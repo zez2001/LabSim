@@ -1,6 +1,6 @@
 # Franka 空烧杯极简抓取 Demo
 
-这个 demo 从空 USD stage 创建地面、灯光、固定桌子、一台 Franka、一个空烧杯和观察相机。使用 Lula 逆运动学计算关节位置目标，通过夹爪接触和摩擦抓取烧杯，再抬起并保持。运行时不打开或引用 `lab_001`，不接入原有任务和训练管线。
+这个 demo 从空 USD stage 创建地面、灯光、固定桌子、一台 Franka、一个空烧杯和观察相机。使用 Lula 逆运动学计算关节位置目标，通过夹爪接触和摩擦抓取烧杯，再抬起并保持。运行时不打开或引用 `lab_001`。`run.sh` 保留原始极简演示；下面的任务管线通过项目已有工厂注册，接入 HDF5、ACT/Diffusion 训练和仿真推理。
 
 ## 启动
 
@@ -67,3 +67,144 @@ Franka 引用仓库现有 `assets/robots/Franka.usd`，保留其真实关节、�
 未验证其他机器／Isaac 版本、真实烧杯参数、液体行为、随机初始位置或统计成功率。
 
 项目背景、完整规划书归档与本次工程范围见 [背景说明](../../docs/background/README.md)。
+
+## 与其他任务相同的采集、训练和测试流程
+
+任务名、控制器名和采集器名均为 `minimal_pick`，配置位于 `config/minimal_pick.yaml`。
+新增文件为 `tasks/minimal_pick_task.py`、`controllers/minimal_pick_controller.py`、
+`data_collectors/minimal_pick_collector.py`、`demos/minimal_pick/scene.py`、
+`pipeline.py` / `pipeline.sh`、训练数据适配器和 ACT / DP 配置。
+三个工厂新增注册项，`main.py` 为此配置调用独立场景入口；已有实验室配置的启动流程保持原样。
+机器人和烧杯资产沿用上文所述来源。这里有两个训练相机，观察相机仍用于 GUI。
+
+本机使用相同 Isaac Sim 环境。ACT 原实现导入 IPython，本次补齐了依赖；
+复现安装命令是：
+
+```bash
+/home/wujing/Desktop/vla/labutopia-env/bin/python -m pip install \
+  -r /home/wujing/Desktop/vla/LabSim/demos/minimal_pick/requirements-training.txt
+```
+
+固定 `IPython==8.37.0` 和 Isaac Sim 所需的 `psutil==5.9.8`。
+ACT 首次使用会下载原实现的 torchvision ResNet18 权重；本机已缓存。
+远程推理复用仓库 `packages/openpi-client/src` 中已有的客户端。
+
+### GUI 运行与记录
+
+和其他任务一样通过主入口运行。默认采集一条演示，结束后关闭应用：
+
+```bash
+cd /home/wujing/Desktop/vla/LabSim
+OMNI_KIT_ACCEPT_EULA=YES /home/wujing/Desktop/vla/labutopia-env/bin/python \
+  main.py --config-name minimal_pick
+```
+
+指定采集数量、输出目录并保留 GUI 最终状态：
+
+```bash
+bash /home/wujing/Desktop/vla/LabSim/demos/minimal_pick/pipeline.sh \
+  --episodes 10 --keep-open
+```
+
+`--headless` 可用于批量采集，仍然渲染训练相机并保存录像；`--no-video` 只关闭录像保存，仍采集 RGB。
+默认写入新的 `outputs/minimal_pick_pipeline/年月日_时分秒/`。
+可以用 `--output /绝对路径/新目录` 指定位置，已有目录会报错，防止覆盖。
+机器人与烧杯初始位置固定；每条演示重新 reset、静置，并重新计算初始高度。
+重复采集不会自动增加场景多样性。
+
+每次输出包括：
+
+- `initial_scene.usda`：展开引用后的初始场景；USD 不含动作回放。
+- `video/episode_0000.mp4`：两个训练视角并排的录像，512×256、60 fps。
+- `dataset/episode_0000.h5`：逐帧训练数据和物理状态。
+- `dataset/episode_data.hdf5`：按 `episode_0000` 等分组的成功演示汇总，可直接训练。
+- `dataset/meta/episode.jsonl`、`episode_0000_result.json`、`summary.json` 和实际使用的 `config.yaml`。
+
+终端打印 `SUCCESS` / `FAIL` / `TIMEOUT`，退出码分别为 0 / 1 / 124，中断为 130。
+失败轨迹仍留在各自 H5 中，但不会进入成功演示汇总；异常中断的文件标记 `complete=false`。
+成功判定在物理步上检查提升 ≥5 cm 和双侧接触连续 ≥1 秒，条件中断会清零。
+模型和回放均只下发机器人关节位置目标，烧杯由物理接触运动。
+
+### 数据契约
+
+与项目原有训练管线同名的数据为 `camera_1_rgb`、`camera_2_rgb`，uint8 `[T,3,256,256]`；
+`agent_pose` 和 `actions` 均为 float32 `[T,8]`，含 7 个机械臂关节和一个手指关节。
+动作是绝对关节位置目标，夹爪目标会对称下发给两指。
+采集频率 60 Hz，物理频率 120 Hz。
+每个 `obs[t]` 在 `action[t]` 下发前获取；`actions[t]` 是该次实际下发的目标，
+不是用下一帧测得的关节位置替代。两个物理步之后的状态保存在 `next_agent_pose` 和 `next_object_pose`。
+
+还记录 `joint_positions`（含两个手指）、物体位姿（xyz+wxyz）、时间戳、接触力、提升高度、保持时长、done 和稀疏成功 reward。
+训练适配器仅读取所需字段，按 episode 划分训练/验证集，动作分块在本条轨迹边界填充，
+ACT 填充段会被 mask；归一化参数仅使用训练集。单条演示不会划出验证集。
+新的适配器明确从 `actions` 读取监督目标，避免原适配器把测得的关节状态作为动作监督。
+DP 使用原模型和工作空间，独立子类将输出块起点对齐到最后一帧观测对应的动作，不改变原任务的策略实现。
+
+### ACT 或 Diffusion 训练
+
+使用项目原有 `train.py` 和工作空间。默认数据路径指向本次已实际采集的演示，
+训练时可替换为自己的采集目录：
+
+```bash
+cd /home/wujing/Desktop/vla/LabSim
+/home/wujing/Desktop/vla/labutopia-env/bin/python train.py \
+  --config-name=train_minimal_pick_act \
+  task.dataset_path=/home/wujing/Desktop/vla/LabSim/outputs/minimal_pick_pipeline/verified_collect/dataset
+
+/home/wujing/Desktop/vla/labutopia-env/bin/python train.py \
+  --config-name=train_minimal_pick_dp \
+  task.dataset_path=/home/wujing/Desktop/vla/LabSim/outputs/minimal_pick_pipeline/verified_collect/dataset
+```
+
+默认 batch size 为 8，W&B 日志关闭在线上传；正常训练按配置运行完整 epoch。
+一次训练链路检查可额外加 `training.num_epochs=1 training.max_train_steps=2 training.max_val_steps=1`。
+输出工作空间目录中的 `checkpoints/latest.ckpt` 包含模型、归一化器和配置；DP 可使用 EMA 权重。
+两条固定初始位置演示与短训练仅用于验证工程链路，不能据此声称泛化或学习成功率。
+
+### 在这个场景测试
+
+专家测试就是上面的 `main.py --config-name minimal_pick`，同时记录演示。
+对保存的动作轨迹重新进行物理仿真：
+
+```bash
+bash /home/wujing/Desktop/vla/LabSim/demos/minimal_pick/pipeline.sh \
+  --replay /home/wujing/Desktop/vla/LabSim/outputs/minimal_pick_pipeline/verified_collect/dataset/episode_data.hdf5 \
+  --episode episode_0000 --keep-open
+```
+
+回放相同 60 Hz 的关节目标，不强制机器人测得的状态或器皿位姿。结果由重新仿真的接触与提升判定。
+直接观看录像可用系统播放器打开 MP4，能暂停和拖动。
+
+对训练检查点进行 GUI 测试：
+
+```bash
+bash /home/wujing/Desktop/vla/LabSim/demos/minimal_pick/pipeline.sh \
+  --checkpoint /绝对路径/训练输出/checkpoints/latest.ckpt --keep-open
+```
+
+支持本项目 ACT / DP 工作空间检查点；不要求单独填写归一化器路径。
+也可以像其他任务一样修改 `config/minimal_pick.yaml` 的 `mode: infer`，
+设置 `infer.type: local` 和 `infer.policy_model_path` 后用 `main.py` 启动。
+回放对应 `infer.type: replay`、`infer.replay_data_path` 和 `infer.episode`。
+远程模型对应 `infer.type: remote`、`infer.host`、`infer.port` 和 `infer.n_obs_steps`；
+继续使用原有 OpenPI WebSocket 协议，模型返回非空 `[动作数,8]` 绝对关节目标。
+模型需要使用本任务的相机、状态和动作定义训练。
+
+### 本轮实际验证与限制
+
+2026-10-10，本机最终相机配置下 GUI 采集两条成功演示，均为 518 帧 / 8.633 秒，
+最终提升 0.111837 m，连续双侧接触保持 1 秒；逐帧检查了 RGB 非空、画面变化、数据长度和录像可解码。
+视频和数据位于 `outputs/minimal_pick_pipeline/verified_collect/`。
+`video/episode_0000_preview.mp4` 为第一条录像的 H.264 浏览器预览版本；原始录像保留。
+
+已验证成功动作回放、主入口 `main.py` 调用、ACT 和 DP 各两个训练批次的反向传播、
+一个验证批次和检查点保存。ACT train loss 1.7060 / val loss 1.9119；
+DP train loss 0.9396 / val loss 0.9758（仅工程检查数值）。
+ACT 短训练检查点测试正确结束为 TIMEOUT；DP 短训练检查点测试正确结束为 FAIL，均未抓取成功。
+远程接口通过本地 WebSocket 服务收发了 33 次观测/动作并完成成功抓取；
+服务输出来自已记录动作，证明协议和执行兼容，未验证真实远程模型。
+数据契约测试覆盖真实动作监督、episode 分割、边界填充和失败过滤。
+
+尚未进行完整策略训练、策略学习成功率评估、LeRobot/OpenPI 数据转换与训练、
+随机场景或真实硬件验证。本轮接入已有任务能力，不新增训练算法或 benchmark 评估系统。
+`main` 分支保持上游原版；代码在 `codex/minimal-franka-beaker`，运行数据、视频和检查点由 `.gitignore` 排除。

@@ -1,0 +1,18 @@
+name: minimal_pick
+image_shape: [3, 256, 256]
+dataset_path: outputs/minimal_pick_pipeline/verified_collect/dataset
+shape_meta:
+  obs:
+    camera_1_rgb: {shape: '${task.image_shape}', type: rgb}
+    camera_2_rgb: {shape: '${task.image_shape}', type: rgb}
+    agent_pose: {shape: [8], type: low_dim}
+  action: {shape: [8]}
+dataset:
+  _target_: policy.dataset.minimal_pick_dataset.MinimalPickDataset
+  shape_meta: ${task.shape_meta}
+  dataset_path: ${task.dataset_path}
+  horizon: ${horizon}
+  n_obs_steps: ${n_obs_steps}
+  policy_type: act
+  seed: 42
+  val_ratio: 0.1

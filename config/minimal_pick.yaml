@@ -1,0 +1,41 @@
+name: MinimalFrankaBeaker
+task_type: minimal_pick
+controller_type: minimal_pick
+mode: collect
+max_episodes: 1
+task:
+  timeout_seconds: 20.0
+  required_lift_m: 0.05
+  required_hold_seconds: 1.0
+  instruction: Lift the empty beaker and hold it above the table.
+  control_hz: 60
+cameras:
+  - name: camera_1
+    prim_path: /World/Camera1
+    eye: [1.05, -1.1, 1.4]
+    target: [0.05, 0.0, 0.95]
+    resolution: [256, 256]
+    focal_length: 2.2  # Camera API uses centimeters: 22 mm
+    image_type: rgb
+  - name: camera_2
+    prim_path: /World/Camera2
+    eye: [0.1, 0.05, 2.0]
+    target: [0.1, 0.0, 0.8]
+    resolution: [256, 256]
+    focal_length: 1.8  # 18 mm
+    image_type: rgb
+collector:
+  type: minimal_pick
+  compression: gzip
+infer:
+  type: replay
+  replay_data_path: null
+  episode: episode_0000
+  policy_model_path: null
+  use_ema: true
+  obs_names: {camera_1_rgb: camera_1_rgb, camera_2_rgb: camera_2_rgb}
+  n_obs_steps: 1
+  host: 127.0.0.1
+  port: 8000
+multi_run:
+  run_dir: outputs/minimal_pick_pipeline/${now:%Y%m%d_%H%M%S}

@@ -21,6 +21,19 @@ def parse_args():
 # Get command line arguments
 args = parse_args()
 
+# Independent scenes use their own scene builder and the shared task registries.
+# Existing laboratory configurations keep the original startup and run loop.
+if args.config_name == 'minimal_pick':
+    import sys
+    from pathlib import Path
+    from demos.minimal_pick.pipeline import main as minimal_pick_main
+    if args.backend != 'numpy':
+        raise ValueError('minimal_pick currently uses the numpy physics backend')
+    sys.exit(minimal_pick_main(argparse.Namespace(
+        config=Path(args.config_dir) / 'minimal_pick.yaml', headless=args.headless,
+        no_video=args.no_video, episodes=None, output=None, replay=None,
+        episode='episode_0000', checkpoint=None, timeout_seconds=None, keep_open=False)))
+
 # Set up simulation app based on arguments
 simulation_config = {
     "headless": False,
