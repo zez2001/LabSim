@@ -4,6 +4,7 @@ from pathlib import Path
 from omegaconf import OmegaConf
 ROOT=Path(__file__).resolve().parents[2]
 def link(src,dst):
+ src,dst=Path(src),Path(dst)
  dst.parent.mkdir(parents=True,exist_ok=True)
  try:os.link(src,dst)
  except OSError:shutil.copy2(src,dst)
