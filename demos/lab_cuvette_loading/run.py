@@ -67,6 +67,9 @@ def run(args,app):
 
 def main():
  args=parser().parse_args()
+ if not args.replay and (args.episodes>1 or ',' in args.seeds):
+  from demos.lab_cuvette_loading.batch import run_batch
+  return run_batch(args)
  from isaacsim import SimulationApp
  app=SimulationApp(dict(headless=args.headless,width=1280,height=720,extra_args=['--/app/extensions/fsWatcherEnabled=false']))
  code=1

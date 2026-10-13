@@ -29,9 +29,10 @@ def patch_config(base,measurements):
   key=keys[-1]
   if key not in parent:raise ValueError('unknown parameter '+item['name'])
   if item['unit'] not in UNITS:raise ValueError('unsupported unit')
-  expected='m' if key.endswith('_m') else 'kg' if key.endswith('_kg') else None
+  expected='m' if key.endswith('_m') else 'kg' if key.endswith('_kg') else 'deg' if key.endswith('_deg') else 'rad' if key.endswith('_rad') else None
   if expected=='m' and item['unit'] not in ['m','mm'] or expected=='kg' and item['unit'] not in ['kg','g']:raise ValueError('unit dimension mismatch')
-  value=np.asarray(item['value'])*UNITS[item['unit']]
+  if expected in ['rad','deg'] and item['unit'] not in ['rad','deg']:raise ValueError('angular unit dimension mismatch')
+  value=np.asarray(item['value'])*UNITS[item['unit']]/(UNITS[expected] if expected else 1.)
   if not np.isfinite(value).all():raise ValueError('nonfinite parameter')
   value=value.tolist();history.append(dict(name=item['name'],old=parent[key],new=value,source=item['source'],unit_SI=expected or item['unit'],source_type=item['source_type']));parent[key]=value
  cfg['version']=measurements['version'];cfg['calibrated']=False
