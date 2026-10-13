@@ -2,7 +2,7 @@
 
 当前没有真实尺寸、动作/状态或标定记录。接口用明确标记的合成夹具检查；不构成真实校准证据。机器人照片型号未确认，当前 embodiment ID 为 `franka_proxy`。
 
-参数导入：JSON 包含 `version`（必须新建，例如 V1）、`purpose`（calibration 或 model_selection）及 `parameters`。每项为 `name`（V0.yaml 点路径）、`value`、`unit`、`source`、`source_type`。支持 m/mm、kg/g、rad/deg、s/ms。输出新的 config.yaml 与逐项旧值/新值/来源历史；不覆盖 V0，`calibrated` 保持 false。来自 final_validation 的数据禁止调参。导入后重新检查 standard、random 分布、判分、旧数据和回放；大量资产/控制变化需重新采集。
+参数导入：JSON 包含 `version`（必须新建，例如 V1）、`purpose`（calibration 或 model_selection）及 `parameters`。每项为 `name`（V0.yaml 点路径）、`value`、`unit`、`source`、`source_type`。支持 m/mm/cm、kg/g、rad/deg、s/ms、Hz 及配置声明的力/力矩/增益/惯性单位。Isaac 相机 focal_length 配置单位为 cm，导入会按配置单位换算；关节 max_velocity/max_effort 的混合向量需明确使用 mixed_SI（前7项rad/s或N·m、末2项m/s或N）。输出新的 config.yaml 与逐项旧值/新值/来源历史；不覆盖 V0，`calibrated` 保持 false。来自 final_validation 的数据禁止调参。导入后重新检查 standard、random 分布、判分、旧数据和回放；大量资产/控制变化需重新采集。
 
 轨迹导入 JSON 必须提供：
 

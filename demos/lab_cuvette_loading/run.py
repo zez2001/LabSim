@@ -25,9 +25,12 @@ def run(args,app):
  if args.replay:
   if not args.replay_initial:raise ValueError('Replay requires original actual initial state and sampled layout')
   restored=json.loads(args.replay_initial.read_text())
+  original_config=args.replay.parent.parent/'config.yaml'
+  if not original_config.exists() or OmegaConf.to_container(OmegaConf.load(original_config),resolve=True)!=OmegaConf.to_container(cfg,resolve=True):raise ValueError('Replay configuration differs from original; revalidation required')
   with h5py.File(args.replay,'r') as f:
+   if f.attrs.get('task')!='lab_cuvette_loading':raise ValueError('Replay task mismatch')
    if f.attrs['action_dimension']!=8 or f.attrs['robot_state_dimension']!=9:raise ValueError('wrong embodiment/action dimensions')
-   replay_actions=f['actions'][:];replay_phase=f['phase_code'][:]
+   replay_actions=f['actions'][:];replay_phase=f['phase_code'][:];replay_tcp=f['privileged/target_tcp'][:]
   seeds=[restored['layout']['seed']]
  try:
   for index,seed in enumerate(seeds):
@@ -43,7 +46,7 @@ def run(args,app):
    while task.status=='RUNNING' and app.is_running():
     if replay_actions is None:action=controller.step(state)
     else:
-     j=min(task.frame,len(replay_actions)-1);a=replay_actions[j];action=ArticulationAction(joint_positions=np.r_[a[:7],a[7],a[7]]);task.last_action=action.joint_positions;task.phase=list(cfg.control.phases_s)[max(0,int(replay_phase[j]))]
+     j=min(task.frame,len(replay_actions)-1);a=replay_actions[j];action=ArticulationAction(joint_positions=np.r_[a[:7],a[7],a[7]]);task.last_action=action.joint_positions;task.target_tcp=replay_tcp[j].copy();task.phase=list(cfg.control.phases_s)[max(0,int(replay_phase[j]))]
     if action is None:break
     state['phase']=task.phase;state['target_tcp']=task.target_tcp.copy();task.advance(action);next_state=task.observation();result=task.result();recorder.cache_transition(state,action,next_state,result);state=next_state
     if task.frame%180==0:print('STATE',index,seed,task.phase,round(task.elapsed,3),round(task.metrics['depth_m']*1000,3),task.scorer.progress,flush=True)

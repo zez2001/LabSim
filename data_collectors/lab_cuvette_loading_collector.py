@@ -6,7 +6,7 @@ from data_collectors.minimal_pick_collector import MinimalPickCollector
 class LabCuvetteLoadingCollector(MinimalPickCollector):
  def begin_episode(self,index,initial_position):
   super().begin_episode(index,initial_position)
-  self.file.attrs.update(schema_version='labsim.lab_cuvette_loading.V0',task='lab_cuvette_loading',physics_hz=self.cfg.physics.hz,action_semantics='absolute_7_arm_rad_and_symmetric_finger_metre',observation_alignment='obs_before_action; next_state_after_explicit_substeps',rgb='CHW RGB uint8 256x256 60Hz',robot_state_dimension=9,action_dimension=8,privileged_fields='privileged/* not default policy inputs')
+  self.file.attrs.update(schema_version='labsim.lab_cuvette_loading.V0',task='lab_cuvette_loading',physics_hz=self.cfg.physics.hz,control_hz=self.cfg.physics.control_hz,action_semantics='absolute_7_arm_rad_and_symmetric_finger_metre',observation_alignment='obs_before_action; next_state_after_explicit_substeps',rgb=f'CHW RGB uint8 256x256 {self.cfg.physics.control_hz}Hz',robot_state_dimension=9,action_dimension=8,privileged_fields='privileged/* not default policy inputs')
  def cache_transition(self,state,action,next_state,result):
   for key,rgb in state['camera_data'].items():self._append(key,rgb)
   m=next_state['metrics']

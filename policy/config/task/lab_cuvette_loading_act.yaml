@@ -8,7 +8,7 @@ shape_meta:
     agent_pose: {shape: [8], type: low_dim}
   action: {shape: [8]}
 dataset:
-  _target_: policy.dataset.lab_cuvette_loading_dataset.MinimalPickDataset
+  _target_: policy.dataset.minimal_pick_dataset.MinimalPickDataset
   shape_meta: ${task.shape_meta}
   dataset_path: ${task.dataset_path}
   horizon: ${horizon}

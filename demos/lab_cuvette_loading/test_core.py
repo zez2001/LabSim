@@ -27,6 +27,10 @@ class Checks(unittest.TestCase):
   self.assertNotEqual(score.update(1,m)[0],'SUCCESS')
  def test_cross_robot_rejected(self):
   with self.assertRaisesRegex(ValueError,'Cross-robot'):normalize_record(dict(purpose='calibration',robot_type='neo_unconfirmed'))
+ def test_parameter_unit_conversion(self):
+  cfg,_=patch_config(ROOT/'config/lab_cuvette_loading/V0.yaml',dict(version='V1_test',purpose='calibration',parameters=[dict(name='cameras.external.focal_length',value=24,unit='mm',source='fixture',source_type='synthetic'),dict(name='layout.rack_yaw_deg',value=np.pi/60,unit='rad',source='fixture',source_type='synthetic')]))
+  self.assertAlmostEqual(cfg['cameras']['external']['focal_length'],2.4)
+  self.assertAlmostEqual(cfg['layout']['rack_yaw_deg'],3.)
  def test_holdout_cannot_tune(self):
   with self.assertRaisesRegex(ValueError,'final validation'):patch_config(ROOT/'config/lab_cuvette_loading/V0.yaml',dict(version='V1',purpose='final_validation',parameters=[]))
 if __name__=='__main__':unittest.main()
