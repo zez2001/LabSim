@@ -1,0 +1,40 @@
+name: MinimalPrecisionInsertion
+task_type: minimal_precision_insertion
+controller_type: minimal_precision_insertion
+mode: collect
+task:
+  instruction: Physically insert and release the rigid tube in the straight loading hole.
+  control_hz: 60
+  timeout_seconds: 34.0
+  speed_m_s: 0.001
+  required_depth_m: 0.018
+  hold_seconds: 1.0
+  penetration_tolerance_m: 0.00005
+  initial_tcp: [0.20, 0.0, 0.827]
+  hole_center: [0.20, 0.00030]
+  floor_z: 0.770
+  grip_above_bottom_m: 0.035
+  initial_bottom_gap_m: 0.002
+  target_depth_m: 0.020
+  release_time_s: 25.0
+  retreat_time_s: 27.0
+  check_time_s: 30.0
+  ik_position_tolerance_m: 0.00001
+  ik_orientation_tolerance_rad: 0.001
+geometry:
+  collision: compound_convex
+  tube_segments: 96
+  hole_segments: 128
+physics:
+  hz: 120
+  contact_offset_m: 0.00005
+  static_friction: 0.5
+  dynamic_friction: 0.4
+  solver: TGS
+  position_iterations: 32
+  velocity_iterations: 8
+  ccd: true
+cameras:
+  - {name: camera_1, prim_path: /World/Camera1, eye: [0.25, -0.10, 0.835], target: [0.20, 0.0003, 0.799], resolution: [256, 256], focal_length: 3.5}
+  - {name: camera_2, prim_path: /World/Camera2, eye: [0.12, 0.06, 0.825], target: [0.20, 0.0003, 0.790], resolution: [256, 256], focal_length: 3.0}
+collector: {type: minimal_precision_insertion, compression: gzip}

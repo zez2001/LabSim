@@ -4,6 +4,8 @@ from data_collectors.mock_collector import MockCollector
 from data_collectors.action_state_collector import ActionStateDataCollector
 from data_collectors.minimal_pick_collector import MinimalPickCollector
 
+from data_collectors.minimal_precision_insertion_collector import MinimalPrecisionInsertionCollector
+
 _collector_registry: Dict[str, Type[DataCollector]] = {}
 
 def register_collector(name: str, collector_class: Type[DataCollector]):
@@ -21,3 +23,5 @@ register_collector("default", DataCollector)
 register_collector("mock", MockCollector)
 register_collector("action_state", ActionStateDataCollector)
 register_collector("minimal_pick", MinimalPickCollector)
+
+register_collector("minimal_precision_insertion", MinimalPrecisionInsertionCollector)

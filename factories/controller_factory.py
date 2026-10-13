@@ -23,6 +23,8 @@ from controllers.navigation_controller import NavigationController
 from controllers.mobile_pick_controller import MobilePickController
 from controllers.minimal_pick_controller import MinimalPickController
 
+from controllers.minimal_precision_insertion_controller import MinimalPrecisionInsertionController
+
 _controller_registry: Dict[str, Type[BaseController]] = {}
 
 def register_controller(name: str, controller_class: Type[BaseController]):
@@ -55,3 +57,5 @@ register_controller("LiquidMixing", LiquidMixingController)
 register_controller("navigation", NavigationController)
 register_controller("mobile_pick", MobilePickController)
 register_controller("minimal_pick", MinimalPickController)
+
+register_controller("minimal_precision_insertion", MinimalPrecisionInsertionController)

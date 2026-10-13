@@ -17,6 +17,8 @@ from tasks.navigation_task import NavigationTask
 from tasks.mobile_pick_task import MobilePickTask
 from tasks.minimal_pick_task import MinimalPickTask
 
+from tasks.minimal_precision_insertion_task import MinimalPrecisionInsertionTask
+
 _task_registry: Dict[str, Type[BaseTask]] = {}
 
 def register_task(name: str, task_class: Type[BaseTask]):
@@ -46,3 +48,5 @@ register_task("LiquidMixing", LiquidMixing)
 register_task("navigation", NavigationTask)
 register_task("mobile_pick", MobilePickTask)
 register_task("minimal_pick", MinimalPickTask)
+
+register_task("minimal_precision_insertion", MinimalPrecisionInsertionTask)

@@ -1,0 +1,1772 @@
+#usda 1.0
+(
+    defaultPrim = "Asset"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Asset" (
+    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI", "MaterialBindingAPI"]
+)
+{
+    rel material:binding:physics = </Asset/Material>
+    point3f physics:centerOfMass = (0, 0, 0)
+    float3 physics:diagonalInertia = (0.0000042916668, 0.0000042916668, 2.5e-7)
+    float physics:mass = 0.02
+    quatf physics:principalAxes = (1, 0, 0, 0)
+    bool physxRigidBody:enableCCD = 1
+
+    def Material "Material" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.4
+        float physics:restitution = 0
+        float physics:staticFriction = 0.5
+        uniform token physxMaterial:frictionCombineMode = "average"
+        uniform token physxMaterial:restitutionCombineMode = "average"
+    }
+
+    def Mesh "Visual"
+    {
+        int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        int[] faceVertexIndices = [0, 1, 97, 0, 97, 96, 1, 2, 98, 1, 98, 97, 2, 3, 99, 2, 99, 98, 3, 4, 100, 3, 100, 99, 4, 5, 101, 4, 101, 100, 5, 6, 102, 5, 102, 101, 6, 7, 103, 6, 103, 102, 7, 8, 104, 7, 104, 103, 8, 9, 105, 8, 105, 104, 9, 10, 106, 9, 106, 105, 10, 11, 107, 10, 107, 106, 11, 12, 108, 11, 108, 107, 12, 13, 109, 12, 109, 108, 13, 14, 110, 13, 110, 109, 14, 15, 111, 14, 111, 110, 15, 16, 112, 15, 112, 111, 16, 17, 113, 16, 113, 112, 17, 18, 114, 17, 114, 113, 18, 19, 115, 18, 115, 114, 19, 20, 116, 19, 116, 115, 20, 21, 117, 20, 117, 116, 21, 22, 118, 21, 118, 117, 22, 23, 119, 22, 119, 118, 23, 24, 120, 23, 120, 119, 24, 25, 121, 24, 121, 120, 25, 26, 122, 25, 122, 121, 26, 27, 123, 26, 123, 122, 27, 28, 124, 27, 124, 123, 28, 29, 125, 28, 125, 124, 29, 30, 126, 29, 126, 125, 30, 31, 127, 30, 127, 126, 31, 32, 128, 31, 128, 127, 32, 33, 129, 32, 129, 128, 33, 34, 130, 33, 130, 129, 34, 35, 131, 34, 131, 130, 35, 36, 132, 35, 132, 131, 36, 37, 133, 36, 133, 132, 37, 38, 134, 37, 134, 133, 38, 39, 135, 38, 135, 134, 39, 40, 136, 39, 136, 135, 40, 41, 137, 40, 137, 136, 41, 42, 138, 41, 138, 137, 42, 43, 139, 42, 139, 138, 43, 44, 140, 43, 140, 139, 44, 45, 141, 44, 141, 140, 45, 46, 142, 45, 142, 141, 46, 47, 143, 46, 143, 142, 47, 48, 144, 47, 144, 143, 48, 49, 145, 48, 145, 144, 49, 50, 146, 49, 146, 145, 50, 51, 147, 50, 147, 146, 51, 52, 148, 51, 148, 147, 52, 53, 149, 52, 149, 148, 53, 54, 150, 53, 150, 149, 54, 55, 151, 54, 151, 150, 55, 56, 152, 55, 152, 151, 56, 57, 153, 56, 153, 152, 57, 58, 154, 57, 154, 153, 58, 59, 155, 58, 155, 154, 59, 60, 156, 59, 156, 155, 60, 61, 157, 60, 157, 156, 61, 62, 158, 61, 158, 157, 62, 63, 159, 62, 159, 158, 63, 64, 160, 63, 160, 159, 64, 65, 161, 64, 161, 160, 65, 66, 162, 65, 162, 161, 66, 67, 163, 66, 163, 162, 67, 68, 164, 67, 164, 163, 68, 69, 165, 68, 165, 164, 69, 70, 166, 69, 166, 165, 70, 71, 167, 70, 167, 166, 71, 72, 168, 71, 168, 167, 72, 73, 169, 72, 169, 168, 73, 74, 170, 73, 170, 169, 74, 75, 171, 74, 171, 170, 75, 76, 172, 75, 172, 171, 76, 77, 173, 76, 173, 172, 77, 78, 174, 77, 174, 173, 78, 79, 175, 78, 175, 174, 79, 80, 176, 79, 176, 175, 80, 81, 177, 80, 177, 176, 81, 82, 178, 81, 178, 177, 82, 83, 179, 82, 179, 178, 83, 84, 180, 83, 180, 179, 84, 85, 181, 84, 181, 180, 85, 86, 182, 85, 182, 181, 86, 87, 183, 86, 183, 182, 87, 88, 184, 87, 184, 183, 88, 89, 185, 88, 185, 184, 89, 90, 186, 89, 186, 185, 90, 91, 187, 90, 187, 186, 91, 92, 188, 91, 188, 187, 92, 93, 189, 92, 189, 188, 93, 94, 190, 93, 190, 189, 94, 95, 191, 94, 191, 190, 95, 0, 96, 95, 96, 191, 0, 2, 1, 0, 3, 2, 0, 4, 3, 0, 5, 4, 0, 6, 5, 0, 7, 6, 0, 8, 7, 0, 9, 8, 0, 10, 9, 0, 11, 10, 0, 12, 11, 0, 13, 12, 0, 14, 13, 0, 15, 14, 0, 16, 15, 0, 17, 16, 0, 18, 17, 0, 19, 18, 0, 20, 19, 0, 21, 20, 0, 22, 21, 0, 23, 22, 0, 24, 23, 0, 25, 24, 0, 26, 25, 0, 27, 26, 0, 28, 27, 0, 29, 28, 0, 30, 29, 0, 31, 30, 0, 32, 31, 0, 33, 32, 0, 34, 33, 0, 35, 34, 0, 36, 35, 0, 37, 36, 0, 38, 37, 0, 39, 38, 0, 40, 39, 0, 41, 40, 0, 42, 41, 0, 43, 42, 0, 44, 43, 0, 45, 44, 0, 46, 45, 0, 47, 46, 0, 48, 47, 0, 49, 48, 0, 50, 49, 0, 51, 50, 0, 52, 51, 0, 53, 52, 0, 54, 53, 0, 55, 54, 0, 56, 55, 0, 57, 56, 0, 58, 57, 0, 59, 58, 0, 60, 59, 0, 61, 60, 0, 62, 61, 0, 63, 62, 0, 64, 63, 0, 65, 64, 0, 66, 65, 0, 67, 66, 0, 68, 67, 0, 69, 68, 0, 70, 69, 0, 71, 70, 0, 72, 71, 0, 73, 72, 0, 74, 73, 0, 75, 74, 0, 76, 75, 0, 77, 76, 0, 78, 77, 0, 79, 78, 0, 80, 79, 0, 81, 80, 0, 82, 81, 0, 83, 82, 0, 84, 83, 0, 85, 84, 0, 86, 85, 0, 87, 86, 0, 88, 87, 0, 89, 88, 0, 90, 89, 0, 91, 90, 0, 92, 91, 0, 93, 92, 0, 94, 93, 0, 95, 94, 96, 97, 98, 96, 98, 99, 96, 99, 100, 96, 100, 101, 96, 101, 102, 96, 102, 103, 96, 103, 104, 96, 104, 105, 96, 105, 106, 96, 106, 107, 96, 107, 108, 96, 108, 109, 96, 109, 110, 96, 110, 111, 96, 111, 112, 96, 112, 113, 96, 113, 114, 96, 114, 115, 96, 115, 116, 96, 116, 117, 96, 117, 118, 96, 118, 119, 96, 119, 120, 96, 120, 121, 96, 121, 122, 96, 122, 123, 96, 123, 124, 96, 124, 125, 96, 125, 126, 96, 126, 127, 96, 127, 128, 96, 128, 129, 96, 129, 130, 96, 130, 131, 96, 131, 132, 96, 132, 133, 96, 133, 134, 96, 134, 135, 96, 135, 136, 96, 136, 137, 96, 137, 138, 96, 138, 139, 96, 139, 140, 96, 140, 141, 96, 141, 142, 96, 142, 143, 96, 143, 144, 96, 144, 145, 96, 145, 146, 96, 146, 147, 96, 147, 148, 96, 148, 149, 96, 149, 150, 96, 150, 151, 96, 151, 152, 96, 152, 153, 96, 153, 154, 96, 154, 155, 96, 155, 156, 96, 156, 157, 96, 157, 158, 96, 158, 159, 96, 159, 160, 96, 160, 161, 96, 161, 162, 96, 162, 163, 96, 163, 164, 96, 164, 165, 96, 165, 166, 96, 166, 167, 96, 167, 168, 96, 168, 169, 96, 169, 170, 96, 170, 171, 96, 171, 172, 96, 172, 173, 96, 173, 174, 96, 174, 175, 96, 175, 176, 96, 176, 177, 96, 177, 178, 96, 178, 179, 96, 179, 180, 96, 180, 181, 96, 181, 182, 96, 182, 183, 96, 183, 184, 96, 184, 185, 96, 185, 186, 96, 186, 187, 96, 187, 188, 96, 188, 189, 96, 189, 190, 96, 190, 191]
+        point3f[] points = [(0.005, 0, -0.025), (0.004989295, 0.00032701564, -0.025), (0.0049572242, 0.000652631, -0.025), (0.0049039265, 0.0009754516, -0.025), (0.0048296293, 0.0012940952, -0.025), (0.0047346507, 0.0016071973, -0.025), (0.0046193977, 0.0019134171, -0.025), (0.004484364, 0.0022114434, -0.025), (0.004330127, 0.0025, -0.025), (0.004157348, 0.0027778512, -0.025), (0.003966767, 0.003043807, -0.025), (0.003759199, 0.0032967292, -0.025), (0.0035355338, 0.0035355338, -0.025), (0.0032967292, 0.003759199, -0.025), (0.003043807, 0.003966767, -0.025), (0.0027778512, 0.004157348, -0.025), (0.0025, 0.004330127, -0.025), (0.0022114434, 0.004484364, -0.025), (0.0019134171, 0.0046193977, -0.025), (0.0016071973, 0.0047346507, -0.025), (0.0012940952, 0.0048296293, -0.025), (0.0009754516, 0.0049039265, -0.025), (0.000652631, 0.0049572242, -0.025), (0.00032701564, 0.004989295, -0.025), (3.061617e-19, 0.005, -0.025), (-0.00032701564, 0.004989295, -0.025), (-0.000652631, 0.0049572242, -0.025), (-0.0009754516, 0.0049039265, -0.025), (-0.0012940952, 0.0048296293, -0.025), (-0.0016071973, 0.0047346507, -0.025), (-0.0019134171, 0.0046193977, -0.025), (-0.0022114434, 0.004484364, -0.025), (-0.0025, 0.004330127, -0.025), (-0.0027778512, 0.004157348, -0.025), (-0.003043807, 0.003966767, -0.025), (-0.0032967292, 0.003759199, -0.025), (-0.0035355338, 0.0035355338, -0.025), (-0.003759199, 0.0032967292, -0.025), (-0.003966767, 0.003043807, -0.025), (-0.004157348, 0.0027778512, -0.025), (-0.004330127, 0.0025, -0.025), (-0.004484364, 0.0022114434, -0.025), (-0.0046193977, 0.0019134171, -0.025), (-0.0047346507, 0.0016071973, -0.025), (-0.0048296293, 0.0012940952, -0.025), (-0.0049039265, 0.0009754516, -0.025), (-0.0049572242, 0.000652631, -0.025), (-0.004989295, 0.00032701564, -0.025), (-0.005, 6.123234e-19, -0.025), (-0.004989295, -0.00032701564, -0.025), (-0.0049572242, -0.000652631, -0.025), (-0.0049039265, -0.0009754516, -0.025), (-0.0048296293, -0.0012940952, -0.025), (-0.0047346507, -0.0016071973, -0.025), (-0.0046193977, -0.0019134171, -0.025), (-0.004484364, -0.0022114434, -0.025), (-0.004330127, -0.0025, -0.025), (-0.004157348, -0.0027778512, -0.025), (-0.003966767, -0.003043807, -0.025), (-0.003759199, -0.0032967292, -0.025), (-0.0035355338, -0.0035355338, -0.025), (-0.0032967292, -0.003759199, -0.025), (-0.003043807, -0.003966767, -0.025), (-0.0027778512, -0.004157348, -0.025), (-0.0025, -0.004330127, -0.025), (-0.0022114434, -0.004484364, -0.025), (-0.0019134171, -0.0046193977, -0.025), (-0.0016071973, -0.0047346507, -0.025), (-0.0012940952, -0.0048296293, -0.025), (-0.0009754516, -0.0049039265, -0.025), (-0.000652631, -0.0049572242, -0.025), (-0.00032701564, -0.004989295, -0.025), (-9.184851e-19, -0.005, -0.025), (0.00032701564, -0.004989295, -0.025), (0.000652631, -0.0049572242, -0.025), (0.0009754516, -0.0049039265, -0.025), (0.0012940952, -0.0048296293, -0.025), (0.0016071973, -0.0047346507, -0.025), (0.0019134171, -0.0046193977, -0.025), (0.0022114434, -0.004484364, -0.025), (0.0025, -0.004330127, -0.025), (0.0027778512, -0.004157348, -0.025), (0.003043807, -0.003966767, -0.025), (0.0032967292, -0.003759199, -0.025), (0.0035355338, -0.0035355338, -0.025), (0.003759199, -0.0032967292, -0.025), (0.003966767, -0.003043807, -0.025), (0.004157348, -0.0027778512, -0.025), (0.004330127, -0.0025, -0.025), (0.004484364, -0.0022114434, -0.025), (0.0046193977, -0.0019134171, -0.025), (0.0047346507, -0.0016071973, -0.025), (0.0048296293, -0.0012940952, -0.025), (0.0049039265, -0.0009754516, -0.025), (0.0049572242, -0.000652631, -0.025), (0.004989295, -0.00032701564, -0.025), (0.005, 0, 0.025), (0.004989295, 0.00032701564, 0.025), (0.0049572242, 0.000652631, 0.025), (0.0049039265, 0.0009754516, 0.025), (0.0048296293, 0.0012940952, 0.025), (0.0047346507, 0.0016071973, 0.025), (0.0046193977, 0.0019134171, 0.025), (0.004484364, 0.0022114434, 0.025), (0.004330127, 0.0025, 0.025), (0.004157348, 0.0027778512, 0.025), (0.003966767, 0.003043807, 0.025), (0.003759199, 0.0032967292, 0.025), (0.0035355338, 0.0035355338, 0.025), (0.0032967292, 0.003759199, 0.025), (0.003043807, 0.003966767, 0.025), (0.0027778512, 0.004157348, 0.025), (0.0025, 0.004330127, 0.025), (0.0022114434, 0.004484364, 0.025), (0.0019134171, 0.0046193977, 0.025), (0.0016071973, 0.0047346507, 0.025), (0.0012940952, 0.0048296293, 0.025), (0.0009754516, 0.0049039265, 0.025), (0.000652631, 0.0049572242, 0.025), (0.00032701564, 0.004989295, 0.025), (3.061617e-19, 0.005, 0.025), (-0.00032701564, 0.004989295, 0.025), (-0.000652631, 0.0049572242, 0.025), (-0.0009754516, 0.0049039265, 0.025), (-0.0012940952, 0.0048296293, 0.025), (-0.0016071973, 0.0047346507, 0.025), (-0.0019134171, 0.0046193977, 0.025), (-0.0022114434, 0.004484364, 0.025), (-0.0025, 0.004330127, 0.025), (-0.0027778512, 0.004157348, 0.025), (-0.003043807, 0.003966767, 0.025), (-0.0032967292, 0.003759199, 0.025), (-0.0035355338, 0.0035355338, 0.025), (-0.003759199, 0.0032967292, 0.025), (-0.003966767, 0.003043807, 0.025), (-0.004157348, 0.0027778512, 0.025), (-0.004330127, 0.0025, 0.025), (-0.004484364, 0.0022114434, 0.025), (-0.0046193977, 0.0019134171, 0.025), (-0.0047346507, 0.0016071973, 0.025), (-0.0048296293, 0.0012940952, 0.025), (-0.0049039265, 0.0009754516, 0.025), (-0.0049572242, 0.000652631, 0.025), (-0.004989295, 0.00032701564, 0.025), (-0.005, 6.123234e-19, 0.025), (-0.004989295, -0.00032701564, 0.025), (-0.0049572242, -0.000652631, 0.025), (-0.0049039265, -0.0009754516, 0.025), (-0.0048296293, -0.0012940952, 0.025), (-0.0047346507, -0.0016071973, 0.025), (-0.0046193977, -0.0019134171, 0.025), (-0.004484364, -0.0022114434, 0.025), (-0.004330127, -0.0025, 0.025), (-0.004157348, -0.0027778512, 0.025), (-0.003966767, -0.003043807, 0.025), (-0.003759199, -0.0032967292, 0.025), (-0.0035355338, -0.0035355338, 0.025), (-0.0032967292, -0.003759199, 0.025), (-0.003043807, -0.003966767, 0.025), (-0.0027778512, -0.004157348, 0.025), (-0.0025, -0.004330127, 0.025), (-0.0022114434, -0.004484364, 0.025), (-0.0019134171, -0.0046193977, 0.025), (-0.0016071973, -0.0047346507, 0.025), (-0.0012940952, -0.0048296293, 0.025), (-0.0009754516, -0.0049039265, 0.025), (-0.000652631, -0.0049572242, 0.025), (-0.00032701564, -0.004989295, 0.025), (-9.184851e-19, -0.005, 0.025), (0.00032701564, -0.004989295, 0.025), (0.000652631, -0.0049572242, 0.025), (0.0009754516, -0.0049039265, 0.025), (0.0012940952, -0.0048296293, 0.025), (0.0016071973, -0.0047346507, 0.025), (0.0019134171, -0.0046193977, 0.025), (0.0022114434, -0.004484364, 0.025), (0.0025, -0.004330127, 0.025), (0.0027778512, -0.004157348, 0.025), (0.003043807, -0.003966767, 0.025), (0.0032967292, -0.003759199, 0.025), (0.0035355338, -0.0035355338, 0.025), (0.003759199, -0.0032967292, 0.025), (0.003966767, -0.003043807, 0.025), (0.004157348, -0.0027778512, 0.025), (0.004330127, -0.0025, 0.025), (0.004484364, -0.0022114434, 0.025), (0.0046193977, -0.0019134171, 0.025), (0.0047346507, -0.0016071973, 0.025), (0.0048296293, -0.0012940952, 0.025), (0.0049039265, -0.0009754516, 0.025), (0.0049572242, -0.000652631, 0.025), (0.004989295, -0.00032701564, 0.025)]
+        color3f[] primvars:displayColor = [(0.1, 0.45, 0.8)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Xform "Collision"
+    {
+        uniform token purpose = "guide"
+
+        def Mesh "sector_000" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (5, 0, -25), (4.9892945, 0.32701564, -25), (0, 0, 25), (5, 0, 25), (4.9892945, 0.32701564, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_001" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.9892945, 0.32701564, -25), (4.9572244, 0.652631, -25), (0, 0, 25), (4.9892945, 0.32701564, 25), (4.9572244, 0.652631, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_002" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.9572244, 0.652631, -25), (4.9039264, 0.9754516, -25), (0, 0, 25), (4.9572244, 0.652631, 25), (4.9039264, 0.9754516, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_003" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.9039264, 0.9754516, -25), (4.829629, 1.2940953, -25), (0, 0, 25), (4.9039264, 0.9754516, 25), (4.829629, 1.2940953, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_004" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.829629, 1.2940953, -25), (4.7346506, 1.6071973, -25), (0, 0, 25), (4.829629, 1.2940953, 25), (4.7346506, 1.6071973, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_005" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.7346506, 1.6071973, -25), (4.6193976, 1.9134172, -25), (0, 0, 25), (4.7346506, 1.6071973, 25), (4.6193976, 1.9134172, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_006" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.6193976, 1.9134172, -25), (4.4843636, 2.2114434, -25), (0, 0, 25), (4.6193976, 1.9134172, 25), (4.4843636, 2.2114434, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_007" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.4843636, 2.2114434, -25), (4.3301272, 2.5, -25), (0, 0, 25), (4.4843636, 2.2114434, 25), (4.3301272, 2.5, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_008" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.3301272, 2.5, -25), (4.157348, 2.777851, -25), (0, 0, 25), (4.3301272, 2.5, 25), (4.157348, 2.777851, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_009" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.157348, 2.777851, -25), (3.9667666, 3.043807, -25), (0, 0, 25), (4.157348, 2.777851, 25), (3.9667666, 3.043807, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_010" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.9667666, 3.043807, -25), (3.7591991, 3.296729, -25), (0, 0, 25), (3.9667666, 3.043807, 25), (3.7591991, 3.296729, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_011" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.7591991, 3.296729, -25), (3.535534, 3.535534, -25), (0, 0, 25), (3.7591991, 3.296729, 25), (3.535534, 3.535534, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_012" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.535534, 3.535534, -25), (3.296729, 3.7591991, -25), (0, 0, 25), (3.535534, 3.535534, 25), (3.296729, 3.7591991, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_013" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.296729, 3.7591991, -25), (3.043807, 3.9667666, -25), (0, 0, 25), (3.296729, 3.7591991, 25), (3.043807, 3.9667666, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_014" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.043807, 3.9667666, -25), (2.777851, 4.157348, -25), (0, 0, 25), (3.043807, 3.9667666, 25), (2.777851, 4.157348, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_015" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (2.777851, 4.157348, -25), (2.5, 4.3301272, -25), (0, 0, 25), (2.777851, 4.157348, 25), (2.5, 4.3301272, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_016" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (2.5, 4.3301272, -25), (2.2114434, 4.4843636, -25), (0, 0, 25), (2.5, 4.3301272, 25), (2.2114434, 4.4843636, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_017" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (2.2114434, 4.4843636, -25), (1.9134172, 4.6193976, -25), (0, 0, 25), (2.2114434, 4.4843636, 25), (1.9134172, 4.6193976, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_018" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (1.9134172, 4.6193976, -25), (1.6071973, 4.7346506, -25), (0, 0, 25), (1.9134172, 4.6193976, 25), (1.6071973, 4.7346506, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_019" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (1.6071973, 4.7346506, -25), (1.2940953, 4.829629, -25), (0, 0, 25), (1.6071973, 4.7346506, 25), (1.2940953, 4.829629, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_020" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (1.2940953, 4.829629, -25), (0.9754516, 4.9039264, -25), (0, 0, 25), (1.2940953, 4.829629, 25), (0.9754516, 4.9039264, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_021" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (0.9754516, 4.9039264, -25), (0.652631, 4.9572244, -25), (0, 0, 25), (0.9754516, 4.9039264, 25), (0.652631, 4.9572244, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_022" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (0.652631, 4.9572244, -25), (0.32701564, 4.9892945, -25), (0, 0, 25), (0.652631, 4.9572244, 25), (0.32701564, 4.9892945, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_023" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (0.32701564, 4.9892945, -25), (3.061617e-16, 5, -25), (0, 0, 25), (0.32701564, 4.9892945, 25), (3.061617e-16, 5, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_024" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.061617e-16, 5, -25), (-0.32701564, 4.9892945, -25), (0, 0, 25), (3.061617e-16, 5, 25), (-0.32701564, 4.9892945, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_025" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-0.32701564, 4.9892945, -25), (-0.652631, 4.9572244, -25), (0, 0, 25), (-0.32701564, 4.9892945, 25), (-0.652631, 4.9572244, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_026" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-0.652631, 4.9572244, -25), (-0.9754516, 4.9039264, -25), (0, 0, 25), (-0.652631, 4.9572244, 25), (-0.9754516, 4.9039264, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_027" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-0.9754516, 4.9039264, -25), (-1.2940953, 4.829629, -25), (0, 0, 25), (-0.9754516, 4.9039264, 25), (-1.2940953, 4.829629, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_028" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-1.2940953, 4.829629, -25), (-1.6071973, 4.7346506, -25), (0, 0, 25), (-1.2940953, 4.829629, 25), (-1.6071973, 4.7346506, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_029" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-1.6071973, 4.7346506, -25), (-1.9134172, 4.6193976, -25), (0, 0, 25), (-1.6071973, 4.7346506, 25), (-1.9134172, 4.6193976, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_030" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-1.9134172, 4.6193976, -25), (-2.2114434, 4.4843636, -25), (0, 0, 25), (-1.9134172, 4.6193976, 25), (-2.2114434, 4.4843636, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_031" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-2.2114434, 4.4843636, -25), (-2.5, 4.3301272, -25), (0, 0, 25), (-2.2114434, 4.4843636, 25), (-2.5, 4.3301272, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_032" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-2.5, 4.3301272, -25), (-2.777851, 4.157348, -25), (0, 0, 25), (-2.5, 4.3301272, 25), (-2.777851, 4.157348, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_033" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-2.777851, 4.157348, -25), (-3.043807, 3.9667666, -25), (0, 0, 25), (-2.777851, 4.157348, 25), (-3.043807, 3.9667666, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_034" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.043807, 3.9667666, -25), (-3.296729, 3.7591991, -25), (0, 0, 25), (-3.043807, 3.9667666, 25), (-3.296729, 3.7591991, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_035" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.296729, 3.7591991, -25), (-3.535534, 3.535534, -25), (0, 0, 25), (-3.296729, 3.7591991, 25), (-3.535534, 3.535534, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_036" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.535534, 3.535534, -25), (-3.7591991, 3.296729, -25), (0, 0, 25), (-3.535534, 3.535534, 25), (-3.7591991, 3.296729, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_037" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.7591991, 3.296729, -25), (-3.9667666, 3.043807, -25), (0, 0, 25), (-3.7591991, 3.296729, 25), (-3.9667666, 3.043807, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_038" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.9667666, 3.043807, -25), (-4.157348, 2.777851, -25), (0, 0, 25), (-3.9667666, 3.043807, 25), (-4.157348, 2.777851, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_039" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.157348, 2.777851, -25), (-4.3301272, 2.5, -25), (0, 0, 25), (-4.157348, 2.777851, 25), (-4.3301272, 2.5, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_040" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.3301272, 2.5, -25), (-4.4843636, 2.2114434, -25), (0, 0, 25), (-4.3301272, 2.5, 25), (-4.4843636, 2.2114434, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_041" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.4843636, 2.2114434, -25), (-4.6193976, 1.9134172, -25), (0, 0, 25), (-4.4843636, 2.2114434, 25), (-4.6193976, 1.9134172, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_042" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.6193976, 1.9134172, -25), (-4.7346506, 1.6071973, -25), (0, 0, 25), (-4.6193976, 1.9134172, 25), (-4.7346506, 1.6071973, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_043" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.7346506, 1.6071973, -25), (-4.829629, 1.2940953, -25), (0, 0, 25), (-4.7346506, 1.6071973, 25), (-4.829629, 1.2940953, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_044" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.829629, 1.2940953, -25), (-4.9039264, 0.9754516, -25), (0, 0, 25), (-4.829629, 1.2940953, 25), (-4.9039264, 0.9754516, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_045" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.9039264, 0.9754516, -25), (-4.9572244, 0.652631, -25), (0, 0, 25), (-4.9039264, 0.9754516, 25), (-4.9572244, 0.652631, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_046" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.9572244, 0.652631, -25), (-4.9892945, 0.32701564, -25), (0, 0, 25), (-4.9572244, 0.652631, 25), (-4.9892945, 0.32701564, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_047" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.9892945, 0.32701564, -25), (-5, 6.123234e-16, -25), (0, 0, 25), (-4.9892945, 0.32701564, 25), (-5, 6.123234e-16, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_048" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-5, 6.123234e-16, -25), (-4.9892945, -0.32701564, -25), (0, 0, 25), (-5, 6.123234e-16, 25), (-4.9892945, -0.32701564, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_049" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.9892945, -0.32701564, -25), (-4.9572244, -0.652631, -25), (0, 0, 25), (-4.9892945, -0.32701564, 25), (-4.9572244, -0.652631, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_050" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.9572244, -0.652631, -25), (-4.9039264, -0.9754516, -25), (0, 0, 25), (-4.9572244, -0.652631, 25), (-4.9039264, -0.9754516, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_051" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.9039264, -0.9754516, -25), (-4.829629, -1.2940953, -25), (0, 0, 25), (-4.9039264, -0.9754516, 25), (-4.829629, -1.2940953, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_052" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.829629, -1.2940953, -25), (-4.7346506, -1.6071973, -25), (0, 0, 25), (-4.829629, -1.2940953, 25), (-4.7346506, -1.6071973, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_053" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.7346506, -1.6071973, -25), (-4.6193976, -1.9134172, -25), (0, 0, 25), (-4.7346506, -1.6071973, 25), (-4.6193976, -1.9134172, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_054" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.6193976, -1.9134172, -25), (-4.4843636, -2.2114434, -25), (0, 0, 25), (-4.6193976, -1.9134172, 25), (-4.4843636, -2.2114434, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_055" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.4843636, -2.2114434, -25), (-4.3301272, -2.5, -25), (0, 0, 25), (-4.4843636, -2.2114434, 25), (-4.3301272, -2.5, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_056" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.3301272, -2.5, -25), (-4.157348, -2.777851, -25), (0, 0, 25), (-4.3301272, -2.5, 25), (-4.157348, -2.777851, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_057" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-4.157348, -2.777851, -25), (-3.9667666, -3.043807, -25), (0, 0, 25), (-4.157348, -2.777851, 25), (-3.9667666, -3.043807, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_058" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.9667666, -3.043807, -25), (-3.7591991, -3.296729, -25), (0, 0, 25), (-3.9667666, -3.043807, 25), (-3.7591991, -3.296729, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_059" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.7591991, -3.296729, -25), (-3.535534, -3.535534, -25), (0, 0, 25), (-3.7591991, -3.296729, 25), (-3.535534, -3.535534, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_060" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.535534, -3.535534, -25), (-3.296729, -3.7591991, -25), (0, 0, 25), (-3.535534, -3.535534, 25), (-3.296729, -3.7591991, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_061" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.296729, -3.7591991, -25), (-3.043807, -3.9667666, -25), (0, 0, 25), (-3.296729, -3.7591991, 25), (-3.043807, -3.9667666, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_062" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-3.043807, -3.9667666, -25), (-2.777851, -4.157348, -25), (0, 0, 25), (-3.043807, -3.9667666, 25), (-2.777851, -4.157348, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_063" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-2.777851, -4.157348, -25), (-2.5, -4.3301272, -25), (0, 0, 25), (-2.777851, -4.157348, 25), (-2.5, -4.3301272, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_064" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-2.5, -4.3301272, -25), (-2.2114434, -4.4843636, -25), (0, 0, 25), (-2.5, -4.3301272, 25), (-2.2114434, -4.4843636, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_065" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-2.2114434, -4.4843636, -25), (-1.9134172, -4.6193976, -25), (0, 0, 25), (-2.2114434, -4.4843636, 25), (-1.9134172, -4.6193976, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_066" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-1.9134172, -4.6193976, -25), (-1.6071973, -4.7346506, -25), (0, 0, 25), (-1.9134172, -4.6193976, 25), (-1.6071973, -4.7346506, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_067" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-1.6071973, -4.7346506, -25), (-1.2940953, -4.829629, -25), (0, 0, 25), (-1.6071973, -4.7346506, 25), (-1.2940953, -4.829629, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_068" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-1.2940953, -4.829629, -25), (-0.9754516, -4.9039264, -25), (0, 0, 25), (-1.2940953, -4.829629, 25), (-0.9754516, -4.9039264, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_069" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-0.9754516, -4.9039264, -25), (-0.652631, -4.9572244, -25), (0, 0, 25), (-0.9754516, -4.9039264, 25), (-0.652631, -4.9572244, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_070" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-0.652631, -4.9572244, -25), (-0.32701564, -4.9892945, -25), (0, 0, 25), (-0.652631, -4.9572244, 25), (-0.32701564, -4.9892945, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_071" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-0.32701564, -4.9892945, -25), (-9.18485e-16, -5, -25), (0, 0, 25), (-0.32701564, -4.9892945, 25), (-9.18485e-16, -5, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_072" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (-9.18485e-16, -5, -25), (0.32701564, -4.9892945, -25), (0, 0, 25), (-9.18485e-16, -5, 25), (0.32701564, -4.9892945, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_073" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (0.32701564, -4.9892945, -25), (0.652631, -4.9572244, -25), (0, 0, 25), (0.32701564, -4.9892945, 25), (0.652631, -4.9572244, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_074" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (0.652631, -4.9572244, -25), (0.9754516, -4.9039264, -25), (0, 0, 25), (0.652631, -4.9572244, 25), (0.9754516, -4.9039264, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_075" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (0.9754516, -4.9039264, -25), (1.2940953, -4.829629, -25), (0, 0, 25), (0.9754516, -4.9039264, 25), (1.2940953, -4.829629, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_076" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (1.2940953, -4.829629, -25), (1.6071973, -4.7346506, -25), (0, 0, 25), (1.2940953, -4.829629, 25), (1.6071973, -4.7346506, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_077" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (1.6071973, -4.7346506, -25), (1.9134172, -4.6193976, -25), (0, 0, 25), (1.6071973, -4.7346506, 25), (1.9134172, -4.6193976, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_078" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (1.9134172, -4.6193976, -25), (2.2114434, -4.4843636, -25), (0, 0, 25), (1.9134172, -4.6193976, 25), (2.2114434, -4.4843636, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_079" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (2.2114434, -4.4843636, -25), (2.5, -4.3301272, -25), (0, 0, 25), (2.2114434, -4.4843636, 25), (2.5, -4.3301272, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_080" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (2.5, -4.3301272, -25), (2.777851, -4.157348, -25), (0, 0, 25), (2.5, -4.3301272, 25), (2.777851, -4.157348, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_081" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (2.777851, -4.157348, -25), (3.043807, -3.9667666, -25), (0, 0, 25), (2.777851, -4.157348, 25), (3.043807, -3.9667666, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_082" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.043807, -3.9667666, -25), (3.296729, -3.7591991, -25), (0, 0, 25), (3.043807, -3.9667666, 25), (3.296729, -3.7591991, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_083" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.296729, -3.7591991, -25), (3.535534, -3.535534, -25), (0, 0, 25), (3.296729, -3.7591991, 25), (3.535534, -3.535534, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_084" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.535534, -3.535534, -25), (3.7591991, -3.296729, -25), (0, 0, 25), (3.535534, -3.535534, 25), (3.7591991, -3.296729, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_085" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.7591991, -3.296729, -25), (3.9667666, -3.043807, -25), (0, 0, 25), (3.7591991, -3.296729, 25), (3.9667666, -3.043807, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_086" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (3.9667666, -3.043807, -25), (4.157348, -2.777851, -25), (0, 0, 25), (3.9667666, -3.043807, 25), (4.157348, -2.777851, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_087" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.157348, -2.777851, -25), (4.3301272, -2.5, -25), (0, 0, 25), (4.157348, -2.777851, 25), (4.3301272, -2.5, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_088" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.3301272, -2.5, -25), (4.4843636, -2.2114434, -25), (0, 0, 25), (4.3301272, -2.5, 25), (4.4843636, -2.2114434, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_089" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.4843636, -2.2114434, -25), (4.6193976, -1.9134172, -25), (0, 0, 25), (4.4843636, -2.2114434, 25), (4.6193976, -1.9134172, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_090" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.6193976, -1.9134172, -25), (4.7346506, -1.6071973, -25), (0, 0, 25), (4.6193976, -1.9134172, 25), (4.7346506, -1.6071973, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_091" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.7346506, -1.6071973, -25), (4.829629, -1.2940953, -25), (0, 0, 25), (4.7346506, -1.6071973, 25), (4.829629, -1.2940953, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_092" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.829629, -1.2940953, -25), (4.9039264, -0.9754516, -25), (0, 0, 25), (4.829629, -1.2940953, 25), (4.9039264, -0.9754516, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_093" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.9039264, -0.9754516, -25), (4.9572244, -0.652631, -25), (0, 0, 25), (4.9039264, -0.9754516, 25), (4.9572244, -0.652631, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_094" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.9572244, -0.652631, -25), (4.9892945, -0.32701564, -25), (0, 0, 25), (4.9572244, -0.652631, 25), (4.9892945, -0.32701564, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+
+        def Mesh "sector_095" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI"]
+        )
+        {
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [0, 2, 1, 3, 4, 5, 0, 1, 4, 0, 4, 3, 1, 2, 5, 1, 5, 4, 2, 0, 3, 2, 3, 5]
+            uniform token physics:approximation = "convexHull"
+            float physxCollision:contactOffset = 0.00005
+            float physxCollision:restOffset = 0
+            int physxConvexHullCollision:hullVertexLimit = 256
+            float physxConvexHullCollision:minThickness = 0
+            point3f[] points = [(0, 0, -25), (4.9892945, -0.32701564, -25), (5, -1.2246468e-15, -25), (0, 0, 25), (4.9892945, -0.32701564, 25), (5, -1.2246468e-15, 25)]
+            uniform token purpose = "guide"
+            uniform token subdivisionScheme = "none"
+            float3 xformOp:scale = (0.001, 0.001, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:scale"]
+        }
+    }
+}
+

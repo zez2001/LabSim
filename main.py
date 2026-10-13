@@ -34,6 +34,30 @@ if args.config_name == 'minimal_pick':
         no_video=args.no_video, episodes=None, output=None, replay=None,
         episode='episode_0000', checkpoint=None, timeout_seconds=None, keep_open=False)))
 
+if args.config_name == 'minimal_precision_insertion':
+    import sys
+    from pathlib import Path
+    from demos.minimal_precision_insertion.run import run as precision_run
+    if args.backend != 'numpy':
+        raise ValueError('minimal_precision_insertion currently uses CPU PhysX with the numpy backend')
+    precision_app = SimulationApp(dict(headless=args.headless, width=1280, height=720,
+        extra_args=['--/app/extensions/fsWatcherEnabled=false']))
+    precision_code = 1
+    try:
+        precision_code = precision_run(argparse.Namespace(
+            config=Path(args.config_dir) / 'minimal_precision_insertion.yaml',
+            headless=args.headless, no_video=args.no_video, output=None,
+            offsets='0', physics_hz='120', repeats=1, diagnostic=False,
+            contact_offset_mm=None, position_iterations=None, tube_segments=None), precision_app)
+    except Exception:
+        import traceback
+        traceback.print_exc()
+    finally:
+        from omni.kit.app import get_app
+        get_app().post_quit(precision_code)
+        precision_app.close()
+    sys.exit(precision_code)
+
 # Set up simulation app based on arguments
 simulation_config = {
     "headless": False,
