@@ -50,3 +50,6 @@ register_task("mobile_pick", MobilePickTask)
 register_task("minimal_pick", MinimalPickTask)
 
 register_task("minimal_precision_insertion", MinimalPrecisionInsertionTask)
+
+from tasks.lab_cuvette_loading_task import LabCuvetteLoadingTask
+register_task("lab_cuvette_loading", LabCuvetteLoadingTask)

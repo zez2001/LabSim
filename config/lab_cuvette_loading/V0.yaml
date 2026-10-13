@@ -1,0 +1,109 @@
+name: lab_cuvette_loading
+task_type: lab_cuvette_loading
+controller_type: lab_cuvette_loading
+mode: collect
+version: V0
+calibrated: false
+robot:
+  type: franka_proxy
+  usd_path: assets/robots/Franka.usd
+  base_m: [-0.30, 0.0, 0.74]
+  tcp_local_m: [0.0, 0.0, 0.10]
+  arm_kp: [20000, 20000, 20000, 20000, 12000, 12000, 12000]
+  arm_kd: [500, 500, 500, 500, 200, 200, 200]
+  max_effort: [87, 87, 87, 87, 12, 12, 12, 8, 8]
+  max_velocity: [2.175, 2.175, 2.175, 2.175, 2.61, 2.61, 2.61, 0.10, 0.10]
+  finger_kp: 2000
+  finger_kd: 100
+  initial_tcp_m: [0.10, -0.13, 0.98]
+  ik_position_tolerance_m: 0.00005
+  ik_orientation_tolerance_rad: 0.003
+layout:
+  table_top_m: 0.74
+  rack_xy_m: [0.15, -0.14]
+  rack_yaw_deg: 0.0
+  instrument_xy_m: [0.24, 0.12]
+  instrument_yaw_deg: 0.0
+  target_local_xy_m: [-0.075, -0.035]
+  chamber_floor_z_m: 0.800
+  shell_top_z_m: 0.870
+rack:
+  rows: 6
+  columns: 8
+  pitch_m: 0.017
+  slot_inner_m: 0.015
+  depth_m: 0.018
+  base_thickness_m: 0.004
+  source_slot: [0, 0]
+  random_legal_slots: [[0,0], [0,1], [0,2], [0,3], [0,4], [0,5], [0,6], [0,7]]
+cuvette:
+  size_m: [0.013, 0.013, 0.045]
+  wall_m: 0.001
+  mass_kg: 0.02
+  center_of_mass_m: [0.0, 0.0, 0.0]
+  inertia_diagonal_kg_m2: [0.000003656666667, 0.000003656666667, 0.000000563333333]
+  opacity: 0.28
+  grasp_above_bottom_m: 0.035
+  target_id: cuvette_target
+  distractor_count: 2
+instrument:
+  size_xy_m: [0.36, 0.28]
+  wall_m: 0.01
+  electronics_width_m: 0.10
+  lid_size_m: [0.24, 0.012, 0.18]
+  lid_center_local_xy_m: [-0.055, 0.145]
+  neighbor_offset_xy_m: [0.055, 0.015]
+holder:
+  inner_m: 0.015
+  depth_m: 0.020
+  wall_m: 0.003
+  target_id: UV2510_proxy/sample_slot_0
+physics:
+  hz: 240
+  control_hz: 60
+  solver: TGS
+  position_iterations: 64
+  velocity_iterations: 16
+  contact_offset_m: 0.0001
+  rest_offset_m: 0.0
+  ccd: true
+  static_friction: 0.6
+  dynamic_friction: 0.5
+  finger_static_friction: 1.0
+  finger_dynamic_friction: 0.8
+  restitution: 0.0
+control:
+  phases_s: {APPROACH_SOURCE: 3.0, GRASP: 1.5, EXTRACT: 2.5, TRANSPORT: 3.5, ALIGN: 2.0, INSERT: 4.0, RELEASE: 2.0, RETREAT: 2.0, VERIFY: 2.5}
+  extract_clearance_m: 0.10
+  transport_tcp_z_m: 0.99
+  insert_start_gap_m: 0.004
+  released_bottom_gap_m: 0.0005
+  retreat_m: 0.10
+scoring:
+  required_depth_m: 0.018
+  penetration_tolerance_m: 0.00025
+  xy_tolerance_m: 0.0010
+  orientation_tolerance_deg: 5.0
+  stable_translation_m: 0.0003
+  stable_rotation_deg: 1.0
+  stable_seconds: 1.0
+  grasp_force_N: 0.02
+  extraction_above_rack_m: 0.010
+  transported_distance_m: 0.12
+  retreat_distance_m: 0.070
+  timeout_s: 28.0
+random:
+  rack_translation_mm: 10.0
+  rack_yaw_deg: 3.0
+  instrument_translation_mm: 5.0
+  instrument_yaw_deg: 2.0
+  light_scale: [0.8, 1.2]
+  in_slot_translation_mm: 0.25
+light: {intensity: 1000.0}
+cameras:
+  external: {eye: [0.85, -0.95, 1.32], target: [0.12, 0.04, 0.86], focal_length: 2.4, resolution: [256,256]}
+  wrist: {local_eye: [0.100, 0.0, 0.040], target_below_tcp_m: 0.015, focal_length: 1.2, resolution: [256,256]}
+collector: {compression: gzip}
+task:
+  control_hz: 60
+  instruction: Take the designated cuvette from the white rack and physically load it into the open instrument then release and retreat.

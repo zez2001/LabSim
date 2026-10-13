@@ -58,6 +58,14 @@ if args.config_name == 'minimal_precision_insertion':
         precision_app.close()
     sys.exit(precision_code)
 
+if args.config_name == 'lab_cuvette_loading':
+    import sys
+    from demos.lab_cuvette_loading.run import main as cuvette_main
+    if args.backend != 'numpy':
+        raise ValueError('lab_cuvette_loading currently uses CPU PhysX')
+    sys.argv = [sys.argv[0]] + (['--headless'] if args.headless else []) + (['--no-video'] if args.no_video else [])
+    sys.exit(cuvette_main())
+
 # Set up simulation app based on arguments
 simulation_config = {
     "headless": False,

@@ -59,3 +59,6 @@ register_controller("mobile_pick", MobilePickController)
 register_controller("minimal_pick", MinimalPickController)
 
 register_controller("minimal_precision_insertion", MinimalPrecisionInsertionController)
+
+from controllers.lab_cuvette_loading_controller import LabCuvetteLoadingController
+register_controller("lab_cuvette_loading", LabCuvetteLoadingController)
