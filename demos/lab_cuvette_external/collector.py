@@ -4,6 +4,12 @@ import numpy as np
 from data_collectors.lab_cuvette_loading_collector import LabCuvetteLoadingCollector
 
 class ExternalCollector(LabCuvetteLoadingCollector):
+    unavailable={'privileged/depth_m','privileged/xy_error_m','privileged/yaw_error_rad','privileged/overlap_m'}
+
+    def _append(self,key,value):
+        if key in self.unavailable:return
+        return super()._append(key,value)
+
     def cache_transition(self,state,action,next_state,result):
         video=self.save_video;self.save_video=False
         self._append('privileged/overlap_measurement_available',np.bool_(False))

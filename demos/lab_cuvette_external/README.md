@@ -78,7 +78,7 @@ bash demos/lab_cuvette_external/usd_python.sh demos/lab_cuvette_external/build.p
 每个60Hz控制动作保持4个240Hz物理步，`obs_t → action_t → next_state`。本版诊断的 `privileged/progress` 只有 `actual_held` 一列，附加可用性布尔字段；不是原完整任务八阶段的完成标记。
 
 所有本轮诊断的H5 `success=false`、`full_task_eligible=false`；成功的落稳检查不等于完整装载成功。没有把诊断混入V0或完整任务训练索引。
-`privileged/overlap_m=0` 是兼容旧写入器的占位，必须同时检查 `overlap_measurement_available=false`，**不能解释为零穿透**。视频明确写 `mesh overlap NOT measured`。
+当前诊断schema为 `labsim.lab_cuvette_loading.V0_ext01.diagnostic.v1`，学习字段仍对应原V0语义。未定义的depth、目标XY/yaw误差及Mesh overlap直接不写入，`overlap_measurement_available=false`；tilt由实际四元数计算。早期诊断曾保留上述占位字段，必须参照metadata_errata.json，不能将其当测量。视频明确写 `mesh overlap NOT measured`。
 独立审计另用源网格全部顶点和实际姿态计算水平桌面越界，并报告覆盖局限。未声称沿用旧Box/SAT即可排除新Mesh穿透。
 
 后续ACT/DP可沿用学习字段的形状语义，但当前没有合格完整成功轨迹；现有适配器应拒绝这些诊断文件，不能为了读取batch而把它们改成成功。

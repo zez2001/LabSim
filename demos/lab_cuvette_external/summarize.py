@@ -10,7 +10,7 @@ def link(label,path):return f'[{label}]({Path(path).resolve()})'
 def main():
     src=load(DOC/'source_manifest.json');geo=load(DOC/'source_geometry.json');conv=load(DOC/'conversion.json');mass=load(DOC/'vessel_mass_properties.json');audit=load(DOC/'diagnostic_audit.json');preserve=load(DOC/'baseline_after.json');valid=load(DOC/'independent_load_validation.json');feasible=load(DOC/'feasibility.json');roles=load(DOC/'asset_roles.json');cook=load(OUT/'drop_final01/cooked_comparison.json')
     status=[
-        dict(item='加载成功',state='passed',evidence=['independent_load_validation.json','outputs scene_attempt01/scene.usda'],limits='五个派生USD独立加载；必要引用已解析；不代表物理通过'),
+        dict(item='加载成功',state='passed',evidence=['independent_load_validation.json','outputs scene_final01/scene.usda'],limits='五个派生USD独立加载；必要引用已解析；不代表物理通过'),
         dict(item='几何接入验收',state='coordinate_geometry_passed_with_identity_limits',evidence=['conversion.json','dimensions.csv','source_sections.png'],limits='单位/朝向/defaultPrim/实际顶点尺寸通过；源模型真实尺寸及身份未确认'),
         dict(item='配对装载可行性',state='blocked_identity_and_geometry',evidence=['feasibility.json','pairing_sections.png'],limits='两候选座给定居中竖直姿态有网格边界相交；其他方向未穷举；身份未知'),
         dict(item='物理配置及限定检查',state='partially_observed_NOT_accepted_for_precision',evidence=['vessel_mass_properties.json','drop_final01/runtime_readback.json','cooked_sections.png','diagnostic_audit.json'],limits='质量惯量读回及落稳/侧壁接触有证据；烹饪偏差约0.312mm，源几何桌面越界约0.28mm；旧架抖动；机器人惯量未校准'),
@@ -83,7 +83,7 @@ def main():
     '## 实际运行与数据','',
     table(['目录','实际结果','仿真秒','run函数墙钟秒','解释'],[(name,(r:=load(OUT/name/'result.json'))['status'],r['simulation_seconds'],round(r['wall_seconds'],2),desc) for name,desc in [('drop_final01','从台面上25mm自由落下并接触落稳；几何精度未通过'),('side_final01','0.4m/s初始化侧向速度；真实侧壁接触峰值约0.357N'),('rack01','新器皿＋旧架持续抖动'),('grasp_final01','支撑不合法，2秒处停止进入抓取'),('grasp_table02','保持子阶段约8.625秒；释放后约90度倾倒，整体失败')]]),'',
     '上述墙钟为run函数内设置/测量/执行时长，不含SimulationApp完整启动关闭，不能当独占GPU性能基准。开始前已有PID491444占显存，未停止。开发grasp01与grasp_table01曾短暂重叠启动/关闭，全部保留且排除性能比较；后续入口增加flock顺序化。没有开展成功率或性能配置比较。',
-    '实际动作、双RGB、9维机器人状态、对象位姿、接触点/力/分离量、阶段和时间已保存。H5延续8维动作和学习观测语义，60Hz记录、240Hz逐物理状态，obs/action/next时序审计通过。新的progress只有actual_held列；重叠占位值不可作为测量。所有diagnostic都full_success=false、success=false，不进入完整任务训练索引；未开展ACT/DP训练或完整成功batch验证。',
+    '实际动作、双RGB、9维机器人状态、对象位姿、接触点/力/分离量、阶段和时间已保存。H5延续8维动作和学习观测语义，60Hz记录、240Hz逐物理状态，obs/action/next时序审计通过。当前诊断schema为V0_ext01.diagnostic.v1，省略未定义的depth/目标XY/yaw误差/overlap指标，tilt由实际四元数计算；progress只有actual_held列。早期诊断的完整任务指标存在占位字段，不能作为测量，详见metadata_errata.json。所有diagnostic都full_success=false、success=false，不进入完整任务训练索引；实际调用既有ACT/DP数据集构造器，确认拒绝全部非完整成功诊断；没有修改成功标志来制造batch。未开展训练或完整成功batch验证。',
     '开发失败保留：USD离线schema依赖修复、结果JSON序列化失败、调试截图数值类型修复、早期额外字段长度错误、传感器预热导致初始下落在录制前完成，以及初态窗口包含落稳瞬态。后续修复均有独立新输出；原始文件不覆写。metadata_errata.json纠正旧字段零碰撞误差含义及其他元数据问题。','',
     f"- {link('自由下落完整诊断录像',OUT/'drop_final01/video/episode_0000.mp4')}",f"- {link('侧壁接触完整诊断录像',OUT/'side_final01/video/episode_0000.mp4')}",f"- {link('旧架支撑失效与抓取停止录像',OUT/'grasp_final01/video/episode_0000.mp4')}",f"- {link('桌面夹持保持及释放倾倒录像',OUT/'grasp_table02/video/episode_0000.mp4')}",f"![夹持保持与失败释放实际轨迹]({DOC/'grasp_table02_trace.png'})",'',
     '## 复现入口与记录','',f"准确命令见{link('运行README',ROOT/'demos/lab_cuvette_external/README.md')}。新版本独立run.sh已实际运行scene、physics/drop/side/rack/grasp/grasp_table及task/standard/random关口；完整任务关口只记录blocked，不是10/20次完整测试。新配置路径为config/lab_cuvette_loading/V0_ext01.yaml。build.py在已有派生目录时拒绝覆盖，正常查看直接加载交付资产。",'',
@@ -91,7 +91,7 @@ def main():
     '优先补充候选座身份与装载方向、器皿和仪器是否配套，以及一组器皿外宽/座限制净宽的测量。其他信息可分步提供，不要求立即完整标定。',
     table(['缺少信息','影响步骤','当前假设或阻塞','最小补充方式'],[(q['missing'],q['affects'],q['current'],q['minimum']) for q in questions]),'',
     '## 证据索引','',
-    '\n'.join('- '+link(p.name,p) for p in [DOC/'source_manifest.json',DOC/'asset_roles.json',DOC/'conversion.json',DOC/'dimensions.csv',DOC/'independent_load_validation.json',DOC/'feasibility.json',DOC/'vessel_mass_properties.json',DOC/'physical_parameters.csv',DOC/'diagnostic_audit.json',DOC/'attempt_inventory.json',DOC/'metadata_errata.json',DOC/'baseline_before.json',DOC/'baseline_after.json',DOC/'archive_integrity_after.json',DOC/'environment.json',DOC/'stage_status.json',DOC/'questions.json']),''
+    '\n'.join('- '+link(p.name,p) for p in [DOC/'source_manifest.json',DOC/'asset_roles.json',DOC/'conversion.json',DOC/'dimensions.csv',DOC/'independent_load_validation.json',DOC/'feasibility.json',DOC/'vessel_mass_properties.json',DOC/'physical_parameters.csv',DOC/'diagnostic_audit.json',DOC/'attempt_inventory.json',DOC/'metadata_errata.json',DOC/'adapter_guard_check.json',DOC/'rebuild_validation.json',DOC/'baseline_before.json',DOC/'baseline_after.json',DOC/'archive_integrity_after.json',DOC/'environment.json',DOC/'stage_status.json',DOC/'questions.json']),''
     ]
     (DOC/'report.md').write_text('\n'.join(lines))
     print('DELIVERY_REPORT',DOC/'report.md')

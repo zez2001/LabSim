@@ -90,7 +90,7 @@
 | grasp_table02 | SUBTASK_FAILED | 28.51666666666537 | 97.48 | 保持子阶段约8.625秒；释放后约90度倾倒，整体失败 |
 
 上述墙钟为run函数内设置/测量/执行时长，不含SimulationApp完整启动关闭，不能当独占GPU性能基准。开始前已有PID491444占显存，未停止。开发grasp01与grasp_table01曾短暂重叠启动/关闭，全部保留且排除性能比较；后续入口增加flock顺序化。没有开展成功率或性能配置比较。
-实际动作、双RGB、9维机器人状态、对象位姿、接触点/力/分离量、阶段和时间已保存。H5延续8维动作和学习观测语义，60Hz记录、240Hz逐物理状态，obs/action/next时序审计通过。新的progress只有actual_held列；重叠占位值不可作为测量。所有diagnostic都full_success=false、success=false，不进入完整任务训练索引；未开展ACT/DP训练或完整成功batch验证。
+实际动作、双RGB、9维机器人状态、对象位姿、接触点/力/分离量、阶段和时间已保存。H5延续8维动作和学习观测语义，60Hz记录、240Hz逐物理状态，obs/action/next时序审计通过。当前诊断schema为V0_ext01.diagnostic.v1，省略未定义的depth/目标XY/yaw误差/overlap指标，tilt由实际四元数计算；progress只有actual_held列。早期诊断的完整任务指标存在占位字段，不能作为测量，详见metadata_errata.json。所有diagnostic都full_success=false、success=false，不进入完整任务训练索引；实际调用既有ACT/DP数据集构造器，确认拒绝全部非完整成功诊断；没有修改成功标志来制造batch。未开展训练或完整成功batch验证。
 开发失败保留：USD离线schema依赖修复、结果JSON序列化失败、调试截图数值类型修复、早期额外字段长度错误、传感器预热导致初始下落在录制前完成，以及初态窗口包含落稳瞬态。后续修复均有独立新输出；原始文件不覆写。metadata_errata.json纠正旧字段零碰撞误差含义及其他元数据问题。
 
 - [自由下落完整诊断录像](/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_ext01/drop_final01/video/episode_0000.mp4)
@@ -128,6 +128,8 @@
 - [diagnostic_audit.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/diagnostic_audit.json)
 - [attempt_inventory.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/attempt_inventory.json)
 - [metadata_errata.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/metadata_errata.json)
+- [adapter_guard_check.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/adapter_guard_check.json)
+- [rebuild_validation.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/rebuild_validation.json)
 - [baseline_before.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/baseline_before.json)
 - [baseline_after.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/baseline_after.json)
 - [archive_integrity_after.json](/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_ext01/archive_integrity_after.json)
