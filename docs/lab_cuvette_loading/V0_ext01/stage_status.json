@@ -1,0 +1,75 @@
+[
+  {
+    "item": "加载成功",
+    "state": "passed",
+    "evidence": [
+      "independent_load_validation.json",
+      "outputs scene_attempt01/scene.usda"
+    ],
+    "limits": "五个派生USD独立加载；必要引用已解析；不代表物理通过"
+  },
+  {
+    "item": "几何接入验收",
+    "state": "coordinate_geometry_passed_with_identity_limits",
+    "evidence": [
+      "conversion.json",
+      "dimensions.csv",
+      "source_sections.png"
+    ],
+    "limits": "单位/朝向/defaultPrim/实际顶点尺寸通过；源模型真实尺寸及身份未确认"
+  },
+  {
+    "item": "配对装载可行性",
+    "state": "blocked_identity_and_geometry",
+    "evidence": [
+      "feasibility.json",
+      "pairing_sections.png"
+    ],
+    "limits": "两候选座给定居中竖直姿态有网格边界相交；其他方向未穷举；身份未知"
+  },
+  {
+    "item": "物理配置及限定检查",
+    "state": "partially_observed_NOT_accepted_for_precision",
+    "evidence": [
+      "vessel_mass_properties.json",
+      "drop_final01/runtime_readback.json",
+      "cooked_sections.png",
+      "diagnostic_audit.json"
+    ],
+    "limits": "质量惯量读回及落稳/侧壁接触有证据；烹饪偏差约0.312mm，源几何桌面越界约0.28mm；旧架抖动；机器人惯量未校准"
+  },
+  {
+    "item": "子任务",
+    "state": "grasp_hold_phase_passed_release_failed",
+    "evidence": [
+      "grasp_table02/physics_records.json",
+      "grasp_table02/video/episode_0000.mp4"
+    ],
+    "limits": "桌面局部诊断；双指抬升保持约8.625s，最后释放倾倒，整条诊断失败"
+  },
+  {
+    "item": "完整任务",
+    "state": "not_executed_blocked",
+    "evidence": [
+      "task_gate01/gate_result.json"
+    ],
+    "limits": "没有完整任务执行器放行；新装载判据未冻结；完整成功0"
+  },
+  {
+    "item": "standard和random",
+    "state": "blocked_0_full_episodes",
+    "evidence": [
+      "standard_gate01/gate_result.json",
+      "random_gate01/gate_result.json"
+    ],
+    "limits": "仅运行关口；未开展10次/20次完整批次；随机种子5000至5019已保存"
+  },
+  {
+    "item": "真实一致性",
+    "state": "not_verified",
+    "evidence": [
+      "config calibrated=false"
+    ],
+    "limits": "未做真实尺寸/材料/机器人/相机校准或real2sim gap评估"
+  }
+]

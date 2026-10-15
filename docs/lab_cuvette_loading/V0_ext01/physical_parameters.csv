@@ -1,0 +1,16 @@
+参数,值,单位,对象,来源,设置位置,验证方式,真实校准
+mass,0.02,kg,器皿,本轮可配置假设,config vessel.mass_kg,PhysX mass query及tensor读回,否
+COM,"[8.972380432432565e-07, 9.038206870173137e-07, 0.02902763194004881]",m,器皿,源闭合网格＋均匀质量分布计算,derived MassAPI,tensor com及PhysX查询,否
+inertia,"[1.1456999602524016e-06, 9.524168769928582e-06, 9.524169362036958e-06]",kg m^2,器皿,源闭合壁/底积分，非V0实心盒,derived diagonalInertia＋principalAxes,tensor完整惯量及主惯量读回,否
+friction,0.6 static / 0.5 dynamic,1,器皿/外部仪器,可配置假设,MaterialAPI,绑定路径读回；数值作者层，非完整运行时材质读回,否
+finger friction,1.0 / 0.8,1,指端,可配置假设,run.py FingerPhysics,作者层＋绑定,否
+restitution,0,1,新器皿/仪器/指端,可配置假设,MaterialAPI,作者层,否
+combine,average / average,token,新物理材质,本轮选择,PhysxMaterialAPI,作者层,否
+contact/rest offset,0.00005 / 0,m,新器皿/仪器/机器人,可配置数值设置,PhysxCollisionAPI,USD写入；未直接运行时读回,否
+rack contact/rest,0.0001 / 0,m,来源架,V0源资产继承,复制rack USD,源文件相同SHA及独立inode,否
+convex minThickness,0,m,分块凸体,取消额外加厚的源几何保真尝试,PhysxConvexHullCollisionAPI,写入0，烹饪误差仍未解决；不据此宣称有效厚度精确,否
+CCD,True,bool,新器皿及场景,本轮选择,Physx APIs,场景作者层/读回；器皿作者层,否
+step/control,240 / 60,Hz,场景,沿用工程控制频率,World和cfg,时序及engine时钟对照，4子步,否
+solver/iterations,CPU TGS 64/16,token,场景/刚体/关节,工程选择,PhysxScene/RigidBody/Articulation,后端/solver读回；迭代作者层,否
+Franka dynamics,旧USD质量/质心/惯量,mixed,机器人,源资产继承，原始依据未知,旧Franka USD,选取连杆/手/指实际质量惯量读回，尺度仍待核验,否
+table material,未显式覆盖,unknown,桌面,Isaac FixedCuboid默认,World场景,最终回退值未知,否

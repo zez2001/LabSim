@@ -1,0 +1,74 @@
+version: V0_ext01
+calibrated: false
+source:
+  directory: assets/lab_cuvette_loading/V0_ext01/source
+  archive_sha256: 62f96e93b3a179d17ed00738a16213785465ae704bd5f3f6f94d17e6f7934fce
+  instrument: newnew4.usd
+  instrument_prim: /RotatedRoot
+  vessel: TestTube_Baked.usd
+  vessel_prim: /TestTube
+derived_directory: assets/lab_cuvette_loading/V0_ext01/derived
+output_root: outputs/lab_cuvette_loading/V0_ext01
+pairing:
+  vessel_identity_confirmed: false
+  target_identity_confirmed: false
+  selected_candidate: null
+  insertion_axis: [0, 0, -1]
+  assumption: upright centred straight vertical loading only; other orientations unconfirmed
+physics:
+  hz: 240
+  control_hz: 60
+  solver: TGS
+  position_iterations: 64
+  velocity_iterations: 16
+  contact_offset_m: 0.00005
+  rest_offset_m: 0.0
+  static_friction: 0.6
+  dynamic_friction: 0.5
+  finger_static_friction: 1.0
+  finger_dynamic_friction: 0.8
+  restitution: 0.0
+  ccd: true
+vessel:
+  mass_kg: 0.020
+  mass_source: configurable assumption; NOT measured; uniform density over closed source solid walls and bottom
+  visual_opacity: 0.28
+  visual_source: derived transparent appearance assumption; source material retained in source_original.usda
+  collision: source_radial_convex_compound
+  radial_sectors: 64
+  height_bands: source_bottom_fillet_straight_wall_top_fillet
+  max_hull_vertices: 256
+  convex_min_thickness_m: 0.0
+scene:
+  table_top_m: 0.74
+  table_size_m: [1.6, 1.5, 0.08]
+  instrument_xyz_m: [0.36, 0.22, 0.74]
+  instrument_yaw_deg: 0.0
+  rack_xy_m: [0.15, -0.14]
+  rack_yaw_deg: 0.0
+  source_slot: [0, 0]
+  source_local_xy_m: [0.0, 0.0]
+  provenance: installation translation chosen for visibility and robot clearance; no dimensional scaling
+robot:
+  usd_path: assets/robots/Franka.usd
+  base_m: [-0.30, 0, 0.74]
+  tcp_local_m: [0, 0, 0.10]
+  grasp_above_bottom_m: 0.053
+  uncertainty: inherited mass inertia scale requires actual readback; do not claim calibrated dynamics
+random:
+  test_seeds: [5000,5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019]
+  rack_translation_mm: 10
+  rack_yaw_deg: 3
+  instrument_translation_mm: 5
+  instrument_yaw_deg: 2
+  in_slot_translation_mm: 0.025
+  light_scale: [0.8, 1.2]
+  status: blocked_identity_and_geometry; not executed full task batches
+acceptance:
+  geometric_sampling_step_m: 0.00025
+  numerical_epsilon_m: 0.0000001
+  cooked_geometry_warning_m: 0.00005
+  full_task_thresholds: null
+  full_task_gate: require confirmed identities, feasible exact pairing, validated collision and new scoring specification
+  subtask_hold_s: 1.0
+  subtask_clearance_m: 0.040

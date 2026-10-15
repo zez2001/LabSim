@@ -1,0 +1,66 @@
+[
+  {
+    "role": "target_vessel",
+    "V0": "V0 Cube empty cup",
+    "external_file_prim": "TestTube_Baked.usd /TestTube/Mesh",
+    "replacement": "replaced visual and dynamic compound collision",
+    "identity_evidence": "source USD vertices match packaged OBJ within1.2e-8m",
+    "unknown": "actual vessel model and matching instrument unconfirmed"
+  },
+  {
+    "role": "distractor_vessels",
+    "V0": "V0 cuvette_debug",
+    "external_file_prim": "same external vessel_debug.usda, two copies",
+    "replacement": "replaced in diagnostic scene",
+    "identity_evidence": "explicit source reuse",
+    "unknown": "not proof of real distractor identity"
+  },
+  {
+    "role": "source_rack",
+    "V0": "V0 parameterised 6x8 rack",
+    "external_file_prim": "no rack supplied",
+    "replacement": "NOT replaced; independent V0 proxy copy",
+    "identity_evidence": "package inventory",
+    "unknown": "true slot dimensions and matching vessel"
+  },
+  {
+    "role": "instrument_shell",
+    "V0": "V0 seven Cube proxy",
+    "external_file_prim": "newnew4.usd /RotatedRoot",
+    "replacement": "replaced visual and static triangles",
+    "identity_evidence": "CAD converter metadata and assembly geometry",
+    "unknown": "real model identity and dimensions unverified"
+  },
+  {
+    "role": "target_holder",
+    "V0": "V0 4 walls and shared Base",
+    "external_file_prim": "two candidate instance paths in source_geometry.json",
+    "replacement": "both source parts preserved and collidable; NONE selected as confirmed target",
+    "identity_evidence": "geometry only",
+    "unknown": "which component and loading direction; no hidden V0 holder"
+  },
+  {
+    "role": "neighbour_parts",
+    "V0": "V0 empty neighbour Cube slot",
+    "external_file_prim": "all 8 instrument proxy meshes once",
+    "replacement": "external assembly retained",
+    "identity_evidence": "instance proxy traversal",
+    "unknown": "semantic labels unknown"
+  },
+  {
+    "role": "robot_and_gripper",
+    "V0": "existing Franka USD",
+    "external_file_prim": "assets/robots/Franka.usd",
+    "replacement": "reused",
+    "identity_evidence": "repository asset",
+    "unknown": "real neo model and inherited inertia units"
+  },
+  {
+    "role": "table_and_background",
+    "V0": "V0 synthetic table and background",
+    "external_file_prim": "FixedCuboid/GroundPlane/DomeLight",
+    "replacement": "synthetic proxy retained; table enlarged1.6x1.5m for supplied instrument, no size scaling of CAD",
+    "identity_evidence": "explicit installation assumption",
+    "unknown": "true table, camera and layout measurements; decorative V0 background omitted from diagnostics"
+  }
+]
