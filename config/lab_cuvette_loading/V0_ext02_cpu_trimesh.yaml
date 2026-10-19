@@ -1,0 +1,56 @@
+version: V0_ext02
+calibrated: false
+source_asset: assets/lab_cuvette_loading/V0_ext01/derived/vessel_debug.usda
+derived_directory: assets/lab_cuvette_loading/V0_ext02
+output_root: outputs/lab_cuvette_loading/V0_ext02
+physics:
+  hz: 240
+  control_hz: 60
+  solver: TGS
+  position_iterations: 64
+  velocity_iterations: 16
+  contact_offset_m: 0.00005
+  rest_offset_m: 0.0
+  static_friction: 0.6
+  dynamic_friction: 0.5
+  finger_static_friction: 1.0
+  finger_dynamic_friction: 0.8
+  restitution: 0.0
+  ccd: true
+scene:
+  table_top_m: 0.74
+  table_size_m: [1.6, 1.5, 0.08]
+  cup_xy_m: [-0.04, -0.22]
+  initial_bottom_gap_m: 0.005
+robot:
+  usd_path: assets/robots/Franka.usd
+  base_m: [-0.30, 0, 0.74]
+  tcp_local_m: [0, 0, 0.10]
+  grasp_above_bottom_m: 0.053
+acceptance:
+  support_geometry_m: 0.00005
+  steady_source_penetration_m: 0.00005
+  window_s: 3.0
+  position_drift_m: 0.0002
+  orientation_change_deg: 1.0
+  linear_speed_m_s: 0.001
+  angular_speed_rad_s: 0.02
+  lift_m: 0.040
+  hold_s: 1.0
+  release_support_force_N: 0.10
+  release_bottom_gap_m: 0.00005
+  upright_after_release_deg: 1.0
+  actual_retreat_clearance_m: 0.040
+  scope: fixed engineering gates; NOT calibrated accuracy or insertion acceptance
+full_task:
+  executed: false
+  success: false
+  gate: unconfirmed_target_identity_pairing_direction_and_intersecting_upright_path
+gripper:
+  mode: inherited_close
+  contact_safety_factor: 2.0
+  method: contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp; no gain or force-limit change
+
+collision_scheme: sdf_cpu
+collision_execution: CPU_TRIANGLE_FALLBACK_NOT_GPU_SDF
+placement_mode: unload_to_weight
