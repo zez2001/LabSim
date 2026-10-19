@@ -217,7 +217,9 @@ def run(args,app,output,cfg):
                         else:dz=0.
                         target=target+[0,0,dz]
                     elif r['source_bottom_gap_m']>1e-5:target=target+[0,0,-min(.001/control,r['source_bottom_gap_m']*.25)]
-                if u>=(10. if cfg.get('placement_mode','hold_then_quiet')=='unload_to_weight' else 6.):outcome='PLACEMENT_SUPPORT_NOT_ESTABLISHED';break
+                if u>=(10. if cfg.get('placement_mode','hold_then_quiet')=='unload_to_weight' else 6.):
+                    contact_support=abs(r['source_bottom_z_m']-cfg.scene.table_top_m)<=cfg.acceptance.release_bottom_gap_m and r['support_force_vector_N'][2]>=cfg.acceptance.release_support_force_N
+                    outcome='PRE_RELEASE_UNSTABLE' if contact_support else 'PLACEMENT_SUPPORT_NOT_ESTABLISHED';break
             elif phase=='OPEN':
                 target=open_start;grip=grip_closed+(.04-grip_closed)*min(1.,u/3)
                 if u>=3.:ready_start=None;enter('CLEAR_FINGERS')

@@ -24,6 +24,13 @@ def analyze(folder):
     transport=[r for r in rows if r['phase']=='TRANSPORT'];transport_ok=bool(transport and np.linalg.norm(np.array(transport[-1]['position'])[:2]-t0[:2]-[.03,.02])<=.003 and np.all(np.array(transport[-1]['finger_force_N'])>.02))
     flags=dict(support_valid=bool(initial['static_pass']),grasp_success=bool(best>=1.),hold_success=bool(best>=1.),transport_success=transport_ok,pre_release_supported_and_quiet=release_ok,released_stable=stable);success=bool(all(flags.values()))
     result=dict(schema='labsim.V0_ext02.independent_tabletop.v1',diagnostic_success=success,full_success=False,full_task_executed=False,flags=flags,controller_diagnostic_success=raw['diagnostic_success'],controller_agrees=success==raw['diagnostic_success'],actual_hold_s=best,max_lift_m=float(lift.max()),final_tilt_deg=float(tilt[-1]),actual_retreat_clearance_m=clearance,pre_release=before,final_window=final,simulation_seconds=raw['simulation_seconds'],wall_seconds=raw['wall_seconds'])
+    if success:status='DIAGNOSTIC_SUCCESS'
+    elif final['source_penetration_m']>cfg.acceptance.steady_source_penetration_m:status='PHYSICS_INVALID'
+    elif not transport_ok:status='GRASP_SLIP'
+    elif opened:status='UNSTABLE_AFTER_RELEASE'
+    elif np.any(force[-int(cfg.physics.hz):,2]>=cfg.acceptance.release_support_force_N):status='PRE_RELEASE_UNSTABLE'
+    else:status='PLACEMENT_SUPPORT_NOT_ESTABLISHED'
+    result.update(independent_status=status,controller_status=raw['status'],OPEN_executed=bool(opened),RETREAT_executed=retreated,steady_velocity_thresholds_source='engineering assumptions declared in ext02 config, not measured hardware specifications')
     write(p/'independent_tabletop_score.json',result)
     with (p/'tabletop_states.csv').open('w') as fp:
         w=csv.writer(fp);w.writerow(['time_s','phase','x_m','y_m','z_m','source_bottom_m','tilt_deg','speed_m_s','angular_speed_rad_s','left_N','right_N','support_z_N'])
