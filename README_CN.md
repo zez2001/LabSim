@@ -1,3 +1,9 @@
+# LabSim 实验分支
+
+本分支的系列实验、当前状态、DOCX 报告、代表录像和复现入口见 [LabSim 进展与分享入口](LABSIM_PROGRESS.md)。
+
+以下保留上游 LabUtopia 文档。
+
 <div align="center">
   <img src="images/logo.png" alt="Logo" width="180">
 </div>

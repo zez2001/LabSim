@@ -1,0 +1,12 @@
+---
+description: LabSim 用户授权的自动提交与推送约定
+alwaysApply: true
+---
+
+# 代码改动自动同步
+
+用户在 2026-10-19 要求以后每次修改代码都自动上传。
+
+- 每批完成并验证的代码修改，提交后推送 `origin` 当前开发分支，并核对远端 SHA 等于本地 HEAD。
+- 例如：`git push -u origin codex/lab-cuvette-external-assets`。推送失败时保留提交并如实说明，不声称已上传。
+- 不自动修改 `main`、强制推送或改变仓库可见性；保留旧版本及结果，详见根目录 `AGENTS.md`。
