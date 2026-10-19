@@ -30,3 +30,7 @@ bash demos/lab_cuvette_demo01/run_random.sh \
   outputs/lab_cuvette_loading/V0_demo01/fixed5_20261019 \
   outputs/lab_cuvette_loading/V0_demo01/my_random_three
 ```
+
+最终结果：固定5/5独立通过；小范围随机2/3通过，seed7000在OPEN时因50.289µm源底面穿入越过50µm门槛失败，未完成撤离。原生配套保持未执行和false。完整[补充报告](../../docs/lab_cuvette_loading/V0_demo01/report.md)、[所有结果](../../docs/lab_cuvette_loading/V0_demo01/results.json)及[代表录像](../../docs/lab_cuvette_loading/V0_demo01/media)已整理，原始H5/逐步状态/接触保存在各输出目录。
+
+本轮实际验证模式为headless加双视角与主录像渲染；GUI参数入口复用SimulationApp，未在本轮另行实跑GUI。

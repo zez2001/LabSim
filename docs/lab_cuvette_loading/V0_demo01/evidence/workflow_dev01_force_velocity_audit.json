@@ -1,0 +1,162 @@
+{
+  "api": {
+    "native_linear": "SingleRigidPrim -> tensor RigidBodyView.get_velocities, world COM m/s",
+    "native_angular": "same tensor, world rad/s; USD fallback converts degrees to radians",
+    "usd_linear": "UsdPhysics.RigidBodyAPI.GetVelocityAttr raw world m/s, read after same physics step; may be stale under Fabric",
+    "usd_angular": "GetAngularVelocityAttr raw world deg/s, not tensor rad/s",
+    "fd_linear": "world COM positions from same-step source origin+rotated localCOM, backward difference dt",
+    "fd_angular": "R_current R_previous^-1 rotation vector /dt, world rad/s",
+    "force": "cup-side RigidContactView normal matrix plus get_friction_data; dt=1/physics_hz; no double-side force addition"
+  },
+  "phase_summary": {
+    "RESET": {
+      "count": 961,
+      "native_linear_rms_m_s": 1.8598580081490086e-05,
+      "fd_com_linear_rms_m_s": 5.015918056805816e-06,
+      "native_angular_rms_rad_s": 0.00043860653552262014,
+      "fd_angular_rms_rad_s": 6.360722550464345e-06,
+      "usd_angular_raw_rms_deg_s": 0.02511724496108785,
+      "mean_support_vector_N": [
+        -5.029774795427164e-07,
+        -7.992541856024924e-07,
+        0.19620015434076965
+      ],
+      "mean_finger_normal_sum_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_finger_friction_sum_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_contact_plus_gravity_vector_N": [
+        -5.029774795427164e-07,
+        -7.992541856024924e-07,
+        1.5434077022728785e-07
+      ],
+      "mean_environment_normal_norm_sum_N": 0.19620015434184257
+    },
+    "INSERT": {
+      "count": 2748,
+      "native_linear_rms_m_s": 0.015811379164408983,
+      "fd_com_linear_rms_m_s": 0.006839189792234518,
+      "native_angular_rms_rad_s": 0.19252985691043836,
+      "fd_angular_rms_rad_s": 0.03369619067280045,
+      "usd_angular_raw_rms_deg_s": 11.031148534302464,
+      "mean_support_vector_N": [
+        -0.0005763667238079109,
+        -0.00042163067068762294,
+        0.00409616162278789
+      ],
+      "mean_finger_normal_sum_N": [
+        -2.312602525401733e-05,
+        -0.00014882559686074957,
+        -0.002635967121581409
+      ],
+      "mean_finger_friction_sum_N": [
+        0.000591773612633817,
+        0.0005801508792642938,
+        0.19471119100406217
+      ],
+      "mean_contact_plus_gravity_vector_N": [
+        -7.719136428111165e-06,
+        9.694611715921253e-06,
+        -2.861449473134941e-05
+      ],
+      "mean_environment_normal_norm_sum_N": 0.0040959518896266705
+    },
+    "SUPPORT_TRANSFER": {
+      "count": 744,
+      "native_linear_rms_m_s": 0.036629173627934566,
+      "fd_com_linear_rms_m_s": 0.0024763012493753756,
+      "native_angular_rms_rad_s": 2.1059183816680673,
+      "fd_angular_rms_rad_s": 0.07798141353628138,
+      "usd_angular_raw_rms_deg_s": 120.66023670814376,
+      "mean_support_vector_N": [
+        -0.18699331119988877,
+        0.004097016662762574,
+        2.747616357564574
+      ],
+      "mean_finger_normal_sum_N": [
+        0.0002586076912623583,
+        -0.004219447094846958,
+        -0.0007523165971428652
+      ],
+      "mean_finger_friction_sum_N": [
+        0.1867143901769547,
+        7.864323817211355e-05,
+        -2.5506661290199446
+      ],
+      "mean_contact_plus_gravity_vector_N": [
+        -2.0313331671699362e-05,
+        -4.37871939122712e-05,
+        -2.0880525136600127e-06
+      ],
+      "mean_environment_normal_norm_sum_N": 2.747306390849483
+    },
+    "OPEN": {
+      "count": 588,
+      "native_linear_rms_m_s": 0.0037343844192088776,
+      "fd_com_linear_rms_m_s": 0.001986702643541357,
+      "native_angular_rms_rad_s": 0.2244996037089819,
+      "fd_angular_rms_rad_s": 0.07053335088647064,
+      "usd_angular_raw_rms_deg_s": 12.862879953997934,
+      "mean_support_vector_N": [
+        -0.013733369957207664,
+        -0.0037659609718622604,
+        0.2572711256111817
+      ],
+      "mean_finger_normal_sum_N": [
+        -7.555771598701391e-05,
+        0.003769545323297787,
+        -3.667551663966151e-05
+      ],
+      "mean_finger_friction_sum_N": [
+        0.013793845684841738,
+        1.4383230379118552e-06,
+        -0.06105101112473608
+      ],
+      "mean_contact_plus_gravity_vector_N": [
+        -1.5081988352940758e-05,
+        5.022674473438132e-06,
+        -1.6561030194034836e-05
+      ],
+      "mean_environment_normal_norm_sum_N": 0.25718189119583085
+    },
+    "VERIFY": {
+      "count": 744,
+      "native_linear_rms_m_s": 3.0462361089622023e-05,
+      "fd_com_linear_rms_m_s": 0.0,
+      "native_angular_rms_rad_s": 0.0011389266681829302,
+      "fd_angular_rms_rad_s": 0.0,
+      "usd_angular_raw_rms_deg_s": 0.06525569278913514,
+      "mean_support_vector_N": [
+        -1.7462298274040222e-09,
+        -4.7075445763766766e-09,
+        0.19620001841394696
+      ],
+      "mean_finger_normal_sum_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_finger_friction_sum_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_contact_plus_gravity_vector_N": [
+        -1.7462298274040222e-09,
+        -4.7075445763766766e-09,
+        1.8413946950568416e-08
+      ],
+      "mean_environment_normal_norm_sum_N": 0.19608482718467712
+    }
+  },
+  "duplicate_pair_step_type_reports": 0,
+  "duplicate_limitation": "types can legitimately differ; records not summed into force query; native event vectors retain reported side convention",
+  "assumed_weight_N": 0.1962,
+  "source": "20g assumption, not measured"
+}

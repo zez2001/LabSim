@@ -1,6 +1,6 @@
 # LabSim 进展与分享入口
 
-当前分享分支为 `codex/lab-cuvette-external-assets`。本分支包含从 minimal_pick 到 V0_ext02 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。
+当前分享分支为 `codex/lab-cuvette-external-assets`。本分支包含从 minimal_pick 到 V0_demo01 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。
 
 - [系列实验总报告 DOCX](docs/series_20261019/LabSim系列实验总报告20261019.docx)
 - [适合 Agent 阅读的完整报告](docs/series_20261019/report.md)
@@ -14,7 +14,15 @@ minimal_pick 已完成独立物理抓取、数据采集与动作回放；ACT/DP 
 
 V0 为图像关系参考下的 Python 参数化代理场景，完成标准、随机、采集和回放的声明批次。外部文件尺寸资产接入后，原生配对仍有身份及几何关口。V0_ext02 的 28 块厚壁器皿通过独立支撑和抓取搬运诊断，最终停在松爪前检查，未完成经判分通过的释放闭环。不要把 V0 成功、外部资产诊断进展和原生完整装载混为一谈。
 
-最新授权接续版本为 V0_demo01：保留 native_pair 原生几何关口，另以明确可见的工程工装完成连续取出、搬运、装载、释放与撤离。系列报告截止 ext02，不包含尚未执行的新任务结果；后续结果另立版本记录。
+V0_demo01 已在明确新增的来源工装和仪器前侧目标工装中完成连续取出、搬运、装载、交接、松爪、撤离和3秒观察。固定配置5/5独立通过；工装XY各±1mm的小范围随机2/3通过。seed7000在OPEN时源底面穿入0.050289mm，超过既定0.050000mm门槛，保留失败，未放宽标准。原生配对未执行，native_pair_success及原任务full_success仍为false。
+
+- [V0_demo01 完整补充报告 DOCX](docs/lab_cuvette_loading/V0_demo01/LabSim_V0_demo01_连续装载结果报告_20261019.docx)
+- [V0_demo01 Agent阅读报告与复现入口](docs/lab_cuvette_loading/V0_demo01/report.md)
+- [1080p单次连续成功主录像](docs/lab_cuvette_loading/V0_demo01/media/engineering_workflow_success_1080p.mp4)
+- [全部固定与随机结果 JSON](docs/lab_cuvette_loading/V0_demo01/results.json)
+- [随机释放失败及慢放](docs/lab_cuvette_loading/V0_demo01/media)
+
+系列总报告保留截至ext02的历史，V0_demo01结果独立补充；工程工装成功不能解释为原外部器皿与原装载座配套成功。原始H5和逐物理步接触记录保存在本机outputs，精简证据与代表录像随Git分享。
 
 ## 克隆与查看
 
@@ -35,6 +43,7 @@ git lfs pull --include="assets/robots/Franka.usd,assets/beaker.usda,assets/lab_c
 - [V0 完整代理任务](demos/lab_cuvette_loading/README.md)
 - [ext01 外部资产及关口](demos/lab_cuvette_external/README.md)
 - [ext02 支撑与抓取搬运诊断](demos/lab_cuvette_ext02/README.md)
+- [V0_demo01 连续工程任务](demos/lab_cuvette_demo01/README.md)
 
 离线 ext02 判分需要加载 USD 库路径：
 
