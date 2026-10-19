@@ -107,7 +107,7 @@ def run(args,app,output,cfg):
         if not preflight['passed']:raise RuntimeError('Planned fixture/path surface clearance gate failed')
     source=ctx['source'];floor=ctx['fixtures']['target_floor'] if full else np.r_[source[:2]+[.03,.02],cfg.scene.table_top_m]
     cameras={}
-    views=[('camera_1_rgb','/World/Observation',[.75,-1.05,1.65],[.10,.04,.92],(256,256),2.4),('camera_2_rgb','/World/Franka/panda_hand/WristCamera',[.10,-.18,.98],[-.04,-.22,.77],(256,256),1.2),('wide','/World/Main',[.85,-1.15,1.72],[.10,.02,1.02],(1920,1080),1.8),('close','/World/Close',floor+[.10,-.14,.11],floor+[0,0,.037],(640,640),3.5)]
+    views=[('camera_1_rgb','/World/Observation',[.75,-1.05,1.65],[.10,.04,.92],(256,256),2.4),('camera_2_rgb','/World/Franka/panda_hand/WristCamera',[.10,-.18,.98],[-.04,-.22,.77],(256,256),1.2),('wide','/World/Main',[.85,-1.15,1.72],[.10,.02,1.10],(1920,1080),1.6),('close','/World/Close',floor+[.10,-.14,.11],floor+[0,0,.037],(640,640),3.5)]
     for key,path,eye,target,size,focal in views:
         c=Camera(path,name=key,frequency=60,resolution=size);c.set_focal_length(focal);c.set_clipping_range(.0001,10.);set_camera_view(eye=np.array(eye),target=np.array(target),camera_prim_path=path);c.initialize();cameras[key]=c
         if key=='camera_2_rgb':
