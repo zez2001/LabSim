@@ -22,3 +22,11 @@ bash demos/lab_cuvette_demo01/run.sh --headless \
 首条独立通过记录：`outputs/lab_cuvette_loading/V0_demo01/workflow_dev02/trial_00`，执行提交 `bf90910`，54.9667秒仿真，全部阶段已执行；最大源几何穿透0.014365mm，撤离净空86.128mm，原生配对未执行。五次固定检查使用相同物理/控制，仅扩大主录像取景，完成后汇总全部结果。
 
 五次顺序复现：`bash demos/lab_cuvette_demo01/run_fixed.sh outputs/lab_cuvette_loading/V0_demo01/my_fixed_five`。独立通过后的小范围布局命令加 `--random-layout --seed 7000`；来源及目标工装XY各±1mm，不改变原资产尺寸或物理参数，每条先执行几何净空审查。
+
+固定五次已完成并独立通过：`outputs/lab_cuvette_loading/V0_demo01/fixed5_20261019/fixed_0` 至 `fixed_4`。小范围随机检查入口会先核对这五条独立结果：
+
+```bash
+bash demos/lab_cuvette_demo01/run_random.sh \
+  outputs/lab_cuvette_loading/V0_demo01/fixed5_20261019 \
+  outputs/lab_cuvette_loading/V0_demo01/my_random_three
+```
