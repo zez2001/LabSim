@@ -1,0 +1,40 @@
+{
+  "schema": "labsim.V0_demo04.static_visual_qa.v1",
+  "source_run": "outputs/lab_cuvette_loading/V0_demo04/static_final_01/trial_00",
+  "task_physics_steps": 0,
+  "actual_images_reviewed": [
+    "final_static_overview.png",
+    "final_static_top.png",
+    "final_static_source.png",
+    "final_static_chamber.png"
+  ],
+  "observations": {
+    "instrument_count_visible": 1,
+    "source_rack_grid_visible": "6 rows x 6 columns with open cells",
+    "white_target_and_blue_neighbor_visible": true,
+    "lid_open_chamber_visible": true,
+    "original_two_seats_visible": true,
+    "opening_towards_rack_corresponds_to_transform_audit": true,
+    "no_orange_external_target_or_cyan_single_slot_visible": true
+  },
+  "limitations": [
+    "Static reset previews, not natural settled or dynamic insertion evidence.",
+    "Overview includes source, hand, instrument and chamber but top of arm is cropped.",
+    "Screen near/far reverses between cameras; slot IDs and world frames define correspondence.",
+    "Geometry, materials, source rack dimensions and lid pose remain partly assumed; screenshot appearance does not establish physical calibration.",
+    "Source reference video originally includes a neighbor instrument; latest user instruction intentionally removes it from this version.",
+    "Visual QA cannot prove cooked collision representation, complete gripper clearance or native seat insertion feasibility."
+  ],
+  "reference_images": [
+    {
+      "file": "reference_video_initial_roles.jpg",
+      "original": "docs/lab_cuvette_loading/V0_demo02/reference_review/frames/wide_scene_roles_frame_000.jpg",
+      "meaning": "Historical source video annotated first frame; neighbor instrument is intentionally excluded in demo04."
+    },
+    {
+      "file": "reference_video_internal_seats.jpg",
+      "original": "docs/lab_cuvette_loading/V0_demo02/reference_review/frames/chamber_identity_frame_142.jpg",
+      "meaning": "Historical source video annotated dual view; internal target seats and separated gripper."
+    }
+  ]
+}

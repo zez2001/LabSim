@@ -1,31 +1,27 @@
 # LabSim 结果阅读包 先读说明
 
-最新交付是V0_demo03视频场景适配：从完整白色6×6架抓取原尺寸器皿，进入开盖仪器样品腔A派生座，完成支撑交接、实际松爪、撤离和3.1秒稳定。固定复测独立成功 5/5，小范围随机独立成功 10/10，另有1次随机运行中断未评分并保留。已实际读取主片同源的训练格式batch，未训练模型。
+最新版本V0_demo04修正了12.5 mm器皿、单台仪器和朝向，保留原12.6 mm座及原CAD凸起。**完整装载尚未完成**。A/B座均存在原网格材料干涉；没有扩孔、删凸起或用16 mm座替代。实际完成一条76.917秒受限诊断和两条搬运失败记录；固定5次、随机10次完整任务未启动，成功训练episode为0。
 
 生成时间：{{GENERATED_AT}}（Asia/Shanghai）。分支：`{{BRANCH}}`。来源提交：`{{SOURCE_COMMIT}}`。
 
-## 建议阅读顺序
+## 先看本轮
 
-1. [最新DOCX](04_V0_demo03视频适配/LabSim_V0_demo03_视频场景适配结果报告_20261020.docx)或[Markdown报告](04_V0_demo03视频适配/report.md)。
-2. [完整主录像](04_V0_demo03视频适配/media/random8000_full_view/main_h264.mp4)和[同次腔内近景](04_V0_demo03视频适配/media/random8000_full_view/closeup_h264.mp4)。这是同一个seed8000从来源初态到撤离后稳定的连续记录，其他片段注明来源。
-3. [原视频与全架对应](04_V0_demo03视频适配/media/random8000_full_view/reference_scene_correspondence_vertical.png)、[腔内A对应](04_V0_demo03视频适配/media/random8000_full_view/reference_internal_A_correspondence_vertical.png)、[资产来源与假设](04_V0_demo03视频适配/source_and_assumptions.md)及[尺寸CSV](04_V0_demo03视频适配/dimensions.csv)。
-4. [18条完整结果及1条中断](04_V0_demo03视频适配/results/final/results.csv)、[逐条判分与版本](04_V0_demo03视频适配/results/final/README.md)、[批次数据验收](04_V0_demo03视频适配/data_audit/formal_batch_audit_tool.md)。18条完整记录包括2条开发失败、1条开发成功、5次固定与10次随机，另有seed8008运行中断1条未评分；不把开发尝试或中断混进正式批次。
-5. [真实batch精简样例](04_V0_demo03视频适配/data_audit/main_sample_data/README.md)、[主片完整控制时序](04_V0_demo03视频适配/data_audit/random8000_trajectory/README.md)及[动作语义](04_V0_demo03视频适配/data_audit/action_scope.md)。约360KB的batch是实际两个时点，不是完整episode；完整CSV保留全部控制周期和辅助力上限。
+1. [最新DOCX](05_V0_demo04原座核查/LabSim_V0_demo04_原座装载核查报告_20261020.docx)或[Markdown报告](05_V0_demo04原座核查/report.md)。
+2. [同次连续1080p录像](05_V0_demo04原座核查/media/preinsert_diagnostic_03_main.mp4)：架内抓取、实际拔出、搬运、低速接近、原座上方停止、上抬10 mm并保持。**没有插入、松爪、完全撤离或释放后稳定**。[实际H5观测近景](05_V0_demo04原座核查/media/preinsert_diagnostic_03_obs256_camera2_65s_end.mp4)源分辨率256×256；原展示近景受手爪遮挡，不能作为精细接触证据。
+3. [单台仪器/6×6架静态截图](05_V0_demo04原座核查/scene_check/README.md)、[尺寸表](05_V0_demo04原座核查/dimensions/dimensions.csv)、[器皿视觉与碰撞派生](05_V0_demo04原座核查/vessel/README.md)及[原座凸起干涉定位](05_V0_demo04原座核查/geometry/refined_02/README.md)。
+4. [全部实际运行与未执行批次](05_V0_demo04原座核查/results/summary.json)、[逐次CSV](05_V0_demo04原座核查/results/runs.csv)、[首次搬运失败录像](05_V0_demo04原座核查/media/failure_transport_main.mp4)及[慢速搬运失败片段](05_V0_demo04原座核查/media/failure_02_held_deviation_last5s.mp4)。两次失败与最终受限诊断采用不同控制版本，不构成固定重复成功率。
+5. [完整episode](06_V0_demo04完整诊断episode/episode_data.hdf5)和[数据先读](06_V0_demo04完整诊断episode/README.md)。885,164,015字节，4615控制转换，52个源数据集完整哈希核验，无外链/软链/VDS/外部存储。双视角RGB、动作、实际状态、阶段、槽位/座ID、完整双指命令与逐步effort记录齐备；原生/差分速度均保留。另有压缩逐物理步和原生接触记录，以及实际配置/初态/独立判分/源代码哈希。
 
-## 事实与限制
+H5 complete=true仅表示闭合完整记录。workflow_success/native_pair_success/data_eligible/real_calibrated均为false。正常成功过滤器按预期拒绝；现有getitem/collate的显式诊断读取核对首、中、尾及padding通过，未训练模型。`read_batch.npz`是读取样本，完整数据是H5本体。未完成释放撤离，post_retreat_window不可用，释放后稳定为null；末段terminal_window包括实际上抬运动。
 
-白架是视频行列/外观参考下的Python参数化设计，110×110×28mm、36个真实开口。A座按用户确认在原腔内位置重建16×16mm通道，保留原器皿、机身、B座和盖板派生姿态。ChemLab四种架只作定向结构参考，没有导入模型或代码。不是实测复刻，native_pair_success和real_calibrated仍为false。
+## 历史资料与限制
 
-随机只覆盖A1、A2、B1、B2、C1各两次及装配XY±1mm平移，yaw/槽内扰动为0；不代表全部36槽或真实成功概率。控制使用实际物体位置反馈，无视觉模型。8维action未包括阶段化夹指effort上限，重放须复用阶段控制或CSV/NPZ辅助指令；batch可读取不等于策略已学会自主装载。
+[01系列报告](01_系列实验背景/report.md)截止ext02；[02 demo01](02_V0_demo01连续装载/report.md)为机外工程工装；[03 demo02](03_V0_demo02场景核查/report.md)为原尺寸场景核查；[04 demo03](04_V0_demo03视频适配/report.md)为14.85 mm旧器皿和腔内16 mm派生座的历史成功任务。其固定5/5及小随机10/10仅适用于旧适配配置，不能覆盖本轮修正尺寸与原座验证。原seed7000和各失败记录保留。
 
-开发失败保留：[搬运碰盖板录像](04_V0_demo03视频适配/media/dev_01_failure/main_h264.mp4)、[入口受力和夹持滑移诊断](04_V0_demo03视频适配/data_audit/dev02_contact_diagnosis/README.md)。固定批处理外壳在5条已完整保存后的汇总返回143，原因未知，另只读汇总确认5/5。原seed8008工具会话143中断停在INSERT，没有评分，原目录保留，同seed在新恢复目录完成，单独列出而不算物理失败。原生与差分速度差异、烹饪表面/offset完整回读未知等告警没有删除；50µm源几何门槛未放宽。
-
-## 历史资料
-
-[01系列报告](01_系列实验背景/report.md)截止ext02，涵盖抓取、采集/回放、合成偏差插入和资产接入；[02 demo01](02_V0_demo01连续装载/report.md)是机外工程工装，固定5/5、小随机2/3；[03 demo02](03_V0_demo02场景核查/report.md)是正确场景和原配尺寸冲突核查，未完成连续装载。旧视频和评分各保留所属范围，不改写seed7000原50µm门槛失败。demo03开发首条成功的1.6cm展示相机存在架角裁切，最终主片改1.3cm完整视野，物理与H5观测相机未改。
+本轮器皿12.5 mm和中央座宽12.6 mm为用户提供名义尺寸；高度67.5 mm、质量20 g、摩擦与机器人参数未真实标定。白架110×110×28 mm、36个16 mm方槽为视频参考下的参数化假设；没有原架CAD或真实尺寸声明。仪器继承此前近90°开盖派生状态，整体绕Z135°朝向架中心。原生座内伸结构的真实功能及刚柔性未知；原座烹饪表面/offset未完整读回，不宣称已排除穿透或达到50µm控制精度。
 
 ## 传输与继续工作
 
-这是报告、录像、结果和精简证据的独立文件副本，四个文件夹可离线阅读。不是完整工程、环境或原始大数据包。`文件清单.json`与`SHA256SUMS.txt`记录来源和传输校验；执行 `sha256sum -c SHA256SUMS.txt`。完整原始H5/双视角/接触在原工程outputs独立目录，本包不含。
+请传输整个文件夹，不单独发送DOCX。Word中的视频为外部相对链接，包内MP4可直接播放；文件存在与解码通过不保证所有在线预览器都支持点击。根目录`文件清单.json`和`SHA256SUMS.txt`记录来源、实际提交和SHA，执行`sha256sum -c SHA256SUMS.txt`核对。
 
-原工程 `/home/wujing/Desktop/vla/LabSim`；[源码及来源提交]({{REPOSITORY_URL}}/tree/{{SOURCE_COMMIT}})。仓库私有，源码链接需要权限。后续实测校正集中于架体尺寸、器皿与原座全深度配合/承托/型号、质量摩擦驱动响应及相机/盖板标定；这些事实不阻塞本次独立适配任务。
+[源码及提交]({{REPOSITORY_URL}}/tree/{{SOURCE_COMMIT}})，原工程为`/home/wujing/Desktop/vla/LabSim`，GitHub当前显示仓库公开。完整H5在阅读包中，未上传Git；代码、配置、派生资产、报告及必要视频在对应分支。后续需集中确认原座内伸结构用途/刚柔性/行程、器皿全轮廓公差，以及承托基准和真实装载姿态，不重新要求用户选择已确认的A/B角色。

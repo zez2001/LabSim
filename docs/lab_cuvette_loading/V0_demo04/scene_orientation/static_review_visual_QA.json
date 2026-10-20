@@ -1,0 +1,55 @@
+{
+  "schema": "labsim.V0_demo04.static_review_visual_QA.v1",
+  "method": "view_image detail original, four actual rendered static screenshots",
+  "source_validation": "outputs/lab_cuvette_loading/V0_demo04/static_02/trial_00/static_validation.json",
+  "source_validation_sha256": "88f838445ca2dabdc547b85d6b924a6c7c698ed0d0de94b9f652720edbe10030",
+  "task_physics_steps": 0,
+  "static_scene_pass": true,
+  "checks": {
+    "exactly_one_instrument": true,
+    "all_original_instrument_colliders": true,
+    "original_A_active": true,
+    "original_B_active": true,
+    "no_engineering_adapter": true,
+    "rack36slots": true,
+    "rack50colliders": true,
+    "cuvette28colliders": true,
+    "opening_faces_rack": true,
+    "reset_position_check": true
+  },
+  "frames": [
+    {
+      "file": "overview.png",
+      "source": "outputs/lab_cuvette_loading/V0_demo04/static_02/trial_00/overview.png",
+      "sha256": "48c0efe50aac44392bb95c35766aaaf205bf70086cc63869063506e42190a789"
+    },
+    {
+      "file": "top.png",
+      "source": "outputs/lab_cuvette_loading/V0_demo04/static_02/trial_00/top.png",
+      "sha256": "e2d5a3d32aa341faae116e22b2250c3131e423056b0da5a9e95a084244ef3f88"
+    },
+    {
+      "file": "source.png",
+      "source": "outputs/lab_cuvette_loading/V0_demo04/static_02/trial_00/source.png",
+      "sha256": "c5bccad793dda3a9c4c4015304ee48d3312e9f4b5cd047560088fcba0df046a6"
+    },
+    {
+      "file": "chamber.png",
+      "source": "outputs/lab_cuvette_loading/V0_demo04/static_02/trial_00/chamber.png",
+      "sha256": "8089ed81b6aa09705a0655e8bf328b565203528226c4e023dd4694b6f750fd2e"
+    }
+  ],
+  "findings": [
+    "overview/top/chamber visually agree with single-root135deg and far-from-hinge opening toward rack",
+    "Full rack inside overview; upper robot outside top edge at initial preview",
+    "Source closeup has substantial pink/red dither or convergence noise; not suitable to call a clean detailed evidence view",
+    "Current rotated rack places pale source vessel toward image right/far and blue neighbor toward image left/near. A1/F6 remain engineering IDs; camera-near/far role should not be called an exact match to original video",
+    "Original A/B geometry present, no16mm engineering adapter",
+    "All screenshots correctly label RESET PREVIEW/no task physics/geometry blocked; no continuous workflow success claimed"
+  ],
+  "runtime_started_by_this_review": false,
+  "source_files_modified": false,
+  "workflow_success": false,
+  "native_pair_success": false,
+  "real_calibrated": false
+}

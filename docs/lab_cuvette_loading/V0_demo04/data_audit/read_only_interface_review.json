@@ -1,0 +1,37 @@
+{
+  "schema": "labsim.V0_demo04.read_only_interface_review.v1",
+  "review_scope": "Static collector/portable/MinimalPickDataset interface review only; no new episode, simulation, inference, or training was executed.",
+  "source_sha256": {
+    "demos/lab_cuvette_demo04/collector.py": "cc44b7df1b1eb9df98c7033cde851c16c9b4aefdc7d9dc73a499acaec71183bf",
+    "demos/lab_cuvette_demo04/portable_episode.py": "e9dfcd9c0433cb746931d503556ff1dbc40e9e0bd28d26220fe8a8fdc5019b81",
+    "policy/dataset/minimal_pick_dataset.py": "d99f445a10040c8eb0d51dabc3a6aee3570264245ff8f08d31110adc6f75d689",
+    "demos/lab_cuvette_demo04/run.py": "ccf3ada8496e81811d10ffaa521de11ce149aa828e39eb89f37a0bf0343e8de1"
+  },
+  "reviewed_contracts": {
+    "raw_collector_marks_complete_without_promoting_diagnostic_success": true,
+    "full_qualification_requires_exact_workflow_phases_geometry_and_independent_bindings": true,
+    "runtime_auxiliary_uses_same_post_action_endpoint_as_next_timestamp": true,
+    "portable_copies_all_raw_datasets_and_preserves_outcome_labels": true,
+    "portable_verifies_full_logical_values_shape_and_dtype": true,
+    "portable_verifies_auxiliary_against_saved_physics_endpoints": true,
+    "portable_rejects_soft_and_external_links": true,
+    "normal_loader_rejects_false_success": true,
+    "diagnostic_read_reuses_existing_getitem_and_collate_without_relabelling": true
+  },
+  "non_blocking_findings_at_review": [
+    {
+      "id": "schedule_configuration_scope",
+      "detail": "run.py creates collector rcfg from the historical runtime config and sets eleven phases. canonical_schedule(cfg) uses that input, although the collector private phase map and H5 phase_names_json contain fourteen phases. Root notified before actual run; actual output needs its own schedule check.",
+      "blocks_diagnostic_export": false
+    },
+    {
+      "id": "self_containment_scope",
+      "detail": "no_external_links checks H5 links but not virtual dataset mappings or external dataset storage. The current collector creates ordinary in-file datasets. Actual output will additionally be checked for dataset.is_virtual and dataset.external.",
+      "blocks_current_collector_output": false
+    }
+  ],
+  "actual_episode_export_executed": false,
+  "actual_episode_export_status": "Awaiting root-provided closed V0_demo04 diagnostic episode path.",
+  "physics_executed_by_this_review": false,
+  "code_modified_by_this_review": false
+}

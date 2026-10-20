@@ -1,14 +1,14 @@
 # LabSim 进展与分享入口
 
-最新 **V0_demo03 已完成正确场景内的连续物理装载与数据采集**：完整白色6×6参数化架 → 原尺寸器皿 → 开盖样品腔内A派生座 → 支撑交接 → 实际松爪 → 撤离及3.1秒稳定。固定复测独立成功 5/5，小范围随机独立成功 10/10，另有1次随机运行中断未评分并保留。现有加载器已读取真实训练格式batch，未开展训练。本模式为 `video_demo_adapted`；原CAD配套验证和真实标定仍为false。
+最新 **V0_demo04 已修正12.5 mm器皿、单台仪器及朝向，原座完整装载仍受几何干涉阻塞**。本轮选择腔内原A座 `candidate_far_hinge`，保留12.6 mm中央参考尺寸与全部凸起。A/B两座均有源材料相交证据，没有扩孔、删件或放宽穿透判据。实际完成一条76.917秒受限连续诊断：6×6架取物 → 提取搬运 → 原A座上方低速接近 → 安全停止 → 上抬10 mm并保持；未执行插入、释放及完整撤离后稳定。另两次搬运失败完整保留。
 
-- [本轮完整报告](docs/lab_cuvette_loading/V0_demo03/report.md) · [DOCX](docs/lab_cuvette_loading/V0_demo03/LabSim_V0_demo03_视频场景适配结果报告_20261020.docx)
-- [1080p单次连续主录像](docs/lab_cuvette_loading/V0_demo03/media/random8000_full_view/main_h264.mp4) · [同次腔内近景](docs/lab_cuvette_loading/V0_demo03/media/random8000_full_view/closeup_h264.mp4)
-- [18条完整结果及1条中断](docs/lab_cuvette_loading/V0_demo03/results/final/results.csv) · [真实batch样例](docs/lab_cuvette_loading/V0_demo03/data_audit/main_sample_data/README.md)
-- [资产来源与修改](docs/lab_cuvette_loading/V0_demo03/source_and_assumptions.md) · [尺寸表](docs/lab_cuvette_loading/V0_demo03/dimensions.csv) · [启动命令](demos/lab_cuvette_demo03/README.md)
-- [全部进展与历史报告](LABSIM_PROGRESS.md) · [新Agent结果阅读包](docs/agent_handoff/README.md)
+- [本轮报告](docs/lab_cuvette_loading/V0_demo04/report.md) · [DOCX](docs/lab_cuvette_loading/V0_demo04/LabSim_V0_demo04_原座装载核查报告_20261020.docx)
+- [同次1080p受限诊断录像](docs/lab_cuvette_loading/V0_demo04/media/preinsert_diagnostic_03_main.mp4) · [实际观测近景](docs/lab_cuvette_loading/V0_demo04/media/preinsert_diagnostic_03_obs256_camera2_65s_end.mp4)
+- [原座干涉定位](docs/lab_cuvette_loading/V0_demo04/geometry/refined_02/README.md) · [完整尺寸表](docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv) · [静态场景](docs/lab_cuvette_loading/V0_demo04/scene_check/README.md)
+- [全部本轮运行与未执行批次](docs/lab_cuvette_loading/V0_demo04/results/summary.json) · [完整episode读取核验](docs/lab_cuvette_loading/V0_demo04/data_audit/READ_FIRST_actual_diagnostic_03_zh.md) · [准确命令](demos/lab_cuvette_demo04/README.md)
+- [全部历史](LABSIM_PROGRESS.md) · [新Agent结果阅读包](docs/agent_handoff/README.md)
 
-分享分支为 `codex/lab-cuvette-demo03`，仓库私有，接收方需要访问权限。V0_demo02原尺寸冲突和demo01机外工程实验保留，不被本轮适配成功改写。以下保留上游LabUtopia文档。
+分享分支为 `codex/lab-cuvette-demo04`，GitHub当前显示仓库公开，可直接访问。阅读包另含885 MB自含H5和压缩逐步物理/接触记录；该数据完整可读，但完整装载与成功训练资格均为false。固定5次及随机10次完整任务未启动。旧demo03的16 mm适配座成功保留其原范围。以下保留上游LabUtopia文档。
 
 <div align="center">
   <img src="images/logo.png" alt="Logo" width="180">
