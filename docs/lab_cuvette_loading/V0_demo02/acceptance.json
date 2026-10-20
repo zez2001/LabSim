@@ -1,0 +1,122 @@
+{
+  "version": "V0_demo02",
+  "status": "BLOCKED_STATIC_ACCEPTANCE",
+  "blockers": [
+    "COMPLETE_SOURCE_RACK_ASSET_NOT_FOUND: no CAD dimensions, collision slot IDs or supported source initial state",
+    "INTERNAL_SEAT_AND_MATCHED_MODEL_UNCONFIRMED: video far-hinge A mapping is provisional; other seat role unresolved",
+    "NATIVE_VESSEL_SEAT_GEOMETRY_INTERSECTS: actual mesh sections cross in both declared upright centred candidate poses; no dimension edits allowed"
+  ],
+  "complete_rack_asset_found": false,
+  "target_identity_confirmed": false,
+  "declared_pose_geometry_passed": false,
+  "candidates": [
+    {
+      "source_prim": "/RotatedRoot/newnew4/newnew4/tn__2_ZBFi3j3/tn__4_x1iBOa1g0Jv0g7n4/Mesh",
+      "observed_intersecting_sections": 40,
+      "top_centerline_spacing_m": {
+        "X": 0.012600000381469717,
+        "Y": 0.012600000381469691
+      },
+      "proof": "actual original triangle section boundary intersections in declared upright centred pose; not a full arbitrary-path search"
+    },
+    {
+      "source_prim": "/RotatedRoot/newnew4/newnew4/tn__2_1_dNPo5b5/tn__4_x1iBOa1g0Jv0g7n4/Mesh",
+      "observed_intersecting_sections": 40,
+      "top_centerline_spacing_m": {
+        "X": 0.012600000381469745,
+        "Y": 0.0126000003814698
+      },
+      "proof": "actual original triangle section boundary intersections in declared upright centred pose; not a full arbitrary-path search"
+    }
+  ],
+  "scene_correspondence_accepted": false,
+  "workflow_executed": false,
+  "workflow_success": false,
+  "native_pair_executed": false,
+  "native_pair_success": false,
+  "real_calibrated": false,
+  "data_eligible": false,
+  "new_physical_trajectory": null,
+  "successful_training_batch": null,
+  "post_retreat_window": {
+    "available": false,
+    "status": "unavailable",
+    "reason": "new workflow not executed"
+  },
+  "stable_after_retreat": null,
+  "terminal_window": null,
+  "standard": {
+    "requested": 5,
+    "executed": 0,
+    "result": null
+  },
+  "random": {
+    "requested_minimum": 10,
+    "executed": 0,
+    "result": null
+  },
+  "source_rack_video_count": {
+    "rows": 6,
+    "columns": 6,
+    "basis": "two-view manual image count, not CAD or dimensional measurement"
+  },
+  "lid_pose": {
+    "source_main_plane_angle_deg": 41.56696523356667,
+    "main_plane_area_m2": 0.08323222812348961,
+    "main_plane_normal": [
+      2.5004097132017987e-17,
+      -0.6634949477859057,
+      0.7481807630931032
+    ],
+    "target_main_plane_angle_deg": 90.0,
+    "delta_deg": 48.43303476643333,
+    "hinge_axis_origin_in_instrument_m": [
+      -0.10725000000000004,
+      -0.04931238622768555,
+      0.21999999999999947
+    ],
+    "hinge_axis": [
+      1,
+      0,
+      0
+    ],
+    "derived_rigid_pose_row_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.6634949477859058,
+        0.7481807630931031,
+        0.0
+      ],
+      [
+        0.0,
+        -0.7481807630931031,
+        0.6634949477859058,
+        0.0
+      ],
+      [
+        0.0,
+        0.1480059007781334,
+        0.11092569024487214,
+        1.0
+      ]
+    ],
+    "angle_source": "image estimate near vertical; not measured or camera-calibrated",
+    "hinge_axis_source": "line through the two native hinge-mesh bounding-box centres; geometric estimate",
+    "changed_source_file": false,
+    "source_geometry_rescaled": false
+  },
+  "scene_manifest_sha256": "313436c87a23df241e47b7377ff44045c85066473a981dcb874cccd2d64807bb",
+  "measured_evidence": [
+    "docs/lab_cuvette_loading/V0_demo02/source_audit/delivery_inventory.json",
+    "docs/lab_cuvette_loading/V0_demo02/source_audit/candidate_fit_and_chamber_sections.json",
+    "docs/lab_cuvette_loading/V0_demo02/source_audit/source_geometry.json"
+  ],
+  "inherited_release_logic": "demos/lab_cuvette_demo01/run.py remains available; new complete executor has not been adapted or physically validated without accepted geometry",
+  "limits": "static local geometry and composition checks do not prove whole-hand/whole-arm clearance or actual cooked collision dimensions"
+}

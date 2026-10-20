@@ -1,8 +1,13 @@
-# LabSim 实验分支
+# LabSim 进展与分享入口
 
-本分支的系列实验、当前状态、DOCX 报告、代表录像和复现入口见 [LabSim 进展与分享入口](LABSIM_PROGRESS.md)。
+当前开发分支为 `codex/lab-cuvette-demo02`。最新版本 **V0_demo02 尚未完成连续装载**：已复核视频与CAD、恢复腔内候选座参考帧和近竖直开盖派生姿态，完成Isaac静态截图及判分/采集接口核查。完整来源架CAD仍缺，原器皿与候选座声明插入姿态相交；新标准5次、随机10次与成功训练batch均未执行。
 
-以下保留上游 LabUtopia 文档。
+- [全部进展与历史报告](LABSIM_PROGRESS.md)
+- [V0_demo02 本轮报告及截图](docs/lab_cuvette_loading/V0_demo02/report.md) · [DOCX报告](docs/lab_cuvette_loading/V0_demo02/LabSim_V0_demo02_场景与装载关口报告_20261020.docx)
+- [资产对应与哈希](docs/lab_cuvette_loading/V0_demo02/asset_correspondence.csv) · [集中待补资料](docs/lab_cuvette_loading/V0_demo02/required_information.json)
+- [静态审核与复现命令](demos/lab_cuvette_demo02/README.md) · [Agent结果阅读包](docs/agent_handoff/README.md)
+
+历史 V0_demo01 的机外工程流程成功与本轮原生场景分开记录。以下保留上游 LabUtopia 文档。
 
 <div align="center">
   <img src="images/logo.png" alt="Logo" width="180">

@@ -1,0 +1,88 @@
+{
+  "schema": "labsim.V0_demo02.collector_interface_checks.v1",
+  "all_assertions_passed": true,
+  "initial_success_labels_all_false": true,
+  "unknown_ids_absent_not_fabricated": true,
+  "positive_metadata_interface_rejection_reasons": [],
+  "negative_cases": [
+    {
+      "case": "historical",
+      "rejected_by": [
+        "not_historical"
+      ]
+    },
+    {
+      "case": "missing_checks",
+      "rejected_by": [
+        "all_independent_checks_pass"
+      ]
+    },
+    {
+      "case": "wrong_time",
+      "rejected_by": [
+        "same_terminal_state"
+      ]
+    },
+    {
+      "case": "unaccepted_scene",
+      "rejected_by": [
+        "independently_accepted_scene"
+      ]
+    },
+    {
+      "case": "wrong_source",
+      "rejected_by": [
+        "same_source_slot"
+      ]
+    },
+    {
+      "case": "controller_status_without_independent_score",
+      "rejected_by": [
+        "new_score_schema",
+        "not_historical",
+        "new_score_scene",
+        "independently_accepted_scene",
+        "independently_eligible",
+        "all_independent_checks_pass",
+        "same_episode",
+        "same_asset_manifest",
+        "same_source_slot",
+        "same_internal_target",
+        "same_terminal_state",
+        "saved_physics_hash_present",
+        "saved_events_hash_present"
+      ]
+    },
+    {
+      "case": "external_target",
+      "rejected_by": [
+        "same_internal_target"
+      ]
+    }
+  ],
+  "all_required_independent_checks": [
+    "scene_and_geometry_contract",
+    "asset_and_slot_bindings",
+    "initial_source_slot_and_support",
+    "all_workflow_stages_in_order",
+    "source_slot_actually_cleared",
+    "correct_internal_seat_loaded",
+    "supported_before_open",
+    "both_fingers_open_and_detached",
+    "actual_retreat_clearance",
+    "post_retreat_stable_3s",
+    "measured_penetration_within_original_gate",
+    "no_forbidden_robot_environment_contact",
+    "finite_native_signals",
+    "no_forbidden_kinematic_or_attachment"
+  ],
+  "new_h5_created": false,
+  "begin_episode_called": false,
+  "physical_trajectory_generated": false,
+  "training_batch_generated": false,
+  "code_sha256": {
+    "demos/lab_cuvette_demo02/analyze.py": "580728bf6189b67bdc7cb42e06b8cee04b9d8e66ceec53199d8b585f45c692f6",
+    "demos/lab_cuvette_demo02/data_check.py": "c93337c3093de553dddcef935303b3217577e9fa65eb2c4946ca78af39709772",
+    "demos/lab_cuvette_demo02/collector.py": "26b264ba242a227a68fde2505cbf125c66791b0601f5ac10f10f48ec136b6a06"
+  }
+}

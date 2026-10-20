@@ -1,0 +1,38 @@
+{
+  "schema": "labsim.V0_demo02.required_information.v1",
+  "date": "2026-10-20",
+  "complete_workflow_currently_blocked": true,
+  "items": [
+    {
+      "priority": 1,
+      "id": "complete_white_rack_source",
+      "request": "提供完整白色多孔来源架 CAD 的准确文件及装配入口；若已在附件内，请在目录或截图中指出具体文件/部件。若没有 CAD，请提供可追溯尺寸图纸或实测数据。",
+      "why_required": "本机递归附件和USD深层实例核查仍未找到架体；视频可数6x6槽口，但不能测出壁厚、底面、槽深和孔距，因此无法建立有依据的自然支撑、槽位ID及架内抓取。",
+      "requested_dimensions": ["总长宽高", "行列和槽位编号方向", "孔距", "槽宽及全深度轮廓", "槽深", "底厚", "器皿露出高度"],
+      "evidence": ["source_audit/delivery_inventory.json", "source_audit/usd_deep_inspection.json", "reference_review/frames/source_rack_t15_hand_crop.jpg"],
+      "status": "missing_or_not_located_in_inspected_material"
+    },
+    {
+      "priority": 2,
+      "id": "target_identity_and_pairing",
+      "request": "在原视频/CAD截图标出实际目标A、另一部件B及插入轴，确认器皿、仪器和两个装载部件的型号与配套关系。",
+      "why_required": "CAD两座来自同一prototype且无功能标签，远/近铰链只支持暂定映射；视频B有透明物，但CAD未提供可独立删掉的对应玻璃实体。",
+      "image_role_A": "释放后手相机画面右下、距铰链更远的金属框座",
+      "image_role_B": "画面左下、较近铰链、已有透明/粉色方杯状物的另一座",
+      "provisional_CAD_mapping_only": {"A": "candidate_far_hinge", "B": "candidate_near_hinge"},
+      "evidence": ["reference_review/frames/chamber_identity_frame_142.jpg", "source_audit/candidate_three_views.png"],
+      "status": "unconfirmed"
+    },
+    {
+      "priority": 3,
+      "id": "authoritative_fit_dimensions",
+      "request": "提供器皿外轮廓/底部和原座入口、全深度限制尺寸及承托高度的厂家图纸或实测值；如CAD确有错误，请指出需修订部位及尺寸依据。同时补充真实开盖角度/铰链依据。",
+      "why_required": "源器皿约14.85mm外宽，原座顶部中央边界间距约12.6mm；已声明居中直立下插10mm在40个采样高度有实际表面交叉见证。不能任意缩放或删墙恢复成功。源CAD盖板41.566965度与视频近竖直姿态不一致，目前仅派生层作图像估计的刚体姿态修正。",
+      "requested_dimensions": ["器皿全深度外宽及底部轮廓", "座入口X/Y净宽", "沿真实插入方向的全深度限制轮廓", "承托面高度和目标装载深度", "型号配套公差", "开盖姿态及铰链位置"],
+      "evidence": ["source_audit/candidate_original_pair_sections.png", "source_audit/candidate_fit_and_chamber_sections.json", "scene_build.json"],
+      "status": "measured_or_manufacturer_basis_missing"
+    }
+  ],
+  "still_possible_without_these_items": ["可追溯源资产/单位/变换核查", "保留原尺寸的静态场景审核", "判分窗口语义修正", "采集元数据与过滤拒绝检查"],
+  "not_claimed_complete": ["完整白架到正确内部座连续物理任务", "一条完整新任务成功轨迹", "标准五次", "合法布局和跨槽随机十次", "成功新任务训练batch", "真实标定"]
+}

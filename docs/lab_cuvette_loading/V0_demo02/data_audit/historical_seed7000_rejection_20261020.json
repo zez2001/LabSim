@@ -1,0 +1,155 @@
+{
+  "schema": "labsim.V0_demo02.data_audit.v1",
+  "candidates": [
+    {
+      "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo01/random3_20261019/seed_7000/trial_00/dataset/episode_0000.h5",
+      "original_sha256": "e1fdaa323f171e3a2c1519279438c829ab426b0a6bc423827d76a0f76ff4f481",
+      "independent_score": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/V0_demo02/data_audit/seed7000_semantics_v2.json",
+      "independent_score_sha256": "5492dcd50b9807209865592f5bbfc7280b5f2fe3ea3d1de1e3a6774cc381e83f",
+      "eligible": false,
+      "checks": {
+        "new_scene_only": false,
+        "new_task_only": false,
+        "raw_complete": true,
+        "raw_success": false,
+        "independently_data_eligible": false,
+        "independently_workflow_success": false,
+        "scene_correspondence_accepted": false,
+        "score_version": true,
+        "not_historical_rescore": false,
+        "source_slot_bound": false,
+        "correct_internal_target": false,
+        "asset_version_bound": false,
+        "action_semantics": true,
+        "observation_alignment": true,
+        "declared_simulation_scope": false,
+        "required_arrays_present": true,
+        "nonempty": true,
+        "all_transition_lengths_equal": true,
+        "action_and_agent_dimensions": true,
+        "robot_nine_positions": true,
+        "dual_rgb_uint8_CHW_256": true,
+        "timestamp_action_hold": true,
+        "transition_timestamp_continuity": true,
+        "next_robot_state_matches_next_observation": true,
+        "next_object_state_matches_next_observation": true,
+        "finite_actions_and_agent": true,
+        "phase_map_and_codes": false
+      },
+      "rejection_reasons": [
+        "new_scene_only",
+        "new_task_only",
+        "raw_success",
+        "independently_data_eligible",
+        "independently_workflow_success",
+        "scene_correspondence_accepted",
+        "not_historical_rescore",
+        "source_slot_bound",
+        "correct_internal_target",
+        "asset_version_bound",
+        "declared_simulation_scope",
+        "phase_map_and_codes"
+      ],
+      "missing_arrays": [],
+      "attributes": {
+        "action_dimension": 8,
+        "action_semantics": "absolute_7_arm_rad_and_symmetric_finger_metre",
+        "complete": true,
+        "control_hz": 60,
+        "frames": 2774,
+        "full_success": false,
+        "full_task_eligible": false,
+        "initial_position_m": [
+          -0.040058386256565666,
+          -0.21934500760409736,
+          0.743
+        ],
+        "native_pair_success": false,
+        "observation_alignment": "obs_before_action; next_state_after_explicit_substeps",
+        "physics_hz": 240,
+        "privileged_fields": "privileged/* not default policy inputs",
+        "progress_columns": "support_valid,grasp_success,extract_success,transport_success,loaded,released,retreated,stable",
+        "quaternion_order": "wxyz",
+        "reason": "PHYSICS_INVALID_GEOMETRY",
+        "rgb": "CHW RGB uint8 256x256 60Hz",
+        "robot_state_dimension": 9,
+        "scene_version": "V0_demo01",
+        "schema_version": "labsim.lab_cuvette_loading.V0_demo01.v1",
+        "status": "PHYSICS_INVALID_GEOMETRY",
+        "success": false,
+        "tabletop_release_success": false,
+        "task": "lab_cuvette_demo01_engineering",
+        "workflow_success": false
+      },
+      "diagnostics": {
+        "frames": 2774,
+        "shapes": {
+          "camera_1_rgb": [
+            2774,
+            3,
+            256,
+            256
+          ],
+          "camera_2_rgb": [
+            2774,
+            3,
+            256,
+            256
+          ],
+          "agent_pose": [
+            2774,
+            8
+          ],
+          "actions": [
+            2774,
+            8
+          ],
+          "next_agent_pose": [
+            2774,
+            8
+          ],
+          "joint_positions": [
+            2774,
+            9
+          ],
+          "timestamp": [
+            2774
+          ],
+          "next_timestamp": [
+            2774
+          ],
+          "phase_code": [
+            2774
+          ],
+          "privileged/object_pose": [
+            2774,
+            7
+          ],
+          "privileged/next_object_pose": [
+            2774,
+            7
+          ]
+        },
+        "max_action_hold_error_s": 6.158268339717665e-15,
+        "rgb_alignment_scope": "writer contract and timestamp continuity checked; image content timing not independently measured"
+      },
+      "real_calibrated": false,
+      "native_pair_success": false,
+      "raw_unchanged_after_read": true
+    }
+  ],
+  "selected": [],
+  "eligible_count": 0,
+  "loader": {
+    "executed": true,
+    "training_batch_executed": false,
+    "status": "rejected_no_eligible_complete_success",
+    "error": "Dataset contains no complete successful episodes",
+    "original_loader": "policy.dataset.minimal_pick_dataset.MinimalPickDataset"
+  },
+  "index_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo02/data_audit/historical_seed7000_rejection_20261020/episode_data.hdf5",
+  "raw_files_rewritten": false,
+  "index_portability": "external links require original raw H5 paths; share report without claiming raw data included",
+  "training_batch_status": "not_executed",
+  "eligibility_scope": "complete correct-scene physical workflow in simulation; real calibration is a separate flag"
+}

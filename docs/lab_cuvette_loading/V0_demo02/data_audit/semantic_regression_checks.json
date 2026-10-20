@@ -1,0 +1,88 @@
+{
+  "schema": "labsim.V0_demo02.semantic_regression_checks.v1",
+  "run_date_local": "2026-10-20",
+  "executed": "CPU read-only analysis; no new simulation",
+  "all_assertions_passed": true,
+  "historical_failure": {
+    "post_retreat_status": "unavailable",
+    "stable_after_retreat": null,
+    "terminal_window_available": true,
+    "old_success": false,
+    "actual_retreat_clearance_m": null
+  },
+  "historical_success": {
+    "post_retreat_available": true,
+    "stable_after_retreat": true,
+    "old_success": true,
+    "demo02_data_eligible": false
+  },
+  "absent_new_scene_contract_rejected": true,
+  "metadata_interface_only": {
+    "positive_case": {
+      "new_scene_only": true,
+      "new_task_only": true,
+      "raw_complete": true,
+      "raw_success": true,
+      "independently_data_eligible": true,
+      "independently_workflow_success": true,
+      "scene_correspondence_accepted": true,
+      "score_version": true,
+      "not_historical_rescore": true,
+      "source_slot_bound": true,
+      "correct_internal_target": true,
+      "asset_version_bound": true,
+      "action_semantics": true,
+      "observation_alignment": true,
+      "declared_simulation_scope": true
+    },
+    "negative_cases": [
+      {
+        "changed_field": "scene_version",
+        "rejected_by": [
+          "new_scene_only"
+        ]
+      },
+      {
+        "changed_field": "target_is_internal_chamber",
+        "rejected_by": [
+          "correct_internal_target"
+        ]
+      },
+      {
+        "changed_field": "success",
+        "rejected_by": [
+          "raw_success"
+        ]
+      },
+      {
+        "changed_field": "asset_manifest_sha256",
+        "rejected_by": [
+          "asset_version_bound"
+        ]
+      },
+      {
+        "changed_field": "source_slot_id",
+        "rejected_by": [
+          "source_slot_bound"
+        ]
+      }
+    ],
+    "physical_trajectory_generated": false,
+    "training_batch_generated": false
+  },
+  "originals_unchanged": true,
+  "protected_file_sha256": {
+    "outputs/lab_cuvette_loading/V0_demo01/random3_20261019/seed_7000/trial_00/independent_score.json": "d8ca01feaae3603c0f99023c1525cee25bf725c40f89c32903d77ffbda3ab7eb",
+    "outputs/lab_cuvette_loading/V0_demo01/random3_20261019/seed_7000/trial_00/result.json": "a4c9752a2f941f1314738961f0581ff6ddf012989fe455a29f841293dc89465d",
+    "outputs/lab_cuvette_loading/V0_demo01/random3_20261019/seed_7000/trial_00/events.json": "4542445f67ea6abbf117dcea87214ce561f462c22b1e566b205b08c541f13342",
+    "outputs/lab_cuvette_loading/V0_demo01/random3_20261019/seed_7000/trial_00/physics_records.json": "6b33bdde0d7ddf56db4bb67135b977c67512e554ef9d9da637db777d856f5e03",
+    "outputs/lab_cuvette_loading/V0_demo01/fixed5_20261019/fixed_0/trial_00/independent_score.json": "46cd1957946c7b21ddcc2632d3bef2314aa987f89d10f840d21f196b5a5dba18",
+    "outputs/lab_cuvette_loading/V0_demo01/fixed5_20261019/fixed_0/trial_00/result.json": "fcc10c5dc1c65ecc86e15d7028966d3c0bb436f77f7cb6ec24801d1a4cf77c27"
+  },
+  "code_sha256": {
+    "demos/lab_cuvette_demo02/analyze.py": "da7b0dca21abe6dcec760f9a3f0d536c7ddbd01b9cfa61c8d60911414f996396",
+    "demos/lab_cuvette_demo02/data_check.py": "2e79c693c185f393899f940722f99301b282c1e9c58e9d9486db28b97043062b"
+  },
+  "actual_new_scene_trajectory_executed": false,
+  "actual_new_scene_training_batch_executed": false
+}

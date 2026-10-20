@@ -1,8 +1,8 @@
 # LabSim 进展与分享入口
 
-当前分享分支为 `codex/lab-cuvette-external-assets`。本分支包含从 minimal_pick 到 V0_demo01 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。
+当前分享分支为 `codex/lab-cuvette-demo02`。本分支包含从 minimal_pick 到 V0_demo02 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。
 
-给其他 agent 的可传输阅读包统一按 [结果阅读包规范](docs/agent_handoff/README.md) 生成。当前桌面目录为 `/home/wujing/Desktop/LabSim_截至V0_demo01_结果阅读包_20261020`，先读包内 `00_给Agent阅读说明.md`；包括系列背景、本轮报告、成功及失败录像、结果表和精简证据。以后每次改进交付创建新包，保留旧包。
+给其他 agent 的可传输阅读包统一按 [结果阅读包规范](docs/agent_handoff/README.md) 生成。当前桌面目录为 `/home/wujing/Desktop/LabSim_截至V0_demo02_结果阅读包_20261020`，先读包内 `00_给Agent阅读说明.md`；包括系列背景、本轮报告、成功及失败录像、结果表和精简证据。以后每次改进交付创建新包，保留旧包。
 
 - [系列实验总报告 DOCX](docs/series_20261019/LabSim系列实验总报告20261019.docx)
 - [适合 Agent 阅读的完整报告](docs/series_20261019/report.md)
@@ -10,7 +10,19 @@
 - [精简结果与资产依据证据](docs/series_20261019/evidence)
 - [各复制材料的来源与 SHA256](docs/series_20261019/source_manifest.json)
 
-## 当前结论
+## V0_demo02 本轮状态
+
+V0_demo02尚未完成正确场景内的连续物理装载。实际原视频核查得到6×6白色多孔架和两台仪器，纠正旧6×8假设及任务仪器混淆。已有CAD实例代理共8网格，未找到完整来源架；源盖板主面41.566965°，派生层刚体增转48.433035°到图像估计90°。腔内A/B仅暂定映射；两个原座与14.85mm器皿的声明竖直居中姿态各有40个截面相交见证。没有缩模、删座或用机外槽替代终点。
+
+已实际完成源附件/深层USD/最终场景审计、独立USD保存重载、四视角Isaac零步静态图、历史seed7000判分语义修正、新采集元数据与失败/空索引拒绝核查。完整任务、5次标准、10次合法随机、新成功H5及训练batch均未执行。原失败、原评分和旧H5保留。
+
+- [V0_demo02结果报告](docs/lab_cuvette_loading/V0_demo02/report.md)
+- [本轮DOCX](docs/lab_cuvette_loading/V0_demo02/LabSim_V0_demo02_场景与装载关口报告_20261020.docx)
+- [资产对应CSV](docs/lab_cuvette_loading/V0_demo02/asset_correspondence.csv) · [实算尺寸及变换](docs/lab_cuvette_loading/V0_demo02/source_audit/final_scene_verification.json)
+- [实际静态截图](docs/lab_cuvette_loading/V0_demo02/static_review) · [独立验收状态](docs/lab_cuvette_loading/V0_demo02/acceptance.json)
+- [三项集中待补资料](docs/lab_cuvette_loading/V0_demo02/required_information.json) · [数据接口核查](docs/lab_cuvette_loading/V0_demo02/data_audit/README.md)
+
+## 历史实验结论
 
 minimal_pick 已完成独立物理抓取、数据采集与动作回放；ACT/DP 仅做过极短训练链路检查，短训练策略未抓取成功。合成直孔实验观察到亚毫米偏差导致的结果变化，但边界对物理与接触配置敏感，不构成真实精度验证。
 
@@ -30,7 +42,7 @@ V0_demo01 已在明确新增的来源工装和仪器前侧目标工装中完成�
 
 ```bash
 GIT_LFS_SKIP_SMUDGE=1 git clone --single-branch \
-  --branch codex/lab-cuvette-external-assets \
+  --branch codex/lab-cuvette-demo02 \
   https://github.com/zez2001/LabSim.git
 cd LabSim
 git lfs pull --include="assets/robots/Franka.usd,assets/beaker.usda,assets/lab_cuvette_loading/**,docs/**"
@@ -46,6 +58,7 @@ git lfs pull --include="assets/robots/Franka.usd,assets/beaker.usda,assets/lab_c
 - [ext01 外部资产及关口](demos/lab_cuvette_external/README.md)
 - [ext02 支撑与抓取搬运诊断](demos/lab_cuvette_ext02/README.md)
 - [V0_demo01 连续工程任务](demos/lab_cuvette_demo01/README.md)
+- [V0_demo02 视频场景与原生装载核查](demos/lab_cuvette_demo02/README.md)
 
 离线 ext02 判分需要加载 USD 库路径：
 

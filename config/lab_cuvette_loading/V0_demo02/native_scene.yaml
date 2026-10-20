@@ -1,0 +1,74 @@
+version: V0_demo02
+task: lab_cuvette_loading_V0_demo02
+source:
+  instrument: assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd
+  instrument_prim: /RotatedRoot
+  vessel: assets/lab_cuvette_loading/V0_ext01/source/TestTube_Baked.usd
+  vessel_collision: assets/lab_cuvette_loading/V0_ext02/walls28_mm.usda
+  complete_rack: null
+  source_slot_id: null
+scene:
+  table_top_m: 0.74
+  instrument_xyz_m: [0.36, 0.18, 0.74]
+  instrument_yaw_deg: 0.0
+  neighbor_instrument_xyz_m: [0.96, 0.53, 0.74]
+  table_center_xy_m: [0.35, 0.20]
+  table_size_m: [2.2, 1.8, 0.08]
+  installation_source: engineering placement for CAD review; not real camera calibration
+  chamber_survey_frame: candidate pair midpoint at source lower Z; NOT a measured chamber support
+  selected_target_seat_id: null
+  provisional_target_seat_id: candidate_far_hinge
+  provisional_mapping_basis: video target is farther from open-lid hinge; identity remains unconfirmed
+  preview_vessel_gap_above_candidate_m: 0.020
+  preview_vessel_status: unsupported initial pose for static CAD review only; no physics advancement
+lid_pose:
+  enabled: true
+  target_main_plane_angle_deg: 90.0
+  angle_source: image estimate near vertical; not measured or camera-calibrated
+  hinge_axis_source: line through the two native hinge-mesh bounding-box centres; geometric estimate
+  method: rigid rotation about estimated hinge X axis in derived layer only; source unchanged
+robot:
+  usd_path: assets/robots/Franka.usd
+  base_m: [-0.30, 0.0, 0.74]
+  grasp_above_bottom_m: 0.053
+  grasp_position_source: inherited engineering value; requires rack and finger clearance revalidation
+physics:
+  hz: 240
+  control_hz: 60
+  contact_offset_m: 0.00005
+  rest_offset_m: 0.0
+  solver: TGS
+  position_iterations: 64
+  velocity_iterations: 1
+  static_friction: 0.6
+  dynamic_friction: 0.5
+  restitution: 0.0
+  calibrated: false
+acceptance:
+  penetration_m: 0.00005
+  post_retreat_seconds: 3.0
+  position_drift_m: 0.0002
+  orientation_change_deg: 1.0
+  data_scope: lab_cuvette_loading_V0_demo02
+  success_requires: independent geometry and contact evidence in the verified complete rack and internal seat
+demo_release:
+  bottom_distance_m: 0.00005
+  clear_seconds: 0.5
+  max_actual_pose_step_m: 0.003
+  max_actual_tilt_deg: 10.0
+  max_tilt_deg: 1.0
+  min_support_N: 0.1
+  native_velocity_policy: retain native, USD and pose differences; finite checks and actual motion are hard gates
+  observe_s: 3.0
+  open_seconds: 3.0
+  orientation_change_deg: 1.0
+  penetration_m: 0.00005
+  position_drift_m: 0.0002
+  support_window_s: 0.5
+  unload_seconds: 3.0
+random:
+  instrument_and_seat_rigid_assembly: true
+  rack_and_slot_rigid_assembly: true
+  source_slots: null
+  legal_translation_bounds_m: null
+  status: unexecuted_until_static_and_standard_acceptance
