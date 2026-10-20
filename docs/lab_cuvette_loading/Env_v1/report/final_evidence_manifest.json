@@ -1,0 +1,96 @@
+{
+  "run_names": [
+    "grasp_hold_04",
+    "extract_transport_01",
+    "extract_fixed_orientation_01",
+    "extract_continuous_latch_01",
+    "preinsert_continuous_latch_01"
+  ],
+  "policy_attempt_dirs": [
+    "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01",
+    "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03",
+    "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01"
+  ],
+  "run_process_evidence": {
+    "preview_05": "docs/lab_cuvette_loading/Env_v1/runtime/preview_05_process.json",
+    "extract_continuous_latch_01": "docs/lab_cuvette_loading/Env_v1/runtime/extract_continuous_latch_01_process.json",
+    "grasp_hold_01": "docs/lab_cuvette_loading/Env_v1/runtime/grasp_hold_01_process.json",
+    "preview_03": "docs/lab_cuvette_loading/Env_v1/runtime/preview_03_process.json",
+    "preview_06": "docs/lab_cuvette_loading/Env_v1/runtime/preview_06_process.json",
+    "replay_astra03_01": "docs/lab_cuvette_loading/Env_v1/runtime/replay_astra03_01_process.json",
+    "grasp_hold_02": "docs/lab_cuvette_loading/Env_v1/runtime/grasp_hold_02_process.json",
+    "grasp_hold_03": "docs/lab_cuvette_loading/Env_v1/runtime/grasp_hold_03_process.json",
+    "preinsert_continuous_latch_01": "docs/lab_cuvette_loading/Env_v1/runtime/preinsert_continuous_latch_01_process.json",
+    "grasp_hold_04": "docs/lab_cuvette_loading/Env_v1/runtime/grasp_hold_04_process.json",
+    "extract_transport_01": "docs/lab_cuvette_loading/Env_v1/runtime/extract_transport_01_process.json",
+    "extract_fixed_orientation_01": "docs/lab_cuvette_loading/Env_v1/runtime/extract_fixed_orientation_01_process.json",
+    "rpc_01": "docs/lab_cuvette_loading/Env_v1/runtime/rpc_01_process.json",
+    "preview_04": "docs/lab_cuvette_loading/Env_v1/runtime/preview_04_process.json"
+  },
+  "renderer_audit": "docs/lab_cuvette_loading/Env_v1/data/preinsert_continuous_latch01_inspection/renderer_USD_sync_audit.json",
+  "dataset_group_evidence": "docs/lab_cuvette_loading/Env_v1/data/condition_group_actual_inspection.json",
+  "figures": [
+    {
+      "role": "reference",
+      "path": "docs/lab_cuvette_loading/Env_v1/reference/reference_layout_annotations.jpg",
+      "caption": "原任务视频初态关系标注；只取目标仪器，当前Franka为机器人代理",
+      "max_height_cm": 4.3
+    },
+    {
+      "role": "scene",
+      "path": "docs/lab_cuvette_loading/Env_v1/data/preinsert_continuous_latch01_inspection/dual_view_last.png",
+      "caption": "82.65秒诊断末帧：固定侧视与真实腕视；器皿仍被夹持，未插入或松爪",
+      "max_height_cm": 5.8
+    },
+    {
+      "role": "geometry",
+      "path": "docs/lab_cuvette_loading/Env_v1/geometry/current_20261021/four_yaw_entrance_sections.png",
+      "caption": "实际原座必要入口截面与器皿底部材料；图示不替代PhysX烹饪几何读回",
+      "max_height_cm": 7.5
+    },
+    {
+      "role": "control",
+      "path": "docs/lab_cuvette_loading/Env_v1/data/control_results_compact.png",
+      "caption": "四次真实诊断：锁存交接后实际提取与搬运；预插入true只属于诊断",
+      "max_height_cm": 9.2
+    }
+  ],
+  "media": [
+    {
+      "label": "主录像：同一次82.65秒连续预插入诊断，未插入/释放（压缩阅读版）",
+      "path": "outputs/lab_cuvette_loading/Env_v1/reading_media_20261021/01_preinsert_continuous_82s.mp4"
+    },
+    {
+      "label": "失败录像：原接触锁存交接中的提取滑移（压缩阅读版）",
+      "path": "outputs/lab_cuvette_loading/Env_v1/reading_media_20261021/02_extraction_slip_failure.mp4"
+    },
+    {
+      "label": "腕部关键片段：安全接近与回抬，未插入（同次轨迹剪取）",
+      "path": "outputs/lab_cuvette_loading/Env_v1/reading_media_20261021/03_safe_approach_retract_wrist.mp4"
+    }
+  ],
+  "checks": [
+    {
+      "label": "新诊断H5记录有效",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/preinsert_continuous_latch01_inspection/inspection.json",
+      "json_key": "H5_labels.record_valid",
+      "equals": true
+    },
+    {
+      "label": "便携导出H5字节不变",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/preinsert01_portable_export_validation.json",
+      "json_key": "original_HDF5_bytes_preserved",
+      "equals": true
+    },
+    {
+      "label": "便携H5无外链",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/preinsert01_portable_export_validation.json",
+      "json_key": "HDF5_external_dependencies",
+      "equals": []
+    }
+  ],
+  "reproduction_commands": [
+    "bash demos/lab_cuvette_env_v1/run.sh --mode teacher \\\n --config config/lab_cuvette_loading/Env_v1/preinsert_continuous_latch.yaml \\\n --headless --output NEW_PREINSERT_DIR",
+    "../labutopia-env/bin/python scripts/read_lab_cuvette_env_v1_data.py \\\n EPISODE/dataset/episode_0000.h5 --sample-filter all_valid --policy-type act"
+  ]
+}

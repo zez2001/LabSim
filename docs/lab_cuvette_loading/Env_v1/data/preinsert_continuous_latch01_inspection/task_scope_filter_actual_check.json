@@ -1,0 +1,103 @@
+{
+  "schema": "labsim.Env_v1.actual_diagnostic_task_scope.v1",
+  "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/dataset/episode_0000.h5",
+  "episode_id": "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c",
+  "task_type": "preinsert_diagnostic",
+  "source_sha256_before": "f5d131de2e802bc28fe22ef82b40bf13761b83374df668d8b6fe7798edcc02f2",
+  "source_sha256_after": "f5d131de2e802bc28fe22ef82b40bf13761b83374df668d8b6fe7798edcc02f2",
+  "source_file_unchanged": true,
+  "source_labels_unchanged": true,
+  "H5_stored_independent_score_exactly_matches_file": true,
+  "raw_labels": {
+    "task_success": true,
+    "record_valid": true,
+    "eligible_for_success_bc": false,
+    "eligible_for_failure_analysis": false
+  },
+  "filters": {
+    "all_valid": {
+      "accepted": true,
+      "transitions": 4958,
+      "episode_labels": {
+        "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c": {
+          "task_success": true,
+          "record_valid": true,
+          "failure_type": "NONE",
+          "termination_reason": "PREINSERT_DIAGNOSTIC_COMPLETE"
+        }
+      },
+      "first_sample_labels": {
+        "episode_id": "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c",
+        "task_success": true,
+        "record_valid": true,
+        "failure_type": "NONE",
+        "termination_reason": "PREINSERT_DIAGNOSTIC_COMPLETE"
+      }
+    },
+    "success": {
+      "accepted": false,
+      "exception_type": "ValueError",
+      "message": "Dataset contains no complete successful episodes"
+    },
+    "failure": {
+      "accepted": false,
+      "exception_type": "ValueError",
+      "message": "Dataset contains no eligible failure episodes"
+    }
+  },
+  "original_independent_semantics": {
+    "task_success": true,
+    "workflow_success": null,
+    "full_success": null,
+    "native_pair_success": null,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "terminal_window": {
+      "status": "complete",
+      "stable": false,
+      "required_duration_s": 3.0,
+      "measured_duration_s": 3.0,
+      "sample_count": 721,
+      "position_drift_m": 0.008618464079096538,
+      "orientation_change_deg": 0.016667437449063773,
+      "criteria": {
+        "position_stable": false,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null
+      },
+      "start_t": 79.65,
+      "end_t": 82.65
+    },
+    "diagnostic_hold_window": {
+      "status": "complete",
+      "stable": true,
+      "required_duration_s": 1.0,
+      "measured_duration_s": 1.0,
+      "sample_count": 241,
+      "position_drift_m": 4.835421067353473e-07,
+      "orientation_change_deg": 0.00046686978546263533,
+      "criteria": {
+        "position_stable": true,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "bilateral_contact_during_hold": true
+      },
+      "start_t": 81.65,
+      "end_t": 82.65
+    },
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null
+  },
+  "interpretation": "Successful preinsert diagnostic only: source extraction, held transport, safe approach and upward retraction; neither native insertion nor loading release/retreat. The terminal3s window contains intentional retraction; only the specified final1s diagnostic hold is stable.",
+  "optimizer_training_or_simulation_executed": false,
+  "fake_success_index_created": false
+}

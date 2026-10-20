@@ -1,0 +1,31 @@
+{
+  "schema": "labsim.Env_v1.final_CPU_validation.v1",
+  "not_simulation_evidence": true,
+  "commands": [
+    {
+      "command": "../labutopia-env/bin/python -m unittest discover -s tests -p test_lab_cuvette_env_v1*.py -v",
+      "exit_code": 0,
+      "ran": 43,
+      "skipped": 1,
+      "passed": 42,
+      "log_sha256": "5fbc87c0e4b1766dad2138495402138bd08bfa0697097ab25cadec136e2e759b"
+    },
+    {
+      "command": "../rpent/.venv/bin/python -m pytest -q tests/test_lab_cuvette_env_v1_rpc.py tests/test_lab_cuvette_policy_contract.py",
+      "exit_code": 0,
+      "passed": 14,
+      "wall_seconds": 1.41
+    }
+  ],
+  "counting": "Commands overlap some logical coverage; these are not57 unique physical tests.",
+  "latest_unittest_command": {
+    "command": "../labutopia-env/bin/python -m unittest discover -s tests -p test_lab_cuvette_env_v1*.py -v",
+    "exit_code": 0,
+    "ran": 52,
+    "passed": 51,
+    "skipped": 1,
+    "wall_seconds": 1.801,
+    "log_sha256": "d86fcb70adb2b5172c9af0c54e5a46cf9c87bfb87c0a394858e1bec56b95370b"
+  },
+  "additional_dataset_checks": "22 passed separately, see condition_group_split_validation.json; some coverage overlaps; no unique physical-test total claimed."
+}

@@ -1,0 +1,479 @@
+{
+  "schema": "labsim.Env_v1.actual_condition_group_read.v1",
+  "created_utc": "2026-10-20T17:59:26.989794+00:00",
+  "split_group_keys": [
+    "source_slot_id",
+    "target_seat_id",
+    "scene_version",
+    "asset_version",
+    "task_type"
+  ],
+  "selection": "all_valid",
+  "validation_ratio_for_reads": 0,
+  "source_files_opened_readonly": true,
+  "simulator_rpc_training_executed": false,
+  "source_labels_or_h5_rewritten": false,
+  "fake_condition_id_or_index_created": false,
+  "checks": [
+    {
+      "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003/dataset/episode_0000.h5",
+      "source_sha256_before": "c1d1de1aad43c142055346f9889653303fc22b5e31bdebd4cac5eca1cadb7bac",
+      "source_sha256_after": "c1d1de1aad43c142055346f9889653303fc22b5e31bdebd4cac5eca1cadb7bac",
+      "source_unchanged": true,
+      "direct_hdf5_attributes": {
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge",
+        "scene_version": "Env_v1",
+        "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+        "task_type": "preinsert_diagnostic"
+      },
+      "raw_labels": {
+        "complete": true,
+        "task_success": false,
+        "record_valid": true,
+        "failure_type": "TASK_INCOMPLETE",
+        "termination_reason": "POLICY_BUDGET",
+        "eligible_for_success_bc": false,
+        "eligible_for_failure_analysis": false
+      },
+      "reads": [
+        {
+          "policy_type": "act",
+          "n_obs_steps": 1,
+          "transitions": 15,
+          "episode_group_values": {
+            "14c647b5-7790-4ce0-8c9b-a24b5016ffdf": {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "preinsert_diagnostic"
+            }
+          },
+          "train_group_values": [
+            {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "preinsert_diagnostic"
+            }
+          ],
+          "val_group_values": [],
+          "batch_shapes": {
+            "obs/side_camera_rgb": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/wrist_camera_rgb": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/agent_pose": [
+              3,
+              8
+            ],
+            "action": [
+              3,
+              16,
+              8
+            ]
+          },
+          "checks": [
+            {
+              "index": 0,
+              "transition": 0,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "TASK_INCOMPLETE",
+                "termination_reason": "POLICY_BUDGET"
+              }
+            },
+            {
+              "index": 7,
+              "transition": 7,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "TASK_INCOMPLETE",
+                "termination_reason": "POLICY_BUDGET"
+              }
+            },
+            {
+              "index": 14,
+              "transition": 14,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "TASK_INCOMPLETE",
+                "termination_reason": "POLICY_BUDGET"
+              }
+            }
+          ]
+        },
+        {
+          "policy_type": "dp",
+          "n_obs_steps": 3,
+          "transitions": 15,
+          "episode_group_values": {
+            "14c647b5-7790-4ce0-8c9b-a24b5016ffdf": {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "preinsert_diagnostic"
+            }
+          },
+          "train_group_values": [
+            {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "preinsert_diagnostic"
+            }
+          ],
+          "val_group_values": [],
+          "batch_shapes": {
+            "obs/side_camera_rgb": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/wrist_camera_rgb": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/agent_pose": [
+              3,
+              3,
+              8
+            ],
+            "action": [
+              3,
+              16,
+              8
+            ]
+          },
+          "checks": [
+            {
+              "index": 0,
+              "transition": 0,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "TASK_INCOMPLETE",
+                "termination_reason": "POLICY_BUDGET"
+              }
+            },
+            {
+              "index": 7,
+              "transition": 7,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "TASK_INCOMPLETE",
+                "termination_reason": "POLICY_BUDGET"
+              }
+            },
+            {
+              "index": 14,
+              "transition": 14,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "TASK_INCOMPLETE",
+                "termination_reason": "POLICY_BUDGET"
+              }
+            }
+          ]
+        }
+      ],
+      "single_condition_nonzero_holdout": {
+        "val_ratio": 0.1,
+        "rejected": true,
+        "exception_type": "ValueError",
+        "message": "Scene-condition split requires at least two distinct groups for nonzero val_ratio; use val_ratio=0 for reading only"
+      }
+    },
+    {
+      "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/extract_transport_01/episode_0000/dataset/episode_0000.h5",
+      "source_sha256_before": "406b6790e5ef64b055ae2b5191a0a0f5197d6697379d07b697f5e88d8709b56b",
+      "source_sha256_after": "406b6790e5ef64b055ae2b5191a0a0f5197d6697379d07b697f5e88d8709b56b",
+      "source_unchanged": true,
+      "direct_hdf5_attributes": {
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge",
+        "scene_version": "Env_v1",
+        "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+        "task_type": "extract_transport"
+      },
+      "raw_labels": {
+        "complete": true,
+        "task_success": false,
+        "record_valid": true,
+        "failure_type": "GRASP_SLIP",
+        "termination_reason": "GRASP_SLIP",
+        "eligible_for_success_bc": false,
+        "eligible_for_failure_analysis": false
+      },
+      "reads": [
+        {
+          "policy_type": "act",
+          "n_obs_steps": 1,
+          "transitions": 945,
+          "episode_group_values": {
+            "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7": {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "extract_transport"
+            }
+          },
+          "train_group_values": [
+            {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "extract_transport"
+            }
+          ],
+          "val_group_values": [],
+          "batch_shapes": {
+            "obs/side_camera_rgb": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/wrist_camera_rgb": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/agent_pose": [
+              3,
+              8
+            ],
+            "action": [
+              3,
+              16,
+              8
+            ]
+          },
+          "checks": [
+            {
+              "index": 0,
+              "transition": 0,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "GRASP_SLIP",
+                "termination_reason": "GRASP_SLIP"
+              }
+            },
+            {
+              "index": 472,
+              "transition": 472,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "GRASP_SLIP",
+                "termination_reason": "GRASP_SLIP"
+              }
+            },
+            {
+              "index": 944,
+              "transition": 944,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "GRASP_SLIP",
+                "termination_reason": "GRASP_SLIP"
+              }
+            }
+          ]
+        },
+        {
+          "policy_type": "dp",
+          "n_obs_steps": 3,
+          "transitions": 945,
+          "episode_group_values": {
+            "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7": {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "extract_transport"
+            }
+          },
+          "train_group_values": [
+            {
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "scene_version": "Env_v1",
+              "asset_version": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+              "task_type": "extract_transport"
+            }
+          ],
+          "val_group_values": [],
+          "batch_shapes": {
+            "obs/side_camera_rgb": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/wrist_camera_rgb": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "obs/agent_pose": [
+              3,
+              3,
+              8
+            ],
+            "action": [
+              3,
+              16,
+              8
+            ]
+          },
+          "checks": [
+            {
+              "index": 0,
+              "transition": 0,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "GRASP_SLIP",
+                "termination_reason": "GRASP_SLIP"
+              }
+            },
+            {
+              "index": 472,
+              "transition": 472,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "GRASP_SLIP",
+                "termination_reason": "GRASP_SLIP"
+              }
+            },
+            {
+              "index": 944,
+              "transition": 944,
+              "exact_saved_actions": true,
+              "exact_saved_rgb": {
+                "side_camera_rgb": true,
+                "wrist_camera_rgb": true
+              },
+              "labels": {
+                "episode_id": "1aecee9d-f2cc-4bb7-86ab-6ca6bc5dade7",
+                "task_success": false,
+                "record_valid": true,
+                "failure_type": "GRASP_SLIP",
+                "termination_reason": "GRASP_SLIP"
+              }
+            }
+          ]
+        }
+      ],
+      "single_condition_nonzero_holdout": {
+        "val_ratio": 0.1,
+        "rejected": true,
+        "exception_type": "ValueError",
+        "message": "Scene-condition split requires at least two distinct groups for nonzero val_ratio; use val_ratio=0 for reading only"
+      }
+    }
+  ],
+  "limitations": [
+    "The five keys are actual direct HDF5 attributes, not an invented condition_id.",
+    "These keys group slot, seat, scene version, asset hash and task type. They do not encode every exact layout, physics parameter or controller configuration.",
+    "Only one condition is available in each inspected H5; these reads do not establish any held-out-condition performance.",
+    "Both episodes are diagnostic subtasks; neither enters full-loading success or failure quotas."
+  ]
+}

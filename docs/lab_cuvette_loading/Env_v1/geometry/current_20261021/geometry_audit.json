@@ -1,0 +1,1194 @@
+{
+  "schema": "labsim.Env_v1.current_geometry.v1",
+  "binding": {
+    "contract": {
+      "version": "Env_v1",
+      "scene_mode": "native_nominal",
+      "source": {
+        "instrument": "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda",
+        "vessel": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda",
+        "vessel_collision": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda"
+      },
+      "asset_directory": "assets/lab_cuvette_loading/V0_demo04",
+      "derived_directory": "assets/lab_cuvette_loading/V0_demo04",
+      "scene": {
+        "initial_bottom_gap_m": 0.0002,
+        "instrument_xyz_m": [
+          0.36,
+          0,
+          0.74
+        ],
+        "table_size_m": [
+          2.2,
+          1.8,
+          0.08
+        ],
+        "table_top_m": 0.74,
+        "instrument_count": 1,
+        "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+        "design_rack_origin_m": [
+          -0.04,
+          -0.22,
+          0.74
+        ],
+        "design_instrument_origin_m": [
+          0.36,
+          0.18,
+          0.74
+        ],
+        "instrument_yaw_deg": 90.0
+      },
+      "rack": {
+        "rows": 6,
+        "columns": 6,
+        "inner_m": 0.016,
+        "wall_m": 0.002,
+        "depth_m": 0.025,
+        "base_m": 0.003,
+        "selected_slot_id": "A1",
+        "blue_slot_id": "F6",
+        "yaw_deg": -90.0,
+        "origin_m": [
+          -0.04,
+          -0.22,
+          0.74
+        ]
+      },
+      "adapter": {
+        "selected_target_seat_id": "candidate_far_hinge",
+        "inner_m": 0.0126,
+        "outer_m": 0.0204,
+        "height_m": 0.029,
+        "base_m": 0.002,
+        "geometry": "original CAD mesh3; no engineering adapter"
+      },
+      "vessel": {
+        "outer_xy_m": [
+          0.0125,
+          0.0125
+        ],
+        "height_m": 0.0675,
+        "mass_kg": 0.02,
+        "dimension_source": "user-provided nominal dimensions2026-10-20",
+        "mass_source": "engineering assumption, not measured",
+        "xy_scale": 0.8417508417508418,
+        "yaw_deg": 90.0
+      },
+      "robot": {
+        "base_m": [
+          -0.3,
+          0,
+          0.74
+        ],
+        "grasp_above_bottom_m": 0.053,
+        "initial_tcp_m": [
+          -0.085,
+          -0.175,
+          1.0230000000000001
+        ],
+        "tcp_local_m": [
+          0,
+          0,
+          0.1
+        ],
+        "usd_path": "assets/robots/Franka.usd",
+        "gripper_yaw_deg": -90.0,
+        "tcp_quaternion_wxyz": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "tcp_frame": "right_gripper",
+        "initial_joint_positions": [
+          0.1779404569926203,
+          -1.208031663591094,
+          -0.8197921486914327,
+          -2.872999113364274,
+          -0.7667170833832817,
+          1.7454942736950525,
+          -0.8053155743445266,
+          0.04,
+          0.04
+        ],
+        "initial_joint_basis": "Env_v1 arm_plan_01 seed1; sampled full11-link input triangle pathcheck, actual dynamics still required"
+      },
+      "control": {
+        "final_speed_m_s": 0.0002,
+        "insert_speed_m_s": 0.001,
+        "retreat_m": 0.1,
+        "timeout_s": 135.0,
+        "transport_bottom_z_m": 0.975,
+        "approach_s": 6.0,
+        "extract_s": 6.0,
+        "transport_s": 16.0,
+        "transport_route": "source_y_then_target_x",
+        "retreat_lift_m": 0.06,
+        "retreat_lateral_m": [
+          -0.12,
+          0
+        ],
+        "retreat_route": "lift_then_outward_X",
+        "alignment_budget_m": 1.5e-05,
+        "tilt_budget_deg": 0.02,
+        "yaw_budget_deg": 0.1,
+        "jam_detection": {
+          "window_s": 0.3,
+          "command_down_min_m": 0.00015,
+          "vessel_down_max_m": 2.5e-05,
+          "relative_slip_m": 0.00015,
+          "wall_force_N": 0.5,
+          "force_rise_N": 0.2,
+          "action": "stop downward target; retract to preinsert safe height; save actual failure"
+        },
+        "grip_schedule": {
+          "transport_effort_N": 8.0,
+          "unload_effort_start_N": 8.0,
+          "unload_effort_end_N": 0.05,
+          "unload_seconds": 3.0,
+          "open_effort_N": 0.5,
+          "open_seconds": 3.0,
+          "truth_object_pose_used": true
+        },
+        "diagnostic_safe_bottom_above_rim_m": 0.001,
+        "diagnostic_alignment_budget_m": 0.0001,
+        "diagnostic_approach_speed_m_s": 0.002,
+        "diagnostic_near_speed_m_s": 0.0005,
+        "extract_orientation_feedback": false,
+        "transport_hold_before_align_s": 3.2,
+        "transport_hold_timeout_s": 10.0
+      },
+      "gripper": {
+        "contact_safety_factor": 2.0,
+        "method": "Freeze the existing command at first bilateral contact and preserve it through final latch; no reopening jump, no added closure at latch, effort cap unchanged.",
+        "mode": "contact_latched",
+        "actual_slip_max_m": 0.001,
+        "actual_tilt_max_deg": 1.0,
+        "contact_threshold_N": 0.03,
+        "contact_persist_s": 0.1,
+        "maximum_compression_m": 0.0003,
+        "latch_transition_policy": "preserve_first_contact_command"
+      },
+      "physics": {
+        "ccd": true,
+        "contact_offset_m": 5e-05,
+        "control_hz": 60,
+        "dynamic_friction": 0.5,
+        "finger_dynamic_friction": 0.8,
+        "finger_static_friction": 1.0,
+        "hz": 240,
+        "position_iterations": 64,
+        "rest_offset_m": 0.0,
+        "restitution": 0.0,
+        "solver": "TGS",
+        "static_friction": 0.6,
+        "velocity_iterations": 1
+      },
+      "geometry": {
+        "target_depth_m": 0.027,
+        "target_depth_basis": "candidate source center-ray floor, not manufacturer-confirmed; full task remains unqualified until verified",
+        "upright_yaw_cardinals_deg": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "path_step_m": 0.00025,
+        "section_step_m": 5e-05,
+        "overlap_tolerance_m": 5e-05,
+        "required_path_geometry_valid": true
+      },
+      "environment_motion_limits": {
+        "geometry_safe_stop_above_rim_m": 0.001,
+        "action_max_translation_m": 0.01,
+        "action_max_rotation_rad": 0.1,
+        "action_max_joint_delta_rad": 0.1,
+        "max_action_duration_s": 0.5,
+        "gripper_effort_max_N": 8.0,
+        "physics_hz": 240,
+        "control_hz": 60,
+        "policy_hz": 20
+      }
+    },
+    "files": {
+      "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda": "2c075c4e4273ce23fcc0843e56ed0b42c66c030aeb9cf6fc1fbed89da4bd8c77",
+      "assets/lab_cuvette_loading/V0_demo03/rack.usda": "4739e631592cad3a023957f541e7dffb3bf3733b163197d43c1898cb0e296549",
+      "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+      "assets/lab_cuvette_loading/V0_demo04/rack.usda": "b1a5e809d22ff0a204c85c53e867a07f7fbef1e49604c9f8ec647af202626c91",
+      "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda": "8d52757227303edd4f38918ee04763481f08846fdd8daa6803295c8fc77c689d",
+      "assets/lab_cuvette_loading/V0_ext01/source/TestTube_Baked.usd": "c7d6897a1e555c282ac30a53e95cb872fda4e112821d2a013a9612bd40e39f36",
+      "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd": "8261714be7250b61466e9b3537a25438a5cc441c20a465ea6b3c27b43383a1dc",
+      "assets/robots/Franka.usd": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b",
+      "controllers/lab_cuvette_env_v1_controller.py": "2f29d648523c853f16ec0067eb6579f072b34e84237fc3fef25e1367a89d778a",
+      "demos/lab_cuvette_demo03/scene.py": "a4677c5c33a51209282c3cb45601fa117a2c3d344f78f8e6e548aa5f2f000fde",
+      "demos/lab_cuvette_demo04/scene.py": "e624c944fba548dab450aa1462a5799f11de6bad0ae36292474e2723e2e5f6d1",
+      "demos/lab_cuvette_env_v1/cameras.py": "2c27af819aaa8f1a6f73508cef95fbfe329fb0f34a2cfd2f0635a8936c791d6f",
+      "demos/lab_cuvette_env_v1/geometry_audit.py": "00a8e488884ef231f1d5c704876fa413976aec90944696eecdfad7e09940038e",
+      "demos/lab_cuvette_env_v1/physics_capture.py": "097e20a12fc674f4d7faa5532990bd376558f0054af1aaf2b6b51177b2ce3bcf",
+      "demos/lab_cuvette_env_v1/replay.py": "83473aa8221a33a89e96684729ad0c9a75f80b315577d9f11425e13c2afdc225",
+      "demos/lab_cuvette_env_v1/rpc.py": "80461b9ea73089f3e69c70a0692863bb8de3fb3c0c9d08ae9323fdc0b874b5c2",
+      "demos/lab_cuvette_env_v1/run.py": "e29f3c89321321c6733e03c23e9504baf5372f8d93cf589bf0b1cdec6fc890f7",
+      "demos/lab_cuvette_env_v1/scene.py": "05c4745eead9a1c7b77b3d739fa05c1be593697b04b20442ef805d8d7e293c4a",
+      "demos/lab_cuvette_external/feasibility.py": "a1fd8d313663d9335b63c3666664f6fce9f8fa6b9a47aedee1b722eefaed3415",
+      "demos/lab_cuvette_external/geometry.py": "ce32a8229297bb243baf895b6257684e3226c80ea696a1f0e375807dfe00dbe4",
+      "demos/lab_cuvette_external/run.py": "9cca97724c43052cb3304e077cda406b299d3694e1874de4972e2cd50fe48f42",
+      "tasks/lab_cuvette_loading_env_v1.py": "461d5f2fbd1b6be49fae584d66ad4708080539cb6a9224f309740a38d31908d9"
+    },
+    "schema": "labsim.Env_v1.current_geometry.v1",
+    "fingerprint": "6f25866882814dfa0bff4b7d8ec0c8bbcde8589c0a50a20cbc2b7f9d7be6392a"
+  },
+  "physics_executed": false,
+  "source_modified": false,
+  "real_calibrated": false,
+  "selected_target_seat_id": "candidate_far_hinge",
+  "geometry_valid": false,
+  "vessel_path_geometry_valid": false,
+  "whole_hand_path_valid": null,
+  "reason": "ALL_UPRIGHT_YAWS_REQUIRED_ENTRANCE_BLOCKED",
+  "source_units_transforms": {
+    "filename": "newnew4.usd",
+    "meters_per_unit": 0.001,
+    "up_axis": "Z",
+    "default_prim": "/RotatedRoot",
+    "source_world_min": [
+      -268.6291369858217,
+      -944.9999999999999,
+      -96.73348137090416
+    ],
+    "source_world_max": [
+      251.87086301417833,
+      -310.3752275446284,
+      338.7475058688111
+    ],
+    "normalized_min": [
+      -0.26025,
+      -0.31731238622768576,
+      0.0
+    ],
+    "normalized_max": [
+      0.26025,
+      0.3173123862276858,
+      0.4354809872397153
+    ],
+    "dimensions_m": [
+      0.5205,
+      0.6346247724553715,
+      0.4354809872397153
+    ],
+    "source_world_to_normalized_row_matrix": [
+      [
+        0.001,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.001,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.001,
+        0.0
+      ],
+      [
+        0.008379136985821684,
+        0.6276876137723142,
+        0.09673348137090416,
+        1.0
+      ]
+    ],
+    "origin_definition": "XY AABB centre and lowest actual transformed vertex; NOT centre of mass",
+    "external_references": [
+      ""
+    ],
+    "custom_layer_data": {
+      "creator": "omni.kit.converter.hoops_core 509.1.0 hoops_cad_converter 9.2.0+v9-2-0.2340.42272a51.gl"
+    },
+    "ordinary_traverse_meshes": 0,
+    "instance_proxy_meshes": 8,
+    "instances": [
+      {
+        "path": "/RotatedRoot/newnew4/newnew4/tn__1_ZBFi3j3",
+        "prototype": "/__Prototype_3"
+      },
+      {
+        "path": "/RotatedRoot/newnew4/newnew4/tn__2_ZBFi3j3",
+        "prototype": "/__Prototype_1"
+      },
+      {
+        "path": "/RotatedRoot/newnew4/newnew4/tn__2_1_dNPo5b5",
+        "prototype": "/__Prototype_1"
+      },
+      {
+        "path": "/RotatedRoot/newnew4/newnew4/tn__3_ZBFi3j3",
+        "prototype": "/__Prototype_4"
+      },
+      {
+        "path": "/RotatedRoot/newnew4/newnew4/tn__4_ZBFi3j3",
+        "prototype": "/__Prototype_2"
+      },
+      {
+        "path": "/RotatedRoot/newnew4/newnew4/tn__4_1_dNPo5b5",
+        "prototype": "/__Prototype_2"
+      }
+    ],
+    "physics_prims": []
+  },
+  "seats": [
+    {
+      "seat_id": "candidate_far_hinge",
+      "seat": "A",
+      "source_mesh_index": 3,
+      "source_prim": "/RotatedRoot/newnew4/newnew4/tn__2_ZBFi3j3/tn__4_x1iBOa1g0Jv0g7n4/Mesh",
+      "origin_in_instrument_m": [
+        -0.14991553560697635,
+        0.14762935326296264,
+        0.14500000000000007
+      ],
+      "target_frame_row_rotation_to_instrument": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "dimensions_m": [
+        0.02039999961853045,
+        0.02039999961853045,
+        0.028999999999999998
+      ],
+      "candidate_support_height_m": 0.001999999999999974,
+      "candidate_insertion_depth_m": 0.027000000000000024,
+      "configured_requested_depth_m": 0.027,
+      "depth_basis": "Actual top29mm minus highest central downward ray surface2mm. Geometric candidate only; no manufacturer/video/real depth measurement confirmation.",
+      "depth_adjusted_to_bypass_interference": false,
+      "all_upright_yaw_interval_certificate": {
+        "all_upright_yaws_excluded": true,
+        "near_quarter_turn_half_interval_deg": 0.5,
+        "verified_source_material_square_half_mm": 6.15,
+        "source_square_subset_verified": true,
+        "source_square_distance_from_actual_material_boundary_mm": 0.03392714549517562,
+        "common_contained_square_half_mm_over_near_interval": 6.097026240157639,
+        "all_yaw_necessary_translation_bounds_from_contained_disk_mm": [
+          -0.1500001900000001,
+          -1.65000019,
+          0.1500001900000001,
+          0.9000001900000001
+        ],
+        "actual_source_obstacle_point_mm": [
+          -5.1,
+          -4.85
+        ],
+        "point_inside_actual_source_aperture_exclusion_verified": true,
+        "minimum_axis_margins_inside_common_vessel_material_over_entire_translation_domain_mm": [
+          0.8470260501576394,
+          0.34702605015763943
+        ],
+        "near_quarter_turn_intervals_excluded": true,
+        "source_edge_witness_points_mm": [
+          [
+            -6.249,
+            -5.99
+          ],
+          [
+            -6.249,
+            5.99
+          ],
+          [
+            6.249,
+            -5.99
+          ],
+          [
+            6.249,
+            5.99
+          ],
+          [
+            -5.99,
+            -6.249
+          ],
+          [
+            -5.99,
+            6.249
+          ],
+          [
+            5.99,
+            -6.249
+          ],
+          [
+            5.99,
+            6.249
+          ]
+        ],
+        "all_edge_witnesses_inside_actual_vessel_material_verified": true,
+        "far_from_quarter_turn_interval_deg": [
+          0.5,
+          45.0
+        ],
+        "projected_X_width_lower_bound_mm_over_far_interval": 12.602068009726533,
+        "maximum_actual_aperture_X_width_mm": 12.60000038,
+        "far_interval_width_excess_lower_bound_mm": 0.002067629726532516,
+        "far_from_quarter_turn_intervals_excluded": true,
+        "proof": "Near each90deg orientation, every vessel contains a common rotated-square core; a verified source material point remains strictly inside that core for all necessaryXY translations. Elsewhere, actual vessel edge witnesses imply projectedX span greater than the entire actual apertureX span. Conservative subsets prove necessary-condition failure; they do not replace visual/collision geometry.",
+        "scope": "All upright yaw angles andXY translations at this necessary closed-bottom-through-entrance plane. Doesnot exclude arbitrary inclined6DoF paths, compliance or a different real asset."
+      },
+      "orientations": [
+        {
+          "seat_id": "candidate_far_hinge",
+          "seat": "A",
+          "yaw_deg": 0,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265193,
+                    0.005991590209305286
+                  ],
+                  [
+                    -0.00550000000000006,
+                    0.005991590209305286
+                  ],
+                  [
+                    -0.005499999999999928,
+                    -0.00599241815507412
+                  ],
+                  [
+                    -0.00469999980926506,
+                    -0.00599241815507412
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.027000000000000024,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.00550000000000006,
+              0.005650000190734824,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.1554155356069764,
+              0.15327935345369748,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.005151002975133999,
+              0.005186469757250127,
+              0.0285
+            ],
+            "vessel_triangle_index": 17,
+            "distance_to_actual_vessel_triangle_m": 0.0005802235656467887,
+            "source_boundary_samples_inside_closed_vessel_material": 223,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        },
+        {
+          "seat_id": "candidate_far_hinge",
+          "seat": "A",
+          "yaw_deg": 90,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265193,
+                    0.005991577636450529
+                  ],
+                  [
+                    -0.00550000000000006,
+                    0.005991577636450529
+                  ],
+                  [
+                    -0.005499999999999928,
+                    -0.005992424208670855
+                  ],
+                  [
+                    -0.00469999980926506,
+                    -0.005992424208670855
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.027000000000000024,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.00550000000000006,
+              0.005650000190734824,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.1554155356069764,
+              0.15327935345369748,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.005150677049495887,
+              0.005186079142379392,
+              0.02850000000019232
+            ],
+            "vessel_triangle_index": 895,
+            "distance_to_actual_vessel_triangle_m": 0.000580731661661515,
+            "source_boundary_samples_inside_closed_vessel_material": 223,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        },
+        {
+          "seat_id": "candidate_far_hinge",
+          "seat": "A",
+          "yaw_deg": 180,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265193,
+                    0.0059924181550741204
+                  ],
+                  [
+                    -0.00550000000000006,
+                    0.0059924181550741204
+                  ],
+                  [
+                    -0.005499999999999928,
+                    -0.0059915902093052855
+                  ],
+                  [
+                    -0.00469999980926506,
+                    -0.0059915902093052855
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.027000000000000024,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.00550000000000006,
+              0.005650000190734824,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.1554155356069764,
+              0.15327935345369748,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.00515107885704714,
+              0.005186616771397705,
+              0.028499999999978844
+            ],
+            "vessel_triangle_index": 890,
+            "distance_to_actual_vessel_triangle_m": 0.0005800604772919223,
+            "source_boundary_samples_inside_closed_vessel_material": 223,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        },
+        {
+          "seat_id": "candidate_far_hinge",
+          "seat": "A",
+          "yaw_deg": 270,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265193,
+                    0.0059924242086708554
+                  ],
+                  [
+                    -0.00550000000000006,
+                    0.0059924242086708554
+                  ],
+                  [
+                    -0.005499999999999928,
+                    -0.005991577636450528
+                  ],
+                  [
+                    -0.00469999980926506,
+                    -0.005991577636450528
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.027000000000000024,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.00550000000000006,
+              0.005650000190734824,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.1554155356069764,
+              0.15327935345369748,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.005151387807969897,
+              0.005187023070674193,
+              0.028499999999885384
+            ],
+            "vessel_triangle_index": 885,
+            "distance_to_actual_vessel_triangle_m": 0.0005795500617994201,
+            "source_boundary_samples_inside_closed_vessel_material": 223,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        }
+      ],
+      "no_upright_XY_domain_for_all_four_yaws": true
+    },
+    {
+      "seat_id": "candidate_near_hinge",
+      "seat": "B",
+      "source_mesh_index": 4,
+      "source_prim": "/RotatedRoot/newnew4/newnew4/tn__2_1_dNPo5b5/tn__4_x1iBOa1g0Jv0g7n4/Mesh",
+      "origin_in_instrument_m": [
+        -0.14991553560698526,
+        0.04362935326296552,
+        0.14500000000000007
+      ],
+      "target_frame_row_rotation_to_instrument": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "dimensions_m": [
+        0.020399999618530285,
+        0.0203999996185303,
+        0.028999999999999998
+      ],
+      "candidate_support_height_m": 0.0020000000000000018,
+      "candidate_insertion_depth_m": 0.026999999999999996,
+      "configured_requested_depth_m": 0.027,
+      "depth_basis": "Actual top29mm minus highest central downward ray surface2mm. Geometric candidate only; no manufacturer/video/real depth measurement confirmation.",
+      "depth_adjusted_to_bypass_interference": false,
+      "all_upright_yaw_interval_certificate": {
+        "all_upright_yaws_excluded": true,
+        "near_quarter_turn_half_interval_deg": 0.5,
+        "verified_source_material_square_half_mm": 6.15,
+        "source_square_subset_verified": true,
+        "source_square_distance_from_actual_material_boundary_mm": 0.03392714549517562,
+        "common_contained_square_half_mm_over_near_interval": 6.097026240157639,
+        "all_yaw_necessary_translation_bounds_from_contained_disk_mm": [
+          -0.1500001900000001,
+          -1.65000019,
+          0.1500001900000001,
+          0.9000001900000001
+        ],
+        "actual_source_obstacle_point_mm": [
+          -5.1,
+          -4.85
+        ],
+        "point_inside_actual_source_aperture_exclusion_verified": true,
+        "minimum_axis_margins_inside_common_vessel_material_over_entire_translation_domain_mm": [
+          0.8470260501576394,
+          0.34702605015763943
+        ],
+        "near_quarter_turn_intervals_excluded": true,
+        "source_edge_witness_points_mm": [
+          [
+            -6.249,
+            -5.99
+          ],
+          [
+            -6.249,
+            5.99
+          ],
+          [
+            6.249,
+            -5.99
+          ],
+          [
+            6.249,
+            5.99
+          ],
+          [
+            -5.99,
+            -6.249
+          ],
+          [
+            -5.99,
+            6.249
+          ],
+          [
+            5.99,
+            -6.249
+          ],
+          [
+            5.99,
+            6.249
+          ]
+        ],
+        "all_edge_witnesses_inside_actual_vessel_material_verified": true,
+        "far_from_quarter_turn_interval_deg": [
+          0.5,
+          45.0
+        ],
+        "projected_X_width_lower_bound_mm_over_far_interval": 12.602068009726533,
+        "maximum_actual_aperture_X_width_mm": 12.60000038,
+        "far_interval_width_excess_lower_bound_mm": 0.002067629726532516,
+        "far_from_quarter_turn_intervals_excluded": true,
+        "proof": "Near each90deg orientation, every vessel contains a common rotated-square core; a verified source material point remains strictly inside that core for all necessaryXY translations. Elsewhere, actual vessel edge witnesses imply projectedX span greater than the entire actual apertureX span. Conservative subsets prove necessary-condition failure; they do not replace visual/collision geometry.",
+        "scope": "All upright yaw angles andXY translations at this necessary closed-bottom-through-entrance plane. Doesnot exclude arbitrary inclined6DoF paths, compliance or a different real asset."
+      },
+      "orientations": [
+        {
+          "seat_id": "candidate_near_hinge",
+          "seat": "B",
+          "yaw_deg": 0,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265137,
+                    0.005991590209305286
+                  ],
+                  [
+                    -0.005500000000000005,
+                    0.005991590209305286
+                  ],
+                  [
+                    -0.005499999999999983,
+                    -0.00599241815507412
+                  ],
+                  [
+                    -0.004699999809265137,
+                    -0.00599241815507412
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.026999999999999996,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.005499999999999988,
+              -0.0056709679326703,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.15541553560698523,
+              0.03795838533029522,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.005499999999999988,
+              -0.006250002421438694,
+              0.028500000000000008
+            ],
+            "vessel_triangle_index": 881,
+            "distance_to_actual_vessel_triangle_m": 0.0005790344887683938,
+            "source_boundary_samples_inside_closed_vessel_material": 224,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        },
+        {
+          "seat_id": "candidate_near_hinge",
+          "seat": "B",
+          "yaw_deg": 90,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265137,
+                    0.005991577636450529
+                  ],
+                  [
+                    -0.005500000000000005,
+                    0.005991577636450529
+                  ],
+                  [
+                    -0.005499999999999983,
+                    -0.005992424208670855
+                  ],
+                  [
+                    -0.004699999809265137,
+                    -0.005992424208670855
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.026999999999999996,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.005499999999999988,
+              -0.0056709679326703,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.15541553560698523,
+              0.03795838533029522,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.005499999999999988,
+              -0.006250002421438694,
+              0.0285
+            ],
+            "vessel_triangle_index": 876,
+            "distance_to_actual_vessel_triangle_m": 0.0005790344887683938,
+            "source_boundary_samples_inside_closed_vessel_material": 224,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        },
+        {
+          "seat_id": "candidate_near_hinge",
+          "seat": "B",
+          "yaw_deg": 180,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265137,
+                    0.0059924181550741204
+                  ],
+                  [
+                    -0.005500000000000005,
+                    0.0059924181550741204
+                  ],
+                  [
+                    -0.005499999999999983,
+                    -0.0059915902093052855
+                  ],
+                  [
+                    -0.004699999809265137,
+                    -0.0059915902093052855
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.026999999999999996,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.005499999999999988,
+              -0.0056709679326703,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.15541553560698523,
+              0.03795838533029522,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.005499999999999989,
+              -0.006250002421438693,
+              0.0285
+            ],
+            "vessel_triangle_index": 1761,
+            "distance_to_actual_vessel_triangle_m": 0.0005790344887683929,
+            "source_boundary_samples_inside_closed_vessel_material": 224,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        },
+        {
+          "seat_id": "candidate_near_hinge",
+          "seat": "B",
+          "yaw_deg": 270,
+          "probe_seat_z_mm": 28.499999999999996,
+          "probe_vessel_z_mm": 1.0,
+          "corresponding_insertion_depth_mm": 1.5000000000000013,
+          "necessary_translation_bounds_mm": [
+            -0.04999777000000005,
+            -1.54999777,
+            0.04999777000000005,
+            0.79999777
+          ],
+          "necessary_domain_area_mm2": 0.23498907301989186,
+          "feasible_domain_empty": true,
+          "feasible_domain_area_mm2": 0.0,
+          "positive_clearance_domain_present": false,
+          "vessel_triangle_count": 54,
+          "obstacle_triangle_count": 70,
+          "configuration_polygon_count_before_union": 3780,
+          "triangulation_area_residual_mm2": 0.0,
+          "declared_center_material_intersection_area_mm2": 2.3200041190008487,
+          "scope": "All XY translations in the necessary aperture-bounding domain for this upright yaw, at a required bottom-through-entrance cross-section; not all6DOF configurations.",
+          "final_pose_crossing_sections": 21,
+          "first_observed_center_path_crossing": {
+            "observed_insertion_depth_m": 2.5000000000000716e-05,
+            "witnesses": [
+              {
+                "seat_z_m": 0.028975000000000008,
+                "xy_m": [
+                  [
+                    -0.004699999809265137,
+                    0.0059924242086708554
+                  ],
+                  [
+                    -0.005500000000000005,
+                    0.0059924242086708554
+                  ],
+                  [
+                    -0.005499999999999983,
+                    -0.005991577636450528
+                  ],
+                  [
+                    -0.004699999809265137,
+                    -0.005991577636450528
+                  ]
+                ]
+              }
+            ]
+          },
+          "center_path_full_depth_candidate_m": 0.026999999999999996,
+          "configured_requested_depth_m": 0.027,
+          "center_path_geometry_valid": false,
+          "original_seat_boundary_inside_vessel_material_witness": {
+            "seat_surface_local_m": [
+              -0.005499999999999988,
+              -0.0056709679326703,
+              0.028499999999999998
+            ],
+            "seat_surface_instrument_m": [
+              -0.15541553560698523,
+              0.03795838533029522,
+              0.17350000000000007
+            ],
+            "nearest_vessel_triangle_point_seat_local_m": [
+              -0.005499999999999988,
+              -0.006250002421438693,
+              0.028500000000000008
+            ],
+            "vessel_triangle_index": 877,
+            "distance_to_actual_vessel_triangle_m": 0.0005790344887683929,
+            "source_boundary_samples_inside_closed_vessel_material": 224,
+            "computation_unit": "mm, converted back to m",
+            "scope": "Observed source-surface material-overlap witness at candidate finalpose; not a global penetration maximum or cooked collider measurement."
+          }
+        }
+      ],
+      "no_upright_XY_domain_for_all_four_yaws": true
+    }
+  ],
+  "method": {
+    "section_step_m": 5e-05,
+    "first_change_step_m": 2.5e-05,
+    "polygon_endpoint_snap_m": 1e-11,
+    "configuration_space": "C = bbox-feasible translations minus union_i,j (obstacle_triangle_i Minkowski minus vessel_material_triangle_j); full actual bottom material and central aperture polygons.",
+    "no_nearest_vertex_distance": true,
+    "physical_collision_representation": "Authored input checked; actual cooked PhysX representation unknown in this offline process.",
+    "source_open_mesh_limit": "The seat is non-watertight. Only actual closed plane contours support the entrance configuration-space argument; no signed global seat solid or elastic model is invented.",
+    "limitations": [
+      "Four physically meaningful upright yaws and allXY translations in the stated required entrance plane; not arbitrary6DoF paths.",
+      "Continuous-path samples give observed crossing witnesses, not a global swept-volume certificate or exact first-contact time.",
+      "Whole gripper/robot clearance remains separate and cannot cure a known vessel-source intersection.",
+      "No evidence establishes the protrusions as elastic or permits their removal.",
+      "27mm is a geometry-derived candidate, not measured operating depth. Entrance failure occurs before that candidate end depth."
+    ]
+  },
+  "dependencies": {
+    "shapely": "2.2.0",
+    "GEOS": "3.14.1",
+    "numpy": "1.26.0",
+    "trimesh": "4.5.1"
+  },
+  "wall_clock_s": 54.46095773300112
+}

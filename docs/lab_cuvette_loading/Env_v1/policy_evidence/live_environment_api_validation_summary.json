@@ -1,0 +1,239 @@
+{
+  "schema": "labsim.Env_v1.actual_live_api_validation_summary.v1",
+  "scope": "Actual retained Isaac RPC, not mock. Random checks cover initialization only; not a formal task batch.",
+  "started_utc": "2026-10-20T17:42:34.732876+00:00",
+  "finished_utc": "2026-10-20T17:44:47.157635+00:00",
+  "actual_validator_exit_code": 0,
+  "all_checks_passed": true,
+  "check_count": 23,
+  "checks": [
+    {
+      "name": "public_observation_contract",
+      "passed": true
+    },
+    {
+      "name": "render_and_meta_side_camera",
+      "passed": true
+    },
+    {
+      "name": "render_and_meta_wrist_camera",
+      "passed": true
+    },
+    {
+      "name": "actual_idle_physics_pause",
+      "passed": true
+    },
+    {
+      "name": "reset_standard_41_1",
+      "passed": true
+    },
+    {
+      "name": "joint_velocity_zero_005s_three_ticks",
+      "passed": true
+    },
+    {
+      "name": "two_action_chunk_all_frames",
+      "passed": true
+    },
+    {
+      "name": "invalid_duration_rejected_no_advance",
+      "passed": true
+    },
+    {
+      "name": "stale_step_rejected_no_advance",
+      "passed": true
+    },
+    {
+      "name": "finalize_and_flush",
+      "passed": true
+    },
+    {
+      "name": "terminated_episode_rejects_action",
+      "passed": true
+    },
+    {
+      "name": "reset_standard_41_2",
+      "passed": true
+    },
+    {
+      "name": "old_episode_rejected_after_reset",
+      "passed": true
+    },
+    {
+      "name": "reset_standard_41_3",
+      "passed": true
+    },
+    {
+      "name": "standard_same_seed_reset_repeatability",
+      "passed": true
+    },
+    {
+      "name": "reset_random_7_4",
+      "passed": true
+    },
+    {
+      "name": "reset_random_7_5",
+      "passed": true
+    },
+    {
+      "name": "random_seed7_reset_repeatability",
+      "passed": true
+    },
+    {
+      "name": "random_B1_legal_source_and_rigid_assemblies",
+      "passed": true
+    },
+    {
+      "name": "reset_standard_0_6",
+      "passed": true
+    },
+    {
+      "name": "native_loading_preflight_terminated",
+      "passed": true
+    },
+    {
+      "name": "native_gate_rejects_insertion_action",
+      "passed": true
+    },
+    {
+      "name": "graceful_rpc_endpoint_closed",
+      "passed": true
+    }
+  ],
+  "new_episodes": [
+    {
+      "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+      "directory": "episode_0005",
+      "mode": "standard",
+      "seed": 41,
+      "subtask": "preinsert_diagnostic"
+    },
+    {
+      "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+      "directory": "episode_0006",
+      "mode": "standard",
+      "seed": 41,
+      "subtask": "preinsert_diagnostic"
+    },
+    {
+      "episode_id": "0ecedb9b-d5ef-4c82-9990-078b4fa44bf5",
+      "directory": "episode_0007",
+      "mode": "standard",
+      "seed": 41,
+      "subtask": "preinsert_diagnostic"
+    },
+    {
+      "episode_id": "ce35159a-e2a7-47a0-86b0-772bece83ee9",
+      "directory": "episode_0008",
+      "mode": "random",
+      "seed": 7,
+      "subtask": "preinsert_diagnostic"
+    },
+    {
+      "episode_id": "aed251c3-1c33-4687-a1b0-95080fa11b9c",
+      "directory": "episode_0009",
+      "mode": "random",
+      "seed": 7,
+      "subtask": "preinsert_diagnostic"
+    },
+    {
+      "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+      "directory": "episode_0010",
+      "mode": "standard",
+      "seed": 0,
+      "subtask": "loading"
+    }
+  ],
+  "actual_pause_wall_s": 2.0136982609983534,
+  "pause_simulation_time_unchanged": true,
+  "standard_repeat": {
+    "name": "standard_same_seed_reset_repeatability",
+    "passed": true,
+    "max_abs_joint_difference_rad_or_m": 0.0,
+    "max_abs_tcp_difference_m": 0.0,
+    "quaternion_sign_aware_max_difference": 0.0,
+    "scope": "Observed reset repeatability, not calibrated physical accuracy or task success."
+  },
+  "random_repeat": {
+    "name": "random_seed7_reset_repeatability",
+    "passed": true,
+    "max_abs_joint_difference_rad_or_m": 0.0,
+    "max_abs_tcp_difference_m": 0.0,
+    "quaternion_sign_aware_max_difference": 0.0,
+    "scope": "Observed reset repeatability, not calibrated physical accuracy or task success."
+  },
+  "random_initialization": {
+    "slot_id": "B1",
+    "actual": {
+      "seed": 7,
+      "rack_translation_m": [
+        0.000250190933209334,
+        0.000794427601939151
+      ],
+      "instrument_assembly_translation_m": [
+        0.000551371380490387,
+        -0.0005495856200188162
+      ],
+      "within_slot_translation_m": [
+        0,
+        0
+      ],
+      "source_slot_id": "B1"
+    },
+    "source_reference_inside": true,
+    "observed_source_rack_penetration_m": 0.0,
+    "not_a_formal_random_task_batch": true,
+    "robot_reachability_not_tested": true
+  },
+  "native_gate": {
+    "termination_reason": "GEOMETRY_PRECHECK_BLOCKED",
+    "actual_control_or_insertion_steps": 0,
+    "reset_initialization_physics_steps": 4,
+    "actual_model_predict_requests_during_gate": 0,
+    "model_predict_counter_before_and_after": [
+      6,
+      6
+    ],
+    "not_a_physical_insertion_failure": true
+  },
+  "shutdown": {
+    "environment_endpoint_closed": true,
+    "isaac_launcher_session": 62219,
+    "isaac_launcher_exit_code": 0,
+    "isaac_exit_evidence_source": "Root actual retained session poll",
+    "model_shutdown_ack": {
+      "ok": true
+    },
+    "model_pid_terminated": true,
+    "model_endpoint_closed": true,
+    "model_numeric_exit_code": null,
+    "model_numeric_exit_code_reason": "Read from zombie /proc stat if available; otherwise unavailable because this validator is not the original waitpid owner.",
+    "gpu_snapshot_before_model_shutdown": "8408 MiB, 49140 MiB",
+    "gpu_snapshot_after_model_shutdown": "533 MiB, 49140 MiB"
+  },
+  "metadata_boundary_status": "Old live RPC raw get_camera_meta contains renderer debug; later default getter source fix has CPU validation. Final Astra03/Harness actual model tool boundaries used sanitized metadata and passed.",
+  "full_loading_evaluations": 0,
+  "model_calls_by_validator": 0,
+  "real_calibrated": false,
+  "reproduction_command": [
+    "/home/wujing/Desktop/vla/rpent/.venv/bin/python",
+    "scripts/validate_lab_cuvette_env_v1_live.py",
+    "--endpoint",
+    "http://127.0.0.1:8097",
+    "--server-output",
+    "outputs/lab_cuvette_loading/Env_v1/rpc_01",
+    "--output",
+    "outputs/lab_cuvette_loading/Env_v1/live_api_01",
+    "--evidence",
+    "docs/lab_cuvette_loading/Env_v1/policy_evidence/live_environment_api_validation.json",
+    "--pause-s",
+    "2",
+    "--shutdown"
+  ],
+  "full_evidence": {
+    "path": "docs/lab_cuvette_loading/Env_v1/policy_evidence/live_environment_api_validation.json",
+    "bytes": 108113,
+    "sha256": "c85d4134b5507b4eb8a09f5b9141a0cf14fdde817ce342730a447177da1147a3"
+  },
+  "request_trace": "outputs/lab_cuvette_loading/Env_v1/live_api_01/requests.jsonl"
+}

@@ -1,49 +1,49 @@
 # LabSim Env_v1 阶段状态
 
-更新于 2026-10-21 01:08 Asia/Shanghai。分支 `codex/lab-cuvette-env-v1`；从 `e7e0099` 独立建立，V0 到 demo04 的代码、资产和原输出未覆盖。
+更新于2026-10-21。分支 `codex/lab-cuvette-env-v1`。V0至demo04的源资产、配置、原评分及输出保留。**完整原座装载尚未完成**，以下诊断与接口成绩不替代装载成功或性能评测。
 
-**完整装载尚未完成。** 当前原座入口存在实际材料干涉；正在继续不依赖该实物信息的控制、观测、数据及策略接入工作。不能把下面的诊断结果计为原座装载成功。
+## 当前实际结果
 
-## 本轮已实际完成
+- 场景实际加载单仪器、开盖腔内原A/B座、完整白色6×6架、目标器皿与蓝色邻近器皿。器皿12.5×12.5×67.5 mm为用户名义尺寸，20 g质量仍是假设。Franka是代理，布局为视频关系估计，未真实标定。
+- 刚性原座仍有几何阻塞：实际源/派生USD、实例代理及完整变换已审计，两座在必要入口截面上的四个直立方位整个XY可行域均为空，区间证书进一步排除所有直立yaw。12.6 mm只是部分中央参考截面，27 mm仍是射线候选深度。结论不涵盖无依据的斜插或未知弹性机构。启动及每次reset校验资产、装配、路径和控制哈希，改变后重算。
+- task/controller/collector已接入现有factories和main统一入口，真实reset/step及主线程RPC已运行；九维执行命令、旧八维映射、effort、原始动作、后继状态及时间均记录。教师明确使用真值，视觉策略默认无器皿真值。
+- 原minimal_pick本轮真实回归SUCCESS：518步、8.6333仿真秒、抬升111.84 mm并保持1秒，正常ACT/DP读取通过；不计新装载任务成功。
+- preview03实际保存2秒记录后因相机清理崩溃，原错误保留；preview04正常exit0。preview06修复真实projection。旧extract01动态腕相机残差0.966282 mm为历史一个render年龄证据；新fixed01官方zero_delay已实际运行，935/935观测的renderer对当前USD误差小于1e−8 m，最大6.67e−16 m。已测软件渲染状态关联通过，不称为真实物理精度或光学校准，手/前臂部分遮挡仍有定性局限。
+- grasp_hold_01/02在接近时失败，03接触锁存失败，全部保留。grasp_hold_04实际通过静止子任务：17.5333秒、双指3秒保持，手内原点最大漂移约1.507 µm、转角0.00294°，exit0。**杯仍由来源架承重，不是悬持或已完成提取。** 没有提高8 N力限、摩擦或驱动增益。
+- extract_transport_01在15.7667秒因GRASP_SLIP停止，只抬升约3.504 mm，未清槽。与静止grasp04在15.2667秒前杯pose和命令逐行相同。静置架支撑约+0.501 N、指摩擦Z约−0.305 N，合计平衡0.196 N假设重量。微抬后杯/手相对姿态变化；时序对齐不等于因果确证。
+- fixed_orientation01仍GRASP_SLIP，15.6秒停止、未清槽，故主动姿态反馈不是唯一成因。其EXTRACT前3665样本的pose/q/TCP/速度/命令逐值同基线，指接触仅有观测到的浮点聚合差；物理配置不变。
+- continuous_latch01实际42.3秒、2537控制步、exit0，保留首次闭合目标以消除latch再张开跳变，8 N上限/摩擦/增益不变。独立sourceclear/grasp/transport均true，最大相对漂移30.42 µm/0.0355°，已实际悬持提取搬运；末端3秒世界漂移230.445 µm超过原200 µm门槛，因此task_success=false，原评分保留。
+- 最新preinsert_continuous_latch01实际82.65秒、4958控制步/19836物理步、exit0，独立preinsert_diagnostic成功。清槽/抓持/搬运均true；75.2125秒观察到安全接近，约1 mm处停止后上抬，80.6125秒观察到真实上抬超过8 mm，末1秒漂移0.4835 µm且hold=true。full/native_pair均null，未插入、未开爪、未实际撤离，post_retreat仍unavailable/null。评分不因成功诊断升级为完整装载。
+- 新实际记录的ACT/DP读取、RGB/动作/后继与时间检查通过；preview04原格式便携导出约53.96 MB，H5原字节SHA相同，无外部链接/VDS/外置存储。不修改动作、fps或标签；小阅读包默认不含大H5。
+- 真实RPC环境API的23项检查全部通过：6个新reset episode、同seed standard/random与B1装配复现、2秒等待不步进、0.05秒动作等于3控制周期、chunk、迟到动作拒绝及原座门控0控制步。random仅检查初始化，不是random任务批次；此次验证器没有调用模型。保留RPC launcher已实际exit0；模型服务RPC关闭后PID消失，非父进程退出码仍未知。
+- main真实动作回放已执行Astra03短诊断的15个控制周期，typed关节/夹指命令逐行相同、最大差0 rad/0 m，exit0；实际机器人关节状态在此短窗口也相同。新独立判分仍false，不继承源结果；不宣称完整装载、全状态逐位确定性或接触精度。证据：[实际短回放](docs/lab_cuvette_loading/Env_v1/data/replay_astra03_01_actual_summary.json)。
 
-- 原视频六帧及四张照片重新核对；新布局有一台仪器、完整白色6×6架、目标器皿和远角蓝色器皿，Franka 是代理机器人。布局采用视频关系估计，未真实标定。
-- 当前12.5×12.5×67.5 mm器皿、A/B原座及完整变换重新离线审计。两座入口必要XY可行域在四个直立正交方位均为空，区间证书进一步排除所有直立yaw。结论不涵盖未经依据的倾斜路径或未知弹性机构。中央12.6 mm参考截面不能证明整条路径可通行。
-- 审计绑定实际依赖文件/配置/装配/控制实现哈希；启动和每次reset均检查，相关输入变化后离线重算。原27 mm深度仍仅为源几何中心射线候选，不是实测承托深度。
-- 正式任务、教师、独立判分、采集器已注册现有factories，`main.py --config-name lab_cuvette_env_v1` 已实际运行。模型默认观测排除物体真值；教师明确使用真值。
-- 新同步环境提供reset/step/chunk_step/观测/相机/语言/close，显式9维执行命令和旧8维单指映射、阶段effort、原始输出与转换均记录。等待模型时不步进。
-- `minimal_pick_regression_20261021_01` **实际专家回归SUCCESS**：518控制步、8.6333仿真秒、抬升111.84 mm、双指保持1秒、进程exit0；正常ACT和DP成功读取均通过。
-- `preview_03` 2秒/120步，图像/H5已保存，但Camera.destroy导致退出崩溃；保留原错误。`preview_04` 2秒正常exit0， scoped传感器清理修复通过。
-- `grasp_hold_01/02` 均在11秒接近阶段因TCP偏差失败。独立URDF FK证实物理TCP读取正确，而重复IK分支和逐关节限速破坏了目标跟踪。新增固定目标缓存、连续IK初值、声明容差及连续关节命令后，`grasp_hold_03` 的固定目标命令不再漂移，命令FK误差从最高104.6 mm降至47.55微米。
-- `grasp_hold_03` 仍失败：首次接触冻结到测量宽度会比上一已下发目标更宽，92次接触/失触循环、0次最终锁存。已修为有重量/摩擦/刚度依据的有界正开口，且不宽于上一闭合命令；未提高8 N上限、摩擦或增益。
-- `grasp_hold_04` **静止夹持子任务实际通过**：17.5333秒、1051控制步、4208物理步；连续双指3秒保持，手内原点最大漂移1.507微米、转角0.00294度。未提取、未插入、未释放，完整装载资格仍为false/null。实际进程exit0。
-- 两相机均为真实不同renderproduct：side固定世界、wrist为hand子节点。grasp04从第一有效非0传感器token开始，双路无黑帧/重复帧，传感器时间减engine origin后与观测差≤0.914微秒；初始化4个物理步之前的step0和早期重力响应全部记录。
-- **腕部画面尚未合格**：直接USD、物理hand×固定mount及既有Fabric矩阵一致，实际RGB却未显示预计器皿。不能因挂载和时间正确宣称视野正确；下一步读取渲染CameraParams/深度定位。CPU PhysX仍保留，当前显示变换采用显式USD写回；未迁移动力学后端。
-- 新实际episode的ACT/DP `all_valid`读取、首中末图像/动作/后继状态及便携H5检查通过；success/failure/all_valid保持独立资格。诊断成功不进入完整loading BC，几何阻塞/服务异常不计物理失败。原始历史评分未改写。
+证据：[几何](docs/lab_cuvette_loading/Env_v1/geometry/README.md)、[相机逐帧残差](docs/lab_cuvette_loading/Env_v1/data/extract01_renderer_USD_dynamic_audit.json)、[提取对齐JSON](docs/lab_cuvette_loading/Env_v1/data/extract01_control_analysis.json)、[力与姿态图](docs/lab_cuvette_loading/Env_v1/data/extract01_control_alignment.png)、[数据验收](docs/lab_cuvette_loading/Env_v1/data/README.md)。
 
-## 真实模型资源与集成状态
+API实证：[live_environment_api_validation.json](docs/lab_cuvette_loading/Env_v1/policy_evidence/live_environment_api_validation.json)。该检查起于仍返回完整debug元数据的旧原始getter；模型tool已独立净化，新getter已完成CPU及真实保存metadata输入契约检查，尚未重启raw RPC实测，不能把23项契约通过当作旧getter观测边界通过。
 
-π0.5实际checkpoint已加载并正常退出；已核实本机RLinf/RPent/OpenPI fork版本、checkpoint哈希与LIBERO7维OSC动作语义，未把它误当旧8维关节位置。Astra使用现有登录和实际gpt-6-astra ID完成真实文本请求。Harness使用真实RPent BaseEnvFacade/BaseEnvClient及Toolkit契约；主线程HTTP传输、旧episode保护与CPU测试通过。
+## 三条真实策略链路已接通
 
-**三后端的Env_v1图像→模型→动作→后继观测尚未完成**，待腕图像问题定位后顺序运行。访问探测或fixture协议测试不算策略物理集成。真实图像策略默认无真值，Astra直接模式无VLA/完整专家入口。
+三条链共用真实Isaac RPC、场景、采集器和独立判分，均完成真实双视角图像、模型请求、5个有界动作和后继观测。每条策略动作仅**0.25秒**，加reset渲染fence后记录至0.266667秒；均为standard的preinsert_diagnostic、POLICY_BUDGET、task_success=false。
 
-## 未完成项目及门控
+- π0.5真实checkpoint推理1次，实际5动作。
+- GPT-6 Astra direct合格样例为attempt03，实际5个低层动作，没有VLA/完整专家入口。attempt01工具发现失败、0动作；attempt02虽有5动作，但工具返回暴露renderer/debug/depth统计，不作为RGB观测边界合格证据。旧尝试保留。
+- RLinf/RPent Harness用真实Astra规划及5次真实π0.5 primitive，实际5动作，不包装专家脚本。
 
-实际提取/搬运有界保持、预插入、整条原座装载、支撑交接/松爪/撤离均尚未在Env_v1验收。完整任务固定5次、random10次，以及20成功+20物理有效失败、100+100扩量均未开始；三后端5+5/20+20正式评测亦未开始。没有本轮完整装载成功率。
+RPC日志证明外部等待及只读观测不推进物理。它们证明接口接通，**不是120秒完整任务性能评测、任务成功率或有效完整失败配额**。证据：[实际三链](docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json)、[模型与全部尝试](docs/lab_cuvette_loading/Env_v1/policy_backends.md)。
 
-最近已实测入口：
+## 未完成与门控
 
-```bash
-OMNI_KIT_ACCEPT_EULA=YES ../labutopia-env/bin/python main.py \
- --config-name lab_cuvette_env_v1 --env-mode teacher --subtask grasp_hold \
- --headless --output outputs/lab_cuvette_loading/Env_v1/grasp_hold_04
-```
+实际提取搬运和最新安全预插入诊断已通过；旧continuous01整体保持false保留。原座插入、承托交接、实际松爪、撤离及释放后3秒稳定仍未完成。完整任务固定5次、random10次、20成功+20有效失败、后续100+100及各策略5+5/20+20正式评测均未开始。没有本轮完整装载成功率。
 
-输出目录必须换新，不覆盖旧结果。新数据正常读取、导出命令见 `docs/lab_cuvette_loading/Env_v1/data/README.md`；几何证据见 `geometry/README.md`；模型资源与协议见 `policy_backends.md`。这些文档中尚未实跑的命令不能当作验证结果。
+几何预检、初始化无效、服务异常、进程中断和物理无效单列，不混入物理失败。无实际撤离时post_retreat_window为unavailable，稳定结果为null；末态另存terminal_window。real_calibrated保持false。
 
-## 下一项工作与必要实物信息
+## 本轮归档与后续条件
 
-先定位真正渲染的腕部view/projection，继续提取搬运，完成同一RPC下三条真实模型链。随后按实际稳定性决定是否扩量，保留全部失败。
+最新安全诊断、4958步读取/相机关联、2546460010字节便携导出及15周期真实动作回放均已完成，本轮报告已生成并完成8页逐页渲染核查，24条运行及5次策略尝试已列入CSV；小阅读包在最终提交推送核验后按该SHA生成。成功源于保持阶段冻结目标并等待实际quiet，判分阈值未放宽；不越过原几何门控。公共getter新边界为CPU和实际保存metadata输入的契约检查，尚未重启raw RPC实测；Astra03/Harness的实际模型tool已独立净化。新[诊断摘要](docs/lab_cuvette_loading/Env_v1/data/preinsert_continuous_latch01_result_summary.json)及[当前资产清单](docs/lab_cuvette_loading/Env_v1/current_asset_scene_manifest.json)保留范围、原始哈希和尺寸依据。
 
-原座完整装载集中缺三项：入口内伸件究竟是刚性/可动/弹性结构及依据；器皿底角/座入口限制截面和实际进入方向；真实承托位置与装载深度。未获得依据前，不删除凸起、缩小器皿或碰撞、不放宽穿透门槛。`real_calibrated=false`。
+完整原座装载集中缺三项：入口内伸件刚性/可动/弹性结构及依据；器皿底角、入口截面与实际进入方向；正常承托点和装载深度。不凭外观认定弹片，不删除凸起、缩小器皿/碰撞或放宽穿透门槛。
 
-已验证批次持续提交并推送；新阅读包只含本轮改动与结果，不默认打包原始H5或历史整套输出。
+## 复现与分享
+
+main统一入口已实跑，预览、受门控standard/random、读取过滤、视频回看、原格式导出、RPC及三后端准确CLI见[正式入口](docs/lab_cuvette_loading/Env_v1/README.md)。示例必须使用新输出目录；命令存在不代表新批次已执行。已验证改动由根任务阶段提交推送；[最终DOCX](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.docx)、[Markdown与三段视频](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.md)及[实际运行表](docs/lab_cuvette_loading/Env_v1/results_20261021/actual_runs.csv)已归档；最终交付SHA由推送后生成的包根清单给出，报告中408932d是运行代码提交。

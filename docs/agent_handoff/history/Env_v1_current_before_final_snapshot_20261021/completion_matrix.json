@@ -1,0 +1,105 @@
+{
+  "schema": "labsim.Env_v1.current_completion_matrix.v1",
+  "updated_at": "2026-10-21T01:46:18+08:00",
+  "version": "Env_v1",
+  "branch": "codex/lab-cuvette-env-v1",
+  "final_goal_complete": false,
+  "real_calibrated": false,
+  "pending_live_work": [
+    "EXTRACT fixed TCP orientation plus independent zero_delay renderer-order test; verify physical prefix",
+    "new raw getter RGB metadata whitelist actual trial"
+  ],
+  "items": [
+    {
+      "item": "scene",
+      "status": "已实际加载",
+      "actual_scope": "完整6x6架 单仪器 原A/B座 用户名义12.5mm器皿",
+      "remaining_or_limit": "部分验收；视频关系估计，Franka代理，未完成全路径",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/reference/README.md"
+    },
+    {
+      "item": "cameras_projection",
+      "status": "实际通过",
+      "actual_scope": "真实renderer projection及初帧fence",
+      "remaining_or_limit": "动态腕相机姿态残差0.966282mm仍告警；曝光延迟和遮挡比例未确证",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/extract01_renderer_USD_dynamic_audit.json"
+    },
+    {
+      "item": "geometry",
+      "status": "已实际审计且阻塞",
+      "actual_scope": "A/B必要入口，所有直立yaw的必要条件失败",
+      "remaining_or_limit": "不涵盖任意斜插/未知弹性；烹饪碰撞表示未知",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/geometry/README.md"
+    },
+    {
+      "item": "grasp_hold",
+      "status": "子任务实际成功",
+      "actual_scope": "grasp_hold_04在来源架承重下双指稳定3秒",
+      "remaining_or_limit": "非悬持 非拔出 非完整loading",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/grasp04_inspection/inspection.json"
+    },
+    {
+      "item": "extract_transport",
+      "status": "实际失败",
+      "actual_scope": "extract01抬升3.504mm后GRASP_SLIP，未清槽",
+      "remaining_or_limit": "静止承重与悬持分开；单因素修复试验待追加",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/extract01_control_analysis.json"
+    },
+    {
+      "item": "loading",
+      "status": "未完成",
+      "actual_scope": "未完成实际插入 支撑交接 松爪 撤离 3秒稳定",
+      "remaining_or_limit": "完整成功0；固定5/random10未开始",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/geometry/README.md"
+    },
+    {
+      "item": "data_read_export",
+      "status": "实际通过其声明范围",
+      "actual_scope": "新记录普通ACT/DP读取 原格式H5便携导出",
+      "remaining_or_limit": "不代表完整loading成功BC；未验证LeRobot/OpenPI转换",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/README.md"
+    },
+    {
+      "item": "live_environment_api",
+      "status": "23项真实检查通过",
+      "actual_scope": "6次reset seed装配复现 2秒暂停 3ticks持续动作 chunk 迟到拒绝 native门控0动作",
+      "remaining_or_limit": "random只初始化；旧原始getterdebug边界未通过，新getter真实trial待查；无模型调用",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/policy_evidence/live_environment_api_validation.json"
+    },
+    {
+      "item": "pi05",
+      "status": "真实短链已接通",
+      "actual_scope": "1次checkpoint推理 5动作 0.25秒",
+      "remaining_or_limit": "task_success=false；非性能评测",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json"
+    },
+    {
+      "item": "astra_direct",
+      "status": "真实合格短链已接通",
+      "actual_scope": "attempt03 5低层动作 0.25秒 无VLA",
+      "remaining_or_limit": "保留01零动作和02观测边界不合格；非性能评测",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json"
+    },
+    {
+      "item": "harness_vla",
+      "status": "真实短链已接通",
+      "actual_scope": "真实RPent/Astra 5次pi05 primitive 5动作 0.25秒",
+      "remaining_or_limit": "非完整专家primitive，非性能评测",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json"
+    },
+    {
+      "item": "batch_collection",
+      "status": "未开始",
+      "actual_scope": "20成功+20有效失败及100+100",
+      "remaining_or_limit": "诊断/几何阻塞/服务错误不混入配额",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/data/README.md"
+    },
+    {
+      "item": "real_calibration",
+      "status": "未完成",
+      "actual_scope": "real_calibrated=false",
+      "remaining_or_limit": "需入口机构 底角/方向 承托深度实物信息",
+      "evidence": "docs/lab_cuvette_loading/Env_v1/geometry/README.md"
+    }
+  ]
+}

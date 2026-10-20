@@ -1,0 +1,122 @@
+{
+  "schema": "labsim.Env_v1.portable_reading_summary.v1",
+  "source_evidence": "docs/lab_cuvette_loading/Env_v1/data/preinsert01_portable_export_validation.json",
+  "source_evidence_sha256": "7c0601858a6da5b7797d2bd4488690c2103ff1445fffb9a7560b437612d6ba0a",
+  "portable_directory": "/home/wujing/Desktop/LabSim_Env_v1_便携数据_preinsert01_20261021",
+  "total_bytes": 2546460010,
+  "excluded_from_reading_package": true,
+  "episode_id": "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c",
+  "transitions": 4958,
+  "labels": {
+    "episode_id": "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c",
+    "scene_version": "Env_v1",
+    "task_type": "preinsert_diagnostic",
+    "complete": true,
+    "record_valid": true,
+    "task_success": true,
+    "failure_type": "NONE",
+    "termination_reason": "PREINSERT_DIAGNOSTIC_COMPLETE",
+    "eligible_for_success_bc": false,
+    "eligible_for_failure_analysis": false,
+    "real_calibrated": false
+  },
+  "semantics": {
+    "action_semantics": "absolute_7_arm_rad_and_symmetric_finger_metre",
+    "legacy_8d_mapping": "agent_pose/actions=[arm_q0..q6(rad),left_finger_q7(m)]; actual right_finger_q8 stored separately",
+    "executed_action_semantics": "absolute_position_9d:7_arm_rad+left_and_right_finger_m",
+    "observation_alignment": "obs_before_action; next_state_after_explicit_substeps",
+    "control_hz": 60.0,
+    "physics_hz": 240.0
+  },
+  "HDF5_external_dependencies": [],
+  "original_HDF5_bytes_preserved": true,
+  "data_reading_requires_original_machine": false,
+  "conversion": {
+    "action_semantics_changed": false,
+    "frame_rate_changed": false,
+    "labels_changed": false,
+    "training_platform_conversion": false
+  },
+  "normal_reader_validation": {
+    "act": {
+      "sample_filter": "all_valid",
+      "policy_type": "act",
+      "transitions": 4958,
+      "selected_indices": [
+        0,
+        2479,
+        4957
+      ],
+      "batch_shapes": {
+        "obs/side_camera_rgb": [
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/wrist_camera_rgb": [
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/agent_pose": [
+          3,
+          8
+        ],
+        "action": [
+          3,
+          16,
+          8
+        ]
+      },
+      "all_exact_saved_RGB": true,
+      "all_exact_executed_actions": true,
+      "source_labels_unchanged": true
+    },
+    "dp": {
+      "sample_filter": "all_valid",
+      "policy_type": "dp",
+      "transitions": 4958,
+      "selected_indices": [
+        0,
+        2479,
+        4957
+      ],
+      "batch_shapes": {
+        "obs/side_camera_rgb": [
+          3,
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/wrist_camera_rgb": [
+          3,
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/agent_pose": [
+          3,
+          3,
+          8
+        ],
+        "action": [
+          3,
+          16,
+          8
+        ]
+      },
+      "all_exact_saved_RGB": true,
+      "all_exact_executed_actions": true,
+      "source_labels_unchanged": true
+    }
+  },
+  "scope": "Use recorded task_type/independent labels. Diagnostic records are not full-loading success/failure training quota.",
+  "full_loading_success": false,
+  "full_loading_training_success_quota": 0,
+  "full_loading_training_valid_failure_quota": 0,
+  "not_included": "HDF5, full physics/contact records, complete media inventory and videos remain in separate portable directory."
+}

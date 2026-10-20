@@ -22,9 +22,11 @@
 
 ## 自动失效及复现
 
-00:32 实际执行 `check_cached_binding`，当前源码相对已完成快照返回 `current=false, reason=binding_changed`。开发过程中正式环境/教师新增源码已改变绑定，正式运行前必须自动重算，不能直接读取旧 JSON 布尔值。`ensure_current_audit` 按新指纹建立独立子目录；各次快照保留，不覆盖旧证据。
+历史00:32 实际执行 `check_cached_binding`，当前源码相对已完成快照返回 `current=false, reason=binding_changed`。开发过程中正式环境/教师新增源码已改变绑定，正式运行前必须自动重算，不能直接读取旧 JSON 布尔值。`ensure_current_audit` 按新指纹建立独立子目录；各次快照保留，不覆盖旧证据。
 
-实际运行过的离线入口如下；新代码冻结后仍需重新运行：
+最终代码408932d冻结后，已在 `final_native_audit_01` 重新计算并正常exit0。当前审计副本为 [current_20261021/geometry_audit.json](current_20261021/geometry_audit.json)，指纹 `6f25866882814dfa0bff4b7d8ec0c8bbcde8589c0a50a20cbc2b7f9d7be6392a`，geometry_valid=false；与历史cache分开保留。启动/reset仍会自行核对当前绑定。
+
+实际运行过的离线入口如下：
 
 ```bash
 bash demos/lab_cuvette_external/usd_python.sh \

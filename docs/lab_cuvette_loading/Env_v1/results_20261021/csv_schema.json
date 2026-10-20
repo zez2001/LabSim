@@ -1,0 +1,58 @@
+{
+  "schema": "labsim.Env_v1.report_csv_extract.v1",
+  "source": "report_evidence.json",
+  "source_sha256": "2db2f2d232df6c62a210ce3c4fd6c44827cbba07aa9d64cccc44735c5e26d11e",
+  "format": {
+    "encoding": "UTF-8 with BOM",
+    "delimiter": ",",
+    "header": true,
+    "unknown_null_missing": "empty cell; never filled with zero",
+    "boolean_values": [
+      "true",
+      "false"
+    ],
+    "structured_values": "compact JSON in CSV cell",
+    "steps": "integer counts as recorded; zero retained only when actually present",
+    "phase": "reported phase only; empty if absent from frozen evidence"
+  },
+  "files": {
+    "actual_runs.csv": {
+      "rows": 24,
+      "source_array": "runs",
+      "seed_note": "The frozen runs array has no seed field; seed cells remain empty. No external config inference."
+    },
+    "policy_attempts.csv": {
+      "rows": 5,
+      "source_array": "policy_attempts",
+      "seed_source": "request.seed, falling back to environment_final_result.seed",
+      "outcome_source": "environment_final_result, task_success/termination fall back to attempt only when absent",
+      "phase_note": "No phase synthesized from planner/action count."
+    }
+  },
+  "scope": {
+    "preview": "policy_id preview; no full loading qualification",
+    "full_loading": "task_type loading",
+    "diagnostic": "all explicit non-loading task types in this report; this is an analytical scope label"
+  },
+  "status": {
+    "actual_runs": "Derived only from literal task_success true/false/null: task_success_true/task_success_false/task_success_unknown. Not process exit status.",
+    "policy_attempts": "qualified_integration if qualified_integration true; else unqualified_integration if integration_complete true; else integration_incomplete if integration_complete false; unknown empty. This is integration scope, not task performance."
+  },
+  "units": {
+    "simulation_seconds": "simulated seconds",
+    "wall_seconds": "wall-clock seconds; policy rows use complete attempt wall_time_s",
+    "maximum_relative_position_drift_m": "metres; vessel bottom-frame origin in hand coordinates, includes rotation lever arm",
+    "maximum_relative_orientation_drift_deg": "degrees",
+    "control_steps": "control ticks",
+    "physical_steps": "physics steps"
+  },
+  "qualification_notes": [
+    "Diagnostic/preview success does not count toward full-loading success BC, full-loading failure quota, or 20+20 collection.",
+    "preinsert_diagnostic success means safe approach/up-motion/declared hold, not insertion, gripper opening or actual loading retreat.",
+    "The three qualified policy chains each executed five bounded actions, 15 control ticks (0.25 seconds of actions). Reset render-fence time produces approximately 0.266667 recorded simulated seconds. These are finite integration checks, not task-level evaluation or success rates.",
+    "Astra01 has zero executed actions and no valid transition; Astra02 has actual actions but an unqualified observation boundary. Both remain included.",
+    "full_success blank represents null/unknown/not applicable and must not be converted to false or true.",
+    "record_valid is record/time/action/result integrity within declared scope, not physical calibration or loading success.",
+    "All 24 runs and all five policy attempts from the frozen report evidence are exported; selected_primary_evidence does not filter rows."
+  ]
+}

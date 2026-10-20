@@ -1,0 +1,923 @@
+{
+  "schema": "labsim.Env_v1.current_asset_scene_manifest.v1",
+  "created_utc": "2026-10-20T18:07:06.804849+00:00",
+  "scope": "Compact current-scene identity/size supplement, not a new full provenance report or asset rebuild",
+  "episode_id": "f54b2bf4-7f67-48d3-af19-ca46dbceed4f",
+  "evidence_episode": "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000",
+  "version": "Env_v1",
+  "scene_mode": "native_nominal",
+  "task_type": "extract_transport",
+  "assets": [
+    {
+      "role": "active_vessel",
+      "creation": "External vessel visual source, normalized once; ext02 material-wall collision input then XY affine12.5/14.85; Z unchanged",
+      "source_file": "assets/lab_cuvette_loading/V0_ext01/source/TestTube_Baked.usd",
+      "source_prim": "/TestTube/Mesh",
+      "derived_asset": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda",
+      "scene_instances": [
+        "/World/Cuvette",
+        "/World/NeighborCuvette_F6"
+      ],
+      "visual": "/Asset/Visual/Mesh",
+      "collision": "/Asset/Collision/*",
+      "input_collision_count": 28,
+      "input_approximation": "convexHull per material-wall block; union preserves central cavity",
+      "real_mass_material_calibrated": false
+    },
+    {
+      "role": "complete_white_source_rack",
+      "creation": "Python parametric6x6 rack; reused demo03 geometry in demo04 asset. No ChemLab model referenced",
+      "source_file": null,
+      "derived_asset": "assets/lab_cuvette_loading/V0_demo04/rack.usda",
+      "scene_instances": [
+        "/World/SourceRack"
+      ],
+      "generator": "demos/lab_cuvette_demo03/scene.py:rack_dimensions/rack_parts/rack_slots",
+      "visual_collision_separate": true,
+      "input_collision_count": 50,
+      "input_approximation": "box primitives:1base+7fullXwalls+42shortYwalls;36real open voids",
+      "slot_ids": "A1–F6;A=negative localY,1=negative localX; IDs rotate with rack",
+      "selected_slot_id": "A1",
+      "blue_neighbor_slot_id": "F6",
+      "real_dimensions_calibrated": false
+    },
+    {
+      "role": "instrument_body_open_lid_chamber",
+      "creation": "Provided original newnew4 source instances; normalized mm→m with source root transform once; lid rigid pose adapted near90deg from video estimate",
+      "source_file": "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd",
+      "derived_asset": "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda",
+      "intermediate": "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda",
+      "scene_instances": [
+        "/World/Instrument"
+      ],
+      "body_source_prim": "/RotatedRoot/newnew4/newnew4/tn__1_ZBFi3j3/tn__1_x1ZBa0c2t04z0ZA6/Mesh",
+      "lid_source_prim": "/RotatedRoot/newnew4/newnew4/tn__3_ZBFi3j3/tn__8_x1iBOa1g0Jv0g7n4/Mesh",
+      "chamber_unique_source_prim": null,
+      "chamber_note": "Recessed chamber belongs to original assembly/body geometry; no independent measured chamber solid identified in these records",
+      "collision_input_count": 8,
+      "input_approximation": "original static triangle meshes; no single convex hull filling chamber",
+      "visual_collision_separate": true,
+      "original_source_rescaled": false,
+      "lid_pose_estimate": {
+        "source_main_plane_angle_deg": 41.56696523356667,
+        "main_plane_area_m2": 0.08323222812348961,
+        "main_plane_normal": [
+          2.5004097132017987e-17,
+          -0.6634949477859057,
+          0.7481807630931032
+        ],
+        "target_main_plane_angle_deg": 90.0,
+        "delta_deg": 48.43303476643333,
+        "hinge_axis_origin_in_instrument_m": [
+          -0.10725000000000004,
+          -0.04931238622768555,
+          0.21999999999999947
+        ],
+        "hinge_axis": [
+          1,
+          0,
+          0
+        ],
+        "derived_rigid_pose_row_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.6634949477859058,
+            0.7481807630931031,
+            0.0
+          ],
+          [
+            0.0,
+            -0.7481807630931031,
+            0.6634949477859058,
+            0.0
+          ],
+          [
+            0.0,
+            0.1480059007781334,
+            0.11092569024487214,
+            1.0
+          ]
+        ],
+        "angle_source": "image estimate near vertical; not measured or camera-calibrated",
+        "hinge_axis_source": "line through the two native hinge-mesh bounding-box centres; geometric estimate",
+        "changed_source_file": false,
+        "source_geometry_rescaled": false
+      }
+    },
+    {
+      "role": "internal_seat_A",
+      "seat_id": "candidate_far_hinge",
+      "selected": true,
+      "user_confirmed_target_role": true,
+      "manufacturer_function_confirmed": false,
+      "source_file": "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd",
+      "source_prim": "/RotatedRoot/newnew4/newnew4/tn__2_ZBFi3j3/tn__4_x1iBOa1g0Jv0g7n4/Mesh",
+      "scene_visual": "/World/Instrument/Visual/Source/newnew4/newnew4/tn__2_ZBFi3j3/tn__4_x1iBOa1g0Jv0g7n4/Mesh",
+      "scene_collision": "/World/Instrument/Collision/SourceMesh3",
+      "creation": "Unmodified native seat geometry;16mm engineering adapter absent",
+      "geometry_valid": false
+    },
+    {
+      "role": "internal_seat_B",
+      "seat_id": "candidate_near_hinge",
+      "selected": false,
+      "user_confirmed_target_role": true,
+      "manufacturer_function_confirmed": false,
+      "source_file": "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd",
+      "source_prim": "/RotatedRoot/newnew4/newnew4/tn__2_1_dNPo5b5/tn__4_x1iBOa1g0Jv0g7n4/Mesh",
+      "scene_collision": "/World/Instrument/Collision/SourceMesh4",
+      "creation": "Unmodified native seat retained",
+      "geometry_valid": false
+    },
+    {
+      "role": "robot",
+      "creation": "Existing Franka USD + installed Lula kinematics; proxy robot for reference video, reference robot model not established",
+      "source_file": "assets/robots/Franka.usd",
+      "scene_instances": [
+        "/World/Franka"
+      ],
+      "input_collision_approximation": null,
+      "real_dynamics_calibrated": false,
+      "base_world_m": [
+        -0.3,
+        0,
+        0.74
+      ],
+      "TCP_frame": "right_gripper",
+      "TCP_fixed_transform_verified": {
+        "source": "Installed Franka Lula right_gripper fixed frame,not hand frame",
+        "configured_translation_m": [
+          0.0,
+          0.0,
+          0.1
+        ],
+        "configured_quaternion_wxyz": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "solver_FK_verified": true,
+        "solver_translation_m": [
+          -2.013397315623472e-17,
+          -1.8295911660692887e-17,
+          0.09999999999999994
+        ],
+        "solver_quaternion_wxyz": [
+          1.396716540945625e-12,
+          2.3716922523120403e-20,
+          1.6263032587282564e-19,
+          1.0
+        ],
+        "configured_position_error_m": 7.453148408236581e-17,
+        "configured_orientation_error_rad": 2.7934330818912695e-12
+      }
+    }
+  ],
+  "files": {
+    "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd": {
+      "sha256": "8261714be7250b61466e9b3537a25438a5cc441c20a465ea6b3c27b43383a1dc",
+      "recorded_binding_sha256": "8261714be7250b61466e9b3537a25438a5cc441c20a465ea6b3c27b43383a1dc",
+      "current_matches_recorded_hash": true
+    },
+    "assets/lab_cuvette_loading/V0_ext01/source/TestTube_Baked.usd": {
+      "sha256": "c7d6897a1e555c282ac30a53e95cb872fda4e112821d2a013a9612bd40e39f36",
+      "recorded_binding_sha256": "c7d6897a1e555c282ac30a53e95cb872fda4e112821d2a013a9612bd40e39f36",
+      "current_matches_recorded_hash": true
+    },
+    "assets/lab_cuvette_loading/V0_ext02/walls28_mm.usda": {
+      "sha256": "70133b2a66b1705f6de80c52e46c857b02a9811386971ea14b6a188e1edfde4b",
+      "recorded_binding_sha256": "70133b2a66b1705f6de80c52e46c857b02a9811386971ea14b6a188e1edfde4b",
+      "current_matches_recorded_hash": true
+    },
+    "assets/lab_cuvette_loading/V0_demo03/rack.usda": {
+      "sha256": "4739e631592cad3a023957f541e7dffb3bf3733b163197d43c1898cb0e296549",
+      "recorded_binding_sha256": "4739e631592cad3a023957f541e7dffb3bf3733b163197d43c1898cb0e296549",
+      "current_matches_recorded_hash": true
+    },
+    "assets/lab_cuvette_loading/V0_demo04/rack.usda": {
+      "sha256": "b1a5e809d22ff0a204c85c53e867a07f7fbef1e49604c9f8ec647af202626c91",
+      "recorded_binding_sha256": "b1a5e809d22ff0a204c85c53e867a07f7fbef1e49604c9f8ec647af202626c91",
+      "current_matches_recorded_hash": true
+    },
+    "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda": {
+      "sha256": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+      "recorded_binding_sha256": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+      "current_matches_recorded_hash": true
+    },
+    "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda": {
+      "sha256": "8d52757227303edd4f38918ee04763481f08846fdd8daa6803295c8fc77c689d",
+      "recorded_binding_sha256": "8d52757227303edd4f38918ee04763481f08846fdd8daa6803295c8fc77c689d",
+      "current_matches_recorded_hash": true
+    },
+    "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda": {
+      "sha256": "2c075c4e4273ce23fcc0843e56ed0b42c66c030aeb9cf6fc1fbed89da4bd8c77",
+      "recorded_binding_sha256": "2c075c4e4273ce23fcc0843e56ed0b42c66c030aeb9cf6fc1fbed89da4bd8c77",
+      "current_matches_recorded_hash": true
+    },
+    "assets/robots/Franka.usd": {
+      "sha256": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b",
+      "recorded_binding_sha256": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b",
+      "current_matches_recorded_hash": true
+    }
+  },
+  "original_archive": {
+    "path": "/home/wujing/Desktop/vla/奥凯.zip",
+    "sha256": "62f96e93b3a179d17ed00738a16213785465ae704bd5f3f6f94d17e6f7934fce",
+    "basis": "inherited ext01 source manifest; archive not modified or re-extracted this audit"
+  },
+  "current_layout": {
+    "source_slot_id": "A1",
+    "target_seat_id": "candidate_far_hinge",
+    "rack_origin": [
+      -0.04,
+      -0.22,
+      0.74
+    ],
+    "rack_rotation": [
+      [
+        6.123233995736766e-17,
+        1.0,
+        0.0
+      ],
+      [
+        -1.0,
+        6.123233995736766e-17,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "instrument_origin": [
+      0.36,
+      0.0,
+      0.74
+    ],
+    "instrument_rotation": [
+      [
+        6.123233995736766e-17,
+        -1.0,
+        0.0
+      ],
+      [
+        1.0,
+        6.123233995736766e-17,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "instrument_yaw_deg": 90.0,
+    "opening_direction_world": [
+      -1.0,
+      6.123233995736766e-17,
+      0.0
+    ],
+    "rack_direction_world": [
+      -0.876215908676647,
+      -0.48191874977215593,
+      0.0
+    ],
+    "source_floor": [
+      -0.085,
+      -0.175,
+      0.743
+    ],
+    "source_rim_z": 0.768,
+    "target_floor": [
+      0.21237064673703734,
+      -0.14991553560697635,
+      0.887
+    ],
+    "target_rim_z": 0.914,
+    "neighbors": [
+      {
+        "slot_id": "F6",
+        "position": [
+          0.0050000000000000044,
+          -0.265,
+          0.7432
+        ],
+        "prim_path": "/World/NeighborCuvette_F6"
+      }
+    ]
+  },
+  "current_nominal_yaws_deg": {
+    "instrument": 90,
+    "rack": -90,
+    "vessel": 90,
+    "gripper": -90
+  },
+  "historical_layout_caveat": {
+    "file": "assets/lab_cuvette_loading/V0_demo04/manifest.json",
+    "historical_instrument_origin_m": [
+      0.36,
+      0.18,
+      0.74
+    ],
+    "historical_instrument_yaw_deg": 135.0,
+    "historical_rack_yaw_deg": 45,
+    "current_instrument_origin_m": [
+      0.36,
+      0,
+      0.74
+    ],
+    "current_instrument_yaw_deg": 90.0,
+    "current_rack_yaw_deg": -90.0,
+    "historical_world_AABBs_not_reused": true
+  },
+  "instrument_count": 1,
+  "instrument_count_basis": "Actual episode config=1; current inherited scene.add_scene authors exactly one /World/Instrument and no neighboring instrument; actual videos reviewed",
+  "dimensions": [
+    {
+      "asset": "instrument_body",
+      "metric": "AABB_dimensions",
+      "frame": "source_normalized_m",
+      "value": "[520.5,630.0000000000001,230.00000000000014]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "open_assembly",
+      "metric": "AABB_dimensions",
+      "frame": "source_normalized_m",
+      "value": "[520.5,634.6247724553715,435.48098723971526]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "instrument_body",
+      "metric": "AABB_dimensions",
+      "frame": "derived_instrument_local_m",
+      "value": "[520.5,630.0000000000001,230.00000000000014]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "open_assembly",
+      "metric": "AABB_dimensions",
+      "frame": "derived_instrument_local_m",
+      "value": "[520.5,630.0000000000001,576.9999987511015]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "selected_A",
+      "metric": "AABB_dimensions",
+      "frame": "derived_instrument_local_m",
+      "value": "[20.39999961853045,20.39999961853045,28.999999999999996]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "retained_B",
+      "metric": "AABB_dimensions",
+      "frame": "derived_instrument_local_m",
+      "value": "[20.399999618530284,20.3999996185303,28.999999999999996]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "vessel_visual",
+      "metric": "AABB_dimensions",
+      "frame": "derived_vessel_local_m",
+      "value": "[12.500004842877388,12.500004842877388,67.49999523162842]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "vessel_collision_input_union_bbox",
+      "metric": "AABB_dimensions",
+      "frame": "derived_vessel_local_m",
+      "value": "[12.50000536208995,12.50000536208995,67.49999557668306]",
+      "unit": "mm",
+      "parameter_source": "existing transformed-vertex audit; current asset SHA256 matches",
+      "evidence": "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv",
+      "limitations": "authored/input vertices, not PhysX cooked geometry"
+    },
+    {
+      "asset": "instrument_body",
+      "metric": "AABB_dimensions",
+      "frame": "Env_v1_world_Rz90",
+      "value": "[630.0000000000001,520.5,230.00000000000014]",
+      "unit": "mm",
+      "parameter_source": "Rz90 applied to previously audited current local AABB",
+      "evidence": "actual episode config.yaml + bound asset hash",
+      "limitations": "Calculated from known90-degree rigid assembly yaw; previous V04 yaw135 world extents are not reused"
+    },
+    {
+      "asset": "open_assembly",
+      "metric": "AABB_dimensions",
+      "frame": "Env_v1_world_Rz90",
+      "value": "[630.0000000000001,520.5,576.9999987511015]",
+      "unit": "mm",
+      "parameter_source": "Rz90 applied to previously audited current local AABB",
+      "evidence": "actual episode config.yaml + bound asset hash",
+      "limitations": "Calculated from known90-degree rigid assembly yaw; previous V04 yaw135 world extents are not reused"
+    },
+    {
+      "asset": "vessel",
+      "metric": "nominal_outer_dimensions",
+      "frame": "vessel_body",
+      "value": "[12.5,12.5,67.5]",
+      "unit": "mm",
+      "parameter_source": "user-provided nominal XY; retained height",
+      "evidence": "actual episode config.yaml",
+      "limitations": "not real calibration"
+    },
+    {
+      "asset": "vessel",
+      "metric": "grasp_height_above_bottom",
+      "frame": "vessel_body",
+      "value": "53",
+      "unit": "mm",
+      "parameter_source": "engineering task choice",
+      "evidence": "actual episode config.yaml",
+      "limitations": "not contact-pressure centroid"
+    },
+    {
+      "asset": "vessel",
+      "metric": "mass",
+      "frame": "vessel_body",
+      "value": "0.02",
+      "unit": "kg",
+      "parameter_source": "engineering assumption",
+      "evidence": "actual episode config.yaml + vessel/derivation.json",
+      "limitations": "not measured material mass"
+    },
+    {
+      "asset": "rack",
+      "metric": "rows_columns",
+      "frame": "rack_local",
+      "value": "[6,6]",
+      "unit": "count",
+      "parameter_source": "video-confirmed layout; parametric implementation",
+      "evidence": "actual episode config.yaml",
+      "limitations": "no original rack CAD or measured dimensions"
+    },
+    {
+      "asset": "rack",
+      "metric": "slot_clear_dimensions",
+      "frame": "rack_local",
+      "value": "[16,16,25]",
+      "unit": "mm",
+      "parameter_source": "parametric demo assumption; exposure=67.5-25",
+      "evidence": "demos/lab_cuvette_demo03/scene.py:rack_dimensions/rack_parts/rack_slots",
+      "limitations": "not measured rack geometry"
+    },
+    {
+      "asset": "rack",
+      "metric": "outer_dimensions",
+      "frame": "rack_local",
+      "value": "[110,110,28]",
+      "unit": "mm",
+      "parameter_source": "parametric demo assumption; exposure=67.5-25",
+      "evidence": "demos/lab_cuvette_demo03/scene.py:rack_dimensions/rack_parts/rack_slots",
+      "limitations": "not measured rack geometry"
+    },
+    {
+      "asset": "rack",
+      "metric": "wall_thickness",
+      "frame": "rack_local",
+      "value": "2",
+      "unit": "mm",
+      "parameter_source": "parametric demo assumption; exposure=67.5-25",
+      "evidence": "demos/lab_cuvette_demo03/scene.py:rack_dimensions/rack_parts/rack_slots",
+      "limitations": "not measured rack geometry"
+    },
+    {
+      "asset": "rack",
+      "metric": "bottom_thickness",
+      "frame": "rack_local",
+      "value": "3",
+      "unit": "mm",
+      "parameter_source": "parametric demo assumption; exposure=67.5-25",
+      "evidence": "demos/lab_cuvette_demo03/scene.py:rack_dimensions/rack_parts/rack_slots",
+      "limitations": "not measured rack geometry"
+    },
+    {
+      "asset": "rack",
+      "metric": "pitch",
+      "frame": "rack_local",
+      "value": "18",
+      "unit": "mm",
+      "parameter_source": "parametric demo assumption; exposure=67.5-25",
+      "evidence": "demos/lab_cuvette_demo03/scene.py:rack_dimensions/rack_parts/rack_slots",
+      "limitations": "not measured rack geometry"
+    },
+    {
+      "asset": "rack",
+      "metric": "vessel_exposure_above_rim",
+      "frame": "rack_local",
+      "value": "42.5",
+      "unit": "mm",
+      "parameter_source": "parametric demo assumption; exposure=67.5-25",
+      "evidence": "demos/lab_cuvette_demo03/scene.py:rack_dimensions/rack_parts/rack_slots",
+      "limitations": "not measured rack geometry"
+    },
+    {
+      "asset": "candidate_far_hinge",
+      "metric": "original_outer_AABB",
+      "frame": "instrument_local",
+      "value": "[20.39999961853045,20.39999961853045,28.999999999999996]",
+      "unit": "mm",
+      "parameter_source": "actual original CAD transformed vertices",
+      "evidence": "actual geometry_audit_binding.json:seats",
+      "limitations": "retained local protrusions; outer AABB is not clear aperture"
+    },
+    {
+      "asset": "candidate_far_hinge",
+      "metric": "central_reference_width",
+      "frame": "seat_local",
+      "value": "[12.6,12.6]",
+      "unit": "mm",
+      "parameter_source": "user-provided nominal dimension; central CAD reference",
+      "evidence": "actual episode config.yaml + geometry_audit_binding.json",
+      "limitations": "not a12.6mm clear square through all depths"
+    },
+    {
+      "asset": "candidate_far_hinge",
+      "metric": "candidate_support_height",
+      "frame": "seat_local",
+      "value": "1.999999999999974",
+      "unit": "mm",
+      "parameter_source": "source central downward-ray geometric candidate",
+      "evidence": "actual geometry_audit_binding.json:seats",
+      "limitations": "operating support/function not manufacturer-confirmed"
+    },
+    {
+      "asset": "candidate_far_hinge",
+      "metric": "candidate_insertion_depth",
+      "frame": "seat_local",
+      "value": "27.000000000000025",
+      "unit": "mm",
+      "parameter_source": "29mm top minus2mm candidate floor",
+      "evidence": "actual geometry_audit_binding.json:seats",
+      "limitations": "not verified usable depth; entrance geometry gate false"
+    },
+    {
+      "asset": "candidate_near_hinge",
+      "metric": "original_outer_AABB",
+      "frame": "instrument_local",
+      "value": "[20.399999618530284,20.3999996185303,28.999999999999996]",
+      "unit": "mm",
+      "parameter_source": "actual original CAD transformed vertices",
+      "evidence": "actual geometry_audit_binding.json:seats",
+      "limitations": "retained local protrusions; outer AABB is not clear aperture"
+    },
+    {
+      "asset": "candidate_near_hinge",
+      "metric": "central_reference_width",
+      "frame": "seat_local",
+      "value": "[12.6,12.6]",
+      "unit": "mm",
+      "parameter_source": "user-provided nominal dimension; central CAD reference",
+      "evidence": "actual episode config.yaml + geometry_audit_binding.json",
+      "limitations": "not a12.6mm clear square through all depths"
+    },
+    {
+      "asset": "candidate_near_hinge",
+      "metric": "candidate_support_height",
+      "frame": "seat_local",
+      "value": "2.0000000000000018",
+      "unit": "mm",
+      "parameter_source": "source central downward-ray geometric candidate",
+      "evidence": "actual geometry_audit_binding.json:seats",
+      "limitations": "operating support/function not manufacturer-confirmed"
+    },
+    {
+      "asset": "candidate_near_hinge",
+      "metric": "candidate_insertion_depth",
+      "frame": "seat_local",
+      "value": "26.999999999999996",
+      "unit": "mm",
+      "parameter_source": "29mm top minus2mm candidate floor",
+      "evidence": "actual geometry_audit_binding.json:seats",
+      "limitations": "not verified usable depth; entrance geometry gate false"
+    },
+    {
+      "asset": "instrument",
+      "metric": "origin",
+      "frame": "world",
+      "value": "[0.36,0,0.74]",
+      "unit": "m",
+      "parameter_source": "actual saved configuration or first valid recorded physical pose",
+      "evidence": "actual episode config.yaml / initial_debug.json",
+      "limitations": ""
+    },
+    {
+      "asset": "instrument",
+      "metric": "yaw",
+      "frame": "world",
+      "value": "90.0",
+      "unit": "degree",
+      "parameter_source": "actual saved configuration",
+      "evidence": "actual episode config.yaml",
+      "limitations": ""
+    },
+    {
+      "asset": "rack",
+      "metric": "origin",
+      "frame": "world",
+      "value": "[-0.04,-0.22,0.74]",
+      "unit": "m",
+      "parameter_source": "actual saved configuration or first valid recorded physical pose",
+      "evidence": "actual episode config.yaml / initial_debug.json",
+      "limitations": ""
+    },
+    {
+      "asset": "rack",
+      "metric": "yaw",
+      "frame": "world",
+      "value": "-90.0",
+      "unit": "degree",
+      "parameter_source": "actual saved configuration",
+      "evidence": "actual episode config.yaml",
+      "limitations": ""
+    },
+    {
+      "asset": "vessel",
+      "metric": "origin",
+      "frame": "world",
+      "value": "[-0.08500039577484131,-0.1750001311302185,0.7430002093315125]",
+      "unit": "m",
+      "parameter_source": "actual saved configuration or first valid recorded physical pose",
+      "evidence": "actual episode config.yaml / initial_debug.json",
+      "limitations": ""
+    },
+    {
+      "asset": "vessel",
+      "metric": "yaw",
+      "frame": "world",
+      "value": "90.0",
+      "unit": "degree",
+      "parameter_source": "actual saved configuration",
+      "evidence": "actual episode config.yaml",
+      "limitations": ""
+    },
+    {
+      "asset": "selected_A",
+      "metric": "floor_candidate",
+      "frame": "world",
+      "value": "[0.21237064673703734,-0.14991553560697635,0.887]",
+      "unit": "m",
+      "parameter_source": "current rigid layout applied to audited geometric candidate",
+      "evidence": "actual config + demos/lab_cuvette_demo04/scene.py:layout",
+      "limitations": "not a proven legal support region"
+    },
+    {
+      "asset": "selected_A",
+      "metric": "rim_height",
+      "frame": "world",
+      "value": "0.914",
+      "unit": "m",
+      "parameter_source": "current rigid layout",
+      "evidence": "actual config + demos/lab_cuvette_demo04/scene.py:layout",
+      "limitations": ""
+    },
+    {
+      "asset": "chamber",
+      "metric": "clear_entry_dimensions",
+      "frame": "instrument_local",
+      "value": "null",
+      "unit": "mm",
+      "parameter_source": "unknown",
+      "evidence": null,
+      "limitations": "No audited unique chamber-clearance dimensions; do not infer from seat envelope"
+    }
+  ],
+  "mass_inertia": {
+    "basis": {
+      "mass": "20g retained engineering assumption, not real measured mass",
+      "density": "uniform over material boundary, adjusted to keep20g after XY scaling; inferred numerical density, not material identification",
+      "dimensions": "user-authorized uniform12.5/14.85 XY hypothesis, not correction of source CAD or manufacturer measurement",
+      "inertia": "closed visual material-volume integral; 28 overlapping collider hulls are not summed for mass",
+      "material_contact": "inherited ext02; not calibrated, rest_offset0 unchanged"
+    },
+    "USD_reloaded": {
+      "mass_kg": 0.019999999552965164,
+      "com_body_m": [
+        7.555694878647046e-07,
+        7.609040721945348e-07,
+        0.029027633368968964
+      ],
+      "principal_inertia_kg_m2": [
+        8.117793868223089e-07,
+        9.357208000437822e-06,
+        9.357208909932524e-06
+      ],
+      "principal_axes_quaternion_wxyz": [
+        -0.4880206286907196,
+        0.5117052793502808,
+        0.48802098631858826,
+        0.5116923451423645
+      ],
+      "inertia_body_kg_m2": [
+        [
+          9.357207366775483e-06,
+          3.5836486984627673e-13,
+          -1.1008905577025845e-10
+        ],
+        [
+          3.5836486984627673e-13,
+          9.357208242141132e-06,
+          -1.1069108510713347e-10
+        ],
+        [
+          -1.1008905577025845e-10,
+          -1.1069108510713348e-10,
+          8.11779334648283e-07
+        ]
+      ]
+    },
+    "actual_simulator_mass_information_readback": null
+  },
+  "collision_geometry": {
+    "A": "normalized/derived visual source mesh",
+    "B": "authored collision input geometry",
+    "C": "actual cooked PhysX collision representation",
+    "A_to_B_observed_slice": {
+      "evidence": "docs/lab_cuvette_loading/Env_v1/geometry/cache/370ed94e68d05ace3f304a9efe603ed124300dc1c589750d6826ebba34b93f6d/collision_input_slices.csv",
+      "z_mm": 26.5,
+      "outer_boundary_discrete_distance_mm": 6.332166389918298e-07,
+      "inner_cavity_boundary_discrete_distance_mm": 0.09761077200784993,
+      "extra_cavity_fill_area_mm2": 0.12066087706515322,
+      "uncovered_material_area_mm2": 1.4420574661445419e-05,
+      "union_internal_overlap_boundaries_removed": true,
+      "centre_cavity_remains_empty": true,
+      "method": "Discrete points to contour line segments on actual material/collision geometric union; no nearest-vertex shortcut",
+      "strict_global_error_bound": false
+    },
+    "B_to_C": null,
+    "A_to_C": null,
+    "actual_cooked_geometry_known": false,
+    "actual_runtime_fallback_known": false,
+    "native_target_overlap_measured": false
+  },
+  "geometry_gate": {
+    "selected_seat": "candidate_far_hinge",
+    "geometry_valid": false,
+    "reason": "ALL_UPRIGHT_YAWS_REQUIRED_ENTRANCE_BLOCKED",
+    "fingerprint": "5a79876e23a3b6b92ead85f51999161c0a6abbbe81449ff6eee87fdc3f8e622f",
+    "native_pair_verified": false,
+    "scope": "Actual source geometry entrance proof for upright yaw/XY family; not arbitrary compliant6DoF insertion"
+  },
+  "current_physics_authored": {
+    "ccd": true,
+    "contact_offset_m": 5e-05,
+    "control_hz": 60,
+    "dynamic_friction": 0.5,
+    "finger_dynamic_friction": 0.8,
+    "finger_static_friction": 1.0,
+    "hz": 240,
+    "position_iterations": 64,
+    "rest_offset_m": 0.0,
+    "restitution": 0.0,
+    "solver": "TGS",
+    "static_friction": 0.6,
+    "velocity_iterations": 1
+  },
+  "runtime_parameter_note": "Scene builder explicitly overrides table/robot collision offsets, solver iterations and robot/finger drives/material. Vessel COM/inertia and material attributes are inherited from the hashed derived USD; actual cooked shape readback remains unavailable.",
+  "real_calibrated": false,
+  "source_or_derived_assets_modified": false,
+  "Isaac_started_for_this_manifest": false,
+  "unknowns": [
+    "Measured original rack dimensions and CAD are unavailable.",
+    "Real vessel mass/material and robot dynamics are uncalibrated.",
+    "Manufacturer function of internal seat protrusions is not confirmed; no elastic model or removal is authorized.",
+    "Actual cooked collision geometry, fallback and source-to-cooked error remain unknown.",
+    "Unique chamber clear dimensions and all6DoF legal insertion path are not established."
+  ],
+  "evidence_files": {
+    "assets/lab_cuvette_loading/V0_demo04/manifest.json": "73e4a4cfcf433e183908fe6ea9231d119c6fa7f22a478c3fc69e07a5fb5ad224",
+    "docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv": "7356a407739826aff65c70873957092f3cb38a69664ff6c7c41137d361851c25",
+    "docs/lab_cuvette_loading/V0_demo04/vessel/derivation.json": "8363765d28e263975cdbac0ba035aace2772222e7a7394fe1baa70325d7d3f4e",
+    "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/manifest.json": "313436c87a23df241e47b7377ff44045c85066473a981dcb874cccd2d64807bb",
+    "docs/lab_cuvette_loading/Env_v1/geometry/cache/370ed94e68d05ace3f304a9efe603ed124300dc1c589750d6826ebba34b93f6d/collision_input_slices.csv": "45b08b6abe2bbb8a3f490268e9c443896d19c85706b2a69472e3ea3b1f5064a4",
+    "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/config.yaml": "e85398d57815a2ab13f06ea285a6b89b7dd9ea0f0294cc1e63df79324c63dfbe",
+    "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/geometry_audit_binding.json": "4961834e56b1c93ae3cb0329519da462bd2a1e14b9d62f7755488942c308f3ef",
+    "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/initial_debug.json": "758168a68f62fb6083f485e12d79a795838d586c19cfe4f9d0225debbc64c8af",
+    "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/physics_capture_meta.json": "8bc9cbe1d4c2d834fa1704a09376358d4d28758614183feccf88224c1264fc7f"
+  },
+  "units_and_transforms": {
+    "stage": "metres, Z-up",
+    "instrument_source": {
+      "meters_per_unit": 0.001,
+      "up_axis": "Z",
+      "root": "/RotatedRoot",
+      "source_root_rotation_included_once": true,
+      "source_to_normalized_row_matrix": [
+        [
+          0.001,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0.001,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0.001,
+          0
+        ],
+        [
+          0.008379136985821684,
+          0.6276876137723142,
+          0.09673348137090416,
+          1
+        ]
+      ],
+      "basis": "actual geometry_audit_binding.json:source_units_transforms + existing source dimensional audit"
+    },
+    "vessel_source": {
+      "meters_per_unit": 1.0,
+      "source_up_axis": "Y",
+      "normalized_up_axis": "Z",
+      "basis": "docs/lab_cuvette_loading/V0_demo02/source_audit/dimensions.csv; inherited normalization, no second axis conversion"
+    },
+    "current_assembly_transforms": "world_position = Rz(current_yaw) * instrument_local_position + instrument_origin; lid and seats inherit the same assembly transform"
+  },
+  "runtime_reference_resolution": {
+    "config_source_instrument": "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda",
+    "actual_scene_reference_instrument": "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda",
+    "reason": "Inherited add_scene resolves instrument_native.usda from cfg.asset_directory; cfg.source.instrument is upstream source provenance, not a separate neighboring instance.",
+    "actual_scene_reference_rack": "assets/lab_cuvette_loading/V0_demo04/rack.usda",
+    "actual_active_vessel_reference": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda",
+    "basis": "demos/lab_cuvette_demo04/scene.py:add_scene; demos/lab_cuvette_demo04/run.py:make_scene; saved config asset_directory/derived_directory/collision_scheme"
+  },
+  "initial_state_coordinate_check": {
+    "sample_t_s": 0.016666666666666666,
+    "sample_physics_step": 4,
+    "initial_debug_is_first_valid_observation_after_recorded_initialization_substeps": true,
+    "physics_records_include_earlier_initialization": true,
+    "actual_vessel_position_world_m": [
+      -0.08500039577484131,
+      -0.1750001311302185,
+      0.7430002093315125
+    ],
+    "actual_vessel_bottom_world_z_m": 0.743000206350435,
+    "actual_source_bottom_gap_m": 2.0635043496142202e-07,
+    "target_xy_error_frame": "instrument/seat local axes, not worldXY",
+    "recomputed_target_xy_error_m": [
+      -0.025084595523242176,
+      0.2973710425118786
+    ],
+    "recorded_xy_error_m": [
+      -0.025084595523242176,
+      0.2973710425118786
+    ],
+    "maximum_absolute_agreement_m": 0.0
+  },
+  "latest_verified_episode_crosscheck": {
+    "episode": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000",
+    "episode_id": "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c",
+    "task_type": "preinsert_diagnostic",
+    "same_asset_hashes_as_primary_manifest": {
+      "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd": true,
+      "assets/lab_cuvette_loading/V0_ext01/source/TestTube_Baked.usd": true,
+      "assets/lab_cuvette_loading/V0_demo03/rack.usda": true,
+      "assets/lab_cuvette_loading/V0_demo04/rack.usda": true,
+      "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda": true,
+      "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda": true,
+      "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda": true,
+      "assets/robots/Franka.usd": true
+    },
+    "same_saved_layout_origins_and_yaws": true,
+    "geometry_audit_fingerprint": "77eb78a9faaa4f8b0dd0c403210eebf1880e76df985548b2b9f942afb3c816cb",
+    "geometry_valid": false,
+    "config_sha256": "6e883e4050c50bd275bad7552932e7fd71ea9341ed7db092633af3f08423ee24",
+    "geometry_binding_sha256": "b289e4fa140f850cc4e2bb751b965c7679437424a80d7a3bc5e5fd8f1a42b563",
+    "note": "Source identity, dimensions and assembly placement unchanged; controller experiment and code-binding fingerprint differ from primary extract_transport evidence. Diagnostic success does not change native geometry gate."
+  }
+}

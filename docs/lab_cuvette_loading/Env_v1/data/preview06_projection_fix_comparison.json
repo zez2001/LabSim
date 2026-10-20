@@ -1,0 +1,74 @@
+{
+  "schema": "labsim.Env_v1.actual_renderer_projection_fix.v1",
+  "cases": {
+    "preview_05": {
+      "source": "outputs/lab_cuvette_loading/Env_v1/preview_05/episode_0000/final_camera_meta.json",
+      "sha256": "425b74647a31f4a3634ed31edc04f9a9c8cc619acc9cd2a1430c33976982e65d",
+      "cameras": {
+        "side_camera": {
+          "renderer_P00": 4.772130739822563,
+          "renderer_P11": 6.362840986430084,
+          "expected_P00": 0.9067049026489258,
+          "expected_P11": 1.2089397430419921,
+          "raw_focal": 0.0949999988079071,
+          "raw_aperture": [
+            0.20954999327659607,
+            0.15716250240802765
+          ],
+          "P00_absolute_error": 3.865425837173637,
+          "actual_HFOV_deg": 23.67016567161499
+        },
+        "wrist_camera": {
+          "renderer_P00": 4.772130739822563,
+          "renderer_P11": 6.362840986430084,
+          "expected_P00": 1.1453113555908203,
+          "expected_P11": 1.527081807454427,
+          "raw_focal": 0.11999999731779099,
+          "raw_aperture": [
+            0.20954999327659607,
+            0.15716250240802765
+          ],
+          "P00_absolute_error": 3.6268193842317427,
+          "actual_HFOV_deg": 23.67016567161499
+        }
+      }
+    },
+    "preview_06": {
+      "source": "outputs/lab_cuvette_loading/Env_v1/preview_06/episode_0000/final_camera_meta.json",
+      "sha256": "563c77a2df7704e45730547f0e8bafb2ff402aa489832d9b16a3db77b5aa103e",
+      "cameras": {
+        "side_camera": {
+          "renderer_P00": 0.9067048356362448,
+          "renderer_P11": 1.2089397808483264,
+          "expected_P00": 0.9067048072814942,
+          "expected_P11": 1.2089397430419921,
+          "raw_focal": 9.5,
+          "raw_aperture": [
+            20.954999923706055,
+            15.7162504196167
+          ],
+          "P00_absolute_error": 2.8354750658543537e-08,
+          "actual_HFOV_deg": 95.6025025721318
+        },
+        "wrist_camera": {
+          "renderer_P00": 1.145311431212343,
+          "renderer_P11": 1.5270819082831237,
+          "expected_P00": 1.1453113555908203,
+          "expected_P11": 1.527081807454427,
+          "raw_focal": 12.0,
+          "raw_aperture": [
+            20.954999923706055,
+            15.7162504196167
+          ],
+          "P00_absolute_error": 7.562152259943389e-08,
+          "actual_HFOV_deg": 82.250044583393
+        }
+      }
+    }
+  },
+  "physics_configuration_changed": false,
+  "camera_pose_configuration_changed": false,
+  "change": "Author complete native USD lens before sensor creation, normalize focal/aperture together by100, preserving intended pinhole ratio. Physical optical calibration remains false.",
+  "verification": "Official actual renderer CameraParams projection matches intended K in preview06 within1e-7. This does not alone validate startup frame or dynamic image timing.",
+  "raw_data_modified": false
+}

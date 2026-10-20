@@ -1,0 +1,3654 @@
+{
+  "schema": "labsim.Env_v1.actual_live_api_validation.v1",
+  "scope": "Actual retained Isaac RPC, not mock. Random checks cover initialization only; not a formal task batch.",
+  "started_utc": "2026-10-20T17:42:34.732876+00:00",
+  "endpoint": "http://127.0.0.1:8097",
+  "output": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/live_api_01",
+  "server_output": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01",
+  "command": [
+    "/home/wujing/Desktop/vla/rpent/.venv/bin/python",
+    "scripts/validate_lab_cuvette_env_v1_live.py",
+    "--endpoint",
+    "http://127.0.0.1:8097",
+    "--server-output",
+    "outputs/lab_cuvette_loading/Env_v1/rpc_01",
+    "--output",
+    "outputs/lab_cuvette_loading/Env_v1/live_api_01",
+    "--evidence",
+    "docs/lab_cuvette_loading/Env_v1/policy_evidence/live_environment_api_validation.json",
+    "--pause-s",
+    "2",
+    "--shutdown"
+  ],
+  "git_sha": "ff1e3d3436e9df9c4bf6a9d75f7e864542546d29",
+  "script_sha256": "d1368b63d02d8b3e1f9fa6d901d5c5ac82bfeed9f7607e67d0850567c90310e5",
+  "checks": [
+    {
+      "name": "public_observation_contract",
+      "passed": true,
+      "keys": [
+        "episode_id",
+        "step_index",
+        "simulation_time",
+        "images",
+        "joint_positions",
+        "joint_velocities",
+        "TCPpose",
+        "task_language",
+        "source_slot_id",
+        "target_seat_id"
+      ],
+      "state": {
+        "episode_id": "6469ba9b-c8f7-4c7e-802a-814b1a3b6e77",
+        "step_index": 15,
+        "simulation_time": 0.26666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "650cb1da9c6d66412bcbf1f216b55a767faf80fbef71e33b4ed400847221c157",
+          "values": [
+            0.14309465885162354,
+            -1.2448277473449707,
+            -0.8122669458389282,
+            -2.92665696144104,
+            -0.7919883728027344,
+            1.8005752563476562,
+            -0.7455015778541565,
+            0.039999913424253464,
+            0.03999997302889824
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "ca4b98578b1d16dd43ec428e705115351d945c0d0172be3773d7dc0e16110c1a",
+          "values": [
+            -0.11281268298625946,
+            -0.11350836604833603,
+            0.010911893099546432,
+            -0.09357356280088425,
+            -0.021028360351920128,
+            0.04341704398393631,
+            0.021151075139641762,
+            4.134957634960301e-06,
+            4.134957634960301e-06
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08305455877604585,
+            -0.16762354530418205,
+            1.0175253041898256
+          ],
+          "quaternion_wxyz": [
+            -0.01318569730303786,
+            0.6886148293652944,
+            -0.7245456408939619,
+            0.025872155426197817
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "language": "Pick the light cuvette from white rack slot A1 and transport it to the candidate_far_hinge internal seat of the single open instrument. Stop safely above the seat without inserting or releasing, then lift back and hold."
+    },
+    {
+      "name": "render_and_meta_side_camera",
+      "passed": true,
+      "image": {
+        "shape": [
+          480,
+          640,
+          3
+        ],
+        "dtype": "uint8",
+        "sha256": "94076972df8fb6cb58e438da489763547c66928166ee874561933496af2931ab"
+      },
+      "camera_name": "side_camera",
+      "mounting": "fixed_world",
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "raw_metadata_contains_renderer_debug": true,
+      "note": "Live RPC started before later default-metadata sanitization; model Toolkit independently whitelists metadata."
+    },
+    {
+      "name": "render_and_meta_wrist_camera",
+      "passed": true,
+      "image": {
+        "shape": [
+          480,
+          640,
+          3
+        ],
+        "dtype": "uint8",
+        "sha256": "c1ebbdba8e47a0a34055517c3d80943d78aaf799a4df9187b8677adc1f7b9d93"
+      },
+      "camera_name": "wrist_camera",
+      "mounting": "robot_hand_link",
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "raw_metadata_contains_renderer_debug": true,
+      "note": "Live RPC started before later default-metadata sanitization; model Toolkit independently whitelists metadata."
+    },
+    {
+      "name": "actual_idle_physics_pause",
+      "passed": true,
+      "waited_wall_s": 2.0136982609983534,
+      "before": {
+        "episode_id": "6469ba9b-c8f7-4c7e-802a-814b1a3b6e77",
+        "step_index": 15,
+        "simulation_time": 0.26666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "650cb1da9c6d66412bcbf1f216b55a767faf80fbef71e33b4ed400847221c157",
+          "values": [
+            0.14309465885162354,
+            -1.2448277473449707,
+            -0.8122669458389282,
+            -2.92665696144104,
+            -0.7919883728027344,
+            1.8005752563476562,
+            -0.7455015778541565,
+            0.039999913424253464,
+            0.03999997302889824
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "ca4b98578b1d16dd43ec428e705115351d945c0d0172be3773d7dc0e16110c1a",
+          "values": [
+            -0.11281268298625946,
+            -0.11350836604833603,
+            0.010911893099546432,
+            -0.09357356280088425,
+            -0.021028360351920128,
+            0.04341704398393631,
+            0.021151075139641762,
+            4.134957634960301e-06,
+            4.134957634960301e-06
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08305455877604585,
+            -0.16762354530418205,
+            1.0175253041898256
+          ],
+          "quaternion_wxyz": [
+            -0.01318569730303786,
+            0.6886148293652944,
+            -0.7245456408939619,
+            0.025872155426197817
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": {
+        "episode_id": "6469ba9b-c8f7-4c7e-802a-814b1a3b6e77",
+        "step_index": 15,
+        "simulation_time": 0.26666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "650cb1da9c6d66412bcbf1f216b55a767faf80fbef71e33b4ed400847221c157",
+          "values": [
+            0.14309465885162354,
+            -1.2448277473449707,
+            -0.8122669458389282,
+            -2.92665696144104,
+            -0.7919883728027344,
+            1.8005752563476562,
+            -0.7455015778541565,
+            0.039999913424253464,
+            0.03999997302889824
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "ca4b98578b1d16dd43ec428e705115351d945c0d0172be3773d7dc0e16110c1a",
+          "values": [
+            -0.11281268298625946,
+            -0.11350836604833603,
+            0.010911893099546432,
+            -0.09357356280088425,
+            -0.021028360351920128,
+            0.04341704398393631,
+            0.021151075139641762,
+            4.134957634960301e-06,
+            4.134957634960301e-06
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08305455877604585,
+            -0.16762354530418205,
+            1.0175253041898256
+          ],
+          "quaternion_wxyz": [
+            -0.01318569730303786,
+            0.6886148293652944,
+            -0.7245456408939619,
+            0.025872155426197817
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      }
+    },
+    {
+      "name": "reset_standard_41_1",
+      "passed": true,
+      "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+      "info": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      }
+    },
+    {
+      "name": "joint_velocity_zero_005s_three_ticks",
+      "passed": true,
+      "before": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 3,
+        "simulation_time": 0.06666666666666667,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "26d47d9fb26508a591ab936b48cd279716fdf1851817e96811c33fa40b7400e7",
+          "values": [
+            0.17792817950248718,
+            -1.2088712453842163,
+            -0.8208186030387878,
+            -2.8744699954986572,
+            -0.7667199373245239,
+            1.7453007698059082,
+            -0.8053146004676819,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "bc6407eedcdd72fd8aee1dcb11ff679ce88b5b4c8e2ba23fd616a6ec89c1cccf",
+          "values": [
+            0.0009493376710452139,
+            0.0089720468968153,
+            0.009229516610503197,
+            0.008357916958630085,
+            0.0003397589607629925,
+            0.0020729706156998873,
+            -1.2021977454423904e-05,
+            9.581126505509019e-06,
+            9.58112741500372e-06
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.0852327097954288,
+            -0.17450555904829768,
+            1.022418152693873
+          ],
+          "quaternion_wxyz": [
+            -0.0006379747362840578,
+            0.7071816010357255,
+            -0.7070315761515048,
+            -0.0003556255092848158
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      }
+    },
+    {
+      "name": "two_action_chunk_all_frames",
+      "passed": true,
+      "before": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 3,
+        "simulation_time": 0.06666666666666667,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "26d47d9fb26508a591ab936b48cd279716fdf1851817e96811c33fa40b7400e7",
+          "values": [
+            0.17792817950248718,
+            -1.2088712453842163,
+            -0.8208186030387878,
+            -2.8744699954986572,
+            -0.7667199373245239,
+            1.7453007698059082,
+            -0.8053146004676819,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "bc6407eedcdd72fd8aee1dcb11ff679ce88b5b4c8e2ba23fd616a6ec89c1cccf",
+          "values": [
+            0.0009493376710452139,
+            0.0089720468968153,
+            0.009229516610503197,
+            0.008357916958630085,
+            0.0003397589607629925,
+            0.0020729706156998873,
+            -1.2021977454423904e-05,
+            9.581126505509019e-06,
+            9.58112741500372e-06
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.0852327097954288,
+            -0.17450555904829768,
+            1.022418152693873
+          ],
+          "quaternion_wxyz": [
+            -0.0006379747362840578,
+            0.7071816010357255,
+            -0.7070315761515048,
+            -0.0003556255092848158
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": [
+        {
+          "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+          "step_index": 4,
+          "simulation_time": 0.08333333333333333,
+          "joint_positions": {
+            "shape": [
+              9
+            ],
+            "dtype": "float32",
+            "sha256": "6bf8ec5ed2c3341d234acc10a2c29e05662a34ce64a852d0b59fc23f2700e73d",
+            "values": [
+              0.17792555689811707,
+              -1.2090801000595093,
+              -0.8210739493370056,
+              -2.874835968017578,
+              -0.7667208313941956,
+              1.7452527284622192,
+              -0.8053143620491028,
+              0.03999992087483406,
+              0.03999995067715645
+            ]
+          },
+          "joint_velocities": {
+            "shape": [
+              9
+            ],
+            "dtype": "float32",
+            "sha256": "0f280c7e3fac98e21cd54752c291406dd2218de7a6d77b0167f0120dc795db81",
+            "values": [
+              0.0009504113695584238,
+              0.008974706754088402,
+              0.009232522919774055,
+              0.008349794894456863,
+              0.0003400132118258625,
+              0.002074924297630787,
+              -1.1987217476416845e-05,
+              1.4883924450259656e-05,
+              1.4883924450259656e-05
+            ]
+          },
+          "TCPpose": {
+            "position_m": [
+              -0.08529057983889296,
+              -0.1743820821434055,
+              1.022273597346481
+            ],
+            "quaternion_wxyz": [
+              -0.000699557391886965,
+              0.7072371534073156,
+              -0.7069758466559412,
+              -0.0005212531897722739
+            ]
+          },
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge"
+        },
+        {
+          "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+          "step_index": 5,
+          "simulation_time": 0.1,
+          "joint_positions": {
+            "shape": [
+              9
+            ],
+            "dtype": "float32",
+            "sha256": "2066ed7af6c3f1710ff9f3b9d93dbe1936aeb76613d235c15377d256d569fe06",
+            "values": [
+              0.17792296409606934,
+              -1.2092889547348022,
+              -0.8213292956352234,
+              -2.875201940536499,
+              -0.7667217254638672,
+              1.7452048063278198,
+              -0.8053141236305237,
+              0.03999992460012436,
+              0.03999995440244675
+            ]
+          },
+          "joint_velocities": {
+            "shape": [
+              9
+            ],
+            "dtype": "float32",
+            "sha256": "267bfe40c33ef29adf98baf0dc176173e6b686a8d00855633ca6789b04f051c4",
+            "values": [
+              0.0009511996759101748,
+              0.00897310022264719,
+              0.009235655888915062,
+              0.008350027725100517,
+              0.0003404129820410162,
+              0.0020754504948854446,
+              -1.200966835313011e-05,
+              1.489789065090008e-05,
+              1.4897889741405379e-05
+            ]
+          },
+          "TCPpose": {
+            "position_m": [
+              -0.08534819667684203,
+              -0.17425846439752476,
+              1.0221292929940087
+            ],
+            "quaternion_wxyz": [
+              -0.0007615056272648042,
+              0.7072926791773816,
+              -0.7069200905412021,
+              -0.0006867899823393672
+            ]
+          },
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge"
+        }
+      ]
+    },
+    {
+      "name": "invalid_duration_rejected_no_advance",
+      "passed": true,
+      "error": "env.step: duration must be whole control ticks within declared limit",
+      "before": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 5,
+        "simulation_time": 0.1,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "2066ed7af6c3f1710ff9f3b9d93dbe1936aeb76613d235c15377d256d569fe06",
+          "values": [
+            0.17792296409606934,
+            -1.2092889547348022,
+            -0.8213292956352234,
+            -2.875201940536499,
+            -0.7667217254638672,
+            1.7452048063278198,
+            -0.8053141236305237,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "267bfe40c33ef29adf98baf0dc176173e6b686a8d00855633ca6789b04f051c4",
+          "values": [
+            0.0009511996759101748,
+            0.00897310022264719,
+            0.009235655888915062,
+            0.008350027725100517,
+            0.0003404129820410162,
+            0.0020754504948854446,
+            -1.200966835313011e-05,
+            1.489789065090008e-05,
+            1.4897889741405379e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08534819667684203,
+            -0.17425846439752476,
+            1.0221292929940087
+          ],
+          "quaternion_wxyz": [
+            -0.0007615056272648042,
+            0.7072926791773816,
+            -0.7069200905412021,
+            -0.0006867899823393672
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 5,
+        "simulation_time": 0.1,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "2066ed7af6c3f1710ff9f3b9d93dbe1936aeb76613d235c15377d256d569fe06",
+          "values": [
+            0.17792296409606934,
+            -1.2092889547348022,
+            -0.8213292956352234,
+            -2.875201940536499,
+            -0.7667217254638672,
+            1.7452048063278198,
+            -0.8053141236305237,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "267bfe40c33ef29adf98baf0dc176173e6b686a8d00855633ca6789b04f051c4",
+          "values": [
+            0.0009511996759101748,
+            0.00897310022264719,
+            0.009235655888915062,
+            0.008350027725100517,
+            0.0003404129820410162,
+            0.0020754504948854446,
+            -1.200966835313011e-05,
+            1.489789065090008e-05,
+            1.4897889741405379e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08534819667684203,
+            -0.17425846439752476,
+            1.0221292929940087
+          ],
+          "quaternion_wxyz": [
+            -0.0007615056272648042,
+            0.7072926791773816,
+            -0.7069200905412021,
+            -0.0006867899823393672
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      }
+    },
+    {
+      "name": "stale_step_rejected_no_advance",
+      "passed": true,
+      "error": "env.step: Stale/missing observation_step",
+      "before": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 5,
+        "simulation_time": 0.1,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "2066ed7af6c3f1710ff9f3b9d93dbe1936aeb76613d235c15377d256d569fe06",
+          "values": [
+            0.17792296409606934,
+            -1.2092889547348022,
+            -0.8213292956352234,
+            -2.875201940536499,
+            -0.7667217254638672,
+            1.7452048063278198,
+            -0.8053141236305237,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "267bfe40c33ef29adf98baf0dc176173e6b686a8d00855633ca6789b04f051c4",
+          "values": [
+            0.0009511996759101748,
+            0.00897310022264719,
+            0.009235655888915062,
+            0.008350027725100517,
+            0.0003404129820410162,
+            0.0020754504948854446,
+            -1.200966835313011e-05,
+            1.489789065090008e-05,
+            1.4897889741405379e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08534819667684203,
+            -0.17425846439752476,
+            1.0221292929940087
+          ],
+          "quaternion_wxyz": [
+            -0.0007615056272648042,
+            0.7072926791773816,
+            -0.7069200905412021,
+            -0.0006867899823393672
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 5,
+        "simulation_time": 0.1,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "2066ed7af6c3f1710ff9f3b9d93dbe1936aeb76613d235c15377d256d569fe06",
+          "values": [
+            0.17792296409606934,
+            -1.2092889547348022,
+            -0.8213292956352234,
+            -2.875201940536499,
+            -0.7667217254638672,
+            1.7452048063278198,
+            -0.8053141236305237,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "267bfe40c33ef29adf98baf0dc176173e6b686a8d00855633ca6789b04f051c4",
+          "values": [
+            0.0009511996759101748,
+            0.00897310022264719,
+            0.009235655888915062,
+            0.008350027725100517,
+            0.0003404129820410162,
+            0.0020754504948854446,
+            -1.200966835313011e-05,
+            1.489789065090008e-05,
+            1.4897889741405379e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08534819667684203,
+            -0.17425846439752476,
+            1.0221292929940087
+          ],
+          "quaternion_wxyz": [
+            -0.0007615056272648042,
+            0.7072926791773816,
+            -0.7069200905412021,
+            -0.0006867899823393672
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      }
+    },
+    {
+      "name": "finalize_and_flush",
+      "passed": true,
+      "final": {
+        "schema": "labsim.Env_v1.independent_physical.v1",
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "task_type": "preinsert_diagnostic",
+        "geometry_valid": false,
+        "task_success": false,
+        "workflow_success": null,
+        "full_success": null,
+        "native_pair_success": null,
+        "record_valid": true,
+        "record_valid_scope": "independent physical trace AND collector action/sensor/time integrity",
+        "failure_type": "TASK_INCOMPLETE",
+        "termination_reason": "API_VALIDATION_BUDGET",
+        "eligible_for_success_bc": false,
+        "eligible_for_failure_analysis": false,
+        "real_calibrated": false,
+        "source_slot_cleared": false,
+        "grasp_success": false,
+        "transport_success": false,
+        "loading_sequence_observed": false,
+        "loading_candidate_sequence_observed": false,
+        "release_observed": false,
+        "retreat_observed": false,
+        "stable_after_retreat": null,
+        "post_retreat_window": {
+          "status": "unavailable",
+          "stable": null,
+          "sample_count": 0,
+          "reason": "actual_gripper_retreat_not_observed"
+        },
+        "terminal_window": {
+          "status": "incomplete",
+          "stable": null,
+          "required_duration_s": 3.0,
+          "measured_duration_s": 0.1,
+          "sample_count": 25,
+          "position_drift_m": 0.00019991443410228419,
+          "orientation_change_deg": 0.0030406114888574284,
+          "criteria": {
+            "position_stable": true,
+            "target_support": null,
+            "target_contains": null,
+            "native_overlap_within_limit": null,
+            "no_finger_contact": null
+          },
+          "start_t": 0.0,
+          "end_t": 0.1
+        },
+        "diagnostic_hold_window": {
+          "status": "unavailable",
+          "stable": null,
+          "reason": "physical_diagnostic_up_retract_not_observed"
+        },
+        "grasp_relative_pose": {
+          "reference_available": false,
+          "maximum_position_drift_m": null,
+          "maximum_orientation_drift_deg": null,
+          "maximum_configured_grasp_anchor_drift_m": null,
+          "maximum_configured_grasp_anchor_axial_drift_m": null,
+          "maximum_configured_grasp_anchor_transverse_drift_m": null,
+          "configured_grasp_anchor_height_m": 0.053,
+          "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+          "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+          "position_limit_m": 0.0002,
+          "orientation_limit_deg": 1.0
+        },
+        "measured_grasp_segments": {
+          "static_grasp": {
+            "status": "unavailable",
+            "reference_position_drift_m": null,
+            "reference_orientation_drift_deg": null
+          },
+          "extraction": {
+            "status": "unavailable",
+            "reference_position_drift_m": null,
+            "reference_orientation_drift_deg": null
+          },
+          "transport": {
+            "status": "unavailable",
+            "reference_position_drift_m": null,
+            "reference_orientation_drift_deg": null
+          }
+        },
+        "grasp_attempts": [],
+        "retry_count": 0,
+        "physics_quality_flags": [
+          "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+        ],
+        "invalid_state_reasons": [],
+        "observed_events": {},
+        "physical_sample_count": 25,
+        "simulation_duration_s": 0.1,
+        "stage_labels_used_as_success_proof": false,
+        "geometry_audit_fingerprint": "a167cb0027b87308738bea3352e6697289ef72c43deac65a6c9f0ea628e9047b",
+        "scene_version": "Env_v1",
+        "simulation_seconds": 0.1,
+        "wall_seconds": 59.098118958998384,
+        "seed": 41,
+        "policy_id": "live_api_validation",
+        "actual_control_steps": 5,
+        "actual_physics_steps": 24,
+        "complete": true,
+        "frames": 5,
+        "physical_score_record_valid": true,
+        "record_integrity_errors": []
+      }
+    },
+    {
+      "name": "terminated_episode_rejects_action",
+      "passed": true,
+      "error": "env.step: Episode terminated; reset before actions",
+      "before": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 5,
+        "simulation_time": 0.1,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "2066ed7af6c3f1710ff9f3b9d93dbe1936aeb76613d235c15377d256d569fe06",
+          "values": [
+            0.17792296409606934,
+            -1.2092889547348022,
+            -0.8213292956352234,
+            -2.875201940536499,
+            -0.7667217254638672,
+            1.7452048063278198,
+            -0.8053141236305237,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "267bfe40c33ef29adf98baf0dc176173e6b686a8d00855633ca6789b04f051c4",
+          "values": [
+            0.0009511996759101748,
+            0.00897310022264719,
+            0.009235655888915062,
+            0.008350027725100517,
+            0.0003404129820410162,
+            0.0020754504948854446,
+            -1.200966835313011e-05,
+            1.489789065090008e-05,
+            1.4897889741405379e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08534819667684203,
+            -0.17425846439752476,
+            1.0221292929940087
+          ],
+          "quaternion_wxyz": [
+            -0.0007615056272648042,
+            0.7072926791773816,
+            -0.7069200905412021,
+            -0.0006867899823393672
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 5,
+        "simulation_time": 0.1,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "2066ed7af6c3f1710ff9f3b9d93dbe1936aeb76613d235c15377d256d569fe06",
+          "values": [
+            0.17792296409606934,
+            -1.2092889547348022,
+            -0.8213292956352234,
+            -2.875201940536499,
+            -0.7667217254638672,
+            1.7452048063278198,
+            -0.8053141236305237,
+            0.03999992460012436,
+            0.03999995440244675
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "267bfe40c33ef29adf98baf0dc176173e6b686a8d00855633ca6789b04f051c4",
+          "values": [
+            0.0009511996759101748,
+            0.00897310022264719,
+            0.009235655888915062,
+            0.008350027725100517,
+            0.0003404129820410162,
+            0.0020754504948854446,
+            -1.200966835313011e-05,
+            1.489789065090008e-05,
+            1.4897889741405379e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08534819667684203,
+            -0.17425846439752476,
+            1.0221292929940087
+          ],
+          "quaternion_wxyz": [
+            -0.0007615056272648042,
+            0.7072926791773816,
+            -0.7069200905412021,
+            -0.0006867899823393672
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      }
+    },
+    {
+      "name": "reset_standard_41_2",
+      "passed": true,
+      "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+      "info": {
+        "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      }
+    },
+    {
+      "name": "old_episode_rejected_after_reset",
+      "passed": true,
+      "error": "env.step: Stale/missing episode_id",
+      "before": {
+        "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": {
+        "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      }
+    },
+    {
+      "name": "reset_standard_41_3",
+      "passed": true,
+      "episode_id": "0ecedb9b-d5ef-4c82-9990-078b4fa44bf5",
+      "info": {
+        "episode_id": "0ecedb9b-d5ef-4c82-9990-078b4fa44bf5",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      }
+    },
+    {
+      "name": "standard_same_seed_reset_repeatability",
+      "passed": true,
+      "max_abs_joint_difference_rad_or_m": 0.0,
+      "max_abs_tcp_difference_m": 0.0,
+      "quaternion_sign_aware_max_difference": 0.0,
+      "check_tolerances": {
+        "joint_coordinates": 1e-06,
+        "tcp_m": 1e-06,
+        "quaternion_component": 1e-06
+      },
+      "scope": "Observed reset repeatability, not calibrated physical accuracy or task success."
+    },
+    {
+      "name": "reset_random_7_4",
+      "passed": true,
+      "episode_id": "ce35159a-e2a7-47a0-86b0-772bece83ee9",
+      "info": {
+        "episode_id": "ce35159a-e2a7-47a0-86b0-772bece83ee9",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      }
+    },
+    {
+      "name": "reset_random_7_5",
+      "passed": true,
+      "episode_id": "aed251c3-1c33-4687-a1b0-95080fa11b9c",
+      "info": {
+        "episode_id": "aed251c3-1c33-4687-a1b0-95080fa11b9c",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      }
+    },
+    {
+      "name": "random_seed7_reset_repeatability",
+      "passed": true,
+      "max_abs_joint_difference_rad_or_m": 0.0,
+      "max_abs_tcp_difference_m": 0.0,
+      "quaternion_sign_aware_max_difference": 0.0,
+      "check_tolerances": {
+        "joint_coordinates": 1e-06,
+        "tcp_m": 1e-06,
+        "quaternion_component": 1e-06
+      },
+      "scope": "Observed reset repeatability, not calibrated physical accuracy or task success."
+    },
+    {
+      "name": "random_B1_legal_source_and_rigid_assemblies",
+      "passed": true,
+      "assembly": {
+        "source_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "8a14af7fc2e679b6cac97d25a86002732a411409a52720bc1f6420259ce68c97",
+          "values": [
+            -0.06674980906679068,
+            -0.17420557239806084,
+            0.743
+          ]
+        },
+        "target_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "85504df3c178f6df7d71e35628d255073d24354c1be5335f6495fcf18d918fa4",
+          "values": [
+            0.21292201811752773,
+            -0.15046512122699515,
+            0.887
+          ]
+        },
+        "target_origin_in_instrument": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "99482816947abcce5d6a9068323d96731fddb69e91a6d11474d50363821bf407",
+          "values": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.145
+          ]
+        },
+        "rack_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "0ddb566712584f3dbad8f929a569cc3a83a4d797ae08e83c6599d4c7d2800e3e",
+          "values": [
+            -0.03974980906679067,
+            -0.21920557239806085,
+            0.74
+          ]
+        },
+        "rack_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "dec36d7556518fba5cb211820cd9758306a7d8b5e67393c2d433d2c8e4bc59e3",
+          "values": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "instrument_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "04c1059588f157cd2e31201812818ec4c06902ac0dd5243b568fa30099468aaa",
+          "values": [
+            0.36055137138049037,
+            -0.0005495856200188162,
+            0.74
+          ]
+        },
+        "instrument_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "861be611fe0f7474ea92fed2bc3c871fa4a4a356bd2a647a379164d6ab3c13c4",
+          "values": [
+            [
+              6.123233995736766e-17,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "configuration": {
+        "rack": {
+          "rows": 6,
+          "columns": 6,
+          "inner_m": 0.016,
+          "wall_m": 0.002,
+          "depth_m": 0.025,
+          "base_m": 0.003,
+          "selected_slot_id": "B1",
+          "blue_slot_id": "F6",
+          "yaw_deg": -90.0,
+          "origin_m": [
+            -0.03974980906679067,
+            -0.21920557239806085,
+            0.74
+          ]
+        },
+        "scene": {
+          "initial_bottom_gap_m": 0.0002,
+          "instrument_xyz_m": [
+            0.36055137138049037,
+            -0.0005495856200188162,
+            0.74
+          ],
+          "table_size_m": [
+            2.2,
+            1.8,
+            0.08
+          ],
+          "table_top_m": 0.74,
+          "instrument_count": 1,
+          "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+          "design_rack_origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ],
+          "design_instrument_origin_m": [
+            0.36,
+            0.18,
+            0.74
+          ],
+          "instrument_yaw_deg": 90.0
+        },
+        "randomization": {
+          "legal_slots": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1"
+          ],
+          "rack_translation_half_range_m": 0.001,
+          "instrument_translation_half_range_m": 0.001,
+          "yaw_half_range_deg": 0.0,
+          "in_slot_translation_m": 0.0,
+          "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together",
+          "actual": {
+            "seed": 7,
+            "rack_translation_m": [
+              0.000250190933209334,
+              0.000794427601939151
+            ],
+            "instrument_assembly_translation_m": [
+              0.000551371380490387,
+              -0.0005495856200188162
+            ],
+            "within_slot_translation_m": [
+              0,
+              0
+            ],
+            "source_slot_id": "B1"
+          }
+        }
+      },
+      "observed_initial_support": {
+        "object_position_m": [
+          -0.06675016134977341,
+          -0.17420560121536255,
+          0.7430002093315125
+        ],
+        "source_rack_penetration_m": 0.0,
+        "source_bottom_gap_m": 2.044840757831068e-07,
+        "source_reference_inside": true,
+        "source_clearance_m": -0.02499979551592424,
+        "tilt_deg": 3.5222690204404714e-05
+      },
+      "scope": "Local saved configuration plus observed initial source containment; not robot reachability or full random task success."
+    },
+    {
+      "name": "reset_standard_0_6",
+      "passed": true,
+      "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+      "info": {
+        "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": true,
+        "task_type": "loading",
+        "task_success": null,
+        "termination_reason": "GEOMETRY_PRECHECK_BLOCKED",
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      }
+    },
+    {
+      "name": "native_loading_preflight_terminated",
+      "passed": true,
+      "reset_info": {
+        "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": true,
+        "task_type": "loading",
+        "task_success": null,
+        "termination_reason": "GEOMETRY_PRECHECK_BLOCKED",
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      },
+      "public_state": {
+        "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "note": "Reset gravity/camera initialization physics is recorded; zero insertion/control steps and zero model calls."
+    },
+    {
+      "name": "native_gate_rejects_insertion_action",
+      "passed": true,
+      "error": "env.step: Episode terminated; reset before actions",
+      "before": {
+        "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "after": {
+        "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      }
+    },
+    {
+      "name": "graceful_rpc_endpoint_closed",
+      "passed": true
+    }
+  ],
+  "episodes": [
+    {
+      "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+      "mode": "standard",
+      "seed": 41,
+      "subtask": "preinsert_diagnostic",
+      "initial_public_state": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "reset_info": {
+        "episode_id": "89f2095c-ee2f-4036-aceb-9cb7730a5594",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      },
+      "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0005",
+      "audit_only_assembly": {
+        "source_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "78ddf0a1ce78f62e2429083510ab0f5471a5f71691e85b9a551a59e5723234e8",
+          "values": [
+            -0.085,
+            -0.175,
+            0.743
+          ]
+        },
+        "target_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "3c4b2702727e1e7e9554386d03d7277d929739afef9cc900680de6a46e2730be",
+          "values": [
+            0.21237064673703734,
+            -0.14991553560697635,
+            0.887
+          ]
+        },
+        "target_origin_in_instrument": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "99482816947abcce5d6a9068323d96731fddb69e91a6d11474d50363821bf407",
+          "values": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.145
+          ]
+        },
+        "rack_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "d1b39e6e13470c1fb417657270bb7651b90401cc93f2d5fc8c5fa42481147374",
+          "values": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "rack_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "dec36d7556518fba5cb211820cd9758306a7d8b5e67393c2d433d2c8e4bc59e3",
+          "values": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "instrument_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "e600db079e10cb4f530b71b71f55ebc58e2bb5962997f0d5462e9a6e490d8487",
+          "values": [
+            0.36,
+            0.0,
+            0.74
+          ]
+        },
+        "instrument_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "861be611fe0f7474ea92fed2bc3c871fa4a4a356bd2a647a379164d6ab3c13c4",
+          "values": [
+            [
+              6.123233995736766e-17,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "audit_only_configuration": {
+        "rack": {
+          "rows": 6,
+          "columns": 6,
+          "inner_m": 0.016,
+          "wall_m": 0.002,
+          "depth_m": 0.025,
+          "base_m": 0.003,
+          "selected_slot_id": "A1",
+          "blue_slot_id": "F6",
+          "yaw_deg": -90.0,
+          "origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "scene": {
+          "initial_bottom_gap_m": 0.0002,
+          "instrument_xyz_m": [
+            0.36,
+            0,
+            0.74
+          ],
+          "table_size_m": [
+            2.2,
+            1.8,
+            0.08
+          ],
+          "table_top_m": 0.74,
+          "instrument_count": 1,
+          "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+          "design_rack_origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ],
+          "design_instrument_origin_m": [
+            0.36,
+            0.18,
+            0.74
+          ],
+          "instrument_yaw_deg": 90.0
+        },
+        "randomization": {
+          "legal_slots": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1"
+          ],
+          "rack_translation_half_range_m": 0.001,
+          "instrument_translation_half_range_m": 0.001,
+          "yaw_half_range_deg": 0.0,
+          "in_slot_translation_m": 0.0,
+          "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together"
+        }
+      },
+      "audit_only_initial_support": {
+        "object_position_m": [
+          -0.08500039577484131,
+          -0.1750001311302185,
+          0.7430002093315125
+        ],
+        "source_rack_penetration_m": 0.0,
+        "source_bottom_gap_m": 2.0635043496142202e-07,
+        "source_reference_inside": true,
+        "source_clearance_m": -0.02499979364956506,
+        "tilt_deg": 2.2426798989897964e-05
+      },
+      "geometry_audit_fingerprint": "a167cb0027b87308738bea3352e6697289ef72c43deac65a6c9f0ea628e9047b"
+    },
+    {
+      "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+      "mode": "standard",
+      "seed": 41,
+      "subtask": "preinsert_diagnostic",
+      "initial_public_state": {
+        "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "reset_info": {
+        "episode_id": "54c690d1-07fd-4fe8-bbc4-5ffb113bc5da",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      },
+      "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0006",
+      "audit_only_assembly": {
+        "source_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "78ddf0a1ce78f62e2429083510ab0f5471a5f71691e85b9a551a59e5723234e8",
+          "values": [
+            -0.085,
+            -0.175,
+            0.743
+          ]
+        },
+        "target_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "3c4b2702727e1e7e9554386d03d7277d929739afef9cc900680de6a46e2730be",
+          "values": [
+            0.21237064673703734,
+            -0.14991553560697635,
+            0.887
+          ]
+        },
+        "target_origin_in_instrument": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "99482816947abcce5d6a9068323d96731fddb69e91a6d11474d50363821bf407",
+          "values": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.145
+          ]
+        },
+        "rack_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "d1b39e6e13470c1fb417657270bb7651b90401cc93f2d5fc8c5fa42481147374",
+          "values": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "rack_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "dec36d7556518fba5cb211820cd9758306a7d8b5e67393c2d433d2c8e4bc59e3",
+          "values": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "instrument_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "e600db079e10cb4f530b71b71f55ebc58e2bb5962997f0d5462e9a6e490d8487",
+          "values": [
+            0.36,
+            0.0,
+            0.74
+          ]
+        },
+        "instrument_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "861be611fe0f7474ea92fed2bc3c871fa4a4a356bd2a647a379164d6ab3c13c4",
+          "values": [
+            [
+              6.123233995736766e-17,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "audit_only_configuration": {
+        "rack": {
+          "rows": 6,
+          "columns": 6,
+          "inner_m": 0.016,
+          "wall_m": 0.002,
+          "depth_m": 0.025,
+          "base_m": 0.003,
+          "selected_slot_id": "A1",
+          "blue_slot_id": "F6",
+          "yaw_deg": -90.0,
+          "origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "scene": {
+          "initial_bottom_gap_m": 0.0002,
+          "instrument_xyz_m": [
+            0.36,
+            0,
+            0.74
+          ],
+          "table_size_m": [
+            2.2,
+            1.8,
+            0.08
+          ],
+          "table_top_m": 0.74,
+          "instrument_count": 1,
+          "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+          "design_rack_origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ],
+          "design_instrument_origin_m": [
+            0.36,
+            0.18,
+            0.74
+          ],
+          "instrument_yaw_deg": 90.0
+        },
+        "randomization": {
+          "legal_slots": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1"
+          ],
+          "rack_translation_half_range_m": 0.001,
+          "instrument_translation_half_range_m": 0.001,
+          "yaw_half_range_deg": 0.0,
+          "in_slot_translation_m": 0.0,
+          "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together"
+        }
+      },
+      "audit_only_initial_support": {
+        "object_position_m": [
+          -0.08500039577484131,
+          -0.1750001311302185,
+          0.7430002093315125
+        ],
+        "source_rack_penetration_m": 0.0,
+        "source_bottom_gap_m": 2.0635043496142202e-07,
+        "source_reference_inside": true,
+        "source_clearance_m": -0.02499979364956506,
+        "tilt_deg": 2.2426798989897964e-05
+      },
+      "geometry_audit_fingerprint": "a167cb0027b87308738bea3352e6697289ef72c43deac65a6c9f0ea628e9047b"
+    },
+    {
+      "episode_id": "0ecedb9b-d5ef-4c82-9990-078b4fa44bf5",
+      "mode": "standard",
+      "seed": 41,
+      "subtask": "preinsert_diagnostic",
+      "initial_public_state": {
+        "episode_id": "0ecedb9b-d5ef-4c82-9990-078b4fa44bf5",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "reset_info": {
+        "episode_id": "0ecedb9b-d5ef-4c82-9990-078b4fa44bf5",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      },
+      "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0007",
+      "audit_only_assembly": {
+        "source_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "78ddf0a1ce78f62e2429083510ab0f5471a5f71691e85b9a551a59e5723234e8",
+          "values": [
+            -0.085,
+            -0.175,
+            0.743
+          ]
+        },
+        "target_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "3c4b2702727e1e7e9554386d03d7277d929739afef9cc900680de6a46e2730be",
+          "values": [
+            0.21237064673703734,
+            -0.14991553560697635,
+            0.887
+          ]
+        },
+        "target_origin_in_instrument": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "99482816947abcce5d6a9068323d96731fddb69e91a6d11474d50363821bf407",
+          "values": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.145
+          ]
+        },
+        "rack_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "d1b39e6e13470c1fb417657270bb7651b90401cc93f2d5fc8c5fa42481147374",
+          "values": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "rack_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "dec36d7556518fba5cb211820cd9758306a7d8b5e67393c2d433d2c8e4bc59e3",
+          "values": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "instrument_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "e600db079e10cb4f530b71b71f55ebc58e2bb5962997f0d5462e9a6e490d8487",
+          "values": [
+            0.36,
+            0.0,
+            0.74
+          ]
+        },
+        "instrument_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "861be611fe0f7474ea92fed2bc3c871fa4a4a356bd2a647a379164d6ab3c13c4",
+          "values": [
+            [
+              6.123233995736766e-17,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "audit_only_configuration": {
+        "rack": {
+          "rows": 6,
+          "columns": 6,
+          "inner_m": 0.016,
+          "wall_m": 0.002,
+          "depth_m": 0.025,
+          "base_m": 0.003,
+          "selected_slot_id": "A1",
+          "blue_slot_id": "F6",
+          "yaw_deg": -90.0,
+          "origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "scene": {
+          "initial_bottom_gap_m": 0.0002,
+          "instrument_xyz_m": [
+            0.36,
+            0,
+            0.74
+          ],
+          "table_size_m": [
+            2.2,
+            1.8,
+            0.08
+          ],
+          "table_top_m": 0.74,
+          "instrument_count": 1,
+          "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+          "design_rack_origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ],
+          "design_instrument_origin_m": [
+            0.36,
+            0.18,
+            0.74
+          ],
+          "instrument_yaw_deg": 90.0
+        },
+        "randomization": {
+          "legal_slots": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1"
+          ],
+          "rack_translation_half_range_m": 0.001,
+          "instrument_translation_half_range_m": 0.001,
+          "yaw_half_range_deg": 0.0,
+          "in_slot_translation_m": 0.0,
+          "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together"
+        }
+      },
+      "audit_only_initial_support": {
+        "object_position_m": [
+          -0.08500039577484131,
+          -0.1750001311302185,
+          0.7430002093315125
+        ],
+        "source_rack_penetration_m": 0.0,
+        "source_bottom_gap_m": 2.0635043496142202e-07,
+        "source_reference_inside": true,
+        "source_clearance_m": -0.02499979364956506,
+        "tilt_deg": 2.2426798989897964e-05
+      },
+      "geometry_audit_fingerprint": "a167cb0027b87308738bea3352e6697289ef72c43deac65a6c9f0ea628e9047b"
+    },
+    {
+      "episode_id": "ce35159a-e2a7-47a0-86b0-772bece83ee9",
+      "mode": "random",
+      "seed": 7,
+      "subtask": "preinsert_diagnostic",
+      "initial_public_state": {
+        "episode_id": "ce35159a-e2a7-47a0-86b0-772bece83ee9",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "B1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "reset_info": {
+        "episode_id": "ce35159a-e2a7-47a0-86b0-772bece83ee9",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      },
+      "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0008",
+      "audit_only_assembly": {
+        "source_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "8a14af7fc2e679b6cac97d25a86002732a411409a52720bc1f6420259ce68c97",
+          "values": [
+            -0.06674980906679068,
+            -0.17420557239806084,
+            0.743
+          ]
+        },
+        "target_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "85504df3c178f6df7d71e35628d255073d24354c1be5335f6495fcf18d918fa4",
+          "values": [
+            0.21292201811752773,
+            -0.15046512122699515,
+            0.887
+          ]
+        },
+        "target_origin_in_instrument": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "99482816947abcce5d6a9068323d96731fddb69e91a6d11474d50363821bf407",
+          "values": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.145
+          ]
+        },
+        "rack_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "0ddb566712584f3dbad8f929a569cc3a83a4d797ae08e83c6599d4c7d2800e3e",
+          "values": [
+            -0.03974980906679067,
+            -0.21920557239806085,
+            0.74
+          ]
+        },
+        "rack_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "dec36d7556518fba5cb211820cd9758306a7d8b5e67393c2d433d2c8e4bc59e3",
+          "values": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "instrument_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "04c1059588f157cd2e31201812818ec4c06902ac0dd5243b568fa30099468aaa",
+          "values": [
+            0.36055137138049037,
+            -0.0005495856200188162,
+            0.74
+          ]
+        },
+        "instrument_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "861be611fe0f7474ea92fed2bc3c871fa4a4a356bd2a647a379164d6ab3c13c4",
+          "values": [
+            [
+              6.123233995736766e-17,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "audit_only_configuration": {
+        "rack": {
+          "rows": 6,
+          "columns": 6,
+          "inner_m": 0.016,
+          "wall_m": 0.002,
+          "depth_m": 0.025,
+          "base_m": 0.003,
+          "selected_slot_id": "B1",
+          "blue_slot_id": "F6",
+          "yaw_deg": -90.0,
+          "origin_m": [
+            -0.03974980906679067,
+            -0.21920557239806085,
+            0.74
+          ]
+        },
+        "scene": {
+          "initial_bottom_gap_m": 0.0002,
+          "instrument_xyz_m": [
+            0.36055137138049037,
+            -0.0005495856200188162,
+            0.74
+          ],
+          "table_size_m": [
+            2.2,
+            1.8,
+            0.08
+          ],
+          "table_top_m": 0.74,
+          "instrument_count": 1,
+          "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+          "design_rack_origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ],
+          "design_instrument_origin_m": [
+            0.36,
+            0.18,
+            0.74
+          ],
+          "instrument_yaw_deg": 90.0
+        },
+        "randomization": {
+          "legal_slots": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1"
+          ],
+          "rack_translation_half_range_m": 0.001,
+          "instrument_translation_half_range_m": 0.001,
+          "yaw_half_range_deg": 0.0,
+          "in_slot_translation_m": 0.0,
+          "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together",
+          "actual": {
+            "seed": 7,
+            "rack_translation_m": [
+              0.000250190933209334,
+              0.000794427601939151
+            ],
+            "instrument_assembly_translation_m": [
+              0.000551371380490387,
+              -0.0005495856200188162
+            ],
+            "within_slot_translation_m": [
+              0,
+              0
+            ],
+            "source_slot_id": "B1"
+          }
+        }
+      },
+      "audit_only_initial_support": {
+        "object_position_m": [
+          -0.06675016134977341,
+          -0.17420560121536255,
+          0.7430002093315125
+        ],
+        "source_rack_penetration_m": 0.0,
+        "source_bottom_gap_m": 2.044840757831068e-07,
+        "source_reference_inside": true,
+        "source_clearance_m": -0.02499979551592424,
+        "tilt_deg": 3.5222690204404714e-05
+      },
+      "geometry_audit_fingerprint": "2ff20203f7c7dfbc3fdddf477eec1b2c3a58480ca5993abc2177a0e9745824ef"
+    },
+    {
+      "episode_id": "aed251c3-1c33-4687-a1b0-95080fa11b9c",
+      "mode": "random",
+      "seed": 7,
+      "subtask": "preinsert_diagnostic",
+      "initial_public_state": {
+        "episode_id": "aed251c3-1c33-4687-a1b0-95080fa11b9c",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "B1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "reset_info": {
+        "episode_id": "aed251c3-1c33-4687-a1b0-95080fa11b9c",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_type": "preinsert_diagnostic",
+        "task_success": null,
+        "termination_reason": null,
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      },
+      "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0009",
+      "audit_only_assembly": {
+        "source_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "8a14af7fc2e679b6cac97d25a86002732a411409a52720bc1f6420259ce68c97",
+          "values": [
+            -0.06674980906679068,
+            -0.17420557239806084,
+            0.743
+          ]
+        },
+        "target_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "85504df3c178f6df7d71e35628d255073d24354c1be5335f6495fcf18d918fa4",
+          "values": [
+            0.21292201811752773,
+            -0.15046512122699515,
+            0.887
+          ]
+        },
+        "target_origin_in_instrument": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "99482816947abcce5d6a9068323d96731fddb69e91a6d11474d50363821bf407",
+          "values": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.145
+          ]
+        },
+        "rack_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "0ddb566712584f3dbad8f929a569cc3a83a4d797ae08e83c6599d4c7d2800e3e",
+          "values": [
+            -0.03974980906679067,
+            -0.21920557239806085,
+            0.74
+          ]
+        },
+        "rack_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "dec36d7556518fba5cb211820cd9758306a7d8b5e67393c2d433d2c8e4bc59e3",
+          "values": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "instrument_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "04c1059588f157cd2e31201812818ec4c06902ac0dd5243b568fa30099468aaa",
+          "values": [
+            0.36055137138049037,
+            -0.0005495856200188162,
+            0.74
+          ]
+        },
+        "instrument_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "861be611fe0f7474ea92fed2bc3c871fa4a4a356bd2a647a379164d6ab3c13c4",
+          "values": [
+            [
+              6.123233995736766e-17,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "audit_only_configuration": {
+        "rack": {
+          "rows": 6,
+          "columns": 6,
+          "inner_m": 0.016,
+          "wall_m": 0.002,
+          "depth_m": 0.025,
+          "base_m": 0.003,
+          "selected_slot_id": "B1",
+          "blue_slot_id": "F6",
+          "yaw_deg": -90.0,
+          "origin_m": [
+            -0.03974980906679067,
+            -0.21920557239806085,
+            0.74
+          ]
+        },
+        "scene": {
+          "initial_bottom_gap_m": 0.0002,
+          "instrument_xyz_m": [
+            0.36055137138049037,
+            -0.0005495856200188162,
+            0.74
+          ],
+          "table_size_m": [
+            2.2,
+            1.8,
+            0.08
+          ],
+          "table_top_m": 0.74,
+          "instrument_count": 1,
+          "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+          "design_rack_origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ],
+          "design_instrument_origin_m": [
+            0.36,
+            0.18,
+            0.74
+          ],
+          "instrument_yaw_deg": 90.0
+        },
+        "randomization": {
+          "legal_slots": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1"
+          ],
+          "rack_translation_half_range_m": 0.001,
+          "instrument_translation_half_range_m": 0.001,
+          "yaw_half_range_deg": 0.0,
+          "in_slot_translation_m": 0.0,
+          "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together",
+          "actual": {
+            "seed": 7,
+            "rack_translation_m": [
+              0.000250190933209334,
+              0.000794427601939151
+            ],
+            "instrument_assembly_translation_m": [
+              0.000551371380490387,
+              -0.0005495856200188162
+            ],
+            "within_slot_translation_m": [
+              0,
+              0
+            ],
+            "source_slot_id": "B1"
+          }
+        }
+      },
+      "audit_only_initial_support": {
+        "object_position_m": [
+          -0.06675016134977341,
+          -0.17420560121536255,
+          0.7430002093315125
+        ],
+        "source_rack_penetration_m": 0.0,
+        "source_bottom_gap_m": 2.044840757831068e-07,
+        "source_reference_inside": true,
+        "source_clearance_m": -0.02499979551592424,
+        "tilt_deg": 3.5222690204404714e-05
+      },
+      "geometry_audit_fingerprint": "2ff20203f7c7dfbc3fdddf477eec1b2c3a58480ca5993abc2177a0e9745824ef"
+    },
+    {
+      "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+      "mode": "standard",
+      "seed": 0,
+      "subtask": "loading",
+      "initial_public_state": {
+        "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "joint_positions": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "3e134531e3bd8517a52f1d08ecd305b7df2248655773f8c625e49750e0fb64e5",
+          "values": [
+            0.1779361367225647,
+            -1.2082452774047852,
+            -0.8200522661209106,
+            -2.87337064743042,
+            -0.7667176723480225,
+            1.7454451322555542,
+            -0.8053153157234192,
+            0.03999993950128555,
+            0.03999996930360794
+          ]
+        },
+        "joint_velocities": {
+          "shape": [
+            9
+          ],
+          "dtype": "float32",
+          "sha256": "b6ba8760acd7c5a201d19672869a3e05d1ec724bcfb57e83450aab644499d1bc",
+          "values": [
+            0.0010142129613086581,
+            0.00918547622859478,
+            0.009416138753294945,
+            0.008577585220336914,
+            0.00032430345891043544,
+            0.00214076298289001,
+            -1.1982684554823209e-05,
+            1.4414921679417603e-05,
+            1.4414922588912304e-05
+          ]
+        },
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge"
+      },
+      "reset_info": {
+        "episode_id": "66808f53-6a14-4971-aafa-e7d55f6951c8",
+        "step_index": 0,
+        "simulation_time": 0.016666666666666666,
+        "terminated": true,
+        "task_type": "loading",
+        "task_success": null,
+        "termination_reason": "GEOMETRY_PRECHECK_BLOCKED",
+        "geometry_valid": false,
+        "debug_exposed": false,
+        "action_specs": {
+          "joint_position": {
+            "values": "7 arm rad or explicit9 with2 finger metres",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "joint_velocity": {
+            "values": "7 arm rad/s; integrated per60Hz control tick",
+            "frame": "joint",
+            "gripper": "total opening metres"
+          },
+          "ee_pose": {
+            "values": "world xyz metres + quaternion wxyz",
+            "frame": "world"
+          },
+          "ee_delta": {
+            "values": "translation metres + rotation vector radians",
+            "frame": "world or tcp; explicit spatial composition"
+          }
+        }
+      },
+      "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0010",
+      "audit_only_assembly": {
+        "source_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "78ddf0a1ce78f62e2429083510ab0f5471a5f71691e85b9a551a59e5723234e8",
+          "values": [
+            -0.085,
+            -0.175,
+            0.743
+          ]
+        },
+        "target_floor": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "3c4b2702727e1e7e9554386d03d7277d929739afef9cc900680de6a46e2730be",
+          "values": [
+            0.21237064673703734,
+            -0.14991553560697635,
+            0.887
+          ]
+        },
+        "target_origin_in_instrument": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "99482816947abcce5d6a9068323d96731fddb69e91a6d11474d50363821bf407",
+          "values": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.145
+          ]
+        },
+        "rack_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "d1b39e6e13470c1fb417657270bb7651b90401cc93f2d5fc8c5fa42481147374",
+          "values": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "rack_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "dec36d7556518fba5cb211820cd9758306a7d8b5e67393c2d433d2c8e4bc59e3",
+          "values": [
+            [
+              6.123233995736766e-17,
+              1.0,
+              0.0
+            ],
+            [
+              -1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "instrument_origin": {
+          "shape": [
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "e600db079e10cb4f530b71b71f55ebc58e2bb5962997f0d5462e9a6e490d8487",
+          "values": [
+            0.36,
+            0.0,
+            0.74
+          ]
+        },
+        "instrument_rotation": {
+          "shape": [
+            3,
+            3
+          ],
+          "dtype": "float64",
+          "sha256": "861be611fe0f7474ea92fed2bc3c871fa4a4a356bd2a647a379164d6ab3c13c4",
+          "values": [
+            [
+              6.123233995736766e-17,
+              -1.0,
+              0.0
+            ],
+            [
+              1.0,
+              6.123233995736766e-17,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "audit_only_configuration": {
+        "rack": {
+          "rows": 6,
+          "columns": 6,
+          "inner_m": 0.016,
+          "wall_m": 0.002,
+          "depth_m": 0.025,
+          "base_m": 0.003,
+          "selected_slot_id": "A1",
+          "blue_slot_id": "F6",
+          "yaw_deg": -90.0,
+          "origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ]
+        },
+        "scene": {
+          "initial_bottom_gap_m": 0.0002,
+          "instrument_xyz_m": [
+            0.36,
+            0,
+            0.74
+          ],
+          "table_size_m": [
+            2.2,
+            1.8,
+            0.08
+          ],
+          "table_top_m": 0.74,
+          "instrument_count": 1,
+          "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+          "design_rack_origin_m": [
+            -0.04,
+            -0.22,
+            0.74
+          ],
+          "design_instrument_origin_m": [
+            0.36,
+            0.18,
+            0.74
+          ],
+          "instrument_yaw_deg": 90.0
+        },
+        "randomization": {
+          "legal_slots": [
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1"
+          ],
+          "rack_translation_half_range_m": 0.001,
+          "instrument_translation_half_range_m": 0.001,
+          "yaw_half_range_deg": 0.0,
+          "in_slot_translation_m": 0.0,
+          "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together"
+        }
+      },
+      "audit_only_initial_support": {
+        "object_position_m": [
+          -0.08500039577484131,
+          -0.1750001311302185,
+          0.7430002093315125
+        ],
+        "source_rack_penetration_m": 0.0,
+        "source_bottom_gap_m": 2.0635043496142202e-07,
+        "source_reference_inside": true,
+        "source_clearance_m": -0.02499979364956506,
+        "tilt_deg": 2.2426798989897964e-05
+      },
+      "geometry_audit_fingerprint": "a167cb0027b87308738bea3352e6697289ef72c43deac65a6c9f0ea628e9047b"
+    }
+  ],
+  "model_calls_by_this_validator": 0,
+  "real_calibrated": false,
+  "full_loading_evaluations": 0,
+  "launch_metadata": {
+    "schema": "labsim.Env_v1.rpent_environment.v1",
+    "task": "lab_cuvette_loading",
+    "version": "Env_v1",
+    "task_type": "preinsert_diagnostic",
+    "scene_mode": "native_nominal",
+    "configuration_sha256": "c933c977b8f8bd2e3068f71a15e7189704b06fd24d5cd4d6586c9a19f2459bd5",
+    "robot_base_position_m": [
+      -0.3,
+      0,
+      0.74
+    ],
+    "robot_base_quaternion_xyzw": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "robot_base_orientation_basis": "explicit config value; identity when original Franka assembly has no authored base rotation",
+    "physics_hz": 240,
+    "control_hz": 60,
+    "physics_steps_per_control": 4,
+    "action_specs": {
+      "joint_position": {
+        "values": "7 arm rad or explicit9 with2 finger metres",
+        "frame": "joint",
+        "gripper": "total opening metres"
+      },
+      "joint_velocity": {
+        "values": "7 arm rad/s; integrated per60Hz control tick",
+        "frame": "joint",
+        "gripper": "total opening metres"
+      },
+      "ee_pose": {
+        "values": "world xyz metres + quaternion wxyz",
+        "frame": "world"
+      },
+      "ee_delta": {
+        "values": "translation metres + rotation vector radians",
+        "frame": "world or tcp; explicit spatial composition"
+      }
+    },
+    "camera_names": [
+      "side_camera",
+      "wrist_camera"
+    ],
+    "cameras": {
+      "side_camera": {
+        "mounting": "fixed_world",
+        "live_metadata_rpc": "env.get_camera_meta"
+      },
+      "wrist_camera": {
+        "mounting": "robot_hand_link",
+        "live_metadata_rpc": "env.get_camera_meta"
+      }
+    },
+    "camera_configuration": {
+      "side_camera": {
+        "prim_path": "/World/SideCamera",
+        "eye_m": [
+          -0.55,
+          1.05,
+          1.6
+        ],
+        "target_m": [
+          0.08,
+          -0.08,
+          1.0
+        ],
+        "focal_length_cm": 0.95,
+        "horizontal_aperture_mm": 20.955,
+        "resolution": [
+          640,
+          480
+        ],
+        "fps": 60,
+        "policy_resolution": [
+          256,
+          256
+        ],
+        "upworld": [
+          0,
+          0,
+          1
+        ]
+      },
+      "wrist_camera": {
+        "parent_link": "/World/Franka/panda_hand",
+        "prim_path": "/World/Franka/panda_hand/WristCameraV1",
+        "focal_length_cm": 1.2,
+        "horizontal_aperture_mm": 20.955,
+        "resolution": [
+          640,
+          480
+        ],
+        "fps": 60,
+        "policy_resolution": [
+          256,
+          256
+        ],
+        "localeye_m": [
+          0.075,
+          0,
+          0
+        ],
+        "localtarget_m": [
+          0,
+          0,
+          0.35
+        ],
+        "localup": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "observation_debug_exposed": false,
+    "physics_while_waiting_for_rpc": "paused; no app.update/world.step/render",
+    "dispatch_thread": "main",
+    "framework_contract": "deployed_rpent.BaseEnvFacade",
+    "fallback_reason": null,
+    "transport": "http",
+    "wire_format": "RPent POST /call JSON with __ndarray__ base64/dtype/shape",
+    "endpoint": "http://127.0.0.1:8097"
+  },
+  "shutdown": {
+    "response": {
+      "ok": true
+    },
+    "readiness_polls": [
+      {
+        "reachable": false,
+        "error_type": "RpcError",
+        "error": "healthz: HTTP request failed: <urlopen error [Errno 111] Connection refused>"
+      }
+    ],
+    "endpoint_closed": true,
+    "launcher_exit_confirmation": {
+      "reported_by": "root agent actual retained session poll",
+      "session_id": 62219,
+      "exit_code": 0,
+      "scope": "Isaac launcher running rpc_01; confirmed after graceful RPC shutdown, not inferred from TCP closure."
+    }
+  },
+  "finished_utc": "2026-10-20T17:44:47.157635+00:00",
+  "all_checks_passed": true,
+  "actual_model_counter_native_gate_check": {
+    "before_native": {
+      "sampled_wall_unix_s": 1792518179.8302884,
+      "actual_inference_log": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_service_01/service/inference.jsonl",
+      "record_count": 6,
+      "last_request_index": 6,
+      "scope": "Counter sampled during API validation, before native preflight reset; no new inference requested by validator."
+    },
+    "after_api_shutdown": {
+      "record_count": 6,
+      "log": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_service_01/service/inference.jsonl"
+    },
+    "unchanged": true,
+    "model_predict_requests_during_native_gate": 0
+  },
+  "metadata_boundary_status": "Old live RPC raw get_camera_meta contains renderer debug; later default getter source fix has CPU validation. Final Astra03/Harness actual model tool boundaries used sanitized metadata and passed."
+}

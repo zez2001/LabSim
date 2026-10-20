@@ -1,0 +1,37 @@
+{
+  "schema": "labsim.Env_v1.condition_group_split_validation.v1",
+  "recorded_utc": "2026-10-20T17:57:45.719815+00:00",
+  "previous_behavior": "Random split by whole episode only; adjacent chunks protected but same scene-condition could cross splits.",
+  "new_behavior": "Optional explicit scalar HDF5 attribute grouping; same tuple remains wholly train or validation. No generated H5 condition_id.",
+  "split_group_keys": [
+    "source_slot_id",
+    "target_seat_id",
+    "scene_version",
+    "asset_version",
+    "task_type"
+  ],
+  "new_config": "policy/config/task/lab_cuvette_env_v1_act.yaml",
+  "dp_inherits": "policy/config/task/lab_cuvette_env_v1_dp.yaml",
+  "default_compatibility": "None or[] keeps original seeded episode order and episode split.",
+  "missing_field_policy": "ValueError for selected eligible episodes, including val_ratio0. No fallback to episode random split.",
+  "unknown_field_policy": "Unknown/null/unavailable/empty or nonfinite/non-scalar condition values refused.",
+  "single_group_policy": "Nonzero val_ratio raises; val_ratio0 allows normal read-only batches.",
+  "ratio_semantics": "Fraction of distinct condition groups, not guaranteed fraction of episodes when group sizes differ.",
+  "normalizer_scope": "Existing get_all_actions/get_normalizer continue to use train_episodes only.",
+  "command": "/home/wujing/Desktop/vla/labutopia-env/bin/python -m unittest tests/test_minimal_pick_dataset.py tests/test_lab_cuvette_dataset_filters.py tests/test_lab_cuvette_env_v1_collector.py -v",
+  "cpu_tests_passed": 22,
+  "cpu_tests_failed": 0,
+  "new_meaningful_tests": 6,
+  "tests_scope": "Synthetic temporary H5 unit fixtures; not model/Isaac physical evidence. Separate data agent inspects actual H5.",
+  "collector_changes_needed": false,
+  "historical_H5_modified": false,
+  "training_run": false,
+  "rpc_requested": false,
+  "source_sha256": {
+    "policy/dataset/minimal_pick_dataset.py": "4e47f42bbe618ad038ee8a3d9a124df58efc13331f773b10c03b395232cfffdf",
+    "policy/config/task/lab_cuvette_env_v1_act.yaml": "aff9660c3d15fe02c49b389d1f1b67290231925f86e9f168837dc900e637fa80",
+    "tests/test_minimal_pick_dataset.py": "20a1cc66976993ecead7b5bd07d63135ab748d1590fe4bb0a8acd47cf7529d37"
+  },
+  "split_scope": "Existing train/validation split only. No third test partition, training or policy performance evaluation was run.",
+  "condition_order": "Canonical sorting of actual group-value tuples before seeded shuffle makes assignment stable under episode renaming/reindexing when conditions are unchanged."
+}

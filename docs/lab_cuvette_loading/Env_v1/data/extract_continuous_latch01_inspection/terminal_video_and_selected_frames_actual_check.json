@@ -1,0 +1,116 @@
+{
+  "schema": "labsim.Env_v1.actual_terminal_media.v1",
+  "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000",
+  "episode_id": "f54b2bf4-7f67-48d3-af19-ca46dbceed4f",
+  "native_video_count": 3,
+  "native_frames_each": {
+    "side_camera.mp4": 1270,
+    "wrist_camera.mp4": 1270,
+    "dual_view.mp4": 1270
+  },
+  "timestamps_count": 1270,
+  "strictly_monotonic": true,
+  "terminal_frame_t_s": 42.3,
+  "H5_terminal_successor_t_s": 42.3,
+  "terminal_times_match": true,
+  "terminal_frame_appended_at_finalize": true,
+  "last_interval_s": 0.01666666666666572,
+  "MP4_fps": 30,
+  "explicit_frame_time_semantics": "Actual sampled simulation times; final state appended once if not already sampled. Constant-rate MP4 endpoint spacing may differ from the final simulation interval.",
+  "selected_frames": [
+    {
+      "label": "source slot clear",
+      "native_video_frame": 498,
+      "simulation_time_s": 16.616666666666667,
+      "nearby_H5_obs_index": 996,
+      "recorded_phase": "EXTRACT"
+    },
+    {
+      "label": "transport start",
+      "native_video_frame": 669,
+      "simulation_time_s": 22.316666666666666,
+      "nearby_H5_obs_index": 1338,
+      "recorded_phase": "TRANSPORT"
+    },
+    {
+      "label": "transport middle",
+      "native_video_frame": 924,
+      "simulation_time_s": 30.816666666666666,
+      "nearby_H5_obs_index": 1848,
+      "recorded_phase": "TRANSPORT"
+    },
+    {
+      "label": "transport hold",
+      "native_video_frame": 1180,
+      "simulation_time_s": 39.35,
+      "nearby_H5_obs_index": 2360,
+      "recorded_phase": "TRANSPORT_HOLD"
+    },
+    {
+      "label": "terminal hold; task_success=false",
+      "native_video_frame": 1269,
+      "simulation_time_s": 42.3,
+      "nearby_H5_obs_index": 2536,
+      "recorded_phase": "TRANSPORT_HOLD"
+    }
+  ],
+  "selected_media": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Env_v1/data/extract_continuous_latch01_inspection/selected_extraction_transport_frames.jpg",
+  "physical_score_preserved": {
+    "task_success": false,
+    "record_valid": true,
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "eligible_for_success_bc": false,
+    "eligible_for_failure_analysis": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "diagnostic_hold_window": {
+      "status": "complete",
+      "stable": false,
+      "required_duration_s": 3.0,
+      "measured_duration_s": 3.0,
+      "sample_count": 721,
+      "position_drift_m": 0.00023044468060467045,
+      "orientation_change_deg": 0.06253690309452196,
+      "criteria": {
+        "position_stable": false,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "bilateral_contact_during_hold": true,
+        "transport_above_target_xy": true,
+        "above_target_rim": true
+      },
+      "start_t": 39.3,
+      "end_t": 42.3
+    },
+    "grasp_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 3.0424905114330113e-05,
+      "maximum_orientation_drift_deg": 0.03552393725514095,
+      "maximum_configured_grasp_anchor_drift_m": 5.3879955195581535e-06,
+      "maximum_configured_grasp_anchor_axial_drift_m": 4.860736671360111e-06,
+      "maximum_configured_grasp_anchor_transverse_drift_m": 2.951375678502994e-06,
+      "configured_grasp_anchor_height_m": 0.053,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    }
+  },
+  "visual_review": [
+    "Wrist images show the same held vessel above the rack, then transported above the instrument chamber.",
+    "Vessel remains grasped above the native target at terminal time; there is no insertion, release, or retreat claim.",
+    "Full side view contains the robot and instrument; rack/vessel are partly occluded and small.",
+    "World hold drift 230.445um exceeds the existing 200um gate despite small cup-in-hand drift; task_success remains false."
+  ],
+  "no_video_stitching_or_simulation": true
+}

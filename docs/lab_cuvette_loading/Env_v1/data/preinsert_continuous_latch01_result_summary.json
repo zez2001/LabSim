@@ -1,0 +1,212 @@
+{
+  "schema": "labsim.Env_v1.preinsert_continuous_latch01_actual_summary.v1",
+  "source_files": [
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/result.json",
+      "sha256": "e6859e040428dfd02538df28dca04ec7d1b9e65db10e92240ccdac4d7f4684a3"
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/teacher_events.json",
+      "sha256": "02c9981c6b83138932f73d870d14dd42cfba790b0c59f38de308a778fab8b0b7"
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/config.yaml",
+      "sha256": "6e883e4050c50bd275bad7552932e7fd71ea9341ed7db092633af3f08423ee24"
+    }
+  ],
+  "raw_inputs_modified": false,
+  "run_launcher_exit_code": 0,
+  "run_launcher_exit_basis": "Parent retained actual launcher session10110 completion",
+  "result": {
+    "episode_id": "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c",
+    "task_type": "preinsert_diagnostic",
+    "task_success": true,
+    "record_valid": true,
+    "full_success": null,
+    "native_pair_success": null,
+    "failure_type": "NONE",
+    "termination_reason": "PREINSERT_DIAGNOSTIC_COMPLETE",
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "diagnostic_hold_window": {
+      "status": "complete",
+      "stable": true,
+      "required_duration_s": 1.0,
+      "measured_duration_s": 1.0,
+      "sample_count": 241,
+      "position_drift_m": 4.835421067353473e-07,
+      "orientation_change_deg": 0.00046686978546263533,
+      "criteria": {
+        "position_stable": true,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "bilateral_contact_during_hold": true
+      },
+      "start_t": 81.65,
+      "end_t": 82.65
+    },
+    "grasp_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 3.0424905114330113e-05,
+      "maximum_orientation_drift_deg": 0.03552393725514095,
+      "maximum_configured_grasp_anchor_drift_m": 5.723860664501016e-06,
+      "maximum_configured_grasp_anchor_axial_drift_m": 5.012761404694251e-06,
+      "maximum_configured_grasp_anchor_transverse_drift_m": 3.1105605820520246e-06,
+      "configured_grasp_anchor_height_m": 0.053,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    },
+    "observed_events": {
+      "bilateral_grasp_observed": {
+        "t": 14.516666666666667,
+        "physics_step": 3484,
+        "actual_force_N": [
+          0.6896979212760925,
+          0.8902921080589294
+        ]
+      },
+      "actual_lift_started": {
+        "t": 15.558333333333334,
+        "physics_step": 3734,
+        "actual_lift_m": 0.0010187311049603132
+      },
+      "source_slot_cleared": {
+        "t": 16.579166666666666,
+        "physics_step": 3979,
+        "actual_bottom_world_z_m": 0.7700502913372773,
+        "source_rim_world_z_m": 0.768
+      },
+      "held_transport_observed": {
+        "t": 32.229166666666664,
+        "physics_step": 7735,
+        "horizontal_displacement_m": 0.05000647113934576
+      },
+      "safe_preinsert_observed": {
+        "t": 75.2125,
+        "physics_step": 18051,
+        "actual_depth_m": -0.002997965312674402,
+        "actual_xy_error_m": 4.031891634291511e-06
+      },
+      "diagnostic_up_retract_observed": {
+        "t": 80.6125,
+        "physics_step": 19347,
+        "actual_upward_motion_m": 0.008012052959980198
+      }
+    },
+    "simulation_seconds": 82.65,
+    "actual_control_steps": 4958,
+    "actual_physics_steps": 19836,
+    "eligible_for_success_bc": false,
+    "eligible_for_failure_analysis": false,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ]
+  },
+  "teacher_events": [
+    {
+      "t": 4.016666666666667,
+      "event": "teacher_phase_transition",
+      "source": "RESET",
+      "target": "APPROACH_SOURCE"
+    },
+    {
+      "t": 11.016666666666667,
+      "event": "teacher_phase_transition",
+      "source": "APPROACH_SOURCE",
+      "target": "GRASP"
+    },
+    {
+      "t": 14.416666666666666,
+      "event": "first_bilateral_contact_stop_closure",
+      "actual_finger_positions_m": [
+        0.006609529256820679,
+        0.006609555799514055
+      ],
+      "previous_total_opening_command_m": 0.012333333333333203,
+      "frozen_total_opening_m": 0.012333333333333203,
+      "per_finger_compression_m": 0.000155109719231259,
+      "normal_load_basis": "mg/(2*mu)*safety/finger_kp; no wider than previous command"
+    },
+    {
+      "t": 14.516666666666667,
+      "event": "contact_latched",
+      "measured_finger_m": [
+        0.006564501207321882,
+        0.006564532406628132
+      ],
+      "commanded_total_opening_m": 0.012333333333333203,
+      "per_finger_compression_m": 0.00015510971923125903,
+      "latch_transition_policy": "preserve_first_contact_command",
+      "weight_based_candidate_opening_m": 0.012818814175487496,
+      "effective_measured_minus_command_per_finger_m": [
+        0.00039783454065528065,
+        0.00039786573996153027
+      ],
+      "compression_semantics": "Joint target difference, not measured material penetration; first-contact command may predate measured finger response",
+      "effort_limit_N": 8.0,
+      "friction_assumption": 0.6324555320336759,
+      "mass_kg": 0.02,
+      "finger_kp_N_per_m": 2000.0,
+      "truth_pose_used": true
+    },
+    {
+      "t": 15.266666666666667,
+      "event": "teacher_phase_transition",
+      "source": "GRASP",
+      "target": "EXTRACT"
+    },
+    {
+      "t": 22.283333333333335,
+      "event": "teacher_phase_transition",
+      "source": "EXTRACT",
+      "target": "TRANSPORT"
+    },
+    {
+      "t": 39.3,
+      "event": "teacher_phase_transition",
+      "source": "TRANSPORT",
+      "target": "TRANSPORT_HOLD"
+    },
+    {
+      "t": 42.5,
+      "event": "teacher_phase_transition",
+      "source": "TRANSPORT_HOLD",
+      "target": "ALIGN"
+    },
+    {
+      "t": 79.15,
+      "event": "teacher_phase_transition",
+      "source": "ALIGN",
+      "target": "GATE_RETRACT"
+    },
+    {
+      "t": 81.65,
+      "event": "teacher_phase_transition",
+      "source": "GATE_RETRACT",
+      "target": "DIAGNOSTIC_HOLD"
+    },
+    {
+      "t": 82.65,
+      "event": "teacher_stop_suggestion",
+      "status": "PREINSERT_DIAGNOSTIC_COMPLETE",
+      "phase": "DIAGNOSTIC_HOLD",
+      "independent_task_result_not_assigned": true
+    }
+  ],
+  "scope": "Actual full preinsert_diagnostic success only. No native insertion, opening or actual gripper retreat. Post-retreat window unavailable; no full loading BC.",
+  "baseline_preservation": "continuous_latch01 false230.445um hold kept unchanged; new TRANSPORT_HOLD freezes target and waits actualquiet under original threshold."
+}

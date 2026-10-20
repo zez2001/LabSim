@@ -1,14 +1,20 @@
 # LabSim 进展与分享入口
 
-最新 **V0_demo04 已修正12.5 mm器皿、单台仪器及朝向，原座完整装载仍受几何干涉阻塞**。本轮选择腔内原A座 `candidate_far_hinge`，保留12.6 mm中央参考尺寸与全部凸起。A/B两座均有源材料相交证据，没有扩孔、删件或放宽穿透判据。实际完成一条76.917秒受限连续诊断：6×6架取物 → 提取搬运 → 原A座上方低速接近 → 安全停止 → 上抬10 mm并保持；未执行插入、释放及完整撤离后稳定。另两次搬运失败完整保留。
+最新版本 **Env_v1 已整理为正式任务并接通三条真实策略短链，原刚性座完整装载仍受阻**。当前场景使用单台开盖仪器、完整白色6×6来源架和12.5×12.5×67.5 mm器皿，目标是腔内原A座 `candidate_far_hinge`。A/B原座保留12.6 mm中央参考截面及全部内伸结构；原尺寸直立刚性入口的整个必要XY域仍存在材料冲突，没有扩孔、删件或放宽判据。
 
-- [本轮报告](docs/lab_cuvette_loading/V0_demo04/report.md) · [DOCX](docs/lab_cuvette_loading/V0_demo04/LabSim_V0_demo04_原座装载核查报告_20261020.docx)
-- [同次1080p受限诊断录像](docs/lab_cuvette_loading/V0_demo04/media/preinsert_diagnostic_03_main.mp4) · [实际观测近景](docs/lab_cuvette_loading/V0_demo04/media/preinsert_diagnostic_03_obs256_camera2_65s_end.mp4)
-- [原座干涉定位](docs/lab_cuvette_loading/V0_demo04/geometry/refined_02/README.md) · [完整尺寸表](docs/lab_cuvette_loading/V0_demo04/dimensions/dimensions.csv) · [静态场景](docs/lab_cuvette_loading/V0_demo04/scene_check/README.md)
-- [全部本轮运行与未执行批次](docs/lab_cuvette_loading/V0_demo04/results/summary.json) · [完整episode读取核验](docs/lab_cuvette_loading/V0_demo04/data_audit/READ_FIRST_actual_diagnostic_03_zh.md) · [准确命令](demos/lab_cuvette_demo04/README.md)
-- [全部历史](LABSIM_PROGRESS.md) · [新Agent结果阅读包](docs/agent_handoff/README.md)
+最新 **preinsert_continuous_latch01安全预插入诊断已真实通过**：82.65秒，完成清槽、悬持、搬运、原座上方安全接近、上抬和末段1秒保持；未插入、未松爪、未实际撤离，full/native_pair仍为null。此前continuous_latch01的230.445 µm漂移超限false保留。真实projection和zero_delay渲染修复已有最新4958/4958同观测关联实证，旧0.966282 mm残差是修复前记录。π0.5、GPT-6 Astra direct、真实RLinf/RPent Harness VLA各接通5动作/0.25秒短链，均task_success=false，非任务级评测。固定5次/random10次及20+20尚未开始。
 
-分享分支为 `codex/lab-cuvette-demo04`，GitHub当前显示仓库公开，可直接访问。默认精简阅读包仅含本轮约31 MB报告、录像、结果、变更补丁及配置；不包含历史版本目录和完整H5。完整数据仍保留在原大包与outputs中；本轮完整装载与成功训练资格均为false。固定5次及随机10次完整任务未启动。旧demo03的16 mm适配座成功保留其原范围。以下保留上游LabUtopia文档。
+- [本轮DOCX报告](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.docx) · [Markdown报告与视频](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.md) · [24条实际运行表](docs/lab_cuvette_loading/Env_v1/results_20261021/actual_runs.csv)
+- [当前完成状态与全部调用命令](docs/lab_cuvette_loading/Env_v1/README.md) · [持续任务状态](TASK_STATUS.md)
+- [预览及受门控standard/random入口](docs/lab_cuvette_loading/Env_v1/README.md) · [正常读取筛选 便携导出 视频回看](docs/lab_cuvette_loading/Env_v1/data/README.md)
+- [三策略真实调用及全部历史尝试](docs/lab_cuvette_loading/Env_v1/policy_backends.md) · [实际短链记录](docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json)
+- [23项真实API检查](docs/lab_cuvette_loading/Env_v1/policy_evidence/live_environment_api_validation.json)（random仅初始化，非正式任务批次）
+- [15周期真实动作回放](docs/lab_cuvette_loading/Env_v1/replay_README.md) · [本轮连续诊断阅读媒体来源](docs/lab_cuvette_loading/Env_v1/data/reading_media_provenance.json)（不代表完整装载）
+- [原座几何与最少实物信息](docs/lab_cuvette_loading/Env_v1/geometry/README.md) · [提取力与姿态图](docs/lab_cuvette_loading/Env_v1/data/extract01_control_alignment.png) · [动态相机残差](docs/lab_cuvette_loading/Env_v1/data/extract01_renderer_USD_dynamic_audit.json)
+- [新诊断成功结果及范围](docs/lab_cuvette_loading/Env_v1/data/preinsert_continuous_latch01_result_summary.json) · [当前资产 变换与尺寸清单](docs/lab_cuvette_loading/Env_v1/current_asset_scene_manifest.json)
+- [全部历史版本](LABSIM_PROGRESS.md) · [V0_demo04历史报告](docs/lab_cuvette_loading/V0_demo04/report.md) · [精简Agent阅读包规则](docs/agent_handoff/README.md)
+
+分享分支为 [`codex/lab-cuvette-env-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-env-v1)。源CAD、旧资产和结果保留。每轮新阅读包只收本轮改动、报告和少量结果媒体，不默认收整个工程或原始H5；本轮报告已生成并完成8页渲染核查。按最终推送提交生成的桌面小阅读包为 `LabSim_Env_v1_本轮改动与结果_精简阅读包_20261021`，包含报告、三段实际诊断/失败视频、CSV与配置；完整2546460010字节数据单独存放，最终提交和SHA见包根清单。真实校准仍为false，诊断成功不进入完整装载成功BC。以下保留上游LabUtopia文档。
 
 <div align="center">
   <img src="images/logo.png" alt="Logo" width="180">

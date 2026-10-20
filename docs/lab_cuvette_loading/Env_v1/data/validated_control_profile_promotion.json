@@ -1,0 +1,77 @@
+{
+  "source_actual_episode": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000",
+  "source_config_sha256": "6e883e4050c50bd275bad7552932e7fd71ea9341ed7db092633af3f08423ee24",
+  "actual_scope": "preinsert_diagnostic success only, no native insertion/release",
+  "initial_TCP_note": "Static YAML contains an unused historical centre placeholder; episode_config recomputes TCP from actual selected slot before audit/reset. The effective value, not raw placeholder, is compared here.",
+  "profiles": [
+    {
+      "configuration": "config/lab_cuvette_loading/Env_v1/native.yaml",
+      "sha256": "d362f179163c916871878de0b6074fb4c734eebccd50f99f6ea68221f84057db",
+      "functional_profile_equal_after_actual_episode_config": {
+        "control": true,
+        "physics": true,
+        "robot": true,
+        "source": true,
+        "rack": true,
+        "adapter": true,
+        "scene": true,
+        "vessel": true,
+        "cameras": true,
+        "gripper_numeric_and_mode": true
+      },
+      "task_type": "loading",
+      "derived_initial_TCP_m": [
+        -0.085,
+        -0.175,
+        1.0230000000000001
+      ],
+      "scope": "Matches actual reset-derived physical/control settings. Does not claim a new full-loading execution."
+    },
+    {
+      "configuration": "config/lab_cuvette_loading/Env_v1/preinsert.yaml",
+      "sha256": "d0bb09b76fe13b8a3f18a78d25f00b87b41ea689335caa7856a9cf483651e82e",
+      "functional_profile_equal_after_actual_episode_config": {
+        "control": true,
+        "physics": true,
+        "robot": true,
+        "source": true,
+        "rack": true,
+        "adapter": true,
+        "scene": true,
+        "vessel": true,
+        "cameras": true,
+        "gripper_numeric_and_mode": true
+      },
+      "task_type": "preinsert_diagnostic",
+      "derived_initial_TCP_m": [
+        -0.085,
+        -0.175,
+        1.0230000000000001
+      ],
+      "scope": "Matches actual reset-derived physical/control settings. Does not claim a new full-loading execution."
+    },
+    {
+      "configuration": "config/lab_cuvette_loading/Env_v1/extract_transport.yaml",
+      "sha256": "9cc35ab0f4696bd43cf20106cbc6becd1abcce1cc3d684749b79ac03ef9d3ca0",
+      "functional_profile_equal_after_actual_episode_config": {
+        "control": true,
+        "physics": true,
+        "robot": true,
+        "source": true,
+        "rack": true,
+        "adapter": true,
+        "scene": true,
+        "vessel": true,
+        "cameras": true,
+        "gripper_numeric_and_mode": true
+      },
+      "task_type": "extract_transport",
+      "derived_initial_TCP_m": [
+        -0.085,
+        -0.175,
+        1.0230000000000001
+      ],
+      "scope": "Matches actual reset-derived physical/control settings. Does not claim a new full-loading execution."
+    }
+  ]
+}

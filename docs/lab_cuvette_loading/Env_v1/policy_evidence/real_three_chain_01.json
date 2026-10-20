@@ -1,0 +1,905 @@
+{
+  "schema": "labsim.Env_v1.real_policy_integration.v1",
+  "generated_utc": "2026-10-20T17:35:22Z",
+  "scope": "Each accepted attempt executes only 0.25 seconds of policy actions (+ reset camera fence): genuine bounded real-model integration on preinsert_diagnostic; NOT full120s loading capability, performance, failure-quota or success-rate evaluation.",
+  "full_loading_attempts": 0,
+  "services_shutdown": true,
+  "attempts": [
+    {
+      "attempt": "pi05_attempt_01",
+      "backend": "pi05",
+      "episode_id": "98a606d1-f0ab-4a4e-89f2-d672b655a9b7",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0000",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 0,
+      "integration_complete": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET",
+      "actual_executed_policy_actions": 5,
+      "actual_control_steps": 15,
+      "actual_physics_steps": 64,
+      "simulation_duration_s": 0.26666666666666666,
+      "runner_wall_s": 4.961652766000043,
+      "actual_vla_predict_requests": 1,
+      "vla_inference_latencies_s": [
+        0.6029412010029773
+      ],
+      "codex_internal_http_request_count": null,
+      "planner_stats": null,
+      "physical_record_valid": true,
+      "record_integrity_errors": [],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "idle_intervals": [
+        {
+          "idle_wall_s": 0.6070137065798917,
+          "between": [
+            "env.get_camera_meta",
+            "env.step"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        }
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "readonly_method_count": 3,
+      "raw_model_outputs_preserved": true,
+      "key_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01/request.json",
+          "bytes": 2206,
+          "sha256": "3596f4f5de24ba40607c771519836449b5eff31a9e86429eb41839149fecdd12"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01/result.json",
+          "bytes": 5615,
+          "sha256": "b9f641a007f93d9d52558358dbeb1cfaa2e7087d345e0c7ccccb1ba8b7365930"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01/policy_events.jsonl",
+          "bytes": 9360,
+          "sha256": "bd766c354ea97b6a21a678d358f1c19bbca94f1fc8571bbaffa6d1c60b6f87a9"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01_driver/launch.json",
+          "bytes": 1212,
+          "sha256": "298d232edd9d8aeebd81b684c3f868e577c4d2928b033688f37a378e886cc09b"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0000/dataset/episode_0000.h5",
+          "bytes": 4392238,
+          "sha256": "dfbf649881f640da78381210f4d40fa604a04c189d8ecd144cae1c3a4dfd8d7e"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0000/dual_view.mp4",
+          "bytes": 88649,
+          "sha256": "6d0b085e142205661a23d361fcda1ec50bb37e999508e9e00bf26c2a013530f7"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0000/independent_score.json",
+          "bytes": 3562,
+          "sha256": "41cea5abf692bbbb81909e7aaca73686e0e524b621fc4428ca83a82365615c2d"
+        }
+      ],
+      "rpc_interval_scope": "Only requests within this runner started/finished UTC window, same episode UUID; idle wall includes model, planner and transport time, not isolated inference latency.",
+      "policy_action_execution_duration_s": 0.25,
+      "full_120s_performance_evaluation": false
+    },
+    {
+      "attempt": "astra_attempt_03",
+      "backend": "astra",
+      "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 1,
+      "integration_complete": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET",
+      "actual_executed_policy_actions": 5,
+      "actual_control_steps": 15,
+      "actual_physics_steps": 64,
+      "simulation_duration_s": 0.26666666666666666,
+      "runner_wall_s": 52.30266860500342,
+      "actual_vla_predict_requests": 0,
+      "vla_inference_latencies_s": [],
+      "codex_internal_http_request_count": null,
+      "planner_stats": {
+        "backend": "codex_sdk",
+        "elapsed_s": 49.2,
+        "output_chars": 1506,
+        "output_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/planner/astra.txt",
+        "raw_stream_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/planner/astra.txt.stream.jsonl",
+        "last_message_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/planner/astra.txt.last",
+        "last_message_chars": 251,
+        "turns_used": 4,
+        "tool_calls": 6,
+        "total_input_tokens": 163706,
+        "total_cached_input_tokens": 135936,
+        "total_output_tokens": 866,
+        "total_reasoning_output_tokens": 41
+      },
+      "physical_record_valid": true,
+      "record_integrity_errors": [],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "idle_intervals": [
+        {
+          "idle_wall_s": 13.910401922097662,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 6.73964357065779,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 4.715920962644304,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            16,
+            16
+          ],
+          "simulation_time_s": [
+            0.06666666666666667,
+            0.06666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 4.353529119322047,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            28,
+            28
+          ],
+          "simulation_time_s": [
+            0.11666666666666667,
+            0.11666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 5.336624360294081,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            40,
+            40
+          ],
+          "simulation_time_s": [
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 8.33609465272093,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            52,
+            52
+          ],
+          "simulation_time_s": [
+            0.21666666666666667,
+            0.21666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 4.223279561545496,
+          "between": [
+            "env.get_camera_meta",
+            "env.finalize_episode"
+          ],
+          "physics_steps": [
+            64,
+            64
+          ],
+          "simulation_time_s": [
+            0.26666666666666666,
+            0.26666666666666666
+          ],
+          "no_physics_advance": true
+        }
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "readonly_method_count": 30,
+      "raw_model_outputs_preserved": false,
+      "key_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/request.json",
+          "bytes": 1671,
+          "sha256": "cb0485c148f8a3a72ff01c20a506d6ea6816a3b5d2cb22c1f0f9f729acda6602"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/result.json",
+          "bytes": 6690,
+          "sha256": "3109fb402d86bc996050c418b48a133cf3d3641deb27dddd6c54bc93221f026c"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/planner/policy_tools.jsonl",
+          "bytes": 7356,
+          "sha256": "477da5f825dbe0334619bf71eeb2c7b92423c8ceb464cbc7065114aab12e97ea"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03_driver/launch.json",
+          "bytes": 1262,
+          "sha256": "cfeef198d32c08acbdd474213c5c84155f0374328dc7327a393dd01feb5be3fa"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003/dataset/episode_0000.h5",
+          "bytes": 4401492,
+          "sha256": "c1d1de1aad43c142055346f9889653303fc22b5e31bdebd4cac5eca1cadb7bac"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003/dual_view.mp4",
+          "bytes": 86280,
+          "sha256": "17b8f3c5dc021f28669de86a9a4d98055d5856da4ae7c2ef9a0d05de100c455d"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003/independent_score.json",
+          "bytes": 3546,
+          "sha256": "259722f4984d4b9d22edf51d4bc680c09c738476c521dd5fa62eba78e6cdaf62"
+        }
+      ],
+      "model_tool_state_audit": {
+        "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/planner/rpent_states/states.json",
+        "contains_renderer_debug": false,
+        "contains_depth_annotator": false,
+        "full_meta_sidecar_only": true
+      },
+      "rpc_interval_scope": "Only requests within this runner started/finished UTC window, same episode UUID; idle wall includes model, planner and transport time, not isolated inference latency.",
+      "policy_action_execution_duration_s": 0.25,
+      "full_120s_performance_evaluation": false
+    },
+    {
+      "attempt": "harness_attempt_01",
+      "backend": "harness",
+      "episode_id": "6469ba9b-c8f7-4c7e-802a-814b1a3b6e77",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0004",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 2,
+      "integration_complete": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET",
+      "actual_executed_policy_actions": 5,
+      "actual_control_steps": 15,
+      "actual_physics_steps": 64,
+      "simulation_duration_s": 0.26666666666666666,
+      "runner_wall_s": 56.07483837399923,
+      "actual_vla_predict_requests": 5,
+      "vla_inference_latencies_s": [
+        0.16593496900168248,
+        0.14748707900071167,
+        0.15080415900229127,
+        0.18759499800216872,
+        0.14459684800021932
+      ],
+      "codex_internal_http_request_count": null,
+      "planner_stats": {
+        "backend": "codex_sdk",
+        "elapsed_s": 52.4,
+        "output_chars": 1335,
+        "output_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/planner/astra.txt",
+        "raw_stream_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/planner/astra.txt.stream.jsonl",
+        "last_message_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/planner/astra.txt.last",
+        "last_message_chars": 260,
+        "turns_used": 3,
+        "tool_calls": 7,
+        "total_input_tokens": 194967,
+        "total_cached_input_tokens": 165376,
+        "total_output_tokens": 909,
+        "total_reasoning_output_tokens": 11
+      },
+      "physical_record_valid": true,
+      "record_integrity_errors": [],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "idle_intervals": [
+        {
+          "idle_wall_s": 13.088161293402663,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 5.238477035461983,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 0.1768850320877391,
+          "between": [
+            "env.get_observation",
+            "env.step"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 4.7506972015871725,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            16,
+            16
+          ],
+          "simulation_time_s": [
+            0.06666666666666667,
+            0.06666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 0.15841750469553517,
+          "between": [
+            "env.get_observation",
+            "env.step"
+          ],
+          "physics_steps": [
+            16,
+            16
+          ],
+          "simulation_time_s": [
+            0.06666666666666667,
+            0.06666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 5.290269456607348,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            28,
+            28
+          ],
+          "simulation_time_s": [
+            0.11666666666666667,
+            0.11666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 0.16062624141704873,
+          "between": [
+            "env.get_observation",
+            "env.step"
+          ],
+          "physics_steps": [
+            28,
+            28
+          ],
+          "simulation_time_s": [
+            0.11666666666666667,
+            0.11666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 7.01436300979185,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            40,
+            40
+          ],
+          "simulation_time_s": [
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 0.19792381853039842,
+          "between": [
+            "env.get_observation",
+            "env.step"
+          ],
+          "physics_steps": [
+            40,
+            40
+          ],
+          "simulation_time_s": [
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 4.275900105178152,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            52,
+            52
+          ],
+          "simulation_time_s": [
+            0.21666666666666667,
+            0.21666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 0.15458343036516453,
+          "between": [
+            "env.get_observation",
+            "env.step"
+          ],
+          "physics_steps": [
+            52,
+            52
+          ],
+          "simulation_time_s": [
+            0.21666666666666667,
+            0.21666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 10.816443018920836,
+          "between": [
+            "env.get_camera_meta",
+            "env.finalize_episode"
+          ],
+          "physics_steps": [
+            64,
+            64
+          ],
+          "simulation_time_s": [
+            0.26666666666666666,
+            0.26666666666666666
+          ],
+          "no_physics_advance": true
+        }
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "readonly_method_count": 30,
+      "raw_model_outputs_preserved": true,
+      "key_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/request.json",
+          "bytes": 1760,
+          "sha256": "e9910651162afd26bdd513293e7ebc602e0c6f21d6ec021f62986cd5ffb64ef9"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/result.json",
+          "bytes": 7133,
+          "sha256": "d7f7ff19c008cda128011f22fc98352439f6eb828aa79239cf39e99a5c984331"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/planner/policy_tools.jsonl",
+          "bytes": 25888,
+          "sha256": "78f3d36faf2e5b4d40bef2625c3272fce9015ad15c07a6e2b7db6cc02c97d26a"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01_driver/launch.json",
+          "bytes": 1317,
+          "sha256": "f84430ac3dac1c8c1a358639b9a6cc74a687803b2688e0c7b7645e7f0936799d"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0004/dataset/episode_0000.h5",
+          "bytes": 4399775,
+          "sha256": "fdc2ff5cd1306add95570e762928cfe71989d6606cf8908ee378dc24bc3a5bf3"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0004/dual_view.mp4",
+          "bytes": 88367,
+          "sha256": "5eb30955037653fe4e45a0ea20e0d01c689f1385123daff4fa5c2bcb020cca99"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0004/independent_score.json",
+          "bytes": 3553,
+          "sha256": "6b5cafe3a279985673e4ccd3b534abf3a0e0f8c777b9da8889df09f22160dcc2"
+        }
+      ],
+      "model_tool_state_audit": {
+        "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/planner/rpent_states/states.json",
+        "contains_renderer_debug": false,
+        "contains_depth_annotator": false,
+        "full_meta_sidecar_only": true
+      },
+      "rpc_interval_scope": "Only requests within this runner started/finished UTC window, same episode UUID; idle wall includes model, planner and transport time, not isolated inference latency.",
+      "policy_action_execution_duration_s": 0.25,
+      "full_120s_performance_evaluation": false
+    }
+  ],
+  "excluded_attempts": [
+    {
+      "attempt": "astra_attempt_01",
+      "backend": "astra",
+      "episode_id": "117d48a9-3a84-44e4-bc91-f287aa92f02e",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0001",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 1,
+      "integration_complete": false,
+      "task_success": false,
+      "termination_reason": "PLANNER_ENDED",
+      "actual_executed_policy_actions": 0,
+      "actual_control_steps": 0,
+      "actual_physics_steps": 4,
+      "simulation_duration_s": 0.016666666666666666,
+      "runner_wall_s": 16.578723976999754,
+      "actual_vla_predict_requests": 0,
+      "vla_inference_latencies_s": [],
+      "codex_internal_http_request_count": null,
+      "planner_stats": {
+        "backend": "codex_sdk",
+        "elapsed_s": 13.0,
+        "output_chars": 529,
+        "output_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/planner/astra.txt",
+        "raw_stream_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/planner/astra.txt.stream.jsonl",
+        "last_message_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/planner/astra.txt.last",
+        "last_message_chars": 195,
+        "turns_used": 2,
+        "tool_calls": 0,
+        "total_input_tokens": 26441,
+        "total_cached_input_tokens": 17280,
+        "total_output_tokens": 144,
+        "total_reasoning_output_tokens": 10
+      },
+      "physical_record_valid": false,
+      "record_integrity_errors": [
+        "no_transitions"
+      ],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "idle_intervals": [
+        {
+          "idle_wall_s": 13.561513368113083,
+          "between": [
+            "env.get_camera_meta",
+            "env.finalize_episode"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        }
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "readonly_method_count": 6,
+      "raw_model_outputs_preserved": false,
+      "key_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/request.json",
+          "bytes": 1596,
+          "sha256": "0b6082e0e4e12fe7855c6f593c802300a93e9aa9d19b604ef639cf5c6fa998eb"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/result.json",
+          "bytes": 6718,
+          "sha256": "abaebc911a35861c474b89a1f99a2c16f9a14b941fb9f9e7707e5ea15042c2c7"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/planner/policy_tools.jsonl",
+          "bytes": 125,
+          "sha256": "3da2a3582a94a2ad16a2dfbf52bb7b128bc80f94296b6309c68e3626ec42eb30"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01_driver/launch.json",
+          "bytes": 1133,
+          "sha256": "05e7b47c03f2700d55fa1f90225640c9e40a606f3185188fc66858733fe1a467"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0001/dataset/episode_0000.h5",
+          "bytes": 55968,
+          "sha256": "7c0fa8f424de6f2dbb5974d3d1eff1d8937f70fa515be5b530ca76e3ee5f205f"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0001/dual_view.mp4",
+          "bytes": 22965,
+          "sha256": "51686f819fc06fb75f10da160e109fe27a08d44f5a050ba3e3925917fd1d9f8a"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0001/independent_score.json",
+          "bytes": 3547,
+          "sha256": "951e22bb5afbdb7a81cec605c8ec3ad67b24e42f8ba49d851021ff43889add3f"
+        }
+      ],
+      "excluded_from_final_integration_acceptance_reason": "No MCP tool discovery, zero actions, no_transitions",
+      "rpc_interval_scope": "Only requests within this runner started/finished UTC window, same episode UUID; idle wall includes model, planner and transport time, not isolated inference latency."
+    },
+    {
+      "attempt": "astra_attempt_02",
+      "backend": "astra",
+      "episode_id": "a7d15067-fcf8-4251-a7ba-b4850ba3bdd7",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0002",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 1,
+      "integration_complete": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET",
+      "actual_executed_policy_actions": 5,
+      "actual_control_steps": 15,
+      "actual_physics_steps": 64,
+      "simulation_duration_s": 0.26666666666666666,
+      "runner_wall_s": 60.182266624000476,
+      "actual_vla_predict_requests": 0,
+      "vla_inference_latencies_s": [],
+      "codex_internal_http_request_count": null,
+      "planner_stats": {
+        "backend": "codex_sdk",
+        "elapsed_s": 56.6,
+        "output_chars": 1554,
+        "output_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/planner/astra.txt",
+        "raw_stream_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/planner/astra.txt.stream.jsonl",
+        "last_message_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/planner/astra.txt.last",
+        "last_message_chars": 222,
+        "turns_used": 4,
+        "tool_calls": 7,
+        "total_input_tokens": 222636,
+        "total_cached_input_tokens": 190208,
+        "total_output_tokens": 1012,
+        "total_reasoning_output_tokens": 82
+      },
+      "physical_record_valid": true,
+      "record_integrity_errors": [],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "idle_intervals": [
+        {
+          "idle_wall_s": 14.979157651119749,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 9.08316857598038,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            4,
+            4
+          ],
+          "simulation_time_s": [
+            0.016666666666666666,
+            0.016666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 5.65226538128627,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            16,
+            16
+          ],
+          "simulation_time_s": [
+            0.06666666666666667,
+            0.06666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 4.644493575793604,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            28,
+            28
+          ],
+          "simulation_time_s": [
+            0.11666666666666667,
+            0.11666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 5.19390509654113,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            40,
+            40
+          ],
+          "simulation_time_s": [
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 6.624927570625005,
+          "between": [
+            "env.get_camera_meta",
+            "env.get_observation"
+          ],
+          "physics_steps": [
+            52,
+            52
+          ],
+          "simulation_time_s": [
+            0.21666666666666667,
+            0.21666666666666667
+          ],
+          "no_physics_advance": true
+        },
+        {
+          "idle_wall_s": 9.326477107493702,
+          "between": [
+            "env.get_camera_meta",
+            "env.finalize_episode"
+          ],
+          "physics_steps": [
+            64,
+            64
+          ],
+          "simulation_time_s": [
+            0.26666666666666666,
+            0.26666666666666666
+          ],
+          "no_physics_advance": true
+        }
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "readonly_method_count": 30,
+      "raw_model_outputs_preserved": false,
+      "key_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/request.json",
+          "bytes": 1596,
+          "sha256": "bf587ff747cde8caabea86d39c7d2d19e7e419bd452d648ebbd658a58a83d6db"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/result.json",
+          "bytes": 7060,
+          "sha256": "2d85e781d815519110a8fad212d40941625c6281451406f18f7f2235e2764037"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/planner/policy_tools.jsonl",
+          "bytes": 7357,
+          "sha256": "489d0f3c280641e10ac91ea848b731fe5b912c83cd3da7e22126e7a16b813bc0"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02_driver/launch.json",
+          "bytes": 1133,
+          "sha256": "9423e24c0a1534636b1fd40e966f12f0f8646749f8e47a40edf1e20459a253cf"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0002/dataset/episode_0000.h5",
+          "bytes": 4373034,
+          "sha256": "162f8e5d4b7666450952ac6ea85d9acf79908ad1419ff346e5fe6aabe51e2d21"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0002/dual_view.mp4",
+          "bytes": 85144,
+          "sha256": "df68a61975689b2884dd31aed871ca4ce54f4083a244c0c8a5d3d7f1913f5197"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0002/independent_score.json",
+          "bytes": 3546,
+          "sha256": "55b01060e9b3f4a953a30f161ccd7cb8d26dc4ffd549a70dcf075f454bf603e9"
+        }
+      ],
+      "model_tool_state_audit": {
+        "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/planner/rpent_states/states.json",
+        "contains_renderer_debug": true,
+        "contains_depth_annotator": true,
+        "full_meta_sidecar_only": false
+      },
+      "excluded_from_final_integration_acceptance_reason": "Full camera metadata included renderer/depth diagnostics; superseded by sanitized attempt03; original record retained.",
+      "rpc_interval_scope": "Only requests within this runner started/finished UTC window, same episode UUID; idle wall includes model, planner and transport time, not isolated inference latency."
+    }
+  ],
+  "shutdown_evidence": [
+    "live_environment_api_validation.json",
+    "pi05_service_01_shutdown.json"
+  ]
+}

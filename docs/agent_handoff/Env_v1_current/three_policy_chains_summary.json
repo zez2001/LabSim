@@ -1,0 +1,128 @@
+{
+  "schema": "labsim.Env_v1.real_three_chain_reading_summary.v1",
+  "scope": "Each accepted attempt executes only 0.25 seconds of policy actions (+ reset camera fence): genuine bounded real-model integration on preinsert_diagnostic; NOT full120s loading capability, performance, failure-quota or success-rate evaluation.",
+  "full_loading_attempts": 0,
+  "not_a_120s_policy_performance_evaluation": true,
+  "actual_policy_action_duration_s_per_attempt": 0.25,
+  "attempts": [
+    {
+      "attempt": "pi05_attempt_01",
+      "backend": "pi05",
+      "episode_id": "98a606d1-f0ab-4a4e-89f2-d672b655a9b7",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0000",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 0,
+      "integration_complete": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET",
+      "actual_executed_policy_actions": 5,
+      "actual_control_steps": 15,
+      "simulation_duration_s": 0.26666666666666666,
+      "runner_wall_s": 4.961652766000043,
+      "actual_vla_predict_requests": 1,
+      "vla_inference_latencies_s": [
+        0.6029412010029773
+      ],
+      "physical_record_valid": true,
+      "record_integrity_errors": [],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "maximum_observed_external_wait_s": 0.6070137065798917
+    },
+    {
+      "attempt": "astra_attempt_03",
+      "backend": "astra",
+      "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 1,
+      "integration_complete": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET",
+      "actual_executed_policy_actions": 5,
+      "actual_control_steps": 15,
+      "simulation_duration_s": 0.26666666666666666,
+      "runner_wall_s": 52.30266860500342,
+      "actual_vla_predict_requests": 0,
+      "vla_inference_latencies_s": [],
+      "physical_record_valid": true,
+      "record_integrity_errors": [],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "maximum_observed_external_wait_s": 13.910401922097662,
+      "actual_model_metadata_boundary": {
+        "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/planner/rpent_states/states.json",
+        "contains_renderer_debug": false,
+        "contains_depth_annotator": false,
+        "full_meta_sidecar_only": true
+      }
+    },
+    {
+      "attempt": "harness_attempt_01",
+      "backend": "harness",
+      "episode_id": "6469ba9b-c8f7-4c7e-802a-814b1a3b6e77",
+      "environment_episode": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0004",
+      "subtask": "preinsert_diagnostic",
+      "layout_mode": "standard",
+      "seed": 2,
+      "integration_complete": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET",
+      "actual_executed_policy_actions": 5,
+      "actual_control_steps": 15,
+      "simulation_duration_s": 0.26666666666666666,
+      "runner_wall_s": 56.07483837399923,
+      "actual_vla_predict_requests": 5,
+      "vla_inference_latencies_s": [
+        0.16593496900168248,
+        0.14748707900071167,
+        0.15080415900229127,
+        0.18759499800216872,
+        0.14459684800021932
+      ],
+      "physical_record_valid": true,
+      "record_integrity_errors": [],
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "all_observed_idle_intervals_no_physics_advance": true,
+      "readonly_methods_do_not_advance_physics": true,
+      "maximum_observed_external_wait_s": 13.088161293402663,
+      "actual_model_metadata_boundary": {
+        "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/planner/rpent_states/states.json",
+        "contains_renderer_debug": false,
+        "contains_depth_annotator": false,
+        "full_meta_sidecar_only": true
+      }
+    }
+  ],
+  "excluded_astra_attempts": [
+    {
+      "attempt": "astra_attempt_01",
+      "episode_id": "117d48a9-3a84-44e4-bc91-f287aa92f02e",
+      "actual_executed_policy_actions": 0,
+      "excluded_from_final_integration_acceptance_reason": "No MCP tool discovery, zero actions, no_transitions"
+    },
+    {
+      "attempt": "astra_attempt_02",
+      "episode_id": "a7d15067-fcf8-4251-a7ba-b4850ba3bdd7",
+      "actual_executed_policy_actions": 5,
+      "excluded_from_final_integration_acceptance_reason": "Full camera metadata included renderer/depth diagnostics; superseded by sanitized attempt03; original record retained."
+    }
+  ],
+  "services_shutdown": true,
+  "original_checkpoint_is_labsim_finetuned": false,
+  "model_truth_or_expert_available": false,
+  "source_evidence": {
+    "path": "docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json",
+    "sha256": "463aedcd7b674ca8995e84bc7465dcd4f9ccd751bc78124dcc071bca650e3abe"
+  }
+}

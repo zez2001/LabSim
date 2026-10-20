@@ -59,7 +59,7 @@ for k in range(7):
  ax.plot([rack[0]+v]*2,[rack[1]-.055,rack[1]+.055],color='lightgray',lw=.7)
  ax.plot([rack[0]-.055,rack[0]+.055],[rack[1]+v]*2,color='lightgray',lw=.7)
 for name,p in [('A target',a),('B retained',b)]:
- ax.scatter(*p,s=55,marker='s');ax.annotate(name,p,xytext=(p[0]+.03,p[1]+.015))
+ ax.scatter(*p,s=55,marker='s');ax.annotate(name,p,xytext=(p[0]-.045,p[1]+(.04 if name.startswith('A') else -.045)),arrowprops=dict(arrowstyle='-',lw=.5))
 for name,p,color in [('A1',proposal['source_A1_floor_m'][:2],'darkgray'),('F6 blue',proposal['blue_F6_floor_m'][:2],'blue')]:
  ax.scatter(*p,c=color,s=25);ax.annotate(name,p,xytext=(p[0]-.08,p[1]-.025),fontsize=8)
 ax.add_patch(Circle(robot,.06,fc='lightblue'));ax.annotate('Franka proxy',robot,xytext=(robot[0]-.08,robot[1]+.09))

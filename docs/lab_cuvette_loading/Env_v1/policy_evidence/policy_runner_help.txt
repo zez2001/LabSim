@@ -3,6 +3,7 @@ usage: policy_runner.py [-h] --backend {pi05,harness,astra}
                         ENV_ENDPOINT [--vla-endpoint VLA_ENDPOINT] --output
                         OUTPUT [--seed SEED]
                         [--subtask {loading,preinsert_diagnostic}]
+                        [--layout-mode {standard,random}]
                         [--max-model-requests MAX_MODEL_REQUESTS]
                         [--max-actions MAX_ACTIONS]
                         [--planner-timeout-s PLANNER_TIMEOUT_S]
@@ -27,6 +28,9 @@ options:
   --output OUTPUT
   --seed SEED
   --subtask {loading,preinsert_diagnostic}
+  --layout-mode {standard,random}
+                        passed as reset options.mode; assemblies remain
+                        governed by the scene randomizer
   --max-model-requests MAX_MODEL_REQUESTS, --max-planner-turns MAX_MODEL_REQUESTS
                         pi05 predict-call budget; Astra/Harness RPent message-
                         turn budget, not underlying HTTP request count

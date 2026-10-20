@@ -1,0 +1,77 @@
+{
+  "schema": "labsim.Env_v1.docx_render_environment.v1",
+  "purpose": "Local QA helper for the unchanged bundled document renderer; not included in the small agent reading package.",
+  "helper": {
+    "path": "docs/lab_cuvette_loading/Env_v1/report/render_docx_isolated.py",
+    "sha256": "966b2a88932667ca7b8363450d922072669c30338f9377350b28f1e9047ec3d3",
+    "copied_from": "/tmp/labsim_render_bundled_docx_isolated.py",
+    "exact_copy": true
+  },
+  "bundled": {
+    "dependencies_root": "/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies",
+    "python": "/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "renderer": "/home/wujing/.codex/plugins/cache/openai-primary-runtime/documents/26.1015.12040/skills/documents/render_docx.py",
+    "soffice_wrapper": "/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override/soffice",
+    "native_soffice": "/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/soffice",
+    "actual_soffice_version": "LibreOfficeDev 26.8.0.0.alpha0 2c87e51eeaa2b413ff4ae097b2705eea1995d8e5",
+    "system_libreoffice_fallback_used": false,
+    "runtime_files_modified": false
+  },
+  "existing_container": {
+    "runtime": "Docker 29.1.3",
+    "image_argument_used": "47442d7252b7",
+    "immutable_image_id": "sha256:47442d7252b7f0ce6384d45043bc218b7d907a7e14404e69e3b6551a4ec64b75",
+    "existing_tag_at_probe": "rsi-dgm-self-eval:dgm-tokenpilot-3tasks-3workers-20261018-184120",
+    "image_pulled_or_built_for_this_task": false,
+    "host_glibc": "Ubuntu GLIBC 2.35-0ubuntu3.15",
+    "container_glibc": "Debian GLIBC 2.41-12+deb13u3",
+    "root_filesystem_read_only": true,
+    "network": "none",
+    "GPU_enabled": false,
+    "compat_library_count": 49,
+    "compat_library_source": "Existing /usr/lib/x86_64-linux-gnu and its nss subdirectory; individual files mounted read-only into /compat.",
+    "host_core_libraries_excluded": [
+      "libc.so.6",
+      "libm.so.6",
+      "libpthread.so.0",
+      "libdl.so.2",
+      "librt.so.1",
+      "libresolv.so.2",
+      "libstdc++.so.6",
+      "libgcc_s.so.1",
+      "ld-linux-x86-64.so.2"
+    ],
+    "read_only_mounts": [
+      "bundled dependencies",
+      "bundled documents skill",
+      "input DOCX directory",
+      "/usr/share/fonts",
+      "/etc/fonts",
+      "49 individual non-glibc compatibility library files"
+    ],
+    "writable_locations": [
+      "explicit QA output directory",
+      "temporary container /tmp tmpfs"
+    ],
+    "temporary_container_HOME": "/tmp",
+    "HOME_note": "Only the container subprocess environment HOME is /tmp for the canonical renderer writable profile requirement; no host HOME variable, shell variable, runtime directory, or installation is changed.",
+    "packages_installed_or_upgraded": false
+  },
+  "actual_compatibility_smoke": {
+    "input": "/home/wujing/Desktop/vla/LabSim/docs/series_20261019/evidence/V0_asset_creation_audit_20261014.docx",
+    "output": "/tmp/labsim-bundled-lo-isolation-smoke02-20261021",
+    "launcher_session": 1201,
+    "actual_polled_exit_code": 0,
+    "PDF_generated": true,
+    "page_PNG_count": 10,
+    "first_page_visually_inspected": true,
+    "scope": "Compatibility smoke of an older read-only DOCX, not final Env_v1 report QA. Final report rendering and page review are owned by root.",
+    "initial_diagnostic_failure": "With only42 static dependencies the PDF export failed I/O16 while ODT export worked. Added read-only NSS dynamically-loaded providers and sqlite, bringing the existing non-glibc library count to49; the unchanged bundled renderer then succeeded."
+  },
+  "this_copy_operation": {
+    "rendering_started": false,
+    "other_repository_files_modified": false,
+    "commit_created": false
+  },
+  "portability_limit": "This is a local QA tool pinned to paths and a pre-existing local image. It performs no installs and does not claim the same prerequisites exist on another machine."
+}

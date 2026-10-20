@@ -1,0 +1,78 @@
+{
+  "schema": "labsim.Env_v1.actual_renderer_projection_discrepancy.v1",
+  "source_episode": "outputs/lab_cuvette_loading/Env_v1/preview_05/episode_0000/",
+  "cameras": {
+    "side_camera": {
+      "view_convention": "row world point @ raw reshaped cameraViewTransform -> USD optical camera coordinates",
+      "renderer_view_vs_USD_world_position_m": 3.1401849173675503e-16,
+      "renderer_view_vs_USD_rotation_deg": 3.278440724931703e-15,
+      "renderer_P00": 4.772130739822563,
+      "renderer_P11": 6.362840986430084,
+      "expected_P00_from_authored_ratio": 0.9067049026489258,
+      "expected_P11_from_authored_ratio": 1.2089397430419921,
+      "renderer_equivalent_fx_px": 1527.0818367432203,
+      "authored_K_fx_px": 290.14556884765625,
+      "renderer_HFOV_deg": 23.67016567161499,
+      "authored_HFOV_deg": 95.60249835774742,
+      "raw_focalLength": 0.0949999988079071,
+      "raw_aperture": [
+        0.20954999327659607,
+        0.15716250240802765
+      ],
+      "depth": {
+        "shape_hw": [
+          480,
+          640
+        ],
+        "finite_positive_fraction": 1.0,
+        "min_m": 1.0676016807556152,
+        "max_m": 5.74620246887207,
+        "percentiles_5_50_95_m": [
+          1.2005688667297363,
+          1.5622586011886597,
+          5.304802894592285
+        ],
+        "center_m": 1.547508955001831,
+        "semantics": "Official distance_to_image_plane annotator, metres, optical-axis depth; debug only, not a policy channel"
+      }
+    },
+    "wrist_camera": {
+      "view_convention": "row world point @ raw reshaped cameraViewTransform -> USD optical camera coordinates",
+      "renderer_view_vs_USD_world_position_m": 0.00015896080026145084,
+      "renderer_view_vs_USD_rotation_deg": 0.021974752718580372,
+      "renderer_P00": 4.772130739822563,
+      "renderer_P11": 6.362840986430084,
+      "expected_P00_from_authored_ratio": 1.1453113555908203,
+      "expected_P11_from_authored_ratio": 1.527081807454427,
+      "renderer_equivalent_fx_px": 1527.0818367432203,
+      "authored_K_fx_px": 366.4996337890625,
+      "renderer_HFOV_deg": 23.67016567161499,
+      "authored_HFOV_deg": 82.25004833190926,
+      "raw_focalLength": 0.11999999731779099,
+      "raw_aperture": [
+        0.20954999327659607,
+        0.15716250240802765
+      ],
+      "depth": {
+        "shape_hw": [
+          480,
+          640
+        ],
+        "finite_positive_fraction": 1.0,
+        "min_m": 0.31713056564331055,
+        "max_m": 0.400515079498291,
+        "percentiles_5_50_95_m": [
+          0.3618636131286621,
+          0.3829221725463867,
+          0.39748239517211914
+        ],
+        "center_m": 0.35700511932373047,
+        "semantics": "Official distance_to_image_plane annotator, metres, optical-axis depth; debug only, not a policy channel"
+      }
+    }
+  },
+  "observed_cause": "Actual renderer projection differs from ratio-correct authored USD focal/aperture. Both actual projections coincide with default50/20.955 despite different authored focal lengths.",
+  "root_cause_not_yet_confirmed": "Projection fallback/cache or lens-parameter-range handling; next independent preview normalizes native lens numbers while preserving requested FOV.",
+  "physical_accuracy_claim": false,
+  "raw_data_modified": false
+}

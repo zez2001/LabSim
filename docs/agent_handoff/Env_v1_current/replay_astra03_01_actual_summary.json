@@ -1,0 +1,90 @@
+{
+  "schema": "labsim.Env_v1.command_replay_result.v1",
+  "episode_id": "93d1a4be-6412-4c2a-9497-67c4b121da52",
+  "requested_control_ticks": 15,
+  "executed_control_ticks": 15,
+  "startup_terminated": false,
+  "exact_executed_commands": true,
+  "max_arm_joint_difference_rad": 0.0,
+  "max_finger_difference_m": 0.0,
+  "mixed_numeric_difference_note": "Legacy max of native rad/m components, not a physical norm or contact accuracy.",
+  "bitwise_physical_replay_claimed": false,
+  "source_files_unchanged": true,
+  "scope": "Only15 real60Hz control ticks (0.25s) of a short diagnostic source episode; NOT full loading replay or task success.",
+  "formal_entry": "main.py --config-name lab_cuvette_env_v1 --env-mode replay",
+  "actual_parent_exec_session": 45951,
+  "actual_exit_code": 0,
+  "wall_time_s": 68.40450201299973,
+  "wall_scope": "Geometry audit+Isaac initialization+15tick execution+normal cleanup, not isolated replay performance.",
+  "command": [
+    "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+    "-u",
+    "main.py",
+    "--config-name",
+    "lab_cuvette_env_v1",
+    "--env-mode",
+    "replay",
+    "--replay-episode",
+    "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003",
+    "--replay-max-ticks",
+    "15",
+    "--replay-zero-delay",
+    "--headless",
+    "--output",
+    "outputs/lab_cuvette_loading/Env_v1/replay_astra03_01"
+  ],
+  "output": "outputs/lab_cuvette_loading/Env_v1/replay_astra03_01",
+  "source_episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+  "source_labels": {
+    "task_success": false,
+    "record_valid": true,
+    "failure_type": "TASK_INCOMPLETE",
+    "termination_reason": "POLICY_BUDGET",
+    "task_type": "preinsert_diagnostic"
+  },
+  "source_config_sha256": "f9b998a755d68bdc2a42d708f2f62203a09603db52bacac6b6407e7152be096c",
+  "source_h5_sha256": "c1d1de1aad43c142055346f9889653303fc22b5e31bdebd4cac5eca1cadb7bac",
+  "source_result_sha256": "379ccc07ae108ffc25be4d804b4c5aa84a4e420bc42c22d292d861e751cc2de5",
+  "runtime_overrides": {
+    "env.render_zero_delay": {
+      "source": null,
+      "runtime": true,
+      "render_only": true,
+      "basis": "Previously validated Hydra waitIdle and checkForHydraRenderComplete ordering; no extra world.step, physics/control dt, FPS or layout change."
+    }
+  },
+  "max_effort_limit_difference_N": 0.0,
+  "observed_robot_state_comparison": {
+    "observed_max_arm_state_difference_rad": 0.0,
+    "observed_max_finger_state_difference_m": 0.0,
+    "scope": "This15-tick comparison only; not a bitwise/full-state reproducibility guarantee."
+  },
+  "independent_result": {
+    "task_type": "preinsert_diagnostic",
+    "task_success": false,
+    "workflow_success": null,
+    "full_success": null,
+    "native_pair_success": null,
+    "record_valid": true,
+    "failure_type": "TASK_INCOMPLETE",
+    "termination_reason": "REPLAY_SOURCE_EXHAUSTED",
+    "eligible_for_success_bc": false,
+    "eligible_for_failure_analysis": false,
+    "actual_control_steps": 15,
+    "actual_physics_steps": 64,
+    "frames": 15,
+    "simulation_seconds": 0.26666666666666666,
+    "record_integrity_errors": [],
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ]
+  },
+  "teacher_used": false,
+  "object_pose_setter_used": false,
+  "source_success_inherited": false,
+  "geometry_gate_retained": true,
+  "small_evidence_paths": [
+    "runtime/replay_astra03_01_process.json",
+    "data/replay_cpu_contract_validation.json"
+  ]
+}

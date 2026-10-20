@@ -1,0 +1,184 @@
+{
+  "schema": "labsim.Env_v1.actual_camera_sync_audit.v2",
+  "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000",
+  "episode_id": "7c53e30d-a5f2-4d5c-a5ce-cd1456687f2c",
+  "source_HDF5": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/dataset/episode_0000.h5",
+  "source_HDF5_sha256": "f5d131de2e802bc28fe22ef82b40bf13761b83374df668d8b6fe7798edcc02f2",
+  "value_paths": {
+    "renderer": "camera_pose_json[i][camera].renderer_debug.CameraParams.raw.cameraViewTransform",
+    "USD": "camera_pose_json[i][camera].world_from_camera_usd",
+    "observation_time": "timestamp[i]",
+    "actual_settings": "camera_pose_json[i][camera].render_binding.settings"
+  },
+  "calculation": {
+    "renderer": "Gf row world-to-camera 16values reshape4x4, transpose then invert -> column world-from-camera",
+    "position": "Euclidean world-translation difference in metres",
+    "rotation": "angle(R_renderer * R_USD.T) in degrees",
+    "engine_time_origin_s": 0.008333333767950535
+  },
+  "cameras": {
+    "side_camera": {
+      "samples": 4958,
+      "first": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 3.1401849173675503e-16,
+        "rotation_residual_deg": 3.278440724931703e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "last": {
+        "observation_index": 4957,
+        "episode_t_s": 82.63333333333334,
+        "phase": "DIAGNOSTIC_HOLD",
+        "position_residual_m": 3.1401849173675503e-16,
+        "rotation_residual_deg": 3.278440724931703e-15,
+        "renderer_position_vs_previous_USD_m": 3.1401849173675503e-16,
+        "renderer_rotation_vs_previous_USD_deg": 3.278440724931703e-15,
+        "sensor_rendering_time_s": 82.64167097676545,
+        "sensor_minus_engine_origin_minus_obs_s": 4.309664163315574e-06
+      },
+      "worst_position": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 3.1401849173675503e-16,
+        "rotation_residual_deg": 3.278440724931703e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "worst_rotation": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 3.1401849173675503e-16,
+        "rotation_residual_deg": 3.278440724931703e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "position_residual_m": {
+        "min": 3.1401849173675503e-16,
+        "median": 3.1401849173675503e-16,
+        "p95": 3.1401849173675503e-16,
+        "maximum": 3.1401849173675503e-16
+      },
+      "rotation_residual_deg": {
+        "median": 3.278440724931703e-15,
+        "p95": 3.278440724931703e-15,
+        "maximum": 3.278440724931703e-15
+      },
+      "same_observation_matches_current_USD_within_1e_8_m": 4958,
+      "previous_control_USD_correspondence": {
+        "samples": 4957,
+        "within_1e_8_m": 4957,
+        "median_position_residual_m": 3.1401849173675503e-16
+      },
+      "direct_USD_vs_physical_hand_times_mount_max_position_m": null,
+      "actual_zero_delay_settings_observed": [
+        {
+          "/app/hydraEngine/waitIdle": true,
+          "/app/updateOrder/checkForHydraRenderComplete": 1000
+        }
+      ]
+    },
+    "wrist_camera": {
+      "samples": 4958,
+      "first": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 2.2291027918243403e-16,
+        "rotation_residual_deg": 2.3860064035609877e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "last": {
+        "observation_index": 4957,
+        "episode_t_s": 82.63333333333334,
+        "phase": "DIAGNOSTIC_HOLD",
+        "position_residual_m": 2.3055512673781017e-16,
+        "rotation_residual_deg": 7.928924363626392e-16,
+        "renderer_position_vs_previous_USD_m": 7.758567370127013e-08,
+        "renderer_rotation_vs_previous_USD_deg": 2.5139974133037304e-05,
+        "sensor_rendering_time_s": 82.64167097676545,
+        "sensor_minus_engine_origin_minus_obs_s": 4.309664163315574e-06
+      },
+      "worst_position": {
+        "observation_index": 1421,
+        "episode_t_s": 23.7,
+        "phase": "TRANSPORT",
+        "position_residual_m": 6.805778071794071e-16,
+        "rotation_residual_deg": 2.2824089217411463e-15,
+        "renderer_position_vs_previous_USD_m": 3.0172813890594997e-05,
+        "renderer_rotation_vs_previous_USD_deg": 0.0009826262602768481,
+        "sensor_rendering_time_s": 23.70833456981927,
+        "sensor_minus_engine_origin_minus_obs_s": 1.2360513217402058e-06
+      },
+      "worst_rotation": {
+        "observation_index": 2458,
+        "episode_t_s": 40.983333333333334,
+        "phase": "TRANSPORT_HOLD",
+        "position_residual_m": 8.777083671441753e-17,
+        "rotation_residual_deg": 5.794005852337517e-15,
+        "renderer_position_vs_previous_USD_m": 1.5701689096261343e-07,
+        "renderer_rotation_vs_previous_USD_deg": 1.9573149182643202e-05,
+        "sensor_rendering_time_s": 40.99166880454868,
+        "sensor_minus_engine_origin_minus_obs_s": 2.137447395966774e-06
+      },
+      "position_residual_m": {
+        "min": 0.0,
+        "median": 2.220446049250313e-16,
+        "p95": 4.46899245057492e-16,
+        "maximum": 6.805778071794071e-16
+      },
+      "rotation_residual_deg": {
+        "median": 1.5902962982019613e-15,
+        "p95": 3.5445982742084573e-15,
+        "maximum": 5.794005852337517e-15
+      },
+      "same_observation_matches_current_USD_within_1e_8_m": 4958,
+      "previous_control_USD_correspondence": {
+        "samples": 4957,
+        "within_1e_8_m": 307,
+        "median_position_residual_m": 3.962612201756434e-05
+      },
+      "direct_USD_vs_physical_hand_times_mount_max_position_m": 2.982894808906388e-08,
+      "actual_zero_delay_settings_observed": [
+        {
+          "/app/hydraEngine/waitIdle": true,
+          "/app/updateOrder/checkForHydraRenderComplete": 1000
+        }
+      ]
+    }
+  },
+  "raw_data_modified": false,
+  "Isaac_started": false,
+  "scope": "Actual renderer-to-USD observation association; not physical precision, collision penetration or real optical calibration. Near-previous-pose equality does not alone establish exact RGB exposure latency. record_valid does not certify zero latency.",
+  "comparison": {
+    "side_camera": {
+      "reference_max_position_residual_m": 3.1401849173675503e-16,
+      "current_max_position_residual_m": 3.1401849173675503e-16,
+      "reference_last_position_residual_m": 3.1401849173675503e-16,
+      "current_last_position_residual_m": 3.1401849173675503e-16,
+      "reference_source": "docs/lab_cuvette_loading/Env_v1/data/extract_continuous_latch01_inspection/renderer_USD_sync_audit.json",
+      "caveat": "Compare observed sensor association. Different control trials do not isolate dynamics or establish physics convergence."
+    },
+    "wrist_camera": {
+      "reference_max_position_residual_m": 6.805778071794071e-16,
+      "current_max_position_residual_m": 6.805778071794071e-16,
+      "reference_last_position_residual_m": 6.938893903907228e-17,
+      "current_last_position_residual_m": 2.3055512673781017e-16,
+      "reference_source": "docs/lab_cuvette_loading/Env_v1/data/extract_continuous_latch01_inspection/renderer_USD_sync_audit.json",
+      "caveat": "Compare observed sensor association. Different control trials do not isolate dynamics or establish physics convergence."
+    }
+  }
+}

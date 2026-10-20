@@ -1,0 +1,149 @@
+{
+  "schema": "labsim.Env_v1.continuous_latch01_control_summary.v1",
+  "source_files": [
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/result.json",
+      "sha256": "afd62a41571250b580d93d9073a89556ca725c93c49c357c26845ea484879230"
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/teacher_events.json",
+      "sha256": "ee6eb50522ee45527adc30026f2b025751dbc42472120e55daa888fe7cab02db"
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/config.yaml",
+      "sha256": "e85398d57815a2ab13f06ea285a6b89b7dd9ea0f0294cc1e63df79324c63dfbe"
+    }
+  ],
+  "raw_inputs_modified": false,
+  "result": {
+    "episode_id": "f54b2bf4-7f67-48d3-af19-ca46dbceed4f",
+    "task_type": "extract_transport",
+    "task_success": false,
+    "record_valid": true,
+    "failure_type": "TASK_INCOMPLETE",
+    "termination_reason": "EXTRACT_TRANSPORT_COMPLETE",
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "diagnostic_hold_window": {
+      "status": "complete",
+      "stable": false,
+      "required_duration_s": 3.0,
+      "measured_duration_s": 3.0,
+      "sample_count": 721,
+      "position_drift_m": 0.00023044468060467045,
+      "orientation_change_deg": 0.06253690309452196,
+      "criteria": {
+        "position_stable": false,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "bilateral_contact_during_hold": true,
+        "transport_above_target_xy": true,
+        "above_target_rim": true
+      },
+      "start_t": 39.3,
+      "end_t": 42.3
+    },
+    "grasp_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 3.0424905114330113e-05,
+      "maximum_orientation_drift_deg": 0.03552393725514095,
+      "maximum_configured_grasp_anchor_drift_m": 5.3879955195581535e-06,
+      "maximum_configured_grasp_anchor_axial_drift_m": 4.860736671360111e-06,
+      "maximum_configured_grasp_anchor_transverse_drift_m": 2.951375678502994e-06,
+      "configured_grasp_anchor_height_m": 0.053,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    },
+    "simulation_seconds": 42.3,
+    "actual_control_steps": 2537,
+    "actual_physics_steps": 10152,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "eligible_for_success_bc": false,
+    "eligible_for_failure_analysis": false
+  },
+  "events": [
+    {
+      "t": 4.016666666666667,
+      "event": "teacher_phase_transition",
+      "source": "RESET",
+      "target": "APPROACH_SOURCE"
+    },
+    {
+      "t": 11.016666666666667,
+      "event": "teacher_phase_transition",
+      "source": "APPROACH_SOURCE",
+      "target": "GRASP"
+    },
+    {
+      "t": 14.416666666666666,
+      "event": "first_bilateral_contact_stop_closure",
+      "actual_finger_positions_m": [
+        0.006609529256820679,
+        0.006609555799514055
+      ],
+      "previous_total_opening_command_m": 0.012333333333333203,
+      "frozen_total_opening_m": 0.012333333333333203,
+      "per_finger_compression_m": 0.000155109719231259,
+      "normal_load_basis": "mg/(2*mu)*safety/finger_kp; no wider than previous command"
+    },
+    {
+      "t": 14.516666666666667,
+      "event": "contact_latched",
+      "measured_finger_m": [
+        0.006564501207321882,
+        0.006564532406628132
+      ],
+      "commanded_total_opening_m": 0.012333333333333203,
+      "per_finger_compression_m": 0.00015510971923125903,
+      "latch_transition_policy": "preserve_first_contact_command",
+      "weight_based_candidate_opening_m": 0.012818814175487496,
+      "effective_measured_minus_command_per_finger_m": [
+        0.00039783454065528065,
+        0.00039786573996153027
+      ],
+      "compression_semantics": "Joint target difference, not measured material penetration; first-contact command may predate measured finger response",
+      "effort_limit_N": 8.0,
+      "friction_assumption": 0.6324555320336759,
+      "mass_kg": 0.02,
+      "finger_kp_N_per_m": 2000.0,
+      "truth_pose_used": true
+    },
+    {
+      "t": 15.266666666666667,
+      "event": "teacher_phase_transition",
+      "source": "GRASP",
+      "target": "EXTRACT"
+    },
+    {
+      "t": 22.283333333333335,
+      "event": "teacher_phase_transition",
+      "source": "EXTRACT",
+      "target": "TRANSPORT"
+    },
+    {
+      "t": 39.3,
+      "event": "teacher_phase_transition",
+      "source": "TRANSPORT",
+      "target": "TRANSPORT_HOLD"
+    },
+    {
+      "t": 42.3,
+      "event": "teacher_stop_suggestion",
+      "status": "EXTRACT_TRANSPORT_COMPLETE",
+      "phase": "TRANSPORT_HOLD",
+      "independent_task_result_not_assigned": true
+    }
+  ],
+  "scope": "Actual extraction and transport stages passed; overall extraction/transport hold subtask failed. Original score and200um threshold preserved; not full loading or a training success.",
+  "causal_scope": "Change continuous latch after fixed orientation baseline. Observed improvement supports avoiding opening discontinuity, not a global unique-cause proof."
+}
