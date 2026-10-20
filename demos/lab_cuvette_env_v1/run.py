@@ -39,7 +39,15 @@ def main(args=None):
     if args.mode=='audit':print('GEOMETRY_AUDIT',audit.get('geometry_valid'),flush=True);return 0
     lock=open('/tmp/labsim-V0_ext01-gpu.lock','a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     from isaacsim import SimulationApp
-    app=SimulationApp(dict(headless=args.headless,width=1280,height=720,extra_args=['--/app/extensions/fsWatcherEnabled=false']))
+    # These are the installed5.1 zero_delay experience's renderer ordering
+    # settings. They add no world.step/physics tick. Actual pose association
+    # must still be verified from CameraParams for each recorded run.
+    extra_args=['--/app/extensions/fsWatcherEnabled=false']
+    if cfg.env.get('render_zero_delay',False):
+        extra_args.extend(['--/app/hydraEngine/waitIdle=true','--/app/updateOrder/checkForHydraRenderComplete=1000'])
+    (out/'launch_runtime.json').write_text(json.dumps(dict(headless=args.headless,simulation_app_extra_args=extra_args,
+        render_zero_delay_requested=bool(cfg.env.get('render_zero_delay',False)),physics_hz=cfg.physics.hz,control_hz=cfg.physics.control_hz),indent=2)+'\n')
+    app=SimulationApp(dict(headless=args.headless,width=1280,height=720,extra_args=extra_args))
     env=None
     try:
         if args.mode=='plan':

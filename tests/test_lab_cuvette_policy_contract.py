@@ -8,7 +8,7 @@ except ImportError as exc:
 from scipy.spatial.transform import Rotation
 
 from policy_backends.lab_cuvette_env_v1.policy_adapters import (
-    LiberoTransferContract, Pi05LiberoAdapter, policy_observation,
+    LiberoTransferContract, Pi05LiberoAdapter, policy_observation, sensor_meta,
 )
 
 
@@ -39,6 +39,22 @@ def test_truth_is_absent_by_allowlist():
     result = policy_observation(observation())
     assert 'debug' not in result and 'teacher_internal' not in result
     assert 'images' in result and 'TCPpose' in result
+
+
+def test_camera_sensor_metadata_does_not_leak_renderer_or_depth_debug():
+    meta = {'name': 'wrist_camera', 'intrinsic_matrix_native': np.eye(3).tolist(),
+            'renderer_debug': {'distance_to_image_plane': {'center_m': .33}},
+            'configuration': {'debug_render_diagnostics': True},
+            'last_image_read': {'observation_simulation_time_s': .5, 'hidden_depth': 999},
+            'optical_conventions': {'quaternion': 'wxyz', 'debug': 999},
+            'unannounced_sensor': 'not declared'}
+    result = sensor_meta(meta)
+    assert set(result) == {'name', 'intrinsic_matrix_native', 'last_image_read', 'optical_conventions'}
+    assert result['last_image_read'] == {'observation_simulation_time_s': .5}
+    assert result['optical_conventions'] == {'quaternion': 'wxyz'}
+    obs = observation()
+    obs['camera_meta'] = {'wrist_camera': meta, 'debug_camera': meta}
+    assert policy_observation(obs)['camera_meta'] == {'wrist_camera': result}
 
 
 def test_libero_state_uses_base_frame_quaternion_and_signed_fingers():
@@ -98,3 +114,13 @@ def test_astra_direct_toolkit_cannot_expose_vla_or_expert(tmp_path):
     assert toolkit.memory._memory_access == 'read_only'
     with pytest.raises(ValueError, match='forbids'):
         LabSimToolkit(None, output_dir=tmp_path / 'invalid', mode='direct', vla_adapter=object())
+
+
+def test_spent_harness_action_budget_refuses_before_sensor_or_model_access(tmp_path):
+    pytest.importorskip('rpent')
+    from policy_backends.lab_cuvette_env_v1.rpent_extension import LabSimToolkit
+    toolkit = LabSimToolkit(None, output_dir=tmp_path / 'harness', mode='harness',
+                            vla_adapter=object(), maximum_action_calls=1)
+    toolkit._action_calls = 1
+    with pytest.raises(RuntimeError, match='budget reached'):
+        toolkit.vla_primitive('observe and move', maximum_actions=1)

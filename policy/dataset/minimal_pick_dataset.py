@@ -1,5 +1,6 @@
-"""ACT/DP adapter: commanded actions, episode-level splits, bounded action chunks."""
+"""ACT/DP adapter with episode or explicit scene-condition group splits."""
 import copy
+import json
 from pathlib import Path
 import h5py
 import numpy as np
@@ -16,7 +17,14 @@ from utils.episode_selection import (LEGACY_ABSOLUTE_ACTION_SEMANTICS,
 class MinimalPickDataset(BaseImageDataset):
     def __init__(self, shape_meta, dataset_path, horizon=16, n_obs_steps=1,
                  val_ratio=0.1, seed=42, policy_type="act",
-                 sample_filter="success", include_labels=None):
+                 sample_filter="success", include_labels=None, split_group_keys=None):
+        # Optional direct HDF5 episode attributes, never inferred from filenames
+        # or manufactured condition IDs. None/[] preserves the legacy split.
+        if isinstance(split_group_keys, (str, bytes)):
+            raise ValueError("split_group_keys must be a sequence of HDF5 attribute names")
+        self.split_group_keys = tuple(split_group_keys or ())
+        if any(not isinstance(key, str) or not key for key in self.split_group_keys) or len(set(self.split_group_keys)) != len(self.split_group_keys):
+            raise ValueError("split_group_keys requires unique, nonempty HDF5 attribute names")
         if sample_filter not in ("success", "failure", "all_valid"):
             raise ValueError("sample_filter must be success, failure or all_valid")
         self.sample_filter = sample_filter
@@ -31,6 +39,7 @@ class MinimalPickDataset(BaseImageDataset):
             raise ValueError("Invalid horizon or validation ratio")
         self.camera_names = [k for k, v in shape_meta["obs"].items() if v["type"] == "rgb"]
         self.group_paths, self.episode_metadata, self.excluded_episodes = {}, {}, {}
+        self.episode_group_values = {}
         with h5py.File(self.path, "r") as f:
             if "actions" in f and "agent_pose" in f:
                 candidates = [(str(f.attrs.get("episode_id", self.path.stem)), "/")]
@@ -61,12 +70,51 @@ class MinimalPickDataset(BaseImageDataset):
                 episodes.append(name)
                 self.group_paths[name] = group_path
                 self.episode_metadata[name] = metadata
+                if self.split_group_keys:
+                    values = {}
+                    for key in self.split_group_keys:
+                        if key not in group.attrs:
+                            raise ValueError(f"Missing split_group_keys attribute {key!r} in episode {name}; no fallback to episode split")
+                        value = group.attrs[key]
+                        if isinstance(value, np.ndarray) and value.shape == ():
+                            value = value.item()
+                        if isinstance(value, np.generic):
+                            value = value.item()
+                        if isinstance(value, bytes):
+                            value = value.decode("utf-8")
+                        unknown = isinstance(value, str) and value.strip().lower() in {"", "unknown", "unavailable", "null", "none"}
+                        if not isinstance(value, (str, bool, int, float)) or (isinstance(value, float) and not np.isfinite(value)) or unknown:
+                            raise ValueError(f"Split group attribute {key!r} must be a known finite scalar in episode {name}")
+                        values[key] = value
+                    self.episode_group_values[name] = values
         if not episodes:
             suffix = "complete successful episodes" if sample_filter == "success" else f"eligible {sample_filter} episodes"
             raise ValueError(f"Dataset contains no {suffix}")
-        shuffled = np.random.default_rng(seed).permutation(episodes).tolist()
-        n_val = min(len(episodes) - 1, max(1, round(len(episodes) * val_ratio))) if val_ratio else 0
-        self.train_episodes, self.val_episodes = shuffled[n_val:], shuffled[:n_val]
+        self.train_group_values, self.val_group_values = [], []
+        if self.split_group_keys:
+            groups = {}
+            for episode in episodes:
+                group = tuple(self.episode_group_values[episode][key] for key in self.split_group_keys)
+                groups.setdefault(group, []).append(episode)
+            # Renaming/reordering episodes must not move an existing condition
+            # across the split when the set of conditions is unchanged.
+            identities = sorted(groups, key=lambda values: json.dumps(values, allow_nan=False))
+            if val_ratio and len(identities) < 2:
+                raise ValueError("Scene-condition split requires at least two distinct groups for nonzero val_ratio; use val_ratio=0 for reading only")
+            order = np.random.default_rng(seed).permutation(len(identities)).tolist()
+            shuffled = [identities[index] for index in order]
+            # val_ratio applies to distinct conditions, not episode counts;
+            # unequal group sizes can produce a different episode fraction.
+            n_val = min(len(identities) - 1, max(1, round(len(identities) * val_ratio))) if val_ratio else 0
+            train_groups, val_groups = shuffled[n_val:], shuffled[:n_val]
+            self.train_episodes = [e for group in train_groups for e in groups[group]]
+            self.val_episodes = [e for group in val_groups for e in groups[group]]
+            self.train_group_values = [dict(zip(self.split_group_keys, group)) for group in train_groups]
+            self.val_group_values = [dict(zip(self.split_group_keys, group)) for group in val_groups]
+        else:
+            shuffled = np.random.default_rng(seed).permutation(episodes).tolist()
+            n_val = min(len(episodes) - 1, max(1, round(len(episodes) * val_ratio))) if val_ratio else 0
+            self.train_episodes, self.val_episodes = shuffled[n_val:], shuffled[:n_val]
         self._set_episodes(self.train_episodes)
 
     def _set_episodes(self, episodes):

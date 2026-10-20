@@ -1,7 +1,7 @@
 """Pure contact-sign/region math, not a substitute for PhysX API verification."""
 import unittest
 import numpy as np
-from demos.lab_cuvette_env_v1.physics_capture import resolve_contact_sign,classify_seat_point
+from demos.lab_cuvette_env_v1.physics_capture import resolve_contact_sign,classify_seat_point,rigid_following_bottom
 
 class ContactPartitionTest(unittest.TestCase):
     def test_signed_point_sum_is_bound_to_pair_aggregate(self):
@@ -22,6 +22,13 @@ class ContactPartitionTest(unittest.TestCase):
         self.assertEqual(kind,'wall_or_other')
         kind,_,_=classify_seat_point([.1063,.2,.914],[1,0,.01],origin,R,.027)
         self.assertEqual(kind,'entrance_or_top_feature')
+
+    def test_commanded_bottom_uses_actual_outline_and_relative_transform(self):
+        from scipy.spatial.transform import Rotation
+        vertices=np.array([[-.01,-.02,0],[.01,.02,.0675]])
+        value=rigid_following_bottom(vertices,[0,0,.1],Rotation.identity(),[0,0,1.],Rotation.from_euler('x',180,degrees=True))
+        self.assertAlmostEqual(value,.8325)
+        self.assertNotAlmostEqual(value,1.-.1-.0675/2)  # The object origin/centre is not its lowest outline point.
 
     def test_net_seat_z_does_not_make_top_contact_bottom_support(self):
         kind,_,force=classify_seat_point([0,0,.027],[0,0,5.],[0,0,0],np.eye(3),.027)

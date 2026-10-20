@@ -63,6 +63,71 @@ class DatasetContractTest(unittest.TestCase):
         np.testing.assert_array_equal(middle["obs"]["agent_pose"][:, 0], np.array([0, 1, 2]) + offset)
         self.assertEqual(float(middle["action"][2, 0]), 102. + offset)
 
+    def condition_attributes(self, *, one_condition=False):
+        with h5py.File(self.path, "r+") as f:
+            for index in range(3):
+                f[f"episode_{index:04d}"].attrs.update(
+                    source_slot_id="A1" if one_condition or index < 2 else "B1",
+                    target_seat_id="candidate_far_hinge", scene_version="Env_v1",
+                    asset_version="actual-fixture-version", task_type="loading")
+
+    def test_scene_condition_groups_never_cross_train_validation(self):
+        self.condition_attributes()
+        keys = ["source_slot_id", "target_seat_id", "scene_version", "asset_version", "task_type"]
+        data = self.dataset(val_ratio=.34, split_group_keys=keys)
+        validation = data.get_validation_dataset()
+        self.assertFalse(set(data.episode_ids) & set(validation.episode_ids))
+        train = {tuple(g[k] for k in keys) for g in data.train_group_values}
+        val = {tuple(g[k] for k in keys) for g in data.val_group_values}
+        self.assertFalse(train & val)
+        self.assertEqual(("episode_0000" in data.episode_ids), ("episode_0001" in data.episode_ids))
+        self.assertEqual(set(data.episode_ids) | set(validation.episode_ids),
+                         {"episode_0000", "episode_0001", "episode_0002"})
+        repeat = self.dataset(val_ratio=.34, split_group_keys=keys)
+        self.assertEqual(data.train_episodes, repeat.train_episodes)
+        self.assertEqual(data.val_episodes, repeat.val_episodes)
+
+    def test_requested_condition_field_missing_raises_without_fallback(self):
+        self.condition_attributes()
+        with h5py.File(self.path, "r+") as f:
+            del f["episode_0000"].attrs["scene_version"]
+        with self.assertRaisesRegex(ValueError, "Missing split_group_keys attribute 'scene_version'.*no fallback"):
+            self.dataset(val_ratio=0, split_group_keys=["source_slot_id", "scene_version"])
+
+    def test_same_conditions_keep_split_when_episode_names_reorder(self):
+        self.condition_attributes()
+        before = self.dataset(val_ratio=.34, split_group_keys=["source_slot_id"])
+        with h5py.File(self.path, "r+") as f:
+            f.move("episode_0000", "episode_zz00")
+            f.move("episode_0001", "episode_zz01")
+        after = self.dataset(val_ratio=.34, split_group_keys=["source_slot_id"])
+        self.assertEqual(before.train_group_values, after.train_group_values)
+        self.assertEqual(before.val_group_values, after.val_group_values)
+
+    def test_default_and_empty_keys_keep_original_episode_split(self):
+        self.condition_attributes(one_condition=True)
+        expected = np.random.default_rng(42).permutation(
+            ["episode_0000", "episode_0001", "episode_0002"]).tolist()
+        for keys in (None, []):
+            data = self.dataset(val_ratio=.34, split_group_keys=keys)
+            self.assertEqual(data.val_episodes, expected[:1])
+            self.assertEqual(data.train_episodes, expected[1:])
+
+    def test_one_condition_cannot_fake_a_validation_holdout(self):
+        self.condition_attributes(one_condition=True)
+        with self.assertRaisesRegex(ValueError, "at least two distinct groups"):
+            self.dataset(val_ratio=.34, split_group_keys=["source_slot_id"])
+        data = self.dataset(val_ratio=0, split_group_keys=["source_slot_id"])
+        self.assertEqual(len(data.episode_ids), 3)
+        self.assertEqual(data.val_episodes, [])
+
+    def test_unknown_condition_is_not_treated_as_a_measured_group(self):
+        self.condition_attributes()
+        with h5py.File(self.path, "r+") as f:
+            f["episode_0000"].attrs["source_slot_id"] = "unknown"
+        with self.assertRaisesRegex(ValueError, "known finite scalar"):
+            self.dataset(val_ratio=0, split_group_keys=["source_slot_id"])
+
 
 if __name__ == "__main__":
     unittest.main()

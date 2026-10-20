@@ -27,7 +27,9 @@ class FixtureEnvironment:
         assert threading.get_ident()==self.owner,'fixture called outside main thread'
     def reset(self,seed=None,options=None):
         self.check();self.steps=0;self.t=0.;self.episode_id='fixture-'+str(seed)
-        return self.get_observation(),{'fixture_only':True}
+        info={'fixture_only':True,'mode_received':(options or {}).get('mode')}
+        if (options or {}).get('subtask')=='loading':info.update(terminated=True,termination_reason='GEOMETRY_PRECHECK_BLOCKED',task_success=None)
+        return self.get_observation(),info
     def get_observation(self):
         self.check();return {'episode_id':self.episode_id,'steps':self.steps,'simulation_time':self.t,'owner_thread':self.owner,'image':np.arange(60,dtype=np.uint8).reshape(4,5,3)}
     def step(self,action):
@@ -108,3 +110,41 @@ def test_real_rpent_wire_main_thread_and_paused_wait(tmp_path):
         if process.poll() is None:
             process.terminate()
         process.communicate(timeout=5)
+
+
+def test_startup_geometry_termination_never_contacts_model_or_steps(tmp_path):
+    pytest.importorskip('rpent')
+    from rpent.utils.rpc.http_rpc import HttpRpcClient
+    ready = tmp_path / 'gate_ready.json'
+    server = subprocess.Popen([sys.executable, '-u', '-c', _SERVER, str(ready)],
+                              cwd=Path(__file__).resolve().parents[1],
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    try:
+        deadline = time.monotonic() + 10
+        while not ready.exists() and time.monotonic() < deadline and server.poll() is None:
+            time.sleep(.02)
+        assert ready.exists(), server.communicate(timeout=1)
+        meta = json.loads(ready.read_text())
+        output = tmp_path / 'startup_attempt'
+        attempt = subprocess.run([sys.executable, '-m', 'policy_backends.lab_cuvette_env_v1.policy_runner',
+            '--backend', 'pi05', '--env-endpoint', meta['endpoint'], '--output', str(output),
+            '--subtask', 'loading', '--layout-mode', 'random', '--max-model-requests', '1', '--max-actions', '5'],
+            cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True, timeout=15)
+        assert attempt.returncode == 3, attempt.stdout + attempt.stderr
+        result = json.loads((output / 'result.json').read_text())
+        assert result['startup_terminated'] is True
+        assert result['model_service_contacted'] is False
+        assert result['actual_model_requests'] == result['executed_actions'] == 0
+        assert result['task_success'] is None
+        assert result['counts_as_physical_task_failure'] is False
+        assert result['reset_info']['mode_received'] == 'random'
+        events = [json.loads(row) for row in ready.with_suffix('.rpc.jsonl').read_text().splitlines()]
+        assert not any(row['method'] in {'env.step','env.render_camera','env.get_camera_meta'} for row in events)
+        client = HttpRpcClient(meta['endpoint'])
+        assert client.call('env.get_observation')['steps'] == 0
+        client.call('env.close')
+        assert server.wait(timeout=5) == 0
+    finally:
+        if server.poll() is None:
+            server.terminate()
+        server.communicate(timeout=5)

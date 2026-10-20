@@ -15,6 +15,18 @@ from demos.lab_cuvette_env_v1.cameras import create_cameras,policy_image
 from demos.lab_cuvette_env_v1.physics_capture import PhysicsRecorder
 
 class LabCuvetteLoadingEnvV1:
+    # The recorder accesses rig.get_meta directly. Public calibration must not
+    # expose debug depth/renderer state or any future private metadata fields.
+    PUBLIC_CAMERA_META_FIELDS=frozenset((
+        'name','prim_path','physical_parent','mounting',
+        'local_pose_position_m','local_pose_quaternion_wxyz',
+        'world_pose_position_m','world_pose_quaternion_wxyz',
+        'world_from_camera_usd','camera_cv_from_world','extrinsic_translation_unit','meters_per_stage_unit',
+        'optical_conventions','intrinsic_matrix_native','intrinsic_matrix_policy_256',
+        'focal_length_cm','horizontal_aperture_mm','vertical_aperture_mm',
+        'resolution_wh','channels','native_array_layout','policy_transform',
+        'requested_fps','actual_sensor_frequency_hz','sensor_rendering_frame','sensor_rendering_time_s',
+        'sensor_timestamp_clock','sensor_frame_token_semantics','read_simulation_time_s','source'))
     ACTION_SPECS={
       'joint_position':{'values':'7 arm rad or explicit9 with2 finger metres','frame':'joint','gripper':'total opening metres'},
       'joint_velocity':{'values':'7 arm rad/s; integrated per60Hz control tick','frame':'joint','gripper':'total opening metres'},
@@ -63,7 +75,8 @@ class LabCuvetteLoadingEnvV1:
             self.recorder.before_step(self.steps+1,(self.steps+1)/self.cfg.physics.hz,'RESET_INITIALIZATION')
             self.world.step(render=False);self.steps+=1;self.t=self.steps/self.cfg.physics.hz
             self.debug=self.recorder.capture(self.steps,self.t,'RESET_INITIALIZATION',self.qcmd,self.grip/2,self.effort);self.scorer.update(self.debug)
-        self.world.render();self.rig.reset_history()
+        for _ in range(4):self.world.render()
+        self.rig.reset_history()
         self.images=self.rig.get_images();self.camera_meta={n:self.rig.get_meta(n) for n in self.rig.names};self._write(self.episode_dir/'cameras.json',self.camera_meta)
         self._write(self.episode_dir/'geometry_audit_binding.json',self.geometry_audit)
         contract=dict(version='Env_v1',source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,
@@ -76,9 +89,9 @@ class LabCuvetteLoadingEnvV1:
             policy_id=self.options.get('policy_id','teacher' if self.options.get('teacher') else 'external'),demonstrator_id=self.options.get('demonstrator_id','unknown'),
             task_type=self.cfg.env.task_type,source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,asset_version=contract['asset_manifest_sha256']))
         self._obs=self._public_observation();self._record_state=self._collector_state();self.ended=False
-        self._video_writers={};self._video_last_t=-1.;self._write_video()
+        self._video_writers={};self._video_last_t=-1.;self._video_frame_times=[];self._write_video()
         self._write(self.episode_dir/'initial_debug.json',self.debug)
-        self._write(self.episode_dir/'initialization_timing.json',dict(engine_clock_origin_s=self.engine_time_origin,first_observation_episode_time_s=self.t,physics_steps_recorded_before_first_observation=self.steps,source_early_fall_recorded_from_step0=True,physics_backend='CPU PhysX',render_transform_path='Fabric disabled; explicit PhysX USD writeback',transform_update_settings=list(pc.get_physx_update_transformations_settings())))
+        self._write(self.episode_dir/'initialization_timing.json',dict(engine_clock_origin_s=self.engine_time_origin,first_observation_episode_time_s=self.t,physics_steps_recorded_before_first_observation=self.steps,reset_render_flush_passes=4,render_flush_passes_per_control=2,source_early_fall_recorded_from_step0=True,physics_backend='CPU PhysX',render_transform_path='Fabric disabled; explicit PhysX USD writeback',transform_update_settings=list(pc.get_physx_update_transformations_settings())))
         if self.cfg.env.task_type=='loading' and self._geometry_valid() is not True:
             self.finalize_episode('GEOMETRY_PRECHECK_BLOCKED','GEOMETRY_PRECHECK_BLOCKED')
         return self.get_observation(),self._public_info()
@@ -120,7 +133,11 @@ class LabCuvetteLoadingEnvV1:
         if self._obs is None:raise RuntimeError('reset first')
         return copy.deepcopy(self._obs)
     def get_debug_observation(self):return copy.deepcopy(self.debug)
-    def get_camera_meta(self,camera_name,**kwargs):return self.rig.get_meta(camera_name)
+    def get_camera_meta(self,camera_name,**kwargs):
+        """Public camera calibration/time only; privileged diagnostics stay on disk."""
+        if kwargs:raise ValueError('Public camera metadata does not accept debug/extra options')
+        metadata=self.rig.get_meta(camera_name)
+        return {key:copy.deepcopy(value) for key,value in metadata.items() if key in self.PUBLIC_CAMERA_META_FIELDS}
     def render_camera(self,camera_name,**kwargs):
         if camera_name not in self.images:raise KeyError(camera_name)
         return self.images[camera_name].copy()
@@ -170,13 +187,14 @@ class LabCuvetteLoadingEnvV1:
             dr=(goalr*r.inv()).as_rotvec();norm=np.linalg.norm(dr)
             if norm>self.cfg.env.action_max_rotation_rad:goalr=Rotation.from_rotvec(dr/norm*self.cfg.env.action_max_rotation_rad)*r
             quat=np.roll(goalr.as_quat(),1);goal=np.r_[goalp,quat]
-            if self._ik_goal is None or not np.allclose(goal,self._ik_goal,atol=1e-12,rtol=0):
+            cache_hit=bool(self._ik_goal is not None and self._ik_solution is not None and np.allclose(goal,self._ik_goal,atol=1e-12,rtol=0))
+            if not cache_hit:
                 solution,valid=self.solver.get_kinematics_solver().compute_inverse_kinematics(self.solver.get_end_effector_frame(),goalp,quat,warm_start=self._ik_seed,position_tolerance=float(self.ctx['old'].robot.ik_position_tolerance_m),orientation_tolerance=float(self.ctx['old'].robot.ik_orientation_tolerance_rad))
                 if not valid:raise RuntimeError('CONTROL_OR_IK_FAILURE')
                 self._ik_seed=np.asarray(solution).copy();self._ik_solution=self.solver.get_joints_subset().make_articulation_action(solution,None);self._ik_goal=goal.copy()
             ik=self._ik_solution
             q[np.asarray(ik.joint_indices,int)]=ik.joint_positions;target_pose=dict(position_m=goalp.tolist(),quaternion_wxyz=quat.tolist())
-            conversion['IK']=dict(frame=self.solver.get_end_effector_frame(),warm_start='previous IK solution; reset initial actual arm q',position_tolerance_m=float(self.ctx['old'].robot.ik_position_tolerance_m),orientation_tolerance_rad=float(self.ctx['old'].robot.ik_orientation_tolerance_rad),unchanged_goal_cached=True)
+            conversion['IK']=dict(frame=self.solver.get_end_effector_frame(),warm_start='previous IK solution; reset initial actual arm q',position_tolerance_m=float(self.ctx['old'].robot.ik_position_tolerance_m),orientation_tolerance_rad=float(self.ctx['old'].robot.ik_orientation_tolerance_rad),unchanged_goal_cache_enabled=True,unchanged_goal_cache_hit=cache_hit,solver_called=not cache_hit)
         else:raise ValueError('Unknown action type')
         q[7:]=opening/2
         rate=np.asarray(self.ctx['old'].robot.max_velocity[:7])/self.cfg.physics.control_hz
@@ -218,7 +236,8 @@ class LabCuvetteLoadingEnvV1:
                 evidence=self.scorer.update(self.debug)
                 if evidence.get('terminate') and stop is None:stop=(evidence['termination_reason'],evidence.get('failure_type'))
             self.world.physics_sim_view.update_articulations_kinematic()
-            self.world.render();self.images=self.rig.get_images();self.control_steps+=1;self._obs=self._public_observation();next_state=self._collector_state()
+            for _ in range(2):self.world.render()
+            self.images=self.rig.get_images();self.control_steps+=1;self._obs=self._public_observation();next_state=self._collector_state()
             if self.t>=self.cfg.env.timeout_s:stop=stop or ('SIMULATION_TIMEOUT','TIMEOUT')
             if self._geometry_valid() is not True and np.linalg.norm(np.asarray(self.debug['object_position_m'])[:2]-self.ctx['fixtures']['target_floor'][:2])<.02 and self.debug['source_bottom_z_m']<self.ctx['fixtures']['target_rim_z']+.0005:
                 stop=('GEOMETRY_SAFETY_STOP','GEOMETRY_PRECHECK_BLOCKED')
@@ -248,9 +267,13 @@ class LabCuvetteLoadingEnvV1:
         result=results[-1]
         if return_all_frames:result=(*result[:4],dict(result[4],all_frames=[x[0] for x in results]))
         return result
-    def _write_video(self):
+    def _write_video(self,*,force=False):
         import cv2
-        if self.t-self._video_last_t<1/30-1e-9:return
+        # The last control state can fall between native30Hz movie samples.
+        # Append that actual terminal state once, without duplicating a state
+        # already written at the same simulation time.
+        if abs(self.t-self._video_last_t)<1e-9:return False
+        if not force and self.t-self._video_last_t<1/30-1e-9:return False
         self._video_last_t=self.t;frames=[]
         for name in self.rig.names:
             frame=cv2.cvtColor(self.images[name],cv2.COLOR_RGB2BGR);h,w=frame.shape[:2]
@@ -260,6 +283,8 @@ class LabCuvetteLoadingEnvV1:
         cv2.putText(both,f'Env_v1 {self.cfg.env.task_type} | t={self.t:.3f}s {self.phase}',(8,25),cv2.FONT_HERSHEY_SIMPLEX,.55,(255,255,255),2)
         if 'dual' not in self._video_writers:self._video_writers['dual']=cv2.VideoWriter(str(self.episode_dir/'dual_view.mp4'),cv2.VideoWriter_fourcc(*'mp4v'),30,(both.shape[1],both.shape[0]))
         self._video_writers['dual'].write(both)
+        self._video_frame_times.append(float(self.t))
+        return True
     def finalize_episode(self,termination_reason='POLICY_BUDGET',failure_type=None):
         if self._result is not None:return copy.deepcopy(self._result)
         if self.ctx is None:return None
@@ -272,7 +297,12 @@ class LabCuvetteLoadingEnvV1:
         self._result['physical_score_record_valid']=physical_score.get('record_valid')
         self._result['record_integrity_errors']=list(self.collector._integrity_errors)
         self._write(self.episode_dir/'final_camera_meta.json',{n:self.rig.get_meta(n) for n in self.rig.names})
-        self._write_video()
+        terminal_frame_appended=self._write_video(force=True)
+        self._write(self.episode_dir/'video_timestamps.json',dict(schema='labsim.Env_v1.native_video_timestamps.v1',
+            videos=['side_camera.mp4','wrist_camera.mp4','dual_view.mp4'],nominal_fps=30,
+            frame_simulation_times_s=self._video_frame_times,terminal_simulation_time_s=self.t,
+            terminal_frame_appended_at_finalize=terminal_frame_appended,
+            semantics='Actual sampled simulation times; final state appended once if not already sampled. Constant-rate MP4 endpoint spacing may differ from the final simulation interval.'))
         for writer in self._video_writers.values():writer.release()
         self._video_writers={};self.ended=True;self._write(self.episode_dir/'result.json',self._result)
         return copy.deepcopy(self._result)

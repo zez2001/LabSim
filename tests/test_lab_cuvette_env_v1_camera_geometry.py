@@ -1,7 +1,7 @@
 """CPU camera-axis math; rendered visibility still requires real Isaac checks."""
 import unittest
 import numpy as np
-from demos.lab_cuvette_env_v1.cameras import look_at_usd, pose_matrix, policy_image, normalized_camera_spec, DEFAULT_CAMERA_CONFIG
+from demos.lab_cuvette_env_v1.cameras import look_at_usd, pose_matrix, policy_image, normalized_camera_spec, CameraRig, DEFAULT_CAMERA_CONFIG,depth_summary,diagnostic_json
 
 class CameraAxisTest(unittest.TestCase):
     def test_optical_axis_points_at_target_and_up_is_projected_correctly(self):
@@ -31,6 +31,26 @@ class CameraAxisTest(unittest.TestCase):
         self.assertEqual(spec['prim_path'],'/World/Franka/panda_hand/WristCameraV1')
         json.dumps(spec,allow_nan=False)
 
+    def test_cleanup_continues_after_vendor_detach_error_and_is_idempotent(self):
+        class BrokenAnnotator:
+            def detach(self,paths):raise TypeError('Invalid NodeObj object in Py_Node in getAttributes')
+        class Product:
+            def __init__(self):self.destroyed=False
+            def destroy(self):self.destroyed=True
+        class Sensor:
+            def __init__(self):
+                self._custom_annotators={'rgb':BrokenAnnotator()};self._fabric_time_annotator=None
+                self._render_product_path='/Render/product';self._render_product=Product();self._current_frame={}
+            def pause(self):pass
+        sensors={name:Sensor() for name in ('side_camera','wrist_camera')}
+        products=[s._render_product for s in sensors.values()]
+        rig=CameraRig({},sensors,{},1.)
+        result=rig.close()
+        self.assertTrue(result['cleanup_errors_observed']);self.assertTrue(rig.closed)
+        self.assertTrue(all(p.destroyed for p in products))
+        self.assertTrue(all(not s._custom_annotators and s._render_product is None for s in sensors.values()))
+        self.assertIsNone(rig.close())
+
     def test_bad_axis_is_not_silently_replaced(self):
         with self.assertRaises(ValueError):look_at_usd([0,0,0],[0,0,0],[0,0,1])
         with self.assertRaises(ValueError):look_at_usd([0,0,1],[0,0,0],[0,0,1])
@@ -39,5 +59,14 @@ class CameraAxisTest(unittest.TestCase):
         source=np.zeros((480,640,3),np.uint8);source[:,:,0]=127;source[:,:,2]=31
         out=policy_image(source)
         self.assertEqual(out.shape,(3,256,256));self.assertTrue((out[0]==127).all());self.assertTrue((out[2]==31).all())
+
+    def test_debug_depth_nonfinite_values_are_not_zero_filled_or_policy_images(self):
+        import json
+        values=np.array([[np.inf,0],[.25,np.nan]])
+        result=depth_summary(values)
+        self.assertEqual(result['finite_positive_fraction'],.25)
+        self.assertEqual(result['min_m'],.25);self.assertIsNone(result['center_m'])
+        encoded=json.dumps(diagnostic_json(dict(depth=result,raw_matrix=np.eye(4))),allow_nan=False)
+        self.assertIn('null',encoded)
 
 if __name__=='__main__':unittest.main()

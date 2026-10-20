@@ -33,7 +33,42 @@ def policy_observation(observation: dict) -> dict:
     allowed = ("episode_id", "step_index", "simulation_time", "task_language",
                "images", "joint_positions", "joint_velocities", "TCPpose", "camera_meta", "action_spec",
                "source_slot_id", "target_seat_id", "scene_version", "asset_version")
-    return {key: observation[key] for key in allowed if key in observation}
+    result = {key: observation[key] for key in allowed if key in observation}
+    if "camera_meta" in result:
+        result["camera_meta"] = {name: sensor_meta(meta) for name, meta in result["camera_meta"].items()
+                                 if name in {"side_camera", "wrist_camera"}}
+    return result
+
+
+def sensor_meta(metadata: dict) -> dict:
+    """Declared RGB sensor calibration/timing only; renderer/depth stays audit-only.
+
+    Explicit top-level and nested allowlists prevent a future debug addition
+    inside an otherwise public metadata container from reaching the model.
+    """
+    direct = ("name", "prim_path", "physical_parent", "mounting",
+              "local_pose_position_m", "local_pose_quaternion_wxyz",
+              "world_pose_position_m", "world_pose_quaternion_wxyz",
+              "world_from_camera_usd", "camera_cv_from_world",
+              "extrinsic_translation_unit", "meters_per_stage_unit",
+              "configured_mount_from_parent", "extrinsic_pose_source",
+              "intrinsic_matrix_native", "intrinsic_matrix_policy_256",
+              "focal_length_cm", "horizontal_aperture_mm", "vertical_aperture_mm",
+              "resolution_wh", "channels", "native_array_layout", "requested_fps",
+              "actual_sensor_frequency_hz", "sensor_rendering_time_s", "sensor_timestamp_clock",
+              "sensor_frame_token_semantics", "read_simulation_time_s", "source", "synthetic_duplicate")
+    nested = {
+        "optical_conventions": ("usd", "opencv", "world", "quaternion"),
+        "policy_transform": ("resize_wh", "interpolation", "layout", "crop", "rotation_deg", "flip", "aspect_ratio"),
+        "sensor_rendering_frame": ("referenceTimeDenominator", "referenceTimeNumerator"),
+        "last_image_read": ("sensor_rendering_time_s", "repeated_sensor_frame", "black_frame",
+                            "mean_intensity", "image_orientation_transform", "observation_simulation_time_s"),
+    }
+    result = {key: metadata[key] for key in direct if key in metadata}
+    for key, names in nested.items():
+        if isinstance(metadata.get(key), dict):
+            result[key] = {name: metadata[key][name] for name in names if name in metadata[key]}
+    return result
 
 
 def _rgb(observation: dict, key: str) -> np.ndarray:
@@ -138,6 +173,7 @@ class Pi05LiberoAdapter:
         if self.episode_id != episode_id:
             raise ValueError("episode changed: call adapter.reset before reusing model history")
         encoded = self.encode_observation(observation)
+        started_unix_s = time.time()
         started = time.perf_counter()
         raw = np.asarray(self._model.predict(encoded, {"mode": "eval"}), dtype=np.float64)
         elapsed = time.perf_counter() - started
@@ -148,6 +184,9 @@ class Pi05LiberoAdapter:
             "policy_id": self.contract.checkpoint_id,
             "episode_id": episode_id, "observation_step": int(observation["step_index"]),
             "inference_wall_s": elapsed, "contract": asdict(self.contract),
+            "started_wall_unix_s": started_unix_s, "finished_wall_unix_s": time.time(),
+            "input_image_sha256": {name: hashlib.sha256(encoded[key].tobytes()).hexdigest()
+                                   for name, key in (("side_camera", "main_images"), ("wrist_camera", "wrist_images"))},
             "contract_sha256": self.contract.contract_sha256,
             "state_vector": encoded["states"].tolist(),
             "raw_output_shape": list(raw.shape), "inference_call": self.inference_calls,

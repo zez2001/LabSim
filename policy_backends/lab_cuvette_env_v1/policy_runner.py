@@ -21,7 +21,7 @@ from rpent.planner.codex import CodexPlanner
 from rpent.utils.rpc.http_rpc import HttpRpcClient
 from rpent.utils.logging import init_output_dir
 
-from .policy_adapters import LiberoTransferContract, Pi05LiberoAdapter, append_event, policy_observation
+from .policy_adapters import LiberoTransferContract, Pi05LiberoAdapter, append_event, policy_observation, sensor_meta
 from .rpent_extension import LabSimEnvClient, LabSimToolkit, _system_prompt
 
 
@@ -29,10 +29,12 @@ class RestrictedLabSimCodexPlanner(CodexPlanner):
     """Reuse RPent/auth while disabling unrelated installed tools per process."""
     def _build_config(self, mcp_url):
         cfg = super()._build_config(mcp_url)
+        # Desktop runtime exposes MCP dispatch through code_mode_host. Disabling
+        # it hides even our allowed tools; shell and unrelated MCPs stay disabled.
         extra = ["web_search=\"disabled\"", "agents.enabled=false", "tools.view_image=false",
-                 "project_doc_max_bytes=0"]
+                 "project_doc_max_bytes=0", "features.code_mode_host=true"]
         for name in ("shell_tool", "view_image", "apps", "browser_use", "browser_use_external",
-                     "computer_use", "image_generation", "multi_agent", "skill_search", "code_mode_host",
+                     "computer_use", "image_generation", "multi_agent", "skill_search",
                      "code_mode", "hooks", "memories"):
             extra.append(f"features.{name}=false")
         user_config = Path.home() / ".codex" / "config.toml"
@@ -83,7 +85,8 @@ def main(argv=None):
     request = vars(args) | {"started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                             "scorer_truth_visible": False, "physics_during_inference": "paused",
                             "model_id": "gpt-6-astra" if args.backend != "pi05" else "RLinf-Pi05-LIBERO-130-fullshot-SFT",
-                            "expert_available": False, "vla_available": args.backend != "astra", "policy_config_snapshot": policy_cfg}
+                            "expert_available": False, "vla_available": args.backend != "astra", "policy_config_snapshot": policy_cfg,
+                            "observation_contract": "rgb_proprio_language_sensor_meta_whitelist_v1"}
     (out / "request.json").write_text(json.dumps(request, indent=2) + "\n")
     env = None
     stage = "ENV_CONNECT"
@@ -108,6 +111,7 @@ def main(argv=None):
         result.update(startup_terminated=False, model_service_contacted=False)
         camera_meta = {name: env.get_camera_meta(name) for name in ("side_camera", "wrist_camera")}
         (out / "camera_meta.json").write_text(json.dumps(camera_meta, indent=2, default=lambda x: x.tolist() if hasattr(x, "tolist") else str(x)) + "\n")
+        (out / "policy_camera_meta.json").write_text(json.dumps({name: sensor_meta(meta) for name, meta in camera_meta.items()}, indent=2, default=lambda x: x.tolist() if hasattr(x, "tolist") else str(x)) + "\n")
         result["model_visible_state_keys"] = list(policy_observation(obs).keys())
         adapter = None
         if args.backend in {"pi05", "harness"}:

@@ -25,7 +25,7 @@ from rpent.session import EnvState
 from rpent.tools.toolkit import Toolkit, readonly
 from rpent.utils.rpc.http_rpc import HttpRpcClient
 
-from .policy_adapters import Pi05LiberoAdapter, append_event, policy_observation
+from .policy_adapters import Pi05LiberoAdapter, append_event, policy_observation, sensor_meta
 
 
 class LabSimEnvFacade(BaseEnvFacade):
@@ -175,7 +175,11 @@ class LabSimToolkit(Toolkit):
         obs = policy_observation(self.env.get_observation())
         payload = {key: value.tolist() if isinstance(value, np.ndarray) else value
                    for key, value in obs.items() if key != "images"}
-        payload["camera_meta"] = {name: self.env.get_camera_meta(name) for name in ("side_camera", "wrist_camera")}
+        full_meta = {name: self.env.get_camera_meta(name) for name in ("side_camera", "wrist_camera")}
+        append_event(self.output_dir / "camera_meta_audit.jsonl", {
+            "episode_id": obs["episode_id"], "step_index": obs["step_index"],
+            "policy_observation": False, "camera_meta": full_meta})
+        payload["camera_meta"] = {name: sensor_meta(meta) for name, meta in full_meta.items()}
         for name, result_key in (("side_camera", "_image_cam_bytes"), ("wrist_camera", "_image_wrist_bytes")):
             rgb = np.asarray(obs["images"][name])
             if rgb.dtype != np.uint8 or rgb.ndim != 3 or rgb.shape[-1] != 3:
@@ -204,6 +208,21 @@ class LabSimToolkit(Toolkit):
         if self._action_calls >= self._maximum_action_calls:
             raise RuntimeError("declared planner action call budget reached")
         self._action_calls += 1
+
+    def _close_spent_action_budget(self):
+        if self._action_calls < self._maximum_action_calls:
+            return False
+        if self._last_motion_result and (self._last_motion_result[2] or self._last_motion_result[3]):
+            return False
+        final = self.env.finalize_episode(termination_reason="POLICY_BUDGET")
+        if isinstance(final, dict) and "task_success" in final:
+            self._task_success = final["task_success"]
+        if self._last_motion_result:
+            obs, reward, _, _, info = self._last_motion_result
+            info = dict(info, terminated=True, termination_reason="POLICY_BUDGET", task_success=self._task_success)
+            self._last_motion_result = (obs, reward, True, True, info)
+        append_event(self.output_dir / "policy_tools.jsonl", {"event": "action_budget_finalized", "result": final})
+        return True
 
     def bounded_action(self, kind, values, gripper_opening_m, duration_s=.05):
         self._consume_action()
@@ -238,11 +257,17 @@ class LabSimToolkit(Toolkit):
                      "raw_values": raw, "executed_envelope": command, "reward": result[1],
                      "terminated": result[2], "truncated": result[3], "task_success": self._task_success,
                      "simulation_time": result[0].get("simulation_time")})
-        return {"action": command, "terminated": result[2], "truncated": result[3], "task_success": self._task_success}
+        exhausted = self._close_spent_action_budget()
+        return {"action": command, "terminated": bool(result[2] or exhausted), "truncated": bool(result[3] or exhausted), "task_success": self._task_success, "budget_exhausted": exhausted}
 
     def vla_primitive(self, instruction, maximum_actions=5):
         if self.vla is None or self.mode != "harness":
             raise RuntimeError("VLA is not available in direct mode")
+        # Refuse before reading sensors or invoking the model when no physical
+        # actions remain. A late tool call must not spend unbounded inference.
+        self.raise_if_cancelled()
+        if self._action_calls >= self._maximum_action_calls:
+            raise RuntimeError("declared planner action call budget reached")
         if not 1 <= int(maximum_actions) <= 5:
             raise ValueError("maximum_actions outside [1,5]")
         obs = self.env.get_observation()
@@ -263,7 +288,8 @@ class LabSimToolkit(Toolkit):
             executed.append(command)
             append_event(self.output_dir / "policy_tools.jsonl", {"event": "vla_action", "executed_envelope": command,
                          "terminated": result[2], "truncated": result[3], "task_success": self._task_success})
-            if result[2] or result[3]:
+            exhausted = self._close_spent_action_budget()
+            if result[2] or result[3] or exhausted:
                 break
         return {"actual_vla_called": True, "checkpoint_id": self.vla.contract.checkpoint_id, "executed_actions": executed,
                 "task_success": self._task_success, "inference_wall_s": inference["inference_wall_s"]}
@@ -320,17 +346,18 @@ def get_robot_spec() -> RobotSpec:
         parser.add_argument("--robot-base-position-m", type=float, nargs=3)
         parser.add_argument("--labsim-mode", choices=["direct", "harness"], default="direct")
         parser.add_argument("--subtask", choices=["loading", "preinsert_diagnostic"], default="loading")
+        parser.add_argument("--layout-mode", choices=["standard", "random"], default="standard")
     def parse(args):
         out = Path(args.output_dir) if args.output_dir else Path("outputs/lab_cuvette_loading/Env_v1/rpent_runs") / (time.strftime("%Y%m%dT%H%M%SZ", time.gmtime()) + f"_seed{args.seed}")
         return RunConfig(recipe_tag=f"labsim_s{args.seed}", output_dir=out,
                          prompt_vars={"task_language": "Load the cuvette from the source rack into the instrument's selected internal seat."},
-                         task_desc={"task": "lab_cuvette_loading", "version": "Env_v1", "seed": args.seed})
+                         task_desc={"task": "lab_cuvette_loading", "version": "Env_v1", "seed": args.seed, "layout_mode": args.layout_mode})
     def runtime(args, output_dir, events, components):
         # Explicitly attach only: no implicit process creation, shared GPU model
         # lifecycle remains under the caller's sequential scheduling.
         env_rpc = HttpRpcClient(args.env_endpoint)
         kwargs = {"env_client": LabSimEnvClient(env_rpc), "mode": args.labsim_mode}
-        kwargs["env_client"].reset(seed=args.seed, options={"subtask": args.subtask})
+        kwargs["env_client"].reset(seed=args.seed, options={"subtask": args.subtask, "mode": args.layout_mode})
         if args.labsim_mode == "harness":
             if not args.vla_endpoint:
                 raise ValueError("Harness requires --vla-endpoint of an actual checkpoint server")
