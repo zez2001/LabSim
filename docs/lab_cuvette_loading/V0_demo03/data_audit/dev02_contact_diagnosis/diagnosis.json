@@ -1,0 +1,134 @@
+{
+  "schema": "labsim.V0_demo03.contact_diagnosis.v1",
+  "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00",
+  "original_status": "FORBIDDEN_ROBOT_ENVIRONMENT_CONTACT",
+  "original_workflow_success": false,
+  "original_independent_score_sha256": "5db7cb350592410cfe609ccbed0e8cd88da155b72e3db74d04070010b63c40ea",
+  "phase_times_s": {
+    "APPROACH_SOURCE": 4.0,
+    "GRASP": 11.0,
+    "EXTRACT": 13.5,
+    "TRANSPORT": 20.5,
+    "ALIGN": 29.5,
+    "INSERT": 32.0
+  },
+  "alignment_error_decomposition": {
+    "cup_xy_error_mm": [
+      -0.6743781188766063,
+      -0.28079316812923416
+    ],
+    "tcp_actual_minus_command_xy_mm": [
+      -0.3370158585517258,
+      -0.2593986178527352
+    ],
+    "held_world_offset_change_xy_mm": [
+      -0.33736226032489436,
+      -0.021394550276498947
+    ],
+    "command_plus_old_offset_minus_target_xy_mm": [
+      0.0,
+      0.0
+    ],
+    "held_offset_translation_component_world_mm": [
+      -0.19441493725785505,
+      -0.005782782018393813,
+      -0.013176113682660879
+    ],
+    "held_offset_hand_rotation_component_world_mm": [
+      -0.14294736369376024,
+      -0.015611766035231189,
+      -3.2293972503094626e-05
+    ],
+    "actual_hand_rotation_change_deg": 0.16548131344639982,
+    "formula": "actual cup XY error = actual TCP-command error + current held world offset-old offset + command+old offset-target; no source pose changes"
+  },
+  "upward_motion_thresholds": [
+    {
+      "threshold_mm": 0.05,
+      "world_up_first_sample_s": 42.0625,
+      "world_up_sustained_50ms_start_s": 42.0625,
+      "hand_palmward_sustained_50ms_start_s": 42.0625
+    },
+    {
+      "threshold_mm": 0.1,
+      "world_up_first_sample_s": 42.079166666666666,
+      "world_up_sustained_50ms_start_s": 42.079166666666666,
+      "hand_palmward_sustained_50ms_start_s": 42.079166666666666
+    },
+    {
+      "threshold_mm": 0.2,
+      "world_up_first_sample_s": 42.1,
+      "world_up_sustained_50ms_start_s": 42.1,
+      "hand_palmward_sustained_50ms_start_s": 42.1
+    },
+    {
+      "threshold_mm": 0.5,
+      "world_up_first_sample_s": 42.15416666666667,
+      "world_up_sustained_50ms_start_s": 42.15416666666667,
+      "hand_palmward_sustained_50ms_start_s": 42.15416666666667
+    },
+    {
+      "threshold_mm": 1.0,
+      "world_up_first_sample_s": 42.24166666666667,
+      "world_up_sustained_50ms_start_s": 42.24166666666667,
+      "hand_palmward_sustained_50ms_start_s": 42.24166666666667
+    },
+    {
+      "threshold_mm": 2.0,
+      "world_up_first_sample_s": 42.416666666666664,
+      "world_up_sustained_50ms_start_s": 42.416666666666664,
+      "hand_palmward_sustained_50ms_start_s": 42.416666666666664
+    },
+    {
+      "threshold_mm": 5.0,
+      "world_up_first_sample_s": 42.94583333333333,
+      "world_up_sustained_50ms_start_s": 42.94583333333333,
+      "hand_palmward_sustained_50ms_start_s": 42.94583333333333
+    },
+    {
+      "threshold_mm": 10.0,
+      "world_up_first_sample_s": 43.833333333333336,
+      "world_up_sustained_50ms_start_s": 43.833333333333336,
+      "hand_palmward_sustained_50ms_start_s": 43.833333333333336
+    }
+  ],
+  "upward_motion_definition": "change of measured cup origin-TCP vertical offset vs actual13.5s; hand-relative axial change separately retained; movement is not a microscopic contact-point stick/slip classification",
+  "nominal_parallel_side_gap_mm": 0.5749972462654116,
+  "max_tilt_deg": 5.917618841747551,
+  "max_tilt_time_s": 44.108333333333334,
+  "max_observed_source_penetration_m": 2.0867815648618893e-05,
+  "final_origin_relative_up_mm": 14.22351598739624,
+  "final_bottom_gap_mm": 1.2423322483534616,
+  "max_target_base_force_magnitude_N": 0.0,
+  "all_target_base_contact_events": 0,
+  "final_normal_force_both_fingers_N": [
+    7.92584753036499,
+    8.048484802246094
+  ],
+  "final_finger_position_difference_mm": -0.00016298145055770874,
+  "post_retreat_window": {
+    "available": false,
+    "status": "unavailable"
+  },
+  "stable_after_retreat": null,
+  "native_pair_success": false,
+  "real_calibrated": false,
+  "protected_source_sha256": {
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/physics_records.json": "0dd4a7d61487601bfac57e72336ea5930f8f04245bb372a8c7b77070b6174e91",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/native_contact_events.json": "73f02312f3e62a64c4cea212a276ba6c8f9026422cb78f2166ecde59216acbd2",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/events.json": "b82737604628d8f1f0127fabdf173eb0399a121ed98b25d9ef2c9aa185c6ea0c",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/result.json": "3ca8b09d80c0c81222c1ed5a12d9f2b7f2bbe47d8b72cc5c0baac6cf3e3cb2c1",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/independent_score.json": "5db7cb350592410cfe609ccbed0e8cd88da155b72e3db74d04070010b63c40ea",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/config.yaml": "fd96d2edbe41bd9a3e8722521a4bc2f6919af70a0daebc7e8af93ab97cc59c24",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/scene_contract.json": "22be470263c046e3bb28b4d56857952517795dc71e8eadb1c26ac6c5d975b2bc",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/dataset/episode_0000.h5": "23366c1123f75a947416e31f7852dbebd200d45ed08e1b14fc5735982d9fe3fe"
+  },
+  "limits": [
+    "Cup origin XY and axis tilt are measured; parallel gap is a geometry reference and is not a success classifier.",
+    "Sustained50ms onset thresholds are descriptive analysis choices, not changed task success gates.",
+    "Cup-in-hand translation change includes contact compliance and numerical effects; no microscopic tangential-contact tracking was recorded.",
+    "Finger joint positions and force magnitudes are recorded; separate complete finger contact-frame orientations are not independently recorded.",
+    "Positive separation with zero impulse is a contact-offset candidate, not proof of material penetration.",
+    "Source-geometry penetration metric is sampled authored geometry, not a global cooked-PhysX error bound."
+  ]
+}

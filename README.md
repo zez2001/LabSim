@@ -1,13 +1,13 @@
 # LabSim 进展与分享入口
 
-当前开发分支为 `codex/lab-cuvette-demo02`。最新版本 **V0_demo02 尚未完成连续装载**：已复核视频与CAD、恢复腔内候选座参考帧和近竖直开盖派生姿态，完成Isaac静态截图及判分/采集接口核查。完整来源架CAD仍缺，原器皿与候选座声明插入姿态相交；新标准5次、随机10次与成功训练batch均未执行。
+当前开发分支为 `codex/lab-cuvette-demo03`。最新 **V0_demo03 已取得一条正确场景内的连续物理成功轨迹**：完整白色6×6参数化架 → 原尺寸器皿 → 开盖样品腔内A派生座 → 支撑交接 → 松爪 → 撤离及3.1秒稳定。独立判分与采集资格通过；固定5次、随机10次和成功batch读取的后续结果见进展页。本模式为 `video_demo_adapted`，原CAD配套和真实标定仍为false。
 
 - [全部进展与历史报告](LABSIM_PROGRESS.md)
-- [V0_demo02 本轮报告及截图](docs/lab_cuvette_loading/V0_demo02/report.md) · [DOCX报告](docs/lab_cuvette_loading/V0_demo02/LabSim_V0_demo02_场景与装载关口报告_20261020.docx)
-- [资产对应与哈希](docs/lab_cuvette_loading/V0_demo02/asset_correspondence.csv) · [集中待补资料](docs/lab_cuvette_loading/V0_demo02/required_information.json)
-- [静态审核与复现命令](demos/lab_cuvette_demo02/README.md) · [Agent结果阅读包](docs/agent_handoff/README.md)
+- [V0_demo03 本轮结果](docs/lab_cuvette_loading/V0_demo03/report.md)
+- [资产变化与来源](docs/lab_cuvette_loading/V0_demo03/asset_changes.json) · [尺寸及假设](docs/lab_cuvette_loading/V0_demo03/dimensions.csv)
+- [启动及采集命令](demos/lab_cuvette_demo03/README.md) · [Agent结果阅读包](docs/agent_handoff/README.md)
 
-历史 V0_demo01 的机外工程流程成功与本轮原生场景分开记录。以下保留上游 LabUtopia 文档。
+V0_demo02的原尺寸冲突和demo01的机外工程实验保留，未被本轮适配成功改写。以下保留上游LabUtopia文档。
 
 <div align="center">
   <img src="images/logo.png" alt="Logo" width="180">

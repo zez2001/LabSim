@@ -1,3 +1,9 @@
+# 最新进展 V0 demo03
+
+2026-10-20：取得一条白色6×6架取物至开盖仪器腔内A派生座的完整连续成功轨迹，61.75秒，实际松爪和撤离后稳定3.1秒，独立15项检查与H5资格一致。当前正在固定5次复测，随机10次及成功batch读取结果随后补充。该适配模式不改写native_pair_success或real_calibrated。
+
+分支：`codex/lab-cuvette-demo03`。详见[本轮报告](docs/lab_cuvette_loading/V0_demo03/report.md)和[启动命令](demos/lab_cuvette_demo03/README.md)。
+
 # LabSim 进展与分享入口
 
 当前分享分支为 `codex/lab-cuvette-demo02`。本分支包含从 minimal_pick 到 V0_demo02 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。

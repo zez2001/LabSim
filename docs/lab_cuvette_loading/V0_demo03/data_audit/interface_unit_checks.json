@@ -1,0 +1,62 @@
+{
+  "schema": "labsim.V0_demo03.interface_unit_checks.v1",
+  "all_assertions_passed": true,
+  "test_scope": "pure metadata/qualification functions only; not a physical trajectory or success dataset",
+  "positive_adapted_simulation_qualification_with_native_and_real_false": true,
+  "negative_cases": [
+    {
+      "case": "native_claim",
+      "rejected_by": [
+        "no_native_pair_claim"
+      ]
+    },
+    {
+      "case": "real_calibration_claim",
+      "rejected_by": [
+        "no_real_calibration_claim"
+      ]
+    },
+    {
+      "case": "wrong_mode",
+      "rejected_by": [
+        "adapted_mode"
+      ]
+    },
+    {
+      "case": "missing_checks",
+      "rejected_by": [
+        "all_independent_checks_pass"
+      ]
+    },
+    {
+      "case": "old_task_version",
+      "rejected_by": [
+        "new_score_scene"
+      ]
+    },
+    {
+      "case": "no_independent_workflow",
+      "rejected_by": [
+        "independently_successful_workflow"
+      ]
+    },
+    {
+      "case": "wrong_terminal_time",
+      "rejected_by": [
+        "same_terminal_state"
+      ]
+    }
+  ],
+  "initial_success_labels_all_false": true,
+  "unknown_slot_ids_not_fabricated": true,
+  "input_native_and_real_claims_forced_false": true,
+  "new_h5_created": false,
+  "begin_episode_called": false,
+  "physical_simulation_executed": false,
+  "actual_training_batch_executed": false,
+  "current_code_sha256": {
+    "demos/lab_cuvette_demo03/analyze.py": "9896a6654020778755f42221f8d0e6f3882a0158fad4092e764eea1a86ead481",
+    "demos/lab_cuvette_demo03/collector.py": "65e180a1d45bbefe9caaf652a23b989ad270f256cfe742538438b8257444d37a",
+    "demos/lab_cuvette_demo03/data_check.py": "c8fd97a3867865e4c24c48d02e0614e9afb69809597098b9d7b3d32292d91fe5"
+  }
+}

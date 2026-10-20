@@ -1,0 +1,396 @@
+{
+  "version": "V0_demo03",
+  "revision": "plan03_geometry_semantics",
+  "date_local": "2026-10-20",
+  "scope": "Pure CPU authored geometry and nominal three-link placement; not full-arm IK or physical workflow success",
+  "reason": {
+    "actual_prior_trial": "outputs/lab_cuvette_loading/V0_demo03/dev_01/trial_00/result.json",
+    "actual_prior_status": "FORBIDDEN_ROBOT_ENVIRONMENT_CONTACT",
+    "actual_prior_simulation_seconds": 27.616666666666667,
+    "actual_prior_source_support": true,
+    "actual_prior_grasp": true,
+    "actual_prior_extract": true,
+    "reported_failing_link": "panda_link6",
+    "failing_link_evidence_source": "root executor contact diagnosis; entire source trial retained",
+    "interpretation": "Previous hand+finger preflight never covered link6; its pass did not imply full-arm clearance"
+  },
+  "changes": {
+    "transport_bottom_z_m": 0.975,
+    "body_main_mesh_top_z_m": 0.97,
+    "nominal_cup_bottom_above_body_top_m": 0.0050000000000000044,
+    "transport_route": "source_x_then_target_y",
+    "retreat_lift_m": 0.06,
+    "retreat_lateral_m": [
+      -0.12,
+      0
+    ],
+    "retreat_stages": [
+      "retreat_lift",
+      "retreat_lateral",
+      "post_retreat_hold"
+    ],
+    "hand_orientation_euler_xyz_rad": [
+      3.141592653589793,
+      0,
+      0
+    ],
+    "post_release_cup_bottom_fixed_at_target": true,
+    "independent_hand_TCP_and_cup_plan": true
+  },
+  "new_CPU_check": {
+    "output": "outputs/lab_cuvette_loading/V0_demo03/cpu_preflight_plan03_01",
+    "config_snapshot": "outputs/lab_cuvette_loading/V0_demo03/cpu_preflight_plan03_01/config.yaml",
+    "config_snapshot_sha256": "8c6b3ba9169e6d778f465080cd98faadb4a0c70153653ce721f753bd41e07cb6",
+    "preflight_json_sha256": "ff26ebe8b90a3cc6cd4ec44df086b5e355a27990b3fd0f914943971b116bb712",
+    "static_geometry_pass": true,
+    "path_warning_count": 0,
+    "passed": true,
+    "phases": [
+      {
+        "phase": "approach",
+        "cup_bottom_start_m": [
+          -0.085,
+          -0.265,
+          0.743
+        ],
+        "cup_bottom_end_m": [
+          -0.085,
+          -0.265,
+          0.743
+        ],
+        "hand_tcp_start_m": [
+          -0.085,
+          -0.265,
+          1.0230000000000001
+        ],
+        "hand_tcp_end_m": [
+          -0.085,
+          -0.265,
+          0.796
+        ],
+        "finger_q_start_m": 0.04,
+        "finger_q_end_m": 0.04,
+        "cup_released": false
+      },
+      {
+        "phase": "grasp",
+        "cup_bottom_start_m": [
+          -0.085,
+          -0.265,
+          0.743
+        ],
+        "cup_bottom_end_m": [
+          -0.085,
+          -0.265,
+          0.743
+        ],
+        "hand_tcp_start_m": [
+          -0.085,
+          -0.265,
+          0.796
+        ],
+        "hand_tcp_end_m": [
+          -0.085,
+          -0.265,
+          0.796
+        ],
+        "finger_q_start_m": 0.04,
+        "finger_q_end_m": 0.0075,
+        "cup_released": false
+      },
+      {
+        "phase": "extract",
+        "cup_bottom_start_m": [
+          -0.085,
+          -0.265,
+          0.743
+        ],
+        "cup_bottom_end_m": [
+          -0.085,
+          -0.265,
+          0.975
+        ],
+        "hand_tcp_start_m": [
+          -0.085,
+          -0.265,
+          0.796
+        ],
+        "hand_tcp_end_m": [
+          -0.085,
+          -0.265,
+          1.028
+        ],
+        "finger_q_start_m": 0.0075,
+        "finger_q_end_m": 0.0075,
+        "cup_released": false
+      },
+      {
+        "phase": "transport_0",
+        "cup_bottom_start_m": [
+          -0.085,
+          -0.265,
+          0.975
+        ],
+        "cup_bottom_end_m": [
+          -0.085,
+          0.3276293532629626,
+          0.975
+        ],
+        "hand_tcp_start_m": [
+          -0.085,
+          -0.265,
+          1.028
+        ],
+        "hand_tcp_end_m": [
+          -0.085,
+          0.3276293532629626,
+          1.028
+        ],
+        "finger_q_start_m": 0.0075,
+        "finger_q_end_m": 0.0075,
+        "cup_released": false
+      },
+      {
+        "phase": "transport_1",
+        "cup_bottom_start_m": [
+          -0.085,
+          0.3276293532629626,
+          0.975
+        ],
+        "cup_bottom_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.975
+        ],
+        "hand_tcp_start_m": [
+          -0.085,
+          0.3276293532629626,
+          1.028
+        ],
+        "hand_tcp_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          1.028
+        ],
+        "finger_q_start_m": 0.0075,
+        "finger_q_end_m": 0.0075,
+        "cup_released": false
+      },
+      {
+        "phase": "insert",
+        "cup_bottom_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.975
+        ],
+        "cup_bottom_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "hand_tcp_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          1.028
+        ],
+        "hand_tcp_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.9400000000000001
+        ],
+        "finger_q_start_m": 0.0075,
+        "finger_q_end_m": 0.0075,
+        "cup_released": false
+      },
+      {
+        "phase": "open",
+        "cup_bottom_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "cup_bottom_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "hand_tcp_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.9400000000000001
+        ],
+        "hand_tcp_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.9400000000000001
+        ],
+        "finger_q_start_m": 0.0075,
+        "finger_q_end_m": 0.04,
+        "cup_released": true
+      },
+      {
+        "phase": "retreat_lift",
+        "cup_bottom_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "cup_bottom_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "hand_tcp_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.9400000000000001
+        ],
+        "hand_tcp_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          1.0
+        ],
+        "finger_q_start_m": 0.04,
+        "finger_q_end_m": 0.04,
+        "cup_released": true
+      },
+      {
+        "phase": "retreat_lateral",
+        "cup_bottom_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "cup_bottom_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "hand_tcp_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          1.0
+        ],
+        "hand_tcp_end_m": [
+          0.09008446439302364,
+          0.3276293532629626,
+          1.0
+        ],
+        "finger_q_start_m": 0.04,
+        "finger_q_end_m": 0.04,
+        "cup_released": true
+      },
+      {
+        "phase": "post_retreat_hold",
+        "cup_bottom_start_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "cup_bottom_end_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "hand_tcp_start_m": [
+          0.09008446439302364,
+          0.3276293532629626,
+          1.0
+        ],
+        "hand_tcp_end_m": [
+          0.09008446439302364,
+          0.3276293532629626,
+          1.0
+        ],
+        "finger_q_start_m": 0.04,
+        "finger_q_end_m": 0.04,
+        "cup_released": true
+      }
+    ],
+    "released_cup_static_target_check": true
+  },
+  "nominal_final_retreat_geometry": {
+    "hand_tcp_m": [
+      0.09008446439302364,
+      0.3276293532629626,
+      1.0
+    ],
+    "vessel_bottom_m": [
+      0.21008446439302364,
+      0.3276293532629626,
+      0.887
+    ],
+    "vessel_top_z_m": 0.9544999952316284,
+    "per_link_clearance": [
+      {
+        "link": "panda_hand",
+        "input_AABB_distance_to_static_vessel_AABB_m": 0.11353126608762744,
+        "lowest_link_z_m": 1.0340001080482912,
+        "lo": [
+          0.05856493390481687,
+          0.2270595966848321,
+          1.0340001080482912
+        ],
+        "hi": [
+          0.121609597718382,
+          0.4315757130315028,
+          1.1259949099041897
+        ]
+      },
+      {
+        "link": "panda_leftfinger",
+        "input_AABB_distance_to_static_vessel_AABB_m": 0.11214685157732511,
+        "lowest_link_z_m": 0.9877001453238237,
+        "lo": [
+          0.07958356137873544,
+          0.2612838663970277,
+          0.9877001453238237
+        ],
+        "hi": [
+          0.10058602663482549,
+          0.2877131175539853,
+          1.0414666979916285
+        ]
+      },
+      {
+        "link": "panda_rightfinger",
+        "input_AABB_distance_to_static_vessel_AABB_m": 0.11214683175956809,
+        "lowest_link_z_m": 0.9877000746447956,
+        "lo": [
+          0.07958356263054031,
+          0.36754558885710686,
+          0.9877000746447956
+        ],
+        "hi": [
+          0.100586025382942,
+          0.39397487624610755,
+          1.04146669781679
+        ]
+      }
+    ],
+    "min_link_input_AABB_clearance_m": 0.11214683175956809,
+    "at_least_40mm_nominal_input_AABB_clearance": true,
+    "caution": "Distances refer to authored input vertex AABBs at nominal hand poses, not observed runtime poses or cooked collision skins"
+  },
+  "old_evidence_preserved": [
+    "geometry_validation.json",
+    "asset_changes.json",
+    "dimensions.csv",
+    "outputs/lab_cuvette_loading/V0_demo03/cpu_preflight_01",
+    "outputs/lab_cuvette_loading/V0_demo03/cpu_preflight_bypass_01",
+    "outputs/lab_cuvette_loading/V0_demo03/dev_01"
+  ],
+  "asset_hashes_unchanged": {
+    "assets/lab_cuvette_loading/V0_demo03/adapter_A.usda": true,
+    "assets/lab_cuvette_loading/V0_demo03/instrument_demo.usda": true,
+    "assets/lab_cuvette_loading/V0_demo03/manifest.json": true,
+    "assets/lab_cuvette_loading/V0_demo03/rack.usda": true
+  },
+  "modified_code_sha256": {
+    "demos/lab_cuvette_demo03/preflight.py": "688b9c7b64cf87a9da7525e8a97eae0308c63e0f69b27cde35821e11f491b69c"
+  },
+  "whole_arm_validation": "Root plan_arm_03 separately computes actual FK/IK poses and declared-input-hull triangle SAT; not adjudicated in this three-link check",
+  "physical_steps_run_by_this_revision": 0,
+  "workflow_success": null,
+  "real_calibrated": false
+}

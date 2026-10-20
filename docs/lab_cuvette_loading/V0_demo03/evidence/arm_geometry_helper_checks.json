@@ -1,0 +1,51 @@
+{
+  "physics_steps": 0,
+  "GPU_process_started": false,
+  "rigid_bodies": 12,
+  "collision_bodies": 11,
+  "empty_bodies": [
+    "panda_link8"
+  ],
+  "whole_body_pose_roundtrip_max_error_m": 2.498001805406602e-16,
+  "unit_policy": "Numeric local coordinates as referenced into existing metre World; authored mesh scale included once, no extra source metadata unit multiplication.",
+  "missing_link6_pose_rejected": true,
+  "triangle_SAT_cases": {
+    "coplanar_AABB_overlap_but_disjoint": {
+      "expected": false,
+      "actual": false,
+      "passed": true,
+      "broad_pairs": 1
+    },
+    "coplanar_actual_overlap": {
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "broad_pairs": 1
+    },
+    "noncoplanar_crossing": {
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "broad_pairs": 1
+    },
+    "parallel_gap": {
+      "expected": false,
+      "actual": false,
+      "passed": true,
+      "broad_pairs": 0
+    }
+  },
+  "capabilities": {
+    "python_fcl_available": false,
+    "rtree_available": true,
+    "triangle_SAT_available": true,
+    "physx_cooked_geometry_readback": false
+  },
+  "FCL_actual_instantiation_error": "ValueError: No FCL Available! Please install the python-fcl library",
+  "ten_posed_mesh_calls_wall_seconds": 0.016848916187882423,
+  "limitations": [
+    "Collision input and reconstructed input hulls, not actual PhysX cooked shape readback.",
+    "External FK/body poses and joint values are supplied by caller; no source rest-pose assumption during motion.",
+    "Robot collision/material/drive parameters are unchanged by this module."
+  ]
+}
