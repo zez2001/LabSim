@@ -62,6 +62,34 @@ class TeacherContractTest(unittest.TestCase):
     def test_unknown_bottom_support_never_triggers_release(self):
         self.assertFalse(self.controller._supported(dict(self.debug,target_bottom_support_N=None,target_bottom_gap_m=0)))
 
+    def test_extract_fixed_orientation_keeps_xy_feedback_active(self):
+        c=self.controller;c.act(dict(simulation_time=0,episode_id='fixture'),self.debug)
+        original=c.rotation_command
+        before=c.target.copy()
+        tilted=dict(self.debug,object_quaternion_wxyz=wxyz(Rotation.from_euler('x',3,degrees=True)*self.cup))
+        c._feedback(tilted,np.array(self.debug['object_position_m'])[:2]+[.001,0],orientation=False)
+        self.assertLess((c.rotation_command*original.inv()).magnitude(),1e-12)
+        self.assertAlmostEqual(c.target[0]-before[0],.00002)
+
+    def test_latch_can_preserve_existing_contact_target_without_reopening(self):
+        c=self.controller;c.act(dict(simulation_time=0,episode_id='fixture'),self.debug)
+        c.cfg['gripper']['latch_transition_policy']='preserve_first_contact_command'
+        c._closure_freeze_opening=.0123
+        c._latch(self.debug,.2)
+        self.assertAlmostEqual(c.latch_opening,.0123)
+        self.assertGreater(c.events[-1]['weight_based_candidate_opening_m'],c.latch_opening)
+        self.assertEqual(c.events[-1]['effort_limit_N'],8.)
+
+    def test_transport_hold_freezes_target_and_does_not_finish_on_elapsed_time_alone(self):
+        c=self.controller;c.act(dict(simulation_time=0,episode_id='fixture'),self.debug)
+        c.phase='TRANSPORT_HOLD';c.phase_start=0
+        target=c.target.copy();orientation=c.rotation_command
+        tilted=dict(self.debug,object_quaternion_wxyz=wxyz(Rotation.from_euler('x',.1,degrees=True)*self.cup))
+        c.act(dict(simulation_time=3.1,episode_id='fixture'),tilted)
+        np.testing.assert_array_equal(c.target,target)
+        self.assertLess((c.rotation_command*orientation.inv()).magnitude(),1e-12)
+        self.assertFalse(c.finished)
+
     def test_teacher_cannot_cross_episode_without_reset(self):
         self.controller.act(dict(simulation_time=0,episode_id='first'),self.debug)
         with self.assertRaises(ValueError):self.controller.act(dict(simulation_time=.1,episode_id='second'),self.debug)

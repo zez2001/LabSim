@@ -84,16 +84,17 @@ class LabCuvetteTeacher:
         cup_rotation=rotation(debug['object_quaternion_wxyz'])
         return hand.inv().apply(cup-tcp),hand.inv()*cup_rotation
 
-    def _feedback(self,debug,desired_cup_xy=None):
+    def _feedback(self,debug,desired_cup_xy=None,*,orientation=True):
         # Actual relative rotation includes passive slip; correcting only XY
         # would leave a tilted vessel approaching the narrow original seat.
-        _,relative_rotation=self._relative(debug)
-        desired_hand=self.desired_cup_rotation*relative_rotation.inv()
-        delta=(desired_hand*self.rotation_command.inv()).as_rotvec()
-        cap=np.deg2rad(float(get(self.cfg,'control.orientation_step_limit_deg',.1)))
-        norm=np.linalg.norm(delta)
-        if norm>cap:delta*=cap/norm
-        self.rotation_command=Rotation.from_rotvec(delta)*self.rotation_command
+        if orientation:
+            _,relative_rotation=self._relative(debug)
+            desired_hand=self.desired_cup_rotation*relative_rotation.inv()
+            delta=(desired_hand*self.rotation_command.inv()).as_rotvec()
+            cap=np.deg2rad(float(get(self.cfg,'control.orientation_step_limit_deg',.1)))
+            norm=np.linalg.norm(delta)
+            if norm>cap:delta*=cap/norm
+            self.rotation_command=Rotation.from_rotvec(delta)*self.rotation_command
         if desired_cup_xy is not None:
             error=np.asarray(debug['object_position_m'],float)[:2]-np.asarray(desired_cup_xy,float)
             correction=-float(get(self.cfg,'control.truth_xy_gain',.15))*error
@@ -129,10 +130,22 @@ class LabCuvetteTeacher:
         compression=mass*9.81/(2*max(mu,1e-6))*float(get(self.cfg,'gripper.contact_safety_factor',2.))/kp
         compression=float(np.clip(compression,0.,float(get(self.cfg,'gripper.maximum_compression_m',.0003))))
         half=max(float(np.mean(fingers))-compression,float(get(self.cfg,'gripper.minimum_latched_finger_m',.001)))
-        self.latch_opening=2*half;self.contact_opening=float(np.sum(fingers));self.latch_time=t
+        candidate_opening=2*half
+        policy=str(get(self.cfg,'gripper.latch_transition_policy','measured_weight_based'))
+        if policy=='preserve_first_contact_command' and self._closure_freeze_opening is not None:
+            # The persistence window already held this command. Recomputing
+            # from later finger positions can reopen the gripper at latch.
+            # Keep that existing target; do not add further closure or effort.
+            self.latch_opening=float(self._closure_freeze_opening)
+        elif policy=='measured_weight_based':self.latch_opening=candidate_opening
+        else:raise ValueError('Unknown/unavailable gripper latch transition policy: '+policy)
+        self.contact_opening=float(np.sum(fingers));self.latch_time=t
         p,q=self._relative(debug);self.grasp_reference=(p.copy(),q)
         self.events.append(dict(t=t,event='contact_latched',measured_finger_m=fingers.tolist(),
             commanded_total_opening_m=self.latch_opening,per_finger_compression_m=compression,
+            latch_transition_policy=policy,weight_based_candidate_opening_m=candidate_opening,
+            effective_measured_minus_command_per_finger_m=(fingers-self.latch_opening/2).tolist(),
+            compression_semantics='Joint target difference, not measured material penetration; first-contact command may predate measured finger response',
             effort_limit_N=8.,friction_assumption=mu,mass_kg=mass,finger_kp_N_per_m=kp,
             truth_pose_used=True))
 
@@ -235,7 +248,8 @@ class LabCuvetteTeacher:
                     elif t-self.latch_time>=.75:self._enter('EXTRACT',t)
             elif self.phase=='EXTRACT':
                 duration=float(get(self.cfg,'control.extract_s',6.))
-                self.target=smooth(self.anchor,self.lift,u/duration);self._feedback(debug,self.source_initial[:2])
+                self.target=smooth(self.anchor,self.lift,u/duration)
+                self._feedback(debug,self.source_initial[:2],orientation=bool(get(self.cfg,'control.extract_orientation_feedback',True)))
                 if u>=duration+1.:
                     if bottom<=float(self.layout['source_rim_z'])+.01 or not np.all(forces>.02):self._finish('EXTRACTION_FAILED',t)
                     else:
@@ -250,11 +264,20 @@ class LabCuvetteTeacher:
                 self._feedback(debug,self.floor[:2] if u>=duration else None)
                 if u>=duration+1.:
                     if np.linalg.norm(position[:2]-self.floor[:2])>.003:self._finish('HELD_POSE_DEVIATION_AFTER_TRANSPORT',t)
-                    elif self.task_type=='extract_transport':self._enter('TRANSPORT_HOLD',t)
+                    elif self.task_type=='extract_transport' or float(get(self.cfg,'control.transport_hold_before_align_s',0.))>0:
+                        self._enter('TRANSPORT_HOLD',t)
                     else:self._enter('ALIGN',t)
             elif self.phase=='TRANSPORT_HOLD':
-                self._feedback(debug,self.floor[:2])
-                if u>=3.:self._finish('EXTRACT_TRANSPORT_COMPLETE',t)
+                # Holding is a fixed robot target, not continued XY centering.
+                # Wait for the declared stationary window; never relax the
+                # independent scorer's position/orientation criteria.
+                seconds=float(get(self.cfg,'control.transport_hold_before_align_s',3.))
+                if seconds<=0:seconds=3.
+                if u>=seconds and self._quiet(t,seconds):
+                    if self.task_type=='extract_transport':self._finish('EXTRACT_TRANSPORT_COMPLETE',t)
+                    else:self._enter('ALIGN',t)
+                elif u>float(get(self.cfg,'control.transport_hold_timeout_s',10.)):
+                    self._finish('HELD_TRANSPORT_NOT_STABLE',t)
             elif self.phase=='ALIGN':
                 self._feedback(debug,self.floor[:2])
                 diagnostic=self.task_type=='preinsert_diagnostic'

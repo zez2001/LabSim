@@ -16,7 +16,7 @@ def parse_args():
                        help='Configuration file name (without .yaml extension)')
     parser.add_argument('--config-dir', type=str, default='config',
                        help='Configuration directory path (default: config)')
-    parser.add_argument('--env-mode',choices=['teacher','preview','serve','audit','plan'],default='teacher')
+    parser.add_argument('--env-mode',choices=['teacher','preview','serve','audit','plan','replay'],default='teacher')
     parser.add_argument('--env-config',type=str,default='config/lab_cuvette_loading/Env_v1/native.yaml')
     parser.add_argument('--subtask',choices=['loading','preinsert_diagnostic','grasp_hold','extract_transport'])
     parser.add_argument('--layout-mode',choices=['standard','random'],default='standard')
@@ -25,6 +25,9 @@ def parse_args():
     parser.add_argument('--output',type=str)
     parser.add_argument('--port',type=int,default=8097)
     parser.add_argument('--initial-state',type=str)
+    parser.add_argument('--replay-episode',type=str)
+    parser.add_argument('--replay-max-ticks',type=int)
+    parser.add_argument('--replay-zero-delay',action=argparse.BooleanOptionalAction,default=True)
     return parser.parse_args()
 
 # Get command line arguments
@@ -35,7 +38,7 @@ args = parse_args()
 if args.config_name == 'lab_cuvette_env_v1':
     import sys
     from demos.lab_cuvette_env_v1.run import parser as env_parser,main as env_main
-    env_args=env_parser().parse_args(['--config',args.env_config,'--mode',args.env_mode,'--layout-mode',args.layout_mode,'--seed',str(args.seed),'--episodes',str(args.episodes),'--port',str(args.port)]+(['--subtask',args.subtask] if args.subtask else [])+(['--headless'] if args.headless else [])+(['--output',args.output] if args.output else [])+(['--initial-state',args.initial_state] if args.initial_state else []))
+    env_args=env_parser().parse_args(['--config',args.env_config,'--mode',args.env_mode,'--layout-mode',args.layout_mode,'--seed',str(args.seed),'--episodes',str(args.episodes),'--port',str(args.port)]+(['--subtask',args.subtask] if args.subtask else [])+(['--headless'] if args.headless else [])+(['--output',args.output] if args.output else [])+(['--initial-state',args.initial_state] if args.initial_state else [])+(['--replay-episode',args.replay_episode] if args.replay_episode else [])+(['--replay-max-ticks',str(args.replay_max_ticks)] if args.replay_max_ticks is not None else [])+(['--replay-zero-delay' if args.replay_zero_delay else '--no-replay-zero-delay'] if args.env_mode=='replay' else []))
     sys.exit(env_main(env_args))
 
 if args.config_name == 'minimal_pick':

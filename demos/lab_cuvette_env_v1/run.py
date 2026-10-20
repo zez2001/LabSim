@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[2]
 def parser():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--config',type=Path,default=ROOT/'config/lab_cuvette_loading/Env_v1/native.yaml')
-    p.add_argument('--mode',choices=['teacher','preview','serve','audit','plan'],default='teacher')
+    p.add_argument('--mode',choices=['teacher','preview','serve','audit','plan','replay'],default='teacher')
     p.add_argument('--subtask',choices=['loading','preinsert_diagnostic','grasp_hold','extract_transport'])
     p.add_argument('--layout-mode',choices=['standard','random'],default='standard')
     p.add_argument('--seed',type=int,default=0);p.add_argument('--episodes',type=int,default=1)
@@ -15,6 +15,9 @@ def parser():
     p.add_argument('--initial-state',type=Path);p.add_argument('--port',type=int,default=8097)
     p.add_argument('--preview-seconds',type=float,default=2.)
     p.add_argument('--timeout-seconds',type=float)
+    p.add_argument('--replay-episode',type=Path)
+    p.add_argument('--replay-max-ticks',type=int,help='Replay prefix in control ticks; default all saved rows')
+    p.add_argument('--replay-zero-delay',action=argparse.BooleanOptionalAction,default=True,help='Explicit render-only override for replay, default enabled')
     return p
 
 def main(args=None):
@@ -25,15 +28,35 @@ def main(args=None):
         subprocess.run(['bash',str(ROOT/'demos/lab_cuvette_external/usd_python.sh'),'-m','demos.lab_cuvette_env_v1.geometry_audit','--config',str(path),'--output',str(cache_directory),'--ensure','--geometry-site',str(geometry_site)],cwd=ROOT,check=True)
         latest=json.loads((Path(cache_directory)/'latest.json').read_text())
         return json.loads((Path(cache_directory)/latest['audit_relative_path']).read_text())
-    cfg=OmegaConf.load(args.config)
-    if args.subtask:cfg.env.task_type=args.subtask
-    if args.timeout_seconds is not None:cfg.env.timeout_s=args.timeout_seconds
-    cfg.env.mode=args.layout_mode
+    replay_source=None
+    if args.mode=='replay':
+        from demos.lab_cuvette_env_v1.replay import load_source,configure_runtime
+        if not args.replay_episode:raise ValueError('replay requires --replay-episode')
+        if args.initial_state is not None or args.episodes!=1:raise ValueError('Replay uses one source-config initial state; no initial-state override or repeated episodes')
+        if args.replay_max_ticks is not None and args.replay_max_ticks<1:raise ValueError('replay-max-ticks must be positive')
+        replay_source=load_source(args.replay_episode);cfg=replay_source.launch_config
+        configure_runtime(replay_source,zero_delay=args.replay_zero_delay)
+        replay_source.manifest['ignored_cli_scene_options']=dict(config=str(args.config),subtask=args.subtask,layout_mode=args.layout_mode,seed=args.seed,timeout_seconds=args.timeout_seconds)
+        args.seed=replay_source.seed;args.layout_mode=replay_source.options['mode']
+        print('REPLAY_SOURCE_CONFIG_AUTHORITATIVE',replay_source.manifest['source_config'],flush=True)
+    else:
+        cfg=OmegaConf.load(args.config)
+        if args.subtask:cfg.env.task_type=args.subtask
+        if args.timeout_seconds is not None:cfg.env.timeout_s=args.timeout_seconds
+        cfg.env.mode=args.layout_mode
     out=args.output or ROOT/cfg.output_root/(time.strftime('%Y%m%d_%H%M%S')+'_'+args.mode)
     out=Path(out);out.mkdir(parents=True,exist_ok=False)
     OmegaConf.save(cfg,out/'launch_config.yaml')
     # Audit runs in the installed USD-only environment, before SimulationApp.
-    effective=episode_config(cfg,args.seed,dict(mode=args.layout_mode))
+    effective=episode_config(cfg,args.seed,replay_source.options if replay_source else dict(mode=args.layout_mode))
+    if replay_source:
+        for key in ['rack.origin_m','scene.instrument_xyz_m','rack.selected_slot_id','adapter.selected_target_seat_id']:
+            actual=OmegaConf.select(effective,key);expected=OmegaConf.select(replay_source.config,key)
+            if key.endswith('_m'):
+                import numpy as np
+                equal=np.allclose(actual,expected,atol=1e-12,rtol=0)
+            else:equal=actual==expected
+            if not equal:raise ValueError('Replay source random assembly reconstruction mismatch: '+key)
     audit=ensure_current_audit(effective,ROOT/cfg.env.geometry_audit_cache,geometry_site=cfg.env.shapely_site)
     (out/'geometry_audit.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2)+'\n')
     if args.mode=='audit':print('GEOMETRY_AUDIT',audit.get('geometry_valid'),flush=True);return 0
@@ -58,11 +81,15 @@ def main(args=None):
             (out/'arm_plan.json').write_text(json.dumps(r,default=lambda x:x.tolist(),indent=2)+'\n')
             return 0 if r['selected'] else 2
         from factories.task_factory import create_task
-        from factories.controller_factory import create_controller
         env=create_task(cfg.task_type,cfg,app,out,geometry_audit=audit,initial_state=args.initial_state)
         if args.mode=='serve':
             from demos.lab_cuvette_env_v1.rpc import serve_environment
             serve_environment(env,port=args.port,ready_path=out/'rpc_ready.json');return 0
+        if args.mode=='replay':
+            from demos.lab_cuvette_env_v1.replay import execute_replay
+            result=execute_replay(env,replay_source,out,max_ticks=args.replay_max_ticks)
+            env._write(out/'summary.json',[result['independent_result']]);return 0
+        from factories.controller_factory import create_controller
         results=[]
         for i in range(args.episodes):
             current=episode_config(cfg,args.seed+i,dict(mode=args.layout_mode))

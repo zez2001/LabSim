@@ -52,6 +52,9 @@ control:
   diagnostic_alignment_budget_m: 0.0001
   diagnostic_approach_speed_m_s: 0.002
   diagnostic_near_speed_m_s: 0.0005
+  extract_orientation_feedback: false
+  transport_hold_before_align_s: 3.2
+  transport_hold_timeout_s: 10.0
 demo_release:
   bottom_distance_m: 5.0e-05
   clear_seconds: 0.5
@@ -71,14 +74,15 @@ demo_release:
 derived_directory: assets/lab_cuvette_loading/V0_demo04
 gripper:
   contact_safety_factor: 2.0
-  method: contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp;
-    no gain or force-limit change
+  method: Freeze the existing command at first bilateral contact and preserve it through
+    final latch; no reopening jump, no added closure at latch, effort cap unchanged.
   mode: contact_latched
   actual_slip_max_m: 0.001
   actual_tilt_max_deg: 1.0
   contact_threshold_N: 0.03
   contact_persist_s: 0.1
   maximum_compression_m: 0.0003
+  latch_transition_policy: preserve_first_contact_command
 mode: workflow
 output_root: outputs/lab_cuvette_loading/Env_v1
 physics:
@@ -239,6 +243,9 @@ env:
   max_action_duration_s: 0.5
   gripper_effort_max_N: 8.0
   geometry_safe_stop_above_rim_m: 0.001
+  control_profile: continuous_latch_fixed_extract_and_quiet_hold
+  control_profile_evidence: 'preinsert_continuous_latch_01: actual preinsert_diagnostic
+    success; full loading remains geometry-gated, not validated'
 geometry:
   target_depth_m: 0.027
   target_depth_basis: candidate source center-ray floor, not manufacturer-confirmed;

@@ -1,0 +1,315 @@
+acceptance:
+  actual_retreat_clearance_m: 0.04
+  angular_speed_rad_s: 0.02
+  hold_s: 1.0
+  lift_m: 0.04
+  linear_speed_m_s: 0.001
+  orientation_change_deg: 1.0
+  position_drift_m: 0.0002
+  release_bottom_gap_m: 5.0e-05
+  release_support_force_N: 0.1
+  scope: fixed engineering gates; NOT calibrated accuracy or insertion acceptance
+  steady_source_penetration_m: 5.0e-05
+  support_geometry_m: 5.0e-05
+  upright_after_release_deg: 1.0
+  window_s: 3.0
+calibrated: false
+control:
+  final_speed_m_s: 0.0002
+  insert_speed_m_s: 0.001
+  retreat_m: 0.1
+  timeout_s: 135.0
+  transport_bottom_z_m: 0.975
+  approach_s: 6.0
+  extract_s: 6.0
+  transport_s: 16.0
+  transport_route: source_y_then_target_x
+  retreat_lift_m: 0.06
+  retreat_lateral_m:
+  - -0.12
+  - 0
+  retreat_route: lift_then_outward_X
+  alignment_budget_m: 1.5e-05
+  tilt_budget_deg: 0.02
+  yaw_budget_deg: 0.1
+  jam_detection:
+    window_s: 0.3
+    command_down_min_m: 0.00015
+    vessel_down_max_m: 2.5e-05
+    relative_slip_m: 0.00015
+    wall_force_N: 0.5
+    force_rise_N: 0.2
+    action: stop downward target; retract to preinsert safe height; save actual failure
+  grip_schedule:
+    transport_effort_N: 8.0
+    unload_effort_start_N: 8.0
+    unload_effort_end_N: 0.05
+    unload_seconds: 3.0
+    open_effort_N: 0.5
+    open_seconds: 3.0
+    truth_object_pose_used: true
+  diagnostic_safe_bottom_above_rim_m: 0.001
+  diagnostic_alignment_budget_m: 0.0001
+  diagnostic_approach_speed_m_s: 0.002
+  diagnostic_near_speed_m_s: 0.0005
+  extract_orientation_feedback: false
+  transport_hold_before_align_s: 3.2
+  transport_hold_timeout_s: 10.0
+demo_release:
+  bottom_distance_m: 5.0e-05
+  clear_seconds: 0.5
+  max_actual_pose_step_m: 0.003
+  max_actual_tilt_deg: 10.0
+  max_tilt_deg: 1.0
+  min_support_N: 0.1
+  native_velocity_policy: retain and flag discrepancy; finite check and actual pose
+    motion are hard gates; speed mismatch alone does not veto opening
+  observe_s: 3.0
+  open_seconds: 3.0
+  orientation_change_deg: 1.0
+  penetration_m: 5.0e-05
+  position_drift_m: 0.0002
+  support_window_s: 0.5
+  unload_seconds: 3.0
+derived_directory: assets/lab_cuvette_loading/V0_demo04
+gripper:
+  contact_safety_factor: 2.0
+  method: contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp;
+    no gain or force-limit change
+  mode: contact_latched
+  actual_slip_max_m: 0.001
+  actual_tilt_max_deg: 1.0
+  contact_threshold_N: 0.03
+  contact_persist_s: 0.1
+  maximum_compression_m: 0.0003
+  latch_transition_policy: preserve_first_contact_command
+mode: workflow
+output_root: outputs/lab_cuvette_loading/Env_v1
+physics:
+  ccd: true
+  contact_offset_m: 5.0e-05
+  control_hz: 60
+  dynamic_friction: 0.5
+  finger_dynamic_friction: 0.8
+  finger_static_friction: 1.0
+  hz: 240
+  position_iterations: 64
+  rest_offset_m: 0.0
+  restitution: 0.0
+  solver: TGS
+  static_friction: 0.6
+  velocity_iterations: 1
+robot:
+  base_m:
+  - -0.3
+  - 0
+  - 0.74
+  grasp_above_bottom_m: 0.053
+  initial_tcp_m:
+  - -0.04
+  - -0.22
+  - 1.02
+  tcp_local_m:
+  - 0
+  - 0
+  - 0.1
+  usd_path: assets/robots/Franka.usd
+  gripper_yaw_deg: -90.0
+  tcp_quaternion_wxyz:
+  - 0
+  - 0
+  - 0
+  - 1
+  tcp_frame: right_gripper
+  initial_joint_positions:
+  - 0.1779404569926203
+  - -1.208031663591094
+  - -0.8197921486914327
+  - -2.872999113364274
+  - -0.7667170833832817
+  - 1.7454942736950525
+  - -0.8053155743445266
+  - 0.04
+  - 0.04
+  initial_joint_basis: Env_v1 arm_plan_01 seed1; sampled full11-link input triangle
+    pathcheck, actual dynamics still required
+scene:
+  initial_bottom_gap_m: 0.0002
+  instrument_xyz_m:
+  - 0.36
+  - 0
+  - 0.74
+  table_size_m:
+  - 2.2
+  - 1.8
+  - 0.08
+  table_top_m: 0.74
+  instrument_count: 1
+  instrument_yaw_policy: explicit video-informed hypothesis with lateral rack offset;
+    not automatic pointing
+  design_rack_origin_m:
+  - -0.04
+  - -0.22
+  - 0.74
+  design_instrument_origin_m:
+  - 0.36
+  - 0.18
+  - 0.74
+  instrument_yaw_deg: 90.0
+variant: native_nominal
+version: Env_v1
+scene_mode: native_nominal
+asset_directory: assets/lab_cuvette_loading/V0_demo04
+rack:
+  rows: 6
+  columns: 6
+  inner_m: 0.016
+  wall_m: 0.002
+  depth_m: 0.025
+  base_m: 0.003
+  selected_slot_id: A1
+  blue_slot_id: F6
+  yaw_deg: -90.0
+  origin_m:
+  - -0.04
+  - -0.22
+  - 0.74
+adapter:
+  selected_target_seat_id: candidate_far_hinge
+  inner_m: 0.0126
+  outer_m: 0.0204
+  height_m: 0.029
+  base_m: 0.002
+  geometry: original CAD mesh3; no engineering adapter
+task:
+  instruction: Single instrument, nominal12.5mm vessel and original12.6mm internal
+    A seat. Geometry gates control execution.
+  control_hz: 60
+source:
+  instrument: assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda
+  vessel: assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda
+  vessel_collision: assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda
+randomization:
+  legal_slots:
+  - A1
+  - A2
+  - B1
+  - B2
+  - C1
+  rack_translation_half_range_m: 0.001
+  instrument_translation_half_range_m: 0.001
+  yaw_half_range_deg: 0.0
+  in_slot_translation_m: 0.0
+  scope: only execute after geometry valid and one full task succeeds; keep whole
+    assemblies together
+video:
+  main_focal_length_cm: 1.1
+  main_resolution:
+  - 1920
+  - 1080
+  fps: 30
+  render_hz: 60
+collision_scheme: vessel_125_mm
+vessel:
+  outer_xy_m:
+  - 0.0125
+  - 0.0125
+  height_m: 0.0675
+  mass_kg: 0.02
+  dimension_source: user-provided nominal dimensions2026-10-20
+  mass_source: engineering assumption, not measured
+  xy_scale: 0.8417508417508418
+  yaw_deg: 90.0
+task_type: lab_cuvette_env_v1
+controller_type: lab_cuvette_env_v1_teacher
+collector_type: lab_cuvette_env_v1
+env:
+  task_type: preinsert_diagnostic
+  controller: teacher
+  mode: standard
+  seed: 0
+  timeout_s: 120.0
+  sync_inference: true
+  control_hz: 60
+  physics_hz: 240
+  policy_hz: 20
+  record: true
+  geometry_audit_cache: outputs/lab_cuvette_loading/Env_v1/geometry_cache
+  shapely_site: /home/wujing/Desktop/vla/physicalrsi-runtime/sim-env/lib/python3.11/site-packages
+  action_max_translation_m: 0.01
+  action_max_rotation_rad: 0.1
+  action_max_joint_delta_rad: 0.1
+  max_action_duration_s: 0.5
+  gripper_effort_max_N: 8.0
+  geometry_safe_stop_above_rim_m: 0.001
+  render_zero_delay: true
+geometry:
+  target_depth_m: 0.027
+  target_depth_basis: candidate source center-ray floor, not manufacturer-confirmed;
+    full task remains unqualified until verified
+  upright_yaw_cardinals_deg:
+  - 0
+  - 90
+  - 180
+  - 270
+  path_step_m: 0.00025
+  section_step_m: 5.0e-05
+  overlap_tolerance_m: 5.0e-05
+  required_path_geometry_valid: true
+cameras:
+  side_camera:
+    prim_path: /World/SideCamera
+    eye_m:
+    - -0.55
+    - 1.05
+    - 1.6
+    target_m:
+    - 0.08
+    - -0.08
+    - 1.0
+    focal_length_cm: 0.95
+    horizontal_aperture_mm: 20.955
+    resolution:
+    - 640
+    - 480
+    fps: 60
+    policy_resolution:
+    - 256
+    - 256
+    upworld:
+    - 0
+    - 0
+    - 1
+  wrist_camera:
+    parent_link: /World/Franka/panda_hand
+    prim_path: /World/Franka/panda_hand/WristCameraV1
+    focal_length_cm: 1.2
+    horizontal_aperture_mm: 20.955
+    resolution:
+    - 640
+    - 480
+    fps: 60
+    policy_resolution:
+    - 256
+    - 256
+    localeye_m:
+    - 0.075
+    - 0
+    - 0
+    localtarget_m:
+    - 0
+    - 0
+    - 0.35
+    localup:
+    - 0
+    - 0
+    - -1
+experiment:
+  id: preinsert_continuous_latch_01
+  basis: Reuse actual extracted/held control; same contact latch, effort cap8N, fixed
+    EXTRACT orientation and later bounded truth pose feedback
+  task_scope: Source extraction, held transport, safe approach to1mm above originalseat
+    rim,10mm retract and hold. Never insert or release while native geometry invalid.
+  hold_control_fix: Freeze robot goal after transport and require a stationary window
+    before ALIGN; continuous centering produced230.4um drift vs fixed200um criterion
+    in extract_continuous_latch_01. Acceptance unchanged.

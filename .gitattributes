@@ -9,3 +9,6 @@ assets/** filter=lfs diff=lfs merge=lfs -text
 # Keep new demo04 recordings on the existing LFS upload channel.
 docs/lab_cuvette_loading/V0_demo04/media/*.mp4 filter=lfs diff=lfs merge=lfs -text
 docs/lab_cuvette_loading/Env_v1/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+
+# The historical main entry uses CRLF; keep its unchanged line-ending format.
+main.py whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
