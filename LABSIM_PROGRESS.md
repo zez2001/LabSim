@@ -2,6 +2,8 @@
 
 当前分享分支为 `codex/lab-cuvette-external-assets`。本分支包含从 minimal_pick 到 V0_demo01 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。
 
+给其他 agent 的可传输阅读包统一按 [结果阅读包规范](docs/agent_handoff/README.md) 生成。当前桌面目录为 `/home/wujing/Desktop/LabSim_截至V0_demo01_结果阅读包_20261020`，先读包内 `00_给Agent阅读说明.md`；包括系列背景、本轮报告、成功及失败录像、结果表和精简证据。以后每次改进交付创建新包，保留旧包。
+
 - [系列实验总报告 DOCX](docs/series_20261019/LabSim系列实验总报告20261019.docx)
 - [适合 Agent 阅读的完整报告](docs/series_20261019/report.md)
 - [11 段代表录像](docs/series_20261019/media)

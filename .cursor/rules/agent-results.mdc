@@ -1,0 +1,15 @@
+---
+description: 每次 LabSim 改进后生成可独立传输的 Agent 结果阅读包
+alwaysApply: true
+---
+
+# 结果阅读包
+
+用户在 2026-10-20 要求以后每次改进都整理结果性文件，供其他 agent 阅读。
+
+- 每次交付创建新的桌面文件夹，保留已有阅读包。包含最新 DOCX/Markdown 报告、必要历史、成功与失败录像、结果表、独立判分和关键证据。
+- 不复制整个工程、环境或大体积原始数据。原始数据只列位置与已知限制，不用空值冒充实测。
+- 更新 `docs/agent_handoff/package.json` 和先读说明，注明已运行、失败、未执行、当前结论及剩余问题。
+- 提交并推送已验证改动后，运行 `python3 scripts/package_agent_results.py --output <新的桌面目录>`；核对来源提交、包内链接和 SHA256。
+- 阅读包必须是独立文件副本，不能依赖本机符号链接。最终报告可点击的文件夹路径。
+- 详细用法见 `docs/agent_handoff/README.md`。源材料已随 Git 保存，桌面阅读包不重复加入 Git。
