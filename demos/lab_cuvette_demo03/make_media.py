@@ -210,7 +210,8 @@ def make_media(episode: Path, output: Path, representative_success: bool = False
 
     definitions = [
         ("initial", "RESET", "APPROACH_SOURCE", ["wide"]),
-        ("source_extraction", "GRASP", "TRANSPORT", ["wide"]),
+        ("source_extraction", "RESET", "TRANSPORT", ["wide"]),
+        ("grasp_and_extraction", "GRASP", "TRANSPORT", ["wide"]),
         ("insertion_handoff", "ALIGN", "OPEN", ["wide", "closeup"]),
         ("open_retreat_stability", "OPEN", None, ["wide", "closeup"]),
     ]

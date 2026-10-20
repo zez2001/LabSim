@@ -1,6 +1,6 @@
 # LabSim 进展与分享入口
 
-当前开发分支为 `codex/lab-cuvette-demo03`。最新 **V0_demo03 已取得一条正确场景内的连续物理成功轨迹**：完整白色6×6参数化架 → 原尺寸器皿 → 开盖样品腔内A派生座 → 支撑交接 → 松爪 → 撤离及3.1秒稳定。独立判分与采集资格通过；固定5次、随机10次和成功batch读取的后续结果见进展页。本模式为 `video_demo_adapted`，原CAD配套和真实标定仍为false。
+当前开发分支为 `codex/lab-cuvette-demo03`。最新 **V0_demo03 已取得一条正确场景内的连续物理成功轨迹**：完整白色6×6参数化架 → 原尺寸器皿 → 开盖样品腔内A派生座 → 支撑交接 → 松爪 → 撤离及3.1秒稳定。独立判分与采集资格通过，固定复测5/5，现有加载器已读出真实训练格式batch；随机10次正在准备，实际后续结果见进展页。本模式为 `video_demo_adapted`，原CAD配套和真实标定仍为false。
 
 - [全部进展与历史报告](LABSIM_PROGRESS.md)
 - [V0_demo03 本轮结果](docs/lab_cuvette_loading/V0_demo03/report.md)

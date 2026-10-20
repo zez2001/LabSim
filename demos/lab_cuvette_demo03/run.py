@@ -110,7 +110,8 @@ def run(args,app,output,cfg):
     source=ctx['source'];floor=ctx['fixtures']['target_floor'] if full else np.r_[source[:2]+[.03,.02],cfg.scene.table_top_m]
     cameras={}
     set_camera_view(eye=np.array([-.75,-.95,1.75]),target=np.array([.30,.12,1.02]))
-    views=[('camera_1_rgb','/World/Observation',[-.75,-.95,1.75],[.30,.12,1.02],(256,256),2.4),('camera_2_rgb','/World/Franka/panda_hand/WristCamera',[.10,-.18,.98],[-.04,-.22,.77],(256,256),1.2),('wide','/World/Main',[-.75,-.95,1.75],[.30,.12,1.02],(1920,1080),1.6),('close','/World/Close',floor+[.10,-.14,.11],floor+[0,0,.037],(640,640),3.5)]
+    # The display camera is independent of the two recorded observation views.
+    views=[('camera_1_rgb','/World/Observation',[-.75,-.95,1.75],[.30,.12,1.02],(256,256),2.4),('camera_2_rgb','/World/Franka/panda_hand/WristCamera',[.10,-.18,.98],[-.04,-.22,.77],(256,256),1.2),('wide','/World/Main',[-.75,-.95,1.75],[.30,.12,1.02],(1920,1080),float(cfg.video.get('main_focal_length_cm',1.6))),('close','/World/Close',floor+[.10,-.14,.11],floor+[0,0,.037],(640,640),3.5)]
     for key,path,eye,target,size,focal in views:
         c=Camera(path,name=key,frequency=60,resolution=size);c.set_focal_length(focal);c.set_clipping_range(.0001,10.);set_camera_view(eye=np.array(eye),target=np.array(target),camera_prim_path=path);c.initialize();cameras[key]=c
         if key=='camera_2_rgb':

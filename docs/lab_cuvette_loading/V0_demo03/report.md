@@ -8,6 +8,6 @@
 
 前两条失败均保留：dev_01搬运时link6碰盖板；dev_02插入前实际X偏差约−.674mm，超过.575mm单侧名义余量，入座受阻后相对TCP上滑，最终保守接近事件停止。没有调整50µm穿透门槛或重新把失败标成功。
 
-当前已完成首条演示，正在进行固定5次、之后的随机10次及现有加载器成功batch读取。此处暂不填写未执行的批次成绩，最终报告将补入实际结果。
+首条演示之外，固定5次已全部独立通过，H5资格一致；现有MinimalPickDataset已实际读取成功batch。固定批处理外壳在末尾汇总阶段返回143，任务五条均完成；原空summary保留，summary_recovered_01只读汇总确认5/5。原因未确证，不将该退出吞成正常零退出。随机10次尚未执行，接下来顺序运行。主展示相机已通过投影检查拟改为1.3cm以完整容纳白架；双视角观测、控制、物理、尺寸及50µm判据不变，新宽视角仍待实际录像验证。最终报告将补入实际结果。
 
 [资产改动](asset_changes.json)、[最终尺寸](dimensions.csv)、[ChemLab定向参考](source_and_assumptions.md)、[整臂计划检查](evidence/arm_plan_03.json)、[几何计划修订](geometry_plan_revision.md)、[运行命令](../../../demos/lab_cuvette_demo03/README.md)。

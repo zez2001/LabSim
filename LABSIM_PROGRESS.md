@@ -1,14 +1,14 @@
 # 最新进展 V0 demo03
 
-2026-10-20：取得一条白色6×6架取物至开盖仪器腔内A派生座的完整连续成功轨迹，61.75秒，实际松爪和撤离后稳定3.1秒，独立15项检查与H5资格一致。当前正在固定5次复测，随机10次及成功batch读取结果随后补充。该适配模式不改写native_pair_success或real_calibrated。
+2026-10-20：取得一条白色6×6架取物至开盖仪器腔内A派生座的完整连续成功轨迹，61.75秒，实际松爪和撤离后稳定3.1秒，独立15项检查与H5资格一致。固定5次已全部独立通过，真实成功batch读取通过；接下来顺序执行随机10次。固定批处理汇总末尾返回143，五条轨迹均完成，保留退出记录后在新目录只读重做汇总。该适配模式不改写native_pair_success或real_calibrated。
 
 分支：`codex/lab-cuvette-demo03`。详见[本轮报告](docs/lab_cuvette_loading/V0_demo03/report.md)和[启动命令](demos/lab_cuvette_demo03/README.md)。
 
-# LabSim 进展与分享入口
+# 历史进展与分享入口 V0 demo02
 
-当前分享分支为 `codex/lab-cuvette-demo02`。本分支包含从 minimal_pick 到 V0_demo02 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。
+V0_demo02历史分享分支为 `codex/lab-cuvette-demo02`。本分支包含从 minimal_pick 到 V0_demo02 的开发历史，`main` 保持 LabUtopia 上游基准。仓库当前是私有的，接收方需要相应 GitHub 访问权限。
 
-给其他 agent 的可传输阅读包统一按 [结果阅读包规范](docs/agent_handoff/README.md) 生成。当前桌面目录为 `/home/wujing/Desktop/LabSim_截至V0_demo02_结果阅读包_20261020`，先读包内 `00_给Agent阅读说明.md`；包括系列背景、本轮报告、成功及失败录像、结果表和精简证据。以后每次改进交付创建新包，保留旧包。
+给其他 agent 的可传输阅读包统一按 [结果阅读包规范](docs/agent_handoff/README.md) 生成。历史demo02桌面目录为 `/home/wujing/Desktop/LabSim_截至V0_demo02_结果阅读包_20261020`，先读包内 `00_给Agent阅读说明.md`；包括系列背景、本轮报告、成功及失败录像、结果表和精简证据。以后每次改进交付创建新包，保留旧包。
 
 - [系列实验总报告 DOCX](docs/series_20261019/LabSim系列实验总报告20261019.docx)
 - [适合 Agent 阅读的完整报告](docs/series_20261019/report.md)

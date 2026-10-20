@@ -1,0 +1,79 @@
+{
+  "schema": "labsim.V0_demo03.media_visual_QA.v1",
+  "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_03/trial_00",
+  "main_video": {
+    "file": "main_h264.mp4",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "frames": 1853,
+    "duration_s": 61.766667,
+    "last_recorded_frame_s": 61.733333333333334
+  },
+  "simulation_end_s": 61.75,
+  "workflow_success": true,
+  "independent_checks": {
+    "scene_and_geometry_contract": true,
+    "asset_and_slot_bindings": true,
+    "initial_source_slot_and_support": true,
+    "all_workflow_stages_in_order": true,
+    "source_slot_actually_cleared": true,
+    "correct_internal_seat_loaded": true,
+    "supported_before_open": true,
+    "both_fingers_open_and_detached": true,
+    "actual_retreat_clearance": true,
+    "post_retreat_stable_3s": true,
+    "measured_penetration_within_original_gate": true,
+    "no_forbidden_robot_environment_contact": true,
+    "finite_native_signals": true,
+    "physics_samples_contiguous": true,
+    "no_forbidden_kinematic_or_attachment": true
+  },
+  "post_retreat_window": {
+    "available": true,
+    "status": "observed",
+    "label": "post_retreat_window",
+    "start_s": 58.65,
+    "end_s": 61.75,
+    "duration_s": 3.1000000000000014,
+    "recorded_samples": 745,
+    "max_sample_interval_s": 0.0041666666666699825,
+    "position_drift_m": 9.996002811937585e-08,
+    "rotation_change_deg": 1.0799477313527668e-05,
+    "max_tilt_deg": 0.0001097223706227903,
+    "max_penetration_m": 0.0,
+    "max_abs_target_bottom_gap_m": 1.2822990580474425e-07,
+    "min_support_Fz_N": 0.19619012405382819,
+    "min_environment_support_Fz_N": 0.19619012405382819,
+    "max_native_speed_m_s": 4.128571594164931e-05,
+    "max_native_angular_rad_s": 0.0014585395072418516,
+    "max_fd_COM_speed_m_s": 2.4558506850660005e-05,
+    "max_fd_angular_rad_s": 4.7447619199648174e-05,
+    "stable": true,
+    "required_duration_s": 3.0
+  },
+  "native_pair_success": false,
+  "adjudicated_data_eligible": true,
+  "raw_controller_result_data_eligible": false,
+  "eligibility_note": "Raw controller result was written before independent writer qualification; original files retained. Adjudication and independent score control dataset eligibility.",
+  "validation": [
+    "All source media decoded and re-encoded on CPU; ffprobe confirms H264 frame count, frame size and duration",
+    "Wide view examined every two seconds from0 to60 plus final frame61.733; target close camera examined every two seconds from28 to60 plus final frame61.733",
+    "Initial, source-extracted, final and both reference comparison panels visually inspected at original resolution",
+    "Both media and original source file SHA256 values rechecked"
+  ],
+  "observed": [
+    "Complete continuous rack-to-internal-A engineering workflow is represented by the same dev_03 episode",
+    "Source rack geometry is6x6 but nearest corner/near A1 bottom is slightly cut by main camera lower edge; not inpainted or reconstructed",
+    "Open chamber visible in wide view, internal A seating clearer in close view; an occluded wide-view target location is labelled see closeup",
+    "Close view shows insertion, slow opening, separation, retreat and final supported vessel"
+  ],
+  "limitations": [
+    "Sampled visual inspection does not replace independent physical scoring",
+    "Camera scale/extrinsics and real dynamics are uncalibrated",
+    "Main framing is not a perfect complete-rack view; use a later separately recorded wider-view single episode if required, never stitch into this run"
+  ],
+  "raw_source_records_modified": false,
+  "gpu_process_started": false
+}

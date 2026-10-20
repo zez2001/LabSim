@@ -1,0 +1,435 @@
+{
+  "schema": "labsim.V0_demo03.formal_batch_audit.v1",
+  "roots": [
+    {
+      "kind": "fixed",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02"
+    }
+  ],
+  "source_script_sha256": "a48256836e69763f2057c4cae7f181955f386322101d3651b1df0044629f540d",
+  "read_only": true,
+  "training_executed": false,
+  "semantic_notes": {
+    "raw_result": "result.json is saved before independent adjudication. Its data_eligible=false and full_task_eligible=false are conservative provisional fields, not the final H5 eligibility.",
+    "final_qualification": "independent_score.json, post-close adjudication.json and completed H5 qualification attributes determine adapted-scene eligibility. execution_summary.data_eligible copies the independent score; its legacy full_task_eligible remains provisional.",
+    "sampled_progress": "privileged/progress is controller progress at transition caching. Final VERIFY adjudication occurs after the last cached transition. A last sampled stable=false is preserved; final stability is independently measured from the actual post-retreat physics window, not filled into progress.",
+    "scope": "video_demo_adapted simulated workflow; native_pair_success=false and real_calibrated=false remain separate facts even for eligible success.",
+    "failure": "A physically failed episode can pass schema/timestamp/label-consistency checks while correctly remaining ineligible. Expected false qualification gates are not malformed-data errors.",
+    "geometry": "Assembly verification recomputes config layout and compares saved preflight plus actual initial pose. It is not an independent reread of composed USD/cooked PhysX surfaces or a proof of global collision accuracy."
+  },
+  "counts": {
+    "fixed": {
+      "expected": 1,
+      "observed": 1,
+      "completed": 1,
+      "pending": 0,
+      "audit_pass": 1,
+      "workflow_success": 0,
+      "actual_failed_workflow": 1,
+      "qualified": 0,
+      "expected_trial_count_met": true
+    }
+  },
+  "records": [
+    {
+      "trial": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00",
+      "batch": "fixed",
+      "status": "AUDIT_PASS",
+      "h5_opened": true,
+      "audit_pass": true,
+      "errors": [],
+      "workflow_success": false,
+      "data_eligible": false,
+      "loader_qualification": false,
+      "source_slot_id": "A1",
+      "target_seat_id": "candidate_far_hinge",
+      "native_pair_success": false,
+      "real_calibrated": false,
+      "final_status": "EVIDENCE_INCOMPLETE_OR_FAILED",
+      "failed_independent_checks": [
+        "all_workflow_stages_in_order",
+        "correct_internal_seat_loaded",
+        "supported_before_open",
+        "both_fingers_open_and_detached",
+        "actual_retreat_clearance",
+        "post_retreat_stable_3s",
+        "no_forbidden_robot_environment_contact"
+      ],
+      "simulation_seconds": 48.61666666666667,
+      "wall_seconds": 176.24725873582065,
+      "frames": 2917,
+      "last_timestamp": 48.61666666666667,
+      "raw_controller_provisional_labels": {
+        "data_eligible": false,
+        "full_task_eligible": false,
+        "full_success": false
+      },
+      "sampled_terminal_progress": {
+        "support_valid": true,
+        "grasp_success": true,
+        "extract_success": true,
+        "transport_success": true,
+        "loaded": false,
+        "released": false,
+        "retreated": false,
+        "stable": false
+      },
+      "final_controller_progress": {
+        "support_valid": true,
+        "grasp_success": true,
+        "extract_success": true,
+        "transport_success": true,
+        "loaded": false,
+        "released": false,
+        "retreated": false,
+        "stable": false
+      },
+      "post_retreat_window": {
+        "available": false,
+        "status": "unavailable",
+        "reason": "VERIFY/completed retreat was not recorded",
+        "duration_s": null,
+        "position_drift_m": null,
+        "rotation_change_deg": null,
+        "stable": null
+      },
+      "stable_after_retreat": null,
+      "physics_quality_flags": [
+        "ROBOT_AND_VESSEL_DYNAMICS_NOT_REAL_CALIBRATED",
+        "GEOMETRY_CHECKS_SAMPLED_NOT_GLOBAL_NATIVE_SHAPE_PROOF",
+        "NATIVE_VS_POSE_VELOCITY_MISMATCH_RETAINED",
+        "UNINTENDED_ROBOT_ENVIRONMENT_CONTACT",
+        "VIDEO_DEMO_ADAPTED_SCENE_NOT_OEM_PAIR_VALIDATION",
+        "ROBOT_VESSEL_MATERIAL_DYNAMICS_NOT_REAL_CALIBRATED"
+      ],
+      "assembly": {
+        "checks": {
+          "source_slot_matches_config_preflight_score": true,
+          "target_seat_matches_config_preflight_score": true,
+          "source_floor_matches_recomputed_layout": true,
+          "target_floor_matches_recomputed_layout": true,
+          "preflight_passed": true,
+          "full_rack_slots_retained": true,
+          "legal_source_slot": true,
+          "initial_pose_at_selected_source_safe_gap": true,
+          "initial_measured_slot_and_seat": true,
+          "rack_local_geometry_unchanged": true,
+          "adapter_local_geometry_unchanged": true,
+          "instrument_yaw_unchanged": true,
+          "randomization_record_present_when_requested": true,
+          "fixed_assembly_origins_unchanged": true,
+          "fixed_source_slot_unchanged": true,
+          "snapshot_config_bound_to_provenance": true
+        },
+        "baseline_config": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/source_snapshot/config/lab_cuvette_loading/V0_demo03/video_demo_adapted.yaml",
+        "baseline_config_sha256": "8c6b3ba9169e6d778f465080cd98faadb4a0c70153653ce721f753bd41e07cb6",
+        "randomization_actual": null,
+        "source_floor_m": [
+          -0.085,
+          -0.265,
+          0.743
+        ],
+        "target_floor_m": [
+          0.21008446439302364,
+          0.3276293532629626,
+          0.887
+        ],
+        "selected_slot_local_m": [
+          -0.045000000000000005,
+          -0.045000000000000005,
+          0.003
+        ],
+        "target_origin_in_instrument_m": [
+          -0.14991553560697635,
+          0.14762935326296264,
+          0.145
+        ],
+        "git_commit_at_run": "a008a18816e642263cdce37a8280fe004d10ab99",
+        "dirty_at_run": "?? assets/lab_cuvette_loading/V0_demo03/\n?? config/lab_cuvette_loading/V0_demo03/\n?? demos/lab_cuvette_demo03/\n?? docs/lab_cuvette_loading/V0_demo03/\n"
+      },
+      "independent_label_checks": {
+        "score_check_set": true,
+        "workflow_derived_from_all_independent_checks": true,
+        "eligible_derived_from_independent_workflow": true,
+        "final_workflow_labels_agree": true,
+        "final_eligibility_labels_agree": true,
+        "no_native_pair_claim": true,
+        "no_real_calibration_claim": true,
+        "adjudication_bound_to_score": true,
+        "saved_physics_hash_matches_score": true,
+        "saved_events_hash_matches_score": true,
+        "raw_controller_result_hash_matches_score": true,
+        "raw_quality_flags_preserved_in_independent_score": true,
+        "summary_quality_flags_preserved_in_independent_score": true,
+        "embedded_score_matches_sidecar": true,
+        "unavailable_post_retreat_has_null_stability": true,
+        "terminal_time_matches_score_summary_and_h5": true
+      },
+      "interface_checks": {
+        "new_scene_only": true,
+        "new_task_only": true,
+        "adapted_scene_mode": true,
+        "adapted_score_scope": true,
+        "no_native_pair_claim": true,
+        "no_real_calibration_claim": true,
+        "raw_complete": true,
+        "raw_scene_correspondence_accepted": true,
+        "scene_correspondence_accepted": true,
+        "score_version": true,
+        "not_historical_rescore": true,
+        "source_slot_bound": true,
+        "correct_internal_target": true,
+        "asset_version_bound": true,
+        "action_semantics": true,
+        "observation_alignment": true,
+        "declared_simulation_scope": true,
+        "score_same_episode": true,
+        "score_matches_saved_h5_adjudication": true,
+        "required_arrays_present": true,
+        "nonempty": true,
+        "all_transition_lengths_equal": true,
+        "action_and_agent_dimensions": true,
+        "robot_nine_positions": true,
+        "dual_rgb_uint8_CHW_256": true,
+        "timestamp_action_hold": true,
+        "transition_timestamp_continuity": true,
+        "next_robot_state_matches_next_observation": true,
+        "next_object_state_matches_next_observation": true,
+        "finite_actions_and_agent": true,
+        "finite_native_fd_and_target_support": true,
+        "native_fd_and_target_support_vector_shapes": true,
+        "per_frame_source_slot_binding": true,
+        "per_frame_target_seat_binding": true,
+        "geometry_boolean_measurements_available": true,
+        "phase_map_and_codes": true
+      },
+      "data_inspection": {
+        "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/dataset/episode_0000.h5",
+        "original_sha256": "23366c1123f75a947416e31f7852dbebd200d45ed08e1b14fc5735982d9fe3fe",
+        "independent_score": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/independent_score.json",
+        "independent_score_sha256": "5db7cb350592410cfe609ccbed0e8cd88da155b72e3db74d04070010b63c40ea",
+        "eligible": false,
+        "checks": {
+          "new_scene_only": true,
+          "new_task_only": true,
+          "adapted_scene_mode": true,
+          "adapted_score_scope": true,
+          "no_native_pair_claim": true,
+          "no_real_calibration_claim": true,
+          "raw_complete": true,
+          "raw_success": false,
+          "raw_data_eligible": false,
+          "raw_full_task_eligible": false,
+          "raw_workflow_success": false,
+          "raw_scene_correspondence_accepted": true,
+          "independently_data_eligible": false,
+          "independently_workflow_success": false,
+          "scene_correspondence_accepted": true,
+          "score_version": true,
+          "all_required_independent_checks": false,
+          "not_historical_rescore": true,
+          "source_slot_bound": true,
+          "correct_internal_target": true,
+          "asset_version_bound": true,
+          "action_semantics": true,
+          "observation_alignment": true,
+          "declared_simulation_scope": true,
+          "score_same_episode": true,
+          "score_matches_saved_h5_adjudication": true,
+          "required_arrays_present": true,
+          "nonempty": true,
+          "all_transition_lengths_equal": true,
+          "action_and_agent_dimensions": true,
+          "robot_nine_positions": true,
+          "dual_rgb_uint8_CHW_256": true,
+          "timestamp_action_hold": true,
+          "transition_timestamp_continuity": true,
+          "next_robot_state_matches_next_observation": true,
+          "next_object_state_matches_next_observation": true,
+          "finite_actions_and_agent": true,
+          "finite_native_fd_and_target_support": true,
+          "native_fd_and_target_support_vector_shapes": true,
+          "per_frame_source_slot_binding": true,
+          "per_frame_target_seat_binding": true,
+          "geometry_boolean_measurements_available": true,
+          "phase_map_and_codes": true
+        },
+        "rejection_reasons": [
+          "raw_success",
+          "raw_data_eligible",
+          "raw_full_task_eligible",
+          "raw_workflow_success",
+          "independently_data_eligible",
+          "independently_workflow_success",
+          "all_required_independent_checks"
+        ],
+        "missing_arrays": [],
+        "attributes": {
+          "action_dimension": 8,
+          "action_semantics": "absolute_7_arm_rad_and_symmetric_finger_metre",
+          "asset_manifest_sha256": "828a0f4fb5066cff4b8af3647279096c4fd12c601b34912b9a90a073756629d5",
+          "cad_pair_verified": false,
+          "complete": true,
+          "control_hz": 60,
+          "data_eligible": false,
+          "data_scope": "lab_cuvette_loading_V0_demo03_video_demo_adapted",
+          "frames": 2917,
+          "full_success": false,
+          "full_task_eligible": false,
+          "geometry_alignment": "after action; same next_state as next_timestamp",
+          "independent_adjudication_available": true,
+          "independent_score_sha256": "5db7cb350592410cfe609ccbed0e8cd88da155b72e3db74d04070010b63c40ea",
+          "initial_position_m": [
+            -0.085,
+            -0.265,
+            0.7432
+          ],
+          "native_pair_success": false,
+          "observation_alignment": "obs_before_action; next_state_after_explicit_substeps",
+          "phase_names_json": "[\"RESET\", \"APPROACH_SOURCE\", \"GRASP\", \"EXTRACT\", \"TRANSPORT\", \"ALIGN\", \"INSERT\", \"SUPPORT_TRANSFER\", \"OPEN\", \"RETREAT\", \"VERIFY\"]",
+          "physics_hz": 240,
+          "privileged_fields": "privileged/* not default policy inputs",
+          "progress_columns": "support_valid,grasp_success,extract_success,transport_success,loaded,released,retreated,stable",
+          "qualification_rejection_json": "[\"independently_successful_workflow\", \"independently_eligible\", \"all_independent_checks_pass\"]",
+          "quaternion_order": "wxyz",
+          "real_calibrated": false,
+          "reason": "FORBIDDEN_ROBOT_ENVIRONMENT_CONTACT",
+          "rgb": "CHW RGB uint8 256x256 60Hz",
+          "robot_state_dimension": 9,
+          "scene_contract_canonical_sha256": "de6e402b4fff7829397166ef347ab75597d4f50b6990d1c6c679c6612798ca5f",
+          "scene_contract_json": "{\"asset_manifest_sha256\": \"828a0f4fb5066cff4b8af3647279096c4fd12c601b34912b9a90a073756629d5\", \"geometry_audit\": {\"accepted\": true}, \"minimum_retreat_clearance_m\": 0.04, \"native_pair_verified\": false, \"real_calibrated\": false, \"runtime_integrity\": {\"method\": \"dynamic contact only; no runtime pose assignment, attachment or collision-disable code\", \"verified\": true}, \"scene_correspondence\": {\"accepted\": true, \"evidence\": [\"parameterized rack36slots and adapted internal A; user authorization2026-10-20\", \"geometry_preflight.json\"]}, \"scene_mode\": \"video_demo_adapted\", \"source_slot\": {\"id\": \"A1\", \"required_clearance_m\": 0.01}, \"target_seat\": {\"id\": \"candidate_far_hinge\", \"inside_sample_chamber\": true, \"manufacturer_identity_confirmed\": false, \"minimum_depth_m\": 0.026900000000000004, \"user_role_confirmed\": true}, \"version\": \"V0_demo03\"}",
+          "scene_correspondence_accepted": true,
+          "scene_mode": "video_demo_adapted",
+          "scene_version": "V0_demo03",
+          "schema_version": "labsim.lab_cuvette_loading.V0_demo03.v1",
+          "source_slot_id": "A1",
+          "source_slot_known": true,
+          "status": "FORBIDDEN_ROBOT_ENVIRONMENT_CONTACT",
+          "success": false,
+          "target_is_internal_chamber": true,
+          "target_seat_id": "candidate_far_hinge",
+          "target_seat_known": true,
+          "task": "lab_cuvette_loading_V0_demo03",
+          "unavailable_geometry_boolean": "int8 -1 unknown, 0 false, 1 true",
+          "unavailable_geometry_float": "NaN means not measured/not applicable; never zero-filled",
+          "workflow_success": false
+        },
+        "diagnostics": {
+          "frames": 2917,
+          "shapes": {
+            "camera_1_rgb": [
+              2917,
+              3,
+              256,
+              256
+            ],
+            "camera_2_rgb": [
+              2917,
+              3,
+              256,
+              256
+            ],
+            "agent_pose": [
+              2917,
+              8
+            ],
+            "actions": [
+              2917,
+              8
+            ],
+            "next_agent_pose": [
+              2917,
+              8
+            ],
+            "joint_positions": [
+              2917,
+              9
+            ],
+            "timestamp": [
+              2917
+            ],
+            "next_timestamp": [
+              2917
+            ],
+            "phase_code": [
+              2917
+            ],
+            "privileged/object_pose": [
+              2917,
+              7
+            ],
+            "privileged/next_object_pose": [
+              2917,
+              7
+            ],
+            "diagnostic/linear_velocity": [
+              2917,
+              3
+            ],
+            "diagnostic/angular_velocity": [
+              2917,
+              3
+            ],
+            "diagnostic/fd_com_velocity": [
+              2917,
+              3
+            ],
+            "diagnostic/fd_angular_velocity": [
+              2917,
+              3
+            ],
+            "diagnostic/target_support_force_vector_N": [
+              2917,
+              3
+            ],
+            "geometry/source_slot_id": [
+              2917
+            ],
+            "geometry/target_seat_id": [
+              2917
+            ],
+            "geometry/source_clearance_m": [
+              2917
+            ],
+            "geometry/depth_m": [
+              2917
+            ],
+            "geometry/bottom_signed_gap_m": [
+              2917
+            ],
+            "geometry/robot_to_vessel_clearance_m": [
+              2917
+            ],
+            "geometry/source_supported_inside_designated_slot": [
+              2917
+            ],
+            "geometry/inside_checked_target_void": [
+              2917
+            ],
+            "geometry/forbidden_robot_environment_contact": [
+              2917
+            ]
+          },
+          "max_action_hold_error_s": 6.158268339717665e-15,
+          "rgb_alignment_scope": "writer contract and timestamp continuity checked; image content timing not independently measured"
+        },
+        "real_calibrated": false,
+        "native_pair_success": false,
+        "raw_unchanged_after_read": true
+      },
+      "video_paths": [
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/closeup.mp4",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/dev_02/trial_00/main.mp4"
+      ],
+      "semantic_notes": {
+        "raw_result": "result.json is saved before independent adjudication. Its data_eligible=false and full_task_eligible=false are conservative provisional fields, not the final H5 eligibility.",
+        "final_qualification": "independent_score.json, post-close adjudication.json and completed H5 qualification attributes determine adapted-scene eligibility. execution_summary.data_eligible copies the independent score; its legacy full_task_eligible remains provisional.",
+        "sampled_progress": "privileged/progress is controller progress at transition caching. Final VERIFY adjudication occurs after the last cached transition. A last sampled stable=false is preserved; final stability is independently measured from the actual post-retreat physics window, not filled into progress.",
+        "scope": "video_demo_adapted simulated workflow; native_pair_success=false and real_calibrated=false remain separate facts even for eligible success.",
+        "failure": "A physically failed episode can pass schema/timestamp/label-consistency checks while correctly remaining ineligible. Expected false qualification gates are not malformed-data errors.",
+        "geometry": "Assembly verification recomputes config layout and compares saved preflight plus actual initial pose. It is not an independent reread of composed USD/cooked PhysX surfaces or a proof of global collision accuracy."
+      }
+    }
+  ],
+  "batch_audit_complete": true
+}

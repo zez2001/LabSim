@@ -28,6 +28,8 @@ bash demos/lab_cuvette_demo03/run_random.sh \
 
 控制器复用Franka/Lula关节位置目标和demo01释放逻辑；根据实际器皿位置小幅修正对准与下降XY目标。器皿保持20g动态刚体和既有walls28_mm接触模型；运行中不设置器皿位姿、附着、冻结或关闭碰撞。240Hz物理/60Hz控制，每周期明确4步。原生、USD与位姿差分速度均保留；目标底面净支撑力单独记录。
 
+主展示相机采用`video.main_focal_length_cm=1.3`，可完整容纳白架并留出字幕空间。它独立于H5双视角观测相机；物理、控制、目标座尺寸和验收门槛不因这次展示调整而改变。固定五次复测使用此前1.6的展示焦距，原录像和配置保留。
+
 `result.json`是控制器原始结果；`independent_score.json`及`adjudication.json`是实际任务/数据资格；`execution_summary.json`合并显示两层结果。未完成撤离时`post_retreat_window`不可用、稳定结果null，末段仅为`terminal_window`。成功数据独立归入`lab_cuvette_loading_V0_demo03_video_demo_adapted`；native_pair_success和real_calibrated始终false，不阻止适配任务的真实成功样本资格。
 
 复现资产可使用`build_assets.py --output <新的目录>`，不会回写源CAD；场景生成后应先用`preflight.py`核对全架/适配座/三手部的计划，再用`plan_arm.py`核对全臂IK/FK的原始碰撞输入，最后由实际连续运行的原生接触和状态独立判分。采样几何不能冒充全局烹饪几何误差界。
