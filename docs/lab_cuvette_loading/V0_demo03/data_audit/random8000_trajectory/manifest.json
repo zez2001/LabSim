@@ -1,0 +1,360 @@
+{
+  "schema": "labsim.V0_demo03.complete_control_trace.v1",
+  "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00",
+  "source_h5_sha256": "58c4b1cc39382222824ac92adf401d6a96da289735f9cd9d44056bcc20e0c998",
+  "frames": 3707,
+  "simulation_seconds": 61.78333333333333,
+  "physics_hz": 240.0,
+  "control_hz": 60.0,
+  "observation_alignment": "timestamp is pre-action; next_timestamp and fields named after are post-action; no interpolation",
+  "phase_alignment": "phase describes action interval; confirmed identical to corresponding physics-step phase",
+  "fd_scope": "backward difference at each physics step, then sampled at60Hz; not60Hz position differencing",
+  "action_semantics": "7 absolute arm targets(rad) and1 symmetric finger target(m); full9command separately preserved",
+  "cup_pose_frame": "world position(m) of normalized source origin and wxyz quaternion; source origin is not COM",
+  "depth_definition": "target rim height minus actual source-mesh minimum local Z; NaN outside target XY applicability",
+  "unavailable_values": "NaN in NPZ, empty CSV cells; no missing value is zero-filled",
+  "missing_fields": [],
+  "scene_mode": "video_demo_adapted",
+  "data_scope": "lab_cuvette_loading_V0_demo03_video_demo_adapted",
+  "native_pair_success": false,
+  "real_calibrated": false,
+  "workflow_success": true,
+  "data_eligible": true,
+  "physics_quality_flags": [
+    "ROBOT_AND_VESSEL_DYNAMICS_NOT_REAL_CALIBRATED",
+    "GEOMETRY_CHECKS_SAMPLED_NOT_GLOBAL_NATIVE_SHAPE_PROOF",
+    "VIDEO_DEMO_ADAPTED_SCENE_NOT_OEM_PAIR_VALIDATION",
+    "ROBOT_VESSEL_MATERIAL_DYNAMICS_NOT_REAL_CALIBRATED",
+    "NATIVE_VS_POSE_VELOCITY_MISMATCH_RETAINED"
+  ],
+  "velocity_audit": {
+    "available": true,
+    "finite": true,
+    "first_difference_sample_available": false,
+    "native_linear_frame": "world COM; m/s",
+    "native_angular_frame": "world; rad/s",
+    "usd_angular_raw_unit": "degree/s; retained, not replaced",
+    "difference": "backward COM difference and world rotation vector at same-step endpoints",
+    "max_linear_disagreement_m_s": 0.21416591502438045,
+    "max_angular_disagreement_rad_s": 7.881338378396478,
+    "mismatch_is_warning_only": true
+  },
+  "source_files_sha256": {
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00/dataset/episode_0000.h5": "58c4b1cc39382222824ac92adf401d6a96da289735f9cd9d44056bcc20e0c998",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00/physics_records.json": "859f7072dd32eabb0cf184f56f4b1fb6df5aeefa4226758713278ac392f12137",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00/events.json": "8637ca7b5f8de20ef2b2b84ce875a55f68bc8be89f86986a55f223167fae53af",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00/independent_score.json": "85c57cda48926f9c5d0d6cb8576cdf4dedef68c658a6473ac18cb1d96a1f44bd",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00/config.yaml": "9cf2ce4608da1b8ad96d6c8f0e0bdaf6bc6d4983dcc2f9bc67f8e060583345cd",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00/scene_contract.json": "22be470263c046e3bb28b4d56857952517795dc71e8eadb1c26ac6c5d975b2bc"
+  },
+  "source_records_unchanged": true,
+  "complete_control_trace_rows": 3707,
+  "physics_states": 14829,
+  "joined_physics_endpoints_verified": true,
+  "actions_and_cup_pose_verified_against_raw": true,
+  "npz_safe_reload_verified": true,
+  "phase_events_s": {
+    "APPROACH_SOURCE": 4.0,
+    "GRASP": 11.0,
+    "EXTRACT": 13.5,
+    "TRANSPORT": 20.5,
+    "ALIGN": 29.5,
+    "INSERT": 32.0,
+    "SUPPORT_TRANSFER": 47.233333333333334,
+    "OPEN": 50.733333333333334,
+    "RETREAT": 53.18333333333333,
+    "VERIFY": 58.68333333333333
+  },
+  "post_retreat_window": {
+    "available": true,
+    "status": "observed",
+    "label": "post_retreat_window",
+    "start_s": 58.68333333333333,
+    "end_s": 61.78333333333333,
+    "duration_s": 3.1000000000000014,
+    "recorded_samples": 745,
+    "max_sample_interval_s": 0.0041666666666699825,
+    "position_drift_m": 1.4975481660844222e-07,
+    "rotation_change_deg": 1.527276728333139e-05,
+    "max_tilt_deg": 7.630176557304134e-05,
+    "max_penetration_m": 0.0,
+    "max_abs_target_bottom_gap_m": 1.337054350569744e-07,
+    "min_support_Fz_N": 0.19616430136647978,
+    "min_environment_support_Fz_N": 0.19616430136647978,
+    "max_native_speed_m_s": 6.281278005669036e-05,
+    "max_native_angular_rad_s": 0.002021548454010458,
+    "max_fd_COM_speed_m_s": 4.396165068479573e-05,
+    "max_fd_angular_rad_s": 0.00012512354903609668,
+    "stable": true,
+    "required_duration_s": 3.0
+  },
+  "stable_after_retreat": true,
+  "actual_retreat_clearance_m": 0.11188462767262107,
+  "npz_fields": {
+    "timestamp_s": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "next_timestamp_s": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "phase_code": {
+      "shape": [
+        3707
+      ],
+      "dtype": "int32"
+    },
+    "phase": {
+      "shape": [
+        3707
+      ],
+      "dtype": "<U16"
+    },
+    "source_slot_id": {
+      "shape": [
+        3707
+      ],
+      "dtype": "<U2"
+    },
+    "target_seat_id": {
+      "shape": [
+        3707
+      ],
+      "dtype": "<U19"
+    },
+    "action_joint_targets": {
+      "shape": [
+        3707,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "robot_agent_before": {
+      "shape": [
+        3707,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "robot_joint_positions_before": {
+      "shape": [
+        3707,
+        9
+      ],
+      "dtype": "float32"
+    },
+    "cup_pose_before": {
+      "shape": [
+        3707,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "cup_pose_after": {
+      "shape": [
+        3707,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "actual_tcp_before": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "actual_tcp_after": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "target_tcp_world_m": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "xy_error_after_m": {
+      "shape": [
+        3707,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "tilt_after_rad": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "target_depth_after_m": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "bottom_signed_gap_after_m": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "source_clearance_after_m": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "hand_clearance_lower_bound_after_m": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "source_penetration_after_m": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "finger_normal_magnitudes_after_N": {
+      "shape": [
+        3707,
+        2
+      ],
+      "dtype": "float32"
+    },
+    "target_base_force_after_N": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "environment_force_after_N": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "finger_normal_vectors_after_N": {
+      "shape": [
+        3707,
+        2,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "finger_friction_vectors_after_N": {
+      "shape": [
+        3707,
+        2,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "native_linear_velocity_after_m_s": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "native_angular_velocity_after_rad_s": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "fd_COM_velocity_after_m_s": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "fd_angular_velocity_after_rad_s": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "usd_linear_velocity_raw_after_m_s": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "usd_angular_velocity_raw_after_deg_s": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "robot_joint_positions_after": {
+      "shape": [
+        3707,
+        9
+      ],
+      "dtype": "float64"
+    },
+    "full_joint_command_after": {
+      "shape": [
+        3707,
+        9
+      ],
+      "dtype": "float64"
+    },
+    "gripper_effort_cap_after_N": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "gripper_command_after_m": {
+      "shape": [
+        3707
+      ],
+      "dtype": "float64"
+    },
+    "descent_stopped_after": {
+      "shape": [
+        3707
+      ],
+      "dtype": "bool"
+    },
+    "cup_in_hand_position_after_m": {
+      "shape": [
+        3707,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "cup_in_hand_quaternion_after_wxyz": {
+      "shape": [
+        3707,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "metadata_json": {
+      "shape": [],
+      "dtype": "<U3358"
+    }
+  },
+  "export_script_sha256": "45c2888f438a8096946a039b568d75843678952fa26f2f6bc8d1bd5428a6e67d"
+}

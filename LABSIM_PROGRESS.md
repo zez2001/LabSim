@@ -1,8 +1,14 @@
 # 最新进展 V0 demo03
 
-2026-10-20：取得一条白色6×6架取物至开盖仪器腔内A派生座的完整连续成功轨迹，61.75秒，实际松爪和撤离后稳定3.1秒，独立15项检查与H5资格一致。固定5次已全部独立通过，真实成功batch读取通过；接下来顺序执行随机10次。固定批处理汇总末尾返回143，五条轨迹均完成，保留退出记录后在新目录只读重做汇总。该适配模式不改写native_pair_success或real_calibrated。
+2026-10-20：完成完整白色6×6架取物至开盖仪器腔内A派生座的单次连续物理演示，实际支撑交接、松爪、撤离及3.1秒稳定。固定复测独立成功 5/5，小范围随机独立成功 10/10；数据资格与独立15项检查一致，主片同源的真实batch和完整控制时序读取通过。随机范围为5个合法槽位各两次、架体和仪器装配各XY±1mm，不代表全部36槽或真实成功率。
 
-分支：`codex/lab-cuvette-demo03`。详见[本轮报告](docs/lab_cuvette_loading/V0_demo03/report.md)和[启动命令](demos/lab_cuvette_demo03/README.md)。
+来源架为参数化设计，选定A为原位置重建的16mm通道，器皿与原仪器机身尺寸保持。原CAD native_pair_success和real_calibrated均为false。开发失败dev_01碰盖板、dev_02入口受力滑移均保留。固定批处理外壳在5条完整保存后汇总阶段返回143，原因未知；只读新汇总确认5/5，不改写轨迹。
+
+- [报告](docs/lab_cuvette_loading/V0_demo03/report.md) · [DOCX](docs/lab_cuvette_loading/V0_demo03/LabSim_V0_demo03_视频场景适配结果报告_20261020.docx)
+- [完整1080p主录像](docs/lab_cuvette_loading/V0_demo03/media/random8000_full_view/main_h264.mp4) · [实际全部结果](docs/lab_cuvette_loading/V0_demo03/results/final/results.csv)
+- [资产来源及假设](docs/lab_cuvette_loading/V0_demo03/source_and_assumptions.md) · [独立数据验收](docs/lab_cuvette_loading/V0_demo03/data_audit/formal_batch_audit_tool.md) · [启动命令](demos/lab_cuvette_demo03/README.md)
+
+当前分享分支为 `codex/lab-cuvette-demo03`。新的桌面阅读包为 `/home/wujing/Desktop/LabSim_截至V0_demo03_结果阅读包_20261020`，包含结果报告、同次主录像、失败录像、逐条判分和真实batch精简样例，按已推送的提交生成；[交接规范](docs/agent_handoff/README.md)。
 
 # 历史进展与分享入口 V0 demo02
 

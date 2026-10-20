@@ -1,0 +1,157 @@
+acceptance:
+  actual_retreat_clearance_m: 0.04
+  angular_speed_rad_s: 0.02
+  hold_s: 1.0
+  lift_m: 0.04
+  linear_speed_m_s: 0.001
+  orientation_change_deg: 1.0
+  position_drift_m: 0.0002
+  release_bottom_gap_m: 5.0e-05
+  release_support_force_N: 0.1
+  scope: fixed engineering gates; NOT calibrated accuracy or insertion acceptance
+  steady_source_penetration_m: 5.0e-05
+  support_geometry_m: 5.0e-05
+  upright_after_release_deg: 1.0
+  window_s: 3.0
+calibrated: false
+control:
+  final_speed_m_s: 0.001
+  insert_speed_m_s: 0.006
+  retreat_m: 0.1
+  timeout_s: 110.0
+  transport_bottom_z_m: 0.975
+  approach_s: 6.0
+  extract_s: 6.0
+  transport_s: 8.0
+  transport_route: source_x_then_target_y
+  retreat_lift_m: 0.06
+  retreat_lateral_m:
+  - -0.12
+  - 0
+  retreat_route: lift_then_outward_X
+  transport_waypoint_xy_m:
+  - -0.085
+  - 0.3276293532629626
+demo_release:
+  bottom_distance_m: 5.0e-05
+  clear_seconds: 0.5
+  max_actual_pose_step_m: 0.003
+  max_actual_tilt_deg: 10.0
+  max_tilt_deg: 1.0
+  min_support_N: 0.1
+  native_velocity_policy: retain and flag discrepancy; finite check and actual pose
+    motion are hard gates; speed mismatch alone does not veto opening
+  observe_s: 3.0
+  open_seconds: 3.0
+  orientation_change_deg: 1.0
+  penetration_m: 5.0e-05
+  position_drift_m: 0.0002
+  support_window_s: 0.5
+  unload_seconds: 3.0
+derived_directory: assets/lab_cuvette_loading/V0_ext02
+full_task:
+  executed: false
+  success: false
+  scope: V0_demo03 video scene adapted simulation, not native CAD pair or calibration
+gripper:
+  contact_safety_factor: 2.0
+  method: contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp;
+    no gain or force-limit change
+  mode: inherited_close
+mode: workflow
+output_root: outputs/lab_cuvette_loading/V0_demo03
+physics:
+  ccd: true
+  contact_offset_m: 5.0e-05
+  control_hz: 60
+  dynamic_friction: 0.5
+  finger_dynamic_friction: 0.8
+  finger_static_friction: 1.0
+  hz: 240
+  position_iterations: 64
+  rest_offset_m: 0.0
+  restitution: 0.0
+  solver: TGS
+  static_friction: 0.6
+  velocity_iterations: 1
+robot:
+  base_m:
+  - -0.3
+  - 0
+  - 0.74
+  grasp_above_bottom_m: 0.053
+  initial_tcp_m:
+  - -0.085
+  - -0.265
+  - 1.0230000000000001
+  tcp_local_m:
+  - 0
+  - 0
+  - 0.1
+  usd_path: assets/robots/Franka.usd
+scene:
+  initial_bottom_gap_m: 0.0002
+  instrument_xyz_m:
+  - 0.36
+  - 0.18
+  - 0.74
+  table_size_m:
+  - 2.2
+  - 1.8
+  - 0.08
+  table_top_m: 0.74
+  neighbor_instrument_xyz_m:
+  - 0.96
+  - 0.53
+  - 0.74
+variant: video_demo_adapted
+version: V0_demo03
+scene_mode: video_demo_adapted
+asset_directory: assets/lab_cuvette_loading/V0_demo03
+rack:
+  rows: 6
+  columns: 6
+  inner_m: 0.016
+  wall_m: 0.002
+  depth_m: 0.025
+  base_m: 0.003
+  selected_slot_id: A1
+  blue_slot_id: F6
+  yaw_deg: 0.0
+  origin_m:
+  - -0.04
+  - -0.22
+  - 0.74
+adapter:
+  inner_m: 0.016
+  outer_m: 0.0204
+  height_m: 0.029
+  base_m: 0.002
+  selected_target_seat_id: candidate_far_hinge
+task:
+  instruction: Take the designated vessel from the complete white6x6 rack and load
+    the adapted internal A seat in the open sample chamber, release and retreat.
+  control_hz: 60
+source:
+  instrument: assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda
+  vessel: assets/lab_cuvette_loading/V0_ext02/walls28_mm.usda
+  vessel_collision: assets/lab_cuvette_loading/V0_ext02/walls28_mm.usda
+randomization:
+  legal_slots:
+  - A1
+  - A2
+  - B1
+  - B2
+  - C1
+  rack_translation_half_range_m: 0.001
+  instrument_translation_half_range_m: 0.001
+  yaw_half_range_deg: 0.0
+  in_slot_translation_m: 0.0
+  scope: vary slot and rigid assembly translations only; keep all slots and target
+    attached to their assemblies
+video:
+  main_resolution:
+  - 1920
+  - 1080
+  fps: 30
+  render_hz: 60

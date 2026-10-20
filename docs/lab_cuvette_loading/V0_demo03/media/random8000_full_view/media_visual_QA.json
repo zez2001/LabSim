@@ -1,0 +1,91 @@
+{
+  "schema": "labsim.V0_demo03.media_visual_QA.v2",
+  "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/V0_demo03/random10_20261020_01/seed_8000/trial_00",
+  "main_video": {
+    "file": "main_h264.mp4",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "frames": 1854,
+    "duration_s": 61.8,
+    "last_recorded_frame_s": 61.766666666666666
+  },
+  "simulation_end_s": 61.78333333333333,
+  "workflow_success": true,
+  "independent_checks": {
+    "scene_and_geometry_contract": true,
+    "asset_and_slot_bindings": true,
+    "initial_source_slot_and_support": true,
+    "all_workflow_stages_in_order": true,
+    "source_slot_actually_cleared": true,
+    "correct_internal_seat_loaded": true,
+    "supported_before_open": true,
+    "both_fingers_open_and_detached": true,
+    "actual_retreat_clearance": true,
+    "post_retreat_stable_3s": true,
+    "measured_penetration_within_original_gate": true,
+    "no_forbidden_robot_environment_contact": true,
+    "finite_native_signals": true,
+    "physics_samples_contiguous": true,
+    "no_forbidden_kinematic_or_attachment": true
+  },
+  "post_retreat_window": {
+    "available": true,
+    "status": "observed",
+    "label": "post_retreat_window",
+    "start_s": 58.68333333333333,
+    "end_s": 61.78333333333333,
+    "duration_s": 3.1000000000000014,
+    "recorded_samples": 745,
+    "max_sample_interval_s": 0.0041666666666699825,
+    "position_drift_m": 1.4975481660844222e-07,
+    "rotation_change_deg": 1.527276728333139e-05,
+    "max_tilt_deg": 7.630176557304134e-05,
+    "max_penetration_m": 0.0,
+    "max_abs_target_bottom_gap_m": 1.337054350569744e-07,
+    "min_support_Fz_N": 0.19616430136647978,
+    "min_environment_support_Fz_N": 0.19616430136647978,
+    "max_native_speed_m_s": 6.281278005669036e-05,
+    "max_native_angular_rad_s": 0.002021548454010458,
+    "max_fd_COM_speed_m_s": 4.396165068479573e-05,
+    "max_fd_angular_rad_s": 0.00012512354903609668,
+    "stable": true,
+    "required_duration_s": 3.0
+  },
+  "recorded_video_stability_coverage_s": 3.0833333333333357,
+  "actual_retreat_clearance_m": 0.11188462767262107,
+  "native_pair_success": false,
+  "real_calibrated": false,
+  "adjudicated_data_eligible": true,
+  "raw_controller_result_data_eligible": false,
+  "eligibility_note": "Controller result is retained as its pre-adjudication snapshot. Independent score and writer adjudication determine data eligibility.",
+  "validation": [
+    "All raw video frames decoded and CPU libx264 encoded; ffprobe confirms same frame count, frame size and original camera timing",
+    "Wide view sampled every2s from0 to60 plus first/extracted/final images; target close view sampled every2s from28 to60 plus final61.766667s",
+    "Both1200px vertical role comparison figures and exact initial/final images visually inspected at original resolution",
+    "All source files and generated media SHA256 verified; old dev03 media SHA256 also rechecked unchanged",
+    "Physics/events SHA256 match independently scored episode, 15checks true, post-retreat3.1s stable"
+  ],
+  "observed": [
+    "Full6x6 source rack including nearest corner is inside1920x1080 main frame, above bottom caption; all rack slots retained visually",
+    "Main source operation is continuous fromRESET through extraction, transport, alignment, internal insertion, support transfer, opening, retreat andVERIFY",
+    "FromALIGN onward original run main video already includes same-time same-episode close-camera inset; this is not stitching different attempts",
+    "Target close view shows insertion, symmetric opening, finger separation, actual retreat and vessel retained in internal A engineering adapter",
+    "Main upper robot at exactRESET partly outside upper frame; later operating robot fits. Source rack, source vessel, instrument and chamber are visible",
+    "Wide scene internal A base is partially hidden by front chamber rim; exact internal A placement is checked in fixed closeup and same-time inset"
+  ],
+  "limitations": [
+    "Visual QA is sampled, not literal every-frame human review; it does not replace independent physics scoring",
+    "Engineering6x6 rack and internal A adapter remain explicitly labelled proxy/adapted assets",
+    "No camera or real dynamics calibration; native pair remains unvalidated",
+    "Nominal30Hz video frame times may precede last physics state by one frame period; physics record provides full3.1s stable window"
+  ],
+  "raw_source_records_modified": false,
+  "old_dev03_media_verified_unchanged": true,
+  "gpu_process_started": false,
+  "media_count": {
+    "h264_videos": 9,
+    "png_figures": 8
+  }
+}

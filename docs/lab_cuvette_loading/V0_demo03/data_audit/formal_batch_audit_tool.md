@@ -14,6 +14,8 @@ Run from the LabSim repository, substituting the actual completed random batch r
 
 It checks source/target IDs; preserved local rack/adapter geometry; recorded rigid assembly shifts; legal slot and safe initial pose; preflight coordinates; provenance-bound config snapshot; obs/action/next-state timestamps; state continuity; native/finite-difference channels; final H5 labels against the independent score and post-close adjudication; sidecar/raw hashes; and source H5 hashes before and after reading. Assembly checks compare saved config, computed layout, preflight and measured initial pose. They do not independently read composed USD transforms or cooked collision surfaces.
 
+Action checks also stream the actual per-physics-step records with bounded memory, join each control endpoint, and verify the stored 8D action against the first eight commanded joints after the writer's float32 conversion. They check symmetric left/right commanded finger positions and verify that `agent_pose` is the measured first eight joints. Its eighth value is the actual left finger position, not the bilateral mean. Phase-dependent finger effort caps remain auxiliary controls in `physics_records.json`; a batch that can be read does not establish complete physical replay using only 8D joint targets. See `action_scope.md`.
+
 `audit.json` includes per-episode checks and SHA256; `episodes.csv` gives the compact list. Workflow failure and malformed data are separate outcomes: a failed physical episode can have a valid schema and consistent false qualification. Missing/unknown qualification fields are rejected. Expected episode counts are explicit; missing future trials are not fabricated.
 
 Two recording layers must remain distinct:

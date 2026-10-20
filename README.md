@@ -1,13 +1,14 @@
 # LabSim 进展与分享入口
 
-当前开发分支为 `codex/lab-cuvette-demo03`。最新 **V0_demo03 已取得一条正确场景内的连续物理成功轨迹**：完整白色6×6参数化架 → 原尺寸器皿 → 开盖样品腔内A派生座 → 支撑交接 → 松爪 → 撤离及3.1秒稳定。独立判分与采集资格通过，固定复测5/5，现有加载器已读出真实训练格式batch；随机10次正在准备，实际后续结果见进展页。本模式为 `video_demo_adapted`，原CAD配套和真实标定仍为false。
+最新 **V0_demo03 已完成正确场景内的连续物理装载与数据采集**：完整白色6×6参数化架 → 原尺寸器皿 → 开盖样品腔内A派生座 → 支撑交接 → 实际松爪 → 撤离及3.1秒稳定。固定复测独立成功 5/5，小范围随机独立成功 10/10，另有1次随机运行中断未评分并保留。现有加载器已读取真实训练格式batch，未开展训练。本模式为 `video_demo_adapted`；原CAD配套验证和真实标定仍为false。
 
-- [全部进展与历史报告](LABSIM_PROGRESS.md)
-- [V0_demo03 本轮结果](docs/lab_cuvette_loading/V0_demo03/report.md)
-- [资产变化与来源](docs/lab_cuvette_loading/V0_demo03/asset_changes.json) · [尺寸及假设](docs/lab_cuvette_loading/V0_demo03/dimensions.csv)
-- [启动及采集命令](demos/lab_cuvette_demo03/README.md) · [Agent结果阅读包](docs/agent_handoff/README.md)
+- [本轮完整报告](docs/lab_cuvette_loading/V0_demo03/report.md) · [DOCX](docs/lab_cuvette_loading/V0_demo03/LabSim_V0_demo03_视频场景适配结果报告_20261020.docx)
+- [1080p单次连续主录像](docs/lab_cuvette_loading/V0_demo03/media/random8000_full_view/main_h264.mp4) · [同次腔内近景](docs/lab_cuvette_loading/V0_demo03/media/random8000_full_view/closeup_h264.mp4)
+- [18条完整结果及1条中断](docs/lab_cuvette_loading/V0_demo03/results/final/results.csv) · [真实batch样例](docs/lab_cuvette_loading/V0_demo03/data_audit/main_sample_data/README.md)
+- [资产来源与修改](docs/lab_cuvette_loading/V0_demo03/source_and_assumptions.md) · [尺寸表](docs/lab_cuvette_loading/V0_demo03/dimensions.csv) · [启动命令](demos/lab_cuvette_demo03/README.md)
+- [全部进展与历史报告](LABSIM_PROGRESS.md) · [新Agent结果阅读包](docs/agent_handoff/README.md)
 
-V0_demo02的原尺寸冲突和demo01的机外工程实验保留，未被本轮适配成功改写。以下保留上游LabUtopia文档。
+分享分支为 `codex/lab-cuvette-demo03`，仓库私有，接收方需要访问权限。V0_demo02原尺寸冲突和demo01机外工程实验保留，不被本轮适配成功改写。以下保留上游LabUtopia文档。
 
 <div align="center">
   <img src="images/logo.png" alt="Logo" width="180">

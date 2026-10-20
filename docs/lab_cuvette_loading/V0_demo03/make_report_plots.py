@@ -14,9 +14,11 @@ import numpy as np
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--trajectory', type=Path)
+    parser.add_argument('--episode-label', default='dev_03')
     args = parser.parse_args()
     root = Path(__file__).resolve().parent
-    source = root/'data_audit/dev_03_trajectory/trajectory.npz'
+    source = args.trajectory or root/'data_audit/dev_03_trajectory/trajectory.npz'
     phases = json.loads((source.parent/'phase_events.json').read_text())
     times = {e['next']: e['t'] for e in phases}
     args.output.mkdir(parents=True, exist_ok=False)
@@ -41,7 +43,7 @@ def main():
     for sign in [-1, 1]:
         axes[0].axhline(sign*.575, color='gray', ls=':', lw=1)
     axes[0].set_ylabel('偏差 mm')
-    axes[0].set_title('同一次 dev_03 的实际偏差与装载深度', fontsize=13)
+    axes[0].set_title(f'同一次 {args.episode_label} 的实际偏差与装载深度', fontsize=13)
     axes[0].legend(loc='lower right', fontsize=10)
     axes[1].plot(t[mask], depth[mask], label='源网格底部相对座口深度')
     axes[1].axhline(26.9, color='green', ls=':', label='26.9 mm 验收门槛')

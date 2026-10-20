@@ -1,0 +1,32 @@
+{
+  "schema": "labsim.V0_demo03.action_scope_audit.v1",
+  "current_tool_sha256": "408f34e6f1471dd7d6d6a5a511fd40e0004653136e94ad015eeae713c421e00c",
+  "actual_dev03_evidence": "formal_audit_dev03_action_validation/audit.json",
+  "actual_endpoint_join_checks": {
+    "checks": {
+      "all_control_endpoints_measured": true,
+      "physics_step_and_time_match": true,
+      "action_interval_phase_matches": true,
+      "all_nine_recorded_commands_finite": true,
+      "H5_action_exact_first8_float32_commands": true,
+      "symmetric_command_fingers": true,
+      "observation_actual_first8_joints": true,
+      "auxiliary_effort_and_grip_target_measured": true
+    },
+    "channels_in_main_action": 8,
+    "action_columns": "commanded q1..q7(rad), commanded leftfinger q8(m); q9 is separately recorded and checked symmetric",
+    "observation_columns": "measured q1..q7(rad), measured leftfinger q8(m); full9positions also saved",
+    "auxiliary_channels": "gripper_effort_limit_N, gripper_target_m, full command_q and phase in physics_records.json; not default policy input/action",
+    "physical_replay_scope": "8D-only replay not verified; retain phase-dependent effort-cap scheduler or use auxiliary commands",
+    "effort_min_N": 0.04999999999999982,
+    "effort_max_N": 8.0,
+    "matched_control_endpoints": 3705
+  },
+  "parser_cross_1MiB_chunk_test_passed": true,
+  "parser_incomplete_record_rejected": true,
+  "observation_eighth_dimension": "actual left finger joint position, not bilateral mean or total aperture",
+  "main_action_does_not_include_phase_effort_cap": true,
+  "complete_8D_only_replay_not_verified": true,
+  "runtime_modified": false,
+  "running_H5_opened": false
+}

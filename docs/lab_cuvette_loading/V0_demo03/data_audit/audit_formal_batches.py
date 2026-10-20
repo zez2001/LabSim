@@ -35,6 +35,7 @@ SEMANTICS = {
     "scope": "video_demo_adapted simulated workflow; native_pair_success=false and real_calibrated=false remain separate facts even for eligible success.",
     "failure": "A physically failed episode can pass schema/timestamp/label-consistency checks while correctly remaining ineligible. Expected false qualification gates are not malformed-data errors.",
     "geometry": "Assembly verification recomputes config layout and compares saved preflight plus actual initial pose. It is not an independent reread of composed USD/cooked PhysX surfaces or a proof of global collision accuracy.",
+    "action_scope": "actions are commanded absolute7arm joint positions(rad) plus the left finger position command(m), symmetric with the right command in this executor. agent_pose contains measured first8joint positions, not a mean of both fingers. Phase-dependent finger effort caps are additional controls in physics_records.json, absent from the8D policy action; a readable batch does not establish complete8D-only physical replay or learned-policy performance.",
 }
 
 
@@ -69,6 +70,81 @@ def label_checks(score, adjudication, summary, attrs):
             score.get("real_calibrated"), summary.get("real_calibrated"),
             bool(attrs.get("real_calibrated", True)))),
     )
+
+
+def iter_json_array(path):
+    """Stream existing indented records with bounded memory; never rewrite them."""
+    decoder = json.JSONDecoder()
+    with Path(path).open(encoding="utf-8") as stream:
+        buffer, position, started = "", 0, False
+        while True:
+            while position < len(buffer) and (buffer[position].isspace() or buffer[position] == ","):
+                position += 1
+            if position == len(buffer):
+                chunk = stream.read(1024 * 1024)
+                if not chunk:
+                    raise ValueError("Incomplete JSON array")
+                buffer, position = chunk, 0
+                continue
+            if not started:
+                if buffer[position] != "[":
+                    raise ValueError("Expected JSON array")
+                started, position = True, position + 1
+                continue
+            if buffer[position] == "]":
+                return
+            try:
+                record, end = decoder.raw_decode(buffer, position)
+            except json.JSONDecodeError:
+                chunk = stream.read(1024 * 1024)
+                if not chunk:
+                    raise ValueError("Incomplete JSON record")
+                buffer, position = buffer[position:] + chunk, 0
+                continue
+            position = end
+            yield record
+
+
+def action_channel_audit(trial, h5):
+    """Match actual8D commands to saved physical-step commands, not names alone."""
+    hz = float(h5.attrs["physics_hz"])
+    times, action = h5["next_timestamp"][:], h5["actions"][:]
+    endpoints = np.rint(times * hz).astype(int)
+    index = {int(step): i for i,step in enumerate(endpoints)}
+    matched = np.zeros(len(times), bool)
+    commands = np.full((len(times), 9), np.nan)
+    effort = np.full(len(times), np.nan)
+    grip_target = np.full(len(times), np.nan)
+    phases = json.loads(decode(h5.attrs["phase_names_json"]))
+    phase_codes = h5["phase_code"][:]
+    phase_match, same_step = True, True
+    for step, row in enumerate(iter_json_array(trial / "physics_records.json")):
+        if not isinstance(row, dict):
+            raise ValueError("Physics record is not an object")
+        if step not in index:
+            continue
+        i = index[step]
+        same_step &= bool(row.get("physics_step") == step and near(row.get("t"), times[i], 1e-9))
+        phase_match &= row.get("phase") == phases[int(phase_codes[i])]
+        if np.shape(row.get("command_q")) == (9,):
+            commands[i] = row["command_q"]
+        effort[i] = row.get("gripper_effort_limit_N", np.nan)
+        grip_target[i] = row.get("gripper_target_m", np.nan)
+        matched[i] = True
+    checks = dict(all_control_endpoints_measured=bool(matched.all()), physics_step_and_time_match=bool(same_step),
+        action_interval_phase_matches=bool(phase_match),
+        all_nine_recorded_commands_finite=bool(np.isfinite(commands).all()),
+        H5_action_exact_first8_float32_commands=bool(np.array_equal(action, commands[:,:8].astype(np.float32))),
+        symmetric_command_fingers=near(commands[:,7], commands[:,8], 1e-9),
+        observation_actual_first8_joints=bool(np.array_equal(h5["agent_pose"][:], h5["joint_positions"][:,:8])),
+        auxiliary_effort_and_grip_target_measured=bool(np.isfinite(effort).all() and np.isfinite(grip_target).all()))
+    return dict(checks=checks, channels_in_main_action=8,
+        action_columns="commanded q1..q7(rad), commanded leftfinger q8(m); q9 is separately recorded and checked symmetric",
+        observation_columns="measured q1..q7(rad), measured leftfinger q8(m); full9positions also saved",
+        auxiliary_channels="gripper_effort_limit_N, gripper_target_m, full command_q and phase in physics_records.json; not default policy input/action",
+        physical_replay_scope="8D-only replay not verified; retain phase-dependent effort-cap scheduler or use auxiliary commands",
+        effort_min_N=float(np.nanmin(effort)), effort_max_N=float(np.nanmax(effort)),
+        matched_control_endpoints=int(matched.sum()))
 
 
 def assembly_audit(trial, config, preflight, initial, score, batch_kind):
@@ -159,6 +235,7 @@ def inspect_trial(trial, kind):
         progress_names = str(attrs.get("progress_columns", "")).split(",")
         progress = dict(zip(progress_names, map(bool, h["privileged/progress"][-1]))) if len(h["timestamp"]) else None
         last_timestamp = float(h["next_timestamp"][-1]) if len(h["timestamp"]) else None
+        action_channels = action_channel_audit(trial, h)
     config = OmegaConf.to_container(OmegaConf.load(trial / "config.yaml"), resolve=True)
     assembly = assembly_audit(trial, config, preflight, initial, score, kind)
     interface_checks = {k: v for k, v in data["checks"].items() if k not in QUALIFICATION_GATES}
@@ -166,10 +243,13 @@ def inspect_trial(trial, kind):
     labels["unavailable_post_retreat_has_null_stability"] = (verify_available or score.get("stable_after_retreat") is None)
     labels["terminal_time_matches_score_summary_and_h5"] = (near(last_timestamp, score.get("trajectory_end_time_s"), 1e-6)
         and near(last_timestamp, summary.get("simulation_seconds"), 1e-6))
+    unchanged_after_complete_audit = sha256(raw_path) == data["original_sha256"]
     all_checks = {**{"interface." + k: v for k, v in interface_checks.items()},
                   **{"labels." + k: v for k, v in labels.items()},
                   **{"assembly." + k: v for k, v in assembly["checks"].items()},
-                  "raw_unchanged_after_read": data["raw_unchanged_after_read"]}
+                  **{"action_channels." + k: v for k,v in action_channels["checks"].items()},
+                  "raw_unchanged_after_read": data["raw_unchanged_after_read"],
+                  "raw_unchanged_after_complete_audit": unchanged_after_complete_audit}
     errors = [k for k, value in all_checks.items() if value is not True]
     return json_safe(dict(trial=str(trial), batch=kind, status="AUDIT_PASS" if not errors else "AUDIT_FAIL",
         h5_opened=True, audit_pass=not errors, errors=errors, workflow_success=score.get("workflow_success"),
@@ -182,9 +262,10 @@ def inspect_trial(trial, kind):
         raw_controller_provisional_labels={k: raw.get(k) for k in ("data_eligible", "full_task_eligible", "full_success")},
         sampled_terminal_progress=progress, final_controller_progress=raw.get("stage_progress"),
         post_retreat_window=score.get("post_retreat_window"), stable_after_retreat=score.get("stable_after_retreat"),
-        physics_quality_flags=score.get("physics_quality_flags", []), assembly=assembly,
+        physics_quality_flags=score.get("physics_quality_flags", []), assembly=assembly, action_channel_audit=action_channels,
         independent_label_checks=labels, interface_checks=interface_checks,
-        data_inspection=data, video_paths=[str(p) for p in sorted(trial.glob("*.mp4"))],
+        data_inspection=data, raw_unchanged_after_complete_audit=unchanged_after_complete_audit,
+        video_paths=[str(p) for p in sorted(trial.glob("*.mp4"))],
         semantic_notes=SEMANTICS))
 
 
