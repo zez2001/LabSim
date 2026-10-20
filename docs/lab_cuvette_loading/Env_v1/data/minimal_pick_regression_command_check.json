@@ -1,0 +1,46 @@
+{
+  "schema": "labsim.Env_v1.original_task_regression_command.v1",
+  "checks": {
+    "parser_accepted_real_arguments": true,
+    "expert_mode": true,
+    "original_task": true,
+    "original_controller": true,
+    "original_collector": true,
+    "existing_python_executable": true,
+    "output_does_not_exist": true,
+    "positive_timeout": true,
+    "task_registered": true,
+    "controller_registered": true,
+    "collector_registered": true,
+    "exists:assets/robots/Franka.usd": true,
+    "exists:tasks/minimal_pick_task.py": true,
+    "exists:controllers/minimal_pick_controller.py": true,
+    "exists:data_collectors/minimal_pick_collector.py": true
+  },
+  "executable_command": "env OMNI_KIT_ACCEPT_EULA=YES flock /tmp/labsim-V0_ext01-gpu.lock /home/wujing/Desktop/vla/labutopia-env/bin/python /home/wujing/Desktop/vla/LabSim/demos/minimal_pick/pipeline.py --config /home/wujing/Desktop/vla/LabSim/config/minimal_pick.yaml --headless --episodes 1 --output /home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/minimal_pick_regression_20261021_01",
+  "working_directory": "/home/wujing/Desktop/vla/LabSim",
+  "argument_values": {
+    "config": "/home/wujing/Desktop/vla/LabSim/config/minimal_pick.yaml",
+    "headless": true,
+    "no_video": false,
+    "episodes": 1,
+    "output": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Env_v1/minimal_pick_regression_20261021_01",
+    "replay": null,
+    "episode": "episode_0000",
+    "checkpoint": null,
+    "timeout_seconds": null,
+    "keep_open": false
+  },
+  "file_sha256": {
+    "demos/minimal_pick/pipeline.py": "a84ccde4025dc94e0ecd3dd5a964bedea12c2f9c53c489a6db5a71f85209e850",
+    "config/minimal_pick.yaml": "31af4df7c6da664e573aeab0f19abcd08bca63c112c8bdf4a2a2500c71dac457",
+    "tasks/minimal_pick_task.py": "90fafd9ee291ef10afa10ddb8c3fdf9b384f70f6d844e60552a2c5cc4485037d",
+    "controllers/minimal_pick_controller.py": "8e202a37397092e30bd1d8c58cd4fbf0124c067673c05455d86dbe97aa7df1c3",
+    "data_collectors/minimal_pick_collector.py": "6a5c1d45e937d1b9982404369a3c3823059022076c763f33f975bbd576926172"
+  },
+  "Isaac_started": false,
+  "GPU_started": false,
+  "physical_regression_executed": false,
+  "source_files_modified": false,
+  "note": "This validates the existing real expert command and dependencies only. Prior minimal_pick raw-data reader regression is separate evidence; actual new physical regression awaits serialized GPU availability."
+}

@@ -1,0 +1,170 @@
+{
+  "scope": "Actual historical demo04 diagnostic03 trace reanalysis; no new simulation and no historical edit.",
+  "source_records": "outputs/lab_cuvette_loading/V0_demo04/diagnostic_03/run/trial_00/physics_records.json",
+  "source_sha256": "498e2a9c0b7626eb644f3693d8d98a75f1004e7ae08a082d560c40656a7dd488",
+  "source_rows": 18461,
+  "scorer_source_sha256": "bd5dbfebd221b53aadec44fc97128111af0d51bca927692a40f3ebd6870ab646",
+  "analysis_implementation_sha256": "21ad53557f50b3c2039b91fa60a842bceaa4072b5ee6a39e3532eb8b32c172cd",
+  "geometry_audit_source": "docs/lab_cuvette_loading/Env_v1/geometry/cache/92bcc45008f87de7f3f778492e6b9d28f63242f7272ca3a3bb50eb3bf27e372b/geometry_audit.json",
+  "geometry_audit_sha256": "2f31e04188c88379a5ab919e5769e186f4aebaf618f88425dbbef37a4a44a2f5",
+  "canonical_mapping": {
+    "depth_m": "Actual target rim worldZ minus recorded actual visual minimum worldZ; not command depth.",
+    "target_bottom_support_N": null,
+    "wall_contact_N": null,
+    "native_target_overlap_m": null,
+    "target_region_contains_object": null,
+    "gripper_object_clearance_m": "Historical independent_geometry.robot_to_vessel_clearance_m; not proof of retreat without prior physical release."
+  },
+  "automatic_failure_observations": [],
+  "score": {
+    "schema": "labsim.Env_v1.independent_physical.v1",
+    "episode_id": "historical_demo04_diagnostic03",
+    "task_type": "preinsert_diagnostic",
+    "geometry_valid": false,
+    "task_success": false,
+    "workflow_success": null,
+    "full_success": null,
+    "native_pair_success": null,
+    "record_valid": true,
+    "record_valid_scope": "physics-state trace; collector additionally verifies action/sensor/time integrity",
+    "failure_type": "GRASP_SLIP",
+    "termination_reason": "HISTORICAL_TRACE_REANALYSIS",
+    "eligible_for_success_bc": false,
+    "eligible_for_failure_analysis": false,
+    "real_calibrated": false,
+    "source_slot_cleared": true,
+    "grasp_success": false,
+    "transport_success": false,
+    "loading_sequence_observed": false,
+    "loading_candidate_sequence_observed": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "terminal_window": {
+      "status": "complete",
+      "stable": false,
+      "required_duration_s": 3.0,
+      "measured_duration_s": 3.0,
+      "sample_count": 721,
+      "position_drift_m": 0.008619865766139347,
+      "orientation_change_deg": 0.09422016517611244,
+      "criteria": {
+        "position_stable": false,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null
+      },
+      "start_t": 73.91666666666667,
+      "end_t": 76.91666666666667
+    },
+    "diagnostic_hold_window": {
+      "status": "complete",
+      "stable": true,
+      "required_duration_s": 1.0,
+      "measured_duration_s": 1.0,
+      "sample_count": 241,
+      "position_drift_m": 4.068542333453403e-06,
+      "orientation_change_deg": 0.004503389161982668,
+      "criteria": {
+        "position_stable": true,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null
+      },
+      "start_t": 75.91666666666667,
+      "end_t": 76.91666666666667
+    },
+    "grasp_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 0.003986348741257635,
+      "maximum_orientation_drift_deg": 3.929530293627797,
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    },
+    "measured_grasp_segments": {
+      "static_grasp": {
+        "status": "measured",
+        "start_t": 12.829166666666667,
+        "end_t": 13.7875,
+        "sample_count": 231,
+        "reference_position_drift_m": 5.247465631320506e-05,
+        "reference_orientation_drift_deg": 0.05972260980011879,
+        "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+      },
+      "extraction": {
+        "status": "measured",
+        "start_t": 13.7875,
+        "end_t": 14.8125,
+        "sample_count": 247,
+        "reference_position_drift_m": 9.848825844806875e-06,
+        "reference_orientation_drift_deg": 0.010684511881878873,
+        "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+      },
+      "transport": {
+        "status": "measured",
+        "start_t": 14.8125,
+        "end_t": 69.47916666666667,
+        "sample_count": 13121,
+        "reference_position_drift_m": 0.0039999022649347,
+        "reference_orientation_drift_deg": 3.9437179704705603,
+        "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+      }
+    },
+    "grasp_attempts": [],
+    "retry_count": 0,
+    "physics_quality_flags": [
+      "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "invalid_state_reasons": [],
+    "observed_events": {
+      "bilateral_grasp_observed": {
+        "t": 12.829166666666667,
+        "physics_step": 3079,
+        "actual_force_N": [
+          5.408177852630615,
+          6.049478054046631
+        ]
+      },
+      "actual_lift_started": {
+        "t": 13.7875,
+        "physics_step": 3309,
+        "actual_lift_m": 0.0010192341881151146
+      },
+      "source_slot_cleared": {
+        "t": 14.8125,
+        "physics_step": 3555,
+        "actual_bottom_world_z_m": 0.7700965037277753,
+        "source_rim_world_z_m": 0.768
+      },
+      "held_transport_observed": {
+        "t": 23.208333333333332,
+        "physics_step": 5570,
+        "horizontal_displacement_m": 0.05001440533576901
+      },
+      "safe_preinsert_observed": {
+        "t": 69.47916666666667,
+        "physics_step": 16675,
+        "actual_depth_m": -0.0029957402395630606,
+        "actual_xy_error_m": 5.126699485223218e-05
+      },
+      "diagnostic_up_retract_observed": {
+        "t": 74.875,
+        "physics_step": 17970,
+        "actual_upward_motion_m": 0.008006098724877564
+      }
+    },
+    "physical_sample_count": 18461,
+    "simulation_duration_s": 76.91666666666667,
+    "stage_labels_used_as_success_proof": false,
+    "geometry_audit_fingerprint": "92bcc45008f87de7f3f778492e6b9d28f63242f7272ca3a3bb50eb3bf27e372b"
+  }
+}

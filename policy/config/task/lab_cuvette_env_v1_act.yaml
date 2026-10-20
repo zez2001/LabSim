@@ -1,0 +1,20 @@
+name: lab_cuvette_env_v1
+image_shape: [3, 256, 256]
+dataset_path: outputs/lab_cuvette_loading/Env_v1/collection/dataset
+sample_filter: success
+shape_meta:
+  obs:
+    side_camera_rgb: {shape: '${task.image_shape}', type: rgb}
+    wrist_camera_rgb: {shape: '${task.image_shape}', type: rgb}
+    agent_pose: {shape: [8], type: low_dim}
+  action: {shape: [8]}
+dataset:
+  _target_: policy.dataset.minimal_pick_dataset.MinimalPickDataset
+  shape_meta: ${task.shape_meta}
+  dataset_path: ${task.dataset_path}
+  horizon: ${horizon}
+  n_obs_steps: ${n_obs_steps}
+  policy_type: act
+  sample_filter: ${task.sample_filter}
+  seed: 42
+  val_ratio: 0.1

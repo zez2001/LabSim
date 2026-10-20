@@ -9,9 +9,18 @@ from policy.model.common.normalizer import LinearNormalizer, SingleFieldLinearNo
 from policy.common.normalize_util import get_image_range_normalizer
 
 
+from utils.episode_selection import (LEGACY_ABSOLUTE_ACTION_SEMANTICS,
+    NON_PHYSICAL_FAILURES, episode_labels, episode_matches_filter)
+
+
 class MinimalPickDataset(BaseImageDataset):
     def __init__(self, shape_meta, dataset_path, horizon=16, n_obs_steps=1,
-                 val_ratio=0.1, seed=42, policy_type="act"):
+                 val_ratio=0.1, seed=42, policy_type="act",
+                 sample_filter="success", include_labels=None):
+        if sample_filter not in ("success", "failure", "all_valid"):
+            raise ValueError("sample_filter must be success, failure or all_valid")
+        self.sample_filter = sample_filter
+        self.include_labels = sample_filter != "success" if include_labels is None else bool(include_labels)
         self.path = Path(dataset_path)
         if self.path.is_dir():
             self.path = self.path / "episode_data.hdf5"
@@ -21,19 +30,40 @@ class MinimalPickDataset(BaseImageDataset):
         if horizon < n_obs_steps or not 0 <= val_ratio < 1:
             raise ValueError("Invalid horizon or validation ratio")
         self.camera_names = [k for k, v in shape_meta["obs"].items() if v["type"] == "rgb"]
+        self.group_paths, self.episode_metadata, self.excluded_episodes = {}, {}, {}
         with h5py.File(self.path, "r") as f:
-            episodes = sorted(k for k in f if isinstance(f[k], h5py.Group) and
-                              f[k].attrs.get("complete", False) and f[k].attrs.get("success", False))
-            self.lengths = {k: len(f[k]["actions"]) for k in episodes}
-            for name in episodes:
-                group = f[name]
-                if group["actions"].shape != group["agent_pose"].shape or group["actions"].shape[1] != 8:
+            if "actions" in f and "agent_pose" in f:
+                candidates = [(str(f.attrs.get("episode_id", self.path.stem)), "/")]
+            else:
+                candidates = [(name, name) for name in sorted(f) if isinstance(f[name], h5py.Group)
+                              and "actions" in f[name] and "agent_pose" in f[name]]
+            episodes = []
+            self.lengths = {}
+            for name, group_path in candidates:
+                group = f[group_path]
+                metadata = episode_labels(group.attrs)
+                accepted, reason = episode_matches_filter(group.attrs, sample_filter)
+                if not accepted:
+                    self.excluded_episodes[name] = reason
+                    continue
+                if group["actions"].shape != group["agent_pose"].shape or group["actions"].shape[1:] != (8,):
                     raise ValueError(f"Invalid action/state shape in {name}")
+                semantics = str(group.attrs.get("action_semantics", ""))
+                if semantics and semantics not in LEGACY_ABSOLUTE_ACTION_SEMANTICS:
+                    raise ValueError(f"Unsupported 8D action semantics in {name}: {semantics}")
+                self.lengths[name] = len(group["actions"])
+                if not self.lengths[name]:
+                    self.excluded_episodes[name] = "no_transitions"
+                    continue
                 for camera in self.camera_names:
-                    if group[camera].shape != (self.lengths[name], *shape_meta["obs"][camera]["shape"]):
+                    if camera not in group or group[camera].shape != (self.lengths[name], *shape_meta["obs"][camera]["shape"]):
                         raise ValueError(f"Invalid RGB shape for {camera} in {name}")
+                episodes.append(name)
+                self.group_paths[name] = group_path
+                self.episode_metadata[name] = metadata
         if not episodes:
-            raise ValueError("Dataset contains no complete successful episodes")
+            suffix = "complete successful episodes" if sample_filter == "success" else f"eligible {sample_filter} episodes"
+            raise ValueError(f"Dataset contains no {suffix}")
         shuffled = np.random.default_rng(seed).permutation(episodes).tolist()
         n_val = min(len(episodes) - 1, max(1, round(len(episodes) * val_ratio))) if val_ratio else 0
         self.train_episodes, self.val_episodes = shuffled[n_val:], shuffled[:n_val]
@@ -53,13 +83,13 @@ class MinimalPickDataset(BaseImageDataset):
 
     def get_all_actions(self):
         with h5py.File(self.path, "r") as f:
-            return torch.from_numpy(np.concatenate([f[e]["actions"][:] for e in self.train_episodes]))
+            return torch.from_numpy(np.concatenate([f[self.group_paths[e]]["actions"][:] for e in self.train_episodes]))
 
     def get_normalizer(self, **kwargs):
         normalizer = LinearNormalizer()
         normalizer["action"] = SingleFieldLinearNormalizer.create_fit(self.get_all_actions().numpy())
         with h5py.File(self.path, "r") as f:
-            poses = np.concatenate([f[e]["agent_pose"][:] for e in self.train_episodes])
+            poses = np.concatenate([f[self.group_paths[e]]["agent_pose"][:] for e in self.train_episodes])
         normalizer["agent_pose"] = SingleFieldLinearNormalizer.create_fit(poses)
         for key in self.camera_names:
             normalizer[key] = get_image_range_normalizer()
@@ -69,7 +99,7 @@ class MinimalPickDataset(BaseImageDataset):
         episode, t = self.sequences[index]
         size = self.lengths[episode]
         with h5py.File(self.path, "r") as f:
-            group = f[episode]
+            group = f[getattr(self, "group_paths", {}).get(episode, episode)]
             if self.policy_type == "act":
                 obs_indices = [t]
                 action_indices = np.arange(t, t + self.horizon)
@@ -88,6 +118,12 @@ class MinimalPickDataset(BaseImageDataset):
         sample = dict(obs=obs, action=torch.from_numpy(actions).float())
         if self.policy_type == "act":
             sample["is_pad"] = torch.from_numpy((action_indices < 0) | (action_indices >= size))
+        if getattr(self, "include_labels", False):
+            metadata = self.episode_metadata[episode]
+            sample["labels"] = dict(episode_id=episode, task_success=bool(metadata["task_success"]),
+                                    record_valid=bool(metadata["record_valid"]),
+                                    failure_type=metadata["failure_type"],
+                                    termination_reason=metadata["termination_reason"])
         return sample
 
     @staticmethod
