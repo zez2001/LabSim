@@ -1,0 +1,2385 @@
+diff --git a/.gitattributes b/.gitattributes
+index b89fa95..1522230 100644
+--- a/.gitattributes
++++ b/.gitattributes
+@@ -5,3 +5,6 @@ assets/** filter=lfs diff=lfs merge=lfs -text
+ *.jpg filter=lfs diff=lfs merge=lfs -text
+ *.JPG filter=lfs diff=lfs merge=lfs -text
+ *.urdf filter=lfs diff=lfs merge=lfs -text
++
++# Keep new demo04 recordings on the existing LFS upload channel.
++docs/lab_cuvette_loading/V0_demo04/media/*.mp4 filter=lfs diff=lfs merge=lfs -text
+diff --git a/config/lab_cuvette_loading/V0_demo04/native_nominal.yaml b/config/lab_cuvette_loading/V0_demo04/native_nominal.yaml
+new file mode 100644
+index 0000000..29e4625
+--- /dev/null
++++ b/config/lab_cuvette_loading/V0_demo04/native_nominal.yaml
+@@ -0,0 +1,197 @@
++acceptance:
++  actual_retreat_clearance_m: 0.04
++  angular_speed_rad_s: 0.02
++  hold_s: 1.0
++  lift_m: 0.04
++  linear_speed_m_s: 0.001
++  orientation_change_deg: 1.0
++  position_drift_m: 0.0002
++  release_bottom_gap_m: 5.0e-05
++  release_support_force_N: 0.1
++  scope: fixed engineering gates; NOT calibrated accuracy or insertion acceptance
++  steady_source_penetration_m: 5.0e-05
++  support_geometry_m: 5.0e-05
++  upright_after_release_deg: 1.0
++  window_s: 3.0
++calibrated: false
++control:
++  final_speed_m_s: 0.0002
++  insert_speed_m_s: 0.001
++  retreat_m: 0.1
++  timeout_s: 135.0
++  transport_bottom_z_m: 0.975
++  approach_s: 6.0
++  extract_s: 6.0
++  transport_s: 16.0
++  transport_route: source_x_then_target_y
++  retreat_lift_m: 0.06
++  retreat_lateral_m:
++  - -0.12
++  - 0
++  retreat_route: lift_then_outward_X
++  alignment_budget_m: 1.5e-05
++  tilt_budget_deg: 0.02
++  yaw_budget_deg: 0.1
++  jam_detection:
++    window_s: 0.3
++    command_down_min_m: 0.00015
++    vessel_down_max_m: 2.5e-05
++    relative_slip_m: 0.00015
++    wall_force_N: 0.5
++    force_rise_N: 0.2
++    action: stop downward target; retract to preinsert safe height; save actual failure
++  grip_schedule:
++    transport_effort_N: 8.0
++    unload_effort_start_N: 8.0
++    unload_effort_end_N: 0.05
++    unload_seconds: 3.0
++    open_effort_N: 0.5
++    open_seconds: 3.0
++    truth_object_pose_used: true
++  diagnostic_safe_bottom_above_rim_m: 0.001
++  diagnostic_alignment_budget_m: 0.0001
++  diagnostic_approach_speed_m_s: 0.002
++  diagnostic_near_speed_m_s: 0.0005
++demo_release:
++  bottom_distance_m: 5.0e-05
++  clear_seconds: 0.5
++  max_actual_pose_step_m: 0.003
++  max_actual_tilt_deg: 10.0
++  max_tilt_deg: 1.0
++  min_support_N: 0.1
++  native_velocity_policy: retain and flag discrepancy; finite check and actual pose
++    motion are hard gates; speed mismatch alone does not veto opening
++  observe_s: 3.0
++  open_seconds: 3.0
++  orientation_change_deg: 1.0
++  penetration_m: 5.0e-05
++  position_drift_m: 0.0002
++  support_window_s: 0.5
++  unload_seconds: 3.0
++derived_directory: assets/lab_cuvette_loading/V0_demo04
++full_task:
++  executed: false
++  success: false
++  scope: V0_demo04 original native seat with user nominal vessel size; not real calibration
++gripper:
++  contact_safety_factor: 2.0
++  method: contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp;
++    no gain or force-limit change
++  mode: inherited_close
++mode: workflow
++output_root: outputs/lab_cuvette_loading/V0_demo04
++physics:
++  ccd: true
++  contact_offset_m: 5.0e-05
++  control_hz: 60
++  dynamic_friction: 0.5
++  finger_dynamic_friction: 0.8
++  finger_static_friction: 1.0
++  hz: 240
++  position_iterations: 64
++  rest_offset_m: 0.0
++  restitution: 0.0
++  solver: TGS
++  static_friction: 0.6
++  velocity_iterations: 1
++robot:
++  base_m:
++  - -0.3
++  - 0
++  - 0.74
++  grasp_above_bottom_m: 0.053
++  initial_tcp_m:
++  - -0.04
++  - -0.22
++  - 1.02
++  tcp_local_m:
++  - 0
++  - 0
++  - 0.1
++  usd_path: assets/robots/Franka.usd
++  gripper_yaw_deg: -45.0
++scene:
++  initial_bottom_gap_m: 0.0002
++  instrument_xyz_m:
++  - 0.36
++  - 0.18
++  - 0.74
++  table_size_m:
++  - 2.2
++  - 1.8
++  - 0.08
++  table_top_m: 0.74
++  instrument_count: 1
++  instrument_yaw_policy: align CAD chamber opening +Y toward rack center; atan2(rack-instrument)-90deg
++  design_rack_origin_m:
++  - -0.04
++  - -0.22
++  - 0.74
++  design_instrument_origin_m:
++  - 0.36
++  - 0.18
++  - 0.74
++variant: native_nominal
++version: V0_demo04
++scene_mode: native_nominal
++asset_directory: assets/lab_cuvette_loading/V0_demo04
++rack:
++  rows: 6
++  columns: 6
++  inner_m: 0.016
++  wall_m: 0.002
++  depth_m: 0.025
++  base_m: 0.003
++  selected_slot_id: A1
++  blue_slot_id: F6
++  yaw_deg: -45.0
++  origin_m:
++  - -0.04
++  - -0.22
++  - 0.74
++adapter:
++  selected_target_seat_id: candidate_far_hinge
++  inner_m: 0.0126
++  outer_m: 0.0204
++  height_m: 0.029
++  base_m: 0.002
++  geometry: original CAD mesh3; no engineering adapter
++task:
++  instruction: Single instrument, nominal12.5mm vessel and original12.6mm internal
++    A seat. Geometry gates control execution.
++  control_hz: 60
++source:
++  instrument: assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda
++  vessel: assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda
++  vessel_collision: assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda
++randomization:
++  legal_slots:
++  - A1
++  - A2
++  - B1
++  - B2
++  - C1
++  rack_translation_half_range_m: 0.001
++  instrument_translation_half_range_m: 0.001
++  yaw_half_range_deg: 0.0
++  in_slot_translation_m: 0.0
++  scope: only execute after geometry valid and one full task succeeds; keep whole
++    assemblies together
++video:
++  main_focal_length_cm: 1.1
++  main_resolution:
++  - 1920
++  - 1080
++  fps: 30
++  render_hz: 60
++collision_scheme: vessel_125_mm
++vessel:
++  outer_xy_m:
++  - 0.0125
++  - 0.0125
++  height_m: 0.0675
++  mass_kg: 0.02
++  dimension_source: user-provided nominal dimensions2026-10-20
++  mass_source: engineering assumption, not measured
++  xy_scale: 0.8417508417508418
++  yaw_deg: 135.0
+diff --git a/demos/lab_cuvette_demo04/README.md b/demos/lab_cuvette_demo04/README.md
+new file mode 100644
+index 0000000..6043ba2
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/README.md
+@@ -0,0 +1,42 @@
++# V0_demo04 单仪器与用户名义尺寸核查
++
++当前结论：12.5 mm 派生器皿已接入单台仪器与完整6×6架；原A/B座顶部内伸结构仍与器皿材料相交。默认完整任务在启动Isaac前返回 `GEOMETRY_BLOCKED_NOT_EXECUTED`。受限诊断只执行架内取物、搬运、座口上方停止和上抬；不等于装载、释放或完整任务成功。固定5次及随机10次尚未启动。
++
++器皿仅XY按12.5/14.85缩放，Z与67.5 mm高度保留，视觉和28块厚壁碰撞输入同步派生；20 g为假设，COM及完整惯量重算。原12.6 mm座、凸起、另一座与CAD附件均保留，未使用16 mm适配座。仪器根节点yaw135°来自开口到架中心方向；架yaw−45°。控制使用物体真值，器皿在初始化之后始终为动态刚体，通过实际接触运动。
++
++从仓库根目录执行，下列输出目录必须不存在，每次换新名称。共享GPU时顺序运行；任务脚本使用 `flock`，规划/静态检查也须等待已有Isaac进程结束。
++
++```bash
++cd /home/wujing/Desktop/vla/LabSim
++export LABSIM_PY=/home/wujing/Desktop/vla/labutopia-env/bin/python
++
++# 默认完整任务：当前应记录几何阻塞，不启动物理
++bash demos/lab_cuvette_demo04/run.sh --headless --output outputs/lab_cuvette_loading/V0_demo04/repro_native_gate_01
++
++# 静态加载、reset、数量与朝向检查：0个任务物理步
++bash demos/lab_cuvette_demo04/run.sh --headless --scene-only --output outputs/lab_cuvette_loading/V0_demo04/repro_static_01
++
++# 整臂非插入路径的零物理步IK/FK及输入网格碰撞检查
++ACCEPT_EULA=Y "$LABSIM_PY" demos/lab_cuvette_demo04/plan_arm.py --output outputs/lab_cuvette_loading/V0_demo04/repro_plan_01
++
++# 有界物理诊断：最低杯底停在原座最高点上方1 mm，再上抬10 mm
++"$LABSIM_PY" demos/lab_cuvette_demo04/execute.py --output outputs/lab_cuvette_loading/V0_demo04/repro_diagnostic_01 -- --headless --preinsert-diagnostic --arm-plan outputs/lab_cuvette_loading/V0_demo04/repro_plan_01/arm_plan.json --initial-state outputs/lab_cuvette_loading/V0_demo04/repro_plan_01/selected_initial_state.json
++
++# 完整复制一个已关闭的实际episode，保留失败标签，核验现有读取器
++"$LABSIM_PY" -m demos.lab_cuvette_demo04.portable_episode --episode outputs/lab_cuvette_loading/V0_demo04/repro_diagnostic_01/run/trial_00 --output outputs/lab_cuvette_loading/V0_demo04/repro_portable_01
++```
++
++移除 `--headless` 可显示GUI。规划与运行必须使用同一配置文件哈希。CPU PhysX/TGS基线240 Hz，控制60 Hz，每控制周期4个物理步。没有频率扫描或训练。运行时 `runtime.json` 保存可读回的质量、增益、力限制、限速与后端；烹饪顶点和原生offset未完整读回，标记未知。双指8 N上限不是器皿重量或底部承托力；接触冲量按当前physics_dt换算。
++
++离线资产/几何可重建到新目录，不覆盖交付资产：
++
++```bash
++bash demos/lab_cuvette_external/usd_python.sh -m demos.lab_cuvette_demo04.build_vessel --output outputs/lab_cuvette_loading/V0_demo04/rebuild_vessel_01.usda --evidence outputs/lab_cuvette_loading/V0_demo04/rebuild_vessel_01_evidence
++bash demos/lab_cuvette_external/usd_python.sh -m demos.lab_cuvette_demo04.native_fit_audit --output outputs/lab_cuvette_loading/V0_demo04/recheck_fit_01 --section-step-mm 0.05 --path-step-mm 0.25
++```
++
++`physics_records.json` 每物理步记录原生/差分速度、姿态、接触、命令及阶段；H5按控制步对齐obs/action/next_obs。动作8维为7臂关节rad+左指目标m，两指完整9维命令和逐步effort另存辅助流。`post_retreat_window` 在未完成释放撤离时不可用，稳定值为null；末段只能称terminal_window。原座穿透未完整测量，不能补零。
++
++失败episode可通过显式诊断读取复用现有getitem/collate；正常成功过滤器应拒绝。导出不会修改success、native_pair_success、data_eligible或real_calibrated。阅读包内的完整H5是真实失败/受限诊断数据，不是完整成功示范；不加入原任务成功训练索引。
++
++报告与证据见 `docs/lab_cuvette_loading/V0_demo04/report.md`。原版本、旧输出与源CAD不回写；完整原座任务需要先核实内伸结构的真实功能、刚柔性及局部配合轮廓。
+diff --git a/demos/lab_cuvette_demo04/analyze.py b/demos/lab_cuvette_demo04/analyze.py
+new file mode 100644
+index 0000000..5112f41
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/analyze.py
+@@ -0,0 +1,40 @@
++"""Independent saved-state scoring for nominal native-seat diagnostics.
++
++A preinsert episode cannot qualify as a complete native loading demonstration.
++Unknown native penetration and unavailable post-release observations stay null.
++"""
++from pathlib import Path
++import json,hashlib
++import numpy as np
++from scipy.spatial.transform import Rotation
++from demos.lab_cuvette_demo04.scene import layout
++from omegaconf import OmegaConf
++
++def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
++def window(rows,start,end):
++    w=[x for x in rows if start-1e-9<=x['t']<=end+1e-9]
++    if not w:return dict(available=False)
++    p=np.array([r['position'] for r in w]);q=np.array([r['quaternion'] for r in w]);q/=np.linalg.norm(q,axis=1)[:,None]
++    return dict(available=True,start_s=w[0]['t'],end_s=w[-1]['t'],duration_s=w[-1]['t']-w[0]['t'],samples=len(w),position_drift_m=float(np.linalg.norm(p-p[0],axis=1).max()),orientation_change_deg=float(np.degrees(2*np.arccos(np.clip(abs(q@q[0]),0,1))).max()),max_observed_rack_table_penetration_m=max(r['source_penetration_m'] for r in w))
++
++def analyze(episode,contract):
++    ep=Path(episode).resolve();rows=json.loads((ep/'physics_records.json').read_text());events=json.loads((ep/'events.json').read_text());raw=json.loads((ep/'result.json').read_text());cfg=OmegaConf.load(ep/'config.yaml');d=layout(cfg);t=float(rows[-1]['t']);phases=list(dict.fromkeys(r['phase'] for r in rows));end=rows[-1]
++    source=[r for r in rows if r['phase']=='RESET' and r['t']>=1]
++    grasp=[r for r in rows if r['phase']=='GRASP']
++    transported=[r for r in rows if r['phase'] in ['TRANSPORT','ALIGN','GATE_RETRACT','DIAGNOSTIC_HOLD']]
++    gate_events=[e for e in events if e.get('event')=='known_geometry_gate_stop_before_native_tabs']
++    checks=dict(scene_population_and_orientation=contract.get('scene_correspondence',{}).get('accepted') is True and contract.get('instrument_count')==1,
++        source_initial_support=bool(source and all(r['independent_geometry']['source_supported_inside_designated_slot'] for r in source[-int(cfg.physics.hz):])),
++        actual_bilateral_grasp=bool(grasp and min(grasp[-1]['finger_force_N'])>.02),
++        actual_source_extraction=bool(transported and max(r['independent_geometry']['source_clearance_m'] for r in transported)>.01),
++        actual_transport_to_target_region=bool(transported and min(np.linalg.norm(r['xy_error_m']) for r in transported)<.003),
++        controlled_stop_above_obstructed_seat=bool(gate_events and gate_events[-1]['source_bottom_z_m']>=d['target_rim_z']+.0009),
++        actual_upward_diagnostic_retraction=bool(gate_events and end['source_bottom_z_m']-gate_events[-1]['source_bottom_z_m']>=.008),
++        finite_native_state=bool(all(np.isfinite(np.r_[r['position'],r['quaternion'],r['linear_velocity'],r['angular_velocity']]).all() for r in rows)),
++        no_forbidden_robot_environment_contact=not any(r['independent_geometry']['forbidden_robot_environment_contact'] for r in rows),
++        continuous_explicit_substeps=bool(len(rows)==raw['frames']*(cfg.physics.hz//cfg.physics.control_hz)+1 and np.allclose(np.diff([r['t'] for r in rows]),1/cfg.physics.hz,atol=1e-10,rtol=0)))
++    blocked=not contract.get('geometry_audit',{}).get('accepted',False)
++    # Retained original tabs have positive material-intersection witnesses;
++    # this run intentionally does not execute the obstructed insertion or release.
++    qualified=False
++    return dict(schema='labsim.V0_demo04.independent.v1',scene_version='V0_demo04',scene_mode='native_nominal',data_scope='lab_cuvette_loading_V0_demo04_native_nominal',source_episode=str(ep),source_slot_id=d['source_slot_id'],target_seat_id=d['target_seat_id'],asset_manifest_sha256=contract['asset_manifest_sha256'],scene_correspondence_accepted=checks['scene_population_and_orientation'],geometry_gate_passed=not blocked,geometry_gate_basis='retained original source-mesh intersection witnesses; not nominal gap threshold',workflow_success=False,native_pair_success=False,real_calibrated=False,data_eligible=False,diagnostic_read_eligible=raw['frames']>0,diagnostic_subtask_completed=bool(all(checks.values()) and raw['status']=='GEOMETRY_BLOCKED_PREINSERT'),status=raw['status'],checks=checks,phases_executed=phases,trajectory_end_time_s=t,simulation_seconds=t,record_count=len(rows),frames=raw['frames'],physics_records_sha256=sha(ep/'physics_records.json'),events_sha256=sha(ep/'events.json'),post_retreat_window=dict(available=False,reason='No full-task release and RETREAT/VERIFY completed'),stable_after_retreat=None,terminal_window=window(rows,max(0,t-3),t),native_seat_penetration_m=None,native_seat_penetration_available=False,physics_quality_flags=['USER_NOMINAL_DIMENSIONS_NOT_REAL_CALIBRATED','ORIGINAL_SEAT_MATERIAL_INTERFERENCE_CONFIRMED','NATIVE_COOKED_GEOMETRY_AND_SEAT_PENETRATION_NOT_FULLY_MEASURED','NO_NATIVE_INSERTION_OR_RELEASE_EXECUTED'],classification='preinsert diagnostic; never full loading success')
+diff --git a/demos/lab_cuvette_demo04/audit_dimensions.py b/demos/lab_cuvette_demo04/audit_dimensions.py
+new file mode 100644
+index 0000000..ab9da53
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/audit_dimensions.py
+@@ -0,0 +1,48 @@
++"""Read-only actual-vertex dimension table across source, derived and world frames."""
++from pathlib import Path
++import argparse,csv,hashlib,json
++import numpy as np
++from pxr import Usd,UsdGeom
++from omegaconf import OmegaConf
++from demos.lab_cuvette_external.geometry import ROOT,SOURCE,normalized
++from demos.lab_cuvette_demo04.scene import layout
++
++def meshes(path):
++    stage=Usd.Stage.Open(str(path),Usd.Stage.LoadAll);cache=UsdGeom.XformCache();out=[]
++    for p in Usd.PrimRange.Stage(stage,Usd.TraverseInstanceProxies()):
++        if not p.IsA(UsdGeom.Mesh):continue
++        v=np.asarray(UsdGeom.Mesh(p).GetPointsAttr().Get(),float)
++        v=(np.c_[v,np.ones(len(v))]@np.asarray(cache.GetLocalToWorldTransform(p)))[:,:3]
++        out.append((str(p.GetPath()),v))
++    return out
++
++def main():
++    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
++    cfg=OmegaConf.load(ROOT/'config/lab_cuvette_loading/V0_demo04/native_nominal.yaml');d=layout(cfg);rows=[]
++    def add(role,frame,points,basis,prim):
++        pts=np.asarray(points);extent=np.ptp(pts,axis=0)*1000
++        rows.append(dict(role=role,frame=frame,X_mm=extent[0],Y_mm=extent[1],Z_mm=extent[2],basis=basis,prim=prim))
++    info,raw=normalized('newnew4.usd')
++    # normalized() retains every source instance and applies full unit/up-axis transform.
++    from demos.lab_cuvette_external.geometry import tri
++    rawv=[tri(r).vertices for r in raw]
++    body_index=next(i for i,r in enumerate(raw) if r['path'].endswith('/tn__1_x1ZBa0c2t04z0ZA6/Mesh'))
++    add('instrument_body','source_normalized_m',rawv[body_index],'actual transformed original source vertices',raw[body_index]['path'])
++    add('open_assembly','source_normalized_m',np.concatenate(rawv),'all8 original source instances; source lid pose','/RotatedRoot')
++    all_inst=meshes(ROOT/cfg.asset_directory/'instrument_native.usda');visual=[(n,v) for n,v in all_inst if '/Visual/' in n]
++    for role,selected in [('instrument_body',[x for x in visual if x[0].endswith(raw[body_index]['path'].split('/RotatedRoot',1)[1])]),('open_assembly',visual),('selected_A',[x for x in visual if x[0].endswith(raw[3]['path'].split('/RotatedRoot',1)[1])]),('retained_B',[x for x in visual if x[0].endswith(raw[4]['path'].split('/RotatedRoot',1)[1])])]:
++        assert selected,(role,[n for n,v in visual])
++        v=np.concatenate([v for n,v in selected]);names=';'.join(n for n,v in selected)
++        add(role,'derived_instrument_local_m',v,'actual derived vertices; inherited video lid pose',names)
++        add(role,'final_world_m',v@d['instrument_rotation'].T+d['instrument_origin'],'world AABB is projected extent after yaw135; not component scale',names)
++    vessel=meshes(ROOT/cfg.asset_directory/'vessel_125_mm.usda')
++    for role,selected in [('vessel_visual',[v for n,v in vessel if '/Visual/' in n]),('vessel_collision_input_union_bbox',[v for n,v in vessel if '/Collision/' in n])]:
++        add(role,'derived_vessel_local_m',np.concatenate(selected),'actual reloaded mesh vertices; not cooked geometry',';'.join(n for n,v in vessel if ('/Visual/' if role=='vessel_visual' else '/Collision/') in n))
++    for role,size,basis in [('rack_outer',[.110,.110,.028],'6x6 parametric design unchanged'),('rack_slot',[.016,.016,.025],'unmeasured demo assumptions; base3mm wall2mm'),('vessel_nominal',[.0125,.0125,.0675],'user nominal XY and retained Z'),('seat_central_reference',[.0126,.0126,.029],'central section only; inward tabs retained')]:
++        rows.append(dict(role=role,frame='design_nominal',X_mm=size[0]*1000,Y_mm=size[1]*1000,Z_mm=size[2]*1000,basis=basis,prim=''))
++    with (a.output/'dimensions.csv').open('x',newline='') as f:
++        w=csv.DictWriter(f,list(rows[0]));w.writeheader();w.writerows(rows)
++    sources=[SOURCE/'newnew4.usd',SOURCE/'TestTube_Baked.usd',ROOT/cfg.asset_directory/'instrument_native.usda',ROOT/cfg.asset_directory/'vessel_125_mm.usda',ROOT/'config/lab_cuvette_loading/V0_demo04/native_nominal.yaml']
++    (a.output/'provenance.json').write_text(json.dumps(dict(method='actual source/derived vertices with complete USD transforms; final world Rz+translation once',source_sha256={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in sources},instrument_count=1,units='m internal;mm table',native_cooked_vertices_read=False,real_calibrated=False),indent=2)+'\n')
++    print(a.output)
++if __name__=='__main__':main()
+diff --git a/demos/lab_cuvette_demo04/build_report_docx.py b/demos/lab_cuvette_demo04/build_report_docx.py
+new file mode 100644
+index 0000000..09e67a9
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/build_report_docx.py
+@@ -0,0 +1,101 @@
++"""Build the evidence report with python-docx; render separately before delivery."""
++from pathlib import Path
++import re,os
++from urllib.parse import urlsplit,unquote,quote
++from docx import Document
++from docx.shared import Mm,Pt,RGBColor
++from docx.oxml import OxmlElement
++from docx.oxml.ns import qn
++from docx.enum.text import WD_ALIGN_PARAGRAPH
++ROOT=Path(__file__).resolve().parents[2]
++BASE=ROOT/'docs/lab_cuvette_loading/V0_demo04'
++OUTPUT=BASE/'LabSim_V0_demo04_原座装载核查报告_20261020.docx'
++FONT='Noto Sans CJK SC'
++
++def font(style,size,bold=None):
++    style.font.name=FONT;style.font.size=Pt(size);style.font.color.rgb=RGBColor(0,0,0)
++    style.element.get_or_add_rPr().get_or_add_rFonts().set(qn('w:eastAsia'),FONT)
++    if bold is not None:style.font.bold=bold
++
++def href(raw):
++    u=urlsplit(raw)
++    if u.scheme:return raw
++    p=(BASE/unquote(u.path)).resolve()
++    if not p.exists():raise FileNotFoundError(p)
++    if p.is_relative_to(BASE):return Path(os.path.relpath(p,BASE)).as_posix()
++    if p.is_relative_to(ROOT):return 'https://github.com/zez2001/LabSim/blob/codex/lab-cuvette-demo04/'+quote(p.relative_to(ROOT).as_posix())
++    raise ValueError(raw)
++
++def link(p,label,url):
++    h=OxmlElement('w:hyperlink');h.set(qn('r:id'),p.part.relate_to(href(url),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',is_external=True))
++    r=OxmlElement('w:r');pr=OxmlElement('w:rPr');color=OxmlElement('w:color');color.set(qn('w:val'),'185A82');pr.append(color);r.append(pr)
++    t=OxmlElement('w:t');t.text=label;r.append(t);h.append(r);p._p.append(h)
++
++def inline(p,text):
++    pattern=re.compile(r'(\[[^\]]+\]\([^\n)]+\)|\*\*[^*]+\*\*|`[^`]+`)')
++    for t in pattern.split(text):
++        if t.startswith('[') and '](' in t:
++            label,url=t[1:-1].split('](',1);link(p,label,url)
++        elif t.startswith('**'):
++            p.add_run(t[2:-2]).bold=True
++        elif t.startswith('`'):
++            p.add_run(t[1:-1])
++        else:p.add_run(t)
++
++def build():
++    doc=Document();sec=doc.sections[0];sec.page_width=Mm(210);sec.page_height=Mm(297)
++    sec.top_margin=Mm(19);sec.bottom_margin=Mm(18);sec.left_margin=Mm(20);sec.right_margin=Mm(20)
++    for name,size,bold in [('Normal',10.5,False),('Title',21,True),('Heading 1',14,True),('Heading 2',12,True),('Caption',9,False),('List Bullet',10.5,False)]:font(doc.styles[name],size,bold)
++    for style in doc.styles:
++        for border in list(style.element.iter(qn('w:pBdr'))):border.getparent().remove(border)
++    n=doc.styles['Normal'].paragraph_format;n.space_after=Pt(5);n.line_spacing=1.15
++    for name in ['Heading 1','Heading 2']:
++        f=doc.styles[name].paragraph_format;f.space_before=Pt(12);f.space_after=Pt(5);f.keep_with_next=True
++    font(doc.styles['Title'],21,True);doc.styles['Title'].paragraph_format.space_after=Pt(10)
++    doc.core_properties.title='LabSim V0 demo04 原座装载核查报告';doc.core_properties.author='LabSim project';doc.core_properties.subject='用户更正尺寸后的单仪器场景与实际运行证据'
++    foot=sec.footer.paragraphs[0];foot.alignment=WD_ALIGN_PARAGRAPH.RIGHT
++    r=foot.add_run();r.font.size=Pt(9);f=OxmlElement('w:fldSimple');f.set(qn('w:instr'),'PAGE');r._r.addnext(f)
++    lines=(BASE/'report.md').read_text().splitlines();i=0;in_code=False
++    while i<len(lines):
++        line=lines[i].strip();i+=1
++        if not line:continue
++        if line.startswith('```'):in_code=not in_code;continue
++        if in_code:
++            p=doc.add_paragraph();p.paragraph_format.space_after=Pt(1);p.paragraph_format.line_spacing=1.0
++            r=p.add_run(line);r.font.name='DejaVu Sans Mono';r.font.size=Pt(8);continue
++        if line.startswith('# '):
++            doc.add_paragraph('LabSim V0 demo04 原座装载核查报告','Title');continue
++        if line.startswith('##'):
++            text=re.sub(r'^#+\s*','',line);text=re.sub(r'^\d+\W*','',text);text=re.sub(r'[:：，、。/／_()（）—–-]',' ',text)
++            doc.add_paragraph(text,'Heading 1' if not line.startswith('###') else 'Heading 2');continue
++        if line.startswith('|'):
++            rows=[line]
++            while i<len(lines) and lines[i].strip().startswith('|'):rows.append(lines[i].strip());i+=1
++            parsed=[[x.strip() for x in row.strip('|').split('|')] for row in rows if not re.match(r'^\|?[\s:|-]+\|?$',row)]
++            count=len(parsed[0]);tab=doc.add_table(rows=0,cols=count);tab.autofit=False
++            widths=([.24,.33,.43] if count==3 else [.5,.5] if count==2 else [1/count]*count)
++            for ri,row in enumerate(parsed):
++                cells=tab.add_row().cells
++                for ci,value in enumerate(row):
++                    cells[ci].width=Mm(170*widths[ci]);p=cells[ci].paragraphs[0];p.paragraph_format.space_after=Pt(4);p.paragraph_format.space_before=Pt(3);p.paragraph_format.line_spacing=1.05
++                    inline(p,value)
++                    for r in p.runs:r.font.size=Pt(9);r.bold=(ri==0) or r.bold
++                    if ri==0:
++                        sh=OxmlElement('w:shd');sh.set(qn('w:fill'),'EFEFEF');cells[ci]._tc.get_or_add_tcPr().append(sh)
++                pr=tab.rows[-1]._tr.get_or_add_trPr();no=OxmlElement('w:cantSplit');pr.append(no)
++                if ri==0:pr.append(OxmlElement('w:tblHeader'))
++            borders=OxmlElement('w:tblBorders')
++            for side in ['top','bottom','left','right','insideH','insideV']:
++                e=OxmlElement('w:'+side);e.set(qn('w:val'),'single');e.set(qn('w:sz'),'4');e.set(qn('w:color'),'CCCCCC');borders.append(e)
++            tab._tbl.tblPr.append(borders);continue
++        m=re.match(r'^!\[([^\]]*)\]\(([^)]+)\)$',line)
++        if m:
++            p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.keep_with_next=True
++            from PIL import Image
++            path=(BASE/unquote(m[2])).resolve();w,h=Image.open(path).size
++            width=min(170,100*w/h);r=p.add_run();shape=r.add_picture(str(path),width=Mm(width));shape._inline.docPr.set('descr',m[1]);continue
++        style='Caption' if re.match(r'^图\s*\d',line) else 'List Bullet' if line.startswith('- ') else None
++        text=line[2:] if line.startswith(('- ','> ')) else line
++        p=doc.add_paragraph(style=style);inline(p,text)
++    doc.save(OUTPUT);print(OUTPUT)
++if __name__=='__main__':build()
+diff --git a/demos/lab_cuvette_demo04/build_scene_assets.py b/demos/lab_cuvette_demo04/build_scene_assets.py
+new file mode 100644
+index 0000000..4a8ebab
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/build_scene_assets.py
+@@ -0,0 +1,24 @@
++"""Non-destructive references: full unchanged rack and all original seat solids."""
++from pathlib import Path
++import os,argparse,hashlib
++from pxr import Usd,UsdGeom,UsdPhysics
++from omegaconf import OmegaConf
++from demos.lab_cuvette_demo04.scene import ROOT,ASSETS,layout
++from demos.lab_cuvette_external.geometry import write
++
++def build(cfg):
++    ASSETS.mkdir(exist_ok=True,parents=True)
++    sources={'rack.usda':ROOT/'assets/lab_cuvette_loading/V0_demo03/rack.usda','instrument_native.usda':ROOT/'assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda'}
++    for name,source in sources.items():
++        path=ASSETS/name
++        if path.exists():raise FileExistsError(path)
++        s=Usd.Stage.CreateNew(str(path));r=UsdGeom.Xform.Define(s,'/Asset');s.SetDefaultPrim(r.GetPrim());UsdGeom.SetStageMetersPerUnit(s,1.);UsdGeom.SetStageUpAxis(s,'Z');r.GetPrim().GetReferences().AddReference(os.path.relpath(source,ASSETS));r.GetPrim().SetCustomDataByKey('version','V0_demo04 original geometry reference; no seat replacement');s.GetRootLayer().Save()
++    checks={}
++    for name,expected in [('rack.usda',50),('instrument_native.usda',8)]:
++        s=Usd.Stage.Open(str(ASSETS/name),Usd.Stage.LoadAll);cols=[str(p.GetPath()) for p in Usd.PrimRange.Stage(s,Usd.TraverseInstanceProxies()) if p.HasAPI(UsdPhysics.CollisionAPI)];assert len(cols)==expected
++        checks[name]={'colliders':cols,'count':len(cols),'engineering_adapter_absent':not bool(s.GetPrimAtPath('/Asset/EngineeringAdapterA'))}
++    files=[ASSETS/k for k in sources]+[ASSETS/'vessel_125_mm.usda']
++    if not all(p.exists() for p in files):raise RuntimeError('Build corrected vessel first')
++    write(ASSETS/'manifest.json',dict(version='V0_demo04',scene_mode='native_nominal',instrument_count=1,rack_slots=36,nominal_vessel_xy_m=.0125,nominal_seat_central_width_m=.0126,nominal_dimension_source='user2026-10-20',real_calibrated=False,source_CAD_unchanged=True,original_A_and_B_restored=True,engineering16mm_adapter_in_native_scene=False,checks=checks,layout=layout(cfg),source_sha256={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources.values()},asset_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}))
++if __name__=='__main__':
++    p=argparse.ArgumentParser();p.add_argument('--config',type=Path,default=ROOT/'config/lab_cuvette_loading/V0_demo04/native_nominal.yaml');a=p.parse_args();build(OmegaConf.load(a.config))
+diff --git a/demos/lab_cuvette_demo04/build_vessel.py b/demos/lab_cuvette_demo04/build_vessel.py
+new file mode 100644
+index 0000000..a9c2a61
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/build_vessel.py
+@@ -0,0 +1,408 @@
++"""Derive a 12.5 mm XY vessel from ext02, without starting Isaac or a GPU.
++
++The declared affine map is diag(12.5/14.85, 12.5/14.85, 1).  It is
++applied to every visual and collision INPUT vertex in the rigid-body frame.
++Mass remains an explicit 20 g engineering assumption.  Inertia is integrated
++over the closed source visual material volume and checked by an independent
++central-second-moment affine transform.  Cooked PhysX geometry is not read.
++
++Run through demos/lab_cuvette_external/usd_python.sh for pxr/Physx schemas.
++"""
++from __future__ import annotations
++
++import argparse
++import csv
++import hashlib
++import json
++from pathlib import Path
++
++import numpy as np
++from pxr import Gf, Usd, UsdGeom, UsdPhysics
++from scipy.spatial import ConvexHull
++from scipy.spatial.transform import Rotation
++import trimesh
++
++ROOT = Path(__file__).resolve().parents[2]
++SOURCE = ROOT / "assets/lab_cuvette_loading/V0_ext02/walls28_mm.usda"
++OUTPUT = ROOT / "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda"
++EVIDENCE = ROOT / "docs/lab_cuvette_loading/V0_demo04/vessel"
++EXPECTED_SOURCE_SHA256 = "70133b2a66b1705f6de80c52e46c857b02a9811386971ea14b6a188e1edfde4b"
++SCALE = np.array([12.5 / 14.85, 12.5 / 14.85, 1.0])
++MASS_KG = 0.020
++
++
++def sha256(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def serializable(value):
++    if isinstance(value, np.ndarray):
++        return value.tolist()
++    if isinstance(value, (np.floating, np.integer, np.bool_)):
++        return value.item()
++    if isinstance(value, Path):
++        return str(value)
++    raise TypeError(type(value))
++
++
++def write_json(path, data):
++    path.write_text(json.dumps(data, ensure_ascii=False, indent=2, default=serializable,
++                               allow_nan=False) + "\n", encoding="utf-8")
++
++
++def read_geometry(stage):
++    cache = UsdGeom.XformCache()
++    body = stage.GetDefaultPrim()
++    inverse_body = np.linalg.inv(np.asarray(cache.GetLocalToWorldTransform(body)))
++    result = {}
++    for prim in stage.Traverse():
++        if not prim.IsA(UsdGeom.Mesh):
++            continue
++        mesh = UsdGeom.Mesh(prim)
++        points = np.asarray(mesh.GetPointsAttr().Get(), dtype=float)
++        counts = np.asarray(mesh.GetFaceVertexCountsAttr().Get(), dtype=int)
++        if not np.all(counts == 3):
++            raise ValueError("Unexpected non-triangle source: " + str(prim.GetPath()))
++        indices = np.asarray(mesh.GetFaceVertexIndicesAttr().Get(), dtype=int).reshape(-1, 3)
++        matrix = np.asarray(cache.GetLocalToWorldTransform(prim)) @ inverse_body
++        world = (np.c_[points, np.ones(len(points))] @ matrix)[:, :3]
++        result[str(prim.GetPath())] = dict(points=points, faces=indices, matrix=matrix,
++            body_points=world, collision=prim.HasAPI(UsdPhysics.CollisionAPI),
++            approximation=str(UsdPhysics.MeshCollisionAPI(prim).GetApproximationAttr().Get())
++            if prim.HasAPI(UsdPhysics.MeshCollisionAPI) else None,
++            normals_authored=mesh.GetNormalsAttr().HasAuthoredValue())
++    return result
++
++
++def integrate_material(points, faces, mass=MASS_KG):
++    """Signed origin tetrahedra; exact polynomial integrals of indexed triangles.
++
++    No convex hull, external surface area approximation, or collider-volume sum
++    enters the material mass calculation.  Source must be a closed oriented
++    material boundary including its cavity and base.
++    """
++    mesh = trimesh.Trimesh(vertices=points, faces=faces, process=True)
++    if not mesh.is_watertight or not mesh.is_winding_consistent:
++        raise ValueError("Visual material boundary is not closed/oriented")
++    triangles = points[faces]
++    volumes = np.einsum("ij,ij->i", triangles[:, 0],
++                        np.cross(triangles[:, 1], triangles[:, 2])) / 6
++    volume = volumes.sum()
++    if volume <= 0:
++        raise ValueError("Expected positive oriented material volume")
++    sums = triangles.sum(axis=1)
++    com = np.einsum("i,ij->j", volumes, sums) / (4 * volume)
++    raw = np.einsum("i,ij,ik->jk", volumes / 20, sums, sums)
++    raw += np.einsum("i,ipj,ipk->jk", volumes / 20, triangles, triangles)
++    covariance = raw / volume - np.outer(com, com)
++    inertia = mass * (np.trace(covariance) * np.eye(3) - covariance)
++    mesh.density = mass / volume
++    if not np.allclose(inertia, mesh.moment_inertia, atol=1e-17, rtol=1e-9):
++        raise ValueError("Tetrahedral and trimesh surface-integral inertia disagree")
++    if not np.allclose(com, mesh.center_mass, atol=1e-13, rtol=1e-9):
++        raise ValueError("Tetrahedral and trimesh COM disagree")
++    principal, axes = np.linalg.eigh(inertia)
++    if np.linalg.det(axes) < 0:
++        axes[:, -1] *= -1
++    if np.any(principal <= 0):
++        raise ValueError("Non-positive principal inertia")
++    quat = Rotation.from_matrix(axes).as_quat()  # xyzw, columns are body-frame axes
++    return dict(mass_kg=mass, material_volume_m3=volume, homogeneous_density_kg_m3=mass / volume,
++                com_body_m=com, central_second_moment_m2=covariance,
++                inertia_body_kg_m2=inertia, principal_inertia_kg_m2=principal,
++                principal_axes_columns_in_body=axes,
++                principal_axes_quaternion_wxyz=np.r_[quat[3], quat[:3]],
++                boundary_watertight=True, boundary_winding_consistent=True,
++                independent_trimesh_inertia_max_abs_delta_kg_m2=np.abs(inertia-mesh.moment_inertia).max())
++
++
++def usd_mass_snapshot(stage):
++    api = UsdPhysics.MassAPI(stage.GetDefaultPrim())
++    quaternion = api.GetPrincipalAxesAttr().Get()
++    row_rotation = np.asarray(Gf.Matrix3d(Gf.Quatd(quaternion)))
++    principal = np.asarray(api.GetDiagonalInertiaAttr().Get(), dtype=float)
++    return dict(mass_kg=float(api.GetMassAttr().Get()),
++                com_body_m=np.asarray(api.GetCenterOfMassAttr().Get(), dtype=float),
++                principal_inertia_kg_m2=principal,
++                principal_axes_quaternion_wxyz=np.r_[quaternion.GetReal(), quaternion.GetImaginary()],
++                inertia_body_kg_m2=row_rotation.T @ np.diag(principal) @ row_rotation)
++
++
++def convex_input_mesh(geometry):
++    """Mathematical hull of authored input vertices, not a PhysX cooked readback."""
++    points = geometry["body_points"]
++    hull = ConvexHull(points)
++    faces = hull.simplices.copy()
++    for index, face in enumerate(faces):
++        normal = np.cross(points[face[1]] - points[face[0]], points[face[2]] - points[face[0]])
++        if np.dot(normal, hull.equations[index, :3]) < 0:
++            faces[index, [1, 2]] = faces[index, [2, 1]]
++    return trimesh.Trimesh(vertices=points, faces=faces, process=False)
++
++
++def section_segments(mesh, height):
++    segments = trimesh.intersections.mesh_plane(mesh, [0, 0, 1], [0, 0, height])
++    return segments[:, :, :2] if len(segments) else np.empty((0, 2, 2))
++
++
++def section_measurements(geometries, evidence):
++    heights_mm = [0.0001, 0.1, 1, 4.8, 4.9, 5.1, 5.2, 10, 25, 40, 60, 67.25, 67.45]
++    rows = []
++    sections = {}
++    for version, geometry in geometries.items():
++        visual = geometry["/Asset/Visual/Mesh"]
++        visual_mesh = trimesh.Trimesh(vertices=visual["body_points"], faces=visual["faces"], process=False)
++        hulls = [convex_input_mesh(g) for g in geometry.values() if g["collision"]]
++        version_sections = []
++        for height_mm in heights_mm:
++            actual = section_segments(visual_mesh, height_mm / 1000)
++            per_shape = [section_segments(hull, height_mm / 1000) for hull in hulls]
++            union_segments = np.concatenate(per_shape)
++            # Bounds of a union equal the bounds of all of its member points.
++            # We do not sum per-hull areas or interpret partition internal
++            # faces as material/exterior error.  No coverage metric is claimed.
++            actual_width = np.ptp(actual.reshape(-1, 2), axis=0)*1000 if len(actual) else [None, None]
++            collision_width = np.ptp(union_segments.reshape(-1, 2), axis=0)*1000 if len(union_segments) else [None, None]
++            row = dict(version=version, height_mm=height_mm,
++                       visual_width_X_mm=actual_width[0], visual_width_Y_mm=actual_width[1],
++                       input_hull_union_bounds_width_X_mm=collision_width[0],
++                       input_hull_union_bounds_width_Y_mm=collision_width[1],
++                       visual_intersection_segments=len(actual),
++                       active_input_hulls=sum(len(part)>0 for part in per_shape))
++            rows.append(row)
++            version_sections.append((height_mm, actual, union_segments))
++        sections[version] = version_sections
++    with (evidence / "sections.csv").open("w", encoding="utf-8", newline="") as stream:
++        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
++        writer.writeheader()
++        writer.writerows(rows)
++    return rows, sections
++
++
++def plot_geometry(geometries, sections, evidence):
++    import matplotlib
++    matplotlib.use("Agg")
++    import matplotlib.pyplot as plt
++    from matplotlib.collections import LineCollection
++    from matplotlib.lines import Line2D
++    fig, axes = plt.subplots(2, 3, figsize=(13, 10), constrained_layout=True)
++    projections = [(0, 1, "XY top"), (0, 2, "XZ side"), (1, 2, "YZ side")]
++    for row, (version, geometry) in enumerate(geometries.items()):
++        for column, (i, j, title) in enumerate(projections):
++            ax = axes[row, column]
++            for g in geometry.values():
++                p = g["body_points"] * 1000
++                edges = p[g["faces"]][:, [0, 1, 2, 0], :][:, :, [i, j]]
++                ax.add_collection(LineCollection(edges, colors="#e55c25" if g["collision"] else "#185999",
++                    linewidths=.42 if g["collision"] else .5, alpha=.38 if g["collision"] else .65))
++            ax.autoscale()
++            ax.set_aspect("equal")
++            ax.set_title(version + " | " + title)
++            ax.set_xlabel("XYZ"[i] + " / mm")
++            ax.set_ylabel("XYZ"[j] + " / mm")
++            ax.grid(alpha=.2)
++    axes[0, 0].legend(handles=[Line2D([0], [0], color="#185999", label="visual material boundary"),
++                              Line2D([0], [0], color="#e55c25", label="28 collision INPUT meshes")], fontsize=8)
++    fig.suptitle("V0_demo04: XY scale only; Z and base unchanged | offline input geometry, not cooked PhysX", fontsize=12)
++    fig.savefig(evidence / "visual_collision_overlay.png", dpi=170)
++    plt.close(fig)
++    selected = [4.9, 25, 67.45]
++    fig, axes = plt.subplots(2, 3, figsize=(12, 8), constrained_layout=True)
++    for row, (version, slices) in enumerate(sections.items()):
++        for col, height in enumerate(selected):
++            _, actual, union_segments = next(x for x in slices if x[0] == height)
++            ax = axes[row, col]
++            for segments, color, style in [(actual, "#185999", "-"), (union_segments, "#e55c25", "--")]:
++                ax.add_collection(LineCollection(segments*1000, colors=color, linestyles=style, linewidths=1.2))
++            ax.autoscale()
++            ax.set_title(f"{version} | Z={height:g} mm")
++            ax.set_aspect("equal")
++            ax.set_xlabel("X / mm")
++            ax.set_ylabel("Y / mm")
++            ax.grid(alpha=.2)
++    fig.suptitle("Blue: visual material section; orange: INPUT convex-hull sections, including partition boundaries")
++    fig.savefig(evidence / "material_sections.png", dpi=170)
++    plt.close(fig)
++
++
++def build(output=OUTPUT, evidence=EVIDENCE):
++    output, evidence = Path(output).resolve(), Path(evidence).resolve()
++    if output.exists() or evidence.exists():
++        raise FileExistsError("Use a new output asset and new evidence directory")
++    source_sha = sha256(SOURCE)
++    if source_sha != EXPECTED_SOURCE_SHA256:
++        raise ValueError("Source differs from the preserved ext02 baseline")
++    source = Usd.Stage.Open(str(SOURCE), Usd.Stage.LoadAll)
++    original = read_geometry(source)
++    colliders = [g for g in original.values() if g["collision"]]
++    if len(original) != 29 or len(colliders) != 28:
++        raise ValueError("Expected one visual mesh and 28 collision inputs")
++    if any(g["approximation"] != "convexHull" for g in colliders):
++        raise ValueError("Source collision representation unexpectedly changed")
++    visual = original["/Asset/Visual/Mesh"]
++    before = integrate_material(visual["body_points"], visual["faces"])
++    output.parent.mkdir(parents=True, exist_ok=True)
++    evidence.mkdir(parents=True, exist_ok=False)
++    # Fully flattened standalone layer: no absolute/external source references.
++    source.Flatten().Export(str(output))
++    derived = Usd.Stage.Open(str(output))
++    records = []
++    for path, g in original.items():
++        mesh = UsdGeom.Mesh(derived.GetPrimAtPath(path))
++        # Preserve every existing local transform, topology, mass/material API,
++        # collider setting and path.  Pull the body-frame affine map back into
++        # local points; this handles the inherited 0.001 collision mesh scale.
++        target_body = g["body_points"] * SCALE
++        local = (np.c_[target_body, np.ones(len(target_body))] @ np.linalg.inv(g["matrix"]))[:, :3]
++        mesh.GetPointsAttr().Set([Gf.Vec3f(*point) for point in local])
++        mesh.GetExtentAttr().Set([Gf.Vec3f(*local.min(axis=0)), Gf.Vec3f(*local.max(axis=0))])
++        if g["normals_authored"]:
++            raise ValueError("Source gained authored normals; affine inverse-transpose handling required")
++        records.append(dict(path=path, vertex_count=len(local), triangle_count=len(g["faces"]),
++                            collision=g["collision"], approximation=g["approximation"],
++                            source_body_bounds_m=[g["body_points"].min(0), g["body_points"].max(0)]))
++    derived.GetRootLayer().Save()
++    intermediate = read_geometry(derived)
++    transformed = intermediate["/Asset/Visual/Mesh"]
++    after = integrate_material(transformed["body_points"], transformed["faces"])
++    affine_q = np.diag(SCALE) @ before["central_second_moment_m2"] @ np.diag(SCALE)
++    affine_i = MASS_KG * (np.trace(affine_q) * np.eye(3) - affine_q)
++    affine_com = before["com_body_m"] * SCALE
++    ideal_after = integrate_material(visual["body_points"] * SCALE, visual["faces"])
++    ideal_affine_error = float(np.abs(ideal_after["inertia_body_kg_m2"]-affine_i).max())
++    quantized_affine_error = float(np.abs(after["inertia_body_kg_m2"]-affine_i).max())
++    # Comparing a 1e-14 off-diagonal value by its own relative magnitude is
++    # ill-conditioned.  Bound the full tensor error relative to tensor scale,
++    # and separately verify the unquantized independent integral to1e-15.
++    affine_quantization_relative = quantized_affine_error / float(np.abs(affine_i).max())
++    if ideal_affine_error > 1e-15 or affine_quantization_relative > 1e-6:
++        raise ValueError("Reintegrated and full affine inertia disagree")
++    mass_api = UsdPhysics.MassAPI(derived.GetDefaultPrim())
++    mass_api.GetMassAttr().Set(MASS_KG)
++    mass_api.GetCenterOfMassAttr().Set(Gf.Vec3f(*after["com_body_m"]))
++    mass_api.GetDiagonalInertiaAttr().Set(Gf.Vec3f(*after["principal_inertia_kg_m2"]))
++    q = after["principal_axes_quaternion_wxyz"]
++    mass_api.GetPrincipalAxesAttr().Set(Gf.Quatf(float(q[0]), Gf.Vec3f(*q[1:])))
++    derived.GetDefaultPrim().SetCustomDataByKey("labsim_vessel_version", "V0_demo04_vessel_125_mm")
++    derived.GetDefaultPrim().SetCustomDataByKey("labsim_source_sha256", source_sha)
++    derived.GetDefaultPrim().SetCustomDataByKey("labsim_geometry_change", "XY=12.5/14.85; Z=1; bottom origin unchanged; visual and all28 collision inputs transformed identically")
++    derived.GetDefaultPrim().SetCustomDataByKey("labsim_mass_assumption", "20g engineering assumption; homogeneous source-material integral; not calibrated")
++    derived.GetRootLayer().Save()
++    derived = None
++    reload = Usd.Stage.Open(str(output), Usd.Stage.LoadAll)
++    final = read_geometry(reload)
++    mass_written = usd_mass_snapshot(reload)
++    max_errors, z_errors, unchanged_topology, unchanged_parameters = [], [], [], []
++    for record in records:
++        path = record["path"]
++        src, dst = original[path], final[path]
++        record["derived_body_bounds_m"] = [dst["body_points"].min(0), dst["body_points"].max(0)]
++        err = np.abs(dst["body_points"] - src["body_points"] * SCALE)
++        record["affine_vertex_max_abs_error_m"] = float(err.max())
++        record["Z_max_abs_change_m"] = float(np.abs(dst["body_points"][:, 2]-src["body_points"][:, 2]).max())
++        max_errors.append(record["affine_vertex_max_abs_error_m"])
++        z_errors.append(record["Z_max_abs_change_m"])
++        unchanged_topology.append(np.array_equal(src["faces"], dst["faces"]))
++        # All properties other than points/extent/root mass/provenance must be
++        # byte-identical USD values.  This explicitly catches changed offsets.
++        for attr in source.GetPrimAtPath(path).GetAttributes():
++            if attr.GetName() not in ["points", "extent"]:
++                unchanged_parameters.append(str(attr.Get()) == str(reload.GetPrimAtPath(path).GetAttribute(attr.GetName()).Get()))
++    checks = dict(standalone_no_external_used_layers=len(reload.GetUsedLayers()) == 2,
++                  collision_count_28=sum(x["collision"] for x in final.values()) == 28,
++                  one_visual_mesh=len(final) == 29,
++                  topology_unchanged=all(unchanged_topology),
++                  all_other_mesh_attributes_unchanged=all(unchanged_parameters),
++                  all_meshes_same_declared_affine=max(max_errors) < 1e-8,
++                  all_Z_vertices_unchanged=max(z_errors) < 1e-14,
++                  bottom_origin_preserved=abs(final["/Asset/Visual/Mesh"]["body_points"][:, 2].min()) < 1e-14,
++                  authored_inertia_reconstructs_full_tensor=np.allclose(mass_written["inertia_body_kg_m2"], after["inertia_body_kg_m2"], atol=2e-12, rtol=2e-6),
++                  ideal_integral_matches_full_affine=ideal_affine_error <= 1e-15,
++                  quantized_integral_matches_affine_tensor_norm=affine_quantization_relative <= 1e-6,
++                  authored_COM_matches_reintegrated=np.allclose(mass_written["com_body_m"],after["com_body_m"],atol=2e-9,rtol=2e-6),
++                  source_sha256_unchanged=sha256(SOURCE) == source_sha)
++    if not all(checks.values()):
++        raise ValueError("Reload check failed: " + str(checks))
++    rows, sections = section_measurements({"source14.85": original, "derived12.5": final}, evidence)
++    plot_geometry({"source14.85": original, "derived12.5": final}, sections, evidence)
++    with (evidence / "mass_properties.csv").open("w", encoding="utf-8", newline="") as stream:
++        writer=csv.writer(stream); writer.writerow(["version", "quantity", "value", "unit", "basis"])
++        for version, result in [("source14.85", before), ("derived12.5", after)]:
++            for name, unit in [("mass_kg", "kg"), ("material_volume_m3", "m3"),
++                               ("homogeneous_density_kg_m3", "kg/m3"), ("com_body_m", "m"),
++                               ("inertia_body_kg_m2", "kg*m2"), ("principal_inertia_kg_m2", "kg*m2"),
++                               ("principal_axes_columns_in_body", "dimensionless"),
++                               ("principal_axes_quaternion_wxyz", "dimensionless")]:
++                writer.writerow([version, name, json.dumps(result[name], default=serializable), unit,
++                                 "closed visual material volume; homogeneous distribution;20g assumed"])
++    report = dict(schema="labsim.V0_demo04.vessel_derivation.v1", version="V0_demo04",
++        source=dict(path=str(SOURCE.relative_to(ROOT)), sha256=source_sha),
++        output=dict(path=str(output.relative_to(ROOT)) if output.is_relative_to(ROOT) else str(output), sha256=sha256(output)),
++        builder=dict(path=str(Path(__file__).relative_to(ROOT)),sha256=sha256(Path(__file__))),
++        affine=dict(axis_scale=SCALE, nominal_width_before_mm=14.85, nominal_width_after_mm=12.5,
++                    scaling_about="rigid body origin; Z bottom0 unchanged", full_height_scaled=False),
++        input_meshes=records, source_material_integrated=before, derived_material_integrated=after,
++        source_USD_mass=usd_mass_snapshot(source), derived_USD_mass_reloaded=mass_written,
++        affine_validation=dict(method="Q'=S Q S^T; I'=m*(trace(Q')Id-Q'); COM'=S COM, fixed20g mass",
++            predicted_COM_m=affine_com, predicted_full_inertia_kg_m2=affine_i,
++            COM_max_abs_error_m=np.abs(after["com_body_m"]-affine_com).max(),
++            ideal_double_precision_integral_max_abs_error_kg_m2=ideal_affine_error,
++            USD_float_quantized_integral_max_abs_error_kg_m2=quantized_affine_error,
++            quantized_full_tensor_max_norm_relative_error=affine_quantization_relative,
++            verification_tolerances=dict(ideal_absolute_kg_m2=1e-15, quantized_full_tensor_relative=1e-6),
++            predicted_material_volume_m3=before["material_volume_m3"]*np.prod(SCALE),
++            no_simple_uniform_s_squared_inertia_rule_used=True),
++        checks=checks, section_method="actual triangle-plane visual sections; collision INPUT convex-hull section union bounds equal member-point bounds. Individual partition edges shown for debug, not interpreted as exterior error; area/coverage/penetration not measured here",
++        sampled_heights_mm=sorted(set(row["height_mm"] for row in rows)),
++        parameter_basis=dict(mass="20g retained engineering assumption, not real measured mass",
++            density="uniform over material boundary, adjusted to keep20g after XY scaling; inferred numerical density, not material identification",
++            dimensions="user-authorized uniform12.5/14.85 XY hypothesis, not correction of source CAD or manufacturer measurement",
++            inertia="closed visual material-volume integral; 28 overlapping collider hulls are not summed for mass",
++            material_contact="inherited ext02; not calibrated, rest_offset0 unchanged"),
++        physical_runtime=dict(Isaac_started=False,GPU_started=False,physics_steps=0,
++            PhysX_cooked_geometry_readback=False,task_success=None,native_pair_success=None,real_calibrated=False),
++        limitations=["Independent derived experimental vessel, not original vessel identity or measured specimen.",
++            "Sections and overlay concern input geometry only; no claim about cooked contact shape or global error bound.",
++            "No local wall removal/reshaping to bypass native-seat protrusions; native fit remains a separate geometry gate.",
++            "Inherited convex hull input triangulations are retained; mesh watertightness of individual collider inputs is not claimed."])
++    write_json(evidence / "derivation.json", report)
++    (evidence / "README.md").write_text(
++        "# V0_demo04 独立12.5mm器皿派生\n\n"
++        "从V0_ext02/walls28_mm.usda实际视觉材料网格与28块厚壁碰撞输入派生；"
++        "所有点使用同一刚体局部仿射变换diag(12.5/14.85,12.5/14.85,1)。"
++        "XY缩放，高度、底部Z=0、拓扑和全部原碰撞/材质参数不变，不对局部壁形作让位。"
++        "这是经授权的新假设器皿，不能写成原CAD已修正或真实型号配套。\n\n"
++        "质量继续设为20g（工程假设）。对闭合、定向的实际视觉材料边界进行有符号四面体体积积分，"
++        "包括底部和内腔壁；同质材料分布假设不变。总质量固定，因此缩放后数值密度相应增大，"
++        "不是同种材料实测密度。计算COM、完整惯量张量、主轴和主惯量；"
++        "另由源中心二阶矩Q进行完整仿射Q'=SQSᵀ与I'=m(tr(Q')Id−Q')验证，"
++        "没有套用等比缩放s²规则。用trimesh表面积分独立核对，并重载USD属性重建完整张量。\n\n"
++        "尺寸来自实际顶点和完整局部变换；12.5mm是按源名义14.85mm定义的比例，"
++        "源float顶点使实际包络略有数纳米舍入差异，不能当作真实精度。"
++        "sections.csv覆盖底部、过渡、直壁和杯口13个实际高度。"
++        "蓝线为实际视觉材料截面，橙线为28个碰撞输入点的数学凸包截面（含内部切分边，仅作调试显示）。"
++        "CSV报告其几何并集的包络宽度；没有按内部切分边计算外表面误差，也没有相加重叠面积冒充实体体积。"
++        "面积、覆盖误差及穿透未在此测量。这是输入几何检查，不是PhysX实际烹饪表示读取；未启动Isaac/GPU。\n\n"
++        "产物：derivation.json、mass_properties.csv、sections.csv、visual_collision_overlay.png、material_sections.png。"
++        "源文件SHA保持70133b2a66b1705f6de80c52e46c857b02a9811386971ea14b6a188e1edfde4b。"
++        "原座配合由独立geometry gate判断，本文件不标注任务成功。\n\n"
++        "复现（要求新目标文件与新证据目录）：\n\n```bash\n"
++        "bash demos/lab_cuvette_external/usd_python.sh -m demos.lab_cuvette_demo04.build_vessel "
++        "--output outputs/lab_cuvette_loading/V0_demo04/vessel_check/vessel_125_mm.usda "
++        "--evidence outputs/lab_cuvette_loading/V0_demo04/vessel_check/evidence\n```\n", encoding="utf-8")
++    write_json(evidence / "manifest.json", dict(schema="labsim.V0_demo04.vessel_evidence_manifest.v1",
++        source_sha256=source_sha,asset_sha256=sha256(output),
++        files=[dict(file=p.name,bytes=p.stat().st_size,sha256=sha256(p))
++               for p in sorted(evidence.iterdir()) if p.is_file()]))
++    print(json.dumps(dict(asset=str(output),evidence=str(evidence),sha256=sha256(output),
++                         checks=checks,COM_m=after["com_body_m"],
++                         principal_inertia_kg_m2=after["principal_inertia_kg_m2"]),default=serializable,indent=2))
++    return report
++
++
++if __name__ == "__main__":
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--output", type=Path, default=OUTPUT)
++    parser.add_argument("--evidence", type=Path, default=EVIDENCE)
++    args = parser.parse_args()
++    build(args.output, args.evidence)
+diff --git a/demos/lab_cuvette_demo04/collector.py b/demos/lab_cuvette_demo04/collector.py
+new file mode 100644
+index 0000000..ed2c793
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/collector.py
+@@ -0,0 +1,179 @@
++"""V0_demo04 native-nominal aligned collector with explicit auxiliary controls.
++
++Previous collectors and raw episodes are untouched. Failed/unknown episodes
++close for diagnostic use; only independently bound physical success qualifies
++for the learning-success index. Native pairing requires that same complete
++workflow and the geometry gate. Real calibration is never claimed here.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++from pathlib import Path
++
++import h5py
++import numpy as np
++from omegaconf import OmegaConf
++
++from demos.lab_cuvette_demo03.analyze import PHASES, json_safe, load_json, sha256
++from demos.lab_cuvette_demo03.collector import Demo03Collector
++
++PHASE_NAMES = tuple(PHASES) + ("GATE_RETRACT", "DIAGNOSTIC_HOLD", "JAM_RETRACT")
++
++
++def canonical_schedule(cfg, controller_file=None):
++    config = OmegaConf.to_container(cfg, resolve=True) if OmegaConf.is_config(cfg) else dict(cfg)
++    names = list(config.get("control", {}).get("phases_s", {}))
++    if not names:
++        names = list(PHASE_NAMES if config.get("version") == "V0_demo04" else PHASES)
++    payload = dict(schema="labsim.V0_demo04.control_schedule.v1", configuration=json_safe(config),
++        phase_names=names, schedule_encoder_source_sha256=sha256(__file__),
++        auxiliary_action_semantics="per-control symmetric effort cap_N, raw requested finger target_m, full9joint applied position command",
++        controller_source_sha256=sha256(controller_file) if controller_file and Path(controller_file).is_file() else None)
++    text = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
++    return text, hashlib.sha256(text.encode()).hexdigest()
++
++
++def collector_metadata(contract, schedule_json, schedule_sha256):
++    contract = dict(contract or {})
++    source, target = contract.get("source_slot", {}), contract.get("target_seat", {})
++    instrument_count = contract.get("instrument_count", contract.get("scene_correspondence", {}).get("instrument_count"))
++    values = dict(schema_version="labsim.lab_cuvette_loading.V0_demo04.v1", scene_version="V0_demo04",
++        task="lab_cuvette_loading_V0_demo04", scene_mode="native_nominal",
++        data_scope="lab_cuvette_loading_V0_demo04_native_nominal",
++        source_slot_known=bool(source.get("id")), target_seat_known=bool(target.get("id")),
++        scene_correspondence_accepted=(contract.get("version") == "V0_demo04"
++            and contract.get("scene_mode") == "native_nominal"
++            and contract.get("scene_correspondence", {}).get("accepted") is True),
++        action_semantics="absolute_7_arm_rad_and_symmetric_finger_metre",
++        observation_alignment="obs_before_action; next_state_after_explicit_substeps",
++        phase_names_json=json.dumps(list(PHASE_NAMES)), real_calibrated=False, native_pair_success=False,
++        cad_pair_verified=False, success=False, complete=False, workflow_success=False,
++        data_eligible=False, full_task_eligible=False, full_success=False,
++        diagnostic_read_eligible=False, control_schedule_json=schedule_json,
++        control_schedule_sha256=schedule_sha256, control_auxiliary_alignment="same post-action endpoint as next_timestamp",
++        control_auxiliary_units="command_q:7arm_rad+2finger_m; gripper_effort_limit_N:N per finger; gripper_target_m:m requested before command limiting")
++    for key,value in (("source_slot_id", source.get("id")), ("target_seat_id", target.get("id")),
++        ("target_is_internal_chamber", target.get("inside_sample_chamber")),
++        ("asset_manifest_sha256", contract.get("asset_manifest_sha256")), ("instrument_count", instrument_count)):
++        if value is not None:
++            values[key] = value
++    text = json.dumps(json_safe(contract), ensure_ascii=False, sort_keys=True, allow_nan=False)
++    values.update(scene_contract_json=text, scene_contract_canonical_sha256=hashlib.sha256(text.encode()).hexdigest())
++    return values
++
++
++def qualification_reasons(metadata, score, output, frames, final_timestamp, observed_phases):
++    checks = dict(new_score_schema=score.get("schema") == "labsim.V0_demo04.independent.v1",
++        new_score_scene=score.get("scene_version") == "V0_demo04",
++        native_nominal_scope=score.get("scene_mode") == metadata.get("scene_mode") == "native_nominal",
++        single_instrument_bound=metadata.get("instrument_count") == 1,
++        independently_accepted_geometry=score.get("geometry_gate_passed") is True,
++        independently_successful_workflow=score.get("workflow_success") is True,
++        independently_eligible=score.get("data_eligible") is True,
++        independently_accepted_scene=score.get("scene_correspondence_accepted") is True,
++        collector_accepted_scene=metadata.get("scene_correspondence_accepted") is True,
++        no_real_calibration_claim=score.get("real_calibrated") is False,
++        same_episode=bool(score.get("source_episode")) and Path(score["source_episode"]).resolve() == Path(output).resolve(),
++        same_asset_manifest=bool(metadata.get("asset_manifest_sha256")) and metadata.get("asset_manifest_sha256") == score.get("asset_manifest_sha256"),
++        same_source_slot=bool(metadata.get("source_slot_id")) and metadata.get("source_slot_id") == score.get("source_slot_id"),
++        same_internal_target=metadata.get("target_is_internal_chamber") is True and bool(metadata.get("target_seat_id"))
++            and metadata.get("target_seat_id") == score.get("target_seat_id"),
++        actual_transitions_present=frames > 0,
++        complete_workflow_observed=list(observed_phases) == list(PHASES),
++        same_terminal_state=bool(final_timestamp is not None and score.get("trajectory_end_time_s") is not None
++            and abs(float(final_timestamp)-float(score["trajectory_end_time_s"])) <= 1e-6),
++        saved_physics_hash_present=bool(score.get("physics_records_sha256")),
++        saved_events_hash_present=bool(score.get("events_sha256")))
++    return [key for key,value in checks.items() if value is not True]
++
++
++class Demo04Collector(Demo03Collector):
++    def __init__(self, cfg, output_dir, save_video=True, *, scene_contract=None):
++        super().__init__(cfg, output_dir, save_video, scene_contract=scene_contract)
++        # Keep the historical eleven workflow codes stable and append diagnostic
++        # phases. They are observable, but cannot qualify as the full workflow.
++        self.cfg.control.phases_s = {phase: 0.0 for phase in PHASE_NAMES}
++        controller = Path(__file__).with_name("run.py")
++        schedule, digest = canonical_schedule(cfg, controller)
++        self.metadata = collector_metadata(scene_contract, schedule, digest)
++
++    def begin_episode(self, index, initial_position):
++        super().begin_episode(index, initial_position)
++        self.file.attrs.update(self.metadata)
++        self.file.attrs["control_auxiliary_unknown"] = "NaN and available=false; never zero-filled"
++
++    def cache_transition(self, state, action, next_state, result):
++        super().cache_transition(state, action, next_state, result)
++        auxiliary = next_state.get("control_aux", {})
++        q = auxiliary.get("command_q")
++        q = np.asarray(q, float) if q is not None and np.shape(q) == (9,) else np.full(9, np.nan)
++        effort = auxiliary.get("gripper_effort_limit_N")
++        target = auxiliary.get("gripper_target_m")
++        effort = float(effort) if effort is not None else np.nan
++        target = float(target) if target is not None else np.nan
++        self.count -= 1
++        self._append("control_auxiliary/command_q", q)
++        self._append("control_auxiliary/gripper_effort_limit_N", np.float64(effort))
++        self._append("control_auxiliary/gripper_target_m", np.float64(target))
++        self._append("control_auxiliary/available", np.bool_(np.isfinite(q).all() and np.isfinite([effort, target]).all()))
++        self.count += 1
++
++    def finish_episode(self, result, independent_score=None):
++        if self.file is None:
++            raise RuntimeError("No open V0_demo04 episode")
++        self.file.flush()
++        evidence, source_hash, rejection = None, None, ["independent_score_not_provided"]
++        if independent_score is not None and Path(independent_score).is_file():
++            path = Path(independent_score)
++            evidence, source_hash = load_json(path), sha256(path)
++            last = float(self.file["next_timestamp"][-1]) if self.count else None
++            codes = self.file["phase_code"][:] if self.count else []
++            phase_names = json.loads(self.file.attrs["phase_names_json"])
++            observed = list(dict.fromkeys(phase_names[int(code)] for code in codes if 0 <= int(code) < len(phase_names)))
++            rejection = qualification_reasons(self.metadata, evidence, self.output, self.count, last, observed)
++            for key,name in (("physics_records_sha256", "physics_records.json"), ("events_sha256", "events.json")):
++                raw = self.output / name
++                if not raw.is_file() or evidence.get(key) != sha256(raw):
++                    rejection.append("independent_score_does_not_match_" + name)
++            if not self.count or "control_auxiliary/available" not in self.file or not self.file["control_auxiliary/available"][:].all():
++                rejection.append("auxiliary_control_not_fully_measured")
++        elif independent_score is not None:
++            rejection = ["independent_score_file_missing"]
++        eligible = not rejection
++        geometry_pass = bool(evidence and evidence.get("geometry_gate_passed") is True)
++        native = bool(eligible and geometry_pass and evidence.get("native_pair_success") is True)
++        diagnostic = bool(self.count > 0)
++        workflow_verdict = evidence.get("workflow_success") if evidence else None
++        terminal_verdict = "SUCCESS" if eligible else ("FAILED_OR_BLOCKED" if workflow_verdict is False else "UNADJUDICATED")
++        self.file.attrs.update(complete=True, frames=self.count, success=eligible, workflow_success=eligible,
++            full_success=eligible, full_task_eligible=eligible, data_eligible=eligible,
++            native_pair_success=native, cad_pair_verified=native, real_calibrated=False,
++            geometry_gate_passed=geometry_pass, diagnostic_read_eligible=diagnostic,
++            independent_adjudication_available=evidence is not None,
++            terminal_verdict=terminal_verdict, workflow_verdict_json=json.dumps(workflow_verdict),
++            status=result.get("status", "UNKNOWN"), reason=result.get("reason", result.get("status", "UNKNOWN")),
++            qualification_rejection_json=json.dumps(rejection), independent_score_sha256=source_hash or "unavailable")
++        if self.count:
++            if "done" in self.file:
++                self.file["done"][-1] = True
++            if "reward" in self.file:
++                self.file["reward"][-1] = np.float32(eligible)
++        adjudication = dict(workflow_success=eligible, geometry_gate_passed=geometry_pass,
++            native_pair_success=native, real_calibrated=False, data_eligible=eligible,
++            diagnostic_read_eligible=diagnostic, rejection_reasons=rejection,
++            workflow_verdict=workflow_verdict,
++            score_sha256=source_hash, score_source=str(independent_score) if independent_score else None)
++        properties = dict(result, independent_adjudication=adjudication)
++        if evidence is not None:
++            self.file.create_dataset("independent_score_json", data=json.dumps(json_safe(evidence), ensure_ascii=False), dtype=h5py.string_dtype())
++        self.file.create_dataset("task_properties", data=json.dumps(json_safe(properties), ensure_ascii=False), dtype=h5py.string_dtype())
++        self.close()
++        with (self.output / (self.name + "_result.json")).open("x", encoding="utf-8") as stream:
++            json.dump(json_safe(properties), stream, ensure_ascii=False, indent=2, allow_nan=False)
++            stream.write("\n")
++        with (self.output / "dataset/meta/episode.jsonl").open("a", encoding="utf-8") as stream:
++            stream.write(json.dumps(json_safe(dict(episode_index=self.index, length=self.count,
++                tasks=[self.cfg.task.instruction], task_properties=properties)), ensure_ascii=False) + "\n")
++        self.episode_count += 1
++        return adjudication
+diff --git a/demos/lab_cuvette_demo04/execute.py b/demos/lab_cuvette_demo04/execute.py
+new file mode 100644
+index 0000000..ddd0de6
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/execute.py
+@@ -0,0 +1,14 @@
++"""Sequential single-process driver preserving start, exit, timing and full log."""
++from pathlib import Path
++import argparse,datetime,json,subprocess,time
++ROOT=Path(__file__).resolve().parents[2]
++def main():
++    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('arguments',nargs=argparse.REMAINDER);a=p.parse_args();dest=a.output.resolve();dest.mkdir(parents=True,exist_ok=False)
++    extra=a.arguments[1:] if a.arguments and a.arguments[0]=='--' else a.arguments
++    cmd=['bash',str(ROOT/'demos/lab_cuvette_demo04/run.sh'),*extra,'--output',str(dest/'run')];start=time.monotonic();utc=datetime.datetime.now(datetime.timezone.utc).isoformat()
++    (dest/'request.json').write_text(json.dumps(dict(command=cmd,started_at_utc=utc,sequential=True),indent=2)+'\n')
++    with (dest/'process.log').open('xb') as f:code=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT).returncode
++    result=dict(command=cmd,started_at_utc=utc,finished_at_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),observed_process_exit_code=code,process_wall_seconds=time.monotonic()-start,wall_scope='full child startup through output and shutdown',parallel_isaac=False)
++    (dest/'driver_result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
++    raise SystemExit(code if code>=0 else 128-code)
++if __name__=='__main__':main()
+diff --git a/demos/lab_cuvette_demo04/native_fit_audit.py b/demos/lab_cuvette_demo04/native_fit_audit.py
+new file mode 100644
+index 0000000..b0642b4
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/native_fit_audit.py
+@@ -0,0 +1,338 @@
++"""CPU-only original-seat fit audit for the explicitly corrected 12.5 mm vessel.
++
++Reads original source triangles, including instance proxies and all source tabs.
++No Isaac process, source edit, mesh repair, collision cooking or physics occurs.
++Observed intersections are witnesses, not global error bounds or an arbitrary
++six-DOF path search. The source vessel is affinely scaled in XY only.
++"""
++from __future__ import annotations
++
++import argparse
++import csv
++import hashlib
++import json
++from pathlib import Path
++
++import numpy as np
++import trimesh
++from pxr import Usd, UsdGeom, UsdPhysics
++
++from demos.lab_cuvette_external.geometry import ROOT, SOURCE, normalized, tri
++from demos.lab_cuvette_external.feasibility import intersects, widths
++
++
++def sha(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def serial(value):
++    if isinstance(value, np.ndarray):
++        return value.tolist()
++    if isinstance(value, np.generic):
++        return value.item()
++    raise TypeError(type(value).__name__)
++
++
++def write(path, value):
++    with Path(path).open('x', encoding='utf-8') as stream:
++        json.dump(value, stream, ensure_ascii=False, indent=2, default=serial, allow_nan=False)
++        stream.write('\n')
++
++
++def write_csv(path, rows):
++    with Path(path).open('x', encoding='utf-8', newline='') as stream:
++        writer = csv.DictWriter(stream, list(rows[0]))
++        writer.writeheader()
++        writer.writerows(rows)
++
++
++def section(mesh, z):
++    return trimesh.intersections.mesh_plane(mesh, [0, 0, 1], [0, 0, float(z)])
++
++
++def sample_segments(segments, step_m=.000025):
++    result = []
++    for a, b in segments:
++        result.extend(a+(b-a)*f for f in np.linspace(0, 1, max(2, int(np.ceil(np.linalg.norm(b-a)/step_m))+1)))
++    return np.asarray(result).reshape(-1, 3)
++
++
++def metadata(filename, row):
++    stage = Usd.Stage.Open(str(SOURCE/filename), Usd.Stage.LoadAll)
++    prim = stage.GetPrimAtPath(row['path'])
++    ancestors = []
++    while prim and not prim.IsPseudoRoot():
++        ancestors.append(dict(path=str(prim.GetPath()), type=prim.GetTypeName(),
++            custom_data=prim.GetCustomData(), applied_schemas=list(prim.GetAppliedSchemas()),
++            custom_attributes={a.GetName(): str(a.Get()) for a in prim.GetAttributes() if a.IsCustom()}))
++        prim = prim.GetParent()
++    return dict(ancestors=ancestors, bound_material=row.get('material'),
++                material_subsets=row.get('subsets'),
++                mechanical_role='unknown: geometry/metallic appearance is not spring/elasticity or manufacturer specification',
++                elastic_or_spring_api_present=any('Deform' in str(x) or 'Spring' in str(x) for x in ancestors))
++
++
++def feature_identity(rows):
++    """Explicit local region evidence; no inferred manufacturer/elastic role."""
++    records=[]
++    for label,index in [('A',3),('B',4)]:
++        mesh=tri(rows[index]);origin=np.r_[mesh.bounds.mean(0)[:2],mesh.bounds[0,2]]
++        mesh.apply_translation(-origin);v=mesh.vertices;features=[]
++        for sign in [-1,1]:
++            selected=(v[:,0]>=-.00550001)&(v[:,0]<=-.00469999)&(sign*v[:,1]>=.00479999)&(sign*v[:,1]<=.00630001)&(v[:,2]>=.02799999)
++            ids=np.flatnonzero(selected);points=v[ids]
++            faces=np.flatnonzero(selected[mesh.faces].all(1))
++            features.append(dict(side_y_sign=sign,source_vertex_count=len(points),
++                bounds_local_m=[points.min(0),points.max(0)],dimensions_m=np.ptp(points,axis=0),
++                original_transformed_vertices_local_m=points,
++                processed_mesh_triangle_indices_fully_in_region=faces,
++                source_prim=rows[index]['path'],separate_source_prim=False,
++                designation='top-frame inward rectangular block/plate feature; functional role unknown'))
++        records.append(dict(seat=label,source_prim=rows[index]['path'],features=features,
++            mechanical_identity='unknown: no named spring, manufacturer role, elastic properties or separate deformable material in original source metadata',
++            inference_limit='Approximate0.8x1.5x1.0mm geometry is insufficient to establish an elastic spring or permission to remove/deform it.'))
++    return dict(method='Original transformed source vertices in explicitly declared local feature regions; no source modification',seats=records)
++
++
++def audit(output, section_step_m=.00005, path_step_m=.00025):
++    output = Path(output)
++    output.mkdir(parents=True, exist_ok=False)
++    info, rows = normalized('newnew4.usd')
++    vessel_info, vessel_rows = normalized('TestTube_Baked.usd')
++    original = tri(vessel_rows[0])
++    vessel = original.copy()
++    scale = .0125/.01485
++    vessel.vertices[:, :2] *= scale
++    assert np.allclose(vessel.extents[:2], .0125, atol=1e-8)
++    section_cache = {}
++    def vessel_section(z):
++        key = round(float(z), 12)
++        if key not in section_cache:
++            section_cache[key] = section(vessel, key)
++        return section_cache[key]
++    reports, section_rows, path_rows, local_rows = [], [], [], []
++    for label, index in [('A', 3), ('B', 4)]:
++        seat = tri(rows[index])
++        origin = np.r_[seat.bounds.mean(0)[:2], seat.bounds[0, 2]]
++        seat.apply_translation(-origin)
++        height = float(seat.extents[2])
++        hits, _, _ = seat.ray.intersects_location([[0, 0, height+.001]], [[0, 0, -1]], multiple_hits=True)
++        support = float(np.max(hits[:, 2]))
++        zs = np.arange(section_step_m/2, height, section_step_m)
++        sections = [(float(z), section(seat, z)) for z in zs]
++        final_witnesses = []
++        for z, ss in sections:
++            crossing = intersects(ss, vessel_section(z-support))
++            w = widths(ss)
++            section_rows.append(dict(seat=label, source_mesh_index=index,
++                z_above_source_seat_bottom_mm=z*1000, z_in_instrument_mm=(z+origin[2])*1000,
++                central_X_boundary_spacing_mm=None if w['X'] is None else w['X']*1000,
++                central_Y_boundary_spacing_mm=None if w['Y'] is None else w['Y']*1000,
++                final_pose_boundary_crossing_count=len(crossing)))
++            if crossing:
++                final_witnesses.append(dict(z_above_seat_bottom_m=z,
++                    z_in_instrument_m=z+origin[2], xy_local_m=crossing))
++        def pose_probe(bottom):
++            witnesses = []
++            for z, ss in sections:
++                if z < bottom-1e-12 or z > bottom+vessel.extents[2]+1e-12:
++                    continue
++                crossing = intersects(ss, vessel_section(z-bottom))
++                if crossing:
++                    witnesses.append(dict(z_above_seat_bottom_m=z, xy_local_m=crossing))
++            return witnesses
++        bottoms = np.arange(height+.005, support-path_step_m/2, -path_step_m)
++        bottoms = sorted(set(float(max(support, b)) for b in bottoms) | {support}, reverse=True)
++        first, preceding = None, None
++        for bottom in bottoms:
++            witnesses = pose_probe(bottom)
++            path_rows.append(dict(seat=label, vessel_bottom_above_seat_bottom_mm=bottom*1000,
++                depth_below_rim_mm=(height-bottom)*1000,
++                observed_crossing_sections=len(witnesses),
++                first_witness_z_mm=None if not witnesses else witnesses[0]['z_above_seat_bottom_m']*1000))
++            if witnesses and first is None:
++                first = dict(vessel_bottom_m=bottom, depth_below_rim_m=height-bottom,
++                             preceding_sample_bottom_m=preceding, witnesses=witnesses[:3])
++            preceding = bottom
++        # Refine only the first observed change in this one declared path.
++        refined = []
++        if first and first['preceding_sample_bottom_m'] is not None:
++            for bottom in np.arange(first['preceding_sample_bottom_m'], first['vessel_bottom_m']-.000005, -.000025):
++                witnesses = pose_probe(float(bottom))
++                refined.append(dict(vessel_bottom_m=float(bottom), depth_below_rim_m=height-bottom,
++                                    observed_crossing_sections=len(witnesses), witnesses=witnesses[:1]))
++        # Closed vessel material permits an independent point-in-solid test.
++        # Distances are closest points on actual triangles, never nearest vertices.
++        placed = vessel.copy()
++        placed.apply_translation([0, 0, support])
++        point_reports = []
++        for z in [support+.000025, height-.0005]:
++            points = sample_segments(section(seat, z))
++            inside = placed.contains(points)
++            selected = points[inside]
++            if not len(selected):
++                continue
++            closest, distance, face = trimesh.proximity.closest_point(placed, selected)
++            order = np.argsort(distance)[::-1][:8]
++            seat_closest, seat_distance, seat_face = trimesh.proximity.closest_point(seat, selected[order])
++            point_reports.append(dict(z_above_seat_bottom_m=z, points_sampled=len(points),
++                source_boundary_points_inside_vessel_material=int(inside.sum()),
++                worst_points=[dict(seat_surface_local_m=selected[k],
++                    seat_surface_instrument_m=selected[k]+origin,
++                    seat_processed_triangle_index=int(seat_face[n]),
++                    seat_triangle_local_m=seat.triangles[seat_face[n]],
++                    distance_to_original_seat_triangle_m=seat_distance[n],
++                    point_to_vessel_triangle_distance_m=distance[k],
++                    nearest_vessel_surface_local_m=closest[k], vessel_triangle_index=int(face[k]),
++                    vessel_triangle_local_m=placed.triangles[face[k]]) for n,k in enumerate(order)]))
++        # Limited legal XY and yaw check at a known obstructed complete pose.
++        # This is not a new trajectory, an inclined insertion or parameter search.
++        probe_z = height-.0005
++        seat_section = section(seat, probe_z)
++        original_section = vessel_section(probe_z-support)
++        for dx in [-.00005, 0., .00005]:
++            for dy in [-.00005, 0., .00005]:
++                for yaw in [-.5, -.25, 0., .25, .5]:
++                    theta = np.radians(yaw)
++                    R = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
++                    rotated = original_section.copy()
++                    rotated[:, :, :2] = rotated[:, :, :2]@R.T+[dx, dy]
++                    crossing = intersects(seat_section, rotated)
++                    local_rows.append(dict(seat=label, dx_mm=dx*1000, dy_mm=dy*1000,
++                        yaw_deg=yaw, z_above_seat_bottom_mm=probe_z*1000,
++                        observed_boundary_crossing_count=len(crossing)))
++        reports.append(dict(seat=label, source_mesh_index=index, source_prim=rows[index]['path'],
++            origin_in_instrument_m=origin, dimensions_m=seat.extents,
++            source_seat_watertight=seat.is_watertight,
++            source_metadata=metadata('newnew4.usd', rows[index]),
++            center_axis_surface_hits_above_seat_bottom_m=np.sort(hits[:, 2]),
++            candidate_support_plane_m=support,
++            support_definition='Highest original-seat surface hit of central downward ray; local geometric reference, not validated physical support or manufacturer datum.',
++            declared_final_vessel_bottom_m=support, declared_final_depth_m=height-support,
++            final_pose_witnesses=final_witnesses,
++            first_observed_path_crossing=first, refined_first_change=refined,
++            conservative_preinsert_bottom_m=height+.0005,
++            conservative_preinsert_scope='500um above original highest seat triangle; original-seat geometry only, not whole hand/chamber/robot clearance.',
++            material_overlap_point_witnesses=point_reports,
++            status='BLOCKED_ORIGINAL_MATERIAL_INTERSECTION' if final_witnesses else 'NO_SAMPLED_WITNESS_NOT_CERTIFIED'))
++    result = dict(schema='labsim.V0_demo04.native_fit.v1', physics_executed=False,
++        real_calibrated=False, source_changed=False, native_pair_success=False,
++        source_files={str((SOURCE/name).relative_to(ROOT)): sha(SOURCE/name)
++                      for name in ['newnew4.usd', 'TestTube_Baked.usd']},
++        input_units_and_transforms=info, original_vessel_metadata=vessel_info,
++        vessel=dict(source='TestTube_Baked.usd', original_dimensions_m=original.extents,
++            new_dimensions_m=vessel.extents, scale_xyz=[scale, scale, 1.],
++            basis='User corrected nominal external width12.5mm and retained67.5mm height; no local wall edit.',
++            closed_material_mesh=vessel.is_watertight),
++        method=dict(section_spacing_m=section_step_m, path_spacing_m=path_step_m,
++            first_change_refinement_m=.000025, first_z_sample_offset_m=section_step_m/2,
++            boundary_intersection='actual triangle-plane segments, pairwise 2D segment crossings',
++            point_depth='original seat section points classified inside closed scaled vessel, nearest triangle-surface distance',
++            limited_pose_grid='3x3 XY at-50/0/+50um and5yaw angles-0.5/-0.25/0/+0.25/+0.5deg; fixed final upright support pose',
++            limitations=['Observed samples and local interference witnesses; not rigorous global bounds.',
++                'Centerline12.6mm boundary spacing is not a complete full-aperture classification.',
++                'No arbitrary tilt, elastic deformation, alternative compliant material, active search or physical insertion tested.',
++                'Source seat is not watertight; no claim of signed distance to complete closed seat solid.',
++                'Local source-frame point distance measures observed material intersection, not PhysX cooking or contact accuracy.']),
++        seats=reports, limited_pose_grid_all_obstructed=all(r['observed_boundary_crossing_count']>0 for r in local_rows))
++    write(output/'native_fit_audit.json', result)
++    write_csv(output/'full_depth_sections.csv', section_rows)
++    write_csv(output/'insertion_path.csv', path_rows)
++    write_csv(output/'limited_xy_yaw.csv', local_rows)
++    dimensions=[dict(role='corrected_vessel', quantity='outer_X', value_mm=vessel.extents[0]*1000, basis='source triangles with authorized uniform XY scale12.5/14.85'),
++                dict(role='corrected_vessel', quantity='outer_Y', value_mm=vessel.extents[1]*1000, basis='same XY scale'),
++                dict(role='corrected_vessel', quantity='height_Z', value_mm=vessel.extents[2]*1000, basis='original Z unchanged')]
++    for report in reports:
++        for axis,value in zip('XYZ',report['dimensions_m']):
++            dimensions.append(dict(role='original_seat_'+report['seat'],quantity='outer_'+axis,value_mm=float(value*1000),basis='all original source vertices and complete transforms; no feature removed'))
++        dimensions.extend([dict(role='original_seat_'+report['seat'],quantity='center_ray_support_above_bottom',value_mm=report['candidate_support_plane_m']*1000,basis=report['support_definition']),
++            dict(role='original_seat_'+report['seat'],quantity='declared_insertion_depth',value_mm=report['declared_final_depth_m']*1000,basis='rim minus highest center-ray support; candidate datum only'),
++            dict(role='original_seat_'+report['seat'],quantity='observed_material_overlap_point_depth_max',value_mm=max(w['point_to_vessel_triangle_distance_m'] for p in report['material_overlap_point_witnesses'] for w in p['worst_points'])*1000,basis='sampled original-seat boundary point within closed cuvette material, closest triangle surface distance; not global bound')])
++    write_csv(output/'dimensions.csv',dimensions)
++    write(output/'source_feature_identity.json',feature_identity(rows))
++    figures(output, rows, vessel, reports)
++    (output/'README.md').write_text(summary(result), encoding='utf-8')
++    write(output/'provenance.json',dict(implementation=str(Path(__file__).resolve().relative_to(ROOT)),
++        implementation_sha256=sha(__file__),physics_executed=False,
++        input_source_files=result['source_files'],output_overwrite_allowed=False))
++    write(output/'artifact_hashes.json', {p.name: sha(p) for p in output.iterdir() if p.is_file()})
++    return result
++
++
++def figures(output, rows, vessel, reports):
++    import matplotlib
++    matplotlib.use('Agg')
++    import matplotlib.pyplot as plt
++    fig, axes = plt.subplots(2, 3, figsize=(15, 9))
++    for axes_row, report in zip(axes, reports):
++        seat = tri(rows[report['source_mesh_index']])
++        seat.apply_translation(-report['origin_in_instrument_m'])
++        bottom = report['declared_final_vessel_bottom_m']
++        for ax, z, title in zip(axes_row, [.0285, .002025, .0285], ['top frame full section', 'bottom transition', 'top obstruction close-up']):
++            for seg in section(seat, z): ax.plot(seg[:, 0]*1000, seg[:, 1]*1000, 'k-', linewidth=1.)
++            for seg in section(vessel, z-bottom): ax.plot(seg[:, 0]*1000, seg[:, 1]*1000, color='tab:orange', linewidth=1.1)
++            crossing = intersects(section(seat, z), section(vessel, z-bottom))
++            if crossing:
++                xy = np.asarray(crossing)*1000
++                ax.scatter(xy[:, 0], xy[:, 1], c='red', s=12, zorder=4)
++            ax.set(title=f"{report['seat']}: {title}; z={z*1000:.3f}mm", xlabel='local X mm', ylabel='local Y mm', aspect='equal')
++            ax.grid(alpha=.25)
++            if title.endswith('close-up'):
++                ax.set_xlim(-6.5, -4.)
++                ax.set_ylim(4.5, 6.7)
++        for witness in report['material_overlap_point_witnesses']:
++            if abs(witness['z_above_seat_bottom_m']-.0285)<1e-8:
++                positive=[w for w in witness['worst_points'] if w['seat_surface_local_m'][1]>0]
++                w=(positive or witness['worst_points'])[0];p=np.asarray(w['seat_surface_local_m'])*1000;q=np.asarray(w['nearest_vessel_surface_local_m'])*1000
++                axes_row[2].plot([p[0],q[0]],[p[1],q[1]],'m-',lw=2)
++                axes_row[2].annotate(f"observed point-to-triangle\n{w['point_to_vessel_triangle_distance_m']*1000:.3f}mm",p[:2],xytext=(-6.45,6.45),fontsize=8)
++    fig.suptitle('Original A/B retained: black source seat; orange12.5mm vessel material boundaries; red actual crossings')
++    fig.tight_layout();fig.savefig(output/'native_pair_sections.png', dpi=170);plt.close(fig)
++    fig,axes=plt.subplots(1,2,figsize=(12,4.5))
++    with (output/'insertion_path.csv').open(newline='') as stream: path=list(csv.DictReader(stream))
++    for label,color in [('A','tab:blue'),('B','tab:orange')]:
++        selected=[r for r in path if r['seat']==label]
++        axes[0].plot([float(r['depth_below_rim_mm']) for r in selected],[int(r['observed_crossing_sections']) for r in selected],color=color,linestyle='-' if label=='A' else '--',label='Original '+label)
++        report=next(r for r in reports if r['seat']==label)
++        axes[1].plot([r['depth_below_rim_m']*1000 for r in report['refined_first_change']], [r['observed_crossing_sections'] for r in report['refined_first_change']],marker='o',markersize=3,color=color,linestyle='-' if label=='A' else '--',label='Original '+label)
++    for ax in axes:
++        ax.set(xlabel='declared insertion depth below rim mm',ylabel='observed crossing sections')
++        ax.grid(alpha=.25);ax.legend()
++    axes[0].set_title('Complete upright insertion segment: source geometry')
++    axes[1].set_title('First observed change:25um depth samples')
++    fig.tight_layout();fig.savefig(output/'insertion_path_gate.png',dpi=170);plt.close(fig)
++
++
++def summary(result):
++    lines=['# V0_demo04 原座完整插入段几何关口', '',
++        '本证据为重新读取源网格后的纯CPU检查，未启动Isaac、未执行物理插入。原座全部凸起保留，未扩孔、删面或修改原CAD。', '',
++        '器皿按用户本轮更正外宽，将原网格XY统一乘12.5/14.85，Z及底定位不变。中央12.6mm边界间距不能代表所有离轴局部轮廓。', '']
++    for report in result['seats']:
++        depths=[w['point_to_vessel_triangle_distance_m'] for p in report['material_overlap_point_witnesses'] for w in p['worst_points']]
++        first=next((r for r in report['refined_first_change'] if r['observed_crossing_sections']),None)
++        lines += [f"## 原座{report['seat']}", '', f"源prim：`{report['source_prim']}`。状态：**{report['status']}**。", '',
++            f"原座底包络instrument Z={report['origin_in_instrument_m'][2]*1000:.3f}mm；中央射线最高承托面高出该包络{report['candidate_support_plane_m']*1000:.3f}mm。",
++            f"完整声明下插终态深度{report['declared_final_depth_m']*1000:.3f}mm，真实截面交叉层数{len(report['final_pose_witnesses'])}；观测到座边界点落入器皿材料内的最大点到三角面距离{max(depths)*1000:.6f}mm。", '']
++        if first: lines += [f"25um纵向加密中的首个已观察交叉深度为{first['depth_below_rim_m']*1000:.6f}mm。受50um截面采样限制，这不是严格最早接触深度。", '']
++    lines += ['## 有限姿态诊断及停止范围', '',
++        f"±50um XY的3×3组合及yaw±0.5°内5个离散角，共每座45种最终姿态，均有真实边界交叉：{result['limited_pose_grid_all_obstructed']}。该有限检查不证明所有连续姿态或斜插路径均不可能。", '',
++        '保守的座几何预插入终点为器皿最低点高于原座最高三角面0.5mm；不能将其当作已装载，也不包含整手/腔壁/整臂净空通过。', '',
++        '原座单一网格含局部薄片/凸起，但源几何及属性不足以证明其是可弹性退让的弹片。厂家结构作用、材料和真实形变量均为未知；本轮刚性源座不能自行假设可弯曲。', '',
++        '已观察实材干涉超过名义单边余量，不应开始以扩孔、删除凸起或负rest_offset强行完成的原生配对测试。物理接触、真实校准和烹饪碰撞均未由本离线审计验证。', '',
++        '复现：`bash demos/lab_cuvette_external/usd_python.sh -m demos.lab_cuvette_demo04.native_fit_audit --output <新的目录>`。', '']
++    return '\n'.join(lines)
++
++
++def main():
++    parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--output', type=Path, required=True)
++    parser.add_argument('--section-step-mm', type=float, default=.05)
++    parser.add_argument('--path-step-mm', type=float, default=.25)
++    args=parser.parse_args()
++    if args.section_step_mm<=0 or args.path_step_mm<=0: parser.error('sampling steps must be positive')
++    result=audit(args.output, args.section_step_mm/1000, args.path_step_mm/1000)
++    print('NATIVE_FIT', [(r['seat'], r['status']) for r in result['seats']], 'limited45_each_obstructed',result['limited_pose_grid_all_obstructed'])
++
++
++if __name__=='__main__':
++    main()
+diff --git a/demos/lab_cuvette_demo04/plan_arm.py b/demos/lab_cuvette_demo04/plan_arm.py
+new file mode 100644
+index 0000000..e6600c2
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/plan_arm.py
+@@ -0,0 +1,80 @@
++"""Zero-physics Lula IK/FK whole-arm input-envelope path diagnostic.
++
++Searches a small set of robot mount/IK seed choices, preserving all assets and
++TCP orientation. No dynamic object is attached, moved or simulated here.
++"""
++from pathlib import Path
++import argparse,json,sys
++import numpy as np
++from omegaconf import OmegaConf
++ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT))
++from demos.lab_cuvette_external.run import write
++
++def diagnose(cfg,out):
++    import omni.usd
++    from pxr import UsdGeom
++    from scipy.spatial.transform import Rotation
++    from isaacsim.robot_motion.motion_generation import LulaKinematicsSolver,interface_config_loader
++    from demos.lab_cuvette_demo03.arm_geometry import load_collision_model,collision_local_points,TriangleMeshIndex
++    from demos.lab_cuvette_demo04.preflight import instrument_triangles,_box_hits
++    from demos.lab_cuvette_demo04.scene import layout
++    omni.usd.get_context().new_stage();UsdGeom.SetStageMetersPerUnit(omni.usd.get_context().get_stage(),1.)
++    kin=LulaKinematicsSolver(**interface_config_loader.load_supported_lula_kinematics_solver_config('Franka'))
++    model=load_collision_model();local=collision_local_points(model)
++    local={k:np.array([[x,y,z] for x in [v[:,0].min(),v[:,0].max()] for y in [v[:,1].min(),v[:,1].max()] for z in [v[:,2].min(),v[:,2].max()]]) for k,v in local.items()}
++    d=layout(cfg);stage,records=instrument_triangles(cfg);indexes={r['path']:TriangleMeshIndex(r['triangles'].reshape(-1,3),np.arange(r['triangles'].size//3).reshape(-1,3)) for r in records};source=d['source_floor'];dest=d['target_floor'];g=cfg.robot.grasp_above_bottom_m;z=cfg.control.transport_bottom_z_m+g
++    initial=source+[0,0,.28];anchor=source+[0,0,g];lift=np.r_[source[:2],z];corner=np.array([source[0],dest[1],z]);transport=np.r_[dest[:2],z];load=np.r_[dest[:2],d['target_rim_z']+cfg.control.diagnostic_safe_bottom_above_rim_m+g]
++    raised=load+[0,0,.01];withdrawn=raised.copy()
++    segments=[('approach',initial,anchor,.04),('extract',anchor,lift,.0063),('around_lid',lift,corner,.0063),('enter',corner,transport,.0063),('insert',transport,load,.0063),('diagnostic_retract',load,raised,.0063),('diagnostic_hold',raised,withdrawn,.0063)]
++    bases=[[-.3,0,.74],[-.3,.2,.74],[-.2,.4,.74],[-.1,.4,.74],[-.3,.4,.74]]
++    yaw=np.radians(float(cfg.robot.gripper_yaw_deg));qq=Rotation.from_euler('xyz',[np.pi,0,yaw]).as_quat();orientation=np.r_[qq[3],qq[:3]]
++    seeds=[np.array([0.,-.785,0.,-2.356,0.,1.571,.785]),np.array([0.,-.785,1.,-2.356,0.,1.571,.785]),np.array([0.,-.785,-1.,-2.356,0.,1.571,.785])]
++    candidates=[];chosen=None
++    for base in bases:
++      kin.set_robot_base_pose(np.array(base),np.array([1.,0,0,0]))
++      for seed_index,seed in enumerate(seeds):
++        q,valid=kin.compute_inverse_kinematics('right_gripper',initial,orientation,warm_start=seed,position_tolerance=5e-5,orientation_tolerance=.003)
++        initial_q=q.copy();hits=[];fail=None;max_delta=0.
++        if not valid:fail='initial IK'
++        for phase,a,b,finger in segments if valid else []:
++          for frac in np.linspace(0,1,25):
++            target=a+(b-a)*frac;next_q,ok=kin.compute_inverse_kinematics('right_gripper',target,orientation,warm_start=q,position_tolerance=5e-5,orientation_tolerance=.003)
++            if not ok:fail='IK '+phase;break
++            max_delta=max(max_delta,float(np.max(abs(next_q-q))));q=next_q
++            for name,v in local.items():
++                if 'finger' in name:
++                    hp,hr=kin.compute_forward_kinematics('panda_hand',q);lp=np.array([0,(1 if name=='panda_leftfinger' else -1)*finger,.05839997]);p=hp+hr@lp;rot=hr
++                else:p,rot=kin.compute_forward_kinematics(name,q)
++                points=v@rot.T+p;collisions=_box_hits(records,points.min(0),points.max(0))
++                if collisions:
++                    confirmed=[]
++                    for mesh in model['links'][name]['meshes']:
++                        world=mesh['vertices_local_m']@rot.T+p
++                        faces=mesh['convex_hull_faces_input'] if mesh['approximation_authored']=='convexHull' else mesh['faces']
++                        for c in collisions:
++                            check=indexes[c['path']].intersections(world,faces,max_witnesses=2)
++                            if check['surface_contact_or_crossing']:confirmed.append(dict(path=c['path'],check=check))
++                    if confirmed:hits.append(dict(phase=phase,fraction=float(frac),tcp_target=target,joints=q.copy(),link=name,hits=confirmed))
++            if hits:break
++          if fail or hits:break
++        passed=not fail and not hits and max_delta<.45
++        result=dict(base_m=base,seed_index=seed_index,initial_arm_q=initial_q,passed=passed,ik_failure=fail,first_collision=hits[:3],max_sample_joint_delta_rad=max_delta)
++        candidates.append(result);print('ARM_CANDIDATE',base,seed_index,passed,fail,[(h['phase'],h['link']) for h in hits[:2]],flush=True)
++        if passed:chosen=result;break
++      if chosen:break
++    result=dict(version='V0_demo04',method='Lula IK/FK25 samples per segment; all11 collision-bearing rigid links; AABB broadphase followed by reconstructed declared input-hull triangle SAT vs retained original instrument triangles; no physics',candidates=candidates,selected=chosen,transport_bottom_z_m=cfg.control.transport_bottom_z_m,physics_steps=0,cooked_geometry_readback=False,limitations=['Non-inserting diagnostic path only; original native geometry remains blocked. No open/release/native success.','Input vertex AABBs are conservative and are not cooked convex buffers.','Rasterized source rack and blue neighbor are checked during actual execution; this plan screens instrument/lid.'])
++    result['config_file_sha256']=__import__('hashlib').sha256((ROOT/'config/lab_cuvette_loading/V0_demo04/native_nominal.yaml').read_bytes()).hexdigest()
++    write(out/'arm_plan.json',result)
++    if chosen:write(out/'selected_initial_state.json',dict(joints=np.r_[chosen['initial_arm_q'],.04,.04],robot_base_m=chosen['base_m']))
++    return result
++
++def main():
++ p=argparse.ArgumentParser();p.add_argument('--config',type=Path,default=ROOT/'config/lab_cuvette_loading/V0_demo04/native_nominal.yaml');p.add_argument('--output',type=Path,required=True);p.add_argument('--bottom-z',type=float);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
++ from isaacsim import SimulationApp
++ app=SimulationApp(dict(headless=True,extra_args=['--/app/extensions/fsWatcherEnabled=false']))
++ try:
++  cfg=OmegaConf.load(a.config)
++  if a.bottom_z is not None:cfg.control.transport_bottom_z_m=a.bottom_z
++  diagnose(cfg,a.output)
++ finally:app.close()
++if __name__=='__main__':main()
+diff --git a/demos/lab_cuvette_demo04/portable_episode.py b/demos/lab_cuvette_demo04/portable_episode.py
+new file mode 100644
+index 0000000..415c814
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/portable_episode.py
+@@ -0,0 +1,267 @@
++"""Self-contained copy of one real completed episode, including auxiliary control.
++
++All source datasets/labels are retained. Failed or unknown task outcomes remain
++failed/unknown; diagnostic reads reuse existing loader methods without promoting
++any H5 success attribute. No simulation, inference or training is performed.
++"""
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++from pathlib import Path
++from types import SimpleNamespace
++import tempfile
++
++import h5py
++import numpy as np
++from omegaconf import OmegaConf
++
++from demos.lab_cuvette_demo03.analyze import json_safe, load_json, sha256, write_new
++from demos.lab_cuvette_demo04.collector import canonical_schedule
++
++
++def iter_records(path):
++    decoder = json.JSONDecoder()
++    with Path(path).open(encoding="utf-8") as stream:
++        buffer, position, started = "", 0, False
++        while True:
++            while position < len(buffer) and (buffer[position].isspace() or buffer[position] == ","):
++                position += 1
++            if position == len(buffer):
++                chunk = stream.read(1024 * 1024)
++                if not chunk:
++                    raise ValueError("Incomplete physics JSON array")
++                buffer, position = chunk, 0
++                continue
++            if not started:
++                if buffer[position] != "[":
++                    raise ValueError("Expected physics JSON array")
++                started, position = True, position + 1
++                continue
++            if buffer[position] == "]":
++                return
++            try:
++                row, end = decoder.raw_decode(buffer, position)
++            except json.JSONDecodeError:
++                chunk = stream.read(1024 * 1024)
++                if not chunk:
++                    raise ValueError("Incomplete physics JSON record")
++                buffer, position = buffer[position:] + chunk, 0
++                continue
++            position = end
++            if not isinstance(row, dict):
++                raise ValueError("Physics row is not an object")
++            yield row
++
++
++def dataset_digest(dataset):
++    """Hash all logical values, including variable-length UTF-8, with bounded RAM."""
++    digest = hashlib.sha256()
++    if dataset.shape == ():
++        blocks = [dataset[()]]
++    else:
++        blocks = (dataset[start:start+16] for start in range(0, len(dataset), 16))
++    for block in blocks:
++        data = np.asarray(block)
++        if data.dtype.kind in "OUS":
++            for item in data.reshape(-1):
++                encoded = item if isinstance(item, bytes) else str(item).encode()
++                digest.update(len(encoded).to_bytes(8, "little"))
++                digest.update(encoded)
++        else:
++            digest.update(np.ascontiguousarray(data).tobytes())
++    return digest.hexdigest()
++
++
++def auxiliary_from_physics(raw, physics):
++    times, hz = raw["next_timestamp"][:], float(raw.attrs["physics_hz"])
++    wanted = {int(round(t*hz)): i for i,t in enumerate(times)}
++    n = len(times)
++    q, effort, grip = np.full((n, 9), np.nan), np.full(n, np.nan), np.full(n, np.nan)
++    matched, phase_match, time_match = np.zeros(n, bool), True, True
++    names = json.loads(raw.attrs["phase_names_json"])
++    phases = raw["phase_code"][:]
++    for step,row in enumerate(iter_records(physics)):
++        if step not in wanted:
++            continue
++        i = wanted[step]
++        time_match &= bool(row.get("physics_step") == step and abs(float(row["t"]) - times[i]) < 1e-8)
++        phase_match &= row.get("phase") == names[int(phases[i])]
++        if np.shape(row.get("command_q")) == (9,):
++            q[i] = row["command_q"]
++        if row.get("gripper_effort_limit_N") is not None:
++            effort[i] = row["gripper_effort_limit_N"]
++        if row.get("gripper_target_m") is not None:
++            grip[i] = row["gripper_target_m"]
++        matched[i] = True
++    available = matched & np.isfinite(q).all(1) & np.isfinite(effort) & np.isfinite(grip)
++    actions_equal = bool(np.array_equal(q[:,:8].astype(np.float32), raw["actions"][:]))
++    checks = dict(all_control_endpoints_found=bool(matched.all()), same_physics_step_time=bool(time_match),
++        same_action_phase=bool(phase_match), all_auxiliary_measured=bool(available.all()),
++        exact_float32_action_match=actions_equal,
++        command_fingers_symmetric=bool(np.allclose(q[:,7], q[:,8], atol=1e-9, rtol=0)))
++    values = dict(command_q=q, gripper_effort_limit_N=effort, gripper_target_m=grip, available=available)
++    if "control_auxiliary" in raw:
++        checks["runtime_auxiliary_matches_saved_physics"] = all(
++            key in raw["control_auxiliary"] and np.array_equal(raw["control_auxiliary"][key][:], value, equal_nan=True)
++            for key,value in values.items())
++    return values, checks
++
++
++def no_external_links(group):
++    links = []
++    def visit(current, prefix=""):
++        for key in current:
++            name = prefix + key
++            link = current.get(key, getlink=True)
++            if not isinstance(link, h5py.HardLink):
++                links.append(dict(path=name, link_type=type(link).__name__))
++            elif isinstance(current[key], h5py.Group):
++                visit(current[key], name + "/")
++    visit(group)
++    return links
++
++
++def read_batch(portable, output):
++    """Try the normal success filter, then an explicit non-training diagnostic view."""
++    from policy.dataset.minimal_pick_dataset import MinimalPickDataset
++    cameras = ["camera_1_rgb", "camera_2_rgb"]
++    shape_meta = {"obs": {**{key: {"type": "rgb", "shape": [3,256,256]} for key in cameras},
++        "agent_pose": {"type": "low_dim", "shape": [8]}}, "action": {"shape": [8]}}
++    try:
++        dataset = MinimalPickDataset(shape_meta, str(portable), horizon=16, n_obs_steps=1, val_ratio=0, policy_type="act")
++        batch = dataset.collate_fn([dataset[0]])
++        mode, rejection = "existing_normal_success_filtered_loader", None
++    except ValueError as exc:
++        if "no complete successful episodes" not in str(exc):
++            raise
++        rejection = str(exc)
++        # The temporary index deliberately retains the original false success
++        # label. A diagnostic view invokes the existing __getitem__/collate code;
++        # it is not a trained dataset and never changes raw/index success=true.
++        with tempfile.TemporaryDirectory(prefix="labsim_diagnostic_read_") as temporary:
++            index = Path(temporary) / "diagnostic_read_index.h5"
++            with h5py.File(index, "x") as h:
++                h.attrs.update(scope="diagnostic_read_only_not_learning_success_index", training_eligible=False)
++                h["episode_0000"] = h5py.ExternalLink(str(portable), "/episode_0000")
++            view = SimpleNamespace(path=index, horizon=16, n_obs_steps=1, policy_type="act", camera_names=cameras,
++                lengths={"episode_0000": 0}, sequences=[("episode_0000", 0)])
++            with h5py.File(portable, "r") as h:
++                view.lengths["episode_0000"] = len(h["episode_0000/actions"])
++                assert not bool(h["episode_0000"].attrs.get("success", False))
++            sample = MinimalPickDataset.__getitem__(view, 0)
++            batch = MinimalPickDataset.collate_fn([sample])
++        mode = "diagnostic_read_only_existing_getitem_and_collate; normal_success_filter_rejected"
++    arrays = {"obs_" + k: v.numpy() for k,v in batch["obs"].items()}
++    arrays.update(action=batch["action"].numpy(), is_pad=batch["is_pad"].numpy())
++    # Validate against the same raw group; constructor chooses one episode only.
++    with h5py.File(portable, "r") as h:
++        group = h["episode_0000"]
++        n = len(group["actions"])
++        expected = group["actions"][np.clip(np.arange(16), 0, n-1)] if n >= 16 else np.stack([group["actions"][min(i,n-1)] for i in range(16)])
++        assert np.array_equal(arrays["action"][0], expected)
++        assert np.array_equal(arrays["obs_agent_pose"][0], group["agent_pose"][0])
++        for key in cameras:
++            assert np.array_equal(np.rint(arrays["obs_"+key][0]*255).astype(np.uint8), group[key][0])
++        outcome = {key: json_safe(group.attrs.get(key)) for key in ("success", "workflow_success", "data_eligible", "native_pair_success", "real_calibrated")}
++    with (output / "read_batch.npz").open("xb") as stream:
++        np.savez_compressed(stream, **arrays)
++    with np.load(output / "read_batch.npz", allow_pickle=False) as saved:
++        assert all(np.array_equal(saved[k], v) for k,v in arrays.items())
++    return dict(mode=mode, normal_loader_rejection=rejection, original_outcome_labels=outcome,
++        batch_read_executed=True, optimizer_or_training_executed=False,
++        training_success_index_eligible=bool(outcome.get("success") and outcome.get("data_eligible")),
++        raw_success_labels_unchanged=True, arrays={k:list(v.shape) for k,v in arrays.items()},
++        exact_source_actions_state_and_RGB_verified=True, sample_sha256=sha256(output / "read_batch.npz"))
++
++
++def export_episode(episode, output):
++    episode, output = Path(episode).resolve(), Path(output).resolve()
++    for marker in ("adjudication.json", "execution_summary.json"):
++        if not (episode / marker).is_file():
++            raise ValueError("Episode not confirmed closed: missing " + marker)
++    raw_files = list((episode / "dataset").glob("episode_*.h5"))
++    if len(raw_files) != 1:
++        raise ValueError("Expected exactly one raw episode H5")
++    raw_path, physics_path = raw_files[0], episode / "physics_records.json"
++    protected = [raw_path, physics_path, episode / "config.yaml", episode / "events.json"]
++    before = {str(p): sha256(p) for p in protected}
++    output.mkdir(parents=True, exist_ok=False)
++    destination = output / "episode_data.hdf5"
++    with h5py.File(raw_path, "r") as raw:
++        if not bool(raw.attrs.get("complete", False)) or not len(raw["actions"]):
++            raise ValueError("Raw episode must be closed, complete and nonempty")
++        auxiliary, alignment = auxiliary_from_physics(raw, physics_path)
++        if not all(alignment.values()):
++            raise ValueError("Saved command/physics/auxiliary alignment failed: " + str(alignment))
++        if raw.attrs.get("control_schedule_json"):
++            schedule = str(raw.attrs["control_schedule_json"])
++            schedule_hash = hashlib.sha256(schedule.encode()).hexdigest()
++            if raw.attrs.get("control_schedule_sha256") != schedule_hash:
++                raise ValueError("Runtime schedule hash mismatch")
++            schedule_origin = "runtime collector metadata"
++        else:
++            config = OmegaConf.load(episode / "config.yaml")
++            snapshots = list((episode.parent / "source_snapshot/demos").glob("*/run.py"))
++            schedule, schedule_hash = canonical_schedule(config, snapshots[0] if len(snapshots)==1 else None)
++            schedule_origin = "derived from preserved config/controller snapshot for historical-tool validation; not a new run"
++        with h5py.File(destination, "x") as portable:
++            portable.attrs.update(schema="labsim.portable_real_episode.v1", format_version="V0_demo04",
++                self_contained=True, source_H5_sha256=before[str(raw_path)], original_labels_preserved=True,
++                source_scene_version=str(raw.attrs.get("scene_version", "unknown")), source_episode_provenance=str(episode),
++                portability_scope="all datasets copied; provenance absolute paths are strings only, never live external data links")
++            group = portable.create_group("episode_0000")
++            group.attrs.update(dict(raw.attrs))
++            for key in raw:
++                raw.copy(key, group, name=key, expand_external=True, expand_soft=True, expand_refs=True)
++            if "control_auxiliary" not in group:
++                aux_group = group.create_group("control_auxiliary")
++                for key,value in auxiliary.items():
++                    aux_group.create_dataset(key, data=value, compression="lzf")
++            group.attrs.update(control_schedule_json=schedule, control_schedule_sha256=schedule_hash,
++                portable_auxiliary_origin="exact original physics-step endpoint join; runtime auxiliary compared when present")
++            portable.create_dataset("control_schedule_json", data=schedule, dtype=h5py.string_dtype())
++        copy_checks = {}
++        with h5py.File(destination, "r") as portable:
++            group = portable["episode_0000"]
++            def verify(name,obj):
++                if isinstance(obj, h5py.Dataset):
++                    copied = group[name]
++                    copy_checks[name] = dict(shape_equal=obj.shape==copied.shape, dtype_equal=obj.dtype==copied.dtype,
++                        full_value_sha256=dataset_digest(obj), copied_full_value_sha256=dataset_digest(copied))
++            raw.visititems(verify)
++            assert all(v["shape_equal"] and v["dtype_equal"] and v["full_value_sha256"]==v["copied_full_value_sha256"] for v in copy_checks.values())
++            links = no_external_links(portable)
++            assert not links
++            labels = {key: json_safe(raw.attrs.get(key)) for key in ("success", "workflow_success", "data_eligible", "native_pair_success", "real_calibrated")}
++            assert all(json_safe(group.attrs.get(k)) == value for k,value in labels.items())
++            frames = len(group["actions"])
++    batch = read_batch(destination, output)
++    unchanged = {str(p): sha256(p)==digest for p,digest in ((Path(k),v) for k,v in before.items())}
++    assert all(unchanged.values())
++    result = dict(schema="labsim.V0_demo04.portable_episode_audit.v1", source_episode=str(episode),
++        source_scene_version=str(OmegaConf.load(episode / "config.yaml").get("version", "unknown")),
++        portable_file=str(destination), portable_sha256=sha256(destination), portable_bytes=destination.stat().st_size,
++        complete_frames=frames, original_outcome_labels=labels, source_files_sha256=before,
++        source_files_unchanged=unchanged, copied_dataset_count=len(copy_checks), all_source_dataset_values_verified=True,
++        dataset_copy_checks=copy_checks, external_or_soft_links=links, all_data_self_contained=True,
++        auxiliary_endpoint_checks=alignment, control_schedule_sha256=schedule_hash, control_schedule_origin=schedule_origin,
++        config_source_sha256=before[str(episode / "config.yaml")], loader=batch,
++        runtime_executed_by_export=False, optimizer_or_training_executed=False,
++        source_version_not_relabelled=True, tool_source_sha256=sha256(__file__))
++    write_new(output / "portable_audit.json", result)
++    return result
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--episode", type=Path, required=True)
++    parser.add_argument("--output", type=Path, required=True, help="new directory")
++    args = parser.parse_args()
++    result = export_episode(args.episode, args.output)
++    print(json.dumps({k:result[k] for k in ("portable_file", "complete_frames", "portable_bytes", "all_data_self_contained", "loader")}))
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/demos/lab_cuvette_demo04/preflight.py b/demos/lab_cuvette_demo04/preflight.py
+new file mode 100644
+index 0000000..498c622
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/preflight.py
+@@ -0,0 +1,30 @@
++"""Original geometry gate and independently permitted non-inserting diagnostic."""
++import json,hashlib
++from pathlib import Path
++import numpy as np
++from demos.lab_cuvette_demo04.scene import ROOT,layout
++from demos.lab_cuvette_external.run import write
++
++def inspect(cfg,out=None):
++    data=layout(cfg);file=ROOT/'docs/lab_cuvette_loading/V0_demo04/geometry/refined_02/native_fit_audit.json';report=json.loads(file.read_text())
++    # Neither a centerline width nor the old16mm adapter qualifies the native pair.
++    selected=next(x for x in report['seats'] if x['seat']==('A' if data['target_seat_id']=='candidate_far_hinge' else 'B'))
++    pair_pass=not bool(selected['final_pose_witnesses'] or selected['first_observed_path_crossing'])
++    front=data['opening_direction_world'][:2];toward=(data['rack_origin']-data['instrument_origin'])[:2];toward/=np.linalg.norm(toward)
++    orient=float(front@toward);source_margin=(float(cfg.rack.inner_m)-.0125)/2
++    result=dict(version='V0_demo04',scene_mode='native_nominal',instrument_count=1,rack_slots=36,source_slot_id=data['source_slot_id'],target_seat_id=data['target_seat_id'],source_floor=data['source_floor'],target_floor=data['target_floor'],instrument_yaw_deg=data['instrument_yaw_deg'],opening_toward_rack_dot=orient,source_side_clearance_m=source_margin,scene_structure_pass=bool(source_margin>0 and orient>.99),geometry_gate_passed=pair_pass,passed=pair_pass,preinsert_passed=bool(source_margin>0 and orient>.99),native_fit_report=str(file),native_fit_sha256=hashlib.sha256(file.read_bytes()).hexdigest(),diagnostic_bottom_stop_z_m=data['target_rim_z']+float(cfg.control.diagnostic_safe_bottom_above_rim_m),diagnostic_scope='grasp and transport only to rim+1mm, then upward10mm and hold; no insertion/release/native success',limitations=['Native tabs still interfere; full native task is blocked.','Scene-structure gate is not whole-arm collision validation.','Source geometry checks are not cooked PhysX global error bounds.'])
++    if out is not None:write(Path(out)/'geometry_preflight.json',result)
++    return result
++
++
++def instrument_triangles(cfg):
++    from pxr import Usd,UsdGeom,UsdPhysics
++    s=Usd.Stage.Open(str(ROOT/cfg.asset_directory/'instrument_native.usda'),Usd.Stage.LoadAll);cache=UsdGeom.XformCache();d=layout(cfg);records=[]
++    for p in Usd.PrimRange.Stage(s,Usd.TraverseInstanceProxies()):
++        if not p.IsA(UsdGeom.Mesh) or not p.HasAPI(UsdPhysics.CollisionAPI):continue
++        m=UsdGeom.Mesh(p);v=np.asarray(m.GetPointsAttr().Get(),float);v=(np.c_[v,np.ones(len(v))]@np.asarray(cache.GetLocalToWorldTransform(p)))[:,:3];v=v@d['instrument_rotation'].T+d['instrument_origin'];f=np.asarray(m.GetFaceVertexIndicesAttr().Get(),int).reshape(-1,3);records.append(dict(path=str(p.GetPath()),triangles=v[f]))
++    return s,records
++
++def _box_hits(records,lo,hi):
++    from demos.lab_cuvette_demo03.preflight import _box_hits as base
++    return base(records,lo,hi)
+diff --git a/demos/lab_cuvette_demo04/run.py b/demos/lab_cuvette_demo04/run.py
+new file mode 100644
+index 0000000..8ecc7ab
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/run.py
+@@ -0,0 +1,399 @@
++"""V0_demo04: original-seat geometry gate and dynamic preinsert diagnosis."""
++from pathlib import Path
++import argparse,sys,json,time,datetime,hashlib,subprocess
++import numpy as np
++from omegaconf import OmegaConf
++ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT))
++from demos.lab_cuvette_external.run import write
++from demos.lab_cuvette_ext02.support import measure
++def make_scene(args,app,output,cfg):
++    import omni.usd,omni.physx
++    from pxr import Usd,UsdGeom,UsdLux,Gf,UsdPhysics,PhysxSchema,UsdShade,UsdUtils,PhysicsSchemaTools
++    from isaacsim.core.api import World
++    from isaacsim.core.api.objects import GroundPlane,FixedCuboid
++    from isaacsim.core.prims import SingleRigidPrim
++    from isaacsim.core.api.sensors import RigidContactView
++    from isaacsim.core.utils.stage import add_reference_to_stage
++    from isaacsim.core.utils.types import ArticulationAction
++    from isaacsim.core.utils.viewports import set_camera_view
++    from isaacsim.sensors.camera import Camera
++    from isaacsim.robot.manipulators.examples.franka import Franka
++    from isaacsim.robot.manipulators.examples.franka.kinematics_solver import KinematicsSolver
++    from isaacsim.core.utils.rotations import euler_angles_to_quat
++    from demos.lab_cuvette_external.geometry import normalized,tri
++    from demos.lab_cuvette_external.build import add_mesh
++    from demos.lab_cuvette_loading.model import slots,rz
++    from demos.lab_cuvette_loading.scene import tcp
++    from demos.lab_cuvette_external.collector import ExternalCollector
++    started=time.monotonic();hz=cfg.physics.hz;control=cfg.physics.control_hz;substeps=hz//control
++
++    assert substeps*control==hz
++    omni.usd.get_context().new_stage();World.clear_instance()
++    omni.physx.get_physx_cooking_interface().release_local_mesh_cache();omni.physx.get_physx_cooking_private_interface().release_runtime_mesh_cache()
++    world=World(stage_units_in_meters=1.,physics_dt=1/hz,rendering_dt=1/control,backend='numpy',device='cpu');stage=omni.usd.get_context().get_stage()
++    stage.SetDefaultPrim(UsdGeom.Xform.Define(stage,'/World').GetPrim());UsdGeom.SetStageUpAxis(stage,'Z')
++    GroundPlane(prim_path='/World/Ground',size=10.)
++    size=np.array(cfg.scene.table_size_m);table=world.scene.add(FixedCuboid(prim_path='/World/Table',name='table',position=np.array([.05,0,cfg.scene.table_top_m-size[2]/2]),scale=size,color=np.array([.6,.52,.42])))
++    UsdLux.DomeLight.Define(stage,'/World/Light').CreateIntensityAttr(1000)
++    assets=ROOT/cfg.derived_directory
++    full=cfg.mode=='workflow'
++    if full:
++        from demos.lab_cuvette_demo04.scene import add_scene
++        fixtures=add_scene(world,stage,cfg)
++        source=fixtures['source_floor'].copy()
++    else:source=np.r_[cfg.scene.cup_xy_m,cfg.scene.table_top_m]
++    cup_start=source+[0,0,cfg.scene.initial_bottom_gap_m]
++    add_reference_to_stage(str(assets/(cfg.get('collision_scheme','walls28_mm')+'.usda')),'/World/Cuvette')
++    cup=world.scene.add(SingleRigidPrim(prim_path='/World/Cuvette',name='external_vessel',position=cup_start,orientation=euler_angles_to_quat(np.array([0.,0.,np.radians(float(cfg.vessel.yaw_deg))]))))
++    body_api=PhysxSchema.PhysxRigidBodyAPI.Apply(stage.GetPrimAtPath('/World/Cuvette'));body_api.CreateSolverPositionIterationCountAttr(cfg.physics.position_iterations);body_api.CreateSolverVelocityIterationCountAttr(cfg.physics.velocity_iterations)
++    robot=world.scene.add(Franka(prim_path='/World/Franka',name='franka',usd_path=str(ROOT/cfg.robot.usd_path),position=np.array(cfg.robot.base_m)))
++    from demos.lab_cuvette_ext02.build import source_mesh
++    from demos.lab_cuvette_external.build import mat
++    UsdShade.MaterialBindingAPI.Apply(table.prim).Bind(mat(stage,'/World/TablePhysics',cfg),materialPurpose='physics')
++    ct=PhysxSchema.PhysxCollisionAPI.Apply(table.prim);ct.CreateContactOffsetAttr(cfg.physics.contact_offset_m);ct.CreateRestOffsetAttr(0.)
++    old=OmegaConf.load(ROOT/'config/lab_cuvette_loading/V0.yaml');robot.set_joints_default_state(positions=np.array([0,-.785,0,-2.356,0,1.571,.785,.04,.04]))
++    api=PhysxSchema.PhysxSceneAPI.Apply(stage.GetPrimAtPath('/physicsScene'));api.CreateEnableGPUDynamicsAttr(False);api.CreateBroadphaseTypeAttr('MBP');api.CreateSolverTypeAttr(cfg.physics.solver);api.CreateEnableCCDAttr(cfg.physics.ccd)
++    pm=UsdShade.Material.Define(stage,'/World/FingerPhysics');ma=UsdPhysics.MaterialAPI.Apply(pm.GetPrim());ma.CreateStaticFrictionAttr(cfg.physics.finger_static_friction);ma.CreateDynamicFrictionAttr(cfg.physics.finger_dynamic_friction);ma.CreateRestitutionAttr(cfg.physics.restitution)
++    pa=PhysxSchema.PhysxMaterialAPI.Apply(pm.GetPrim());pa.CreateFrictionCombineModeAttr('average');pa.CreateRestitutionCombineModeAttr('average')
++    for prim in stage.Traverse():
++        if prim.HasAPI(UsdPhysics.ArticulationRootAPI):
++            a=PhysxSchema.PhysxArticulationAPI.Apply(prim);a.CreateSolverPositionIterationCountAttr(cfg.physics.position_iterations);a.CreateSolverVelocityIterationCountAttr(cfg.physics.velocity_iterations)
++        if str(prim.GetPath()).startswith('/World/Franka') and prim.HasAPI(UsdPhysics.RigidBodyAPI):
++            PhysxSchema.PhysxContactReportAPI.Apply(prim).CreateThresholdAttr(0.)
++        if str(prim.GetPath()).startswith('/World/Franka') and prim.HasAPI(UsdPhysics.CollisionAPI):
++            a=PhysxSchema.PhysxCollisionAPI.Apply(prim);a.CreateContactOffsetAttr(cfg.physics.contact_offset_m);a.CreateRestOffsetAttr(cfg.physics.rest_offset_m)
++            if 'finger' in str(prim.GetPath()):UsdShade.MaterialBindingAPI.Apply(prim).Bind(pm,materialPurpose='physics')
++        n=prim.GetName()
++        if n.startswith('panda_joint') and prim.IsA(UsdPhysics.RevoluteJoint):
++            i=int(n.replace('panda_joint',''))-1;a=UsdPhysics.DriveAPI.Apply(prim,'angular');a.CreateTypeAttr('force');a.CreateStiffnessAttr(old.robot.arm_kp[i]*np.pi/180);a.CreateDampingAttr(old.robot.arm_kd[i]*np.pi/180);a.CreateMaxForceAttr(old.robot.max_effort[i]);PhysxSchema.PhysxJointAPI.Apply(prim).CreateMaxJointVelocityAttr(old.robot.max_velocity[i]*180/np.pi)
++        if n in ['panda_finger_joint1','panda_finger_joint2']:
++            a=UsdPhysics.DriveAPI.Apply(prim,'linear');a.CreateTypeAttr('force');a.CreateStiffnessAttr(old.robot.finger_kp);a.CreateDampingAttr(old.robot.finger_kd);a.CreateMaxForceAttr(old.robot.max_effort[7]);PhysxSchema.PhysxJointAPI.Apply(prim).CreateMaxJointVelocityAttr(old.robot.max_velocity[7])
++    hand=world.scene.add(SingleRigidPrim(prim_path='/World/Franka/panda_hand',name='hand'))
++    gripper_bodies={'panda_hand':hand}
++    for name in ['panda_leftfinger','panda_rightfinger']:gripper_bodies[name]=world.scene.add(SingleRigidPrim(prim_path='/World/Franka/'+name,name=name+'_state'))
++    filters=[str(p.GetPath()) for p in stage.Traverse() if p.HasAPI(UsdPhysics.CollisionAPI) and not any(str(p.GetPath()).startswith('/World/'+x) for x in ['Franka','Cuvette','Distractor'])]
++    env=RigidContactView(prim_paths_expr='/World/Cuvette',filter_paths_expr=filters,name='external_contacts',max_contact_count=4096)
++    fingers=RigidContactView(prim_paths_expr=['/World/Franka/panda_leftfinger','/World/Franka/panda_rightfinger'],filter_paths_expr=[['/World/Cuvette'],['/World/Cuvette']],name='external_fingers',max_contact_count=256)
++    world.reset();solver=KinematicsSolver(robot);solver.get_kinematics_solver().set_robot_base_pose(np.array(cfg.robot.base_m),np.array([1.,0,0,0]));orientation=euler_angles_to_quat(np.array([np.pi,0,np.radians(float(cfg.robot.gripper_yaw_deg))]))
++    initial_tcp=source+np.array([0,0,.28]);cfg.robot.initial_tcp_m=initial_tcp.tolist();ik,valid=solver.compute_inverse_kinematics(initial_tcp,orientation)
++    if not valid:raise RuntimeError('Initial TCP unreachable')
++    q=robot.get_joint_positions().copy();q[np.array(ik.joint_indices,dtype=int)]=ik.joint_positions;q[7:]=.04;robot.set_joints_default_state(positions=q)
++    if args.initial_state:
++        q=np.array(json.loads(args.initial_state.read_text())['joints'],dtype=float);robot.set_joints_default_state(positions=q)
++    errors=[]
++    for _ in range(2):
++        world.reset();errors.append(float(np.linalg.norm(cup.get_world_pose()[0]-cup_start)))
++    robot.set_joint_positions(q);ac=robot.get_articulation_controller();ac.set_gains(kps=np.r_[old.robot.arm_kp,[old.robot.finger_kp]*2],kds=np.r_[old.robot.arm_kd,[old.robot.finger_kd]*2]);ac.set_max_efforts(np.array(old.robot.max_effort));robot._articulation_view.set_max_joint_velocities(np.array([old.robot.max_velocity]));ac.apply_action(ArticulationAction(joint_positions=q))
++    cup_fingers=RigidContactView(prim_paths_expr='/World/Cuvette',filter_paths_expr=['/World/Franka/panda_leftfinger','/World/Franka/panda_rightfinger'],name='cup_fingers',max_contact_count=1024)
++    for v in [env,fingers,cup_fingers]:v.initialize()
++    write(output/'reset_check.json',dict(errors_m=errors,passed=max(errors)<1e-6))
++    return locals()
++
++def run(args,app,output,cfg):
++    import cv2,shutil
++    from scipy.spatial.transform import Rotation
++    from pxr import UsdGeom,UsdPhysics,PhysxSchema,PhysicsSchemaTools
++    import omni.physx
++    from isaacsim.sensors.camera import Camera
++    from isaacsim.core.utils.viewports import set_camera_view
++    from isaacsim.core.utils.types import ArticulationAction
++    from demos.lab_cuvette_ext02.build import source_mesh
++    from demos.lab_cuvette_demo04.collector import Demo04Collector
++    from demos.lab_cuvette_loading.scene import tcp
++    start=time.monotonic();output.mkdir(exist_ok=False);OmegaConf.save(cfg,output/'config.yaml');ctx=make_scene(args,app,output,cfg)
++    world,stage,cup,robot,hand,solver,ac,env,fingers,cf,old,orientation,last_q=[ctx[k] for k in ['world','stage','cup','robot','hand','solver','ac','env','fingers','cup_fingers','old','orientation','q']]
++    full=cfg.mode=='workflow';hz=cfg.physics.hz;control=cfg.physics.control_hz;sub=hz//control;dt=1/hz;spec=cfg.demo_release
++    if full:
++        from demos.lab_cuvette_demo04.preflight import inspect
++        preflight=inspect(cfg,output)
++        if not preflight['passed'] and not (args.preinsert_diagnostic and preflight['preinsert_passed']) and not args.scene_only:raise RuntimeError('Original seat geometry blocked; no full task executed. Use --preinsert-diagnostic only for the explicitly bounded non-inserting diagnostic.')
++    source=ctx['source'];floor=ctx['fixtures']['target_floor'] if full else np.r_[source[:2]+[.03,.02],cfg.scene.table_top_m]
++    cameras={}
++    set_camera_view(eye=np.array([-.75,-.95,1.75]),target=np.array([.30,.12,1.02]))
++    # The display camera is independent of the two recorded observation views.
++    views=[('camera_1_rgb','/World/Observation',[-.75,-.95,1.75],[.30,.12,1.02],(256,256),2.4),('camera_2_rgb','/World/Franka/panda_hand/WristCamera',[.10,-.18,.98],[-.04,-.22,.77],(256,256),1.2),('wide','/World/Main',[-.75,-.95,1.75],[.30,.12,1.02],(1920,1080),float(cfg.video.get('main_focal_length_cm',1.6))),('close','/World/Close',floor+ctx['fixtures']['opening_direction_world']*.16+[0,0,.21],floor+[0,0,.037],(640,640),3.5)]
++    for key,path,eye,target,size,focal in views:
++        c=Camera(path,name=key,frequency=60,resolution=size);c.set_focal_length(focal);c.set_clipping_range(.0001,10.);set_camera_view(eye=np.array(eye),target=np.array(target),camera_prim_path=path);c.initialize();cameras[key]=c
++        if key=='camera_2_rgb':
++            eye=np.array([.1,0,.04]);target=np.array(cfg.robot.tcp_local_m)+[0,0,.015];z=eye-target;z/=np.linalg.norm(z);x=np.cross([0,1,0],z);x/=np.linalg.norm(x);y=np.cross(z,x);qq=Rotation.from_matrix(np.column_stack([x,y,z])).as_quat();c.set_local_pose(eye,np.r_[qq[3],qq[:3]],camera_axes='usd')
++    for _ in range(5):world.render()
++    # make_scene resets the initial state. No late teleport that invalidates broadphase.
++    world.render()
++    if args.scene_only:
++        from demos.lab_cuvette_demo04.static_review import save_review
++        result=save_review(ctx,cameras,cfg,output)
++        world.stop();world.clear();return result
++    m=source_mesh();m.vertices[:,:2]*=float(cfg.vessel.xy_scale);com_local=np.asarray(cup.get_com()[0]).reshape(3);rb=UsdPhysics.RigidBodyAPI(cup.prim)
++    rcfg=OmegaConf.create(OmegaConf.to_container(cfg,resolve=True));rcfg.version='V0_demo04';rcfg.physics.hz=hz;rcfg.physics.control_hz=control;rcfg.task.control_hz=control;rcfg.task.instruction='White6x6 rack; corrected12.5mm vessel; original12.6mm internal A. Geometry gate controls full execution.'
++    phases=['RESET','APPROACH_SOURCE','GRASP','EXTRACT','TRANSPORT','ALIGN','INSERT','SUPPORT_TRANSFER','OPEN','RETREAT','VERIFY','GATE_RETRACT','DIAGNOSTIC_HOLD','JAM_RETRACT'];rcfg.control.phases_s={k:0 for k in phases}
++    contract=dict(version='V0_demo04',scene_mode='native_nominal',asset_manifest_sha256=hashlib.sha256((ROOT/cfg.asset_directory/'manifest.json').read_bytes()).hexdigest(),instrument_count=1,scene_correspondence=dict(accepted=bool(preflight['scene_structure_pass']),evidence=['single instrument root oriented toward rack; corrected nominal12.5mm vessel; all original seats active','geometry_preflight.json']),geometry_audit=dict(accepted=bool(preflight['geometry_gate_passed'])),source_slot=dict(id=ctx['fixtures']['source_slot_id'],required_clearance_m=.01),target_seat=dict(id=ctx['fixtures']['target_seat_id'],inside_sample_chamber=True,user_role_confirmed=True,manufacturer_identity_confirmed=False,minimum_depth_m=ctx['fixtures']['target_depth_m']-.0001),minimum_retreat_clearance_m=.04,native_pair_verified=False,real_calibrated=False,runtime_integrity=dict(verified=True,method='dynamic contact only; no runtime pose assignment, attachment or collision-disable code'))
++    write(output/'scene_contract.json',contract)
++    collector=Demo04Collector(rcfg,output,False,scene_contract=contract);collector.begin_episode(0,ctx['cup_start']);collector.file.attrs.update(overlap_scope='source rack analytic envelope and table only; native seat penetration unavailable',native_seat_overlap_measured=False,demonstrator_uses_object_truth=True,nominal_dimensions_source='user supplied',single_instrument=True)
++    movie=cv2.VideoWriter(str(output/'main.mp4'),cv2.VideoWriter_fourcc(*'mp4v'),30,(1920,1080));close_movie=cv2.VideoWriter(str(output/'closeup.mp4'),cv2.VideoWriter_fourcc(*'mp4v'),30,(640,640));assert movie.isOpened() and close_movie.isOpened()
++    rows=[];events=[];native=[];phase='RESET';phase_start=0.;t=0.;steps=0;target=ctx['initial_tcp'].copy();grip=.04;effort=8.;qcmd=last_q.copy();cached_target=None;cached_ik=None;initial_tcp=target.copy();anchor=lift=transport=align=None;contact_target=None;open_target=None;ready=None;clear=None;settled=None;relative=None;source_initial=None;status='RUNNING';flags={k:False for k in ['support_valid','grasp_success','extract_success','transport_success','loaded','released','retreated','stable']};quality=[];descent_stopped=False;last_video_t=-1.;forbidden_contact=False
++    from demos.lab_cuvette_demo04.runtime_geometry import fixture_measure,hand_clearance
++    from demos.lab_cuvette_demo04.scene import link_local_collision_points
++    link_points=link_local_collision_points(cfg);link_points={k:np.array([[x,y,z] for x in [v[:,0].min(),v[:,0].max()] for y in [v[:,1].min(),v[:,1].max()] for z in [v[:,2].min(),v[:,2].max()]]) for k,v in link_points.items()}
++    edges=np.asarray(m.edges_unique)
++    target_base_indices=[i for i,p in enumerate(ctx['filters']) if p.endswith('/Collision/SourceMesh3')]
++    if len(target_base_indices)!=1:raise RuntimeError('Unique target support base not found: '+str(ctx['filters']))
++    def friction(view):
++        fs,pts,counts,starts=view.get_friction_data(dt=dt);fs=np.asarray(fs);out=np.zeros(np.asarray(counts).shape+(3,))
++        for index in np.ndindex(out.shape[:-1]):
++            n=int(np.asarray(counts)[index]);st=int(np.asarray(starts)[index]);out[index]=fs[st:st+n].sum(0)
++        return out
++    def capture():
++        p,quat=cup.get_world_pose();rot=Rotation.from_quat(np.r_[quat[1:],quat[0]]);vs=rot.apply(m.vertices)+p;bottom=float(vs[:,2].min());com=rot.apply(com_local)+p
++        fm=np.asarray(cf.get_contact_force_matrix(dt=dt)).reshape(-1,2,3).sum(0);ff=friction(cf).reshape(-1,2,3).sum(0)
++        em=np.asarray(env.get_contact_force_matrix(dt=dt)).reshape(-1,len(ctx['filters']),3).sum(0);ef=friction(env).reshape(-1,len(ctx['filters']),3).sum(0)
++        force=em.sum(0)+ef.sum(0);finger_mag=np.linalg.norm(fm,axis=1)
++        hp,hq=hand.get_world_pose();hr=Rotation.from_quat(np.r_[hq[1:],hq[0]]);relq=(hr.inv()*rot).as_quat();fd=np.full(3,np.nan);omega=np.full(3,np.nan)
++        if rows:
++            prev=rows[-1];fd=(com-prev['com_world_m'])/dt;qr=Rotation.from_quat(np.r_[prev['quaternion'][1:],prev['quaternion'][0]]);omega=(rot*qr.inv()).as_rotvec()/dt
++        data=ctx['fixtures'];target_measure=fixture_measure(vs,edges,floor,data['instrument_rotation'],data['target_inner_m'],data['target_depth_m'])
++        source_measure=fixture_measure(vs,edges,source,data['rack_rotation'],data['source_inner_m'],data['source_depth_m'])
++        gap=target_measure['gap'];xy=((p-floor)@data['instrument_rotation'])[:2];depth=target_measure['depth'] if np.max(abs(xy))<.015 else float('nan')
++        penetration=max(0.,cfg.scene.table_top_m-bottom,source_measure['penetration'])
++        support_target=(em+ef)[target_base_indices].sum(0)
++        clearance=hand_clearance(link_points,ctx['gripper_bodies'],vs)
++        geom=dict(source_slot_id=data['source_slot_id'],target_seat_id=data['target_seat_id'],source_supported_inside_designated_slot=bool(source_measure['inside'] and abs(source_measure['gap'])<=spec.bottom_distance_m and force[2]>=spec.min_support_N),source_clearance_m=bottom-data['source_rim_z'],depth_m=depth,bottom_signed_gap_m=gap,inside_checked_target_void=None,native_target_penetration_m=None,native_target_penetration_available=False,robot_to_vessel_clearance_m=clearance,forbidden_robot_environment_contact=forbidden_contact)
++        tilt=float(np.degrees(np.arccos(np.clip(rot.as_matrix()[2,2],-1,1))))
++        # USD readback is synchronized but may be stale under Fabric; retain raw.
++        uv=rb.GetVelocityAttr().Get();uw=rb.GetAngularVelocityAttr().Get()
++        return dict(t=t,engine_time=world.current_time,physics_step=steps,phase=phase,position=np.array(p),quaternion=np.array(quat),com_world_m=com,linear_velocity=np.array(cup.get_linear_velocity()),angular_velocity=np.array(cup.get_angular_velocity()),usd_linear_velocity=np.array(uv if uv is not None else [np.nan]*3),usd_angular_velocity_deg_s=np.array(uw if uw is not None else [np.nan]*3),fd_com_velocity=fd,fd_angular_velocity=omega,source_bottom_z_m=bottom,source_bottom_gap_m=max(0.,source_measure['gap']),source_penetration_m=penetration,target_bottom_signed_gap_m=gap,depth_m=depth,xy_error_m=xy,tilt_deg=tilt,support_force_vector_N=force,target_support_force_vector_N=support_target,independent_geometry=geom,environment_normal_force_matrix_N=em,environment_friction_N=ef,environment_normal_sum_norms_N=float(np.linalg.norm(em,axis=1).sum()),finger_force_N=finger_mag,finger_force_vectors_on_cup_N=fm,finger_friction_on_cup_N=ff,actual_tcp=tcp(dict(hand=hand),cfg),target_tcp=target.copy(),command_q=qcmd.copy(),joints=robot.get_joint_positions().copy(),joint_velocities=robot.get_joint_velocities().copy(),gripper_effort_limit_N=effort,gripper_target_m=grip,native_seat_force_semantics='whole seat force; not separated bottom support',descent_stopped=descent_stopped,cup_in_hand_position_m=hr.inv().apply(p-hp),cup_in_hand_quaternion=np.r_[relq[3],relq[:3]])
++    def observation(r):
++        return dict(control_aux={k:r[k] for k in ['command_q','gripper_effort_limit_N','gripper_target_m']},independent_geometry=r['independent_geometry'],target_support_force_vector_N=r['target_support_force_vector_N'],camera_data={k:np.transpose(cameras[k].get_rgb()[:,:,:3],(2,0,1)).astype(np.uint8) for k in ['camera_1_rgb','camera_2_rgb']},joint_positions=r['joints'],simulation_time=r['t'],tcp=r['actual_tcp'],object_position=r['position'],object_orientation=r['quaternion'],phase=r['phase'],target_tcp=r['target_tcp'],metrics=dict(depth_m=r['depth_m'],xy_error_m=r['xy_error_m'],tilt_rad=np.radians(r['tilt_deg']),yaw_error_rad=np.nan,overlap_m=r['source_penetration_m'],finger_contact_N=r['finger_force_N'],environment_contact_N=float(np.linalg.norm(r['support_force_vector_N']))),**{k:r[k] for k in ['linear_velocity','angular_velocity','usd_linear_velocity','usd_angular_velocity_deg_s','fd_com_velocity','fd_angular_velocity','support_force_vector_N','source_bottom_z_m','source_penetration_m','finger_force_vectors_on_cup_N','finger_friction_on_cup_N']})
++    def enter(name):
++        nonlocal phase,phase_start,ready
++        events.append(dict(t=t,event='phase',previous=phase,next=name,actual=rows[-1]));phase=name;phase_start=t;ready=None;print('DEMO_PHASE',output.name,f'{t:.3f}',name,flush=True)
++    def smooth(a,b,u):
++        u=np.clip(u,0.,1.);return a+(3*u*u-2*u*u*u)*(b-a)
++    def quiet(seconds):
++        w=[x for x in rows if x['t']>=t-seconds-1e-8]
++        if not w or w[-1]['t']-w[0]['t']<seconds-1e-6:return False
++        ps=np.array([x['position'] for x in w]);qs=np.array([x['quaternion'] for x in w]);qs/=np.linalg.norm(qs,axis=1)[:,None]
++        return bool(np.linalg.norm(ps-ps[0],axis=1).max()<=spec.position_drift_m and np.degrees(2*np.arccos(np.clip(abs(qs@qs[0]),0,1))).max()<=spec.orientation_change_deg and max(x['source_penetration_m'] for x in w)<=spec.penetration_m)
++    def supported(r):return bool(abs(r['target_bottom_signed_gap_m'])<=spec.bottom_distance_m and r['target_support_force_vector_N'][2]>=spec.min_support_N and r['tilt_deg']<=spec.max_tilt_deg and np.max(abs(r['xy_error_m']))<=float(cfg.control.alignment_budget_m))
++    def video(r):
++        nonlocal last_video_t
++        if t-last_video_t<1/30-1e-8:return
++        last_video_t=t;frame=cv2.cvtColor(cameras['wide'].get_rgb()[:,:,:3],cv2.COLOR_RGB2BGR);detail=cv2.cvtColor(cameras['close'].get_rgb()[:,:,:3],cv2.COLOR_RGB2BGR)
++        if phase in ['ALIGN','INSERT','SUPPORT_TRANSFER','OPEN','RETREAT','VERIFY']:frame[432:1072,1272:1912]=detail
++        gap_label=f'{r["target_bottom_signed_gap_m"]*1000:.3f}mm' if np.max(abs(r['xy_error_m']))<.015 else 'outside target'
++        for text,y in [(f'V0_demo04  {cfg.variant}  {cfg.mode}  t={t:.3f}s  {phase}',32),('ONE INSTRUMENT | 12.5mm VESSEL + ORIGINAL12.6mm A | NOT CALIBRATED',63),(f'{ctx["fixtures"]["source_slot_id"]} -> internal A | bottom gap {gap_label} | tilt {r["tilt_deg"]:.3f}deg | seat total Fz {r["target_support_force_vector_N"][2]:.3f}N',94)]:
++            cv2.putText(frame,text,(12,y),cv2.FONT_HERSHEY_SIMPLEX,.69,(0,0,0),4);cv2.putText(frame,text,(12,y),cv2.FONT_HERSHEY_SIMPLEX,.69,(255,255,255),1)
++        cv2.putText(detail,f'{t:.3f}s {phase}',(8,24),cv2.FONT_HERSHEY_SIMPLEX,.55,(255,255,255),1);movie.write(frame);close_movie.write(detail)
++    def callback(headers,data):
++        nonlocal forbidden_contact
++        for h in headers:
++            paths=[str(PhysicsSchemaTools.intToSdfPath(h.collider0)),str(PhysicsSchemaTools.intToSdfPath(h.collider1))]
++            if not (any(p.startswith('/World/Cuvette') for p in paths) or (any(p.startswith('/World/Franka') for p in paths) and any(p.startswith('/World/Instrument') or p.startswith('/World/SourceRack') or p.startswith('/World/NeighborCuvette') for p in paths))):continue
++            pts=[]
++            for j in range(h.contact_data_offset,h.contact_data_offset+h.num_contact_data):
++                d=data[j];v=lambda a:[float(a.x),float(a.y),float(a.z)];imp=v(d.impulse);pts.append(dict(position_m=v(d.position),normal=v(d.normal),impulse_Ns=imp,force_N=(np.array(imp)/dt).tolist(),separation_m=float(d.separation)))
++            if any(np.linalg.norm(p['force_N'])>.01 or p['separation_m']<-.00005 for p in pts) and any(p.startswith('/World/Franka') for p in paths) and not any(p.startswith('/World/Cuvette') for p in paths):forbidden_contact=True
++            native.append(dict(step=steps+1,t=(steps+1)/hz,phase=phase,colliders=paths,type=str(h.type),points=pts))
++    subscription=omni.physx.get_physx_simulation_interface().subscribe_contact_report_events(callback)
++    r=capture();rows.append(r);state=observation(r);write(output/'initial.json',r);video(r)
++    stage.Flatten().Export(str(output/'initial_scene.usda'))
++    try:
++        while t<cfg.control.timeout_s and app.is_running():
++            r=rows[-1];u=t-phase_start
++            if phase=='RESET':
++                if u>=4.:
++                    if not quiet(3.) or r['tilt_deg']>1.:status='INITIAL_SUPPORT_INVALID';break
++                    flags['support_valid']=True;source_initial=r['position'].copy();anchor=source_initial+[0,0,cfg.robot.grasp_above_bottom_m]
++                    lift=anchor+[0,0,float(cfg.control.transport_bottom_z_m-source_initial[2])];transport=np.r_[floor[:2],lift[2]];align=transport.copy();enter('APPROACH_SOURCE')
++            elif phase=='APPROACH_SOURCE':
++                target=smooth(initial_tcp,anchor,u/cfg.control.approach_s);grip=.04
++                if u>=7.:
++                    if np.linalg.norm(r['actual_tcp']-anchor)>.002:status='CONTROL_OR_IK_FAILURE';break
++                    enter('GRASP')
++            elif phase=='GRASP':
++                target=anchor;grip=.04*(1-min(1.,u/2))
++                if u>=2.5:
++                    if not np.all(r['finger_force_N']>.02):status='GRASP_FAILED';break
++                    flags['grasp_success']=True;relative=r['position']-r['actual_tcp'];enter('EXTRACT')
++            elif phase=='EXTRACT':
++                grip=0.;target=smooth(anchor,lift,u/cfg.control.extract_s)
++                if u>=7.:
++                    flags['extract_success']=bool(r['source_bottom_z_m']>ctx['fixtures']['source_rim_z']+.010 and np.all(r['finger_force_N']>.02))
++                    if not flags['extract_success']:status='GRASP_SLIP';break
++                    enter('TRANSPORT')
++            elif phase=='TRANSPORT':
++                waypoint=np.array([lift[0],transport[1],lift[2]]);duration=cfg.control.transport_s/2
++                if u<duration:target=smooth(lift,waypoint,u/duration)
++                elif u<cfg.control.transport_s:target=smooth(waypoint,transport,(u-duration)/duration)
++                else:
++                    # The held vessel can rotate within a real bilateral grasp.
++                    # Use the already declared truth feedback during the final
++                    # stationary second instead of confusing TCP arrival with
++                    # vessel arrival. Keep the existing3mm stage gate unchanged.
++                    target[:2]+=-ctx['fixtures']['instrument_rotation'][:2,:2]@np.clip(.15*np.asarray(r['xy_error_m']),-.00002,.00002)
++                grip=0.
++                if u>=cfg.control.transport_s+1.:
++                    flags['transport_success']=bool(np.linalg.norm(r['position'][:2]-floor[:2])<.003 and np.all(r['finger_force_N']>.02))
++                    if not flags['transport_success']:status='HELD_POSE_DEVIATION_AFTER_TRANSPORT';break
++                    # Re-estimate the held offset after actual transport. Gravity
++                    # tracking bias means nominal TCP/old grasp offsets do not
++                    # guarantee that the physical vessel is over this narrow seat.
++                    relative=r['position']-r['actual_tcp']
++                    align=np.r_[floor[:2]-relative[:2],transport[2]];enter('ALIGN')
++            elif phase=='ALIGN':
++                grip=0.
++                if u<.5:target=smooth(transport,align,u/.5)
++                else:target[:2]+=-ctx['fixtures']['instrument_rotation'][:2,:2]@np.clip(.15*np.asarray(r['xy_error_m']),-.00002,.00002)
++                if 2.5<=u<2.5+1/control:
++                    if np.max(abs(r['xy_error_m']))>float(cfg.control.diagnostic_alignment_budget_m if args.preinsert_diagnostic else cfg.control.alignment_budget_m):status='ACTUAL_ALIGNMENT_FAILED';break
++                    events.append(dict(t=t,event='prealignment_accepted_then_low_speed_approach',actual_xy_m=r['xy_error_m']))
++                if u>=2.5:
++                    stop=ctx['fixtures']['target_rim_z']+float(cfg.control.diagnostic_safe_bottom_above_rim_m)
++                    if args.preinsert_diagnostic and r['source_bottom_z_m']<=stop+.00002:
++                        descent_stopped=True;contact_target=target.copy();events.append(dict(t=t,event='known_geometry_gate_stop_before_native_tabs',source_bottom_z_m=r['source_bottom_z_m'],safe_stop_z_m=stop,actual_seat_force_N=r['target_support_force_vector_N']));enter('GATE_RETRACT')
++                    elif args.preinsert_diagnostic:
++                        speed=float(cfg.control.diagnostic_near_speed_m_s if r['source_bottom_z_m']-stop<.003 else cfg.control.diagnostic_approach_speed_m_s)
++                        target[2]-=min(speed/control,max(0.,r['source_bottom_z_m']-stop)*.2+1e-7)
++                    elif preflight['geometry_gate_passed']:
++                        enter('INSERT')
++                    else:status='GEOMETRY_BLOCKED_NOT_EXECUTED';break
++            elif phase=='GATE_RETRACT':
++                target=smooth(contact_target,contact_target+[0,0,.01],u/2);grip=0.
++                if u>=2.5:enter('DIAGNOSTIC_HOLD')
++            elif phase=='DIAGNOSTIC_HOLD':
++                target=contact_target+[0,0,.01];grip=0.
++                if u>=1.0:status='GEOMETRY_BLOCKED_PREINSERT';break
++            elif phase=='JAM_RETRACT':
++                target=smooth(contact_target,contact_target+[0,0,.01],u/2);grip=0.
++                if u>=2.5:status='JAM_DETECTED';break
++            elif phase=='INSERT':
++                grip=0.
++                from demos.lab_cuvette_demo04.safety import jam_reason
++                jam=jam_reason(rows,cfg.control.jam_detection)
++                if jam:
++                    descent_stopped=True;contact_target=target.copy();events.append(dict(t=t,event='jam_stop_and_retract',reason=jam));enter('JAM_RETRACT')
++                    continue
++                # Privileged state feedback commands robot joints only. The
++                # vessel remains dynamic and moves solely through contact.
++                target[:2]+=-ctx['fixtures']['instrument_rotation'][:2,:2]@np.clip(.08*np.asarray(r['xy_error_m']),-.00001,.00001)
++                if r['target_support_force_vector_N'][2]>.10 and abs(r['target_bottom_signed_gap_m'])<.0002:
++                    descent_stopped=True;contact_target=target.copy();events.append(dict(t=t,event='stop_downward_command_on_actual_contact',force=r['support_force_vector_N'],bottom=r['source_bottom_z_m']));enter('SUPPORT_TRANSFER')
++                else:
++                    speed=cfg.control.final_speed_m_s if r['target_bottom_signed_gap_m']<.001 else cfg.control.insert_speed_m_s
++                    target=target+[0,0,-min(speed/control,max(0.,r['target_bottom_signed_gap_m'])*.2+1e-6)]
++                if u>35.:status='INSERT_BLOCKED';break
++            elif phase=='SUPPORT_TRANSFER':
++                # Stop descent; relieve compressive load with bounded upward-only
++                # axial corrections, then reduce finger normal effort in stages.
++                effort=float(8.-7.95*min(1.,u/spec.unload_seconds))
++                recent=rows[-max(1,int(.1*hz)):];fz=float(np.mean([x['target_support_force_vector_N'][2] for x in recent]))
++                if fz>.2462 and target[2]<contact_target[2]+.001:target=target+[0,0,min(1e-5,max(0.,fz-.2462)*2e-6)]
++                if u>=spec.unload_seconds and supported(r) and all(supported(x) for x in rows[-sub:]) and quiet(spec.support_window_s):
++                    if ready is None:ready=t
++                    if t-ready>=spec.support_window_s:
++                        flags['loaded']=True;open_target=target.copy();enter('OPEN')
++                else:ready=None
++                if u>=10.:
++                    # Preserve actual trajectory; no perpetual speed-only veto.
++                    status='SUPPORT_TRANSFER_FAILED';break
++            elif phase=='OPEN':
++                target=open_target;effort=.5;grip=.04*min(1.,u/spec.open_seconds)
++                if np.all(r['finger_force_N']<.01) and np.all(r['joints'][7:]>.025) and supported(r):
++                    if clear is None:clear=t
++                    if t-clear>=spec.clear_seconds:flags['released']=True;enter('RETREAT')
++                else:clear=None
++                if u>7.:status='RELEASE_FAILED';break
++            elif phase=='RETREAT':
++                grip=.04;effort=8.;raised=open_target+np.array([0,0,cfg.control.retreat_lift_m]);withdrawn=raised+np.r_[cfg.control.retreat_lateral_m,0.]
++                target=smooth(open_target,raised,u/2) if u<2 else smooth(raised,withdrawn,(u-2)/3)
++                if u>=5.5:
++                    flags['retreated']=bool(r['independent_geometry']['robot_to_vessel_clearance_m']>=.04 and np.all(r['finger_force_N']<.01))
++                    if not flags['retreated']:status='RETREAT_FAILED';break
++                    enter('VERIFY')
++            elif phase=='VERIFY':
++                target=open_target+np.r_[cfg.control.retreat_lateral_m,cfg.control.retreat_lift_m];grip=.04
++                if u>=spec.observe_s+.1:
++                    flags['stable']=bool(quiet(spec.observe_s) and supported(r) and np.all(r['finger_force_N']<.01));status='WORKFLOW_SUCCESS' if all(flags.values()) else 'UNSTABLE_AFTER_RELEASE';break
++            if cached_target is None or not np.array_equal(target,cached_target):
++                ik,ok=solver.compute_inverse_kinematics(target,orientation,position_tolerance=old.robot.ik_position_tolerance_m,orientation_tolerance=old.robot.ik_orientation_tolerance_rad)
++                if not ok:status='CONTROL_OR_IK_FAILURE';break
++                cached_target=target.copy();cached_ik=ik
++            ik=cached_ik;q=r['joints'].copy();q[np.asarray(ik.joint_indices,int)]=ik.joint_positions;q[7:]=grip;limit=np.array(old.robot.max_velocity)/control;q=np.clip(q,last_q-limit,last_q+limit);last_q=q.copy();qcmd=q.copy()
++            ac.set_max_efforts(np.r_[old.robot.max_effort[:7],[effort]*2]);action=ArticulationAction(joint_positions=q);ac.apply_action(action);state['phase']=phase;state['target_tcp']=target.copy()
++            for _ in range(sub):
++                world.step(render=False);steps+=1;t=steps/hz;r=capture();rows.append(r)
++            world.render();after=observation(r);collector.cache_transition(state,action,after,dict(status='RUNNING',full_success=False,stage_progress=flags,seed=args.seed));state=after;video(r)
++            if not np.isfinite(np.r_[r['position'],r['quaternion'],r['linear_velocity'],r['angular_velocity']]).all():status='PHYSICS_INVALID_NONFINITE';break
++            if forbidden_contact:status='FORBIDDEN_ROBOT_ENVIRONMENT_CONTACT';break
++            if phase!='RESET' and (r['source_penetration_m']>.00005 or r['tilt_deg']>spec.max_actual_tilt_deg):status='PHYSICS_INVALID_GEOMETRY';break
++            if phase in ['SUPPORT_TRANSFER','OPEN','RETREAT','VERIFY'] and np.linalg.norm(r['fd_com_velocity'])>.10:status='DROPPED_OR_LARGE_MOTION';break
++        if status=='RUNNING':status='TIMEOUT'
++        quality=['ROBOT_AND_VESSEL_DYNAMICS_NOT_REAL_CALIBRATED','GEOMETRY_CHECKS_SAMPLED_NOT_GLOBAL_NATIVE_SHAPE_PROOF']
++        if max(x['source_penetration_m'] for x in rows)>spec.penetration_m:
++            quality.append('SOURCE_GEOMETRY_PENETRATION_EXCEEDS_50UM')
++            if status=='WORKFLOW_SUCCESS':status='PHYSICS_INVALID_INITIAL_OR_TRANSIENT_PENETRATION'
++        if any(np.linalg.norm(np.asarray(x['linear_velocity'])-np.asarray(x['fd_com_velocity']))>.001 for x in rows[-int(3*hz):]):quality.append('NATIVE_VS_POSE_VELOCITY_MISMATCH_RETAINED')
++        unintended=[e for e in native if e['points'] and not any(p.startswith('/World/Cuvette') for p in e['colliders'])]
++        if unintended:
++            quality.append('UNINTENDED_ROBOT_ENVIRONMENT_CONTACT')
++            if status=='WORKFLOW_SUCCESS':status='UNINTENDED_ROBOT_ENVIRONMENT_CONTACT'
++        success=status=='WORKFLOW_SUCCESS';result=dict(status=status,reason=status,workflow_success=success if full else False,tabletop_release_success=success if not full else None,native_pair_success=False,native_pair_executed=False,full_success=False,full_task_eligible=False,stage_progress=flags,simulation_seconds=t,wall_seconds=time.monotonic()-start,frames=collector.count,calibrated=False,variant=cfg.variant,mode=cfg.mode,physics_quality_flags=quality,environment_filter_paths=ctx['filters'])
++        result.update(geometry_gate_passed=bool(preflight['geometry_gate_passed']),diagnostic_only=bool(args.preinsert_diagnostic),full_workflow_executed=not args.preinsert_diagnostic,demonstrator_uses_object_truth=True,version='V0_demo04',scene_mode='native_nominal',real_calibrated=False,data_eligible=False,source_slot_id=ctx['fixtures']['source_slot_id'],target_seat_id=ctx['fixtures']['target_seat_id'])
++        write(output/'result.json',result);write(output/'physics_records.json',rows);write(output/'events.json',events);write(output/'native_contact_events.json',native)
++        collector.file.flush()
++        from demos.lab_cuvette_demo04.analyze import analyze
++        independent=analyze(output,contract=contract);write(output/'independent_score.json',independent)
++        if collector.count:
++            collector.file['done'][-1]=True
++            adjudication=collector.finish_episode(result,independent_score=output/'independent_score.json')
++            write(output/'adjudication.json',adjudication)
++        result['independent_workflow_success']=independent['workflow_success'];result['data_eligible']=independent['data_eligible']
++        write(output/'execution_summary.json',result)
++        test=omni.physx.get_physxunittests_interface();kp,kd=ac.get_gains();write(output/'runtime.json',dict(cup_mass=test.get_mass_information('/World/Cuvette'),com_local_m=com_local,kp=kp,kd=kd,max_effort=ac.get_max_efforts(),max_velocity=robot._articulation_view.get_joint_max_velocities(),CPU=True,solver=cfg.physics.solver,position_iterations=cfg.physics.position_iterations,velocity_iterations=cfg.physics.velocity_iterations,physics_hz=hz,control_hz=control,substeps=sub,stats=test.get_physics_stats(),contact_offset_authored=cfg.physics.contact_offset_m,rest_offset_authored=0.,native_offsets_readback=None,calibrated=False))
++        stage.Flatten().Export(str(output/'final_scene.usda'))
++        for key,c in cameras.items():cv2.imwrite(str(output/(key+'_final.png')),cv2.cvtColor(c.get_rgb()[:,:,:3],cv2.COLOR_RGB2BGR))
++        print('DEMO_RESULT',output,status,flags,flush=True)
++    finally:collector.close();movie.release();close_movie.release();world.stop();world.clear()
++    return result
++
++def main():
++    import shutil
++    p=argparse.ArgumentParser(description='Physical video-scene adapted rack to internal-seat workflow')
++    p.add_argument('--headless',action='store_true');p.add_argument('--config',type=Path,default=ROOT/'config/lab_cuvette_loading/V0_demo04/native_nominal.yaml')
++    p.add_argument('--scene-only',action='store_true');p.add_argument('--preinsert-diagnostic',action='store_true')
++    p.add_argument('--arm-plan',type=Path);p.add_argument('--initial-state',type=Path);p.add_argument('--output',type=Path,required=True);p.add_argument('--seed',type=int,default=0)
++    p.add_argument('--random-layout',action='store_true');p.add_argument('--source-slot');args=p.parse_args();cfg=OmegaConf.load(args.config)
++    if cfg.scene_mode!='native_nominal':raise ValueError('This independent executor only implements native_nominal mode')
++    if args.source_slot:cfg.rack.selected_slot_id=args.source_slot
++    if args.random_layout:
++        rng=np.random.default_rng(args.seed);legal=list(cfg.randomization.legal_slots);cfg.rack.selected_slot_id=legal[args.seed%len(legal)]
++        ds=rng.uniform(-cfg.randomization.rack_translation_half_range_m,cfg.randomization.rack_translation_half_range_m,2)
++        di=rng.uniform(-cfg.randomization.instrument_translation_half_range_m,cfg.randomization.instrument_translation_half_range_m,2)
++        cfg.rack.origin_m=(np.asarray(cfg.rack.origin_m)+np.r_[ds,0.]).tolist();cfg.scene.instrument_xyz_m=(np.asarray(cfg.scene.instrument_xyz_m)+np.r_[di,0.]).tolist()
++        cfg.randomization.actual=dict(seed=args.seed,source_slot_id=cfg.rack.selected_slot_id,rack_translation_m=ds.tolist(),instrument_assembly_translation_m=di.tolist(),within_slot_translation_m=[0.,0.],rotations_randomized=False)
++    from demos.lab_cuvette_demo04.scene import layout
++    geometry=layout(cfg);cfg.scene.instrument_yaw_deg=geometry['instrument_yaw_deg'];cfg.robot.initial_tcp_m=(geometry['source_floor']+[0,0,.28]).tolist();cfg.control.transport_waypoint_xy_m=[float(geometry['source_floor'][0]),float(geometry['target_floor'][1])];cfg.control.transport_route='source_x_then_target_y'
++    args.output.mkdir(parents=True,exist_ok=False)
++    files=[*Path(__file__).parent.glob('*.py'),args.config.resolve(),ROOT/'assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda',*list((ROOT/cfg.asset_directory).glob('*'))]
++    write(args.output/'provenance.json',dict(command=sys.argv,git_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),dirty=subprocess.check_output(['git','status','--short'],cwd=ROOT,text=True),sha256={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in files if f.is_file()},source_CAD_unchanged=True,derived_vessel_xy_nominal_m=.0125,scene_mode='native_nominal',native_pair_success=False,real_calibrated=False))
++    for f in files:
++        if f.is_file():
++            dest=args.output/'source_snapshot'/f.relative_to(ROOT);dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(f,dest)
++    from demos.lab_cuvette_demo04.preflight import inspect
++    gate=inspect(cfg,args.output)
++    if not args.scene_only and not args.preinsert_diagnostic and not gate['geometry_gate_passed']:
++        write(args.output/'run_status.json',dict(status='GEOMETRY_BLOCKED_NOT_EXECUTED',physics_executed=False,workflow_success=None,native_pair_success=False,geometry_gate_passed=False,reason='Original A/B local tabs intersect corrected vessel; full task and fixed/random are not executed.'))
++        print('DEMO_RESULT GEOMETRY_BLOCKED_NOT_EXECUTED',flush=True);return
++    if args.preinsert_diagnostic:
++        if args.arm_plan is None:raise RuntimeError('Diagnostic requires --arm-plan from this exact config')
++        plan=json.loads(args.arm_plan.read_text())
++        if not plan.get('selected') or plan.get('config_file_sha256')!=hashlib.sha256(args.config.read_bytes()).hexdigest():raise RuntimeError('Whole-arm plan missing/failed or config changed; recompute plan')
++        if not np.allclose(plan['selected']['base_m'],cfg.robot.base_m,atol=1e-12,rtol=0):raise RuntimeError('Arm plan robot base differs from run')
++    from isaacsim import SimulationApp
++    app=SimulationApp(dict(headless=args.headless,width=1920,height=1080,extra_args=['--/app/extensions/fsWatcherEnabled=false']))
++    try:run(args,app,args.output/'trial_00',cfg)
++    except BaseException:
++        import traceback
++        write(args.output/'failure.json',dict(traceback=traceback.format_exc()));traceback.print_exc();raise
++    finally:app.close()
++
++if __name__=='__main__':main()
+diff --git a/demos/lab_cuvette_demo04/run.sh b/demos/lab_cuvette_demo04/run.sh
+new file mode 100755
+index 0000000..70acbe7
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/run.sh
+@@ -0,0 +1,5 @@
++#!/usr/bin/env bash
++set -euo pipefail
++ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
++export OMNI_KIT_ACCEPT_EULA=YES
++exec flock /tmp/labsim-V0_ext01-gpu.lock "${LABSIM_PYTHON:-$ROOT/../labutopia-env/bin/python}" "$ROOT/demos/lab_cuvette_demo04/run.py" "$@"
+diff --git a/demos/lab_cuvette_demo04/runtime_geometry.py b/demos/lab_cuvette_demo04/runtime_geometry.py
+new file mode 100644
+index 0000000..0e3b4ca
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/runtime_geometry.py
+@@ -0,0 +1,7 @@
++"""Reuse source-rack envelope and actual gripper input geometry methods.
++
++These methods do not verify the original native seat void. The runtime keeps
++native-seat penetration unavailable and the original-fit gate independently
++blocked; it never substitutes a12.6mm analytic square for the retained tabs.
++"""
++from demos.lab_cuvette_demo03.runtime_geometry import fixture_measure,hand_clearance
+diff --git a/demos/lab_cuvette_demo04/safety.py b/demos/lab_cuvette_demo04/safety.py
+new file mode 100644
+index 0000000..6b0a1ce
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/safety.py
+@@ -0,0 +1,16 @@
++"""State-based jam diagnostics; command motion alone never establishes insertion."""
++import numpy as np
++
++def jam_reason(rows,cfg):
++    if not rows:return None
++    t=float(rows[-1]['t']);w=[r for r in rows if r['t']>=t-float(cfg['window_s'])-1e-9]
++    if len(w)<2 or w[-1]['t']-w[0]['t']<float(cfg['window_s'])-1e-6:return None
++    a,b=w[0],w[-1]
++    if b.get('target_bottom_signed_gap_m',np.inf)<=.00005:return None
++    command_down=float(a['target_tcp'][2]-b['target_tcp'][2]);actual_down=float(a['source_bottom_z_m']-b['source_bottom_z_m'])
++    if command_down>=float(cfg['command_down_min_m']) and actual_down<=float(cfg['vessel_down_max_m']):return 'DOWNWARD_COMMAND_WITHOUT_VESSEL_PROGRESS'
++    slip=np.linalg.norm(np.asarray(b['cup_in_hand_position_m'])-a['cup_in_hand_position_m'])
++    if slip>float(cfg['relative_slip_m']):return 'VESSEL_SLIPPED_RELATIVE_TO_HAND'
++    forces=np.array([np.linalg.norm(r['target_support_force_vector_N']) for r in w])
++    if np.min(forces[-max(2,len(forces)//2):])>float(cfg['wall_force_N']) and forces[-1]-forces[0]>float(cfg['force_rise_N']):return 'SUSTAINED_RISING_NATIVE_SEAT_FORCE_BEFORE_BOTTOM'
++    return None
+diff --git a/demos/lab_cuvette_demo04/scene.py b/demos/lab_cuvette_demo04/scene.py
+new file mode 100644
+index 0000000..e1b3c4c
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/scene.py
+@@ -0,0 +1,37 @@
++"""One original instrument assembly, corrected vessel, unchanged full rack."""
++from pathlib import Path
++import numpy as np
++from demos.lab_cuvette_demo03.scene import rack_parts,rack_slots,rack_dimensions,rz,get,link_local_collision_points
++ROOT=Path(__file__).resolve().parents[2]
++ASSETS=ROOT/'assets/lab_cuvette_loading/V0_demo04'
++SEATS={'candidate_far_hinge':np.array([-.14991553560697635,.14762935326296264,.145]),'candidate_near_hinge':np.array([-.14991553560698526,.04362935326296552,.145])}
++
++def layout(cfg):
++    origin=np.asarray(cfg.rack.origin_m,float);inst=np.asarray(cfg.scene.instrument_xyz_m,float)
++    # CAD far-from-hinge direction is local+Y. Choose yaw from physical placement,
++    # not from the camera and not a presumed180deg correction.
++    design=np.asarray(get(cfg,'scene.design_rack_origin_m',origin),float)-np.asarray(get(cfg,'scene.design_instrument_origin_m',inst),float)
++    yaw=float(get(cfg,'scene.instrument_yaw_deg',np.degrees(np.arctan2(design[1],design[0]))-90.))%360
++    rr=rz(cfg.rack.yaw_deg);ir=rz(yaw);sid=str(cfg.rack.selected_slot_id);seat=str(cfg.adapter.selected_target_seat_id)
++    slots=[dict(s,origin_world_m=rr@s['origin_local_m']+origin) for s in rack_slots(cfg)]
++    source=next(s for s in slots if s['id']==sid);target_origin=SEATS[seat];floor=ir@(target_origin+[0,0,.002])+inst
++    neighbors=[]
++    for ident in [str(cfg.rack.blue_slot_id)]:
++        p=next(s for s in slots if s['id']==ident)
++        if ident==sid:raise ValueError('Selected source cannot equal occupied blue slot')
++        neighbors.append(dict(slot_id=ident,position=p['origin_world_m']+[0,0,cfg.scene.initial_bottom_gap_m],prim_path='/World/NeighborCuvette_'+ident))
++    return dict(source_slot_id=sid,target_seat_id=seat,target_geometry_id=seat,rack_origin=origin,rack_rotation=rr,instrument_origin=inst,instrument_rotation=ir,instrument_yaw_deg=yaw,opening_direction_world=ir@np.array([0,1.,0]),rack_direction_world=(origin-inst)/np.linalg.norm((origin-inst)[:2]),slots=slots,source_floor=source['origin_world_m'],source_rim_z=float(source['origin_world_m'][2]+cfg.rack.depth_m),source_inner_m=float(cfg.rack.inner_m),source_depth_m=float(cfg.rack.depth_m),target_origin_in_instrument=target_origin,target_floor=floor,target_rim_z=float(floor[2]+.027),target_inner_m=.0126,target_depth_m=.027,neighbors=neighbors,boxes=[dict(name='SourceRack/'+n,center=rr@p+origin,size=s,rotation=rr,kind='rack') for n,p,s in rack_parts(cfg)])
++
++def add_scene(world,stage,cfg):
++    from pxr import UsdGeom,Gf,UsdShade,Sdf
++    d=layout(cfg);directory=ROOT/cfg.asset_directory
++    for path,file,xyz,yaw in [('/World/SourceRack','rack.usda',d['rack_origin'],cfg.rack.yaw_deg),('/World/Instrument','instrument_native.usda',d['instrument_origin'],d['instrument_yaw_deg'])]:
++        xf=UsdGeom.Xform.Define(stage,path);xf.GetPrim().GetReferences().AddReference(str(directory/file));xf.AddTranslateOp().Set(Gf.Vec3d(*xyz));xf.AddRotateZOp().Set(float(yaw))
++    for neighbor in d['neighbors']:
++        xf=UsdGeom.Xform.Define(stage,neighbor['prim_path']);xf.GetPrim().GetReferences().AddReference(str(ROOT/cfg.source.vessel_collision));xf.AddTranslateOp().Set(Gf.Vec3d(*neighbor['position']));xf.AddRotateZOp().Set(float(cfg.vessel.yaw_deg))
++        material=UsdShade.Material.Define(stage,neighbor['prim_path']+'/BlueMaterial');shader=UsdShade.Shader.Define(stage,neighbor['prim_path']+'/BlueMaterial/Surface');shader.CreateIdAttr('UsdPreviewSurface');shader.CreateInput('diffuseColor',Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(.035,.23,.85));shader.CreateInput('roughness',Sdf.ValueTypeNames.Float).Set(.4);material.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(),'surface')
++        for prim in UsdGeom.Xform(xf).GetPrim().GetChildren():
++            if prim.GetName()=='Visual':
++                for child in prim.GetChildren():
++                    if child.IsA(UsdGeom.Mesh):UsdShade.MaterialBindingAPI.Apply(child).Bind(material)
++    return d
+diff --git a/demos/lab_cuvette_demo04/static_review.py b/demos/lab_cuvette_demo04/static_review.py
+new file mode 100644
+index 0000000..c4ace06
+--- /dev/null
++++ b/demos/lab_cuvette_demo04/static_review.py
+@@ -0,0 +1,28 @@
++"""Zero-task-step camera inspection and composed-stage population checks."""
++import hashlib
++import numpy as np
++from demos.lab_cuvette_external.geometry import write
++
++def save_review(ctx,cameras,cfg,output):
++    import cv2
++    from pxr import UsdGeom,UsdPhysics,Gf
++    from isaacsim.sensors.camera import Camera
++    from isaacsim.core.utils.viewports import set_camera_view
++    world,stage=ctx['world'],ctx['stage'];d=ctx['fixtures']
++    shots={}
++    views=[('overview',cameras['wide']),('chamber',cameras['close'])]
++    for name,eye,target in [('top',[.20,-.03,2.5],[.20,-.03,.74]),('source',[.20,-.55,1.10],d['source_floor']+[0,0,.025])]:
++        c=Camera('/World/Review_'+name,name='review_'+name,frequency=60,resolution=(1280,960));c.set_focal_length(1.5 if name=='top' else 2.5);c.set_clipping_range(.0001,10);set_camera_view(eye=np.array(eye),target=np.array(target),camera_prim_path='/World/Review_'+name);c.initialize();views.append((name,c))
++    for _ in range(30):world.render()
++    for name,c in views:
++        frame=cv2.cvtColor(c.get_rgb()[:,:,:3],cv2.COLOR_RGB2BGR)
++        for i,label in enumerate(['V0_demo04 | SINGLE INSTRUMENT | ORIGINAL A/B RETAINED',f'Root yaw {d["instrument_yaw_deg"]:.3f}deg | vessel12.5x12.5x67.5mm USER NOMINAL','RESET PREVIEW: no task physics steps; full native insertion GEOMETRY BLOCKED']):
++            cv2.putText(frame,label,(12,26+i*27),cv2.FONT_HERSHEY_SIMPLEX,.48,(0,0,0),3);cv2.putText(frame,label,(12,26+i*27),cv2.FONT_HERSHEY_SIMPLEX,.48,(255,255,255),1)
++        path=output/(name+'.png');cv2.imwrite(str(path),frame);shots[name]=dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest())
++    stage.Flatten().Export(str(output/'scene.usda'))
++    prims=list(stage.Traverse());colliders=[str(p.GetPath()) for p in prims if p.HasAPI(UsdPhysics.CollisionAPI)]
++    visual=[p for p in prims if str(p.GetPath()).startswith('/World/Instrument/Visual/') and p.IsA(UsdGeom.Mesh)]
++    original_A=stage.GetPrimAtPath('/World/Instrument/Collision/SourceMesh3');original_B=stage.GetPrimAtPath('/World/Instrument/Collision/SourceMesh4')
++    checks=dict(exactly_one_instrument=(bool(stage.GetPrimAtPath('/World/Instrument')) and not bool(stage.GetPrimAtPath('/World/NeighborInstrument'))),all_original_instrument_colliders=len([p for p in colliders if p.startswith('/World/Instrument/')])==8,original_A_active=bool(original_A) and original_A.IsActive(),original_B_active=bool(original_B) and original_B.IsActive(),no_engineering_adapter=not bool(stage.GetPrimAtPath('/World/Instrument/EngineeringAdapterA')),rack36slots=len(list(stage.GetPrimAtPath('/World/SourceRack/Slots').GetChildren()))==36,rack50colliders=len([p for p in colliders if p.startswith('/World/SourceRack/')])==50,cuvette28colliders=len([p for p in colliders if p.startswith('/World/Cuvette/')])==28,opening_faces_rack=float(d['opening_direction_world'][:2]@((d['rack_origin']-d['instrument_origin'])[:2]/np.linalg.norm((d['rack_origin']-d['instrument_origin'])[:2])))>.99999,reset_position_check=max(ctx['errors'])<1e-6)
++    result=dict(version='V0_demo04',task_physics_steps=0,static_scene_pass=all(checks.values()),checks=checks,layout=d,colliders=colliders,screenshots=shots,scene_usd_sha256=hashlib.sha256((output/'scene.usda').read_bytes()).hexdigest(),source_rack_tentative=True,nominal_dimensions_source='user supplied',full_task_executed=False,workflow_success=False,native_pair_success=False,real_calibrated=False)
++    write(output/'static_validation.json',result);print('STATIC_SCENE',result['static_scene_pass'],checks,flush=True);return result

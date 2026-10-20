@@ -8,7 +8,7 @@
 - [全部本轮运行与未执行批次](docs/lab_cuvette_loading/V0_demo04/results/summary.json) · [完整episode读取核验](docs/lab_cuvette_loading/V0_demo04/data_audit/READ_FIRST_actual_diagnostic_03_zh.md) · [准确命令](demos/lab_cuvette_demo04/README.md)
 - [全部历史](LABSIM_PROGRESS.md) · [新Agent结果阅读包](docs/agent_handoff/README.md)
 
-分享分支为 `codex/lab-cuvette-demo04`，GitHub当前显示仓库公开，可直接访问。阅读包另含885 MB自含H5和压缩逐步物理/接触记录；该数据完整可读，但完整装载与成功训练资格均为false。固定5次及随机10次完整任务未启动。旧demo03的16 mm适配座成功保留其原范围。以下保留上游LabUtopia文档。
+分享分支为 `codex/lab-cuvette-demo04`，GitHub当前显示仓库公开，可直接访问。默认精简阅读包仅含本轮约31 MB报告、录像、结果、变更补丁及配置；不包含历史版本目录和完整H5。完整数据仍保留在原大包与outputs中；本轮完整装载与成功训练资格均为false。固定5次及随机10次完整任务未启动。旧demo03的16 mm适配座成功保留其原范围。以下保留上游LabUtopia文档。
 
 <div align="center">
   <img src="images/logo.png" alt="Logo" width="180">
