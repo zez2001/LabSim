@@ -1,0 +1,31 @@
+{
+  "schema": "labsim.Env_v1.rpc_transport_validation.v1",
+  "scope": "Real deployed RPent BaseEnvFacade and HttpRpcClient over localhost HTTP with a fixture environment; NOT Isaac physics integration",
+  "module": "demos/lab_cuvette_env_v1/rpc.py",
+  "isaac_python_import": "passed using source-only RPent root; no model site-packages or installation",
+  "actual_base_class": "rpent.robots.components.env_facade_base.BaseEnvFacade",
+  "isaac_calls_thread_contract": "all dispatch on serve_environment caller main thread",
+  "wait_loop_operations": "HTTPServer.handle_request only; no app.update/world.step/render",
+  "command": "/home/wujing/Desktop/vla/rpent/.venv/bin/python -m pytest -q tests/test_lab_cuvette_env_v1_rpc.py tests/test_lab_cuvette_policy_contract.py",
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "checked": [
+    "RPent ndarray dtype/shape/base64 round trip",
+    "fixed RPC allowlist rejecting debug and teacher methods",
+    "no fixture physics counter/time change during request idle window",
+    "all fixture calls on the server main thread",
+    "old episode action refusal",
+    "Gym five-tuple step",
+    "return_all_frames normalized to RPent obs-list five-tuple",
+    "independent finalize without caller success bool",
+    "server close and process exit 0"
+  ],
+  "actual_isaac_service_run": false,
+  "actual_policy_environment_action": false,
+  "recorded_utc": "2026-10-20T16:31:30.238193+00:00",
+  "checks_additional": [
+    "source-only import retains LabSim robots namespace and Isaac numpy origin",
+    "late old-episode finalize refused"
+  ],
+  "unittest_discovery_in_isaac": "explicit SkipTest because pytest is absent; actual transport suite runs in existing RPent .venv"
+}

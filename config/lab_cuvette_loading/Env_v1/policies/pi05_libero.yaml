@@ -1,0 +1,27 @@
+policy_id: RLinf-Pi05-LIBERO-130-fullshot-SFT
+backend: rpent_pi05
+checkpoint: /home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT
+runtime_python: /home/wujing/Desktop/vla/rpent/.venv/bin/python
+rpent_root: /home/wujing/Desktop/vla/rpent
+rpent_commit: 0d72dfac1e75417564e220e31ba7e4b5d8e83665
+installed_openpi_distribution: rpent-openpi==0.2.2
+installed_rlinf_distribution: rpent-rlinf==0.3.0
+embodiment: libero
+expected_weights_sha256: 4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683
+input_images:
+  main_images: side_camera
+  wrist_images: wrist_camera
+state_semantics: tcp_in_robot_base_xyz_rotvec_signed_finger_left_right
+output_semantics: normalized_osc_delta_xyz_axisangle_gripper_sign
+trained_translation_scale_m: 0.05
+trained_rotation_scale_rad: 0.5
+policy_action_hz: 20.0
+control_hz: 60.0
+execution_translation_cap_m: 0.002
+execution_rotation_cap_rad: 0.02
+maximum_chunk: 5
+gripper_single_finger_delta_m: 0.008
+gripper_effort_limit_N: 8.0
+truth_observation_allowed: false
+is_labsim_finetuned: false
+transfer_dynamics_calibrated: false

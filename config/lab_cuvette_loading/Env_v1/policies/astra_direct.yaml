@@ -1,0 +1,17 @@
+policy_id: gpt-6-astra-direct
+backend: rpent_codex_direct
+provider: codex_app_server_chatgpt_login
+model_id: gpt-6-astra
+reasoning_effort: medium
+codex_bin: /usr/lib/chatgpt/resources/codex
+rpent_root: /home/wujing/Desktop/vla/rpent
+runtime_python: /home/wujing/Desktop/vla/rpent/.venv/bin/python
+truth_observation_allowed: false
+vla_tools_allowed: false
+expert_tools_allowed: false
+allowed_tools: [observe, bounded_action, finish]
+evaluation_memory: empty_frozen_per_episode
+max_translation_m: 0.002
+max_rotation_rad: 0.02
+max_joint_delta_rad: 0.02
+max_control_ticks: 3

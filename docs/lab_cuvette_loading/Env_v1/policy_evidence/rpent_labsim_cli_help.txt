@@ -1,0 +1,80 @@
+usage: rpent_cli.py
+                    [--robot {labsim_cuvette,libero,ridgebase_franka,robocasa,robotwin}]
+                    [--env {labsim_cuvette,libero,ridgebase_franka,robocasa,robotwin}]
+                    [--planner {api,claude_code,codex}] [--model MODEL]
+                    [--base-url BASE_URL] [--max-turns MAX_TURNS]
+                    [--max-tokens MAX_TOKENS]
+                    [--reasoning-effort {none,low,medium,high,xhigh}]
+                    [--no-images] [--planner-timeout-s PLANNER_TIMEOUT_S]
+                    [--claude-code-max-budget-usd CLAUDE_CODE_MAX_BUDGET_USD]
+                    [--output-dir OUTPUT_DIR] [--memory-profile {hf,local}]
+                    [--memory-dir MEMORY_DIR] [--explore] [--dashboard]
+                    [--dashboard-host DASHBOARD_HOST]
+                    [--dashboard-port DASHBOARD_PORT]
+                    [--dashboard-language {en,zh-cn}] [--verbose]
+                    [--interactive] --env-endpoint ENV_ENDPOINT
+                    [--vla-endpoint VLA_ENDPOINT] [--seed SEED]
+                    [--robot-base-position-m ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M]
+                    [--labsim-mode {direct,harness}]
+                    [--subtask {loading,preinsert_diagnostic}] [-h]
+
+RPent: Agentic Infrastructure for the Physical World
+
+options:
+  --robot {labsim_cuvette,libero,ridgebase_franka,robocasa,robotwin}
+                        Robot backend. Known robots: labsim_cuvette, libero,
+                        ridgebase_franka, robocasa, robotwin.
+  --env {labsim_cuvette,libero,ridgebase_franka,robocasa,robotwin}
+                        Deprecated alias for --robot; use --robot instead.
+  --planner {api,claude_code,codex}
+                        LLM backend: api | claude_code | codex.
+  --model MODEL         Model id. For the 'api' planner, prefix the provider
+                        (e.g. anthropic:claude-opus-4-8, openai:gpt-5.5,
+                        openai-chat:glm-5.2). For claude_code/codex this
+                        overrides the backend default model.
+  --base-url BASE_URL   API base URL. Defaults to the selected backend's base
+                        URL env var.
+  --max-turns MAX_TURNS
+  --max-tokens MAX_TOKENS
+  --reasoning-effort {none,low,medium,high,xhigh}
+                        Planner reasoning effort for api, claude_code, and
+                        codex. Higher effort may improve task success rate but
+                        increases runtime. Defaults to none.
+  --no-images           Never send image bytes to the model (api planner
+                        only). Use for text-only models that reject image
+                        input (e.g. 400 "message type 'image_url' is not
+                        supported"); read_image then returns the image name
+                        instead, with a notice.
+  --planner-timeout-s PLANNER_TIMEOUT_S
+                        Wall-clock cap for api/claude_code/codex planner runs.
+                        Terminal interactive API/Claude sessions are exempt.
+                        Defaults to CODEX_TIMEOUT_S (codex only),
+                        CELL_TIMEOUT_S, or 1200.
+  --claude-code-max-budget-usd CLAUDE_CODE_MAX_BUDGET_USD
+                        Budget passed to claude -p --max-budget-usd. Defaults
+                        to MAX_BUDGET_USD env or 10.
+  --output-dir OUTPUT_DIR
+  --memory-profile {hf,local}
+                        Memory profile (default: hf for evaluation, local for
+                        exploration).
+  --memory-dir MEMORY_DIR
+                        Local memory root (environment default when omitted).
+  --explore             Enable exploration and memory distillation.
+  --dashboard           Start a local dashboard server for this single run.
+  --dashboard-host DASHBOARD_HOST
+                        Dashboard bind host. Defaults to 127.0.0.1.
+  --dashboard-port DASHBOARD_PORT
+                        Dashboard port. 0 asks the OS for a free port.
+  --dashboard-language {en,zh-cn}
+                        Dashboard UI language. 'zh-cn' serves the Chinese
+                        translation; defaults to English.
+  --verbose             Enable DEBUG-level logging for stdout and the run.log
+                        file. Defaults to INFO when not set.
+  --interactive, -i     Interactive mode: opens an interactive cli session.
+  --env-endpoint ENV_ENDPOINT
+  --vla-endpoint VLA_ENDPOINT
+  --seed SEED
+  --robot-base-position-m ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M
+  --labsim-mode {direct,harness}
+  --subtask {loading,preinsert_diagnostic}
+  -h, --help            show this help message and exit

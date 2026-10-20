@@ -1,0 +1,38 @@
+usage: policy_runner.py [-h] --backend {pi05,harness,astra}
+                        [--policy-config POLICY_CONFIG] --env-endpoint
+                        ENV_ENDPOINT [--vla-endpoint VLA_ENDPOINT] --output
+                        OUTPUT [--seed SEED]
+                        [--subtask {loading,preinsert_diagnostic}]
+                        [--max-model-requests MAX_MODEL_REQUESTS]
+                        [--max-actions MAX_ACTIONS]
+                        [--planner-timeout-s PLANNER_TIMEOUT_S]
+                        [--robot-base-position-m ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M]
+                        [--robot-base-quaternion-xyzw ROBOT_BASE_QUATERNION_XYZW ROBOT_BASE_QUATERNION_XYZW ROBOT_BASE_QUATERNION_XYZW ROBOT_BASE_QUATERNION_XYZW]
+                        [--codex-bin CODEX_BIN]
+                        [--reasoning-effort {low,medium,high,xhigh}]
+
+Run real policies against the same LabSim RPC; no Isaac/model installation.
+Use the existing RPent .venv. An environment server and (for pi05/Harness) an
+actual checkpoint server must already be running. Waiting for models does not
+step physics; action durations are sent explicitly in simulation seconds.
+
+options:
+  -h, --help            show this help message and exit
+  --backend {pi05,harness,astra}
+  --policy-config POLICY_CONFIG
+                        YAML overrides for the declared transfer contract; no
+                        source edits
+  --env-endpoint ENV_ENDPOINT
+  --vla-endpoint VLA_ENDPOINT
+  --output OUTPUT
+  --seed SEED
+  --subtask {loading,preinsert_diagnostic}
+  --max-model-requests MAX_MODEL_REQUESTS, --max-planner-turns MAX_MODEL_REQUESTS
+                        pi05 predict-call budget; Astra/Harness RPent message-
+                        turn budget, not underlying HTTP request count
+  --max-actions MAX_ACTIONS
+  --planner-timeout-s PLANNER_TIMEOUT_S
+  --robot-base-position-m ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M ROBOT_BASE_POSITION_M
+  --robot-base-quaternion-xyzw ROBOT_BASE_QUATERNION_XYZW ROBOT_BASE_QUATERNION_XYZW ROBOT_BASE_QUATERNION_XYZW ROBOT_BASE_QUATERNION_XYZW
+  --codex-bin CODEX_BIN
+  --reasoning-effort {low,medium,high,xhigh}

@@ -1,0 +1,91 @@
+{
+  "schema": "labsim.Env_v1.policy_deployment_inventory.v1",
+  "recorded_utc": "2026-10-20T15:32:38Z",
+  "rpent_root": "/home/wujing/Desktop/vla/rpent",
+  "rpent_commit": "0d72dfac1e75417564e220e31ba7e4b5d8e83665",
+  "runtime_python": "/home/wujing/Desktop/vla/rpent/.venv/bin/python",
+  "distributions": {
+    "rpent": "0.0.0",
+    "rpent-openpi": "0.2.2",
+    "rpent-rlinf": "0.3.0",
+    "openai-codex": "0.147.0",
+    "torch": "2.7.1",
+    "transformers": "4.57.6"
+  },
+  "checkpoint_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT/model.safetensors",
+      "size_bytes": 7473091464,
+      "sha256": "4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT/metadata.pt",
+      "size_bytes": 3236,
+      "sha256": "8eba92f1159903755c6f529320913033a142a691bb148f90a96db0b6b91d6528"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT/physical-intelligence/libero/norm_stats.json",
+      "size_bytes": 4507,
+      "sha256": "dae37d79a22108af83df9189c6710a3ec8e077d65b28e34bdf1da724e5ae30f1"
+    }
+  ],
+  "model_config": {
+    "pi05": true,
+    "action_dim": 32,
+    "action_horizon": 10,
+    "max_token_len": 200,
+    "discrete_state_input": false
+  },
+  "runtime_rpent_override": {
+    "num_action_chunks": 5,
+    "action_dim": 7,
+    "use_proprio": true,
+    "num_steps": 5,
+    "add_value_head": false,
+    "openpi": {
+      "config_name": "pi05_libero",
+      "num_images_in_input": 2,
+      "action_chunk": 5,
+      "num_steps": 5,
+      "action_env_dim": 7,
+      "add_value_head": false
+    }
+  },
+  "data_config": {
+    "asset_id": "physical-intelligence/libero",
+    "use_quantile_norm": true,
+    "input_transforms": [
+      "LiberoInputs"
+    ],
+    "output_transforms": [
+      "LiberoOutputs"
+    ],
+    "model_input_transforms": [
+      "InjectDefaultPrompt",
+      "ResizeImages",
+      "TokenizePrompt",
+      "PadStatesAndActions"
+    ],
+    "model_output_transforms": []
+  },
+  "installed_fork_provenance": {
+    "declared_repo": "https://github.com/RLinf/openpi.git@rpent",
+    "installed_direct_url": {
+      "url": "file:///tmp/rpent-openpi-lock",
+      "dir_info": {
+        "editable": false
+      }
+    },
+    "exact_upstream_git_commit": "unknown: installed wheel direct_url is a local build path, no git revision"
+  },
+  "semantics_sources": [
+    "rlinf/envs/libero/libero_env.py:_extract_image_and_state",
+    "rlinf/models/embodiment/openpi/__init__.py:get_model (checkpoint Normalize/Unnormalize)",
+    "rpent/robots/components/pi05_vla_client.py:Pi05VLAClient",
+    "robosuite/controllers/config/default/parts/osc_pose.json",
+    "robosuite/models/grippers/panda_gripper.py:PandaGripper.format_action"
+  ],
+  "actual_load_verified": true,
+  "actual_inference_verified": false,
+  "actual_env_action_verified": false
+}

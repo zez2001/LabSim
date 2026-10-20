@@ -2,7 +2,7 @@
 
 更新于 **2026-10-21 00:33（Asia/Shanghai）**。开发分支：`codex/lab-cuvette-env-v1`。本阶段起点提交：`e7e00996ed0b5c0f24e36d10ad5cbeefe58c4462`；本页描述其后的开发工作，提交及远端状态以实际 Git 记录为准。
 
-**最终目标尚未完成。** 本轮已完成离线几何审计、历史数据复核和部分真实模型资源访问；此时间点尚无 Env_v1 新场景的实际 Isaac 连续运行、完整装载成功或策略控制轨迹。以下状态随实际运行逐阶段更新，不能将接口代码或单元测试当作物理演示。
+**最终目标尚未完成。** 本轮已完成离线几何审计、历史数据复核和部分真实模型资源访问；已实际运行 Env_v1 preview_03：2 秒、120 控制步、480 物理步及双相机/H5 已写出；结束时相机销毁出现 Invalid NodeObj，进程关闭崩溃，故资源清理尚未通过。尚无完整装载成功或策略控制轨迹。以下状态随实际运行逐阶段更新，不能将接口代码或单元测试当作物理演示。
 
 ## 已执行并有证据
 
@@ -16,6 +16,8 @@
 - **Astra 真实访问。** 已使用现有登录及实际 `gpt-6-astra` 完成远端文本推理探测。尚无本轮任务图像、机器人动作或后继观测，不计为 Astra 控制 episode。[三后端访问及版本证据](docs/lab_cuvette_loading/Env_v1/policy_backends.md)
 
 ## 代码已建立、尚待实际环境验证
+
+新增实跑记录：`outputs/lab_cuvette_loading/Env_v1/preview_03/episode_0000`（未提交原始 H5）。初始画面确有单台开盖仪器、完整6×6架及两个器皿；腕相机被手爪遮挡，需要重新布置。发现 Lula right_gripper 与 hand 相差180°，正在用实际FK固定变换校核修复，不能沿用错误姿态。
 
 正式 task/controller/factory/collector 与统一 launcher 已建立；环境提供 reset、step、chunk_step、观测、相机、语言及 close 接口。固定 side_camera 与真实 hand 子节点 wrist_camera、同步推理等待、九维执行动作及双指 effort 记录、有界接触锁定教师、分区支撑采集和独立判分已经接入代码。
 
@@ -38,7 +40,7 @@ bash demos/lab_cuvette_external/usd_python.sh \
   -p test_lab_cuvette_env_v1_scorer.py -v
 ```
 
-以下为当前源码提供的准确 CLI，**截至本页时间点尚未实测**。GUI 默认开启；加 `--headless` 运行无窗口模式。正式 loading 仍应受当前几何预检阻塞：
+以下为当前源码提供的 CLI。preview_03 已实际执行，退出清理失败；其他命令仍需验证。GUI 默认开启；加 `--headless` 运行无窗口模式。正式 loading 仍应受当前几何预检阻塞：
 
 ```bash
 bash demos/lab_cuvette_env_v1/run.sh --mode preview \
