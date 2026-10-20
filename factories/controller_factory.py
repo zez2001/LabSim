@@ -62,3 +62,6 @@ register_controller("minimal_precision_insertion", MinimalPrecisionInsertionCont
 
 from controllers.lab_cuvette_loading_controller import LabCuvetteLoadingController
 register_controller("lab_cuvette_loading", LabCuvetteLoadingController)
+
+from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher
+register_controller("lab_cuvette_env_v1_teacher", LabCuvetteTeacher)

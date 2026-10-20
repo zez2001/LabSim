@@ -53,3 +53,6 @@ register_task("minimal_precision_insertion", MinimalPrecisionInsertionTask)
 
 from tasks.lab_cuvette_loading_task import LabCuvetteLoadingTask
 register_task("lab_cuvette_loading", LabCuvetteLoadingTask)
+
+from tasks.lab_cuvette_loading_env_v1 import LabCuvetteLoadingEnvV1
+register_task("lab_cuvette_env_v1", LabCuvetteLoadingEnvV1)

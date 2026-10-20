@@ -1,0 +1,30 @@
+{
+  "schema": "labsim.Env_v1.camera_mount_revision.v1",
+  "source_episode": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_02/episode_0000",
+  "observations": {
+    "vendor_local_pose_not_authored_mount": true,
+    "prior_Fabric_query_had_creation_side_effect": true,
+    "rendered_pixel_pose_association_verified": false
+  },
+  "vendor_code": {
+    "local_pose": "isaacsim.core.utils/xforms.py:get_local_pose; Fabric world divided by USD parent world",
+    "fabric_getter": "isaacsim.core.prims/XformPrim.get_world_poses(usd=False) -> _prepare_view_in_fabric -> _create_fabric_view_indices -> SetWorldXformFromUsd"
+  },
+  "correction": {
+    "authored_mount": "UsdGeom.Xformable.GetLocalTransformation(Default) and original camera config",
+    "world_transform": "ComputeLocalToWorldTransform(Default), respecting resetXformStack",
+    "Fabric": "Read pre-existing usdrt.Rt.Xformable WorldPosition/WorldOrientation attrs only; missing remains unknown",
+    "hierarchy": "SetResetXformStack(False) once for camera at creation; no parent/body/world pose setters per frame",
+    "rendered_visibility": "Requires next real episode; not inferred from metadata"
+  },
+  "CPU_verification": {
+    "unittest_count": 32,
+    "unittest_passed": 32,
+    "actual_USD_inheritance_and_reset_stack_helper": true,
+    "Isaac_started": false
+  },
+  "evidence": [
+    "grasp02_inspection/inspection.json",
+    "grasp02_inspection/independent_URDF_FK_audit.json"
+  ]
+}

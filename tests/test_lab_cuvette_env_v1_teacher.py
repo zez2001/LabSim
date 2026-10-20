@@ -38,8 +38,12 @@ class TeacherContractTest(unittest.TestCase):
     def test_first_contact_freezes_before_persistence_and_lost_contact_resumes_slowly(self):
         c=self.controller;c.act(dict(simulation_time=0,episode_id='fixture'),self.debug)
         c.phase='GRASP';c.phase_start=0;c.anchor=np.array(self.debug['actual_tcp_position_m'])
+        c.last_grip_opening=.013  # Contact follows a target narrower than measured fingers.
+        previous=c.last_grip_opening
         first=c.act(dict(simulation_time=.1,episode_id='fixture'),self.debug)
-        self.assertAlmostEqual(first['gripper_opening_m'],sum(self.debug['finger_joint_positions_m']))
+        self.assertLessEqual(first['gripper_opening_m'],previous)
+        self.assertGreater(first['gripper_opening_m'],sum(self.debug['finger_joint_positions_m'])-.0006)
+        self.assertGreater(first['gripper_opening_m'],0)
         self.assertIsNone(c.latch_opening)
         lost=dict(self.debug,finger_contact_N=[0.,0.])
         following=c.act(dict(simulation_time=.1+1/60,episode_id='fixture'),lost)

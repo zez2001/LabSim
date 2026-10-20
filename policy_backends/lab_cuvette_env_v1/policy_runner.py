@@ -55,6 +55,7 @@ def main(argv=None):
     p.add_argument("--output", required=True)
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--subtask", choices=["loading", "preinsert_diagnostic"], default="loading")
+    p.add_argument("--layout-mode", choices=["standard", "random"], default="standard", help="passed as reset options.mode; assemblies remain governed by the scene randomizer")
     p.add_argument("--max-model-requests", "--max-planner-turns", dest="max_model_requests", type=int, default=100, help="pi05 predict-call budget; Astra/Harness RPent message-turn budget, not underlying HTTP request count")
     p.add_argument("--max-actions", type=int, default=1000)
     p.add_argument("--planner-timeout-s", type=int, default=600)
@@ -87,13 +88,24 @@ def main(argv=None):
     env = None
     stage = "ENV_CONNECT"
     started = time.perf_counter()
-    result = {"backend": args.backend, "integration_complete": False, "task_success": None,
+    result = {"backend": args.backend, "subtask": args.subtask, "layout_mode": args.layout_mode, "integration_complete": False, "task_success": None,
               "actual_model_requests": 0, "executed_actions": 0, "termination_reason": None}
     try:
         env = LabSimEnvClient(HttpRpcClient(args.env_endpoint))
         stage = "ENV_RESET"
-        obs, info = env.reset(seed=args.seed, options={"subtask": args.subtask, "policy_id": {"pi05": "RLinf-Pi05-LIBERO-130-fullshot-SFT", "astra": "gpt-6-astra-direct", "harness": "harness-rpent-pi05-libero"}[args.backend], "truth_visible": False})
+        obs, info = env.reset(seed=args.seed, options={"subtask": args.subtask, "mode": args.layout_mode, "policy_id": {"pi05": "RLinf-Pi05-LIBERO-130-fullshot-SFT", "astra": "gpt-6-astra-direct", "harness": "harness-rpent-pi05-libero"}[args.backend], "truth_visible": False})
         result.update(episode_id=obs["episode_id"], reset_info=info)
+        if info.get("terminated") is True or info.get("truncated") is True:
+            # Loading can terminate at a geometry precheck. Do not connect to a
+            # model service, fetch policy images or issue any action afterward.
+            reason = info.get("termination_reason") or "STARTUP_TERMINATED"
+            result.update(startup_terminated=True, termination_reason=reason,
+                          task_success=info.get("task_success"),
+                          attempt_category="geometry_precheck_blocked" if "GEOMETRY" in str(reason).upper() else "startup_terminated",
+                          counts_as_physical_task_failure=False,
+                          model_service_contacted=False)
+            return 3
+        result.update(startup_terminated=False, model_service_contacted=False)
         camera_meta = {name: env.get_camera_meta(name) for name in ("side_camera", "wrist_camera")}
         (out / "camera_meta.json").write_text(json.dumps(camera_meta, indent=2, default=lambda x: x.tolist() if hasattr(x, "tolist") else str(x)) + "\n")
         result["model_visible_state_keys"] = list(policy_observation(obs).keys())
@@ -107,6 +119,7 @@ def main(argv=None):
             contract_fields = {f.name for f in dataclasses.fields(LiberoTransferContract)}
             contract = LiberoTransferContract(**{k: v for k, v in policy_cfg.items() if k in contract_fields})
             stage = "MODEL_CONNECT"
+            result["model_service_contacted"] = True
             adapter = Pi05LiberoAdapter(HttpRpcClient(args.vla_endpoint), contract=contract, robot_base_position_m=base,
                                        robot_base_quaternion_xyzw=args.robot_base_quaternion_xyzw)
         if args.backend == "pi05":
@@ -136,7 +149,7 @@ def main(argv=None):
                         break
                 if terminated or truncated or result["executed_actions"] >= args.max_actions:
                     break
-            result["termination_reason"] = result["termination_reason"] or "DECLARED_POLICY_BUDGET"
+            result["termination_reason"] = result["termination_reason"] or "POLICY_BUDGET"
         else:
             os.environ["CODEX_BIN"] = args.codex_bin
             toolkit = LabSimToolkit(env, output_dir=out / "planner", mode="direct" if args.backend == "astra" else "harness",
@@ -150,7 +163,13 @@ def main(argv=None):
             prompt = f"Task: {language}\nBegin with observe. Use only the provided RPent tools; no files or shell.\n"
             if args.subtask == "preinsert_diagnostic":
                 prompt += "This episode is explicitly preinsert_diagnostic: approach and transport only. Do not attempt blocked native insertion or claim loading success.\n"
+            if args.backend == "harness":
+                prompt += "For this real-chain attempt, call vla_primitive with an observation-grounded short instruction, then inspect the actual successor observation. Do not substitute a whole expert workflow.\n"
+            else:
+                prompt += "For this real-chain attempt, choose at least one bounded low-level action from the actual observation, then inspect its successor observation.\n"
+            prompt += f"The declared maximum is {args.max_actions} actual actions. End with failure or stuck when the finite budget is spent unless the independent environment has reported success. Do not claim success from interface connectivity.\n"
             stage = "MODEL_PLANNER"
+            result["model_service_contacted"] = True
             solved = planner.solve(system_prompt=_system_prompt(), user_message=prompt, toolkit=toolkit,
                                    max_turns=args.max_model_requests)
             result.update(task_success=toolkit._task_success, planner_error=solved.error,
@@ -184,6 +203,9 @@ def main(argv=None):
                                                  failure_type=failure_type)
                 result["episode_finalized"] = True
                 result["environment_final_result"] = finalized
+                if isinstance(finalized, dict) and finalized.get("termination_reason"):
+                    result["requested_termination_reason"] = result.get("termination_reason")
+                    result["termination_reason"] = finalized["termination_reason"]
                 if isinstance(finalized, dict) and "task_success" in finalized:
                     result["task_success"] = finalized["task_success"]
             except Exception as finalize_error:

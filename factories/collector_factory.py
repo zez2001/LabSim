@@ -25,3 +25,6 @@ register_collector("action_state", ActionStateDataCollector)
 register_collector("minimal_pick", MinimalPickCollector)
 
 register_collector("minimal_precision_insertion", MinimalPrecisionInsertionCollector)
+
+from data_collectors.lab_cuvette_env_v1_collector import LabCuvetteEnvV1Collector
+register_collector("lab_cuvette_env_v1", LabCuvetteEnvV1Collector)

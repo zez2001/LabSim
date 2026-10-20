@@ -53,6 +53,13 @@ def classify_seat_point(point_world,force_on_cup,floor,rotation,depth,tolerance=
     return 'wall_or_other',point,force
 
 
+def rigid_following_bottom(vertices,relative_position,relative_rotation,hand_position,hand_rotation):
+    """No-slip snapshot prediction for requested hand pose; never an actual state."""
+    cup_in_hand=relative_rotation.apply(np.asarray(vertices,float))+np.asarray(relative_position,float)
+    requested_world=hand_rotation.apply(cup_in_hand)+np.asarray(hand_position,float)
+    return float(requested_world[:,2].min())
+
+
 class PhysicsRecorder:
     def __init__(self,ctx,cfg,output_dir):
         from pxr import Usd,UsdGeom,UsdPhysics,PhysicsSchemaTools
@@ -75,6 +82,7 @@ class PhysicsRecorder:
         if len(self.target_indices)!=1:raise RuntimeError('Expected exactly one original selected seat collider: '+str(self.target_indices))
         self.body_api=UsdPhysics.RigidBodyAPI(self.cup.prim)
         self.com_local=np.asarray(self.cup.get_com()[0],float).reshape(3)
+        self.command_kin=ctx['solver'].get_kinematics_solver() if ctx.get('solver') is not None else None
         self.tcp_local=np.asarray(cfg.robot.tcp_local_m,float)
         self.tcp_rotation=rot(getattr(cfg.robot,'tcp_quaternion_wxyz',[0.,0.,0.,1.]))
         self.tcp_fixed_check=dict(source='Installed Franka Lula right_gripper fixed frame,not hand frame',
@@ -127,6 +135,7 @@ class PhysicsRecorder:
             source_visual_paths=mesh_paths,actual_body_local_visual_dimensions_m=np.ptp(self.vertices,axis=0),
             TCP_fixed_frame_verification=self.tcp_fixed_check,
             source_visual_scope='Actual current USD visual points,fullrelative transforms; not cooked PhysX readback',
+            commanded_bottom_definition='min Z of allactualderivedsourcevisualvertices transformed by currentmeasuredcup-in-hand relation and LulaFK(command_q7) handpose; hypotheticalinstantaneousrigidfollowing,notactualdescent andnotattachment',
             target_contact_filter_paths=[self.filters[i] for i in self.target_indices],
             contact_force_unit='N: every tensor contact API explicitly called with physics_dt; raw impulse separately Ns',
             gripper_target_semantics='symmetric per-finger joint target_m; total opening=2*target; raw action envelope retains totalopening',
@@ -245,6 +254,20 @@ class PhysicsRecorder:
             omega=(r*rot(self.last['quaternion_wxyz']).inv()).as_rotvec()/elapsed
         uv=self.body_api.GetVelocityAttr().Get();uw=self.body_api.GetAngularVelocityAttr().Get()
         relative=hr.inv()*r
+        relative_position=hr.inv().apply(p-hp)
+        commanded_bottom=None;commanded_fk_hand=None;commanded_fk_tcp=None;command_fk_error=None
+        q_request=np.asarray(command_q,float)
+        if self.command_kin is not None and q_request.shape==(9,) and np.isfinite(q_request[:7]).all():
+            try:
+                requested_hp,requested_hr=self.command_kin.compute_forward_kinematics('panda_hand',q_request[:7])
+                requested_hr=Rotation.from_matrix(np.asarray(requested_hr))
+                requested_hp=np.asarray(requested_hp)
+                commanded_bottom=rigid_following_bottom(self.vertices,relative_position,relative,requested_hp,requested_hr)
+                commanded_fk_hand=dict(position_m=requested_hp,quaternion_wxyz=q_wxyz(requested_hr))
+                commanded_fk_tcp=dict(position_m=requested_hp+requested_hr.apply(self.tcp_local),
+                                      quaternion_wxyz=q_wxyz(requested_hr*self.tcp_rotation))
+            except Exception as exc:
+                command_fk_error=dict(type=type(exc).__name__,message=str(exc))
         yaw=np.rad2deg(np.arctan2((self.instrument_rotation.T@r.as_matrix())[1,0],(self.instrument_rotation.T@r.as_matrix())[0,0]))
         clearance=self.hand_clearance(self.link_points,self.bodies,world_vertices)
         row=dict(t=float(t),simulation_time=float(t),engine_time=float(self.ctx['world'].current_time),physics_step=int(step),phase=str(phase),
@@ -258,7 +281,10 @@ class PhysicsRecorder:
             linear_velocity_USD_m_s=np.asarray(uv) if uv is not None else None,angular_velocity_USD_deg_s=np.asarray(uw) if uw is not None else None,
             fd_com_velocity_m_s=fd,fd_angular_velocity_rad_s=omega,
             actual_tcp_position_m=tcp,actual_tcp_quaternion_wxyz=q_wxyz(tcp_r),
-            cup_in_hand_position_m=hr.inv().apply(p-hp),cup_in_hand_quaternion_wxyz=q_wxyz(relative),
+            cup_in_hand_position_m=relative_position,cup_in_hand_quaternion_wxyz=q_wxyz(relative),
+            commanded_bottom_z_m=commanded_bottom,command_FK_hand_pose=commanded_fk_hand,command_FK_TCP_pose=commanded_fk_tcp,
+            command_FK_error=command_fk_error,command_bottom_prediction_contact_qualified=bool(np.all(np.linalg.norm(fm,axis=1)>.02)),
+            commanded_bottom_semantics='currentmeasuredcup-in-hand frozenonlyforhypotheticalFKprediction; dynamicactualbottomstoredseparately',
             joints9=np.asarray(self.robot.get_joint_positions()),joint_velocities9=np.asarray(self.robot.get_joint_velocities()),
             finger_contact_N=np.linalg.norm(fm,axis=1),finger_normal_force_on_cup_N=fm,finger_friction_force_on_cup_N=ff,
             finger_joint_positions_m=np.asarray(self.robot.get_joint_positions())[7:9],

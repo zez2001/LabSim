@@ -16,6 +16,15 @@ def parse_args():
                        help='Configuration file name (without .yaml extension)')
     parser.add_argument('--config-dir', type=str, default='config',
                        help='Configuration directory path (default: config)')
+    parser.add_argument('--env-mode',choices=['teacher','preview','serve','audit','plan'],default='teacher')
+    parser.add_argument('--env-config',type=str,default='config/lab_cuvette_loading/Env_v1/native.yaml')
+    parser.add_argument('--subtask',choices=['loading','preinsert_diagnostic','grasp_hold','extract_transport'])
+    parser.add_argument('--layout-mode',choices=['standard','random'],default='standard')
+    parser.add_argument('--seed',type=int,default=0)
+    parser.add_argument('--episodes',type=int,default=1)
+    parser.add_argument('--output',type=str)
+    parser.add_argument('--port',type=int,default=8097)
+    parser.add_argument('--initial-state',type=str)
     return parser.parse_args()
 
 # Get command line arguments
@@ -23,6 +32,12 @@ args = parse_args()
 
 # Independent scenes use their own scene builder and the shared task registries.
 # Existing laboratory configurations keep the original startup and run loop.
+if args.config_name == 'lab_cuvette_env_v1':
+    import sys
+    from demos.lab_cuvette_env_v1.run import parser as env_parser,main as env_main
+    env_args=env_parser().parse_args(['--config',args.env_config,'--mode',args.env_mode,'--layout-mode',args.layout_mode,'--seed',str(args.seed),'--episodes',str(args.episodes),'--port',str(args.port)]+(['--subtask',args.subtask] if args.subtask else [])+(['--headless'] if args.headless else [])+(['--output',args.output] if args.output else [])+(['--initial-state',args.initial_state] if args.initial_state else []))
+    sys.exit(env_main(env_args))
+
 if args.config_name == 'minimal_pick':
     import sys
     from pathlib import Path

@@ -205,11 +205,13 @@ class LabCuvetteTeacher:
                         if self.contact_start is None:
                             self.contact_start=t
                             self._first_bilateral_seen=True
-                            self._closure_freeze_opening=max(.002,float(np.sum(debug['finger_joint_positions_m'])))
+                            mass=float(get(self.cfg,'vessel.mass_kg',.02));mu=np.sqrt(float(get(self.cfg,'physics.dynamic_friction',.5))*float(get(self.cfg,'physics.finger_dynamic_friction',.8)))
+                            compression=min(float(get(self.cfg,'gripper.maximum_compression_m',.0003)),mass*9.81*float(get(self.cfg,'gripper.contact_safety_factor',2.))/(2*mu*float(get(self.cfg,'robot.finger_kp',2000.))))
+                            self._closure_freeze_opening=max(.002,min(self.last_grip_opening,float(np.sum(debug['finger_joint_positions_m']))-2*compression))
                             self.events.append(dict(t=t,event='first_bilateral_contact_stop_closure',
                                 actual_finger_positions_m=list(debug['finger_joint_positions_m']),
                                 previous_total_opening_command_m=self.last_grip_opening,
-                                frozen_total_opening_m=self._closure_freeze_opening))
+                                frozen_total_opening_m=self._closure_freeze_opening,per_finger_compression_m=compression,normal_load_basis='mg/(2*mu)*safety/finger_kp; no wider than previous command'))
                         # Freeze on the very first bilateral sample, before the
                         # persistence timer. Continuing the original time ramp
                         # during this window would add millimetres of compression.

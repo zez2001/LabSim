@@ -44,8 +44,32 @@ H5 同步保存配置、场景契约、相机元数据、实际前后状态、�
 - `historical_success_Diffusion_read.json`：同一历史数据通过正常 Diffusion 读取，含三步观测历史、动作对齐和末端 padding；不是新版本任务成功。
 - `minimal_pick_regression_read.json`：原 minimal_pick 真实518步数据的读取回归。
 - `historical_unknown_failure_exclusion.json`：demo04 第1条真实滑移诊断失败和第3条几何停止保留原始 false 标签；缺少新有效性元数据时被正常筛选器排除。几何停止没有计作物理插入失败。
-- 13项单元/契约测试通过，验证历史默认行为、筛选、九维命令、双指 effort、未知判分、错误类别及 episode 隔离；测试 fixture 明确不是仿真实验。
+- 32项CPU单元/契约测试通过，验证历史默认行为、筛选、九维命令、双指 effort、未知判分、错误类别、episode 隔离、接触锁存、相机配置、接触区域及指令FK底部计算；测试 fixture 明确不是仿真实验。见 `current_cpu_contract_results.json`。
+
+## 新环境实际读取与运行限制
+
+`new_preview03_ACT_read.json` 与 `new_preview03_Diffusion_read.json` 已对新环境真实2秒预览记录的120个转换完成正常 `all_valid` 读取，首/中/末 RGB 与动作逐值一致。标签保持 `task_success=false`、`record_valid=true`、两种完整loading资格均false；这是预览物理记录，不计入完整loading成功或物理任务失败数量。该次进程在记录收尾后出现真实相机清理异常；数据可读不代表进程干净退出。
+
+`new_preview03_portability_check.json` 检查所有H5链接、虚拟数据集和外置存储，未发现外部数据依赖。原始记录未修改。
+
+`TCP_frame_audit.json` 从安装的Lula URDF核实：`panda_hand` 与默认IK `right_gripper` 的朝向相差180°，TCP位置在手局部Z+100mm。新物理采集器在初始化时再用实际求解器FK核对配置，避免把手坐标四元数直接当IK目标导致无意旋转。
+
+`minimal_pick_regression_command_check.json` 是运行前只读检查，未启动Isaac。之后根任务已实际执行原专家回归：`outputs/lab_cuvette_loading/Env_v1/minimal_pick_regression_20261021_01` 真实518步、抬升111.84mm、双指保持1秒，原任务结果为SUCCESS；其新的正常ACT/DP读取证据为 `minimal_pick_actual_regression_ACT_read.json` 和 `minimal_pick_actual_regression_DP_read.json`。它证明原抓取与读取回归，没有作为器皿装载成功。
+
+`preview04_inspection_v2/inspection.json`、`grasp01_inspection/inspection.json`、`grasp02_inspection/inspection.json`、`grasp03_inspection/inspection.json` 保存实际新记录的H5动作/后继状态、时间、全部双视角视频解码及正常读取检查。四者均不是完整loading成功；preview04为预览，grasp01/02接近控制失败，grasp03到达抓取阶段后抓取失败，原false结果保留。grasp03腕相机authored挂载固定，但实际画面仍缺少应能看见的器皿，不能因无黑帧和元数据存在就判视觉可用。
+
+`scripts/audit_env_v1_tcp_fk.py` 只用安装URDF/XML/NumPy/SciPy复核实际关节和TCP，不启动Isaac。grasp02和grasp03同物理步关节FK与记录PhysX TCP最大差分别0.574µm和0.627µm，排除厘米级误差源自TCP帧读取。grasp03固定RESET目标的指令FK位置不再漂移，但这不代表物理标定精度；完整结果见 `grasp02_inspection/independent_URDF_FK_audit.json` 和 `grasp03_URDF_FK_audit.json`。
+
+终止时不足一个完整控制周期的记录只在显式terminated/truncated、正整数物理步且不超过名义控制周期时允许，实际间隔和partial标志逐行保留。正式新环境当前完成整个原子控制周期后结束；不会将时间间隔猜为60Hz。
 
 ## 格式导出核查
 
 工程现有 `scripts/convert_labsim_data_to_lerobot.py` 使用旧 LeRobot API，默认回退60fps，并按帧索引降采样，不能据此证明本轮动作语义及时间转换正确；当前没有将其运行输出宣称为 Env_v1 合格转换。原始 HDF5 是权威记录，八维绝对关节位置不能自动标作 OpenPI DROID 的关节速度。实际模型 checkpoint 的动作变换需要在策略适配链路中逐项验证。
+
+新增原格式便携导出命令，不修改动作、fps或标签：
+
+```bash
+/home/wujing/Desktop/vla/labutopia-env/bin/python scripts/export_lab_cuvette_env_v1_episode.py CLOSED_EPISODE_DIR --output NEW_PORTABLE_DIR --manifest-copy NEW_EVIDENCE.json
+```
+
+实际preview04已导出到 `outputs/lab_cuvette_loading/Env_v1/portable_samples/preview04_native_episode`，23个文件约53.96MB。H5复制前后SHA256相同，没有外部链接/VDS/外置存储；复制后的普通ACT和DP `all_valid` 读取通过。`preview04_portable_export_manifest.json` 保存全部文件哈希和真实读取结果，大H5不放进Git。导出包可独立读取记录，仿真环境、源资产和模型权重不在此数据包内；预览仍是预览，不能计作装载成功或完整物理失败配额。
