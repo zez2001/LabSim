@@ -10,16 +10,21 @@ XY偏移(+0.650,+0.001)mm，杯底候选Z=2mm、插入深度约27mm。
 质量保持20g并对实际闭合视觉材料体积分COM/惯量，数值密度相应改变，
 不是物理材质或真实质量校准。每个独立USD重载核查，并保留源和产物哈希。
 
-离线生成（无需Isaac进程或GPU）：
+离线生成（无需Isaac进程或GPU；新目录必须不存在）：
 
 ```bash
 bash demos/lab_cuvette_external/usd_python.sh \
-  -m demos.lab_cuvette_size_v1.build_assets --widths-mm 12.5 11.0 10.5 10.0 9.5
+  -m demos.lab_cuvette_size_v1.build_assets --widths-mm 12.5 11.0 10.5 10.0 9.5 \
+  --directory assets/lab_cuvette_loading/Size_v1_REPRO_NEW
 ```
 
-完整家族扫描（输出目录须不存在，保留所有评估尺寸）：
+完整家族扫描会调用build，更新其工作副本的Size_v1注册表及派生元数据，
+不能在正式冻结采集的工作区运行。以下在同级新worktree复现，保留所有评估尺寸；
+worktree和输出目录须不存在，既有USD运行环境仍从同级labutopia-env复用：
 
 ```bash
+git worktree add --detach ../LabSim_Size_v1_GEOMETRY_REPRO_NEW HEAD
+cd ../LabSim_Size_v1_GEOMETRY_REPRO_NEW
 bash demos/lab_cuvette_external/usd_python.sh \
   -m demos.lab_cuvette_size_v1.scan_family \
   --config config/lab_cuvette_loading/Size_v1/standard.yaml \
@@ -33,6 +38,77 @@ bash demos/lab_cuvette_external/usd_python.sh \
 可行但保守全深未认证，不写成全局不可通过。10.00mm固定偏移的侧向输入
 表面保守余量约0.350mm，静态采样支撑凸包包含按真实材料体积分的COM。
 
-正几何证书不是物理接触、释放稳定或完整任务成功；没有读取PhysX实际烹饪
-形状或证明任意倾斜6DoF路线。几何证据见
+正几何证书不是物理接触、释放稳定或完整任务成功；离线筛选本身不读取PhysX
+烹饪形状，也不证明任意倾斜6DoF路线。运行时probe通过官方烹饪请求取得28块
+凸体表示并做双向三角表面抽样，未读取已附着PxShape指针；约14μm观察差
+不是严格全局误差界，静态原座完整烹饪表示仍未知。
+几何证据见
 `docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/`。
+
+完整任务、固定验证和数据采集从原工程根目录执行。正式冻结配置只接受10mm
+资产，直接对它增加`--asset-id cuvette_xy_1050`会被冻结守卫拒绝。其他注册尺寸
+必须使用独立、未冻结的探索配置和新输出目录，不继承正式任务资格。
+
+```bash
+bash demos/lab_cuvette_size_v1/run.sh --mode teacher \
+  --config config/lab_cuvette_loading/Size_v1/standard.yaml \
+  --output outputs/lab_cuvette_loading/Size_v1/NEW_SINGLE_RUN
+
+../labutopia-env/bin/python scripts/collect_lab_cuvette_size_v1_standard.py \
+  --phase verify5 --collection outputs/lab_cuvette_loading/Size_v1/NEW_COLLECTION --headless
+../labutopia-env/bin/python scripts/collect_lab_cuvette_size_v1_standard.py \
+  --phase success --collection outputs/lab_cuvette_loading/Size_v1/NEW_COLLECTION \
+  --allow-after-verified-five --headless
+../labutopia-env/bin/python scripts/collect_lab_cuvette_size_v1_standard.py \
+  --phase controlled_failure --collection outputs/lab_cuvette_loading/Size_v1/NEW_COLLECTION \
+  --allow-after-verified-five --headless
+```
+
+新collection先通过真实5/5完整任务；成功和受控失败随后可交错采集，优先自然失败。
+失败不足时仅改变INSERT动作停止深度1/5/10/18mm，不改变场景。每进程至多5集、
+单GPU顺序运行。驱动阶段退出2可表示配额未满，不能与仿真子进程非零退出混淆。
+所有仿真进程闭合后才进行目录审计；不要在活动H5写入时扫描。
+
+以下为本次正式collection的最终审计命令，索引与审计输出必须尚不存在。
+若复现到NEW_COLLECTION，替换以下两个collection路径，训练配置也应显式指向新索引。
+
+```bash
+../labutopia-env/bin/python scripts/validate_lab_cuvette_size_v1_data.py \
+  outputs/lab_cuvette_loading/Size_v1/collection_standard \
+  --config config/lab_cuvette_loading/Size_v1/standard.yaml \
+  --frozen-scene config/lab_cuvette_loading/Size_v1/frozen_scene.json \
+  --admission-scope official_collection \
+  --index outputs/lab_cuvette_loading/Size_v1/collection_standard/dataset/episode_data.hdf5 \
+  --output-json docs/lab_cuvette_loading/Size_v1/data/FINAL_NEW_AUDIT/collection_audit.json
+```
+
+验证器同时核对冻结指纹、实际official/closed/exit0进程证据和标签；受控失败还必须
+存在实际teacher_events事件，与H5后继时刻、INSERT状态、实际深度及配置一致。
+仅声明动作偏差不能进入配额或索引。释放前停止的post_retreat_window为unavailable、
+stable_after_retreat为null。原始标签不改写，preview、短预算、初始化/服务失败、
+中断进程单列。最终审计同时通过正常ACT/DP读取成功/失败各一个batch，并记录互斥
+完整episode的train/val ID；二者均为相同standard场景，训练本身不执行。
+
+正常目录读取固定追加`episode_data.hdf5`；不能改名为index.hdf5后仍传目录。
+轻索引采用collection树内相对ExternalLink，移动时需移动整个collection树；
+原始episode H5本身没有绝对外链。独立便携成功样例已另行导出，约1.96GB，
+其读取与无损归档证据位于`docs/lab_cuvette_loading/Size_v1/data/standard5_actual/`，
+不复制到精简阅读包。
+
+```bash
+../labutopia-env/bin/python scripts/read_lab_cuvette_env_v1_data.py \
+  outputs/lab_cuvette_loading/Size_v1/collection_standard/dataset \
+  --sample-filter success --policy-type act
+../labutopia-env/bin/python scripts/read_lab_cuvette_env_v1_data.py \
+  outputs/lab_cuvette_loading/Size_v1/collection_standard/dataset \
+  --sample-filter failure --policy-type dp --n-obs-steps 2
+```
+
+collect/train/训练自动验证强制standard并禁用场景随机化；训练RNG seed单独配置。
+ACT/DP任务配置为`lab_cuvette_size_v1_act`和`lab_cuvette_size_v1_dp`，默认只读取
+合格成功做BC，失败分自然与确定性动作偏差组。本轮不运行训练、不要求random10。
+
+精简交接快照包含35个资产的尺寸/内腔/质量惯量/材质/碰撞参数、原座保护证据、
+正式相机与初态、实际事件准入及便携样例小清单。最终数量只从显式最终审计取得，
+先前开发成功或局部已完成验证不等于20+20。最终报告放在
+`docs/lab_cuvette_loading/Size_v1/results_20261021/`，由主任务在全部闭合后生成。
