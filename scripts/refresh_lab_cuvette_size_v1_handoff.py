@@ -111,6 +111,8 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
 
     copy(ROOT / "config/lab_cuvette_loading/Size_v1/standard.yaml", "configs/standard.yaml")
     copy(ROOT / "config/lab_cuvette_loading/Size_v1/frozen_scene.json", "configs/frozen_scene.json")
+    copy(ROOT / "config/lab_cuvette_loading/Size_v1/variant_evaluation_1030.yaml",
+         "configs/exploration/variant_evaluation_1030.yaml")
     for policy in ("act", "dp"):
         copy(ROOT / f"policy/config/task/lab_cuvette_size_v1_{policy}.yaml", f"configs/dataset/lab_cuvette_size_v1_{policy}.yaml")
     sources = {
@@ -120,6 +122,7 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
         ROOT / "docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.md": "cooked_preview01_summary.md",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/freeze_against_first_success.json": "freeze_against_first_success.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/phase_A_cpu_validation.json": "phase_A_cpu_validation.json",
+        ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/asset_id_configuration_switch_check.json": "asset_id_configuration_switch_check.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/normal_reader_directory_filename_cpu_check.json": "normal_reader_directory_filename_cpu_check.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/camera_actual_config_summary.json": "development_camera_actual_config_summary.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/normal_read_success_filter.json": "development_success_normal_read.json",
@@ -302,6 +305,15 @@ bash demos/lab_cuvette_size_v1/run.sh --mode teacher \\
 ```
 
 冻结standard只接受10mm资产；直接增加`--asset-id cuvette_xy_1050`会被冻结守卫拒绝。其他注册尺寸使用独立未冻结的探索配置与新目录，重新检查几何及物理，不继承正式成功。原座保持不变。
+
+现有探索配置的实际入口如下；快照configs/exploration保留同一配置模板。解析器会同步更新视觉/碰撞引用和质量属性，但不会自动改变原座或调整插入轴；不能由示例命令推断10.50mm成功：
+
+```bash
+bash demos/lab_cuvette_size_v1/run.sh --mode teacher \\
+ --config config/lab_cuvette_loading/Size_v1/variant_evaluation_1030.yaml \\
+ --asset-id cuvette_xy_1050 \\
+ --output outputs/lab_cuvette_loading/Size_v1/NEW_VARIANT_1050 --headless
+```
 
 正式固定验证和采集：
 

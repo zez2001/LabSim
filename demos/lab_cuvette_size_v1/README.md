@@ -49,6 +49,18 @@ bash demos/lab_cuvette_external/usd_python.sh \
 资产，直接对它增加`--asset-id cuvette_xy_1050`会被冻结守卫拒绝。其他注册尺寸
 必须使用独立、未冻结的探索配置和新输出目录，不继承正式任务资格。
 
+已保存的未冻结探索配置可通过同一入口替换asset_id，例如：
+
+```bash
+bash demos/lab_cuvette_size_v1/run.sh --mode teacher \
+  --config config/lab_cuvette_loading/Size_v1/variant_evaluation_1030.yaml \
+  --asset-id cuvette_xy_1050 \
+  --output outputs/lab_cuvette_loading/Size_v1/NEW_VARIANT_1050 --headless
+```
+
+该入口同步解析选定资产的视觉、碰撞、宽度和质量属性，保持原座与当前目标轴。
+每个尺寸仍需自己的几何和物理判分；此示例不表示10.50mm成功，也不计正式配额。
+
 ```bash
 bash demos/lab_cuvette_size_v1/run.sh --mode teacher \
   --config config/lab_cuvette_loading/Size_v1/standard.yaml \
