@@ -1,5 +1,8 @@
 """Report content validation without Word authoring or a document marker."""
 import importlib.util
+import copy
+import hashlib
+import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -11,6 +14,47 @@ spec.loader.exec_module(report)
 
 
 class ReportTests(unittest.TestCase):
+    def test_compact_provenance_is_relative_small_and_does_not_mutate_authoring_data(self):
+        with tempfile.TemporaryDirectory() as d:
+            parent = Path(d)
+            (parent / 'data').mkdir(); (parent / 'media').mkdir()
+            audit = parent / 'data' / 'audit.json'; audit.write_text('{"actual_count":21}\n')
+            clip = parent / 'media' / 'main.mp4'; clip.write_bytes(b'closed-video-fixture')
+            large = 'DO_NOT_DUPLICATE_FULL_CONFIG_OR_REGISTRY' * 1500
+            full = {'created_at': 'actual_time', 'root': '/original/workspace', 'branch': 'codex/test',
+                'authoring_head': 'commit-sha', 'registry': {'assets': {
+                    'asset_' + str(i): {'full_metadata': large} for i in range(35)}},
+                'summary': {'standard5': {'all_five_successful': True}, 'runs': [
+                    {'config_snapshot': {'full_config': large}, 'physics_quality_flags': ['MEASURED_WARNING']}
+                    for _ in range(40)]},
+                'quota': {'qualified_success_count': 20, 'qualified_failure_count': 1,
+                    'qualification_evidence': {'reader_validation': [large] * 40}},
+                'primary': {'episode_id': 'actual-UUID', 'asset_id': 'asset_0', 'config_snapshot': large},
+                'primary_result': {'task_success': True, 'physics_quality_flags': ['MEASURED_WARNING']},
+                'collection_audit': {'episodes': [large] * 40},
+                'sources': {'registry.json': {'path': 'registry.json', 'bytes': 123, 'sha256': 'source-sha'}},
+                'evidence_files': [{'path': str(audit), 'label': '数据资格与正常读取验证',
+                    'source_provenance_path': '/original/audit.json'}],
+                'figures': [], 'media': [{'path': str(clip), 'kind': 'video', 'label': '主录像',
+                    'source': '/original/main.mp4', 'source_sha256': 'original-video-sha',
+                    'continuous_same_episode': True, 'command': [large]}]}
+            original = copy.deepcopy(full)
+            compact = report.compact_provenance_manifest(full, parent)
+            encoded = json.dumps(compact, ensure_ascii=False).encode()
+            self.assertEqual(full, original)
+            self.assertLess(len(encoded), 500_000)
+            self.assertNotIn('DO_NOT_DUPLICATE_FULL_CONFIG_OR_REGISTRY', encoded.decode())
+            self.assertEqual(compact['schema'], 'labsim.Size_v1.report_provenance_compact.v2')
+            self.assertEqual(compact['collection_counts']['qualified_success_count'], 20)
+            self.assertEqual(compact['primary']['episode_id'], 'actual-UUID')
+            self.assertTrue(compact['primary_result']['task_success'])
+            audit_ref = compact['collection_counts']['full_audit_file']
+            self.assertEqual(audit_ref['path'], 'data/audit.json')
+            self.assertEqual(audit_ref['sha256'], hashlib.sha256(audit.read_bytes()).hexdigest())
+            self.assertEqual(compact['media'][0]['path'], 'media/main.mp4')
+            self.assertTrue(compact['media'][0]['metadata']['continuous_same_episode'])
+            self.assertEqual(compact['sources'][0]['sha256'], 'source-sha')
+
     def test_display_statuses_are_precise_and_do_not_infer_unknown(self):
         self.assertEqual(report.outcome_label('SUCCESS_OBSERVED'), '已观察完整成功')
         self.assertEqual(report.outcome_label('FAILURE_OBSERVED'), '已观察任务失败')

@@ -689,6 +689,95 @@ def write_docx(pages, path):
     doc.save(path)
 
 
+def compact_provenance_manifest(data, output_directory):
+    """Keep the report portable without embedding duplicate experiment databases.
+
+    Called only after the full evidence has authored the document and the selected
+    files have been copied. Source paths below are provenance, not delivery links.
+    The full collection audit remains a separate, byte-identical data file.
+    """
+    parent = Path(output_directory).resolve()
+
+    def delivered(item):
+        path = Path(item['path']).resolve()
+        relative = relative_target(item, parent)
+        digest = hashlib.sha256()
+        with path.open('rb') as stream:
+            for block in iter(lambda: stream.read(1 << 20), b''):
+                digest.update(block)
+        result = {'path': relative, 'label': item.get('label'),
+            'bytes': path.stat().st_size, 'sha256': digest.hexdigest()}
+        if item.get('source_provenance_path'):
+            result['source_provenance_path'] = item['source_provenance_path']
+        return result
+
+    evidence = [delivered(item) for item in data.get('evidence_files', [])]
+    by_label = {item.get('label'): item for item in evidence}
+    media = []
+    for item in data.get('figures', []) + data.get('media', []):
+        entry = delivered(item)
+        entry['kind'] = item.get('kind')
+        entry['metadata'] = {key: value for key, value in item.items()
+            if key not in {'path', 'command', 'source_provenance_path', 'source', 'source_manifest', 'source_sha256'}}
+        entry['source_provenance'] = {key: item[key] for key in ('source', 'source_manifest', 'source_sha256') if key in item}
+        media.append(entry)
+
+    summary, geometry = data.get('summary', {}), data.get('geometry', {})
+    primary, quota = data.get('primary') or {}, data.get('quota', {})
+    qualification = quota.get('qualification_evidence') or {}
+    compact_quota = {key: value for key, value in quota.items() if key != 'qualification_evidence'}
+    compact_quota['full_audit_file'] = by_label.get('数据资格与正常读取验证')
+    compact_quota['original_audit_counts'] = {key: qualification.get(key) for key in (
+        'original_audit_qualified_success_count', 'original_audit_qualified_failure_count')}
+
+    sources = [{'source_path': item.get('path', key), 'sha256': item.get('sha256'), 'bytes': item.get('bytes')}
+        for key, item in data.get('sources', {}).items()]
+    convex = get(data, 'cooked.convex', {})
+    camera_sync, readability = data.get('camera_sync', {}), data.get('camera_readability', {})
+    flags = sorted({flag for row in summary.get('runs', []) for flag in (row.get('physics_quality_flags') or [])})
+    return {'schema': 'labsim.Size_v1.report_provenance_compact.v2',
+        'scope': 'Portable report provenance only. Full internal authoring data was used for DOCX/Markdown; registry, run configs and per-episode audit rows are not duplicated here.',
+        'created_at': data.get('created_at'), 'authoring_head': data.get('authoring_head'),
+        'branch': data.get('branch'), 'authoring_runtime': data.get('authoring_runtime'),
+        'render_required': data.get('render_required'),
+        'source_provenance_workspace': data.get('root'),
+        'collection_counts': compact_quota, 'standard5': summary.get('standard5'),
+        'primary': {key: primary.get(key) for key in ('episode_id', 'asset_id', 'condition_group', 'task_type',
+            'record_valid', 'task_success', 'mode', 'run_role', 'controller_version', 'code_commit',
+            'control_config_sha256', 'config_sha256', 'result_sha256', 'simulation_seconds', 'wall_seconds')},
+        'primary_result': data.get('primary_result'),
+        'primary_source_provenance': {key: primary.get(key) for key in ('episode_directory',
+            'result_path', 'config_path', 'H5_path')},
+        'asset_family': {'registered_count': len(get(data, 'registry.assets', {})),
+            'evaluated_count': geometry.get('evaluated_count'),
+            'registered_asset_ids': sorted(get(data, 'registry.assets', {})),
+            'source_control_asset': geometry.get('source_control_asset'),
+            'source_control_sha256': geometry.get('source_control_sha256'),
+            'original_instrument_path': geometry.get('original_instrument_path'),
+            'original_instrument_sha256': geometry.get('original_instrument_sha256'),
+            'parameters_location': 'Full35-asset physical metadata is in the separate Size_v1_current/asset_summary.json and the copied dimensions_mass_and_inertia.csv; original registry source path/SHA is in sources.'},
+        'geometry_scope': {key: geometry.get(key) for key in ('selected_original_seat', 'original_seat_unmodified',
+            'search_width_range_mm', 'upright_yaws_deg', 'translation_search',
+            'largest_sampled_positive_continuous_sweep_certificate_mm',
+            'largest_sampled_positive_required_entrance_domain_mm', 'smallest_sampled_entrance_rejected_mm', 'range_scope')},
+        'physics': {'backend': data.get('physics_backend'),
+            'primary_quality_flags': get(data, 'primary_result.physics_quality_flags'),
+            'observed_quality_flag_types': flags,
+            'cooked_convex_surface_samples': {key: value for key, value in convex.items() if key != 'per_prim'},
+            'cooked_scope_limitations': get(data, 'cooked.limitations')},
+        'camera': {'primary_episode_id': primary.get('episode_id'),
+            'sync_matches_primary_episode': bool(primary.get('episode_id')) and camera_sync.get('episode_id') == primary.get('episode_id'),
+            'readability_matches_primary_episode': bool(primary.get('episode_id')) and readability.get('episode_id') == primary.get('episode_id'),
+            'association_summary': camera_association(camera_sync, readability, primary.get('episode_id')),
+            'sync_evidence_file': by_label.get('主记录renderer与USD同观测核验'),
+            'readability_evidence_file': by_label.get('主记录双视角与动作读取核验'),
+            'sync_scope_limitations': camera_sync.get('scope')},
+        'full_audit_remains_separate': by_label.get('数据资格与正常读取验证') is not None,
+        'document_content_changed_by_compaction': False,
+        'evidence_files': evidence, 'media': media, 'sources': sources,
+        'warnings': data.get('warnings', [])}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=ROOT)
@@ -728,11 +817,12 @@ def main(argv=None):
         for index, item in enumerate(items):
             source = Path(item['path'])
             target = destination / f'{index:02d}_{source.name}'
-            shutil.copy2(source, target); item['path'] = str(target.resolve())
+            shutil.copy2(source, target); item['source_provenance_path'] = str(source.resolve()); item['path'] = str(target.resolve())
     pages = pages_for(data)
     write_markdown(pages, args.output / (args.stem + '.md'))
     write_docx(pages, args.output / (args.stem + '.docx'))
-    (args.output / 'report_evidence.json').write_text(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf-8')
+    manifest = compact_provenance_manifest(data, args.output)
+    (args.output / 'report_evidence.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf-8')
     print(json.dumps({'docx': str(args.output / (args.stem + '.docx')), 'planned_pages': len(pages),
         'render_and_all_page_visual_QA_required': True, 'videos': len(data['media'])}, ensure_ascii=False))
     return data
