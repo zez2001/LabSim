@@ -1,3 +1,15 @@
+# LabSim Size_v1 进展与分享入口
+
+当前独立分支为[`codex/lab-cuvette-size-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-size-v1)。本轮固定原A座，通过同一XY仿射规则派生比色皿尺寸，不修改原座、旧资产或源CAD。
+
+阶段A已有35个注册资产与实际几何筛选，推荐10.00×10.00×67.5mm假设资产，固定20g假设下重算COM/惯量；10mm加载/复位/自然落稳与双视角preview已实跑。完整装载首条正在验证，不把几何通过或preview计为任务成功。采集、训练和自动验证固定standard，本轮取消random10。
+
+- [本轮状态与准确调用](docs/lab_cuvette_loading/Size_v1/README.md) · [持续状态](TASK_STATUS.md)
+- [35尺寸完整几何结果](docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/README.md) · [可替换资产注册](assets/lab_cuvette_loading/Size_v1/registry.json)
+- [实际碰撞烹饪／座表面抽样与限制](docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.md)
+
+以下保留Env_v1及上游历史入口。
+
 # LabSim 进展与分享入口
 
 最新版本 **Env_v1 已整理为正式任务并接通三条真实策略短链，原刚性座完整装载仍受阻**。当前场景使用单台开盖仪器、完整白色6×6来源架和12.5×12.5×67.5 mm器皿，目标是腔内原A座 `candidate_far_hinge`。A/B原座保留12.6 mm中央参考截面及全部内伸结构；原尺寸直立刚性入口的整个必要XY域仍存在材料冲突，没有扩孔、删件或放宽判据。
