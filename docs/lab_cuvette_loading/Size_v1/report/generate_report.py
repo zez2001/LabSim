@@ -518,7 +518,7 @@ def pages_for(d):
             ['求解器', str(get(c, 'physics.solver', '未知')), f"位置迭代{get(c, 'physics.position_iterations', '未知')} 速度迭代{get(c, 'physics.velocity_iterations', '未知')}"],
             ['接触偏移与静止偏移', f"{num(get(c, 'physics.contact_offset_m'), 8)}m / {num(get(c, 'physics.rest_offset_m'), 8)}m", '沿用基线；不将contact_offset称为位置精度'],
             ['器皿摩擦与恢复', f"静{get(c, 'physics.static_friction', '未知')} 动{get(c, 'physics.dynamic_friction', '未知')} 恢复{get(c, 'physics.restitution', '未知')}", '假设值与average组合；未真实校准'],
-            ['夹持力限制', f"{get(c, 'env.gripper_effort_max_N', '未知')}N", '按阶段调度记录；不针对每个尺寸加力或调摩擦']
+            ['每指关节作用力上限', f"{get(c, 'env.gripper_effort_max_N', '未知')}N", '按阶段调度；不等同于双指实测接触力之和']
         ], [4.0, 5.7, 7.1]),
         ('p', f"preview探针中28个碰撞输入均取得有效凸体烹饪返回。世界米坐标重算的返回表面到输入表面抽样最大{num(None if convex.get('max_observed_cooked_to_input_surface_distance_m') is None else convex['max_observed_cooked_to_input_surface_distance_m'] * 1e6, 3)}µm；反向为{num(None if convex.get('max_observed_input_to_cooked_surface_distance_m') is None else convex['max_observed_input_to_cooked_surface_distance_m'] * 1e6, 3)}µm。零顶点误差不代表整个烹饪面无误差。"),
         ('p', '这些是逐块顶点和面中心到三角表面的已观察距离，不是复合几何并集外表面误差或全局Hausdorff上界。接口返回当前prim的烹饪表示，未读取已附着PxShape指针。原座实际物理raycast命中表面与源三角面一致的抽样证据，不能替代完整静态烹饪顶点索引读取，也不排除未采样差异。'),
