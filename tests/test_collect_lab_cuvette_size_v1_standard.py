@@ -64,6 +64,7 @@ class DriverTests(unittest.TestCase):
 
     def call(self, argv, executor=None, resource_error=False):
         with (patch.object(driver, "ROOT", self.repo), patch.object(driver, "execute_process", side_effect=executor or self.completed) as execute,
+             patch.object(driver.fcntl, "flock"),
              patch.object(driver, "archive_closed_run", return_value=[dict(archived=True, manifest="CPU-fixture")]),
              patch.object(driver, "check_run_resources", side_effect=RuntimeError("disk below8GiB") if resource_error else None,
                           return_value=dict(free_bytes=10 << 30)), contextlib.redirect_stdout(io.StringIO())):
@@ -106,6 +107,22 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(result["status"], "resource_precheck_stop_no_process_started")
         self.assertEqual(result["totals"]["started_processes"], 0)
         execute.assert_not_called()
+
+    def test_one_controlled_full_task_failure_allowed_after_real_verify5_before20(self):
+        verification, _ = self.call(self.args())
+        self.assertEqual(verification["totals"]["success"], 5)
+        args = self.args("controlled_failure") + ["--allow-after-verified-five",
+            "--episodes-per-process", "1", "--max-processes", "1"]
+        result, execute = self.call(args)
+        self.assertEqual(execute.call_count, 1)
+        self.assertEqual(result["status"], "maximum_processes_reached")
+        self.assertEqual(result["totals"]["success"], 5)
+        self.assertEqual(result["totals"]["failure"], 1)
+        self.assertEqual(result["totals"]["controlled_processes"], 1)
+        configs = list((self.collection / "controller_configs").glob("*.yaml"))
+        self.assertEqual(len(configs), 1)
+        self.assertEqual(float(OmegaConf.load(configs[0]).experiment.deviation.value), .001)
+        self.assertEqual(OmegaConf.load(configs[0]).env.mode, "standard")
 
     def test_process_wait_precedes_exit_evidence_creation(self):
         run, log = self.repo / "mock-run", self.repo / "mock.log"

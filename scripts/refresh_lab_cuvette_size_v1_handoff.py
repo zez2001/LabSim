@@ -237,7 +237,7 @@ bash demos/lab_cuvette_size_v1/run.sh --mode teacher \\
  --allow-after-verified-five --headless
 ```
 
-verify5必须新目录且5/5真实完整成功；后两阶段需显式审阅后放行。控制失败仅在自然失败不足时，用固定INSERT停止深度1/5/10/18mm补充；只改动作，无场景随机化。各进程真实wait退出后才归档日志。非零退出（含143）保守单列，不能伪称exit0。
+verify5必须新目录且5/5真实完整成功；后两阶段需显式审阅后放行。此后自然成功采集与受控失败可以交错，优先保留自然失败；不要求先满20条成功。可以先用`--phase controlled_failure --episodes-per-process 1 --max-processes 1 --allow-after-verified-five`完成1条真实任务的INSERT提前停，验证失败元数据及读取链路，再补其余数据。这条按实际提前停状态独立判分，不是缩短接口预算；若累计失败尚未满20，driver阶段退出2表示配额未满，实际单集结果另查独立评分。控制失败用固定INSERT停止深度1/5/10/18mm补充，记录完整偏差spec；只改动作，无场景随机化。各进程真实wait退出后才归档日志。非零仿真子进程退出（含143）保守单列，不能伪称exit0。
 
 闭合后审计并建立轻索引（FINAL_AUDIT.json也必须新路径）：
 

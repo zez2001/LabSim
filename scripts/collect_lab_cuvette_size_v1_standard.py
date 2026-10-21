@@ -1,6 +1,9 @@
 """Thin sequential Size_v1 standard collector; no new environment or labels.
 
 verify5 must pass before success/controlled_failure phases are explicitly allowed.
+After that gate, natural collection and explicit controlled-failure checks may
+interleave. A single full-path early-stop failure can validate the failure chain
+before the remaining natural successes are collected; no short budget is used.
 Only observed, closed official runs in this collection count towards quotas.
 --dry-run validates and prints a plan without creating files or starting Isaac.
 """
@@ -250,8 +253,6 @@ def main(argv=None):
         actual_verified = {e["episode_id"] for e in current["episodes"] if e["phase"] == "verify5" and e["success"]}
         if len(verified_ids) != 5 or not verified_ids.issubset(actual_verified):
             raise ValueError("Verification evidence is missing or no longer matches actual qualified episodes")
-        if args.phase == "controlled_failure" and current["success"] < TARGET:
-            raise ValueError("Finish20 qualified standard successes before controlled failure supplementation")
     if args.dry_run:
         plan = dict(dry_run=True, no_GPU_or_files_created=True, phase=args.phase,
             collection=str(collection), frozen_scene_sha256=fingerprint, asset_id=asset_id,
