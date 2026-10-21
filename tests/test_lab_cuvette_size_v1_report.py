@@ -11,6 +11,53 @@ spec.loader.exec_module(report)
 
 
 class ReportTests(unittest.TestCase):
+    def test_display_statuses_are_precise_and_do_not_infer_unknown(self):
+        self.assertEqual(report.outcome_label('SUCCESS_OBSERVED'), '已观察完整成功')
+        self.assertEqual(report.outcome_label('FAILURE_OBSERVED'), '已观察任务失败')
+        self.assertEqual(report.outcome_label(None), '未知或未执行')
+        self.assertEqual(report.termination_label('CONTROLLER_WORKFLOW_COMPLETE'), '流程执行结束')
+        self.assertEqual(report.standard_label({'selected_episode_count': 5, 'closed_record_count': 5,
+            'independently_scored_success_count': 5, 'independently_scored_failure_count': 0,
+            'outcome_unknown_count': 0}), '5/5完整成功')
+
+    def test_representatives_include_sizes_and_controlled_failure_not_preview(self):
+        def row(ident, asset, group='natural', excluded=False):
+            return {'episode_id': ident, 'asset_id': asset, 'complete': True,
+                'task_type': 'loading', 'condition_group': group, 'task_success': group == 'natural',
+                'qualification_exclusions': ['preview_or_interface_diagnostic'] if excluded else []}
+        primary = row('main', 'cuvette_xy_1000')
+        rows = [row('preview', 'cuvette_xy_1030', excluded=True), primary,
+            row('medium', 'cuvette_xy_1030'), row('failure', 'cuvette_xy_1050'),
+            row('controlled', 'cuvette_xy_1000', 'deterministic_action_deviation')]
+        chosen = report.representative_runs({'runs': rows}, primary)
+        self.assertEqual([x['episode_id'] for x in chosen], ['main', 'medium', 'failure', 'controlled'])
+
+    def test_camera_association_requires_matching_episode_UUID(self):
+        sync = {'episode_id': 'correct', 'cameras': {name: {'samples': 7,
+            'same_observation_matches_current_USD_within_1e_8_m': 7}
+            for name in ('side_camera', 'wrist_camera')}}
+        self.assertIn('侧视7/7、腕视7/7', report.camera_association(sync, {}, 'correct'))
+        self.assertIn('结果未知', report.camera_association(sync, {}, 'other'))
+        self.assertNotIn('7/7', report.camera_association(sync, {}, 'other'))
+
+    def test_final_progress_uses_actual_quota_completion(self):
+        complete = report.final_progress({'qualified_success_count': 4, 'qualified_failure_count': 3,
+            'success_target': 4, 'failure_target': 3, 'success_missing': 0, 'failure_missing': 0})
+        self.assertIn('已达到本轮', complete)
+        self.assertIn('成功4条、有效失败3条', complete)
+        self.assertNotIn('20条', complete)
+        self.assertIn('尚缺成功未知条', report.final_progress({}))
+
+    def test_docx_grid_and_columns_match_deliberate_widths(self):
+        from docx import Document
+        from docx.shared import Cm
+        with tempfile.TemporaryDirectory() as d:
+            target = Path(d) / 'table_widths.docx'
+            report.write_docx([[report.table(['A', 'B'], [['x', 'y']], [3.0, 10.0])]], target)
+            table = Document(target).tables[0]
+            self.assertEqual([column.width.twips for column in table.columns], [Cm(3).twips, Cm(10).twips])
+            self.assertEqual([grid.w.twips for grid in table._tbl.tblGrid.gridCol_lst], [Cm(3).twips, Cm(10).twips])
+
     def test_standard_episode_labels_keep_uuid_and_episode_suffix(self):
         labels = [report.episode_label({'episode_id': f'uuid-{index}-unique',
             'episode_directory': f'collection_standard/runs/verify5_long_shared_prefix/episode_{index:04d}'})

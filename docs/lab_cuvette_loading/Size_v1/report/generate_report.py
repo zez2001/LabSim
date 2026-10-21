@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[4]
 GEOMETRY = 'docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02'
 COOKED = 'docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.json'
 FAILURE1050 = 'docs/lab_cuvette_loading/Size_v1/data/loading1050_inspection/failure_audit.json'
+CAMERA_SYNC = 'docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/renderer_USD_sync_audit.json'
+CAMERA_READABILITY = 'docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/standard01_readability_summary.json'
 BUNDLED_PYTHON = '/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3'
 
 
@@ -48,6 +50,83 @@ def episode_label(row):
     """Keep repeated episodes distinguishable inside a narrow report column."""
     suffix = Path(row.get('episode_directory') or '未知episode').name
     return short(row.get('episode_id') or row.get('run_name'), 13) + ' / ' + suffix
+
+
+def outcome_label(value):
+    return {'SUCCESS_OBSERVED': '已观察完整成功', 'FAILURE_OBSERVED': '已观察任务失败',
+            'SUCCESS_AND_FAILURE_OBSERVED': '自然成败均有记录'}.get(value, '未知或未执行')
+
+
+def termination_label(value):
+    return {'CONTROLLER_WORKFLOW_COMPLETE': '流程执行结束',
+        'CONTROLLED_EARLY_STOP': '受控提前停止插入', 'GRASP_SLIP': '抓持相对位姿超限',
+        'TIMEOUT': '任务超时', 'BLOCKED': '实际受阻', 'PHYSICS_INVALID': '物理异常',
+        'CONTROL_OR_IK_FAILURE': '控制或IK失败', 'NONE': '无'}.get(value,
+            '未知' if value is None else '其他 见原始CSV')
+
+
+def provenance_label(value):
+    return {'runtime_metadata': '实际运行元数据', 'saved_configuration': '运行保存配置',
+        'shared_builder_code_declaration': '共享构建代码声明'}.get(value, '未知')
+
+
+def qualification_label(value):
+    return {'CHECKED_AGAINST_EXPLICIT_COLLECTION_AUDIT': '已按明确的采集审计核对',
+        'QUALIFICATION_UNAVAILABLE_NO_COLLECTION_AUDIT': '缺少采集资格审计'}.get(value, '未知')
+
+
+def standard_label(verification):
+    if (verification.get('selected_episode_count') == 5 and verification.get('closed_record_count') == 5
+            and verification.get('independently_scored_success_count') == 5
+            and verification.get('independently_scored_failure_count') == 0
+            and verification.get('outcome_unknown_count') == 0):
+        return '5/5完整成功'
+    closed = verification.get('closed_record_count')
+    return '尚无完成记录' if closed == 0 else '完成记录' + num(closed, 0) + '条'
+
+
+def representative_runs(summary, primary):
+    rows = [row for row in summary.get('runs', []) if row.get('complete') is True
+        and row.get('task_type') == 'loading'
+        and 'preview_or_interface_diagnostic' not in row.get('qualification_exclusions', [])]
+    selected = []
+    def add(row):
+        if row is not None and row not in selected:
+            selected.append(row)
+    add(next((row for row in rows if row.get('episode_id') == primary.get('episode_id')), None))
+    for asset_id in ('cuvette_xy_1030', 'cuvette_xy_1050'):
+        add(next((row for row in rows if row.get('asset_id') == asset_id
+            and row.get('condition_group') == 'natural'), None))
+    add(next((row for row in rows if row.get('condition_group') == 'deterministic_action_deviation'
+        and row.get('task_success') is False), None))
+    return selected
+
+
+def camera_association(sync, readability, episode_id):
+    if not episode_id or sync.get('episode_id') != episode_id:
+        return '当前主记录没有匹配UUID的renderer与USD关联核验，结果未知。'
+    parts = []
+    for key, label in (('side_camera', '侧视'), ('wrist_camera', '腕视')):
+        camera = get(sync, 'cameras.' + key, {})
+        parts.append(label + num(camera.get('same_observation_matches_current_USD_within_1e_8_m'), 0)
+            + '/' + num(camera.get('samples'), 0))
+    text = '主记录同观测renderer与当前USD的位置关联通过数为' + '、'.join(parts) + '，计算门槛为1e-8m。'
+    if readability.get('episode_id') == episode_id:
+        frames = [get(readability, 'cameras.' + key + '.recorded_RGB_frames') for key in ('side_camera', 'wrist_camera')]
+        text += '两路实际RGB帧数分别为' + '、'.join(num(x, 0) for x in frames) + '，动作与后继状态对齐结果随读取核验JSON保存。'
+    text += '这确认记录中的状态关联，不是实物光学标定、接触精度或精确曝光延迟的证明。'
+    return text
+
+
+def final_progress(quota):
+    success, failure = quota.get('qualified_success_count'), quota.get('qualified_failure_count')
+    st, ft = quota.get('success_target'), quota.get('failure_target')
+    text = f'本轮固定standard已审计合格成功{num(success, 0)}条、有效失败{num(failure, 0)}条。'
+    if all(isinstance(x, int) for x in (success, failure, st, ft)) and success >= st and failure >= ft:
+        text += '已达到本轮成功与失败数据目标；受控偏差失败的解释范围按前页分组。'
+    else:
+        text += f"距本轮目标尚缺成功{num(quota.get('success_missing'), 0)}条、失败{num(quota.get('failure_missing'), 0)}条。"
+    return text + '尺寸结论仍仅限已测试的离散资产与当前控制；质量、材料、器皿尺寸及机器人动力学仍需实物测量校正，real_calibrated=false。'
 
 
 def controlled_failure_paragraph(summary):
@@ -255,6 +334,8 @@ def collect(e, args):
             raise ValueError('Report frozen-scene evidence differs from qualified collection')
     portable = e.json(args.portable_validation) if args.portable_validation else {}
     process = e.json(args.process_evidence) if args.process_evidence else {}
+    camera_sync = e.json(CAMERA_SYNC, required=False)
+    camera_readability = e.json(CAMERA_READABILITY, required=False)
     media, media_manifest = _media_items(e, args.media_manifest)
     figures = [item for item in media if item['kind'] == 'image']
     for filename, label, role in (
@@ -276,6 +357,10 @@ def collect(e, args):
         evidence_files.append({'path': str(e.register(args.frozen_scene)), 'label': '冻结standard场景清单'})
     if failure1050:
         evidence_files.append({'path': str(e.register(FAILURE1050)), 'label': '10.50mm开发失败复核'})
+    for filename, body, label in ((CAMERA_SYNC, camera_sync, '主记录renderer与USD同观测核验'),
+            (CAMERA_READABILITY, camera_readability, '主记录双视角与动作读取核验')):
+        if primary and body.get('episode_id') == primary.get('episode_id'):
+            evidence_files.append({'path': str(e.register(filename)), 'label': label})
     try:
         head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=e.root, text=True).strip()
         branch = subprocess.check_output(['git', 'branch', '--show-current'], cwd=e.root, text=True).strip()
@@ -288,6 +373,7 @@ def collect(e, args):
         'primary_result': result, 'actual_config': config, 'frozen_scene': frozen,
         'portable_validation': portable, 'process_evidence': process,
         'cooked': cooked, 'failure1050_audit': failure1050,
+        'camera_sync': camera_sync, 'camera_readability': camera_readability,
         'physics_capture_meta': physics_meta, 'physics_backend': backend,
         'media_manifest': media_manifest, 'media': [x for x in media if x['kind'] == 'video'],
         'figures': figures, 'evidence_files': evidence_files, 'sources': e.sources,
@@ -324,7 +410,7 @@ def pages_for(d):
             ['尺寸资产', f"{g['evaluated_count']}个已生成并评估", '9.50至12.50mm；独立USD与asset_id全部保留'],
             ['原座', 'candidate_far_hinge 原A座', '保持原始几何和内部结构；未扩大孔口或删除凸起'],
             ['完整任务', '已确认成功' if full else '尚未确认成功', '实际释放 撤离 稳定必须同时成立'],
-            ['5次standard', get(s, 'standard5.status', '未知'), f"完成记录{get(s, 'standard5.closed_record_count', '未知')}条；逐次结果单列"],
+            ['5次standard', standard_label(s.get('standard5', {})), '独立判分与逐次结果单列'],
             ['合格成功', num(q.get('qualified_success_count'), 0) + ' / 20', '需冻结场景与正常数据读取资格'],
             ['合格失败', num(q.get('qualified_failure_count'), 0) + ' / 20', '自然失败与动作偏差失败分组'],
             ['random及训练', '本轮未要求random 不新增训练', '训练和自动验证默认固定standard']
@@ -359,19 +445,21 @@ def pages_for(d):
             rows.append([num(a['nominal_outer_width_mm'], 2), state(a['entry_required_slice_four_yaw_XY_domain_present']),
                 '正证书' if a['conservative_full_path_certificate_present'] else '未认证',
                 num(a.get('conservative_XY_clearance_lower_bound_mm'), 4),
-                short(a.get('complete_task_result'), 24)])
+                outcome_label(a.get('complete_task_result'))])
     geometry_figure = next(x for x in d['figures'] if x.get('role') == 'geometry')
     pages.append([('h', '原座通道与可行尺寸范围'),
-        table(['宽度 mm', '入口全XY域', '全深竖直路径', '保守余量 mm', '自然控制完整任务'], rows, [2.0, 2.8, 3.4, 3.0, 5.6]),
-        ('p', '尺寸表的完整任务结果仅汇总明确标注condition_group=natural的未扰动控制组。确定性动作偏差的成败另列，不将受控提前停止等失败解释为该尺寸自然不稳定；未知组不归入natural。全部原始成败仍保留在候选CSV和运行列表，正式配额继续按各条件组独立审计。'),
-        ('p', '10.70mm是当前采样中取得保守全深正证书的最大宽度，不是全局物理尺寸上限。10.72至11.00mm在入口有可行域，但保守全深检查未认证，不能写成必然无法装载。11.02mm起的已测试尺寸在四个声明直立方位的入口必要域为空；不排除未研究的倾斜6DoF路线。'),
-        image(geometry_figure, 7.5),
-        ('p', '所有尺寸共用0 90 180 270度方位和全部有界XY平移域。入口取真实座高28.5mm闭合孔域与器皿底上1mm实心截面，计算三角形对Minkowski禁区并集。全深正证书投影保留原座所有承托面上0.1µm以上三角面和垂直壁线段，并用真实器皿外轮廓作保守连续竖直扫掠。负的保守检查仅表示未证明。'),
-        ('p', '几何阶段推荐10.00mm作为初始物理候选，原A座局部偏移X=+0.650mm Y=+0.001mm，保守侧向输入表面余量约0.350mm。原座约2mm承托高度与约27mm插入深度是网格几何候选，最低底面承托采样凸包包含COM。这些几何证据不代替实际物理结果；已运行尺寸的释放、撤离与稳定结果见后页。')])
+        table(['宽度 mm', '入口全XY域', '全深竖直路径', '搜索最佳\n证书余量 mm', '自然控制完整任务'], rows, [2.0, 2.8, 3.4, 3.0, 5.6]),
+        ('p', '余量取几何搜索中的最佳正证书，不是实际跟踪误差。任务列仅汇总natural未扰动控制；受控偏差和未知组另列，全部成败与标签保留在CSV。'),
+        ('p', '10.70mm是最大已采样保守全深正证书，不是物理上限。10.72至11.00mm入口可行而全深未认证，结果未知。11.02mm起的已测试尺寸在四个直立方位入口必要域为空；未研究任意倾斜6DoF路线。'),
+        image(geometry_figure, 5.2),
+        ('p', '全部尺寸统一检查四个直立方位与全部有界XY域，保守竖直扫掠保留三角面及垂直壁；未取得正证书只表示未证明。入口截面、算法和承托采样详见同包几何CSV及JSON。'),
+        ('p', '实际运行固定在原A座局部X=+0.650mm、Y=+0.001mm；10.00mm在此偏移的输入几何余量为' + num(get(g, 'recommended_initial_physics_candidate.fixed_offset_geometry.evaluated_sweep_clearance_mm'), 6) + 'mm，与表中搜索最佳值区分。承托高度约2mm、插入深度约27mm；实际释放、撤离和稳定见后页物理记录。')])
 
-    runs = [x for x in s.get('runs', []) if x.get('task_type') == 'loading']
-    run_table = [[short(x.get('episode_id') or x['run_name'], 12), short(x.get('asset_id'), 21), num(x.get('simulation_seconds'), 2),
-        state(x.get('task_success')), short(x.get('termination_reason'), 43)] for x in runs[-7:]]
+    runs = representative_runs(s, p)
+    run_table = [[short(x.get('episode_id') or x.get('run_name'), 12),
+        num(d['registry']['assets'].get(x.get('asset_id'), {}).get('nominal_outer_xy_mm', [None])[0], 2),
+        num(x.get('simulation_seconds'), 2), state(x.get('task_success')),
+        termination_label(x.get('termination_reason'))] for x in runs]
     if not run_table:
         run_table = [['无完成装载记录', '未知', '未知', '未执行或未闭合', '以actual_runs.csv为准']]
     phase = [('抓取', r.get('grasp_success')), ('实际取出', r.get('source_slot_cleared')),
@@ -382,10 +470,10 @@ def pages_for(d):
     failure_link = next((item for item in d['evidence_files'] if item['label'] == '10.50mm开发失败复核'), None)
     pages.append([('h', '实际连续任务与失败记录'),
         ('p', '控制沿用连续接触锁存：首次双指接触后保持已有闭合命令，避免锁存切换时重新张开。新宽度由实际接触适应，不复制12.5mm的固定指距。示范控制器使用器皿真值位姿；本轮未训练模型。'),
-        table(['episode ID', '资产', '仿真秒', '独立结果', '终止原因'], run_table, [3.1, 3.8, 1.8, 2.3, 5.8]),
-        ('p', f"主记录 {p.get('episode_directory', '尚无可选的已闭合装载episode')}。任务结果只取独立评分，不根据INSERT或VERIFY阶段名称认定成功。完整视频必须来自同一次运行，不拼接不同尝试。"),
+        table(['代表episode', '宽度 mm', '仿真秒', '独立结果', '终止原因'], run_table, [3.2, 2.0, 1.8, 2.5, 7.3]),
+        ('p', f"主记录 {p.get('episode_id', '未知UUID')} / {Path(p.get('episode_directory') or '未知episode').name}。只依据独立评分认定成功。上表选取主记录、10.30mm、10.50mm及受控失败；preview与接口诊断仍保留在原CSV。"),
         ('p', '主记录独立观察：' + '；'.join(label + state(value) for label, value in phase) + '。'),
-        ('p', f"当前主记录终止原因 {r.get('termination_reason', '未知')}；失败类型 {r.get('failure_type', '未知')}。物理质量标记 {', '.join(r.get('physics_quality_flags', [])) or '无已记录项或尚无完成评分'}。完整已启动及未闭合列表另存CSV。"),
+        ('p', f"主记录终止原因为{termination_label(r.get('termination_reason'))}，失败类型为{termination_label(r.get('failure_type'))}。原生速度与位姿差分不一致、原座完整烹饪穿透未读取等实际质量标记保留在JSON；原始英文标签与全部启动记录保留在CSV。"),
         ('h', '十点五毫米开发运行的独立失败'),
         *failure_blocks,
         *([('link', failure_link)] if failure_link else [])])
@@ -393,7 +481,7 @@ def pages_for(d):
     verification = get(s, 'standard5', {})
     selected = set(verification.get('episodes', []))
     rows = [[episode_label(x), state(x.get('task_success')),
-             num(x.get('simulation_seconds'), 2), state(x.get('record_valid')), short(x.get('termination_reason'), 38)]
+             num(x.get('simulation_seconds'), 2), state(x.get('record_valid')), termination_label(x.get('termination_reason'))]
             for x in s.get('runs', []) if x['episode_directory'] in selected]
     if not rows:
         rows = [['尚未指定或尚未启动5次验证', '未知', '未知', '未知', '不以开发preview替代']]
@@ -425,7 +513,7 @@ def pages_for(d):
     ccd_label = '开启' if backend.get('ccd') is True else '关闭' if backend.get('ccd') is False else '未知'
     pages.append([('h', '物理配置与烹饪表示的证据边界'),
         table(['参数', '实际配置或证据', '范围'], [
-            ['后端与CCD', backend_label + '；CCD ' + ccd_label, '后端来源' + str(backend.get('backend_source', 'unknown')) + '；CCD来源' + str(backend.get('ccd_source', 'unknown'))],
+            ['后端与CCD', backend_label + '；CCD ' + ccd_label, '后端来自' + provenance_label(backend.get('backend_source')) + '；CCD来自' + provenance_label(backend.get('ccd_source'))],
             ['步进与控制', f"{get(c, 'physics.hz', '未知')}Hz / {get(c, 'physics.control_hz', '未知')}Hz", '每控制周期物理步数由频率比计算'],
             ['求解器', str(get(c, 'physics.solver', '未知')), f"位置迭代{get(c, 'physics.position_iterations', '未知')} 速度迭代{get(c, 'physics.velocity_iterations', '未知')}"],
             ['接触偏移与静止偏移', f"{num(get(c, 'physics.contact_offset_m'), 8)}m / {num(get(c, 'physics.rest_offset_m'), 8)}m", '沿用基线；不将contact_offset称为位置精度'],
@@ -434,9 +522,10 @@ def pages_for(d):
         ], [4.0, 5.7, 7.1]),
         ('p', f"preview探针中28个碰撞输入均取得有效凸体烹饪返回。世界米坐标重算的返回表面到输入表面抽样最大{num(None if convex.get('max_observed_cooked_to_input_surface_distance_m') is None else convex['max_observed_cooked_to_input_surface_distance_m'] * 1e6, 3)}µm；反向为{num(None if convex.get('max_observed_input_to_cooked_surface_distance_m') is None else convex['max_observed_input_to_cooked_surface_distance_m'] * 1e6, 3)}µm。零顶点误差不代表整个烹饪面无误差。"),
         ('p', '这些是逐块顶点和面中心到三角表面的已观察距离，不是复合几何并集外表面误差或全局Hausdorff上界。接口返回当前prim的烹饪表示，未读取已附着PxShape指针。原座实际物理raycast命中表面与源三角面一致的抽样证据，不能替代完整静态烹饪顶点索引读取，也不排除未采样差异。'),
+        ('p', '10.70mm几何证书的搜索最佳余量仅' + num(None if candidate_map.get('cuvette_xy_1070', {}).get('conservative_XY_clearance_lower_bound_mm') is None else candidate_map['cuvette_xy_1070']['conservative_XY_clearance_lower_bound_mm'] * 1000, 3) + 'µm，小于上述烹饪表面已观察距离，不能推荐为物理操作尺寸上限。'),
         ('h', '连续相机与时间对齐'),
         ('p', f"侧相机固定世界安装，腕相机安装于panda_hand。实际主配置侧视分辨率{side.get('resolution', '未知')}，焦距{side.get('focal_length_cm', '未知')}cm；腕视{wrist.get('resolution', '未知')}，焦距{wrist.get('focal_length_cm', '未知')}cm。镜头安装、裁剪与策略256像素变换保持显式配置。"),
-        ('p', '双相机在完整任务过程中持续采集；同步记录观测 动作 后继状态和仿真时间。renderer当前状态对齐的核验与真实相机曝光或实物标定分开。实际本轮未完成的动态同步核验不得用旧preview结果代替；详情按同包原始核验JSON判读。')])
+        ('p', camera_association(d.get('camera_sync', {}), d.get('camera_readability', {}), p.get('episode_id')))])
 
     grouped = q.get('condition_groups', {})
     reader = d['collection_audit'].get('reader_validation', [])
@@ -449,7 +538,7 @@ def pages_for(d):
             ['配额缺口', num(q.get('success_missing'), 0), num(q.get('failure_missing'), 0)]
         ], [7.0, 4.9, 4.9]),
         ('p', controlled_failure_paragraph(s)),
-        ('p', f"资格状态 {q.get('status', '未知')}。几何预检 资产加载 初始化 服务异常 人工中断及未真正执行任务的preview不计失败配额。确定性动作偏差只改变已声明阶段动作，记录幅度与版本，不改变冻结场景，不强撞或伪造标签。"),
+        ('p', f"资格状态为{qualification_label(q.get('status'))}。几何预检、资产加载、初始化、服务异常、人工中断及未真正执行任务的preview不计失败配额。动作偏差只改变已声明阶段动作，记录幅度与版本，场景保持冻结。"),
         ('p', '成功BC默认只读record_valid且task_success的合格完整loading轨迹；自然失败和受控偏差失败分别保存。完整episode划分训练和验证集合，两者保持同一冻结场景；相邻帧不跨集合。原始失败标签不为读取器修改。'),
         table(['读取与冻结项', '实际证据', '说明'], [
             ['正常读取验证条目', str(len(reader)), '每项由已有ACT或DP正常入口实际执行'],
@@ -464,14 +553,14 @@ def pages_for(d):
     pages.append([('h', '复现与交付入口'),
         ('p', f"选定原A座，推荐或实际使用资产{asset_id}。实际完整任务结论为{state(r.get('task_success'))}，释放为{state(r.get('release_observed'))}，撤离为{state(r.get('retreat_observed'))}，撤离后稳定为{state(r.get('stable_after_retreat'))}。原12.5mm控制组合的既有冲突结论保留。"),
         ('code', 'bash demos/lab_cuvette_size_v1/run.sh --mode teacher \\\n  --config config/lab_cuvette_loading/Size_v1/standard.yaml \\\n  --asset-id ' + asset_id + ' --output NEW_EPISODE_DIRECTORY\n\n'
-          'python3 scripts/summarize_lab_cuvette_size_v1.py \\\n  --root outputs/lab_cuvette_loading/Size_v1 \\\n  --output NEW_SUMMARY_DIRECTORY'),
-        ('p', '默认GUI；服务器环境可加--headless。每次使用新目录。正式collect train和自动验证锁定冻结清单中的asset_id，不能随意改尺寸；尺寸对比须使用独立开发配置和输出，不计最终10mm固定场景配额。解析器保留当前目标偏移，不自动为其他尺寸调参或继承10mm结果。以上命令存在不表示5次或20+20已完成。'),
+          '../labutopia-env/bin/python scripts/summarize_lab_cuvette_size_v1.py \\\n  --root outputs/lab_cuvette_loading/Size_v1 \\\n  --output NEW_SUMMARY_DIRECTORY'),
+        ('p', '启动入口默认GUI；本轮实际记录使用--headless，尚未实际验证本版本GUI展示。每次使用新目录。正式collect、train及自动验证锁定冻结asset_id；尺寸探索使用独立开发配置，不计10mm配额。解析器保留当前目标偏移，不自动为其他尺寸调参或继承10mm结果。'),
         ('h', '同包代表录像'),
         *video_blocks,
         ('p', '视频仅按manifest注明整段运行或剪辑范围；主录像应连续包含其实际执行阶段。未发生的插入 松爪 撤离不通过剪辑包装为成功。'),
         ('h', '结果表与剩余工作'),
         *evidence_blocks,
-        ('p', '若完整任务仍未通过，优先依据准确失败阶段 真实接触与源几何重叠记录修复控制和时序；原座不修改。若已通过，先核对固定5次重复性，再按同一冻结场景补齐成功与有效失败配额。实际缺口按本报告数据表，不预定成功。所有参数仍待实物测量校正，real_calibrated=false。')])
+        ('p', final_progress(q))])
     return pages
 
 
@@ -536,6 +625,12 @@ def write_docx(pages, path):
             elif kind == 'table':
                 table_obj = doc.add_table(rows=1, cols=len(value['header']))
                 table_obj.alignment = WD_TABLE_ALIGNMENT.CENTER; table_obj.autofit = False
+                for column, grid, width in zip(table_obj.columns, table_obj._tbl.tblGrid.gridCol_lst, value['widths_cm']):
+                    column.width = Cm(width)
+                    grid.w = Cm(width)
+                total_width = sum(Cm(width).twips for width in value['widths_cm'])
+                table_width = table_obj._tbl.tblPr.find(qn('w:tblW'))
+                table_width.set(qn('w:w'), str(total_width)); table_width.set(qn('w:type'), 'dxa')
                 for j, text in enumerate(value['header']):
                     table_obj.rows[0].cells[j].text = text
                 for row in value['rows']:
