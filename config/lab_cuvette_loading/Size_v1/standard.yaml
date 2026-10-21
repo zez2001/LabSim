@@ -289,6 +289,8 @@ env:
   material_geometry_check_hz: 15
   render_flush_passes_per_control: 1
   probe_cooked_collision: true
+  execution_purpose: collect
+  frozen_scene_manifest: config/lab_cuvette_loading/Size_v1/frozen_scene.json
 geometry:
   target_loading_offset_local_m:
   - 0.00065
@@ -345,11 +347,12 @@ cameras:
     - 0
     - -1
 experiment:
-  id: size_v1_development
+  id: Size_v1_frozen_standard
   condition_group: natural
   truth_teacher: true
   controller_version: Size_v1.continuous_latch.loading01
   original_seat_unchanged: true
+  run_role: standard_collection
 collection:
   mode: standard
   scene_randomization_enabled: false
