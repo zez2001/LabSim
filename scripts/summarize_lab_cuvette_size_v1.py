@@ -169,6 +169,9 @@ def scan_runs(root, errors):
         role = _first(cfg.get('experiment', {}).get('run_role'), cfg.get('collection', {}).get('run_role'))
         rows.append({'run_name': run_name, 'episode_directory': relative,
             'episode_id': identifier, 'asset_id': asset,
+            'config_snapshot': cfg,
+            'config_path': str(episode / 'config.yaml') if (episode / 'config.yaml').is_file() else None,
+            'config_sha256': sha(episode / 'config.yaml') if (episode / 'config.yaml').is_file() else None,
             'closed_status': 'COMPLETE_RECORD' if complete is True else 'UNCLOSED_OR_UNKNOWN',
             'complete': complete, 'task_type': task,
             'record_valid': known_bool(result.get('record_valid')), 'task_success': outcome,

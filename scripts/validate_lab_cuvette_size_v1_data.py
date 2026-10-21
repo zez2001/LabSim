@@ -1,6 +1,7 @@
 """Audit Size_v1 quotas and read normal ACT/DP batches without changing labels.
 
-Optionally copy eligible complete episodes into the existing merged HDF5 index.
+Default indexes contain relative links to self-contained episode HDF5 files in
+the same collection tree; --copy-data explicitly creates a self-contained copy.
 Diagnostics, initialization/service failures and unknown scene membership are
 reported separately and cannot fill the 20-success / 20-failure quotas.
 """
@@ -8,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -23,6 +25,7 @@ from demos.lab_cuvette_size_v1.frozen_scene import (CONDITION_GROUPS, file_sha,
     load_frozen, validate_frozen_scene)
 from policy.dataset.lab_cuvette_size_v1_dataset import LabCuvetteSizeV1Dataset
 from scripts.read_lab_cuvette_env_v1_data import describe, inspect
+from scripts.actual_episode_inspect import scan_links
 from utils.episode_selection import episode_matches_filter
 
 
@@ -44,6 +47,17 @@ def audit_episode(path, expected_sha):
     with h5py.File(path, "r") as episode:
         attrs = episode_attributes(episode)
         count = len(episode["actions"]) if "actions" in episode else 0
+        policy = str(attrs.get("policy_id", "")).lower()
+        reason = str(attrs.get("termination_reason", "")).upper()
+        failure = str(attrs.get("failure_type", "")).upper()
+        diagnostic_termination = (reason in {"PREVIEW_COMPLETE", "DIAGNOSTIC_ONLY", "REPLAY_SOURCE_EXHAUSTED"}
+            or "BUDGET" in reason or reason.startswith("REPLAY_"))
+        if "preview" in policy or diagnostic_termination or failure == "DIAGNOSTIC_ONLY":
+            errors.append("preview_or_short_budget_interface_diagnostic_not_task_quota")
+        if attrs.get("task_type") != "loading":
+            errors.append("not_full_loading_task")
+        if attrs.get("task_success") is False and failure in {"", "UNKNOWN", "NONE", "UNAVAILABLE"}:
+            errors.append("missing_physical_task_failure_type")
         if attrs.get("frozen_scene_sha256") != expected_sha:
             errors.append("missing_or_different_frozen_scene")
         if attrs.get("scene_mode") != "standard":
@@ -53,13 +67,32 @@ def audit_episode(path, expected_sha):
         for key in ("asset_id", "source_slot_id", "target_seat_id", "control_config_sha256", "code_commit"):
             if attrs.get(key) in (None, "", "unknown", "unavailable"):
                 errors.append("missing_" + key)
-        if attrs.get("condition_group") == "deterministic_action_deviation":
-            deviation = attrs.get("deterministic_action_deviation_json")
+        deviation = attrs.get("deterministic_action_deviation_json")
+        try:
+            if isinstance(deviation, str):
+                deviation = json.loads(deviation)
             if deviation is None and "episode_metadata_json" in episode:
                 metadata = json.loads(episode["episode_metadata_json"][()].decode())
                 deviation = metadata.get("deterministic_action_deviation")
-            if not deviation:
+        except (ValueError, TypeError, AttributeError):
+            errors.append("invalid_action_deviation_json")
+            deviation = None
+        if attrs.get("condition_group") == "natural" and deviation:
+            errors.append("natural_group_contains_action_deviation")
+        if attrs.get("condition_group") == "deterministic_action_deviation":
+            if not isinstance(deviation, dict) or not all(deviation.get(key) is not None for key in
+                    ("stage", "value", "unit", "controller_version")):
                 errors.append("missing_action_deviation_specification")
+            else:
+                if any(not isinstance(deviation[key], str) or not deviation[key].strip()
+                       for key in ("stage", "unit", "controller_version")):
+                    errors.append("invalid_action_deviation_stage_unit_or_controller")
+                try:
+                    values = np.asarray(deviation["value"], float)
+                    if not values.size or not np.isfinite(values).all():
+                        errors.append("nonfinite_action_deviation_value")
+                except (ValueError, TypeError):
+                    errors.append("nonnumeric_action_deviation_value")
         if count:
             for camera in ("side_camera_rgb", "wrist_camera_rgb"):
                 if camera not in episode or len(episode[camera]) != count:
@@ -88,21 +121,49 @@ def audit_episode(path, expected_sha):
                 labels=attrs, admission_errors=errors, **accepted)
 
 
-def make_index(rows, destination):
-    destination = Path(destination)
+def make_index(rows, destination, *, copy_data=False, collection_root=None):
+    destination = Path(destination).resolve()
+    if not copy_data and collection_root is None:
+        raise ValueError("Relative link index requires an explicit collection_root")
+    collection = Path(collection_root).resolve() if collection_root is not None else None
+    if not copy_data and not destination.is_relative_to(collection):
+        raise ValueError("Relative index must remain within the collection tree")
+    selected = []
+    for row in rows:
+        if not (row["success"] or row["failure"]):
+            continue
+        source = Path(row["path"]).resolve()
+        if collection is not None and not source.is_relative_to(collection):
+            raise ValueError("Episode lies outside the selected collection tree: " + str(source))
+        if source == destination:
+            raise ValueError("Index cannot replace an episode source")
+        with h5py.File(source, "r") as record:
+            dependencies = scan_links(record)
+            if dependencies:
+                raise ValueError("Original episode must be self-contained, without external links/VDS: " + str(source))
+        selected.append((row, source))
     destination.parent.mkdir(parents=True, exist_ok=True)
     count = 0
     with h5py.File(destination, "x") as merged:
-        merged.attrs.update(schema_version="labsim.Size_v1.index.v1", sample_filter="all_valid")
-        for row in rows:
-            if not (row["success"] or row["failure"]):
-                continue
-            with h5py.File(row["path"], "r") as source:
-                target = merged.create_group(f"episode_{count:04d}")
-                target.attrs.update(dict(source.attrs))
-                for key in source:
-                    source.copy(key, target)
+        merged.attrs.update(schema_version="labsim.Size_v1.index.v1", sample_filter="all_valid",
+            storage_mode="copied_episode_data" if copy_data else "relative_external_links",
+            portability_scope="self-contained index" if copy_data else "move entire collection tree including original episode HDF5 files")
+        sources = []
+        for row, source_path in selected:
+            relative = Path(os.path.relpath(source_path, destination.parent)).as_posix()
+            name = f"episode_{count:04d}"
+            if copy_data:
+                with h5py.File(source_path, "r") as source:
+                    target = merged.create_group(name)
+                    target.attrs.update(dict(source.attrs))
+                    for key in source:
+                        source.copy(key, target)
+            else:
+                merged[name] = h5py.ExternalLink(relative, "/")
+            sources.append(dict(index_group=name, relative_episode_file=relative,
+                                source_sha256=row.get("source_sha256")))
             count += 1
+        merged.attrs["episode_sources_json"] = json.dumps(sources, ensure_ascii=False, sort_keys=True)
     return count
 
 
@@ -127,10 +188,13 @@ def main(argv=None):
     parser.add_argument("episodes_root", type=Path)
     parser.add_argument("--frozen-scene", type=Path, required=True)
     parser.add_argument("--config", type=Path, required=True)
-    parser.add_argument("--index", type=Path, help="Create a new portable normal-reader HDF5 index; never overwrite")
+    parser.add_argument("--index", type=Path, help="Create a small relative-link index within episodes_root; move whole collection tree together")
+    parser.add_argument("--copy-data", action="store_true", help="Explicitly copy complete selected HDF5 contents instead of lightweight relative links")
     parser.add_argument("--read-index", type=Path, help="Read an existing index without creating one")
     parser.add_argument("--output-json", type=Path, required=True)
     args = parser.parse_args(argv)
+    if args.copy_data and not args.index:
+        parser.error("--copy-data requires --index")
     frozen = load_frozen(args.frozen_scene)
     validate_frozen_scene(OmegaConf.load(args.config), frozen, ROOT, purpose="collect")
     files = sorted(args.episodes_root.rglob("episode_*.h5"))
@@ -155,7 +219,10 @@ def main(argv=None):
         duplicate_episode_files_not_counted=duplicates, episodes=rows, reader_validation=[],
         labels_modified=False, random10_is_not_an_acceptance_requirement=True)
     if args.index:
-        result["merged_episodes"] = make_index(rows, args.index)
+        result["merged_episodes"] = make_index(rows, args.index, copy_data=args.copy_data,
+                                               collection_root=args.episodes_root)
+        result["index_storage"] = "copied_episode_data" if args.copy_data else "relative_external_links"
+        result["index_portability"] = "self-contained copied index" if args.copy_data else "move the entire collection tree, preserving relative paths"
     index = args.index or args.read_index
     if index:
         for selection, count in (("success", success), ("failure", failure)):

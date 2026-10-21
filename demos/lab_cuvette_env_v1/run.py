@@ -50,6 +50,7 @@ def main(args=None):
         cfg.env.mode=args.layout_mode
         if cfg.version=='Size_v1':
             from demos.lab_cuvette_size_v1.frozen_scene import validate_execution_mode
+            cfg.env.execution_purpose='eval' if args.mode=='serve' else 'collect'
             validate_execution_mode(cfg,purpose='eval' if args.mode=='serve' else 'collect',explicit_random=args.mode=='serve' and args.layout_mode=='random')
     out=args.output or ROOT/cfg.output_root/(time.strftime('%Y%m%d_%H%M%S')+'_'+args.mode)
     out=Path(out);out.mkdir(parents=True,exist_ok=False)

@@ -96,22 +96,26 @@ class LabCuvetteLoadingEnvV1:
             frozen_path=self.cfg.env.get('frozen_scene_manifest')
             if frozen_path:
                 frozen=json.loads((Path(__file__).resolve().parents[1]/frozen_path).read_text())
-                validate_frozen_scene(self.cfg,frozen,Path(__file__).resolve().parents[1],purpose='collect')
+                purpose=self.cfg.env.get('execution_purpose','collect')
+                validation=validate_frozen_scene(self.cfg,frozen,Path(__file__).resolve().parents[1],purpose=purpose,explicit_random=purpose=='eval' and self.cfg.env.mode=='random')
                 deviation=OmegaConf.to_container(self.cfg.experiment.deviation,resolve=True) if 'deviation' in self.cfg.experiment else {}
                 size_metadata=episode_metadata(self.cfg,frozen,condition_group=self.cfg.experiment.get('condition_group','natural'),deviation=deviation)
+                size_metadata.update(scene_mode=self.cfg.env.mode,fixed_collection_eligible=bool(validation.get('fixed_collection_eligible')))
             else:
                 size_metadata=dict(asset_id=self.cfg.vessel.asset_id,condition_group=self.cfg.experiment.get('condition_group','development'),scene_mode=self.cfg.scene_mode,code_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip())
+            size_metadata.update(asset_sha256=self.cfg.asset_selection.asset_sha256,asset_registry_sha256=self.cfg.asset_selection.registry_sha256,
+                asset_version=self.cfg.asset_selection.asset_sha256,actual_execution_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip())
             contract.update(size_metadata)
             size_metadata['deterministic_action_deviation_json']=json.dumps(size_metadata.get('deterministic_action_deviation',{}),sort_keys=True)
         from factories.collector_factory import create_collector
         self.collector=create_collector(self.cfg.collector_type,self.cfg,self.episode_dir,save_video=True,scene_contract=contract,camera_meta=self.camera_meta)
         self.collector.begin_episode(0,np.array(self.debug['object_position_m']),episode_id=self.episode_id,metadata=dict(seed=int(seed or 0),
             policy_id=self.options.get('policy_id','teacher' if self.options.get('teacher') else 'external'),demonstrator_id=self.options.get('demonstrator_id','unknown'),
-            task_type=self.cfg.env.task_type,source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,asset_version=contract['asset_manifest_sha256'],**size_metadata))
+            task_type=self.cfg.env.task_type,source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,**({'asset_version':contract['asset_manifest_sha256']} if 'asset_version' not in size_metadata else {}),**size_metadata))
         self._obs=self._public_observation();self._record_state=self._collector_state();self.ended=False
         self._video_writers={};self._video_last_t=-1.;self._video_frame_times=[];self._write_video()
         self._write(self.episode_dir/'initial_debug.json',self.debug)
-        self._write(self.episode_dir/'initialization_timing.json',dict(engine_clock_origin_s=self.engine_time_origin,first_observation_episode_time_s=self.t,physics_steps_recorded_before_first_observation=self.steps,reset_render_flush_passes=4,render_flush_passes_per_control=2,source_early_fall_recorded_from_step0=True,physics_backend='CPU PhysX',render_transform_path='Fabric disabled; explicit PhysX USD writeback',transform_update_settings=list(pc.get_physx_update_transformations_settings())))
+        self._write(self.episode_dir/'initialization_timing.json',dict(engine_clock_origin_s=self.engine_time_origin,first_observation_episode_time_s=self.t,physics_steps_recorded_before_first_observation=self.steps,reset_render_flush_passes=4,render_flush_passes_per_control=int(self.cfg.env.get('render_flush_passes_per_control',2)),source_early_fall_recorded_from_step0=True,physics_backend='CPU PhysX',render_transform_path='Fabric disabled; explicit PhysX USD writeback',transform_update_settings=list(pc.get_physx_update_transformations_settings())))
         if self.cfg.env.task_type=='loading' and self._geometry_valid() is not True:
             self.finalize_episode('GEOMETRY_PRECHECK_BLOCKED','GEOMETRY_PRECHECK_BLOCKED')
         return self.get_observation(),self._public_info()

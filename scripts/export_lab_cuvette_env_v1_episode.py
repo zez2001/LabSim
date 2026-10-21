@@ -37,7 +37,7 @@ def export_portable_episode(source,destination,*,validate_reader=True):
         transitions=len(h['actions'])
     destination.mkdir(parents=True,exist_ok=False)
     candidates=[source_h5]
-    candidates += sorted(p for p in source.iterdir() if p.is_file() and p.suffix in ('.json','.yaml','.yml','.jsonl','.mp4','.png'))
+    candidates += sorted(p for p in source.iterdir() if p.is_file() and (p.suffix in ('.json','.yaml','.yml','.jsonl','.mp4','.png') or p.name.endswith('.jsonl.gz')))
     candidates += sorted((source/'video').glob('*.mp4'))
     candidates += sorted((source/'dataset/meta').glob('*.jsonl'))
     files=[]

@@ -105,7 +105,8 @@ class LabCuvetteEnvV1Collector(MinimalPickCollector):
                      asset_version=self.scene_contract.get("asset_manifest_sha256", "unknown"),
                      task_type="loading")
         for key in ("seed", "policy_id", "demonstrator_id", "asset_version", "source_slot_id", "target_seat_id", "task_type",
-                    "asset_id", "condition_group", "frozen_scene_sha256", "control_config_sha256", "code_commit", "scene_mode", "deterministic_action_deviation_json"):
+                    "asset_id", "condition_group", "frozen_scene_sha256", "control_config_sha256", "code_commit", "scene_mode", "deterministic_action_deviation_json",
+                    "asset_sha256", "asset_registry_sha256", "actual_execution_commit", "fixed_collection_eligible"):
             if metadata.get(key) is not None:
                 attrs[key] = metadata[key]
             elif self.scene_contract.get(key) is not None:
@@ -248,6 +249,8 @@ class LabCuvetteEnvV1Collector(MinimalPickCollector):
         success_bc = bool(record_valid and outcome is True and geometry is True and task_type == "loading")
         failure_analysis = bool(record_valid and outcome is False and task_type == "loading"
                                 and failure.upper() not in NON_PHYSICAL_FAILURES and failure != "UNKNOWN")
+        if self.configuration.get('version')=='Size_v1':
+            success_bc=bool(success_bc and self.scene_contract.get('fixed_collection_eligible') is True)
         labels = dict(record_valid=record_valid, task_success=outcome, geometry_valid=geometry,
             failure_type=failure, termination_reason=reason, task_type=task_type,
             eligible_for_success_bc=success_bc, eligible_for_failure_analysis=failure_analysis,
