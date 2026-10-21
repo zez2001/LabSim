@@ -1,0 +1,166 @@
+{
+  "schema": "labsim.Env_v1.actual_camera_sync_audit.v2",
+  "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000",
+  "episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+  "source_HDF5": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/dataset/episode_0000.h5",
+  "source_HDF5_sha256": "2659bf58ab1e0c36ea7079687a6a543e261afcc990b3a7761fbc0a0e525a93f6",
+  "value_paths": {
+    "renderer": "camera_pose_json[i][camera].renderer_debug.CameraParams.raw.cameraViewTransform",
+    "USD": "camera_pose_json[i][camera].world_from_camera_usd",
+    "observation_time": "timestamp[i]",
+    "actual_settings": "camera_pose_json[i][camera].render_binding.settings"
+  },
+  "calculation": {
+    "renderer": "Gf row world-to-camera 16values reshape4x4, transpose then invert -> column world-from-camera",
+    "position": "Euclidean world-translation difference in metres",
+    "rotation": "angle(R_renderer * R_USD.T) in degrees",
+    "engine_time_origin_s": 0.008333333767950535
+  },
+  "cameras": {
+    "side_camera": {
+      "samples": 6348,
+      "first": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 5.087681048627601e-16,
+        "rotation_residual_deg": 3.895368034302952e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "last": {
+        "observation_index": 6347,
+        "episode_t_s": 105.8,
+        "phase": "VERIFY",
+        "position_residual_m": 5.087681048627601e-16,
+        "rotation_residual_deg": 3.895368034302952e-15,
+        "renderer_position_vs_previous_USD_m": 5.087681048627601e-16,
+        "renderer_rotation_vs_previous_USD_deg": 3.895368034302952e-15,
+        "sensor_rendering_time_s": 105.80833885166794,
+        "sensor_minus_engine_origin_minus_obs_s": 5.517899992923958e-06
+      },
+      "worst_position": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 5.087681048627601e-16,
+        "rotation_residual_deg": 3.895368034302952e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "worst_rotation": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 5.087681048627601e-16,
+        "rotation_residual_deg": 3.895368034302952e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "position_residual_m": {
+        "min": 5.087681048627601e-16,
+        "median": 5.087681048627601e-16,
+        "p95": 5.087681048627601e-16,
+        "maximum": 5.087681048627601e-16
+      },
+      "rotation_residual_deg": {
+        "median": 3.895368034302952e-15,
+        "p95": 3.895368034302952e-15,
+        "maximum": 3.895368034302952e-15
+      },
+      "same_observation_matches_current_USD_within_1e_8_m": 6348,
+      "previous_control_USD_correspondence": {
+        "samples": 6347,
+        "within_1e_8_m": 6347,
+        "median_position_residual_m": 5.087681048627601e-16
+      },
+      "direct_USD_vs_physical_hand_times_mount_max_position_m": null,
+      "actual_zero_delay_settings_observed": [
+        {
+          "/app/hydraEngine/waitIdle": true,
+          "/app/updateOrder/checkForHydraRenderComplete": 1000
+        }
+      ]
+    },
+    "wrist_camera": {
+      "samples": 6348,
+      "first": {
+        "observation_index": 0,
+        "episode_t_s": 0.016666666666666666,
+        "phase": "RESET",
+        "position_residual_m": 2.2291027918243403e-16,
+        "rotation_residual_deg": 2.3860064035609877e-15,
+        "renderer_position_vs_previous_USD_m": null,
+        "renderer_rotation_vs_previous_USD_deg": null,
+        "sensor_rendering_time_s": 0.025000001303851604,
+        "sensor_minus_engine_origin_minus_obs_s": 8.692344032057431e-10
+      },
+      "last": {
+        "observation_index": 6347,
+        "episode_t_s": 105.8,
+        "phase": "VERIFY",
+        "position_residual_m": 2.4276213934271013e-16,
+        "rotation_residual_deg": 1.5902780990349054e-15,
+        "renderer_position_vs_previous_USD_m": 2.4276213934271013e-16,
+        "renderer_rotation_vs_previous_USD_deg": 1.5902780990349054e-15,
+        "sensor_rendering_time_s": 105.80833885166794,
+        "sensor_minus_engine_origin_minus_obs_s": 5.517899992923958e-06
+      },
+      "worst_position": {
+        "observation_index": 1548,
+        "episode_t_s": 25.816666666666666,
+        "phase": "TRANSPORT",
+        "position_residual_m": 6.866350197783356e-16,
+        "rotation_residual_deg": 1.7801728312513477e-15,
+        "renderer_position_vs_previous_USD_m": 7.848398775532819e-05,
+        "renderer_rotation_vs_previous_USD_deg": 0.0002539644132343905,
+        "sensor_rendering_time_s": 25.825001346878707,
+        "sensor_minus_engine_origin_minus_obs_s": 1.3464440904442654e-06
+      },
+      "worst_rotation": {
+        "observation_index": 3540,
+        "episode_t_s": 59.016666666666666,
+        "phase": "ALIGN",
+        "position_residual_m": 2.220446049250313e-16,
+        "rotation_residual_deg": 5.746110063473438e-15,
+        "renderer_position_vs_previous_USD_m": 2.4460725978890257e-05,
+        "renderer_rotation_vs_previous_USD_deg": 0.002727810888081761,
+        "sensor_rendering_time_s": 59.02500307839364,
+        "sensor_minus_engine_origin_minus_obs_s": 3.0779590218799058e-06
+      },
+      "position_residual_m": {
+        "min": 0.0,
+        "median": 2.2247786310271853e-16,
+        "p95": 4.47545209131181e-16,
+        "maximum": 6.866350197783356e-16
+      },
+      "rotation_residual_deg": {
+        "median": 1.5903326959112796e-15,
+        "p95": 3.3348510015361023e-15,
+        "maximum": 5.746110063473438e-15
+      },
+      "same_observation_matches_current_USD_within_1e_8_m": 6348,
+      "previous_control_USD_correspondence": {
+        "samples": 6347,
+        "within_1e_8_m": 557,
+        "median_position_residual_m": 2.2431942896750392e-05
+      },
+      "direct_USD_vs_physical_hand_times_mount_max_position_m": 2.981940710169271e-08,
+      "actual_zero_delay_settings_observed": [
+        {
+          "/app/hydraEngine/waitIdle": true,
+          "/app/updateOrder/checkForHydraRenderComplete": 1000
+        }
+      ]
+    }
+  },
+  "raw_data_modified": false,
+  "Isaac_started": false,
+  "scope": "Actual renderer-to-USD observation association; not physical precision, collision penetration or real optical calibration. Near-previous-pose equality does not alone establish exact RGB exposure latency. record_valid does not certify zero latency."
+}
