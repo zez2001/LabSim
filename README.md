@@ -2,11 +2,13 @@
 
 当前独立分支为[`codex/lab-cuvette-size-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-size-v1)。本轮固定原A座，通过同一XY仿射规则派生比色皿尺寸，不修改原座、旧资产或源CAD。
 
-阶段A已有35个注册资产与实际几何筛选，推荐10.00×10.00×67.5mm假设资产，固定20g假设下重算COM/惯量；10mm加载/复位/自然落稳与双视角preview已实跑。10.00mm首条完整装载已真实成功：105.82秒，包含实际插入、承托交接、松爪、撤离和3秒稳定；正在做额外尺寸探索及冻结standard重复验证，正式20+20配额尚未开始。采集、训练和自动验证固定standard，本轮取消random10。
+阶段A已有35个注册资产与实际几何筛选，推荐10.00×10.00×67.5mm假设资产，固定20g假设下重算COM/惯量；10mm加载/复位/自然落稳与双视角preview已实跑。10.00mm首条完整装载已真实成功：105.82秒，包含实际插入、承托交接、松爪、撤离和3秒稳定；冻结standard已实际5/5完整成功且进程正常退出0，首5条均通过独立资格及ACT/DP读取审计，正式合格成功5条、失败0条；正在追加10.30mm尺寸验证，继续目标20成功+20有效失败。采集、训练和自动验证固定standard，本轮取消random10。
 
 - [本轮状态与准确调用](docs/lab_cuvette_loading/Size_v1/README.md) · [持续状态](TASK_STATUS.md)
 - [35尺寸完整几何结果](docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/README.md) · [可替换资产注册](assets/lab_cuvette_loading/Size_v1/registry.json)
 - [实际碰撞烹饪／座表面抽样与限制](docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.md)
+
+- [5次固定场景逐集结果与便携样例核验](docs/lab_cuvette_loading/Size_v1/data/standard5_actual/README.md)
 
 以下保留Env_v1及上游历史入口。
 
