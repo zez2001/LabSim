@@ -12,9 +12,9 @@
 
 # LabSim 进展与分享入口
 
-最新版本 **Env_v1 已整理为正式任务并接通三条真实策略短链，原刚性座完整装载仍受阻**。当前场景使用单台开盖仪器、完整白色6×6来源架和12.5×12.5×67.5 mm器皿，目标是腔内原A座 `candidate_far_hinge`。A/B原座保留12.6 mm中央参考截面及全部内伸结构；原尺寸直立刚性入口的整个必要XY域仍存在材料冲突，没有扩孔、删件或放宽判据。
+历史阶段 **Env_v1 已整理为正式任务并接通三条真实策略短链，原刚性座完整装载仍受阻**。当前场景使用单台开盖仪器、完整白色6×6来源架和12.5×12.5×67.5 mm器皿，目标是腔内原A座 `candidate_far_hinge`。A/B原座保留12.6 mm中央参考截面及全部内伸结构；原尺寸直立刚性入口的整个必要XY域仍存在材料冲突，没有扩孔、删件或放宽判据。
 
-最新 **preinsert_continuous_latch01安全预插入诊断已真实通过**：82.65秒，完成清槽、悬持、搬运、原座上方安全接近、上抬和末段1秒保持；未插入、未松爪、未实际撤离，full/native_pair仍为null。此前continuous_latch01的230.445 µm漂移超限false保留。真实projection和zero_delay渲染修复已有最新4958/4958同观测关联实证，旧0.966282 mm残差是修复前记录。π0.5、GPT-6 Astra direct、真实RLinf/RPent Harness VLA各接通5动作/0.25秒短链，均task_success=false，非任务级评测。固定5次/random10次及20+20尚未开始。
+Env_v1阶段的 **preinsert_continuous_latch01安全预插入诊断已真实通过**：82.65秒，完成清槽、悬持、搬运、原座上方安全接近、上抬和末段1秒保持；未插入、未松爪、未实际撤离，full/native_pair仍为null。此前continuous_latch01的230.445 µm漂移超限false保留。真实projection和zero_delay渲染修复已有最新4958/4958同观测关联实证，旧0.966282 mm残差是修复前记录。π0.5、GPT-6 Astra direct、真实RLinf/RPent Harness VLA各接通5动作/0.25秒短链，均task_success=false，非任务级评测。固定5次/random10次及20+20尚未开始。
 
 - [本轮DOCX报告](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.docx) · [Markdown报告与视频](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.md) · [24条实际运行表](docs/lab_cuvette_loading/Env_v1/results_20261021/actual_runs.csv)
 - [当前完成状态与全部调用命令](docs/lab_cuvette_loading/Env_v1/README.md) · [持续任务状态](TASK_STATUS.md)

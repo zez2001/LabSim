@@ -1,0 +1,133 @@
+{
+  "schema": "labsim.Size_v1.boundary1050_failure_media.v1",
+  "episode_id": "022b4499-5a99-443f-884c-9fe326da822b",
+  "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000",
+  "asset_id": "cuvette_xy_1050",
+  "original_independent_task_success": false,
+  "original_failure_type": "GRASP_SLIP",
+  "original_release_observed": true,
+  "original_retreat_observed": true,
+  "original_stable_after_retreat": true,
+  "classification": "Early grounded relative-origin drift exceeds200um; supported final XY also exceeds100um. Physical release/stability does not overwrite these gates.",
+  "process_exit_code": 143,
+  "process_exit_evidence": "Parent observed unified exec session14671 exit143; App Shutting Down and complete records are separate evidence",
+  "frozen_standard_collection_eligible": false,
+  "source_labels_modified": false,
+  "videos": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/07_boundary1050_early_grasp_gate_13s_to_18s.mp4",
+      "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000/dual_view.mp4",
+      "source_sha256": "f199c18ee98c58395fcd17485c3bb6fb7034f48e6f23d0c4b320d8f1a3aea2fc",
+      "derived_sha256": "3057538a8fbfbbe01ac3d85c80d6b0ec7db433e3c8734356ae0b71d40beada94",
+      "source_probe": {
+        "frame_count": 3174,
+        "fps": "30/1",
+        "resolution_wh": [
+          1280,
+          480
+        ],
+        "duration_s": 105.8
+      },
+      "derived_probe": {
+        "frame_count": 120,
+        "fps": "30/1",
+        "resolution_wh": [
+          1280,
+          480
+        ],
+        "duration_s": 4.0
+      },
+      "command": [
+        "ffmpeg",
+        "-nostdin",
+        "-v",
+        "error",
+        "-threads",
+        "2",
+        "-filter_threads",
+        "2",
+        "-i",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000/dual_view.mp4",
+        "-vf",
+        "trim=start_frame=405:end_frame=525,setpts=PTS-STARTPTS",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "2",
+        "-crf",
+        "24",
+        "-preset",
+        "fast",
+        "-pix_fmt",
+        "yuv420p",
+        "-an",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/07_boundary1050_early_grasp_gate_13s_to_18s.mp4"
+      ],
+      "source_frame_start_inclusive": 405,
+      "source_frame_end_inclusive": 524,
+      "first_actual_sim_t_s": 13.516666666666667,
+      "last_actual_sim_t_s": 17.483333333333334,
+      "same_single_continuous_attempt": true,
+      "multiple_attempts_spliced": false,
+      "derived_full_CPU_decode_exit_code": 0
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/08_boundary1050_release_stable_despite_failed_score.mp4",
+      "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000/wrist_camera.mp4",
+      "source_sha256": "41837b2fb8b4d198810eca60a7bf3cf4c1d593c5c1b268a52f8ec58a0738573b",
+      "derived_sha256": "af0e5506875ba7c0ff4779f6c4a0c19629fe975a6c8ec355bab75e9a4cc2fcdf",
+      "source_probe": {
+        "frame_count": 3174,
+        "fps": "30/1",
+        "resolution_wh": [
+          640,
+          480
+        ],
+        "duration_s": 105.8
+      },
+      "derived_probe": {
+        "frame_count": 429,
+        "fps": "30/1",
+        "resolution_wh": [
+          640,
+          480
+        ],
+        "duration_s": 14.3
+      },
+      "command": [
+        "ffmpeg",
+        "-nostdin",
+        "-v",
+        "error",
+        "-threads",
+        "2",
+        "-filter_threads",
+        "2",
+        "-i",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000/wrist_camera.mp4",
+        "-vf",
+        "trim=start_frame=2745:end_frame=3174,setpts=PTS-STARTPTS",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "2",
+        "-crf",
+        "24",
+        "-preset",
+        "fast",
+        "-pix_fmt",
+        "yuv420p",
+        "-an",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/08_boundary1050_release_stable_despite_failed_score.mp4"
+      ],
+      "source_frame_start_inclusive": 2745,
+      "source_frame_end_inclusive": 3173,
+      "first_actual_sim_t_s": 91.51666666666667,
+      "last_actual_sim_t_s": 105.78333333333333,
+      "same_single_continuous_attempt": true,
+      "multiple_attempts_spliced": false,
+      "derived_full_CPU_decode_exit_code": 0
+    }
+  ],
+  "total_derived_bytes": 775145
+}

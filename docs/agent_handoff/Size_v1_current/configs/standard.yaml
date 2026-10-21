@@ -1,0 +1,382 @@
+acceptance:
+  actual_retreat_clearance_m: 0.04
+  angular_speed_rad_s: 0.02
+  hold_s: 1.0
+  lift_m: 0.04
+  linear_speed_m_s: 0.001
+  orientation_change_deg: 1.0
+  position_drift_m: 0.0002
+  release_bottom_gap_m: 5.0e-05
+  release_support_force_N: 0.1
+  scope: fixed engineering gates; NOT calibrated accuracy or insertion acceptance
+  steady_source_penetration_m: 5.0e-05
+  support_geometry_m: 5.0e-05
+  upright_after_release_deg: 1.0
+  window_s: 3.0
+calibrated: false
+control:
+  final_speed_m_s: 0.0002
+  insert_speed_m_s: 0.001
+  retreat_m: 0.1
+  timeout_s: 168.0
+  transport_bottom_z_m: 0.975
+  approach_s: 6.0
+  extract_s: 6.0
+  transport_s: 16.0
+  transport_route: source_y_then_target_x
+  retreat_lift_m: 0.06
+  retreat_lateral_m:
+  - -0.12
+  - 0
+  retreat_route: lift_then_outward_X
+  alignment_budget_m: 0.0001
+  tilt_budget_deg: 0.15
+  yaw_budget_deg: 0.2
+  jam_detection:
+    window_s: 0.3
+    command_down_min_m: 0.00015
+    vessel_down_max_m: 2.5e-05
+    relative_slip_m: 0.00015
+    wall_force_N: 0.5
+    force_rise_N: 0.2
+    action: stop downward target; retract to preinsert safe height; save actual failure
+  grip_schedule:
+    transport_effort_N: 8.0
+    unload_effort_start_N: 8.0
+    unload_effort_end_N: 0.05
+    unload_seconds: 3.0
+    open_effort_N: 0.5
+    open_seconds: 3.0
+    truth_object_pose_used: true
+  diagnostic_safe_bottom_above_rim_m: 0.001
+  diagnostic_alignment_budget_m: 0.0001
+  diagnostic_approach_speed_m_s: 0.002
+  diagnostic_near_speed_m_s: 0.0005
+  extract_orientation_feedback: false
+  transport_hold_before_align_s: 3.2
+  transport_hold_timeout_s: 10.0
+  loading_preapproach: true
+  preinsert_bottom_above_rim_m: 0.002
+  preapproach_speed_m_s: 0.005
+  insert_timeout_s: 60.0
+  allow_geometric_support_transfer: true
+  alignment_budget_basis: '10mm full-path clearance>=.35mm: .10mm XY +27mm*sin(.15deg)=.071mm
+    + yaw .2deg envelope .025mm <.35mm; release penetration50um and stability200um/1deg/3s
+    unchanged'
+demo_release:
+  bottom_distance_m: 5.0e-05
+  clear_seconds: 0.5
+  max_actual_pose_step_m: 0.003
+  max_actual_tilt_deg: 10.0
+  max_tilt_deg: 1.0
+  min_support_N: 0.1
+  native_velocity_policy: retain and flag discrepancy; finite check and actual pose
+    motion are hard gates; speed mismatch alone does not veto opening
+  observe_s: 3.0
+  open_seconds: 3.0
+  orientation_change_deg: 1.0
+  penetration_m: 5.0e-05
+  position_drift_m: 0.0002
+  support_window_s: 0.5
+  unload_seconds: 3.0
+derived_directory: assets/lab_cuvette_loading/Size_v1
+gripper:
+  contact_safety_factor: 2.0
+  method: contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp;
+    no gain or force-limit change
+  mode: contact_latched
+  actual_slip_max_m: 0.001
+  actual_tilt_max_deg: 1.0
+  contact_threshold_N: 0.03
+  contact_persist_s: 0.1
+  maximum_compression_m: 0.0003
+  latch_transition_policy: preserve_first_contact_command
+mode: workflow
+output_root: outputs/lab_cuvette_loading/Size_v1
+physics:
+  ccd: true
+  contact_offset_m: 5.0e-05
+  control_hz: 60
+  dynamic_friction: 0.5
+  finger_dynamic_friction: 0.8
+  finger_static_friction: 1.0
+  hz: 240
+  position_iterations: 64
+  rest_offset_m: 0.0
+  restitution: 0.0
+  solver: TGS
+  static_friction: 0.6
+  velocity_iterations: 1
+robot:
+  base_m:
+  - -0.3
+  - 0
+  - 0.74
+  grasp_above_bottom_m: 0.053
+  initial_tcp_m:
+  - -0.085
+  - -0.175
+  - 1.0230000000000001
+  tcp_local_m:
+  - 0
+  - 0
+  - 0.1
+  usd_path: assets/robots/Franka.usd
+  gripper_yaw_deg: -90.0
+  tcp_quaternion_wxyz:
+  - 0
+  - 0
+  - 0
+  - 1
+  tcp_frame: right_gripper
+  initial_joint_positions:
+  - 0.1779404569926203
+  - -1.208031663591094
+  - -0.8197921486914327
+  - -2.872999113364274
+  - -0.7667170833832817
+  - 1.7454942736950525
+  - -0.8053155743445266
+  - 0.04
+  - 0.04
+  initial_joint_basis: Env_v1 arm_plan_01 seed1; sampled full11-link input triangle
+    pathcheck, actual dynamics still required
+scene:
+  initial_bottom_gap_m: 0.0002
+  instrument_xyz_m:
+  - 0.36
+  - 0
+  - 0.74
+  table_size_m:
+  - 2.2
+  - 1.8
+  - 0.08
+  table_top_m: 0.74
+  instrument_count: 1
+  instrument_yaw_policy: explicit video-informed hypothesis with lateral rack offset;
+    not automatic pointing
+  design_rack_origin_m:
+  - -0.04
+  - -0.22
+  - 0.74
+  design_instrument_origin_m:
+  - 0.36
+  - 0.18
+  - 0.74
+  instrument_yaw_deg: 90.0
+variant: xy_size_hypothesis
+version: Size_v1
+scene_mode: standard
+asset_directory: assets/lab_cuvette_loading/V0_demo04
+rack:
+  rows: 6
+  columns: 6
+  inner_m: 0.016
+  wall_m: 0.002
+  depth_m: 0.025
+  base_m: 0.003
+  selected_slot_id: A1
+  blue_slot_id: F6
+  yaw_deg: -90.0
+  origin_m:
+  - -0.04
+  - -0.22
+  - 0.74
+adapter:
+  selected_target_seat_id: candidate_far_hinge
+  inner_m: 0.0126
+  outer_m: 0.0204
+  height_m: 0.029
+  base_m: 0.002
+  geometry: original CAD mesh3; no engineering adapter
+task:
+  instruction: Physically load the10mm hypothetical cuvette from fixed white rack
+    A1 into unchanged original internal A seat, transfer support, release, retreat
+    and leave stable for3seconds.
+  control_hz: 60
+source:
+  instrument: assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda
+  vessel: assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda
+  vessel_collision: assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda
+randomization:
+  legal_slots:
+  - A1
+  - A2
+  - B1
+  - B2
+  - C1
+  rack_translation_half_range_m: 0.0
+  instrument_translation_half_range_m: 0.0
+  yaw_half_range_deg: 0.0
+  in_slot_translation_m: 0.0
+  scope: only execute after geometry valid and one full task succeeds; keep whole
+    assemblies together
+  enabled: false
+  asset_randomization_enabled: false
+  light_randomization_enabled: false
+  physics_randomization_enabled: false
+  layout_randomization_enabled: false
+video:
+  main_focal_length_cm: 1.1
+  main_resolution:
+  - 1920
+  - 1080
+  fps: 30
+  render_hz: 60
+collision_scheme: cuvette_xy_1000
+vessel:
+  outer_xy_m:
+  - 0.01
+  - 0.01
+  height_m: 0.0675
+  mass_kg: 0.02
+  dimension_source: XY size hypothesis derived from preserved12.5mm control; not measured
+  mass_source: retained20g engineering assumption, not measured
+  xy_scale: 0.6734006734006734
+  yaw_deg: 90.0
+  asset_id: cuvette_xy_1000
+  actual_outer_dimensions_m:
+  - 0.01000000350177288
+  - 0.01000000350177288
+  - 0.06749999523162842
+  center_of_mass_m:
+  - 6.042121449604159e-07
+  - 6.087301784440295e-07
+  - 0.029027631688380916
+  inertia_body_kg_m2:
+  - - 9.211088376712258e-06
+    - 1.1337154717373428e-14
+    - -8.832234243109803e-11
+  - - 1.1337154713867837e-14
+    - 9.211088649686659e-06
+    - -8.898320448212892e-11
+  - - -8.832234243125229e-11
+    - -8.898320448218497e-11
+    - 5.195387870064674e-07
+  axis_scale_from_control:
+  - 0.8
+  - 0.8
+  - 1.0
+  xy_scale_basis: legacy original14.85mm CAD helper only; loaded USD already transformed
+task_type: lab_cuvette_size_v1
+controller_type: lab_cuvette_env_v1_teacher
+collector_type: lab_cuvette_env_v1
+env:
+  task_type: loading
+  controller: teacher
+  mode: standard
+  seed: 0
+  timeout_s: 170.0
+  sync_inference: true
+  control_hz: 60
+  physics_hz: 240
+  policy_hz: 20
+  record: true
+  geometry_audit_cache: outputs/lab_cuvette_loading/Size_v1/geometry_cache
+  shapely_site: /home/wujing/Desktop/vla/physicalrsi-runtime/sim-env/lib/python3.11/site-packages
+  action_max_translation_m: 0.01
+  action_max_rotation_rad: 0.1
+  action_max_joint_delta_rad: 0.1
+  max_action_duration_s: 0.5
+  gripper_effort_max_N: 8.0
+  geometry_safe_stop_above_rim_m: 0.001
+  render_zero_delay: true
+  scene_randomization_enabled: false
+  geometry_audit_module: demos.lab_cuvette_size_v1.geometry_audit
+  scene_layout_module: demos.lab_cuvette_size_v1.scene
+  scorer_module: demos.lab_cuvette_size_v1.scorer
+  material_geometry_module: demos.lab_cuvette_size_v1.runtime_geometry
+  material_geometry_check_hz: 15
+  render_flush_passes_per_control: 1
+  probe_cooked_collision: true
+  execution_purpose: collect
+  frozen_scene_manifest: config/lab_cuvette_loading/Size_v1/frozen_scene.json
+geometry:
+  target_loading_offset_local_m:
+  - 0.00065
+  - 1.0e-06
+  - 0
+  target_depth_m: 0.027
+  scene_assets_unmodified: true
+cameras:
+  side_camera:
+    prim_path: /World/SideCamera
+    eye_m:
+    - -0.7
+    - -0.85
+    - 1.65
+    target_m:
+    - 0.1
+    - -0.1
+    - 1.0
+    focal_length_cm: 2.0
+    horizontal_aperture_mm: 20.955
+    resolution:
+    - 640
+    - 480
+    fps: 60
+    policy_resolution:
+    - 256
+    - 256
+    upworld:
+    - 0
+    - 0
+    - 1
+  wrist_camera:
+    parent_link: /World/Franka/panda_hand
+    prim_path: /World/Franka/panda_hand/WristCameraV1
+    focal_length_cm: 1.2
+    horizontal_aperture_mm: 20.955
+    resolution:
+    - 640
+    - 480
+    fps: 60
+    policy_resolution:
+    - 256
+    - 256
+    localeye_m:
+    - 0.075
+    - 0
+    - 0
+    localtarget_m:
+    - 0
+    - 0
+    - 0.35
+    localup:
+    - 0
+    - 0
+    - -1
+experiment:
+  id: Size_v1_frozen_standard
+  condition_group: natural
+  truth_teacher: true
+  controller_version: Size_v1.continuous_latch.loading01
+  original_seat_unchanged: true
+  run_role: standard_collection
+collection:
+  mode: standard
+  scene_randomization_enabled: false
+training_scene:
+  mode: standard
+  scene_randomization_enabled: false
+  automatic_validation_mode: standard
+  automatic_validation_randomization_enabled: false
+asset_id: cuvette_xy_1000
+collector:
+  compression: gzip
+asset_registry: assets/lab_cuvette_loading/Size_v1/registry.json
+asset_selection:
+  schema: labsim.Size_v1.asset_selection.v1
+  asset_id: cuvette_xy_1000
+  asset_sha256: 680dad7643f8534caeaa8adf710784de4e2acad8be8fab8a2c7897140a573b79
+  source_path: assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda
+  source_sha256: 8d52757227303edd4f38918ee04763481f08846fdd8daa6803295c8fc77c689d
+  registry_path: assets/lab_cuvette_loading/Size_v1/registry.json
+  registry_sha256: ca095fa5d5efe4974b585c023c775f099e7bb943fb1ebc695c0729aff5ab806a
+  validation_scope: Source/USD content hashes and independent registered measured
+    dimensions/mass/contact metadata; separate geometry/cooking/runtime checks still
+    required
+  original_rack_and_instrument_preserved: true
+  target_offset_automatically_adjusted: false
+  mass_distribution_assumption: Uniform closed visual material volume, cavity excluded;
+    fixed total mass means numerical density varies; no constant-density claim

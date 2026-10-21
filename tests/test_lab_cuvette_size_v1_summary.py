@@ -71,6 +71,21 @@ class SummaryTests(unittest.TestCase):
             self.assertIsNone(rows[0]['actual_physics_steps'])
             self.assertFalse(rows[0]['counts_as_task_failure'])
 
+    def test_nested_official_verify_prefix_selects_only_verification_runs(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d) / 'runs'
+            self.episode(root, 'collection_standard/runs/verify5_batch_00', outcome=True, complete=True)
+            self.episode(root, 'collection_standard/runs/verify5_batch_01', outcome=True, complete=True)
+            self.episode(root, 'collection_standard/runs/success_batch_02', outcome=True, complete=True)
+            self.episode(root, 'collection_standard/runs/controlled_failure_batch_03', outcome=False, complete=True)
+            self.episode(root, 'collection_standard/runs/notverify5_batch_04', outcome=False, complete=True)
+            result = summarize(root, DEFAULT_GEOMETRY, Path(d) / 'summary',
+                               verification_prefixes=['verify5_'])
+            self.assertEqual(result['standard5']['selected_episode_count'], 2)
+            self.assertEqual(result['standard5']['independently_scored_success_count'], 2)
+            self.assertEqual(result['standard5']['independently_scored_failure_count'], 0)
+            self.assertTrue(all('/verify5_' in name for name in result['standard5']['episodes']))
+
 
 if __name__ == '__main__':
     unittest.main()

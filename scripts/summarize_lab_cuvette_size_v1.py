@@ -315,6 +315,27 @@ def write_csv(path, rows, fallback_fields):
                 if isinstance(v, (dict, list)) else v for k, v in row.items()})
 
 
+def verification_selected(row, prefixes):
+    """Match explicit run prefixes at directory-component boundaries.
+
+    Official runs may be nested atcollection_standard/runs/verify5_* rather
+    than directly under--root. Do not search arbitrary substrings or count
+    a sibling success/controlled_failure batch as part ofverify5.
+    """
+    if row.get('duplicate_of') or row.get('task_type') != 'loading':
+        return False
+    if 'preview_or_interface_diagnostic' in row.get('qualification_exclusions', []):
+        return False
+    if row.get('run_role') == 'standard_validation':
+        return True
+    relative = str(row.get('episode_directory', ''))
+    directories = Path(relative).parts[:-1]
+    return any(str(row.get('run_name', '')).startswith(prefix)
+               or relative.startswith(prefix)
+               or any(part.startswith(prefix) for part in directories)
+               for prefix in prefixes)
+
+
 def summarize(root, geometry, output, *, collection_audit=None, verification_prefixes=()):
     root, geometry, output = Path(root).resolve(), Path(geometry).resolve(), Path(output).resolve()
     if not root.is_dir() or not geometry.is_dir():
@@ -327,7 +348,7 @@ def summarize(root, geometry, output, *, collection_audit=None, verification_pre
     audit = attach_collection_audit(rows, collection_audit, errors)
     candidates = candidate_table(geometry, rows)
     verification = [r for r in rows if r['mode'] == 'standard' and
-        (r['run_role'] == 'standard_validation' or any(r['run_name'].startswith(p) for p in verification_prefixes))]
+                    verification_selected(r, verification_prefixes)]
     successes = [r for r in rows if r['qualified_success'] is True]
     failures = [r for r in rows if r['qualified_failure'] is True]
     quota = {'status': 'CHECKED_AGAINST_EXPLICIT_COLLECTION_AUDIT' if audit else 'QUALIFICATION_UNAVAILABLE_NO_COLLECTION_AUDIT',

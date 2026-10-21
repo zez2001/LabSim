@@ -1,26 +1,30 @@
-# Agent结果阅读包：当前Env_v1
+# Agent结果阅读包：当前 Size_v1
 
-当前选择[package.json](package.json)仅包含两个目录：
+当前 [package.json](package.json) 只选择本轮两个目录：
 
-- `docs/lab_cuvette_loading/Env_v1/results_20261021`：本轮最终报告及其自带media。
-- `docs/agent_handoff/Env_v1_current`：本轮预插入/历史失败/replay/三链/API摘要、完成矩阵、状态、资产尺寸及全部当前配置。
+- `docs/lab_cuvette_loading/Size_v1/results_20261021`：最终DOCX/Markdown报告、必要图片及代表连续录像。
+- `docs/agent_handoff/Size_v1_current`：固定标准场景、资产尺寸假设、几何与物理摘要、实际结果/配额、读取资格及准确调用命令。
 
-目标小于20MB，不包含整套历史、outputs、H5、环境、checkpoint或桌面2546460010字节的preinsert01便携episode（旧extract01约451MB亦不打包）。旧V0_demo04_current和旧阅读包保留；此前清单/说明另存history。报告目录尚在归档时不能先执行打包或宣称包已生成。
+目标小于20MB。旧 V0、Env_v1、各 demo 的目录与桌面阅读包保持原样；切换前的清单和说明已经独立保存到 `history/handoff_before_Size_v1_*`。不复制全部35个资产实体、原始H5、JSONL日志、环境或模型检查点。完整便携episode单独提供。
 
-根任务应在最终trial落盘后刷新Env_v1_current中的配置、矩阵、状态及version.json来源哈希。确认报告引用的DOCX、Markdown、视频、图片、CSV和必要JSON均存在，media只含本轮必要证据，并确认总量小于20MB。核查[先读说明](00_给Agent阅读说明.md)的计划包内链接后，提交并推送已验证改动、核对远端SHA，再执行：
+最终运行闭合并审计后，刷新小证据。若尚无最终审计，配额必须保持 unavailable，不能提前写成20成功+20失败：
 
 ```bash
 cd /home/wujing/Desktop/vla/LabSim
-python3 scripts/package_agent_results.py \
- --output /home/wujing/Desktop/LabSim_Env_v1_本轮改动与结果_阅读包_20261021
+python3 scripts/refresh_lab_cuvette_size_v1_handoff.py --refresh \
+ --summary outputs/lab_cuvette_loading/Size_v1/summaries/FINAL_SNAPSHOT/summary.json \
+ --collection-audit outputs/lab_cuvette_loading/Size_v1/collection_standard/FINAL_AUDIT.json
 ```
 
-必须使用不存在的新输出目录，保留旧包；本文不是已打包或已推送的证明。生成后检查脚本返回的bytes小于20×1024×1024，并在包根执行：
+没有最终审计时可省略两个可选参数；此时只快照已闭合的原始结果，并明确不宣称采集配额。刷新脚本不生成报告、不启动仿真、不生成最终阅读包。
+
+检查报告所有视频、图片、CSV、配置引用均存在、DOCX相对media链接有效，且当前结果与独立评分一致。然后提交并推送、核对远端SHA，最后才生成全新的桌面包：
 
 ```bash
-sha256sum -c SHA256SUMS.txt
+python3 scripts/package_agent_results.py \
+ --output /home/wujing/Desktop/LabSim_Size_v1_本轮改动与结果_精简阅读包_20261021
 ```
 
-脚本复制实体文件，不保留软链接，LFS实体缺失会停止；最终分支、提交、来源及SHA写入包根清单。普通Markdown引用自动改为包内链接或固定提交源码链接。根先读说明直接使用计划包内相对路径，需在最终生成前逐项核对。DOCX的视频为同级media相对链接，不能只传DOCX。
+输出目录必须不存在；此说明不代表已经打包或上传。生成后检查总量小于20×1024×1024字节，并执行 `sha256sum -c SHA256SUMS.txt`。包根清单记录最终分支、提交、源文件及SHA256；不要在报告或快照中猜测尚未产生的最终提交。
 
-当前Env_v1完整原座装载未完成。最新82.65秒/4958步预插入诊断通过清槽、搬运、预对准及持物回退，未插入、松爪或脱指撤离；旧42.3秒hold超200μm失败保留。三条策略各0.25秒属于真实接口验证，15tick replay仅短诊断，random API初始化不属于正式任务批次，完整loading成功/有效失败配额0/0。以上边界与最终报告、视频标注、评分及摘要必须一致。
+本轮研究的是“原座不改，统一XY变换的比色皿尺寸假设”。实际完整任务结果、固定5次验证及20/20配额均以本轮最终证据为准；几何证书、preview、预插入、开发成功和进程中断不能混算为正式合格采集。random10已经从本轮验收中取消，训练及自动验证保持standard。`real_calibrated`与原12.5mm配套结论不因新尺寸成功而改变。

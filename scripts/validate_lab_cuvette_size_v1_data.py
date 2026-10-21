@@ -121,6 +121,50 @@ def audit_episode(path, expected_sha):
                 labels=attrs, admission_errors=errors, **accepted)
 
 
+def official_process_gate(row, collection_root):
+    """Independently enforce real closed official driver provenance for quotas.
+
+    This never changes the HDF5's raw physical outcome. Standalone portable
+    episode reading uses audit_episode directly and needs no driver files.
+    """
+    root = Path(collection_root).resolve()
+    source = Path(row["path"]).resolve()
+    run = source.parents[2]
+    errors, matching = [], []
+    if not source.is_relative_to(root / "runs") or source.parent.name != "dataset":
+        errors.append("not_an_official_collection_run_path")
+    for manifest in sorted((root / "driver_records").glob("batch_*.json")):
+        record = json.loads(manifest.read_text())
+        if Path(record.get("run_directory", "")).resolve() == run:
+            matching.append((manifest, record))
+    if len(matching) != 1:
+        errors.append("official_driver_record_missing_or_ambiguous")
+    else:
+        manifest, record = matching[0]
+        if record.get("official_collection_run") is not True or record.get("process_exited") is not True:
+            errors.append("official_process_exit_not_observed")
+        if record.get("exit_code") != 0 or isinstance(record.get("exit_code"), bool):
+            errors.append("official_process_nonzero_or_unknown_exit:" + str(record.get("exit_code")))
+        if record.get("interrupted"):
+            errors.append("official_process_interrupted")
+        proof_path = run / "process_exit.json"
+        if not proof_path.is_file():
+            errors.append("independent_process_exit_evidence_missing")
+        else:
+            proof = json.loads(proof_path.read_text())
+            if Path(proof.get("run_directory", "")).resolve() != run or proof.get("process_exited") is not True or proof.get("exit_code") != 0 or isinstance(proof.get("exit_code"), bool) or proof.get("interrupted"):
+                errors.append("independent_process_exit_evidence_nonzero_interrupted_or_mismatched")
+        row["official_driver_evidence"] = dict(path=str(manifest), sha256=file_sha(manifest),
+            observed_exit_code=record.get("exit_code"), interrupted=record.get("interrupted"))
+    row["official_process_admission_errors"] = errors
+    if errors:
+        row["admission_errors"].extend(errors)
+        for key in ("success", "failure", "all_valid"):
+            row[key] = False
+    row["source_HDF5_labels_preserved"] = True
+    return row
+
+
 def make_index(rows, destination, *, copy_data=False, collection_root=None):
     destination = Path(destination).resolve()
     if not copy_data and collection_root is None:
@@ -192,15 +236,27 @@ def main(argv=None):
     parser.add_argument("--copy-data", action="store_true", help="Explicitly copy complete selected HDF5 contents instead of lightweight relative links")
     parser.add_argument("--read-index", type=Path, help="Read an existing index without creating one")
     parser.add_argument("--output-json", type=Path, required=True)
+    parser.add_argument("--admission-scope", choices=("auto", "official_collection", "standalone_record"), default="auto",
+        help="auto requires actual driver exit evidence when collection_contract.json exists; standalone reads are not official20/20 quota evidence")
     args = parser.parse_args(argv)
     if args.copy_data and not args.index:
         parser.error("--copy-data requires --index")
     frozen = load_frozen(args.frozen_scene)
     validate_frozen_scene(OmegaConf.load(args.config), frozen, ROOT, purpose="collect")
+    contract_path = args.episodes_root / "collection_contract.json"
+    official = contract_path.is_file()
+    if args.admission_scope == "official_collection" and not official:
+        raise ValueError("Official collection scope requires collection_contract.json")
+    if args.admission_scope == "standalone_record" and official:
+        raise ValueError("Cannot bypass actual official collection process evidence with standalone scope")
+    if official and json.loads(contract_path.read_text()).get("frozen_scene_sha256") != frozen["frozen_scene_sha256"]:
+        raise ValueError("Official collection frozen-scene contract differs from current audit")
     files = sorted(args.episodes_root.rglob("episode_*.h5"))
     rows, seen, duplicates = [], set(), []
     for path in files:
         row = audit_episode(path, frozen["frozen_scene_sha256"])
+        if official:
+            row = official_process_gate(row, args.episodes_root)
         identity = row["labels"].get("episode_id") or row["source_sha256"]
         if identity in seen:
             duplicates.append(str(path))
@@ -212,6 +268,8 @@ def main(argv=None):
     grouped = {group: dict(success=sum(row["success"] and row["labels"].get("condition_group") == group for row in rows),
         failure=sum(row["failure"] and row["labels"].get("condition_group") == group for row in rows)) for group in CONDITION_GROUPS}
     result = dict(schema="labsim.Size_v1.collection_audit.v1", frozen_scene_sha256=frozen["frozen_scene_sha256"],
+        admission_scope="official_collection_closed_exit0" if official else "standalone_record_reading_only",
+        official_collection_quota_evidence=official,
         scene_mode="standard", scene_randomization_enabled=False, inspected_episode_count=len(rows),
         qualified_success_count=success, qualified_failure_count=failure,
         success_quota=20, failure_quota=20, success_missing=max(0, 20-success), failure_missing=max(0, 20-failure),

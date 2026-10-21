@@ -1,0 +1,105 @@
+{
+  "schema": "labsim.Size_v1.family_geometry.v1",
+  "source_control_asset": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda",
+  "source_control_sha256": "8d52757227303edd4f38918ee04763481f08846fdd8daa6803295c8fc77c689d",
+  "selected_original_seat": "candidate_far_hinge",
+  "original_instrument_path": "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda",
+  "original_instrument_sha256": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+  "original_seat_unmodified": true,
+  "registered_count": 35,
+  "evaluated_count": 35,
+  "coarse_step_mm": 0.2,
+  "fine_step_mm": 0.02,
+  "search_width_range_mm": [
+    9.5,
+    12.5
+  ],
+  "upright_yaws_deg": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "translation_search": "Same full polygonal boundedXY configuration-space algorithm at every width/yaw; not centre-only",
+  "largest_sampled_positive_continuous_sweep_certificate_mm": 10.7,
+  "largest_sampled_positive_required_entrance_domain_mm": 11.0,
+  "smallest_sampled_entrance_rejected_mm": 11.02,
+  "recommended_initial_physics_candidate": {
+    "asset_id": "cuvette_xy_1000",
+    "width_mm": 10.0,
+    "seat_local_target_offset_m": [
+      0.00065,
+      1e-06,
+      0
+    ],
+    "bottom_above_original_seat_base_m": 0.001999999880790637,
+    "candidate_insertion_depth_m": 0.02699999511241913,
+    "fixed_offset_geometry": {
+      "yaw_deg": 0,
+      "entry_positive_clearance_XY_domain_present": true,
+      "entry_free_area_mm2": 2.6000162622790937,
+      "entry_translation_bounds_mm": [
+        -1.2999962600000003,
+        -2.7999990099999996,
+        1.3000049200000001,
+        2.0500029900000003
+      ],
+      "entry_triangulation_area_residual_mm2": 0.0,
+      "actual_closed_bottom_convexity_area_residual_mm2": 7.918905147720672e-10,
+      "conservative_full_path_positive_XY_domain_present": true,
+      "conservative_full_path_free_area_mm2": 1.4014922665020397,
+      "best_offset_mm": [
+        0.6502424506664052,
+        0.0008519056346478675
+      ],
+      "best_sweep_clearance_mm": 0.3502815019363127,
+      "evaluated_offset_mm": [
+        0.65,
+        0.001
+      ],
+      "evaluated_fixed_XY_full_path_valid": true,
+      "evaluated_sweep_clearance_mm": 0.35004590085315695,
+      "nearest_seat_processed_triangle_index": 359,
+      "nearest_seat_triangle_vertices_mm": [
+        [
+          -4.700000725154085,
+          4.800003908096012,
+          28.999994993209764
+        ],
+        [
+          -5.4999993661681845,
+          6.299999497352299,
+          28.999994993209764
+        ],
+        [
+          -5.4999993661681845,
+          4.800003908096012,
+          28.999994993209764
+        ]
+      ],
+      "support": {
+        "sample_count": 169,
+        "floor_hit_count": 140,
+        "floor_hit_fraction": 0.8284023668639053,
+        "sampled_support_convex_hull_area_mm2": 67.56703721709025,
+        "COM_XY_inside_sampled_support_hull": true,
+        "COM_to_sampled_support_hull_boundary_mm": 4.109014712624666,
+        "actual_uniform_visual_material_COM_XY_mm": [
+          0.6506042121449607,
+          0.0016087301784439099
+        ],
+        "support_height_mm": 1.9999998807906372,
+        "scope": "15x15 actual low-bottom-section interior ray samples; static geometric support candidate, not dynamic stability test"
+      },
+      "physics_validation": null,
+      "full_task_success": null
+    },
+    "reason": "Retains more width than9.5mm lower search endpoint with approximately0.35mm conservative lateral sweep margin, unlike near10.7mm zero-margin boundary; geometric support hull contains assumedCOM. Physics/complete task still required."
+  },
+  "range_scope": "Observed tested size hypotheses, not a real specimen inference. Positive conservative sweep means clearance of authored triangle surfaces. False conservative gate is inconclusive; four-yaw entrance rejects do not exclude arbitrary inclined6DOF paths.",
+  "runtime_started": false,
+  "physics_validation": null,
+  "full_task_success": null,
+  "real_calibrated": false,
+  "wall_clock_s": 20.43437098099821
+}
