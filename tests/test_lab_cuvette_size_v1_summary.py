@@ -9,6 +9,14 @@ from scripts.summarize_lab_cuvette_size_v1 import (
 
 
 class SummaryTests(unittest.TestCase):
+    def candidate_run(self, outcome, group, name):
+        return {'asset_id': 'cuvette_xy_1000', 'duplicate_of': None,
+            'actual_physics_steps': 800, 'task_type': 'loading',
+            'qualification_exclusions': [], 'task_success': outcome,
+            'condition_group': group, 'complete': True,
+            'episode_directory': name + '/episode_0000',
+            'physics_quality_flags': [], 'stable_after_retreat': outcome}
+
     def episode(self, root, name, *, outcome=None, complete=False, policy='teacher', ident=None):
         p = Path(root) / name / 'episode_0000'
         p.mkdir(parents=True)
@@ -85,6 +93,38 @@ class SummaryTests(unittest.TestCase):
             self.assertEqual(result['standard5']['independently_scored_success_count'], 2)
             self.assertEqual(result['standard5']['independently_scored_failure_count'], 0)
             self.assertTrue(all('/verify5_' in name for name in result['standard5']['episodes']))
+
+    def test_controlled_failure_does_not_change_natural_size_verdict(self):
+        runs = [self.candidate_run(True, 'natural', 'natural_success'),
+                self.candidate_run(False, 'deterministic_action_deviation', 'controlled_stop')]
+        row = next(r for r in candidate_table(DEFAULT_GEOMETRY, runs) if r['asset_id'] == 'cuvette_xy_1000')
+        self.assertEqual(row['complete_task_result'], 'SUCCESS_OBSERVED')
+        self.assertEqual(row['observed_loading_success_count'], 1)
+        self.assertEqual(row['observed_loading_failure_count'], 1)
+        self.assertEqual(row['natural_loading_failure_count'], 0)
+        self.assertEqual(row['controlled_action_deviation_failure_count'], 1)
+
+    def test_real_natural_failure_remains_in_natural_size_verdict(self):
+        runs = [self.candidate_run(True, 'natural', 'natural_success'),
+                self.candidate_run(False, 'natural', 'natural_failure'),
+                self.candidate_run(False, 'deterministic_action_deviation', 'controlled_stop')]
+        row = next(r for r in candidate_table(DEFAULT_GEOMETRY, runs) if r['asset_id'] == 'cuvette_xy_1000')
+        self.assertEqual(row['complete_task_result'], 'SUCCESS_AND_FAILURE_OBSERVED')
+        self.assertEqual(row['natural_loading_failure_count'], 1)
+        self.assertEqual(row['observed_loading_failure_count'], 2)
+
+    def test_unknown_group_and_unknown_outcome_are_not_inferred_as_natural_failure(self):
+        runs = [self.candidate_run(False, None, 'unknown_group'),
+                self.candidate_run(None, 'natural', 'unknown_outcome'),
+                self.candidate_run(False, 'deterministic_action_deviation', 'controlled_stop')]
+        row = next(r for r in candidate_table(DEFAULT_GEOMETRY, runs) if r['asset_id'] == 'cuvette_xy_1000')
+        self.assertIsNone(row['complete_task_result'])
+        self.assertEqual(row['natural_loading_success_count'], 0)
+        self.assertEqual(row['natural_loading_failure_count'], 0)
+        self.assertEqual(row['natural_loading_unknown_count'], 1)
+        self.assertEqual(row['unclassified_condition_loading_failure_count'], 1)
+        self.assertEqual(row['observed_loading_failure_count'], 2)
+        self.assertEqual(row['observed_loading_unknown_count'], 1)
 
 
 if __name__ == '__main__':

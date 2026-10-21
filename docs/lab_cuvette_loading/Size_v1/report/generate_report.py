@@ -175,6 +175,8 @@ def collect(e, args):
     summary = e.json(summary_path)
     if summary.get('schema') != 'labsim.Size_v1.combined_results.v1':
         raise ValueError('Use the actual summarize_lab_cuvette_size_v1.py output')
+    if any('complete_task_result_scope' not in row for row in summary.get('candidates', [])):
+        raise ValueError('Regenerate the summary with natural-control-only size verdicts before report authoring')
     geometry_path = e.path(args.geometry or GEOMETRY)
     geometry = e.json(geometry_path / 'family_summary.json')
     registry = e.json('assets/lab_cuvette_loading/Size_v1/registry.json')
@@ -336,7 +338,8 @@ def pages_for(d):
                 short(a.get('complete_task_result'), 24)])
     geometry_figure = next(x for x in d['figures'] if x.get('role') == 'geometry')
     pages.append([('h', '原座通道与可行尺寸范围'),
-        table(['宽度 mm', '入口全XY域', '全深竖直路径', '保守余量 mm', '实际完整任务'], rows, [2.0, 2.8, 3.4, 3.0, 5.6]),
+        table(['宽度 mm', '入口全XY域', '全深竖直路径', '保守余量 mm', '自然控制完整任务'], rows, [2.0, 2.8, 3.4, 3.0, 5.6]),
+        ('p', '尺寸表的完整任务结果仅汇总明确标注condition_group=natural的未扰动控制组。确定性动作偏差的成败另列，不将受控提前停止等失败解释为该尺寸自然不稳定；未知组不归入natural。全部原始成败仍保留在候选CSV和运行列表，正式配额继续按各条件组独立审计。'),
         ('p', '10.70mm是当前采样中取得保守全深正证书的最大宽度，不是全局物理尺寸上限。10.72至11.00mm在入口有可行域，但保守全深检查未认证，不能写成必然无法装载。11.02mm起的已测试尺寸在四个声明直立方位的入口必要域为空；不排除未研究的倾斜6DoF路线。'),
         image(geometry_figure, 7.5),
         ('p', '所有尺寸共用0 90 180 270度方位和全部有界XY平移域。入口取真实座高28.5mm闭合孔域与器皿底上1mm实心截面，计算三角形对Minkowski禁区并集。全深正证书投影保留原座所有承托面上0.1µm以上三角面和垂直壁线段，并用真实器皿外轮廓作保守连续竖直扫掠。负的保守检查仅表示未证明。'),

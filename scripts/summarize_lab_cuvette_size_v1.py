@@ -262,6 +262,13 @@ def attach_collection_audit(rows, audit_path, errors):
 
 def candidate_table(geometry, rows):
     table = []
+    def counts(group):
+        values = [known_bool(r.get('task_success')) for r in group]
+        return values.count(True), values.count(False), values.count(None)
+    def verdict(successes, failures):
+        if not successes and not failures:
+            return None
+        return 'SUCCESS_AND_FAILURE_OBSERVED' if successes and failures else 'SUCCESS_OBSERVED' if successes else 'FAILURE_OBSERVED'
     for path in sorted(Path(geometry).glob('cuvette_xy_*.json')):
         candidate = json.loads(path.read_text())
         if 'orientations' not in candidate:
@@ -273,12 +280,18 @@ def candidate_table(geometry, rows):
         loading = [r for r in runs if r['task_type'] == 'loading'
                    and not any(x in r['qualification_exclusions'] for x in
                        ('preview_or_interface_diagnostic', 'precheck_initialization_service_interruption_or_physics_invalid', 'no_task_actions'))]
-        observed = [r['task_success'] for r in loading if r['task_success'] is not None]
-        success_n, failure_n = observed.count(True), observed.count(False)
-        if not observed:
-            task_result = None
-        else:
-            task_result = 'SUCCESS_AND_FAILURE_OBSERVED' if success_n and failure_n else 'SUCCESS_OBSERVED' if success_n else 'FAILURE_OBSERVED'
+        # A deliberately stopped/offset controller does not establish that a
+        # vessel size is unreliable under the unchanged natural controller.
+        # Preserve every raw outcome below; group explicitly and never infer
+        # unknown/legacy group membership asnatural.
+        natural = [r for r in loading if r.get('condition_group') == 'natural']
+        controlled = [r for r in loading if r.get('condition_group') == 'deterministic_action_deviation']
+        unclassified = [r for r in loading if r.get('condition_group') not in ('natural', 'deterministic_action_deviation')]
+        success_n, failure_n, unknown_n = counts(loading)
+        natural_success, natural_failure, natural_unknown = counts(natural)
+        controlled_success, controlled_failure, controlled_unknown = counts(controlled)
+        unclassified_success, unclassified_failure, unclassified_unknown = counts(unclassified)
+        task_result = verdict(natural_success, natural_failure)
         certificate = candidate['continuous_vertical_sweep_certificate_any_four_yaw']
         support = best.get('support')
         table.append({'asset_id': candidate['asset_id'], 'nominal_outer_width_mm': candidate['width_nominal_mm'],
@@ -295,9 +308,21 @@ def candidate_table(geometry, rows):
             'physical_execution_observed': True if physical else None,
             'physics_validation': 'ACTUAL_PHYSICS_RECORDED_REVIEW_QUALITY_FLAGS' if physical else None,
             'complete_task_result': task_result,
+            'complete_task_result_scope': 'Only explicitly taggednatural unperturbed-controller loading outcomes evaluate size usability; controlled action-deviation and unknown groups do not change this verdict',
             'actual_started_episode_count': len(runs), 'closed_episode_count': sum(r['complete'] is True for r in runs),
             'observed_loading_success_count': success_n, 'observed_loading_failure_count': failure_n,
-            'observed_loading_unknown_count': sum(r['task_success'] is None for r in loading),
+            'observed_loading_unknown_count': unknown_n,
+            'observed_loading_counts_scope': 'All observed loading condition groups; no raw failure removed; not a size-stability estimate or qualified-data quota',
+            'natural_loading_success_count': natural_success,
+            'natural_loading_failure_count': natural_failure,
+            'natural_loading_unknown_count': natural_unknown,
+            'controlled_action_deviation_success_count': controlled_success,
+            'controlled_action_deviation_failure_count': controlled_failure,
+            'controlled_action_deviation_unknown_count': controlled_unknown,
+            'controlled_action_deviation_scope': 'Explicit deterministic-action-deviation group; raw outcomes retained for analysis. Frozen-scene/quota admission remains a separate audit, not natural size usability',
+            'unclassified_condition_loading_success_count': unclassified_success,
+            'unclassified_condition_loading_failure_count': unclassified_failure,
+            'unclassified_condition_loading_unknown_count': unclassified_unknown,
             'actual_run_directories': [r['episode_directory'] for r in runs],
             'physics_quality_flags': sorted({f for r in runs for f in (r.get('physics_quality_flags') or [])}),
             'physical_stability_after_release_observed': True if any(r['stable_after_retreat'] is True for r in runs) else None,
