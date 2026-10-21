@@ -25,7 +25,8 @@ def main(args=None):
     from demos.lab_cuvette_env_v1.scene import episode_config
     def ensure_current_audit(config,cache_directory,geometry_site=None):
         path=out/'audit_input.yaml';OmegaConf.save(config,path)
-        subprocess.run(['bash',str(ROOT/'demos/lab_cuvette_external/usd_python.sh'),'-m','demos.lab_cuvette_env_v1.geometry_audit','--config',str(path),'--output',str(cache_directory),'--ensure','--geometry-site',str(geometry_site)],cwd=ROOT,check=True)
+        audit_module=config.env.get('geometry_audit_module','demos.lab_cuvette_env_v1.geometry_audit')
+        subprocess.run(['bash',str(ROOT/'demos/lab_cuvette_external/usd_python.sh'),'-m',audit_module,'--config',str(path),'--output',str(cache_directory),'--ensure','--geometry-site',str(geometry_site)],cwd=ROOT,check=True)
         latest=json.loads((Path(cache_directory)/'latest.json').read_text())
         return json.loads((Path(cache_directory)/latest['audit_relative_path']).read_text())
     replay_source=None
@@ -41,9 +42,15 @@ def main(args=None):
         print('REPLAY_SOURCE_CONFIG_AUTHORITATIVE',replay_source.manifest['source_config'],flush=True)
     else:
         cfg=OmegaConf.load(args.config)
+        if cfg.get('version')=='Size_v1':
+            from demos.lab_cuvette_size_v1.asset_selection import resolve_asset_config
+            cfg=resolve_asset_config(cfg,getattr(args,'asset_id',None))
         if args.subtask:cfg.env.task_type=args.subtask
         if args.timeout_seconds is not None:cfg.env.timeout_s=args.timeout_seconds
         cfg.env.mode=args.layout_mode
+        if cfg.version=='Size_v1':
+            from demos.lab_cuvette_size_v1.frozen_scene import validate_execution_mode
+            validate_execution_mode(cfg,purpose='eval' if args.mode=='serve' else 'collect',explicit_random=args.mode=='serve' and args.layout_mode=='random')
     out=args.output or ROOT/cfg.output_root/(time.strftime('%Y%m%d_%H%M%S')+'_'+args.mode)
     out=Path(out);out.mkdir(parents=True,exist_ok=False)
     OmegaConf.save(cfg,out/'launch_config.yaml')

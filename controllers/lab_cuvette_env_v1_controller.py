@@ -292,6 +292,13 @@ class LabCuvetteTeacher:
                         else:
                             speed=float(get(self.cfg,'control.diagnostic_near_speed_m_s',.0005) if bottom-stop<.003 else get(self.cfg,'control.diagnostic_approach_speed_m_s',.002))
                             self.target[2]-=min(speed/self.hz,max(0.,bottom-stop)*.2)
+                    elif bool(get(self.cfg,'control.loading_preapproach',False)):
+                        stop=self.rim+float(get(self.cfg,'control.preinsert_bottom_above_rim_m',.002))
+                        if bottom<=stop+.00002:self._enter('INSERT',t)
+                        else:
+                            speed=float(get(self.cfg,'control.preapproach_speed_m_s',.005))
+                            if bottom-stop<.003:speed=min(speed,.001)
+                            self.target[2]-=min(speed/self.hz,max(0.,bottom-stop)*.2)
                     else:self._enter('INSERT',t)
                 if u>80.:self._finish('ALIGNMENT_TIMEOUT',t)
             elif self.phase=='GATE_RETRACT':
@@ -303,7 +310,13 @@ class LabCuvetteTeacher:
                 if u>=1.:self._finish('PREINSERT_DIAGNOSTIC_COMPLETE',t)
             elif self.phase=='INSERT':
                 self._feedback(debug,self.floor[:2]);jam=self._jam(t,debug)
-                if jam:
+                deviation=get(self.cfg,'experiment.deviation',{})
+                requested_stop=get(deviation,'stop_insertion_at_depth_m')
+                actual_depth=debug.get('depth_m')
+                if requested_stop is not None and actual_depth is not None and actual_depth>=float(requested_stop):
+                    self.events.append(dict(t=t,event='deterministic_action_deviation',spec=dict(deviation),actual_depth_m=actual_depth,normal_actions_only=True))
+                    self._finish('CONTROLLED_EARLY_STOP',t)
+                elif jam:
                     self.contact_target=self.target.copy();self.events.append(dict(t=t,event='jam_stop_downward_target',reason=jam));self._enter('JAM_RETRACT',t)
                 elif self._supported(debug):
                     self.contact_target=self.target.copy();self._enter('SUPPORT_TRANSFER',t)
@@ -314,14 +327,18 @@ class LabCuvetteTeacher:
                         # Geometry reached the base: do not keep driving down
                         # while waiting for a missing/insufficient force signal.
                         if self._bottom_wait_start is None:self._bottom_wait_start=t
-                        if t-self._bottom_wait_start>=1.:
+                        if bool(get(self.cfg,'control.allow_geometric_support_transfer',False)) and self._quiet(t,.2) and float(debug['tilt_deg'])<=float(get(self.cfg,'demo_release.max_tilt_deg',1.)):
+                            self.contact_target=self.target.copy()
+                            self.events.append(dict(t=t,event='stop_descent_begin_supported_unload_probe',actual_bottom_gap_m=gap,actual_bottom_force_N=debug.get('target_bottom_support_N'),support_not_yet_claimed=True))
+                            self._enter('SUPPORT_TRANSFER',t)
+                        elif t-self._bottom_wait_start>=1.:
                             self._finish('BOTTOM_SUPPORT_MEASUREMENT_UNAVAILABLE' if debug.get('target_bottom_support_N') is None else 'BOTTOM_SUPPORT_NOT_ESTABLISHED',t)
                     else:
                         self._bottom_wait_start=None
                         speed=float(get(self.cfg,'control.final_speed_m_s',.0002) if gap<.001 else get(self.cfg,'control.insert_speed_m_s',.001))
                         self.target[2]-=min(speed/self.hz,max(0.,gap)*.2)
 
-                    if u>35.:self.contact_target=self.target.copy();self._enter('JAM_RETRACT',t)
+                    if u>float(get(self.cfg,'control.insert_timeout_s',35.)):self.contact_target=self.target.copy();self._enter('JAM_RETRACT',t)
             elif self.phase=='JAM_RETRACT':
                 self.target=smooth(self.contact_target,self.contact_target+[0,0,.01],u/2.)
                 if u>=2.5:self._finish('INSERT_BLOCKED',t)
@@ -330,8 +347,9 @@ class LabCuvetteTeacher:
                 effort=8.-7.95*fraction
                 opening=self.latch_opening+(self.contact_opening-self.latch_opening)*fraction
                 force=debug.get('target_bottom_support_N')
-                if force is not None and force>.02*9.81+.05:
-                    self.target[2]+=min(.00001,max(0.,self.contact_target[2]+.001-self.target[2]),(force-.02*9.81)*.000002)
+                weight=float(get(self.cfg,'vessel.mass_kg',.02))*9.81
+                if force is not None and force>weight+.05:
+                    self.target[2]+=min(.00001,max(0.,self.contact_target[2]+.001-self.target[2]),(force-weight)*.000002)
                 if u>=duration and self._supported(debug) and self._quiet(t,float(get(self.cfg,'demo_release.support_window_s',.5))):
                     self.open_target=self.target.copy();self._enter('OPEN',t)
                 if u>10.:self._finish('SUPPORT_TRANSFER_FAILED',t)

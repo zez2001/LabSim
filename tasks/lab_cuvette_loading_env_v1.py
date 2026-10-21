@@ -59,13 +59,20 @@ class LabCuvetteLoadingEnvV1:
         self.steps=0;self.control_steps=0;self.t=0.;self.phase='RESET';self.grip=.08;self.effort=float(self.cfg.env.gripper_effort_max_N);self._result=None;self._policy_latch=None;self._policy_latch_contact=None
         self.episode_wall=time.perf_counter();self._ensure_bound_audit();self._write(self.episode_dir/'options.json',self.options);OmegaConf.save(self.cfg,self.episode_dir/'config.yaml')
         self.ctx=build_context(self.cfg,self.app,self.episode_dir,self.initial_state)
+        if self.cfg.env.get('probe_cooked_collision',False):
+            from demos.lab_cuvette_size_v1.cooked_probe import probe
+            probe(self.ctx['stage'],self.episode_dir/'cooked_collision_probe.json')
         self.world,self.robot,self.solver,self.ac=[self.ctx[k] for k in ['world','robot','solver','ac']];self.qcmd=self.robot.get_joint_positions().copy();self._ik_seed=self.qcmd[:7].copy();self._ik_goal=None;self._ik_solution=None
         self.engine_time_origin=float(self.world.current_time)
         pc=self.world.get_physics_context();pc.enable_fabric(False)
         pc.set_physx_update_transformations_settings(update_to_usd=True,update_velocities_to_usd=True,output_velocities_local_space=False)
         self.world.physics_sim_view.update_articulations_kinematic()
         self.recorder=PhysicsRecorder(self.ctx,self.cfg,self.episode_dir)
-        self.scorer=CuvetteLoadingEnvV1Scorer(self.cfg,self.ctx['fixtures'],self.geometry_audit)
+        scorer_class=CuvetteLoadingEnvV1Scorer
+        if self.cfg.env.get('scorer_module'):
+            from importlib import import_module
+            scorer_class=import_module(self.cfg.env.scorer_module).Scorer
+        self.scorer=scorer_class(self.cfg,self.ctx['fixtures'],self.geometry_audit)
         self.debug=self.recorder.capture(0,0.,self.phase,self.qcmd,self.grip/2,self.effort);self.scorer.update(self.debug)
         self.rig=create_cameras(self.ctx,self.cfg)
         for _ in range(8):self.world.render()
@@ -79,15 +86,28 @@ class LabCuvetteLoadingEnvV1:
         self.rig.reset_history()
         self.images=self.rig.get_images();self.camera_meta={n:self.rig.get_meta(n) for n in self.rig.names};self._write(self.episode_dir/'cameras.json',self.camera_meta)
         self._write(self.episode_dir/'geometry_audit_binding.json',self.geometry_audit)
-        contract=dict(version='Env_v1',source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,
+        contract=dict(version=str(self.cfg.get('version','Env_v1')),source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,
             asset_manifest_sha256=__import__('hashlib').sha256((Path(__file__).resolve().parents[1]/self.cfg.asset_directory/'manifest.json').read_bytes()).hexdigest(),
             scene_mode=self.cfg.scene_mode,task_type=self.cfg.env.task_type,geometry_valid=self._geometry_valid(),action_specs=self.ACTION_SPECS,
             controller_in_default_step=False,real_calibrated=False)
+        size_metadata={}
+        if self.cfg.get('version')=='Size_v1':
+            from demos.lab_cuvette_size_v1.frozen_scene import episode_metadata,validate_frozen_scene
+            frozen_path=self.cfg.env.get('frozen_scene_manifest')
+            if frozen_path:
+                frozen=json.loads((Path(__file__).resolve().parents[1]/frozen_path).read_text())
+                validate_frozen_scene(self.cfg,frozen,Path(__file__).resolve().parents[1],purpose='collect')
+                deviation=OmegaConf.to_container(self.cfg.experiment.deviation,resolve=True) if 'deviation' in self.cfg.experiment else {}
+                size_metadata=episode_metadata(self.cfg,frozen,condition_group=self.cfg.experiment.get('condition_group','natural'),deviation=deviation)
+            else:
+                size_metadata=dict(asset_id=self.cfg.vessel.asset_id,condition_group=self.cfg.experiment.get('condition_group','development'),scene_mode=self.cfg.scene_mode,code_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip())
+            contract.update(size_metadata)
+            size_metadata['deterministic_action_deviation_json']=json.dumps(size_metadata.get('deterministic_action_deviation',{}),sort_keys=True)
         from factories.collector_factory import create_collector
         self.collector=create_collector(self.cfg.collector_type,self.cfg,self.episode_dir,save_video=True,scene_contract=contract,camera_meta=self.camera_meta)
         self.collector.begin_episode(0,np.array(self.debug['object_position_m']),episode_id=self.episode_id,metadata=dict(seed=int(seed or 0),
             policy_id=self.options.get('policy_id','teacher' if self.options.get('teacher') else 'external'),demonstrator_id=self.options.get('demonstrator_id','unknown'),
-            task_type=self.cfg.env.task_type,source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,asset_version=contract['asset_manifest_sha256']))
+            task_type=self.cfg.env.task_type,source_slot_id=self.cfg.rack.selected_slot_id,target_seat_id=self.cfg.adapter.selected_target_seat_id,asset_version=contract['asset_manifest_sha256'],**size_metadata))
         self._obs=self._public_observation();self._record_state=self._collector_state();self.ended=False
         self._video_writers={};self._video_last_t=-1.;self._video_frame_times=[];self._write_video()
         self._write(self.episode_dir/'initial_debug.json',self.debug)
@@ -96,13 +116,14 @@ class LabCuvetteLoadingEnvV1:
             self.finalize_episode('GEOMETRY_PRECHECK_BLOCKED','GEOMETRY_PRECHECK_BLOCKED')
         return self.get_observation(),self._public_info()
     def _ensure_bound_audit(self):
-        from demos.lab_cuvette_env_v1.geometry_audit import binding
+        from importlib import import_module
+        binding=import_module(self.cfg.env.get('geometry_audit_module','demos.lab_cuvette_env_v1.geometry_audit')).binding
         previous=self.geometry_audit.get('binding')
         current=binding(self.cfg,previous['files']) if previous else None
         if current is not None and current['fingerprint']==previous['fingerprint']:return
         root=Path(__file__).resolve().parents[1];path=self.episode_dir/'audit_input.yaml';OmegaConf.save(self.cfg,path)
         cache=root/self.cfg.env.geometry_audit_cache
-        subprocess.run(['bash',str(root/'demos/lab_cuvette_external/usd_python.sh'),'-m','demos.lab_cuvette_env_v1.geometry_audit','--config',str(path),'--output',str(cache),'--ensure','--geometry-site',str(self.cfg.env.shapely_site)],cwd=root,check=True)
+        subprocess.run(['bash',str(root/'demos/lab_cuvette_external/usd_python.sh'),'-m',self.cfg.env.get('geometry_audit_module','demos.lab_cuvette_env_v1.geometry_audit'),'--config',str(path),'--output',str(cache),'--ensure','--geometry-site',str(self.cfg.env.shapely_site)],cwd=root,check=True)
         latest=json.loads((cache/'latest.json').read_text());self.geometry_audit=json.loads((cache/latest['audit_relative_path']).read_text())
 
     def _geometry_valid(self):
@@ -236,7 +257,7 @@ class LabCuvetteLoadingEnvV1:
                 evidence=self.scorer.update(self.debug)
                 if evidence.get('terminate') and stop is None:stop=(evidence['termination_reason'],evidence.get('failure_type'))
             self.world.physics_sim_view.update_articulations_kinematic()
-            for _ in range(2):self.world.render()
+            for _ in range(int(self.cfg.env.get('render_flush_passes_per_control',2))):self.world.render()
             self.images=self.rig.get_images();self.control_steps+=1;self._obs=self._public_observation();next_state=self._collector_state()
             if self.t>=self.cfg.env.timeout_s:stop=stop or ('SIMULATION_TIMEOUT','TIMEOUT')
             if self._geometry_valid() is not True and np.linalg.norm(np.asarray(self.debug['object_position_m'])[:2]-self.ctx['fixtures']['target_floor'][:2])<.02 and self.debug['source_bottom_z_m']<self.ctx['fixtures']['target_rim_z']+.0005:
@@ -280,7 +301,7 @@ class LabCuvetteLoadingEnvV1:
             if name not in self._video_writers:self._video_writers[name]=cv2.VideoWriter(str(self.episode_dir/(name+'.mp4')),cv2.VideoWriter_fourcc(*'mp4v'),30,(w,h))
             self._video_writers[name].write(frame);frames.append(frame)
         both=np.concatenate(frames,axis=1)
-        cv2.putText(both,f'Env_v1 {self.cfg.env.task_type} | t={self.t:.3f}s {self.phase}',(8,25),cv2.FONT_HERSHEY_SIMPLEX,.55,(255,255,255),2)
+        cv2.putText(both,f"{self.cfg.get('version','Env_v1')} {self.cfg.env.task_type} | t={self.t:.3f}s {self.phase}",(8,25),cv2.FONT_HERSHEY_SIMPLEX,.55,(255,255,255),2)
         if 'dual' not in self._video_writers:self._video_writers['dual']=cv2.VideoWriter(str(self.episode_dir/'dual_view.mp4'),cv2.VideoWriter_fourcc(*'mp4v'),30,(both.shape[1],both.shape[0]))
         self._video_writers['dual'].write(both)
         self._video_frame_times.append(float(self.t))
@@ -289,7 +310,7 @@ class LabCuvetteLoadingEnvV1:
         if self._result is not None:return copy.deepcopy(self._result)
         if self.ctx is None:return None
         self._result=self.scorer.finalize(self.episode_id,self.cfg.env.task_type,termination_reason,failure_type)
-        self._result.update(scene_version='Env_v1',simulation_seconds=self.t,wall_seconds=time.perf_counter()-self.episode_wall,
+        self._result.update(scene_version=str(self.cfg.get('version','Env_v1')),simulation_seconds=self.t,wall_seconds=time.perf_counter()-self.episode_wall,
             seed=int(self.cfg.env.seed),policy_id=self.options.get('policy_id','teacher'),actual_control_steps=self.control_steps,actual_physics_steps=self.steps)
         physical_score=copy.deepcopy(self._result);self._write(self.episode_dir/'independent_score.json',physical_score)
         labels=self.collector.finish_episode(self._result,independent_score=physical_score)

@@ -104,7 +104,8 @@ class LabCuvetteEnvV1Collector(MinimalPickCollector):
         attrs.update(seed="unknown", policy_id="unknown", demonstrator_id="unknown",
                      asset_version=self.scene_contract.get("asset_manifest_sha256", "unknown"),
                      task_type="loading")
-        for key in ("seed", "policy_id", "demonstrator_id", "asset_version", "source_slot_id", "target_seat_id", "task_type"):
+        for key in ("seed", "policy_id", "demonstrator_id", "asset_version", "source_slot_id", "target_seat_id", "task_type",
+                    "asset_id", "condition_group", "frozen_scene_sha256", "control_config_sha256", "code_commit", "scene_mode", "deterministic_action_deviation_json"):
             if metadata.get(key) is not None:
                 attrs[key] = metadata[key]
             elif self.scene_contract.get(key) is not None:

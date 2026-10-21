@@ -121,6 +121,12 @@ class PhysicsRecorder:
             mesh_paths.append(path)
         if not vertices:raise RuntimeError('Actual derived vessel visual meshes not found')
         self.vertices=np.concatenate(vertices);self.faces=np.asarray(faces,int)
+        self.material_geometry=None
+        if cfg.env.get('material_geometry_module'):
+            from importlib import import_module
+            self.material_geometry=import_module(cfg.env.material_geometry_module).SeatMaterialGeometry.from_stage(
+                ctx['stage'],self.filters[self.target_indices[0]],self.vertices,self.faces,self.layout.get('seat_original_floor',self.floor),self.instrument_rotation,self.depth,
+                tolerance_m=float(cfg.demo_release.penetration_m),cache_control_hz=int(cfg.env.get('material_geometry_check_hz',cfg.physics.control_hz)))
         edges=np.concatenate([self.faces[:,[0,1]],self.faces[:,[1,2]],self.faces[:,[2,0]]])
         self.edges=np.unique(np.sort(edges,axis=1),axis=0)
         self.link_points=link_local_collision_points(cfg)
@@ -149,6 +155,7 @@ class PhysicsRecorder:
             bottom_partition='selectedseat point within±50um ofdeclaredfloorsurface andupwardforce cosine>=0.5; no whole-seatFz substitute',
             bottom_partition_limitations='Contactpoint is solver report,not materialintersectionproof; sloped/unidentifiedsupport remains wall/unknown',
             native_target_overlap_measured=False)
+        if self.material_geometry is not None:metadata['material_geometry']=self.material_geometry.metadata()
         (self.output/'physics_capture_meta.json').write_text(json.dumps(safe(metadata),ensure_ascii=False,indent=2)+'\n')
 
     def before_step(self,step,t,phase):
@@ -303,6 +310,8 @@ class PhysicsRecorder:
             forbidden_robot_environment_contact=self.forbidden_contact,forbidden_robot_environment_contact_this_step=self.forbidden_this_step,
             command_q9=np.asarray(command_q),gripper_target_m=float(gripper_target_m),gripper_effort_limit_N=effort,
             record_api_sample_time='aftercompletedphysicsstep,nointerveningstep',native_contact_events_count=self.contact_count)
+        if self.material_geometry is not None:
+            row.update(self.material_geometry.measure(p,q,float(t)))
         self._physics.write(json.dumps(safe(row),ensure_ascii=False,separators=(',',':'),allow_nan=False)+'\n')
         self.last=safe(row);self._recent.append(self.last)
         compact={key:self.last[key] for key in ('t','physics_step','phase','object_position_m','quaternion_wxyz','source_bottom_z_m','target_bottom_gap_m','depth_m','xy_error_target_m','tilt_deg','finger_contact_N','target_bottom_support_N','wall_contact_N','source_rack_penetration_m','native_target_overlap_m','gripper_object_clearance_m','forbidden_robot_environment_contact')}

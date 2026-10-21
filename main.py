@@ -35,7 +35,7 @@ args = parse_args()
 
 # Independent scenes use their own scene builder and the shared task registries.
 # Existing laboratory configurations keep the original startup and run loop.
-if args.config_name == 'lab_cuvette_env_v1':
+if args.config_name in ('lab_cuvette_env_v1','lab_cuvette_size_v1'):
     import sys
     from demos.lab_cuvette_env_v1.run import parser as env_parser,main as env_main
     env_args=env_parser().parse_args(['--config',args.env_config,'--mode',args.env_mode,'--layout-mode',args.layout_mode,'--seed',str(args.seed),'--episodes',str(args.episodes),'--port',str(args.port)]+(['--subtask',args.subtask] if args.subtask else [])+(['--headless'] if args.headless else [])+(['--output',args.output] if args.output else [])+(['--initial-state',args.initial_state] if args.initial_state else [])+(['--replay-episode',args.replay_episode] if args.replay_episode else [])+(['--replay-max-ticks',str(args.replay_max_ticks)] if args.replay_max_ticks is not None else [])+(['--replay-zero-delay' if args.replay_zero_delay else '--no-replay-zero-delay'] if args.env_mode=='replay' else []))

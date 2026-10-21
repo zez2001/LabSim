@@ -1,0 +1,414 @@
+{
+  "schema": "labsim.Size_v1.runtime_input_geometry_offline_validation.v1",
+  "scope": "CPU input-source geometry tests only; no physics execution",
+  "unit": "metres except explicitly named mm",
+  "command": "bash demos/lab_cuvette_external/usd_python.sh; Python mesh_records + SeatMaterialGeometry.measure",
+  "source_seat": "/Asset/Collision/SourceMesh3",
+  "runs": [
+    {
+      "asset_id": "cuvette_xy_1000",
+      "asset_sha256": "680dad7643f8534caeaa8adf710784de4e2acad8be8fab8a2c7897140a573b79",
+      "metadata": {
+        "schema": "labsim.Size_v1.actual_pose_input_material_check.v1",
+        "scope": "Current source visual vessel material versus unchanged selected-seat collision input triangles; NOT cooked PhysX readback",
+        "query_units": "mm; returned length fields use m",
+        "method": "Exact closest point on triangles for every vertex and at most256 deterministic stratified face-centroids per mesh; both mesh directions; complete unique-edge finite segment-triangle crossing queries",
+        "target_watertight": false,
+        "target_winding_consistent": true,
+        "target_boundary_edge_count": 90,
+        "vessel_watertight": true,
+        "vessel_face_count": 1764,
+        "target_face_count": 976,
+        "vessel_sample_count": 1140,
+        "target_sample_count": 758,
+        "vessel_max_triangle_edge_m": 0.06762504528517622,
+        "vessel_p95_triangle_edge_m": 0.009569024667143822,
+        "sample_spacing_is_global_error_bound": false,
+        "numerical_endpoint_epsilon_m": 1e-08,
+        "overlap_tolerance_m": 5e-05,
+        "cache_control_hz": 60.0,
+        "loading_center_offset_local_m": [
+          0.00065,
+          0.0
+        ],
+        "native_target_overlap_measured": false,
+        "limitations": [
+          "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+          "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+          "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+          "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+        ],
+        "source_paths": null,
+        "target_input_arrays_sha256": "52f6a521c7a8a7c593cc7560b446ff7fafaafeca0c348e20dae0f116e15002a8"
+      },
+      "queries": [
+        {
+          "pose_m": [
+            -0.14926553560697634,
+            0.14762935326296264,
+            0.157
+          ],
+          "quaternion_wxyz": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "bottom_gap_m": 0.01,
+          "measurement": {
+            "input_geometry_sample_time_s": 0.0,
+            "input_geometry_cache_age_s": 0.0,
+            "input_geometry_near_selected_seat": true,
+            "native_target_overlap_m": null,
+            "native_target_overlap_measured": false,
+            "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+            "input_geometry_overlap_observed_m": 0.0,
+            "target_region_contains_object_sampled": true,
+            "target_region_contains_object": true,
+            "input_geometry_surface_crossing_count": 0,
+            "input_geometry_min_sample_surface_distance_m": 0.0012630817485424098,
+            "input_geometry_observed_worst_point_world_m": null,
+            "input_geometry_sign_qualified": true,
+            "input_method": "All vertices plus deterministic face-centroid samples; exact point-to-triangle signed distances and complete unique-edge crossing checks in mm. Qualified input-mesh observation, not cooked PhysX.",
+            "input_limitations": [
+              "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+              "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+              "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+              "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+            ],
+            "input_geometry_assessment": "sampled_input_material_within_tolerance",
+            "input_geometry_sampled_material_query_available": true,
+            "input_geometry_crossing_without_resolved_depth": false,
+            "input_geometry_observed_worst_direction": null,
+            "input_geometry_query_sample_counts": {
+              "vessel": 623,
+              "target": 0
+            },
+            "input_geometry_crossing_queries": {
+              "vessel_edges": {
+                "count": 0,
+                "point_mm": null,
+                "tested_segments": 1526
+              },
+              "target_edges_local": {
+                "count": 0,
+                "point_mm": null,
+                "tested_segments": 0
+              }
+            },
+            "input_geometry_reference_envelope_contains": true,
+            "input_geometry_aabb_distance_lower_bound_m": 0.0,
+            "input_geometry_compute_wall_s": 0.16385465699568158
+          }
+        },
+        {
+          "pose_m": [
+            -0.14926553560697634,
+            0.14762935326296264,
+            0.14701999999999998
+          ],
+          "quaternion_wxyz": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "bottom_gap_m": 2e-05,
+          "measurement": {
+            "input_geometry_sample_time_s": 1.0,
+            "input_geometry_cache_age_s": 0.0,
+            "input_geometry_near_selected_seat": true,
+            "native_target_overlap_m": null,
+            "native_target_overlap_measured": false,
+            "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+            "input_geometry_overlap_observed_m": 0.0,
+            "target_region_contains_object_sampled": true,
+            "target_region_contains_object": true,
+            "input_geometry_surface_crossing_count": 0,
+            "input_geometry_min_sample_surface_distance_m": 2.0000119209271362e-05,
+            "input_geometry_observed_worst_point_world_m": null,
+            "input_geometry_sign_qualified": true,
+            "input_method": "All vertices plus deterministic face-centroid samples; exact point-to-triangle signed distances and complete unique-edge crossing checks in mm. Qualified input-mesh observation, not cooked PhysX.",
+            "input_limitations": [
+              "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+              "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+              "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+              "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+            ],
+            "input_geometry_assessment": "sampled_input_material_within_tolerance",
+            "input_geometry_sampled_material_query_available": true,
+            "input_geometry_crossing_without_resolved_depth": false,
+            "input_geometry_observed_worst_direction": null,
+            "input_geometry_query_sample_counts": {
+              "vessel": 629,
+              "target": 77
+            },
+            "input_geometry_crossing_queries": {
+              "vessel_edges": {
+                "count": 0,
+                "point_mm": null,
+                "tested_segments": 1526
+              },
+              "target_edges_local": {
+                "count": 0,
+                "point_mm": null,
+                "tested_segments": 0
+              }
+            },
+            "input_geometry_reference_envelope_contains": true,
+            "input_geometry_aabb_distance_lower_bound_m": 0.0,
+            "input_geometry_compute_wall_s": 0.11785977600084152
+          }
+        },
+        {
+          "pose_m": [
+            -0.14926553560697634,
+            0.14762935326296264,
+            0.14698999999999998
+          ],
+          "quaternion_wxyz": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "bottom_gap_m": -1e-05,
+          "measurement": {
+            "input_geometry_sample_time_s": 2.0,
+            "input_geometry_cache_age_s": 0.0,
+            "input_geometry_near_selected_seat": true,
+            "native_target_overlap_m": null,
+            "native_target_overlap_measured": false,
+            "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+            "input_geometry_overlap_observed_m": 1.000028560852045e-05,
+            "target_region_contains_object_sampled": true,
+            "target_region_contains_object": true,
+            "input_geometry_surface_crossing_count": 288,
+            "input_geometry_min_sample_surface_distance_m": 1.1610256455372098e-06,
+            "input_geometry_observed_worst_point_world_m": [
+              -0.14449314536803562,
+              0.14297683448392326,
+              0.14698999999999998
+            ],
+            "input_geometry_sign_qualified": true,
+            "input_method": "All vertices plus deterministic face-centroid samples; exact point-to-triangle signed distances and complete unique-edge crossing checks in mm. Qualified input-mesh observation, not cooked PhysX.",
+            "input_limitations": [
+              "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+              "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+              "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+              "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+            ],
+            "input_geometry_assessment": "sampled_input_material_within_tolerance",
+            "input_geometry_sampled_material_query_available": true,
+            "input_geometry_crossing_without_resolved_depth": false,
+            "input_geometry_observed_worst_direction": "vessel_sample_inside_target_input",
+            "input_geometry_query_sample_counts": {
+              "vessel": 629,
+              "target": 77
+            },
+            "input_geometry_crossing_queries": {
+              "vessel_edges": {
+                "count": 116,
+                "point_mm": [
+                  -154.11509294,
+                  142.98330464,
+                  146.99999988
+                ],
+                "tested_segments": 1526
+              },
+              "target_edges_local": {
+                "count": 172,
+                "point_mm": [
+                  -4.84758595,
+                  -2.04619841,
+                  0.00999988
+                ],
+                "tested_segments": 252
+              }
+            },
+            "input_geometry_reference_envelope_contains": true,
+            "input_geometry_aabb_distance_lower_bound_m": 0.0,
+            "input_geometry_compute_wall_s": 0.11676851600350346
+          }
+        },
+        {
+          "pose_m": [
+            -0.14926553560697634,
+            0.14762935326296264,
+            0.1469
+          ],
+          "quaternion_wxyz": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "bottom_gap_m": -0.0001,
+          "measurement": {
+            "input_geometry_sample_time_s": 3.0,
+            "input_geometry_cache_age_s": 0.0,
+            "input_geometry_near_selected_seat": true,
+            "native_target_overlap_m": null,
+            "native_target_overlap_measured": false,
+            "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+            "input_geometry_overlap_observed_m": 9.99999212728607e-05,
+            "target_region_contains_object_sampled": false,
+            "target_region_contains_object": false,
+            "input_geometry_surface_crossing_count": 302,
+            "input_geometry_min_sample_surface_distance_m": 1.3230482737185412e-06,
+            "input_geometry_observed_worst_point_world_m": [
+              -0.14449314536803562,
+              0.14297683448392326,
+              0.1469
+            ],
+            "input_geometry_sign_qualified": true,
+            "input_method": "All vertices plus deterministic face-centroid samples; exact point-to-triangle signed distances and complete unique-edge crossing checks in mm. Qualified input-mesh observation, not cooked PhysX.",
+            "input_limitations": [
+              "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+              "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+              "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+              "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+            ],
+            "input_geometry_assessment": "observed_input_material_overlap",
+            "input_geometry_sampled_material_query_available": true,
+            "input_geometry_crossing_without_resolved_depth": false,
+            "input_geometry_observed_worst_direction": "vessel_sample_inside_target_input",
+            "input_geometry_query_sample_counts": {
+              "vessel": 629,
+              "target": 77
+            },
+            "input_geometry_crossing_queries": {
+              "vessel_edges": {
+                "count": 124,
+                "point_mm": [
+                  -154.21634823,
+                  142.84850127,
+                  146.99999988
+                ],
+                "tested_segments": 1526
+              },
+              "target_edges_local": {
+                "count": 178,
+                "point_mm": [
+                  -4.95055932,
+                  -2.27208318,
+                  0.09999988
+                ],
+                "tested_segments": 252
+              }
+            },
+            "input_geometry_reference_envelope_contains": true,
+            "input_geometry_aabb_distance_lower_bound_m": 0.0,
+            "input_geometry_compute_wall_s": 0.12765816099999938
+          }
+        }
+      ]
+    },
+    {
+      "asset_id": "cuvette_xy_1250",
+      "asset_sha256": "118819003b1f86a8abb725367083edd4853c5b9d05ed3147268f28d8644d3f2c",
+      "metadata": {
+        "schema": "labsim.Size_v1.actual_pose_input_material_check.v1",
+        "scope": "Current source visual vessel material versus unchanged selected-seat collision input triangles; NOT cooked PhysX readback",
+        "query_units": "mm; returned length fields use m",
+        "method": "Exact closest point on triangles for every vertex and at most256 deterministic stratified face-centroids per mesh; both mesh directions; complete unique-edge finite segment-triangle crossing queries",
+        "target_watertight": false,
+        "target_winding_consistent": true,
+        "target_boundary_edge_count": 90,
+        "vessel_watertight": true,
+        "vessel_face_count": 1764,
+        "target_face_count": 976,
+        "vessel_sample_count": 1140,
+        "target_sample_count": 758,
+        "vessel_max_triangle_edge_m": 0.0680062399385713,
+        "vessel_p95_triangle_edge_m": 0.01196128036826849,
+        "sample_spacing_is_global_error_bound": false,
+        "numerical_endpoint_epsilon_m": 1e-08,
+        "overlap_tolerance_m": 5e-05,
+        "cache_control_hz": 60.0,
+        "loading_center_offset_local_m": [
+          0.0,
+          0.0
+        ],
+        "native_target_overlap_measured": false,
+        "limitations": [
+          "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+          "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+          "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+          "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+        ],
+        "source_paths": null,
+        "target_input_arrays_sha256": "52f6a521c7a8a7c593cc7560b446ff7fafaafeca0c348e20dae0f116e15002a8"
+      },
+      "queries": [
+        {
+          "pose_m": [
+            -0.14991553560697635,
+            0.14762935326296264,
+            0.1725
+          ],
+          "quaternion_wxyz": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "bottom_gap_m": 0.0255,
+          "measurement": {
+            "input_geometry_sample_time_s": 0.0,
+            "input_geometry_cache_age_s": 0.0,
+            "input_geometry_near_selected_seat": true,
+            "native_target_overlap_m": null,
+            "native_target_overlap_measured": false,
+            "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+            "input_geometry_overlap_observed_m": 0.001450007736204327,
+            "target_region_contains_object_sampled": false,
+            "target_region_contains_object": false,
+            "input_geometry_surface_crossing_count": 16,
+            "input_geometry_min_sample_surface_distance_m": 4.999558574360208e-05,
+            "input_geometry_observed_worst_point_world_m": [
+              -0.15461553633213043,
+              0.14282935857772827,
+              0.17399999499320984
+            ],
+            "input_geometry_sign_qualified": true,
+            "input_method": "All vertices plus deterministic face-centroid samples; exact point-to-triangle signed distances and complete unique-edge crossing checks in mm. Qualified input-mesh observation, not cooked PhysX.",
+            "input_limitations": [
+              "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+              "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+              "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+              "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+            ],
+            "input_geometry_assessment": "observed_input_material_overlap",
+            "input_geometry_sampled_material_query_available": true,
+            "input_geometry_crossing_without_resolved_depth": false,
+            "input_geometry_observed_worst_direction": "target_input_sample_inside_vessel",
+            "input_geometry_query_sample_counts": {
+              "vessel": 437,
+              "target": 23
+            },
+            "input_geometry_crossing_queries": {
+              "vessel_edges": {
+                "count": 0,
+                "point_mm": null,
+                "tested_segments": 1057
+              },
+              "target_edges_local": {
+                "count": 16,
+                "point_mm": [
+                  -5.49999937,
+                  -6.25000242,
+                  0.49999297
+                ],
+                "tested_segments": 26
+              }
+            },
+            "input_geometry_reference_envelope_contains": true,
+            "input_geometry_aabb_distance_lower_bound_m": 0.0,
+            "input_geometry_compute_wall_s": 0.07828861600137316
+          }
+        }
+      ]
+    }
+  ]
+}

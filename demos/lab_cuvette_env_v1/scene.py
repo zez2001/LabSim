@@ -20,6 +20,9 @@ def episode_config(base,seed=0,options=None):
     return cfg
 
 def layout(cfg):
+    if cfg.env.get('scene_layout_module'):
+        from importlib import import_module
+        return import_module(cfg.env.scene_layout_module).layout(cfg)
     from demos.lab_cuvette_demo04.scene import layout as inherited
     if 'instrument_yaw_deg' not in cfg.scene:raise ValueError('Formal scene requires explicit instrument yaw from reference/layout review')
     return inherited(cfg)

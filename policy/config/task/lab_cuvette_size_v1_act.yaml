@@ -1,0 +1,35 @@
+name: lab_cuvette_size_v1
+image_shape: [3, 256, 256]
+dataset_path: outputs/lab_cuvette_loading/Size_v1/collection/dataset
+sample_filter: success
+# RNG seeds affect model optimization / episode split, never scene geometry.
+training_rng_seed: ${training.seed}
+scene_mode: standard
+scene_randomization_enabled: false
+automatic_validation_mode: standard
+scene_config_path: config/lab_cuvette_loading/Size_v1/standard.yaml
+frozen_scene_path: config/lab_cuvette_loading/Size_v1/frozen_scene.json
+shape_meta:
+  obs:
+    side_camera_rgb: {shape: '${task.image_shape}', type: rgb}
+    wrist_camera_rgb: {shape: '${task.image_shape}', type: rgb}
+    agent_pose: {shape: [8], type: low_dim}
+  action: {shape: [8]}
+dataset:
+  _target_: policy.dataset.lab_cuvette_size_v1_dataset.LabCuvetteSizeV1Dataset
+  shape_meta: ${task.shape_meta}
+  dataset_path: ${task.dataset_path}
+  horizon: ${horizon}
+  n_obs_steps: ${n_obs_steps}
+  policy_type: act
+  sample_filter: ${task.sample_filter}
+  seed: 42
+  training_rng_seed: ${task.training_rng_seed}
+  val_ratio: 0.1
+  split_group_keys: []
+  frozen_scene_path: ${task.frozen_scene_path}
+  scene_config_path: ${task.scene_config_path}
+  repository_root: .
+  scene_mode: ${task.scene_mode}
+  scene_randomization_enabled: ${task.scene_randomization_enabled}
+  automatic_validation_mode: ${task.automatic_validation_mode}
