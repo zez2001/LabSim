@@ -59,6 +59,7 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
         ROOT / "docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.md": "cooked_preview01_summary.md",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/freeze_against_first_success.json": "freeze_against_first_success.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/phase_A_cpu_validation.json": "phase_A_cpu_validation.json",
+        ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/normal_reader_directory_filename_cpu_check.json": "normal_reader_directory_filename_cpu_check.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/camera_actual_config_summary.json": "camera_actual_config_summary.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/normal_read_success_filter.json": "development_success_normal_read.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/frozen_reader_admission_actual.json": "development_frozen_admission.json",
@@ -184,7 +185,7 @@ verify5必须新目录且5/5真实完整成功；后两阶段需显式审阅后�
  --output-json outputs/lab_cuvette_loading/Size_v1/collection_standard/FINAL_AUDIT.json
 ```
 
-默认索引是同collection树内的相对H5外链，传输时必须移动整个collection树；原episode H5本身仍独立。`--copy-data`显式复制完整数据，需额外磁盘。ACT/DP任务配置默认准确指向上述collection_standard/dataset。训练成功BC默认success，失败用于单独分析，train/val按完整episode拆分、两者同一固定场景。
+标准索引文件名固定为`collection_standard/dataset/episode_data.hdf5`。正常读取器接收dataset目录后固定追加`episode_data.hdf5`，不会自动发现名为`index.hdf5`的文件；请按上面的准确文件名创建。默认索引是同collection树内的相对H5外链，传输时必须移动整个collection树；原episode H5本身仍独立。`--copy-data`显式复制完整数据，需额外磁盘。ACT/DP任务配置默认准确指向上述collection_standard/dataset。训练成功BC默认success，失败用于单独分析，train/val按完整episode拆分、两者同一固定场景。
 
 ```bash
 ../labutopia-env/bin/python scripts/read_lab_cuvette_env_v1_data.py \\
