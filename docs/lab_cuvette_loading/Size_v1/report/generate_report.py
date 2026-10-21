@@ -327,7 +327,7 @@ def pages_for(d):
 
     candidate_map = {x['asset_id']: x for x in s.get('candidates', [])}
     rows = []
-    for ident in ('cuvette_xy_1250', 'cuvette_xy_1102', 'cuvette_xy_1100', 'cuvette_xy_1072', 'cuvette_xy_1070', 'cuvette_xy_1050', 'cuvette_xy_1000', 'cuvette_xy_0950'):
+    for ident in ('cuvette_xy_1250', 'cuvette_xy_1102', 'cuvette_xy_1100', 'cuvette_xy_1072', 'cuvette_xy_1070', 'cuvette_xy_1050', 'cuvette_xy_1030', 'cuvette_xy_1000', 'cuvette_xy_0950'):
         a = candidate_map.get(ident)
         if a:
             rows.append([num(a['nominal_outer_width_mm'], 2), state(a['entry_required_slice_four_yaw_XY_domain_present']),
@@ -343,7 +343,7 @@ def pages_for(d):
         ('p', '推荐初始物理候选为10.00mm，原A座局部偏移X=+0.650mm Y=+0.001mm，保守侧向输入表面余量约0.350mm。原座约2mm承托高度与约27mm插入深度是网格几何候选；最低底面承托采样凸包包含COM，实际释放稳定仍须仿真验证。')])
 
     runs = [x for x in s.get('runs', []) if x.get('task_type') == 'loading']
-    run_table = [[short(x['run_name'], 24), short(x.get('asset_id'), 21), num(x.get('simulation_seconds'), 2),
+    run_table = [[short(x.get('episode_id') or x['run_name'], 12), short(x.get('asset_id'), 21), num(x.get('simulation_seconds'), 2),
         state(x.get('task_success')), short(x.get('termination_reason'), 43)] for x in runs[-7:]]
     if not run_table:
         run_table = [['无完成装载记录', '未知', '未知', '未执行或未闭合', '以actual_runs.csv为准']]
@@ -355,7 +355,7 @@ def pages_for(d):
     failure_link = next((item for item in d['evidence_files'] if item['label'] == '10.50mm开发失败复核'), None)
     pages.append([('h', '实际连续任务与失败记录'),
         ('p', '控制沿用连续接触锁存：首次双指接触后保持已有闭合命令，避免锁存切换时重新张开。新宽度由实际接触适应，不复制12.5mm的固定指距。示范控制器使用器皿真值位姿；本轮未训练模型。'),
-        table(['运行', '资产', '仿真秒', '独立结果', '终止原因'], run_table, [3.1, 3.8, 1.8, 2.3, 5.8]),
+        table(['episode ID', '资产', '仿真秒', '独立结果', '终止原因'], run_table, [3.1, 3.8, 1.8, 2.3, 5.8]),
         ('p', f"主记录 {p.get('episode_directory', '尚无可选的已闭合装载episode')}。任务结果只取独立评分，不根据INSERT或VERIFY阶段名称认定成功。完整视频必须来自同一次运行，不拼接不同尝试。"),
         ('p', '主记录独立观察：' + '；'.join(label + state(value) for label, value in phase) + '。'),
         ('p', f"当前主记录终止原因 {r.get('termination_reason', '未知')}；失败类型 {r.get('failure_type', '未知')}。物理质量标记 {', '.join(r.get('physics_quality_flags', [])) or '无已记录项或尚无完成评分'}。完整已启动及未闭合列表另存CSV。"),
