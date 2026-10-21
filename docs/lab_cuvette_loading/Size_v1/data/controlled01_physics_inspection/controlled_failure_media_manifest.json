@@ -1,0 +1,133 @@
+{
+  "schema": "labsim.Size_v1.frozen_controlled_failure_representative_media.v1",
+  "episode_id": "88633c2e-2b26-497b-834a-5ee0bd369d68",
+  "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T045710Z_edfa49e9_00/episode_0000",
+  "frozen_scene_sha256": "f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+  "condition_group": "deterministic_action_deviation",
+  "role": "Controlled early-stop task failure representative; NOT natural blocked insertion",
+  "actual_task_success": false,
+  "record_valid": true,
+  "failure_type": "CONTROLLED_EARLY_STOP",
+  "actual_deviation_event": {
+    "t": 62.38333333333333,
+    "event": "deterministic_action_deviation",
+    "spec": {
+      "stage": "INSERT",
+      "value": 0.001,
+      "unit": "m",
+      "controller_version": "Size_v1.continuous_latch.loading01",
+      "stop_insertion_at_depth_m": 0.001,
+      "action": "stop normal insertion at actual depth; preserve physical failure result"
+    },
+    "actual_depth_m": 0.001016965243500454,
+    "normal_actions_only": true
+  },
+  "release_observed": false,
+  "retreat_observed": false,
+  "stable_after_retreat": null,
+  "post_retreat_window_status": "unavailable",
+  "process_exit_code": 0,
+  "videos": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_controlled_early_stop_full_62s.mp4",
+      "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T045710Z_edfa49e9_00/episode_0000/dual_view.mp4",
+      "source_sha256": "45b1d56b4bba06c5c1433e51ed5aaf3041bff8b09bf8be8a791be43e6572ee35",
+      "derived_sha256": "3e0dfaddb9e9789971b8c8596959cd8a702edd8e5c338ed82f8c9406a5a88d6c",
+      "source_probe": {
+        "frame_count": 1872,
+        "fps": "30/1",
+        "resolution_wh": [
+          1280,
+          480
+        ],
+        "duration_s": 62.4
+      },
+      "derived_probe": {
+        "frame_count": 1872,
+        "fps": "30/1",
+        "resolution_wh": [
+          1280,
+          544
+        ],
+        "duration_s": 62.4
+      },
+      "source_frame_start_inclusive": 0,
+      "source_frame_end_inclusive": 1871,
+      "first_actual_sim_t_s": 0.016666666666666666,
+      "last_actual_sim_t_s": 62.38333333333333,
+      "single_same_episode_continuous": true,
+      "attempts_spliced": false,
+      "time_resampling": false,
+      "source_image_region_unoccluded": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 480
+      },
+      "annotation_region": "New64px black band appended below the original480px image. Original camera pixels are neither cropped nor spatially rescaled; H264 is a lossy transcode.",
+      "burned_caption_lines": [
+        "受控动作偏差：插入深度达到1 mm后提前停止",
+        "未释放、未撤离；非自然卡滞；固定 standard 场景"
+      ],
+      "caption_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+      "command": [
+        "ffmpeg",
+        "-nostdin",
+        "-v",
+        "error",
+        "-threads",
+        "2",
+        "-filter_threads",
+        "2",
+        "-i",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T045710Z_edfa49e9_00/episode_0000/dual_view.mp4",
+        "-vf",
+        "pad=iw:ih+64:0:0:black,drawtext=fontfile=/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc:textfile=/tmp/labsim-size-controlled01-caption-0.txt:fontcolor=white:fontsize=22:x=14:y=486,drawtext=fontfile=/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc:textfile=/tmp/labsim-size-controlled01-caption-1.txt:fontcolor=white:fontsize=19:x=14:y=518",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "2",
+        "-preset",
+        "fast",
+        "-crf",
+        "26",
+        "-pix_fmt",
+        "yuv420p",
+        "-vsync",
+        "0",
+        "-an",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_controlled_early_stop_full_62s.mp4"
+      ],
+      "full_CPU_decode_exit_code": 0
+    }
+  ],
+  "images": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/07_controlled_early_stop_terminal.png",
+      "derived_sha256": "d2b3a9b38ec03e04e285a297f86d2261a82c42d17a2bd9234c34f1703bf17f21",
+      "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_controlled_early_stop_full_62s.mp4",
+      "source_frame_index": 1871,
+      "actual_simulation_time_s": 62.38333333333333,
+      "command": [
+        "ffmpeg",
+        "-nostdin",
+        "-v",
+        "error",
+        "-threads",
+        "2",
+        "-filter_threads",
+        "2",
+        "-i",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_controlled_early_stop_full_62s.mp4",
+        "-vf",
+        "select=eq(n\\,1871)",
+        "-frames:v",
+        "1",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/07_controlled_early_stop_terminal.png"
+      ]
+    }
+  ],
+  "original_record_or_media_modified": false,
+  "total_derived_bytes": 2894452,
+  "target_total_bytes_under_4MiB": true
+}

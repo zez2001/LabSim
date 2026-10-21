@@ -42,8 +42,75 @@ def episode_attributes(episode):
             if np.ndim(value) == 0}
 
 
+def controlled_event_admission(source, attributes):
+    """Actual early-stop event evidence, beyond a configured deviation string.
+
+    The input is an already-open CLOSED standalone episode HDF5. No label or
+    source file is changed. A configured early stop that never reached INSERT
+    cannot enter the executed deterministic-deviation failure quota.
+    """
+    episode = Path(source.filename).resolve().parent.parent
+    checks, event, state, index = {}, None, None, None
+    evidence = dict(schema="labsim.Size_v1.controlled_event_admission.v1",
+        source_episode=str(episode), source_labels_or_states_modified=False)
+    if attributes.get("complete") is not True:
+        return dict(evidence, qualified=False, checks=dict(record_individually_closed=False),
+                    errors=["controlled_record_not_closed"])
+    paths = {"result": episode / "result.json", "config": episode / "config.yaml",
+             "events": episode / "teacher_events.json"}
+    if not all(path.is_file() for path in paths.values()):
+        return dict(evidence, qualified=False, checks={},
+            errors=["missing_actual_controlled_event_result_or_configuration_sidecar"])
+    try:
+        final = json.loads(paths["result"].read_text())
+        cfg = OmegaConf.to_container(OmegaConf.load(paths["config"]), resolve=True)
+        events = json.loads(paths["events"].read_text())
+        expected = cfg.get("experiment", {}).get("deviation", {})
+        actual = [entry for entry in events if entry.get("event") == "deterministic_action_deviation"]
+        stops = [entry for entry in events if entry.get("event") == "teacher_stop_suggestion"]
+        checks = dict(record_individually_closed=final.get("complete") is True,
+            result_matches_HDF5_episode=final.get("episode_id") == attributes.get("episode_id"),
+            one_actual_deviation_event=len(actual) == 1,
+            configured_condition_group=cfg.get("experiment", {}).get("condition_group") == "deterministic_action_deviation",
+            configured_INSERT_stage=expected.get("stage") == "INSERT",
+            configured_metre_unit=expected.get("unit") == "m",
+            controller_version_recorded=bool(expected.get("controller_version")),
+            result_is_valid_task_failure=final.get("record_valid") is True and final.get("task_success") is False,
+            actual_failure_type=final.get("failure_type") == "CONTROLLED_EARLY_STOP" and attributes.get("failure_type") == "CONTROLLED_EARLY_STOP",
+            actual_termination_reason=final.get("termination_reason") == "CONTROLLED_EARLY_STOP" and attributes.get("termination_reason") == "CONTROLLED_EARLY_STOP",
+            no_release_or_retreat=final.get("release_observed") is False and final.get("retreat_observed") is False,
+            post_retreat_window_unavailable=final.get("post_retreat_window", {}).get("status") == "unavailable",
+            post_retreat_stability_unknown=final.get("stable_after_retreat") is None)
+        saved = json.loads(str(attributes.get("deterministic_action_deviation_json", "null")))
+        checks["HDF5_spec_matches_config"] = saved == expected
+        if len(actual) == 1:
+            event = actual[0]
+            checks["event_spec_matches_config"] = event.get("spec") == expected
+            times = source["next_timestamp"][:]
+            index = int(np.argmin(abs(times - float(event["t"]))))
+            state = json.loads(scalar(source["privileged/next_state_json"][index]))
+            phase = scalar(source["phase"][index])
+            checks["event_matches_actual_successor_time"] = abs(float(times[index]) - float(event["t"])) <= 1e-8
+            checks["actual_saved_phase_INSERT"] = phase == "INSERT"
+            checks["event_depth_matches_saved_physical_state"] = abs(float(state["depth_m"]) - float(event["actual_depth_m"])) <= 1e-10
+            checks["actual_depth_reached_stop"] = float(state["depth_m"]) >= float(expected["stop_insertion_at_depth_m"])
+            checks["normal_actions_only"] = event.get("normal_actions_only") is True
+            checks["teacher_stop_same_time_and_phase"] = any(entry.get("status") == "CONTROLLED_EARLY_STOP" and entry.get("phase") == "INSERT" and abs(float(entry["t"]) - float(event["t"])) <= 1e-10 for entry in stops)
+            checks["final_time_matches_actual_stop"] = abs(float(final["simulation_seconds"]) - float(event["t"])) <= 1e-8
+        evidence.update(source_sidecar_sha256={key: file_sha(path) for key, path in paths.items()},
+            configuration_spec=expected, actual_event=event, actual_event_count=len(actual),
+            corresponding_successor_row=index, actual_depth_m=None if state is None else state.get("depth_m"))
+    except Exception as error:
+        return dict(evidence, qualified=False, checks=checks,
+            errors=["controlled_event_evidence_unreadable:" + type(error).__name__ + ":" + str(error)])
+    rejected = ["controlled_event_check_failed:" + key for key, value in checks.items() if value is not True]
+    return dict(evidence, qualified=not rejected and bool(checks), checks=checks, errors=rejected,
+                scope="Actual trajectory INSERT early-stop failure; config declaration alone is insufficient")
+
+
 def audit_episode(path, expected_sha):
     errors = []
+    event_evidence = None
     with h5py.File(path, "r") as episode:
         attrs = episode_attributes(episode)
         count = len(episode["actions"]) if "actions" in episode else 0
@@ -112,13 +179,17 @@ def audit_episode(path, expected_sha):
                 command = episode["control_auxiliary/command_q"][:]
                 if command.shape != (count, 9) or not np.array_equal(command[:, :8].astype(np.float32), episode["actions"][:]):
                     errors.append("legacy_action_mapping_mismatch")
+        if attrs.get("condition_group") == "deterministic_action_deviation":
+            event_evidence = controlled_event_admission(episode, attrs)
+            errors.extend(event_evidence["errors"])
         accepted = {}
         for selection in ("success", "failure", "all_valid"):
             match, reason = episode_matches_filter(episode.attrs, selection)
             accepted[selection] = bool(match and not errors and attrs.get("task_type") == "loading")
             accepted[selection + "_filter_reason"] = reason
     return dict(path=str(Path(path).resolve()), source_sha256=file_sha(path), transitions=count,
-                labels=attrs, admission_errors=errors, **accepted)
+                labels=attrs, admission_errors=errors,
+                controlled_deviation_event_evidence=event_evidence, **accepted)
 
 
 def official_process_gate(row, collection_root):

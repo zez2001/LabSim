@@ -11,6 +11,38 @@ spec.loader.exec_module(report)
 
 
 class ReportTests(unittest.TestCase):
+    def test_standard_episode_labels_keep_uuid_and_episode_suffix(self):
+        labels = [report.episode_label({'episode_id': f'uuid-{index}-unique',
+            'episode_directory': f'collection_standard/runs/verify5_long_shared_prefix/episode_{index:04d}'})
+            for index in range(5)]
+        self.assertEqual(len(set(labels)), 5)
+        self.assertIn('uuid-0-unique', labels[0])
+        self.assertTrue(labels[0].endswith('episode_0000'))
+
+    def test_audited_controlled_stops_do_not_become_natural_failures(self):
+        summary = {'collection20_success20_failure': {'condition_groups': {
+            'natural': {'qualified_failure': 0},
+            'deterministic_action_deviation': {'qualified_failure': 2}}},
+            'runs': [{'qualified_failure': True,
+                'condition_group': 'deterministic_action_deviation',
+                'failure_type': 'CONTROLLED_EARLY_STOP'} for _ in range(2)]}
+        text = report.controlled_failure_paragraph(summary)
+        self.assertIn('自然控制0条', text)
+        self.assertIn('确定性动作偏差2条', text)
+        self.assertIn('全部为CONTROLLED_EARLY_STOP', text)
+        self.assertIn('不是自然受阻或碰撞失败样本', text)
+        self.assertNotIn('20条', text)
+
+    def test_mixed_or_unknown_controlled_types_are_not_inferred_as_early_stops(self):
+        summary = {'collection20_success20_failure': {'condition_groups': {
+            'deterministic_action_deviation': {'qualified_failure': 1}}},
+            'runs': [{'qualified_failure': True,
+                'condition_group': 'deterministic_action_deviation', 'failure_type': None}]}
+        text = report.controlled_failure_paragraph(summary)
+        self.assertIn('自然控制未知条', text)
+        self.assertIn('类型为未知', text)
+        self.assertNotIn('全部为CONTROLLED_EARLY_STOP', text)
+
     def test_unknown_is_not_reported_as_false_or_zero(self):
         self.assertEqual(report.state(None), '未知或未执行')
         self.assertEqual(report.num(None), '未知')

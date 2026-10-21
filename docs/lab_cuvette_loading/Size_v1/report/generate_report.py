@@ -44,6 +44,30 @@ def short(value, length=46):
     return text if len(text) <= length else text[:length-1] + '…'
 
 
+def episode_label(row):
+    """Keep repeated episodes distinguishable inside a narrow report column."""
+    suffix = Path(row.get('episode_directory') or '未知episode').name
+    return short(row.get('episode_id') or row.get('run_name'), 13) + ' / ' + suffix
+
+
+def controlled_failure_paragraph(summary):
+    """Describe audited groups without recasting induced stops as size failures."""
+    quota = summary.get('collection20_success20_failure', {})
+    count = get(quota, 'condition_groups.deterministic_action_deviation.qualified_failure')
+    natural = get(quota, 'condition_groups.natural.qualified_failure')
+    text = (f"本次合格失败中，自然控制{num(natural, 0)}条，确定性动作偏差{num(count, 0)}条。"
+            '两组不混成自然卡滞率，也不据动作偏差失败推断器皿尺寸不能通过。')
+    rows = [row for row in summary.get('runs', [])
+            if row.get('qualified_failure') is True
+            and row.get('condition_group') == 'deterministic_action_deviation']
+    if count and len(rows) == count and all(row.get('failure_type') == 'CONTROLLED_EARLY_STOP' for row in rows):
+        text += '本次已审计的受控失败全部为CONTROLLED_EARLY_STOP，即按配置提前停止插入；不是自然受阻或碰撞失败样本。'
+    elif count:
+        kinds = sorted({row.get('failure_type') or '未知' for row in rows})
+        text += '受控失败的已记录类型为' + ('、'.join(kinds) or '未知') + '，逐次原因与偏差事件以原记录为准。'
+    return text
+
+
 def optional_bool(value):
     if isinstance(value, bool):
         return value
@@ -343,7 +367,7 @@ def pages_for(d):
         ('p', '10.70mm是当前采样中取得保守全深正证书的最大宽度，不是全局物理尺寸上限。10.72至11.00mm在入口有可行域，但保守全深检查未认证，不能写成必然无法装载。11.02mm起的已测试尺寸在四个声明直立方位的入口必要域为空；不排除未研究的倾斜6DoF路线。'),
         image(geometry_figure, 7.5),
         ('p', '所有尺寸共用0 90 180 270度方位和全部有界XY平移域。入口取真实座高28.5mm闭合孔域与器皿底上1mm实心截面，计算三角形对Minkowski禁区并集。全深正证书投影保留原座所有承托面上0.1µm以上三角面和垂直壁线段，并用真实器皿外轮廓作保守连续竖直扫掠。负的保守检查仅表示未证明。'),
-        ('p', '推荐初始物理候选为10.00mm，原A座局部偏移X=+0.650mm Y=+0.001mm，保守侧向输入表面余量约0.350mm。原座约2mm承托高度与约27mm插入深度是网格几何候选；最低底面承托采样凸包包含COM，实际释放稳定仍须仿真验证。')])
+        ('p', '几何阶段推荐10.00mm作为初始物理候选，原A座局部偏移X=+0.650mm Y=+0.001mm，保守侧向输入表面余量约0.350mm。原座约2mm承托高度与约27mm插入深度是网格几何候选，最低底面承托采样凸包包含COM。这些几何证据不代替实际物理结果；已运行尺寸的释放、撤离与稳定结果见后页。')])
 
     runs = [x for x in s.get('runs', []) if x.get('task_type') == 'loading']
     run_table = [[short(x.get('episode_id') or x['run_name'], 12), short(x.get('asset_id'), 21), num(x.get('simulation_seconds'), 2),
@@ -368,7 +392,7 @@ def pages_for(d):
 
     verification = get(s, 'standard5', {})
     selected = set(verification.get('episodes', []))
-    rows = [[short(x['episode_directory'], 37), state(x.get('task_success')),
+    rows = [[episode_label(x), state(x.get('task_success')),
              num(x.get('simulation_seconds'), 2), state(x.get('record_valid')), short(x.get('termination_reason'), 38)]
             for x in s.get('runs', []) if x['episode_directory'] in selected]
     if not rows:
@@ -424,6 +448,7 @@ def pages_for(d):
             ['确定性动作偏差', num(get(grouped, 'deterministic_action_deviation.qualified_success'), 0), num(get(grouped, 'deterministic_action_deviation.qualified_failure'), 0)],
             ['配额缺口', num(q.get('success_missing'), 0), num(q.get('failure_missing'), 0)]
         ], [7.0, 4.9, 4.9]),
+        ('p', controlled_failure_paragraph(s)),
         ('p', f"资格状态 {q.get('status', '未知')}。几何预检 资产加载 初始化 服务异常 人工中断及未真正执行任务的preview不计失败配额。确定性动作偏差只改变已声明阶段动作，记录幅度与版本，不改变冻结场景，不强撞或伪造标签。"),
         ('p', '成功BC默认只读record_valid且task_success的合格完整loading轨迹；自然失败和受控偏差失败分别保存。完整episode划分训练和验证集合，两者保持同一冻结场景；相邻帧不跨集合。原始失败标签不为读取器修改。'),
         table(['读取与冻结项', '实际证据', '说明'], [

@@ -133,7 +133,12 @@ class RelativeIndexTests(unittest.TestCase):
                       audit_episode(path, self.frozen["frozen_scene_sha256"])["admission_errors"])
         with h5py.File(path, "r+") as record:
             record.attrs["condition_group"] = "deterministic_action_deviation"
-        self.assertTrue(audit_episode(path, self.frozen["frozen_scene_sha256"])["failure"])
+        # A configured spec alone is not evidence the actual action deviation
+        # happened. Production quota admission also requires closed sidecars
+        # and matching teacher event / physical successor state.
+        configured = audit_episode(path, self.frozen["frozen_scene_sha256"])
+        self.assertFalse(configured["failure"])
+        self.assertIn("missing_actual_controlled_event_result_or_configuration_sidecar", configured["admission_errors"])
         with h5py.File(path, "r+") as record:
             record.attrs["deterministic_action_deviation_json"] = "{}"
         self.assertFalse(audit_episode(path, self.frozen["frozen_scene_sha256"])["failure"])
