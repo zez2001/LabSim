@@ -60,13 +60,76 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/freeze_against_first_success.json": "freeze_against_first_success.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/phase_A_cpu_validation.json": "phase_A_cpu_validation.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/normal_reader_directory_filename_cpu_check.json": "normal_reader_directory_filename_cpu_check.json",
-        ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/camera_actual_config_summary.json": "camera_actual_config_summary.json",
+        ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/camera_actual_config_summary.json": "development_camera_actual_config_summary.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/normal_read_success_filter.json": "development_success_normal_read.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/frozen_reader_admission_actual.json": "development_frozen_admission.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/independent_recomputed_score.json": "development_independent_recomputed_score.json",
     }
     for source, target in sources.items():
         copy(source, target)
+    # Prefer the individually CLOSED official first episode over development
+    # metadata. Never open the currently recording episode2+ or read its HDF5.
+    formal_inspection = ROOT / "docs/lab_cuvette_loading/Size_v1/data/standard01_inspection"
+    guarded_path = formal_inspection / "guarded_frozen_dataset_read.json"
+    readability_path = formal_inspection / "standard01_readability_summary.json"
+    formal_evidence, derived_sources = None, []
+    if guarded_path.is_file() and readability_path.is_file():
+        guarded, readability = read(guarded_path), read(readability_path)
+        episode = Path(guarded["source_episode"]).resolve()
+        frozen_sha = read(ROOT / "config/lab_cuvette_loading/Size_v1/frozen_scene.json")["frozen_scene_sha256"]
+        if not episode.is_relative_to(ROOT / "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs") or episode.name != "episode_0000":
+            raise ValueError("Formal camera/initial evidence must refer only to closed official episode0")
+        final = read(episode / "result.json")
+        if final.get("complete") is not True or readability.get("individually_closed_complete_record") is not True or readability.get("accessible_write_handles_to_episode"):
+            raise ValueError("Formal first episode is not proven individually closed")
+        if guarded.get("frozen_scene_sha256") != frozen_sha or guarded.get("source_metadata", {}).get("frozen_scene_sha256") != frozen_sha or readability.get("episode_id") != final.get("episode_id"):
+            raise ValueError("Formal closed-episode frozen fingerprint or identity differs")
+        copy(guarded_path, "formal_standard01/guarded_frozen_dataset_read.json")
+        copy(readability_path, "formal_standard01/standard01_readability_summary.json")
+        copy(episode / "physics_capture_meta.json", "formal_standard01/physics_capture_meta.json")
+        copy(episode / "reset_check.json", "formal_standard01/reset_check.json")
+        if (formal_inspection / "closed_episode_writer_preflight.json").is_file():
+            copy(formal_inspection / "closed_episode_writer_preflight.json", "formal_standard01/closed_episode_writer_preflight.json")
+        camera = dict(schema="labsim.Size_v1.formal_closed_episode_camera_summary.v1",
+            source_episode=str(episode), episode_id=final["episode_id"], frozen_scene_sha256=frozen_sha,
+            scope="Actual individually closed frozen standard episode0; batch-exit/quota status is separate",
+            configured_cameras=readability["configured_camera_snapshot"], actual_mounts=readability["actual_camera_mounts"],
+            actual_observation_count=readability["actual_observation_count"], continuous_side_and_wrist=True,
+            observed_camera_checks=readability["cameras"],
+            real_calibrated=False, source_labels_modified=False,
+            renderer_association_is_not_real_precision=True)
+        save("camera_actual_config_summary.json", camera)
+        initial_path = episode / "initial_debug.json"
+        initial = read(initial_path)
+        initial_fields = ("t", "simulation_time", "engine_time", "physics_step", "phase", "object_position_m",
+            "object_quaternion_wxyz", "com_world_m", "source_bottom_z_m", "source_bottom_gap_m",
+            "source_rack_penetration_m", "target_bottom_gap_m", "depth_m", "xy_error_target_m",
+            "tilt_deg", "yaw_error_deg", "joints9", "joint_velocities9", "actual_tcp_position_m",
+            "actual_tcp_quaternion_wxyz", "linear_velocity_native_m_s", "angular_velocity_native_rad_s",
+            "linear_velocity_USD_m_s", "angular_velocity_USD_deg_s", "fd_com_velocity_m_s",
+            "fd_angular_velocity_rad_s", "finger_contact_N")
+        initial_summary = dict(schema="labsim.Size_v1.formal_initial_state_small_summary.v1",
+            source_episode=str(episode), episode_id=final["episode_id"], frozen_scene_sha256=frozen_sha,
+            source_initial_debug_sha256=sha(initial_path),
+            scope="Saved actual first public reset observation after recorded initialization physics steps; not a substitute for the full early physics trace",
+            actual={key: initial.get(key) for key in initial_fields},
+            declared_initial_joints=read(episode / "declared_initial_joints.json"),
+            reset_check=read(episode / "reset_check.json"),
+            source_labels_or_states_modified=False)
+        save("formal_standard01/initial_state_summary.json", initial_summary)
+        formal_evidence = dict(episode_id=final["episode_id"], source_episode=str(episode),
+            frozen_scene_sha256=frozen_sha, individually_closed=True,
+            task_success=final.get("task_success"), release_observed=final.get("release_observed"),
+            retreat_observed=final.get("retreat_observed"), stable_after_retreat=final.get("stable_after_retreat"),
+            actual_control_steps=final.get("actual_control_steps"),
+            scope="Individual physical and guarded dataset read evidence; official whole-process exit and final quota remain separate")
+        for source, target in ((readability_path, "camera_actual_config_summary.json"),
+                               (initial_path, "formal_standard01/initial_state_summary.json")):
+            derived_sources.append(dict(source=str(source.relative_to(ROOT)), source_sha256=sha(source),
+                derived_file=target, derived_sha256=sha(OUT / target)))
+    else:
+        copy(ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/camera_actual_config_summary.json",
+             "camera_actual_config_summary.json")
     registry_path = ROOT / "assets/lab_cuvette_loading/Size_v1/registry.json"
     registry = read(registry_path)
     selected_fields = ("asset_id", "asset_path", "asset_sha256", "source", "builder", "derivation_method",
@@ -126,6 +189,7 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
         actual_closed_raw_results=actual_runs, raw_result_labels_modified=False,
         observed_development_or_official_full_successes=sum(row.get("full_success") is True for row in actual_runs),
         official_verify5=verification, qualified_collection=quota,
+        formal_first_closed_episode_evidence=formal_evidence,
         combined_summary_source=None if not summary else dict(path=str(Path(summary).resolve()), sha256=sha(summary)),
         scope="Raw closed task outcomes, official repeat evidence and strict frozen collection quotas are separate",
         random10_required=False, real_calibrated=False)
@@ -143,6 +207,7 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
         "原目标为同一A座candidate_far_hinge，原座几何及物理配置不变。35个比色皿尺寸假设使用同一XY仿射、Z高度67.5mm和固定20g质量假设；质心惯量重算，不声称真实校准。\n\n"
         f"快照观察到 {len(actual_runs)} 条已落盘complete原始结果，其中full_success=true为 {snapshot['observed_development_or_official_full_successes']} 条；这不是正式配额。"
         f"正式固定5次通过字段为 {verification.get('passed')}，合格采集成功/失败分别为 {quota['qualified_success_count']}/{quota['qualified_failure_count']}；None表示缺实际审计。逐次结果见result_snapshot.json。\n\n"
+        "formal_standard01保存已单独闭合正式首集的物理记录定义、冻结读取证据和实际初态；camera_actual_config_summary优先采用该正式首集，而development_camera_actual_config_summary保留开发对照。首集完整不代表整批已退出或5/5成立。\n\n"
         "10.70mm是最大已采样正的保守完整路径证书；10.72–11.00mm完整路径未知，11.02mm及以上仅在声明直立四方位和平移规则下入口排除。不能将10mm可完成反推为实物尺寸。\n\n"
         "成功必须实际释放、脱指撤离及3秒稳定；preview、开发成功但无冻结H5指纹、短接口诊断、预检/初始化/服务失败与进程中断不填20/20配额。自然失败和确定性动作偏差分组。\n\n"
         "原生速度与差分仍可能有告警，静态完整烹饪网格/所有回退无法完全读取；逐块约14μm抽样差和原座约44.7nm射线面差不是全局界或真实精度。相机安装固定并记录实际参数；控制器使用器皿真值。\n\n"
@@ -201,6 +266,7 @@ verify5必须新目录且5/5真实完整成功；后两阶段需显式审阅后�
         branch=subprocess.check_output(["git", "branch", "--show-current"], cwd=ROOT, text=True).strip(),
         source_head_before_final_delivery_commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         generated_at=snapshot["generated_at"], copies=provenance,
+        derived_evidence_sources=derived_sources,
         registry_source=dict(path=str(registry_path.relative_to(ROOT)), sha256=sha(registry_path)),
         final_delivery_commit="Read final package-root 文件清单.json; do not predict a self-referential future SHA",
         final_desktop_package_created=False, DOCX_created=False, GPU_started=False))

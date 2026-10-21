@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[4]
 GEOMETRY = 'docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02'
 COOKED = 'docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.json'
+FAILURE1050 = 'docs/lab_cuvette_loading/Size_v1/data/loading1050_inspection/failure_audit.json'
 BUNDLED_PYTHON = '/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3'
 
 
@@ -41,6 +42,69 @@ def num(value, digits=2):
 def short(value, length=46):
     text = str(value) if value is not None else '未知'
     return text if len(text) <= length else text[:length-1] + '…'
+
+
+def optional_bool(value):
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int) and value in (0, 1):
+        return bool(value)
+    if isinstance(value, str) and value.lower() in ('true', 'false'):
+        return value.lower() == 'true'
+    return None
+
+
+def backend_snapshot(metadata, configuration, builder_source=''):
+    """Separate optional effective metadata from unchanged builder declarations."""
+    sections = [metadata]
+    sections.extend(metadata[key] for key in ('runtime_physics', 'physics_configuration',
+        'effective_physics', 'effective_settings', 'backend') if isinstance(metadata.get(key), dict))
+    def first(keys):
+        return next((section[key] for section in sections for key in keys
+                     if key in section and not isinstance(section[key], dict)), None)
+    gpu = optional_bool(first(('gpu_dynamics_enabled', 'enable_gpu_dynamics', 'enableGPUDynamics')))
+    backend = first(('physics_backend', 'backend_name', 'backend'))
+    ccd = optional_bool(first(('ccd', 'enable_ccd', 'enableCCD')))
+    result = {'backend': backend, 'gpu_dynamics': gpu, 'ccd': ccd,
+        'backend_source': 'runtime_metadata' if backend is not None or gpu is not None else 'unknown',
+        'ccd_source': 'runtime_metadata' if ccd is not None else 'unknown',
+        'broadphase': first(('broadphase', 'broadphase_type', 'broadphaseType'))}
+    if backend is None and gpu is None and 'CreateEnableGPUDynamicsAttr(False)' in builder_source:
+        result.update(backend='PhysX', gpu_dynamics=False, backend_source='shared_builder_code_declaration')
+        if "CreateBroadphaseTypeAttr('MBP')" in builder_source:
+            result['broadphase'] = 'MBP'
+    if ccd is None:
+        result['ccd'] = optional_bool(get(configuration, 'physics.ccd'))
+        result['ccd_source'] = 'saved_configuration' if result['ccd'] is not None else 'unknown'
+    return result
+
+
+def failure1050_paragraphs(audit):
+    """Render the audited historical failure without relabelling its future runs."""
+    if not audit:
+        return ['尚未提供10.50mm开发运行的独立失败复核；具体成因保持未知。']
+    worst = audit.get('maximum_position_gate_observation', {})
+    support = audit.get('support_stage_additional_gate', {})
+    xy = support.get('xy_um_range')
+    bounds = (num(xy[0], 3) + '至' + num(xy[1], 3)) if isinstance(xy, list) and len(xy) == 2 else '未知'
+    verdict = audit.get('original_independent_verdict', {})
+    online = get(audit, 'controller_vs_independent_gate.controller_online_safety_origin_drift_limit_m')
+    online_um = None if online is None else online * 1e6
+    anchor = get(audit, 'grip_thresholds.configured_grasp_anchor_point_m')
+    anchor_distance_mm = sum(float(x) ** 2 for x in anchor) ** .5 * 1000 if isinstance(anchor, list) and len(anchor) == 3 else None
+    return [
+        f"10.50mm开发运行在GRASP阶段{num(worst.get('t_s'), 3)}秒观察到杯底原点相对手漂移{num(worst.get('origin_drift_um'), 3)}µm，"
+        f"相对姿态变化{num(worst.get('relative_rotation_change_deg'), 6)}度；配置抓取锚点漂移{num(worst.get('configured_grasp_anchor_drift_um'), 3)}µm。"
+        f"杯底原点距配置抓取锚点{num(anchor_distance_mm, 1)}mm，旋转杠杆分量为{num(worst.get('rotation_lever_component_um'), 3)}µm。不能将原点漂移解释为等量纯轴向滑移，也不能用较小的锚点值替换原{num(get(audit, 'grip_thresholds.origin_drift_um'), 1)}µm判分门槛。"
+        f"控制器在线安全上限为{num(online_um, 1)}µm，独立质量门控与在线停止条件分别记录；动作继续不等于评分通过。",
+        f"第二个独立门控同样未通过：获得承托时的XY误差为{bounds}µm，高于原{num(get(audit, 'alignment_thresholds.xy_um'), 1)}µm门槛；"
+        f"{support.get('samples', '未知')}个承托样本中，满足装载对准的样本为{support.get('aligned_supported_samples', '未知')}。"
+        '因此不能只忽略早期抓持门控就把该次改判为合格装载。',
+        f"该次实际松爪{state(verdict.get('release_observed'))}、撤离{state(verdict.get('retreat_observed'))}、末尾稳定{state(get(verdict, 'post_retreat_window.stable'))}，"
+        f"完整任务仍为{state(verdict.get('task_success'))}，失败类型{verdict.get('failure_type', '未知')}。"
+        f"进程实际退出码{get(audit, 'process_status.exit_code', '未知')}单独保留，不把进程状态当作上述物理失败成因。"
+        '10.50mm开发资产与最终冻结10.00mm场景不同，未获正式配额资格；释放和末态稳定不自动使它成为合格成功或配额失败。'
+    ]
 
 
 class Evidence:
@@ -115,6 +179,7 @@ def collect(e, args):
     geometry = e.json(geometry_path / 'family_summary.json')
     registry = e.json('assets/lab_cuvette_loading/Size_v1/registry.json')
     cooked = e.json(COOKED, required=False)
+    failure1050 = e.json(FAILURE1050, required=False)
     quota = summary.get('collection20_success20_failure', {})
     audit_path = args.collection_audit or get(quota, 'qualification_evidence.path')
     audit = e.json(audit_path) if audit_path else {}
@@ -150,6 +215,14 @@ def collect(e, args):
                 raise ValueError('Saved run config changed after summary; regenerate summary')
     if not config:
         e.warnings.append('Summary lacks savedconfig_snapshot; regenerate with current summarizer or pass --actual-config-json. Missing settings remain unknown.')
+    physics_meta_path = getattr(args, 'physics_capture_meta', None)
+    if physics_meta_path is None and primary:
+        candidate = e.path(summary['root']) / primary['episode_directory'] / 'physics_capture_meta.json'
+        if candidate.is_file():
+            physics_meta_path = candidate
+    physics_meta = e.json(physics_meta_path) if physics_meta_path else {}
+    builder_path = e.register('demos/lab_cuvette_demo04/run.py', required=False)
+    backend = backend_snapshot(physics_meta, config, builder_path.read_text() if builder_path else '')
     frozen = e.json(args.frozen_scene) if args.frozen_scene else {}
     if frozen and get(quota, 'qualification_evidence.frozen_scene_sha256'):
         if frozen.get('frozen_scene_sha256') != get(quota, 'qualification_evidence.frozen_scene_sha256'):
@@ -175,6 +248,8 @@ def collect(e, args):
         evidence_files.append({'path': str(e.register(audit_path)), 'label': '数据资格与正常读取验证'})
     if args.frozen_scene:
         evidence_files.append({'path': str(e.register(args.frozen_scene)), 'label': '冻结standard场景清单'})
+    if failure1050:
+        evidence_files.append({'path': str(e.register(FAILURE1050)), 'label': '10.50mm开发失败复核'})
     try:
         head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=e.root, text=True).strip()
         branch = subprocess.check_output(['git', 'branch', '--show-current'], cwd=e.root, text=True).strip()
@@ -186,7 +261,9 @@ def collect(e, args):
         'quota': quota, 'collection_audit': audit, 'primary': primary,
         'primary_result': result, 'actual_config': config, 'frozen_scene': frozen,
         'portable_validation': portable, 'process_evidence': process,
-        'cooked': cooked, 'media_manifest': media_manifest, 'media': [x for x in media if x['kind'] == 'video'],
+        'cooked': cooked, 'failure1050_audit': failure1050,
+        'physics_capture_meta': physics_meta, 'physics_backend': backend,
+        'media_manifest': media_manifest, 'media': [x for x in media if x['kind'] == 'video'],
         'figures': figures, 'evidence_files': evidence_files, 'sources': e.sources,
         'warnings': e.warnings, 'authoring_head': head, 'branch': branch,
         'authoring_runtime': BUNDLED_PYTHON,
@@ -215,7 +292,7 @@ def pages_for(d):
             '当前没有已确认的完整任务成功。已完成尺寸资产与几何筛选，实际装载结果及中止阶段见本报告。')
     pages = []
     pages.append([('title', title), ('p', 'Size_v1  2026年10月21日  固定原A座与standard场景'),
-        ('p', lead + '本轮只改变器皿XY尺寸，原座、整机、来源架和物理参数保持。尺寸是实验假设，不是对实物尺寸的反推，也不是平台真实精度认证。'),
+        ('p', lead + '本轮只改变器皿XY尺寸，原座、整机、来源架和物理参数保持。物理任务判分、进程退出和正式冻结数据资格分别记录；开发成功不自动增加配额。尺寸是实验假设，不是实物反推或平台精度认证。'),
         ('h', '本轮结果'),
         table(['项目', '实际状态', '证据范围'], [
             ['尺寸资产', f"{g['evaluated_count']}个已生成并评估", '9.50至12.50mm；独立USD与asset_id全部保留'],
@@ -274,12 +351,17 @@ def pages_for(d):
         ('搬运', r.get('transport_success')), ('装载序列', r.get('loading_sequence_observed')),
         ('实际松爪', r.get('release_observed')), ('实际撤离', r.get('retreat_observed')),
         ('撤离后稳定', r.get('stable_after_retreat'))]
+    failure_blocks = [('p', paragraph) for paragraph in failure1050_paragraphs(d.get('failure1050_audit', {}))]
+    failure_link = next((item for item in d['evidence_files'] if item['label'] == '10.50mm开发失败复核'), None)
     pages.append([('h', '实际连续任务与失败记录'),
         ('p', '控制沿用连续接触锁存：首次双指接触后保持已有闭合命令，避免锁存切换时重新张开。新宽度由实际接触适应，不复制12.5mm的固定指距。示范控制器使用器皿真值位姿；本轮未训练模型。'),
         table(['运行', '资产', '仿真秒', '独立结果', '终止原因'], run_table, [3.1, 3.8, 1.8, 2.3, 5.8]),
         ('p', f"主记录 {p.get('episode_directory', '尚无可选的已闭合装载episode')}。任务结果只取独立评分，不根据INSERT或VERIFY阶段名称认定成功。完整视频必须来自同一次运行，不拼接不同尝试。"),
-        table(['实际物理事件', '独立观察', '说明'], [[label, state(value), '由状态 接触及事件核验；未知不补值'] for label, value in phase], [4.0, 3.2, 9.6]),
-        ('p', f"当前主记录终止原因 {r.get('termination_reason', '未知')}；失败类型 {r.get('failure_type', '未知')}。物理质量标记 {', '.join(r.get('physics_quality_flags', [])) or '无已记录项或尚无完成评分'}。完整已启动及未闭合列表另存CSV。")])
+        ('p', '主记录独立观察：' + '；'.join(label + state(value) for label, value in phase) + '。'),
+        ('p', f"当前主记录终止原因 {r.get('termination_reason', '未知')}；失败类型 {r.get('failure_type', '未知')}。物理质量标记 {', '.join(r.get('physics_quality_flags', [])) or '无已记录项或尚无完成评分'}。完整已启动及未闭合列表另存CSV。"),
+        ('h', '十点五毫米开发运行的独立失败'),
+        *failure_blocks,
+        *([('link', failure_link)] if failure_link else [])])
 
     verification = get(s, 'standard5', {})
     selected = set(verification.get('episodes', []))
@@ -307,8 +389,16 @@ def pages_for(d):
     convex = cooked.get('convex', {})
     side = get(c, 'cameras.side_camera', {})
     wrist = get(c, 'cameras.wrist_camera', {})
+    backend = d.get('physics_backend', {})
+    if backend.get('backend_source') == 'shared_builder_code_declaration':
+        backend_label = 'PhysX CPU dynamics 共享构建代码声明'
+    else:
+        gpu = backend.get('gpu_dynamics')
+        backend_label = str(backend.get('backend') or '未知') + (' GPU dynamics' if gpu is True else ' CPU dynamics' if gpu is False else ' dynamics未知')
+    ccd_label = '开启' if backend.get('ccd') is True else '关闭' if backend.get('ccd') is False else '未知'
     pages.append([('h', '物理配置与烹饪表示的证据边界'),
         table(['参数', '实际配置或证据', '范围'], [
+            ['后端与CCD', backend_label + '；CCD ' + ccd_label, '后端来源' + str(backend.get('backend_source', 'unknown')) + '；CCD来源' + str(backend.get('ccd_source', 'unknown'))],
             ['步进与控制', f"{get(c, 'physics.hz', '未知')}Hz / {get(c, 'physics.control_hz', '未知')}Hz", '每控制周期物理步数由频率比计算'],
             ['求解器', str(get(c, 'physics.solver', '未知')), f"位置迭代{get(c, 'physics.position_iterations', '未知')} 速度迭代{get(c, 'physics.velocity_iterations', '未知')}"],
             ['接触偏移与静止偏移', f"{num(get(c, 'physics.contact_offset_m'), 8)}m / {num(get(c, 'physics.rest_offset_m'), 8)}m", '沿用基线；不将contact_offset称为位置精度'],
@@ -347,7 +437,7 @@ def pages_for(d):
         ('p', f"选定原A座，推荐或实际使用资产{asset_id}。实际完整任务结论为{state(r.get('task_success'))}，释放为{state(r.get('release_observed'))}，撤离为{state(r.get('retreat_observed'))}，撤离后稳定为{state(r.get('stable_after_retreat'))}。原12.5mm控制组合的既有冲突结论保留。"),
         ('code', 'bash demos/lab_cuvette_size_v1/run.sh --mode teacher \\\n  --config config/lab_cuvette_loading/Size_v1/standard.yaml \\\n  --asset-id ' + asset_id + ' --output NEW_EPISODE_DIRECTORY\n\n'
           'python3 scripts/summarize_lab_cuvette_size_v1.py \\\n  --root outputs/lab_cuvette_loading/Size_v1 \\\n  --output NEW_SUMMARY_DIRECTORY'),
-        ('p', '默认GUI；服务器环境可加--headless。每次使用新目录。--asset-id替换已注册器皿，保留当前目标偏移，不自动给其他尺寸调参或继承10mm结果。实际运行的完整配置与代码版本保存在各episode；以上命令存在不表示5次或20+20已完成。'),
+        ('p', '默认GUI；服务器环境可加--headless。每次使用新目录。正式collect train和自动验证锁定冻结清单中的asset_id，不能随意改尺寸；尺寸对比须使用独立开发配置和输出，不计最终10mm固定场景配额。解析器保留当前目标偏移，不自动为其他尺寸调参或继承10mm结果。以上命令存在不表示5次或20+20已完成。'),
         ('h', '同包代表录像'),
         *video_blocks,
         ('p', '视频仅按manifest注明整段运行或剪辑范围；主录像应连续包含其实际执行阶段。未发生的插入 松爪 撤离不通过剪辑包装为成功。'),
@@ -486,6 +576,7 @@ def main(argv=None):
     parser.add_argument('--frozen-scene', type=Path)
     parser.add_argument('--portable-validation', type=Path)
     parser.add_argument('--process-evidence', type=Path)
+    parser.add_argument('--physics-capture-meta', type=Path, help='Optional actual physics metadata JSON; defaults to selected episode metadata when present')
     parser.add_argument('--actual-config-json', type=Path, help='Optional existing exact run configuration JSON; YAML parsing belongs to the existing summary data tool')
     parser.add_argument('--primary-episode-id')
     parser.add_argument('--output', type=Path, required=True)

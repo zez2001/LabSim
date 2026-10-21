@@ -9,7 +9,7 @@
 1. [本轮报告与录像](01_Size_v1报告与结果/)：DOCX、Markdown、表格和同级media；请传输整个目录，不能只传DOCX。
 2. [状态与边界](02_本次改动与配置/状态与边界.md)及[最新实际结果快照](02_本次改动与配置/result_snapshot.json)：区分开发运行、正式固定5次、合格成功/失败、进程中断及未完成项。
 3. [尺寸与几何结果](02_本次改动与配置/candidate_dimensions_and_geometry.csv)、[资产摘要](02_本次改动与配置/asset_summary.json)、[原座几何摘要](02_本次改动与配置/geometry_family_summary.json)及[实际烹饪探针](02_本次改动与配置/cooked_preview01_summary.md)。
-4. [冻结标准场景配置](02_本次改动与配置/configs/standard.yaml)、[冻结依赖清单](02_本次改动与配置/configs/frozen_scene.json)、[相机安装与实际读取](02_本次改动与配置/camera_actual_config_summary.json)。
+4. [冻结标准场景配置](02_本次改动与配置/configs/standard.yaml)、[冻结依赖清单](02_本次改动与配置/configs/frozen_scene.json)、[正式已闭合首集的相机摘要](02_本次改动与配置/camera_actual_config_summary.json)、[实际物理记录定义](02_本次改动与配置/formal_standard01/physics_capture_meta.json)、[实际初态摘要](02_本次改动与配置/formal_standard01/initial_state_summary.json)及[冻结数据正常读取](02_本次改动与配置/formal_standard01/guarded_frozen_dataset_read.json)。首集证据不代替整批退出与最终配额审计。
 5. [复现与采集命令](02_本次改动与配置/复现与数据读取.md)、[数据资格](02_本次改动与配置/data_qualification.json)及[快照来源和哈希](02_本次改动与配置/version.json)。源路径是追溯信息，不表示大文件已经放进此小包。
 
 阅读时保留以下事实：

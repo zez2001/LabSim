@@ -1,0 +1,122 @@
+{
+  "schema": "labsim.Env_v1.physics_capture.v1",
+  "physics_dt_s": 0.004166666666666667,
+  "source_visual_paths": [
+    "/World/Cuvette/Visual/Mesh"
+  ],
+  "actual_body_local_visual_dimensions_m": [
+    0.01000000350177288,
+    0.01000000350177288,
+    0.0674999952316284
+  ],
+  "TCP_fixed_frame_verification": {
+    "source": "Installed Franka Lula right_gripper fixed frame,not hand frame",
+    "configured_translation_m": [
+      0.0,
+      0.0,
+      0.1
+    ],
+    "configured_quaternion_wxyz": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "solver_FK_verified": true,
+    "solver_translation_m": [
+      -2.013397315623472e-17,
+      -1.8295911660692887e-17,
+      0.09999999999999994
+    ],
+    "solver_quaternion_wxyz": [
+      1.396716540945625e-12,
+      2.3716922523120403e-20,
+      1.6263032587282564e-19,
+      1.0
+    ],
+    "configured_position_error_m": 7.453148408236581e-17,
+    "configured_orientation_error_rad": 2.7934330818912695e-12
+  },
+  "source_visual_scope": "Actual current USD visual points,fullrelative transforms; not cooked PhysX readback",
+  "commanded_bottom_definition": "min Z of allactualderivedsourcevisualvertices transformed by currentmeasuredcup-in-hand relation and LulaFK(command_q7) handpose; hypotheticalinstantaneousrigidfollowing,notactualdescent andnotattachment",
+  "target_contact_filter_paths": [
+    "/World/Instrument/Collision/SourceMesh3"
+  ],
+  "contact_force_unit": "N: every tensor contact API explicitly called with physics_dt; raw impulse separately Ns",
+  "gripper_target_semantics": "symmetric per-finger joint target_m; total opening=2*target; raw action envelope retains totalopening",
+  "velocity_channels": {
+    "native_linear": "SingleRigidPrim.get_linear_velocity,world axes,m/s,backend body velocity",
+    "native_angular": "SingleRigidPrim.get_angular_velocity,world axes,rad/s",
+    "usd_linear": "UsdPhysics.RigidBodyAPI.GetVelocityAttr,world axes,stage-length/s; may be stale under Fabric",
+    "usd_angular": "UsdPhysics.RigidBodyAPI.GetAngularVelocityAttr,world axes,deg/s; may be stale under Fabric",
+    "fd_linear": "World COM from actualpose+localCOM difference/currentphysics_dt,m/s",
+    "fd_angular": "World rotation log(R_t*R_prev^-1)/physics_dt,rad/s"
+  },
+  "timestamp_semantics": "capture after completed physics step; initialrow0 FD unknown,allAPI reads same no-step interval",
+  "bottom_partition": "selectedseat point within±50um ofdeclaredfloorsurface andupwardforce cosine>=0.5; no whole-seatFz substitute",
+  "bottom_partition_limitations": "Contactpoint is solver report,not materialintersectionproof; sloped/unidentifiedsupport remains wall/unknown",
+  "native_target_overlap_measured": false,
+  "material_geometry": {
+    "schema": "labsim.Size_v1.actual_pose_input_material_check.v1",
+    "scope": "Current source visual vessel material versus unchanged selected-seat collision input triangles; NOT cooked PhysX readback",
+    "query_units": "mm; returned length fields use m",
+    "method": "Exact closest point on triangles for every vertex and at most256 deterministic stratified face-centroids per mesh; both mesh directions; complete unique-edge finite segment-triangle crossing queries",
+    "target_watertight": false,
+    "target_winding_consistent": true,
+    "target_boundary_edge_count": 90,
+    "vessel_watertight": true,
+    "vessel_face_count": 1764,
+    "target_face_count": 976,
+    "vessel_sample_count": 1140,
+    "target_sample_count": 758,
+    "vessel_max_triangle_edge_m": 0.06762504528517621,
+    "vessel_p95_triangle_edge_m": 0.009569024667143822,
+    "sample_spacing_is_global_error_bound": false,
+    "numerical_endpoint_epsilon_m": 1e-08,
+    "overlap_tolerance_m": 5e-05,
+    "cache_control_hz": 15.0,
+    "loading_center_offset_local_m": [
+      0.0,
+      0.0
+    ],
+    "native_target_overlap_measured": false,
+    "limitations": [
+      "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+      "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+      "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+      "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+    ],
+    "source_paths": {
+      "target_collision_prim_path": "/World/Instrument/Collision/SourceMesh3",
+      "target_meters_per_stage_unit": 1.0,
+      "world_transform_row_matrix": [
+        [
+          2.220446049250313e-16,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -1.0,
+          2.220446049250313e-16,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.36,
+          0.0,
+          0.74,
+          1.0
+        ]
+      ],
+      "authored_approximation": "none"
+    },
+    "target_input_arrays_sha256": "e33f7201f2eb27655cce2b0a79cdb6228dbb1badd5829f70daefc4f11dbbc868"
+  }
+}

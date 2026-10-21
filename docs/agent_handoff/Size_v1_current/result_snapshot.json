@@ -1,7 +1,7 @@
 {
   "schema": "labsim.Size_v1.small_reading_results.v1",
   "version": "Size_v1",
-  "generated_at": "2026-10-21T10:33:46+08:00",
+  "generated_at": "2026-10-21T10:45:40+08:00",
   "actual_closed_raw_results": [
     {
       "source": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/result.json",
@@ -22,6 +22,58 @@
       "actual_physics_steps": 25396,
       "simulation_seconds": 105.81666666666666,
       "wall_seconds": 821.7070042889973,
+      "release_observed": true,
+      "retreat_observed": true,
+      "stable_after_retreat": true,
+      "source_slot_cleared": true,
+      "grasp_success": true,
+      "transport_success": true,
+      "post_retreat_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": true,
+          "target_contains": true,
+          "observed_input_material_overlap_within_limit": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666,
+        "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+      },
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "qualification": "Use explicit final collection audit; closed raw result alone does not establish frozen quota admission"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0001/result.json",
+      "source_sha256": "e713454a16771650b3e6a48ea22da4064f0489ab110d3533f2a0bbac46adb456",
+      "episode_id": "12a8d7a3-7789-4f1c-b339-87548ccd5ccf",
+      "asset_id": "cuvette_xy_1000",
+      "scene_version": "Size_v1",
+      "task_type": "loading",
+      "complete": true,
+      "record_valid": true,
+      "task_success": true,
+      "full_success": true,
+      "failure_type": "NONE",
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "condition_group": "natural",
+      "frozen_scene_sha256": null,
+      "actual_control_steps": 6348,
+      "actual_physics_steps": 25396,
+      "simulation_seconds": 105.81666666666666,
+      "wall_seconds": 895.0745593790052,
       "release_observed": true,
       "retreat_observed": true,
       "stable_after_retreat": true,
@@ -196,7 +248,7 @@
     }
   ],
   "raw_result_labels_modified": false,
-  "observed_development_or_official_full_successes": 2,
+  "observed_development_or_official_full_successes": 3,
   "official_verify5": {
     "passed": null,
     "status": "No closed official5/5 pass evidence at snapshot time; may be running or not passed"
@@ -211,6 +263,18 @@
     "failure_missing": null,
     "condition_groups": null,
     "evidence": null
+  },
+  "formal_first_closed_episode_evidence": {
+    "episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+    "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000",
+    "frozen_scene_sha256": "f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+    "individually_closed": true,
+    "task_success": true,
+    "release_observed": true,
+    "retreat_observed": true,
+    "stable_after_retreat": true,
+    "actual_control_steps": 6348,
+    "scope": "Individual physical and guarded dataset read evidence; official whole-process exit and final quota remain separate"
   },
   "combined_summary_source": null,
   "scope": "Raw closed task outcomes, official repeat evidence and strict frozen collection quotas are separate",
