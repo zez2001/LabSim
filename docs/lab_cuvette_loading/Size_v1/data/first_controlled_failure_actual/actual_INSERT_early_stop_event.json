@@ -1,0 +1,57 @@
+{
+  "schema": "labsim.Size_v1.actual_controlled_deviation_event_audit.v1",
+  "episode_id": "88633c2e-2b26-497b-834a-5ee0bd369d68",
+  "source_episode": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T045710Z_edfa49e9_00/episode_0000",
+  "source_teacher_events_sha256": "034b3f226d172aee348f6c2900a25e82f95f49c799df3d90d60a5bea2cae8371",
+  "source_result_sha256": "a5f187676b39da9b6ba0f8d4727745ecf54ca1f694f04bde1cb7b02ecf7a9632",
+  "configuration_spec": {
+    "stage": "INSERT",
+    "value": 0.001,
+    "unit": "m",
+    "controller_version": "Size_v1.continuous_latch.loading01",
+    "stop_insertion_at_depth_m": 0.001,
+    "action": "stop normal insertion at actual depth; preserve physical failure result"
+  },
+  "actual_event": {
+    "t": 62.38333333333333,
+    "event": "deterministic_action_deviation",
+    "spec": {
+      "stage": "INSERT",
+      "value": 0.001,
+      "unit": "m",
+      "controller_version": "Size_v1.continuous_latch.loading01",
+      "stop_insertion_at_depth_m": 0.001,
+      "action": "stop normal insertion at actual depth; preserve physical failure result"
+    },
+    "actual_depth_m": 0.001016965243500454,
+    "normal_actions_only": true
+  },
+  "actual_event_count": 1,
+  "corresponding_successor_row": 3741,
+  "actual_depth_m": 0.001016965243500454,
+  "stop_depth_overshoot_m": 1.6965243500454037e-05,
+  "checks": {
+    "one_actual_deviation_event": true,
+    "configured_condition_group": true,
+    "configured_INSERT_stage": true,
+    "configured_metre_unit": true,
+    "complete_controller_version": true,
+    "task_failure_is_CONTROLLED_EARLY_STOP": true,
+    "raw_record_valid_and_task_failed": true,
+    "no_release_or_retreat": true,
+    "post_retreat_window_unavailable": true,
+    "post_retreat_stability_unknown": true,
+    "HDF5_spec_matches_config": true,
+    "event_spec_matches_config": true,
+    "event_matches_actual_successor_time": true,
+    "actual_saved_phase_INSERT": true,
+    "event_depth_matches_saved_physical_state": true,
+    "actual_depth_reached_requested_stop": true,
+    "normal_actions_only_flag": true,
+    "teacher_stop_same_time_and_phase": true,
+    "final_simulation_time_matches_stop": true
+  },
+  "controlled_deviation_actually_executed_and_failure_qualified": true,
+  "raw_labels_or_config_modified": false,
+  "scope": "Actual trajectory failure caused by observed normal-action INSERT early stop, not physical jam or short-budget interface test"
+}
