@@ -8,10 +8,13 @@ every rendered page must be visually inspected before delivery.
 """
 from __future__ import annotations
 import argparse
+from collections import Counter
 import hashlib
 import json
+import math
 from pathlib import Path
 import shutil
+import shlex
 import subprocess
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -39,6 +42,83 @@ def state(value):
 
 def num(value, digits=2):
     return '未知' if value is None else f'{float(value):.{digits}f}'
+
+
+def report_date(created_at):
+    try:
+        when = datetime.fromisoformat(str(created_at).replace('Z', '+00:00'))
+        when = when.replace(tzinfo=ZoneInfo('Asia/Shanghai')) if when.tzinfo is None else when.astimezone(ZoneInfo('Asia/Shanghai'))
+        return f'{when.year}年{when.month}月{when.day}日'
+    except (TypeError, ValueError):
+        return '日期未知'
+
+
+def reproduction_commands(data, asset_id):
+    root = Path(data.get('root') or ROOT)
+    def source_path(value):
+        path = Path(value)
+        return shlex.quote(path.relative_to(root).as_posix() if path.is_absolute() and path.is_relative_to(root) else str(path))
+    summary = data.get('summary', {})
+    prefixes = get(summary, 'standard5.selection.explicit_run_prefixes', [])
+    audit_path = get(data, 'quota.qualification_evidence.path') or 'ACTUAL_COLLECTION_AUDIT_JSON'
+    lines = ['../labutopia-env/bin/python scripts/summarize_lab_cuvette_size_v1.py',
+        '--root ' + source_path(summary.get('root') or 'outputs/lab_cuvette_loading/Size_v1')]
+    lines += ['--verification-run-prefix ' + shlex.quote(prefix) for prefix in prefixes]
+    lines += ['--collection-audit ' + source_path(audit_path), '--output NEW_SUMMARY_DIRECTORY']
+    summary_command = ' \\\n  '.join(lines)
+    return ('bash demos/lab_cuvette_size_v1/run.sh --mode teacher \\\n  --config config/lab_cuvette_loading/Size_v1/standard.yaml \\\n  --asset-id ' + shlex.quote(asset_id) + ' --output NEW_EPISODE_DIRECTORY\n\n' + summary_command)
+
+
+def failure_depth_distribution(audit):
+    counts, unknown = Counter(), 0
+    for row in audit.get('episodes', []):
+        if row.get('failure') is not True or get(row, 'labels.condition_group') != 'deterministic_action_deviation':
+            continue
+        evidence = row.get('controlled_deviation_event_evidence') or {}
+        event = evidence.get('actual_event') or {}
+        spec = event.get('spec') or {}
+        depth = spec.get('stop_insertion_at_depth_m')
+        checks = evidence.get('checks') or {}
+        if (evidence.get('qualified') is True and evidence.get('actual_event_count') == 1
+                and checks and all(value is True for value in checks.values())
+                and spec.get('stage') == 'INSERT' and spec.get('unit') == 'm'
+                and isinstance(depth, (int, float)) and math.isfinite(depth)):
+            counts[depth * 1000] += 1
+        else:
+            unknown += 1
+    if not counts:
+        return '实际事件的停止阈值分布尚无已核实证据。'
+    text = '按实际事件记录的停止阈值统计：' + '、'.join(f'{depth:g}mm {count}条' for depth, count in sorted(counts.items())) + '。'
+    if unknown:
+        text += f'另有{unknown}条事件核验不足，未归入该分布。'
+    return text
+
+
+def reader_split_summary(audit):
+    parts = []
+    for selection, label in (('success', '成功'), ('failure', '失败')):
+        rows = [row for row in audit.get('reader_validation', []) if row.get('sample_filter') == selection]
+        valid = [row for row in rows
+            if isinstance(row.get('train_episode_ids'), list) and isinstance(row.get('validation_episode_ids'), list)
+            and row.get('episode_split_disjoint') is True
+            and not set(row['train_episode_ids']) & set(row['validation_episode_ids'])
+            and row.get('train_and_validation_same_frozen_standard_scene') is True]
+        pairs = {(len(row['train_episode_ids']), len(row['validation_episode_ids'])) for row in valid}
+        if len(valid) == len(rows) == 2 and len(pairs) == 1 and {row.get('policy_type') for row in valid} == {'act', 'dp'}:
+            train, val = next(iter(pairs))
+            parts.append(f'{label}{train}/{val}')
+        else:
+            parts.append(label + '未知')
+    return '按完整episode划分，训练/验证为' + '、'.join(parts) + '，保持同一固定standard场景。'
+
+
+def reader_check_scope(audit):
+    rows = audit.get('episodes', [])
+    timeline = bool(rows) and all(row.get('admission_errors') == [] for row in rows)
+    total = sum(row['transitions'] for row in rows) if rows and all(isinstance(row.get('transitions'), int) for row in rows) else None
+    count = f'{total}条转换的' if total is not None else ''
+    prefix = count + '全时间轴及8D动作映射已通过准入检查；' if timeline else '全时间轴与8D动作映射的本轮准入证据未知；'
+    return prefix + '正常读取器选样核对RGB和动作，不是全量逐帧图像核验。本轮未执行训练。'
 
 
 def short(value, length=46):
@@ -129,22 +209,21 @@ def final_progress(quota):
     return text + '尺寸结论仍仅限已测试的离散资产与当前控制；质量、材料、器皿尺寸及机器人动力学仍需实物测量校正，real_calibrated=false。'
 
 
-def controlled_failure_paragraph(summary):
+def controlled_failure_paragraph(summary, audit=None):
     """Describe audited groups without recasting induced stops as size failures."""
     quota = summary.get('collection20_success20_failure', {})
     count = get(quota, 'condition_groups.deterministic_action_deviation.qualified_failure')
     natural = get(quota, 'condition_groups.natural.qualified_failure')
-    text = (f"本次合格失败中，自然控制{num(natural, 0)}条，确定性动作偏差{num(count, 0)}条。"
-            '两组不混成自然卡滞率，也不据动作偏差失败推断器皿尺寸不能通过。')
+    text = f"本次合格失败中，自然控制{num(natural, 0)}条，确定性动作偏差{num(count, 0)}条。"
     rows = [row for row in summary.get('runs', [])
             if row.get('qualified_failure') is True
             and row.get('condition_group') == 'deterministic_action_deviation']
     if count and len(rows) == count and all(row.get('failure_type') == 'CONTROLLED_EARLY_STOP' for row in rows):
-        text += '本次已审计的受控失败全部为CONTROLLED_EARLY_STOP，即按配置提前停止插入；不是自然受阻或碰撞失败样本。'
+        text += '全部为CONTROLLED_EARLY_STOP，按配置提前停止；不是自然受阻或碰撞失败样本。'
     elif count:
         kinds = sorted({row.get('failure_type') or '未知' for row in rows})
         text += '受控失败的已记录类型为' + ('、'.join(kinds) or '未知') + '，逐次原因与偏差事件以原记录为准。'
-    return text
+    return text + (failure_depth_distribution(audit) if audit is not None else '')
 
 
 def optional_bool(value):
@@ -353,6 +432,10 @@ def collect(e, args):
         evidence_files.append({'path': str(p), 'label': filename})
     if audit_path:
         evidence_files.append({'path': str(e.register(audit_path)), 'label': '数据资格与正常读取验证'})
+    if audit_path:
+        batch_evidence = e.register(e.path(audit_path).parent / 'actual_training_task_dataset_batch.json', required=False)
+        if batch_evidence:
+            evidence_files.append({'path': str(batch_evidence), 'label': '正式ACT单帧与DP三帧任务数据集实际batch读取'})
     if args.frozen_scene:
         evidence_files.append({'path': str(e.register(args.frozen_scene)), 'label': '冻结standard场景清单'})
     if failure1050:
@@ -403,7 +486,7 @@ def pages_for(d):
     lead = (f"当前实际独立评分已确认完整装载，成功资产为{', '.join(sorted({x['asset_id'] for x in true_runs}))}。" if full else
             '当前没有已确认的完整任务成功。已完成尺寸资产与几何筛选，实际装载结果及中止阶段见本报告。')
     pages = []
-    pages.append([('title', title), ('p', 'Size_v1  2026年10月21日  固定原A座与standard场景'),
+    pages.append([('title', title), ('p', 'Size_v1  ' + report_date(d.get('created_at')) + '  固定原A座与standard场景'),
         ('p', lead + '本轮只改变器皿XY尺寸，原座、整机、来源架和物理参数保持。物理任务判分、进程退出和正式冻结数据资格分别记录；开发成功不自动增加配额。尺寸是实验假设，不是实物反推或平台精度认证。'),
         ('h', '本轮结果'),
         table(['项目', '实际状态', '证据范围'], [
@@ -537,23 +620,22 @@ def pages_for(d):
             ['确定性动作偏差', num(get(grouped, 'deterministic_action_deviation.qualified_success'), 0), num(get(grouped, 'deterministic_action_deviation.qualified_failure'), 0)],
             ['配额缺口', num(q.get('success_missing'), 0), num(q.get('failure_missing'), 0)]
         ], [7.0, 4.9, 4.9]),
-        ('p', controlled_failure_paragraph(s)),
+        ('p', controlled_failure_paragraph(s, d['collection_audit'])),
         ('p', f"资格状态为{qualification_label(q.get('status'))}。几何预检、资产加载、初始化、服务异常、人工中断及未真正执行任务的preview不计失败配额。动作偏差只改变已声明阶段动作，记录幅度与版本，场景保持冻结。"),
-        ('p', '成功BC默认只读record_valid且task_success的合格完整loading轨迹；自然失败和受控偏差失败分别保存。完整episode划分训练和验证集合，两者保持同一冻结场景；相邻帧不跨集合。原始失败标签不为读取器修改。'),
+        ('p', '成功BC只读合格成功；自然与受控失败分开，原标签保留。' + reader_split_summary(d['collection_audit'])),
         table(['读取与冻结项', '实际证据', '说明'], [
             ['正常读取验证条目', str(len(reader)), '每项由已有ACT或DP正常入口实际执行'],
             ['冻结场景指纹', short(d['frozen_scene'].get('frozen_scene_sha256') or get(q, 'qualification_evidence.frozen_scene_sha256'), 36), '完整指纹与资产依赖在JSON'],
             ['便携episode验证', '已提供证据' if d['portable_validation'] else '未提供本轮证据', '不把旧绝对路径外链当成便携副本'],
             ['标签与资产', '保持原始值', 'asset_id 场景 控制与代码版本随episode保存']
         ], [4.0, 5.2, 7.6]),
-        ('p', '资格计数未知时保留未知，不把它自动填成0或20。采集审计与汇总不一致时应先重新核查，不开始训练。训练模型不是本轮执行内容。')])
+        ('p', reader_check_scope(d['collection_audit']))])
 
     video_blocks = [('media', item) for item in d['media'][:5]]
     evidence_blocks = [('link', item) for item in d['evidence_files'][:4]]
     pages.append([('h', '复现与交付入口'),
         ('p', f"选定原A座，推荐或实际使用资产{asset_id}。实际完整任务结论为{state(r.get('task_success'))}，释放为{state(r.get('release_observed'))}，撤离为{state(r.get('retreat_observed'))}，撤离后稳定为{state(r.get('stable_after_retreat'))}。原12.5mm控制组合的既有冲突结论保留。"),
-        ('code', 'bash demos/lab_cuvette_size_v1/run.sh --mode teacher \\\n  --config config/lab_cuvette_loading/Size_v1/standard.yaml \\\n  --asset-id ' + asset_id + ' --output NEW_EPISODE_DIRECTORY\n\n'
-          '../labutopia-env/bin/python scripts/summarize_lab_cuvette_size_v1.py \\\n  --root outputs/lab_cuvette_loading/Size_v1 \\\n  --output NEW_SUMMARY_DIRECTORY'),
+        ('code', reproduction_commands(d, asset_id)),
         ('p', '启动入口默认GUI；本轮实际记录使用--headless，尚未实际验证本版本GUI展示。每次使用新目录。正式collect、train及自动验证锁定冻结asset_id；尺寸探索使用独立开发配置，不计10mm配额。解析器保留当前目标偏移，不自动为其他尺寸调参或继承10mm结果。'),
         ('h', '同包代表录像'),
         *video_blocks,

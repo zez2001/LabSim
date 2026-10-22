@@ -14,6 +14,48 @@ spec.loader.exec_module(report)
 
 
 class ReportTests(unittest.TestCase):
+    def test_report_date_uses_created_at_in_Shanghai(self):
+        self.assertEqual(report.report_date('2026-10-21T17:10:00+00:00'), '2026年10月22日')
+        self.assertEqual(report.report_date('2026-10-22T01:10:00+08:00'), '2026年10月22日')
+        self.assertEqual(report.report_date(None), '日期未知')
+
+    def test_reproduction_summary_includes_actual_verification_and_audit(self):
+        data = {'root': '/repo', 'summary': {'root': '/repo/outputs/Size_v1', 'standard5': {
+            'selection': {'explicit_run_prefixes': ['verify5_actual_batch']}}},
+            'quota': {'qualification_evidence': {'path': '/repo/docs/final_actual/collection_audit.json'}}}
+        command = report.reproduction_commands(data, 'cuvette_xy_1000')
+        self.assertIn('../labutopia-env/bin/python scripts/summarize_lab_cuvette_size_v1.py', command)
+        self.assertIn('--verification-run-prefix verify5_actual_batch', command)
+        self.assertIn('--collection-audit docs/final_actual/collection_audit.json', command)
+        self.assertIn('--root outputs/Size_v1', command)
+        self.assertNotIn('/repo/', command)
+
+    def test_depth_groups_require_actual_admitted_events_not_configuration_only(self):
+        def event_row(depth, actual=True):
+            return {'failure': True, 'labels': {'condition_group': 'deterministic_action_deviation'},
+                'controlled_deviation_event_evidence': {'qualified': True, 'actual_event_count': 1,
+                    'checks': {'actual_event_matches_state': True}, 'configuration_spec': {'stop_insertion_at_depth_m': .099},
+                    'actual_event': {'spec': {'stage': 'INSERT', 'unit': 'm',
+                        'stop_insertion_at_depth_m': depth}} if actual else {}}}
+        text = report.failure_depth_distribution({'episodes': [event_row(.001), event_row(.001), event_row(.005), event_row(.099, False)]})
+        self.assertIn('1mm 2条、5mm 1条', text)
+        self.assertIn('另有1条事件核验不足', text)
+        self.assertNotIn('99mm', text)
+
+    def test_reader_split_counts_are_actual_and_RGB_scope_stays_sampled(self):
+        rows = [{'sample_filter': selection, 'policy_type': policy,
+            'train_episode_ids': ['train0', 'train1'], 'validation_episode_ids': ['val0'],
+            'episode_split_disjoint': True, 'train_and_validation_same_frozen_standard_scene': True}
+            for selection in ('success', 'failure') for policy in ('act', 'dp')]
+        audit = {'reader_validation': rows, 'episodes': [{'admission_errors': []}]}
+        self.assertIn('成功2/1、失败2/1', report.reader_split_summary(audit))
+        scope = report.reader_check_scope(audit)
+        self.assertIn('全时间轴及8D动作映射', scope)
+        self.assertIn('选样核对RGB', scope)
+        self.assertIn('不是全量逐帧图像核验', scope)
+        rows[-1]['episode_split_disjoint'] = False
+        self.assertIn('失败未知', report.reader_split_summary(audit))
+
     def test_compact_provenance_is_relative_small_and_does_not_mutate_authoring_data(self):
         with tempfile.TemporaryDirectory() as d:
             parent = Path(d)

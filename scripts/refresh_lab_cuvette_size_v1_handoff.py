@@ -94,7 +94,7 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
     OUT.mkdir(parents=True, exist_ok=True)
     provenance = []
     def copy(source, target):
-        source, target = Path(source), OUT / target
+        source, target = Path(source).resolve(strict=True), OUT / target
         if not source.is_file():
             raise FileNotFoundError(source)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -240,6 +240,12 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
             ("qualified_success_count", "qualified_failure_count", "success_missing", "failure_missing", "condition_groups")},
             evidence=dict(source=str(Path(collection_audit).resolve()), sha256=sha(collection_audit)))
         copy(collection_audit, "final_collection_audit.json")
+        independent_checks = Path(collection_audit).resolve().parent / "independent_final_checks.json"
+        if independent_checks.is_file():
+            copy(independent_checks, "final_independent_checks.json")
+        batch_check = Path(collection_audit).resolve().parent / "actual_training_task_dataset_batch.json"
+        if batch_check.is_file():
+            copy(batch_check, "actual_training_task_dataset_batch.json")
     actual_runs = []
     source_results = sorted((ROOT / "outputs/lab_cuvette_loading/Size_v1").glob("**/episode_*/result.json"))
     fields = ("episode_id", "asset_id", "scene_version", "task_type", "complete", "record_valid", "task_success",
@@ -401,6 +407,7 @@ bash demos/lab_cuvette_external/usd_python.sh \\
         derived_evidence_sources=derived_sources,
         registry_source=dict(path=str(registry_path.relative_to(ROOT)), sha256=sha(registry_path)),
         final_delivery_commit="Read final package-root 文件清单.json; do not predict a self-referential future SHA",
+        operation_flags_scope="This snapshot-refresh command only; the separately authored DOCX and final package are recorded in their own manifests",
         final_desktop_package_created=False, DOCX_created=False, GPU_started=False))
     return dict(output=str(OUT), files=len(list(OUT.rglob("*"))), total_bytes=sum(p.stat().st_size for p in OUT.rglob("*") if p.is_file()),
         formal_success=quota["qualified_success_count"], formal_failure=quota["qualified_failure_count"])
