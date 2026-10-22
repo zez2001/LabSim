@@ -1,6 +1,6 @@
 {
   "schema": "labsim.project_handoff.validation.v1",
-  "CPU_contracts_passed": 85,
+  "CPU_contracts_passed": 104,
   "CPU_environment": {
     "python": "3.11.16",
     "packages": {
@@ -37,5 +37,14 @@
   "original_data_labels_modified": false,
   "known_runtime_warning": "git-lfs command absent from current ordinary PATH; checked-out asset entities are present. Existing Git LFS push hook remains usable. New hosts must install/configure Git LFS.",
   "new_machine_end_to_end_deployment_verified": false,
-  "GUI_from_new_wrapper_actually_run": false
+  "GUI_from_new_wrapper_actually_run": false,
+  "additional_package_selection_contracts": 18,
+  "CLI_contract_count": 17,
+  "remote_CI_first_run": {
+    "url": "https://github.com/zez2001/LabSim/actions/runs/39746458835",
+    "conclusion": "failure",
+    "cause": "Fresh checkout retained an LFS pointer for the registry required by the asset-query contract",
+    "correction": "Workflow now explicitly fetches only the 2.25MB registry; assets and frozen hashes are unchanged"
+  },
+  "remote_CI_final_result": "Inspect the public CPU contracts run for the delivered source commit; this JSON records local checks, not a predicted remote result"
 }

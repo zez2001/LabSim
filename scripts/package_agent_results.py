@@ -34,37 +34,77 @@ def within(path: Path, parent: Path) -> bool:
     return path.is_relative_to(parent)
 
 
+def selection_path(parent: Path, name: str, *, source: bool) -> Path:
+    """Selections are repository/package relative and cannot traverse symlinks."""
+    relative = Path(name)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(f"Selection must use a relative path without '..': {name}")
+    path = parent / relative
+    current = parent
+    for part in relative.parts:
+        current = current / part
+        if current.is_symlink():
+            raise ValueError(f"Selection traverses a symlink: {current}")
+    resolved = path.resolve()
+    if not within(resolved, parent):
+        raise ValueError(f"Selection escapes its {'repository' if source else 'package'}: {name}")
+    return resolved
+
+
 def build(manifest_path: Path, output: Path) -> dict:
+    manifest_path = manifest_path.expanduser().absolute()
+    if not within(manifest_path, ROOT):
+        raise ValueError("Package manifest must be a repository file")
+    manifest_path = selection_path(ROOT, manifest_path.relative_to(ROOT).as_posix(), source=True)
     config = json.loads(manifest_path.read_text(encoding="utf-8"))
     if config["schema"] != "labsim.agent_results_package.v1":
         raise ValueError("Unsupported package manifest schema")
-    output = output.expanduser().resolve()
+    output = output.expanduser().absolute()
+    if any(path.is_symlink() for path in (output, *output.parents)):
+        raise ValueError(f"Output path must not traverse a symlink: {output}")
+    output = output.resolve()
     if output.exists():
         raise FileExistsError(f"保留旧包，输出目录必须不存在：{output}")
     head, branch = git("rev-parse", "HEAD"), git("branch", "--show-current")
     repo_url = config["repository_url"].rstrip("/")
     generated_at = datetime.now(ZoneInfo("Asia/Shanghai")).isoformat(timespec="seconds")
     mapping: dict[Path, Path] = {}
-    for entry in config["directories"]:
-        source = (ROOT / entry["source"]).resolve()
-        dest = (output / entry["destination"]).resolve()
-        if not within(source, ROOT) or not source.is_dir() or not within(dest, output):
+
+    def select_file(source: Path, target: Path) -> None:
+        if not within(source, ROOT) or not source.is_file() or source.is_symlink():
+            raise ValueError(f"Invalid package file: {source}")
+        if not within(target, output) or target == output:
+            raise ValueError(f"Invalid package destination: {target}")
+        reserved = (output / "文件清单.json", output / "SHA256SUMS.txt")
+        if any(target == item or within(target, item) for item in reserved):
+            raise ValueError(f"Reserved package destination: {target}")
+        if source in mapping:
+            raise ValueError(f"Duplicate source selection: {source}")
+        if any(target == item or within(target, item) or within(item, target)
+               for item in mapping.values()):
+            raise ValueError(f"Duplicate or conflicting destination: {target}")
+        with source.open("rb") as stream:
+            if stream.read(100).startswith(b"version https://git-lfs.github.com/spec/v1"):
+                raise ValueError(f"Fetch the actual Git LFS object first: {source}")
+        mapping[source] = target
+
+    for entry in config.get("directories", []):
+        source = selection_path(ROOT, entry["source"], source=True)
+        dest = selection_path(output, entry["destination"], source=False)
+        if not source.is_dir():
             raise ValueError(f"Invalid package directory: {entry}")
         for path in sorted(source.rglob("*")):
             if path.is_symlink():
                 raise ValueError(f"Source symlink is not a standalone result: {path}")
             if path.is_file():
                 target = dest / path.relative_to(source)
-                if target in mapping.values():
-                    raise ValueError(f"Duplicate destination: {target}")
-                with path.open("rb") as stream:
-                    if stream.read(100).startswith(b"version https://git-lfs.github.com/spec/v1"):
-                        raise ValueError(f"Fetch the actual Git LFS object first: {path}")
-                mapping[path] = target
-    readme = (ROOT / config["readme"]).resolve()
-    if not within(readme, ROOT) or not readme.is_file():
-        raise ValueError("Invalid readme source")
-    mapping[readme] = output / "00_给Agent阅读说明.md"
+                select_file(path, target)
+    for entry in config.get("files", []):
+        source = selection_path(ROOT, entry["source"], source=True)
+        target = selection_path(output, entry["destination"], source=False)
+        select_file(source, target)
+    readme = selection_path(ROOT, config["readme"], source=True)
+    select_file(readme, output / "00_给Agent阅读说明.md")
     # Finish all selection validation before creating the output directory.
     output.mkdir(parents=True, exist_ok=False)
     records = []
@@ -162,7 +202,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
-        result = build(args.manifest.resolve(), args.output)
+        result = build(args.manifest.absolute(), args.output)
     except (ValueError, FileExistsError) as exc:
         parser.exit(1, f"{exc}\n")
     print(json.dumps(result, ensure_ascii=False, indent=2))

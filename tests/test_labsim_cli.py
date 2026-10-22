@@ -11,6 +11,14 @@ def parse(*args):
     return cli.parser().parse_args(args)
 
 
+def test_asset_query_explains_unfetched_registry(tmp_path, monkeypatch):
+    registry = tmp_path / "registry.json"
+    registry.write_text("version https://git-lfs.github.com/spec/v1\noid sha256:example\nsize 100\n")
+    monkeypatch.setattr(cli, "REGISTRY", registry)
+    with pytest.raises(ValueError, match="git lfs pull"):
+        cli.asset_rows()
+
+
 def test_demo_is_one_standard_GUI_episode_and_accepts_spaces(tmp_path):
     output = tmp_path / "new run with spaces"
     command = cli.build_command(parse("demo", "--output", str(output)))

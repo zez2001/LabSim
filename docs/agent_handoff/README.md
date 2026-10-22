@@ -1,32 +1,54 @@
-# Agent结果阅读包：当前 Size_v1
+# 结果阅读包
 
-当前 [package.json](package.json) 只选择本轮两个目录：
+每轮交付创建一个新目录，只收本轮改动与结果。保留旧包，不打包完整工程、环境、原始 H5 或检查点。完整工程通过 GitHub 分享，原始数据单独交接。
 
-- `docs/lab_cuvette_loading/Size_v1/results_20261021`：最终DOCX/Markdown报告、必要图片及代表连续录像。
-- `docs/agent_handoff/Size_v1_current`：固定标准场景、资产尺寸假设、几何与物理摘要、实际结果/配额、读取资格及准确调用命令。
+纯工程管理、文档或接口整理只放新的项目文档、相关源码与检查结果，不重复复制旧实验的大视频和报告。新实验需要时加入本轮 DOCX / Markdown、代表录像、结果表、配置及评分证据，保持报告和媒体的相对目录结构。
 
-目标小于20MB。旧 V0、Env_v1、各 demo 的目录与桌面阅读包保持原样；切换前的清单和说明已经独立保存到 `history/handoff_before_Size_v1_*`。不复制全部35个资产实体、原始H5、JSONL日志、环境或模型检查点。完整便携episode单独提供。
+## 选择文件
 
-最终运行闭合并审计后，刷新小证据。若尚无最终审计，配额必须保持 unavailable，不能提前写成20成功+20失败：
+当前默认[清单](package.json)是[项目交接清单](project_handoff/package.json)：根 README、开发规范、统一入口、CPU 工作流及开发接入证据。已有实验通过固定提交的 GitHub 链接引用。
 
-```bash
-cd /home/wujing/Desktop/vla/LabSim
-python3 scripts/refresh_lab_cuvette_size_v1_handoff.py --refresh \
- --summary outputs/lab_cuvette_loading/Size_v1/summaries/FINAL_SNAPSHOT/summary.json \
- --collection-audit outputs/lab_cuvette_loading/Size_v1/collection_standard/FINAL_AUDIT.json
+清单支持整个目录和独立文件，可组合使用：
+
+```json
+{
+  "schema": "labsim.agent_results_package.v1",
+  "repository_url": "https://github.com/zez2001/LabSim",
+  "readme": "docs/agent_handoff/project_handoff/00_交接阅读说明.md",
+  "directories": [
+    {"source": "docs/development", "destination": "开发接入"}
+  ],
+  "files": [
+    {"source": "README.md", "destination": "项目README.md"}
+  ]
+}
 ```
 
-没有最终审计时可省略两个可选参数；此时只快照已闭合的原始结果，并明确不宣称采集配额。刷新脚本不生成报告、不启动仿真、不生成最终阅读包。
+source必须指向仓库内真实内容，destination必须在包内。脚本拒绝越界、symlink、重复或冲突目标、未下载的 LFS 指针和覆盖已有输出。旧的仅含directories的清单继续兼容。
 
-检查报告所有视频、图片、CSV、配置引用均存在、DOCX相对media链接有效，且当前结果与独立评分一致。然后提交并推送、核对远端SHA，最后才生成全新的桌面包：
+Markdown里已选中的文件链接会改为包内相对链接；未复制的仓库文件链接会固定到本次提交的GitHub路径。DOCX相对媒体链接须在作者阶段做好，并把相应媒体目录一并纳入。源码路径与大数据路径若只用于追溯，必须明确其并未复制到包内。
+
+## 生成与检查
+
+先验证改动、提交推送并核对远端SHA，再在工程根目录运行：
 
 ```bash
-python3 scripts/package_agent_results.py \
- --output /home/wujing/Desktop/LabSim_Size_v1_本轮改动与结果_精简阅读包_20261021
+python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_项目开发交接包_NEW
 ```
 
-输出目录必须不存在；此说明不代表已经打包或上传。生成后检查总量小于20×1024×1024字节，并执行 `sha256sum -c SHA256SUMS.txt`。包根清单记录最终分支、提交、源文件及SHA256；不要在报告或快照中猜测尚未产生的最终提交。
+输出目录必须尚不存在。实验资料通常控制在20MiB内；纯工程整理应更小。不要为接近体积预算而复制不相关历史媒体。
 
-本轮研究的是“原座不改，统一XY变换的比色皿尺寸假设”。实际完整任务结果、固定5次验证及20/20配额均以本轮最终证据为准；几何证书、preview、预插入、开发成功和进程中断不能混算为正式合格采集。random10已经从本轮验收中取消，训练及自动验证保持standard。`real_calibrated`与原12.5mm配套结论不因新尺寸成功而改变。
+包根的文件清单.json记录实际提交、分支、源文件SHA、转换及复制后SHA；SHA256SUMS.txt用于传输后的逐文件检查：
 
-通过真实固定5次验证并显式放行后，自然采集与受控失败可交错。优先自然失败；允许先运行1条完整任务的INSERT确定性提前停，确认失败标签、元数据与读取链路，再补采其余20/20缺口。它没有缩短环境预算，不能与短预算接口诊断混算；采集driver因总配额未满退出2与仿真子进程非零退出必须区分。
+```bash
+cd /path/to/reading-package
+sha256sum --check SHA256SUMS.txt
+```
+
+交付前检查总大小、包内相对链接、媒体实体、配置和报告引用；不把内部预览包或未推送工作树标成最终交付。不要预填未来提交SHA，也不把旧实验报告描述为本轮新运行。
+
+## 实验数据范围
+
+结果包不建立新的数据平台，不修改原始标签。完整任务、几何预检、初始化、服务异常、人工中断、短预算接口诊断和实际受控失败须区分。
+
+Size_v1的最终40集证据保存在[正式审计目录](../lab_cuvette_loading/Size_v1/data/final40_actual/README.md)。刷新其小型配置快照应使用真实的最终审计和汇总，不能把计划配额写成已完成。需要重新制作包含视频的实验包时，从历史清单选择必要目录，并指向实际存在的results_20261022，不覆盖旧包。

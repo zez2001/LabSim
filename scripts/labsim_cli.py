@@ -257,6 +257,8 @@ def doctor_report():
 
 
 def asset_rows(asset_id=None):
+    if lfs_pointer(REGISTRY):
+        raise ValueError("Asset registry is a Git LFS pointer; run git lfs pull and retry")
     registry = json.loads(REGISTRY.read_text())
     if asset_id and asset_id not in registry["assets"]:
         raise ValueError(f"Unknown asset_id: {asset_id}")

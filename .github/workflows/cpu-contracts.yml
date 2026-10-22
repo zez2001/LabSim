@@ -30,6 +30,10 @@ jobs:
           python-version: "3.11"
           cache: pip
           cache-dependency-path: requirements/ci.txt
+      - name: Fetch the small registry required by asset-query checks
+        run: |
+          git lfs pull --include="assets/lab_cuvette_loading/Size_v1/registry.json" --exclude=""
+          python -c "import json; json.load(open('assets/lab_cuvette_loading/Size_v1/registry.json'))"
       - name: Install CPU check dependencies
         run: python -m pip install -r requirements/ci.txt
       - name: Check the project entry point
@@ -40,6 +44,7 @@ jobs:
         run: |
           python -m pytest -q \
             tests/test_labsim_cli.py \
+            tests/test_package_agent_results.py \
             tests/test_lab_cuvette_env_v1_teacher.py \
             tests/test_lab_cuvette_env_v1_scorer.py \
             tests/test_lab_cuvette_size_v1_workflow_contract.py \
