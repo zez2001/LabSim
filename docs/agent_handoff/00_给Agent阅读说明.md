@@ -1,6 +1,6 @@
 # LabSim Size_v1：本轮改动与结果
 
-这是小阅读包，只收本轮尺寸变体、固定原座装载及采集结果。完整H5、原始日志、35个派生USD实体、环境和检查点另行管理；旧阅读包、Env_v1与全部历史实验保留。
+这是小阅读包，只收本轮尺寸变体、固定原座装载及采集结果。本轮最终审计为20条合格完整成功及20条有效受控提前停止失败（1/5/10/18mm各5条），没有自然失败或模型训练。完整H5、原始日志、35个派生USD实体、环境和检查点另行管理；旧阅读包、Env_v1与全部历史实验保留。
 
 生成时间：{{GENERATED_AT}}（Asia/Shanghai）。分支：`{{BRANCH}}`。交付提交：`{{SOURCE_COMMIT}}`。
 
@@ -10,7 +10,7 @@
 2. [状态与边界](02_本次改动与配置/状态与边界.md)及[最新实际结果快照](02_本次改动与配置/result_snapshot.json)：区分开发运行、正式固定5次、合格成功/失败、进程中断及未完成项。
 3. [尺寸与几何结果](02_本次改动与配置/candidate_dimensions_and_geometry.csv)、[资产摘要](02_本次改动与配置/asset_summary.json)、[原座几何摘要](02_本次改动与配置/geometry_family_summary.json)及[实际烹饪探针](02_本次改动与配置/cooked_preview01_summary.md)。
 4. [冻结标准场景配置](02_本次改动与配置/configs/standard.yaml)、[冻结依赖清单](02_本次改动与配置/configs/frozen_scene.json)、[正式已闭合首集的相机摘要](02_本次改动与配置/camera_actual_config_summary.json)、[实际物理记录定义](02_本次改动与配置/formal_standard01/physics_capture_meta.json)、[实际初态摘要](02_本次改动与配置/formal_standard01/initial_state_summary.json)及[冻结数据正常读取](02_本次改动与配置/formal_standard01/guarded_frozen_dataset_read.json)。首集证据不代替整批退出与最终配额审计。
-5. [复现与采集命令](02_本次改动与配置/复现与数据读取.md)、[数据资格](02_本次改动与配置/data_qualification.json)及[快照来源和哈希](02_本次改动与配置/version.json)。源路径是追溯信息，不表示大文件已经放进此小包。
+5. [复现与采集命令](02_本次改动与配置/复现与数据读取.md)、[数据资格](02_本次改动与配置/data_qualification.json)、[40集独立核查](02_本次改动与配置/final_independent_checks.json)、[正式ACT单帧／DP三帧任务dataset读取](02_本次改动与配置/actual_training_task_dataset_batch.json)及[快照来源和哈希](02_本次改动与配置/version.json)。源路径是追溯信息，不表示大文件已经放进此小包。
 
 阅读时保留以下事实：
 

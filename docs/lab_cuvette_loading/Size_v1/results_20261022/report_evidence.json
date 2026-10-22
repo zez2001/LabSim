@@ -1,0 +1,1337 @@
+{
+  "schema": "labsim.Size_v1.report_provenance_compact.v2",
+  "scope": "Portable report provenance only. Full internal authoring data was used for DOCX/Markdown; registry, run configs and per-episode audit rows are not duplicated here.",
+  "created_at": "2026-10-22T15:16:03.261768+08:00",
+  "authoring_head": "4ed7c4a33ad5e4e6b264f0cd00720f7ae64c6f7d",
+  "branch": "codex/lab-cuvette-size-v1",
+  "authoring_runtime": "/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "render_required": "Packaged render_docx.py and bundled LibreOffice only; inspect every rendered page",
+  "source_provenance_workspace": "/home/wujing/Desktop/vla/LabSim",
+  "collection_counts": {
+    "status": "CHECKED_AGAINST_EXPLICIT_COLLECTION_AUDIT",
+    "qualified_success_count": 20,
+    "qualified_failure_count": 20,
+    "success_target": 20,
+    "failure_target": 20,
+    "success_missing": 0,
+    "failure_missing": 0,
+    "unqualified_or_unknown_episode_count": 4,
+    "qualification_unknown_count": 4,
+    "condition_groups": {
+      "natural": {
+        "qualified_success": 20,
+        "qualified_failure": 0
+      },
+      "deterministic_action_deviation": {
+        "qualified_success": 0,
+        "qualified_failure": 20
+      }
+    },
+    "raw_labels_modified": false,
+    "full_audit_file": {
+      "path": "data/07_collection_audit.json",
+      "label": "数据资格与正常读取验证",
+      "bytes": 1690628,
+      "sha256": "d8f5c621e611b148bf0093b22a60e81a5e9f983f780847d4a52a30be599e2285",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/collection_audit.json"
+    },
+    "original_audit_counts": {
+      "original_audit_qualified_success_count": 20,
+      "original_audit_qualified_failure_count": 20
+    }
+  },
+  "standard5": {
+    "requested_count": 5,
+    "selection": {
+      "explicit_run_prefixes": [
+        "verify5_20261021T021430Z_274d1b2d_00"
+      ],
+      "config_role": "experiment.run_role or collection.run_role=standard_validation"
+    },
+    "selected_episode_count": 5,
+    "closed_record_count": 5,
+    "independently_scored_success_count": 5,
+    "independently_scored_failure_count": 0,
+    "outcome_unknown_count": 0,
+    "qualified_success_count": 5,
+    "status": "AT_LEAST_FIVE_CLOSED",
+    "all_five_successful": true,
+    "episodes": [
+      "collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000",
+      "collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0001",
+      "collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0002",
+      "collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0003",
+      "collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0004"
+    ]
+  },
+  "primary": {
+    "episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+    "asset_id": "cuvette_xy_1000",
+    "condition_group": "natural",
+    "task_type": "loading",
+    "record_valid": true,
+    "task_success": true,
+    "mode": "standard",
+    "run_role": "standard_collection",
+    "controller_version": "Size_v1.continuous_latch.loading01",
+    "code_commit": "425a9b48b6119a474181d90701ecf3160b47a164",
+    "control_config_sha256": "6a72bdc05c29094bba19cd87e1e3a49733b6f8b1e406389cab4cb0b86970fbee",
+    "config_sha256": "4379c7a0468091b31daf7b8bd701f8ce1979ea2ab69b8257042cd391aa2037dc",
+    "result_sha256": "4e51389214bd130279bb82ee7e0da99b142e1ba61acc94d4fff0e46d672a3437",
+    "simulation_seconds": 105.81666666666666,
+    "wall_seconds": 821.7070042889973
+  },
+  "primary_result": {
+    "schema": "labsim.Size_v1.independent_physical.v1",
+    "episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+    "task_type": "loading",
+    "geometry_valid": true,
+    "task_success": true,
+    "workflow_success": true,
+    "full_success": true,
+    "native_pair_success": null,
+    "record_valid": true,
+    "record_valid_scope": "independent physical trace AND collector action/sensor/time integrity",
+    "failure_type": "NONE",
+    "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+    "eligible_for_success_bc": true,
+    "eligible_for_failure_analysis": false,
+    "real_calibrated": false,
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "loading_sequence_observed": true,
+    "loading_candidate_sequence_observed": true,
+    "release_observed": true,
+    "retreat_observed": true,
+    "stable_after_retreat": true,
+    "post_retreat_window": {
+      "status": "complete",
+      "stable": true,
+      "required_duration_s": 3.0,
+      "measured_duration_s": 3.0,
+      "sample_count": 721,
+      "position_drift_m": 2.388837865275353e-07,
+      "orientation_change_deg": 0.0007131989862548174,
+      "criteria": {
+        "position_stable": true,
+        "target_support": true,
+        "target_contains": true,
+        "observed_input_material_overlap_within_limit": true,
+        "no_finger_contact": true,
+        "upright": true,
+        "retained_loading_depth": true
+      },
+      "start_t": 102.81666666666666,
+      "end_t": 105.81666666666666,
+      "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+    },
+    "terminal_window": {
+      "status": "complete",
+      "stable": true,
+      "required_duration_s": 3.0,
+      "measured_duration_s": 3.0,
+      "sample_count": 721,
+      "position_drift_m": 2.388837865275353e-07,
+      "orientation_change_deg": 0.0007131989862548174,
+      "criteria": {
+        "position_stable": true,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null
+      },
+      "start_t": 102.81666666666666,
+      "end_t": 105.81666666666666
+    },
+    "diagnostic_hold_window": {
+      "status": "not_applicable",
+      "stable": null
+    },
+    "grasp_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 4.902244572336129e-06,
+      "maximum_orientation_drift_deg": 0.011725607532398664,
+      "maximum_configured_grasp_anchor_drift_m": 3.4818400831525384e-06,
+      "maximum_configured_grasp_anchor_axial_drift_m": 1.6599925247324014e-06,
+      "maximum_configured_grasp_anchor_transverse_drift_m": 3.4492709433987428e-06,
+      "configured_grasp_anchor_height_m": 0.053,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    },
+    "measured_grasp_segments": {
+      "static_grasp": {
+        "status": "measured",
+        "start_t": 14.641666666666667,
+        "end_t": 15.708333333333334,
+        "sample_count": 257,
+        "reference_position_drift_m": 2.39209621660664e-06,
+        "reference_orientation_drift_deg": 0.008436749432321389,
+        "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+      },
+      "extraction": {
+        "status": "measured",
+        "start_t": 15.708333333333334,
+        "end_t": 16.729166666666668,
+        "sample_count": 246,
+        "reference_position_drift_m": 1.2412002590039798e-06,
+        "reference_orientation_drift_deg": 0.001698194199643248,
+        "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+      },
+      "transport": {
+        "status": "measured",
+        "start_t": 16.729166666666668,
+        "end_t": 58.325,
+        "sample_count": 9984,
+        "reference_position_drift_m": 5.760611979192661e-06,
+        "reference_orientation_drift_deg": 0.007533031010911535,
+        "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+      }
+    },
+    "grasp_attempts": [
+      {
+        "start_t": 14.641666666666667,
+        "end_t": 95.24583333333334,
+        "maximum_position_drift_m": 4.902244572336129e-06,
+        "maximum_orientation_drift_deg": 0.011725607532398664,
+        "maximum_configured_grasp_anchor_drift_m": 3.4818400831525384e-06,
+        "ended_by": "measured_fingers_open_and_both_contacts_lost"
+      }
+    ],
+    "retry_count": 0,
+    "physics_quality_flags": [
+      "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "invalid_state_reasons": [],
+    "observed_events": {
+      "bilateral_grasp_observed": {
+        "t": 14.641666666666667,
+        "physics_step": 3514,
+        "actual_force_N": [
+          0.9300541281700134,
+          0.9367905855178833
+        ]
+      },
+      "actual_lift_started": {
+        "t": 15.708333333333334,
+        "physics_step": 3770,
+        "actual_lift_m": 0.00102822216291798
+      },
+      "source_slot_cleared": {
+        "t": 16.729166666666668,
+        "physics_step": 4015,
+        "actual_bottom_world_z_m": 0.7700642263727308,
+        "source_rim_world_z_m": 0.768
+      },
+      "held_transport_observed": {
+        "t": 32.354166666666664,
+        "physics_step": 7765,
+        "horizontal_displacement_m": 0.050035657841593646
+      },
+      "safe_preinsert_observed": {
+        "t": 58.325,
+        "physics_step": 13998,
+        "actual_depth_m": -0.002998206601682731,
+        "actual_xy_error_m": 1.969819688856479e-06
+      },
+      "loaded_pose_candidate": {
+        "t": 91.925,
+        "physics_step": 22062,
+        "actual_depth_m": 0.02695083066119872,
+        "measured_bottom_support_N": 0.0,
+        "target_region_contains_object": true
+      },
+      "loaded_supported_candidate": {
+        "t": 94.4875,
+        "physics_step": 22677,
+        "actual_depth_m": 0.027000002385896258,
+        "classified_bottom_support_N": 0.265820175409317,
+        "target_region_contains_object": true
+      },
+      "correct_target_supported": {
+        "t": 94.4875,
+        "physics_step": 22677
+      },
+      "both_fingers_open_and_detached": {
+        "t": 95.1,
+        "physics_step": 22824,
+        "actual_joint_positions_m": [
+          0.006580832414329052,
+          0.0065809316001832485
+        ],
+        "actual_force_N": [
+          0.0,
+          0.0
+        ]
+      },
+      "actual_gripper_retreat": {
+        "t": 98.63333333333334,
+        "physics_step": 23672,
+        "minimum_gripper_object_clearance_m": 0.040067193687533385
+      }
+    },
+    "physical_sample_count": 25397,
+    "simulation_duration_s": 105.81666666666666,
+    "stage_labels_used_as_success_proof": false,
+    "geometry_audit_fingerprint": "89935d7c1c76ce4e56905db5c9923fbfc7503ea3357f91fac8acbe89a8d10e5c",
+    "asset_id": "cuvette_xy_1000",
+    "scene_version": "Size_v1",
+    "condition_group": "natural",
+    "variant_pair_success": true,
+    "original_12_5mm_native_pair_verdict_unchanged": true,
+    "acceptance_geometry_scope": "Declared input material geometry checks plus actual physical contact and motion, not calibrated cooked geometry or real accuracy",
+    "simulation_seconds": 105.81666666666666,
+    "wall_seconds": 821.7070042889973,
+    "seed": 0,
+    "policy_id": "truth_teacher",
+    "actual_control_steps": 6348,
+    "actual_physics_steps": 25396,
+    "complete": true,
+    "frames": 6348,
+    "physical_score_record_valid": true,
+    "record_integrity_errors": []
+  },
+  "primary_source_provenance": {
+    "episode_directory": "collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000",
+    "result_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/result.json",
+    "config_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/config.yaml",
+    "H5_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/dataset/episode_0000.h5"
+  },
+  "asset_family": {
+    "registered_count": 35,
+    "evaluated_count": 35,
+    "registered_asset_ids": [
+      "cuvette_xy_0950",
+      "cuvette_xy_0970",
+      "cuvette_xy_0990",
+      "cuvette_xy_1000",
+      "cuvette_xy_1010",
+      "cuvette_xy_1030",
+      "cuvette_xy_1050",
+      "cuvette_xy_1070",
+      "cuvette_xy_1072",
+      "cuvette_xy_1074",
+      "cuvette_xy_1076",
+      "cuvette_xy_1078",
+      "cuvette_xy_1080",
+      "cuvette_xy_1082",
+      "cuvette_xy_1084",
+      "cuvette_xy_1086",
+      "cuvette_xy_1088",
+      "cuvette_xy_1090",
+      "cuvette_xy_1092",
+      "cuvette_xy_1094",
+      "cuvette_xy_1096",
+      "cuvette_xy_1098",
+      "cuvette_xy_1100",
+      "cuvette_xy_1102",
+      "cuvette_xy_1104",
+      "cuvette_xy_1106",
+      "cuvette_xy_1108",
+      "cuvette_xy_1110",
+      "cuvette_xy_1130",
+      "cuvette_xy_1150",
+      "cuvette_xy_1170",
+      "cuvette_xy_1190",
+      "cuvette_xy_1210",
+      "cuvette_xy_1230",
+      "cuvette_xy_1250"
+    ],
+    "source_control_asset": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda",
+    "source_control_sha256": "8d52757227303edd4f38918ee04763481f08846fdd8daa6803295c8fc77c689d",
+    "original_instrument_path": "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda",
+    "original_instrument_sha256": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+    "parameters_location": "Full35-asset physical metadata is in the separate Size_v1_current/asset_summary.json and the copied dimensions_mass_and_inertia.csv; original registry source path/SHA is in sources."
+  },
+  "geometry_scope": {
+    "selected_original_seat": "candidate_far_hinge",
+    "original_seat_unmodified": true,
+    "search_width_range_mm": [
+      9.5,
+      12.5
+    ],
+    "upright_yaws_deg": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "translation_search": "Same full polygonal boundedXY configuration-space algorithm at every width/yaw; not centre-only",
+    "largest_sampled_positive_continuous_sweep_certificate_mm": 10.7,
+    "largest_sampled_positive_required_entrance_domain_mm": 11.0,
+    "smallest_sampled_entrance_rejected_mm": 11.02,
+    "range_scope": "Observed tested size hypotheses, not a real specimen inference. Positive conservative sweep means clearance of authored triangle surfaces. False conservative gate is inconclusive; four-yaw entrance rejects do not exclude arbitrary inclined6DOF paths."
+  },
+  "physics": {
+    "backend": {
+      "backend": "PhysX",
+      "gpu_dynamics": false,
+      "ccd": true,
+      "backend_source": "shared_builder_code_declaration",
+      "ccd_source": "saved_configuration",
+      "broadphase": "MBP"
+    },
+    "primary_quality_flags": [
+      "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "observed_quality_flag_types": [
+      "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "cooked_convex_surface_samples": {
+      "input_prim_count": 28,
+      "valid_response_prim_count": 28,
+      "returned_hull_count": 28,
+      "one_returned_hull_per_input": true,
+      "authored_approximations": [
+        "convexHull"
+      ],
+      "input_vertices": 1098,
+      "input_triangles": 2095,
+      "returned_vertices": 682,
+      "returned_triangles": 1252,
+      "total_cooked_to_input_samples": 1934,
+      "total_input_to_cooked_samples": 3193,
+      "max_observed_cooked_to_input_surface_distance_m": 1.3589149698245092e-05,
+      "max_observed_input_to_cooked_surface_distance_m": 1.4032253701942245e-05,
+      "attached_PxShape_pointer_vertices_read_back": false,
+      "scope": "Vertices and triangle face centroids to triangle surfaces, per input block; no compound union exterior error/global Hausdorff bound or absence-of-fallback proof"
+    },
+    "cooked_scope_limitations": [
+      "Convex cooking request output is not attached PxShape pointer-level readback.",
+      "Per-block surface samples do not identify compound union exposed exterior or cavity-fill globally.",
+      "215 of976 source face identifiers observed does not establish remaining surfaces are absent.",
+      "Static full triangle vertices and explicit per-shape effective fallback remain unknown.",
+      "No task insertion, release, retreat or post-retreat stability evaluated in this preview."
+    ]
+  },
+  "camera": {
+    "primary_episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+    "sync_matches_primary_episode": true,
+    "readability_matches_primary_episode": true,
+    "association_summary": "主记录同观测renderer与当前USD的位置关联通过数为侧视6348/6348、腕视6348/6348，计算门槛为1e-8m。两路实际RGB帧数分别为6348、6348，动作与后继状态对齐结果随读取核验JSON保存。这确认记录中的状态关联，不是实物光学标定、接触精度或精确曝光延迟的证明。",
+    "sync_evidence_file": {
+      "path": "data/11_renderer_USD_sync_audit.json",
+      "label": "主记录renderer与USD同观测核验",
+      "bytes": 7282,
+      "sha256": "65a405757cfdcd0e2ffefc571de1073f993d18309403885a280c3e8b4dd2d802",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/renderer_USD_sync_audit.json"
+    },
+    "readability_evidence_file": {
+      "path": "data/12_standard01_readability_summary.json",
+      "label": "主记录双视角与动作读取核验",
+      "bytes": 13715,
+      "sha256": "6901d7d335320fc0eed058a60477d22f836fcd3476319acf1fcb6885d882e26a",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/standard01_readability_summary.json"
+    },
+    "sync_scope_limitations": "Actual renderer-to-USD observation association; not physical precision, collision penetration or real optical calibration. Near-previous-pose equality does not alone establish exact RGB exposure latency. record_valid does not certify zero latency."
+  },
+  "full_audit_remains_separate": true,
+  "document_content_changed_by_compaction": false,
+  "evidence_files": [
+    {
+      "path": "data/00_candidate_results.csv",
+      "label": "candidate_results.csv",
+      "bytes": 34175,
+      "sha256": "92be332e9426d2fd85e044390d0950d4387990d070197f05ea7d201a1f0184c5",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/candidate_results.csv"
+    },
+    {
+      "path": "data/01_actual_runs.csv",
+      "label": "actual_runs.csv",
+      "bytes": 583771,
+      "sha256": "8f294e25e377ad706bdab22b1df532ae35241a5dba8e72d11a15454ad075bae1",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/actual_runs.csv"
+    },
+    {
+      "path": "data/02_standard5_runs.csv",
+      "label": "standard5_runs.csv",
+      "bytes": 68002,
+      "sha256": "04c042df89ebf973875c6eb9421c778bfa36c6c278a24d3b7fcdb8a7f5d91c45",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/standard5_runs.csv"
+    },
+    {
+      "path": "data/03_collection_status.csv",
+      "label": "collection_status.csv",
+      "bytes": 23556,
+      "sha256": "6e5188e826b88a692185b8a2d6f3741d8e4f2dae7fe68d1dbe1b685f21a0ef0b",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/collection_status.csv"
+    },
+    {
+      "path": "data/04_candidate_dimensions_and_geometry.csv",
+      "label": "candidate_dimensions_and_geometry.csv",
+      "bytes": 9166,
+      "sha256": "02c3328182cffdb2f73b56a06a60849bd556e7c402cc22c0075be8c472cd2063",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/candidate_dimensions_and_geometry.csv"
+    },
+    {
+      "path": "data/05_dimensions_mass_and_inertia.csv",
+      "label": "dimensions_mass_and_inertia.csv",
+      "bytes": 16995,
+      "sha256": "a8c0df819f49b081431262842c58d17fb9f66140a420bb7122a08a8858f526a4",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/dimensions_mass_and_inertia.csv"
+    },
+    {
+      "path": "data/06_asset_derivation_checks.json",
+      "label": "asset_derivation_checks.json",
+      "bytes": 542,
+      "sha256": "65fe2b5b325146649da6bf9eecfdb068210ae23f4cefea5a226b487ec460564a",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/asset_derivation_checks.json"
+    },
+    {
+      "path": "data/07_collection_audit.json",
+      "label": "数据资格与正常读取验证",
+      "bytes": 1690628,
+      "sha256": "d8f5c621e611b148bf0093b22a60e81a5e9f983f780847d4a52a30be599e2285",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/collection_audit.json"
+    },
+    {
+      "path": "data/08_actual_training_task_dataset_batch.json",
+      "label": "正式ACT单帧与DP三帧任务数据集实际batch读取",
+      "bytes": 12841,
+      "sha256": "c415247112abc7639bf2e1d238f2d8d7ee16d67d01f0134e383d7bc950c31ad0",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/actual_training_task_dataset_batch.json"
+    },
+    {
+      "path": "data/09_frozen_scene.json",
+      "label": "冻结standard场景清单",
+      "bytes": 21525,
+      "sha256": "540f8ade4d5d8cd72f8cb9230efd66417c85d8144eb5a06c7ccb0bb4ac289859",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/config/lab_cuvette_loading/Size_v1/frozen_scene.json"
+    },
+    {
+      "path": "data/10_failure_audit.json",
+      "label": "10.50mm开发失败复核",
+      "bytes": 19977,
+      "sha256": "10fbb9331b9b7e85a8c6570c57306e7f927004c3089e74b41b607a06cef140c7",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/loading1050_inspection/failure_audit.json"
+    },
+    {
+      "path": "data/11_renderer_USD_sync_audit.json",
+      "label": "主记录renderer与USD同观测核验",
+      "bytes": 7282,
+      "sha256": "65a405757cfdcd0e2ffefc571de1073f993d18309403885a280c3e8b4dd2d802",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/renderer_USD_sync_audit.json"
+    },
+    {
+      "path": "data/12_standard01_readability_summary.json",
+      "label": "主记录双视角与动作读取核验",
+      "bytes": 13715,
+      "sha256": "6901d7d335320fc0eed058a60477d22f836fcd3476319acf1fcb6885d882e26a",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/standard01_readability_summary.json"
+    }
+  ],
+  "media": [
+    {
+      "path": "media/00_03_standard01_scene_initial.png",
+      "label": "正式standard场景 一台原仪器 完整6×6来源架及机械臂",
+      "bytes": 104028,
+      "sha256": "742dd93473334a33c5d5c1c9b36e79df2f3bb4fb287736e33c7d5dc996255a83",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_standard01_scene_initial.png",
+      "kind": "image",
+      "metadata": {
+        "source_frame_index": 0,
+        "actual_simulation_time_s": 0.016666666666666666,
+        "sha256": "742dd93473334a33c5d5c1c9b36e79df2f3bb4fb287736e33c7d5dc996255a83",
+        "source_episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+        "label": "正式standard场景 一台原仪器 完整6×6来源架及机械臂",
+        "role": "overview",
+        "kind": "image"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/side_camera.mp4",
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/standard01_media_manifest.json"
+      }
+    },
+    {
+      "path": "media/01_04_standard01_dual_view_final.png",
+      "label": "04_standard01_dual_view_final",
+      "bytes": 273458,
+      "sha256": "0cf586628323bc427ffaa8a874c81954b73002b69071e51ed9c82d878e74e39f",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/04_standard01_dual_view_final.png",
+      "kind": "image",
+      "metadata": {
+        "source_frame_index": 3174,
+        "actual_simulation_time_s": 105.81666666666666,
+        "sha256": "0cf586628323bc427ffaa8a874c81954b73002b69071e51ed9c82d878e74e39f",
+        "source_episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+        "label": "04_standard01_dual_view_final",
+        "kind": "image"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/dual_view.mp4",
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/standard01_media_manifest.json"
+      }
+    },
+    {
+      "path": "media/02_05_standard01_target_final_wrist.png",
+      "label": "05_standard01_target_final_wrist",
+      "bytes": 141256,
+      "sha256": "a52626b875175e8f09a27a204dd864521b21f09fe21ec5bf07e3fcc3ed238a5a",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/05_standard01_target_final_wrist.png",
+      "kind": "image",
+      "metadata": {
+        "source_frame_index": 3174,
+        "actual_simulation_time_s": 105.81666666666666,
+        "sha256": "a52626b875175e8f09a27a204dd864521b21f09fe21ec5bf07e3fcc3ed238a5a",
+        "source_episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+        "label": "05_standard01_target_final_wrist",
+        "kind": "image"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4",
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/standard01_media_manifest.json"
+      }
+    },
+    {
+      "path": "media/03_06_standard01_actual_workflow_wrist_frames.jpg",
+      "label": "06_standard01_actual_workflow_wrist_frames",
+      "bytes": 92056,
+      "sha256": "9b7c6bbf8e4032a5bae3a7d517d7f7eecb65f138384d7b291e2ee55bbb335993",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/06_standard01_actual_workflow_wrist_frames.jpg",
+      "kind": "image",
+      "metadata": {
+        "sha256": "9b7c6bbf8e4032a5bae3a7d517d7f7eecb65f138384d7b291e2ee55bbb335993",
+        "sources": [
+          {
+            "event": "Contact latch",
+            "event_t_s": 14.666666666666666,
+            "selected_frame_index": 440,
+            "selected_actual_sim_t_s": 14.683333333333334,
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4"
+          },
+          {
+            "event": "Source slot cleared",
+            "event_t_s": 16.729166666666668,
+            "selected_frame_index": 502,
+            "selected_actual_sim_t_s": 16.75,
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4"
+          },
+          {
+            "event": "Controlled insertion",
+            "event_t_s": 59.333333333333336,
+            "selected_frame_index": 1780,
+            "selected_actual_sim_t_s": 59.35,
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4"
+          },
+          {
+            "event": "Bottom support observed",
+            "event_t_s": 94.4875,
+            "selected_frame_index": 2835,
+            "selected_actual_sim_t_s": 94.51666666666667,
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4"
+          },
+          {
+            "event": "Both fingers detached",
+            "event_t_s": 95.1,
+            "selected_frame_index": 2853,
+            "selected_actual_sim_t_s": 95.11666666666666,
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4"
+          },
+          {
+            "event": "Actual retreat >=40mm",
+            "event_t_s": 98.63333333333334,
+            "selected_frame_index": 2959,
+            "selected_actual_sim_t_s": 98.65,
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4"
+          }
+        ],
+        "description": "Actual frame montage from this one episode; each tile is the first recorded frame at or after the independently timed event. The full video remains continuous.",
+        "source_episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+        "label": "06_standard01_actual_workflow_wrist_frames",
+        "kind": "image"
+      },
+      "source_provenance": {
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/standard01_media_manifest.json"
+      }
+    },
+    {
+      "path": "media/04_07_controlled_early_stop_terminal.png",
+      "label": "07_controlled_early_stop_terminal",
+      "bytes": 285947,
+      "sha256": "d2b3a9b38ec03e04e285a297f86d2261a82c42d17a2bd9234c34f1703bf17f21",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/07_controlled_early_stop_terminal.png",
+      "kind": "image",
+      "metadata": {
+        "derived_sha256": "d2b3a9b38ec03e04e285a297f86d2261a82c42d17a2bd9234c34f1703bf17f21",
+        "source_frame_index": 1871,
+        "actual_simulation_time_s": 62.38333333333333,
+        "sha256": "d2b3a9b38ec03e04e285a297f86d2261a82c42d17a2bd9234c34f1703bf17f21",
+        "source_episode_id": "88633c2e-2b26-497b-834a-5ee0bd369d68",
+        "label": "07_controlled_early_stop_terminal",
+        "kind": "image"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_controlled_early_stop_full_62s.mp4",
+        "source_manifest": "docs/lab_cuvette_loading/Size_v1/data/controlled01_physics_inspection/controlled_failure_media_manifest.json"
+      }
+    },
+    {
+      "path": "media/05_control_vs_1000_visual_collision_overlay.png",
+      "label": "原12.5mm对照与10mm假设资产的实际视觉和28碰撞输入叠加",
+      "bytes": 660695,
+      "sha256": "15459ef9516b284667d8515048cc42753d2a039159463695b7bc3bda421346fe",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/control_vs_1000_visual_collision_overlay.png",
+      "kind": "image",
+      "metadata": {
+        "label": "原12.5mm对照与10mm假设资产的实际视觉和28碰撞输入叠加",
+        "caption": "原12.5mm对照与10mm假设资产的实际视觉和28碰撞输入叠加",
+        "kind": "image",
+        "role": "overlay"
+      },
+      "source_provenance": {}
+    },
+    {
+      "path": "media/06_recommended_1000_original_A_path.png",
+      "label": "10mm器皿与原A座入口及连续竖直扫掠的全部XY可行域",
+      "bytes": 70452,
+      "sha256": "1f02567631d11f004787d28d6b07ebe539325982aa585b00093a253a15466543",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/recommended_1000_original_A_path.png",
+      "kind": "image",
+      "metadata": {
+        "label": "10mm器皿与原A座入口及连续竖直扫掠的全部XY可行域",
+        "caption": "10mm器皿与原A座入口及连续竖直扫掠的全部XY可行域",
+        "kind": "image",
+        "role": "geometry"
+      },
+      "source_provenance": {}
+    },
+    {
+      "path": "media/07_01_standard01_complete_105s.mp4",
+      "label": "正式标准场景完整成功录像 同一次105.82秒",
+      "bytes": 5763604,
+      "sha256": "e31242fe252a6090cce25fb38758d87f8c4219a0d8817a5fdd5c9b1fb2264d78",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/01_standard01_complete_105s.mp4",
+      "kind": "video",
+      "metadata": {
+        "derived_sha256": "e31242fe252a6090cce25fb38758d87f8c4219a0d8817a5fdd5c9b1fb2264d78",
+        "source_probe": {
+          "resolution_wh": [
+            1280,
+            480
+          ],
+          "frame_count": 3175,
+          "fps": "30/1",
+          "duration_s": 105.833333
+        },
+        "derived_probe": {
+          "resolution_wh": [
+            1280,
+            480
+          ],
+          "frame_count": 3175,
+          "fps": "30/1",
+          "duration_s": 105.833333
+        },
+        "source_frame_start_inclusive": 0,
+        "source_frame_end_inclusive": 3174,
+        "actual_simulation_time_first_s": 0.016666666666666666,
+        "actual_simulation_time_last_s": 105.81666666666666,
+        "continuous_same_episode": true,
+        "multiple_attempts_spliced": false,
+        "CPU_full_decode_exit_code": 0,
+        "pixels": "H264 lossy transcode; same resolution/fps/frame order; no geometric or timing edits beyond the declared contiguous wrist clip",
+        "sha256": "e31242fe252a6090cce25fb38758d87f8c4219a0d8817a5fdd5c9b1fb2264d78",
+        "source_episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+        "label": "正式标准场景完整成功录像 同一次105.82秒",
+        "kind": "video"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/dual_view.mp4",
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/standard01_media_manifest.json",
+        "source_sha256": "2b311a48a0f2102e1a80e1cf3724e53ed15deddabe015ba451a5508d9b1234c2"
+      }
+    },
+    {
+      "path": "media/08_02_standard01_insertion_release_retreat_wrist_88s_to_end.mp4",
+      "label": "插入 支撑交接 松爪 撤离近景 88秒至结束",
+      "bytes": 648425,
+      "sha256": "4017de69e2acf0aa2122d92fbf2dd9bafaab291718780a24fd3f579de8f0e928",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/02_standard01_insertion_release_retreat_wrist_88s_to_end.mp4",
+      "kind": "video",
+      "metadata": {
+        "derived_sha256": "4017de69e2acf0aa2122d92fbf2dd9bafaab291718780a24fd3f579de8f0e928",
+        "source_probe": {
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "frame_count": 3175,
+          "fps": "30/1",
+          "duration_s": 105.833333
+        },
+        "derived_probe": {
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "frame_count": 535,
+          "fps": "30/1",
+          "duration_s": 17.833333
+        },
+        "source_frame_start_inclusive": 2640,
+        "source_frame_end_inclusive": 3174,
+        "actual_simulation_time_first_s": 88.01666666666667,
+        "actual_simulation_time_last_s": 105.81666666666666,
+        "continuous_same_episode": true,
+        "multiple_attempts_spliced": false,
+        "CPU_full_decode_exit_code": 0,
+        "pixels": "H264 lossy transcode; same resolution/fps/frame order; no geometric or timing edits beyond the declared contiguous wrist clip",
+        "sha256": "4017de69e2acf0aa2122d92fbf2dd9bafaab291718780a24fd3f579de8f0e928",
+        "source_episode_id": "a8fe2a83-42c8-4941-9e40-521a3b8389a0",
+        "label": "插入 支撑交接 松爪 撤离近景 88秒至结束",
+        "kind": "video"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/wrist_camera.mp4",
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/standard01_media_manifest.json",
+        "source_sha256": "5ba959c393c7157b814afe3d8d0761348db7c84a49cc0331c224427433078ae2"
+      }
+    },
+    {
+      "path": "media/09_03_controlled_early_stop_full_62s.mp4",
+      "label": "受控失败完整录像 1mm深度提前停止 未释放或撤离",
+      "bytes": 2608505,
+      "sha256": "3e0dfaddb9e9789971b8c8596959cd8a702edd8e5c338ed82f8c9406a5a88d6c",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_controlled_early_stop_full_62s.mp4",
+      "kind": "video",
+      "metadata": {
+        "derived_sha256": "3e0dfaddb9e9789971b8c8596959cd8a702edd8e5c338ed82f8c9406a5a88d6c",
+        "source_probe": {
+          "frame_count": 1872,
+          "fps": "30/1",
+          "resolution_wh": [
+            1280,
+            480
+          ],
+          "duration_s": 62.4
+        },
+        "derived_probe": {
+          "frame_count": 1872,
+          "fps": "30/1",
+          "resolution_wh": [
+            1280,
+            544
+          ],
+          "duration_s": 62.4
+        },
+        "source_frame_start_inclusive": 0,
+        "source_frame_end_inclusive": 1871,
+        "first_actual_sim_t_s": 0.016666666666666666,
+        "last_actual_sim_t_s": 62.38333333333333,
+        "single_same_episode_continuous": true,
+        "attempts_spliced": false,
+        "time_resampling": false,
+        "source_image_region_unoccluded": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 480
+        },
+        "annotation_region": "New64px black band appended below the original480px image. Original camera pixels are neither cropped nor spatially rescaled; H264 is a lossy transcode.",
+        "burned_caption_lines": [
+          "受控动作偏差：插入深度达到1 mm后提前停止",
+          "未释放、未撤离；非自然卡滞；固定 standard 场景"
+        ],
+        "caption_font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "full_CPU_decode_exit_code": 0,
+        "sha256": "3e0dfaddb9e9789971b8c8596959cd8a702edd8e5c338ed82f8c9406a5a88d6c",
+        "source_episode_id": "88633c2e-2b26-497b-834a-5ee0bd369d68",
+        "label": "受控失败完整录像 1mm深度提前停止 未释放或撤离",
+        "kind": "video"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T045710Z_edfa49e9_00/episode_0000/dual_view.mp4",
+        "source_manifest": "docs/lab_cuvette_loading/Size_v1/data/controlled01_physics_inspection/controlled_failure_media_manifest.json",
+        "source_sha256": "45b1d56b4bba06c5c1433e51ed5aaf3041bff8b09bf8be8a791be43e6572ee35"
+      }
+    },
+    {
+      "path": "media/10_07_boundary1050_early_grasp_gate_13s_to_18s.mp4",
+      "label": "10.50mm开发失败 抓持判分片段 13.52至17.48秒",
+      "bytes": 228287,
+      "sha256": "3057538a8fbfbbe01ac3d85c80d6b0ec7db433e3c8734356ae0b71d40beada94",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/07_boundary1050_early_grasp_gate_13s_to_18s.mp4",
+      "kind": "video",
+      "metadata": {
+        "derived_sha256": "3057538a8fbfbbe01ac3d85c80d6b0ec7db433e3c8734356ae0b71d40beada94",
+        "source_probe": {
+          "frame_count": 3174,
+          "fps": "30/1",
+          "resolution_wh": [
+            1280,
+            480
+          ],
+          "duration_s": 105.8
+        },
+        "derived_probe": {
+          "frame_count": 120,
+          "fps": "30/1",
+          "resolution_wh": [
+            1280,
+            480
+          ],
+          "duration_s": 4.0
+        },
+        "source_frame_start_inclusive": 405,
+        "source_frame_end_inclusive": 524,
+        "first_actual_sim_t_s": 13.516666666666667,
+        "last_actual_sim_t_s": 17.483333333333334,
+        "same_single_continuous_attempt": true,
+        "multiple_attempts_spliced": false,
+        "derived_full_CPU_decode_exit_code": 0,
+        "sha256": "3057538a8fbfbbe01ac3d85c80d6b0ec7db433e3c8734356ae0b71d40beada94",
+        "source_episode_id": "022b4499-5a99-443f-884c-9fe326da822b",
+        "label": "10.50mm开发失败 抓持判分片段 13.52至17.48秒",
+        "kind": "video"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000/dual_view.mp4",
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/loading1050_media_manifest.json",
+        "source_sha256": "f199c18ee98c58395fcd17485c3bb6fb7034f48e6f23d0c4b320d8f1a3aea2fc"
+      }
+    },
+    {
+      "path": "media/11_08_boundary1050_release_stable_despite_failed_score.mp4",
+      "label": "10.50mm开发失败 实际释放撤离与稳定 91.52秒至结束",
+      "bytes": 546858,
+      "sha256": "af0e5506875ba7c0ff4779f6c4a0c19629fe975a6c8ec355bab75e9a4cc2fcdf",
+      "source_provenance_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/08_boundary1050_release_stable_despite_failed_score.mp4",
+      "kind": "video",
+      "metadata": {
+        "derived_sha256": "af0e5506875ba7c0ff4779f6c4a0c19629fe975a6c8ec355bab75e9a4cc2fcdf",
+        "source_probe": {
+          "frame_count": 3174,
+          "fps": "30/1",
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "duration_s": 105.8
+        },
+        "derived_probe": {
+          "frame_count": 429,
+          "fps": "30/1",
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "duration_s": 14.3
+        },
+        "source_frame_start_inclusive": 2745,
+        "source_frame_end_inclusive": 3173,
+        "first_actual_sim_t_s": 91.51666666666667,
+        "last_actual_sim_t_s": 105.78333333333333,
+        "same_single_continuous_attempt": true,
+        "multiple_attempts_spliced": false,
+        "derived_full_CPU_decode_exit_code": 0,
+        "sha256": "af0e5506875ba7c0ff4779f6c4a0c19629fe975a6c8ec355bab75e9a4cc2fcdf",
+        "source_episode_id": "022b4499-5a99-443f-884c-9fe326da822b",
+        "label": "10.50mm开发失败 实际释放撤离与稳定 91.52秒至结束",
+        "kind": "video"
+      },
+      "source_provenance": {
+        "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000/wrist_camera.mp4",
+        "source_manifest": "outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/loading1050_media_manifest.json",
+        "source_sha256": "41837b2fb8b4d198810eca60a7bf3cf4c1d593c5c1b268a52f8ec58a0738573b"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/summary.json",
+      "sha256": "cc8d2b59b2fcbc4650d76361f7a444ddbe9e2a59fe9c8adc1114d23712dc7d3a",
+      "bytes": 989225
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/family_summary.json",
+      "sha256": "7ed3d6f085ef9c2c3b105b242b873a9ce841702c2651ad51dfcf2e946ae28051",
+      "bytes": 4060
+    },
+    {
+      "source_path": "assets/lab_cuvette_loading/Size_v1/registry.json",
+      "sha256": "ca095fa5d5efe4974b585c023c775f099e7bb943fb1ebc695c0729aff5ab806a",
+      "bytes": 2245509
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.json",
+      "sha256": "c6a0fcb726fc2fcf94b1858a572b4a165a9f02ae3437fcab89810f3d4f92f791",
+      "bytes": 40322
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/loading1050_inspection/failure_audit.json",
+      "sha256": "10fbb9331b9b7e85a8c6570c57306e7f927004c3089e74b41b607a06cef140c7",
+      "bytes": 19977
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/final40_actual/collection_audit.json",
+      "sha256": "d8f5c621e611b148bf0093b22a60e81a5e9f983f780847d4a52a30be599e2285",
+      "bytes": 1690628
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/result.json",
+      "sha256": "4e51389214bd130279bb82ee7e0da99b142e1ba61acc94d4fff0e46d672a3437",
+      "bytes": 7505
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T045710Z_edfa49e9_00/episode_0000/config.yaml",
+      "sha256": "ab552fa52950ee9083995779f6c1f6b8f8d49a71b06edc98bd0df59e03c9eaa3",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T071909Z_5619b9ca_00/episode_0000/config.yaml",
+      "sha256": "cfc5ee116aa03080fcac52b43850be0aba092d6106179c7b0e6063c8161ade5b",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T071909Z_5619b9ca_00/episode_0001/config.yaml",
+      "sha256": "193c55cc96ac490c743f77b67baadb2df4cafe043bef79317e9532a649649e53",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T071909Z_5619b9ca_00/episode_0002/config.yaml",
+      "sha256": "098cf8e398dac634a4ac6185ee93250b254ef06f90477e4b993cb08305306665",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T071909Z_5619b9ca_00/episode_0003/config.yaml",
+      "sha256": "b85b40e190213dba930ba4ba71a96c3d563f91a69a073b9a45e351f6bc4033ad",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T071909Z_5619b9ca_00/episode_0004/config.yaml",
+      "sha256": "f76961b6be4d0057d89cdb98f6119466211da89842aa5cf82e0fa33915e0b375",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T075843Z_b655862f_00/episode_0000/config.yaml",
+      "sha256": "b13d92f234aaaafbeaadda889ad372d9ae8ce400ad99ac5f1fc3b0d24098e39e",
+      "bytes": 10578
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T075843Z_b655862f_00/episode_0001/config.yaml",
+      "sha256": "7232562c722822b8f4de2c17916e46e64d625d9598640a6fe62ccb7ac9f61521",
+      "bytes": 10578
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T075843Z_b655862f_00/episode_0002/config.yaml",
+      "sha256": "743ceb9ec83e5a4af666f133a1cab84ee72deeff9ec254a28e8542e4c8a63253",
+      "bytes": 10578
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T075843Z_b655862f_00/episode_0003/config.yaml",
+      "sha256": "bbc0647650193f0fccddf824374ca409309ccb7e95bd255c82fe0f0ec6118cc7",
+      "bytes": 10578
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T075843Z_b655862f_00/episode_0004/config.yaml",
+      "sha256": "adb0f7a0b2a0511dea27c8a0f5b1fd18bcc72f25523cf32ca670c75376969bb5",
+      "bytes": 10578
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T084047Z_501ae5d9_00/episode_0000/config.yaml",
+      "sha256": "b41d72259acb34e15883bc702784bba4d0cebbd9c54e381e699e271715194df5",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T084047Z_501ae5d9_00/episode_0001/config.yaml",
+      "sha256": "942f166a505a5aedafe31a78d36bdbfed6c0099e2d38262f3fbe2fc6d092e1bc",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T084047Z_501ae5d9_00/episode_0002/config.yaml",
+      "sha256": "4573ef021b62497f5a6dc938035699778d04c6f8864bb757a3cc8f8de66be627",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T084047Z_501ae5d9_00/episode_0003/config.yaml",
+      "sha256": "fed2efa57e2718d0d089b810d54206ffcd8888432be5e052d5d9cca56fb50f76",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T084047Z_501ae5d9_00/episode_0004/config.yaml",
+      "sha256": "44becd94650703c0d927b26ef672fdd224f4a61974817674ce3829b3899222cb",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T092650Z_a396495c_00/episode_0000/config.yaml",
+      "sha256": "ab552fa52950ee9083995779f6c1f6b8f8d49a71b06edc98bd0df59e03c9eaa3",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T092650Z_a396495c_00/episode_0001/config.yaml",
+      "sha256": "79ed9ac97a0dacae299f05ee0630901a0479b69fac692e972a5390c053c78543",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T092650Z_a396495c_00/episode_0002/config.yaml",
+      "sha256": "be616273e0304ed3df937058ccc5e0fe347b5f146ba41095312b68e2fef304af",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/controlled_failure_20261021T092650Z_a396495c_00/episode_0003/config.yaml",
+      "sha256": "476b70453f6c0e0b8d945b16434d167d5161633a2f8ecffd70a5a6aff6a05191",
+      "bytes": 10580
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T034658Z_8928651a_00/episode_0000/config.yaml",
+      "sha256": "4379c7a0468091b31daf7b8bd701f8ce1979ea2ab69b8257042cd391aa2037dc",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T034658Z_8928651a_00/episode_0001/config.yaml",
+      "sha256": "336625ae2818b501a531e390c65ab56fb2cbc698e4ed46389b1edb64eed058cd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T034658Z_8928651a_00/episode_0002/config.yaml",
+      "sha256": "cd9ea463806ca47429f3055b60809bb8d0b0c66b116fc398aef7c5138979dad9",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T034658Z_8928651a_00/episode_0003/config.yaml",
+      "sha256": "fafd03487c7d630ca6e3841df245de6d18a98d070f98c4c7d50ab44b52c1c57b",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T034658Z_8928651a_00/episode_0004/config.yaml",
+      "sha256": "8b2975a7bb35e6aa3c57389d76c1eb7e6dc66dd9cb7dd3d5a8acafd5c2fdf1dd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T050557Z_1940849e_00/episode_0000/config.yaml",
+      "sha256": "4379c7a0468091b31daf7b8bd701f8ce1979ea2ab69b8257042cd391aa2037dc",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T050557Z_1940849e_00/episode_0001/config.yaml",
+      "sha256": "336625ae2818b501a531e390c65ab56fb2cbc698e4ed46389b1edb64eed058cd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T050557Z_1940849e_00/episode_0002/config.yaml",
+      "sha256": "cd9ea463806ca47429f3055b60809bb8d0b0c66b116fc398aef7c5138979dad9",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T050557Z_1940849e_00/episode_0003/config.yaml",
+      "sha256": "fafd03487c7d630ca6e3841df245de6d18a98d070f98c4c7d50ab44b52c1c57b",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T050557Z_1940849e_00/episode_0004/config.yaml",
+      "sha256": "8b2975a7bb35e6aa3c57389d76c1eb7e6dc66dd9cb7dd3d5a8acafd5c2fdf1dd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T061505Z_8c146230_00/episode_0000/config.yaml",
+      "sha256": "4379c7a0468091b31daf7b8bd701f8ce1979ea2ab69b8257042cd391aa2037dc",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T061505Z_8c146230_00/episode_0001/config.yaml",
+      "sha256": "336625ae2818b501a531e390c65ab56fb2cbc698e4ed46389b1edb64eed058cd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T061505Z_8c146230_00/episode_0002/config.yaml",
+      "sha256": "cd9ea463806ca47429f3055b60809bb8d0b0c66b116fc398aef7c5138979dad9",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T061505Z_8c146230_00/episode_0003/config.yaml",
+      "sha256": "fafd03487c7d630ca6e3841df245de6d18a98d070f98c4c7d50ab44b52c1c57b",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/success_20261021T061505Z_8c146230_00/episode_0004/config.yaml",
+      "sha256": "8b2975a7bb35e6aa3c57389d76c1eb7e6dc66dd9cb7dd3d5a8acafd5c2fdf1dd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/config.yaml",
+      "sha256": "4379c7a0468091b31daf7b8bd701f8ce1979ea2ab69b8257042cd391aa2037dc",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0001/config.yaml",
+      "sha256": "336625ae2818b501a531e390c65ab56fb2cbc698e4ed46389b1edb64eed058cd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0002/config.yaml",
+      "sha256": "cd9ea463806ca47429f3055b60809bb8d0b0c66b116fc398aef7c5138979dad9",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0003/config.yaml",
+      "sha256": "fafd03487c7d630ca6e3841df245de6d18a98d070f98c4c7d50ab44b52c1c57b",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0004/config.yaml",
+      "sha256": "8b2975a7bb35e6aa3c57389d76c1eb7e6dc66dd9cb7dd3d5a8acafd5c2fdf1dd",
+      "bytes": 10317
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/loading_01/episode_0000/config.yaml",
+      "sha256": "6ddd5bd8484f93590786563d02fe408cb8cf16319d21dd18ec79284ba433daa4",
+      "bytes": 10174
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/loading_1030_01/episode_0000/config.yaml",
+      "sha256": "373e60b06b0818b1decb0e874d09d576c4f768c454f1a6047f999c27739aebfd",
+      "bytes": 10496
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/loading_1050_01/episode_0000/config.yaml",
+      "sha256": "a96d79c1876c7f9236bf04841ece188cf647a36eb69b8b196178d726566be2cd",
+      "bytes": 10210
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/preview_01/episode_0000/config.yaml",
+      "sha256": "124dfc87a53d5120bf412c0028c965f7ea8247617dd9449d36af9a6a24877e73",
+      "bytes": 8575
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/runs/verify5_20261021T021430Z_274d1b2d_00/episode_0000/physics_capture_meta.json",
+      "sha256": "000de1fb53e0696456df45c60ec607ffe7204184f6cbb40e9f8b92b34297d0d7",
+      "bytes": 5199
+    },
+    {
+      "source_path": "demos/lab_cuvette_demo04/run.py",
+      "sha256": "92088545ce6d9d3240dbb853505fa38884f404ff2ed6a8ae410b0ebce9e53fed",
+      "bytes": 43170
+    },
+    {
+      "source_path": "config/lab_cuvette_loading/Size_v1/frozen_scene.json",
+      "sha256": "540f8ade4d5d8cd72f8cb9230efd66417c85d8144eb5a06c7ccb0bb4ac289859",
+      "bytes": 21525
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/standard5_actual/portable_episode_validation.json",
+      "sha256": "92a180e906b563b5bd834603a97a48799d478ea71acd2a110350fd5f0ca268a1",
+      "bytes": 12462
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/renderer_USD_sync_audit.json",
+      "sha256": "65a405757cfdcd0e2ffefc571de1073f993d18309403885a280c3e8b4dd2d802",
+      "bytes": 7282
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/standard01_inspection/standard01_readability_summary.json",
+      "sha256": "6901d7d335320fc0eed058a60477d22f836fcd3476319acf1fcb6885d882e26a",
+      "bytes": 13715
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/report/selected_media.json",
+      "sha256": "3e499ba42c380bf898737b86d3ecbbf1d37ceb400e68bc42bdf8b9bfe560141d",
+      "bytes": 22594
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/01_standard01_complete_105s.mp4",
+      "sha256": "e31242fe252a6090cce25fb38758d87f8c4219a0d8817a5fdd5c9b1fb2264d78",
+      "bytes": 5763604
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/02_standard01_insertion_release_retreat_wrist_88s_to_end.mp4",
+      "sha256": "4017de69e2acf0aa2122d92fbf2dd9bafaab291718780a24fd3f579de8f0e928",
+      "bytes": 648425
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_standard01_scene_initial.png",
+      "sha256": "742dd93473334a33c5d5c1c9b36e79df2f3bb4fb287736e33c7d5dc996255a83",
+      "bytes": 104028
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/04_standard01_dual_view_final.png",
+      "sha256": "0cf586628323bc427ffaa8a874c81954b73002b69071e51ed9c82d878e74e39f",
+      "bytes": 273458
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/05_standard01_target_final_wrist.png",
+      "sha256": "a52626b875175e8f09a27a204dd864521b21f09fe21ec5bf07e3fcc3ed238a5a",
+      "bytes": 141256
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/06_standard01_actual_workflow_wrist_frames.jpg",
+      "sha256": "9b7c6bbf8e4032a5bae3a7d517d7f7eecb65f138384d7b291e2ee55bbb335993",
+      "bytes": 92056
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/03_controlled_early_stop_full_62s.mp4",
+      "sha256": "3e0dfaddb9e9789971b8c8596959cd8a702edd8e5c338ed82f8c9406a5a88d6c",
+      "bytes": 2608505
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_frozen_20261021/07_controlled_early_stop_terminal.png",
+      "sha256": "d2b3a9b38ec03e04e285a297f86d2261a82c42d17a2bd9234c34f1703bf17f21",
+      "bytes": 285947
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/07_boundary1050_early_grasp_gate_13s_to_18s.mp4",
+      "sha256": "3057538a8fbfbbe01ac3d85c80d6b0ec7db433e3c8734356ae0b71d40beada94",
+      "bytes": 228287
+    },
+    {
+      "source_path": "outputs/lab_cuvette_loading/Size_v1/reading_media_20261021/08_boundary1050_release_stable_despite_failed_score.mp4",
+      "sha256": "af0e5506875ba7c0ff4779f6c4a0c19629fe975a6c8ec355bab75e9a4cc2fcdf",
+      "bytes": 546858
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/control_vs_1000_visual_collision_overlay.png",
+      "sha256": "15459ef9516b284667d8515048cc42753d2a039159463695b7bc3bda421346fe",
+      "bytes": 660695
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/recommended_1000_original_A_path.png",
+      "sha256": "1f02567631d11f004787d28d6b07ebe539325982aa585b00093a253a15466543",
+      "bytes": 70452
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/candidate_results.csv",
+      "sha256": "92be332e9426d2fd85e044390d0950d4387990d070197f05ea7d201a1f0184c5",
+      "bytes": 34175
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/actual_runs.csv",
+      "sha256": "8f294e25e377ad706bdab22b1df532ae35241a5dba8e72d11a15454ad075bae1",
+      "bytes": 583771
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/standard5_runs.csv",
+      "sha256": "04c042df89ebf973875c6eb9421c778bfa36c6c278a24d3b7fcdb8a7f5d91c45",
+      "bytes": 68002
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/final40_actual/summary/collection_status.csv",
+      "sha256": "6e5188e826b88a692185b8a2d6f3741d8e4f2dae7fe68d1dbe1b685f21a0ef0b",
+      "bytes": 23556
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/candidate_dimensions_and_geometry.csv",
+      "sha256": "02c3328182cffdb2f73b56a06a60849bd556e7c402cc22c0075be8c472cd2063",
+      "bytes": 9166
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/dimensions_mass_and_inertia.csv",
+      "sha256": "a8c0df819f49b081431262842c58d17fb9f66140a420bb7122a08a8858f526a4",
+      "bytes": 16995
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/asset_derivation_checks.json",
+      "sha256": "65fe2b5b325146649da6bf9eecfdb068210ae23f4cefea5a226b487ec460564a",
+      "bytes": 542
+    },
+    {
+      "source_path": "docs/lab_cuvette_loading/Size_v1/data/final40_actual/actual_training_task_dataset_batch.json",
+      "sha256": "c415247112abc7639bf2e1d238f2d8d7ee16d67d01f0134e383d7bc950c31ad0",
+      "bytes": 12841
+    }
+  ],
+  "warnings": []
+}

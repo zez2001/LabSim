@@ -1,0 +1,475 @@
+{
+  "schema": "labsim.Size_v1.actual_training_task_dataset_batch.v1",
+  "scope": "Actual normal Hydra-composed task.dataset instantiation and selected small batches from final default index; no workspace, model, optimizer, training or simulation",
+  "checks": [
+    {
+      "policy": "act",
+      "normal_training_configuration": "train_lab_cuvette_loading_act",
+      "Hydra_overrides": [
+        "task=lab_cuvette_size_v1_act",
+        "policy.camera_names=[side_camera_rgb,wrist_camera_rgb]"
+      ],
+      "dataset_instantiated_via": "hydra.utils.instantiate(cfg.task.dataset)",
+      "dataset_target": "policy.dataset.lab_cuvette_size_v1_dataset.LabCuvetteSizeV1Dataset",
+      "task_dataset_resolved": {
+        "_target_": "policy.dataset.lab_cuvette_size_v1_dataset.LabCuvetteSizeV1Dataset",
+        "shape_meta": {
+          "obs": {
+            "side_camera_rgb": {
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "type": "rgb"
+            },
+            "wrist_camera_rgb": {
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "type": "rgb"
+            },
+            "agent_pose": {
+              "shape": [
+                8
+              ],
+              "type": "low_dim"
+            }
+          },
+          "action": {
+            "shape": [
+              8
+            ]
+          }
+        },
+        "dataset_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/dataset",
+        "horizon": 16,
+        "n_obs_steps": 1,
+        "policy_type": "act",
+        "sample_filter": "success",
+        "seed": 42,
+        "training_rng_seed": 42,
+        "val_ratio": 0.1,
+        "split_group_keys": [],
+        "frozen_scene_path": "config/lab_cuvette_loading/Size_v1/frozen_scene.json",
+        "scene_config_path": "config/lab_cuvette_loading/Size_v1/standard.yaml",
+        "repository_root": ".",
+        "scene_mode": "standard",
+        "scene_randomization_enabled": false,
+        "automatic_validation_mode": "standard"
+      },
+      "shape_meta": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              256,
+              256
+            ],
+            "type": "rgb"
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              256,
+              256
+            ],
+            "type": "rgb"
+          },
+          "agent_pose": {
+            "shape": [
+              8
+            ],
+            "type": "low_dim"
+          }
+        },
+        "action": {
+          "shape": [
+            8
+          ]
+        }
+      },
+      "n_obs_steps": 1,
+      "horizon": 16,
+      "action_dimension": 8,
+      "dataset_path_argument_is_directory": true,
+      "actual_index_filename": "episode_data.hdf5",
+      "source_index_group_count": 40,
+      "eligible_success_episode_count": 20,
+      "excluded_failure_episode_count": 20,
+      "default_success_filter": true,
+      "train_episode_count": 18,
+      "validation_episode_count": 2,
+      "train_episode_ids": [
+        "episode_0034",
+        "episode_0027",
+        "episode_0032",
+        "episode_0030",
+        "episode_0026",
+        "episode_0039",
+        "episode_0023",
+        "episode_0020",
+        "episode_0036",
+        "episode_0025",
+        "episode_0031",
+        "episode_0038",
+        "episode_0022",
+        "episode_0024",
+        "episode_0037",
+        "episode_0021",
+        "episode_0033",
+        "episode_0028"
+      ],
+      "validation_episode_ids": [
+        "episode_0035",
+        "episode_0029"
+      ],
+      "whole_episode_split_disjoint": true,
+      "scene_admission": {
+        "frozen_scene_match": true,
+        "frozen_scene_sha256": "f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+        "mode": "standard",
+        "fixed_collection_eligible": true
+      },
+      "scene_mode": "standard",
+      "scene_randomization_enabled": false,
+      "automatic_validation_mode": "standard",
+      "training_RNG_seed": 42,
+      "episode_split_seed": 42,
+      "scene_randomization_is_independent_of_seed": true,
+      "train_batch_shapes": {
+        "obs/side_camera_rgb": [
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/wrist_camera_rgb": [
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/agent_pose": [
+          3,
+          8
+        ],
+        "action": [
+          3,
+          16,
+          8
+        ]
+      },
+      "validation_small_batch_shapes": {
+        "obs/side_camera_rgb": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "obs/wrist_camera_rgb": [
+          1,
+          3,
+          256,
+          256
+        ],
+        "obs/agent_pose": [
+          1,
+          8
+        ],
+        "action": [
+          1,
+          16,
+          8
+        ]
+      },
+      "actual_selected_sample_checks": [
+        {
+          "dataset_index": 0,
+          "index_group": "episode_0034",
+          "episode_id": "c6b5bf8d-5efe-4add-8232-128d73285d04",
+          "transition": 0,
+          "observation_indices": [
+            0
+          ],
+          "exact_saved_RGB": true,
+          "exact_saved_agent_pose": true,
+          "exact_saved_executed_actions": true
+        },
+        {
+          "dataset_index": 57132,
+          "index_group": "episode_0025",
+          "episode_id": "f2337e35-a05c-4e27-a3ff-89deb63fe31d",
+          "transition": 0,
+          "observation_indices": [
+            0
+          ],
+          "exact_saved_RGB": true,
+          "exact_saved_agent_pose": true,
+          "exact_saved_executed_actions": true
+        },
+        {
+          "dataset_index": 114263,
+          "index_group": "episode_0028",
+          "episode_id": "dd2bd736-5fae-4c47-8593-9677c1813dca",
+          "transition": 6347,
+          "observation_indices": [
+            6347
+          ],
+          "exact_saved_RGB": true,
+          "exact_saved_agent_pose": true,
+          "exact_saved_executed_actions": true
+        }
+      ],
+      "source_labels_or_states_modified": false
+    },
+    {
+      "policy": "dp",
+      "normal_training_configuration": "train_lab_cuvette_loading_dp",
+      "Hydra_overrides": [
+        "task=lab_cuvette_size_v1_dp"
+      ],
+      "dataset_instantiated_via": "hydra.utils.instantiate(cfg.task.dataset)",
+      "dataset_target": "policy.dataset.lab_cuvette_size_v1_dataset.LabCuvetteSizeV1Dataset",
+      "task_dataset_resolved": {
+        "_target_": "policy.dataset.lab_cuvette_size_v1_dataset.LabCuvetteSizeV1Dataset",
+        "shape_meta": {
+          "obs": {
+            "side_camera_rgb": {
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "type": "rgb"
+            },
+            "wrist_camera_rgb": {
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "type": "rgb"
+            },
+            "agent_pose": {
+              "shape": [
+                8
+              ],
+              "type": "low_dim"
+            }
+          },
+          "action": {
+            "shape": [
+              8
+            ]
+          }
+        },
+        "dataset_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/dataset",
+        "horizon": 16,
+        "n_obs_steps": 3,
+        "policy_type": "dp",
+        "sample_filter": "success",
+        "seed": 42,
+        "training_rng_seed": 42,
+        "val_ratio": 0.1,
+        "split_group_keys": [],
+        "frozen_scene_path": "config/lab_cuvette_loading/Size_v1/frozen_scene.json",
+        "scene_config_path": "config/lab_cuvette_loading/Size_v1/standard.yaml",
+        "repository_root": ".",
+        "scene_mode": "standard",
+        "scene_randomization_enabled": false,
+        "automatic_validation_mode": "standard"
+      },
+      "shape_meta": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              256,
+              256
+            ],
+            "type": "rgb"
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              256,
+              256
+            ],
+            "type": "rgb"
+          },
+          "agent_pose": {
+            "shape": [
+              8
+            ],
+            "type": "low_dim"
+          }
+        },
+        "action": {
+          "shape": [
+            8
+          ]
+        }
+      },
+      "n_obs_steps": 3,
+      "horizon": 16,
+      "action_dimension": 8,
+      "dataset_path_argument_is_directory": true,
+      "actual_index_filename": "episode_data.hdf5",
+      "source_index_group_count": 40,
+      "eligible_success_episode_count": 20,
+      "excluded_failure_episode_count": 20,
+      "default_success_filter": true,
+      "train_episode_count": 18,
+      "validation_episode_count": 2,
+      "train_episode_ids": [
+        "episode_0034",
+        "episode_0027",
+        "episode_0032",
+        "episode_0030",
+        "episode_0026",
+        "episode_0039",
+        "episode_0023",
+        "episode_0020",
+        "episode_0036",
+        "episode_0025",
+        "episode_0031",
+        "episode_0038",
+        "episode_0022",
+        "episode_0024",
+        "episode_0037",
+        "episode_0021",
+        "episode_0033",
+        "episode_0028"
+      ],
+      "validation_episode_ids": [
+        "episode_0035",
+        "episode_0029"
+      ],
+      "whole_episode_split_disjoint": true,
+      "scene_admission": {
+        "frozen_scene_match": true,
+        "frozen_scene_sha256": "f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+        "mode": "standard",
+        "fixed_collection_eligible": true
+      },
+      "scene_mode": "standard",
+      "scene_randomization_enabled": false,
+      "automatic_validation_mode": "standard",
+      "training_RNG_seed": 42,
+      "episode_split_seed": 42,
+      "scene_randomization_is_independent_of_seed": true,
+      "train_batch_shapes": {
+        "obs/side_camera_rgb": [
+          3,
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/wrist_camera_rgb": [
+          3,
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/agent_pose": [
+          3,
+          3,
+          8
+        ],
+        "action": [
+          3,
+          16,
+          8
+        ]
+      },
+      "validation_small_batch_shapes": {
+        "obs/side_camera_rgb": [
+          1,
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/wrist_camera_rgb": [
+          1,
+          3,
+          3,
+          256,
+          256
+        ],
+        "obs/agent_pose": [
+          1,
+          3,
+          8
+        ],
+        "action": [
+          1,
+          16,
+          8
+        ]
+      },
+      "actual_selected_sample_checks": [
+        {
+          "dataset_index": 0,
+          "index_group": "episode_0034",
+          "episode_id": "c6b5bf8d-5efe-4add-8232-128d73285d04",
+          "transition": 0,
+          "observation_indices": [
+            0,
+            0,
+            0
+          ],
+          "exact_saved_RGB": true,
+          "exact_saved_agent_pose": true,
+          "exact_saved_executed_actions": true
+        },
+        {
+          "dataset_index": 57132,
+          "index_group": "episode_0025",
+          "episode_id": "f2337e35-a05c-4e27-a3ff-89deb63fe31d",
+          "transition": 0,
+          "observation_indices": [
+            0,
+            0,
+            0
+          ],
+          "exact_saved_RGB": true,
+          "exact_saved_agent_pose": true,
+          "exact_saved_executed_actions": true
+        },
+        {
+          "dataset_index": 114263,
+          "index_group": "episode_0028",
+          "episode_id": "dd2bd736-5fae-4c47-8593-9677c1813dca",
+          "transition": 6347,
+          "observation_indices": [
+            6345,
+            6346,
+            6347
+          ],
+          "exact_saved_RGB": true,
+          "exact_saved_agent_pose": true,
+          "exact_saved_executed_actions": true
+        }
+      ],
+      "source_labels_or_states_modified": false
+    }
+  ],
+  "CPU_thread_limit": 2,
+  "CUDA_VISIBLE_DEVICES": "",
+  "GPU_started": false,
+  "workspace_instantiated": false,
+  "model_instantiated": false,
+  "optimizer_instantiated": false,
+  "training_executed": false,
+  "index_or_source_data_modified": false,
+  "index_size_and_mtime_unchanged": true,
+  "source_HDF5_full_SHA_recomputed": false,
+  "image_validation_scope": "3 selected train sequences for each policy; ACT1 observation and DP3 observations, both cameras; no exhaustive per-frame RGB audit",
+  "automatic_validation_scope": "get_validation_dataset() on the same frozen standard episode split; one small actual validation sample per policy, no physical policy evaluation"
+}

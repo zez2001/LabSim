@@ -1,16 +1,19 @@
 # LabSim Size_v1 进展与分享入口
 
-当前独立分支为[`codex/lab-cuvette-size-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-size-v1)。本轮固定原A座，通过同一XY仿射规则派生比色皿尺寸，不修改原座、旧资产或源CAD。
+更新于2026-10-22。独立分支为[`codex/lab-cuvette-size-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-size-v1)。本轮固定原A座`candidate_far_hinge`，通过同一XY仿射规则派生比色皿尺寸，不修改原座、整机、旧资产或源CAD。
 
-阶段A已有35个注册资产与实际几何筛选，推荐10.00×10.00×67.5mm假设资产，固定20g假设下重算COM/惯量；10mm加载/复位/自然落稳与双视角preview已实跑。10.00mm首条完整装载已真实成功：105.82秒，包含实际插入、承托交接、松爪、撤离和3秒稳定；冻结standard已实际5/5完整成功且进程正常退出0，20条成功均通过冻结及真实进程准入、无损归档和ACT/DP正常读取审计，正式合格成功20条、受控有效失败6条（1mm单条与5mm组5条真实INSERT提前停止）；10.30mm单次完整装载也已成功；正式采集仍冻结10mm，继续目标20成功+20有效失败。采集、训练和自动验证固定standard，本轮取消random10。
+已完成35个9.50–12.50mm独立资产及几何筛选。正式任务采用10.00×10.00×67.5mm假设资产、20g质量假设，重新计算COM/惯量。10.00mm和10.30mm均有实际完整装载成功；10.50mm开发运行虽释放并撤离，抓持和对准门控仍失败，不能由末态稳定改判成功。物理可用结果只覆盖已测离散尺寸，10.70mm正几何证书不是物理上限。
 
-- [本轮状态与准确调用](docs/lab_cuvette_loading/Size_v1/README.md) · [持续状态](TASK_STATUS.md)
+固定standard验证5/5完整成功，并计入正式20条合格自然成功。另采集20条有效受控失败：1/5/10/18mm插入深度处提前停止各5条，无自然失败；没有把它们解释为自然卡滞或尺寸不可通过。全部40条通过冻结、实际事件、真实进程及正常数据读取审计；9次仿真子进程均exit0，无中断。ACT/DP成功和失败读取均通过，两组各按完整episode划分18/2，训练未执行。collect、train及自动验证均固定standard，random10取消。
+
+- [本轮DOCX报告](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.docx) · [报告与5段实际录像](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)
+- [40条最终数据审计与读取](docs/lab_cuvette_loading/Size_v1/data/final40_actual/README.md) · [5次固定场景逐集结果及便携样例](docs/lab_cuvette_loading/Size_v1/data/standard5_actual/README.md)
+- [本轮调用与范围](docs/lab_cuvette_loading/Size_v1/README.md) · [详细命令及未来训练相机配置](demos/lab_cuvette_size_v1/README.md) · [持续状态](TASK_STATUS.md)
 - [35尺寸完整几何结果](docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/README.md) · [可替换资产注册](assets/lab_cuvette_loading/Size_v1/registry.json)
-- [实际碰撞烹饪／座表面抽样与限制](docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.md)
+- [碰撞烹饪／座表面抽样与限制](docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.md) · [冻结配置](config/lab_cuvette_loading/Size_v1/standard.yaml) · [冻结依赖](config/lab_cuvette_loading/Size_v1/frozen_scene.json)
+- [本轮Agent结果快照](docs/agent_handoff/Size_v1_current/状态与边界.md) · [精简阅读包规范](docs/agent_handoff/README.md)
 
-- [5次固定场景逐集结果与便携样例核验](docs/lab_cuvette_loading/Size_v1/data/standard5_actual/README.md) · [20条完整成功与18/2读取核验](docs/lab_cuvette_loading/Size_v1/data/collection20_actual/README.md)
-
-以下保留Env_v1及上游历史入口。
+新阅读包为`LabSim_Size_v1_本轮改动与结果_精简阅读包_20261022`，仅包含本轮报告、必要结果媒体、结果表和配置证据。完整collection与约1.96GB独立便携episode另行管理。原座完整烹饪表示读回、原生速度与差分告警及真实物理校准仍有局限；不宣称实物尺寸或平台精度已获验证。下方保留Env_v1历史阶段原结论，不代表当前Size_v1状态。
 
 # LabSim 进展与分享入口
 

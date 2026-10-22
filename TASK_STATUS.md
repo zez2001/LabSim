@@ -1,6 +1,6 @@
 # LabSim Size_v1 阶段状态
 
-更新2026-10-21，分支codex/lab-cuvette-size-v1。原座A candidate_far_hinge完全保留；12.5mm对照、Env_v1及旧版本保留。
+更新2026-10-22，分支codex/lab-cuvette-size-v1。原座A candidate_far_hinge完全保留；12.5mm对照、Env_v1及旧版本保留。
 
 ## 阶段A 已验证
 
@@ -14,8 +14,14 @@
 
 重新接回完整加载：预对准、快速无接触接近、低速27mm插入、停止顶压、逐步卸载、慢松爪、撤离、3秒稳定。保留稳定200um/1deg/3s与50um穿透门槛；对准误差预算由10mm真实余量声明，不照搬12.5mm紧配预算。10.00mm loading_01已实际完成全流程，105.8167仿真秒/6348控制步/exit0，独立成功true。实际承托94.4875s、双指脱离95.1s、撤离98.6333s，最后3秒稳定；位移漂移.239um，姿态变化.000714deg。原座未改，native_pair原12.5结论不翻true。此为开发demo，未带最终冻结指纹，不计正式20条。10.5mm边界探索已完成但独立判为GRASP_SLIP，且进程实际退出143，开发记录保留不计正式配额。10mm配置已冻结75项依赖，5次standard全部完整成功，批次实际正常退出0且5集原始日志均无损归档。10.30mm开发尺寸验证也已完整成功，实际父wait exit0，105.7833仿真秒/6346控制步；原座三个USD层和world输入数组SHA与10/10.5相同。它不计冻结10mm配额。离散10.0/10.3成功不能称连续物理范围；10.5原门控失败不等于已证明几何不能插入。
 
-## 阶段C 已有20条合格成功和6条合格受控失败
+## 阶段C 完成20条合格成功和20条有效受控失败
 
-5次冻结standard验证与随后三批共15条自然补采均完整成功，四次自然仿真子进程actual exit0、无中断。20条成功及首条受控失败均通过production逐集准入、真实进程、无损归档及ACT/DP正常读取核验；成功按完整episode划分18条训练、2条验证，无训练执行，场景随机化关闭。合格成功20、失败6；尚缺14条有效失败。新增5mm组5条已通过实际事件/H5/配置一致性、真实子进程exit0和无损归档准入；10mm、18mm和剩余1mm组在同一冻结场景中顺序推进，最终默认索引和全部失败的正常读取待全部闭合后核验。首条同场景INSERT提前停止已实际核验：62.383333s、实际深度1.016965mm，child exit0、record_valid=true、CONTROLLED_EARLY_STOP；没有释放/撤离，post_retreat_window unavailable且stable_after_retreat=null。实际事件、H5和配置一致，成功/失败各ACT/DP读取均通过。首集约1.96GB便携副本已实际导出并正常读取，无HDF5外链。自然失败与确定性动作偏差分组，场景不随机，不把开发尺寸探索和预检计入配额。
+首批5次冻结standard全部完整成功，并计入随后累计20条自然成功。另20条为确定性动作偏差失败：在INSERT实际深度1/5/10/18mm处提前停止，各5条。没有自然失败，不推断自然卡滞概率。全部40条实际开展取物、拔出、搬运、对准和插入；成功包含实际承托、松爪、撤离、至少3秒稳定，受控失败没有释放和撤离，post_retreat_window unavailable、stable_after_retreat null。9次实际仿真子进程均exit0，无中断、非零或配额归档排除。
+
+最终production逐集审计、实际受控事件/H5/配置一致性、真实进程和无损归档均通过。默认dataset/episode_data.hdf5已生成40集相对链接索引。正常ACT和DP的成功/失败四组读取均通过，各20集按完整episode划分18条训练、2条验证，无训练执行，场景随机化关闭。读取证据涵盖全体时间轴和8D动作映射及选样RGB，不宣称40集图像逐帧全量核对。全部正式初态与冻结配置另行核查；最终证据见final40_actual。
+
+首集约1.96GB便携副本已导出并正常读取，无HDF5外链。精简阅读包仅交报告、代表视频、表格及配置，不装入完整H5/日志。原座几何与物理参数、旧版本和源CAD保持。保留NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT及NATIVE_TARGET_OVERLAP_UNAVAILABLE；real_calibrated=false，原12.5mm配套冲突结论不改。
+
+[本轮报告与视频](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)；[最终40集审计](docs/lab_cuvette_loading/Size_v1/data/final40_actual/README.md)。
 
 [阶段A资产与几何](docs/lab_cuvette_loading/Size_v1/geometry/README.md)；[旧Env_v1状态](docs/lab_cuvette_loading/Env_v1/TASK_STATUS_before_Size_v1.md)。

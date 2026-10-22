@@ -1,0 +1,602 @@
+{
+  "schema": "labsim.Size_v1.protection_audit.v1",
+  "baseline_Env_v1_commit": "c61c5bd10cbd59559fee24a263f71297534b44f3",
+  "actual_audit_head": "900f6415a789cc06676ae111111ca08a4deb8d98",
+  "original_instrument_USD_dependency_count": 3,
+  "instrument_USD_dependencies": [
+    {
+      "path": "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda",
+      "current_sha256": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+      "baseline_sha256": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+      "baseline_hash_basis": "git_lfs_content_oid",
+      "equals_Env_v1_git_content": true,
+      "equals_Env_v1_actual_run_binding": true
+    },
+    {
+      "path": "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd",
+      "current_sha256": "8261714be7250b61466e9b3537a25438a5cc441c20a465ea6b3c27b43383a1dc",
+      "baseline_sha256": "8261714be7250b61466e9b3537a25438a5cc441c20a465ea6b3c27b43383a1dc",
+      "baseline_hash_basis": "git_lfs_content_oid",
+      "equals_Env_v1_git_content": true,
+      "equals_Env_v1_actual_run_binding": true
+    },
+    {
+      "path": "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda",
+      "current_sha256": "2c075c4e4273ce23fcc0843e56ed0b42c66c030aeb9cf6fc1fbed89da4bd8c77",
+      "baseline_sha256": "2c075c4e4273ce23fcc0843e56ed0b42c66c030aeb9cf6fc1fbed89da4bd8c77",
+      "baseline_hash_basis": "git_lfs_content_oid",
+      "equals_Env_v1_git_content": true,
+      "equals_Env_v1_actual_run_binding": true
+    }
+  ],
+  "original_A_seat_snapshot": "original_A_seat_composed_USD_snapshot.json",
+  "Env_v1_to_Size_v1_runtime_config_comparisons": [
+    {
+      "run": "outputs/lab_cuvette_loading/Size_v1/loading_01",
+      "config_sha256": "6ddd5bd8484f93590786563d02fe408cb8cf16319d21dd18ec79284ba433daa4",
+      "checks": {
+        "identical_physics_dictionary": true,
+        "identical_adapter_dictionary": true,
+        "identical_instrument_asset_directory": true,
+        "identical_provenance_instrument": true,
+        "identical_instrument_world_position": true,
+        "identical_instrument_world_yaw": true,
+        "identical_rack_dictionary": true,
+        "same_original_instrument_dependency_hashes": true
+      },
+      "intentionally_changed_loading_offset_local_m": [
+        0.00065,
+        1e-06,
+        0
+      ],
+      "result": {
+        "episode_id": "fa9fda66-2cff-488f-81b9-416569928d78",
+        "asset_id": "cuvette_xy_1000",
+        "task_type": "loading",
+        "task_success": true,
+        "full_success": true,
+        "record_valid": true,
+        "failure_type": "NONE",
+        "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+        "simulation_seconds": 105.81666666666666,
+        "grasp_success": true,
+        "transport_success": true,
+        "loading_sequence_observed": true,
+        "release_observed": true,
+        "retreat_observed": true,
+        "stable_after_retreat": true,
+        "grasp_relative_pose": {
+          "reference_available": true,
+          "maximum_position_drift_m": 4.902244572336129e-06,
+          "maximum_orientation_drift_deg": 0.011725607532398664,
+          "maximum_configured_grasp_anchor_drift_m": 3.4818400831525384e-06,
+          "maximum_configured_grasp_anchor_axial_drift_m": 1.6599925247324014e-06,
+          "maximum_configured_grasp_anchor_transverse_drift_m": 3.4492709433987428e-06,
+          "configured_grasp_anchor_height_m": 0.053,
+          "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+          "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+          "position_limit_m": 0.0002,
+          "orientation_limit_deg": 1.0
+        },
+        "physics_quality_flags": [
+          "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+          "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+        ]
+      }
+    },
+    {
+      "run": "outputs/lab_cuvette_loading/Size_v1/loading_1050_01",
+      "config_sha256": "a96d79c1876c7f9236bf04841ece188cf647a36eb69b8b196178d726566be2cd",
+      "checks": {
+        "identical_physics_dictionary": true,
+        "identical_adapter_dictionary": true,
+        "identical_instrument_asset_directory": true,
+        "identical_provenance_instrument": true,
+        "identical_instrument_world_position": true,
+        "identical_instrument_world_yaw": true,
+        "identical_rack_dictionary": true,
+        "same_original_instrument_dependency_hashes": true
+      },
+      "intentionally_changed_loading_offset_local_m": [
+        0.00065,
+        1e-06,
+        0
+      ],
+      "result": {
+        "episode_id": "022b4499-5a99-443f-884c-9fe326da822b",
+        "asset_id": "cuvette_xy_1050",
+        "task_type": "loading",
+        "task_success": false,
+        "full_success": false,
+        "record_valid": true,
+        "failure_type": "GRASP_SLIP",
+        "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+        "simulation_seconds": 105.78333333333333,
+        "grasp_success": false,
+        "transport_success": false,
+        "loading_sequence_observed": false,
+        "release_observed": true,
+        "retreat_observed": true,
+        "stable_after_retreat": true,
+        "grasp_relative_pose": {
+          "reference_available": true,
+          "maximum_position_drift_m": 0.0006160424025581697,
+          "maximum_orientation_drift_deg": 0.7043582276202223,
+          "maximum_configured_grasp_anchor_drift_m": 0.00012722737938107933,
+          "maximum_configured_grasp_anchor_axial_drift_m": 0.00011636270708751484,
+          "maximum_configured_grasp_anchor_transverse_drift_m": 5.144440167250772e-05,
+          "configured_grasp_anchor_height_m": 0.053,
+          "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+          "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+          "position_limit_m": 0.0002,
+          "orientation_limit_deg": 1.0
+        },
+        "physics_quality_flags": [
+          "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+        ]
+      }
+    }
+  ],
+  "source12_5mm_sha256": "8d52757227303edd4f38918ee04763481f08846fdd8daa6803295c8fc77c689d",
+  "source12_5mm_matches_preserved_sha256": true,
+  "registry_sha256": "ca095fa5d5efe4974b585c023c775f099e7bb943fb1ebc695c0729aff5ab806a",
+  "registered_variant_count": 35,
+  "all35_checks": {
+    "hash_matches_registry": true,
+    "independent_json_matches_registry": true,
+    "same_XY_affine_all_visual_and_collision": true,
+    "Z_all_vertices_unchanged": true,
+    "topology_unchanged": true,
+    "all_other_mesh_attributes_unchanged": true,
+    "all_material_shader_attributes_unchanged": true,
+    "one_visual_plus28_collision": true,
+    "mass20g_retained": true,
+    "reintegrated_COM_matches_USD": true,
+    "reintegrated_full_inertia_matches_USD": true,
+    "volume_follows_XY_area_scale": true,
+    "units_Zup_defaultPrim_preserved": true,
+    "standalone_no_external_layers": true
+  },
+  "maximum_observed_affine_vertex_storage_error_m": 2.380371212640231e-10,
+  "historical_protected_tracked_paths": 85,
+  "historical_changed_paths": [],
+  "historical_Env_v1_small_evidence": [
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_03/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_03/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_03/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_04/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_04/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_04/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_01/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_01/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_01/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_02/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_02/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_02/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_03/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_03/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_03/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_04/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_04/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/grasp_hold_04/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_05/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_05/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_05/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_06/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_06/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preview_06/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_transport_01/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_transport_01/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_transport_01/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0001/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0001/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0002/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0002/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0003/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0004/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0004/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0005/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0005/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0006/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0006/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0007/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0007/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0008/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0008/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0009/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0009/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0010/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/rpc_01/episode_0010/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_fixed_orientation_01/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_fixed_orientation_01/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_fixed_orientation_01/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/extract_continuous_latch_01/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/preinsert_continuous_latch_01/episode_0000/teacher_events.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/replay_astra03_01/episode_0000/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/replay_astra03_01/episode_0000/episode_0000_result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_access_01/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_access_02/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01/request.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_01_driver/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/request.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02/planner/rpent_states/states.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_02_driver/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/request.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03/planner/rpent_states/states.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/astra_attempt_03_driver/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/request.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01/planner/rpent_states/states.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/harness_attempt_01_driver/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01/request.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/policy_backends/pi05_attempt_01_driver/result.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/geometry_cache/latest.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/geometry_cache/6f25866882814dfa0bff4b7d8ec0c8bbcde8589c0a50a20cbc2b7f9d7be6392a/geometry_audit.json",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/geometry_cache/6f25866882814dfa0bff4b7d8ec0c8bbcde8589c0a50a20cbc2b7f9d7be6392a/collision_input_slices.csv",
+      "exists": true,
+      "same_sha256": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Env_v1/minimal_pick_regression_20261021_01/summary.json",
+      "exists": true,
+      "same_sha256": true
+    }
+  ],
+  "local_main_sha": "8df72784265c375a327ffa3f0a0cf8c676f229a7",
+  "geometry_range": {
+    "maximum_sampled_positive_conservative_path_certificate_mm": 10.7,
+    "full_path_not_certified_mm": [
+      10.72,
+      11.0
+    ],
+    "largest_sampled_entrance_domain_present_mm": 11.0,
+    "smallest_sampled_four_upright_yaw_entrance_rejected_mm": 11.02
+  },
+  "physical_scope": "10.00mm complete success observed once and10.50mm complete task false withGRASP_SLIP; not a continuous physical width range.10.50mm release/retreat/final stability still observed, so do not call it proven geometric insertion blockage.",
+  "limitations": [
+    "Authored/composed USD layers and actual saved runtime parameter dictionaries were verified; no full attached cookedPxShape vertex equivalence across historical runs is claimed.",
+    "This offline process starts neitherSimulationApp norGPU and does not step the formal verification running in parallel.",
+    "Historical ignored large media/HDF5 were not all globally hashed before/after; small historical evidence hashes and tracked version files were checked.",
+    "No real mass/material/robot dynamics calibration. Geometry certificates do not establish a continuous physical success interval."
+  ]
+}

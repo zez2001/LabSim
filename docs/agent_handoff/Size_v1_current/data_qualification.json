@@ -1,14 +1,26 @@
 {
   "schema": "labsim.Size_v1.reading_data_qualification.v1",
-  "status": "unavailable_no_explicit_final_collection_audit",
-  "qualified_success_count": null,
-  "qualified_failure_count": null,
+  "status": "actual_collection_audit",
+  "qualified_success_count": 20,
+  "qualified_failure_count": 20,
   "success_target": 20,
   "failure_target": 20,
-  "success_missing": null,
-  "failure_missing": null,
-  "condition_groups": null,
-  "evidence": null,
+  "success_missing": 0,
+  "failure_missing": 0,
+  "condition_groups": {
+    "natural": {
+      "success": 20,
+      "failure": 0
+    },
+    "deterministic_action_deviation": {
+      "success": 0,
+      "failure": 20
+    }
+  },
+  "evidence": {
+    "source": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Size_v1/data/final40_actual/collection_audit.json",
+    "sha256": "d8f5c621e611b148bf0093b22a60e81a5e9f983f780847d4a52a30be599e2285"
+  },
   "train_default_filter": "eligible complete successful full-loading episodes only",
   "train_validation_split": "whole episode; same frozen standard scene on both sides",
   "natural_and_controlled_failures_separate": true,

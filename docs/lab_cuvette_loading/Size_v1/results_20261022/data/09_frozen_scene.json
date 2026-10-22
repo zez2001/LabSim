@@ -1,0 +1,629 @@
+{
+  "schema": "labsim.lab_cuvette_loading.Size_v1.frozen_scene.v1",
+  "frozen_scene_sha256": "f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+  "scene": {
+    "version": "Size_v1",
+    "scene_mode": "standard",
+    "source": {
+      "instrument": "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda",
+      "vessel": "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda",
+      "vessel_collision": "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda"
+    },
+    "asset_id": "cuvette_xy_1000",
+    "asset_directory": "assets/lab_cuvette_loading/V0_demo04",
+    "derived_directory": "assets/lab_cuvette_loading/Size_v1",
+    "collision_scheme": "cuvette_xy_1000",
+    "vessel": {
+      "outer_xy_m": [
+        0.01,
+        0.01
+      ],
+      "height_m": 0.0675,
+      "mass_kg": 0.02,
+      "dimension_source": "XY size hypothesis derived from preserved12.5mm control; not measured",
+      "mass_source": "retained20g engineering assumption, not measured",
+      "xy_scale": 0.6734006734006734,
+      "yaw_deg": 90.0,
+      "asset_id": "cuvette_xy_1000",
+      "actual_outer_dimensions_m": [
+        0.01000000350177288,
+        0.01000000350177288,
+        0.06749999523162842
+      ],
+      "center_of_mass_m": [
+        6.042121449604159e-07,
+        6.087301784440295e-07,
+        0.029027631688380916
+      ],
+      "inertia_body_kg_m2": [
+        [
+          9.211088376712258e-06,
+          1.1337154717373428e-14,
+          -8.832234243109803e-11
+        ],
+        [
+          1.1337154713867837e-14,
+          9.211088649686659e-06,
+          -8.898320448212892e-11
+        ],
+        [
+          -8.832234243125229e-11,
+          -8.898320448218497e-11,
+          5.195387870064674e-07
+        ]
+      ],
+      "axis_scale_from_control": [
+        0.8,
+        0.8,
+        1.0
+      ],
+      "xy_scale_basis": "legacy original14.85mm CAD helper only; loaded USD already transformed"
+    },
+    "scene": {
+      "initial_bottom_gap_m": 0.0002,
+      "instrument_xyz_m": [
+        0.36,
+        0,
+        0.74
+      ],
+      "table_size_m": [
+        2.2,
+        1.8,
+        0.08
+      ],
+      "table_top_m": 0.74,
+      "instrument_count": 1,
+      "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+      "design_rack_origin_m": [
+        -0.04,
+        -0.22,
+        0.74
+      ],
+      "design_instrument_origin_m": [
+        0.36,
+        0.18,
+        0.74
+      ],
+      "instrument_yaw_deg": 90.0
+    },
+    "rack": {
+      "rows": 6,
+      "columns": 6,
+      "inner_m": 0.016,
+      "wall_m": 0.002,
+      "depth_m": 0.025,
+      "base_m": 0.003,
+      "selected_slot_id": "A1",
+      "blue_slot_id": "F6",
+      "yaw_deg": -90.0,
+      "origin_m": [
+        -0.04,
+        -0.22,
+        0.74
+      ]
+    },
+    "adapter": {
+      "selected_target_seat_id": "candidate_far_hinge",
+      "inner_m": 0.0126,
+      "outer_m": 0.0204,
+      "height_m": 0.029,
+      "base_m": 0.002,
+      "geometry": "original CAD mesh3; no engineering adapter"
+    },
+    "robot": {
+      "base_m": [
+        -0.3,
+        0,
+        0.74
+      ],
+      "grasp_above_bottom_m": 0.053,
+      "initial_tcp_m": [
+        -0.085,
+        -0.175,
+        1.0230000000000001
+      ],
+      "tcp_local_m": [
+        0,
+        0,
+        0.1
+      ],
+      "usd_path": "assets/robots/Franka.usd",
+      "gripper_yaw_deg": -90.0,
+      "tcp_quaternion_wxyz": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "tcp_frame": "right_gripper",
+      "initial_joint_positions": [
+        0.1779404569926203,
+        -1.208031663591094,
+        -0.8197921486914327,
+        -2.872999113364274,
+        -0.7667170833832817,
+        1.7454942736950525,
+        -0.8053155743445266,
+        0.04,
+        0.04
+      ],
+      "initial_joint_basis": "Env_v1 arm_plan_01 seed1; sampled full11-link input triangle pathcheck, actual dynamics still required"
+    },
+    "physics": {
+      "ccd": true,
+      "contact_offset_m": 5e-05,
+      "control_hz": 60,
+      "dynamic_friction": 0.5,
+      "finger_dynamic_friction": 0.8,
+      "finger_static_friction": 1.0,
+      "hz": 240,
+      "position_iterations": 64,
+      "rest_offset_m": 0.0,
+      "restitution": 0.0,
+      "solver": "TGS",
+      "static_friction": 0.6,
+      "velocity_iterations": 1
+    },
+    "cameras": {
+      "side_camera": {
+        "prim_path": "/World/SideCamera",
+        "eye_m": [
+          -0.7,
+          -0.85,
+          1.65
+        ],
+        "target_m": [
+          0.1,
+          -0.1,
+          1.0
+        ],
+        "focal_length_cm": 2.0,
+        "horizontal_aperture_mm": 20.955,
+        "resolution": [
+          640,
+          480
+        ],
+        "fps": 60,
+        "policy_resolution": [
+          256,
+          256
+        ],
+        "upworld": [
+          0,
+          0,
+          1
+        ]
+      },
+      "wrist_camera": {
+        "parent_link": "/World/Franka/panda_hand",
+        "prim_path": "/World/Franka/panda_hand/WristCameraV1",
+        "focal_length_cm": 1.2,
+        "horizontal_aperture_mm": 20.955,
+        "resolution": [
+          640,
+          480
+        ],
+        "fps": 60,
+        "policy_resolution": [
+          256,
+          256
+        ],
+        "localeye_m": [
+          0.075,
+          0,
+          0
+        ],
+        "localtarget_m": [
+          0,
+          0,
+          0.35
+        ],
+        "localup": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "video": {
+      "main_focal_length_cm": 1.1,
+      "main_resolution": [
+        1920,
+        1080
+      ],
+      "fps": 30,
+      "render_hz": 60
+    },
+    "acceptance": {
+      "actual_retreat_clearance_m": 0.04,
+      "angular_speed_rad_s": 0.02,
+      "hold_s": 1.0,
+      "lift_m": 0.04,
+      "linear_speed_m_s": 0.001,
+      "orientation_change_deg": 1.0,
+      "position_drift_m": 0.0002,
+      "release_bottom_gap_m": 5e-05,
+      "release_support_force_N": 0.1,
+      "scope": "fixed engineering gates; NOT calibrated accuracy or insertion acceptance",
+      "steady_source_penetration_m": 5e-05,
+      "support_geometry_m": 5e-05,
+      "upright_after_release_deg": 1.0,
+      "window_s": 3.0
+    },
+    "demo_release": {
+      "bottom_distance_m": 5e-05,
+      "clear_seconds": 0.5,
+      "max_actual_pose_step_m": 0.003,
+      "max_actual_tilt_deg": 10.0,
+      "max_tilt_deg": 1.0,
+      "min_support_N": 0.1,
+      "native_velocity_policy": "retain and flag discrepancy; finite check and actual pose motion are hard gates; speed mismatch alone does not veto opening",
+      "observe_s": 3.0,
+      "open_seconds": 3.0,
+      "orientation_change_deg": 1.0,
+      "penetration_m": 5e-05,
+      "position_drift_m": 0.0002,
+      "support_window_s": 0.5,
+      "unload_seconds": 3.0
+    },
+    "geometry": {
+      "target_loading_offset_local_m": [
+        0.00065,
+        1e-06,
+        0
+      ],
+      "target_depth_m": 0.027,
+      "scene_assets_unmodified": true
+    },
+    "gripper": {
+      "contact_safety_factor": 2.0,
+      "method": "contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp; no gain or force-limit change",
+      "mode": "contact_latched",
+      "actual_slip_max_m": 0.001,
+      "actual_tilt_max_deg": 1.0,
+      "contact_threshold_N": 0.03,
+      "contact_persist_s": 0.1,
+      "maximum_compression_m": 0.0003,
+      "latch_transition_policy": "preserve_first_contact_command"
+    },
+    "env": {
+      "mode": "standard",
+      "scene_randomization_enabled": false,
+      "control_hz": 60,
+      "physics_hz": 240,
+      "render_zero_delay": true
+    },
+    "randomization": {
+      "legal_slots": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "rack_translation_half_range_m": 0.0,
+      "instrument_translation_half_range_m": 0.0,
+      "yaw_half_range_deg": 0.0,
+      "in_slot_translation_m": 0.0,
+      "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together",
+      "enabled": false,
+      "asset_randomization_enabled": false,
+      "light_randomization_enabled": false,
+      "physics_randomization_enabled": false,
+      "layout_randomization_enabled": false
+    }
+  },
+  "assets": {
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_0950.json": {
+      "sha256": "c98451f45515d76b0e798ded540ed651a677a22ef390671e6c0d8f4982d8c342",
+      "bytes": 57435
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_0970.json": {
+      "sha256": "b0b37f2f03e22d4df5f9899a99daf9a2a0bbf64a89e774635eb33f336cfaf15c",
+      "bytes": 57510
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_0990.json": {
+      "sha256": "3a2541e378539c609acd3bc8c36a6ec7f87bac7936218ae83c667770d7cfeb5d",
+      "bytes": 57426
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.json": {
+      "sha256": "7629e3dc92a435d2ed3d38b47b63dad5897d79f5c9b9e41e4d022a2b5aba630d",
+      "bytes": 57386
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda": {
+      "sha256": "680dad7643f8534caeaa8adf710784de4e2acad8be8fab8a2c7897140a573b79",
+      "bytes": 353002
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1010.json": {
+      "sha256": "5fa698569d3e3c2a5bc85d4060863901c37b92a8d324d2bda71f2291d4a93f8c",
+      "bytes": 57418
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1030.json": {
+      "sha256": "d49be7dbc86faf928d030af12a29f2dfd1a6ef8a5c2ac8df7666d54b4d3ebbad",
+      "bytes": 57463
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1050.json": {
+      "sha256": "ce902621bc6b9094ed595c4c6aefbfaf337262ec997a5413075b26000ba36774",
+      "bytes": 57440
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1070.json": {
+      "sha256": "99f977c2b38f2738f2e0328e633b0212cb6dbacad073cca0f5da863a1a58d5a9",
+      "bytes": 57426
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1072.json": {
+      "sha256": "f193bb5a4cb1ab64ebda8eb264f98ac68f3acc297b06007303747555b1540534",
+      "bytes": 57452
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1074.json": {
+      "sha256": "09f36a990549d10573ed48068e125386f7a8b68cacecd1147c33a5f344621870",
+      "bytes": 57387
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1076.json": {
+      "sha256": "e56f015ea54efa26b05673f3d2aec8d94f2610ba6ea594f9022e3a45321a37b7",
+      "bytes": 57447
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1078.json": {
+      "sha256": "50fe5f78871fef4c9303c7728de7333c4841ec943942036e25d4784fbbe20948",
+      "bytes": 57467
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1080.json": {
+      "sha256": "a9b01ff56de4cfbcf66e7a65c92570b3f6044f18f553620e536d36a8fd71743a",
+      "bytes": 57467
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1082.json": {
+      "sha256": "e303214f451ee35f8c9d10b01b6de935e2e315bcfcc7e5805af5210a2118f662",
+      "bytes": 57445
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1084.json": {
+      "sha256": "809afdc7514088e6765dfe7d635d8b0f99969be86c3cb2defef8bacd7a254ae7",
+      "bytes": 57491
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1086.json": {
+      "sha256": "0e560887359c37194394832e7713f8a94b5f2b621cc5e6b280516e0d6684057e",
+      "bytes": 57417
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1088.json": {
+      "sha256": "ad8075a456dc5c86f3cb5f2145c739d0a02d8d246b23271e9ae915d018a04fbc",
+      "bytes": 57427
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1090.json": {
+      "sha256": "37bce3734e03050d90bb030cd8375c9161aa9b521a14422f36102314de8a7dd1",
+      "bytes": 57489
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1092.json": {
+      "sha256": "ec6ea113dd36cee438328db896dedfbb81caa3ffee8d8ce7943753ae27564da2",
+      "bytes": 57442
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1094.json": {
+      "sha256": "62b32bde3d356ea5698b3470778358db290081912c7e6fa26cab743548be5c67",
+      "bytes": 57437
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1096.json": {
+      "sha256": "6e6e2d1fd4833402b9e734202ae02520d6c660a7b5c5a31a23e31b6c1bbacf1a",
+      "bytes": 57437
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1098.json": {
+      "sha256": "92d01bb3a9c8e5d2c725d055e386bdfa692f4629b13cce3f1cb97cae4ea7c7e7",
+      "bytes": 57475
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1100.json": {
+      "sha256": "8f246bef8b2cd4bc04ce6503a59d7cf22d37a54308faf0ce06fed198b6b21749",
+      "bytes": 57431
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1102.json": {
+      "sha256": "e0b42e7e43f4a56b65cb907fe648c4b771ca3f4cf476808ced3ef8f0206b24c2",
+      "bytes": 57466
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1104.json": {
+      "sha256": "f17705a12871553a3444f1a49ce51e67ed82453fd264bd413f4b21f46b7b6455",
+      "bytes": 57438
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1106.json": {
+      "sha256": "dd5d808ece8766d4001c07f6c8fc008f0a6bdae12fc9b94e4976cde9b23d4e7d",
+      "bytes": 57480
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1108.json": {
+      "sha256": "d4c4729983f5eed68175d67fefd3d4fdd66e4a8d00758244e6b21aa3a6e97e6e",
+      "bytes": 57451
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1110.json": {
+      "sha256": "6e34e4385aa59a058058474cfef94e0ab1d54b316d3499029685f6f34cbf9ae4",
+      "bytes": 57485
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1130.json": {
+      "sha256": "6fb20673891e22d8155a1eaec7aaacc506fdccc5457171fd0b51e502de591126",
+      "bytes": 57486
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1150.json": {
+      "sha256": "8714bd63d524cd0a8559d5782bac638244c0de4f002d5ea28e6f0219ba96320b",
+      "bytes": 57444
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1170.json": {
+      "sha256": "11c8e7e7d4cb9a77cacf8911bc5ad4013fedc349b896b7ffb35a8dab5d8e6875",
+      "bytes": 57516
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1190.json": {
+      "sha256": "620aa37e2c81ada4b831827ebe051eb65ca96cec381a076aa25835b37902ac44",
+      "bytes": 57479
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1210.json": {
+      "sha256": "70a34681e0588ce033bf6af7b752f8305470e028bb5436c56ee74fc498e003b6",
+      "bytes": 57459
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1230.json": {
+      "sha256": "8b32f91e98e6f768e1427657780dd2572c2a999f32fa5d7ab445bf187bca3348",
+      "bytes": 57523
+    },
+    "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1250.json": {
+      "sha256": "731a992ab4d5e967eb67b0550a2732279ef99fbc32024edb3f84a1c6c8e1a140",
+      "bytes": 57474
+    },
+    "assets/lab_cuvette_loading/Size_v1/registry.json": {
+      "sha256": "ca095fa5d5efe4974b585c023c775f099e7bb943fb1ebc695c0729aff5ab806a",
+      "bytes": 2245509
+    },
+    "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda": {
+      "sha256": "2c075c4e4273ce23fcc0843e56ed0b42c66c030aeb9cf6fc1fbed89da4bd8c77",
+      "bytes": 2715677
+    },
+    "assets/lab_cuvette_loading/V0_demo03/rack.usda": {
+      "sha256": "4739e631592cad3a023957f541e7dffb3bf3733b163197d43c1898cb0e296549",
+      "bytes": 64046
+    },
+    "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda": {
+      "sha256": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+      "bytes": 301
+    },
+    "assets/lab_cuvette_loading/V0_demo04/rack.usda": {
+      "sha256": "b1a5e809d22ff0a204c85c53e867a07f7fbef1e49604c9f8ec647af202626c91",
+      "bytes": 268
+    },
+    "assets/lab_cuvette_loading/V0_ext01/source/TestTube_Baked.usd": {
+      "sha256": "c7d6897a1e555c282ac30a53e95cb872fda4e112821d2a013a9612bd40e39f36",
+      "bytes": 173738
+    },
+    "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd": {
+      "sha256": "8261714be7250b61466e9b3537a25438a5cc441c20a465ea6b3c27b43383a1dc",
+      "bytes": 1325056
+    },
+    "assets/robots/Franka.usd": {
+      "sha256": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b",
+      "bytes": 10063498
+    },
+    "config/lab_cuvette_loading/Size_v1/standard.yaml": {
+      "sha256": "4379c7a0468091b31daf7b8bd701f8ce1979ea2ab69b8257042cd391aa2037dc",
+      "bytes": 10317
+    },
+    "config/lab_cuvette_loading/V0.yaml": {
+      "sha256": "e594e058663f0b77e943178b3aa44cd1e31a6648d535fb7c00f1daa002f213b9",
+      "bytes": 3186
+    },
+    "controllers/lab_cuvette_env_v1_controller.py": {
+      "sha256": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb",
+      "bytes": 26899
+    },
+    "demos/lab_cuvette_demo03/runtime_geometry.py": {
+      "sha256": "b9c7f7a026c45325e0195abd9364884b18151406873d7bcee4e40c797a309de5",
+      "bytes": 2125
+    },
+    "demos/lab_cuvette_demo03/scene.py": {
+      "sha256": "a4677c5c33a51209282c3cb45601fa117a2c3d344f78f8e6e548aa5f2f000fde",
+      "bytes": 9561
+    },
+    "demos/lab_cuvette_demo04/run.py": {
+      "sha256": "92088545ce6d9d3240dbb853505fa38884f404ff2ed6a8ae410b0ebce9e53fed",
+      "bytes": 43170
+    },
+    "demos/lab_cuvette_demo04/scene.py": {
+      "sha256": "e624c944fba548dab450aa1462a5799f11de6bad0ae36292474e2723e2e5f6d1",
+      "bytes": 3956
+    },
+    "demos/lab_cuvette_env_v1/cameras.py": {
+      "sha256": "2c27af819aaa8f1a6f73508cef95fbfe329fb0f34a2cfd2f0635a8936c791d6f",
+      "bytes": 29479
+    },
+    "demos/lab_cuvette_env_v1/geometry_audit.py": {
+      "sha256": "00a8e488884ef231f1d5c704876fa413976aec90944696eecdfad7e09940038e",
+      "bytes": 52944
+    },
+    "demos/lab_cuvette_env_v1/physics_capture.py": {
+      "sha256": "10d6d6a40455d16c6234701c661516212f7367fc85f3201ba6c7066020358276",
+      "bytes": 25409
+    },
+    "demos/lab_cuvette_env_v1/replay.py": {
+      "sha256": "83473aa8221a33a89e96684729ad0c9a75f80b315577d9f11425e13c2afdc225",
+      "bytes": 14248
+    },
+    "demos/lab_cuvette_env_v1/rpc.py": {
+      "sha256": "80461b9ea73089f3e69c70a0692863bb8de3fb3c0c9d08ae9323fdc0b874b5c2",
+      "bytes": 15278
+    },
+    "demos/lab_cuvette_env_v1/run.py": {
+      "sha256": "8aeca3beccce816d88f0aa67a02f41ce0597f4aa19d84537cc59316e2bded2a3",
+      "bytes": 9906
+    },
+    "demos/lab_cuvette_env_v1/scene.py": {
+      "sha256": "cd287888f752b7c43d5b205df480ec29c01d6ae3bd4ccb2640bc7af04eb539b4",
+      "bytes": 2538
+    },
+    "demos/lab_cuvette_external/build.py": {
+      "sha256": "011e929c148a1cc4603814f64c894c1db60a970f1fd3f05dfd2685df56c2ad17",
+      "bytes": 8222
+    },
+    "demos/lab_cuvette_external/feasibility.py": {
+      "sha256": "a1fd8d313663d9335b63c3666664f6fce9f8fa6b9a47aedee1b722eefaed3415",
+      "bytes": 6009
+    },
+    "demos/lab_cuvette_external/geometry.py": {
+      "sha256": "ce32a8229297bb243baf895b6257684e3226c80ea696a1f0e375807dfe00dbe4",
+      "bytes": 8562
+    },
+    "demos/lab_cuvette_external/run.py": {
+      "sha256": "9cca97724c43052cb3304e077cda406b299d3694e1874de4972e2cd50fe48f42",
+      "bytes": 27960
+    },
+    "demos/lab_cuvette_loading/model.py": {
+      "sha256": "303f3f6dc5012075e51f1eba2083a30229917eebf039ec6e9400071ddeb4f463",
+      "bytes": 10053
+    },
+    "demos/lab_cuvette_size_v1/__init__.py": {
+      "sha256": "4bc30dc9cd8e2894677e66402ebe631aa87beff099e198630f8123ce4fcac04d",
+      "bytes": 71
+    },
+    "demos/lab_cuvette_size_v1/asset_selection.py": {
+      "sha256": "f2b81b5bc60214c2484ea3cf94fdcc5be51c4122d9279c35033fca211bfc1b71",
+      "bytes": 11825
+    },
+    "demos/lab_cuvette_size_v1/build_assets.py": {
+      "sha256": "c57e79dce97731bcfd39a4abbeb7b0326673490d56242fd649f87fbf310145a1",
+      "bytes": 11985
+    },
+    "demos/lab_cuvette_size_v1/cooked_probe.py": {
+      "sha256": "b965bdae47efc0e576c0a4e5205e6272eb59da88da7513a928b1e5233623aef0",
+      "bytes": 17826
+    },
+    "demos/lab_cuvette_size_v1/frozen_scene.py": {
+      "sha256": "402ba288176910fdae7e30e9f004437531cef0942292f24eb1fd39c18d4de3f5",
+      "bytes": 11933
+    },
+    "demos/lab_cuvette_size_v1/geometry_audit.py": {
+      "sha256": "627484a5e0d0d2c52c9d37f4d726c2a4094cdb75c7608cd073df93a40fc8a5a9",
+      "bytes": 18006
+    },
+    "demos/lab_cuvette_size_v1/run.py": {
+      "sha256": "71ac88e4c80d3dc426c11d1db0f20da3de12dad083dbcd8c509a6693d042230f",
+      "bytes": 447
+    },
+    "demos/lab_cuvette_size_v1/runtime_geometry.py": {
+      "sha256": "852a4604f057e0cc2642fc7269c103545a6bc4c16e8b8004d4861d7fb72c5948",
+      "bytes": 17942
+    },
+    "demos/lab_cuvette_size_v1/scan_family.py": {
+      "sha256": "36c144a046e6df9d36b4ee489a065e4298a58c4a8608fa68ddc9dad6a0f0d07f",
+      "bytes": 10074
+    },
+    "demos/lab_cuvette_size_v1/scene.py": {
+      "sha256": "9601d2b74333828d202f37cc61732290d6c1aadb8b005cfc869bbbfbd0d2efe2",
+      "bytes": 655
+    },
+    "demos/lab_cuvette_size_v1/scorer.py": {
+      "sha256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "bytes": 4385
+    },
+    "tasks/lab_cuvette_loading_env_v1.py": {
+      "sha256": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "bytes": 31370
+    }
+  },
+  "asset_dependency_scope": "explicit transitive list supplied by existing USD audit",
+  "code_commit": "425a9b48b6119a474181d90701ecf3160b47a164",
+  "control_config_sha256": "6a72bdc05c29094bba19cd87e1e3a49733b6f8b1e406389cab4cb0b86970fbee",
+  "mode_rules": {
+    "collect": "standard",
+    "train": "standard",
+    "automatic_validation": "standard",
+    "eval_random": "explicit option only; not part of this collection"
+  },
+  "training_rng_seed_is_not_scene_randomization": true,
+  "real_calibrated": false
+}
