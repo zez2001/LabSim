@@ -120,6 +120,27 @@ collect/train/训练自动验证强制standard并禁用场景随机化；训练R
 ACT/DP任务配置为`lab_cuvette_size_v1_act`和`lab_cuvette_size_v1_dp`，默认只读取
 合格成功做BC，失败分自然与确定性动作偏差组。本轮不运行训练、不要求random10。
 
+以后明确启动训练时，可复用正常ACT/DP入口及以下精确override（本轮仅CPU检查
+Hydra配置合成，没有执行这些训练命令）。ACT必须覆盖`policy.camera_names`；仅替换
+task会继承旧相机名，与本任务观测键不一致。DP从`shape_meta`和obs_encoder自动取得
+两路相机，不额外注入不支持的camera_names字段。下列输出目录须不存在：
+
+```bash
+../labutopia-env/bin/python train.py --config-name=train_lab_cuvette_loading_act \
+  task=lab_cuvette_size_v1_act \
+  'policy.camera_names=[side_camera_rgb,wrist_camera_rgb]' \
+  hydra.run.dir=outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_ACT_NEW
+../labutopia-env/bin/python train.py --config-name=train_lab_cuvette_loading_dp \
+  task=lab_cuvette_size_v1_dp \
+  hydra.run.dir=outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_DP_NEW
+```
+
+只检查配置时，在任一上述命令末尾加`--cfg job --resolve`，Hydra只输出配置并退出，
+不会创建workspace、读取H5、启动优化或仿真。CPU合成证据见
+`docs/lab_cuvette_loading/Size_v1/runtime/future_training_hydra_compose_cpu_check.json`。
+两入口仍只用冻结standard、success过滤和whole-episode划分，自动验证使用同一固定
+场景数据；它是离线验证损失，不是本轮已经执行过policy物理闭环评估的声明。
+
 精简交接快照包含35个资产的尺寸/内腔/质量惯量/材质/碰撞参数、原座保护证据、
 正式相机与初态、实际事件准入及便携样例小清单。最终数量只从显式最终审计取得，
 先前开发成功或局部已完成验证不等于20+20。最终报告放在

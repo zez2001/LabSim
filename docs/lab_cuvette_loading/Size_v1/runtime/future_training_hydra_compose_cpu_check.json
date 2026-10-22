@@ -1,0 +1,128 @@
+{
+  "schema": "labsim.Size_v1.future_training_hydra_compose_cpu_check.v1",
+  "scope": "Actual normal train.py --cfg job --resolve subprocesses only; no model, dataset, workspace, training, simulation or final collection audit executed",
+  "frozen_scene_sha256": "f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+  "frozen_dependency_check_passed": true,
+  "changed_files_outside_frozen_dependencies": true,
+  "original_ACT_task_only_inherited_camera_keys": [
+    "camera_1_rgb",
+    "camera_2_rgb"
+  ],
+  "original_ACT_task_only_observation_keys": [
+    "side_camera_rgb",
+    "wrist_camera_rgb"
+  ],
+  "original_ACT_task_only_camera_mismatch_reproduced": true,
+  "explicit_ACT_camera_override_required": true,
+  "source_SHA256": {
+    "train.py": "fd106327e88a7ed8bf0806edcd0e9b7ada996c3477c701738991383faaf1126f",
+    "policy/config/train_lab_cuvette_loading_act.yaml": "d071ff99fa2c1bb0ae77028865a6b49060f39e6a29893fdf40bedc8cbc388e5e",
+    "policy/config/train_lab_cuvette_loading_dp.yaml": "6a96346d956d18ff7734fe49c44e99f983e66e8c4bb923daf4b321ac6fec9569",
+    "policy/config/task/lab_cuvette_size_v1_act.yaml": "f0e2b3282cb0542946828ddf4e9fd249b72006a29b8ec029ec622f0c08e7ea51",
+    "policy/config/task/lab_cuvette_size_v1_dp.yaml": "191fa90c4b7fde1c4b98e80ccad6109eca5c81039bcddf4fccbd1b707b7d3a6b"
+  },
+  "checks": [
+    {
+      "policy": "act",
+      "actual_CPU_configuration_only_argv": [
+        "/home/wujing/Desktop/vla/LabSim/../labutopia-env/bin/python",
+        "train.py",
+        "--config-name=train_lab_cuvette_loading_act",
+        "task=lab_cuvette_size_v1_act",
+        "policy.camera_names=[side_camera_rgb,wrist_camera_rgb]",
+        "hydra.run.dir=outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_ACT_NEW",
+        "--cfg",
+        "job",
+        "--resolve"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "composed_configuration_sha256": "c0b7754c899ce1273747901b187505fba0678bb1595e9d202edf19c64de7c3e2",
+      "policy_target": "policy.policy.act_image_policy.ACTImagePolicy",
+      "policy_camera_key_source": "policy.camera_names explicit override",
+      "effective_policy_camera_keys": [
+        "side_camera_rgb",
+        "wrist_camera_rgb"
+      ],
+      "dataset_observation_RGB_keys": [
+        "side_camera_rgb",
+        "wrist_camera_rgb"
+      ],
+      "camera_keys_match": true,
+      "dataset_target": "policy.dataset.lab_cuvette_size_v1_dataset.LabCuvetteSizeV1Dataset",
+      "dataset_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/dataset",
+      "resolved_index_filename": "episode_data.hdf5",
+      "sample_filter": "success",
+      "scene_mode": "standard",
+      "scene_randomization_enabled": false,
+      "automatic_validation_mode": "standard",
+      "split_group_keys": [],
+      "split_scope": "complete episode",
+      "val_ratio": 0.1,
+      "n_obs_steps": 1,
+      "horizon": 16,
+      "training_rng_seed": 42,
+      "episode_split_seed": 42,
+      "requested_output_directory": "outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_ACT_NEW",
+      "training_output_directory_created": false,
+      "training_executed": false,
+      "model_instantiated": false,
+      "dataset_instantiated": false,
+      "HDF5_opened": false
+    },
+    {
+      "policy": "dp",
+      "actual_CPU_configuration_only_argv": [
+        "/home/wujing/Desktop/vla/LabSim/../labutopia-env/bin/python",
+        "train.py",
+        "--config-name=train_lab_cuvette_loading_dp",
+        "task=lab_cuvette_size_v1_dp",
+        "hydra.run.dir=outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_DP_NEW",
+        "--cfg",
+        "job",
+        "--resolve"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "composed_configuration_sha256": "08071ce04c435f0b4fdef702ad96035933518be7fa8f8c754536673dd9f0e82f",
+      "policy_target": "policy.policy.minimal_pick_diffusion_policy.MinimalPickDiffusionPolicy",
+      "policy_camera_key_source": "policy.obs_encoder.shape_meta.obs RGB keys",
+      "effective_policy_camera_keys": [
+        "side_camera_rgb",
+        "wrist_camera_rgb"
+      ],
+      "dataset_observation_RGB_keys": [
+        "side_camera_rgb",
+        "wrist_camera_rgb"
+      ],
+      "camera_keys_match": true,
+      "dataset_target": "policy.dataset.lab_cuvette_size_v1_dataset.LabCuvetteSizeV1Dataset",
+      "dataset_path": "outputs/lab_cuvette_loading/Size_v1/collection_standard/dataset",
+      "resolved_index_filename": "episode_data.hdf5",
+      "sample_filter": "success",
+      "scene_mode": "standard",
+      "scene_randomization_enabled": false,
+      "automatic_validation_mode": "standard",
+      "split_group_keys": [],
+      "split_scope": "complete episode",
+      "val_ratio": 0.1,
+      "n_obs_steps": 3,
+      "horizon": 16,
+      "training_rng_seed": 42,
+      "episode_split_seed": 42,
+      "requested_output_directory": "outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_DP_NEW",
+      "training_output_directory_created": false,
+      "training_executed": false,
+      "model_instantiated": false,
+      "dataset_instantiated": false,
+      "HDF5_opened": false
+    }
+  ],
+  "CPU_thread_limit": 2,
+  "CUDA_VISIBLE_DEVICES": "",
+  "GPU_started": false,
+  "training_executed": false,
+  "HDF5_opened": false,
+  "final_index_created": false,
+  "source_labels_or_frozen_assets_modified": false
+}

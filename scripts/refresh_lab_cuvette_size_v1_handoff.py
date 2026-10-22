@@ -124,6 +124,7 @@ def refresh(*, summary=None, collection_audit=None, allow_refresh=False):
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/phase_A_cpu_validation.json": "phase_A_cpu_validation.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/asset_id_configuration_switch_check.json": "asset_id_configuration_switch_check.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/normal_reader_directory_filename_cpu_check.json": "normal_reader_directory_filename_cpu_check.json",
+        ROOT / "docs/lab_cuvette_loading/Size_v1/runtime/future_training_hydra_compose_cpu_check.json": "future_training_hydra_compose_cpu_check.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/camera_actual_config_summary.json": "development_camera_actual_config_summary.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/normal_read_success_filter.json": "development_success_normal_read.json",
         ROOT / "docs/lab_cuvette_loading/Size_v1/data/loading01_inspection/frozen_reader_admission_actual.json": "development_frozen_admission.json",
@@ -356,6 +357,20 @@ verify5必须新目录且5/5真实完整成功；后两阶段需显式审阅后�
 ```
 
 本轮不执行模型训练。训练入口的task配置为`lab_cuvette_size_v1_act`或`lab_cuvette_size_v1_dp`，启用冻结守卫，自动验证standard；training.seed只控制训练随机数，不允许开启场景随机化。
+
+以下仅为未来明确启动训练时的正常入口示例，本轮未执行。ACT仅换task仍会继承旧相机名，必须精确覆盖`policy.camera_names=[side_camera_rgb,wrist_camera_rgb]`；DP从shape_meta/obs_encoder取两路相机，不加入不支持的camera_names字段。输出目录须不存在：
+
+```bash
+../labutopia-env/bin/python train.py --config-name=train_lab_cuvette_loading_act \\
+ task=lab_cuvette_size_v1_act \\
+ 'policy.camera_names=[side_camera_rgb,wrist_camera_rgb]' \\
+ hydra.run.dir=outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_ACT_NEW
+../labutopia-env/bin/python train.py --config-name=train_lab_cuvette_loading_dp \\
+ task=lab_cuvette_size_v1_dp \\
+ hydra.run.dir=outputs/lab_cuvette_loading/Size_v1/FUTURE_TRAIN_DP_NEW
+```
+
+任一命令末尾加`--cfg job --resolve`只合成/打印Hydra配置并退出，不创建workspace、不读取H5或训练。实际CPU合成证据在future_training_hydra_compose_cpu_check.json。collect/train/自动验证均保持standard、场景随机化关闭；成功BC、相同冻结场景的whole-episode train/val划分不变。这里自动验证是离线验证损失，不能写成本轮已经执行policy物理闭环评估。
 
 独立离线资产生成（新目录；不启GPU）：
 
