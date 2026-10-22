@@ -1,6 +1,6 @@
 # LabSim Size_v1 阶段状态
 
-更新2026-10-22，分支codex/lab-cuvette-size-v1。原座A candidate_far_hinge完全保留；12.5mm对照、Env_v1及旧版本保留。
+更新2026-10-22。当前工程开发与交接分支为codex/labsim；本页保留Size_v1实验状态，原实验分支末端见archive/20261022/lab-cuvette-size-v1。原座A candidate_far_hinge完全保留；12.5mm对照、Env_v1及旧版本保留。
 
 ## 阶段A 已验证
 

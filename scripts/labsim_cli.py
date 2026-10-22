@@ -1,0 +1,339 @@
+"""Small project entry point over the existing Size_v1 implementation.
+
+No physics, assets, labels, file formats, or training loop are implemented here.
+Commands run from the repository root even when called from another directory.
+Use --dry-run on a command to see exact argv without creating output files.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import importlib.metadata
+import importlib.util
+import json
+import os
+from pathlib import Path
+import shlex
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+CONFIG = ROOT / "config/lab_cuvette_loading/Size_v1/standard.yaml"
+FROZEN = ROOT / "config/lab_cuvette_loading/Size_v1/frozen_scene.json"
+REGISTRY = ROOT / "assets/lab_cuvette_loading/Size_v1/registry.json"
+OUTPUT_ROOT = ROOT / "outputs/lab_cuvette_loading/Size_v1"
+
+
+def resolve_path(value):
+    """CLI relative paths are always repository-relative, not caller-relative."""
+    value = Path(value).expanduser()
+    return (value if value.is_absolute() else ROOT / value).resolve()
+
+
+def new_path(value):
+    value = resolve_path(value)
+    if value.exists() or value.is_symlink():
+        raise ValueError(f"Output already exists; use a new path: {value}")
+    return value
+
+
+def existing_file(value):
+    value = resolve_path(value)
+    if not value.is_file():
+        raise ValueError(f"File does not exist: {value}")
+    return value
+
+
+def sha256(path):
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def lfs_pointer(path):
+    with Path(path).open("rb") as stream:
+        return stream.read(128).startswith(b"version https://git-lfs.github.com/spec/v1")
+
+
+def parser():
+    p = argparse.ArgumentParser(description=__doc__)
+    commands = p.add_subparsers(dest="command", required=True)
+    doctor = commands.add_parser("doctor", help="CPU-only runtime, LFS and frozen-scene checks")
+    doctor.add_argument("--json", action="store_true", help="Print a machine-readable diagnostic")
+    assets = commands.add_parser("assets", help="List registered size hypotheses; no simulation")
+    assets.add_argument("--asset-id")
+    assets.add_argument("--json", action="store_true")
+    demo = commands.add_parser("demo", help="Run one complete frozen standard teacher episode (GUI by default)")
+    demo.add_argument("--output", required=True, help="New output directory; never overwrite an episode")
+    demo.add_argument("--headless", action="store_true")
+    demo.add_argument("--dry-run", action="store_true")
+    collect = commands.add_parser("collect", help="Existing sequential standard collector; one Isaac process at a time")
+    collect.add_argument("--phase", required=True, choices=("verify5", "success", "controlled_failure"))
+    collect.add_argument("--collection", required=True, help="Dedicated directory below outputs/lab_cuvette_loading/Size_v1")
+    collect.add_argument("--episodes-per-process", type=int, choices=range(1, 6), default=5)
+    collect.add_argument("--max-processes", type=int, default=8)
+    collect.add_argument("--allow-after-verified-five", action="store_true")
+    collect.add_argument("--headless", action="store_true")
+    collect.add_argument("--dry-run", action="store_true")
+    validate = commands.add_parser("validate", help="Audit a closed official collection and create a new relative-link index")
+    validate.add_argument("--collection", required=True)
+    validate.add_argument("--index", required=True, help="New HDF5 index inside the collection tree")
+    validate.add_argument("--output", required=True, help="New JSON audit path")
+    validate.add_argument("--dry-run", action="store_true")
+    dataset = commands.add_parser("dataset-check", help="Read actual ACT/DP batches from an existing index; never train")
+    dataset.add_argument("--index", required=True)
+    dataset.add_argument("--sample-filter", choices=("success", "failure"), default="success")
+    dataset.add_argument("--policy", choices=("act", "dp", "both"), default="both")
+    dataset.add_argument("--output", required=True, help="New JSON read-check path")
+    dataset.add_argument("--dry-run", action="store_true")
+    return p
+
+
+def collection_path(value):
+    collection = resolve_path(value)
+    if collection == OUTPUT_ROOT or not collection.is_relative_to(OUTPUT_ROOT):
+        raise ValueError(f"Collection must be a dedicated directory below {OUTPUT_ROOT}")
+    return collection
+
+
+def closed_collection(collection):
+    """Refuse obvious live/incomplete runs before an audit opens their HDF5s.
+
+    The underlying validator still makes the official per-episode decision.
+    This check is an early guard, not a replacement for its process evidence.
+    """
+    contract = collection / "collection_contract.json"
+    if not contract.is_file():
+        raise ValueError(f"Official collection contract is missing: {contract}")
+    runs = collection / "runs"
+    for run in runs.iterdir() if runs.is_dir() else ():
+        if run.is_dir():
+            evidence = run / "process_exit.json"
+            if not evidence.is_file() or json.loads(evidence.read_text()).get("process_exited") is not True:
+                raise ValueError(f"Run is not closed; wait for the collector before reading it: {run}")
+
+
+def build_command(args):
+    """Build real subprocess argv without shell interpolation or output writes."""
+    if args.command == "demo":
+        output = new_path(args.output)
+        command = ["bash", str(ROOT / "demos/lab_cuvette_size_v1/run.sh"),
+            "--mode", "teacher", "--config", str(CONFIG), "--layout-mode", "standard",
+            "--seed", "0", "--episodes", "1", "--output", str(output)]
+        if args.headless:
+            command.append("--headless")
+        return command
+    if args.command == "collect":
+        collection = collection_path(args.collection)
+        if args.max_processes < 1:
+            raise ValueError("--max-processes must be positive")
+        if args.phase == "verify5":
+            new_path(collection)
+        elif not args.allow_after_verified_five:
+            raise ValueError("Review verify5 first, then explicitly use --allow-after-verified-five")
+        command = [sys.executable, str(ROOT / "scripts/collect_lab_cuvette_size_v1_standard.py"),
+            "--phase", args.phase, "--collection", str(collection), "--config", str(CONFIG),
+            "--frozen-scene", str(FROZEN), "--episodes-per-process", str(args.episodes_per_process),
+            "--max-processes", str(args.max_processes)]
+        if args.allow_after_verified_five:
+            command.append("--allow-after-verified-five")
+        if args.headless:
+            command.append("--headless")
+        return command
+    if args.command == "validate":
+        collection = collection_path(args.collection)
+        closed_collection(collection)
+        index, output = new_path(args.index), new_path(args.output)
+        if not index.is_relative_to(collection):
+            raise ValueError("Relative-link index must stay inside its collection; move the whole tree together")
+        if index == output:
+            raise ValueError("Index and JSON audit must use different paths")
+        return [sys.executable, str(ROOT / "scripts/validate_lab_cuvette_size_v1_data.py"),
+            str(collection), "--config", str(CONFIG), "--frozen-scene", str(FROZEN),
+            "--admission-scope", "official_collection", "--index", str(index), "--output-json", str(output)]
+    if args.command == "dataset-check":
+        index, output = existing_file(args.index), new_path(args.output)
+        return [sys.executable, str(Path(__file__).resolve()), "dataset-check", "--index", str(index),
+            "--sample-filter", args.sample_filter, "--policy", args.policy, "--output", str(output)]
+    raise ValueError("No subprocess command for " + args.command)
+
+
+def frozen_check():
+    from omegaconf import OmegaConf
+    from demos.lab_cuvette_size_v1.frozen_scene import load_frozen, validate_frozen_scene
+    frozen = load_frozen(FROZEN)
+    value = validate_frozen_scene(OmegaConf.load(CONFIG), frozen, ROOT, purpose="collect")
+    return dict(value, dependency_count=len(frozen["assets"]))
+
+
+def doctor_report():
+    """Do not import SimulationApp, initialize CUDA or edit/install anything."""
+    modules = {}
+    for name in ("omegaconf", "h5py", "numpy", "torch", "cv2", "scipy", "isaacsim"):
+        try:
+            spec = importlib.util.find_spec(name)
+            modules[name] = dict(available=spec is not None, origin=spec.origin if spec else None)
+        except (ImportError, ValueError) as error:
+            modules[name] = dict(available=False, error=str(error))
+    versions = {}
+    for name in ("isaacsim", "numpy", "omegaconf", "h5py", "torch"):
+        try:
+            versions[name] = importlib.metadata.version(name)
+        except importlib.metadata.PackageNotFoundError:
+            versions[name] = None
+    result = dict(schema="labsim.project_doctor.v1", repository=str(ROOT), python=sys.executable,
+        python_version=sys.version.split()[0], modules=modules, versions=versions,
+        simulation_started=False, GPU_initialized=False, files_modified=False,
+        config=str(CONFIG), frozen_manifest=str(FROZEN), warnings=[], errors=[])
+    if sys.version_info[:2] != (3, 11):
+        result["errors"].append("Validated Isaac Sim5.1 runtime requires Python3.11; select it with LABSIM_PYTHON")
+    missing = [name for name, value in modules.items() if not value["available"]]
+    if missing:
+        result["errors"].append("Missing runtime modules: " + ", ".join(missing))
+    try:
+        manifest = json.loads(FROZEN.read_text())
+        paths = {ROOT / key for key in manifest["assets"]}
+        registry = json.loads(REGISTRY.read_text())
+        paths.update(ROOT / item["asset_path"] for item in registry["assets"].values())
+        pointers = [str(path.relative_to(ROOT)) for path in sorted(paths) if path.is_file() and lfs_pointer(path)]
+        absent = [str(path.relative_to(ROOT)) for path in sorted(paths) if not path.is_file()]
+        result["assets"] = dict(registered_variants=len(registry["assets"]),
+            inspected_files=len(paths), missing=absent, LFS_pointers=pointers)
+        if pointers or absent:
+            result["errors"].append("Missing asset contents; run git lfs pull and re-run doctor")
+    except (ValueError, KeyError, OSError) as error:
+        result["errors"].append("Asset manifest check: " + str(error))
+    try:
+        result["frozen_scene"] = frozen_check()
+    except Exception as error:
+        result["errors"].append("Frozen-scene check: " + str(error))
+    try:
+        from omegaconf import OmegaConf
+        cfg = OmegaConf.load(CONFIG)
+        site = Path(str(cfg.env.shapely_site))
+        result["geometry_dependency"] = dict(configured_site=str(site), exists=site.is_dir(),
+            source="frozen standard config; runtime-only absolute dependency path")
+        if not site.is_dir():
+            result["errors"].append("Configured isolated geometry site is missing: " + str(site))
+        else:
+            probe = subprocess.run([sys.executable, "-c", "import sys;sys.path.insert(0,sys.argv[1]);import shapely;from shapely import constrained_delaunay_triangles;print(shapely.__version__)", str(site)],
+                cwd=ROOT, capture_output=True, text=True, timeout=30)
+            result["geometry_dependency"].update(import_exit_code=probe.returncode, shapely_version=probe.stdout.strip())
+            if probe.returncode:
+                result["errors"].append("Geometry dependency import failed: " + probe.stderr.strip()[-1200:])
+    except Exception as error:
+        result["errors"].append("Geometry dependency check: " + str(error))
+    helper = ROOT / "demos/lab_cuvette_external/usd_python.sh"
+    sibling = ROOT.parent / "labutopia-env"
+    result["USD_bootstrap"] = dict(script=str(helper), expected_sibling_environment=str(sibling),
+        sibling_environment_exists=sibling.is_dir(),
+        layout_requirement="Existing frozen USD helper contains Isaac5.1 extcache paths under the sibling labutopia-env; LABSIM_PYTHON selects Python but does not rewrite those paths")
+    if not sibling.is_dir():
+        result["errors"].append("USD helper expects the existing sibling labutopia-env; this checkout needs explicit runtime setup")
+    else:
+        try:
+            probe = subprocess.run(["bash", str(helper), "-c",
+                "from pxr import Usd, UsdGeom, PhysxSchema;print(Usd.GetVersion())"],
+                cwd=ROOT, env=dict(os.environ, LABSIM_PYTHON=sys.executable),
+                capture_output=True, text=True, timeout=30)
+            result["USD_bootstrap"].update(import_exit_code=probe.returncode, USD_version=probe.stdout.strip())
+            if probe.returncode:
+                result["errors"].append("Existing USD/PhysxSchema bootstrap failed: " + probe.stderr.strip()[-1200:])
+        except (OSError, subprocess.TimeoutExpired) as error:
+            result["errors"].append("USD bootstrap check: " + str(error))
+    try:
+        probe = subprocess.run(["git", "lfs", "version"], cwd=ROOT, capture_output=True, text=True, timeout=10)
+        result["git_lfs"] = dict(available=probe.returncode == 0, version=probe.stdout.strip())
+        if probe.returncode:
+            result["warnings"].append("git-lfs unavailable; existing assets may run, but cloning/pushing LFS assets requires git-lfs")
+    except (OSError, subprocess.TimeoutExpired) as error:
+        result["git_lfs"] = dict(available=False, error=str(error))
+        result["warnings"].append("git-lfs check unavailable")
+    result["warnings"].append("CPU checks do not establish GPU/GUI readiness or successful physical execution; no package installation or runtime upgrade is performed")
+    result["ready_for_existing_runtime"] = not result["errors"]
+    return result
+
+
+def asset_rows(asset_id=None):
+    registry = json.loads(REGISTRY.read_text())
+    if asset_id and asset_id not in registry["assets"]:
+        raise ValueError(f"Unknown asset_id: {asset_id}")
+    rows = []
+    for key, item in sorted(registry["assets"].items(), key=lambda pair: pair[1]["nominal_outer_xy_mm"]):
+        if asset_id and key != asset_id:
+            continue
+        rows.append(dict(asset_id=key, nominal_outer_xy_mm=item["nominal_outer_xy_mm"],
+            actual_outer_dimensions_mm=item["actual_outer_dimensions_mm"], height_nominal_mm=item["height_nominal_mm"],
+            mass_kg=item["mass_kg"], mass_source=item["mass_source"], asset_path=item["asset_path"],
+            asset_sha256=item["asset_sha256"], frozen_standard_selected=key == "cuvette_xy_1000"))
+    return rows
+
+
+def dataset_check(args):
+    from scripts.validate_lab_cuvette_size_v1_data import validate_reader
+    index, output = existing_file(args.index), new_path(args.output)
+    frozen_check()
+    policies = ("act", "dp") if args.policy == "both" else (args.policy,)
+    results = [validate_reader(index, FROZEN, CONFIG, sample_filter=args.sample_filter, policy_type=policy)
+               for policy in policies]
+    value = dict(schema="labsim.project_dataset_check.v1", index=str(index),
+        sample_filter=args.sample_filter, reader_validation=results, optimizer_or_training_executed=False,
+        source_labels_modified=False)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("x", encoding="utf-8") as stream:
+        json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
+        stream.write("\n")
+    print(json.dumps(dict(output=str(output), sample_filter=args.sample_filter,
+        policies=list(policies), episodes=[len(row["episodes"]) for row in results],
+        optimizer_or_training_executed=False), ensure_ascii=False))
+    return 0
+
+
+def main(argv=None):
+    args = parser().parse_args(argv)
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    try:
+        if args.command == "doctor":
+            result = doctor_report()
+            if args.json:
+                print(json.dumps(result, ensure_ascii=False, indent=2))
+            else:
+                print(f"LabSim runtime: {result['python']} (Python {result['python_version']})")
+                print("Frozen standard: " + ("PASS" if "frozen_scene" in result else "FAIL"))
+                print("Assets: " + json.dumps(result.get("assets", {}), ensure_ascii=False))
+                for level in ("errors", "warnings"):
+                    for message in result[level]:
+                        print(level.upper() + ": " + message)
+                print("CPU preflight: " + ("PASS" if result["ready_for_existing_runtime"] else "FAIL"))
+            return 0 if result["ready_for_existing_runtime"] else 2
+        if args.command == "assets":
+            rows = asset_rows(args.asset_id)
+            if args.json:
+                print(json.dumps(rows, ensure_ascii=False, indent=2))
+            else:
+                for row in rows:
+                    width = "×".join(str(value) for value in row["nominal_outer_xy_mm"])
+                    selected = " [frozen standard]" if row["frozen_standard_selected"] else ""
+                    print(f"{row['asset_id']}  {width}×{row['height_nominal_mm']} mm  {row['mass_kg']} kg{selected}")
+                print("Size hypotheses; registry includes source hashes and mass assumptions. Frozen standard permits cuvette_xy_1000 only.")
+            return 0
+        command = build_command(args)
+        if args.dry_run:
+            print(json.dumps(dict(dry_run=True, files_created=False, simulation_started=False,
+                cwd=str(ROOT), argv=command, shell_display=shlex.join(command)), ensure_ascii=False, indent=2))
+            return 0
+        if args.command == "dataset-check":
+            return dataset_check(args)
+        frozen_check()
+        environment = dict(os.environ, LABSIM_PYTHON=sys.executable)
+        return subprocess.run(command, cwd=ROOT, env=environment, check=False).returncode
+    except (ValueError, OSError, ImportError) as error:
+        print("LabSim: " + str(error), file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

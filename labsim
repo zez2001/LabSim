@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Run from any directory; keep the validated Isaac environment untouched.
+set -euo pipefail
+LABSIM_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -n "${LABSIM_PYTHON:-}" ]]; then
+  LABSIM_CLI_PYTHON="$LABSIM_PYTHON"
+elif [[ -x "$LABSIM_ROOT/../labutopia-env/bin/python" ]]; then
+  LABSIM_CLI_PYTHON="$LABSIM_ROOT/../labutopia-env/bin/python"
+else
+  LABSIM_CLI_PYTHON=python3
+fi
+cd "$LABSIM_ROOT"
+exec "$LABSIM_CLI_PYTHON" "$LABSIM_ROOT/scripts/labsim_cli.py" "$@"

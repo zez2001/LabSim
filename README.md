@@ -1,439 +1,130 @@
-# LabSim Size_v1 进展与分享入口
+# LabSim
 
-更新于2026-10-22。独立分支为[`codex/lab-cuvette-size-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-size-v1)。本轮固定原A座`candidate_far_hinge`，通过同一XY仿射规则派生比色皿尺寸，不修改原座、整机、旧资产或源CAD。
+基于 LabUtopia 和 Isaac Sim 的科学实验操作仿真工程。当前正式任务是 **`lab_cuvette_loading / Size_v1`**：Franka 从白色 6×6 来源架抓取比色皿，搬运到开盖仪器的内部座，完成插入、支撑交接、松爪、撤离与 3 秒稳定观察，并记录可供 ACT / Diffusion 读取的轨迹。
 
-已完成35个9.50–12.50mm独立资产及几何筛选。正式任务采用10.00×10.00×67.5mm假设资产、20g质量假设，重新计算COM/惯量。10.00mm和10.30mm均有实际完整装载成功；10.50mm开发运行虽释放并撤离，抓持和对准门控仍失败，不能由末态稳定改判成功。物理可用结果只覆盖已测离散尺寸，10.70mm正几何证书不是物理上限。
+**开发与交接入口：[`codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim)。** `main` 保留 LabUtopia 上游基准。日常修复和同一功能的改进继续使用当前分支；独立功能才另开短期分支。具体约定见 [贡献与分支规则](CONTRIBUTING.md)。
 
-固定standard验证5/5完整成功，并计入正式20条合格自然成功。另采集20条有效受控失败：1/5/10/18mm插入深度处提前停止各5条，无自然失败；没有把它们解释为自然卡滞或尺寸不可通过。全部40条通过冻结、实际事件、真实进程及正常数据读取审计；9次仿真子进程均exit0，无中断。ACT/DP成功和失败读取均通过，两组各按完整episode划分18/2，训练未执行。collect、train及自动验证均固定standard，random10取消。
+## 功能与验证范围
 
-- [本轮DOCX报告](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.docx) · [报告与5段实际录像](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)
-- [40条最终数据审计与读取](docs/lab_cuvette_loading/Size_v1/data/final40_actual/README.md) · [5次固定场景逐集结果及便携样例](docs/lab_cuvette_loading/Size_v1/data/standard5_actual/README.md)
-- [本轮调用与范围](docs/lab_cuvette_loading/Size_v1/README.md) · [详细命令及未来训练相机配置](demos/lab_cuvette_size_v1/README.md) · [持续状态](TASK_STATUS.md)
-- [35尺寸完整几何结果](docs/lab_cuvette_loading/Size_v1/geometry/family_20261021_02/README.md) · [可替换资产注册](assets/lab_cuvette_loading/Size_v1/registry.json)
-- [碰撞烹饪／座表面抽样与限制](docs/lab_cuvette_loading/Size_v1/physics/cooked_preview01_summary.md) · [冻结配置](config/lab_cuvette_loading/Size_v1/standard.yaml) · [冻结依赖](config/lab_cuvette_loading/Size_v1/frozen_scene.json)
-- [本轮Agent结果快照](docs/agent_handoff/Size_v1_current/状态与边界.md) · [精简阅读包规范](docs/agent_handoff/README.md)
+- 独立场景：单台开盖仪器、原始内部 A 座、完整参数化 6×6 架、动态空心比色皿、Franka、侧视与腕部相机。
+- 完整物理执行：来源架取物 → 拔出 → 搬运 → 对准 → 插入 → 承托交接 → 对称慢松爪 → 撤离 → 稳定。专家控制器使用器皿真值位姿和接触反馈。
+- 连续双指接触锁存、按阶段卸载、卡滞检测与独立判分；锁存的是夹指位置命令，不是把物体绑定到机器人。
+- 采集双相机 RGB、机器人状态、原始及实际动作、时间戳、物体位姿、接触与任务阶段；保留成功、失败和未执行状态。
+- 35 个独立尺寸资产及注册表，通过 `asset_id` 选择；支持几何筛选、冻结场景校验、数据审计和正常 ACT / Diffusion 数据读取。
+- 保留早期 `minimal_pick`、精密插入及器皿装载各版本，入口见[历史实验索引](docs/history/README.md)。
 
-新阅读包为`LabSim_Size_v1_本轮改动与结果_精简阅读包_20261022`，仅包含本轮报告、必要结果媒体、结果表和配置证据。完整collection与约1.96GB独立便携episode另行管理。原座完整烹饪表示读回、原生速度与差分告警及真实物理校准仍有局限；不宣称实物尺寸或平台精度已获验证。下方保留Env_v1历史阶段原结论，不代表当前Size_v1状态。
+当前正式配置使用 **10.0×10.0×67.5 mm** 比色皿、20 g 质量假设、来源槽 A1、原内部 A 座 `candidate_far_hinge`。原座几何、尺寸、碰撞和物理参数保持不变。尺寸资产属于工程假设，不是实物测量结果。
 
-# LabSim 进展与分享入口
+已实际完成固定场景 **5/5** 验证，并采集 **20 条合格完整成功 + 20 条有效失败**。失败均为确定性动作偏差：在 1 / 5 / 10 / 18 mm 插入深度提前停止，各 5 条；没有自然失败，不能据此解释为自然卡滞。全部 40 条通过实际事件、进程、冻结与读取审计。成功和失败分别按完整 episode 划分 18 train / 2 val；本轮未执行训练。
 
-历史阶段 **Env_v1 已整理为正式任务并接通三条真实策略短链，原刚性座完整装载仍受阻**。当前场景使用单台开盖仪器、完整白色6×6来源架和12.5×12.5×67.5 mm器皿，目标是腔内原A座 `candidate_far_hinge`。A/B原座保留12.6 mm中央参考截面及全部内伸结构；原尺寸直立刚性入口的整个必要XY域仍存在材料冲突，没有扩孔、删件或放宽判据。
+[结果报告与连续录像](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md) · [DOCX](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.docx) · [40 条数据审计](docs/lab_cuvette_loading/Size_v1/data/final40_actual/README.md)
 
-Env_v1阶段的 **preinsert_continuous_latch01安全预插入诊断已真实通过**：82.65秒，完成清槽、悬持、搬运、原座上方安全接近、上抬和末段1秒保持；未插入、未松爪、未实际撤离，full/native_pair仍为null。此前continuous_latch01的230.445 µm漂移超限false保留。真实projection和zero_delay渲染修复已有最新4958/4958同观测关联实证，旧0.966282 mm残差是修复前记录。π0.5、GPT-6 Astra direct、真实RLinf/RPent Harness VLA各接通5动作/0.25秒短链，均task_success=false，非任务级评测。固定5次/random10次及20+20尚未开始。
+## 环境与获取
 
-- [本轮DOCX报告](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.docx) · [Markdown报告与视频](docs/lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.md) · [24条实际运行表](docs/lab_cuvette_loading/Env_v1/results_20261021/actual_runs.csv)
-- [当前完成状态与全部调用命令](docs/lab_cuvette_loading/Env_v1/README.md) · [持续任务状态](TASK_STATUS.md)
-- [预览及受门控standard/random入口](docs/lab_cuvette_loading/Env_v1/README.md) · [正常读取筛选 便携导出 视频回看](docs/lab_cuvette_loading/Env_v1/data/README.md)
-- [三策略真实调用及全部历史尝试](docs/lab_cuvette_loading/Env_v1/policy_backends.md) · [实际短链记录](docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json)
-- [23项真实API检查](docs/lab_cuvette_loading/Env_v1/policy_evidence/live_environment_api_validation.json)（random仅初始化，非正式任务批次）
-- [15周期真实动作回放](docs/lab_cuvette_loading/Env_v1/replay_README.md) · [本轮连续诊断阅读媒体来源](docs/lab_cuvette_loading/Env_v1/data/reading_media_provenance.json)（不代表完整装载）
-- [原座几何与最少实物信息](docs/lab_cuvette_loading/Env_v1/geometry/README.md) · [提取力与姿态图](docs/lab_cuvette_loading/Env_v1/data/extract01_control_alignment.png) · [动态相机残差](docs/lab_cuvette_loading/Env_v1/data/extract01_renderer_USD_dynamic_audit.json)
-- [新诊断成功结果及范围](docs/lab_cuvette_loading/Env_v1/data/preinsert_continuous_latch01_result_summary.json) · [当前资产 变换与尺寸清单](docs/lab_cuvette_loading/Env_v1/current_asset_scene_manifest.json)
-- [全部历史版本](LABSIM_PROGRESS.md) · [V0_demo04历史报告](docs/lab_cuvette_loading/V0_demo04/report.md) · [精简Agent阅读包规则](docs/agent_handoff/README.md)
-
-分享分支为 [`codex/lab-cuvette-env-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-env-v1)。源CAD、旧资产和结果保留。每轮新阅读包只收本轮改动、报告和少量结果媒体，不默认收整个工程或原始H5；本轮报告已生成并完成8页渲染核查。按最终推送提交生成的桌面小阅读包为 `LabSim_Env_v1_本轮改动与结果_精简阅读包_20261021`，包含报告、三段实际诊断/失败视频、CSV与配置；完整2546460010字节数据单独存放，最终提交和SHA见包根清单。真实校准仍为false，诊断成功不进入完整装载成功BC。以下保留上游LabUtopia文档。
-
-<div align="center">
-  <img src="images/logo.png" alt="Logo" width="180">
-</div>
-
-# [NeurIPS 2025] LabUtopia: High-Fidelity Simulation and Hierarchical Benchmark for Scientific Embodied Agents
-
-<div align="center">
-
-[![Paper](https://img.shields.io/badge/📄_Paper-arXiv-red.svg)](https://arxiv.org/pdf/2505.22634v1.pdf)
-[![arXiv](https://img.shields.io/badge/arXiv-2505.22634-b31b1b.svg)](https://arxiv.org/abs/2505.22634)
-[![Website](https://img.shields.io/badge/🌐_Website-LabUtopia-blue.svg)](https://rui-li023.github.io/labutopia-site/)
-[![Dataset](https://img.shields.io/badge/HuggingFace-Dataset-orange?logo=huggingface)](https://huggingface.co/datasets/Ruinwalker/Labutopia-Dataset)
-
-</div>
-
-<div align="center">
-  <img src="images/teaser.png" alt="LabUtopia Teaser" width="80%">
-</div>
-
-[中文版 README](README_CN.md) | [English README](README.md)
-
-## System Requirements
-- NVIDIA GPU with CUDA support (RTX series recommended, Isaac Sim does not support A100/A800)
-- Ubuntu 24.04 (tested version)
-- conda
-- Python 3.11
-- Isaac Sim 5.1
-
-## 🛠️ Installation
-
-### 1. Code Download
-
-Download the code and pull scene assets:
+已运行环境为 Linux、NVIDIA RTX 4090、Python 3.11、Isaac Sim 5.1；物理 240 Hz、控制 60 Hz。GPU 仿真顺序运行。代码、配置和资产在 Git / Git LFS 中；约 61 GB 原始数据及 Python 环境不随普通 clone 提供。
 
 ```bash
-git clone https://github.com/Rui-li023/LabUtopia.git
-sudo apt install git-lfs 
+git clone --branch codex/labsim https://github.com/zez2001/LabSim.git
+cd LabSim
+git lfs install
 git lfs pull
 ```
 
-### 2. Environment Creation
-Create and activate a new conda environment:
-```bash
-conda create -n labutopia python=3.11 -y
-conda activate labutopia
-```
-
-### 3. Dependencies Installation
-Install required packages:
-```bash
-# Install PyTorch
-pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0 --index-url https://download.pytorch.org/whl/cu126
-
-# Install Isaac Sim
-pip install isaacsim[all,extscache]==5.1.0 --extra-index-url https://pypi.nvidia.com
-
-# Install other dependencies
-pip install -r requirements.txt
-
-# Run script to setup .vscode/settings.json
-python -m isaacsim --generate-vscode-settings
-```
-
-## Code Structure
-
-```
-LabSim/
-├── assets/                # Resource files directory
-│   ├── chemistry_lab/     # Chemistry lab scene resources
-│   ├── fetch/             # Fetch robot resources
-│   ├── navigation/        # Navigation task resources
-│   └── robots/            # Robot model resources
-├── config/                # Configuration files directory
-│   ├── level1_*.yaml    # Level 1 basic task configs
-│   ├── level2_*.yaml    # Level 2 combined task configs
-│   ├── level3_*.yaml    # Level 3 generalization task configs
-│   └── level4_*.yaml    # Level 4 long sequence task configs
-├── controllers/         # Controller implementations
-│   ├── atomic_actions/  # Basic action controllers
-│   ├── inference_engines/ # Inference engine implementations
-│   └── robot_controllers/ # Robot controllers
-├── data_collectors/     # Data collector implementations
-├── factories/           # Factory class implementations
-├── policy/            # Policy model implementations
-├── tasks/             # Task definition implementations
-├── tests/            # Test code
-└── utils/            # Utility functions
-```
-
-### Design Philosophy
-1. Modular structure for better code organization and maintainability
-2. Scene state and observation data acquisition (including camera images, robot states, and scene object states) are handled in tasks
-3. Robot control and task success condition checking are handled in controllers
-
-## Usage
-
-### Data Collection
-
-Data collection is the first step in training models. LabUtopia supports data collection for multiple task types, and you can also download pre-collected data from our HuggingFace repository.
-
-#### 1. Select Configuration File
-There are multiple pre-configured task files in the `config` folder:
-
-**Level 1 Basic Tasks:**
-- `level1_pick.yaml` - Pick tasks
-- `level1_place.yaml` - Place tasks  
-- `level1_open_door.yaml` - Open door tasks
-- `level1_open_drawer.yaml` - Open drawer tasks
-- `level1_close_door.yaml` - Close door tasks
-- `level1_close_drawer.yaml` - Close drawer tasks
-- `level1_pour.yaml` - Pour tasks
-- `level1_press.yaml` - Press tasks
-- `level1_shake.yaml` - Shake tasks
-- `level1_stir.yaml` - Stir tasks
-
-**Level 2 Combined Tasks:**
-- `level2_ShakeBeaker.yaml` - Shake beaker
-- `level2_StirGlassrod.yaml` - Stir with glass rod
-- `level2_PourLiquid.yaml` - Pour liquid
-- `level2_TransportBeaker.yaml` - Transport beaker
-- `level2_Heat_Liquid.yaml` - Heat liquid
-- `level2_openclose.yaml` - Open and close tasks
-
-**Level 3 Generalization Tasks:**
-- `level3_PourLiquid.yaml` - Complex pour tasks
-- `level3_Heat_Liquid.yaml` - Complex heating tasks
-- `level3_TrabsportBeaker.yaml` - Complex transport tasks
-- `level3_open.yaml` - Complex open tasks
-- `level3_pick.yaml` - Complex pick tasks
-- `level3_press.yaml` - Complex press tasks
-
-**Level 4 Long Sequence Tasks:**
-- `level4_CleanBeaker.yaml` - Clean beaker
-- `level4_DeviceOperation.yaml` - Device operation
-
-#### 2. Modify Configuration Parameters
-
-Each configuration file contains the following main parameters that need to be adjusted according to requirements:
-
-```yaml
-# Basic configuration
-name: level1_pick                    # Task name
-task_type: "pick"                   # Task type
-controller_type: "pick"             # Controller type
-mode: "collect"                     # Mode: collect or infer
-
-# Scene configuration
-usd_path: "assets/chemistry_lab/pick_task/scene.usd"  # Scene file path
-
-# Task parameters
-task:
-  max_steps: 1000                   # Maximum steps
-  obj_paths:                        # Target object configuration
-    - path: "/World/conical_bottle02"
-      position_range:               # Object position range
-        x: [0.22, 0.32]
-        y: [-0.07, 0.03]
-        z: [0.80, 0.80]
-
-# Data collection parameters
-max_episodes: 100                   # Maximum collection episodes
-
-# Camera configuration
-cameras_names: ["camera_1", "camera_2"]
-cameras:
-  - prim_path: "/World/Camera1"
-    name: "camera_1"
-    translation: [2, 0, 2]         # Camera position
-    resolution: [256, 256]         # Resolution
-    focal_length: 6                 # Focal length
-    orientation: [0.61237, 0.35355, 0.35355, 0.61237]  # Orientation
-    image_type: "rgb"              # Image type, rgb depth, point. You can use rgb+depth to get more than one type of image.
-
-# Robot configuration
-robot:
-  type: "franka"                   # Robot type
-  position: [-0.4, -0, 0.71]      # Robot position
-
-# Data collector configuration
-collector:
-  type: "default"                  # Collector type
-  compression: null                # Compression settings
-```
-
-#### 3. Run Data Collection
-
-After selecting the configuration file, run:
-```bash
-# Use default configuration
-python main.py --config-name level1_pick
-```
-
-Data will be saved in the `outputs/collect/date/time_taskname/` directory.
-
-### Training
-
-The training process uses collected data to train robot policy models.
-
-#### 1. Select Training Configuration
-
-There are multiple training configurations in the `policy/config/` folder:
-
-- `train_diffusion_unet_image_workspace.yaml` - Diffusion model training (recommended)
-- `train_act_image_workspace.yaml` - ACT model training
-
-#### 2. Modify Training Parameters
-
-Main parameters that need to be adjusted:
-
-```yaml
-# Model configuration
-policy:
-  _target_: policy.policy.diffusion_unet_image_policy.DiffusionUnetImagePolicy
-  shape_meta: ${shape_meta}        # Data shape metadata
-  
-  # Noise scheduler configuration
-  noise_scheduler:
-    num_train_timesteps: 100       # Training timesteps
-    beta_start: 0.0001             # Beta start value
-    beta_end: 0.02                 # Beta end value
-    beta_schedule: squaredcos_cap_v2  # Beta schedule strategy
-
-  # Observation encoder configuration
-  obs_encoder:
-    _target_: policy.model.vision.multi_image_obs_encoder.MultiImageObsEncoder
-    rgb_model:
-      _target_: policy.model.vision.model_getter.get_resnet
-      name: resnet18               # Backbone network
-    resize_shape: [256, 256]      # Resize shape
-    random_crop: False              # Random crop
-
-# Training parameters
-training:
-  device: "cuda:0"                # Training device
-  seed: 42                        # Random seed
-  num_epochs: 8000                # Training epochs
-  lr: 1.0e-4                      # Learning rate
-  batch_size: 64                  # Batch size
-  gradient_accumulate_every: 1     # Gradient accumulation steps
-  
-  # Checkpoint saving
-  checkpoint_every: 30             # Save every 30 epochs
-  val_every: 10                   # Validate every 10 epochs
-
-# Data loader configuration
-dataloader:
-  batch_size: 64                  # Batch size
-  num_workers: 4                  # Number of workers
-  shuffle: True                   # Whether to shuffle data
-
-# Optimizer configuration
-optimizer:
-  _target_: torch.optim.AdamW
-  lr: 1.0e-4                      # Learning rate
-  betas: [0.95, 0.999]           # Adam parameters
-  weight_decay: 1.0e-6           # Weight decay
-```
-
-#### 3. Specify Dataset Location
-Modify the corresponding configuration file in the `policy/config/task` folder, change the `dataset_path` parameter to your dataset folder location.
-
-#### 4. Run Training
+**当前电脑**可复用项目同级的 `../labutopia-env/bin/python`。其他位置显式设置解释器，再运行只读检查：
 
 ```bash
-# Use diffusion model training
-python train.py --config-name=train_diffusion_unet_image_workspace
-
-# Use ACT model training
-python train.py --config-name=train_act_image_workspace
+export LABSIM_PYTHON=/absolute/path/to/python
+./labsim doctor
+./labsim --help
 ```
 
-Training logs and models will be saved in the `outputs/train/date/time_modelname_taskname/` directory.
+`doctor` 检查解释器、依赖发现、LFS 实体、冻结文件和路径，并报告可迁移性问题；它不启动 Isaac Sim，也不等同于 GPU / GUI 运行通过。新机器请先阅读[开发接入指南](docs/development/ONBOARDING.md)：当前仍有既有环境路径依赖，不能只安装 Python 包就认定部署完成。上游安装参考已移至 [LabUtopia 文档](docs/upstream/README.labutopia.md)。
 
-### Inference
+## 运行完整 GUI demo
 
-Use trained models for inference testing.
-
-#### 1. Modify Configuration File
-
-Change the mode from `collect` to `infer` in the configuration file and add inference-related configurations:
-
-```yaml
-# Basic configuration
-mode: "infer"                     # Change to inference mode
-
-# Inference configuration
-infer:
-  obs_names: {"camera_1_rgb": 'camera_1_rgb', "camera_2_rgb": 'camera_2_rgb'}
-  
-  # Local inference configuration
-  policy_model_path: "outputs/train/2025.03.25/12.43.59_train_act_image_pick_pick_data/checkpoints/latest.ckpt"
-  policy_config_path: "outputs/train/2025.03.25/12.43.59_train_act_image_pick_pick_data/.hydra/config.yaml"
-  normalizer_path: "outputs/train/2025.03.25/12.43.59_train_act_image_pick_pick_data/checkpoints/normalize.ckpt"
-  
-  # Remote inference configuration (optional)
-  type: "remote"                  # Use remote inference
-  host: "101.126.156.90"         # Server address
-  port: 56434                     # Server port
-  n_obs_steps: 1                  # Observation steps
-  timeout: 30                     # Timeout
-  max_retries: 3                  # Maximum retries
-
-max_episodes: 50                  # Inference episodes
-```
-
-#### 2. Run Inference
+以下命令均在仓库根目录执行。`outputs/` 下的名称是示例新输出位置，请为每次运行使用尚不存在的目录。默认 GUI；无桌面显示时增加 `--headless`。
 
 ```bash
-# Use local model inference
-python main.py --config-name level1_pick
-
-# Use remote inference
-python main.py --config-name level3_PourLiquid
+./labsim demo --output outputs/lab_cuvette_loading/Size_v1/demo_handoff_001 --dry-run
+./labsim demo --output outputs/lab_cuvette_loading/Size_v1/demo_handoff_001
 ```
 
-Inference results will be saved in the `outputs/infer/date/time_taskname/` directory.
+默认任务固定为正式 Size_v1 standard 场景。单次成功轨迹约 106 秒仿真时间，实际墙钟时间受硬件和图像记录影响。输出保留连续录像、episode、事件与独立结果；依据实际结果判断成功，不能以进程正常结束代替任务成功。
 
-## Use OpenPI
+## 固定场景采集
 
-### Installation
+先在全新 collection 完成 5 次验证；通过后，沿用同一个 collection 补采成功和确定性动作偏差失败：
 
-Download our modified OpenPI code:
-
-```
-git clone https://github.com/Rui-li023/openpi.git
-```
-
-### Data Conversion
-
-Convert LabUtopia format data to LeRobot format dataset:
-
-```
-python scripts/convert_labsim_data_to_lerobot.py --data_dir outputs/collect/xxx/xxx/dataset --num_processes 8 --fps 60 --repo_name labutopia/level3-pick
+```bash
+./labsim collect --phase verify5 --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 --headless
+./labsim collect --phase success --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 \
+  --allow-after-verified-five --headless
+./labsim collect --phase controlled_failure --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 \
+  --allow-after-verified-five --headless
 ```
 
-**Note:** The `--fps` argument specifies the control frequency of the converted data. Our collected demonstrations are sampled at 60Hz by default. If you want the converted dataset to have the same behavior as the original collection, make sure to set `--fps` to 60.
+只需检查命令和路径时追加 `--dry-run`。采集会检查冻结依赖并保持 standard；布局、资产、光照和物理随机化均关闭。训练随机种子与场景随机化是不同设置。失败组保持 `task_success=false`，不会混入成功 BC 数据。阶段驱动退出码 2 可表示配额尚未满足，须结合保存的仿真子进程退出码与逐集结果解释。
 
-### Remote Inference
+## 审计与读取数据
 
-LabUtopia supports using remote servers for model inference.
+等待该 collection 的所有仿真进程退出后再审计。新索引和审计文件不能已经存在：
 
-#### Installation
+```bash
+./labsim validate --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 \
+  --index outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/dataset/episode_data.hdf5 \
+  --output outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/audit/collection.json
 
-```
-cd openpi/packages/openpi-client
-pip install -e . 
-```
-
-#### Configuration
-Configure the remote inference engine in your config file:
-
-```yaml
-infer:
-  engine: remote  # Use remote inference engine
-  host: "0.0.0.0"  # OpenPI server host
-  port: 8080  # OpenPI server port (optional)
-  n_obs_steps: 3  # Observation steps
+./labsim dataset-check \
+  --index outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/dataset/episode_data.hdf5 \
+  --sample-filter success --policy both \
+  --output outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/audit/success_read.json
 ```
 
-#### Usage
-The OpenPI client provides simplified WebSocket communication with the remote server:
+失败读取把 `--sample-filter` 改为 `failure`，同时改用新的输出 JSON。`dataset-check` 通过正常 ACT / DP 读取器检查 batch，不启动训练。正式索引文件名为 `episode_data.hdf5`；轻索引使用 collection 内相对链接，移动时需保留完整 collection 树。单集可独立导出，已有便携样例证据见[数据接入说明](docs/lab_cuvette_loading/Size_v1/data/standard5_actual/README.md)。
 
-1. **Initialize**: The client automatically connects to the OpenPI server using WebSocket
-2. **Inference**: Sends observation data (images, poses) to the server and receives action predictions
-3. **Data Format**: Automatically handles image format conversion and pose data serialization
-4. **Error Handling**: Includes fallback mechanisms for failed predictions
+Git 中提供审计结果和少量代表媒体。已有完整数据在本机 `outputs/lab_cuvette_loading/Size_v1/collection_standard/`，交接时需单独传输或重新采集；只有 clone 代码不会得到这些 episode。
 
-#### Server Response Format
-The OpenPI server should return actions in one of these formats:
-- `{"action": [action_array]}`
-- `{"actions": [action_array]}`
-- Any dictionary with a key containing "action"
+## 资产与扩展
 
-## 🤝 Contributing
-
-We welcome contributions from the community! If you have any questions, suggestions, or ideas for improvements, please feel free to:
-
-- **Open an Issue**: Report bugs, request features, or discuss ideas
-- **Submit a Pull Request**: Contribute code improvements, documentation fixes, or new features
-
-Before submitting a PR, please ensure your code follows the project's coding style and passes relevant tests.
-
-Thank you to all contributors for supporting this project! 🙏
-
-## 📚 Citation
-
-```bibtex
-@article{li2025labutopia,
-  author    = {Li, Rui and Hu, Zixuan and Qu, Wenxi and Zhang, Jinouwen and Yin, Zhenfei and Zhang, Sha and Huang, Xuantuo and Wang, Hanqing and Wang, Tai and Pang, Jiangmiao and Ouyang, Wanli and Bai, Lei and Zuo, Wangmeng and Duan, Ling-Yu and Zhou, Dongzhan and Tang, Shixiang},
-  title     = {LabUtopia: High-Fidelity Simulation and Hierarchical Benchmark for Scientific Embodied Agents},
-  journal   = {arXiv preprint arXiv:2505.22634},
-  year      = {2025},
-}
+```bash
+./labsim assets
+./labsim assets --asset-id cuvette_xy_1000 --json
 ```
 
-## 📄 License
-This repository contains both source code and data assets:
+资产注册表在 [registry.json](assets/lab_cuvette_loading/Size_v1/registry.json)。正式场景冻结为 10 mm；测试其他尺寸使用独立未冻结配置，不能覆盖正式资产或自动继承其成功资格。35 个候选均保留同一 XY 仿射派生规则、高度、空腔和底部拓扑，视觉与碰撞同步变换；固定 20 g 时重新积分质心和惯量，不同时假设密度保持不变。
 
-- **Code**  
-  Released under the [MIT License](./LICENSE).  
+新增尺寸、几何扫描和高级底层命令见 [Size_v1 使用说明](demos/lab_cuvette_size_v1/README.md)。现有环境接口、动作语义和实现位置见[开发接入指南](docs/development/ONBOARDING.md)。ACT / DP 训练配置已接入，但本轮仅验证配置合成及数据读取；后续训练须显式启动，默认只读合格成功、保持 standard。
 
-- **Data Assets**  
-  Released under the [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).  
-  Free to use and modify for research and educational purposes **only**.  
+## 目录导航
+
+```text
+labsim                      稳定命令入口；scripts/labsim_cli.py 分派
+assets/lab_cuvette_loading/  原始来源、历史派生资产及 Size_v1 注册表
+config/lab_cuvette_loading/  各版本场景、冻结配置和物理参数
+demos/lab_cuvette_size_v1/   正式任务组合与尺寸实验
+tasks/                      环境 API、场景和观测实现
+controllers/                机器人控制与任务执行
+data_collectors/            既有记录管线
+policy/                     ACT / DP 数据集与训练配置
+scripts/                    采集、审计、读取、打包和维护工具
+tests/                      CPU 回归及明确标注的仿真检查
+docs/development/           接入与开发说明
+docs/history/               历史实验入口和归档
+outputs/                    本地产生的大数据；不默认加入 Git
+```
+
+## 已知边界
+
+- 10.0 和 10.3 mm 有实际完整成功记录；10.5 mm 开发运行质量判分失败。几何正证书最大已观察到 10.70 mm，不能据此给出连续物理可用上限。
+- 来源架尺寸、20 g 质量及接触材料仍含工程假设；未做真实设备校准。原 12.5 mm 器皿与原座的配套结论没有改写为成功。
+- 保留原生速度与位姿差分不一致告警；静态原座完整 PhysX 烹饪表示尚不能完整读回。几何抽样误差不是严格全局误差界。
+- 专家使用仿真真值；完整示范成功不等于视觉策略已训练或闭环评测通过，不包含液体、光谱、玻璃破碎或真机操作。
+- 新机器完整部署尚需独立验证。冻结依赖改变后应建立新实验版本，不能把旧场景指纹直接赋给修改后的任务。
+
+## 开发交接与来源
+
+新开发者先运行 `doctor`，核对[开发接入指南](docs/development/ONBOARDING.md)，再用全新目录运行一次完整 demo。修改前明确资产、控制、评分和数据影响，按[贡献规则](CONTRIBUTING.md)提交、验证与推送。历史过程保留在[历史索引](docs/history/README.md)，主页只维护当前支持功能、使用方法和边界。
+
+GitHub [CPU contracts](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) 检查 CLI、控制状态机、评分和数据语义，不启动 Isaac 或训练。其轻量依赖独立列在 [requirements/ci.txt](requirements/ci.txt)，应装入新的 CPU 检查环境，不要改动已有仿真环境。具体测试命令见工作流及[本次验证记录](docs/development/validation/verification_summary.json)。开发分支禁止强推和删除，短期功能分支合入后自动清理；日常迭代不要求新建分支。
+
+LabSim 基于 [LabUtopia](https://github.com/Rui-li023/LabUtopia)。上游原文、论文引用及资产授权说明见[上游文档](docs/upstream/README.labutopia.md)；代码许可证见 [LICENSE](LICENSE)。外部 CAD 与其他第三方资产的来源和适用范围以各版本清单为准，仓库代码许可证不自动替代第三方资产授权。项目背景见[背景文档](docs/background/README.md)。
