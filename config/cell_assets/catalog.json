@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "chemlab": {
+      "provider": "huggingface",
+      "repo_id": "MBZUAI/ChemLab-Assets",
+      "revision": "a6c006f921c9bee62f5585dd7f769163a7f51573",
+      "github_revision": "c711fe1a7a9d26a7efd9d63d2bddc0de62e6b65e",
+      "url": "https://github.com/mbzuai-nlp/ChemLab-Assets",
+      "license": "CC-BY-NC-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "attribution": "Zirui Song, Jiadong Zhang, Jiahao Zhang, Xiaosong Ma, Xiaojun Chang, Xiuying Chen; MBZUAI; ChemLab-Assets v1.4.0",
+      "notice_files": [
+        "LICENSE",
+        "LICENSE-ASSETS.md",
+        "NOTICE.md",
+        "CITATION.cff"
+      ]
+    }
+  },
+  "assets": [
+    {
+      "asset_id": "biorad_cfxopus",
+      "category_id": 5,
+      "manufacturer": "Bio-Rad",
+      "model": "CFX Opus 96",
+      "source": "chemlab",
+      "source_directory": "assets/expansion_batch04/t4_measure/biorad_cfxopus",
+      "entry_file": "model.urdf",
+      "entry_sha256": "3f0043b9803c2243c2aff98a836e557dceabc7784ee162450527afb4d17ed85b",
+      "format": "urdf",
+      "meters_per_unit": 1.0,
+      "up_axis": "Z",
+      "front_axis": "-Y",
+      "source_dimensions_m": [
+        0.33,
+        0.5608,
+        0.36
+      ],
+      "real_calibrated": false,
+      "limitations": [
+        "根据公开资料建立的开源模型，非厂家 CAD，未做实物标定。",
+        "上游仪器过程模型及真机控制 API 尚未接入本适配器。",
+        "实际接触和 Franka 装载需独立验证。",
+        "源模型分件质量／惯量含工程分配，尚未进行设备动力学标定。"
+      ],
+      "substitution": "替代清单第 5 类 Bio-Rad T100：同为 PCR 热循环设备，CFX Opus 96 为实时荧光 PCR 仪，不能沿用 T100 的尺寸或接口。"
+    },
+    {
+      "asset_id": "opentrons_flex_single_5_1000ul",
+      "category_id": 4,
+      "manufacturer": "Opentrons",
+      "model": "Flex (1-channel 5–1000 µL)",
+      "source": "chemlab",
+      "source_directory": "assets/basic40_batch02/t5_automation/opentrons_flex",
+      "entry_file": "model.urdf",
+      "entry_sha256": "2d15b913ed4dbe01228727a57c2feda9e89cd2a343eed34d2595348c68f30eb6",
+      "format": "urdf",
+      "meters_per_unit": 1.0,
+      "up_axis": "Z",
+      "front_axis": "-Y",
+      "source_dimensions_m": [
+        0.87,
+        0.6909,
+        0.84
+      ],
+      "real_calibrated": false,
+      "limitations": [
+        "根据公开资料建立的开源模型，非厂家 CAD，未做实物标定。",
+        "上游仪器过程模型及真机控制 API 尚未接入本适配器。",
+        "实际接触和 Franka 装载需独立验证。",
+        "源 URDF 多个关节的 effort/velocity 为零且缺少分件惯量；当前仅验证加载，不宣称移液机构动力学可用。"
+      ],
+      "substitution": "替代清单第 4 类 Hamilton STAR：同属自动移液工作站，Flex 单通道配置不等同于 STAR 的通道数、容量和软件接口。"
+    },
+    {
+      "asset_id": "ika_ks4000",
+      "category_id": 7,
+      "manufacturer": "IKA",
+      "model": "KS 4000 i control",
+      "source": "chemlab",
+      "source_directory": "assets/expansion_batch03/t4_measure/ika_ks4000",
+      "entry_file": "model.urdf",
+      "entry_sha256": "b683089d6438bc0ef4a2cfc18a3b68f9dd321ec3a2aa9fc0a90311e57157c90e",
+      "format": "urdf",
+      "meters_per_unit": 1.0,
+      "up_axis": "Z",
+      "front_axis": "-Y",
+      "source_dimensions_m": [
+        0.58,
+        0.75,
+        0.52
+      ],
+      "real_calibrated": false,
+      "limitations": [
+        "恒温轨道摇床，仅作为加热与混匀的宽泛替代；不等同于清单中的紧凑型试管热混匀／冷却模块。",
+        "公开参考资料重建，非厂家 CAD；参数及机构未经实物标定。",
+        "本适配仅提供几何与刚体交互，不模拟温度场、液体、轨道混匀效果或真机控制。"
+      ],
+      "substitution": "第 7 类的部分替代：加热孵育及轨道混匀；不覆盖 CPAC 的低温冷却、紧凑占位或容器适配。"
+    }
+  ]
+}

@@ -125,6 +125,8 @@ GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信
 
 公开完整成功样例约 284 MB，保留全部 6,348 个 transition；两路 RGB 缩为 96 像素，其余数值轨迹保留。使用独立安装的 HF CLI，无需登录即可下载；目录必须另选未使用的路径：
 
+单细胞前流程设备见[设备资产与 API](demos/cell_assets/README.md)：固定版本下载并加载 PCR、移液工作站及恒温摇床模型，提供 Franka 装载示例。大型源模型和运行结果存放在项目外；类别替代、许可和未覆盖设备见该文档。
+
 ```bash
 HF_HUB_DISABLE_IMPLICIT_TOKEN=1 hf download Txie000/SLAI-Labsim \
   --repo-type dataset --revision 82317fe33089aca5a20827da2adc592a1e0fdddc \
