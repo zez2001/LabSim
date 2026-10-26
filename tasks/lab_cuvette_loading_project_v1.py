@@ -32,6 +32,17 @@ class LabCuvetteProjectV1(LabCuvetteLoadingEnvV1):
         latest = json.loads((cache / 'latest.json').read_text())
         self.geometry_audit = json.loads((cache / latest['audit_relative_path']).read_text())
 
+    def reset(self, seed=None, options=None):
+        requested = dict(options or {})
+        if requested.get('mode', 'standard') != 'standard':
+            raise ValueError('Project_v1 native task supports only the fixed standard scene')
+        if requested.get('subtask', requested.get('task_type', 'loading')) != 'loading':
+            raise ValueError('Project_v1 native task supports the complete loading task only')
+        # Validate the declared base scene before the inherited reset handler
+        # can create physics or write an initialization error into a prior run.
+        scene_contract(self.base_cfg)
+        return super().reset(seed, options)
+
     def _reset(self, seed=None, options=None):
         observation, info = super()._reset(seed, options)
         # The first capture is at the distant source rack; correct the target

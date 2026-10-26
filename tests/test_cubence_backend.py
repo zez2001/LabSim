@@ -8,9 +8,10 @@ import tempfile
 import unittest
 from unittest.mock import patch
 import urllib.error
+import numpy as np
 
 from policy.backends.cubence import BudgetExceeded, BudgetLedger, CubenceClient, ProviderError, input_token_bound, load_config, response_tools
-from policy.backends.cubence_tools import GenericRobotTools, public_observation, tool_definitions
+from policy.backends.cubence_tools import GenericRobotTools, observation_content, public_observation, run_episode, tool_definitions
 
 
 CONFIG=Path(__file__).resolve().parents[1]/"config/lab_cuvette_loading/Project_v1/policies/cubence_gpt6.json"
@@ -34,7 +35,7 @@ class Opener:
 class Environment:
     """A protocol fake; does not claim simulation or success."""
     def __init__(self):
-        self.executions=[];self.saved={};self.step=0
+        self.executions=[];self.saved={};self.step=0;self.ended=False;self.result=None
     def observe(self):
         return dict(episode_id="e1",observation_id="o"+str(self.step),joint_positions=[0.]*7+[.04,.04],
             joint_velocities=[0.]*9,TCPpose=dict(position_m=[0.,0.,1.],quaternion_wxyz=[1.,0.,0.,0.]),
@@ -45,7 +46,12 @@ class Environment:
         receipt=dict(action_id=action["action_id"],status="EXECUTED",observation_id="o"+str(self.step))
         self.saved[action["action_id"]]=receipt
         return receipt
-    def finish(self,reason):return dict(task_success=False,termination_reason=reason)
+    def status(self):return dict(terminated=self.ended)
+    def finish(self,reason,*,failure_type=None):
+        if not self.ended:
+            self.result=dict(task_success=False,termination_reason=reason,failure_type=failure_type,record_valid=failure_type is None)
+            self.ended=True
+        return self.result
 
 
 class CubenceBackendContracts(unittest.TestCase):
@@ -119,6 +125,17 @@ class CubenceBackendContracts(unittest.TestCase):
         bound=input_token_bound({"input":[dict(type="input_image",image_url="data:image/png;base64,"+"a"*1_000_000)]},24000)
         self.assertLess(bound,10000)
 
+    def test_declared_image_resize_preserves_native_data_and_calibration_mapping(self):
+        observation=Environment().observe();image=np.full((480,640,3),120,np.uint8)
+        observation['images']={'side_camera':image.copy(),'wrist_camera':image.copy()}
+        observation['camera_meta']={name:dict(intrinsic_matrix_native=[[500.,0.,319.5],[0.,500.,239.5],[0.,0.,1.]]) for name in observation['images']}
+        content=observation_content(observation,image_config={'max_side_px':256,'jpeg_quality':60})
+        data=json.loads(content[0]['text']);meta=data['model_image_transforms']['side_camera']
+        self.assertEqual(meta['native_resolution_wh'],[640,480]);self.assertEqual(meta['transmitted_resolution_wh'],[256,192])
+        np.testing.assert_allclose(meta['intrinsic_matrix_transmitted'],[[200.,0.,127.5],[0.,200.,95.5],[0.,0.,1.]],rtol=0,atol=1e-12)
+        self.assertFalse(meta['native_recording_changed']);self.assertEqual(observation['images']['side_camera'].shape,(480,640,3))
+        self.assertTrue(content[2]['image_url'].startswith('data:image/jpeg;base64,'))
+
     def test_public_observation_denies_truth_and_camera_debug(self):
         observation=Environment().observe();observation["camera_meta"]={"side_camera":dict(intrinsic_matrix_native=[[1]],object_depth_m=9,renderer_debug={"private":1})}
         public=public_observation(observation)
@@ -179,6 +196,85 @@ class CubenceBackendContracts(unittest.TestCase):
         names=[x["name"] for x in tool_definitions()]
         self.assertEqual(names,["observe","move_ee","gripper","wait","finish"])
         self.assertTrue(all(t["parameters"]["additionalProperties"] is False for t in tool_definitions()))
+
+    def test_parallel_function_calls_cannot_be_enabled_by_extra_kwargs(self):
+        client,opener=self.client([dict(model='gpt-6-astra',output=[],usage=dict(input_tokens=1,output_tokens=1))])
+        client.responses([],instructions='test',tools=tool_definitions(),parallel_tool_calls=True)
+        self.assertIs(json.loads(opener.calls[0][0].data)['parallel_tool_calls'],False)
+
+    def test_malformed_gripper_numbers_are_protocol_errors_before_motion(self):
+        for field in ('opening_m','effort_limit_N','duration_s'):
+            for invalid in (None,'0.01',{},[],True,float('nan')):
+                env=Environment();tools=GenericRobotTools(env,self.cfg['action_limits']);tools.observe()
+                args=dict(episode_id='e1',observation_id='o0',action_id='bad',opening_m=.01,effort_limit_N=8.,duration_s=.1)
+                args[field]=invalid
+                with self.assertRaises(ProviderError,msg=(field,invalid)):tools.execute('gripper',args)
+                self.assertEqual(env.executions,[])
+
+    def episode(self,env,client,*,max_calls=1):
+        output=Path(self.directory.name)/'episode'
+        with patch('policy.backends.cubence_tools.observation_content',lambda obs,**kwargs:[dict(type='input_text',text='CPU fixture robot observation')]):
+            summary=run_episode(env,client,output,max_calls=max_calls)
+        return summary,output
+
+    def tool_reply(self,name='move_ee',arguments=None):
+        return dict(model='gpt-6-astra',id='fixture-response',usage=dict(input_tokens=1,output_tokens=1),
+            output=[dict(type='function_call',name=name,call_id='call-fixture',arguments=json.dumps(arguments or self.action()))])
+
+    def test_provider_http_failure_flushes_attempt_with_nonphysical_label(self):
+        error=urllib.error.HTTPError('https://api.cubence.ai/v1/responses',401,'private-error-body',{},None)
+        client,_=self.client([error]);env=Environment();summary,output=self.episode(env,client)
+        self.assertEqual(summary['backend_failure_type'],'MODEL_SERVICE_ERROR')
+        self.assertEqual(summary['backend_error_code'],'PROVIDER_HTTP_ERROR')
+        self.assertEqual(summary['network_attempts_this_episode'],1)
+        self.assertEqual(summary['api_decisions'],0)
+        self.assertFalse(summary['task_result']['record_valid'])
+        self.assertEqual(env.executions,[])
+        self.assertEqual(json.loads((output/'summary.json').read_text()),summary)
+
+    def test_multiple_model_calls_abort_before_either_motion_and_preserve_calls(self):
+        reply=self.tool_reply();reply['output']*=2
+        client,_=self.client([reply]);env=Environment();summary,output=self.episode(env,client)
+        self.assertEqual(summary['backend_failure_type'],'INPUT_CONTRACT_ERROR')
+        self.assertEqual(summary['backend_error_code'],'PROTOCOL_MULTIPLE_ACTIONS_REFUSED')
+        self.assertEqual(env.executions,[])
+        error=json.loads((output/'policy_trace.jsonl').read_text().splitlines()[-1])
+        self.assertEqual(len(error['model_tool_calls']),2)
+        self.assertFalse(summary['task_result']['record_valid'])
+
+    def test_repeated_malformed_gripper_outputs_do_not_become_task_failures(self):
+        args=dict(episode_id='e1',observation_id='o0',action_id='bad',opening_m=None,effort_limit_N=8.,duration_s=.1)
+        client,_=self.client([self.tool_reply('gripper',args) for _ in range(8)])
+        env=Environment();summary,_=self.episode(env,client,max_calls=8)
+        self.assertEqual(summary['protocol_rejections'],8)
+        self.assertEqual(summary['backend_error_code'],'PROTOCOL_ERROR_LIMIT')
+        self.assertEqual(summary['task_result']['failure_type'],'INPUT_CONTRACT_ERROR')
+        self.assertEqual(env.executions,[])
+
+    def test_partial_execution_failure_preserves_actual_receipt_without_replay(self):
+        env=Environment();execute=env.execute
+        def partial(action):
+            result=execute(action);result.update(completed=False,error_type='RuntimeError',error='CONTROL_OR_IK_FAILURE');raise RuntimeError('CONTROL_OR_IK_FAILURE')
+        env.execute=partial
+        client,_=self.client([self.tool_reply()]);summary,output=self.episode(env,client)
+        self.assertEqual(summary['backend_failure_type'],'PHYSICS_INVALID')
+        self.assertEqual(len(env.executions),1)
+        error=json.loads((output/'policy_trace.jsonl').read_text().splitlines()[-1])
+        self.assertEqual(error['action_receipt']['error'],'CONTROL_OR_IK_FAILURE')
+
+    def test_normal_policy_budget_retains_independent_physical_admission(self):
+        env=Environment();client,_=self.client([self.tool_reply()]);summary,_=self.episode(env,client)
+        self.assertEqual(summary['termination_reason'],'POLICY_BUDGET')
+        self.assertIsNone(summary['backend_failure_type'])
+        self.assertIsNone(summary['backend_error_code'])
+        self.assertTrue(summary['task_result']['record_valid'])
+        self.assertEqual(len(env.executions),1)
+
+    def test_already_ended_physical_verdict_is_not_rewritten(self):
+        env=Environment();env.ended=True;env.result=dict(task_success=False,record_valid=True,failure_type='GRASP_SLIP')
+        client,_=self.client([]);summary,_=self.episode(env,client)
+        self.assertEqual(summary['task_result']['failure_type'],'GRASP_SLIP')
+        self.assertEqual(summary['api_decisions'],0)
 
 
 if __name__=="__main__":unittest.main()

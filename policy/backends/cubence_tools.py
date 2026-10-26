@@ -8,15 +8,14 @@ from __future__ import annotations
 
 import base64
 import copy
+import hashlib
 import io
 import json
 import math
 from pathlib import Path
 import time
-from typing import Any
-import uuid
 
-from .cubence import BudgetExceeded, CubenceClient, ProviderError, canonical_hash, response_text, response_tools
+from .cubence import CubenceClient, ProviderError, canonical_hash, response_tools
 
 
 PUBLIC_FIELDS = frozenset(("episode_id", "observation_id", "step_index", "simulation_time", "simulation_time_s",
@@ -40,6 +39,23 @@ def json_safe(value):
     return value
 
 
+def finite_number(value, code):
+    if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value):
+        raise ProviderError(code)
+    return float(value)
+
+
+def backend_failure_class(code):
+    """Backend errors cannot be admitted as valid physical task failures."""
+    if code in ('COST_BUDGET_EXHAUSTED','REQUEST_BUDGET_EXHAUSTED','POLICY_BUDGET'):
+        return None
+    if code.startswith('PROTOCOL'):
+        return 'INPUT_CONTRACT_ERROR'
+    if code.startswith('PHYSICS') or code=='ACTION_EXECUTION_UNKNOWN_CHECK_RECEIPT':
+        return 'PHYSICS_INVALID'
+    return 'MODEL_SERVICE_ERROR'
+
+
 def public_observation(observation: dict) -> dict:
     result={k:copy.deepcopy(v) for k,v in observation.items() if k in PUBLIC_FIELDS}
     if 'images' in result:
@@ -57,7 +73,9 @@ def public_observation(observation: dict) -> dict:
     for name in ("joint_positions", "joint_velocities"):
         if name in result:
             values=json_safe(result[name])
-            if len(values)!=9 or not all(math.isfinite(float(x)) for x in values):
+            try:valid=len(values)==9 and all(math.isfinite(float(x)) for x in values)
+            except (TypeError,ValueError,OverflowError):valid=False
+            if not valid:
                 raise ProviderError("PHYSICS_INVALID_NONFINITE_ROBOT_STATE")
     return result
 
@@ -126,7 +144,7 @@ class GenericRobotTools:
                 raise ProviderError("PROTOCOL_STALE_"+name.upper())
 
     def _duration(self, value):
-        d=float(value)
+        d=finite_number(value,"PROTOCOL_ACTION_DURATION_LIMIT")
         if not math.isfinite(d) or d<float(self.limits["min_duration_s"])-1e-9 or d>float(self.limits["max_duration_s"])+1e-9:
             raise ProviderError("PROTOCOL_ACTION_DURATION_LIMIT")
         hz=int(self.limits["control_hz"])
@@ -138,9 +156,17 @@ class GenericRobotTools:
     def _pose(self):
         pose=self.last_observation.get("TCPpose", self.last_observation.get("tcp_pose"))
         if not isinstance(pose, dict):raise ProviderError("PROTOCOL_TCP_POSE_UNAVAILABLE")
-        return [float(x) for x in pose["position_m"]], [float(x) for x in pose["quaternion_wxyz"]]
+        try:
+            p=[float(x) for x in pose["position_m"]];q=[float(x) for x in pose["quaternion_wxyz"]]
+        except (TypeError,ValueError,KeyError):
+            raise ProviderError("PHYSICS_INVALID_TCP_POSE") from None
+        if len(p)!=3 or len(q)!=4 or not all(math.isfinite(x) for x in p+q) or sum(x*x for x in q)<.25:
+            raise ProviderError("PHYSICS_INVALID_TCP_POSE")
+        return p,q
 
     def execute(self, name: str, arguments: dict) -> dict:
+        if not isinstance(arguments,dict):raise ProviderError("PROTOCOL_TOOL_ARGUMENTS_NOT_OBJECT")
+        if not isinstance(name,str):raise ProviderError("PROTOCOL_UNKNOWN_TOOL")
         if name=="observe":
             obs=self.observe()
             return {"status":"OBSERVED", "episode_id":obs["episode_id"], "observation_id":obs["observation_id"]}
@@ -176,7 +202,7 @@ class GenericRobotTools:
             mode=arguments.get("mode");v=arguments.get("values")
             if mode not in {"ee_pose","ee_delta"} or not isinstance(v,list) or len(v)!=(7 if mode=="ee_pose" else 6):
                 raise ProviderError("PROTOCOL_ACTION_SHAPE")
-            if not all(isinstance(x,(int,float)) and math.isfinite(x) for x in v):
+            if not all(not isinstance(x,bool) and isinstance(x,(int,float)) and math.isfinite(x) for x in v):
                 raise ProviderError("PROTOCOL_NONFINITE_ACTION")
             if arguments.get("frame") not in {"world","tcp"} or mode=="ee_pose" and arguments.get("frame")!="world":
                 raise ProviderError("PROTOCOL_ACTION_FRAME")
@@ -193,7 +219,8 @@ class GenericRobotTools:
                 raise ProviderError("PROTOCOL_ROTATION_SPEED_LIMIT")
             action.update(type=mode,values=v,frame=arguments["frame"])
         elif name=="gripper":
-            opening=float(arguments.get("opening_m"));effort=float(arguments.get("effort_limit_N"))
+            opening=finite_number(arguments.get("opening_m"),"PROTOCOL_GRIPPER_OPENING_LIMIT")
+            effort=finite_number(arguments.get("effort_limit_N"),"PROTOCOL_GRIPPER_EFFORT_LIMIT")
             if not math.isfinite(opening) or not 0<=opening<=float(self.limits["max_gripper_opening_m"]):
                 raise ProviderError("PROTOCOL_GRIPPER_OPENING_LIMIT")
             if not math.isfinite(effort) or not 0<=effort<=float(self.limits["gripper_effort_limit_N"]):
@@ -205,29 +232,55 @@ class GenericRobotTools:
         self.receipts[action_id]=(identity_hash,None)
         try:
             receipt=self.env.execute(action)
-        except Exception:
+        except Exception as error:
             receipt=self.env.receipt(action_id)
-            if receipt is None:raise ProviderError("ACTION_EXECUTION_UNKNOWN_CHECK_RECEIPT") from None
+            if receipt is None:
+                if isinstance(error,(ValueError,TypeError)):raise ProviderError("PROTOCOL_ENVIRONMENT_ACTION_REJECTED") from None
+                raise ProviderError("ACTION_EXECUTION_UNKNOWN_CHECK_RECEIPT") from None
         self.receipts[action_id]=(identity_hash,json_safe(receipt))
+        if receipt.get('completed') is False or receipt.get('error_type'):
+            raise ProviderError("PHYSICS_ACTION_EXECUTION_FAILURE")
         self.commanded_opening_m=action["gripper_opening_m"]
         self.commanded_effort_N=action["gripper_effort_limit_N"]
         self.observe()
         return {**json_safe(receipt),"requested_duration_s":arguments["duration_s"],"executed_duration_s":duration}
 
 
-def observation_content(observation: dict) -> list[dict]:
+def observation_content(observation: dict, *, image_config=None) -> list[dict]:
     from PIL import Image
     obs=public_observation(observation)
     images=obs.pop("images",{})
-    content=[dict(type="input_text",text=json.dumps(json_safe(obs),ensure_ascii=False,allow_nan=False))]
+    settings=dict(max_side_px=640,jpeg_quality=80,detail='low',resize_interpolation='lanczos')
+    settings.update(image_config or {})
+    if not isinstance(settings['max_side_px'],int) or not 64<=settings['max_side_px']<=640 or not isinstance(settings['jpeg_quality'],int) or not 30<=settings['jpeg_quality']<=95 or settings['detail'] not in ('low','high','auto') or settings['resize_interpolation']!='lanczos':
+        raise ProviderError('PROTOCOL_INVALID_IMAGE_TRANSFORM_CONFIG')
+    content=[];provenance={}
     for name in ("side_camera","wrist_camera"):
         if name not in images:raise ProviderError("PROTOCOL_REQUIRED_RGB_MISSING")
         value=images[name]
-        image=Image.fromarray(value).convert("RGB")
-        image.thumbnail((640,480))
-        buffer=io.BytesIO();image.save(buffer,format="JPEG",quality=80)
-        content.extend([dict(type="input_text",text="Synchronized RGB: "+name),dict(type="input_image",image_url="data:image/jpeg;base64,"+base64.b64encode(buffer.getvalue()).decode(),detail="low")])
-    return content
+        try:image=Image.fromarray(value).convert("RGB")
+        except (ValueError,TypeError,AttributeError):raise ProviderError('PROTOCOL_REQUIRED_RGB_INVALID') from None
+        original=image.size
+        image.thumbnail((settings['max_side_px'],settings['max_side_px']),Image.Resampling.LANCZOS)
+        buffer=io.BytesIO();image.save(buffer,format="JPEG",quality=settings['jpeg_quality']);transmitted=buffer.getvalue()
+        sx=image.size[0]/original[0];sy=image.size[1]/original[1]
+        pixel_transform=[[sx,0.,(sx-1)/2],[0.,sy,(sy-1)/2],[0.,0.,1.]]
+        camera=obs.get('camera_meta',obs.get('camera_calibration',{})).get(name,{})
+        intrinsic=json_safe(camera.get('intrinsic_matrix_native'))
+        transformed=None
+        if isinstance(intrinsic,list) and len(intrinsic)==3 and all(isinstance(row,list) and len(row)==3 for row in intrinsic):
+            transformed=[[sum(pixel_transform[i][k]*intrinsic[k][j] for k in range(3)) for j in range(3)] for i in range(3)]
+        provenance[name]=dict(native_resolution_wh=list(original),transmitted_resolution_wh=list(image.size),scale_xy=[sx,sy],
+            native_rgb_sha256=hashlib.sha256(value.tobytes()).hexdigest(),transmitted_jpeg_sha256=hashlib.sha256(transmitted).hexdigest(),
+            transmitted_bytes=len(transmitted),jpeg_quality=settings['jpeg_quality'],detail=settings['detail'],
+            resize_interpolation='Pillow LANCZOS',crop=None,rotation_deg=0,color_space='RGB',
+            transmitted_pixel_from_native_pixel=pixel_transform,intrinsic_matrix_transmitted=transformed,
+            pixel_convention='zero-based pixel-centre indices: dst=(src+.5)*scale-.5',native_recording_changed=False)
+        content.extend([dict(type="input_text",text="Synchronized RGB: "+name),dict(type="input_image",image_url="data:image/jpeg;base64,"+base64.b64encode(transmitted).decode(),detail=settings['detail'])])
+    obs['model_image_transforms']=provenance
+    try:encoded=json.dumps(json_safe(obs),ensure_ascii=False,allow_nan=False)
+    except (ValueError,TypeError):raise ProviderError('PHYSICS_INVALID_OBSERVATION') from None
+    return [dict(type='input_text',text=encoded)]+content
 
 
 def run_episode(environment, client: CubenceClient, output: str | Path, *, max_calls=160, prompt=SYSTEM_PROMPT) -> dict:
@@ -237,26 +290,34 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
     schema=tool_definitions()
     frozen=dict(schema="labsim.gpt_controller.v1",provider_config=cfg,prompt=prompt,tool_schema=schema,
         object_truth_used=False,teacher_used=False,physics_paused_during_inference=True,
+        implementation_sha256={name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest() for name in ('cubence.py','cubence_tools.py')},
         action_meaning="generic EE pose/delta, symmetric gripper or wait; facade performs only IK, interpolation and bounds")
     (output/"controller.json").write_text(json.dumps(frozen,indent=2,ensure_ascii=False)+"\n")
     controller_sha=canonical_hash(frozen)
-    started=time.monotonic();calls=0;errors=0;history=[];termination="POLICY_BUDGET";failure=None
+    started=time.monotonic();calls=0;errors=0;history=[];termination="POLICY_BUDGET";failure=None;backend_error_code=None
+    budget_before=client.ledger.summary()
     trace=(output/"policy_trace.jsonl").open("x")
+    obs=None
     try:
         while calls<int(max_calls):
             status=environment.status()
             if status.get("terminated") or status.get("ended"):
                 termination="ENVIRONMENT_TERMINATED";break
             if time.monotonic()-started>float(cfg["episode_timeout_s"]):
-                termination="POLICY_EPISODE_WALL_TIMEOUT";failure="PROVIDER_TIMEOUT";break
+                termination="POLICY_EPISODE_WALL_TIMEOUT";backend_error_code=termination;failure='MODEL_SERVICE_ERROR';break
             obs=tools.observe()
-            contents=observation_content(obs)
+            contents=observation_content(obs,image_config=cfg.get('images'))
+            try:image_provenance=json.loads(contents[0]['text']).get('model_image_transforms')
+            except (ValueError,TypeError,KeyError):image_provenance=None
             # Fresh images every decision; earlier turns preserve only generic
             # tool calls/receipts, never repeated base64 images or privileged state.
             recent_turns=history[-max(1,int(cfg.get("max_context_messages",12))//2):]
             conversation=[item for turn in recent_turns for item in turn]
             input_items=[dict(role="user",content="Task: "+str(obs.get("task_language","")))]+conversation+[dict(role="user",content=contents)]
             before=float(obs.get("simulation_time",obs.get("simulation_time_s",0.)))
+            response=None
+            meta=None
+            call=None
             try:
                 response,meta=client.responses(input_items,instructions=prompt+"\nAction limits: "+json.dumps(cfg["action_limits"]),tools=schema,label="policy:"+str(obs["episode_id"]),deadline_monotonic=started+float(cfg["episode_timeout_s"]))
                 calls+=1
@@ -270,6 +331,7 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                 try:
                     receipt=tools.execute(call["name"],call["arguments"])
                 except ProviderError as error:
+                    if not error.code.startswith('PROTOCOL'):raise
                     errors+=1
                     receipt={"status":"REJECTED","error":error.code,"episode_id":obs["episode_id"],"observation_id":obs["observation_id"],"physics_advanced":False}
                 # Preserve complete response-item groups in memory. Some reasoning
@@ -279,21 +341,37 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                 record=dict(event="decision",episode_id=obs["episode_id"],observation_id=obs["observation_id"],simulation_time_s=before,
                     requested_model=cfg["model"],returned_model=response.get("model"),request_id=meta["request_id"],response_id=response.get("id"),
                     inference_wall_seconds=meta["wall_seconds"],usage=response.get("usage"),tool_call=call,receipt=receipt,controller_sha256=controller_sha,
-                    image_channels=["side_camera","wrist_camera"],truth_exposed=False)
+                    image_channels=["side_camera","wrist_camera"],model_image_transforms=image_provenance,truth_exposed=False)
                 trace.write(json.dumps(json_safe(record),ensure_ascii=False,allow_nan=False)+"\n");trace.flush()
                 if call["name"]=="finish" and receipt.get("status")!="REJECTED":termination="POLICY_FINISH_REQUEST";break
-                if errors>=8:termination="PROTOCOL_ERROR_LIMIT";failure="PROTOCOL_ERROR";break
+                if errors>=8:termination="PROTOCOL_ERROR_LIMIT";backend_error_code=termination;failure='INPUT_CONTRACT_ERROR';break
             except ProviderError as error:
-                failure="PROVIDER_FAILURE" if not error.code.startswith("PROTOCOL") else "PROTOCOL_ERROR"
+                failure=backend_failure_class(error.code)
                 termination=error.code
-                trace.write(json.dumps(dict(event="error",code=error.code,http_status=error.status,episode_id=obs["episode_id"],observation_id=obs["observation_id"],simulation_time_s=before))+"\n");trace.flush()
+                backend_error_code=error.code
+                invalid_calls=[]
+                if isinstance(response,dict) and isinstance(response.get('output'),list):
+                    invalid_calls=[{k:item.get(k) for k in ('name','arguments','call_id')} for item in response['output'] if isinstance(item,dict) and item.get('type')=='function_call']
+                partial_receipt=environment.receipt(call['arguments'].get('action_id')) if call and call.get('arguments',{}).get('action_id') else None
+                trace.write(json.dumps(dict(event="error",code=error.code,http_status=error.status,episode_id=obs["episode_id"],observation_id=obs["observation_id"],simulation_time_s=before,
+                    model_tool_calls=invalid_calls,action_receipt=json_safe(partial_receipt),response_id=response.get('id') if response else None,request_id=meta.get('request_id') if meta else None))+"\n");trace.flush()
                 break
-        result=environment.finish(reason=termination)
-        summary=dict(schema="labsim.cubence_episode.v1",controller_sha256=controller_sha,provider=cfg["provider"],requested_model=cfg["model"],
-            endpoint=cfg["endpoint"],api_decisions=calls,protocol_rejections=errors,wall_seconds=time.monotonic()-started,
-            termination_reason=termination,backend_failure_type=failure,task_result=json_safe(result),budget=client.ledger.summary(),
-            object_truth_used=False,teacher_used=False,physics_paused_during_inference=True)
-        (output/"summary.json").write_text(json.dumps(summary,indent=2,ensure_ascii=False,allow_nan=False)+"\n")
-        return summary
+    except ProviderError as error:
+        # Observation/context validation can fail before any API request. It must
+        # still flush the physical attempt and retain an explicit nonphysical tag.
+        backend_error_code=termination=error.code;failure=backend_failure_class(error.code)
+        trace.write(json.dumps(dict(event='error',code=error.code,http_status=error.status,
+            episode_id=obs.get('episode_id') if obs else None,observation_id=obs.get('observation_id') if obs else None))+"\n");trace.flush()
     finally:
         trace.close()
+    result=environment.finish(reason=termination,failure_type=failure)
+    budget_after=client.ledger.summary()
+    summary=dict(schema="labsim.cubence_episode.v1",controller_sha256=controller_sha,provider=cfg["provider"],requested_model=cfg["model"],
+        endpoint=cfg["endpoint"],api_decisions=calls,protocol_rejections=errors,wall_seconds=time.monotonic()-started,
+        termination_reason=termination,backend_failure_type=failure,backend_error_code=backend_error_code,
+        task_result=json_safe(result),budget=budget_after,
+        network_attempts_this_episode=budget_after.get('total_network_attempts',0)-budget_before.get('total_network_attempts',0),
+        estimated_usd_this_episode=budget_after.get('total_estimated_usd',0)-budget_before.get('total_estimated_usd',0),
+        object_truth_used=False,teacher_used=False,physics_paused_during_inference=True)
+    (output/"summary.json").write_text(json.dumps(summary,indent=2,ensure_ascii=False,allow_nan=False)+"\n")
+    return summary

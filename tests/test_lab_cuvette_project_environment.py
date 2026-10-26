@@ -31,6 +31,11 @@ class Task:
             self.observation['TCPpose']['position_m'] = action['values'][:3]
         self.observation['gripper_opening_m'] = action['gripper_opening_m']
 
+    def finalize_episode(self, reason, failure_type):
+        self.finalize_arguments = (reason, failure_type)
+        self.ended = True
+        self._result = dict(task_success=None, termination_reason=reason, failure_type=failure_type)
+
 
 def action(**kwargs):
     return dict(action_id='first', episode_id='episode-1', observation_id='episode-1:0',
@@ -99,3 +104,37 @@ def test_partial_exception_reserves_action_id(tmp_path):
     assert receipt['completed'] is False
     assert receipt['error_type'] == 'RuntimeError'
     assert task.control_steps == 1
+
+
+@pytest.mark.parametrize('failure_type', ['MODEL_SERVICE_ERROR', 'INPUT_CONTRACT_ERROR',
+    'PROCESS_INTERRUPTED', 'PHYSICS_INVALID'])
+def test_backend_failure_is_forwarded_before_independent_finalization(tmp_path, failure_type):
+    task = Task(tmp_path)
+    result = ProjectEnvironment(task).finish('provider_or_protocol_error', failure_type=failure_type)
+    assert task.finalize_arguments == ('provider_or_protocol_error', failure_type)
+    assert result['task_success'] is None
+
+
+def test_backend_failure_never_rewrites_previously_scored_outcome(tmp_path):
+    task = Task(tmp_path)
+    task.ended = True
+    task._result = dict(task_success=False, termination_reason='REAL_PHYSICAL_DROP')
+    result = ProjectEnvironment(task).finish('provider_error', failure_type='MODEL_SERVICE_ERROR')
+    assert result['termination_reason'] == 'REAL_PHYSICAL_DROP'
+    assert result['task_success'] is False
+    assert not hasattr(task, 'finalize_arguments')
+
+
+def test_finish_cannot_submit_a_success_classification(tmp_path):
+    task = Task(tmp_path)
+    with pytest.raises(ValueError, match='nonphysical'):
+        ProjectEnvironment(task).finish('done', failure_type='SUCCESS')
+    assert not task.ended
+
+
+@pytest.mark.parametrize('options', [{'mode':'random'}, {'subtask':'preinsert_diagnostic'}])
+def test_reset_cannot_stamp_another_scene_or_subtask_as_standard_loading(tmp_path, options):
+    task = Task(tmp_path)
+    with pytest.raises(ValueError, match='only'):
+        ProjectEnvironment(task).reset(options=options)
+    assert task.control_steps == 0

@@ -1,0 +1,99 @@
+{
+  "schema": "labsim.Project_v1.optional_policy_inventory.v1",
+  "observed_unix_s": 1793007259.5930743,
+  "rpent_root": "/home/wujing/Desktop/vla/rpent",
+  "policy_python": "/home/wujing/Desktop/vla/rpent/.venv/bin/python3.11",
+  "checkpoint": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT",
+  "cpu_only": true,
+  "models_started": false,
+  "inference_executed": false,
+  "gpu_touched": false,
+  "checkpoint_is_labsim_finetuned": false,
+  "transfer_dynamics_calibrated": false,
+  "rpent_commit": "0d72dfac1e75417564e220e31ba7e4b5d8e83665",
+  "runtime_exists": true,
+  "runtime": {
+    "python": "3.11.16 (main, Aug 27 2026, 14:44:21) [GCC 14.3.0]",
+    "packages": {
+      "rpent-openpi": "0.2.2",
+      "rpent-rlinf": "0.3.0",
+      "torch": "2.7.1",
+      "openai-codex": "0.147.0"
+    }
+  },
+  "checkpoint_files": [
+    {
+      "file": "model.safetensors",
+      "exists": true,
+      "bytes": 7473091464,
+      "sha256": "4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683"
+    },
+    {
+      "file": "metadata.pt",
+      "exists": true,
+      "bytes": 3236,
+      "sha256": "8eba92f1159903755c6f529320913033a142a691bb148f90a96db0b6b91d6528"
+    },
+    {
+      "file": "physical-intelligence/libero/norm_stats.json",
+      "exists": true,
+      "bytes": 4507,
+      "sha256": "dae37d79a22108af83df9189c6710a3ec8e077d65b28e34bdf1da724e5ae30f1"
+    }
+  ],
+  "services": {
+    "8097": {
+      "tcp_listening": false,
+      "service_identity_verified": false,
+      "note": "TCP reachability alone is not model/environment identity or task validation"
+    },
+    "8098": {
+      "tcp_listening": false,
+      "service_identity_verified": false,
+      "note": "TCP reachability alone is not model/environment identity or task validation"
+    }
+  },
+  "historical_evidence": {
+    "file": "docs/lab_cuvette_loading/Env_v1/policy_evidence/real_three_chain_01.json",
+    "sha256": "463aedcd7b674ca8995e84bc7465dcd4f9ccd751bc78124dcc071bca650e3abe",
+    "scope": "Each accepted attempt executes only 0.25 seconds of policy actions (+ reset camera fence): genuine bounded real-model integration on preinsert_diagnostic; NOT full120s loading capability, performance, failure-quota or success-rate evaluation.",
+    "full_loading_attempts": 0,
+    "attempts": [
+      {
+        "attempt": "pi05_attempt_01",
+        "backend": "pi05",
+        "episode_id": "98a606d1-f0ab-4a4e-89f2-d672b655a9b7",
+        "actual_executed_policy_actions": 5,
+        "actual_control_steps": 15,
+        "simulation_duration_s": 0.26666666666666666,
+        "actual_vla_predict_requests": 1,
+        "task_success": false,
+        "termination_reason": "POLICY_BUDGET"
+      },
+      {
+        "attempt": "astra_attempt_03",
+        "backend": "astra",
+        "episode_id": "14c647b5-7790-4ce0-8c9b-a24b5016ffdf",
+        "actual_executed_policy_actions": 5,
+        "actual_control_steps": 15,
+        "simulation_duration_s": 0.26666666666666666,
+        "actual_vla_predict_requests": 0,
+        "task_success": false,
+        "termination_reason": "POLICY_BUDGET"
+      },
+      {
+        "attempt": "harness_attempt_01",
+        "backend": "harness",
+        "episode_id": "6469ba9b-c8f7-4c7e-802a-814b1a3b6e77",
+        "actual_executed_policy_actions": 5,
+        "actual_control_steps": 15,
+        "simulation_duration_s": 0.26666666666666666,
+        "actual_vla_predict_requests": 5,
+        "task_success": false,
+        "termination_reason": "POLICY_BUDGET"
+      }
+    ]
+  },
+  "new_project_optional_backend_physics_run": false,
+  "new_project_rpc_status": "CPU transport contract only until an actual Isaac RPC run is separately recorded"
+}

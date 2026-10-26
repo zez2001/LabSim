@@ -248,6 +248,10 @@ class CubenceClient:
         if tools:
             payload.update(tools=tools, parallel_tool_calls=False)
         payload.update(extra)
+        if tools:
+            # Policy tools are a serial robot-control protocol. A caller cannot
+            # accidentally enable parallel physical actions through extra kwargs.
+            payload["parallel_tool_calls"] = False
         return self.request(payload, label=label, endpoint="responses", deadline_monotonic=deadline_monotonic)
 
 
@@ -261,7 +265,10 @@ def response_text(response: dict) -> str:
 
 def response_tools(response: dict) -> list[dict]:
     tools=[]
-    for item in response.get("output", []):
+    output=response.get("output", [])
+    if not isinstance(output,list):raise ProviderError("PROTOCOL_INVALID_RESPONSE_OUTPUT")
+    for item in output:
+        if not isinstance(item,dict):raise ProviderError("PROTOCOL_INVALID_RESPONSE_ITEM")
         if item.get("type") == "function_call":
             try:
                 arguments = json.loads(item.get("arguments", ""))
@@ -272,4 +279,8 @@ def response_tools(response: dict) -> list[dict]:
             tools.append({"name": item.get("name"), "arguments": arguments, "call_id": item.get("call_id")})
     if len(tools) > 1:
         raise ProviderError("PROTOCOL_MULTIPLE_ACTIONS_REFUSED")
+    if tools and (not isinstance(tools[0]['name'],str) or not tools[0]['name']):
+        raise ProviderError("PROTOCOL_UNKNOWN_TOOL")
+    if tools and (not isinstance(tools[0]['call_id'],str) or not tools[0]['call_id']):
+        raise ProviderError("PROTOCOL_CALL_ID_MISSING")
     return tools

@@ -1,0 +1,254 @@
+{
+  "schema": "labsim.Project_v1.engineering_preflight.v1",
+  "recorded_utc": "2026-10-26T09:52:50.857086+00:00",
+  "repository": "/home/wujing/Desktop/vla/LabSim",
+  "initial_branch": "codex/labsim",
+  "initial_HEAD": "d5aab4ff85b7b591b3870995160451c8223875ab",
+  "initial_worktree_clean": true,
+  "core_commit": "d09c5ffce2018702702eb0d4c77d862f1eae6faa",
+  "python_runtime": "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+  "geometry_dependency": "LABSIM_GEOMETRY_SITE isolated Shapely2.2.0; original environments unchanged",
+  "GPU": "NVIDIA GeForce RTX 4090, 560.28.03, 49140 MiB",
+  "runtime_versions": {
+    "IsaacSim": "5.1.0.0",
+    "Python": "3.11.16",
+    "torch": "2.7.0+cu126",
+    "numpy": "1.26.0",
+    "h5py": "3.15.1",
+    "OmegaConf": "2.3.0"
+  },
+  "entrypoints": {
+    "native_task": "factories/task_factory.py:lab_cuvette_project_v1",
+    "task": "tasks/lab_cuvette_loading_project_v1.py:LabCuvetteProjectV1",
+    "teacher": "controllers/lab_cuvette_env_v1_controller.py:LabCuvetteTeacher",
+    "collector": "data_collectors/lab_cuvette_env_v1_collector.py",
+    "scorer": "demos/lab_cuvette_project_v1/scorer.py",
+    "launcher": "demos/lab_cuvette_project_v1/run.py"
+  },
+  "historical_data": {
+    "root": "outputs/lab_cuvette_loading/Size_v1/collection_standard",
+    "success": 20,
+    "controlled_early_stop_failure": 20,
+    "natural_failure": 0,
+    "recollected_40": false,
+    "normal_reader": "policy/dataset/lab_cuvette_size_v1_dataset.py"
+  },
+  "baseline_reproduction": {
+    "run": "outputs/lab_cuvette_loading/Project_v1/baseline_teacher_01",
+    "session_id": 25267,
+    "process_exit_code": 0,
+    "actual_result": {
+      "schema": "labsim.Size_v1.independent_physical.v1",
+      "episode_id": "e1a429e9-0f93-4ba4-84bc-501207ca801f",
+      "task_type": "loading",
+      "geometry_valid": true,
+      "task_success": true,
+      "workflow_success": true,
+      "full_success": true,
+      "native_pair_success": null,
+      "record_valid": true,
+      "record_valid_scope": "independent physical trace AND collector action/sensor/time integrity",
+      "failure_type": "NONE",
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "eligible_for_success_bc": true,
+      "eligible_for_failure_analysis": false,
+      "real_calibrated": false,
+      "source_slot_cleared": true,
+      "grasp_success": true,
+      "transport_success": true,
+      "loading_sequence_observed": true,
+      "loading_candidate_sequence_observed": true,
+      "release_observed": true,
+      "retreat_observed": true,
+      "stable_after_retreat": true,
+      "post_retreat_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": true,
+          "target_contains": true,
+          "observed_input_material_overlap_within_limit": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666,
+        "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666
+      },
+      "diagnostic_hold_window": {
+        "status": "not_applicable",
+        "stable": null
+      },
+      "grasp_relative_pose": {
+        "reference_available": true,
+        "maximum_position_drift_m": 4.902244572336129e-06,
+        "maximum_orientation_drift_deg": 0.011725607532398664,
+        "maximum_configured_grasp_anchor_drift_m": 3.4818400831525384e-06,
+        "maximum_configured_grasp_anchor_axial_drift_m": 1.6599925247324014e-06,
+        "maximum_configured_grasp_anchor_transverse_drift_m": 3.4492709433987428e-06,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "measured_grasp_segments": {
+        "static_grasp": {
+          "status": "measured",
+          "start_t": 14.641666666666667,
+          "end_t": 15.708333333333334,
+          "sample_count": 257,
+          "reference_position_drift_m": 2.39209621660664e-06,
+          "reference_orientation_drift_deg": 0.008436749432321389,
+          "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+        },
+        "extraction": {
+          "status": "measured",
+          "start_t": 15.708333333333334,
+          "end_t": 16.729166666666668,
+          "sample_count": 246,
+          "reference_position_drift_m": 1.2412002590039798e-06,
+          "reference_orientation_drift_deg": 0.001698194199643248,
+          "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+        },
+        "transport": {
+          "status": "measured",
+          "start_t": 16.729166666666668,
+          "end_t": 58.325,
+          "sample_count": 9984,
+          "reference_position_drift_m": 5.760611979192661e-06,
+          "reference_orientation_drift_deg": 0.007533031010911535,
+          "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+        }
+      },
+      "grasp_attempts": [
+        {
+          "start_t": 14.641666666666667,
+          "end_t": 95.24583333333334,
+          "maximum_position_drift_m": 4.902244572336129e-06,
+          "maximum_orientation_drift_deg": 0.011725607532398664,
+          "maximum_configured_grasp_anchor_drift_m": 3.4818400831525384e-06,
+          "ended_by": "measured_fingers_open_and_both_contacts_lost"
+        }
+      ],
+      "retry_count": 0,
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [],
+      "observed_events": {
+        "bilateral_grasp_observed": {
+          "t": 14.641666666666667,
+          "physics_step": 3514,
+          "actual_force_N": [
+            0.9300541281700134,
+            0.9367906451225281
+          ]
+        },
+        "actual_lift_started": {
+          "t": 15.708333333333334,
+          "physics_step": 3770,
+          "actual_lift_m": 0.00102822216291798
+        },
+        "source_slot_cleared": {
+          "t": 16.729166666666668,
+          "physics_step": 4015,
+          "actual_bottom_world_z_m": 0.7700642263727308,
+          "source_rim_world_z_m": 0.768
+        },
+        "held_transport_observed": {
+          "t": 32.354166666666664,
+          "physics_step": 7765,
+          "horizontal_displacement_m": 0.050035657841593646
+        },
+        "safe_preinsert_observed": {
+          "t": 58.325,
+          "physics_step": 13998,
+          "actual_depth_m": -0.002998206601682731,
+          "actual_xy_error_m": 1.969819688856479e-06
+        },
+        "loaded_pose_candidate": {
+          "t": 91.925,
+          "physics_step": 22062,
+          "actual_depth_m": 0.02695083066119872,
+          "measured_bottom_support_N": 0.0,
+          "target_region_contains_object": true
+        },
+        "loaded_supported_candidate": {
+          "t": 94.4875,
+          "physics_step": 22677,
+          "actual_depth_m": 0.027000002385896258,
+          "classified_bottom_support_N": 0.265820175409317,
+          "target_region_contains_object": true
+        },
+        "correct_target_supported": {
+          "t": 94.4875,
+          "physics_step": 22677
+        },
+        "both_fingers_open_and_detached": {
+          "t": 95.1,
+          "physics_step": 22824,
+          "actual_joint_positions_m": [
+            0.006580832414329052,
+            0.0065809316001832485
+          ],
+          "actual_force_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "actual_gripper_retreat": {
+          "t": 98.63333333333334,
+          "physics_step": 23672,
+          "minimum_gripper_object_clearance_m": 0.040067193687533385
+        }
+      },
+      "physical_sample_count": 25397,
+      "simulation_duration_s": 105.81666666666666,
+      "stage_labels_used_as_success_proof": false,
+      "geometry_audit_fingerprint": "89935d7c1c76ce4e56905db5c9923fbfc7503ea3357f91fac8acbe89a8d10e5c",
+      "asset_id": "cuvette_xy_1000",
+      "scene_version": "Size_v1",
+      "condition_group": "natural",
+      "variant_pair_success": true,
+      "original_12_5mm_native_pair_verdict_unchanged": true,
+      "acceptance_geometry_scope": "Declared input material geometry checks plus actual physical contact and motion, not calibrated cooked geometry or real accuracy",
+      "simulation_seconds": 105.81666666666666,
+      "wall_seconds": 910.1051100110053,
+      "seed": 0,
+      "policy_id": "truth_teacher",
+      "actual_control_steps": 6348,
+      "actual_physics_steps": 25396,
+      "complete": true,
+      "frames": 6348,
+      "physical_score_record_valid": true,
+      "record_integrity_errors": []
+    }
+  }
+}

@@ -1,130 +1,121 @@
 # LabSim
 
-基于 LabUtopia 和 Isaac Sim 的科学实验操作仿真工程。当前正式任务是 **`lab_cuvette_loading / Size_v1`**：Franka 从白色 6×6 来源架抓取比色皿，搬运到开盖仪器的内部座，完成插入、支撑交接、松爪、撤离与 3 秒稳定观察，并记录可供 ACT / Diffusion 读取的轨迹。
+LabSim 是基于 LabUtopia 与 Isaac Sim 的科学实验机器人仿真项目。当前入口为 **`lab_cuvette_loading / Project_v1 / standard`**：Franka 从完整白色 6×6 来源架取出比色皿，搬运到单台开盖仪器的内部 A 座，完成插入、支撑交接、松爪、撤离与至少 3 秒稳定观察。
 
-**开发与交接入口：[`codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim)。** `main` 保留 LabUtopia 上游基准。日常修复和同一功能的改进继续使用当前分支；独立功能才另开短期分支。具体约定见 [贡献与分支规则](CONTRIBUTING.md)。
+[开发分支 `codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim) · [开发接入](docs/development/ONBOARDING.md) · [历史实验](docs/history/README.md)
 
-## 功能与验证范围
+## 提供的能力
 
-- 独立场景：单台开盖仪器、原始内部 A 座、完整参数化 6×6 架、动态空心比色皿、Franka、侧视与腕部相机。
-- 完整物理执行：来源架取物 → 拔出 → 搬运 → 对准 → 插入 → 承托交接 → 对称慢松爪 → 撤离 → 稳定。专家控制器使用器皿真值位姿和接触反馈。
-- 连续双指接触锁存、按阶段卸载、卡滞检测与独立判分；锁存的是夹指位置命令，不是把物体绑定到机器人。
-- 采集双相机 RGB、机器人状态、原始及实际动作、时间戳、物体位姿、接触与任务阶段；保留成功、失败和未执行状态。
-- 35 个独立尺寸资产及注册表，通过 `asset_id` 选择；支持几何筛选、冻结场景校验、数据审计和正常 ACT / Diffusion 数据读取。
-- 保留早期 `minimal_pick`、精密插入及器皿装载各版本，入口见[历史实验索引](docs/history/README.md)。
+- **同一物理任务，多种控制入口**：真值专家 `teacher`、Cubence `gpt-6-astra` 的图像闭环 `gpt6`，以及供既有 π0.5 / RPent Harness 使用的本地 RPC；任务、记录器和独立评分共用。
+- **真实刚体接触**：动态空心比色皿、28 块壁体碰撞、双指接触锁存、支撑交接与缓慢释放。锁存夹指命令，不把器皿绑定到机器人。
+- **采集与读取**：侧视和腕视 RGB、关节状态、原始及实际动作、力限制、时间戳、接触、物体状态与阶段；正常 ACT / Diffusion 读取器分别筛选合格成功和失败，当前工作不包含模型训练。
+- **可追溯资产**：原仪器内部座保持不变，35 个横向尺寸变体独立注册；新发布资产通过固定 HF revision、大小和 SHA256 校验下载，支持缓存及离线复用。
+- **独立判分**：实际取物、清槽、搬运、正确装载、双指脱离、撤离及稳定均需证据。进程退出、控制器阶段或模型的 `finish` 请求不能代替成功。
 
-当前正式配置使用 **10.0×10.0×67.5 mm** 比色皿、20 g 质量假设、来源槽 A1、原内部 A 座 `candidate_far_hinge`。原座几何、尺寸、碰撞和物理参数保持不变。尺寸资产属于工程假设，不是实物测量结果。
+标准场景固定为 **10×10×67.5 mm** 比色皿、20 g 质量假设、来源槽 A1、F6 蓝色器皿、原内部 A 座 `candidate_far_hinge`；物理 240 Hz，控制 60 Hz。来源架 16 mm 槽宽及材料参数包含工程假设，未做实物校准。原 12.5 mm 器皿与原座的配套结论保留。
 
-已实际完成固定场景 **5/5** 验证，并采集 **20 条合格完整成功 + 20 条有效失败**。失败均为确定性动作偏差：在 1 / 5 / 10 / 18 mm 插入深度提前停止，各 5 条；没有自然失败，不能据此解释为自然卡滞。全部 40 条通过实际事件、进程、冻结与读取审计。成功和失败分别按完整 episode 划分 18 train / 2 val；本轮未执行训练。
+## 环境与第一次运行
 
-[结果报告与连续录像](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md) · [DOCX](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.docx) · [40 条数据审计](docs/lab_cuvette_loading/Size_v1/data/final40_actual/README.md)
-
-## 环境与获取
-
-已运行环境为 Linux、NVIDIA RTX 4090、Python 3.11、Isaac Sim 5.1；物理 240 Hz、控制 60 Hz。GPU 仿真顺序运行。代码、配置和资产在 Git / Git LFS 中；约 61 GB 原始数据及 Python 环境不随普通 clone 提供。
+运行基线为 **Linux、Python 3.11、Isaac Sim 5.1、NVIDIA GPU**，已使用 RTX 4090。同一 GPU 顺序运行仿真。项目不自动升级 Isaac、Torch 或现有模型环境。
 
 ```bash
-git clone --branch codex/labsim https://github.com/zez2001/LabSim.git
+GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/labsim https://github.com/zez2001/LabSim.git
 cd LabSim
-git lfs install
-git lfs pull
-```
 
-**当前电脑**可复用项目同级的 `../labutopia-env/bin/python`。其他位置显式设置解释器，再运行只读检查：
+# 选择已经安装 Isaac Sim 5.1 的 Python 3.11
+export LABSIM_PYTHON=/absolute/path/to/isaac-python
+# 选择独立的 Shapely>=2.1 Python3.11 site-packages
+export LABSIM_GEOMETRY_SITE=/absolute/path/to/geometry/lib/python3.11/site-packages
 
-```bash
-export LABSIM_PYTHON=/absolute/path/to/python
+./labsim assets download
 ./labsim doctor
-./labsim --help
+./labsim demo --task lab_cuvette_loading --scene standard --backend teacher \
+  --gui --output outputs/lab_cuvette_loading/Project_v1/demo_001
 ```
 
-`doctor` 检查解释器、依赖发现、LFS 实体、冻结文件和路径，并报告可迁移性问题；它不启动 Isaac Sim，也不等同于 GPU / GUI 运行通过。新机器请先阅读[开发接入指南](docs/development/ONBOARDING.md)：当前仍有既有环境路径依赖，不能只安装 Python 包就认定部署完成。上游安装参考已移至 [LabUtopia 文档](docs/upstream/README.labutopia.md)。
+首次运行前准备依赖的方法见[接入指南](docs/development/ONBOARDING.md)。`LABSIM_PYTHON` 选择既有解释器；`LABSIM_GEOMETRY_SITE` 避免向 Isaac 或模型环境安装几何工具。USD / PhysX 扩展从所选 Isaac 安装中发现，不要求 checkout 位于原开发者的目录。
 
-## 运行完整 GUI demo
+资产默认写入 `~/.cache/labsim/assets/<revision>/`，完整校验后被入口自动采用。可用 `LABSIM_ASSET_CACHE` 更改缓存根目录，或用 `LABSIM_ASSET_ROOT` 指定保持 `assets/...` 布局的完整安装目录。下载不需要 HF 登录。
 
-以下命令均在仓库根目录执行。`outputs/` 下的名称是示例新输出位置，请为每次运行使用尚不存在的目录。默认 GUI；无桌面显示时增加 `--headless`。
+固定资产 revision 为 [`bb880f098180c291f6f65995f969d48047207067`](https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067)。任务依赖包括 82 个 HF 文件和 1 个固定公共 Git LFS 来源的 Franka 文件，共 83 个文件、31,955,703 字节。Franka 没有重新上传到 HF；逐文件来源、授权及哈希见[资产锁文件](config/lab_cuvette_loading/Project_v1/assets.lock.json)。已完成空缓存、无凭据独立进程的 83/83 下载及离线复用检查，见[匿名下载摘要](docs/lab_cuvette_loading/Project_v1/assets/anonymous_download_summary.json)。
+
+所有输出目录必须是新目录。无桌面显示时将 `--gui` 换为 `--headless`；可先加 `--dry-run` 查看启动命令。`doctor` 只做 CPU 预检，不等同于 GPU、GUI 或物理任务通过。
+
+## 示范、重复评测与采集
 
 ```bash
-./labsim demo --output outputs/lab_cuvette_loading/Size_v1/demo_handoff_001 --dry-run
-./labsim demo --output outputs/lab_cuvette_loading/Size_v1/demo_handoff_001
+# 一次完整 headless 示范
+./labsim demo --task lab_cuvette_loading --scene standard --backend teacher \
+  --headless --output outputs/lab_cuvette_loading/Project_v1/demo_headless_001
+
+# 同一 Isaac 进程连续 reset 并运行 5 集
+./labsim eval --task lab_cuvette_loading --scene standard --backend teacher \
+  --episodes 5 --headless --output outputs/lab_cuvette_loading/Project_v1/teacher5_001
+
+# 新采集；同样保存完整双视角 episode
+./labsim collect --task lab_cuvette_loading --scene standard --backend teacher \
+  --episodes 1 --headless --output outputs/lab_cuvette_loading/Project_v1/collect_001
+
+# 动作偏差：插入到 5 mm 后提前停止，不释放、不伪造成功
+./labsim collect --task lab_cuvette_loading --scene standard --backend teacher \
+  --controlled-stop-depth-mm 5 --headless \
+  --output outputs/lab_cuvette_loading/Project_v1/controlled_failure_001
 ```
 
-默认任务固定为正式 Size_v1 standard 场景。单次成功轨迹约 106 秒仿真时间，实际墙钟时间受硬件和图像记录影响。输出保留连续录像、episode、事件与独立结果；依据实际结果判断成功，不能以进程正常结束代替任务成功。
+`summary.json` 保存逐集结果；`episode_0000/result.json` 与 `independent_score.json` 保存独立判分，`side_camera.mp4`、`wrist_camera.mp4`、`dual_view.mp4` 是同次运行的连续录像。该 episode 的 `dataset/episode_0000.h5` 保存图像与状态，物理、接触及任务事件另存。成功的一集约需 106 秒仿真时间，图像记录使墙钟运行明显更长。
 
-## 固定场景采集
+Project_v1 默认保持 standard；采集、训练及训练内自动验证关闭场景随机化。历史 Size_v1 配额采集与审计仍可显式使用 `collect --phase ...` / `validate`，见[原任务说明](demos/lab_cuvette_size_v1/README.md)；旧冻结资格不自动赋予 Project_v1。
 
-先在全新 collection 完成 5 次验证；通过后，沿用同一个 collection 补采成功和确定性动作偏差失败：
+## GPT-6 Astra 图像闭环
+
+直接后端固定使用 Cubence `https://api.cubence.ai/v1` 和 `gpt-6-astra`，不修改全局 Codex 配置，也不回退到其他模型。在当前终端读取密钥，避免写入 shell 历史、仓库或日志：
 
 ```bash
-./labsim collect --phase verify5 --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 --headless
-./labsim collect --phase success --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 \
-  --allow-after-verified-five --headless
-./labsim collect --phase controlled_failure --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 \
-  --allow-after-verified-five --headless
+read -rsp "Cubence API key: " CUBENCE_API_KEY
+export CUBENCE_API_KEY
+printf '\n'
+
+./labsim eval --task lab_cuvette_loading --scene standard --backend gpt6 \
+  --episodes 1 --max-calls 160 --headless \
+  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \
+  --output outputs/lab_cuvette_loading/Project_v1/gpt_attempt_001
+
+unset CUBENCE_API_KEY
 ```
 
-只需检查命令和路径时追加 `--dry-run`。采集会检查冻结依赖并保持 standard；布局、资产、光照和物理随机化均关闭。训练随机种子与场景随机化是不同设置。失败组保持 `task_success=false`，不会混入成功 BC 数据。阶段驱动退出码 2 可表示配额尚未满足，须结合保存的仿真子进程退出码与逐集结果解释。
+[提供方配置](config/lab_cuvette_loading/Project_v1/policies/cubence_gpt6.json) 声明 Responses API、超时、动作限制和估算价格。探针、重试及评测应共用同一预算 ledger；默认硬上限为 **估算 $30 / 1500 次网络请求**，单集默认最多 160 次模型调用。估算费用不等于供应商账单。
 
-## 审计与读取数据
+GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信号，通过通用末端移动、夹爪、等待和结束请求控制；没有专家装载宏、器皿真值位姿或评分内部状态。模型请求期间仿真暂停，执行后产生新观测。过期观测被拒绝，同一动作 ID 查询已有回执，不重复运动。完整成功仍由物理结果判定，API 连通或短动作序列不能当作完成任务。
 
-等待该 collection 的所有仿真进程退出后再审计。新索引和审计文件不能已经存在：
+可选 π0.5 / Harness 通过 `./labsim serve` 接入，部署与有限预算调用见[策略适配说明](policy/backends/OPTIONAL_POLICIES.md)。这些依赖不自动安装，也不等同于已完成新任务的策略评测。
+
+## 读取数据与接入策略
+
+等待仿真进程退出后，通过正常读取器验证 batch：
 
 ```bash
-./labsim validate --collection outputs/lab_cuvette_loading/Size_v1/collection_handoff_001 \
-  --index outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/dataset/episode_data.hdf5 \
-  --output outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/audit/collection.json
-
 ./labsim dataset-check \
-  --index outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/dataset/episode_data.hdf5 \
+  --path outputs/lab_cuvette_loading/Project_v1/collect_001/episode_0000 \
   --sample-filter success --policy both \
-  --output outputs/lab_cuvette_loading/Size_v1/collection_handoff_001/audit/success_read.json
+  --output outputs/lab_cuvette_loading/Project_v1/collect_001/read_success.json
 ```
 
-失败读取把 `--sample-filter` 改为 `failure`，同时改用新的输出 JSON。`dataset-check` 通过正常 ACT / DP 读取器检查 batch，不启动训练。正式索引文件名为 `episode_data.hdf5`；轻索引使用 collection 内相对链接，移动时需保留完整 collection 树。单集可独立导出，已有便携样例证据见[数据接入说明](docs/lab_cuvette_loading/Size_v1/data/standard5_actual/README.md)。
+失败 episode 使用 `--sample-filter failure` 和新的输出文件。读取不启动训练，也不改标签。单集 H5 保存实际图像和状态；多集索引若使用相对链接，传输时保留其 collection 树。
 
-Git 中提供审计结果和少量代表媒体。已有完整数据在本机 `outputs/lab_cuvette_loading/Size_v1/collection_standard/`，交接时需单独传输或重新采集；只有 clone 代码不会得到这些 episode。
+[Project_v1 ACT](policy/config/task/lab_cuvette_project_v1_act.yaml) / [DP 配置](policy/config/task/lab_cuvette_project_v1_dp.yaml) 直接使用 `side_camera_rgb`、`wrist_camera_rgb`，不需旧相机名称 override。读取器只接受同一指纹的 Project_v1 standard 完整任务；成功 BC 默认只读合格成功，失败用于显式选择的分析或学习方法，train / val 按完整 episode 划分。
 
-## 资产与扩展
+公开机器人接口为 `ProjectEnvironment.reset / observe / execute / receipt / status / finish / close`。ACT / DP 的 8 维数据动作是 7 个臂关节位置目标加一个对称夹指位置；实际执行的 9 维双指命令另存。GPT / π0.5 末端动作明确区分米、弧度、world / TCP 参考系和 wxyz 四元数。接口与代码地图见[接入指南](docs/development/ONBOARDING.md)。
 
-```bash
-./labsim assets
-./labsim assets --asset-id cuvette_xy_1000 --json
-```
+## 验证证据与限制
 
-资产注册表在 [registry.json](assets/lab_cuvette_loading/Size_v1/registry.json)。正式场景冻结为 10 mm；测试其他尺寸使用独立未冻结配置，不能覆盖正式资产或自动继承其成功资格。35 个候选均保留同一 XY 仿射派生规则、高度、空腔和底部拓扑，视觉与碰撞同步变换；固定 20 g 时重新积分质心和惯量，不同时假设密度保持不变。
+历史 Size_v1 已完成固定配置 5/5 验证及 20 条合格完整成功、20 条受控提前停止失败；这些失败不是自然卡滞。既有完整物理任务链已再次复现。历史结果与录像见[尺寸实验报告](docs/lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)，不能直接当作 Project_v1 新入口或 GPT 成功率。
 
-新增尺寸、几何扫描和高级底层命令见 [Size_v1 使用说明](demos/lab_cuvette_size_v1/README.md)。现有环境接口、动作语义和实现位置见[开发接入指南](docs/development/ONBOARDING.md)。ACT / DP 训练配置已接入，但本轮仅验证配置合成及数据读取；后续训练须显式启动，默认只读合格成功、保持 standard。
+Project_v1 发布、匿名资产验证和本轮执行证据集中在 [Project_v1 文档目录](docs/lab_cuvette_loading/Project_v1/)。GPU 完整运行、策略完整任务和数据读取以实际保存的结果为准。代码仓库不包含历史约 61 GB 原始 collection，也不因公开资产而发布凭据、模型权重或完整训练数据。
 
-## 目录导航
+未做实物尺寸、质量、摩擦及机器人动力学校准；保留原生速度与位姿差分不一致等物理质量告警。静态原座的完整有效 PhysX 烹饪表示尚未全部读回。输入几何抽样不能证明严格全局穿透上界，也不能解释为 0.1 mm 真实精度认证。本项目不包含液体、玻璃破碎、光谱测量或真机操作。
 
-```text
-labsim                      稳定命令入口；scripts/labsim_cli.py 分派
-assets/lab_cuvette_loading/  原始来源、历史派生资产及 Size_v1 注册表
-config/lab_cuvette_loading/  各版本场景、冻结配置和物理参数
-demos/lab_cuvette_size_v1/   正式任务组合与尺寸实验
-tasks/                      环境 API、场景和观测实现
-controllers/                机器人控制与任务执行
-data_collectors/            既有记录管线
-policy/                     ACT / DP 数据集与训练配置
-scripts/                    采集、审计、读取、打包和维护工具
-tests/                      CPU 回归及明确标注的仿真检查
-docs/development/           接入与开发说明
-docs/history/               历史实验入口和归档
-outputs/                    本地产生的大数据；不默认加入 Git
-```
+## 开发与来源
 
-## 已知边界
+`codex/labsim` 是长期开发分支，`main` 保留上游基线。日常修复沿用当前分支，独立功能再建短期分支。修改场景、控制、评分或资产需建立新配置/数据指纹，保留历史文件。完成验证后提交、推送并建立本轮精简阅读包，见 [CONTRIBUTING.md](CONTRIBUTING.md) 与[打包说明](docs/agent_handoff/README.md)。
 
-- 10.0 和 10.3 mm 有实际完整成功记录；10.5 mm 开发运行质量判分失败。几何正证书最大已观察到 10.70 mm，不能据此给出连续物理可用上限。
-- 来源架尺寸、20 g 质量及接触材料仍含工程假设；未做真实设备校准。原 12.5 mm 器皿与原座的配套结论没有改写为成功。
-- 保留原生速度与位姿差分不一致告警；静态原座完整 PhysX 烹饪表示尚不能完整读回。几何抽样误差不是严格全局误差界。
-- 专家使用仿真真值；完整示范成功不等于视觉策略已训练或闭环评测通过，不包含液体、光谱、玻璃破碎或真机操作。
-- 新机器完整部署尚需独立验证。冻结依赖改变后应建立新实验版本，不能把旧场景指纹直接赋给修改后的任务。
-
-## 开发交接与来源
-
-新开发者先运行 `doctor`，核对[开发接入指南](docs/development/ONBOARDING.md)，再用全新目录运行一次完整 demo。修改前明确资产、控制、评分和数据影响，按[贡献规则](CONTRIBUTING.md)提交、验证与推送。历史过程保留在[历史索引](docs/history/README.md)，主页只维护当前支持功能、使用方法和边界。
-
-GitHub [CPU contracts](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) 检查 CLI、控制状态机、评分和数据语义，不启动 Isaac 或训练。其轻量依赖独立列在 [requirements/ci.txt](requirements/ci.txt)，应装入新的 CPU 检查环境，不要改动已有仿真环境。具体测试命令见工作流及[本次验证记录](docs/development/validation/verification_summary.json)。开发分支禁止强推和删除，短期功能分支合入后自动清理；日常迭代不要求新建分支。
-
-LabSim 基于 [LabUtopia](https://github.com/Rui-li023/LabUtopia)。上游原文、论文引用及资产授权说明见[上游文档](docs/upstream/README.labutopia.md)；代码许可证见 [LICENSE](LICENSE)。外部 CAD 与其他第三方资产的来源和适用范围以各版本清单为准，仓库代码许可证不自动替代第三方资产授权。项目背景见[背景文档](docs/background/README.md)。
+GitHub [CPU contracts](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) 检查接口及评分等 CPU 契约；GPU 物理运行另记。项目基于 [LabUtopia](https://github.com/Rui-li023/LabUtopia)，上游说明见[上游文档](docs/upstream/README.labutopia.md)。代码许可见 [LICENSE](LICENSE)，第三方资产适用各自声明。项目背景见[背景文档](docs/background/README.md)。

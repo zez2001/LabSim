@@ -28,6 +28,12 @@ def parse_args():
     parser.add_argument('--replay-episode',type=str)
     parser.add_argument('--replay-max-ticks',type=int)
     parser.add_argument('--replay-zero-delay',action=argparse.BooleanOptionalAction,default=True)
+    parser.add_argument('--policy-backend',choices=['teacher','gpt6','rpc'],default='teacher',
+                        help='Project_v1 control backend; independent of the CPU/GPU physics option')
+    parser.add_argument('--project-config',default='config/lab_cuvette_loading/Project_v1/standard.yaml')
+    parser.add_argument('--provider-config')
+    parser.add_argument('--budget-ledger')
+    parser.add_argument('--max-calls',type=int,default=160)
     return parser.parse_args()
 
 # Get command line arguments
@@ -35,6 +41,12 @@ args = parse_args()
 
 # Independent scenes use their own scene builder and the shared task registries.
 # Existing laboratory configurations keep the original startup and run loop.
+if args.config_name == 'lab_cuvette_project_v1':
+    import sys
+    from demos.lab_cuvette_project_v1.native_entry import build_project_argv
+    from demos.lab_cuvette_project_v1.run import main as project_main
+    sys.exit(project_main(build_project_argv(args)))
+
 if args.config_name in ('lab_cuvette_env_v1','lab_cuvette_size_v1'):
     import sys
     from demos.lab_cuvette_env_v1.run import parser as env_parser,main as env_main

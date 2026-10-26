@@ -30,6 +30,8 @@ def main(argv=None):
     p.add_argument("--output",required=True)
     p.add_argument("--ledger",required=True,help="Shared absolute budget ledger used by all subsequent evaluations")
     p.add_argument("--image",type=Path,help="Optional real camera RGB file for the image probe; default is the independent red/blue synthetic test")
+    p.add_argument('--image-max-side',type=int,default=640,help='Declared thumbnail bound for --image; native source file remains unchanged')
+    p.add_argument('--image-jpeg-quality',type=int,default=80)
     p.add_argument("--capabilities",nargs="+",choices=["text","image","tools","structured","multiturn","error"],default=["text","image","tools","structured","multiturn"])
     args=p.parse_args(argv)
     output=Path(args.output)
@@ -42,11 +44,14 @@ def main(argv=None):
     real_image=None
     if args.image:
         from PIL import Image
-        source=args.image.read_bytes();image=Image.open(io.BytesIO(source)).convert('RGB');image.thumbnail((640,480))
-        encoded=io.BytesIO();image.save(encoded,format='PNG');raw=encoded.getvalue()
-        real_image='data:image/png;base64,'+base64.b64encode(raw).decode()
+        if not 64<=args.image_max_side<=640 or not 30<=args.image_jpeg_quality<=95:p.error('Image bound must be64..640 and JPEG quality30..95')
+        source=args.image.read_bytes();image=Image.open(io.BytesIO(source)).convert('RGB');native_size=image.size
+        image.thumbnail((args.image_max_side,args.image_max_side),Image.Resampling.LANCZOS)
+        encoded=io.BytesIO();image.save(encoded,format='JPEG',quality=args.image_jpeg_quality);raw=encoded.getvalue()
+        real_image='data:image/jpeg;base64,'+base64.b64encode(raw).decode()
         evidence['image_source']=dict(kind='provided_real_camera_file',path=str(args.image),source_sha256=hashlib.sha256(source).hexdigest(),
-            transmitted_sha256=hashlib.sha256(raw).hexdigest(),transmitted_resolution_wh=list(image.size),truth_annotations_supplied=False)
+            transmitted_sha256=hashlib.sha256(raw).hexdigest(),native_resolution_wh=list(native_size),transmitted_resolution_wh=list(image.size),
+            format='JPEG',jpeg_quality=args.image_jpeg_quality,resize_interpolation='Pillow LANCZOS',truth_annotations_supplied=False)
     tools=[dict(type="function",name="probe_echo",description="Return the provided integer without executing anything.",strict=True,
         parameters=dict(type="object",properties={"value":{"type":"integer"}},required=["value"],additionalProperties=False))]
     last_tool_response=None

@@ -39,6 +39,11 @@ class ProjectEnvironment:
         self._payload_hashes = {}
 
     def reset(self, seed=0, options=None):
+        requested = dict(options or {})
+        if requested.get('mode', 'standard') != 'standard':
+            raise ValueError('Project_v1 reset supports fixed standard only')
+        if requested.get('subtask', requested.get('task_type', 'loading')) != 'loading':
+            raise ValueError('Project_v1 reset supports complete loading only')
         self._receipts.clear()
         self._payload_hashes.clear()
         self.task.reset(seed, options or dict(mode='standard', policy_id='external'))
@@ -161,9 +166,15 @@ class ProjectEnvironment:
                 stream.write(json.dumps(receipt, allow_nan=False) + '\n')
         return self.receipt(action_id)
 
-    def finish(self, reason='POLICY_FINISH_REQUEST'):
+    def finish(self, reason='POLICY_FINISH_REQUEST', *, failure_type=None):
+        # A backend may mark service/protocol/interruption failures, never
+        # submit successful task evidence or rewrite an already scored outcome.
+        allowed = {'MODEL_SERVICE_ERROR', 'INPUT_CONTRACT_ERROR', 'PROCESS_INTERRUPTED', 'PHYSICS_INVALID'}
+        normalized = None if failure_type is None else str(failure_type).upper()
+        if normalized is not None and normalized not in allowed:
+            raise ValueError('finish accepts only declared nonphysical backend failure classifications')
         if not self.task.ended:
-            self.task.finalize_episode(str(reason), None)
+            self.task.finalize_episode(str(reason), normalized)
         return self.status()
 
     def close(self):
