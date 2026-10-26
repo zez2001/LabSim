@@ -1,0 +1,344 @@
+{
+  "schema": "labsim.Project_v1_1.preorient_closed_stage_pose_compare.v1",
+  "analysis_date_local": "2026-10-27",
+  "runs": [
+    {
+      "run": "teacher_lateral_hold_01",
+      "actual_execution_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "static_ideal_definition": "Rz(robot.gripper_yaw_deg) * Rx(pi), per existing plan_arm convention",
+      "static_ideal_quaternion_wxyz": [
+        4.329780281177467e-17,
+        0.7071067811865476,
+        -0.7071067811865475,
+        -4.329780281177466e-17
+      ],
+      "stage_samples": {
+        "GRASP": {
+          "t_s": 14.516666666666667,
+          "physics_step": 3484,
+          "recorded_phase": "APPROACH_SOURCE",
+          "actual_TCP_quaternion_wxyz": [
+            -0.0004541709403027877,
+            0.7070149039721103,
+            -0.707198486274291,
+            0.00014248303779744836
+          ],
+          "actual_TCP_error_to_static_ideal_deg": 0.05653719329399539,
+          "actual_TCP_error_rotation_vector_deg": [
+            0.025255594400326726,
+            -0.04834596000396593,
+            -0.014875393384502764
+          ],
+          "cup_world_quaternion_wxyz": [
+            0.7071091532707214,
+            4.656612873077393e-10,
+            -9.313225746154785e-10,
+            0.7071045637130737
+          ],
+          "cup_actual_tilt_deg": 0.0,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "source_gap_m": 3.0505084458454235e-08,
+          "applied_total_opening_m": 0.08,
+          "actual_TCP_z_axis_tilt_from_world_down_deg": 0.05454518201002184
+        },
+        "bilateral_reference": {
+          "t_s": 18.720833333333335,
+          "physics_step": 4493,
+          "recorded_phase": "GRASP",
+          "actual_TCP_quaternion_wxyz": [
+            -0.0004535656198959811,
+            0.7070152320557531,
+            -0.7071981586992107,
+            0.00014230890363666423
+          ],
+          "actual_TCP_error_to_static_ideal_deg": 0.056453609613738756,
+          "actual_TCP_error_rotation_vector_deg": [
+            0.02522065603475238,
+            -0.04828280198577449,
+            -0.014822266358408812
+          ],
+          "cup_world_quaternion_wxyz": [
+            0.7071936130523682,
+            0.0016154730692505836,
+            0.0016417410224676132,
+            0.7070163488388062
+          ],
+          "cup_actual_tilt_deg": 0.26393585479096265,
+          "finger_contact_N": [
+            0.23483645915985107,
+            0.3777216374874115
+          ],
+          "source_gap_m": -6.540675615562819e-07,
+          "applied_total_opening_m": 0.01041846341854427,
+          "actual_TCP_z_axis_tilt_from_world_down_deg": 0.05447302490105861
+        },
+        "EXTRACT": {
+          "t_s": 19.483333333333334,
+          "physics_step": 4676,
+          "recorded_phase": "GRASP",
+          "actual_TCP_quaternion_wxyz": [
+            -0.00045421776838046205,
+            0.7070156192518354,
+            -0.7071977710425769,
+            0.00014301249467522229
+          ],
+          "actual_TCP_error_to_static_ideal_deg": 0.056529307841157665,
+          "actual_TCP_error_rotation_vector_deg": [
+            0.02521648772595085,
+            -0.04839265549264591,
+            -0.014759481228601025
+          ],
+          "cup_world_quaternion_wxyz": [
+            0.7072340250015259,
+            0.0015471787191927433,
+            0.001578986644744873,
+            0.706976056098938
+          ],
+          "cup_actual_tilt_deg": 0.2533217098681599,
+          "finger_contact_N": [
+            0.2864658832550049,
+            0.5154610872268677
+          ],
+          "source_gap_m": -5.174817956365985e-07,
+          "applied_total_opening_m": 0.010318463418544269,
+          "actual_TCP_z_axis_tilt_from_world_down_deg": 0.05456849221295955
+        }
+      },
+      "first_global_200um_qualified_sample": {
+        "t_s": 19.533333333333335,
+        "phase": "EXTRACT",
+        "physics_step": 4688,
+        "body_drift_m": 0.0002421474881170307,
+        "finger_contact_N": [
+          0.21461904048919678,
+          0.272713303565979
+        ]
+      },
+      "maximum_GRASP_drift_after_reference_before_EXTRACT": {
+        "t_s": 18.754166666666666,
+        "phase": "GRASP",
+        "body_drift_m": 8.822660675787144e-06
+      },
+      "full_decompressed_physics_rows": 4817,
+      "full_decompressed_SHA256": "6d4709c219c558b5b693ae5bfdaf6dbe23979cffb772be481d39a42c8ca5f175",
+      "full_decompressed_SHA256_and_bytes_equal_prearchive": true,
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_lateral_hold_01/episode_0000/config.yaml",
+          "SHA256": "aa9f43e7edc8b6ce798091a65546dee837020d89f3715497484c91c9b22c5b01"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_lateral_hold_01/episode_0000/teacher_events.json",
+          "SHA256": "224927421c004413420455bbe6eacd0cc2535705ad0ca5a07a36c315d365b8fc"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_lateral_hold_01/episode_0000/independent_score.json",
+          "SHA256": "e0db628ac1d27f1edf8ef4e79bcf8996d1a15d35569c7fbf02677cc00931d592"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_lateral_hold_01/episode_0000/execution_trace.jsonl",
+          "SHA256": "01cbdb06a375d4fee338f63807ea0956156d913ee103ffe97efeb0ad33900827"
+        }
+      ],
+      "raw_archive": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_lateral_hold_01/episode_0000/physics_records.jsonl.gz",
+        "SHA256": "d8fab3a38ff0c07238271eb00d538a6fd1eb857bfc2630e8c2cf7427c4c0b08d",
+        "original_decompressed_SHA256": "6d4709c219c558b5b693ae5bfdaf6dbe23979cffb772be481d39a42c8ca5f175"
+      }
+    },
+    {
+      "run": "teacher_preorient_01",
+      "actual_execution_commit": "f7e1bcc44eaa1d7fd2e25d3fb1d3079624459295",
+      "static_ideal_definition": "Rz(robot.gripper_yaw_deg) * Rx(pi), per existing plan_arm convention",
+      "static_ideal_quaternion_wxyz": [
+        4.329780281177467e-17,
+        0.7071067811865476,
+        -0.7071067811865475,
+        -4.329780281177466e-17
+      ],
+      "stage_samples": {
+        "GRASP": {
+          "t_s": 14.516666666666667,
+          "physics_step": 3484,
+          "recorded_phase": "APPROACH_SOURCE",
+          "actual_TCP_quaternion_wxyz": [
+            1.1252995764348434e-06,
+            0.7071085991246384,
+            -0.7071049632413982,
+            1.4512086955160468e-06
+          ],
+          "actual_TCP_error_to_static_ideal_deg": 0.00036204639148254303,
+          "actual_TCP_error_rotation_vector_deg": [
+            -0.00020877051923594967,
+            -2.6407916781448378e-05,
+            0.0002946100504306445
+          ],
+          "cup_world_quaternion_wxyz": [
+            0.7071091532707214,
+            4.656612873077393e-10,
+            -9.313225746154785e-10,
+            0.7071045637130737
+          ],
+          "cup_actual_tilt_deg": 0.0,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "source_gap_m": 3.0505084458454235e-08,
+          "applied_total_opening_m": 0.08,
+          "actual_TCP_z_axis_tilt_from_world_down_deg": 0.00021043409365004465
+        },
+        "bilateral_reference": {
+          "t_s": 18.729166666666668,
+          "physics_step": 4495,
+          "recorded_phase": "GRASP",
+          "actual_TCP_quaternion_wxyz": [
+            -4.398134937169553e-07,
+            0.7071063937561236,
+            -0.7071071686164864,
+            -4.387859352599312e-07
+          ],
+          "actual_TCP_error_to_static_ideal_deg": 9.492258018509763e-05,
+          "actual_TCP_error_rotation_vector_deg": [
+            7.119156611468682e-05,
+            -8.326149503646913e-08,
+            -6.278574846776866e-05
+          ],
+          "cup_world_quaternion_wxyz": [
+            0.7071050405502319,
+            0.0016238205134868622,
+            0.0016377139836549759,
+            0.7071048021316528
+          ],
+          "cup_actual_tilt_deg": 0.2642797694259241,
+          "finger_contact_N": [
+            0.21538551151752472,
+            0.39812836050987244
+          ],
+          "source_gap_m": -4.2189867532904657e-07,
+          "applied_total_opening_m": 0.010401166430027224,
+          "actual_TCP_z_axis_tilt_from_world_down_deg": 7.119161480354763e-05
+        },
+        "EXTRACT": {
+          "t_s": 19.483333333333334,
+          "physics_step": 4676,
+          "recorded_phase": "GRASP",
+          "actual_TCP_quaternion_wxyz": [
+            -5.87007022061992e-07,
+            0.7071067513840895,
+            -0.7071068109887327,
+            1.9879181891473248e-07
+          ],
+          "actual_TCP_error_to_static_ideal_deg": 7.118264833709885e-05,
+          "actual_TCP_error_rotation_vector_deg": [
+            3.1456483341637125e-05,
+            -6.367207660440275e-05,
+            -4.8296729644413654e-06
+          ],
+          "cup_world_quaternion_wxyz": [
+            0.707162618637085,
+            0.0014677131548523903,
+            0.0014976179227232933,
+            0.7070478796958923
+          ],
+          "cup_actual_tilt_deg": 0.24028862142425736,
+          "finger_contact_N": [
+            0.2878997325897217,
+            0.5079776644706726
+          ],
+          "source_gap_m": -5.448498883176001e-07,
+          "applied_total_opening_m": 0.010301166430027223,
+          "actual_TCP_z_axis_tilt_from_world_down_deg": 7.101861504173456e-05
+        }
+      },
+      "first_global_200um_qualified_sample": {
+        "t_s": 19.5375,
+        "phase": "EXTRACT",
+        "physics_step": 4689,
+        "body_drift_m": 0.00023243523539360754,
+        "finger_contact_N": [
+          0.15257178246974945,
+          0.16522856056690216
+        ]
+      },
+      "maximum_GRASP_drift_after_reference_before_EXTRACT": {
+        "t_s": 18.920833333333334,
+        "phase": "GRASP",
+        "body_drift_m": 2.0944946037498795e-05
+      },
+      "full_decompressed_physics_rows": 4813,
+      "full_decompressed_SHA256": "3282824740a2b70fe0842b6aeae447c32d67ccaa1c5972b8781b4ddb4d3958ae",
+      "full_decompressed_SHA256_and_bytes_equal_prearchive": true,
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_preorient_01/episode_0000/config.yaml",
+          "SHA256": "a5ffe47d22ed5e0729e70b9f6e34b1bd0a4bfa7717bb325807b2aae506291bef"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_preorient_01/episode_0000/teacher_events.json",
+          "SHA256": "ef04b2a88bbba84ede049b46b3c394ae3415a1811283b1feaf8d6e8fdb7dd749"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_preorient_01/episode_0000/independent_score.json",
+          "SHA256": "d190f634b5ff033ac039af837b1cd28d891bf61a33dbede794efb709a8b3df43"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_preorient_01/episode_0000/execution_trace.jsonl",
+          "SHA256": "526a94835b5bd9cb6553855eb2275dacecb5814e845f4f3f2f5cbaeae95f0677"
+        }
+      ],
+      "raw_archive": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_preorient_01/episode_0000/physics_records.jsonl.gz",
+        "SHA256": "60efd61efbf2a9d56033d575d20cb637899d9e0b034b40ccc30367417fb7b6f5",
+        "original_decompressed_SHA256": "3282824740a2b70fe0842b6aeae447c32d67ccaa1c5972b8781b4ddb4d3958ae"
+      }
+    }
+  ],
+  "complete_recorded_config_differences": [
+    {
+      "path": "experiment.controller_version",
+      "old": "Project_v1_1.teacher_phase_motion_clock.v4",
+      "new": "Project_v1_1.teacher_phase_motion_clock.v5"
+    },
+    {
+      "path": "teacher_execution.version",
+      "old": "Project_v1_1.teacher_phase_motion_clock.v4",
+      "new": "Project_v1_1.teacher_phase_motion_clock.v5"
+    }
+  ],
+  "config_groups_equal": {
+    "physics": true,
+    "vessel": true,
+    "robot": true,
+    "gripper": true,
+    "acceptance": true,
+    "cameras": true,
+    "robot_tracking": true
+  },
+  "scorers_unchanged": [
+    {
+      "path": "demos/lab_cuvette_project_v1/scorer.py",
+      "old_SHA256": "3a7d713a6f4eb388c54cd327d9bf620987829bd28926eaa94a01f249a085e807",
+      "new_SHA256": "3a7d713a6f4eb388c54cd327d9bf620987829bd28926eaa94a01f249a085e807",
+      "byte_identical": true
+    },
+    {
+      "path": "demos/lab_cuvette_size_v1/scorer.py",
+      "old_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "new_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "byte_identical": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "old_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "new_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "byte_identical": true
+    }
+  ],
+  "GPU_used": false,
+  "API_calls": 0,
+  "raw_H5_labels_thresholds_runtime_policy_inputs_modified": false
+}

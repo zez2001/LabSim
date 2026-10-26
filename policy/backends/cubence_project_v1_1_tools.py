@@ -28,7 +28,9 @@ If an action partially executed or safety stopped, do not replay it as though no
 An execution_finished command with target_reached=false is not a successful move. Observe the fresh images/state before deciding on a smaller correction.
 The force cap is an upper limit, not a measured contact force. move and wait preserve the previous gripper request; only the explicit gripper tool changes opening/effort. Use the public bilateral finger contact readings to assess contact, and fresh images to assess retention.
 Both cameras are synchronized at each decision. The side camera covers the rack, arm and instrument; the wrist camera moves with the hand. Use their actual supplied mounting, intrinsics, extrinsics, image transformation and timestamps. Do not assume an old wrist mounting or invent object poses from a task ID.
+Use the static robot calibration in task_language to distinguish the TCP frame from the panda_hand/palm frame when interpreting images and camera mounting. Apply the stated parent/child transform and quaternion convention; do not assume the frames share an origin or orientation. The frame-origin offset is robot geometry, not a complete hand/finger collision envelope or an obstacle-pose oracle.
 Plan clearance for the whole hand and the held vessel, not only the TCP or the vessel bottom. After extraction, inspect the side image and lift sufficiently above intervening rack walls and instrument housing before lateral transport. Leaving the source slot does not prove that the fingers, palm or arm clear the instrument. Use fresh images to choose a clear route and to check clearance again before descent; no obstacle coordinates or safe-height oracle are provided.
+If an intervening housing edge or whole-hand clearance cannot be judged from the current images, obtain fresh dual views and establish visually supported clearance before horizontal transport. Do not continue laterally solely because the TCP or vessel appears outside the source slot; if clearance remains uncertain, observe or stop rather than assume a safe route.
 Perspective alignment: overlap or centering in one image does not establish coaxial alignment. Cross-check the vessel long axis and the intended aperture in both views using the supplied calibration; do not assume equal image pixels imply equal world positions.
 Once visually near the seat or uncertain contact, command insertion/descent at no more than0.001m/s. Split it into short bounded increments and inspect fresh dual-view images, robot state and bilateral finger contact after each increment. This instruction does not add a hidden contact detector or automatic insertion macro.
 If the hand descends while the vessel moves upward relative to the fingers, or one side of finger contact is lost, stop descending. Use only a visually supported safe backoff and realignment before trying again; do not keep pressing with the same downward command or release to bypass the obstruction.
@@ -80,7 +82,7 @@ class ProjectV11RobotTools(GenericRobotTools):
     @staticmethod
     def controller_metadata():
         return dict(version='Project_v1_1',tools_class='ProjectV11RobotTools',
-            prompt_version='Project_v1_1.public_tools.v3',
+            prompt_version='Project_v1_1.public_tools.v4',
             receipt_contract='accepted/execution_finished/target_reached/safety_stopped/partial_execution',
             implementation_sha256={Path(__file__).name:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
             observation_scope='Same public RGB/robot/calibration/tactile whitelist as Project_v1; no object truth')

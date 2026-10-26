@@ -1,0 +1,1151 @@
+{
+  "schema": "labsim.Project_v1_1.gpt03_closed_safety_collision_offline.v1",
+  "analysis_date_local": "2026-10-27",
+  "actual_execution_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+  "original_result": {
+    "task_success": false,
+    "failure_type": "SAFETY_COLLISION",
+    "failure_domain": "safety",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "grasp_success": false,
+    "source_slot_cleared": true,
+    "transport_success": false,
+    "simulation_seconds": 29.666666666666668
+  },
+  "observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 14.1125,
+      "physics_step": 3387,
+      "actual_force_N": [
+        1.6059736013412476,
+        1.6087442636489868
+      ]
+    },
+    "actual_lift_started": {
+      "t": 14.1125,
+      "physics_step": 3387,
+      "actual_lift_m": 0.0015168716298576967
+    },
+    "source_slot_cleared": {
+      "t": 15.370833333333334,
+      "physics_step": 3689,
+      "actual_bottom_world_z_m": 0.7700867171812803,
+      "source_rim_world_z_m": 0.768
+    },
+    "held_transport_observed": {
+      "t": 24.545833333333334,
+      "physics_step": 5891,
+      "horizontal_displacement_m": 0.05001890374401141
+    }
+  },
+  "original_grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 0.0008415075807453727,
+    "maximum_orientation_drift_deg": 0.6975153189097228,
+    "maximum_configured_grasp_anchor_drift_m": 0.00044663059177909003,
+    "maximum_configured_grasp_anchor_axial_drift_m": 4.483942818077131e-05,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 0.0004443740667426055,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "post_retreat_window": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "actual_gripper_retreat_not_observed"
+  },
+  "actual_API_decisions": 15,
+  "actual_network_attempts": 15,
+  "actual_accepted_receipts": 15,
+  "last_receipt": {
+    "action_id": "gpt:3c43a4dacea2b436e709fc42fb0e8dc5d0d1f7ce7cd2fefcfacc3541cc5cac93",
+    "episode_id": "0294af20-b684-4e2c-b842-6f1facb450e0",
+    "observation_id": "0294af20-b684-4e2c-b842-6f1facb450e0:1680",
+    "accepted": true,
+    "execution_finished": true,
+    "target_reached": false,
+    "safety_stopped": true,
+    "completed": true,
+    "completed_semantics": "Execution interval ended; target_reached independently measures actual endpoint.",
+    "requested_duration_s": 2.0,
+    "executed_duration_s": 1.6500000000000021,
+    "executed_control_ticks": 99,
+    "partial_execution": true,
+    "simulation_time_before": 28.016666666666666,
+    "requested_start_TCP": {
+      "position_m": [
+        0.022924225998036687,
+        -0.12687895562451582,
+        0.9508457827531619
+      ],
+      "quaternion_wxyz": [
+        -0.0004320513762364528,
+        0.7070143461193927,
+        -0.7071990609042075,
+        0.00012636923290405206
+      ]
+    },
+    "requested_target_TCP": {
+      "position_m": [
+        0.058924225998036685,
+        -0.11087895562451582,
+        0.9508457827531619
+      ],
+      "quaternion_wxyz": [
+        -0.0004320513762364528,
+        0.7070143461193927,
+        -0.7071990609042075,
+        0.00012636923290405206
+      ]
+    },
+    "maximum_position_tracking_error_m": 0.0004060152681158374,
+    "maximum_orientation_tracking_error_rad": 0.0024841555947096015,
+    "stop_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "control_steps_before": 1680,
+    "physics_steps_before": 6724,
+    "plan": {
+      "planned_ticks": 120,
+      "requested_ticks": 120,
+      "maximum_FK_position_error_m": 3.428263042070008e-16,
+      "maximum_FK_orientation_error_rad": 8.809154612190301e-16,
+      "maximum_joint_step_rad": 0.00129698448179294,
+      "wall_seconds": 0.7917318859836087,
+      "scope": "Continuous kinematics only; not collision or dynamics certification",
+      "FK_goal_scope": "nominal + frozen current robot tracking estimate",
+      "runtime_feedback_revalidation": true
+    },
+    "status": "STOPPED",
+    "executed_physics_steps": 396,
+    "incomplete_control_interval": false,
+    "simulation_time_after": 29.666666666666668,
+    "observation_id_after": "0294af20-b684-4e2c-b842-6f1facb450e0:1779",
+    "successor_observation_available": true,
+    "actual_endpoint_valid": true,
+    "actual_endpoint_TCP": {
+      "position_m": [
+        0.053005345474100476,
+        -0.11380489455917366,
+        0.9509069033523514
+      ],
+      "quaternion_wxyz": [
+        -0.0008736075807942932,
+        0.7069808945109528,
+        -0.7072309359783958,
+        0.0012863908465366805
+      ]
+    },
+    "TCPpose": {
+      "position_m": [
+        0.053005345474100476,
+        -0.11380489455917366,
+        0.9509069033523514
+      ],
+      "quaternion_wxyz": [
+        -0.0008736075807942932,
+        0.7069808945109528,
+        -0.7072309359783958,
+        0.0012863908465366805
+      ]
+    },
+    "final_position_error_m": 0.006602878238588328,
+    "final_orientation_error_rad": 0.0024841555947096015,
+    "tracking_error_coverage_complete": true,
+    "tracking_error_sampling": "completed control boundaries; not a physics-substep maximum",
+    "target_reached_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+    "requested_gripper_opening_m": 0.009,
+    "applied_gripper_opening_m": 0.008999999999999994,
+    "requested_effort_limit_N": 4.0,
+    "applied_effort_limit_N": 4.0,
+    "stop_domain": "safety",
+    "endpoint_tolerances": {
+      "position_m": 0.001,
+      "orientation_rad": 0.008726646259971648
+    },
+    "wall_seconds": 12.58765239699278,
+    "terminated": true,
+    "gripper_opening_m": 0.009841607417911291
+  },
+  "first_native_forbidden_contact": {
+    "physics_step": 7117,
+    "t": 29.654166666666665,
+    "phase": "POLICY",
+    "colliders": [
+      "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+      "/World/Instrument/Collision/SourceMesh2"
+    ],
+    "type": "ContactEventType.CONTACT_FOUND",
+    "points": [
+      {
+        "position_m": [
+          0.07296422123908997,
+          -0.11942743510007858,
+          0.9377999901771545
+        ],
+        "normal_raw": [
+          -0.7730103731155396,
+          7.394556433837352e-08,
+          0.6343934535980225
+        ],
+        "impulse_raw_Ns": [
+          -0.20291219651699066,
+          1.941042171438312e-08,
+          0.16652579605579376
+        ],
+        "force_raw_N": [
+          -48.69892716407776,
+          4.658501211451949e-06,
+          39.9661910533905
+        ],
+        "separation_m": -8.938752580434084e-05,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      },
+      {
+        "position_m": [
+          0.07296809554100037,
+          -0.1072077602148056,
+          0.9378046989440918
+        ],
+        "normal_raw": [
+          -0.7730103731155396,
+          7.394556433837352e-08,
+          0.6343934535980225
+        ],
+        "impulse_raw_Ns": [
+          -0.014887038618326187,
+          1.4240824075528735e-09,
+          0.012217480689287186
+        ],
+        "force_raw_N": [
+          -3.572889268398285,
+          3.4177977781268964e-07,
+          2.9321953654289246
+        ],
+        "separation_m": -8.852686733007431e-05,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      }
+    ],
+    "possible_duplicate_same_step": false,
+    "forbidden_robot_environment": true,
+    "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+  },
+  "first_positive_cup_instrument_contact_after_clear": null,
+  "first_positive_hand_cup_contact_after_clear": null,
+  "forbidden_contact_count": 4,
+  "forbidden_pairs": [
+    {
+      "colliders": [
+        "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+        "/World/Instrument/Collision/SourceMesh2"
+      ],
+      "events": 4
+    }
+  ],
+  "all_native_forbidden_contacts": [
+    {
+      "physics_step": 7117,
+      "t": 29.654166666666665,
+      "phase": "POLICY",
+      "colliders": [
+        "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+        "/World/Instrument/Collision/SourceMesh2"
+      ],
+      "type": "ContactEventType.CONTACT_FOUND",
+      "points": [
+        {
+          "position_m": [
+            0.07296422123908997,
+            -0.11942743510007858,
+            0.9377999901771545
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.20291219651699066,
+            1.941042171438312e-08,
+            0.16652579605579376
+          ],
+          "force_raw_N": [
+            -48.69892716407776,
+            4.658501211451949e-06,
+            39.9661910533905
+          ],
+          "separation_m": -8.938752580434084e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.07296809554100037,
+            -0.1072077602148056,
+            0.9378046989440918
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.014887038618326187,
+            1.4240824075528735e-09,
+            0.012217480689287186
+          ],
+          "force_raw_N": [
+            -3.572889268398285,
+            3.4177977781268964e-07,
+            2.9321953654289246
+          ],
+          "separation_m": -8.852686733007431e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        }
+      ],
+      "possible_duplicate_same_step": false,
+      "forbidden_robot_environment": true,
+      "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+    },
+    {
+      "physics_step": 7118,
+      "t": 29.658333333333335,
+      "phase": "POLICY",
+      "colliders": [
+        "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+        "/World/Instrument/Collision/SourceMesh2"
+      ],
+      "type": "ContactEventType.CONTACT_PERSIST",
+      "points": [
+        {
+          "position_m": [
+            0.07296422123908997,
+            -0.11942743510007858,
+            0.9377999901771545
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.026329917833209038,
+            2.518699249165479e-09,
+            0.021608414128422737
+          ],
+          "force_raw_N": [
+            -6.319180279970169,
+            6.04487819799715e-07,
+            5.186019390821457
+          ],
+          "separation_m": 3.7088830140419304e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.07296809554100037,
+            -0.1072077602148056,
+            0.9378046989440918
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.05786817893385887,
+            5.535624403307793e-09,
+            0.047491203993558884
+          ],
+          "force_raw_N": [
+            -13.88836294412613,
+            1.3285498567938703e-06,
+            11.397888958454132
+          ],
+          "separation_m": 3.494921111268923e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        }
+      ],
+      "possible_duplicate_same_step": false,
+      "forbidden_robot_environment": true,
+      "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+    },
+    {
+      "physics_step": 7119,
+      "t": 29.6625,
+      "phase": "POLICY",
+      "colliders": [
+        "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+        "/World/Instrument/Collision/SourceMesh2"
+      ],
+      "type": "ContactEventType.CONTACT_PERSIST",
+      "points": [
+        {
+          "position_m": [
+            0.07296422123908997,
+            -0.11942743510007858,
+            0.9377999901771545
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.008623230271041393,
+            8.248914329378465e-10,
+            0.007076904643326998
+          ],
+          "force_raw_N": [
+            -2.0695752650499344,
+            1.9797394390508316e-07,
+            1.6984571143984795
+          ],
+          "separation_m": 1.6886277080629952e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.07296809554100037,
+            -0.1072077602148056,
+            0.9378046989440918
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.09042565524578094,
+            8.650046900982034e-09,
+            0.07421044260263443
+          ],
+          "force_raw_N": [
+            -21.702157258987427,
+            2.076011256235688e-06,
+            17.810506224632263
+          ],
+          "separation_m": 1.2522213182819542e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        }
+      ],
+      "possible_duplicate_same_step": false,
+      "forbidden_robot_environment": true,
+      "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+    },
+    {
+      "physics_step": 7120,
+      "t": 29.666666666666668,
+      "phase": "POLICY",
+      "colliders": [
+        "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+        "/World/Instrument/Collision/SourceMesh2"
+      ],
+      "type": "ContactEventType.CONTACT_PERSIST",
+      "points": [
+        {
+          "position_m": [
+            0.07296422123908997,
+            -0.11942743510007858,
+            0.9377999901771545
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.09246321022510529,
+            8.844957655185226e-09,
+            0.07588262110948563
+          ],
+          "force_raw_N": [
+            -22.19117045402527,
+            2.1227898372444542e-06,
+            18.21182906627655
+          ],
+          "separation_m": -4.892272045253776e-06,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.07296809554100037,
+            -0.1072077602148056,
+            0.9378046989440918
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.03538806736469269,
+            3.38519479115007e-09,
+            0.02904224768280983
+          ],
+          "force_raw_N": [
+            -8.493136167526245,
+            8.124467498760168e-07,
+            6.970139443874359
+          ],
+          "separation_m": -1.0311186997569166e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        }
+      ],
+      "possible_duplicate_same_step": false,
+      "forbidden_robot_environment": true,
+      "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+    }
+  ],
+  "first_known_collision_t_s": 29.654166666666665,
+  "before_first_known_collision_maximum_bilateral_bottom_drift": {
+    "t": 15.041666666666666,
+    "physics_step": 3610,
+    "object_position_m": [
+      -0.08480947464704514,
+      -0.17498619854450226,
+      0.7635165452957153
+    ],
+    "object_quaternion_wxyz": [
+      0.7071823477745056,
+      -0.00021097296848893166,
+      -0.0003263978287577629,
+      0.7070310711860657
+    ],
+    "object_bottom_world_z_m": 0.7635121545992114,
+    "actual_tcp_position_m": [
+      -0.08507216492847902,
+      -0.174873283936861,
+      0.8113830148260274
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.0004424899867798222,
+      0.7070099328340885,
+      -0.7072034691051879,
+      0.00011118514646677445
+    ],
+    "cup_in_hand_position_m": [
+      -0.00013527502162359112,
+      0.00022524403209220093,
+      0.14786660241737867
+    ],
+    "cup_in_hand_quaternion_wxyz": [
+      1.1515020300252989e-05,
+      -0.9999999878360304,
+      2.9939169875814464e-05,
+      -0.00015264006506442973
+    ],
+    "finger_contact_N": [
+      1.6064461469650269,
+      1.6098967790603638
+    ],
+    "finger_joint_positions_m": [
+      0.005308565218001604,
+      0.0053085507825016975
+    ],
+    "gripper_target_m": 0.004499999999999997,
+    "gripper_effort_limit_N": 4.0,
+    "depth_m": null,
+    "xy_error_target_m": [
+      -0.02572066293752594,
+      0.2971791213840825
+    ],
+    "tilt_deg": 0.04453546796990448,
+    "target_region_contains_object": null,
+    "target_bottom_gap_m": null,
+    "target_bottom_support_N": 0.0,
+    "source_bottom_gap_m": 0.020512154599211407,
+    "environment_net_force_N": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "bottom_relative_drift_m": 2.068213197858499e-06
+  },
+  "first_200um_grasp_drift_sample": {
+    "t": 29.654166666666665,
+    "physics_step": 7117,
+    "object_position_m": [
+      0.05257413908839226,
+      -0.11393749713897705,
+      0.9030539989471436
+    ],
+    "object_quaternion_wxyz": [
+      0.7068613767623901,
+      -0.0004764935001730919,
+      -0.0005484241992235184,
+      0.707351803779602
+    ],
+    "object_bottom_world_z_m": 0.9030465861772702,
+    "actual_tcp_position_m": [
+      0.05253522757626687,
+      -0.11380935191782349,
+      0.9509218987362394
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.0006049061442202613,
+      0.7069316712173201,
+      -0.7072814908581952,
+      0.0003728375680743318
+    ],
+    "cup_in_hand_position_m": [
+      -0.0001438523078820377,
+      -2.7209984108788373e-05,
+      0.14786786324511145
+    ],
+    "cup_in_hand_quaternion_wxyz": [
+      -3.328753817151474e-05,
+      -0.9999998165290185,
+      0.000594227673446357,
+      -0.00011281551867664948
+    ],
+    "finger_contact_N": [
+      99.60382080078125,
+      99.61238098144531
+    ],
+    "finger_joint_positions_m": [
+      0.004999106749892235,
+      0.005432529840618372
+    ],
+    "gripper_target_m": 0.004499999999999997,
+    "gripper_effort_limit_N": 4.0,
+    "depth_m": null,
+    "xy_error_target_m": [
+      0.03532803846799928,
+      0.15979550764864509
+    ],
+    "tilt_deg": 0.08325178844713838,
+    "target_region_contains_object": null,
+    "target_bottom_gap_m": null,
+    "target_bottom_support_N": 0.0,
+    "source_bottom_gap_m": 0.1600465861772702,
+    "environment_net_force_N": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "bottom_relative_drift_m": 0.0002528697492251003
+  },
+  "original_maximum_grasp_drift_sample_reproduced": {
+    "t": 29.666666666666668,
+    "physics_step": 7120,
+    "object_position_m": [
+      0.05253774672746658,
+      -0.11400839686393738,
+      0.9029956459999084
+    ],
+    "object_quaternion_wxyz": [
+      0.703847348690033,
+      0.0011506588198244572,
+      0.0019878637976944447,
+      0.7103475332260132
+    ],
+    "object_bottom_world_z_m": 0.9029690142314467,
+    "actual_tcp_position_m": [
+      0.053005345474100476,
+      -0.11380489455917366,
+      0.9509069033523514
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.0008736075807942932,
+      0.7069808945109528,
+      -0.7072309359783958,
+      0.0012863908465366805
+    ],
+    "cup_in_hand_position_m": [
+      -0.00017572508071108154,
+      -0.0006138839955821312,
+      0.14790971623798133
+    ],
+    "cup_in_hand_quaternion_wxyz": [
+      0.0037451510470023802,
+      -0.9999815449255,
+      0.00477467460144937,
+      -0.0002934867898322133
+    ],
+    "finger_contact_N": [
+      268.6033630371094,
+      267.5273742675781
+    ],
+    "finger_joint_positions_m": [
+      0.0045327539555728436,
+      0.005308853462338448
+    ],
+    "gripper_target_m": 0.004499999999999997,
+    "gripper_effort_limit_N": 4.0,
+    "depth_m": null,
+    "xy_error_target_m": [
+      0.03525713874303895,
+      0.15983190000957076
+    ],
+    "tilt_deg": 0.26320230740903156,
+    "target_region_contains_object": null,
+    "target_bottom_gap_m": null,
+    "target_bottom_support_N": 0.0,
+    "source_bottom_gap_m": 0.15996901423144672,
+    "environment_net_force_N": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "bottom_relative_drift_m": 0.0008415075807453727
+  },
+  "selected_actual_physics_samples": [
+    {
+      "requested_t_s": 14.1125,
+      "actual_sample": {
+        "t": 14.1125,
+        "physics_step": 3387,
+        "object_position_m": [
+          -0.08481662720441818,
+          -0.17493568360805511,
+          0.7447226047515869
+        ],
+        "object_quaternion_wxyz": [
+          0.7072569131851196,
+          -5.804281681776047e-05,
+          -0.00042887497693300247,
+          0.7069565653800964
+        ],
+        "object_bottom_world_z_m": 0.7447168755743839,
+        "actual_tcp_position_m": [
+          -0.08507609156468768,
+          -0.17484078223509256,
+          0.7925889113743634
+        ],
+        "actual_tcp_quaternion_wxyz": [
+          -0.0005354101570077978,
+          0.7069779217264333,
+          -0.7072354137766674,
+          -3.2054378534779824e-05
+        ],
+        "cup_in_hand_position_m": [
+          -0.00013322660336277303,
+          0.00022543210890156116,
+          0.14786638767200777
+        ],
+        "cup_in_hand_quaternion_wxyz": [
+          1.1585968750103562e-05,
+          -0.9999999898072185,
+          -3.0258745786604362e-05,
+          -0.00013905299860491745
+        ],
+        "finger_contact_N": [
+          1.6059736013412476,
+          1.6087442636489868
+        ],
+        "finger_joint_positions_m": [
+          0.005308758933097124,
+          0.0053087398409843445
+        ],
+        "gripper_target_m": 0.004499999999999997,
+        "gripper_effort_limit_N": 4.0,
+        "depth_m": null,
+        "xy_error_target_m": [
+          -0.025670148001078797,
+          0.2971862739414555
+        ],
+        "tilt_deg": 0.04959348782980744,
+        "target_region_contains_object": null,
+        "target_bottom_gap_m": null,
+        "target_bottom_support_N": 0.0,
+        "source_bottom_gap_m": 0.001716875574383936,
+        "environment_net_force_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bottom_relative_drift_m": 0.0
+      }
+    },
+    {
+      "requested_t_s": 15.370833333333334,
+      "actual_sample": {
+        "t": 15.370833333333334,
+        "physics_step": 3689,
+        "object_position_m": [
+          -0.08481265604496002,
+          -0.17498478293418884,
+          0.7700910568237305
+        ],
+        "object_quaternion_wxyz": [
+          0.7071770429611206,
+          -0.0002051456831395626,
+          -0.0003226837143301964,
+          0.7070364356040955
+        ],
+        "object_bottom_world_z_m": 0.7700867171812803,
+        "actual_tcp_position_m": [
+          -0.08507456099121052,
+          -0.17487214562430722,
+          0.8179574057646124
+        ],
+        "actual_tcp_quaternion_wxyz": [
+          -0.00043519752941326194,
+          0.7070126178443277,
+          -0.7072007896984336,
+          0.0001089125016606623
+        ],
+        "cup_in_hand_position_m": [
+          -0.00013465983260193615,
+          0.00022510522600510297,
+          0.1478664792590956
+        ],
+        "cup_in_hand_quaternion_wxyz": [
+          1.1500283906052593e-05,
+          -0.999999988474312,
+          3.3687315400654505e-05,
+          -0.00014759500109364534
+        ],
+        "finger_contact_N": [
+          1.6112130880355835,
+          1.6023675203323364
+        ],
+        "finger_joint_positions_m": [
+          0.0053085521794855595,
+          0.005308542866259813
+        ],
+        "gripper_target_m": 0.004499999999999997,
+        "gripper_effort_limit_N": 4.0,
+        "depth_m": null,
+        "xy_error_target_m": [
+          -0.025719247327212525,
+          0.29718230278199737
+        ],
+        "tilt_deg": 0.043816781314070616,
+        "target_region_contains_object": null,
+        "target_bottom_gap_m": null,
+        "target_bottom_support_N": 0.0,
+        "source_bottom_gap_m": 0.027086717181280306,
+        "environment_net_force_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bottom_relative_drift_m": 1.4728837953641277e-06
+      }
+    },
+    {
+      "requested_t_s": 29.65,
+      "actual_sample": {
+        "t": 29.65,
+        "physics_step": 7116,
+        "object_position_m": [
+          0.0525842048227787,
+          -0.1139288991689682,
+          0.902977705001831
+        ],
+        "object_quaternion_wxyz": [
+          0.7071747183799744,
+          -0.00022108526900410652,
+          -0.0003156978636980057,
+          0.7070387601852417
+        ],
+        "object_bottom_world_z_m": 0.9029734529447532,
+        "actual_tcp_position_m": [
+          0.05232163492016712,
+          -0.11381456385817948,
+          0.9508439937172131
+        ],
+        "actual_tcp_quaternion_wxyz": [
+          -0.00042740611506438637,
+          0.7070145265414312,
+          -0.7071988836988146,
+          0.00012441285925078195
+        ],
+        "cup_in_hand_position_m": [
+          -0.00013478231963611457,
+          0.00022524795298984148,
+          0.14786642568635502
+        ],
+        "cup_in_hand_quaternion_wxyz": [
+          1.0620087111197463e-05,
+          -0.9999999885022404,
+          3.4278452958447225e-05,
+          -0.00014733540240317319
+        ],
+        "finger_contact_N": [
+          1.6162469387054443,
+          1.6025822162628174
+        ],
+        "finger_joint_positions_m": [
+          0.0053085326217114925,
+          0.005308564752340317
+        ],
+        "gripper_target_m": 0.004499999999999997,
+        "gripper_effort_limit_N": 4.0,
+        "depth_m": null,
+        "xy_error_target_m": [
+          0.03533663643800813,
+          0.15978544191425864
+        ],
+        "tilt_deg": 0.044165174393812144,
+        "target_region_contains_object": null,
+        "target_bottom_gap_m": null,
+        "target_bottom_support_N": 0.0,
+        "source_bottom_gap_m": 0.15997345294475318,
+        "environment_net_force_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bottom_relative_drift_m": 1.5670391231740461e-06
+      }
+    },
+    {
+      "requested_t_s": 29.654166666666665,
+      "actual_sample": {
+        "t": 29.654166666666665,
+        "physics_step": 7117,
+        "object_position_m": [
+          0.05257413908839226,
+          -0.11393749713897705,
+          0.9030539989471436
+        ],
+        "object_quaternion_wxyz": [
+          0.7068613767623901,
+          -0.0004764935001730919,
+          -0.0005484241992235184,
+          0.707351803779602
+        ],
+        "object_bottom_world_z_m": 0.9030465861772702,
+        "actual_tcp_position_m": [
+          0.05253522757626687,
+          -0.11380935191782349,
+          0.9509218987362394
+        ],
+        "actual_tcp_quaternion_wxyz": [
+          -0.0006049061442202613,
+          0.7069316712173201,
+          -0.7072814908581952,
+          0.0003728375680743318
+        ],
+        "cup_in_hand_position_m": [
+          -0.0001438523078820377,
+          -2.7209984108788373e-05,
+          0.14786786324511145
+        ],
+        "cup_in_hand_quaternion_wxyz": [
+          -3.328753817151474e-05,
+          -0.9999998165290185,
+          0.000594227673446357,
+          -0.00011281551867664948
+        ],
+        "finger_contact_N": [
+          99.60382080078125,
+          99.61238098144531
+        ],
+        "finger_joint_positions_m": [
+          0.004999106749892235,
+          0.005432529840618372
+        ],
+        "gripper_target_m": 0.004499999999999997,
+        "gripper_effort_limit_N": 4.0,
+        "depth_m": null,
+        "xy_error_target_m": [
+          0.03532803846799928,
+          0.15979550764864509
+        ],
+        "tilt_deg": 0.08325178844713838,
+        "target_region_contains_object": null,
+        "target_bottom_gap_m": null,
+        "target_bottom_support_N": 0.0,
+        "source_bottom_gap_m": 0.1600465861772702,
+        "environment_net_force_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bottom_relative_drift_m": 0.0002528697492251003
+      }
+    },
+    {
+      "requested_t_s": 29.654166666666665,
+      "actual_sample": {
+        "t": 29.654166666666665,
+        "physics_step": 7117,
+        "object_position_m": [
+          0.05257413908839226,
+          -0.11393749713897705,
+          0.9030539989471436
+        ],
+        "object_quaternion_wxyz": [
+          0.7068613767623901,
+          -0.0004764935001730919,
+          -0.0005484241992235184,
+          0.707351803779602
+        ],
+        "object_bottom_world_z_m": 0.9030465861772702,
+        "actual_tcp_position_m": [
+          0.05253522757626687,
+          -0.11380935191782349,
+          0.9509218987362394
+        ],
+        "actual_tcp_quaternion_wxyz": [
+          -0.0006049061442202613,
+          0.7069316712173201,
+          -0.7072814908581952,
+          0.0003728375680743318
+        ],
+        "cup_in_hand_position_m": [
+          -0.0001438523078820377,
+          -2.7209984108788373e-05,
+          0.14786786324511145
+        ],
+        "cup_in_hand_quaternion_wxyz": [
+          -3.328753817151474e-05,
+          -0.9999998165290185,
+          0.000594227673446357,
+          -0.00011281551867664948
+        ],
+        "finger_contact_N": [
+          99.60382080078125,
+          99.61238098144531
+        ],
+        "finger_joint_positions_m": [
+          0.004999106749892235,
+          0.005432529840618372
+        ],
+        "gripper_target_m": 0.004499999999999997,
+        "gripper_effort_limit_N": 4.0,
+        "depth_m": null,
+        "xy_error_target_m": [
+          0.03532803846799928,
+          0.15979550764864509
+        ],
+        "tilt_deg": 0.08325178844713838,
+        "target_region_contains_object": null,
+        "target_bottom_gap_m": null,
+        "target_bottom_support_N": 0.0,
+        "source_bottom_gap_m": 0.1600465861772702,
+        "environment_net_force_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bottom_relative_drift_m": 0.0002528697492251003
+      }
+    },
+    {
+      "requested_t_s": 29.666666666666668,
+      "actual_sample": {
+        "t": 29.666666666666668,
+        "physics_step": 7120,
+        "object_position_m": [
+          0.05253774672746658,
+          -0.11400839686393738,
+          0.9029956459999084
+        ],
+        "object_quaternion_wxyz": [
+          0.703847348690033,
+          0.0011506588198244572,
+          0.0019878637976944447,
+          0.7103475332260132
+        ],
+        "object_bottom_world_z_m": 0.9029690142314467,
+        "actual_tcp_position_m": [
+          0.053005345474100476,
+          -0.11380489455917366,
+          0.9509069033523514
+        ],
+        "actual_tcp_quaternion_wxyz": [
+          -0.0008736075807942932,
+          0.7069808945109528,
+          -0.7072309359783958,
+          0.0012863908465366805
+        ],
+        "cup_in_hand_position_m": [
+          -0.00017572508071108154,
+          -0.0006138839955821312,
+          0.14790971623798133
+        ],
+        "cup_in_hand_quaternion_wxyz": [
+          0.0037451510470023802,
+          -0.9999815449255,
+          0.00477467460144937,
+          -0.0002934867898322133
+        ],
+        "finger_contact_N": [
+          268.6033630371094,
+          267.5273742675781
+        ],
+        "finger_joint_positions_m": [
+          0.0045327539555728436,
+          0.005308853462338448
+        ],
+        "gripper_target_m": 0.004499999999999997,
+        "gripper_effort_limit_N": 4.0,
+        "depth_m": null,
+        "xy_error_target_m": [
+          0.03525713874303895,
+          0.15983190000957076
+        ],
+        "tilt_deg": 0.26320230740903156,
+        "target_region_contains_object": null,
+        "target_bottom_gap_m": null,
+        "target_bottom_support_N": 0.0,
+        "source_bottom_gap_m": 0.15996901423144672,
+        "environment_net_force_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bottom_relative_drift_m": 0.0008415075807453727
+      }
+    }
+  ],
+  "gpt01_comparison": {
+    "same_collider_pair": false,
+    "gpt01_first_pair": [
+      "/World/Franka/panda_hand/geometry/panda_hand",
+      "/World/Instrument/Collision/SourceMesh2"
+    ],
+    "gpt03_first_pair": [
+      "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+      "/World/Instrument/Collision/SourceMesh2"
+    ],
+    "gpt01_first_point_world_m": [
+      0.06435796618461609,
+      -0.15646256506443024,
+      0.9154633283615112
+    ],
+    "gpt03_first_point_world_m": [
+      0.07296422123908997,
+      -0.11942743510007858,
+      0.9377999901771545
+    ],
+    "first_point_delta_world_m": [
+      0.008606255054473877,
+      0.037035129964351654,
+      0.02233666181564331
+    ],
+    "first_point_distance_m": 0.04409756159478087,
+    "scope": "Same safety family does not imply identical shape, path, height or cause."
+  },
+  "full_physics_rows": 7121,
+  "full_native_rows": 36030,
+  "whole_decompressed_SHA_and_bytes_verified_against_closed_archive": true,
+  "normal_filter_admission": {
+    "success": false,
+    "failure": true
+  },
+  "closed_audit": {
+    "path": "../gpt_debug_03_closed_read_archive.json",
+    "SHA256": "d825925345a6424affae10feb9a4a323fcda2ceb237df98d1fd475e0db87889c"
+  },
+  "source_independent_score_SHA256": "e91a6937d03e43fa4ce8e3d287932758952bb2af5f7fbbfac18cd8dd9b744218",
+  "source_receipts_SHA256": "98b3306300346585c514a44ac3a1bac6f65d4b3db7a405b75e63bd51b50be8cc",
+  "GPU_used": false,
+  "API_calls": 0,
+  "raw_H5_labels_runtime_policy_inputs_modified": false,
+  "limits": [
+    "Privileged offline collision coordinates and object pose never sent to policy.",
+    "Original false/safety and valid integrity/physics remain independent; early stable grasp does not replace failed full-trajectory labels.",
+    "Target error remaining after a safety stop is not the same as measured tracking error during the executed interval.",
+    "No calibrated hardware precision, upstream model identity, statistical rate, or full HTTP body preservation claim."
+  ]
+}

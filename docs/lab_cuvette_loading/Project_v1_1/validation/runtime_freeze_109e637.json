@@ -1,0 +1,566 @@
+{
+  "schema": "labsim.Project_v1_1.runtime_freeze.v2",
+  "checked_at_utc": "2026-10-26T20:32:56.649537+00:00",
+  "target_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+  "previous_runtime_commit": "9e48016412907385d1a8c9e40860139f3d730764",
+  "branch": "codex/labsim",
+  "remote": {
+    "SHA": "109e637bcb264458ffc231f4e052e60ff6764242",
+    "ref": "refs/heads/codex/labsim",
+    "method": "Actual git ls-remote --heads origin codex/labsim"
+  },
+  "checkouts": {
+    "development": {
+      "HEAD": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "status_porcelain": [
+        "?? docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_causal_timing_review/",
+        "?? docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_control_chain_review/"
+      ]
+    },
+    "clean_execution": {
+      "HEAD": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "status_porcelain": []
+    }
+  },
+  "runtime_source_changed_paths": [
+    "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+    "controllers/lab_cuvette_project_v1_1_controller.py"
+  ],
+  "functional_change": "New teacher only: while phase==EXTRACT, drop desired_cup_xy before parent _feedback. Existing orientation argument, all other phases, physical/control timers and gripper state remain unchanged. Added version/diagnostic metadata.",
+  "controller_patch": "diff --git a/controllers/lab_cuvette_project_v1_1_controller.py b/controllers/lab_cuvette_project_v1_1_controller.py\nindex 5d14eb8..367ad48 100644\n--- a/controllers/lab_cuvette_project_v1_1_controller.py\n+++ b/controllers/lab_cuvette_project_v1_1_controller.py\n@@ -1,8 +1,8 @@\n \"\"\"Phase-motion clock and source-constrained grasp teacher adapter.\n \n-Only four smooth motion phases are slowed. The original teacher, physics,\n-scorer, 60 Hz actions and physical contact timers are unchanged. GRASP holds\n-the existing EE orientation and slows closure near the nominal vessel width.\n+Only four smooth motion phases are slowed. Physics, scorer, 60 Hz actions and\n+physical contact timers are unchanged. GRASP holds the existing EE orientation\n+and slows closure near contact. EXTRACT keeps the nominal lateral lift axis.\n \"\"\"\n from __future__ import annotations\n \n@@ -13,7 +13,7 @@ from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get\n \n \n class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):\n-    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v3'\n+    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v4'\n     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))\n     NEAR_CONTACT_MARGIN_M = .002\n \n@@ -42,6 +42,7 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):\n         self.controller_motion_clock_s = 0.\n         self._clock_cached_action = None\n         self._grasp_orientation_feedback_suppressed = False\n+        self._extract_lateral_feedback_suppressed = False\n         return self\n \n     def _feedback(self, debug, desired_cup_xy=None, *, orientation=True):\n@@ -51,6 +52,14 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):\n         if self.phase == 'GRASP' and orientation:\n             self._grasp_orientation_feedback_suppressed = True\n             orientation = False\n+        if self.phase == 'EXTRACT' and desired_cup_xy is not None:\n+            # A source-supported bottom can pivot about the fingers. Chasing\n+            # that bottom with lateral hand corrections during a nominally\n+            # vertical lift changes the load transfer. Keep the existing lift\n+            # axis; resume the parent's XY feedback during TRANSPORT/ALIGN.\n+            # This is a teacher-only A/B, not an established physical fix.\n+            self._extract_lateral_feedback_suppressed = True\n+            desired_cup_xy = None\n         return super()._feedback(debug, desired_cup_xy, orientation=orientation)\n \n     def act(self, public_obs, debug):\n@@ -81,6 +90,7 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):\n         motion_elapsed = self._phase_motion_elapsed\n         event_start = len(self.events)\n         self._grasp_orientation_feedback_suppressed = False\n+        self._extract_lateral_feedback_suppressed = False\n         previous_opening = self.last_grip_opening\n         unlatched_before = self.latch_opening is None\n         bilateral = all(float(v) > float(get(self.cfg, 'gripper.contact_threshold_N', .02))\n@@ -122,6 +132,8 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):\n             physical_control_hz=self.hz, physical_watchdogs_unscaled=True,\n             grasp_orientation_feedback_suppressed=self._grasp_orientation_feedback_suppressed,\n             grasp_orientation_feedback_policy='Hold existing EE orientation during GRASP while source-constrained; unchanged feedback after extraction',\n+            extract_lateral_feedback_suppressed=self._extract_lateral_feedback_suppressed,\n+            extract_lateral_feedback_policy='Fixed nominal XY during EXTRACT; parent XY feedback resumes in TRANSPORT and ALIGN',\n             near_contact_slow_close_zone=slow_zone,\n             near_contact_slow_close_applied=float(action['gripper_opening_m']) > parent_opening,\n             near_contact_nominal_outer_width_m=self.nominal_vessel_outer_width_m,\n",
+  "config_changed_fields": [
+    {
+      "path": "experiment.controller_version",
+      "before": "Project_v1_1.teacher_phase_motion_clock.v3",
+      "after": "Project_v1_1.teacher_phase_motion_clock.v4"
+    },
+    {
+      "path": "teacher_execution.version",
+      "before": "Project_v1_1.teacher_phase_motion_clock.v3",
+      "after": "Project_v1_1.teacher_phase_motion_clock.v4"
+    }
+  ],
+  "protected_config_groups": {
+    "acceptance": {
+      "unchanged": true,
+      "SHA256": "a3f9536a7f3a87c46d468ee6fbc1b792b80006d93cd7006e82b79e8a895926f3"
+    },
+    "demo_release": {
+      "unchanged": true,
+      "SHA256": "d0f9721575de189532bb6d3734948f6f3ba702ff5d48f4e1aee4312ab8b13cd8"
+    },
+    "physics": {
+      "unchanged": true,
+      "SHA256": "50423df3d31f1d30e4a09943ab8ae93f1ae963528249d27aec8d3707a7af60e0"
+    },
+    "robot": {
+      "unchanged": true,
+      "SHA256": "e1a47cd8b75c35c2df87bfa5a7502a4d83450a5f8542ebab8eb6b178882cbb23"
+    },
+    "vessel": {
+      "unchanged": true,
+      "SHA256": "3dee58174900a7e82d59eb5b02a03bd91f7bafa5a8e60a206e21427dab78c8c4"
+    },
+    "gripper": {
+      "unchanged": true,
+      "SHA256": "494289dc6ce3e53827d4ee4b1ee8d9d77e2f2cf517a930345931da260195b93b"
+    },
+    "executor": {
+      "unchanged": true,
+      "SHA256": "75ef27e134ab4666ab9e9c66643f915291104848af65a69f5dda3ee572dffd98"
+    },
+    "robot_tracking": {
+      "unchanged": true,
+      "SHA256": "a60c71da91872e3c4e552c499067f18a495bf4aa85ec25d56dc9efaa7df4407c"
+    },
+    "control": {
+      "unchanged": true,
+      "SHA256": "ff10de90724bfc84cba95af034835faf83eb11e3ebf33db83b21662649a8fba7"
+    },
+    "geometry": {
+      "unchanged": true,
+      "SHA256": "b9e8402558da8c08d8aa2e092aae43a4cdc0858421971367aae7731ada1c4495"
+    },
+    "rack": {
+      "unchanged": true,
+      "SHA256": "67240b9125f63b38394cc25a2e0d5a95ce42278ab7185300a79a3df807795a49"
+    },
+    "adapter": {
+      "unchanged": true,
+      "SHA256": "0183bc509b01c7540b5085a3213ee484c50cbca620c30e3f853855ebb3924292"
+    },
+    "cameras": {
+      "unchanged": true,
+      "SHA256": "60276658dd295370db1fe87bbdb83b18e1a6283606891758e085576a7f96a0ab"
+    }
+  },
+  "protected_scorer_files": {
+    "demos/lab_cuvette_project_v1_1/scorer.py": {
+      "unchanged": true,
+      "SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f"
+    },
+    "tasks/lab_cuvette_loading_env_v1_scorer.py": {
+      "unchanged": true,
+      "SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611"
+    },
+    "demos/lab_cuvette_size_v1/scorer.py": {
+      "unchanged": true,
+      "SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74"
+    }
+  },
+  "source_inventory_count": 39,
+  "source_inventory": [
+    {
+      "path": ".github/workflows/cpu-contracts.yml",
+      "freeze_commit_SHA256": "5d792b9b81722595044f117cabca462baa7c00f08e9a02976cd04512d720c03d",
+      "development_SHA256": "5d792b9b81722595044f117cabca462baa7c00f08e9a02976cd04512d720c03d",
+      "clean_checkout_SHA256": "5d792b9b81722595044f117cabca462baa7c00f08e9a02976cd04512d720c03d",
+      "previous9e48016_SHA256": "5d792b9b81722595044f117cabca462baa7c00f08e9a02976cd04512d720c03d",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+      "freeze_commit_SHA256": "054bcdd8fff283a877fc2e2da897e55aaa53bc63935cdca1f3c2504b68e03beb",
+      "development_SHA256": "054bcdd8fff283a877fc2e2da897e55aaa53bc63935cdca1f3c2504b68e03beb",
+      "clean_checkout_SHA256": "054bcdd8fff283a877fc2e2da897e55aaa53bc63935cdca1f3c2504b68e03beb",
+      "previous9e48016_SHA256": "054bcdd8fff283a877fc2e2da897e55aaa53bc63935cdca1f3c2504b68e03beb",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json",
+      "freeze_commit_SHA256": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+      "development_SHA256": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+      "clean_checkout_SHA256": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+      "previous9e48016_SHA256": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json",
+      "freeze_commit_SHA256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba",
+      "development_SHA256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba",
+      "clean_checkout_SHA256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba",
+      "previous9e48016_SHA256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "freeze_commit_SHA256": "307b52191e53ba79629b9bd108012f6fb90c98d427339f057b91556d5fcc42f5",
+      "development_SHA256": "307b52191e53ba79629b9bd108012f6fb90c98d427339f057b91556d5fcc42f5",
+      "clean_checkout_SHA256": "307b52191e53ba79629b9bd108012f6fb90c98d427339f057b91556d5fcc42f5",
+      "previous9e48016_SHA256": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": false
+    },
+    {
+      "path": "controllers/lab_cuvette_project_v1_1_controller.py",
+      "freeze_commit_SHA256": "a8c60ddd21df15322788fbfe4c6f445674643366c5845fcb0eca3f96add3b011",
+      "development_SHA256": "a8c60ddd21df15322788fbfe4c6f445674643366c5845fcb0eca3f96add3b011",
+      "clean_checkout_SHA256": "a8c60ddd21df15322788fbfe4c6f445674643366c5845fcb0eca3f96add3b011",
+      "previous9e48016_SHA256": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": false
+    },
+    {
+      "path": "data_collectors/lab_cuvette_project_v1_1_collector.py",
+      "freeze_commit_SHA256": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1",
+      "development_SHA256": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1",
+      "clean_checkout_SHA256": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1",
+      "previous9e48016_SHA256": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/__init__.py",
+      "freeze_commit_SHA256": "c03e55ad7ab225135b8619b4386d666db40a981f0181136262876648c0e346f8",
+      "development_SHA256": "c03e55ad7ab225135b8619b4386d666db40a981f0181136262876648c0e346f8",
+      "clean_checkout_SHA256": "c03e55ad7ab225135b8619b4386d666db40a981f0181136262876648c0e346f8",
+      "previous9e48016_SHA256": "c03e55ad7ab225135b8619b4386d666db40a981f0181136262876648c0e346f8",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/asset_selection.py",
+      "freeze_commit_SHA256": "e27eb6965a7611f1f36178ae7d025aeaa736bcc1af4cdac9fee5ad5b0bc71431",
+      "development_SHA256": "e27eb6965a7611f1f36178ae7d025aeaa736bcc1af4cdac9fee5ad5b0bc71431",
+      "clean_checkout_SHA256": "e27eb6965a7611f1f36178ae7d025aeaa736bcc1af4cdac9fee5ad5b0bc71431",
+      "previous9e48016_SHA256": "e27eb6965a7611f1f36178ae7d025aeaa736bcc1af4cdac9fee5ad5b0bc71431",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/assets.py",
+      "freeze_commit_SHA256": "2769e32c8ecaa4237413e397fc902c702d6331e7f259163add8b37a9549aac8c",
+      "development_SHA256": "2769e32c8ecaa4237413e397fc902c702d6331e7f259163add8b37a9549aac8c",
+      "clean_checkout_SHA256": "2769e32c8ecaa4237413e397fc902c702d6331e7f259163add8b37a9549aac8c",
+      "previous9e48016_SHA256": "2769e32c8ecaa4237413e397fc902c702d6331e7f259163add8b37a9549aac8c",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/contract.py",
+      "freeze_commit_SHA256": "63f14b4e7ef8973c1cab46b021afb29cd46ca455a3a46d056e6cacdc4b120093",
+      "development_SHA256": "63f14b4e7ef8973c1cab46b021afb29cd46ca455a3a46d056e6cacdc4b120093",
+      "clean_checkout_SHA256": "63f14b4e7ef8973c1cab46b021afb29cd46ca455a3a46d056e6cacdc4b120093",
+      "previous9e48016_SHA256": "63f14b4e7ef8973c1cab46b021afb29cd46ca455a3a46d056e6cacdc4b120093",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/environment.py",
+      "freeze_commit_SHA256": "0dcfb00d53ca54c12459df907793e97277669b8caffa12d31678c81ae3041c7d",
+      "development_SHA256": "0dcfb00d53ca54c12459df907793e97277669b8caffa12d31678c81ae3041c7d",
+      "clean_checkout_SHA256": "0dcfb00d53ca54c12459df907793e97277669b8caffa12d31678c81ae3041c7d",
+      "previous9e48016_SHA256": "0dcfb00d53ca54c12459df907793e97277669b8caffa12d31678c81ae3041c7d",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/geometry_audit.py",
+      "freeze_commit_SHA256": "4c4b6c64d057a8a831330f6e92080fc50af0a2b3e5dc23f9bf66221e12c3b338",
+      "development_SHA256": "4c4b6c64d057a8a831330f6e92080fc50af0a2b3e5dc23f9bf66221e12c3b338",
+      "clean_checkout_SHA256": "4c4b6c64d057a8a831330f6e92080fc50af0a2b3e5dc23f9bf66221e12c3b338",
+      "previous9e48016_SHA256": "4c4b6c64d057a8a831330f6e92080fc50af0a2b3e5dc23f9bf66221e12c3b338",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/native_entry.py",
+      "freeze_commit_SHA256": "baa18e96da02322f39052073a33adf7e64af3f0e545a6d1f74ba826db6fbeaac",
+      "development_SHA256": "baa18e96da02322f39052073a33adf7e64af3f0e545a6d1f74ba826db6fbeaac",
+      "clean_checkout_SHA256": "baa18e96da02322f39052073a33adf7e64af3f0e545a6d1f74ba826db6fbeaac",
+      "previous9e48016_SHA256": "baa18e96da02322f39052073a33adf7e64af3f0e545a6d1f74ba826db6fbeaac",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/rpc.py",
+      "freeze_commit_SHA256": "ca9572d508863d97b899487759987be1ad7443cf11bbf5b5b8465b301992d44f",
+      "development_SHA256": "ca9572d508863d97b899487759987be1ad7443cf11bbf5b5b8465b301992d44f",
+      "clean_checkout_SHA256": "ca9572d508863d97b899487759987be1ad7443cf11bbf5b5b8465b301992d44f",
+      "previous9e48016_SHA256": "ca9572d508863d97b899487759987be1ad7443cf11bbf5b5b8465b301992d44f",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/run.py",
+      "freeze_commit_SHA256": "f9e4a10360581c09d60b2f60840eb7d69cab72903237eb560ad4e1a86b0aad76",
+      "development_SHA256": "f9e4a10360581c09d60b2f60840eb7d69cab72903237eb560ad4e1a86b0aad76",
+      "clean_checkout_SHA256": "f9e4a10360581c09d60b2f60840eb7d69cab72903237eb560ad4e1a86b0aad76",
+      "previous9e48016_SHA256": "f9e4a10360581c09d60b2f60840eb7d69cab72903237eb560ad4e1a86b0aad76",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/runtime.py",
+      "freeze_commit_SHA256": "2aa20d2f6f5e700bcfaf76644897a4e366b7fc674f7a72e97eda8e4c01fc4479",
+      "development_SHA256": "2aa20d2f6f5e700bcfaf76644897a4e366b7fc674f7a72e97eda8e4c01fc4479",
+      "clean_checkout_SHA256": "2aa20d2f6f5e700bcfaf76644897a4e366b7fc674f7a72e97eda8e4c01fc4479",
+      "previous9e48016_SHA256": "2aa20d2f6f5e700bcfaf76644897a4e366b7fc674f7a72e97eda8e4c01fc4479",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/scorer.py",
+      "freeze_commit_SHA256": "3a7d713a6f4eb388c54cd327d9bf620987829bd28926eaa94a01f249a085e807",
+      "development_SHA256": "3a7d713a6f4eb388c54cd327d9bf620987829bd28926eaa94a01f249a085e807",
+      "clean_checkout_SHA256": "3a7d713a6f4eb388c54cd327d9bf620987829bd28926eaa94a01f249a085e807",
+      "previous9e48016_SHA256": "3a7d713a6f4eb388c54cd327d9bf620987829bd28926eaa94a01f249a085e807",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/camera_audit.py",
+      "freeze_commit_SHA256": "386a8bdcf2c7260ac5b206018bba32f8b26acacec004c3f81e0b3580abb278dd",
+      "development_SHA256": "386a8bdcf2c7260ac5b206018bba32f8b26acacec004c3f81e0b3580abb278dd",
+      "clean_checkout_SHA256": "386a8bdcf2c7260ac5b206018bba32f8b26acacec004c3f81e0b3580abb278dd",
+      "previous9e48016_SHA256": "386a8bdcf2c7260ac5b206018bba32f8b26acacec004c3f81e0b3580abb278dd",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/checked_probes.py",
+      "freeze_commit_SHA256": "5f087e64251542eaf0e2da548325ece50c83ed45333054f2c77c684b43e4aaea",
+      "development_SHA256": "5f087e64251542eaf0e2da548325ece50c83ed45333054f2c77c684b43e4aaea",
+      "clean_checkout_SHA256": "5f087e64251542eaf0e2da548325ece50c83ed45333054f2c77c684b43e4aaea",
+      "previous9e48016_SHA256": "5f087e64251542eaf0e2da548325ece50c83ed45333054f2c77c684b43e4aaea",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/continuous_ik.py",
+      "freeze_commit_SHA256": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+      "development_SHA256": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+      "clean_checkout_SHA256": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+      "previous9e48016_SHA256": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/contract.py",
+      "freeze_commit_SHA256": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+      "development_SHA256": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+      "clean_checkout_SHA256": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+      "previous9e48016_SHA256": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/diagnostics.py",
+      "freeze_commit_SHA256": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff",
+      "development_SHA256": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff",
+      "clean_checkout_SHA256": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff",
+      "previous9e48016_SHA256": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/environment.py",
+      "freeze_commit_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "development_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "clean_checkout_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "previous9e48016_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/free_space_plan.py",
+      "freeze_commit_SHA256": "453ff97f91b0baf98eb8a1d10366748577a8d39e0367d248239c128066c2f3be",
+      "development_SHA256": "453ff97f91b0baf98eb8a1d10366748577a8d39e0367d248239c128066c2f3be",
+      "clean_checkout_SHA256": "453ff97f91b0baf98eb8a1d10366748577a8d39e0367d248239c128066c2f3be",
+      "previous9e48016_SHA256": "453ff97f91b0baf98eb8a1d10366748577a8d39e0367d248239c128066c2f3be",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "freeze_commit_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "development_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "clean_checkout_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "previous9e48016_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/probes.py",
+      "freeze_commit_SHA256": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+      "development_SHA256": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+      "clean_checkout_SHA256": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+      "previous9e48016_SHA256": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/robot_tracking.py",
+      "freeze_commit_SHA256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+      "development_SHA256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+      "clean_checkout_SHA256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+      "previous9e48016_SHA256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/run.py",
+      "freeze_commit_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "development_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "clean_checkout_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "previous9e48016_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "freeze_commit_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "development_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "clean_checkout_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "previous9e48016_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "labsim",
+      "freeze_commit_SHA256": "33d4b4b85ed8b4a309699f10b003b2a611f9f4fb342e22a244eb58407f1bd752",
+      "development_SHA256": "33d4b4b85ed8b4a309699f10b003b2a611f9f4fb342e22a244eb58407f1bd752",
+      "clean_checkout_SHA256": "33d4b4b85ed8b4a309699f10b003b2a611f9f4fb342e22a244eb58407f1bd752",
+      "previous9e48016_SHA256": "33d4b4b85ed8b4a309699f10b003b2a611f9f4fb342e22a244eb58407f1bd752",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "policy/backends/cubence.py",
+      "freeze_commit_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "development_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "clean_checkout_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "previous9e48016_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "policy/backends/cubence_project_v1_1_tools.py",
+      "freeze_commit_SHA256": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594",
+      "development_SHA256": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594",
+      "clean_checkout_SHA256": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594",
+      "previous9e48016_SHA256": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "policy/dataset/lab_cuvette_project_v1_1_dataset.py",
+      "freeze_commit_SHA256": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+      "development_SHA256": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+      "clean_checkout_SHA256": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+      "previous9e48016_SHA256": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "requirements/ci-readers.txt",
+      "freeze_commit_SHA256": "2bd82248590f25bc8362613fe3a2c5c8436359cd842be165cf36ad6e97be8979",
+      "development_SHA256": "2bd82248590f25bc8362613fe3a2c5c8436359cd842be165cf36ad6e97be8979",
+      "clean_checkout_SHA256": "2bd82248590f25bc8362613fe3a2c5c8436359cd842be165cf36ad6e97be8979",
+      "previous9e48016_SHA256": "2bd82248590f25bc8362613fe3a2c5c8436359cd842be165cf36ad6e97be8979",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "requirements/ci.txt",
+      "freeze_commit_SHA256": "725c2b3ef982e1e6692338dc7ab624d768e0649fc9048acd79af120baab49381",
+      "development_SHA256": "725c2b3ef982e1e6692338dc7ab624d768e0649fc9048acd79af120baab49381",
+      "clean_checkout_SHA256": "725c2b3ef982e1e6692338dc7ab624d768e0649fc9048acd79af120baab49381",
+      "previous9e48016_SHA256": "725c2b3ef982e1e6692338dc7ab624d768e0649fc9048acd79af120baab49381",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "scripts/labsim_cli.py",
+      "freeze_commit_SHA256": "e02ce8c3c515d36665c44fbeed8dd430f3c3760c0eccef6619d28a6d9e3729e5",
+      "development_SHA256": "e02ce8c3c515d36665c44fbeed8dd430f3c3760c0eccef6619d28a6d9e3729e5",
+      "clean_checkout_SHA256": "e02ce8c3c515d36665c44fbeed8dd430f3c3760c0eccef6619d28a6d9e3729e5",
+      "previous9e48016_SHA256": "e02ce8c3c515d36665c44fbeed8dd430f3c3760c0eccef6619d28a6d9e3729e5",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "scripts/read_lab_cuvette_project_v1_data.py",
+      "freeze_commit_SHA256": "8847a205a917654b0652a3be7ee0b57c4d6a749c07e1d778422af41e29e399b7",
+      "development_SHA256": "8847a205a917654b0652a3be7ee0b57c4d6a749c07e1d778422af41e29e399b7",
+      "clean_checkout_SHA256": "8847a205a917654b0652a3be7ee0b57c4d6a749c07e1d778422af41e29e399b7",
+      "previous9e48016_SHA256": "8847a205a917654b0652a3be7ee0b57c4d6a749c07e1d778422af41e29e399b7",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "freeze_commit_SHA256": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+      "development_SHA256": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+      "clean_checkout_SHA256": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+      "previous9e48016_SHA256": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+      "all_current_copies_match": true,
+      "unchanged_from_9e48016": true
+    }
+  ],
+  "cpu_evidence": {
+    "previous_actual_test_commit": "b3765fcea3f3e24b75fb42eb5e3ef6ed8c5795e6",
+    "previous_distinct_passed": 527,
+    "previous_full_suite_transferred_as_current_pass": false,
+    "unchanged_monitored_files": 39,
+    "changed_monitored_files": [
+      {
+        "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+        "tested_b376_SHA256": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+        "current_SHA256": "307b52191e53ba79629b9bd108012f6fb90c98d427339f057b91556d5fcc42f5",
+        "clean_checkout_SHA256": "307b52191e53ba79629b9bd108012f6fb90c98d427339f057b91556d5fcc42f5"
+      },
+      {
+        "path": "controllers/lab_cuvette_project_v1_1_controller.py",
+        "tested_b376_SHA256": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+        "current_SHA256": "a8c60ddd21df15322788fbfe4c6f445674643366c5845fcb0eca3f96add3b011",
+        "clean_checkout_SHA256": "a8c60ddd21df15322788fbfe4c6f445674643366c5845fcb0eca3f96add3b011"
+      },
+      {
+        "path": "tests/test_lab_cuvette_project_v1_1_teacher_grasp_orientation.py",
+        "tested_b376_SHA256": "632004a6768dcecee0d8efb47a4a6a88052cd3797a0fa8f3b3d565bcf23cc8c9",
+        "current_SHA256": "630a19c511be8dfde082426f4b96834f38eda3ab4e046a92edac80a22c16523e",
+        "clean_checkout_SHA256": "630a19c511be8dfde082426f4b96834f38eda3ab4e046a92edac80a22c16523e"
+      },
+      {
+        "path": "tests/test_lab_cuvette_project_v1_1_teacher_near_contact_close.py",
+        "tested_b376_SHA256": "98c6f9432e20e8ce21c4f7ec33cd0a319dc8a4b2fa99940cf363d38f9bd3d5ba",
+        "current_SHA256": "5a1f3a2994d2d5e5f229e257b5f08a7025cb9f2a027829beef1e57e67024de71",
+        "clean_checkout_SHA256": "5a1f3a2994d2d5e5f229e257b5f08a7025cb9f2a027829beef1e57e67024de71"
+      }
+    ],
+    "why_old_full_count_is_not_current": "Teacher source, two teacher tests and version labels changed; prior527 proof remains historical evidence only.",
+    "current_root_focused_test_count_reported": 94,
+    "root_focused_source": "docs/lab_cuvette_loading/Project_v1_1/teacher_extract_axis_v4.md",
+    "root_focused_source_SHA256": "7eab5011418b05346d03e3a87fbb17f460c94e8919f73be712f2a4ba15c9cde2",
+    "root_focused_test_execution_observed_by_this_reviewer": false,
+    "CI_current_status": "Success",
+    "full_suite_rerun_by_this_reviewer": false
+  },
+  "github_ci": {
+    "workflow": "CPU contracts",
+    "run_number": 22,
+    "run_ID": 40396175929,
+    "url": "https://github.com/zez2001/LabSim/actions/runs/40396175929",
+    "commit_url": "https://github.com/zez2001/LabSim/commit/109e637bcb264458ffc231f4e052e60ff6764242",
+    "status": "Success",
+    "total_duration_s": 50,
+    "jobs": [
+      {
+        "name": "contracts",
+        "duration_s": 43
+      },
+      {
+        "name": "normal-readers",
+        "duration_s": 47
+      }
+    ],
+    "method": "Anonymous public GitHub Actions run and commit pages read during this audit",
+    "raw_job_logs_not_read": true,
+    "physical_simulation_test": false
+  },
+  "assets": {
+    "repository": "Txie000/SLAI-Labsim",
+    "revision": "bb880f098180c291f6f65995f969d48047207067",
+    "lock_path": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+    "lock_SHA256": "054bcdd8fff283a877fc2e2da897e55aaa53bc63935cdca1f3c2504b68e03beb",
+    "root_clean_and_previous_lock_bytes_identical": true,
+    "previous_actual_cache_SHA_check": {
+      "proof": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_freeze_9e48016.json",
+      "proof_SHA256": "d4ec6fda50ce465c4db9a5429bb7bdba1c576b5ebe398dc5cfc4dd3392b8fe56",
+      "verified_files": 83,
+      "all_previous_checks_match": true,
+      "checked_at_utc": "2026-10-26T20:11:45.898776+00:00"
+    },
+    "current_launch_uses_same_pinned_asset_root": true,
+    "asset_git_diff_9e_to_109_empty": true,
+    "cache_files_rehashed_this_audit": false,
+    "historical_source_assets_rehashed_this_audit": false,
+    "download_performed": false,
+    "interpretation": "Reuses identified83-file prior cached-byte proof and unchanged lock; no new download or claim of a fresh cache-byte hash pass."
+  },
+  "new_physical_AB": {
+    "run_id": "teacher_lateral_hold_01",
+    "observed_PID": 395840,
+    "PID_exists": true,
+    "actual_process_cwd_matches_clean": true,
+    "process_exit_present": false,
+    "process_exit_proof": null,
+    "status": "RUNNING_NOT_CLOSED",
+    "physical_pass": null,
+    "task_success": null,
+    "actual_execution_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+    "frozen_scene_sha256": "3c5077c5325f4149933af13c11ea9931efa300ebc72cbeed446bdabb9577fbe7",
+    "old_9e_fingerprint": "984ac5489470ce5063741702ae91d1ba1e0ee4a75f63ae1c3515b6e0f5c9a09c",
+    "different_fingerprint_must_not_be_merged_as_same_frozen_collection": true,
+    "H5_opened": false
+  },
+  "reviewer_modified_runtime": false,
+  "GPU_started_by_reviewer": false,
+  "provider_API_calls": 0,
+  "checkout_modified_by_reviewer": false
+}

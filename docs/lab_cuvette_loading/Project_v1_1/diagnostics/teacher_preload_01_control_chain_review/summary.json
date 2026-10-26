@@ -1,0 +1,677 @@
+{
+  "schema": "labsim.Project_v1_1.teacher_preload_control_chain_review.v1",
+  "checked_at_utc": "2026-10-26T20:29:22.149205+00:00",
+  "actual_runtime_commit": "9e48016412907385d1a8c9e40860139f3d730764",
+  "reviewed_source_basis": "Frozen9e48016 Git blobs; root may independently edit a later teacher version during this read-only review.",
+  "source_SHA256": {
+    "controllers/lab_cuvette_env_v1_controller.py": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb",
+    "controllers/lab_cuvette_project_v1_1_controller.py": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+    "demos/lab_cuvette_project_v1_1/probes.py": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+    "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+    "tasks/lab_cuvette_loading_project_v1_1.py": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6"
+  },
+  "closed_proofs": {
+    "teacher_preload_01": {
+      "process_exited": true,
+      "exit_code": 0,
+      "PID": 383109,
+      "PID_gone": true
+    },
+    "grasp_transport_04": {
+      "process_exited": true,
+      "exit_code": 0,
+      "PID": 379613,
+      "PID_gone": true
+    }
+  },
+  "confirmed": {
+    "extract_orientation_feedback": false,
+    "EXTRACT_requested_quaternion_max_change_rad": 0.0,
+    "actual_parent_feedback_CPU_replay_count": 31,
+    "CPU_replay_maximum_XY_residual_m": 0.0,
+    "XY_feedback_gain": 0.15,
+    "XY_step_limit_m": 2e-05,
+    "XY_restarts_from_anchor_each_tick": true,
+    "first_teacher_logical_latch_m": 0.01041846341854427,
+    "final_helper_applied_m": 0.01028513008521093,
+    "force_feedback_close_times_s": [
+      18.733333333333334,
+      18.75,
+      18.766666666666666,
+      19.533333333333335
+    ],
+    "maximum_positive_applied_opening_step_m": 0.0,
+    "explicit_opening_ticks": 0,
+    "release_slew_ticks": 0,
+    "contact_loss_recovery_ticks": 0,
+    "effort_cap_values_N": [
+      8.0
+    ],
+    "force_reference_values_m": [
+      0.01041846341854427
+    ]
+  },
+  "generic": {
+    "close_request_m": 0.009,
+    "close_duration_s": 3.0,
+    "effort_cap_N": 5.0,
+    "first_freeze_t_s": 21.133333333333333,
+    "first_frozen_applied_m": 0.009394443937804961,
+    "first_freeze_after_control_force_N": [
+      1.0003352165222168,
+      1.667518138885498
+    ],
+    "first_lift_start_s": 21.15,
+    "first_two_lift_world_deltas": [
+      [
+        0.0,
+        0.0,
+        0.04
+      ],
+      [
+        0.0,
+        0.0,
+        0.04
+      ]
+    ],
+    "additional_force_feedback_ticks": 0,
+    "reference_caveat": "Raw audit found~0.31075deg initial lift cup reorientation. Sustained-grasp scorer reference21.220833s follows lift21.15s by~70.8ms; later micrometre drift cannot exclude early movement. Do not change historical reference or labels."
+  },
+  "physical_evidence_reused": {
+    "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_orientation_review/summary.json",
+    "SHA256": "d2a8928da908c1d9b44a4078d354830c4ed5b2e3388b0b9e5eb53b6a3f3ad11c",
+    "preload_first_200um_crossing": {
+      "run": "teacher_preload_01",
+      "t_s": 19.533333333333335,
+      "t_from_EXTRACT_s": 0.05000000000000071,
+      "cup_world_change_deg": 0.3320763299743624,
+      "hand_actual_change_deg": 0.0008286613200997438,
+      "TCP_actual_change_deg": 0.0008286613200997055,
+      "command_FK_TCP_change_deg": 0.0001169589035359303,
+      "cup_world_rotation_vector_deg": [
+        0.003242832536702555,
+        -0.27416764439738983,
+        -0.18734000035221243
+      ],
+      "hand_world_rotation_vector_deg": [
+        0.000578053235343647,
+        0.0004149511616375093,
+        -0.00042467584578578734
+      ],
+      "TCP_world_rotation_vector_deg": [
+        0.0005780532353436488,
+        0.0004149511616374302,
+        -0.00042467584578578744
+      ],
+      "command_FK_TCP_rotation_vector_deg": [
+        -8.158390924662198e-06,
+        9.180467026996634e-05,
+        -7.200505739508997e-05
+      ],
+      "actual_TCP_delta_m": [
+        -3.1304337398257998e-06,
+        1.7384262783470827e-06,
+        4.291374315568142e-06
+      ],
+      "actual_hand_delta_m": [
+        -2.4065375328063965e-06,
+        7.301568984985352e-07,
+        4.291534423828125e-06
+      ],
+      "cup_world_delta_m": [
+        0.00023312121629714966,
+        3.2082200050354004e-05,
+        -1.8715858459472656e-05
+      ],
+      "command_FK_TCP_delta_m": [
+        -2.6568809635973967e-06,
+        -4.6918053736577647e-07,
+        9.329475710306845e-06
+      ],
+      "cup_actual_tilt_deg": 0.020885024138490645,
+      "finger_contact_N": [
+        0.18518631160259247,
+        0.2441074103116989
+      ],
+      "applied_total_opening_m": 0.010318463418544269,
+      "source_gap_m": 3.381079747288851e-07,
+      "environment_vertical_force_N": 0.16493746638178203,
+      "bottom_drift_from_scorer_m": 0.0002474903569114371,
+      "anchor_drift_from_scorer_m": 4.096440731307533e-05,
+      "rotation_lever_norm_m": 0.0002637251993605457,
+      "bottom_delta_in_hand_m": [
+        3.015758278150873e-05,
+        0.0002444649431784712,
+        2.4060102278955497e-05
+      ],
+      "rotation_lever_delta_in_hand_m": [
+        -2.485356753873043e-06,
+        -0.0002637123285161193,
+        -7.820282424061964e-07
+      ],
+      "anchor_delta_in_hand_m": [
+        2.7672226027635687e-05,
+        -1.924738533764809e-05,
+        2.32780740365493e-05
+      ],
+      "anchor_axial_signed_m": -2.3369376191900933e-05
+    },
+    "preload_maxima": {
+      "cup_world_change_deg": {
+        "max_value": 1.7527624149268737,
+        "sample": {
+          "run": "teacher_preload_01",
+          "t_s": 20.008333333333333,
+          "t_from_EXTRACT_s": 0.5249999999999986,
+          "cup_world_change_deg": 1.7527624149268737,
+          "hand_actual_change_deg": 0.0037935555464254788,
+          "TCP_actual_change_deg": 0.0037935555464257043,
+          "command_FK_TCP_change_deg": 0.010343264790811015,
+          "cup_world_rotation_vector_deg": [
+            1.7265136992331125,
+            -0.3021798091877222,
+            0.003727259040076649
+          ],
+          "hand_world_rotation_vector_deg": [
+            0.003300652642658088,
+            0.0018268830973399836,
+            -0.00039906636663988664
+          ],
+          "TCP_world_rotation_vector_deg": [
+            0.0033006526426583873,
+            0.001826883097339911,
+            -0.0003990663666398866
+          ],
+          "command_FK_TCP_rotation_vector_deg": [
+            -0.009419325659208978,
+            -0.0037642486638494975,
+            0.0020223408850402647
+          ],
+          "actual_TCP_delta_m": [
+            -7.770291608963364e-06,
+            -1.338784634849488e-05,
+            0.0021173954592383915
+          ],
+          "actual_hand_delta_m": [
+            -4.582107067108154e-06,
+            -1.9147992134094238e-05,
+            0.0021173954010009766
+          ],
+          "cup_world_delta_m": [
+            0.000250987708568573,
+            0.0014992952346801758,
+            0.0019111037254333496
+          ],
+          "command_FK_TCP_delta_m": [
+            6.0656788902491154e-06,
+            -3.742529299363695e-05,
+            0.0023217019512752346
+          ],
+          "cup_actual_tilt_deg": 1.7246612554053733,
+          "finger_contact_N": [
+            0.33227720856666565,
+            0.33309149742126465
+          ],
+          "applied_total_opening_m": 0.01028513008521093,
+          "source_gap_m": 0.0017838705263047983,
+          "environment_vertical_force_N": 0.0,
+          "bottom_drift_from_scorer_m": 0.0015475023529530534,
+          "anchor_drift_from_scorer_m": 0.00024623177133919826,
+          "rotation_lever_norm_m": 0.0016198583816492628,
+          "bottom_delta_in_hand_m": [
+            0.001509892999659314,
+            0.00026773662491347966,
+            0.00020809555895062726
+          ],
+          "rotation_lever_delta_in_hand_m": [
+            -0.0015934508306458385,
+            -0.00029043658810539764,
+            2.2410158481180054e-05
+          ],
+          "anchor_delta_in_hand_m": [
+            -8.355783098652455e-05,
+            -2.2699963191917982e-05,
+            0.0002305057174318073
+          ],
+          "anchor_axial_signed_m": -0.00023066590601157136
+        }
+      },
+      "hand_actual_change_deg": {
+        "max_value": 0.003817871243634707,
+        "sample": {
+          "run": "teacher_preload_01",
+          "t_s": 19.875,
+          "t_from_EXTRACT_s": 0.3916666666666657,
+          "cup_world_change_deg": 1.2983233988213534,
+          "hand_actual_change_deg": 0.003817871243634707,
+          "TCP_actual_change_deg": 0.0038178712436330187,
+          "command_FK_TCP_change_deg": 0.007245093412165728,
+          "cup_world_rotation_vector_deg": [
+            1.2627802425764247,
+            -0.3016894257009825,
+            0.0036328096382916616
+          ],
+          "hand_world_rotation_vector_deg": [
+            0.0031406209692100774,
+            0.002105302232085183,
+            -0.000529474524701543
+          ],
+          "TCP_world_rotation_vector_deg": [
+            0.0031406209692103173,
+            0.002105302232084963,
+            -0.0005294745246888208
+          ],
+          "command_FK_TCP_rotation_vector_deg": [
+            -0.00676150120681659,
+            -0.002056955004968397,
+            0.0015944955593417257
+          ],
+          "actual_TCP_delta_m": [
+            -1.1012833868964678e-05,
+            -1.3473625450344251e-05,
+            0.0011510844257592856
+          ],
+          "actual_hand_delta_m": [
+            -7.338821887969971e-06,
+            -1.895427703857422e-05,
+            0.0011510848999023438
+          ],
+          "cup_world_delta_m": [
+            0.00024756044149398804,
+            0.0011101961135864258,
+            0.0009921789169311523
+          ],
+          "command_FK_TCP_delta_m": [
+            2.6628401278427916e-07,
+            -3.310116609067659e-05,
+            0.001304729306465191
+          ],
+          "cup_actual_tilt_deg": 1.261165285749139,
+          "finger_contact_N": [
+            0.32291460037231445,
+            0.32870540022850037
+          ],
+          "applied_total_opening_m": 0.01028513008521093,
+          "source_gap_m": 0.0009037732320447134,
+          "environment_vertical_force_N": 0.0,
+          "bottom_drift_from_scorer_m": 0.0011637521372769122,
+          "anchor_drift_from_scorer_m": 0.00017885165764426237,
+          "rotation_lever_norm_m": 0.001200480865027437,
+          "bottom_delta_in_hand_m": [
+            0.0011210523697755075,
+            0.00026794905021096306,
+            0.00016051145668874445
+          ],
+          "rotation_lever_delta_in_hand_m": [
+            -0.001164776526429005,
+            -0.0002903768080435242,
+            1.1456881227410454e-05
+          ],
+          "anchor_delta_in_hand_m": [
+            -4.372415665349744e-05,
+            -2.242775783256113e-05,
+            0.0001719683379161549
+          ],
+          "anchor_axial_signed_m": -0.00017210887650858465
+        }
+      },
+      "TCP_actual_change_deg": {
+        "max_value": 0.0038178712436330187,
+        "sample": {
+          "run": "teacher_preload_01",
+          "t_s": 19.875,
+          "t_from_EXTRACT_s": 0.3916666666666657,
+          "cup_world_change_deg": 1.2983233988213534,
+          "hand_actual_change_deg": 0.003817871243634707,
+          "TCP_actual_change_deg": 0.0038178712436330187,
+          "command_FK_TCP_change_deg": 0.007245093412165728,
+          "cup_world_rotation_vector_deg": [
+            1.2627802425764247,
+            -0.3016894257009825,
+            0.0036328096382916616
+          ],
+          "hand_world_rotation_vector_deg": [
+            0.0031406209692100774,
+            0.002105302232085183,
+            -0.000529474524701543
+          ],
+          "TCP_world_rotation_vector_deg": [
+            0.0031406209692103173,
+            0.002105302232084963,
+            -0.0005294745246888208
+          ],
+          "command_FK_TCP_rotation_vector_deg": [
+            -0.00676150120681659,
+            -0.002056955004968397,
+            0.0015944955593417257
+          ],
+          "actual_TCP_delta_m": [
+            -1.1012833868964678e-05,
+            -1.3473625450344251e-05,
+            0.0011510844257592856
+          ],
+          "actual_hand_delta_m": [
+            -7.338821887969971e-06,
+            -1.895427703857422e-05,
+            0.0011510848999023438
+          ],
+          "cup_world_delta_m": [
+            0.00024756044149398804,
+            0.0011101961135864258,
+            0.0009921789169311523
+          ],
+          "command_FK_TCP_delta_m": [
+            2.6628401278427916e-07,
+            -3.310116609067659e-05,
+            0.001304729306465191
+          ],
+          "cup_actual_tilt_deg": 1.261165285749139,
+          "finger_contact_N": [
+            0.32291460037231445,
+            0.32870540022850037
+          ],
+          "applied_total_opening_m": 0.01028513008521093,
+          "source_gap_m": 0.0009037732320447134,
+          "environment_vertical_force_N": 0.0,
+          "bottom_drift_from_scorer_m": 0.0011637521372769122,
+          "anchor_drift_from_scorer_m": 0.00017885165764426237,
+          "rotation_lever_norm_m": 0.001200480865027437,
+          "bottom_delta_in_hand_m": [
+            0.0011210523697755075,
+            0.00026794905021096306,
+            0.00016051145668874445
+          ],
+          "rotation_lever_delta_in_hand_m": [
+            -0.001164776526429005,
+            -0.0002903768080435242,
+            1.1456881227410454e-05
+          ],
+          "anchor_delta_in_hand_m": [
+            -4.372415665349744e-05,
+            -2.242775783256113e-05,
+            0.0001719683379161549
+          ],
+          "anchor_axial_signed_m": -0.00017210887650858465
+        }
+      },
+      "command_FK_TCP_change_deg": {
+        "max_value": 0.010343264790811015,
+        "sample": {
+          "run": "teacher_preload_01",
+          "t_s": 20.004166666666666,
+          "t_from_EXTRACT_s": 0.5208333333333321,
+          "cup_world_change_deg": 1.675146748153391,
+          "hand_actual_change_deg": 0.003732629946625068,
+          "TCP_actual_change_deg": 0.003732629946626579,
+          "command_FK_TCP_change_deg": 0.010343264790811015,
+          "cup_world_rotation_vector_deg": [
+            1.6477067434935653,
+            -0.3019468639174741,
+            0.002684523256251368
+          ],
+          "hand_world_rotation_vector_deg": [
+            0.003255697829648958,
+            0.0017925581447074462,
+            -0.0003459671347170464
+          ],
+          "TCP_world_rotation_vector_deg": [
+            0.003255697829649398,
+            0.0017925581447073378,
+            -0.0003459671347297685
+          ],
+          "command_FK_TCP_rotation_vector_deg": [
+            -0.009419325659208978,
+            -0.0037642486638494975,
+            0.0020223408850402647
+          ],
+          "actual_TCP_delta_m": [
+            -7.285743881244033e-06,
+            -1.340662599658149e-05,
+            0.002080440589179111
+          ],
+          "actual_hand_delta_m": [
+            -4.157423973083496e-06,
+            -1.9088387489318848e-05,
+            0.0020804405212402344
+          ],
+          "cup_world_delta_m": [
+            0.0002512633800506592,
+            0.0014315992593765259,
+            0.0018787980079650879
+          ],
+          "command_FK_TCP_delta_m": [
+            6.0656788902491154e-06,
+            -3.742529299363695e-05,
+            0.0023217019512752346
+          ],
+          "cup_actual_tilt_deg": 1.6458831202253756,
+          "finger_contact_N": [
+            0.3380338251590729,
+            0.3353910446166992
+          ],
+          "applied_total_opening_m": 0.01028513008521093,
+          "source_gap_m": 0.0017581755251480091,
+          "environment_vertical_force_N": 0.0,
+          "bottom_drift_from_scorer_m": 0.0014808967640806486,
+          "anchor_drift_from_scorer_m": 0.0002381302520982904,
+          "rotation_lever_norm_m": 0.001548208351286931,
+          "bottom_delta_in_hand_m": [
+            0.0014422595404855573,
+            0.00026751891451717803,
+            0.00020341158796507997
+          ],
+          "rotation_lever_delta_in_hand_m": [
+            -0.0015206263010305039,
+            -0.0002902283121372932,
+            2.0304640918338e-05
+          ],
+          "anchor_delta_in_hand_m": [
+            -7.836676054494653e-05,
+            -2.2709397620115153e-05,
+            0.00022371622888341797
+          ],
+          "anchor_axial_signed_m": -0.00022387408885466236
+        }
+      },
+      "bottom_drift_from_scorer_m": {
+        "max_value": 0.0015476109960088594,
+        "sample": {
+          "run": "teacher_preload_01",
+          "t_s": 20.0125,
+          "t_from_EXTRACT_s": 0.529166666666665,
+          "cup_world_change_deg": 1.752287763876003,
+          "hand_actual_change_deg": 0.003349292943545655,
+          "TCP_actual_change_deg": 0.0033492929435462314,
+          "command_FK_TCP_change_deg": 0.010343264790811015,
+          "cup_world_rotation_vector_deg": [
+            1.7259922352169543,
+            -0.3024108116752236,
+            0.0033033895134565536
+          ],
+          "hand_world_rotation_vector_deg": [
+            0.002823621502924643,
+            0.0017448766830898633,
+            -0.0004475826077000917
+          ],
+          "TCP_world_rotation_vector_deg": [
+            0.002823621502924303,
+            0.0017448766830898885,
+            -0.00044758260770645295
+          ],
+          "command_FK_TCP_rotation_vector_deg": [
+            -0.009419325659208978,
+            -0.0037642486638494975,
+            0.0020223408850402647
+          ],
+          "actual_TCP_delta_m": [
+            -7.805940974298098e-06,
+            -1.5084760448758061e-05,
+            0.0021488664172829575
+          ],
+          "actual_hand_delta_m": [
+            -4.760921001434326e-06,
+            -2.0012259483337402e-05,
+            0.002148866653442383
+          ],
+          "cup_world_delta_m": [
+            0.0002512708306312561,
+            0.0014972090721130371,
+            0.001942455768585205
+          ],
+          "command_FK_TCP_delta_m": [
+            6.0656788902491154e-06,
+            -3.742529299363695e-05,
+            0.0023217019512752346
+          ],
+          "cup_actual_tilt_deg": 1.724147502269297,
+          "finger_contact_N": [
+            0.3333906829357147,
+            0.3331790268421173
+          ],
+          "applied_total_opening_m": 0.01028513008521093,
+          "source_gap_m": 0.001815248155555449,
+          "environment_vertical_force_N": 0.0,
+          "bottom_drift_from_scorer_m": 0.0015476109960088594,
+          "anchor_drift_from_scorer_m": 0.00024628977933312127,
+          "rotation_lever_norm_m": 0.001619844267544788,
+          "bottom_delta_in_hand_m": [
+            0.0015099468073568809,
+            0.00026797789428750795,
+            0.00020820250261111006
+          ],
+          "rotation_lever_delta_in_hand_m": [
+            -0.0015934105339945718,
+            -0.0002905790069883564,
+            2.240897031335204e-05
+          ],
+          "anchor_delta_in_hand_m": [
+            -8.346372663769097e-05,
+            -2.260111270084846e-05,
+            0.0002306114729244621
+          ],
+          "anchor_axial_signed_m": -0.00023077107629875885
+        }
+      },
+      "anchor_drift_from_scorer_m": {
+        "max_value": 0.00024628977933312127,
+        "sample": {
+          "run": "teacher_preload_01",
+          "t_s": 20.0125,
+          "t_from_EXTRACT_s": 0.529166666666665,
+          "cup_world_change_deg": 1.752287763876003,
+          "hand_actual_change_deg": 0.003349292943545655,
+          "TCP_actual_change_deg": 0.0033492929435462314,
+          "command_FK_TCP_change_deg": 0.010343264790811015,
+          "cup_world_rotation_vector_deg": [
+            1.7259922352169543,
+            -0.3024108116752236,
+            0.0033033895134565536
+          ],
+          "hand_world_rotation_vector_deg": [
+            0.002823621502924643,
+            0.0017448766830898633,
+            -0.0004475826077000917
+          ],
+          "TCP_world_rotation_vector_deg": [
+            0.002823621502924303,
+            0.0017448766830898885,
+            -0.00044758260770645295
+          ],
+          "command_FK_TCP_rotation_vector_deg": [
+            -0.009419325659208978,
+            -0.0037642486638494975,
+            0.0020223408850402647
+          ],
+          "actual_TCP_delta_m": [
+            -7.805940974298098e-06,
+            -1.5084760448758061e-05,
+            0.0021488664172829575
+          ],
+          "actual_hand_delta_m": [
+            -4.760921001434326e-06,
+            -2.0012259483337402e-05,
+            0.002148866653442383
+          ],
+          "cup_world_delta_m": [
+            0.0002512708306312561,
+            0.0014972090721130371,
+            0.001942455768585205
+          ],
+          "command_FK_TCP_delta_m": [
+            6.0656788902491154e-06,
+            -3.742529299363695e-05,
+            0.0023217019512752346
+          ],
+          "cup_actual_tilt_deg": 1.724147502269297,
+          "finger_contact_N": [
+            0.3333906829357147,
+            0.3331790268421173
+          ],
+          "applied_total_opening_m": 0.01028513008521093,
+          "source_gap_m": 0.001815248155555449,
+          "environment_vertical_force_N": 0.0,
+          "bottom_drift_from_scorer_m": 0.0015476109960088594,
+          "anchor_drift_from_scorer_m": 0.00024628977933312127,
+          "rotation_lever_norm_m": 0.001619844267544788,
+          "bottom_delta_in_hand_m": [
+            0.0015099468073568809,
+            0.00026797789428750795,
+            0.00020820250261111006
+          ],
+          "rotation_lever_delta_in_hand_m": [
+            -0.0015934105339945718,
+            -0.0002905790069883564,
+            2.240897031335204e-05
+          ],
+          "anchor_delta_in_hand_m": [
+            -8.346372663769097e-05,
+            -2.260111270084846e-05,
+            0.0002306114729244621
+          ],
+          "anchor_axial_signed_m": -0.00023077107629875885
+        }
+      }
+    },
+    "full_raw_not_rescanned": true
+  },
+  "excluded": [
+    "No active finger opening or effort-cap reduction in the failed held interval.",
+    "No helper release mode or loss-recontact reset in that interval.",
+    "No EXTRACT commanded orientation correction; target quaternion constant.",
+    "Actual hand rotation is far smaller than cup reorientation; no evidence supports EE truth reorientation as the driver."
+  ],
+  "proposal": {
+    "single_factor": "Disable source EXTRACT XY feedback only in the new teacher; keep fixed anchor XY until extraction completes.",
+    "keep": [
+      "orientation=False",
+      "gripper helper and opening/effort schedule",
+      "Z motion curve and timing",
+      "all subsequent phases",
+      "geometry/physics/friction/gains",
+      "original scorer and200um/reference-window definitions"
+    ],
+    "rationale": "Teacher adds source-cup-truth lateral corrections while bottom is source-supported. Generic first two lifts are pure worldZ. Actual parent function CPU replay reproduces all current XY commands; identical inputs with desired_cup_xy=None keep anchor XY.",
+    "causality_proven": false,
+    "temporal_caveat": "The20um correction at19.533s is a response to already observed cup movement, not established as the initiating cause. Only~2um lateral corrections precede first crossing.",
+    "test": "New independent complete teacher run; compare same-source-handoff reference, early relative drift, cup/hand rotations, support and subsequent workflow. Keep old failed labels. No physics outcome is inferred by CPU replay.",
+    "reject_if": "If early drift persists, this change is not sufficient. Inspect source support/contact torque and weak-grip axial slip rather than relaxing the scorer."
+  },
+  "unknown": [
+    "Whether initial2um lateral perturbation is enough to trigger or amplify the contact transition.",
+    "Whether source/support contact torque or drive response dominates initial rocking.",
+    "Whether axial slip remains after removing lateral source correction."
+  ],
+  "evidence_SHA256": {
+    "outputs/lab_cuvette_loading/Project_v1_1/teacher_preload_01/episode_0000/execution_trace.jsonl": "09fdbbffb245a0e4ca222e0367f57131ea3f17f2de6083c575708560d23cfb19",
+    "outputs/lab_cuvette_loading/Project_v1_1/teacher_preload_01/episode_0000/teacher_events.json": "c6e7c4ace52d669ac59a4264d257ee3c8f16381ba6fdc6ba0abbd73c58c26637",
+    "outputs/lab_cuvette_loading/Project_v1_1/teacher_preload_01/launch_config.yaml": "20e037b4d1a6319e81e71dbd4db277e571923ce0512b055514b6241ce44bad7b",
+    "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_04/episode_0000/execution_trace.jsonl": "509cf0babfbd17ccb2c2dc509b5eb7fa847058d1324324cdb5e5c04954ee4f3a",
+    "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_04/episode_0000/probe_actions.json": "e61b426850ebb138b18632471a3327db4ef506e43ffda202b3fd97ab0304aa54"
+  },
+  "reviewer_modified_runtime": false,
+  "GPU_started": false,
+  "provider_API_calls": 0,
+  "H5_opened": false,
+  "raw_or_labels_modified": false
+}

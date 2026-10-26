@@ -12,6 +12,20 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
         base=super().get_task_language()
         if self.cfg.env.task_type!='loading':
             return base
+        import math
+        try:
+            translation=[float(v) for v in self.cfg.robot.tcp_local_m]
+            quaternion=[float(v) for v in self.cfg.robot.tcp_quaternion_wxyz]
+        except (TypeError,ValueError) as error:
+            raise ValueError('Static robot TCP calibration must contain numeric vectors') from error
+        if len(translation)!=3 or len(quaternion)!=4 or not all(math.isfinite(v) for v in translation+quaternion):
+            raise ValueError('Static robot TCP calibration requires finite translation3 and quaternion4')
+        if abs(math.sqrt(sum(v*v for v in quaternion))-1)>1e-6:
+            raise ValueError('Static robot TCP quaternion must be unit length; it is not silently normalized')
+        tcp_frame=str(self.cfg.robot.tcp_frame)
+        if not tcp_frame.strip():
+            raise ValueError('Static robot TCP frame name must not be empty')
+        frame_distance_mm=1000*math.sqrt(sum(v*v for v in translation))
         depth_mm=1000*float(self.cfg.geometry.target_depth_m)
         height_mm=1000*float(self.cfg.vessel.height_m)
         exposed_mm=height_mm-depth_mm
@@ -20,7 +34,13 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
         return (base+role+
             f' Nominal task geometry: loading depth {depth_mm:g} mm, cuvette height {height_mm:g} mm, '
             f'and {exposed_mm:g} mm of the cuvette remaining above the seat entrance at the nominal loaded pose. '
-            'These are static configured task goals, not measurements of the current vessel pose, insertion depth or support.')
+            'These are static configured task goals, not measurements of the current vessel pose, insertion depth or support.'
+            f' Static robot calibration: TCPpose is the world pose of frame {tcp_frame}, not the panda_hand/palm origin. '
+            f'The fixed transform from {tcp_frame} coordinates into parent frame panda_hand has translation {translation} metres '
+            f'and quaternion {quaternion} in wxyz order. '
+            f'This {frame_distance_mm:g} mm frame-origin separation is not the whole-hand collision envelope. '
+            'Confirm clearance for the entire hand, fingers and held vessel in both camera views; '
+            'this fixed robot calibration provides no current object or obstacle pose, safe height or motion path.')
 
     def _reset(self,seed=None,options=None):
         observation,info=super()._reset(seed,options)

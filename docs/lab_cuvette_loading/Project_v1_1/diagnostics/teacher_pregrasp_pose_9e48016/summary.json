@@ -1,0 +1,577 @@
+{
+  "schema": "labsim.Project_v1_1.pregrasp_orientation_readonly.v1",
+  "checked_at_utc": "2026-10-26T20:37:34.653577+00:00",
+  "actual_closed_run": "teacher_preload_01",
+  "actual_runtime_commit": "9e48016412907385d1a8c9e40860139f3d730764",
+  "project_orientation": {
+    "gripper_yaw_deg": -90.0,
+    "euler_input_xyz_rad": [
+      3.141592653589793,
+      0.0,
+      -1.5707963267948966
+    ],
+    "Isaac_euler_default_extrinsic": true,
+    "composition_for_active_column_vectors": "Rz(gripper_yaw) @ Ry(0) @ Rx(pi)",
+    "equivalent_SciPy": "Rotation.from_euler('xyz',[pi,0,radians(gripper_yaw)])",
+    "ideal_quaternion_wxyz": [
+      4.329780281177467e-17,
+      0.7071067811865476,
+      -0.7071067811865475,
+      -4.329780281177466e-17
+    ],
+    "ideal_matrix_world_from_TCP": [
+      [
+        6.123233995736766e-17,
+        -1.0,
+        -1.2246467991473532e-16
+      ],
+      [
+        -1.0,
+        -6.123233995736766e-17,
+        -7.498798913309288e-33
+      ],
+      [
+        -0.0,
+        1.2246467991473532e-16,
+        -1.0
+      ]
+    ],
+    "installed_Isaac_matrix_function_extracted_and_compared_on_CPU": true,
+    "CPU_matrix_match_atol": 1e-14,
+    "source_functions": [
+      {
+        "logical_file": "demos/lab_cuvette_demo04/run.py",
+        "line": 77
+      },
+      {
+        "logical_file": "demos/lab_cuvette_demo04/plan_arm.py",
+        "line": 30
+      },
+      {
+        "logical_file": "IsaacSim/isaacsim.core.utils/rotations.py",
+        "function": "euler_to_rot_matrix",
+        "line": 148,
+        "end_line": 191,
+        "SHA256": "e5d4aae49c3de4306daaf3ff9d262e3c60d77811a334a68f2adf780abb883858"
+      }
+    ]
+  },
+  "pose_samples": [
+    {
+      "label": "last_APPROACH_action_entering_GRASP",
+      "t_s": 14.516666666666667,
+      "motion_source_phase": "APPROACH_SOURCE",
+      "teacher_phase_after_act": "GRASP",
+      "finger_forces_before_N": [
+        0.0,
+        0.0
+      ],
+      "nominal_TCP": {
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05649369106484887,
+        "tilt_Z_to_reference_deg": 0.054500090113238586,
+        "world_X_heading_deg": -90.01486474920603,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014864749206026318,
+        "local_Y_world_xyz": [
+          -0.9999996110016168,
+          0.000259810268323791,
+          -0.0008429087966901949
+        ],
+        "local_Z_world_xyz": [
+          0.0008430232086592386,
+          0.0004405728997104284,
+          -0.9999995476035926
+        ]
+      },
+      "actual_TCP_before_action": {
+        "quaternion_wxyz": [
+          -0.0004541709403027877,
+          0.7070149039721103,
+          -0.707198486274291,
+          0.00014248303779744836
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05653719329399539,
+        "tilt_Z_to_reference_deg": 0.05454518201002184,
+        "world_X_heading_deg": -90.01486473729585,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014864737295852137,
+        "local_Y_world_xyz": [
+          -0.9999996103015688,
+          0.00025981051978327206,
+          -0.0008437388247904331
+        ],
+        "local_Z_world_xyz": [
+          0.0008438532655558409,
+          0.0004406836701899609,
+          -0.999999546854682
+        ]
+      },
+      "cup": {
+        "quaternion_wxyz": [
+          0.7071090759613969,
+          4.6566123635023715e-10,
+          -9.313224728088945e-10,
+          0.7071044864042509
+        ],
+        "tilt_to_world_up_deg": 1.1931848135506793e-07,
+        "local_X_heading_world_deg": 89.99962811521358,
+        "nominal_flat_sidewall_normals_world_xyz": {
+          "plus_X": [
+            6.49061396107431e-06,
+            0.9999999999789361,
+            1.9756354450755674e-09
+          ],
+          "minus_X": [
+            -6.49061396107431e-06,
+            -0.9999999999789361,
+            -1.9756354450755674e-09
+          ],
+          "plus_Y": [
+            -0.9999999999789361,
+            6.49061396107431e-06,
+            -6.585380245312248e-10
+          ],
+          "minus_Y": [
+            0.9999999999789361,
+            -6.49061396107431e-06,
+            6.585380245312248e-10
+          ]
+        }
+      },
+      "hand_Y_vs_nearest_cup_pmY_wall_normal_deg": 0.05047446875500956,
+      "hand_minus_Z_vs_cup_Z_deg": 0.05454509616515709,
+      "simple_height_difference_across_nominal_width_um": 8.43738166753132
+    },
+    {
+      "label": "first_GRASP_action",
+      "t_s": 14.533333333333333,
+      "motion_source_phase": "GRASP",
+      "teacher_phase_after_act": "GRASP",
+      "finger_forces_before_N": [
+        0.0,
+        0.0
+      ],
+      "nominal_TCP": {
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05649369106484887,
+        "tilt_Z_to_reference_deg": 0.054500090113238586,
+        "world_X_heading_deg": -90.01486474920603,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014864749206026318,
+        "local_Y_world_xyz": [
+          -0.9999996110016168,
+          0.000259810268323791,
+          -0.0008429087966901949
+        ],
+        "local_Z_world_xyz": [
+          0.0008430232086592386,
+          0.0004405728997104284,
+          -0.9999995476035926
+        ]
+      },
+      "actual_TCP_before_action": {
+        "quaternion_wxyz": [
+          -0.0004538428919888734,
+          0.707014933903788,
+          -0.7071984565936229,
+          0.00014232093804389173
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.056495954621100235,
+        "tilt_Z_to_reference_deg": 0.05450375423187162,
+        "world_X_heading_deg": -90.0148599214215,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014859921421503941,
+        "local_Y_world_xyz": [
+          -0.9999996109081102,
+          0.0002597259635457752,
+          -0.0008430457000156284
+        ],
+        "local_Z_world_xyz": [
+          0.0008431600427094896,
+          0.000440449109113241,
+          -0.99999954754276
+        ]
+      },
+      "cup": {
+        "quaternion_wxyz": [
+          0.7071090759613969,
+          -4.656612363936052e-09,
+          -2.7939674183182633e-09,
+          0.7071044864042509
+        ],
+        "tilt_to_world_up_deg": 6.222890645055122e-07,
+        "local_X_heading_world_deg": 89.99962811521358,
+        "nominal_flat_sidewall_normals_world_xyz": {
+          "plus_X": [
+            6.49061396107431e-06,
+            0.9999999999789361,
+            -2.63414354910282e-09
+          ],
+          "minus_X": [
+            -6.49061396107431e-06,
+            -0.9999999999789361,
+            2.63414354910282e-09
+          ],
+          "plus_Y": [
+            -0.9999999999789361,
+            6.49061396107431e-06,
+            -1.053671952426677e-08
+          ],
+          "minus_Y": [
+            0.9999999999789361,
+            -6.49061396107431e-06,
+            1.053671952426677e-08
+          ]
+        }
+      },
+      "hand_Y_vs_nearest_cup_pmY_wall_normal_deg": 0.05043449821276886,
+      "hand_minus_Z_vs_cup_Z_deg": 0.05450328901705371,
+      "simple_height_difference_across_nominal_width_um": 8.430351626331282
+    },
+    {
+      "label": "last_saved_control_boundary_with_both_measured_forces_exactly_zero",
+      "t_s": 18.416666666666668,
+      "motion_source_phase": "GRASP",
+      "teacher_phase_after_act": "GRASP",
+      "finger_forces_before_N": [
+        0.0,
+        0.0
+      ],
+      "nominal_TCP": {
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05649369106484887,
+        "tilt_Z_to_reference_deg": 0.054500090113238586,
+        "world_X_heading_deg": -90.01486474920603,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014864749206026318,
+        "local_Y_world_xyz": [
+          -0.9999996110016168,
+          0.000259810268323791,
+          -0.0008429087966901949
+        ],
+        "local_Z_world_xyz": [
+          0.0008430232086592386,
+          0.0004405728997104284,
+          -0.9999995476035926
+        ]
+      },
+      "actual_TCP_before_action": {
+        "quaternion_wxyz": [
+          -0.0004540433591174117,
+          0.7070152318597803,
+          -0.7071981585031872,
+          0.0001427325825826683
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05651804623946203,
+        "tilt_Z_to_reference_deg": 0.054539801560124064,
+        "world_X_heading_deg": -90.01481162098374,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014811620983721241,
+        "local_Y_world_xyz": [
+          -0.9999996103963187,
+          0.00025888309134209075,
+          -0.000843911580763315
+        ],
+        "local_Z_world_xyz": [
+          0.0008440254748341307,
+          0.00044015070251984643,
+          -0.9999995469440759
+        ]
+      },
+      "cup": {
+        "quaternion_wxyz": [
+          0.7071090163571379,
+          -9.778886788622567e-09,
+          2.7939676537527647e-09,
+          0.7071045460088917
+        ],
+        "tilt_to_world_up_deg": 1.1654185893069369e-06,
+        "local_X_heading_world_deg": 89.99963777452815,
+        "nominal_flat_sidewall_normals_world_xyz": {
+          "plus_X": [
+            6.322027118255136e-06,
+            0.9999999999800159,
+            -1.7780670045040176e-08
+          ],
+          "minus_X": [
+            -6.322027118255136e-06,
+            -0.9999999999800159,
+            1.7780670045040176e-08
+          ],
+          "plus_Y": [
+            -0.9999999999800159,
+            6.322027118033091e-06,
+            -9.878223577600675e-09
+          ],
+          "minus_Y": [
+            0.9999999999800159,
+            -6.322027118033091e-06,
+            9.878223577600675e-09
+          ]
+        }
+      },
+      "hand_Y_vs_nearest_cup_pmY_wall_normal_deg": 0.05047096000124104,
+      "hand_minus_Z_vs_cup_Z_deg": 0.05453977080438267,
+      "simple_height_difference_across_nominal_width_um": 8.439016980528647
+    },
+    {
+      "label": "first_saved_control_boundary_above_contact_threshold_one_or_both_sides",
+      "t_s": 18.6,
+      "motion_source_phase": "GRASP",
+      "teacher_phase_after_act": "GRASP",
+      "finger_forces_before_N": [
+        0.0,
+        0.030338799580931664
+      ],
+      "nominal_TCP": {
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05649369106484887,
+        "tilt_Z_to_reference_deg": 0.054500090113238586,
+        "world_X_heading_deg": -90.01486474920603,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014864749206026318,
+        "local_Y_world_xyz": [
+          -0.9999996110016168,
+          0.000259810268323791,
+          -0.0008429087966901949
+        ],
+        "local_Z_world_xyz": [
+          0.0008430232086592386,
+          0.0004405728997104284,
+          -0.9999995476035926
+        ]
+      },
+      "actual_TCP_before_action": {
+        "quaternion_wxyz": [
+          -0.0004533998736065121,
+          0.7070151128693792,
+          -0.707198277931407,
+          0.00014245597983936095
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05644607251251177,
+        "tilt_Z_to_reference_deg": 0.05445995261371853,
+        "world_X_heading_deg": -90.01483096861763,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014830968617616236,
+        "local_Y_world_xyz": [
+          -0.9999996114063622,
+          0.0002592197611856908,
+          -0.0008426103728725955
+        ],
+        "local_Z_world_xyz": [
+          0.0008427242809877734,
+          0.00043963187837888623,
+          -0.999999548269697
+        ]
+      },
+      "cup": {
+        "quaternion_wxyz": [
+          0.7070995171674169,
+          0.001507014544143619,
+          0.0015307115820586273,
+          0.7071107824455956
+        ],
+        "tilt_to_world_up_deg": 0.2461499741739874,
+        "local_X_heading_world_deg": 90.00091693057519,
+        "nominal_flat_sidewall_normals_world_xyz": {
+          "plus_X": [
+            -1.6003457539437438e-05,
+            0.9999999993115442,
+            -3.3478374259882614e-05
+          ],
+          "minus_X": [
+            1.6003457539437438e-05,
+            -0.9999999993115442,
+            3.3478374259882614e-05
+          ],
+          "plus_Y": [
+            -0.999990772093076,
+            -1.585948731702702e-05,
+            0.004295983842032478
+          ],
+          "minus_Y": [
+            0.999990772093076,
+            1.585948731702702e-05,
+            -0.004295983842032478
+          ]
+        }
+      },
+      "hand_Y_vs_nearest_cup_pmY_wall_normal_deg": 0.2948420753948905,
+      "hand_minus_Z_vs_cup_Z_deg": 0.2956725921044887,
+      "simple_height_difference_across_nominal_width_um": 51.38575539711904
+    },
+    {
+      "label": "first_saved_bilateral_freeze",
+      "t_s": 18.633333333333333,
+      "motion_source_phase": "GRASP",
+      "teacher_phase_after_act": "GRASP",
+      "finger_forces_before_N": [
+        0.08220940828323364,
+        0.153518408536911
+      ],
+      "nominal_TCP": {
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05649369106484887,
+        "tilt_Z_to_reference_deg": 0.054500090113238586,
+        "world_X_heading_deg": -90.01486474920603,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014864749206026318,
+        "local_Y_world_xyz": [
+          -0.9999996110016168,
+          0.000259810268323791,
+          -0.0008429087966901949
+        ],
+        "local_Z_world_xyz": [
+          0.0008430232086592386,
+          0.0004405728997104284,
+          -0.9999995476035926
+        ]
+      },
+      "actual_TCP_before_action": {
+        "quaternion_wxyz": [
+          -0.0004541211245351697,
+          0.707014993421954,
+          -0.7071983969024842,
+          0.00014236964328371475
+        ],
+        "geodesic_error_from_config_ideal_deg": 0.05652437577483542,
+        "tilt_Z_to_reference_deg": 0.05453584674428057,
+        "world_X_heading_deg": -90.01485024839444,
+        "world_X_heading_error_from_gripper_yaw_deg": -0.014850248394452592,
+        "local_Y_world_xyz": [
+          -0.9999996105619274,
+          0.00025955761487836247,
+          -0.00084350805474765
+        ],
+        "local_Z_world_xyz": [
+          0.0008436224073610938,
+          0.0004407737207563635,
+          -0.9999995470097781
+        ]
+      },
+      "cup": {
+        "quaternion_wxyz": [
+          0.7071575177176639,
+          0.0016358391514478658,
+          0.001661580906153482,
+          0.7070521963154877
+        ],
+        "tilt_to_world_up_deg": 0.26719328070538806,
+        "local_X_heading_world_deg": 89.9914708546164,
+        "nominal_flat_sidewall_normals_world_xyz": {
+          "plus_X": [
+            0.00014886166867494888,
+            0.9999999882447644,
+            -3.675152846497167e-05
+          ],
+          "minus_X": [
+            -0.00014886166867494888,
+            -0.9999999882447644,
+            3.675152846497167e-05
+          ],
+          "plus_Y": [
+            -0.9999891159283661,
+            0.0001490314314314678,
+            0.00466324076554988
+          ],
+          "minus_Y": [
+            0.9999891159283661,
+            -0.0001490314314314678,
+            -0.00466324076554988
+          ]
+        }
+      },
+      "hand_Y_vs_nearest_cup_pmY_wall_normal_deg": 0.3155779833758465,
+      "hand_minus_Z_vs_cup_Z_deg": 0.316701899586486,
+      "simple_height_difference_across_nominal_width_um": 55.06733895706874
+    }
+  ],
+  "entry_geometric_scales": {
+    "lever_m": 0.053,
+    "hand_Z_tilt_deg": 0.05454518201002184,
+    "lever_times_tan_tilt_um": 50.45564515274136,
+    "width_m": 0.01,
+    "hand_Y_width_height_difference_um": 8.43738166753132,
+    "interpretation": "Rigid directional illustrations only; not measured vessel slip, force prediction, or a strict error bound. These~50um/~8.4um scales do not alone explain the200um veto or1.5mm failure."
+  },
+  "native_contact_normals_reused": {
+    "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_orientation_review/contact_normal_height.json",
+    "SHA256": "e4505c9f29b3da115a26191c409aec11cac203bedd16e4acfc88649f7771d374",
+    "summary": {
+      "left": {
+        "first_native_contact_t_s": [
+          18.616666666666667,
+          18.616666666666667
+        ],
+        "median_normal_hand_xyz": [
+          0.00020715450468999444,
+          0.9999924864074581,
+          0.0028415588730245503
+        ],
+        "median_normal_cup_xyz": [
+          -0.00011278005838743677,
+          -0.9999928926416226,
+          0.0027004051707920597
+        ],
+        "median_contact_height_above_body_origin_mm": 58.602213859558105
+      },
+      "right": {
+        "first_native_contact_t_s": [
+          18.425,
+          18.425
+        ],
+        "median_normal_hand_xyz": [
+          -0.00012542301470335,
+          -0.999999792568198,
+          -0.000421103116851722
+        ],
+        "median_normal_cup_xyz": [
+          0.00011784865247055904,
+          0.9999997924593114,
+          -0.00042354248440965893
+        ],
+        "median_contact_height_above_body_origin_mm": 39.88310694694519
+      }
+    },
+    "axis_interpretation": "Empirical first-contact normals are predominantly hand +/-Y and cup -/+Y. Not a fresh structural audit of the runtime USD joint or every chamfer/contact face."
+  },
+  "candidate": {
+    "change_not_implemented": "If further teacher diagnosis is needed, align to configured ideal orientation smoothly while gripper is open during approach/free space, then preserve orientation through source grip/extract.",
+    "reason": "Current teacher copies the initial measured TCP orientation in its reset/first act, including~0.055deg initial IK pose residual, rather than commanding the configured exact ideal during approach.",
+    "causal_status": "Candidate only. Small residual might affect onset of asymmetric contact but has not been established as the source of rocking or slip.",
+    "do_not": "Do not rotate a closed hand against a source-supported cup, change source/scorer references, increase force cap/friction, or claim a measured improvement before a separate closed physical A/B."
+  },
+  "source_SHA256": {
+    "outputs/lab_cuvette_loading/Project_v1_1/teacher_preload_01/launch_config.yaml": "20e037b4d1a6319e81e71dbd4db277e571923ce0512b055514b6241ce44bad7b",
+    "outputs/lab_cuvette_loading/Project_v1_1/teacher_preload_01/episode_0000/execution_trace.jsonl": "09fdbbffb245a0e4ca222e0367f57131ea3f17f2de6083c575708560d23cfb19",
+    "outputs/lab_cuvette_loading/Project_v1_1/teacher_preload_01/episode_0000/initial_debug.json": "765d472e53f050bba9e9cd9510d0741c500b284b0734cfffeee37d3d203a333d"
+  },
+  "notes": [
+    "Nominal/actual before-action TCP time is aligned using the preceding completed execution trace row.",
+    "Cup pose is reconstructed from the same pre-action hand pose times the teacher-saved cup-in-TCP relative quaternion, not from a later camera frame.",
+    "Flat sidewall directions mean the vessel local +/-X,+/-Y frame convention; rounded or cooked contact normals can differ and are not re-derived here.",
+    "Saved60Hz first-force samples do not establish the first240Hz physical contact. Existing native-contact audit supplies the earlier onset times."
+  ],
+  "runtime_modified": false,
+  "physics_or_thresholds_modified": false,
+  "GPU_started": false,
+  "provider_API_calls": 0,
+  "H5_opened": false
+}

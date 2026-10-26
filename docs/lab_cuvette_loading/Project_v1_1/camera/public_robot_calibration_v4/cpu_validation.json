@@ -1,0 +1,77 @@
+{
+  "schema": "labsim.public_robot_calibration_v4.cpu_validation.v1",
+  "base_commit": "99fd295e73857816949170f9cc74cfa8123b5ff3",
+  "prompt_version": "Project_v1_1.public_tools.v4",
+  "tests": {
+    "command": "python -m pytest -q tests/test_lab_cuvette_project_v1_1_public_goal.py tests/test_cubence_project_v1_1_tools.py tests/test_cubence_backend.py",
+    "passed": 66,
+    "exit_code": 0,
+    "scope": "CPU AST language contract and mocked provider/tool regressions; no API/GPU/physics validation"
+  },
+  "task_methods_changed": [
+    "get_task_language"
+  ],
+  "source_files": [
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "sha256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11"
+    },
+    {
+      "path": "policy/backends/cubence_project_v1_1_tools.py",
+      "sha256": "50dbcf18cb613ae98b403cbc7ba698ffb63fc044b2810ec7ccda45f68b6008d4"
+    },
+    {
+      "path": "tests/test_lab_cuvette_project_v1_1_public_goal.py",
+      "sha256": "9ecd8539a27daeab2c27a6a4504ee1276c62f13e3133bdc4c904bd622d935c97"
+    },
+    {
+      "path": "tests/test_cubence_project_v1_1_tools.py",
+      "sha256": "8abd64e7006f3b62c165b8fc3373b7062c6bbfe90e00e5f493c682a8d0723c6e"
+    }
+  ],
+  "unchanged_against_HEAD": [
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1.py",
+      "sha256": "e4e130481c0d8593a8721bbd48dd7319ec1659f3bd07d2a68d902301a366c72f",
+      "matches_HEAD": true
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_env_v1.py",
+      "sha256": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "matches_HEAD": true
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "sha256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "matches_HEAD": true
+    },
+    {
+      "path": "policy/backends/cubence.py",
+      "sha256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "matches_HEAD": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json",
+      "sha256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba",
+      "matches_HEAD": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json",
+      "sha256": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+      "matches_HEAD": true
+    }
+  ],
+  "did_not_edit": [
+    "teacher controllers",
+    "standard physical scene configuration",
+    "assets",
+    "scorers",
+    "action limits",
+    "image profiles",
+    "model",
+    "context4 configuration",
+    "old Project_v1 shared behavior"
+  ],
+  "new_physics_or_model_run": false,
+  "prior_GPT03_evidence_rewritten": false
+}

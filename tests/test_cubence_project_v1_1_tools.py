@@ -210,7 +210,7 @@ def test_runner_reuses_provider_ledger_and_exposes_new_rejection_contract(tmp_pa
     assert 'object_position_m' not in json.dumps(rejected)
     controller=json.loads((output/'controller.json').read_text())
     assert controller['controller_extension']['version']=='Project_v1_1'
-    assert controller['controller_extension']['prompt_version']=='Project_v1_1.public_tools.v3'
+    assert controller['controller_extension']['prompt_version']=='Project_v1_1.public_tools.v4'
     assert controller['prompt']==SYSTEM_PROMPT
     assert [tool['name'] for tool in controller['tool_schema']]==['observe','move_ee','gripper','wait','finish']
     saved=''.join(p.read_text() for p in output.rglob('*.json'))+(output/'policy_trace.jsonl').read_text()

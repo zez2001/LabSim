@@ -1,0 +1,250 @@
+{
+  "schema": "labsim.Project_v1_1.lateral_hold_single_factor_closed.v1",
+  "analysis_date_local": "2026-10-27",
+  "old_runtime": "9e48016412907385d1a8c9e40860139f3d730764",
+  "new_runtime": "109e637bcb264458ffc231f4e052e60ff6764242",
+  "closed_config_differences": [
+    {
+      "path": ".experiment.controller_version",
+      "preload": "Project_v1_1.teacher_phase_motion_clock.v3",
+      "lateral": "Project_v1_1.teacher_phase_motion_clock.v4"
+    },
+    {
+      "path": ".teacher_execution.version",
+      "preload": "Project_v1_1.teacher_phase_motion_clock.v3",
+      "lateral": "Project_v1_1.teacher_phase_motion_clock.v4"
+    }
+  ],
+  "unchanged_configuration_groups": {
+    "physics": true,
+    "vessel": true,
+    "robot": true,
+    "gripper": true,
+    "acceptance": true,
+    "cameras": true,
+    "robot_tracking": true
+  },
+  "EXTRACT_nominal_target_max_abs_XY_delta_m": 0.0,
+  "original_new_result": {
+    "task_type": "loading",
+    "condition_group": "natural",
+    "task_success": false,
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "eligible_for_failure_analysis": true,
+    "failure_type": "GRASP_SLIP",
+    "failure_domain": "task"
+  },
+  "old_grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 0.0015476109960088594,
+    "maximum_orientation_drift_deg": 1.751228119770588,
+    "maximum_configured_grasp_anchor_drift_m": 0.00024628977933312783,
+    "maximum_configured_grasp_anchor_axial_drift_m": 0.00023077107629876578,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 8.625383313647962e-05,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "new_grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 0.0015202465866737552,
+    "maximum_orientation_drift_deg": 1.7525535970428983,
+    "maximum_configured_grasp_anchor_drift_m": 0.0002485156579271142,
+    "maximum_configured_grasp_anchor_axial_drift_m": 0.00022113806491575502,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 0.00011339307068891721,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "first200_old": {
+    "run": "teacher_preload_01",
+    "t_s": 19.533333333333335,
+    "t_from_EXTRACT_s": 0.05000000000000071,
+    "cup_world_change_deg": 0.3320763299743624,
+    "hand_actual_change_deg": 0.0008286613200997438,
+    "TCP_actual_change_deg": 0.0008286613200997055,
+    "command_FK_TCP_change_deg": 0.0001169589035359303,
+    "cup_world_rotation_vector_deg": [
+      0.003242832536702555,
+      -0.27416764439738983,
+      -0.18734000035221243
+    ],
+    "hand_world_rotation_vector_deg": [
+      0.000578053235343647,
+      0.0004149511616375093,
+      -0.00042467584578578734
+    ],
+    "TCP_world_rotation_vector_deg": [
+      0.0005780532353436488,
+      0.0004149511616374302,
+      -0.00042467584578578744
+    ],
+    "command_FK_TCP_rotation_vector_deg": [
+      -8.158390924662198e-06,
+      9.180467026996634e-05,
+      -7.200505739508997e-05
+    ],
+    "actual_TCP_delta_m": [
+      -3.1304337398257998e-06,
+      1.7384262783470827e-06,
+      4.291374315568142e-06
+    ],
+    "actual_hand_delta_m": [
+      -2.4065375328063965e-06,
+      7.301568984985352e-07,
+      4.291534423828125e-06
+    ],
+    "cup_world_delta_m": [
+      0.00023312121629714966,
+      3.2082200050354004e-05,
+      -1.8715858459472656e-05
+    ],
+    "command_FK_TCP_delta_m": [
+      -2.6568809635973967e-06,
+      -4.6918053736577647e-07,
+      9.329475710306845e-06
+    ],
+    "cup_actual_tilt_deg": 0.020885024138490645,
+    "finger_contact_N": [
+      0.18518631160259247,
+      0.2441074103116989
+    ],
+    "applied_total_opening_m": 0.010318463418544269,
+    "source_gap_m": 3.381079747288851e-07,
+    "environment_vertical_force_N": 0.16493746638178203,
+    "bottom_drift_from_scorer_m": 0.0002474903569114371,
+    "anchor_drift_from_scorer_m": 4.096440731307533e-05,
+    "rotation_lever_norm_m": 0.0002637251993605457,
+    "bottom_delta_in_hand_m": [
+      3.015758278150873e-05,
+      0.0002444649431784712,
+      2.4060102278955497e-05
+    ],
+    "rotation_lever_delta_in_hand_m": [
+      -2.485356753873043e-06,
+      -0.0002637123285161193,
+      -7.820282424061964e-07
+    ],
+    "anchor_delta_in_hand_m": [
+      2.7672226027635687e-05,
+      -1.924738533764809e-05,
+      2.32780740365493e-05
+    ],
+    "anchor_axial_signed_m": -2.3369376191900933e-05
+  },
+  "first200_new": {
+    "run": "teacher_lateral_hold_01",
+    "t_s": 19.533333333333335,
+    "t_from_EXTRACT_s": 0.05000000000000071,
+    "cup_world_change_deg": 0.3310347943826125,
+    "hand_actual_change_deg": 0.0008912790749941489,
+    "TCP_actual_change_deg": 0.0008912790749941129,
+    "command_FK_TCP_change_deg": 9.656240158496671e-05,
+    "cup_world_rotation_vector_deg": [
+      0.0017475697581917895,
+      -0.2671809551492917,
+      -0.19543622565274585
+    ],
+    "hand_world_rotation_vector_deg": [
+      0.0005544325596092532,
+      0.000429189051407585,
+      -0.0005502541999107457
+    ],
+    "TCP_world_rotation_vector_deg": [
+      0.0005544325596092579,
+      0.00042918905140750424,
+      -0.0005502541999107457
+    ],
+    "command_FK_TCP_rotation_vector_deg": [
+      -1.1575565430091461e-05,
+      8.600673189880886e-05,
+      -4.2345551748872836e-05
+    ],
+    "actual_TCP_delta_m": [
+      -1.6054654262964707e-06,
+      1.2648825478966952e-06,
+      4.291334960826454e-06
+    ],
+    "actual_hand_delta_m": [
+      -8.568167686462402e-07,
+      2.980232238769531e-07,
+      4.291534423828125e-06
+    ],
+    "cup_world_delta_m": [
+      0.00022917985916137695,
+      3.1501054763793945e-05,
+      -1.9252300262451172e-05
+    ],
+    "command_FK_TCP_delta_m": [
+      -3.684298717082646e-07,
+      -5.097721589575333e-07,
+      9.329481595821143e-06
+    ],
+    "cup_actual_tilt_deg": 0.013872268145683991,
+    "finger_contact_N": [
+      0.21461904048919678,
+      0.272713303565979
+    ],
+    "applied_total_opening_m": 0.010318463418544269,
+    "source_gap_m": 4.535293089968917e-07,
+    "environment_vertical_force_N": 0.26719218491920177,
+    "bottom_drift_from_scorer_m": 0.0002421474881170307,
+    "anchor_drift_from_scorer_m": 4.1672810040213356e-05,
+    "rotation_lever_norm_m": 0.0002572643425048091,
+    "bottom_delta_in_hand_m": [
+      3.0070681413520602e-05,
+      0.00023901130135127154,
+      2.4591826835063113e-05
+    ],
+    "rotation_lever_delta_in_hand_m": [
+      -1.1485923836336047e-06,
+      -0.00025726060210123924,
+      -7.779887375991557e-07
+    ],
+    "anchor_delta_in_hand_m": [
+      2.8922089029886997e-05,
+      -1.8249300749967703e-05,
+      2.3813838097463957e-05
+    ],
+    "anchor_axial_signed_m": -2.3899096173504367e-05
+  },
+  "new_force_adjustment_ticks": 5,
+  "new_release_slew_ticks": 0,
+  "closed_audit_SHA256": "4bcaa8e17981c9987c758471d029c95a60bb072a4136c514780ca9c95cdf4b53",
+  "scope": "This one fixed-scene run rejects freezing EXTRACT XY alone as sufficient for the unchanged acceptance gates; it does not prove XY has zero effect or generalize to other grasps.",
+  "source_summary_SHA256": "32d00cbc94504a5d83766a018775cb359a1cc793ffd3b2e06315dbd03483aab5",
+  "source_branch_summary_SHA256": "1eb0f1d1f4ac03297476fc77fd2814adee1f484e94767161d8fdf9137e3bf7d3",
+  "GPU_used": false,
+  "API_calls": 0,
+  "runtime_score_labels_original_outputs_modified": false,
+  "fixed_commit_controller_and_scorer_sources": {
+    "controllers/lab_cuvette_project_v1_1_controller.py": {
+      "old_SHA256": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+      "new_SHA256": "a8c60ddd21df15322788fbfe4c6f445674643366c5845fcb0eca3f96add3b011",
+      "unchanged": false
+    },
+    "demos/lab_cuvette_size_v1/scorer.py": {
+      "old_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "new_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "unchanged": true
+    },
+    "tasks/lab_cuvette_loading_env_v1_scorer.py": {
+      "old_SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "new_SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "unchanged": true
+    },
+    "demos/lab_cuvette_project_v1_1/scorer.py": {
+      "old_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "new_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "unchanged": true
+    }
+  },
+  "EXTRACT_XY_change_location": "Teacher v4 implementation suppresses desired_cup_xy during EXTRACT; only two controller version tags differ in saved config"
+}
