@@ -1,0 +1,225 @@
+{
+  "schema": "labsim.Project_v1_1.preload_v2_static_contract_review.v1",
+  "created_utc": "2026-10-26T20:24:49.451364+00:00",
+  "baseline_commit": "c793a12b8f097eb47a9158a708d896993a05116c",
+  "reviewed_commit": "9e48016412907385d1a8c9e40860139f3d730764",
+  "scope": "Fixed git source inspection only, not a physical run or interpretation of current raw trajectories.",
+  "sources": [
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "baseline_SHA256": "b115448f7d3f49b9452fe41bbc25e055059a17a02695b5a6921683c7296c8b43",
+      "reviewed_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "unchanged_bytes": false,
+      "reviewed_lines": 225
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "baseline_SHA256": "466056e58bdca83367687de7f0deaaa529939cd452b9d4f087c4108677ac91b8",
+      "reviewed_SHA256": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+      "unchanged_bytes": false,
+      "reviewed_lines": 205
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_env_v1.py",
+      "baseline_SHA256": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "reviewed_SHA256": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "unchanged_bytes": true,
+      "reviewed_lines": 337
+    },
+    {
+      "path": "controllers/lab_cuvette_project_v1_1_controller.py",
+      "baseline_SHA256": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+      "reviewed_SHA256": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+      "unchanged_bytes": true,
+      "reviewed_lines": 135
+    },
+    {
+      "path": "controllers/lab_cuvette_env_v1_controller.py",
+      "baseline_SHA256": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb",
+      "reviewed_SHA256": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb",
+      "unchanged_bytes": true,
+      "reviewed_lines": 388
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/robot_tracking.py",
+      "baseline_SHA256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+      "reviewed_SHA256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+      "unchanged_bytes": true,
+      "reviewed_lines": 152
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "baseline_SHA256": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+      "reviewed_SHA256": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+      "unchanged_bytes": true,
+      "reviewed_lines": 420
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "baseline_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "reviewed_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "unchanged_bytes": true,
+      "reviewed_lines": 165
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_env_v1_scorer.py",
+      "baseline_SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "reviewed_SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "unchanged_bytes": true,
+      "reviewed_lines": 573
+    },
+    {
+      "path": "demos/lab_cuvette_size_v1/scorer.py",
+      "baseline_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "reviewed_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "unchanged_bytes": true,
+      "reviewed_lines": 61
+    }
+  ],
+  "necessary_source_snippets": [
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "ranges": [
+        {
+          "first": 95,
+          "last": 124,
+          "excerpt": "95:         sample=(t,logical,ramped,previous,tuple(fingers),tuple(forces),effort)\n96:         if sample == self._last_input:\n97:             return copy.deepcopy(self._last_output)\n98:         dt = 1 / self.control_hz if self.last_t is None else max(0., t - self.last_t)\n99:         widening = (self.logical_requested_opening_m is not None and\n100:                     logical > self.logical_requested_opening_m + 1e-10)\n101:         closing_reversal = bool(self.release_slew_active and\n102:             logical < self.logical_requested_opening_m - 1e-10)\n103:         if closing_reversal:\n104:             self.release_slew_active = self.release_ramp_active = False\n105:             self.frozen_opening_m = self.contact_since_s = None\n106:             self.confirmed = False\n107:         if widening:\n108:             self.frozen_opening_m = None\n109:             self.contact_since_s = None\n110:             self.confirmed = False\n111:             self.recovering = False\n112:             self.release_ramp_active = True\n113:             self.force_hold_reference_opening_m = None\n114:             self.release_ramp_speed_m_s = 0.\n115:             if self.force_preload_adjusted:\n116:                 self.release_slew_active = True\n117:                 self.force_preload_adjusted = False\n118:         self.logical_requested_opening_m = logical\n119:         bilateral = all(value > self.contact_threshold_N for value in forces)\n120:         candidate = max(self.minimum_total_opening_m,\n121:                         sum(fingers) - 2 * self.weight_compression_per_finger_m)\n122:         confirmed_before = self.confirmed\n123:         force_hold_enabled = bool(effort is not None and\n124:             effort >= self.minimum_hold_normal_force_N > 0 and not self.release_ramp_active)"
+        },
+        {
+          "first": 129,
+          "last": 148,
+          "excerpt": "129:         if self.release_ramp_active:\n130:             # Keep the whole explicit opening ramp free from re-latching while\n131:             # residual bilateral contact is still measured during release.\n132:             # The teacher's schedule can still start at an older logical\n133:             # latch, above the actual force-corrected target. Preserve its\n134:             # scheduled opening increments rather than jumping across that\n135:             # difference. A facade ramp already starting at the applied\n136:             # target is unaffected, except possible one-tick catch-up.\n137:             if self.release_slew_active:\n138:                 if dt > 0 and scheduled_opening_delta > 0:\n139:                     self.release_ramp_speed_m_s = scheduled_opening_delta / dt\n140:                 applied = (min(ramped, previous+self.release_ramp_speed_m_s*dt)\n141:                     if ramped >= previous else ramped)\n142:                 finished = abs(applied-logical) <= 1e-10 and abs(ramped-logical) <= 1e-10\n143:             else:\n144:                 applied = ramped\n145:                 finished = ramped >= logical - 1e-10\n146:             decision = \"explicit_opening_ramp\"\n147:             if finished:\n148:                 self.release_ramp_active = self.release_slew_active = False"
+        },
+        {
+          "first": 149,
+          "last": 175,
+          "excerpt": "149:         elif bilateral:\n150:             if self.frozen_opening_m is None:\n151:                 # Key invariant: a transient measured contact width must not\n152:                 # widen a tighter command that has already been applied.\n153:                 self.frozen_opening_m = min(previous, candidate)\n154:                 if self.force_hold_reference_opening_m is None:\n155:                     self.force_hold_reference_opening_m = self.frozen_opening_m\n156:                 self.contact_since_s = t\n157:                 self.confirmed = False\n158:                 decision = \"first_bilateral_freeze\"\n159:             else:\n160:                 decision = \"hold_contact_target\"\n161:             self.recovering = False\n162:             if t - self.contact_since_s >= self.contact_persist_s - 1e-10:\n163:                 self.confirmed = True\n164:                 self.ever_confirmed = True\n165:             if (self.confirmed and force_hold_enabled and min(forces) <\n166:                     self.minimum_hold_normal_force_N * (1 - self.normal_force_hysteresis_fraction)):\n167:                 before = self.frozen_opening_m\n168:                 upper = min(before, previous)\n169:                 lower = min(upper, max(self.minimum_total_opening_m,\n170:                     self.force_hold_reference_opening_m-self.maximum_force_feedback_closure_m))\n171:                 self.frozen_opening_m = max(lower, upper-self.contact_approach_speed_m_s*dt)\n172:                 force_hold_applied = self.frozen_opening_m < before - 1e-12\n173:                 if force_hold_applied:\n174:                     decision = \"low_measured_normal_force_slow_close\"\n175:                     self.force_preload_adjusted = True"
+        },
+        {
+          "first": 177,
+          "last": 186,
+          "excerpt": "177:         elif self.frozen_opening_m is not None or self.recovering:\n178:             # Never jump to an old, already elapsed closure-ramp target after\n179:             # a transient or established grasp loses contact.\n180:             self.frozen_opening_m = None\n181:             self.contact_since_s = None\n182:             self.confirmed = False\n183:             self.recovering = True\n184:             applied = min(previous, max(logical,\n185:                           previous - self.contact_approach_speed_m_s * dt))\n186:             decision = \"contact_loss_slow_close\""
+        }
+      ]
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "ranges": [
+        {
+          "first": 109,
+          "last": 122,
+          "excerpt": "109:             reference=dict(position_m=p.tolist(),quaternion_wxyz=np.roll(r.as_quat(),1).tolist())\n110:             if self.tracking_compensator is not None and not preserve_joint_target:\n111:                 if self._tracking_sample_control_step!=self.control_steps:\n112:                     command_p,command_R=self.forward(seed)\n113:                     corrected=self.tracking_compensator.update(nominal_position_m=p,nominal_rotation_matrix=r.as_matrix(),\n114:                         previous_command_position_m=command_p,previous_command_rotation_matrix=command_R,\n115:                         actual_position_m=self.debug['actual_tcp_position_m'],\n116:                         actual_rotation_matrix=Rotation.from_quat(np.roll(self.debug['actual_tcp_quaternion_wxyz'],-1)).as_matrix(),\n117:                         dt_s=1/self.cfg.physics.control_hz)\n118:                     self._tracking_sample_control_step=self.control_steps\n119:                 else:corrected=self.tracking_compensator.hold(nominal_position_m=p,nominal_rotation_matrix=r.as_matrix())\n120:                 p=corrected.command_position_m;r=Rotation.from_matrix(corrected.command_rotation_matrix)\n121:                 tracking_diagnostics=corrected.diagnostics\n122:                 effective_reference=dict(position_m=p.tolist(),quaternion_wxyz=np.roll(r.as_quat(),1).tolist())"
+        },
+        {
+          "first": 141,
+          "last": 145,
+          "excerpt": "141:         logical=float(action.get('raw_model_action',{}).get('gripper_opening_m',opening))\n142:         opening,grip_diagnostics=self.contact_hold.update(t=self.t,logical_requested_opening_m=logical,\n143:             ramped_opening_m=opening,previous_applied_opening_m=self.grip,\n144:             measured_finger_positions_m=self.debug['finger_joint_positions_m'],finger_contact_N=self.debug['finger_contact_N'],\n145:             effort_limit_N=effort)"
+        }
+      ]
+    },
+    {
+      "path": "controllers/lab_cuvette_env_v1_controller.py",
+      "ranges": [
+        {
+          "first": 87,
+          "last": 105,
+          "excerpt": "87:     def _feedback(self,debug,desired_cup_xy=None,*,orientation=True):\n88:         # Actual relative rotation includes passive slip; correcting only XY\n89:         # would leave a tilted vessel approaching the narrow original seat.\n90:         if orientation:\n91:             _,relative_rotation=self._relative(debug)\n92:             desired_hand=self.desired_cup_rotation*relative_rotation.inv()\n93:             delta=(desired_hand*self.rotation_command.inv()).as_rotvec()\n94:             cap=np.deg2rad(float(get(self.cfg,'control.orientation_step_limit_deg',.1)))\n95:             norm=np.linalg.norm(delta)\n96:             if norm>cap:delta*=cap/norm\n97:             self.rotation_command=Rotation.from_rotvec(delta)*self.rotation_command\n98:         if desired_cup_xy is not None:\n99:             error=np.asarray(debug['object_position_m'],float)[:2]-np.asarray(desired_cup_xy,float)\n100:             correction=-float(get(self.cfg,'control.truth_xy_gain',.15))*error\n101:             cap=float(get(self.cfg,'control.truth_xy_step_limit_m',.00002))\n102:             norm=np.linalg.norm(correction)\n103:             if norm>cap:correction*=cap/norm\n104:             self.target[:2]+=correction\n105:             self.total_feedback_m+=correction"
+        },
+        {
+          "first": 249,
+          "last": 264,
+          "excerpt": "249:             elif self.phase=='EXTRACT':\n250:                 duration=float(get(self.cfg,'control.extract_s',6.))\n251:                 self.target=smooth(self.anchor,self.lift,u/duration)\n252:                 self._feedback(debug,self.source_initial[:2],orientation=bool(get(self.cfg,'control.extract_orientation_feedback',True)))\n253:                 if u>=duration+1.:\n254:                     if bottom<=float(self.layout['source_rim_z'])+.01 or not np.all(forces>.02):self._finish('EXTRACTION_FAILED',t)\n255:                     else:\n256:                         self.transport_start=self.target.copy();rel,_=self._relative(debug)\n257:                         tcp_offset=self.rotation_command.apply(rel)\n258:                         self.transport_end=np.r_[self.floor[:2]-tcp_offset[:2],self.lift[2]]\n259:                         self._enter('TRANSPORT',t)\n260:             elif self.phase=='TRANSPORT':\n261:                 duration=float(get(self.cfg,'control.transport_s',16.));waypoint=self.transport_start.copy();waypoint[1]=self.transport_end[1]\n262:                 if u<duration:\n263:                     self.target=smooth(self.transport_start,waypoint,u/(duration/2)) if u<duration/2 else smooth(waypoint,self.transport_end,(u-duration/2)/(duration/2))\n264:                 self._feedback(debug,self.floor[:2] if u>=duration else None)"
+        }
+      ]
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/robot_tracking.py",
+      "ranges": [
+        {
+          "first": 98,
+          "last": 101,
+          "excerpt": "98:         return TrackingCompensation(\n99:             command_position_m=nominal_position + self._position_bias,\n100:             command_rotation_matrix=Rotation.from_rotvec(self._rotation_bias).as_matrix() @ nominal_rotation,\n101:             diagnostics=diagnostics)"
+        },
+        {
+          "first": 123,
+          "last": 139,
+          "excerpt": "123:         coefficient = self.alpha if self.alpha is not None else -math.expm1(-dt / self.time_constant_s)\n124:         with np.errstate(over=\"ignore\", invalid=\"ignore\"):\n125:             raw_p = command_p - actual_p\n126:         if not np.isfinite(raw_p).all():\n127:             raise ValueError(\"Position residual overflow; no tracking estimate was updated\")\n128:         raw_r = Rotation.from_matrix(command_r @ actual_r.T).as_rotvec()\n129:         filtered_p = self._position_bias + coefficient * (raw_p - self._position_bias)\n130:         filtered_r = self._rotation_bias + coefficient * (raw_r - self._rotation_bias)\n131:         self._position_bias, p_saturated = _bounded(filtered_p, self.max_position_bias_m)\n132:         self._rotation_bias, r_saturated = _bounded(filtered_r, self.max_rotation_bias_rad)\n133:         self._samples += 1\n134:         return self._result(nominal_p, nominal_r, observation_used=True, estimate_held=False,\n135:             dt_s=dt, filter_alpha=coefficient,\n136:             raw_position_error_m=raw_p.tolist(), raw_rotation_error_world_rad=raw_r.tolist(),\n137:             filtered_position_error_before_bound_m=filtered_p.tolist(),\n138:             filtered_rotation_error_before_bound_world_rad=filtered_r.tolist(),\n139:             position_saturated=p_saturated, rotation_saturated=r_saturated)"
+        }
+      ]
+    }
+  ],
+  "unchanged_config_groups": {
+    "acceptance": true,
+    "demo_release": true,
+    "physics": true,
+    "robot": true,
+    "vessel": true,
+    "gripper": true,
+    "executor": true
+  },
+  "scorer_source_bytes_unchanged": {
+    "demos/lab_cuvette_project_v1_1/scorer.py": true,
+    "tasks/lab_cuvette_loading_env_v1_scorer.py": true,
+    "demos/lab_cuvette_size_v1/scorer.py": true
+  },
+  "force_hold_contract": {
+    "sensor_inputs": [
+      "simulation time",
+      "logical total-opening request",
+      "currently scheduled/ramped opening",
+      "previous applied opening",
+      "two measured finger positions",
+      "two nonnegative finger-contact readings interpreted as normal force",
+      "current per-finger effort cap"
+    ],
+    "forbidden_inputs_absent": [
+      "object pose/depth/tilt",
+      "teacher phase",
+      "slot/seat state",
+      "score/goal truth"
+    ],
+    "enable_conditions": [
+      "effort cap is provided and >=minimum_hold_normal_force_N>0",
+      "not in explicit opening ramp",
+      "bilateral contact above detection threshold, persistent for configured contact_persist_s",
+      "weaker finger force <0.9*minimum_hold_normal_force_N"
+    ],
+    "target_definition": "minimum_hold_normal_force_N = finger_kp * min(maximum_compression, mass*g*safety/(2*sqrt(mu_body*mu_finger)*finger_kp)); derived from existing assumptions, not measured load capacity.",
+    "only_new_feedback_rate_bound": "total-opening decrease <=contact_approach_speed*dt (2mm/s;33.333um at a regular60Hz tick). This does not bound original ramps/first-contact candidate or actual material displacement.",
+    "only_new_feedback_total_bound": "maximum_force_feedback_closure=2*maximum_compression=.6mm in the configuration, referenced to first freeze across loss/recontact. It is not total gripper compression, collision penetration or a bound on every source of target change.",
+    "no_widening_by_feedback": "upper=min(frozen,previous);lower=min(upper,...), so this feedback branch cannot enlarge a smaller existing legal command.",
+    "force_or_gain_modified": false
+  },
+  "explicit_release_contract": {
+    "priority": "Logical widening enters opening-ramp branch before bilateral force feedback, clears preload reference/confirmation; low cap below preload disables new force feedback. Merely reducing a cap while it remains above the preload is not alone a release command.",
+    "slew_enable": "Only when prior force_preload_adjusted is true and a subsequent explicit logical widening starts. Untightened and legacy effort=None paths remain original.",
+    "per_step_rule": "positive scheduled_delta/dt updates release speed;applied=min(current_ramped,previous+speed*dt). A paused schedule may catch up only to current ramped, never an undelivered future logical target.",
+    "finish_rule": "Both actual applied target and current ramped must reach logical end before release_slew is cleared.",
+    "closing_reversal": "Explicit logical closing reversal exits release state; it is not silently treated as continuing release.",
+    "idempotency": "Exact repeated(t,logical,ramped,previous,fingers,forces,effort) returns cached output without additional motion.",
+    "not_a_universal_opening_speed_limit": "This rule follows caller scheduling increments; it does not add a new global fixed release speed or certify measured joint motion."
+  },
+  "EXTRACT_orientation_contract": {
+    "configured_extract_orientation_feedback": false,
+    "nominal_teacher_rotation": "ParentEXTRACT calls_feedback(...orientation=False), so its orientation correction is skipped. New teacher suppressesGRASP orientation; _enter does not replace rotation. Nominal rotation_command is therefore held throughEXTRACT untilTRANSPORT default orientation feedback resumes.",
+    "still_active_truth_XY": "EXTRACT still supplies source_initial[:2] asdesired_cup_xy; _feedback98-105 adds bounded truth XY correction to the smooth nominal target. No change of orientation flag disables this position correction.",
+    "still_active_robot_tracking": "Task109-122 applies robot-state-only position/rotation bias after nominal reference. Tracking98-101 uses exp(rotation_bias)*nominal_rotation; update residual uses previous applied-command FK vsactual robot orientation. A fixed nominal orientation need not mean an identical effective IK quaternion.",
+    "rotation_bias_bound_rad": 0.002,
+    "position_bias_bound_m": 0.001,
+    "not_claimed": "No actual rotation amplitude/onset/cause is assigned from source. Contact dynamics, drive response and frame/reference definitions require aligned requested/nominal/effectiveIK/FKactual/nativehand/cup records in the separate closed physical audit."
+  },
+  "finite_conclusions": [
+    "Compared withc793, additional preload is sensor-based and conditional, not a force-cap/gain/friction increase or a teacher macro.",
+    "Low nonzero bilateral contact can now request further bounded tightening despite the former frozen logical target, but this does not guarantee grasp success.",
+    "Release slew avoids jumping across an earlier feedback correction by following the actual opening schedule, not by binding/freezing the object.",
+    "Seven physical/acceptance groups and all three scorers are byte/value unchanged across these fixed commits. No physical-calibration or all-assets-global-hash claim is made by this source-only review.",
+    "EXTRACT nominal teacher orientation was already held in this fixed config. Calling a later observed rotation EXTRACT teacher orientation feedback is unsupported without distinguishing still-active XY and robot tracking layers."
+  ],
+  "CPU_tests_executed_by_this_review": false,
+  "raw_or_HDF5_read": false,
+  "active_outputs_read": false,
+  "runtime_modified": false,
+  "report_draft_modified": false,
+  "API_calls": 0,
+  "GPU_used": false
+}

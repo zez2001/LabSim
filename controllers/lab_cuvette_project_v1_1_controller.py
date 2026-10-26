@@ -1,8 +1,8 @@
 """Phase-motion clock and source-constrained grasp teacher adapter.
 
-Only four smooth motion phases are slowed. The original teacher, physics,
-scorer, 60 Hz actions and physical contact timers are unchanged. GRASP holds
-the existing EE orientation and slows closure near the nominal vessel width.
+Only four smooth motion phases are slowed. Physics, scorer, 60 Hz actions and
+physical contact timers are unchanged. GRASP holds the existing EE orientation
+and slows closure near contact. EXTRACT keeps the nominal lateral lift axis.
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get
 
 
 class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
-    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v3'
+    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v4'
     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))
     NEAR_CONTACT_MARGIN_M = .002
 
@@ -42,6 +42,7 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         self.controller_motion_clock_s = 0.
         self._clock_cached_action = None
         self._grasp_orientation_feedback_suppressed = False
+        self._extract_lateral_feedback_suppressed = False
         return self
 
     def _feedback(self, debug, desired_cup_xy=None, *, orientation=True):
@@ -51,6 +52,14 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         if self.phase == 'GRASP' and orientation:
             self._grasp_orientation_feedback_suppressed = True
             orientation = False
+        if self.phase == 'EXTRACT' and desired_cup_xy is not None:
+            # A source-supported bottom can pivot about the fingers. Chasing
+            # that bottom with lateral hand corrections during a nominally
+            # vertical lift changes the load transfer. Keep the existing lift
+            # axis; resume the parent's XY feedback during TRANSPORT/ALIGN.
+            # This is a teacher-only A/B, not an established physical fix.
+            self._extract_lateral_feedback_suppressed = True
+            desired_cup_xy = None
         return super()._feedback(debug, desired_cup_xy, orientation=orientation)
 
     def act(self, public_obs, debug):
@@ -81,6 +90,7 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         motion_elapsed = self._phase_motion_elapsed
         event_start = len(self.events)
         self._grasp_orientation_feedback_suppressed = False
+        self._extract_lateral_feedback_suppressed = False
         previous_opening = self.last_grip_opening
         unlatched_before = self.latch_opening is None
         bilateral = all(float(v) > float(get(self.cfg, 'gripper.contact_threshold_N', .02))
@@ -122,6 +132,8 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             physical_control_hz=self.hz, physical_watchdogs_unscaled=True,
             grasp_orientation_feedback_suppressed=self._grasp_orientation_feedback_suppressed,
             grasp_orientation_feedback_policy='Hold existing EE orientation during GRASP while source-constrained; unchanged feedback after extraction',
+            extract_lateral_feedback_suppressed=self._extract_lateral_feedback_suppressed,
+            extract_lateral_feedback_policy='Fixed nominal XY during EXTRACT; parent XY feedback resumes in TRANSPORT and ALIGN',
             near_contact_slow_close_zone=slow_zone,
             near_contact_slow_close_applied=float(action['gripper_opening_m']) > parent_opening,
             near_contact_nominal_outer_width_m=self.nominal_vessel_outer_width_m,

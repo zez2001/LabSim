@@ -1,0 +1,608 @@
+{
+  "schema": "labsim.Project_v1_1.public_boundary_review.v1",
+  "checked_at_utc": "2026-10-26T20:19:32.880497+00:00",
+  "reviewed_commit": "9e48016412907385d1a8c9e40860139f3d730764",
+  "scope": "Read-only source review and CPU synthetic inputs through actual public adapters/run_episode. No simulator/provider/active H5.",
+  "source_SHA256": {
+    "tasks/lab_cuvette_loading_env_v1.py": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+    "tasks/lab_cuvette_loading_project_v1.py": "e4e130481c0d8593a8721bbd48dd7319ec1659f3bd07d2a68d902301a366c72f",
+    "tasks/lab_cuvette_loading_project_v1_1.py": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+    "demos/lab_cuvette_project_v1/environment.py": "0dcfb00d53ca54c12459df907793e97277669b8caffa12d31678c81ae3041c7d",
+    "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+    "demos/lab_cuvette_project_v1_1/run.py": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+    "policy/backends/cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+    "policy/backends/cubence_project_v1_1_tools.py": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594",
+    "policy/backends/cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+    "config/lab_cuvette_loading/Project_v1_1/standard.yaml": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba"
+  },
+  "source_lines": {
+    "tasks/lab_cuvette_loading_env_v1.py": [
+      {
+        "name": "_public_observation",
+        "line": 140,
+        "end_line": 145
+      },
+      {
+        "name": "get_camera_meta",
+        "line": 161,
+        "end_line": 165
+      },
+      {
+        "name": "get_task_language",
+        "line": 169,
+        "end_line": 174
+      }
+    ],
+    "tasks/lab_cuvette_loading_project_v1.py": [
+      {
+        "name": "_public_observation",
+        "line": 77,
+        "end_line": 83
+      }
+    ],
+    "tasks/lab_cuvette_loading_project_v1_1.py": [
+      {
+        "name": "get_task_language",
+        "line": 11,
+        "end_line": 23
+      }
+    ],
+    "demos/lab_cuvette_project_v1/environment.py": [
+      {
+        "name": "observe",
+        "line": 52,
+        "end_line": 60
+      },
+      {
+        "name": "execute",
+        "line": 72,
+        "end_line": 167
+      },
+      {
+        "name": "finish",
+        "line": 169,
+        "end_line": 178
+      }
+    ],
+    "demos/lab_cuvette_project_v1_1/environment.py": [
+      {
+        "name": "finish",
+        "line": 24,
+        "end_line": 29
+      },
+      {
+        "name": "execute",
+        "line": 31,
+        "end_line": 135
+      }
+    ],
+    "demos/lab_cuvette_project_v1_1/run.py": [
+      {
+        "name": "parser",
+        "line": 13,
+        "end_line": 35
+      }
+    ],
+    "policy/backends/cubence_tools.py": [
+      {
+        "name": "public_observation",
+        "line": 59,
+        "end_line": 80
+      },
+      {
+        "name": "compact_camera_metadata",
+        "line": 83,
+        "end_line": 94
+      },
+      {
+        "name": "observe",
+        "line": 146,
+        "end_line": 158
+      },
+      {
+        "name": "execute",
+        "line": 222,
+        "end_line": 316
+      },
+      {
+        "name": "observation_content",
+        "line": 319,
+        "end_line": 355
+      },
+      {
+        "name": "run_episode",
+        "line": 402,
+        "end_line": 508
+      }
+    ],
+    "policy/backends/cubence_project_v1_1_tools.py": [
+      {
+        "name": "_public_receipt",
+        "line": 59,
+        "end_line": 74
+      },
+      {
+        "name": "execute",
+        "line": 117,
+        "end_line": 179
+      },
+      {
+        "name": "run_episode",
+        "line": 182,
+        "end_line": 185
+      }
+    ],
+    "policy/backends/cubence.py": [
+      {
+        "name": "responses",
+        "line": 247,
+        "end_line": 259
+      }
+    ]
+  },
+  "task_goal": {
+    "actual_static_language": "Pick the light cuvette from white rack slot A1 and transport it to the candidate_far_hinge internal seat of the single open instrument. Insert, transfer support, open both fingers, retreat and leave the vessel stable. The selected target is candidate_far_hinge, the internal seat farther from the lid hinge among the two seats. Nominal task geometry: loading depth 27 mm, cuvette height 67.5 mm, and 40.5 mm of the cuvette remaining above the seat entrance at the nominal loaded pose. These are static configured task goals, not measurements of the current vessel pose, insertion depth or support.",
+    "declared_nominal_dimensions": {
+      "vessel_xy_mm": [
+        10.0,
+        10.0
+      ],
+      "height_mm": 67.5,
+      "loading_depth_mm": 27.0,
+      "exposed_length_at_nominal_loaded_pose_mm": 40.5
+    },
+    "source": "Frozen task configuration and fixed-scene public prompt prior",
+    "live_pose_or_depth_read": false,
+    "selected_target_role": "candidate_far_hinge: farther from the lid hinge",
+    "world_target_coordinates_exposed": false,
+    "not_real_measurement_or_calibration": true
+  },
+  "prompt": {
+    "version": "Project_v1_1.public_tools.v3",
+    "SHA256": "c3d97cc8905cbb44c933f53d38edb2c77af51e1517a1629ba2b96d1999e76f11",
+    "offline_2_602_or_52_9375_numeric_correction_present": false,
+    "new_guidance": [
+      "cross-check both calibrated views",
+      "whole hand clearance",
+      "near-contact descent <=0.001 m/s",
+      "visual slip/contact-loss stop and safe backoff",
+      "nominal depth and support before opening"
+    ],
+    "task_specific_motion_macro_added": false
+  },
+  "observation_boundary": {
+    "public_top_level_allowlist": [
+      "TCPpose",
+      "camera_calibration",
+      "camera_meta",
+      "episode_id",
+      "finger_contact_N",
+      "finger_contact_forces_N",
+      "gripper_effort_limit_N",
+      "gripper_opening_m",
+      "images",
+      "joint_positions",
+      "joint_velocities",
+      "observation_id",
+      "simulation_time",
+      "simulation_time_s",
+      "source_slot_id",
+      "step_index",
+      "target_seat_id",
+      "task_language",
+      "tcp_pose"
+    ],
+    "public_camera_allowlist": [
+      "camera_cv_from_world",
+      "channels",
+      "extrinsic_translation_unit",
+      "focal_length_cm",
+      "horizontal_aperture_mm",
+      "intrinsic_matrix_native",
+      "intrinsic_matrix_policy_256",
+      "local_pose_position_m",
+      "local_pose_quaternion_wxyz",
+      "meters_per_stage_unit",
+      "mounting",
+      "name",
+      "optical_conventions",
+      "physical_parent",
+      "requested_fps",
+      "resolution_wh",
+      "sensor_rendering_time_s",
+      "sensor_timestamp_clock",
+      "source",
+      "vertical_aperture_mm",
+      "world_from_camera_usd",
+      "world_pose_position_m",
+      "world_pose_quaternion_wxyz"
+    ],
+    "wire_state_fields": [
+      "TCPpose",
+      "camera_meta",
+      "episode_id",
+      "finger_contact_N",
+      "gripper_effort_limit_N",
+      "gripper_opening_m",
+      "joint_positions",
+      "joint_velocities",
+      "model_image_transforms",
+      "observation_id",
+      "simulation_time",
+      "source_slot_id",
+      "step_index",
+      "target_seat_id",
+      "task_language"
+    ],
+    "wire_camera_fields": {
+      "side_camera": [
+        "camera_cv_from_world",
+        "frames",
+        "intrinsic_matrix_native",
+        "local_pose_position_m",
+        "local_pose_quaternion_wxyz",
+        "name",
+        "physical_parent",
+        "resolution_wh",
+        "sensor_rendering_time_s",
+        "world_pose_position_m",
+        "world_pose_quaternion_wxyz"
+      ],
+      "wrist_camera": [
+        "camera_cv_from_world",
+        "frames",
+        "intrinsic_matrix_native",
+        "local_pose_position_m",
+        "local_pose_quaternion_wxyz",
+        "name",
+        "physical_parent",
+        "resolution_wh",
+        "sensor_rendering_time_s",
+        "world_pose_position_m",
+        "world_pose_quaternion_wxyz"
+      ]
+    },
+    "CPU_root_and_camera_privileged_sentinel_removed": true,
+    "CPU_receipt_top_level_privileged_sentinel_removed": true,
+    "adversarial_nested_receipt_sentinel_survives": true,
+    "adversarial_nested_receipt_scope": "Only artificial replacement-env nesting. Actual reviewed receipt pose producer constructs position_m/quaternion_wxyz only. No actual object/seat truth exposure found in that path.",
+    "allowed_runtime_coordinates": "Robot TCP/joints and camera mounting/extrinsics only; no object, rack-slot or target-seat world pose",
+    "images": "Two synchronized RGB; fixed global LANCZOS resize/JPEG; no truth boxes, segmentation/depth or truth-selected crop",
+    "receipts": "Requested/actual robot endpoints, tracking, gripper effort, robot-only planning residuals and symbolic stop/terminal status",
+    "terminal_status": "finish returns status/label, not raw scorer measurements; runner stops before another policy decision"
+  },
+  "provider_configs": {
+    "default_path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json",
+    "default_context": 12,
+    "explicit_path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json",
+    "explicit_context": 4,
+    "only_semantic_change": [
+      "max_context_messages"
+    ],
+    "all_other_bytes_equal_under_single_replacement": true,
+    "auto_switch_to_context4": false
+  },
+  "history": {
+    "unit": "Complete model-response-item group plus matching function_call_output, not literal API item count",
+    "default_retained_groups": 6,
+    "explicit4_retained_groups": 2,
+    "each_decision_new_task_RGB_robot_state_calibration": true,
+    "previous_RGB_not_replayed": true,
+    "old_turns_forgotten": true,
+    "CPU_current_code_proofs": [
+      {
+        "max_context_messages": 12,
+        "complete_turn_limit": 6,
+        "synthetic_decisions": 9,
+        "actual_run_episode_exercised": true,
+        "real_provider_API_calls": 0,
+        "checks": [
+          {
+            "decision_index": 0,
+            "retained_complete_turns": 0,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 1,
+            "retained_complete_turns": 1,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 2,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 3,
+            "retained_complete_turns": 3,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 4,
+            "retained_complete_turns": 4,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 5,
+            "retained_complete_turns": 5,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 6,
+            "retained_complete_turns": 6,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 7,
+            "retained_complete_turns": 6,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 8,
+            "retained_complete_turns": 6,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          }
+        ]
+      },
+      {
+        "max_context_messages": 4,
+        "complete_turn_limit": 2,
+        "synthetic_decisions": 9,
+        "actual_run_episode_exercised": true,
+        "real_provider_API_calls": 0,
+        "checks": [
+          {
+            "decision_index": 0,
+            "retained_complete_turns": 0,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 1,
+            "retained_complete_turns": 1,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 2,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 3,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 4,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 5,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 6,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 7,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          },
+          {
+            "decision_index": 8,
+            "retained_complete_turns": 2,
+            "tool_calls_and_outputs_paired": true,
+            "synthetic_reasoning_markers_stay_with_turn": true,
+            "current_task_language_injected": true,
+            "current_camera_calibration_names": [
+              "side_camera",
+              "wrist_camera"
+            ],
+            "fresh_RGB_blocks": 2,
+            "privileged_sentinel_absent": true,
+            "prompt_v3": true
+          }
+        ]
+      }
+    ]
+  },
+  "existing_regression": {
+    "source": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/contracts_result.json",
+    "source_SHA256": "ebc46e3030ed4133294b9117553110b7a22ab0592fbe05d1f58ec1bf0dae7845",
+    "actual_execution_commit": "b3765fcea3f3e24b75fb42eb5e3ef6ed8c5795e6",
+    "relevant_passed_case_count": 17,
+    "case_ids": [
+      "tests.test_lab_cuvette_project_v1_1_public_goal::test_loading_goal_uses_nominal_config_and_inherits_existing_task_text",
+      "tests.test_lab_cuvette_project_v1_1_public_goal::test_loading_dimensions_follow_config_instead_of_fixed_runtime_numbers",
+      "tests.test_lab_cuvette_project_v1_1_public_goal::test_diagnostic_task_language_is_unchanged_and_needs_no_geometry_fields[preinsert_diagnostic]",
+      "tests.test_lab_cuvette_project_v1_1_public_goal::test_diagnostic_task_language_is_unchanged_and_needs_no_geometry_fields[grasp_hold]",
+      "tests.test_lab_cuvette_project_v1_1_public_goal::test_diagnostic_task_language_is_unchanged_and_needs_no_geometry_fields[extract_transport]",
+      "tests.test_lab_cuvette_project_v1_1_public_goal::test_prompt_v3_explains_general_contact_checks_without_oracle_or_macro",
+      "tests.test_cubence_project_v1_1_tools::test_rejected_gripper_plan_keeps_previous_request_and_simulation_time",
+      "tests.test_cubence_project_v1_1_tools::test_partial_execution_is_retained_and_never_replayed",
+      "tests.test_cubence_project_v1_1_tools::test_completed_interval_does_not_imply_target_reached",
+      "tests.test_cubence_project_v1_1_tools::test_scope_validity_and_applied_gripper_fields_reach_public_receipt",
+      "tests.test_cubence_project_v1_1_tools::test_safety_stop_is_not_automatically_classified_as_physics_invalid",
+      "tests.test_cubence_project_v1_1_tools::test_already_scored_ordinary_task_failure_remains_task_failure",
+      "tests.test_cubence_project_v1_1_tools::test_normal_simulation_time_limit_is_not_numerical_instability",
+      "tests.test_cubence_project_v1_1_tools::test_reused_id_with_changed_payload_cannot_be_misread_as_previous_success",
+      "tests.test_cubence_project_v1_1_tools::test_new_tools_do_not_add_ground_truth_or_task_macros",
+      "tests.test_cubence_project_v1_1_tools::test_runner_reuses_provider_ledger_and_exposes_new_rejection_contract",
+      "tests.test_cubence_project_v1_1_tools::test_runner_stops_after_partial_motion_without_another_model_decision"
+    ],
+    "no_full_suite_rerun": true
+  },
+  "limitations": [
+    "Whitelist/code-path audit, not an adversarial security sandbox. Allowed nested receipt pose fields are trusted from the actual producer, not recursively schema-sanitized.",
+    "Independent simulator safety/scoring uses private object state and can return symbolic stop/terminal labels. No raw pose/depth oracle was found; this is not a claim of unmonitored vision-only sensing.",
+    "Private diagnostics, truth trajectories and teacher observations still exist on local disk outside the provider input path; local code users can access them.",
+    "A1/F6 selection, nominal10x10x67.5mm dimensions, far-hinge role and nominal27mm depth are task priors, not current truth measurements.",
+    "The base prompt hardcodes10x10mm, matching current cuvette_xy_1000. Other asset/evaluation tasks must synchronize that public prior.",
+    "Two complete context turns do not establish equal long-horizon policy quality, live provider acceptance or actual billed-cost reduction. Genuine full-task debug success remains required before formal admission.",
+    "This audit does not claim every future wire request is safe. New physical-run wire artifacts still need review after process closure."
+  ],
+  "source_unchanged_during_review": true,
+  "runtime_modified": false,
+  "GPU_started": false,
+  "real_provider_API_calls": 0,
+  "shared_budget_ledger_modified": false,
+  "active_H5_opened": false
+}

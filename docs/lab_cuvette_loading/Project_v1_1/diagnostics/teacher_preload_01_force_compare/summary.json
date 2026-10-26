@@ -1,0 +1,1411 @@
+{
+  "schema": "labsim.Project_v1_1.closed_teacher_force_hold_compare.v1",
+  "analysis_date_local": "2026-10-27",
+  "runs": [
+    {
+      "run": "teacher_source_hold_01",
+      "scorer_reference_t_s": 18.145833333333332,
+      "EXTRACT_phase_start_t_s": 18.916666666666668,
+      "original_result": {
+        "task_success": false,
+        "failure_type": "GRASP_SLIP",
+        "failure_domain": "task",
+        "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+        "simulation_seconds": 124.26666666666667,
+        "record_valid": true,
+        "record_integrity_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": false
+      },
+      "configured_assumptions": {
+        "mass_kg": 0.02,
+        "g_m_s2": 9.81,
+        "mg_N": 0.1962,
+        "nominal_combined_dynamic_mu": 0.6324555320336759,
+        "safety_factor": 2.0,
+        "balanced_per_finger_N_for_mg": 0.15510971923125902,
+        "balanced_per_finger_N_for_safety": 0.31021943846251804,
+        "contact_threshold_N": 0.03,
+        "finger_kp_N_per_m": 2000.0,
+        "per_finger_nominal_weight_compression_m": 0.000155109719231259
+      },
+      "teacher_first_freeze": {
+        "t": 18.05,
+        "event": "first_bilateral_contact_stop_closure",
+        "actual_finger_positions_m": [
+          0.00536092696711421,
+          0.005360936280339956
+        ],
+        "previous_total_opening_command_m": 0.009666666666666539,
+        "frozen_total_opening_m": 0.009666666666666539,
+        "per_finger_compression_m": 0.000155109719231259,
+        "normal_load_basis": "mg/(2*mu)*safety/finger_kp; no wider than previous command",
+        "controller_time_s": 14.53333333333333,
+        "controller_motion_clock_s": 14.53333333333333,
+        "actual_simulation_time_s": 18.05,
+        "motion_source_phase": "GRASP",
+        "motion_time_scale": 1.0
+      },
+      "teacher_latch": {
+        "t": 18.166666666666668,
+        "event": "contact_latched",
+        "measured_finger_m": [
+          0.005361021030694246,
+          0.0053610424511134624
+        ],
+        "commanded_total_opening_m": 0.009666666666666539,
+        "per_finger_compression_m": 0.00015510971923125903,
+        "latch_transition_policy": "preserve_first_contact_command",
+        "weight_based_candidate_opening_m": 0.01041184404334519,
+        "effective_measured_minus_command_per_finger_m": [
+          0.0005276876973609769,
+          0.0005277091177801931
+        ],
+        "compression_semantics": "Joint target difference, not measured material penetration; first-contact command may predate measured finger response",
+        "effort_limit_N": 8.0,
+        "friction_assumption": 0.6324555320336759,
+        "mass_kg": 0.02,
+        "finger_kp_N_per_m": 2000.0,
+        "truth_pose_used": true,
+        "controller_time_s": 14.649999999999997,
+        "controller_motion_clock_s": 14.649999999999997,
+        "actual_simulation_time_s": 18.166666666666668,
+        "motion_source_phase": "GRASP",
+        "motion_time_scale": 1.0
+      },
+      "window_stats": {
+        "GRASP_last300ms": {
+          "sample_count": 72,
+          "actual_t_range_s": [
+            18.616666666666667,
+            18.9125
+          ],
+          "left_N": {
+            "min": 0.7573977708816528,
+            "median": 0.7608448266983032,
+            "max": 0.7682873010635376
+          },
+          "right_N": {
+            "min": 1.3312993049621582,
+            "median": 1.3407586216926575,
+            "max": 1.3453397750854492
+          },
+          "nominal_capacity_over_mg": {
+            "min": 6.764077294206608,
+            "median": 6.774156226933966,
+            "max": 6.780947502763336
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 0,
+          "samples_both_forces_over_contact_threshold": 72,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": []
+        },
+        "EXTRACT_first100ms": {
+          "sample_count": 24,
+          "actual_t_range_s": [
+            18.916666666666668,
+            19.0125
+          ],
+          "left_N": {
+            "min": 0.261744886636734,
+            "median": 0.8511063158512115,
+            "max": 0.9752477407455444
+          },
+          "right_N": {
+            "min": 0.16226884722709656,
+            "median": 0.9549148082733154,
+            "max": 1.341304898262024
+          },
+          "nominal_capacity_over_mg": {
+            "min": 1.3668187137636818,
+            "median": 6.139715012232596,
+            "max": 6.779277447608329
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 1,
+          "samples_both_forces_over_contact_threshold": 24,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 18.9625,
+              "last_t_s": 18.9625,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            }
+          ]
+        },
+        "EXTRACT_100to400ms": {
+          "sample_count": 72,
+          "actual_t_range_s": [
+            19.016666666666666,
+            19.3125
+          ],
+          "left_N": {
+            "min": 0.9455632567405701,
+            "median": 0.9489757120609283,
+            "max": 0.953538179397583
+          },
+          "right_N": {
+            "min": 0.9446576833724976,
+            "median": 0.9484008550643921,
+            "max": 0.9511280059814453
+          },
+          "nominal_capacity_over_mg": {
+            "min": 6.098413137963398,
+            "median": 6.1165307962548106,
+            "max": 6.134758933344443
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 0,
+          "samples_both_forces_over_contact_threshold": 72,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": []
+        },
+        "EXTRACT_all_available": {
+          "sample_count": 144,
+          "actual_t_range_s": [
+            18.916666666666668,
+            19.5125
+          ],
+          "left_N": {
+            "min": 0.261744886636734,
+            "median": 0.9488602578639984,
+            "max": 0.9752477407455444
+          },
+          "right_N": {
+            "min": 0.16226884722709656,
+            "median": 0.948525458574295,
+            "max": 1.341304898262024
+          },
+          "nominal_capacity_over_mg": {
+            "min": 1.3668187137636818,
+            "median": 6.116727064241561,
+            "max": 6.779277447608329
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 1,
+          "samples_both_forces_over_contact_threshold": 144,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 18.9625,
+              "last_t_s": 18.9625,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            }
+          ]
+        }
+      },
+      "selected_physics": {
+        "GRASP_end": {
+          "run": "teacher_source_hold_01",
+          "t_s": 18.9125,
+          "t_from_EXTRACT_s": -0.00416666666666643,
+          "physics_step": 4539,
+          "left_N": 0.7640825510025024,
+          "right_N": 1.3376885652542114,
+          "nominal_friction_capacity_N": 1.3292767695451528,
+          "capacity_over_mg": 6.775110955887628,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.009666666666666539,
+          "measured_total_opening_m": 0.010722092352807522,
+          "weight_candidate_total_opening_m": 0.010411872914345003,
+          "per_finger_measured_minus_command_compression_m": 0.0005277128430704915,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 3.3297565307166e-07,
+          "anchor_relative_drift_m": 1.8562872382823247e-07,
+          "anchor_axial_signed_m": -1.2065403194286596e-07,
+          "actual_TCP_z_m": 0.7960009674067997,
+          "cup_bottom_z_m": 0.7429995586712393,
+          "source_gap_m": -4.4132876064750803e-07,
+          "environment_force_z_N": 1.3874867926351726
+        },
+        "EXTRACT_begin": {
+          "run": "teacher_source_hold_01",
+          "t_s": 18.916666666666668,
+          "t_from_EXTRACT_s": 0.0,
+          "physics_step": 4540,
+          "left_N": 0.7665592432022095,
+          "right_N": 1.3326257467269897,
+          "nominal_friction_capacity_N": 1.3276411596427782,
+          "capacity_over_mg": 6.766774513979501,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.009666666666666539,
+          "measured_total_opening_m": 0.010721973609179258,
+          "weight_candidate_total_opening_m": 0.01041175417071674,
+          "per_finger_measured_minus_command_compression_m": 0.0005276534712563598,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 2.4118229856378605e-07,
+          "anchor_relative_drift_m": 1.4601319754976334e-07,
+          "anchor_axial_signed_m": -1.1819268270647047e-07,
+          "actual_TCP_z_m": 0.7960008480791849,
+          "cup_bottom_z_m": 0.7429994696218636,
+          "source_gap_m": -5.303781364096594e-07,
+          "environment_force_z_N": 1.3675322602503002
+        },
+        "EXTRACT_50ms": {
+          "run": "teacher_source_hold_01",
+          "t_s": 18.966666666666665,
+          "t_from_EXTRACT_s": 0.04999999999999716,
+          "physics_step": 4552,
+          "left_N": 0.9667426943778992,
+          "right_N": 0.8644503355026245,
+          "nominal_friction_capacity_N": 1.1581481619694456,
+          "capacity_over_mg": 5.902895830629182,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.009666666666666539,
+          "measured_total_opening_m": 0.010621025692671537,
+          "weight_candidate_total_opening_m": 0.010310806254209019,
+          "per_finger_measured_minus_command_compression_m": 0.0004771795130024993,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.0002713911925275857,
+          "anchor_relative_drift_m": 2.938969476131724e-05,
+          "anchor_axial_signed_m": -1.99944246044794e-05,
+          "actual_TCP_z_m": 0.7960053784093445,
+          "cup_bottom_z_m": 0.7429999755984877,
+          "source_gap_m": -2.440151225524545e-08,
+          "environment_force_z_N": 1.2478439808510018
+        },
+        "EXTRACT_100ms": {
+          "run": "teacher_source_hold_01",
+          "t_s": 19.016666666666666,
+          "t_from_EXTRACT_s": 0.09999999999999787,
+          "physics_step": 4564,
+          "left_N": 0.9474174380302429,
+          "right_N": 0.9480957388877869,
+          "nominal_friction_capacity_N": 1.1988277947845358,
+          "capacity_over_mg": 6.110233408687746,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.009666666666666539,
+          "measured_total_opening_m": 0.01062085386365652,
+          "weight_candidate_total_opening_m": 0.010310634425194002,
+          "per_finger_measured_minus_command_compression_m": 0.00047709359849499103,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.0002733175200450497,
+          "anchor_relative_drift_m": 2.9679501650989925e-05,
+          "anchor_axial_signed_m": -2.0109800111984134e-05,
+          "actual_TCP_z_m": 0.7960428091322952,
+          "cup_bottom_z_m": 0.7430372295873936,
+          "source_gap_m": 3.722958739360571e-05,
+          "environment_force_z_N": 0.0
+        },
+        "EXTRACT_400ms": {
+          "run": "teacher_source_hold_01",
+          "t_s": 19.316666666666666,
+          "t_from_EXTRACT_s": 0.3999999999999986,
+          "physics_step": 4636,
+          "left_N": 0.9486396312713623,
+          "right_N": 0.9487470984458923,
+          "nominal_friction_capacity_N": 1.2000127336169626,
+          "capacity_over_mg": 6.1162728522780965,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.009666666666666539,
+          "measured_total_opening_m": 0.010620924178510904,
+          "weight_candidate_total_opening_m": 0.010310704740048386,
+          "per_finger_measured_minus_command_compression_m": 0.00047712875592218276,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.00027277340568672263,
+          "anchor_relative_drift_m": 2.979215671689664e-05,
+          "anchor_axial_signed_m": -2.011009480521579e-05,
+          "actual_TCP_z_m": 0.7971961592236259,
+          "cup_bottom_z_m": 0.7441905074433596,
+          "source_gap_m": 0.0011905074433595786,
+          "environment_force_z_N": 0.0
+        },
+        "terminal_or_600ms": {
+          "run": "teacher_source_hold_01",
+          "t_s": 19.516666666666666,
+          "t_from_EXTRACT_s": 0.5999999999999979,
+          "physics_step": 4684,
+          "left_N": 0.9518547058105469,
+          "right_N": 0.9507763981819153,
+          "nominal_friction_capacity_N": 1.2033295671393727,
+          "capacity_over_mg": 6.133178221913214,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.009666666666666539,
+          "measured_total_opening_m": 0.010620847344398499,
+          "weight_candidate_total_opening_m": 0.01031062790593598,
+          "per_finger_measured_minus_command_compression_m": 0.0004770903388659799,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.0002733831434826836,
+          "anchor_relative_drift_m": 2.9283485003485474e-05,
+          "anchor_axial_signed_m": -1.9807302968867627e-05,
+          "actual_TCP_z_m": 0.7987668600675769,
+          "cup_bottom_z_m": 0.7457615741232816,
+          "source_gap_m": 0.002761574123281596,
+          "environment_force_z_N": 0.0
+        }
+      },
+      "first_200um_crossing_in_scanned_prefix": {
+        "run": "teacher_source_hold_01",
+        "t_s": 18.9625,
+        "t_from_EXTRACT_s": 0.04583333333333073,
+        "physics_step": 4551,
+        "left_N": 0.261744886636734,
+        "right_N": 0.16226884722709656,
+        "nominal_friction_capacity_N": 0.2681698316404344,
+        "capacity_over_mg": 1.3668187137636818,
+        "target_per_finger_N": 0.31021943846251804,
+        "mass_kg": 0.02,
+        "nominal_combined_mu": 0.6324555320336759,
+        "applied_total_opening_m": 0.009666666666666539,
+        "measured_total_opening_m": 0.010623995214700699,
+        "weight_candidate_total_opening_m": 0.01031377577623818,
+        "per_finger_measured_minus_command_compression_m": 0.00047866427401708003,
+        "cap_per_finger_N": 8.0,
+        "bottom_relative_drift_m": 0.00027228001136679836,
+        "anchor_relative_drift_m": 2.9158231223979736e-05,
+        "anchor_axial_signed_m": -1.9872950460849265e-05,
+        "actual_TCP_z_m": 0.7960040667397258,
+        "cup_bottom_z_m": 0.742998759007195,
+        "source_gap_m": -1.240992804962815e-06,
+        "environment_force_z_N": 0.2910725830006413
+      },
+      "peak_scanned_prefix": {
+        "run": "teacher_source_hold_01",
+        "t_s": 19.325,
+        "t_from_EXTRACT_s": 0.40833333333333144,
+        "physics_step": 4638,
+        "left_N": 0.9506254196166992,
+        "right_N": 0.9480391144752502,
+        "nominal_friction_capacity_N": 1.2008208880625952,
+        "capacity_over_mg": 6.1203918861498225,
+        "target_per_finger_N": 0.31021943846251804,
+        "mass_kg": 0.02,
+        "nominal_combined_mu": 0.6324555320336759,
+        "applied_total_opening_m": 0.009666666666666539,
+        "measured_total_opening_m": 0.010620911605656147,
+        "weight_candidate_total_opening_m": 0.010310692167193629,
+        "per_finger_measured_minus_command_compression_m": 0.0004771224694948041,
+        "cap_per_finger_N": 8.0,
+        "bottom_relative_drift_m": 0.0002736228926827449,
+        "anchor_relative_drift_m": 2.9354500945764464e-05,
+        "anchor_axial_signed_m": -1.9986523561304633e-05,
+        "actual_TCP_z_m": 0.7972576710381538,
+        "cup_bottom_z_m": 0.7442520806366646,
+        "source_gap_m": 0.0012520806366645987,
+        "environment_force_z_N": 0.0
+      },
+      "helper_decisions_since_ref_minus200ms": {
+        "original_ramp": 6,
+        "first_bilateral_freeze": 1,
+        "hold_contact_target": 88
+      },
+      "source_configuration": {
+        "control_hz": 60.0,
+        "mass_kg": 0.02,
+        "dynamic_friction": 0.5,
+        "finger_dynamic_friction": 0.8,
+        "finger_kp_N_per_m": 2000.0,
+        "contact_safety_factor": 2.0,
+        "maximum_compression_m": 0.0003,
+        "contact_threshold_N": 0.03,
+        "contact_persist_s": 0.1,
+        "contact_approach_speed_m_s": 0.002,
+        "minimum_total_opening_m": 0.002,
+        "weight_compression_per_finger_m": 0.000155109719231259,
+        "logical_requested_opening_m": null,
+        "frozen_opening_m": null,
+        "contact_since_s": null,
+        "confirmed": false,
+        "ever_confirmed": false,
+        "recovering": false,
+        "release_ramp_active": false,
+        "last_t": null
+      },
+      "source_SHA256": {
+        "config.yaml": "c6940f3a3ee7ec31d111cd56aa27f4731ec1477154c2ea98e7c7089b4d3ed964",
+        "teacher_events.json": "d5b895665defd9e3e6d2ce6e1cb5cc504f85b631b459363b5cbbe076374aad2b",
+        "execution_trace.jsonl": "fdd8afd3325002e2f168c479fb1698e3bda78c8ddfdb7e2833040d6624ed24ed",
+        "independent_score.json": "727dabdf10a605fd3b72c43b15c1c8451fa022e8e59342c7ab3e82e4b2d5ac0f",
+        "result.json": "cb0ae1dcbd9c7fe15fcf48817e035731ad7f1e31be02e424d15416cf4162543a",
+        "release_metadata.json": "af01a2843bcc4c347a75d073834dc723a404a528188403321385ed70ff71938f",
+        "contact_hold_configuration.json": "2c3aff28c18d9c6e1a129d2ae618ff497bf4d374fc0c476c9e81045c9ed21ebf"
+      },
+      "physics_stream_scope": "Read selected prefix from archived gzip through EXTRACT+0.5s or actual terminal, not a repeated full old-run audit"
+    },
+    {
+      "run": "teacher_slow_close_01",
+      "scorer_reference_t_s": 18.720833333333335,
+      "EXTRACT_phase_start_t_s": 19.483333333333334,
+      "original_result": {
+        "task_success": false,
+        "failure_type": "GRASP_SLIP",
+        "failure_domain": "task",
+        "termination_reason": "GRASP_SLIP",
+        "simulation_seconds": 19.966666666666665,
+        "record_valid": true,
+        "record_integrity_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": false
+      },
+      "configured_assumptions": {
+        "mass_kg": 0.02,
+        "g_m_s2": 9.81,
+        "mg_N": 0.1962,
+        "nominal_combined_dynamic_mu": 0.6324555320336759,
+        "safety_factor": 2.0,
+        "balanced_per_finger_N_for_mg": 0.15510971923125902,
+        "balanced_per_finger_N_for_safety": 0.31021943846251804,
+        "contact_threshold_N": 0.03,
+        "finger_kp_N_per_m": 2000.0,
+        "per_finger_nominal_weight_compression_m": 0.000155109719231259
+      },
+      "teacher_first_freeze": {
+        "t": 18.633333333333333,
+        "event": "first_bilateral_contact_stop_closure",
+        "actual_finger_positions_m": [
+          0.005364338401705027,
+          0.005364344455301762
+        ],
+        "previous_total_opening_command_m": 0.010599999999999879,
+        "frozen_total_opening_m": 0.01041846341854427,
+        "per_finger_compression_m": 0.000155109719231259,
+        "normal_load_basis": "mg/(2*mu)*safety/finger_kp; no wider than previous command",
+        "controller_time_s": 15.116666666666662,
+        "controller_motion_clock_s": 15.116666666666662,
+        "actual_simulation_time_s": 18.633333333333333,
+        "motion_source_phase": "GRASP",
+        "motion_time_scale": 1.0
+      },
+      "teacher_latch": {
+        "t": 18.733333333333334,
+        "event": "contact_latched",
+        "measured_finger_m": [
+          0.005362113006412983,
+          0.005362127907574177
+        ],
+        "commanded_total_opening_m": 0.01041846341854427,
+        "per_finger_compression_m": 0.00015510971923125903,
+        "latch_transition_policy": "preserve_first_contact_command",
+        "weight_based_candidate_opening_m": 0.010414021475524641,
+        "effective_measured_minus_command_per_finger_m": [
+          0.00015288129714084806,
+          0.0001528961983020419
+        ],
+        "compression_semantics": "Joint target difference, not measured material penetration; first-contact command may predate measured finger response",
+        "effort_limit_N": 8.0,
+        "friction_assumption": 0.6324555320336759,
+        "mass_kg": 0.02,
+        "finger_kp_N_per_m": 2000.0,
+        "truth_pose_used": true,
+        "controller_time_s": 15.216666666666663,
+        "controller_motion_clock_s": 15.216666666666663,
+        "actual_simulation_time_s": 18.733333333333334,
+        "motion_source_phase": "GRASP",
+        "motion_time_scale": 1.0
+      },
+      "window_stats": {
+        "GRASP_last300ms": {
+          "sample_count": 72,
+          "actual_t_range_s": [
+            19.183333333333334,
+            19.479166666666668
+          ],
+          "left_N": {
+            "min": 0.20339278876781464,
+            "median": 0.20665846019983292,
+            "max": 0.21108102798461914
+          },
+          "right_N": {
+            "min": 0.38422489166259766,
+            "median": 0.3890269696712494,
+            "max": 0.3920256197452545
+          },
+          "nominal_capacity_over_mg": {
+            "min": 1.9046248922101021,
+            "median": 1.9203985506602352,
+            "max": 1.9363760665102148
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 72,
+          "samples_both_forces_over_contact_threshold": 72,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 19.183333333333334,
+              "last_t_s": 19.479166666666668,
+              "contiguous_sample_span_s": 0.2958333333333343,
+              "sample_count": 72
+            }
+          ]
+        },
+        "EXTRACT_first100ms": {
+          "sample_count": 24,
+          "actual_t_range_s": [
+            19.483333333333334,
+            19.579166666666666
+          ],
+          "left_N": {
+            "min": 0.05019061267375946,
+            "median": 0.2021983116865158,
+            "max": 0.2350294440984726
+          },
+          "right_N": {
+            "min": 0.05868541821837425,
+            "median": 0.257620245218277,
+            "max": 0.38997748494148254
+          },
+          "nominal_capacity_over_mg": {
+            "min": 0.3509645669908224,
+            "median": 1.450000986930672,
+            "max": 1.9270224511103011
+          },
+          "samples_capacity_below_mg": 6,
+          "samples_capacity_below_safety_2mg": 24,
+          "samples_both_forces_over_contact_threshold": 24,
+          "capacity_below_mg_spans": [
+            {
+              "first_t_s": 19.525,
+              "last_t_s": 19.525,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            },
+            {
+              "first_t_s": 19.5375,
+              "last_t_s": 19.541666666666668,
+              "contiguous_sample_span_s": 0.00416666666666643,
+              "sample_count": 2
+            },
+            {
+              "first_t_s": 19.55,
+              "last_t_s": 19.558333333333334,
+              "contiguous_sample_span_s": 0.00833333333333286,
+              "sample_count": 3
+            }
+          ],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 19.483333333333334,
+              "last_t_s": 19.579166666666666,
+              "contiguous_sample_span_s": 0.09583333333333144,
+              "sample_count": 24
+            }
+          ]
+        },
+        "EXTRACT_100to400ms": {
+          "sample_count": 72,
+          "actual_t_range_s": [
+            19.583333333333332,
+            19.879166666666666
+          ],
+          "left_N": {
+            "min": 0.19306032359600067,
+            "median": 0.2015906646847725,
+            "max": 0.20809029042720795
+          },
+          "right_N": {
+            "min": 0.1954057216644287,
+            "median": 0.20194745808839798,
+            "max": 0.2078695446252823
+          },
+          "nominal_capacity_over_mg": {
+            "min": 1.256610156290892,
+            "median": 1.3020760004821361,
+            "max": 1.3402249779700437
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 72,
+          "samples_both_forces_over_contact_threshold": 72,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 19.583333333333332,
+              "last_t_s": 19.879166666666666,
+              "contiguous_sample_span_s": 0.2958333333333343,
+              "sample_count": 72
+            }
+          ]
+        },
+        "EXTRACT_all_available": {
+          "sample_count": 117,
+          "actual_t_range_s": [
+            19.483333333333334,
+            19.966666666666665
+          ],
+          "left_N": {
+            "min": 0.05019061267375946,
+            "median": 0.20153579115867615,
+            "max": 0.2350294440984726
+          },
+          "right_N": {
+            "min": 0.05868541821837425,
+            "median": 0.20197923481464386,
+            "max": 0.38997748494148254
+          },
+          "nominal_capacity_over_mg": {
+            "min": 0.3509645669908224,
+            "median": 1.3020148768861644,
+            "max": 1.9270224511103011
+          },
+          "samples_capacity_below_mg": 6,
+          "samples_capacity_below_safety_2mg": 117,
+          "samples_both_forces_over_contact_threshold": 117,
+          "capacity_below_mg_spans": [
+            {
+              "first_t_s": 19.525,
+              "last_t_s": 19.525,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            },
+            {
+              "first_t_s": 19.5375,
+              "last_t_s": 19.541666666666668,
+              "contiguous_sample_span_s": 0.00416666666666643,
+              "sample_count": 2
+            },
+            {
+              "first_t_s": 19.55,
+              "last_t_s": 19.558333333333334,
+              "contiguous_sample_span_s": 0.00833333333333286,
+              "sample_count": 3
+            }
+          ],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 19.483333333333334,
+              "last_t_s": 19.966666666666665,
+              "contiguous_sample_span_s": 0.48333333333333073,
+              "sample_count": 117
+            }
+          ]
+        }
+      },
+      "selected_physics": {
+        "GRASP_end": {
+          "run": "teacher_slow_close_01",
+          "t_s": 19.479166666666668,
+          "t_from_EXTRACT_s": -0.00416666666666643,
+          "physics_step": 4675,
+          "left_N": 0.20545831322669983,
+          "right_N": 0.3890060782432556,
+          "nominal_friction_capacity_N": 0.375972292982206,
+          "capacity_over_mg": 1.916270606433262,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01041846341854427,
+          "measured_total_opening_m": 0.010718551930040121,
+          "weight_candidate_total_opening_m": 0.010408332491577603,
+          "per_finger_measured_minus_command_compression_m": 0.00015004425574792566,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 1.7869602839976893e-05,
+          "anchor_relative_drift_m": 2.4859484767696665e-06,
+          "anchor_axial_signed_m": -1.3526888210462177e-06,
+          "actual_TCP_z_m": 0.7960002517169544,
+          "cup_bottom_z_m": 0.7429996951296174,
+          "source_gap_m": -3.0487038260584853e-07,
+          "environment_force_z_N": 0.6033596183406189
+        },
+        "EXTRACT_begin": {
+          "run": "teacher_slow_close_01",
+          "t_s": 19.483333333333334,
+          "t_from_EXTRACT_s": 0.0,
+          "physics_step": 4676,
+          "left_N": 0.20843903720378876,
+          "right_N": 0.38936078548431396,
+          "nominal_friction_capacity_N": 0.3780818049078411,
+          "capacity_over_mg": 1.9270224511103011,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01041846341854427,
+          "measured_total_opening_m": 0.010718722827732563,
+          "weight_candidate_total_opening_m": 0.010408503389270045,
+          "per_finger_measured_minus_command_compression_m": 0.00015012970459414663,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 1.7604212203276106e-05,
+          "anchor_relative_drift_m": 2.6504433201238477e-06,
+          "anchor_axial_signed_m": -1.7117395036144092e-06,
+          "actual_TCP_z_m": 0.7960004901761689,
+          "cup_bottom_z_m": 0.7429995534934768,
+          "source_gap_m": -4.465065231995524e-07,
+          "environment_force_z_N": 0.5689292429597117
+        },
+        "EXTRACT_50ms": {
+          "run": "teacher_slow_close_01",
+          "t_s": 19.533333333333335,
+          "t_from_EXTRACT_s": 0.05000000000000071,
+          "physics_step": 4688,
+          "left_N": 0.20409855246543884,
+          "right_N": 0.2906600534915924,
+          "nominal_friction_capacity_N": 0.312912817358794,
+          "capacity_over_mg": 1.594866551268063,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01041846341854427,
+          "measured_total_opening_m": 0.010692683048546314,
+          "weight_candidate_total_opening_m": 0.010382463610083796,
+          "per_finger_measured_minus_command_compression_m": 0.00013710981500102224,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 8.947047418304118e-05,
+          "anchor_relative_drift_m": 1.53003094931706e-05,
+          "anchor_axial_signed_m": -1.2675490081870227e-05,
+          "actual_TCP_z_m": 0.796004781657443,
+          "cup_bottom_z_m": 0.7429990297925684,
+          "source_gap_m": -9.702074316164655e-07,
+          "environment_force_z_N": 0.1286972144880565
+        },
+        "EXTRACT_100ms": {
+          "run": "teacher_slow_close_01",
+          "t_s": 19.583333333333332,
+          "t_from_EXTRACT_s": 0.09999999999999787,
+          "physics_step": 4700,
+          "left_N": 0.20145760476589203,
+          "right_N": 0.20597130060195923,
+          "nominal_friction_capacity_N": 0.25768066511032256,
+          "capacity_over_mg": 1.3133571106540394,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01041846341854427,
+          "measured_total_opening_m": 0.010621321387588978,
+          "weight_candidate_total_opening_m": 0.01031110194912646,
+          "per_finger_measured_minus_command_compression_m": 0.00010142898452235403,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.00027239052833881477,
+          "anchor_relative_drift_m": 5.407836623324331e-05,
+          "anchor_axial_signed_m": -4.8731361927012935e-05,
+          "actual_TCP_z_m": 0.796043763459146,
+          "cup_bottom_z_m": 0.7430107137036313,
+          "source_gap_m": 1.0713703631259897e-05,
+          "environment_force_z_N": 0.0
+        },
+        "EXTRACT_400ms": {
+          "run": "teacher_slow_close_01",
+          "t_s": 19.883333333333333,
+          "t_from_EXTRACT_s": 0.3999999999999986,
+          "physics_step": 4772,
+          "left_N": 0.19684690237045288,
+          "right_N": 0.19648107886314392,
+          "nominal_friction_capacity_N": 0.24876245763482616,
+          "capacity_over_mg": 1.2679024344282679,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01041846341854427,
+          "measured_total_opening_m": 0.010620955377817154,
+          "weight_candidate_total_opening_m": 0.010310735939354635,
+          "per_finger_measured_minus_command_compression_m": 0.00010124597963644209,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.001154501016908528,
+          "anchor_relative_drift_m": 0.001089225760671445,
+          "anchor_axial_signed_m": -0.0010868583271377386,
+          "actual_TCP_z_m": 0.7971959207638911,
+          "cup_bottom_z_m": 0.7431072259240644,
+          "source_gap_m": 0.00010722592406442466,
+          "environment_force_z_N": 0.0
+        },
+        "terminal_or_600ms": {
+          "run": "teacher_slow_close_01",
+          "t_s": 19.966666666666665,
+          "t_from_EXTRACT_s": 0.48333333333333073,
+          "physics_step": 4792,
+          "left_N": 0.20114676654338837,
+          "right_N": 0.20111139118671417,
+          "nominal_friction_capacity_N": 0.2544103971620783,
+          "capacity_over_mg": 1.2966890782980545,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01041846341854427,
+          "measured_total_opening_m": 0.01062089903280139,
+          "weight_candidate_total_opening_m": 0.010310679594338871,
+          "per_finger_measured_minus_command_compression_m": 0.00010121780712855997,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.0015919640586080338,
+          "anchor_relative_drift_m": 0.0015037257060758523,
+          "anchor_axial_signed_m": -0.001500045832124104,
+          "actual_TCP_z_m": 0.7977759930215482,
+          "cup_bottom_z_m": 0.7432616489387135,
+          "source_gap_m": 0.00026164893871349904,
+          "environment_force_z_N": 0.0
+        }
+      },
+      "first_200um_crossing_in_scanned_prefix": {
+        "run": "teacher_slow_close_01",
+        "t_s": 19.554166666666667,
+        "t_from_EXTRACT_s": 0.07083333333333286,
+        "physics_step": 4693,
+        "left_N": 0.05019061267375946,
+        "right_N": 0.05868541821837425,
+        "nominal_friction_capacity_N": 0.06885924804359936,
+        "capacity_over_mg": 0.3509645669908224,
+        "target_per_finger_N": 0.31021943846251804,
+        "mass_kg": 0.02,
+        "nominal_combined_mu": 0.6324555320336759,
+        "applied_total_opening_m": 0.01041846341854427,
+        "measured_total_opening_m": 0.010636160615831614,
+        "weight_candidate_total_opening_m": 0.010325941177369095,
+        "per_finger_measured_minus_command_compression_m": 0.00010884859864367189,
+        "cap_per_finger_N": 8.0,
+        "bottom_relative_drift_m": 0.00024110369086487957,
+        "anchor_relative_drift_m": 4.2540244910278705e-05,
+        "anchor_axial_signed_m": -3.66636547773091e-05,
+        "actual_TCP_z_m": 0.7960170607230478,
+        "cup_bottom_z_m": 0.7429990448171473,
+        "source_gap_m": -9.5518285270213e-07,
+        "environment_force_z_N": 0.15146791876031784
+      },
+      "peak_scanned_prefix": {
+        "run": "teacher_slow_close_01",
+        "t_s": 19.966666666666665,
+        "t_from_EXTRACT_s": 0.48333333333333073,
+        "physics_step": 4792,
+        "left_N": 0.20114676654338837,
+        "right_N": 0.20111139118671417,
+        "nominal_friction_capacity_N": 0.2544103971620783,
+        "capacity_over_mg": 1.2966890782980545,
+        "target_per_finger_N": 0.31021943846251804,
+        "mass_kg": 0.02,
+        "nominal_combined_mu": 0.6324555320336759,
+        "applied_total_opening_m": 0.01041846341854427,
+        "measured_total_opening_m": 0.01062089903280139,
+        "weight_candidate_total_opening_m": 0.010310679594338871,
+        "per_finger_measured_minus_command_compression_m": 0.00010121780712855997,
+        "cap_per_finger_N": 8.0,
+        "bottom_relative_drift_m": 0.0015919640586080338,
+        "anchor_relative_drift_m": 0.0015037257060758523,
+        "anchor_axial_signed_m": -0.001500045832124104,
+        "actual_TCP_z_m": 0.7977759930215482,
+        "cup_bottom_z_m": 0.7432616489387135,
+        "source_gap_m": 0.00026164893871349904,
+        "environment_force_z_N": 0.0
+      },
+      "helper_decisions_since_ref_minus200ms": {
+        "original_ramp": 6,
+        "first_bilateral_freeze": 1,
+        "hold_contact_target": 79
+      },
+      "source_configuration": {
+        "control_hz": 60.0,
+        "mass_kg": 0.02,
+        "dynamic_friction": 0.5,
+        "finger_dynamic_friction": 0.8,
+        "finger_kp_N_per_m": 2000.0,
+        "contact_safety_factor": 2.0,
+        "maximum_compression_m": 0.0003,
+        "contact_threshold_N": 0.03,
+        "contact_persist_s": 0.1,
+        "contact_approach_speed_m_s": 0.002,
+        "minimum_total_opening_m": 0.002,
+        "weight_compression_per_finger_m": 0.000155109719231259,
+        "logical_requested_opening_m": null,
+        "frozen_opening_m": null,
+        "contact_since_s": null,
+        "confirmed": false,
+        "ever_confirmed": false,
+        "recovering": false,
+        "release_ramp_active": false,
+        "last_t": null
+      },
+      "source_SHA256": {
+        "config.yaml": "20e037b4d1a6319e81e71dbd4db277e571923ce0512b055514b6241ce44bad7b",
+        "teacher_events.json": "f9ee7c350ba9507c06ef468f63c744043054f8d0f771c4b9da9f99bbea9f69c3",
+        "execution_trace.jsonl": "4cc46f82ed997e4b79db4b50499a97f8a05852eb24447c637c795a0288cbbd4b",
+        "independent_score.json": "e8ea25cef0b546f94bd39e538baf4f143b6d734f2056cf36f36fa4fb0beeeb46",
+        "result.json": "43d8f7d1e698be7131c0af7fc5cdb6453b86e3085e054ab9d849998f61c7d364",
+        "release_metadata.json": "43905c2e230dc04de53744070e4b37716a985c36e64a8259bccd9320629fdf1c",
+        "contact_hold_configuration.json": "2c3aff28c18d9c6e1a129d2ae618ff497bf4d374fc0c476c9e81045c9ed21ebf"
+      },
+      "physics_stream_scope": "Read selected prefix from archived gzip through EXTRACT+0.5s or actual terminal, not a repeated full old-run audit"
+    },
+    {
+      "run": "teacher_preload_01",
+      "scorer_reference_t_s": 18.720833333333335,
+      "EXTRACT_phase_start_t_s": 19.483333333333334,
+      "original_result": {
+        "task_success": false,
+        "failure_type": "GRASP_SLIP",
+        "failure_domain": "task",
+        "termination_reason": "GRASP_SLIP",
+        "simulation_seconds": 20.016666666666666,
+        "record_valid": true,
+        "record_integrity_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": false
+      },
+      "configured_assumptions": {
+        "mass_kg": 0.02,
+        "g_m_s2": 9.81,
+        "mg_N": 0.1962,
+        "nominal_combined_dynamic_mu": 0.6324555320336759,
+        "safety_factor": 2.0,
+        "balanced_per_finger_N_for_mg": 0.15510971923125902,
+        "balanced_per_finger_N_for_safety": 0.31021943846251804,
+        "contact_threshold_N": 0.03,
+        "finger_kp_N_per_m": 2000.0,
+        "per_finger_nominal_weight_compression_m": 0.000155109719231259
+      },
+      "teacher_first_freeze": {
+        "t": 18.633333333333333,
+        "event": "first_bilateral_contact_stop_closure",
+        "actual_finger_positions_m": [
+          0.005364338401705027,
+          0.005364344455301762
+        ],
+        "previous_total_opening_command_m": 0.010599999999999879,
+        "frozen_total_opening_m": 0.01041846341854427,
+        "per_finger_compression_m": 0.000155109719231259,
+        "normal_load_basis": "mg/(2*mu)*safety/finger_kp; no wider than previous command",
+        "controller_time_s": 15.116666666666662,
+        "controller_motion_clock_s": 15.116666666666662,
+        "actual_simulation_time_s": 18.633333333333333,
+        "motion_source_phase": "GRASP",
+        "motion_time_scale": 1.0
+      },
+      "teacher_latch": {
+        "t": 18.733333333333334,
+        "event": "contact_latched",
+        "measured_finger_m": [
+          0.005362113006412983,
+          0.005362127907574177
+        ],
+        "commanded_total_opening_m": 0.01041846341854427,
+        "per_finger_compression_m": 0.00015510971923125903,
+        "latch_transition_policy": "preserve_first_contact_command",
+        "weight_based_candidate_opening_m": 0.010414021475524641,
+        "effective_measured_minus_command_per_finger_m": [
+          0.00015288129714084806,
+          0.0001528961983020419
+        ],
+        "compression_semantics": "Joint target difference, not measured material penetration; first-contact command may predate measured finger response",
+        "effort_limit_N": 8.0,
+        "friction_assumption": 0.6324555320336759,
+        "mass_kg": 0.02,
+        "finger_kp_N_per_m": 2000.0,
+        "truth_pose_used": true,
+        "controller_time_s": 15.216666666666663,
+        "controller_motion_clock_s": 15.216666666666663,
+        "actual_simulation_time_s": 18.733333333333334,
+        "motion_source_phase": "GRASP",
+        "motion_time_scale": 1.0
+      },
+      "window_stats": {
+        "GRASP_last300ms": {
+          "sample_count": 72,
+          "actual_t_range_s": [
+            19.183333333333334,
+            19.479166666666668
+          ],
+          "left_N": {
+            "min": 0.28163963556289673,
+            "median": 0.28480346500873566,
+            "max": 0.2899910509586334
+          },
+          "right_N": {
+            "min": 0.5107837319374084,
+            "median": 0.5161577761173248,
+            "max": 0.5209686756134033
+          },
+          "nominal_capacity_over_mg": {
+            "min": 2.5614793730147225,
+            "median": 2.58143659936502,
+            "max": 2.6039666367545626
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 0,
+          "samples_both_forces_over_contact_threshold": 72,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": []
+        },
+        "EXTRACT_first100ms": {
+          "sample_count": 24,
+          "actual_t_range_s": [
+            19.483333333333334,
+            19.579166666666666
+          ],
+          "left_N": {
+            "min": 0.044219329953193665,
+            "median": 0.28830353915691376,
+            "max": 0.34174203872680664
+          },
+          "right_N": {
+            "min": 0.0,
+            "median": 0.338895708322525,
+            "max": 0.5160961151123047
+          },
+          "nominal_capacity_over_mg": {
+            "min": 0.14254209914230254,
+            "median": 2.1606062851249708,
+            "max": 2.586324325501057
+          },
+          "samples_capacity_below_mg": 2,
+          "samples_capacity_below_safety_2mg": 6,
+          "samples_both_forces_over_contact_threshold": 23,
+          "capacity_below_mg_spans": [
+            {
+              "first_t_s": 19.529166666666665,
+              "last_t_s": 19.529166666666665,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            },
+            {
+              "first_t_s": 19.5375,
+              "last_t_s": 19.5375,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            }
+          ],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 19.525,
+              "last_t_s": 19.545833333333334,
+              "contiguous_sample_span_s": 0.020833333333335702,
+              "sample_count": 6
+            }
+          ]
+        },
+        "EXTRACT_100to400ms": {
+          "sample_count": 72,
+          "actual_t_range_s": [
+            19.583333333333332,
+            19.879166666666666
+          ],
+          "left_N": {
+            "min": 0.32291460037231445,
+            "median": 0.3340088874101639,
+            "max": 0.3447641134262085
+          },
+          "right_N": {
+            "min": 0.327990859746933,
+            "median": 0.33382415771484375,
+            "max": 0.3408990204334259
+          },
+          "nominal_capacity_over_mg": {
+            "min": 2.100513120100777,
+            "median": 2.151888691362984,
+            "max": 2.2005792435543623
+          },
+          "samples_capacity_below_mg": 0,
+          "samples_capacity_below_safety_2mg": 0,
+          "samples_both_forces_over_contact_threshold": 72,
+          "capacity_below_mg_spans": [],
+          "capacity_below_2mg_spans": []
+        },
+        "EXTRACT_all_available": {
+          "sample_count": 129,
+          "actual_t_range_s": [
+            19.483333333333334,
+            20.016666666666666
+          ],
+          "left_N": {
+            "min": 0.044219329953193665,
+            "median": 0.3332468569278717,
+            "max": 0.3447641134262085
+          },
+          "right_N": {
+            "min": 0.0,
+            "median": 0.33420702815055847,
+            "max": 0.5160961151123047
+          },
+          "nominal_capacity_over_mg": {
+            "min": 0.14254209914230254,
+            "median": 2.154380276468408,
+            "max": 2.586324325501057
+          },
+          "samples_capacity_below_mg": 2,
+          "samples_capacity_below_safety_2mg": 6,
+          "samples_both_forces_over_contact_threshold": 128,
+          "capacity_below_mg_spans": [
+            {
+              "first_t_s": 19.529166666666665,
+              "last_t_s": 19.529166666666665,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            },
+            {
+              "first_t_s": 19.5375,
+              "last_t_s": 19.5375,
+              "contiguous_sample_span_s": 0.0,
+              "sample_count": 1
+            }
+          ],
+          "capacity_below_2mg_spans": [
+            {
+              "first_t_s": 19.525,
+              "last_t_s": 19.545833333333334,
+              "contiguous_sample_span_s": 0.020833333333335702,
+              "sample_count": 6
+            }
+          ]
+        }
+      },
+      "selected_physics": {
+        "GRASP_end": {
+          "run": "teacher_preload_01",
+          "t_s": 19.479166666666668,
+          "t_from_EXTRACT_s": -0.00416666666666643,
+          "physics_step": 4675,
+          "left_N": 0.2841884195804596,
+          "right_N": 0.5148710608482361,
+          "nominal_friction_capacity_N": 0.5053695888210833,
+          "capacity_over_mg": 2.575787914480547,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.010318463418544269,
+          "measured_total_opening_m": 0.01072119502350688,
+          "weight_candidate_total_opening_m": 0.010410975585044361,
+          "per_finger_measured_minus_command_compression_m": 0.0002013658024813056,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 8.008190919327318e-06,
+          "anchor_relative_drift_m": 2.1944496478917553e-06,
+          "anchor_axial_signed_m": -7.988549733966503e-07,
+          "actual_TCP_z_m": 0.7960004902154176,
+          "cup_bottom_z_m": 0.7429994894592252,
+          "source_gap_m": -5.105407747674207e-07,
+          "environment_force_z_N": 0.6768992868601345
+        },
+        "EXTRACT_begin": {
+          "run": "teacher_preload_01",
+          "t_s": 19.483333333333334,
+          "t_from_EXTRACT_s": 0.0,
+          "physics_step": 4676,
+          "left_N": 0.2864658832550049,
+          "right_N": 0.5154610872268677,
+          "nominal_friction_capacity_N": 0.5071831487682666,
+          "capacity_over_mg": 2.5850313392878013,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.010318463418544269,
+          "measured_total_opening_m": 0.01072116568684578,
+          "weight_candidate_total_opening_m": 0.010410946248383261,
+          "per_finger_measured_minus_command_compression_m": 0.0002013511341507554,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 7.907319481596105e-06,
+          "anchor_relative_drift_m": 2.139286805717217e-06,
+          "anchor_axial_signed_m": -7.993266267458076e-07,
+          "actual_TCP_z_m": 0.7960004902423395,
+          "cup_bottom_z_m": 0.7429994825182044,
+          "source_gap_m": -5.174817956365985e-07,
+          "environment_force_z_N": 0.6728602034272626
+        },
+        "EXTRACT_50ms": {
+          "run": "teacher_preload_01",
+          "t_s": 19.533333333333335,
+          "t_from_EXTRACT_s": 0.05000000000000071,
+          "physics_step": 4688,
+          "left_N": 0.18518631160259247,
+          "right_N": 0.2441074103116989,
+          "nominal_friction_capacity_N": 0.27150918929202006,
+          "capacity_over_mg": 1.3838388852804284,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.010318463418544269,
+          "measured_total_opening_m": 0.010660972911864519,
+          "weight_candidate_total_opening_m": 0.010350753473402,
+          "per_finger_measured_minus_command_compression_m": 0.00017125474666012525,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.0002474903569114371,
+          "anchor_relative_drift_m": 4.096440731307533e-05,
+          "anchor_axial_signed_m": -2.3369376191900933e-05,
+          "actual_TCP_z_m": 0.7960047816166551,
+          "cup_bottom_z_m": 0.7430003381079747,
+          "source_gap_m": 3.381079747288851e-07,
+          "environment_force_z_N": 0.16493746638178203
+        },
+        "EXTRACT_100ms": {
+          "run": "teacher_preload_01",
+          "t_s": 19.583333333333332,
+          "t_from_EXTRACT_s": 0.09999999999999787,
+          "physics_step": 4700,
+          "left_N": 0.33714351058006287,
+          "right_N": 0.33645448088645935,
+          "nominal_friction_capacity_N": 0.4260207760697748,
+          "capacity_over_mg": 2.171359714932593,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01028513008521093,
+          "measured_total_opening_m": 0.010620883665978909,
+          "weight_candidate_total_opening_m": 0.01031066422751639,
+          "per_finger_measured_minus_command_compression_m": 0.00016787679038398912,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.00027140431421936157,
+          "anchor_relative_drift_m": 4.956987630124539e-05,
+          "anchor_axial_signed_m": -2.930174244189508e-05,
+          "actual_TCP_z_m": 0.7960436441632901,
+          "cup_bottom_z_m": 0.7430306694285973,
+          "source_gap_m": 3.066942859730748e-05,
+          "environment_force_z_N": 0.0
+        },
+        "EXTRACT_400ms": {
+          "run": "teacher_preload_01",
+          "t_s": 19.883333333333333,
+          "t_from_EXTRACT_s": 0.3999999999999986,
+          "physics_step": 4772,
+          "left_N": 0.3330085575580597,
+          "right_N": 0.33389079570770264,
+          "nominal_friction_capacity_N": 0.4217841852826121,
+          "capacity_over_mg": 2.1497664897176967,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01028513008521093,
+          "measured_total_opening_m": 0.010620581451803446,
+          "weight_candidate_total_opening_m": 0.010310362013340927,
+          "per_finger_measured_minus_command_compression_m": 0.00016772568329625776,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.001162843551953681,
+          "anchor_relative_drift_m": 0.00017891649072714988,
+          "anchor_axial_signed_m": -0.00017214058416888326,
+          "actual_TCP_z_m": 0.7971958015106878,
+          "cup_bottom_z_m": 0.7439480829615875,
+          "source_gap_m": 0.0009480829615875486,
+          "environment_force_z_N": 0.0
+        },
+        "terminal_or_600ms": {
+          "run": "teacher_preload_01",
+          "t_s": 20.016666666666666,
+          "t_from_EXTRACT_s": 0.5333333333333314,
+          "physics_step": 4804,
+          "left_N": 0.3336837589740753,
+          "right_N": 0.3351842164993286,
+          "nominal_friction_capacity_N": 0.42302925128831936,
+          "capacity_over_mg": 2.1561123918874583,
+          "target_per_finger_N": 0.31021943846251804,
+          "mass_kg": 0.02,
+          "nominal_combined_mu": 0.6324555320336759,
+          "applied_total_opening_m": 0.01028513008521093,
+          "measured_total_opening_m": 0.01062073977664113,
+          "weight_candidate_total_opening_m": 0.010310520338178612,
+          "per_finger_measured_minus_command_compression_m": 0.00016780484571510008,
+          "cap_per_finger_N": 8.0,
+          "bottom_relative_drift_m": 0.001545068276867683,
+          "anchor_relative_drift_m": 0.0002462796450913309,
+          "anchor_axial_signed_m": -0.00023068146838351863,
+          "actual_TCP_z_m": 0.7981757015307233,
+          "cup_bottom_z_m": 0.7448418701443454,
+          "source_gap_m": 0.0018418701443454477,
+          "environment_force_z_N": 0.0
+        }
+      },
+      "first_200um_crossing_in_scanned_prefix": {
+        "run": "teacher_preload_01",
+        "t_s": 19.533333333333335,
+        "t_from_EXTRACT_s": 0.05000000000000071,
+        "physics_step": 4688,
+        "left_N": 0.18518631160259247,
+        "right_N": 0.2441074103116989,
+        "nominal_friction_capacity_N": 0.27150918929202006,
+        "capacity_over_mg": 1.3838388852804284,
+        "target_per_finger_N": 0.31021943846251804,
+        "mass_kg": 0.02,
+        "nominal_combined_mu": 0.6324555320336759,
+        "applied_total_opening_m": 0.010318463418544269,
+        "measured_total_opening_m": 0.010660972911864519,
+        "weight_candidate_total_opening_m": 0.010350753473402,
+        "per_finger_measured_minus_command_compression_m": 0.00017125474666012525,
+        "cap_per_finger_N": 8.0,
+        "bottom_relative_drift_m": 0.0002474903569114371,
+        "anchor_relative_drift_m": 4.096440731307533e-05,
+        "anchor_axial_signed_m": -2.3369376191900933e-05,
+        "actual_TCP_z_m": 0.7960047816166551,
+        "cup_bottom_z_m": 0.7430003381079747,
+        "source_gap_m": 3.381079747288851e-07,
+        "environment_force_z_N": 0.16493746638178203
+      },
+      "peak_scanned_prefix": {
+        "run": "teacher_preload_01",
+        "t_s": 20.0125,
+        "t_from_EXTRACT_s": 0.529166666666665,
+        "physics_step": 4803,
+        "left_N": 0.3333906829357147,
+        "right_N": 0.3331790268421173,
+        "nominal_friction_capacity_N": 0.4215757004350717,
+        "capacity_over_mg": 2.1487038758158596,
+        "target_per_finger_N": 0.31021943846251804,
+        "mass_kg": 0.02,
+        "nominal_combined_mu": 0.6324555320336759,
+        "applied_total_opening_m": 0.01028513008521093,
+        "measured_total_opening_m": 0.01062073977664113,
+        "weight_candidate_total_opening_m": 0.010310520338178612,
+        "per_finger_measured_minus_command_compression_m": 0.00016780484571510008,
+        "cap_per_finger_N": 8.0,
+        "bottom_relative_drift_m": 0.0015476109960088594,
+        "anchor_relative_drift_m": 0.00024628977933312127,
+        "anchor_axial_signed_m": -0.00023077107629875885,
+        "actual_TCP_z_m": 0.7981493566596225,
+        "cup_bottom_z_m": 0.7448152481555554,
+        "source_gap_m": 0.001815248155555449,
+        "environment_force_z_N": 0.0
+      },
+      "helper_decisions_since_ref_minus200ms": {
+        "original_ramp": 6,
+        "first_bilateral_freeze": 1,
+        "hold_contact_target": 78,
+        "low_measured_normal_force_slow_close": 4
+      },
+      "source_configuration": {
+        "control_hz": 60.0,
+        "mass_kg": 0.02,
+        "dynamic_friction": 0.5,
+        "finger_dynamic_friction": 0.8,
+        "finger_kp_N_per_m": 2000.0,
+        "contact_safety_factor": 2.0,
+        "maximum_compression_m": 0.0003,
+        "contact_threshold_N": 0.03,
+        "contact_persist_s": 0.1,
+        "contact_approach_speed_m_s": 0.002,
+        "minimum_total_opening_m": 0.002,
+        "weight_compression_per_finger_m": 0.000155109719231259,
+        "version": "Project_v1_1.contact_hold.v2",
+        "minimum_hold_normal_force_N": 0.310219438462518,
+        "normal_force_hysteresis_fraction": 0.1,
+        "maximum_force_feedback_closure_m": 0.0006,
+        "logical_requested_opening_m": null,
+        "frozen_opening_m": null,
+        "contact_since_s": null,
+        "confirmed": false,
+        "ever_confirmed": false,
+        "recovering": false,
+        "release_ramp_active": false,
+        "last_t": null,
+        "force_hold_reference_opening_m": null,
+        "previous_ramped_opening_m": null,
+        "release_ramp_speed_m_s": 0.0,
+        "force_preload_adjusted": false,
+        "release_slew_active": false,
+        "_last_input": null,
+        "_last_output": null
+      },
+      "source_SHA256": {
+        "config.yaml": "20e037b4d1a6319e81e71dbd4db277e571923ce0512b055514b6241ce44bad7b",
+        "teacher_events.json": "c6e7c4ace52d669ac59a4264d257ee3c8f16381ba6fdc6ba0abbd73c58c26637",
+        "execution_trace.jsonl": "09fdbbffb245a0e4ca222e0367f57131ea3f17f2de6083c575708560d23cfb19",
+        "independent_score.json": "69d80ccf37c54e42f2f296a413cf1f6c0c34f97929046f079667b8552a00c309",
+        "result.json": "f72a59d522d33fee44b8b514c2551f0e898b0447ebb755034b20c73b5cf22c0d",
+        "release_metadata.json": "a27c9c13e179d8a3787f303f541eb229c2c5da90609397775c109cec51c6295c",
+        "contact_hold_configuration.json": "3cd6b47fb19124e79678077dac0ad0edb77d7dff9fe71bd7dafc1515ece42d25"
+      },
+      "physics_stream_scope": "Read selected prefix from archived gzip through EXTRACT+0.5s or actual terminal, not a repeated full old-run audit"
+    }
+  ],
+  "CPU_only": true,
+  "GPU_used": false,
+  "API_calls": 0,
+  "runtime_score_thresholds_original_outputs_modified": false,
+  "limits": [
+    "Nominal Coulomb capacity mu*(Nleft+Nright) is a model-assumption upper bound, not measured vertical friction or calibrated hardware load capacity.",
+    "Balanced per-finger target is the existing weight-based safety=2 design assumption; total capacity can differ from a weak-finger condition.",
+    "Scalar stiffness times joint compression is a configuration heuristic; measured tensor forces and changing contacts remain primary evidence.",
+    "Contact confirmed means continuous force above0.03N, not demonstrated load-bearing force or task success."
+  ]
+}

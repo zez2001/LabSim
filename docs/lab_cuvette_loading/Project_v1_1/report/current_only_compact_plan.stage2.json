@@ -1,0 +1,229 @@
+{
+  "schema": "labsim.Project_v1_1.stage2_compact_package_plan.v1",
+  "created_utc": "2026-10-26T20:20:12.981297+00:00",
+  "planning_only": true,
+  "package_built": false,
+  "large_media_copied": false,
+  "media_transcoded": false,
+  "hard_limit_bytes": 80000000,
+  "hard_limit_units": "decimal MB;80,000,000 bytes =76.294MiB",
+  "allocation": [
+    {
+      "category": "report",
+      "maximum_bytes": 2000000,
+      "purpose": "最终DOCX MD build与逐页QA结论，不收渲染PNG/PDF"
+    },
+    {
+      "category": "small_results",
+      "maximum_bytes": 4000000,
+      "purpose": "必要CSV/JSON 原判分 全部正式逐集结果和读取/CI/保护小证据"
+    },
+    {
+      "category": "public_observations",
+      "maximum_bytes": 5000000,
+      "purpose": "选定代表episode的全部公开JSON/exact JPEG与manifest；不是HTTP body或私有reasoning归档"
+    },
+    {
+      "category": "configuration_reproduction",
+      "maximum_bytes": 2000000,
+      "purpose": "配置 资产锁 来源SHA 使用说明 首读与最终版本身份，不复制USD全集"
+    },
+    {
+      "category": "final_GPT_continuous_video",
+      "maximum_bytes": 20000000,
+      "purpose": "新run关闭后选择一条从reset到实际终止的全程录像，成功与否按原评分"
+    },
+    {
+      "category": "final_teacher_continuous_video",
+      "maximum_bytes": 20000000,
+      "purpose": "新teacher关闭后选择一条全程录像，不因阶段完成自动称任务成功"
+    },
+    {
+      "category": "current_GPT02_failure_video",
+      "maximum_bytes": 14000000,
+      "purpose": "GPT02整条连续真实安全失败；无拼接"
+    },
+    {
+      "category": "diagnostic_or_force_failure_video",
+      "maximum_bytes": 4000000,
+      "purpose": "优先slow_close01全程，或按剩余额度选grasp04全程，不同时收全部对照"
+    },
+    {
+      "category": "key_closeup_clips",
+      "maximum_bytes": 4000000,
+      "purpose": "少量同episode装载/松爪/退让片段，主录像仍完整；不当成另一条完整尝试"
+    },
+    {
+      "category": "reserve",
+      "maximum_bytes": 5000000,
+      "purpose": "编码容器开销 必要新增小证据或选定原视频超软预算，最终总和仍需硬检"
+    }
+  ],
+  "allocation_sum_bytes": 80000000,
+  "allowlist_required": true,
+  "report_inputs": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.stage2.draft.json",
+  "report_inputs_SHA256": "5c0f4e110bb1e2c7c9dda42eee976daeb89f4c60dfbdb9b3781bb448bd50de16",
+  "current_closed_video_candidates": [
+    {
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_02/episode_0000/dual_view.mp4",
+      "role": "current_GPT02_failure_video",
+      "exists": true,
+      "source_bytes": 13358060,
+      "process_proof": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_02/process_exit.json",
+      "process_proof_SHA256": "7f04f23dee16072edcb7f8182d3394765d2e4d7af2cc2b564f9871736cec1004",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "nb_frames": "1797"
+          }
+        ],
+        "format": {
+          "duration": "59.900000"
+        }
+      },
+      "copied": false,
+      "full_decode_or_visual_QA_performed_by_this_plan": false,
+      "source_video_SHA_not_rehashed_by_this_plan": "Use the closed archive protected-source hash and revalidate selected media during final packaging."
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/teacher_slow_close_01/episode_0000/dual_view.mp4",
+      "role": "diagnostic_or_force_failure_video",
+      "exists": true,
+      "source_bytes": 3853058,
+      "process_proof": "outputs/lab_cuvette_loading/Project_v1_1/teacher_slow_close_01/process_exit.json",
+      "process_proof_SHA256": "7e73d1bdea457cd8e0e9738e16985c0cc47f0c6ffa822d06aa8669575111b035",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "nb_frames": "600"
+          }
+        ],
+        "format": {
+          "duration": "20.000000"
+        }
+      },
+      "copied": false,
+      "full_decode_or_visual_QA_performed_by_this_plan": false,
+      "source_video_SHA_not_rehashed_by_this_plan": "Use the closed archive protected-source hash and revalidate selected media during final packaging."
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_04/episode_0000/dual_view.mp4",
+      "role": "diagnostic_or_force_failure_video",
+      "exists": true,
+      "source_bytes": 6896092,
+      "process_proof": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_04/process_exit.json",
+      "process_proof_SHA256": "b63ddd4025c9439ddf8b46c6cb02a76e8b322ff94b1af9dd07705672f715e17e",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "nb_frames": "995"
+          }
+        ],
+        "format": {
+          "duration": "33.167000"
+        }
+      },
+      "copied": false,
+      "full_decode_or_visual_QA_performed_by_this_plan": false,
+      "source_video_SHA_not_rehashed_by_this_plan": "Use the closed archive protected-source hash and revalidate selected media during final packaging."
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/teacher_source_hold_01/episode_0000/dual_view.mp4",
+      "role": "fallback_teacher_video_only_if_selected_instead_of_new_teacher",
+      "exists": true,
+      "source_bytes": 23483982,
+      "process_proof": "outputs/lab_cuvette_loading/Project_v1_1/teacher_source_hold_01/process_exit.json",
+      "process_proof_SHA256": "60df7fe2c8345f87b7b7d874bc801063098353ac76418ced8d1d6a505b84fa68",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "nb_frames": "3729"
+          }
+        ],
+        "format": {
+          "duration": "124.300000"
+        }
+      },
+      "copied": false,
+      "full_decode_or_visual_QA_performed_by_this_plan": false,
+      "source_video_SHA_not_rehashed_by_this_plan": "Use the closed archive protected-source hash and revalidate selected media during final packaging."
+    }
+  ],
+  "waiting_material": [
+    {
+      "role": "final_GPT_continuous_video",
+      "source": null,
+      "reason": "Actual final closed run not selected. Active GPT03 excluded; no success or outcome assigned."
+    },
+    {
+      "role": "final_teacher_continuous_video",
+      "source": null,
+      "reason": "Wait for teacher_preload01 actual process proof and independent verdict; active output not read."
+    }
+  ],
+  "essential_CSV_candidates": [
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/target_contact_release_curve.csv",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/action_sequence.csv",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/physics_force_opening.csv",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/control_dispatch.csv"
+  ],
+  "media_policy": [
+    "Choose one current native dual-view or a single continuous synchronized composition per representative; do not duplicate side/wrist/dual/main of every run.",
+    "No splice across episodes, no trimming the main video before reset or before the actual terminal event, no hiding failed attempts. A failed full recording is not called a successful full task.",
+    "Prefer direct original bytes if within budget. If later recompression is necessary, label it a derived lossy presentation video, retain source hash, duration, frame count and timestamps, and verify decoded frame count/PTS/duration and key events. Do not alter exact model JPEGs to save package size.",
+    "Media soft caps may borrow from reserve only if final all-file total remains<=80,000,000bytes. If still too large, remove duplicate/optional clips or provide separate pinned original provenance; do not truncate an episode or drop actual results.",
+    "Pack every local figure/video/CSV/config link used by final MD/DOCX. Links in copied provenance JSON to original H5/raw/unselected observations are labelled source-only, not promised bundled files or fake GitHub URLs.",
+    "Final selected videos require full decode, visual review, time/episode binding, fileSHA and existence checks. ffprobe metadata here is not that QA."
+  ],
+  "history_fixed_links": [
+    {
+      "label": "历史Project_v1代码和证据",
+      "url": "https://github.com/zez2001/LabSim/tree/f94f9451ea10022b2e747dae92e419b636f1f695/docs/lab_cuvette_loading/Project_v1",
+      "copy": false
+    },
+    {
+      "label": "既有固定资产HF revision",
+      "url": "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067",
+      "copy": false
+    }
+  ],
+  "exclude": [
+    "旧Project_v1/Env_v1/Size_v1大报告 视频 H5重复复制",
+    "原始H5和外链样例 大JSONL/gzip日志 环境 模型权重 检查点",
+    "完整仓库 assets全集 原始附件或没有必要的asset副本",
+    "凭据 token HTTP headers 完整私有reasoning内容",
+    "活跃运行输出 未实际发生的结果 最终SHA/CI/HF的虚构占位",
+    "全套渲染页图片 内部PDF 临时转码与重复视角媒体"
+  ],
+  "final_gates": [
+    "Close and independently score actual selected new runs; update this draft without replacing raw labels/null.",
+    "Confirm final code/prompt/controller/camera/scorer fingerprints and remoteSHA/CI/HF pins; do not substitute9eCI for future release commit.",
+    "Author/report marker and all-page render only in the authorized final authoring stage.",
+    "Create a new current-only allowlist package, preserve relative report/media layout, full link/file/SHA checks, and assert summed bytes<=80,000,000."
+  ],
+  "prior_draft_preserved_SHA256": "e3a748930f36fe4f878782a435c64c95ae2615395d416f0c30b78d26732cb642",
+  "API_calls": 0,
+  "GPU_used": false,
+  "HDF5_read": false
+}

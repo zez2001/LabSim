@@ -52,7 +52,7 @@ def test_original_parent_still_reorients_for_same_grasp_observation(fixture):
     assert (controller.rotation_command * start.inv()).magnitude() == pytest.approx(np.deg2rad(.1))
 
 
-@pytest.mark.parametrize('phase', ['EXTRACT', 'TRANSPORT', 'ALIGN', 'INSERT', 'GATE_RETRACT'])
+@pytest.mark.parametrize('phase', ['TRANSPORT', 'ALIGN', 'INSERT', 'GATE_RETRACT'])
 @pytest.mark.parametrize('orientation', [True, False])
 def test_non_grasp_feedback_is_identical_to_original_parent_including_xy(fixture, phase, orientation):
     make, debug, parent, _, _ = fixture
@@ -103,6 +103,7 @@ def test_repeat_observation_and_reset_preserve_suppression_and_clock_contract(fi
     assert first['metadata']['grasp_orientation_feedback_suppressed'] is True
     controller.reset()
     assert controller._grasp_orientation_feedback_suppressed is False
+    assert controller._extract_lateral_feedback_suppressed is False
     assert controller.phase == 'RESET' and controller._clock_cached_action is None
 
 
@@ -113,3 +114,36 @@ def test_before_latch_does_not_claim_suppression_of_a_feedback_call_that_never_o
     action = helper.act(controller, debug, .2)
     assert controller.latch_opening is None
     assert action['metadata']['grasp_orientation_feedback_suppressed'] is False
+
+
+@pytest.mark.parametrize('orientation', [True, False])
+def test_extract_keeps_lateral_axis_but_preserves_requested_orientation_feedback(fixture, orientation):
+    make, debug, parent, _, _ = fixture
+    new, old = make(), make(False)
+    helper.enter(new, debug, 'EXTRACT')
+    helper.enter(old, debug, 'EXTRACT')
+    debug['object_quaternion_wxyz'] = parent.wxyz(Rotation.from_euler('x', .4, degrees=True)
+        * Rotation.from_euler('z', 90., degrees=True))
+    start = new.target.copy()
+    for _ in range(20):
+        old._feedback(debug, None, orientation=orientation)
+        new._feedback(debug, [.01, .02], orientation=orientation)
+        np.testing.assert_array_equal(new.target, start)
+        np.testing.assert_array_equal(new.total_feedback_m, np.zeros(2))
+        np.testing.assert_allclose(new.rotation_command.as_matrix(), old.rotation_command.as_matrix(), atol=1e-15)
+    assert new._extract_lateral_feedback_suppressed is True
+
+
+def test_extract_flag_resets_each_observation_and_after_reset(fixture):
+    make, debug, _, _, _ = fixture
+    controller = make()
+    helper.enter(controller, debug, 'EXTRACT')
+    controller.cfg['control']['extract_orientation_feedback'] = False
+    action = helper.act(controller, debug, .2)
+    assert action['metadata']['extract_lateral_feedback_suppressed'] is True
+    assert helper.act(controller, debug, .2) == action
+    controller._enter('ALIGN', .2)
+    following = helper.act(controller, debug, .3)
+    assert following['metadata']['extract_lateral_feedback_suppressed'] is False
+    controller.reset()
+    assert controller._extract_lateral_feedback_suppressed is False

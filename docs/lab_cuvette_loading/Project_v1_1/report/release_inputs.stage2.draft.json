@@ -1,0 +1,1860 @@
+{
+  "schema": "labsim.Project_v1_1.report_inputs.v1",
+  "project_version": "Project_v1_1",
+  "finalized": false,
+  "metadata": {
+    "title": "LabSim Project v1 1 项目发布与验证报告",
+    "date": "2026-10-27",
+    "audience": "组内使用者 后续开发与评测人员",
+    "author": "LabSim 项目",
+    "conclusion": "新执行器与细位移诊断已改善；本阶段新增闭合source_hold01、slow_close01和GPT02均保留失败。helper v2、公开goal、prompt v3与context4已有静态或CPU证据，活跃的新物理与GPT运行不计入。本文件是七页stage2草稿输入，尚不能宣布完整GPT装载或最终发布通过。"
+  },
+  "draft_provenance": {
+    "stage": "stage2",
+    "previous_draft_path": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.draft.json",
+    "previous_draft_sha256_preserved": "e3a748930f36fe4f878782a435c64c95ae2615395d416f0c30b78d26732cb642",
+    "runtime_freeze_commit": "9e48016412907385d1a8c9e40860139f3d730764",
+    "evidence_snapshot_utc": "2026-10-26T20:17:45.851097+00:00",
+    "no_DOCX_authoring": true,
+    "no_artifact_marker": true,
+    "no_rendering": true,
+    "source_hashes_revalidated": true,
+    "figures": 3,
+    "excluded_active_run_names": [
+      "teacher_preload_01",
+      "gpt_debug_03"
+    ],
+    "active_outputs_read": false,
+    "refreshed_source_revisions": [
+      {
+        "id": "current_usage",
+        "previous_draft_sha256": "1f7336b0450dcdf3a1458d475389a1ebc6ab6d1caabf7ed9f10f056c38aca2d8",
+        "stage2_sha256": "6f1ebd000fa4d74bf7af01970bd6f2e9c434ab7c007c0c9164dd9f0a077d0f87",
+        "reason": "Usage was updated by the ongoing release work after the preserved earlier draft."
+      }
+    ],
+    "final_page_count_unverified": true
+  },
+  "sources": [
+    {
+      "id": "closed_001",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/README.md",
+      "sha256": "a634a546c67c0bc85349e4a6f0eb9f7b927a7a1bbe6a023479b8c07689bf4297",
+      "bytes": 1962,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/README.md"
+    },
+    {
+      "id": "closed_002",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/summary.json",
+      "sha256": "a5a8eefeb1f4e4962b4773e07d57e860c23c7a7fee86cb694829c98e2b39e95d",
+      "bytes": 4321,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/summary.json"
+    },
+    {
+      "id": "closed_003",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/runtime_versions.json",
+      "sha256": "ba8ef658f79605dcde041e1c06a07f5b2cc5ea3db0e084bbed597825a150ec22",
+      "bytes": 706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/runtime_versions.json"
+    },
+    {
+      "id": "closed_004",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/contracts_result.json",
+      "sha256": "69053e3a1b0c7e88c27a4c498ae8e21186c54959f22db0e3ff4b2fb8d8394dca",
+      "bytes": 14961,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/contracts_result.json"
+    },
+    {
+      "id": "closed_005",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/normal-readers_result.json",
+      "sha256": "b7df6b36bedf776a0cfbaa48107e73b398e0eb95af08d3cd7aafae495d2351d4",
+      "bytes": 5252,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/normal-readers_result.json"
+    },
+    {
+      "id": "closed_006",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_01_failure_normal_reader.json",
+      "sha256": "fe88a0d09299bd5edad5d745c18bdcec9dc01e6463638ea7df1e3f7685ee37be",
+      "bytes": 6519,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/gpt_debug_01_failure_normal_reader.json"
+    },
+    {
+      "id": "closed_007",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/README.md",
+      "sha256": "53c04b32a2dc7bc438e3326fe71aa5c8b95f6dcb98d5039af3d74529aa956a22",
+      "bytes": 4693,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/README.md"
+    },
+    {
+      "id": "closed_008",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/summary.json",
+      "sha256": "b7bbbc1ea2a7d87947241fcb29678f774f7386a7acbf2042b9113c7a3497a535",
+      "bytes": 55756,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/summary.json"
+    },
+    {
+      "id": "closed_009",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/action_comparison.csv",
+      "sha256": "a9258a997b902883278b4a8b4169030a32a7d2f16b15e8c2d8dbceef41dfa8ca",
+      "bytes": 3135,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/action_comparison.csv"
+    },
+    {
+      "id": "closed_010",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/manifest.json",
+      "sha256": "a4bfd1fdf8f37b787461ce8778aee20f81eb305898bdeaa60fd0cfa2800ed153",
+      "bytes": 2681,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/manifest.json"
+    },
+    {
+      "id": "closed_011",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/README.md",
+      "sha256": "d502190d9011d8f684c1d7970f4875794a3da3927d4f87c85dc8678c68121284",
+      "bytes": 5467,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_012",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/summary.json",
+      "sha256": "53531ef17ccd9cc70ffd81a62d53681346512fed0f313ac08ce9e81595877c43",
+      "bytes": 8241,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_013",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv",
+      "sha256": "5d8b24f2c920254e98f7e82b0b6fe635b8bcea25ee433496d5305310ed9c46a5",
+      "bytes": 1170,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv"
+    },
+    {
+      "id": "closed_014",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json",
+      "sha256": "b1373985531ab01f91783c484fdb9fb8f91b2f3ad9b342717a6dc364d8ff6198",
+      "bytes": 637,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json"
+    },
+    {
+      "id": "closed_015",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png",
+      "sha256": "699a473cf35a0c64b045a7d5f93d67c03f30ac65a0544d1922e885200df673ba",
+      "bytes": 369075,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png"
+    },
+    {
+      "id": "closed_016",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json",
+      "sha256": "7b7ef26ac25032ac3f32db68655c93945b2089cfc1ad3613c58bcc74ff2bd345",
+      "bytes": 1471,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json"
+    },
+    {
+      "id": "closed_017",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_03_closed_read_archive.json",
+      "sha256": "9069680e9d3480ba39777e01ee537924d6acee305f2984fab0e76afbc26b52cb",
+      "bytes": 17104,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_transport_03_closed_read_archive.json"
+    },
+    {
+      "id": "closed_018",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/README.md",
+      "sha256": "01899ad0ee150f5b1d8f33bfbba4bb476807ce67ef39439158c7b7f9c426cc7a",
+      "bytes": 6153,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_019",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json",
+      "sha256": "400aa42408b4757cca7291edcf4c7437b8d5faa4fa1a169e70d2cc63d46c91b9",
+      "bytes": 29469,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_020",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv",
+      "sha256": "eb09ab5f03eda45f32b03dde1c7298c4fd9eaa7c1cff3104bb07a22453e2139d",
+      "bytes": 7436,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv"
+    },
+    {
+      "id": "closed_021",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv",
+      "sha256": "d18ba7500d4c093047631b96389161756f5a2f92f900b203d0316d4169caa6bb",
+      "bytes": 65220,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv"
+    },
+    {
+      "id": "closed_022",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png",
+      "sha256": "6e3dbdaac55fbad13ca28ffa61a277ab190c2c46a11137428059e3b6590f9d98",
+      "bytes": 182651,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png"
+    },
+    {
+      "id": "closed_023",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png",
+      "sha256": "f442304a1c7775b441cf431d0279581876b2f447ff739b4815da90d198a501c2",
+      "bytes": 297882,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png"
+    },
+    {
+      "id": "closed_024",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_02_closed_read_archive.json",
+      "sha256": "dcf9a3038a8ee3468dd174cbf414b7442f82be2b3a375348c153b741a4525b0a",
+      "bytes": 9918,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_025",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/README.md",
+      "sha256": "3dee555eab20713fea2e31627fa3ded56783f5c541d818ea4b29cad6b7977edf",
+      "bytes": 3468,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/README.md"
+    },
+    {
+      "id": "closed_026",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json",
+      "sha256": "d855a59e8d566c59562ea01145d9cc18b6e60c7cd8079f909b0e5174e1c64a48",
+      "bytes": 23557,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/audit.json"
+    },
+    {
+      "id": "closed_027",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_results.csv",
+      "sha256": "55f41d10969b6ce86852cac7b011ab6b834025938e128524e1c722586c0946fd",
+      "bytes": 31816,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_results.csv"
+    },
+    {
+      "id": "closed_028",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/group_results.csv",
+      "sha256": "fcce4e927f7dbb5b297775928f3e39e4bdc6fe723b3f64e599e68bd7c6d30664",
+      "bytes": 890,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/group_results.csv"
+    },
+    {
+      "id": "closed_029",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_metrics.png",
+      "sha256": "0078fa1ea2d2a40cb664570431d47fcb0989f283a4cc5745755370b36e9120e0",
+      "bytes": 255940,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_metrics.png"
+    },
+    {
+      "id": "closed_030",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/hold_velocity_discrepancy.png",
+      "sha256": "b5393e1b197d36bea030dda235e511c59a5be3cae5a7140b86a7b6256c45cc76",
+      "bytes": 212858,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/hold_velocity_discrepancy.png"
+    },
+    {
+      "id": "closed_031",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01_closed_read_archive.json",
+      "sha256": "e5cc8b12c1fa56a68955528e62add15f7d76534185d13aaf851b657f5245d054",
+      "bytes": 36108,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_032",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/README.md",
+      "sha256": "6b620f26096be932967ecfc382496886ebd15e9d43396c4c208ba38bf4ce3a27",
+      "bytes": 2058,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/README.md"
+    },
+    {
+      "id": "closed_033",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json",
+      "sha256": "c6b2947e0c94a82a833373183a049968ada387fa73fe5f27785b79e8b4e46a12",
+      "bytes": 11912,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/audit.json"
+    },
+    {
+      "id": "closed_034",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+      "sha256": "6bc704b45c2410eec53c9e3e1c9fea99ac7025a20d7e98bd2908bf85b746d200",
+      "bytes": 2679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/action_comparison.csv"
+    },
+    {
+      "id": "closed_035",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png",
+      "sha256": "1b75b64ac6c7e09d0e6b7148843c6ea50086d0f461b91029ac10e1e4b2a22709",
+      "bytes": 128896,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/comparison.png"
+    },
+    {
+      "id": "closed_036",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_replay_02_closed_read_archive.json",
+      "sha256": "03e952006d6f5c0c69040ae6e80eab4a8b4bacf2f3846661fbcb7d1892eb29bd",
+      "bytes": 23139,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_replay_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_037",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_closed_read_archive.json",
+      "sha256": "dd913afbaa9ffd860fc0474027432512d26d02a07ac21bc25e6a434b9ba394bf",
+      "bytes": 36879,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_038",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md",
+      "sha256": "ee77ee8a52dfc24faa03ac5938997db1f240130a1af9fcb6e1d6538107c0295e",
+      "bytes": 4715,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md"
+    },
+    {
+      "id": "closed_039",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json",
+      "sha256": "4d4222655c3030f88172ae6068cf9de82f688654703ca6f972e42d4efcd01fdd",
+      "bytes": 25017,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json"
+    },
+    {
+      "id": "closed_040",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.md",
+      "sha256": "47f748803de4921567a47c8def531d84aa0233681a7f6e7bd7c961bedc69f97b",
+      "bytes": 4679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.md"
+    },
+    {
+      "id": "closed_041",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.json",
+      "sha256": "f784402bcceba90f9c335f3024b2f100d5b8d6cb8072bfaacc980b9de4adf7d6",
+      "bytes": 12066,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.json"
+    },
+    {
+      "id": "closed_042",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/README.md",
+      "sha256": "1e5cc68e994a352fa1a35af926d8fc8e3fcb2096b9002efd015f2ad13f3e5795",
+      "bytes": 4039,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/README.md"
+    },
+    {
+      "id": "closed_043",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json",
+      "sha256": "bac32ab5a2f8d04f2f1053148793d57f2062983aa95aefd96022dde127c76491",
+      "bytes": 28889,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json"
+    },
+    {
+      "id": "closed_044",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv",
+      "sha256": "adf896a62c16389fd2c8cf165642a2d9dd877ee6c8b50fc9dbb29abc1b97c929",
+      "bytes": 7376,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv"
+    },
+    {
+      "id": "closed_045",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/manifest.json",
+      "sha256": "6ed6c161994b62ddcaa2302b60ece6f12da174b67c5579f0747abab5a0392c2c",
+      "bytes": 26749,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/manifest.json"
+    },
+    {
+      "id": "closed_046",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_closed_read_archive.json",
+      "sha256": "7820ab51a4d4cf85853515d66cda63e4b2297d912ec3a0ea25274185492576b5",
+      "bytes": 21281,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_047",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_collision_offline.json",
+      "sha256": "ca553a5bda94ab61c314819c0da38496824b10a66ec699eb673cfbcdf0b716b2",
+      "bytes": 8534,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_01_collision_offline.json"
+    },
+    {
+      "id": "closed_048",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/README.md",
+      "sha256": "95b9d497e9db6df08fe4a5d81044c3461d86c5fa0aaa9ede8ce9a4ed5dca3f09",
+      "bytes": 4706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/README.md"
+    },
+    {
+      "id": "closed_049",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/summary.json",
+      "sha256": "7a658e7afa7aae500715d6d0c8edeb6dc2d7550616b1c92846b1482af55a2347",
+      "bytes": 9972,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/summary.json"
+    },
+    {
+      "id": "closed_050",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/action_sequence.csv",
+      "sha256": "72e79d3b7432a77576998f46f4bcfb00dc91eed4895d724020eb775d7524aa69",
+      "bytes": 4862,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/action_sequence.csv"
+    },
+    {
+      "id": "closed_051",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/manifest.json",
+      "sha256": "5860a7e702e119bb599b6df423cf73b54f4b74e8351452acc20ceb4350770aba",
+      "bytes": 11550,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/manifest.json"
+    },
+    {
+      "id": "closed_052",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg",
+      "sha256": "bf3add77fc8462477e8edaece113c30a173ef6c564c2302bf85b125f26f54045",
+      "bytes": 211256,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg"
+    },
+    {
+      "id": "closed_053",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/manifest.json",
+      "sha256": "febe1d6ccba3f8e26a78e359649eb42e6ef652dc3fe2d1e2e6ef5fb50961bf44",
+      "bytes": 1201,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_054",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/public_observation.json",
+      "sha256": "5137922a1a8e660a38b3906ecb6f0e0c11504222b996393e88ef030a72f8aa16",
+      "bytes": 5052,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_055",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_056",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_057",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/manifest.json",
+      "sha256": "058d3d3bcc341fc9e84db790201d41c5b39d73cc68582074d3ba957d04f13f50",
+      "bytes": 1203,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_058",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/public_observation.json",
+      "sha256": "4924e75fc14a5593685a711757cbd7c32b794e977a34f163ccc1e7676c8b7bc7",
+      "bytes": 4994,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_059",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg",
+      "sha256": "4fe307811518d38817239119f9ea8460560cda6b77759ae94bcf00c771e8291f",
+      "bytes": 12821,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_060",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "1b8f7f0c0e4f73bc58ac9fdc64a6c463cdc2611bf3ee8b52e0a92b6a9c86c8d8",
+      "bytes": 15684,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_061",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/README.md",
+      "sha256": "11f0c01136a9aaf3310d361afb547dafc34dd7eb80b169086a8aa9005d26e723",
+      "bytes": 2100,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/README.md"
+    },
+    {
+      "id": "closed_062",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/budget_usage_excerpt.json",
+      "sha256": "a814c3432a3b97c8f161147ef1e9604e1203faa5d6d86fed686fffcb4f2fa973",
+      "bytes": 6585,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/budget_usage_excerpt.json"
+    },
+    {
+      "id": "closed_063",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.csv",
+      "sha256": "6423f6fc93d3696113b2c6a88310df1449349d870fc0534f61d909076ec7e8be",
+      "bytes": 399,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.csv"
+    },
+    {
+      "id": "closed_064",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.json",
+      "sha256": "1c0f26640da92c46e03c9244d6bc1a2d49fe6dc674aa0515b02f639fa32ae3ff",
+      "bytes": 12109,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.json"
+    },
+    {
+      "id": "closed_065",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/manifest.json",
+      "sha256": "6ac358059de6f08aa26a55988e7ef575855b2c58b86871f329e87df75b3a85db",
+      "bytes": 2463,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/manifest.json"
+    },
+    {
+      "id": "closed_066",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/summary.json",
+      "sha256": "90e57773c734e9deb1fa18fb7b8d064316e3b1ca49c46d1a573ec3f4474f05f2",
+      "bytes": 5406,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/summary.json"
+    },
+    {
+      "id": "closed_067",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_068",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_069",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg",
+      "sha256": "ad0d7683196f90f029803e8cd24eec558a0541622ecd8f980681133b0f68be44",
+      "bytes": 9201,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_070",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg",
+      "sha256": "70408c3cce539c407775a907324d4802dea7205a97c07f13ed449e4cbb10d738",
+      "bytes": 11104,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_071",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg",
+      "sha256": "78bf3abdfbadd8c7c1a8ec6638a1387a7272cea8cdbfe1e11269a8a9301e05f1",
+      "bytes": 9556,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg"
+    },
+    {
+      "id": "closed_072",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg",
+      "sha256": "2a57feeb4f838fcb9fa92660446097476b97325ad0267d1ff53451383c8bbb39",
+      "bytes": 12195,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_073",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg",
+      "sha256": "afa840c65cc5d22ed7571e8a67a3a4510298d4c8a95aee285b66902bb812baad",
+      "bytes": 9187,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_074",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg",
+      "sha256": "bba1d6872e0406d970f4106e5c68ea0ab67a3c737c679b618773916998b195aa",
+      "bytes": 10361,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_075",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg",
+      "sha256": "384350d808bbe44966160323e37288d6308c0c7e5301e6c1c88d057bf48efa35",
+      "bytes": 8740,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg"
+    },
+    {
+      "id": "closed_076",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg",
+      "sha256": "0bc7ae6df2835bfa9e0efb27ecbadf79a7106f4dfc42a86d8a8bdafec282f71a",
+      "bytes": 10824,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_077",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg",
+      "sha256": "930671662cbe12091d140ddf7ff75373daf22007429bfd53822264d80d4edba6",
+      "bytes": 8889,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_078",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg",
+      "sha256": "31f175186156c6963afab10d0668979d6f3ff675182a9006c0858c2e8277b3b4",
+      "bytes": 10121,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "cpu590_summary",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/summary.json",
+      "sha256": "3a967b1ef628057c0f89adb983167bbc95bfb7f146da4d64e5995a75c0643691"
+    },
+    {
+      "id": "cpu590_contracts",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/contracts_result.json",
+      "sha256": "461f3405858396c135c2acaaf7401c2ef11cdeb162b4684ca2154ea8d475226b"
+    },
+    {
+      "id": "cpu590_readers",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/normal-readers_result.json",
+      "sha256": "816af5daf54a9fab200175c196ac924d35864b1987f382d1444bd4b950093cb5"
+    },
+    {
+      "id": "cpu590_versions",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/runtime_versions.json",
+      "sha256": "5a936b4bd6836d98780e592aefaf04b03f4243a7a495f567249bc51a5c88a271"
+    },
+    {
+      "id": "cpu590_ci",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/github_ci.json",
+      "sha256": "d9eb3e536f6970e06cdb89c3c4ec862129adb49ed83cc0751591f31826def472"
+    },
+    {
+      "id": "cpu590_protection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/protection_runtime_root_v2.json",
+      "sha256": "b5b8f66a3d12051d631a9f7460fd5a7ece5baf478ef027af2006969e588635c1"
+    },
+    {
+      "id": "cpu590_manifest",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/manifest.json",
+      "sha256": "6a53f4bc72b25046cd17b6957703b3bb521504852b9c1acffdb1acb67196e641"
+    },
+    {
+      "id": "closed_source_index",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/report_sources_closed.json",
+      "sha256": "0b68805a4d1b51f4c5537ce6d5ee250a8cfe762f8292e1e52392f0522a712d25"
+    },
+    {
+      "id": "gpt01_runtime_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/summary.json",
+      "sha256": "299763cc87fb5b0765ed043e764b540b897ea6f7ed338090ab0e02d297a410e6"
+    },
+    {
+      "id": "gpt01_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/controller.json",
+      "sha256": "fd1c709819e94162d84dd0a14e9684054a732d1c28796d5f8590cf57c6769275"
+    },
+    {
+      "id": "current_usage",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/usage.md",
+      "sha256": "6f1ebd000fa4d74bf7af01970bd6f2e9c434ab7c007c0c9164dd9f0a077d0f87"
+    },
+    {
+      "id": "hf_pinned_assets",
+      "scope": "release",
+      "url": "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067"
+    },
+    {
+      "id": "stage2_runtime",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage2_runtime_snapshot.json",
+      "sha256": "1750ea268a4b36ea8c244c8dce839ffe83eaee6a38641d0ce4b664b092a0c9d3",
+      "privileged_offline": false
+    },
+    {
+      "id": "runtime_freeze_ci",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_freeze_9e48016.json",
+      "sha256": "d4ec6fda50ce465c4db9a5429bb7bdba1c576b5ebe398dc5cfc4dd3392b8fe56",
+      "privileged_offline": false
+    },
+    {
+      "id": "grasp04_read",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_04_closed_read_archive.json",
+      "sha256": "eb6953a67bd43b7b817e92dca27bcac1c0e20bd205ae23e7d36184dd4cfb923d",
+      "privileged_offline": false
+    },
+    {
+      "id": "grasp04_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/grasp_transport_04_normal_reader.json",
+      "sha256": "f9d05c733f3348cd1a976b9045c639be4cf941da56d07f7adff26a4877c97953",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_read",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_closed_read_archive.json",
+      "sha256": "6a7ef4929c190cdea4e8706d1bf2ab85173c0acce4b4f7a940e9aba5439235ce",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/README.md",
+      "sha256": "2bdf133514028b0df8df38a05fdcf8bd3ce474b33c65e9e5308dccd65c0078f6",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/evidence.json",
+      "sha256": "64a45fcdc7a3e83e7da7ff19dd7ba43c259aa32f8365bab0dd3b3557aea46024",
+      "privileged_offline": true
+    },
+    {
+      "id": "sourcehold_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/early_grasp_extract.csv",
+      "sha256": "9b58aa35c8eefcc29e75ca7ee58161a9196a49a514baea4b7a97e9885bce4fb6",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_read",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_closed_read_archive.json",
+      "sha256": "c913bf26a460d89400c71cc9a2ce090db27de91fa95902da4d66a5519d1e9bee",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/README.md",
+      "sha256": "27546b81c83789c72ac72a67c7c7a465aada6e1e34dcd9401ca984a0370f1c60",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/evidence.json",
+      "sha256": "c31014e7af54beda7d32bb5a6527fcf34f34d042db58a450fd26939fb613aa09",
+      "privileged_offline": true
+    },
+    {
+      "id": "slow_forces_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/physics_force_opening.csv",
+      "sha256": "ccefdf1df641922f8a536ff07a45926b356ac859bd61bd65a5e35749f7529bcf",
+      "privileged_offline": true
+    },
+    {
+      "id": "slow_dispatch_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/control_dispatch.csv",
+      "sha256": "256c2c81f70e94dfd7afffbed93d46d13d1dc448b0621d8727ab88ff2f574468",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_slow_close_01_normal_reader.json",
+      "sha256": "0519b73f7dc9a4ca12cb65a8d54a6a7dc19357e67f9b3df86a954da7f41837a1",
+      "privileged_offline": false
+    },
+    {
+      "id": "hold_mechanism",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_hold_mechanism_review/review.json",
+      "sha256": "8cf8ebbe5fba99d732f5766e67b581aa356e7d93c55645b438a8d0ffab12a0f9",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_read",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_read_archive.json",
+      "sha256": "01c53d0354f919ac2c60668a5ecf3fc5c9085dc99320f6afde718c5482f4a252",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/README.md",
+      "sha256": "6934b43608f7421009a9f4c7d768b06b41c141608b2cebd001d4c7fef4689b7a",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_evidence",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/summary.json",
+      "sha256": "f3f616300c648e66327d21151a1684b966c788d13a1ede41db45a6b59b72b12b",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_curve",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/target_contact_release_curve.png",
+      "sha256": "775bfbe0aa002c5eda9541264a29d45c3f1b58b89e34fd551a304ea621bc6b92",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_curve_csv",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/target_contact_release_curve.csv",
+      "sha256": "cf4f2a96011613485581a691648ede76ee77dd8b6c3771bee7ecbd735b4738e0",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_input_cross",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/wire_inputs_cross_audit.json",
+      "sha256": "c90b87da775a5a36691871afab538ee790a9336d40039a0d9230f37e6a083728",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_public_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/README.md",
+      "sha256": "0ef2f4b4e3c972aee012dfe568dbf274adfb815241b9a560f4d5dbad2200c7b6",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_public_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/summary.json",
+      "sha256": "b366d546655670e36e6060c9e17b3724be14c32a0b4d35d70d934c10a88d0132",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_input_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/manifest.json",
+      "sha256": "ca8ee191f579aaec92b1ff44b8310c49eb50012e69e85b6962448f41acd398b3",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_actions",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/action_sequence.csv",
+      "sha256": "4388cfc6fa6db8d8e54d5eb8f12c97269fe353ec67bc886fc8d17077188c3c7d",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_wrist_27",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/observations/decision_000027/wrist_camera.jpg",
+      "sha256": "15b251ae4bb4dc90c625e7e42274af3b2f9ac7099cc87cdcc3b97557d62372b7",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_side_27",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/observations/decision_000027/side_camera.jpg",
+      "sha256": "4b9bb77b6a632a236966eb3c4b286cf01765ca332a48a64837eab531b3af8943",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_runtime_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/summary.json",
+      "sha256": "48a4c99ec67ac53ee2739d466a865a41ce6cca1f301b4a571a9603cc0693794a",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/controller.json",
+      "sha256": "68f2750b4df8b396fe04931ff643a6605c11dcb3ea98af1018b50e9c207da345",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_02_normal_reader.json",
+      "sha256": "b797faa4be8ce0c4cd913c34b774187b117fd3618a4a1accdab8bfbd6e146358",
+      "privileged_offline": false
+    },
+    {
+      "id": "preload_implementation",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/contact_preload_feedback_v2_implementation.md",
+      "sha256": "b45c6b23c3e229583f6e8c1e9607f16393b7ad68d7838f8542ccd38b2645b838",
+      "privileged_offline": false
+    },
+    {
+      "id": "force2_review_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/force_hold_v2_review_20261027/README_REVISED.md",
+      "sha256": "0ff5e5afb576074952a203a2b149d8e366d18026f5d09c3a4ee8db192cff28bc",
+      "privileged_offline": false
+    },
+    {
+      "id": "force2_review",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/force_hold_v2_review_20261027/review_revised_snapshot.json",
+      "sha256": "cc6d19de8eb6c23e37ec008c8e5285d738db9e44954fb13d864658ef4cf69c30",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/README.md",
+      "sha256": "f5c0c3f2f51209d840e6b69091957ebd2f40ffe70a01d7fbe862dd5ff3d3af03",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/summary.json",
+      "sha256": "b951a0167a6594c1351fe79aa913057effd0db7bf75603614057b11681655b7b",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_contracts",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/contracts_result.json",
+      "sha256": "ebc46e3030ed4133294b9117553110b7a22ab0592fbe05d1f58ec1bf0dae7845",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/normal-readers_result.json",
+      "sha256": "2db2fe231982248623e7935b2177ca8834dd6dec9b18e7a6f9ebd469541b9153",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_protection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/protection.json",
+      "sha256": "f83a74ecfb026f0c76119e400f7ad33fab1af3830dd4481a80706e47fabdfb15",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/README.md",
+      "sha256": "333f30f7dda0f4a5e8f973e9522a3b05fc54c0e4427af8b1950ea72f0828be71",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_cpu",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/context_structure_CPU.json",
+      "sha256": "2fd7d582b518cd392082d2cd645f03fd9bc411d41fba110339be634eea26aeb1",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_projection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/cost_projection.json",
+      "sha256": "6c8066a44c533b6d476e921f87b7a60f6848f68b256c97d9259a64cccf9ba622",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_cli",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/cli_dry_run.json",
+      "sha256": "ebd1577c7d84c51b3a04524386996159e6089e0e53ee3d67a13d6d3c86fd9cd3",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_profile",
+      "scope": "contract",
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json",
+      "sha256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba"
+    }
+  ],
+  "cohorts": [
+    {
+      "kind": "diagnostic",
+      "status": "closed",
+      "completed_count": 2,
+      "planned_count": 2,
+      "summary_source": "closed_033",
+      "note": "仅计最终两条异常前缀；自由/细位移/手工抓持探针单列，不当完整任务配额。"
+    },
+    {
+      "kind": "teacher",
+      "status": "incomplete",
+      "completed_count": 3,
+      "summary_source": "slow_evidence",
+      "note": "已关闭teacher02、source_hold01、slow_close01三个独立调试版本，均原GRASP_SLIP；不构成同冻结标准回归3/5。active teacher_preload01不计数，最终5次待完整通过后冻结。"
+    },
+    {
+      "kind": "gpt_debug",
+      "status": "incomplete",
+      "completed_count": 2,
+      "summary_source": "gpt02_evidence",
+      "note": "GPT01安全碰机身、GPT02座口受阻后材料几何安全失败均真实运行；不同prompt/版本，不计算正式成功率。active GPT03不计入。"
+    },
+    {
+      "kind": "gpt_formal",
+      "status": "incomplete",
+      "completed_count": 0,
+      "planned_count": 5,
+      "note": "本版本尚未取得冻结配置下完整独立GPT成功，正式五次未启动；旧版formal不合并，短CPU/API诊断不放行。"
+    }
+  ],
+  "pages": [
+    {
+      "title": "当前闭合结论与版本范围",
+      "topics": [
+        "summary"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "本草稿继续记录Project_v1_1，而非最终发布验收。执行器异常前缀与空爪细位移已改善，GPT实际抓持搬运和两次失败轨迹均可复核；闭合证据仍没有本版本GPT完整装载成功。当前代码冻结9e48016声明helper v2、公开goal、prompt v3及独立context4候选；它们不回写旧运行身份或失败标签。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "范围",
+            "当前实际结果",
+            "不能代替"
+          ],
+          "rows": [
+            [
+              "确定性诊断",
+              "原前缀7目标、72自由探针、24细位移完成",
+              "完整持物装载成功"
+            ],
+            [
+              "teacher02 / source_hold01",
+              "均走到工作流结束，独立GRASP_SLIP",
+              "成功teacher样本或通过回归"
+            ],
+            [
+              "teacher slow_close01",
+              "19.967秒提起初段GRASP_SLIP",
+              "保持力修复已物理通过"
+            ],
+            [
+              "GPT debug01",
+              "抓持搬运后SAFETY_COLLISION",
+              "本轮未运行或完整成功"
+            ],
+            [
+              "GPT debug02",
+              "搬运到座口后SAFETY_GEOMETRY_VIOLATION",
+              "支撑交接与稳定装载"
+            ],
+            [
+              "helper v2 / context4",
+              "CPU约束与配置结构已验证",
+              "active运行结果或正式五次"
+            ]
+          ],
+          "widths": [
+            3.2,
+            4.8,
+            3.8
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "teacher_preload_01与GPT03均不纳入本阶段闭合统计；本草稿不读取它们的活跃输出。诊断、真值teacher、真实GPT调试和正式cohort独立列出，不把零成功写成没有运行，也不以budget仍有余额自动放行正式评测。"
+        },
+        {
+          "type": "paragraph",
+          "text": "补充已关闭grasp_transport_04：9e48016实际33.15秒、1988tick、17回执全部TCP到达，grasp/sourceclear通过，杯底相对漂移最大2.698 µm。它仍是control_diagnostic，原taskfalse/POLICY_BUDGET、transportfalse，正常成功/失败训练入口均排除；不能当完整装载通过。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "stage2_runtime",
+              "label": "静态冻结身份与公开goal来源"
+            },
+            {
+              "source": "closed_source_index",
+              "label": "较早78源快照"
+            },
+            {
+              "source": "gpt02_read",
+              "label": "GPT02关闭与完整读取"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "动作异常根因与连续执行修复",
+      "topics": [
+        "executor"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "旧执行器在world小动作中曾实际移动超过200 mm。新路径保持原请求目标，用连续局部IK、FK复核和关节步长界限预规划，再以实际跟踪与速度护栏执行；不再把远IK解逐关节截断后宣称到达，也不把目标追随跑偏TCP重定向。拒绝规划时执行零tick，部分执行按真实时间和后继状态记录，不自动重放。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "序列第三动作",
+            "旧净位移 mm",
+            "新净位移 mm",
+            "新终点误差 µm"
+          ],
+          "rows": [
+            [
+              "world 0 40 0 mm",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/0/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/0/third_action/final_fix02_net_displacement_mm",
+                "format": ".6f"
+              },
+              "1.527"
+            ],
+            [
+              "world 0 35 −19 mm",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/1/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/1/third_action/final_fix02_net_displacement_mm",
+                "format": ".6f"
+              },
+              "2.402"
+            ]
+          ],
+          "widths": [
+            3.2,
+            2.3,
+            2.7,
+            2.8
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "closed_035",
+          "caption": "原请求参数保持不变的两条异常前缀。终点改善与动态路径误差分别显示；完整控制边界跟踪峰值仍约0.367/0.251 mm。",
+          "max_height_cm": 5.3
+        },
+        {
+          "type": "paragraph",
+          "text": "最终fixed_replay_02两集共7动作全部到达、真实退出0。首次修复fixed_replay_01虽完成动作，关闭后Python GC退出139仍作为历史缺陷保留，不能写成当时进程正常。相同请求不等于此前实际起点相同，多处控制与工具改动也不能全部归因于单一补偿。另有三个独立reset、world/TCP两种姿态的72个有符号自由空间探针通过；这些均不是完整装载样本。"
+        },
+        {
+          "type": "paragraph",
+          "text": "同24个空爪细位移条件的100 µm目标由0/24变24/24，B终点最大1.293 µm、3秒保持整窗最大漂移11.529 µm。它只是预插入自由空间诊断，接近FK/native表示分辨尺度，不证明持物、接触插入或真实微米精度；原生速度与差分不一致仍保留。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_032",
+              "label": "新旧前缀说明"
+            },
+            {
+              "source": "closed_034",
+              "label": "全部7动作对照"
+            },
+            {
+              "source": "closed_026",
+              "label": "72探针审计"
+            },
+            {
+              "source": "closed_010",
+              "label": "首次修复及退出缺陷来源"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "专家失败定位与接触保持修订",
+      "topics": [
+        "grasp",
+        "teacher_data"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "teacher02的608.994 µm杯底相对漂移含姿态杆臂效应。source_hold01抑制GRASP姿态反馈后，GRASP峰值降至0.891 µm，但EXTRACT切换初段仍越过原200 µm门槛，global274.017 µm，最终仍GRASP_SLIP。首越界仍由来源底座支撑、早于独立1 mm提起事件，不能叫离架后滑脱。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "闭合对照",
+            "时长 s",
+            "原独立结果",
+            "关键现象"
+          ],
+          "rows": [
+            [
+              "teacher02",
+              "124.267",
+              "false GRASP_SLIP",
+              "早期转动与锚点移动并存"
+            ],
+            [
+              "source_hold01",
+              "124.267",
+              "false GRASP_SLIP",
+              "首越界272.280 µm，仍有来源支撑"
+            ],
+            [
+              "slow_close01",
+              "19.967",
+              "false GRASP_SLIP",
+              "末杯底漂移1.592 mm，主要轴向相对滑移"
+            ]
+          ],
+          "widths": [
+            3.3,
+            1.6,
+            3.4,
+            4.7
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "slow_close01两层同冻结10.418463 mm；提取前100 ms中部分采样的名义摩擦容量低于重力，双指仍各大于0.03 N，所以旧helper持续confirmed/hold_contact_target而不恢复。每指8 N只是上限，不是恒力；muΣN是名义库仑模型容量上界，不是实测竖向摩擦。该run尚无独立1 mm提起/清槽，保留原失败。"
+        },
+        {
+          "type": "paragraph",
+          "text": "helper v2改为持续确认接触后，以机器人指位/力与实际effort上限检查既有约0.3102 N每指预载目标，必要时以原2 mm/s界限继续单向收紧；不加力上限、摩擦或评分容差。新增反馈总收紧以首次冻结为基准限0.6 mm，重接不重置；显式释放连续跟随当前调度。该界限不是材料压缩或穿透全局上界。"
+        },
+        {
+          "type": "paragraph",
+          "text": "修订后的独立CPU反例复核覆盖最低开口不回张、失触预算不重置、旧teacher逻辑释放不突跳及重复样本幂等。527项CPU通过不证明新保持器承重、释放或完整装载已通过；新物理运行仍待独立关闭与原评分。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "sourcehold_evidence",
+              "label": "source hold首越界与身份"
+            },
+            {
+              "source": "slow_evidence",
+              "label": "慢闭合真实力与漂移"
+            },
+            {
+              "source": "slow_dispatch_csv",
+              "label": "双层分派CSV"
+            },
+            {
+              "source": "force2_review",
+              "label": "修订后独立CPU反例"
+            },
+            {
+              "source": "cpu527",
+              "label": "527项CPU及保护"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "公开目标与相机实际观测",
+      "topics": [
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "新的loading语言仅从cfg.geometry.target_depth_m与vessel.height_m给出27 mm名义深度、67.5 mm高度和40.5 mm留外长度，并说明candidate_far_hinge为两座中离铰链更远的目标；它不是当前物体姿态、实际深度或承托测量。diagnostic语言保留。prompt v3新增通用双视透视对准、近座≤1 mm/s分段复查、相对上滑或单侧失触停止及支撑不足不提前开爪，不提供离线误差坐标或teacher宏。"
+        },
+        {
+          "type": "figure",
+          "source": "gpt02_wrist_27",
+          "caption": "GPT02 decision27实际发送腕视JPEG，53.0167秒；可见杯与座口关系，但图像重叠不能证明同轴、全深度插入或腔底支撑。此旧运行仍属c793及原prompt，不冒充新prompt v3验证。",
+          "max_height_cm": 6.0
+        },
+        {
+          "type": "paragraph",
+          "text": "全部33次GPT02公开观测快照、66张exact编码JPEG、静态prompt/schema和公开toolcall/receipt已原字节保存并交叉核SHA。并未归档完整HTTPbody或全部memory response item组，后者可能有未记录的私有reasoning items；不能称完整请求上下文或私有推理已保存。"
+        },
+        {
+          "type": "paragraph",
+          "text": "v2相机原生640×480、发送512×384 JPEG q60 low，保留实际K缩放和时间戳；阶段、GT裁剪和对象真值不进policy。早先同一INSERT瞬间512low/640high各一真实请求均识别杯/指/座边，均不能证明底部支撑或座可见身份；样本不足以推广延迟或精度，继续512low。最终退让后目标部分出腕视、侧视小且遮挡的限制保留。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt02_side_27",
+              "label": "同决策侧视JPEG"
+            },
+            {
+              "source": "gpt02_input_cross",
+              "label": "33观测复制交叉SHA"
+            },
+            {
+              "source": "gpt02_input_manifest",
+              "label": "完整公开观测文件清单"
+            },
+            {
+              "source": "closed_066",
+              "label": "真实双profile单帧API比较"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "GPT02 座口受阻与原独立判分",
+      "topics": [
+        "gpt"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "GPT02实际33次API、33条接受动作、3591转换、59.866667秒，先完成物理离架与高位搬运，随后在座口受阻。最终record/integrity/physics均true，task_success=false、SAFETY_GEOMETRY_VIOLATION / INPUT_MATERIAL_PENETRATION；没有合格完整装载。GPT01则为手体碰机身，二者不能混写成同一故障或执行器失稳。"
+        },
+        {
+          "type": "figure",
+          "source": "gpt02_curve",
+          "caption": "已关闭日志的特许离线分析：杯底停于入口而手继续下降，实际腔底支撑全程为0。原双侧抓持门控与门控外上下文分开，TCP曲线不是杯位姿；这些真值不送入policy。",
+          "max_height_cm": 5.4
+        },
+        {
+          "type": "table",
+          "headers": [
+            "实际时序",
+            "证据",
+            "结果含义"
+          ],
+          "rows": [
+            [
+              "52.9375 s",
+              "入口阻挡，XY误差约2.602 mm",
+              "尚未形成合法深度或底部承托"
+            ],
+            [
+              "开爪前",
+              "双侧门控漂移最大16.956 mm",
+              "失败已发生，不是释放后误计"
+            ],
+            [
+              "55.0167 s",
+              "开始11 mm / 0.5 N卸载",
+              "单独张爪命令不代表完成支撑交接"
+            ],
+            [
+              "59.8667 s",
+              "材料重叠约0.3855 mm触发安全门槛",
+              "正深度来自倾斜最低点，不能判插入成功"
+            ]
+          ],
+          "widths": [
+            2.5,
+            5.1,
+            4.0
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "最后动作仅执行51/120tick、0.85秒，安全停后未完成规定退让。post_retreat_window保持unavailable、stable_after_retreat=null；不能把末3秒上下文改称撤离后稳定。所有原标签、H5和模型公开输入保留，privileged接触坐标只用于事后诊断。新版正式5次尚未启动：必须先由同一最终配置取得GPT独立完整成功，再复核实际费用并冻结全部指纹。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt02_evidence",
+              "label": "原结果与关键时刻"
+            },
+            {
+              "source": "gpt02_curve_csv",
+              "label": "受阻与释放完整CSV"
+            },
+            {
+              "source": "gpt02_actions",
+              "label": "33动作与实际回执"
+            },
+            {
+              "source": "gpt02_read",
+              "label": "闭合全H5读与归档"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "正常读取 CPU回归与上下文预算",
+      "topics": [
+        "teacher_data",
+        "gpt"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "slow_close01与GPT02均通过正常failure ACT/DP读取，success过滤均拒绝，动作8维与观测后继时间对齐，原H5与标签不变。它们可用于失败分析，不能进入成功BC。当前没有本阶段新增合格成功样例，也未启动训练。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "CPU证据",
+            "实际范围",
+            "边界"
+          ],
+          "rows": [
+            [
+              "b3765fc完整契约",
+              "505通过 11轻量skip",
+              "skip均由正常reader环境覆盖"
+            ],
+            [
+              "正常reader",
+              "22通过 0skip",
+              "与契约合计527具体通过用例"
+            ],
+            [
+              "保护",
+              "596历史资产 83运行缓存验SHA",
+              "原物理 机器人 器皿 评分七组未改"
+            ],
+            [
+              "独立helper v2反例",
+              "最低开口 预算 释放 连续调度通过",
+              "不是9e完整物理或远端CI通过"
+            ]
+          ],
+          "widths": [
+            3.2,
+            4.4,
+            4.2
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "context4是显式候选，默认provider仍为12；仅max_context_messages由12改4，其余字节不变。真实runner在synthetic CPU客户端验证保留最近2个完整工具回合、call_id配对和同组模拟reasoning marker，同时每步发送当前Task/public goal、标定与双图。未调用API，不能说服务端已接受、实际费用或策略质量等同。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "GPT02闭合后的共享快照",
+            "本地估算 USD"
+          ],
+          "rows": [
+            [
+              "141次网络请求的总占用",
+              "10.636662"
+            ],
+            [
+              "其中未知usage保守预留",
+              "0.702690"
+            ],
+            [
+              "其余已知usage按公开价估计",
+              "9.933972"
+            ],
+            [
+              "当时剩余授权空间",
+              "19.363338"
+            ]
+          ],
+          "widths": [
+            7.3,
+            3.0
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "以上不是当前活跃GPT03后的最终账本，也不是实付。context4投影按旧GPT02输入拟合，40/50/60决策约2.82/3.54/4.25美元，动作数、输出与重试均未验证；仅在一次完整成功debug和formal每集均约40决策的假设下，才有约2.43美元缓冲。必须先完整成功、看实际成本，不能拿短诊断或投影代替正式放行。30美元/1500次硬限与旧timeout预留继续共享。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "slow_reader",
+              "label": "slow close正常失败batch"
+            },
+            {
+              "source": "gpt02_reader",
+              "label": "GPT02正常失败batch"
+            },
+            {
+              "source": "cpu527",
+              "label": "527项与保护汇总"
+            },
+            {
+              "source": "context4_cpu",
+              "label": "CPU上下文配对证明"
+            },
+            {
+              "source": "context4_projection",
+              "label": "费用假设与正式门槛"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "复现入口 发布条件与精简阅读包",
+      "topics": [
+        "release"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "静态运行冻结为9e48016412907385d1a8c9e40860139f3d730764；同SHA远端与CI第21次Success已核，但不代表最终发布或完整任务验收。新目标语言、prompt v3、helper v2和context4须在实际运行记录中分别绑定。下面是显式候选入口；最终运行前核对已有凭据与同一预算，不重置ledger、不覆盖目录，同GPU顺序运行。"
+        },
+        {
+          "type": "code",
+          "language": "bash",
+          "text": "LABSIM_POLICY_DIR=config/lab_cuvette_loading/Project_v1_1/policies\n./labsim eval --project-version Project_v1_1 --scene standard \\\n  --backend gpt6 --episodes 1 --max-calls 160 --headless \\\n  --provider-config \"$LABSIM_POLICY_DIR/cubence_gpt6_context4.json\" \\\n  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \\\n  --output outputs/lab_cuvette_loading/Project_v1_1/gpt_context4_NEW"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "最终收口项",
+            "本草稿状态"
+          ],
+          "rows": [
+            [
+              "teacher_preload01 GPT03",
+              "不纳入活跃运行统计，等待原评分与关闭证据"
+            ],
+            [
+              "完整成功后teacher与GPT正式回归",
+              "尚不能由现有失败或CPU结果宣布通过"
+            ],
+            [
+              "运行freeze SHA / 同SHA CI",
+              "9e48016已核；后续最终交付提交仍须再核"
+            ],
+            [
+              "同提交checkout 缓存 GUI headless reset reader",
+              "最终运行闭合后补齐，准确限定同机范围"
+            ],
+            [
+              "HF资产与新样例",
+              "旧固定pin可复用；无新成功样例则保留缺口"
+            ],
+            [
+              "报告与≤80MB current-only包",
+              "仅预算方案；不author、不marker、不复制大视频"
+            ]
+          ],
+          "widths": [
+            4.5,
+            6.5
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "阅读包只收本轮报告、必要CSV/JSON/图、公开观测与当前代表性完整连续录像。历史报告和大媒体只给固定SHA链接，不复制H5/raw/环境/权重。80 MB按80,000,000字节硬界处理；最终取材、全部媒体解码/视觉QA、相对链接和包内SHA检查待新run关闭后执行。旧draft与全部原输出原样保留。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "stage2_runtime",
+              "label": "静态代码配置SHA快照"
+            },
+            {
+              "source": "current_usage",
+              "label": "新版入口与reader说明"
+            },
+            {
+              "source": "context4_profile",
+              "label": "显式context4配置"
+            },
+            {
+              "source": "hf_pinned_assets",
+              "label": "既有固定HF资产revision"
+            }
+          ]
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "runtime_freeze_ci",
+              "label": "9e运行身份 39源等价与CI21"
+            },
+            {
+              "source": "grasp04_read",
+              "label": "grasp04关闭与40 dataset全读"
+            },
+            {
+              "source": "grasp04_reader",
+              "label": "诊断数据正常reader排除"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "本文件finalized=false，仅CPU只读输入验证；未author DOCX、marker或渲染，七逻辑组不是真实页数。旧draft保持不变。",
+    "grasp04已关闭，仅纳入抓持诊断而非完整任务；teacher_preload_01和GPT03排除活跃统计，不补造最终成功、失败或费用。",
+    "source_hold01和slow_close01首越界均在来源仍支撑时，不能通称离架滑脱。旧teacher/GPT失败不由新helper或稳定末窗重标成功。",
+    "helper v2预载是使用既有假设的控制规则；0.6mm是新增反馈命令预算，不是材料压缩或几何穿透的全局界。CPU527不是新物理成功或最终同SHA CI。",
+    "公开goal只含配置静态尺寸与目标角色。公开JSON/exact JPEG与记录的prompt/schema/toolcall/receipt不等于完整HTTPbody或全部memory response item组，不能宣称保存未记录的私有reasoning。",
+    "报告中座/杯/力/穿透曲线属于特许事后诊断，绝不回馈policy。input-material重叠不等于已完整读取实际cooked碰撞；真实材料、摩擦、质量、惯量仍未标定。",
+    "微位移、FK误差与相对抓持小量均为当前仿真条件下记录，不能推广真实微米精度；控制边界不是物理子步严格上界，原生与差分速度不一致保留。",
+    "context4只完成CPU结构与投影，未纳入active运行的真实成本/质量；141请求预算是GPT02后旧快照，含0.702690未知usage预留，不是最终账单。",
+    "最终完整GPT成功、冻结正式5次、teacher最终回归、同发布代码复现、Git远端SHA/CI/HF及current-only包仍待闭合；历史资料只固定SHA链接。"
+  ]
+}

@@ -43,7 +43,7 @@ def test_nominal_width_plus_two_mm_gate_bounds_only_the_near_closing_step(
     assert metadata['near_contact_dispatched_opening_m'] == expected
     assert result['gripper_effort_limit_N'] == 8.
     assert result['duration_s'] == 1 / 60
-    assert metadata['teacher_controller_version'].endswith('.v3')
+    assert metadata['teacher_controller_version'] == teacher.VERSION
     assert teacher.cfg == configuration
 
 

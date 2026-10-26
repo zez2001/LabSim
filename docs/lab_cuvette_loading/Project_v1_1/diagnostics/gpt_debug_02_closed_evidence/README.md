@@ -29,4 +29,6 @@ PID147063 已消失，supervisor真实 Popen.wait exit0，进程墙钟750.720 s�
 
 [紧凑JSON](summary.json) · [几何/释放时间线](geometry_release_summary.json) · [实际 native pairs](native_positive_contacts.json) · [曲线CSV](target_contact_release_curve.csv) · [全读审计](../gpt_debug_02_closed_read_archive.json) · [正常 reader](../../validation/gpt_debug_02_normal_reader.json) · [全物理/任务摘录](../gpt_debug_02_contact_task_offline.json)
 
-全部实际发给模型的双视图/publicJSON/manifest、controller和trace由同轮 [perception证据](../gpt_debug_02_perception/README.md) 保存并独立按trace SHA核对；本审计又将其138项原始来源SHA与归档前174项保护清单交叉核对，所有原gpt_control文件均已保存、全部复制文件SHA/bytes一致，见 [wire交叉审计](wire_inputs_cross_audit.json)。本目录内座/杯/接触坐标为有权限的离线诊断，未送入policy。没有新增API/GPU、训练、阈值改动、真实精度或随机泛化结论。
+33次公开观测JSON、66张实际发给模型的JPEG、原manifest、记录的静态prompt/tool schema、公开toolcall/receipt、controller和trace由同轮 [perception证据](../gpt_debug_02_perception/README.md) 保存并独立按trace SHA核对；本审计又将其138项原始来源SHA与归档前174项保护清单交叉核对，所有原gpt_control文件均已保存、全部复制文件SHA/bytes一致，见 [wire交叉审计](wire_inputs_cross_audit.json)。本目录内座/杯/接触坐标为有权限的离线诊断，未送入policy。没有新增API/GPU、训练、阈值改动、真实精度或随机泛化结论。
+
+保存范围不包含完整HTTP body或完整memory response item组；后者可能有未记录的私有reasoning项，因此不能称为保存全部原始请求。观察证据的原始字节和138项源SHA均未变。
