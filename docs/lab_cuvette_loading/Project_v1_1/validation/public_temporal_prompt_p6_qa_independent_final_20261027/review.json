@@ -1,0 +1,101 @@
+{
+  "schema": "labsim.Project_v1_1.P6_QA_independent_final_review.v1",
+  "created_utc": "2026-10-26T23:06:57.593776+00:00",
+  "blocking_submission_findings": [],
+  "review_status": "accepted",
+  "reviewed_source_SHA256": {
+    "policy/backends/cubence_project_v1_1_tools.py": "173b9eca096a257c7db009d5a1cd29ae0b638754f2becb7c8c02a67ae49fc474",
+    "demos/lab_cuvette_project_v1_1/temporal_observation_qa.py": "79b5ad08a26fcd707f11775239b73df7e00feddf7fcb3c7bd956a0f458042e33",
+    "tests/test_lab_cuvette_project_v1_1_temporal_prompt_cadence.py": "033c2f2c699645eaf9f227aa353a085c84c01f3c4c7db4fba81e5d27c6d08f41",
+    "tests/test_lab_cuvette_project_v1_1_temporal_observation_qa.py": "a904b49efb29ca816cdd83255cfd13f27fd9436e2ef95881e10aeed0aa51cfb1",
+    "tests/test_lab_cuvette_project_v1_1_visual_context.py": "b888a2045a1d71f0eb36a1ce63ff640d205819dd03d58c20a21b182f2bb160f6",
+    "docs/lab_cuvette_loading/Project_v1_1/public_temporal_visual_context_v1.md": "b963a8de39ddfec96898f996dfd9580323bf328432d80bc91d4c3ddb83930cff",
+    "docs/lab_cuvette_loading/Project_v1_1/camera/temporal_public_qa_d35_plan/plan.json": "15508873d0791cfe6b4ccc068c1d9dfd34232283d3905a9b2020b35895cd0c1a",
+    "docs/lab_cuvette_loading/Project_v1_1/camera/temporal_public_qa_d35_plan/README.md": "43f6ebeaac965dffb7aaf4ef23bdf49e93a8ecbcd382c40fd5351160ffdffa13"
+  },
+  "protected_file_count": 11,
+  "all_protected_SHA_match_actual_a807_HEAD": true,
+  "author_contracts_XML_recount": {
+    "passed": 630,
+    "skipped": 11,
+    "failed": 0
+  },
+  "author_contracts_result_SHA256": "6c5fa79c264a6012f2f7571c1c780a4066a89cf8c982363ae3fa6f5fb72e9d47",
+  "source_unchanged_during_author_CPU": true,
+  "independent_CPU": {
+    "command": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_visual_context.py",
+      "tests/test_lab_cuvette_project_v1_1_temporal_prompt_cadence.py",
+      "tests/test_lab_cuvette_project_v1_1_temporal_observation_qa.py"
+    ],
+    "passed": 52,
+    "failed": 0,
+    "reported_wall_s": 0.22,
+    "network": "CPU fake opener only"
+  },
+  "checks": [
+    {
+      "topic": "P4/default",
+      "status": "pass",
+      "finding": "P4 prompt SHA remains ac9ac4d33b2e329dfe684bfcd8461b4962274ac5b57659c94194da2af0ce2ddf; absent visual_context still delegates unchanged normal client and five tools. P6 only explicit opt-in."
+    },
+    {
+      "topic": "single_HTTP_and_shared_budget",
+      "status": "pass",
+      "location": "demos/lab_cuvette_project_v1_1/temporal_observation_qa.py:138–177",
+      "finding": "Default preview instantiates neither ledger nor provider. Explicit network branch uses BudgetLedger with original config/default existing shared path, one request allow_retry=False, original120s deadline/output/model. No new caps/reset; unknown errors remain conservative reservations."
+    },
+    {
+      "topic": "no_tool_or_physics",
+      "status": "pass",
+      "finding": "Neutral observation-only instructions; request payload contains no tools/tool_choice and module has no environment/execute/finish. Unexpected tool response or empty visible answer fails; nothing dispatches a robot action."
+    },
+    {
+      "topic": "public_input_identity_and_scope",
+      "status": "pass",
+      "finding": "Strict same public snapshot/finite/JPEG validation across closed one-episode prefix; normal memory helper constructs history before CURRENT, current last. Exact JSON/JPEG copied, not reencoded/cropped; first public bilateral>0.02N is not actual first contact or grasp success."
+    },
+    {
+      "topic": "seed_truthfulness_and_privacy",
+      "status": "pass",
+      "finding": "Offline capture returns None, not a fake model answer; every seed labelled api_sent=false/offline/model_response_generated=false. Actual visible response only, no raw provider reasoning or headers/keys/errors saved. Canonical payload hash plus public projection does not imply saved private full HTTP."
+    },
+    {
+      "topic": "source_and_output_protection",
+      "status": "pass",
+      "finding": "Output requires new separate directory. Proof exit0/PIDgone checked before prefix reads, all manifest JSON/JPEG hashes before copying, before/after hashes preserved. As an explicit trusted-source CLI, supplied proof/source pairing is caller provenance; reviewed actual D0–35 uses exact native closed proof."
+    },
+    {
+      "topic": "P6_strategy_boundary",
+      "status": "pass",
+      "finding": "100um/.1s six-tick world/tcp protocol tests establish routing only, not physical accuracy.3mm/3s remains generically legal; cadence is prompt policy, not automatic phase/guard. No GT pose/depth/seat event, teacher macro, physics or score change."
+    }
+  ],
+  "existing_real_closed_preview": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_temporal_prompt_p6_qa_ready_20261027/closed_public_D35_preview/qa_summary.json",
+    "SHA256": "27cb31807dc29b6bc5b3c5e629f495c6a503be1bb2bbafd6d5b3824768a5b4b9",
+    "source_files_rechecked": 145,
+    "API_sent": false,
+    "actual_network_attempts": 0,
+    "total_images": 4,
+    "current_decision": 35,
+    "previous_decision": 34,
+    "first_public_bilateral_decision": 7
+  },
+  "limitations": [
+    "P6 actual model/physical action compliance not yet validated.",
+    "QA is retrospective single-snapshot temporal observability; not task-success/precision/real3D support proof.",
+    "Original full task/hardware calibration and collision/velocity caveats remain.",
+    "The pure preview and all CPU transport responses are not actual model outputs."
+  ],
+  "runtime_or_clean_checkout_modified": false,
+  "API_calls": 0,
+  "GPU_used": false,
+  "H5_raw_read": false,
+  "shared_real_ledger_modified": false,
+  "old_reports_modified": false
+}

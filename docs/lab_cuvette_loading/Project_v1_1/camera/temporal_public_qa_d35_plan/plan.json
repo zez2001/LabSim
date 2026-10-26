@@ -1,0 +1,163 @@
+{
+  "schema": "labsim.Project_v1_1.closed_public_temporal_QA_plan.v1",
+  "plan_only": false,
+  "preparation_implemented": true,
+  "HTTP_implemented": true,
+  "API_sent": false,
+  "task_executed": false,
+  "task_success": null,
+  "task_dataset_eligible": false,
+  "source_run": "gpt_debug_04",
+  "source_scope": "Only the previously saved exact public RGB/JSON; no H5, raw physical trace, initial_debug, scorer events, actual object truth or teacher data is an input",
+  "selection": {
+    "current_decision": 35,
+    "previous_distinct_decision": 34,
+    "first_public_bilateral_decision": 7,
+    "reference_selection": "Scan saved public observations chronologically, skip duplicate observation identities, choose the first with two finite public finger_contact_N>0.02 N; for this closed prefix it is D7, not a grasp-success reference",
+    "do_not_choose_from_failure_or_GT_timing": true
+  },
+  "input_references": [
+    {
+      "role": "previous_distinct",
+      "decision_index": 34,
+      "episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+      "observation_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:4182",
+      "simulation_time_s": 69.71666666666667,
+      "files": [
+        {
+          "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000034/public_observation.json",
+          "SHA256": "dd107aed4eb32859173d214d6972b7b64eaaf3a1801da6d69940a323003cb184",
+          "bytes": 5911
+        },
+        {
+          "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000034/wrist_camera.jpg",
+          "SHA256": "590493abe4e41cec7da748e360fed1816d3cf9d400034bc27369297b92b1985a",
+          "bytes": 15321
+        }
+      ]
+    },
+    {
+      "role": "first_public_bilateral_contact_reference",
+      "decision_index": 7,
+      "episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+      "observation_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:840",
+      "simulation_time_s": 14.016666666666667,
+      "files": [
+        {
+          "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000007/public_observation.json",
+          "SHA256": "ca6042699562c6915a8edacd39406005f5fb087625fbafde035d6c4e33dabc21",
+          "bytes": 5915
+        },
+        {
+          "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000007/wrist_camera.jpg",
+          "SHA256": "81b77bac197322c3cb0b0c901c9548fdc9f25dc3662a582691d98167f4077aa7",
+          "bytes": 14411
+        }
+      ]
+    },
+    {
+      "role": "current",
+      "decision_index": 35,
+      "episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+      "observation_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:4362",
+      "simulation_time_s": 72.71666666666667,
+      "files": [
+        {
+          "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000035/public_observation.json",
+          "SHA256": "f0737b3273ef42d89c4e09a8cce0b1ca97293f651a364bf672e604c0724077f4",
+          "bytes": 5910
+        },
+        {
+          "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000035/side_camera.jpg",
+          "SHA256": "6abf6a94dde237d7452f2363ca01f0aa3896f097a9b550d76933197769e38e2d",
+          "bytes": 12423
+        },
+        {
+          "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000035/wrist_camera.jpg",
+          "SHA256": "7dcd86d8a23511116303f79d03a74ed4a9b17c0b7edafe08f018c61c2a18630c",
+          "bytes": 15261
+        }
+      ]
+    }
+  ],
+  "input_layout": [
+    {
+      "item": 0,
+      "role": "user",
+      "content": "Historical references labelled with roles and source public robot/tactile/time/wrist calibration; exact D34 wrist then D7 wrist (no recompression)"
+    },
+    {
+      "item": 1,
+      "role": "user",
+      "content": "CURRENT exact D35 public JSON followed by current side/wrist exact JPEGs, same five current blocks as normal temporal input"
+    }
+  ],
+  "QA_instructions": "This is an observation-only retrospective diagnostic over already closed public snapshots. No simulator or tools are available. Return no tool call, execute no action, assign no task/grasp success, and infer no hidden object state. The labelled historical references are stale. The first public bilateral-contact reference is not verified grasp, support, insertion, or a 3D object pose.\nCompare CURRENT with the previous wrist image, and separately with the first public bilateral-contact wrist reference. Is a change in vessel mouth/top edge relative to the black finger pads and intended seat rim visually discernible? Describe its direction as upward/downward/no discernible change/uncertain and identify the visible features supporting that assessment. Account for perspective, tilt and occlusion. Same-pixel overlap is not three-dimensional insertion.\nIs there sufficient visible/public evidence that the vessel bottom is independently supported or that free passage has been established? Answer established/not established/uncertain with visible evidence or missing information. Finger contact and a robot endpoint alone do not establish bottom support. Do not output world object coordinates, numerical insertion depth, unobserved contact events, or success labels.\nReturn concise JSON containing relative_change_vs_previous, relative_change_vs_contact_reference, visual_evidence, free_passage_evidence, bottom_support_evidence, uncertainty_and_missing_view. This is not a robot control request or a full-task evaluation.",
+  "tools": null,
+  "tool_choice_or_robot_executor": null,
+  "profile_source": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json",
+  "call_design": {
+    "client": "Existing CubenceClient and unchanged shared BudgetLedger",
+    "endpoint": "responses",
+    "requests": "One client.request(payload, endpoint=\"responses\", allow_retry=False, ...) call, so at most one network attempt",
+    "why_request_not_control_runner": "Avoid inherited robot-tool-required instruction and any environment/finish execution. Build the ordinary Responses payload with observation-only instructions, no tools, model from pinned profile, low reasoning, store=false and original1024-token output cap",
+    "budget_ledger": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+    "label": "visual_temporal_public_QA:gpt_debug_04:d35-v-d34-ref7",
+    "deadline": "monotonic start + existing request_timeout_s (120s); preserve shared $30/1500 caps; no ledger reset",
+    "error": "On timeout/unknown usage retain existing conservative reservation; no automatic second call"
+  },
+  "required_evidence_after_future_run": [
+    "All source prefix public JSON/JPEG/manifest and process-proof SHA are checked before and after preparation",
+    "Prepared public-only input manifest, full input_items canonical hash and exact images; no provider private reasoning/headers/credentials",
+    "Explicit prepared/offline state API_sent=false before any authorized network call",
+    "Actual sent_at/request_id/model/usage/ledger delta/wall time and response-only visible output once a real call occurs",
+    "Separate diagnostic classification, never a task-success or dataset episode label"
+  ],
+  "HTTP_requires_explicit_allow_network": true,
+  "implementation": "demos/lab_cuvette_project_v1_1/temporal_observation_qa.py",
+  "executable_interface": {
+    "module": "demos.lab_cuvette_project_v1_1.temporal_observation_qa",
+    "default": "offline preview; no provider construction, network or ledger mutation",
+    "source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control",
+    "current_decision": 35,
+    "send": "Add --allow-network only for one explicitly authorized observation-only request; no environment/tools or task labels"
+  },
+  "actual_preview": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_temporal_prompt_p6_qa_ready_20261027/closed_public_D35_preview",
+    "status": "preview_ready_no_network",
+    "API_sent": false,
+    "actual_network_attempts": 0,
+    "source_files_unchanged": true,
+    "current": {
+      "episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+      "observation_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:4362",
+      "simulation_time_s": 72.71666666666667,
+      "source_decision_index": 35,
+      "source_request_label": "policy:28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:4362:decision35",
+      "wrist_jpeg_sha256": "7dcd86d8a23511116303f79d03a74ed4a9b17c0b7edafe08f018c61c2a18630c"
+    },
+    "previous": {
+      "episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+      "observation_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:4182",
+      "simulation_time_s": 69.71666666666667,
+      "source_decision_index": 34,
+      "source_request_label": "policy:28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:4182:decision34",
+      "wrist_jpeg_sha256": "590493abe4e41cec7da748e360fed1816d3cf9d400034bc27369297b92b1985a"
+    },
+    "first_public_bilateral_reference": {
+      "episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+      "observation_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:840",
+      "simulation_time_s": 14.016666666666667,
+      "source_decision_index": 7,
+      "source_request_label": "policy:28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:840:decision7",
+      "wrist_jpeg_sha256": "81b77bac197322c3cb0b0c901c9548fdc9f25dc3662a582691d98167f4077aa7"
+    },
+    "total_images": 4,
+    "input_items_canonical_SHA256": "f4f671758de93f0f0137a9dab4b27ed06404b8386b65c1dab2333d41f49ac760",
+    "conservative_input_token_bound": 49150,
+    "local_limit": 80000,
+    "task_executed": false,
+    "task_success": null,
+    "task_dataset_eligible": false
+  }
+}

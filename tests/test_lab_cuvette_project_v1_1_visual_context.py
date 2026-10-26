@@ -96,7 +96,7 @@ def test_explicit_profile_wraps_only_new_version_prompt_metadata_and_same_ledger
     assert wrapper.ledger is base.ledger and wrapper.cfg==base.cfg and wrapper.cfg is not base.cfg
     assert captured['kwargs']['prompt']==tools_module.TEMPORAL_SYSTEM_PROMPT
     meta=captured['kwargs']['tools_class'].controller_metadata()
-    assert meta['prompt_version']=='Project_v1_1.public_tools.v5_temporal'
+    assert meta['prompt_version']=='Project_v1_1.public_tools.v6_temporal'
     assert meta['visual_context_profile']==VISUAL_CONTEXT
     helper=ROOT/'policy/backends/cubence_project_v1_1_visual_context.py'
     assert meta['implementation_sha256'][helper.name]==hashlib.sha256(helper.read_bytes()).hexdigest()
@@ -230,7 +230,7 @@ def test_actual_provider_fake_receives_augmented_input_and_shared_ledger_bounds_
     assert 'cpu-temporal-placeholder' not in saved and 'Authorization' not in saved
 
 
-def test_end_to_end_runner_selects_temporal_v5_without_new_tools_or_actions(tmp_path,monkeypatch):
+def test_end_to_end_runner_selects_temporal_v6_without_new_tools_or_actions(tmp_path,monkeypatch):
     cfg=load_config(PROFILE);env=helpers.ReceiptEnvironment();ledger=BudgetLedger(tmp_path/'budget.json',cfg)
     commands=[helpers.reply('wait',helpers.args(env),0),
         helpers.reply('finish',dict(episode_id='e1',observation_id='e1:60',reason='CPU contract end'),1)]
@@ -239,7 +239,7 @@ def test_end_to_end_runner_selects_temporal_v5_without_new_tools_or_actions(tmp_
     out=tmp_path/'episode';result=tools_module.run_episode(env,client,out,max_calls=3)
     assert result['network_attempts_this_episode']==2 and len(env.executions)==1
     frozen=json.loads((out/'controller.json').read_text())
-    assert frozen['controller_extension']['prompt_version']=='Project_v1_1.public_tools.v5_temporal'
+    assert frozen['controller_extension']['prompt_version']=='Project_v1_1.public_tools.v6_temporal'
     assert [x['name'] for x in frozen['tool_schema']]==['observe','move_ee','gripper','wait','finish']
     assert len(opener.bodies[-1]['input'][-1]['content'])==5
     assert json.loads(opener.bodies[-1]['input'][-1]['content'][0]['text'])['observation_id']=='e1:60'
