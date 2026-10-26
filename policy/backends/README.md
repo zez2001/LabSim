@@ -21,6 +21,8 @@ Use the same ledger for all probes, debug runs and formal episodes. No credentia
 
 The default configuration is `config/lab_cuvette_loading/Project_v1/policies/cubence_gpt6.json`. It explicitly pins provider `cubence`, global base URL `https://api.cubence.ai/v1`, model `gpt-6-astra` and Responses API. Returned model names are checked. Chat fallback requires an explicit configuration and recorded evidence that Responses was unsupported and Chat was supported; there is no automatic fallback to another model or service. The current closed-loop runner uses Responses.
 
+An HTTP200 response without model identity is rejected as `RETURNED_MODEL_MISSING`; a different returned identity is `RETURNED_MODEL_MISMATCH`. Both retain the actual returned usage/cost estimate, record an error status and stop without retry or silent acceptance. A missing identity alone is not evidence that a different model ran.
+
 `images.max_side_px`, `images.jpeg_quality` and `images.detail` explicitly configure provider image transport. Native640×480 recordings remain unchanged. Every model decision records source/transmitted resolutions and hashes, byte counts, resize scale, pixel-centre transform and the correspondingly transformed camera intrinsic matrix. A smaller provider thumbnail therefore remains a declared policy-input transform, not a change to recorded sensor resolution. To probe an actual camera file with a compact declared representation, add `--image /path/to/frame.png --image-max-side 256 --image-jpeg-quality 60`; retain earlier failed large-image probes separately.
 
 ## Actions and observations
@@ -37,7 +39,11 @@ The five available tools are:
 
 Every motion names the current episode/observation and a unique action ID. Stale observations, invalid frames, nonfinite values, excess distance, speed, rotation, duration and gripper limits are rejected before simulation advances. The environment receipt is queried before an uncertain action could be retried; acknowledged actions never execute twice. Interpolation and IK are generic execution services, not task controllers. The environment records both requested and applied actions.
 
+The backend deterministically namespaces each model action ID by the actual episode ID before dispatch. Receipts and policy traces retain both `model_action_id` and `execution_action_id`. Reusing `a1` in a newly reset episode therefore creates a new valid action; retrying `a1` in the same episode returns its receipt without movement. Old-episode commands are rejected. This isolation also works when the launcher retains facade receipts across resets.
+
 Defaults are 40mm maximum translation,0.15rad maximum rotation,20mm/s,0.15rad/s,0.05–3s duration and8N maximum force cap. Duration is quantized to60Hz and the actual duration is reported. Small moves near contact remain the policy's decision; these action bounds do not certify collision safety.
+
+Receipts distinguish the model's `requested_duration_s`, the tick-aligned `quantized_requested_duration_s` and the measured `executed_duration_s`. An action interrupted by a physical termination may execute fewer ticks. Actual duration comes from recorded simulation-time endpoints, with executed-control-tick count as a fallback; missing measurements remain unavailable. Historical traces are preserved rather than rewritten.
 
 ## Budget and evidence
 
@@ -48,6 +54,8 @@ The public rates observed on2026‑10‑26 were$10 input,$50 output and$1 cached
 GPT receives a compact camera view containing K, CV extrinsic, camera pose/mount, frame dimensions/time and coordinate conventions. Complete public calibration remains available through the environment API and in recorded data. Per-image transmitted K and resize provenance remain explicit. Action rejections report actual vector norms, speed, duration and applicable limits so the policy can repair an invalid bounded command. A local context-limit rejection is an input-contract error before any HTTP request or simulation action.
 
 `controller.json` freezes prompt, tool schema, configuration, action limits and provider implementation hashes. `policy_trace.jsonl` records actual tool calls and receipts, observation IDs, simulation/inference times and usage. `summary.json` separates backend failure from the independently scored task result and retains the exact backend error code plus episode-specific network/cost totals. Provider errors and timeouts finalize as `MODEL_SERVICE_ERROR`; malformed model protocols finalize as `INPUT_CONTRACT_ERROR`; unknown or partial physical execution finalizes as `PHYSICS_INVALID`. Such failures cannot become valid physical task-failure samples. A verdict already produced by the physical environment is preserved. Ordinary action-budget completion remains independently scored. Full formal evaluation must use one frozen controller hash across all episodes; debug attempts remain separate.
+
+Before every API decision, `observations/decision_XXXXXX/` saves the exact two already-encoded JPEG byte strings, the exact public observation JSON supplied as text, and a small SHA manifest. No second image encoding occurs. Trace references are relative to `gpt_control`, and request labels bind `policy:episode:observation_step:decisionN`; retries retain the same label. Failed API calls therefore retain their actual input images and state too. Native dataset images and MP4 frames are separate representations and are not claimed to reproduce these exact provider JPEG bytes. Credentials, HTTP headers and hidden reasoning are excluded from these observation files.
 
 CPU checks:
 

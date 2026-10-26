@@ -127,6 +127,7 @@ Call one tool at a time. Every motion needs the current episode_id, observation_
 Use larger bounded moves in free space and small, slower actions near contact. Model requests pause simulation; duration_s advances simulation only during tool execution.
 Translation and rotation limits apply to the Euclidean vector norm. For example, delta[.02,.02,0] has length.028284m and needs at least1.415s at.02m/s. A longer duration cannot make a vector longer than.04m legal; split it into smaller commands. Read numeric rejection details and correct the next command.
 Follow the full task: approach the designated light cuvette in the white rack, physical grasp, extraction, transport, internal-seat insertion, support transfer, symmetric release, retreat, then at least3seconds stable observation.
+Public fixed-scene task prior: the light cuvette in slot A1 is at the rack corner closest to the robot. The blue cuvette in opposite corner F6 is a distractor to leave in place. The selected light cuvette's nominal outer dimensions are10x10x67.5mm. These are nominal task facts; infer current poses from the images and calibration.
 Do not declare success from your own assessment: finish only requests the same independent physical scorer used for every backend.
 Avoid pushing after stalled insertion, dropping, collisions, and joint limits. If unsure, observe. You may reduce the gripper force cap during an image/state-confirmed support handoff, but cannot change physics or task thresholds.
 Return a tool call rather than a long explanation. No task-specific macro, teacher takeover or hidden plan execution is available.
@@ -143,9 +144,13 @@ class GenericRobotTools:
         self.commanded_effort_N=None
 
     def observe(self):
+        previous_episode=self.last_observation.get('episode_id') if self.last_observation else None
         self.last_observation=public_observation(self.env.observe())
         if not self.last_observation.get("episode_id") or not self.last_observation.get("observation_id"):
             raise ProviderError("PROTOCOL_OBSERVATION_ID_MISSING")
+        if previous_episode is not None and previous_episode!=self.last_observation['episode_id']:
+            self.commanded_opening_m=None
+            self.commanded_effort_N=None
         if self.commanded_opening_m is None:
             self.commanded_opening_m=float(self.last_observation.get("gripper_opening_m",sum(json_safe(self.last_observation["joint_positions"])[-2:])))
         if self.commanded_effort_N is None:
@@ -179,6 +184,41 @@ class GenericRobotTools:
             raise ProviderError("PHYSICS_INVALID_TCP_POSE")
         return p,q
 
+    @staticmethod
+    def execution_id(episode_id,model_action_id):
+        payload=json.dumps([episode_id,model_action_id],ensure_ascii=False,separators=(',',':'))
+        return 'gpt:'+hashlib.sha256(payload.encode()).hexdigest()
+
+    def execution_id_for(self,arguments):
+        if not isinstance(arguments,dict):return None
+        model_id=arguments.get('action_id')
+        if not isinstance(model_id,str) or not 1<=len(model_id)<=128:return None
+        if self.last_observation is None:self.observe()
+        current=self.env.status().get('episode_id') or self.last_observation['episode_id']
+        if arguments.get('episode_id')!=current:return None
+        return self.execution_id(current,model_id)
+
+    def execution_receipt(self,arguments):
+        execution_id=self.execution_id_for(arguments)
+        return self.env.receipt(execution_id) if execution_id else None
+
+    def _timed_receipt(self,receipt,arguments):
+        result=json_safe(receipt)
+        actual=None;source='unavailable'
+        before=result.get('simulation_time_before');after=result.get('simulation_time_after')
+        if isinstance(before,(int,float)) and isinstance(after,(int,float)) and math.isfinite(before) and math.isfinite(after) and after>=before:
+            actual=float(after-before);source='simulation_time_after_minus_before'
+        else:
+            ticks=result.get('executed_control_ticks')
+            if isinstance(ticks,int) and not isinstance(ticks,bool) and ticks>=0:
+                actual=ticks/float(self.limits['control_hz']);source='executed_control_ticks_divided_by_control_hz'
+        result.update(requested_duration_s=arguments['duration_s'],
+            quantized_requested_duration_s=self._duration(arguments['duration_s']),
+            executed_duration_s=actual,executed_duration_source=source,
+            action_id=arguments['action_id'],model_action_id=arguments['action_id'],
+            execution_action_id=self.execution_id(arguments['episode_id'],arguments['action_id']))
+        return result
+
     def execute(self, name: str, arguments: dict) -> dict:
         if not isinstance(arguments,dict):raise ProviderError("PROTOCOL_TOOL_ARGUMENTS_NOT_OBJECT")
         if not isinstance(name,str):raise ProviderError("PROTOCOL_UNKNOWN_TOOL")
@@ -187,18 +227,25 @@ class GenericRobotTools:
             return {"status":"OBSERVED", "episode_id":obs["episode_id"], "observation_id":obs["observation_id"]}
         if name not in {"move_ee", "gripper", "wait", "finish"}:
             raise ProviderError("PROTOCOL_UNKNOWN_TOOL")
+        if self.last_observation is None:self.observe()
+        current_episode=self.env.status().get('episode_id') or self.last_observation['episode_id']
+        if arguments.get('episode_id')!=current_episode:
+            raise ProviderError('PROTOCOL_STALE_EPISODE_ID')
+        if self.last_observation['episode_id']!=current_episode:self.observe()
         # Idempotency check comes before stale-observation rejection: an acknowledged
         # action can be queried again without moving the robot a second time.
         action_id=arguments.get("action_id")
+        execution_action_id=None
         if name!="finish":
             if not isinstance(action_id,str) or not 1<=len(action_id)<=128:
                 raise ProviderError("PROTOCOL_ACTION_ID_MISSING")
-            prior=self.env.receipt(action_id)
+            execution_action_id=self.execution_id(current_episode,action_id)
+            prior=self.env.receipt(execution_action_id)
             if prior is not None:
-                expected=self.receipts.get(action_id)
+                expected=self.receipts.get(execution_action_id)
                 if expected is None or expected[0]!=canonical_hash({"name":name,"arguments":arguments}):
                     raise ProviderError("PROTOCOL_ACTION_ID_REUSED")
-                return {**json_safe(prior),"idempotent_replay":True}
+                return {**self._timed_receipt(prior,arguments),"idempotent_replay":True}
         self._validate_identity(arguments)
         if name=="finish":
             result=self.env.finish(reason="POLICY_FINISH_REQUEST")
@@ -210,7 +257,8 @@ class GenericRobotTools:
         # the grasp. Likewise a move/wait must not silently restore8N after unload.
         opening=self.commanded_opening_m
         effort=self.commanded_effort_N
-        action=dict(action_id=action_id,episode_id=arguments["episode_id"],observation_id=arguments["observation_id"],
+        action=dict(action_id=execution_action_id,model_action_id=action_id,execution_action_id=execution_action_id,
+            episode_id=arguments["episode_id"],observation_id=arguments["observation_id"],
             type="ee_delta", values=[0.]*6, frame="world", duration_s=duration,
             gripper_opening_m=opening, gripper_effort_limit_N=effort)
         if name=="move_ee":
@@ -251,21 +299,21 @@ class GenericRobotTools:
         identity_hash=canonical_hash({"name":name,"arguments":arguments})
         # Record intent before calling. An exception must query the receipt before
         # any caller considers a retry; this adapter never blindly replays motion.
-        self.receipts[action_id]=(identity_hash,None)
+        self.receipts[execution_action_id]=(identity_hash,None)
         try:
             receipt=self.env.execute(action)
         except Exception as error:
-            receipt=self.env.receipt(action_id)
+            receipt=self.env.receipt(execution_action_id)
             if receipt is None:
                 if isinstance(error,(ValueError,TypeError)):raise ProviderError("PROTOCOL_ENVIRONMENT_ACTION_REJECTED") from None
                 raise ProviderError("ACTION_EXECUTION_UNKNOWN_CHECK_RECEIPT") from None
-        self.receipts[action_id]=(identity_hash,json_safe(receipt))
+        self.receipts[execution_action_id]=(identity_hash,json_safe(receipt))
         if receipt.get('completed') is False or receipt.get('error_type'):
             raise ProviderError("PHYSICS_ACTION_EXECUTION_FAILURE")
         self.commanded_opening_m=action["gripper_opening_m"]
         self.commanded_effort_N=action["gripper_effort_limit_N"]
         self.observe()
-        return {**json_safe(receipt),"requested_duration_s":arguments["duration_s"],"executed_duration_s":duration}
+        return self._timed_receipt(receipt,arguments)
 
 
 def observation_content(observation: dict, *, image_config=None) -> list[dict]:
@@ -307,6 +355,50 @@ def observation_content(observation: dict, *, image_config=None) -> list[dict]:
     return [dict(type='input_text',text=encoded)]+content
 
 
+def save_observation_artifacts(contents,output,decision_index,request_label):
+    """Persist exactly the already-encoded wire JPEGs and public state text.
+
+    No image is re-encoded here. The saved public JSON is the first input_text
+    passed to the provider; headers, credentials and hidden reasoning are absent.
+    """
+    try:
+        if not isinstance(contents,list) or len(contents)!=5 or contents[0].get('type')!='input_text':
+            raise ValueError('Expected public state and two named RGB inputs')
+        state_text=contents[0]['text'];state=json.loads(state_text)
+        allowed=(PUBLIC_FIELDS-{'images'})|{'model_image_transforms'}
+        if not isinstance(state,dict) or set(state)-allowed:raise ValueError('Unexpected public-state field')
+        if not isinstance(state.get('episode_id'),str) or not isinstance(state.get('observation_id'),str):raise ValueError('Missing observation identity')
+        image_rows=[]
+        for index,name in enumerate(('side_camera','wrist_camera')):
+            label=contents[1+2*index];block=contents[2+2*index]
+            if label!={'type':'input_text','text':'Synchronized RGB: '+name} or block.get('type')!='input_image':
+                raise ValueError('Unexpected image ordering or name')
+            url=block.get('image_url','');prefix='data:image/jpeg;base64,'
+            if not isinstance(url,str) or not url.startswith(prefix):raise ValueError('Only declared JPEG data URLs may be saved')
+            jpeg=base64.b64decode(url[len(prefix):],validate=True)
+            sha=hashlib.sha256(jpeg).hexdigest()
+            if not jpeg.startswith(b'\xff\xd8') or state['model_image_transforms'][name]['transmitted_jpeg_sha256']!=sha:
+                raise ValueError('Wire image differs from declared provenance')
+            image_rows.append((name,jpeg,sha))
+    except (ValueError,TypeError,KeyError,AttributeError) as error:
+        raise ProviderError('PROTOCOL_OBSERVATION_ARTIFACT_INVALID') from None
+    root=Path(output);folder=root/'observations'/f'decision_{decision_index:06d}'
+    folder.mkdir(parents=True,exist_ok=False)
+    public_bytes=state_text.encode('utf-8')
+    public_path=folder/'public_observation.json';public_path.write_bytes(public_bytes)
+    manifest=dict(schema='labsim.provider_observation_files.v1',decision_index=decision_index,request_label=request_label,
+        episode_id=state['episode_id'],observation_id=state['observation_id'],simulation_time_s=state.get('simulation_time',state.get('simulation_time_s')),
+        public_observation=dict(path=str(public_path.relative_to(root)),sha256=hashlib.sha256(public_bytes).hexdigest(),bytes=len(public_bytes)),images=[])
+    for name,jpeg,sha in image_rows:
+        path=folder/(name+'.jpg');path.write_bytes(jpeg)
+        manifest['images'].append(dict(camera_name=name,path=str(path.relative_to(root)),sha256=sha,bytes=len(jpeg),
+            content_type='image/jpeg',resolution_wh=state['model_image_transforms'][name]['transmitted_resolution_wh']))
+    manifest_path=folder/'manifest.json';manifest_bytes=(json.dumps(manifest,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode()
+    manifest_path.write_bytes(manifest_bytes)
+    return dict(manifest_path=str(manifest_path.relative_to(root)),manifest_sha256=hashlib.sha256(manifest_bytes).hexdigest(),
+        public_observation=manifest['public_observation'],images=manifest['images'])
+
+
 def run_episode(environment, client: CubenceClient, output: str | Path, *, max_calls=160, prompt=SYSTEM_PROMPT) -> dict:
     """Run policy on an already-reset facade. The caller owns reset and close."""
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
@@ -321,7 +413,7 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
     started=time.monotonic();calls=0;errors=0;history=[];termination="POLICY_BUDGET";failure=None;backend_error_code=None
     budget_before=client.ledger.summary()
     trace=(output/"policy_trace.jsonl").open("x")
-    obs=None
+    obs=None;observations_saved=0;observation_artifacts=None;request_label=None;decision_index=None
     try:
         while calls<int(max_calls):
             status=environment.status()
@@ -329,10 +421,14 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                 termination="ENVIRONMENT_TERMINATED";break
             if time.monotonic()-started>float(cfg["episode_timeout_s"]):
                 termination="POLICY_EPISODE_WALL_TIMEOUT";backend_error_code=termination;failure='MODEL_SERVICE_ERROR';break
+            observation_artifacts=None;request_label=None;decision_index=observations_saved
             obs=tools.observe()
             contents=observation_content(obs,image_config=cfg.get('images'))
             try:image_provenance=json.loads(contents[0]['text']).get('model_image_transforms')
             except (ValueError,TypeError,KeyError):image_provenance=None
+            request_label=f"policy:{obs['episode_id']}:{obs.get('step_index',obs['observation_id'])}:decision{decision_index}"
+            observation_artifacts=save_observation_artifacts(contents,output,decision_index,request_label)
+            observations_saved+=1
             # Fresh images every decision; earlier turns preserve only generic
             # tool calls/receipts, never repeated base64 images or privileged state.
             recent_turns=history[-max(1,int(cfg.get("max_context_messages",12))//2):]
@@ -343,7 +439,7 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
             meta=None
             call=None
             try:
-                response,meta=client.responses(input_items,instructions=prompt+"\nAction limits: "+json.dumps(cfg["action_limits"]),tools=schema,label="policy:"+str(obs["episode_id"]),deadline_monotonic=started+float(cfg["episode_timeout_s"]))
+                response,meta=client.responses(input_items,instructions=prompt+"\nAction limits: "+json.dumps(cfg["action_limits"]),tools=schema,label=request_label,deadline_monotonic=started+float(cfg["episode_timeout_s"]))
                 calls+=1
                 after=tools.observe()
                 if abs(float(after.get("simulation_time",after.get("simulation_time_s",0.)))-before)>1e-9:
@@ -358,7 +454,8 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                     if not error.code.startswith('PROTOCOL'):raise
                     errors+=1
                     receipt={"status":"REJECTED","error":error.code,"details":error.details,
-                        "episode_id":obs["episode_id"],"observation_id":obs["observation_id"],"physics_advanced":False}
+                        "episode_id":obs["episode_id"],"observation_id":obs["observation_id"],"physics_advanced":False,
+                        "model_action_id":call['arguments'].get('action_id'),"execution_action_id":tools.execution_id_for(call['arguments'])}
                 # Preserve complete response-item groups in memory. Some reasoning
                 # models require the reasoning item that accompanies a function call.
                 # The trace stores only the observable action, never hidden reasoning.
@@ -366,6 +463,8 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                 record=dict(event="decision",episode_id=obs["episode_id"],observation_id=obs["observation_id"],simulation_time_s=before,
                     requested_model=cfg["model"],returned_model=response.get("model"),request_id=meta["request_id"],response_id=response.get("id"),
                     inference_wall_seconds=meta["wall_seconds"],usage=response.get("usage"),tool_call=call,receipt=receipt,controller_sha256=controller_sha,
+                    model_action_id=call['arguments'].get('action_id'),execution_action_id=receipt.get('execution_action_id'),
+                    decision_index=decision_index,request_label=request_label,observation_artifacts=observation_artifacts,
                     image_channels=["side_camera","wrist_camera"],model_image_transforms=image_provenance,truth_exposed=False)
                 trace.write(json.dumps(json_safe(record),ensure_ascii=False,allow_nan=False)+"\n");trace.flush()
                 if call["name"]=="finish" and receipt.get("status")!="REJECTED":termination="POLICY_FINISH_REQUEST";break
@@ -377,16 +476,18 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                 invalid_calls=[]
                 if isinstance(response,dict) and isinstance(response.get('output'),list):
                     invalid_calls=[{k:item.get(k) for k in ('name','arguments','call_id')} for item in response['output'] if isinstance(item,dict) and item.get('type')=='function_call']
-                partial_receipt=environment.receipt(call['arguments'].get('action_id')) if call and call.get('arguments',{}).get('action_id') else None
+                partial_receipt=tools.execution_receipt(call['arguments']) if call and call.get('arguments',{}).get('action_id') else None
                 trace.write(json.dumps(dict(event="error",code=error.code,http_status=error.status,episode_id=obs["episode_id"],observation_id=obs["observation_id"],simulation_time_s=before,
-                    model_tool_calls=invalid_calls,action_receipt=json_safe(partial_receipt),response_id=response.get('id') if response else None,request_id=meta.get('request_id') if meta else None))+"\n");trace.flush()
+                    model_tool_calls=invalid_calls,action_receipt=json_safe(partial_receipt),response_id=response.get('id') if response else None,request_id=meta.get('request_id') if meta else None,
+                    decision_index=decision_index,request_label=request_label,observation_artifacts=observation_artifacts))+"\n");trace.flush()
                 break
     except ProviderError as error:
         # Observation/context validation can fail before any API request. It must
         # still flush the physical attempt and retain an explicit nonphysical tag.
         backend_error_code=termination=error.code;failure=backend_failure_class(error.code)
         trace.write(json.dumps(dict(event='error',code=error.code,http_status=error.status,
-            episode_id=obs.get('episode_id') if obs else None,observation_id=obs.get('observation_id') if obs else None))+"\n");trace.flush()
+            episode_id=obs.get('episode_id') if obs else None,observation_id=obs.get('observation_id') if obs else None,
+            decision_index=decision_index,request_label=request_label,observation_artifacts=observation_artifacts))+"\n");trace.flush()
     finally:
         trace.close()
     result=environment.finish(reason=termination,failure_type=failure)
@@ -397,6 +498,7 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
         task_result=json_safe(result),budget=budget_after,
         network_attempts_this_episode=budget_after.get('total_network_attempts',0)-budget_before.get('total_network_attempts',0),
         estimated_usd_this_episode=budget_after.get('total_estimated_usd',0)-budget_before.get('total_estimated_usd',0),
+        observation_decisions_recorded=observations_saved,observation_directory='observations',
         object_truth_used=False,teacher_used=False,physics_paused_during_inference=True)
     (output/"summary.json").write_text(json.dumps(summary,indent=2,ensure_ascii=False,allow_nan=False)+"\n")
     return summary

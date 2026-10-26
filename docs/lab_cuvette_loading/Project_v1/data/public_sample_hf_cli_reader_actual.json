@@ -1,0 +1,179 @@
+{
+  "schema": "labsim.Project_v1.reader_check.v1",
+  "path": "/tmp/labsim-hf-cli-public-sample-20261026/examples/Project_v1_teacher_gui_01/episode.h5",
+  "recorded_policy_image_shape": [
+    3,
+    96,
+    96
+  ],
+  "public_sample_derivations": [
+    {
+      "episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+      "schema": "labsim.Project_v1.compact_public_episode.v1",
+      "source_hdf5_sha256": "3a5f31774befc5f7fcf878eab30580ce89d00fe2113cb487aec7ba26300d5664",
+      "temporal_subsampling": false,
+      "original_capture_camera_metadata_retained": true,
+      "recorded_policy_RGB_shape": [
+        3,
+        96,
+        96
+      ],
+      "note": "Stored policy RGB may be a spatial derivative; original capture calibration retains its source resolution."
+    }
+  ],
+  "sample_filter": "success",
+  "reader_validation": [
+    {
+      "policy_type": "act",
+      "episodes": [
+        "f3b86cf1-45ba-4514-b829-b8e87fd5fb35"
+      ],
+      "scene_fingerprint": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        },
+        "is_pad": {
+          "shape": [
+            3,
+            16
+          ],
+          "dtype": "torch.bool",
+          "finite": true
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+          "transitions": 6348,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            6348,
+            8
+          ],
+          "executed_command_shape": [
+            6348,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": true,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    },
+    {
+      "policy_type": "dp",
+      "episodes": [
+        "f3b86cf1-45ba-4514-b829-b8e87fd5fb35"
+      ],
+      "scene_fingerprint": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+          "transitions": 6348,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            6348,
+            8
+          ],
+          "executed_command_shape": [
+            6348,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": true,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    }
+  ],
+  "source_labels_modified": false
+}

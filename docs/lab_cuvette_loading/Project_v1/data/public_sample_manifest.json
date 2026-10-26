@@ -1,0 +1,373 @@
+{
+  "schema": "labsim.Project_v1.compact_public_episode.v1",
+  "source_episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+  "source_hdf5_sha256": "3a5f31774befc5f7fcf878eab30580ce89d00fe2113cb487aec7ba26300d5664",
+  "source_hdf5_size_bytes": 1673848494,
+  "source_scope": "Complete original HDF5 sequence and all its fields; separate high-rate physics JSONL/media sidecars are not bundled",
+  "source_path_recorded": false,
+  "exported_hdf5": "episode.h5",
+  "exported_hdf5_sha256": "6d95d57f0d05ee0e1bdce8898c820b178f97acbba66de63a4d89316b616975c3",
+  "exported_hdf5_size_bytes": 283913973,
+  "source_labels": {
+    "episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+    "scene_version": "Project_v1",
+    "scene_mode": "standard",
+    "task_type": "loading",
+    "condition_group": "natural",
+    "asset_id": "cuvette_xy_1000",
+    "source_slot_id": "A1",
+    "target_seat_id": "candidate_far_hinge",
+    "complete": true,
+    "record_valid": true,
+    "task_success": true,
+    "failure_type": "NONE",
+    "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+    "eligible_for_success_bc": true,
+    "eligible_for_failure_analysis": false,
+    "real_calibrated": false,
+    "frozen_scene_sha256": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+    "control_config_sha256": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+    "code_commit": "d09c5ffce2018702702eb0d4c77d862f1eae6faa"
+  },
+  "transitions": 6348,
+  "first_observation_time_s": 0.016666666666666666,
+  "final_next_state_time_s": 105.81666666666666,
+  "full_simulation_duration_s": 105.8,
+  "source_RGB_shapes": {
+    "side_camera_rgb": [
+      6348,
+      3,
+      256,
+      256
+    ],
+    "wrist_camera_rgb": [
+      6348,
+      3,
+      256,
+      256
+    ]
+  },
+  "exported_RGB_shape_per_camera": [
+    6348,
+    3,
+    96,
+    96
+  ],
+  "image_derivation": {
+    "method": "OpenCV INTER_AREA spatial resize only",
+    "opencv_version": "4.11.0",
+    "from_resolution_wh": [
+      256,
+      256
+    ],
+    "to_resolution_wh": [
+      96,
+      96
+    ],
+    "source_to_export_pixel_center_homography": [
+      [
+        0.375,
+        0,
+        -0.3125
+      ],
+      [
+        0,
+        0.375,
+        -0.3125
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "camera_count": 2,
+    "every_source_frame_retained": true,
+    "terminal_RGB_retained": true,
+    "source_capture_camera_metadata_preserved": true,
+    "original_camera_metadata_sha256": "b3b79e86d4879b84deb907d5dd17841b8885854b43861f7ab92e11fd44a2ff53",
+    "calibration_note": "Original capture metadata retains its original resolution/intrinsics;96px images are a spatial derivative of256px policy images. Apply the native-to-policy preprocessing then this resize transform; no new optical calibration is claimed."
+  },
+  "storage": {
+    "compression": "gzip",
+    "gzip_level": 6,
+    "JSON_text": "Losslessly recompressed as fixed-width UTF8 values; same logical text except declared filesystem provenance replacements",
+    "camera_alias_hardlinks_preserved": true
+  },
+  "physical_action_state_event_values_and_outcome_labels_changed": false,
+  "temporal_subsampling": false,
+  "successful_short_excerpt_claimed": false,
+  "metadata_sanitization": [
+    {
+      "field": "/@configuration_json",
+      "values_changed": 1,
+      "path_occurrences_replaced": 8,
+      "transformation": "Replace author/cache filesystem provenance strings with logical IDs; numeric values unchanged",
+      "logical_aliases": [
+        "asset://lab_cuvette_loading/Size_v1",
+        "asset://lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda",
+        "asset://lab_cuvette_loading/Size_v1/registry.json",
+        "asset://lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda",
+        "asset://lab_cuvette_loading/V0_demo04",
+        "asset://robots/Franka.usd",
+        "provenance://path/4d5602b39e87273d/site-packages"
+      ]
+    }
+  ],
+  "verification": {
+    "non_RGB_dataset_values_verified": [
+      "/action_conversion_json",
+      "/actions",
+      "/actions_raw_json",
+      "/agent_pose",
+      "/camera_pose_json",
+      "/camera_timestamp/side_camera_rgb",
+      "/camera_timestamp/wrist_camera_rgb",
+      "/control_auxiliary/available",
+      "/control_auxiliary/command_q",
+      "/control_auxiliary/gripper_effort_limit_N",
+      "/control_auxiliary/gripper_target_m",
+      "/control_interval_s",
+      "/done",
+      "/episode_id",
+      "/episode_metadata_json",
+      "/independent_score_json",
+      "/inference_wall_time_s",
+      "/joint_positions",
+      "/language_instruction",
+      "/next_agent_pose",
+      "/next_joint_positions",
+      "/next_obs_step",
+      "/next_timestamp",
+      "/obs_step",
+      "/partial_terminal_control_interval",
+      "/phase",
+      "/phase_code",
+      "/privileged/next_state_json",
+      "/privileged/state_json",
+      "/reward",
+      "/task_events_json",
+      "/task_properties",
+      "/terminal_observation/joint_positions",
+      "/timestamp"
+    ],
+    "sanitized_text_datasets": [],
+    "source_attributes_verified": [
+      "/@action_semantics",
+      "/@actual_execution_commit",
+      "/@asset_id",
+      "/@asset_sha256",
+      "/@asset_version",
+      "/@camera_black_frame_counts_json",
+      "/@camera_legacy_mapping_json",
+      "/@camera_meta_json",
+      "/@code_commit",
+      "/@complete",
+      "/@condition_group",
+      "/@configuration_json",
+      "/@control_config_sha256",
+      "/@control_hz",
+      "/@demonstrator_id",
+      "/@deterministic_action_deviation_json",
+      "/@eligible_for_failure_analysis",
+      "/@eligible_for_success_bc",
+      "/@episode_id",
+      "/@executed_action_semantics",
+      "/@failure_type",
+      "/@fixed_collection_eligible",
+      "/@frames",
+      "/@frozen_scene_sha256",
+      "/@geometry_valid",
+      "/@independent_score_sha256",
+      "/@initial_position_m",
+      "/@legacy_8d_mapping",
+      "/@observation_alignment",
+      "/@phase_names_json",
+      "/@physics_hz",
+      "/@policy_id",
+      "/@policy_observation_scope",
+      "/@quaternion_order",
+      "/@real_calibrated",
+      "/@record_integrity_json",
+      "/@record_valid",
+      "/@scene_contract_json",
+      "/@scene_mode",
+      "/@scene_version",
+      "/@schema_version",
+      "/@seed",
+      "/@source_slot_id",
+      "/@success",
+      "/@target_seat_id",
+      "/@task",
+      "/@task_success",
+      "/@task_success_known",
+      "/@task_type",
+      "/@termination_reason",
+      "/@video_frame_count",
+      "/@workflow_success",
+      "/terminal_observation@simulation_time",
+      "/terminal_observation@step_index"
+    ],
+    "resized_RGB_datasets_all_frames_verified": [
+      "/camera_1_rgb",
+      "/camera_2_rgb",
+      "/terminal_observation/side_camera_rgb",
+      "/terminal_observation/wrist_camera_rgb"
+    ],
+    "all_transitions_retained": true,
+    "timestamps_exactly_retained": true,
+    "non_RGB_numeric_values_exactly_retained": true,
+    "external_or_virtual_dependencies": []
+  },
+  "source_modified": false,
+  "normal_reader_validation": [
+    {
+      "policy_type": "act",
+      "scene_fingerprint": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+      "episodes": [
+        "f3b86cf1-45ba-4514-b829-b8e87fd5fb35"
+      ],
+      "transitions": 6348,
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        },
+        "is_pad": {
+          "shape": [
+            3,
+            16
+          ],
+          "dtype": "torch.bool",
+          "finite": true
+        }
+      },
+      "normal_reader": "policy.dataset.lab_cuvette_project_v1_dataset.LabCuvetteProjectV1Dataset",
+      "model_or_optimizer_executed": false
+    },
+    {
+      "policy_type": "dp",
+      "scene_fingerprint": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+      "episodes": [
+        "f3b86cf1-45ba-4514-b829-b8e87fd5fb35"
+      ],
+      "transitions": 6348,
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              96,
+              96
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        }
+      },
+      "normal_reader": "policy.dataset.lab_cuvette_project_v1_dataset.LabCuvetteProjectV1Dataset",
+      "model_or_optimizer_executed": false
+    }
+  ],
+  "normal_reader_shape_meta": {
+    "obs": {
+      "side_camera_rgb": {
+        "shape": [
+          3,
+          96,
+          96
+        ],
+        "type": "rgb"
+      },
+      "wrist_camera_rgb": {
+        "shape": [
+          3,
+          96,
+          96
+        ],
+        "type": "rgb"
+      },
+      "agent_pose": {
+        "shape": [
+          8
+        ],
+        "type": "low_dim"
+      }
+    },
+    "action": {
+      "shape": [
+        8
+      ]
+    }
+  },
+  "export_script_sha256": "da6062ba4ec1a054a5efd806f4b501d1a2cc5542a8d5b98cf1aae2df4f0c9e9c",
+  "wall_seconds": 51.52247722202446,
+  "artifact_size_budget_bytes": 512000000,
+  "within_requested_size_budget": true
+}

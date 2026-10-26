@@ -210,14 +210,17 @@ class CubenceClient:
                         raise ProviderError("PROVIDER_INVALID_ENVELOPE")
                     if parsed.get("error"):
                         raise ProviderError("PROVIDER_ERROR_ENVELOPE")
+                    returned_model=parsed.get('model')
+                    identity_error=('RETURNED_MODEL_MISSING' if returned_model is None or returned_model=='' else
+                        'RETURNED_MODEL_MISMATCH' if returned_model!=self.cfg['model'] else None)
                     try:
-                        meta = self.ledger.complete(request_id, status="OK", usage=parsed.get("usage"),
-                            returned_model=parsed.get("model"), response_id=parsed.get("id"), wall_seconds=time.monotonic()-started,
+                        meta = self.ledger.complete(request_id, status=identity_error or "OK", usage=parsed.get("usage"),
+                            returned_model=returned_model, response_id=parsed.get("id"), wall_seconds=time.monotonic()-started,
                             http_status=int(getattr(response, "status", 200)), retry_index=retry)
                     except (ValueError,TypeError,AttributeError,OverflowError):
                         raise ProviderError("PROVIDER_INVALID_USAGE") from None
-                    if parsed.get("model") != self.cfg["model"]:
-                        raise ProviderError("RETURNED_MODEL_MISMATCH")
+                    if identity_error:
+                        raise ProviderError(identity_error)
                     return parsed, meta
             except urllib.error.HTTPError as error:
                 status = int(error.code)
@@ -231,7 +234,7 @@ class CubenceClient:
                 self.ledger.complete(request_id, status=code, retry_index=retry, wall_seconds=time.monotonic()-started)
                 failure = ProviderError(code, retryable=True)
             except ProviderError as error:
-                if error.code != "RETURNED_MODEL_MISMATCH":
+                if error.code not in ("RETURNED_MODEL_MISSING","RETURNED_MODEL_MISMATCH"):
                     self.ledger.complete(request_id, status=error.code, retry_index=retry, wall_seconds=time.monotonic()-started)
                 raise
             if not failure.retryable or retry + 1 >= attempts:

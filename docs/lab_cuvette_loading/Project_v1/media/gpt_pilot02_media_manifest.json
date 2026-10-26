@@ -1,0 +1,202 @@
+{
+  "schema": "labsim.Project_v1.debug_pilot_media.v1",
+  "created_at_utc": "2026-10-26T11:17:02.940763+00:00",
+  "source_run_id": "Project_v1/gpt_pilot_02/episode_0000",
+  "scope": "Debug pilot only, not a formal GPT repetition result; one actual continuous attempt to the collision stop.",
+  "backend": "gpt6",
+  "provider": "cubence",
+  "requested_model": "gpt-6-astra",
+  "provider_identity_scope": "Model name is the requested Cubence gateway route; not independent verification of upstream model identity.",
+  "controller_sha256": "ea9c139b15a805a8e919b0fcdcbcf55955a2b60a1ed04c097d152abdfea2faef",
+  "source_code_commit": "43649a259112846bbc9b25acf2c3945b421a2281",
+  "source_frozen_scene_sha256": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+  "source_process_exited": true,
+  "source_process_exit_code": 0,
+  "source_process_wall_seconds": 130.12851654697442,
+  "api_decisions": 6,
+  "accepted_motion_decisions": 5,
+  "protocol_rejections": 1,
+  "actual_control_ticks": 531,
+  "simulation_time_end_s": 8.866666666666667,
+  "accepted_action_simulation_duration_s": 8.85,
+  "duration_measurement": "sum(receipt.simulation_time_after - receipt.simulation_time_before); agrees with executed_control_ticks/60; does not trust the historical executed_duration_s field.",
+  "last_accepted_action": {
+    "action_id": "a6",
+    "requested_duration_s": 2,
+    "historical_reported_executed_duration_s": 2.0,
+    "measured_executed_duration_s": 0.8499999999999996,
+    "executed_control_ticks": 51,
+    "stopped_by_environment": true
+  },
+  "timing_reanalysis": {
+    "file": "../policy_evidence/pilot02_action_timing_reanalysis_v2.json",
+    "sha256": "584fa6e3fda01da8c1aa3f3398070eb7f585b4d871bb3ca09b7945095ab979b1"
+  },
+  "object_truth_used": false,
+  "teacher_used": false,
+  "physics_paused_during_inference": true,
+  "task_success": null,
+  "workflow_success": null,
+  "record_valid": false,
+  "failure_type": "PHYSICS_INVALID",
+  "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+  "grasp_success": false,
+  "release_observed": false,
+  "retreat_observed": false,
+  "post_retreat_window": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "actual_gripper_retreat_not_observed"
+  },
+  "terminal_window": {
+    "status": "complete",
+    "stable": true,
+    "required_duration_s": 3.0,
+    "measured_duration_s": 3.000000000000001,
+    "sample_count": 721,
+    "position_drift_m": 1.666000468656264e-08,
+    "orientation_change_deg": 5.323605600496001e-05,
+    "criteria": {
+      "position_stable": true,
+      "target_support": null,
+      "target_contains": null,
+      "native_overlap_within_limit": null,
+      "no_finger_contact": null
+    },
+    "start_t": 5.866666666666666,
+    "end_t": 8.866666666666667
+  },
+  "invalid_state_reasons": [
+    "robot_contact_with_original_instrument_or_rack"
+  ],
+  "physics_quality_flags": [
+    "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+  ],
+  "final_result_label_semantics": "Final independent PHYSICS_INVALID verdict for this debug run; no intermediate BLOCKED/success annotation was invented. Original POLICY stage/time overlay retained.",
+  "source_files": [
+    {
+      "logical_source": "dual_view.mp4",
+      "sha256": "408ad6bffa7e60fae96bc389942cfca675861f7beaa77bba2dc7f1de7d107491",
+      "bytes": 1895132
+    },
+    {
+      "logical_source": "result.json",
+      "sha256": "d34de7d9469b0f49982ea388f803fbaac1b7d4317f3b58cb8e2c8d9ea9bb8d5b",
+      "bytes": 4017
+    },
+    {
+      "logical_source": "independent_score.json",
+      "sha256": "f5401eceb917bd441f056782d8cc35a29d869e6e2920a6a3debccd0f2765e91e",
+      "bytes": 3919
+    },
+    {
+      "logical_source": "video_timestamps.json",
+      "sha256": "23bff2110b0ea576858a3497447c646834d9f9819e1a17c7ce36840ce4586352",
+      "bytes": 5540
+    },
+    {
+      "logical_source": "release_metadata.json",
+      "sha256": "22186e450112f696a3bed2dc0f362cf01d93a9b97fa5e1230c90135761eef836",
+      "bytes": 621
+    },
+    {
+      "logical_source": "gpt_control/summary.json",
+      "sha256": "fe1fcebcfb6944c555eb89c3e44aebb4961018d4f1dd6345e775c278cfc0916b",
+      "bytes": 1102
+    },
+    {
+      "logical_source": "gpt_control/policy_trace.jsonl",
+      "sha256": "2acad2e4c625dca840c28116ad0b0bfd4c7b3193dba39c8041469c03c5635cd1",
+      "bytes": 36205
+    },
+    {
+      "logical_source": "gpt_control/controller.json",
+      "sha256": "a3d63e6aa3d07502221acb73cab04a56b2bf7a8b4611713565f3a12897675df9",
+      "bytes": 7752
+    }
+  ],
+  "source_video_probe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "mpeg4",
+        "width": 1280,
+        "height": 480,
+        "avg_frame_rate": "30/1",
+        "duration": "8.900000",
+        "nb_frames": "267",
+        "nb_read_frames": "267"
+      }
+    ],
+    "format": {
+      "duration": "8.900000",
+      "size": "1895132"
+    }
+  },
+  "full_video": {
+    "file": "gpt_pilot02_full_attempt.mp4",
+    "sha256": "23f5c07927c3c5af5108079e96b1186da1382fed0725216a0d0733b5186aaf29",
+    "bytes": 613435,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 480,
+          "avg_frame_rate": "30/1",
+          "duration": "8.900000",
+          "nb_frames": "267",
+          "nb_read_frames": "267"
+        }
+      ],
+      "format": {
+        "duration": "8.900000",
+        "size": "613435"
+      }
+    },
+    "source_frame_range_inclusive": [
+      0,
+      266
+    ],
+    "source_frame_count": 267,
+    "source_simulation_time_range_s": [
+      0.016666666666666666,
+      8.866666666666667
+    ],
+    "source_terminal_frame_appended_at_finalize": true,
+    "source_frame_selection": "Every source frame in its original order, including the terminal anomaly frame. No stitching or time truncation.",
+    "encoding": {
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "medium",
+      "pixel_format": "yuv420p",
+      "resolution_changed": false,
+      "frame_rate_changed": false,
+      "playback_speed_changed": false,
+      "overlay_added": [
+        "DEBUG PILOT | Cubence gpt-6-astra",
+        "FINAL RESULT: PHYSICS_INVALID"
+      ]
+    },
+    "ffmpeg_video_filter": "drawtext=fontfile=DejaVuSans.ttf:text='DEBUG PILOT | Cubence gpt-6-astra':x=w-tw-8:y=8:fontsize=15:fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=3,drawtext=fontfile=DejaVuSans.ttf:text='FINAL RESULT\\: PHYSICS_INVALID':x=w-tw-8:y=29:fontsize=15:fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=3",
+    "full_decode_exit_code": 0
+  },
+  "final_frame": {
+    "file": "gpt_pilot02_final_physics_invalid.png",
+    "sha256": "687c15695eeb999a7947deb71198a2e0e7afbf80661fffc5671d29bf6b48cb39",
+    "bytes": 326921,
+    "source_frame_index": 266,
+    "source_simulation_time_s": 8.866666666666667,
+    "controller_stage": "POLICY"
+  },
+  "limitations": [
+    "Stopped before any grasp by robot/environment collision; not a valid complete task failure episode.",
+    "No post-retreat window exists; terminal stability of an untouched source vessel is not task success.",
+    "Historical final receipt reports 2 s, while actual final action elapsed 0.85 s/51 ticks; source files remain unchanged.",
+    "267 constant-rate frames play for 8.9 s, whereas final sampled simulation time is 8.8666667 s; use recorded timestamps for physical timing.",
+    "Not one of the later formal GPT repeated evaluations."
+  ],
+  "source_files_unchanged": true
+}

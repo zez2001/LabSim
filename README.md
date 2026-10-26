@@ -4,6 +4,10 @@ LabSim 是基于 LabUtopia 与 Isaac Sim 的科学实验机器人仿真项目。
 
 [开发分支 `codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim) · [开发接入](docs/development/ONBOARDING.md) · [历史实验](docs/history/README.md)
 
+[观看完整 teacher 演示](docs/lab_cuvette_loading/Project_v1/media/teacher_full_continuous.mp4) · [松爪与撤离近景](docs/lab_cuvette_loading/Project_v1/media/teacher_release_wrist_closeup.mp4)
+
+视频来自同一次连续 GUI 运行，侧视与腕视全程保留，完整执行至撤离后稳定。模型评测及物理质量告警另行记录。
+
 ## 提供的能力
 
 - **同一物理任务，多种控制入口**：真值专家 `teacher`、Cubence `gpt-6-astra` 的图像闭环 `gpt6`，以及供既有 π0.5 / RPent Harness 使用的本地 RPC；任务、记录器和独立评分共用。
@@ -24,8 +28,9 @@ cd LabSim
 
 # 选择已经安装 Isaac Sim 5.1 的 Python 3.11
 export LABSIM_PYTHON=/absolute/path/to/isaac-python
-# 选择独立的 Shapely>=2.1 Python3.11 site-packages
-export LABSIM_GEOMETRY_SITE=/absolute/path/to/geometry/lib/python3.11/site-packages
+# 如未准备独立几何工具环境，只在新目录安装 Shapely
+"$LABSIM_PYTHON" -m venv "$HOME/.local/share/labsim/geometry"
+"$HOME/.local/share/labsim/geometry/bin/python" -m pip install --no-deps "shapely==2.2.0"
 
 ./labsim assets download
 ./labsim doctor
@@ -33,7 +38,7 @@ export LABSIM_GEOMETRY_SITE=/absolute/path/to/geometry/lib/python3.11/site-packa
   --gui --output outputs/lab_cuvette_loading/Project_v1/demo_001
 ```
 
-首次运行前准备依赖的方法见[接入指南](docs/development/ONBOARDING.md)。`LABSIM_PYTHON` 选择既有解释器；`LABSIM_GEOMETRY_SITE` 避免向 Isaac 或模型环境安装几何工具。USD / PhysX 扩展从所选 Isaac 安装中发现，不要求 checkout 位于原开发者的目录。
+首次运行前准备依赖的方法见[接入指南](docs/development/ONBOARDING.md)。`LABSIM_PYTHON` 选择既有解释器；几何工具默认发现上述独立目录，也可用 `LABSIM_GEOMETRY_SITE` 选择其他 site-packages，避免向 Isaac 或模型环境安装几何工具。USD / PhysX 扩展从所选 Isaac 安装中发现，不要求 checkout 位于原开发者的目录。
 
 资产默认写入 `~/.cache/labsim/assets/<revision>/`，完整校验后被入口自动采用。可用 `LABSIM_ASSET_CACHE` 更改缓存根目录，或用 `LABSIM_ASSET_ROOT` 指定保持 `assets/...` 布局的完整安装目录。下载不需要 HF 登录。
 
@@ -82,6 +87,12 @@ printf '\n'
   --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \
   --output outputs/lab_cuvette_loading/Project_v1/gpt_attempt_001
 
+# 正式评测：冻结配置后运行 5 集；与先导试验共用预算 ledger
+./labsim eval --task lab_cuvette_loading --scene standard --backend gpt6 \
+  --episodes 5 --max-calls 160 --headless \
+  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \
+  --output outputs/lab_cuvette_loading/Project_v1/gpt_formal5_001
+
 unset CUBENCE_API_KEY
 ```
 
@@ -103,6 +114,20 @@ GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信
 ```
 
 失败 episode 使用 `--sample-filter failure` 和新的输出文件。读取不启动训练，也不改标签。单集 H5 保存实际图像和状态；多集索引若使用相对链接，传输时保留其 collection 树。
+
+公开完整成功样例约 284 MB，保留全部 6,348 个 transition；两路 RGB 缩为 96 像素，其余数值轨迹保留。使用独立安装的 HF CLI，无需登录即可下载；目录必须另选未使用的路径：
+
+```bash
+HF_HUB_DISABLE_IMPLICIT_TOKEN=1 hf download Txie000/SLAI-Labsim \
+  --repo-type dataset --revision 82317fe33089aca5a20827da2adc592a1e0fdddc \
+  --include 'examples/Project_v1_teacher_gui_01/*' --local-dir public_sample_001
+./labsim dataset-check \
+  --path public_sample_001/examples/Project_v1_teacher_gui_01/episode.h5 \
+  --sample-filter success --policy both \
+  --output outputs/lab_cuvette_loading/Project_v1/public_sample_read_001.json
+```
+
+文件 SHA256 和来源版本见[样例索引](config/lab_cuvette_loading/Project_v1/public_samples.json)。该样例来自早期 Project_v1 GUI 版本，与后续正式评测指纹分开，不能直接合并训练。上述 HF CLI 命令已在隔离凭据目录实际匿名下载并逐文件核验。
 
 公开小样例若声明为 96 像素图像派生版，`dataset-check` 按 H5 实际 RGB 形状读取并报告派生信息；正式训练配置仍为 256 像素，不能把缩图样例当作原生 256 像素数据。
 

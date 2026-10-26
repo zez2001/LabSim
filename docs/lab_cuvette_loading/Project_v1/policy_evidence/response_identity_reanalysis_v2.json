@@ -1,0 +1,37 @@
+{
+  "schema": "labsim.Project_v1.response_identity_reanalysis.v2",
+  "observed_unix_s": 1793012646.620121,
+  "analysis_only": true,
+  "source_ledger": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+  "source_ledger_snapshot_sha256": "4cbcde87ce5f7b1907111d2c49b6872ed9b556e0d40c78247e7c1d8dd21dc015",
+  "source_snapshot_network_attempts": 25,
+  "original_ledger_modified_by_analysis": false,
+  "original_probe_outputs_modified": false,
+  "reclassified_request_count": 1,
+  "record": {
+    "request_ordinal": 25,
+    "request_id": "186d6183-abc5-4728-b3f0-223cc36383ca",
+    "label": "probe:real_camera_512jpeg_high",
+    "http_status": 200,
+    "requested_model": "gpt-6-astra",
+    "returned_model": null,
+    "response_id": "resp_0",
+    "historical_ledger_status": "OK",
+    "corrected_identity_status": "RETURNED_MODEL_MISSING",
+    "actual_usage": {
+      "input_tokens": 277,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 213,
+      "output_tokens_details": {
+        "reasoning_tokens": 123
+      },
+      "total_tokens": 490
+    },
+    "charged_estimate_usd_unchanged": 0.01342,
+    "expected_future_behavior": "Reject without retry; retain actual usage and cost estimate; ledger error status RETURNED_MODEL_MISSING."
+  },
+  "interpretation": "The response omitted model identity. Its identity could not be verified; this is not positive evidence that another model ran.",
+  "formal_image_configuration_unchanged": "256px JPEG quality60 detail=low; the512px high-detail probe is separate and not admitted as identity-verified capability."
+}

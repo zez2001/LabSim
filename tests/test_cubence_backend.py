@@ -1,5 +1,7 @@
 """CPU-only transport/safety contracts. These are not physical task validation."""
 import copy
+import base64
+import hashlib
 import io
 import json
 import os
@@ -37,8 +39,9 @@ class Environment:
     def __init__(self):
         self.executions=[];self.saved={};self.step=0;self.ended=False;self.result=None
     def observe(self):
-        return dict(episode_id="e1",observation_id="o"+str(self.step),joint_positions=[0.]*7+[.04,.04],
+        return dict(episode_id="e1",observation_id="o"+str(self.step),step_index=self.step,joint_positions=[0.]*7+[.04,.04],
             joint_velocities=[0.]*9,TCPpose=dict(position_m=[0.,0.,1.],quaternion_wxyz=[1.,0.,0.,0.]),
+            images={'side_camera':np.zeros((8,12,3),np.uint8),'wrist_camera':np.ones((8,12,3),np.uint8)},
             gripper_opening_m=.08,simulation_time=self.step/60,object_position_m=[9,9,9],phase="SECRET")
     def receipt(self,action_id):return self.saved.get(action_id)
     def execute(self,action):
@@ -111,9 +114,22 @@ class CubenceBackendContracts(unittest.TestCase):
         self.assertEqual(opener.calls,[])
 
     def test_returned_model_mismatch_is_recorded_and_refused(self):
-        client,_=self.client([dict(model="another-model",output=[],usage=dict(input_tokens=1,output_tokens=1))])
+        client,opener=self.client([dict(model="another-model",output=[],usage=dict(input_tokens=1,output_tokens=1))])
         with self.assertRaisesRegex(ProviderError,"RETURNED_MODEL_MISMATCH"):client.responses([],instructions="test")
-        self.assertEqual(json.loads(self.ledger.path.read_text())["attempts"][0]["returned_model"],"another-model")
+        item=json.loads(self.ledger.path.read_text())["attempts"][0]
+        self.assertEqual(item["returned_model"],"another-model")
+        self.assertEqual(item['status'],'RETURNED_MODEL_MISMATCH')
+        self.assertAlmostEqual(item['charged_estimate_usd'],.00006)
+        self.assertEqual(len(opener.calls),1)
+
+    def test_missing_returned_model_is_refused_but_actual_usage_is_preserved(self):
+        client,opener=self.client([dict(model=None,id='resp-fixture',output=[],usage=dict(input_tokens=277,output_tokens=213))])
+        with self.assertRaisesRegex(ProviderError,'RETURNED_MODEL_MISSING'):client.responses([],instructions='test')
+        item=json.loads(self.ledger.path.read_text())['attempts'][0]
+        self.assertEqual(item['status'],'RETURNED_MODEL_MISSING');self.assertIsNone(item['returned_model'])
+        self.assertEqual(item['usage'],dict(input_tokens=277,output_tokens=213))
+        self.assertAlmostEqual(item['charged_estimate_usd'],.01342)
+        self.assertEqual(item['response_id'],'resp-fixture');self.assertEqual(len(opener.calls),1)
 
     def test_multiple_or_invalid_tool_calls_never_execute(self):
         with self.assertRaisesRegex(ProviderError,"MULTIPLE_ACTIONS"):
@@ -187,6 +203,57 @@ class CubenceBackendContracts(unittest.TestCase):
         self.assertEqual(len(env.executions),1);self.assertTrue(retry["idempotent_replay"])
         with self.assertRaisesRegex(ProviderError,"ACTION_ID_REUSED"):tools.execute("move_ee",self.action(values=[0,0,.002,0,0,0]))
 
+    def test_two_resets_namespace_reused_model_id_while_facade_receipts_persist(self):
+        class PersistentReceipts(Environment):
+            def __init__(self):super().__init__();self.reset_count=0;self.active_episode='before-reset'
+            def reset(self):
+                self.reset_count+=1;self.active_episode='e'+str(self.reset_count);self.step=0;self.ended=False;self.result=None
+                # Match the launcher lifecycle: task resets, facade receipts stay.
+                return self.observe()
+            def observe(self):return dict(super().observe(),episode_id=self.active_episode)
+            def status(self):return dict(super().status(),episode_id=self.active_episode)
+        env=PersistentReceipts();env.reset()
+        first_tools=GenericRobotTools(env,self.cfg['action_limits']);first_tools.observe()
+        first_command=self.action(episode_id='e1',action_id='a1')
+        first=first_tools.execute('move_ee',first_command)
+        self.assertTrue(first_tools.execute('move_ee',first_command)['idempotent_replay'])
+        env.reset();self.assertEqual(len(env.saved),1)
+        second_tools=GenericRobotTools(env,self.cfg['action_limits']);second_tools.observe()
+        second_command=self.action(episode_id='e2',action_id='a1')
+        second=second_tools.execute('move_ee',second_command)
+        self.assertNotEqual(first['execution_action_id'],second['execution_action_id'])
+        self.assertEqual(first['model_action_id'],second['model_action_id'])
+        self.assertEqual(second['action_id'],'a1')
+        self.assertLessEqual(len(second['execution_action_id']),128)
+        self.assertEqual(env.executions[1]['action_id'],second['execution_action_id'])
+        self.assertEqual(env.executions[1]['model_action_id'],'a1')
+        self.assertEqual(len(env.executions),2);self.assertEqual(len(env.saved),2)
+        self.assertTrue(second_tools.execute('move_ee',second_command)['idempotent_replay'])
+        with self.assertRaisesRegex(ProviderError,'PROTOCOL_STALE_EPISODE_ID'):second_tools.execute('move_ee',first_command)
+        self.assertEqual(len(env.executions),2)
+
+    def test_early_terminated_action_reports_actual_time_separately_from_requested(self):
+        env=Environment();original=env.execute
+        def early_stop(action):
+            receipt=original(action)
+            receipt.update(completed=True,terminated=True,executed_control_ticks=51,simulation_time_before=1.,simulation_time_after=1.85)
+            return receipt
+        env.execute=early_stop
+        tools=GenericRobotTools(env,self.cfg['action_limits']);tools.observe()
+        command=self.action(duration_s=2.)
+        receipt=tools.execute('move_ee',command)
+        self.assertEqual(receipt['requested_duration_s'],2.)
+        self.assertEqual(receipt['quantized_requested_duration_s'],2.)
+        self.assertAlmostEqual(receipt['executed_duration_s'],.85)
+        self.assertEqual(receipt['executed_duration_source'],'simulation_time_after_minus_before')
+        replay=tools.execute('move_ee',command)
+        self.assertAlmostEqual(replay['executed_duration_s'],.85);self.assertEqual(len(env.executions),1)
+
+    def test_missing_execution_time_is_unavailable_rather_than_requested_duration(self):
+        env=Environment();tools=GenericRobotTools(env,self.cfg['action_limits']);tools.observe()
+        receipt=tools.execute('move_ee',self.action())
+        self.assertIsNone(receipt['executed_duration_s']);self.assertEqual(receipt['executed_duration_source'],'unavailable')
+
     def test_stale_or_too_fast_actions_are_rejected_without_step(self):
         env=Environment();tools=GenericRobotTools(env,self.cfg["action_limits"]);tools.observe()
         with self.assertRaisesRegex(ProviderError,"STALE_OBSERVATION_ID"):tools.execute("move_ee",self.action(observation_id="old"))
@@ -240,9 +307,45 @@ class CubenceBackendContracts(unittest.TestCase):
 
     def episode(self,env,client,*,max_calls=1):
         output=Path(self.directory.name)/'episode'
-        with patch('policy.backends.cubence_tools.observation_content',lambda obs,**kwargs:[dict(type='input_text',text='CPU fixture robot observation')]):
-            summary=run_episode(env,client,output,max_calls=max_calls)
+        summary=run_episode(env,client,output,max_calls=max_calls)
         return summary,output
+
+    def test_policy_observation_files_are_exact_wire_jpegs_and_whitelisted_json(self):
+        env=Environment();client,opener=self.client([self.tool_reply()]);summary,output=self.episode(env,client)
+        payload=json.loads(opener.calls[0][0].data);content=payload['input'][-1]['content']
+        record=json.loads((output/'policy_trace.jsonl').read_text().splitlines()[0]);files=record['observation_artifacts']
+        folder=output/'observations/decision_000000'
+        self.assertEqual({p.name for p in folder.iterdir()},{'side_camera.jpg','wrist_camera.jpg','public_observation.json','manifest.json'})
+        for index,image in enumerate(files['images']):
+            saved=(output/image['path']).read_bytes();wire=base64.b64decode(content[2+index*2]['image_url'].split(',',1)[1])
+            self.assertEqual(saved,wire);self.assertEqual(hashlib.sha256(saved).hexdigest(),image['sha256'])
+        public=(output/files['public_observation']['path']).read_bytes()
+        self.assertEqual(public,content[0]['text'].encode())
+        state=json.loads(public)
+        self.assertNotIn('object_position_m',state);self.assertNotIn('phase',state);self.assertNotIn('images',state)
+        all_text=''.join(p.read_text() for p in output.rglob('*.json'))+(output/'policy_trace.jsonl').read_text()
+        self.assertNotIn('private-test-value',all_text);self.assertNotIn('Authorization',all_text)
+        self.assertNotIn('SECRET',all_text)
+        ledger=json.loads(self.ledger.path.read_text())
+        self.assertEqual(ledger['attempts'][0]['label'],'policy:e1:0:decision0')
+        self.assertEqual(record['request_label'],ledger['attempts'][0]['label'])
+        self.assertEqual(summary['observation_decisions_recorded'],1)
+
+    def test_observation_files_exist_before_failed_http_attempt_and_remain_linked(self):
+        error=urllib.error.HTTPError('https://api.cubence.ai/v1/responses',401,'private-error-body',{},None)
+        client,opener=self.client([error]);original=opener.open
+        expected=Path(self.directory.name)/'episode/observations/decision_000000'
+        def check_before_send(request,timeout):
+            self.assertTrue((expected/'public_observation.json').is_file())
+            self.assertTrue((expected/'side_camera.jpg').is_file());self.assertTrue((expected/'wrist_camera.jpg').is_file())
+            return original(request,timeout)
+        opener.open=check_before_send
+        summary,output=self.episode(Environment(),client)
+        trace=json.loads((output/'policy_trace.jsonl').read_text().splitlines()[-1])
+        self.assertEqual(summary['backend_failure_type'],'MODEL_SERVICE_ERROR')
+        self.assertEqual(summary['observation_decisions_recorded'],1)
+        self.assertEqual(trace['request_label'],'policy:e1:0:decision0')
+        self.assertTrue((output/trace['observation_artifacts']['manifest_path']).is_file())
 
     def tool_reply(self,name='move_ee',arguments=None):
         return dict(model='gpt-6-astra',id='fixture-response',usage=dict(input_tokens=1,output_tokens=1),

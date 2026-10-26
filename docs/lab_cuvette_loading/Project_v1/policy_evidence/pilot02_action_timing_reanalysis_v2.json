@@ -1,0 +1,91 @@
+{
+  "schema": "labsim.Project_v1.gpt_timing_reanalysis.v2",
+  "episode": "outputs/lab_cuvette_loading/Project_v1/gpt_pilot_02/episode_0000",
+  "analysis_only": true,
+  "original_files_modified": false,
+  "original_file_sha256": {
+    "outputs/lab_cuvette_loading/Project_v1/gpt_pilot_02/episode_0000/action_receipts.jsonl": "a6f04b44b3fb04b0919b87de9cc6cee376b0c0c5eb5121c6a2b758f4132f45b9",
+    "outputs/lab_cuvette_loading/Project_v1/gpt_pilot_02/episode_0000/gpt_control/policy_trace.jsonl": "2acad2e4c625dca840c28116ad0b0bfd4c7b3193dba39c8041469c03c5635cd1",
+    "outputs/lab_cuvette_loading/Project_v1/gpt_pilot_02/episode_0000/config.yaml": "752cf74d90cd932b98fd5c6569bff4a665ca4881afa4f49939c3691e32da8456",
+    "outputs/lab_cuvette_loading/Project_v1/gpt_pilot_02/episode_0000/independent_score.json": "f5401eceb917bd441f056782d8cc35a29d869e6e2920a6a3debccd0f2765e91e"
+  },
+  "control_hz": 60.0,
+  "rows": [
+    {
+      "action_id": "a1",
+      "tool": "move_ee",
+      "requested_duration_s": 2,
+      "historical_reported_executed_duration_s": 2.0,
+      "measured_executed_duration_s": 2.0,
+      "executed_control_ticks": 120,
+      "duration_from_ticks_s": 2.0,
+      "source_time_before_s": 0.016666666666666666,
+      "source_time_after_s": 2.0166666666666666,
+      "terminated": false,
+      "historical_duration_field_disagrees": false
+    },
+    {
+      "action_id": "a2",
+      "tool": "move_ee",
+      "requested_duration_s": 2,
+      "historical_reported_executed_duration_s": 2.0,
+      "measured_executed_duration_s": 2.0,
+      "executed_control_ticks": 120,
+      "duration_from_ticks_s": 2.0,
+      "source_time_before_s": 2.0166666666666666,
+      "source_time_after_s": 4.016666666666667,
+      "terminated": false,
+      "historical_duration_field_disagrees": false
+    },
+    {
+      "action_id": "a4",
+      "tool": "move_ee",
+      "requested_duration_s": 2,
+      "historical_reported_executed_duration_s": 2.0,
+      "measured_executed_duration_s": 2.0,
+      "executed_control_ticks": 120,
+      "duration_from_ticks_s": 2.0,
+      "source_time_before_s": 4.016666666666667,
+      "source_time_after_s": 6.016666666666667,
+      "terminated": false,
+      "historical_duration_field_disagrees": false
+    },
+    {
+      "action_id": "a5",
+      "tool": "move_ee",
+      "requested_duration_s": 2,
+      "historical_reported_executed_duration_s": 2.0,
+      "measured_executed_duration_s": 2.000000000000001,
+      "executed_control_ticks": 120,
+      "duration_from_ticks_s": 2.0,
+      "source_time_before_s": 6.016666666666667,
+      "source_time_after_s": 8.016666666666667,
+      "terminated": false,
+      "historical_duration_field_disagrees": false
+    },
+    {
+      "action_id": "a6",
+      "tool": "move_ee",
+      "requested_duration_s": 2,
+      "historical_reported_executed_duration_s": 2.0,
+      "measured_executed_duration_s": 0.8499999999999996,
+      "executed_control_ticks": 51,
+      "duration_from_ticks_s": 0.85,
+      "source_time_before_s": 8.016666666666667,
+      "source_time_after_s": 8.866666666666667,
+      "terminated": true,
+      "historical_duration_field_disagrees": true
+    }
+  ],
+  "actions_reanalyzed": 5,
+  "disagreeing_duration_fields": 1,
+  "actual_action_duration_s": 8.850000000000001,
+  "actual_control_ticks": 531,
+  "independent_score_unchanged": {
+    "task_success": null,
+    "record_valid": false,
+    "failure_type": "PHYSICS_INVALID",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION"
+  },
+  "method": "Use native receipt simulation-time endpoints and corroborate with executed control ticks. Preserve the historical requested-as-executed field and original physical verdict."
+}
