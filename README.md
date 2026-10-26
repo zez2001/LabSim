@@ -2,7 +2,7 @@
 
 LabSim 是基于 LabUtopia 与 Isaac Sim 的科学实验机器人仿真项目。默认稳定入口为 **`lab_cuvette_loading / Project_v1 / standard`**：Franka 从完整白色 6×6 来源架取出比色皿，搬运到单台开盖仪器的内部 A 座，完成插入、支撑交接、松爪、撤离与至少 3 秒稳定观察。
 
-[开发分支 `codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim) · [开发接入](docs/development/ONBOARDING.md) · [历史实验](docs/history/README.md)
+[Project_v1_1 使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md) · [开发分支 `codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim) · [开发接入](docs/development/ONBOARDING.md) · [历史实验](docs/history/README.md)
 
 [观看 Project_v1 完整 teacher 演示](docs/lab_cuvette_loading/Project_v1/media/teacher_full_continuous.mp4) · [松爪与撤离近景](docs/lab_cuvette_loading/Project_v1/media/teacher_release_wrist_closeup.mp4)
 
@@ -44,14 +44,14 @@ export LABSIM_PYTHON=/absolute/path/to/isaac-python
 
 固定资产 revision 为 [`bb880f098180c291f6f65995f969d48047207067`](https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067)。任务依赖包括 82 个 HF 文件和 1 个固定公共 Git LFS 来源的 Franka 文件，共 83 个文件、31,955,703 字节。Franka 的再分发许可尚未核实，没有重新上传到 HF；逐文件来源、授权及哈希见[资产锁文件](config/lab_cuvette_loading/Project_v1/assets.lock.json)。已完成空缓存、无凭据独立进程的 83/83 下载及离线复用检查，见[匿名下载摘要](docs/lab_cuvette_loading/Project_v1/assets/anonymous_download_summary.json)。
 
-省略版本时继续运行 Project_v1。独立开发版本 Project_v1_1 必须显式选择：
+省略版本时继续运行 Project_v1。当前独立开发版本 **Project_v1_1** 提供连续 IK、动作回执与运行时保护；必须显式选择，历史版本保持原样：
 
 ```bash
 ./labsim demo --project-version Project_v1_1 --backend teacher \
   --output outputs/lab_cuvette_loading/Project_v1_1/demo_NEW --dry-run
 ```
 
-去掉 `--dry-run` 才实际运行。新版的控制诊断、相机版本、共享预算及正常读取方式见 [Project_v1_1 调用说明](docs/lab_cuvette_loading/Project_v1_1/usage.md)；完整物理与 GPT 回归以该版本的实际证据为准。
+去掉 `--dry-run` 后可用 `--gui` 实际运行示范，或使用 `collect / eval / serve` 同样显式选择版本。[Project_v1_1 使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md)集中说明独立缓存、采集、默认 P4 / 可选 P6、共享预算和正常 reader；下面省略版本的历史示例仍属于 Project_v1。完整物理与 GPT 回归以各版本的实际证据为准。
 
 所有输出目录必须是新目录。无桌面显示时将 `--gui` 换为 `--headless`；可先加 `--dry-run` 查看启动命令。`doctor` 只做 CPU 预检，不等同于 GPU、GUI 或物理任务通过。
 
@@ -101,7 +101,9 @@ unset CUBENCE_API_KEY
 
 [提供方配置](config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json) 声明 Responses API、超时、动作限制和估算价格。探针、重试及评测应共用同一预算 ledger；默认硬上限为 **估算 $30 / 1500 次网络请求**，单集默认最多 160 次模型调用。估算费用不等于供应商账单。Project_v1_1 继续共用上述 ledger，保留已有请求和费用占用；先获得完整成功再冻结并运行新版正式五次，不用空 ledger 重置预算。
 
-需要限制历史上下文时，可显式增加 `--provider-config config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json`。该独立配置保留最近两个完整工具回合，每一步仍发送当前双图、目标说明、机器人状态和相机标定；其他提供方设置及预算上限不变。默认配置保留最近六个回合，不能把不同配置的调试与正式成绩混算。详细命令和验收范围见[新版调用说明](docs/lab_cuvette_loading/Project_v1_1/usage.md)。
+需要限制历史上下文时，可显式增加 `--provider-config config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json`。该独立配置保留最近两个完整工具回合，每一步仍发送当前双图、目标说明、机器人状态和相机标定；其他提供方设置及预算上限不变。默认配置保留最近六个回合，不能把不同配置的调试与正式成绩混算。详细命令和验收范围见[新版使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md)。
+
+本版本默认 provider 是 **P4 / 512 像素最大边 / low detail**。显式选择 `cubence_gpt6_context4_640high_temporal.json` 才启用 **P6 / 640 high / 公开历史腕图**；它是尚待真实策略验证的候选，不是默认控制器。P6 提示接触敏感区每次最多 100 µm 下降后再观察，没有改变工具上限、物理或评分，不能解释为精度保证。配置选择与限制见[历史图像输入说明](docs/lab_cuvette_loading/Project_v1_1/public_temporal_visual_context_v1.md)。
 
 GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信号，通过通用末端移动、夹爪、等待和结束请求控制；没有专家装载宏、器皿真值位姿或评分内部状态。模型请求期间仿真暂停，执行后产生新观测。过期观测被拒绝，同一动作 ID 查询已有回执，不重复运动。完整成功仍由物理结果判定，API 连通或短动作序列不能当作完成任务。运动工具默认每指 8 N 驱动上限，夹爪工具可显式选择 0–8 N；逐动作保存上限，实测接触力另记。
 
@@ -135,6 +137,8 @@ HF_HUB_DISABLE_IMPLICIT_TOKEN=1 hf download Txie000/SLAI-Labsim \
 文件 SHA256 和来源版本见[样例索引](config/lab_cuvette_loading/Project_v1/public_samples.json)。该样例来自早期 Project_v1 GUI 版本，与后续正式评测指纹分开，不能直接合并训练。上述 HF CLI 命令已在隔离凭据目录实际匿名下载并逐文件核验。
 
 公开小样例若声明为 96 像素图像派生版，`dataset-check` 按 H5 实际 RGB 形状读取并报告派生信息；正式训练配置仍为 256 像素，不能把缩图样例当作原生 256 像素数据。
+
+Project_v1_1 的成功 H5 已有自含数据依赖及替代路径正常 ACT/DP 读取证据，见[便携验收](docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json)。CLI 根据版本自动路由新 reader；Python 直接调用须显式传 `LabCuvetteProjectV11Dataset`，不要套用旧版本的筛选规则。约 1.94 GB 的原完整 H5 不收入精简阅读包，也不将该证据称为异机部署或模型训练验证。
 
 [Project_v1 ACT](policy/config/task/lab_cuvette_project_v1_act.yaml) / [DP 配置](policy/config/task/lab_cuvette_project_v1_dp.yaml) 直接使用 `side_camera_rgb`、`wrist_camera_rgb`，不需旧相机名称 override。读取器只接受同一指纹的 Project_v1 standard 完整任务；成功 BC 默认只读合格成功，失败用于显式选择的分析或学习方法，train / val 按完整 episode 划分。
 

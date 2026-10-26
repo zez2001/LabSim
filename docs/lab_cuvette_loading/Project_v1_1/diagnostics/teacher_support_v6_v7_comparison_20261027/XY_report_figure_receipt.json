@@ -1,0 +1,83 @@
+{
+  "schema": "labsim.Project_v1_1.report_XY_companion_figure.v1",
+  "analysis_date_local": "2026-10-27",
+  "sources": [
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/summary.json",
+      "bytes": 90750,
+      "SHA256": "db0c36aa2d572ff91fb1e51142896a7be14d53f688fcf8fbaa078987faeed410"
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/baseline_support_release_control_boundaries.csv",
+      "bytes": 593708,
+      "SHA256": "7b34d4a1f76e3bba3daeac7269c3034f0999800780e5ff649e1c044b6791ea42"
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/summary.json",
+      "bytes": 282025,
+      "SHA256": "db0dd8c30bc38cedaeb1fc68b470dfd546f17742998758afc9298675218ef934"
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/support_release_physics_control_boundaries.csv",
+      "bytes": 645759,
+      "SHA256": "e24dd916c80da40f9d8e32270f1e9f58623021270681e08fdb5e9a02f437154f"
+    }
+  ],
+  "original_three_panel_companion": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_support_gate_comparison.png",
+    "SHA256": "9f7d8c2a563624d1ad1e30e61d4ba2349028774abba4cd2c953535c722b141e1"
+  },
+  "figure": {
+    "path": "teacher_v6_v7_XY_report.png",
+    "SHA256": "503fc06ef75053d99028b93aa159e79c17449b56e1844a5742b8bac8d2aab610",
+    "bytes": 125763,
+    "width_px": 1600,
+    "height_px": 600,
+    "minimum_authored_font_pt": 14
+  },
+  "series": [
+    {
+      "label": "v6: TASK_INCOMPLETE",
+      "original_support_start_t_s": 107.61666666666666,
+      "actual_OPEN_t_s": 110.61666666666666,
+      "relative_OPEN_t_s": 3.0,
+      "independent_correct_target_supported": null,
+      "native_control_boundary_sample_count": 309
+    },
+    {
+      "label": "v7: SUCCESS",
+      "original_support_start_t_s": 107.61666666666666,
+      "actual_OPEN_t_s": 112.01666666666667,
+      "relative_OPEN_t_s": 4.400000000000006,
+      "independent_correct_target_supported": {
+        "relative_t_s": 2.4375,
+        "actual_t_s": 110.05416666666666,
+        "xy_um": 29.829044899356045
+      },
+      "native_control_boundary_sample_count": 309
+    }
+  ],
+  "semantics": "Same closed CSV samples as immutable three-panel figure, independent original timestamps minus each SUPPORT start; no interpolation/resampling/paired duration assumption. Support diamond is exact original independent240Hz event, not a teacher-phase success label.",
+  "plot_range_relative_s": [
+    0,
+    5.15
+  ],
+  "original_XY_gate_m": 0.0001,
+  "tilt_and_floor_support_retained_in_three_panel_CSV_and_summary": true,
+  "script": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/plot_xy_report.py",
+    "SHA256": "64cd43a275afe9779b619ac91940080c1b978133523f81751be47ab58718d9b7"
+  },
+  "reproduction_command": "/home/wujing/Desktop/vla/labutopia-env/bin/python docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/plot_xy_report.py --repo-root /home/wujing/Desktop/vla/LabSim --output-dir /tmp/labsim-support-XY-report-reproduction",
+  "visual_QA_completed": true,
+  "original_three_panel_image_or_manifests_modified": false,
+  "GPU_used": false,
+  "API_calls": 0,
+  "visual_QA_notes": "Final1600x600PNG viewed: complete y-label and x-label, ≥14pt authored fonts, legend above plot, actualOPEN labels outside data, gate label over empty left range, all actual curves and independent support diamond readable without data occlusion.",
+  "all_original_three_panel_manifest_files_unchanged": true,
+  "original_three_panel_manifest_SHA256": "f3a7b38dc7edf143910386ca11cab3847d960514dc4d3e4fe810daa04e7078eb",
+  "companion_README": {
+    "path": "XY_report_README.md",
+    "SHA256": "6bf4f1bda62ee2a1c9805f69159aefd5624988b1754975c05c77c304d6b13bc1"
+  }
+}

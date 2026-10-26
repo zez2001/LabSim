@@ -2,6 +2,8 @@
 
 本文说明独立版本的调用入口。物理运行结果以本版本的实际输出和独立评分为准；命令存在和 CPU 测试通过本身不代表完整任务成功。
 
+首次部署请先看[版本使用入口](README.md)，其中列出独立资产缓存、默认 P4 与可选 P6 的完整配置。
+
 ## 版本与环境
 
 `./labsim` 保留既有默认行为：省略版本时仍运行 `Project_v1`。调用本版本必须显式增加 `--project-version Project_v1_1`。四个执行入口 `demo`、`eval`、`collect`、`serve` 使用相同的版本选择规则，路由至 `demos.lab_cuvette_project_v1_1.run` 和 `config/lab_cuvette_loading/Project_v1_1/standard.yaml`。
@@ -11,7 +13,10 @@
 ```bash
 export LABSIM_PYTHON=/path/to/existing/python3.11
 ./labsim doctor --json
-./labsim assets check
+export LABSIM_ASSET_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/labsim/assets"
+./labsim assets download
+./labsim assets check --asset-root \
+  "$LABSIM_ASSET_CACHE/bb880f098180c291f6f65995f969d48047207067"
 ```
 
 `doctor` 当前检查共享运行环境和原 Project_v1 资产基础，并未替代新版本的物理验收。资产取得和部署说明沿用项目主页。所有输出必须使用不存在的新路径；同一张 GPU 上顺序运行仿真。

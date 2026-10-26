@@ -1,0 +1,161 @@
+
+63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_env_v1/physics_capture.py:145
+145:             target_contact_filter_paths=[self.filters[i] for i in self.target_indices],
+146:             contact_force_unit='N: every tensor contact API explicitly called with physics_dt; raw impulse separately Ns',
+147:             gripper_target_semantics='symmetric per-finger joint target_m; total opening=2*target; raw action envelope retains totalopening',
+148:             velocity_channels=dict(native_linear='SingleRigidPrim.get_linear_velocity,world axes,m/s,backend body velocity',
+149:                 native_angular='SingleRigidPrim.get_angular_velocity,world axes,rad/s',
+
+63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_env_v1/physics_capture.py:189
+189: 
+190:     def _friction(self,view):
+191:         result=view.get_friction_data(dt=self.dt)
+192:         if result is None:return None,[]
+193:         forces,points,counts,starts=[np.asarray(x) for x in result]
+
+63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_env_v1/physics_capture.py:233
+233:         env_raw=self.env.get_contact_force_matrix(dt=self.dt)
+234:         finger_raw=self.cf.get_contact_force_matrix(dt=self.dt)
+235:         if env_raw is None or finger_raw is None:
+236:             raise RuntimeError('Contact tensor view unavailable after physics initialization')
+237:         em=np.asarray(env_raw).reshape(-1,len(self.filters),3).sum(0)
+
+63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_env_v1/physics_capture.py:295
+295:             joints9=np.asarray(self.robot.get_joint_positions()),joint_velocities9=np.asarray(self.robot.get_joint_velocities()),
+296:             finger_contact_N=np.linalg.norm(fm,axis=1),finger_normal_force_on_cup_N=fm,finger_friction_force_on_cup_N=ff,
+297:             finger_joint_positions_m=np.asarray(self.robot.get_joint_positions())[7:9],
+298:             environment_normal_force_matrix_N=em,environment_friction_force_matrix_N=ef,
+299:             environment_net_force_N=(em+ef).sum(0),environment_sum_force_magnitudes_N=float(np.linalg.norm(em+ef,axis=1).sum()),
+
+63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_demo04/run.py:32
+32:     omni.physx.get_physx_cooking_interface().release_local_mesh_cache();omni.physx.get_physx_cooking_private_interface().release_runtime_mesh_cache()
+33:     world=World(stage_units_in_meters=1.,physics_dt=1/hz,rendering_dt=1/control,backend='numpy',device='cpu');stage=omni.usd.get_context().get_stage()
+34:     stage.SetDefaultPrim(UsdGeom.Xform.Define(stage,'/World').GetPrim());UsdGeom.SetStageUpAxis(stage,'Z')
+35:     GroundPlane(prim_path='/World/Ground',size=10.)
+36:     size=np.array(cfg.scene.table_size_m);table=world.scene.add(FixedCuboid(prim_path='/World/Table',name='table',position=np.array([.05,0,cfg.scene.table_top_m-size[2]/2]),scale=size,color=np.array([.6,.52,.42])))
+
+63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_demo04/run.py:86
+86:     robot.set_joint_positions(q);ac=robot.get_articulation_controller();ac.set_gains(kps=np.r_[old.robot.arm_kp,[old.robot.finger_kp]*2],kds=np.r_[old.robot.arm_kd,[old.robot.finger_kd]*2]);ac.set_max_efforts(np.array(old.robot.max_effort));robot._articulation_view.set_max_joint_velocities(np.array([old.robot.max_velocity]));ac.apply_action(ArticulationAction(joint_positions=q))
+87:     cup_fingers=RigidContactView(prim_paths_expr='/World/Cuvette',filter_paths_expr=['/World/Franka/panda_leftfinger','/World/Franka/panda_rightfinger'],name='cup_fingers',max_contact_count=1024)
+88:     for v in [env,fingers,cup_fingers]:v.initialize()
+89:     write(output/'reset_check.json',dict(errors_m=errors,passed=max(errors)<1e-6))
+90:     return locals()
+
+63410bf9258ba2f9bd0af4d517194523fca6617c:tasks/lab_cuvette_loading_project_v1.py:81
+81:                            gripper_effort_limit_N=float(self.effort),
+82:                            finger_contact_N=np.asarray(self.debug['finger_contact_N']).copy())
+83:         return observation
+
+/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.core.api/isaacsim/core/api/sensors/rigid_contact_view.py:250
+250:         self, indices: Optional[Union[np.ndarray, torch.Tensor, wp.array]] = None, clone: bool = True, dt: float = 1.0
+251:     ) -> Union[np.ndarray, torch.Tensor, wp.indexedarray]:
+252:         """Get the overall net contact forces on the prims in the view with respect to the world's frame.
+253: 
+254:         Args:
+255:             indices (Optional[Union[np.ndarray, list, torch.Tensor, wp.array]], optional): indices to specify which prims
+256:                                                                                  to query. Shape (M,).
+257:                                                                                  Where M <= size of the encapsulated prims in the view.
+258:                                                                                  Defaults to None (i.e: all prims in the view).
+259:             clone (bool, optional): True to return a clone of the internal buffer. Otherwise False. Defaults to True.
+260:             dt (float): time step multiplier to convert the underlying impulses to forces. The function returns contact impulses if the default dt is used
+261: 
+
+/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.core.api/isaacsim/core/api/sensors/rigid_contact_view.py:293
+293:     def get_contact_force_matrix(
+294:         self,
+295:         indices: Optional[Union[np.ndarray, list, torch.Tensor, wp.array]] = None,
+296:         clone: bool = True,
+297:         dt: float = 1.0,
+298:     ) -> Union[np.ndarray, torch.Tensor, wp.indexedarray]:
+299:         """Get the contact forces between the prims in the view and the filter prims.
+300: 
+301:         E.g., a matrix of dimension ``(num_shapes, num_filters, 3)`` where ``num_filters`` is
+302:         determined according to the ``filter_paths_expr`` parameter
+303: 
+304:         Args:
+305:             indices (Optional[Union[np.ndarray, list, torch.Tensor, wp.array]], optional): indices to specify which prims
+306:                                                                                  to query. Shape (M,).
+307:                                                                                  Where M <= size of the encapsulated prims in the view.
+308:                                                                                  Defaults to None (i.e: all prims in the view).
+309:             clone (bool, optional): True to return a clone of the internal buffer. Otherwise False. Defaults to True.
+310:             dt (float): time step multiplier to convert the underlying impulses to forces. The function returns contact impulses if the default dt is used
+311: 
+
+/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.core.api/isaacsim/core/api/sensors/rigid_contact_view.py:483
+483:     ]:
+484:         """
+485:         Gets friction data between the prims in the view and the filter prims. Specifically, this method provides frictional contact forces,
+486:         and points. The data in reported for number of anchor points that includes tangential forces in a single tangent direction to contact normal.
+487:         Given to the dynamic nature of collision between bodies, this method will provide buffers of friction data arranged sequentially for each pair.
+488:         The starting index and the number of contact data points for each pair in this stream can be realized from pair_contacts_start_indices,
+489:         and pair_contacts_count tensors. They both have a dimension of (self.num_shapes, self.num_filters) where filter_count is determined
+490:         according to the filter_paths_expr parameter.
+491: 
+492:         Args:
+493:             indices (Optional[Union[np.ndarray, list, torch.Tensor, wp.array]], optional): indicies to specify which prims
+494:                                                                                  to query. Shape (M,).
+495:                                                                                  Where M <= size of the encapsulated prims in the view.
+496:                                                                                  Defaults to None (i.e: all prims in the view).
+497:             clone (bool, optional): True to return a clone of the internal buffer. Otherwise False. Defaults to True.
+498:             dt (float): time step multiplier to convert the underlying impulses to forces. If the default value is used then the forces are in fact contact impulses
+499: 
+
+/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.lx64.r.cp311.u353/omni/physics/tensors/impl/api.py:5810
+5810:         """ Gets the net contact forces acting on the sensors in the view.
+5811: 
+5812:             This includes all the contact forces from all the prims interacting with the sensors, not only the filter prims.
+5813: 
+5814:             .. note::
+5815:                 The function raises an exception if the net contact forces cannot be obtained from the backend.
+5816: 
+5817:             Args:
+5818:                 dt (float): The time step of the simulation to use to convert impulses to forces.
+5819: 
+5820:             Returns:
+5821:                 Union[np.ndarray, torch.Tensor, wp.array]: An array of net contact forces with shape (sensor_count, 3) where sensor_count is the number of sensors in the view. The 3 elements of the last dimension are the x, y, z components of the net contact forces.
+
+/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.lx64.r.cp311.u353/omni/physics/tensors/impl/api.py:5841
+5841:     def get_contact_force_matrix(self, dt):
+5842:         """ Gets the matrix of pair-wise contact forces between sensors and filter prims.
+5843: 
+5844:             This only includes the contact forces between the sensors and the filter prims but not other potential contacts between the sensors and non-filter prims.
+5845: 
+5846:             .. note::
+5847:                 * The function raises an exception if the contact force matrix cannot be obtained from the backend.
+5848:                 * This function can only be used if the view is initialized with a valid filter prims.
+5849:                 * There could be more than one contact point between a sensor prim and a filter prim, but this function aggregates and reports the sum of all those contact forces between a pair of sensor/filter.
+5850: 
+5851:             Args:
+5852:                 dt (float): The time step of the simulation to use to convert impulses to forces.
+5853: 
+5854:             Returns:
+5855:                 Union[np.ndarray, torch.Tensor, wp.array]:
+5856:                   An array of contact forces with shape (sensor_count, filter_count, 3) where sensor_count is the number of sensors in the view and filter_count is the number of filter prims in the view.
+5857:                   The 3 elements of the last dimension are the x, y, z components of the contact forces between the sensors prims (in the first dimension) and the filter prims (in the second dimension).
+5858: 
+
+/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.lx64.r.cp311.u353/omni/physics/tensors/impl/api.py:5961
+5961:     def get_friction_data(self, dt):
+5962:         """ Gets the friction data between sensors and filter prims.
+5963: 
+5964:             This includes the friction forces and the friction points.
+5965: 
+5966:             Note that there could be more than one contact point between a sensor prim and a filter prim. This function is similar to :py:func:`RigidContactView.get_contact_force_matrix`, but does not report the aggregated values for a pair of sensor/filter prims.
+5967:             This is needed because some of the variables reported by this function (such as friction points) are defined only for contact points and cannot be aggregated accross the shape without further information about the geometry of the contact.
+5968: 
+5969:             Note also that the structure of the data returned by this function is different from the :py:func:`RigidContactView.get_contact_force_matrix` function. This function returns contacts data in buffers that need to be further processed.
+5970:             Specifically, the last two tensors returned by this function (i.e. contact_count_buffer, and start_indices_buffer) are used to locate the set of contact data for each sensor-filter pair in the first two tensors (i.e. force_buffer, point_buffer).
+5971: 
+5972:             For each sensor-filter pair, contact data (force_buffer, point_buffer) for all the contact points between sensor-filter prims are within the range of start_indices_buffer[sensor, filter] to start_indices_buffer[sensor, filter] + contact_count_buffer[sensor, filter].
+5973: 
+
+/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.lx64.r.cp311.u353/omni/physics/tensors/impl/api.py:5980
+5980:                 dt (float): The time step of the simulation to use to convert impulses to forces.
+5981: 
+5982:             Returns:
+5983:                 Tuple[Union[np.ndarray, torch.Tensor, wp.array], Union[np.ndarray, torch.Tensor, wp.array], Union[np.ndarray, torch.Tensor, wp.array], Union[np.ndarray, torch.Tensor, wp.array]]:
+5984:                   A tuple of four arrays of friction data:
+5985:                     * The first array is the friction forces with shape (max_contact_data_count, 3) where max_contact_data_count is the maximum number of contact data that can be stored in the view. The 3 elements of the last dimension are the x, y, z components of the friction forces.
+5986:                     * The second array is the friction points with shape (max_contact_data_count, 3) where the 3 elements of the last dimension are the x, y, z components of the friction points.
+5987:                     * The third array is the contact count buffer with shape (sensor_count, filter_count) where sensor_count is the number of sensors in the view and filter_count is the number of filter prims in the view.
+5988:                     * The fourth array is the start indices buffer with shape (sensor_count, filter_count).
