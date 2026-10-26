@@ -34,6 +34,7 @@ def parse_args():
     parser.add_argument('--provider-config')
     parser.add_argument('--budget-ledger')
     parser.add_argument('--max-calls',type=int,default=160)
+    parser.add_argument('--asset-id',help='Project_v1 registered cuvette hypothesis')
     return parser.parse_args()
 
 # Get command line arguments

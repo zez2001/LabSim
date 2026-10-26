@@ -419,6 +419,7 @@ def export_sample(source_h5, output, *, image_size=96, sample_filter="success",
                                       action=dict(shape=[8])),
         export_script_sha256=sha256(__file__), wall_seconds=time.monotonic() - started)
     manifest["normal_reader_shape_meta"]["obs"]["agent_pose"] = dict(shape=[8], type="low_dim")
+    manifest["artifact_size_budget_bytes"] = max_bytes
     manifest["within_requested_size_budget"] = manifest["exported_hdf5_size_bytes"] <= max_bytes
     (output / "sample_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
     (output / "shape_meta.json").write_text(json.dumps(manifest["normal_reader_shape_meta"], indent=2) + "\n")

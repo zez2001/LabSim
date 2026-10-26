@@ -66,6 +66,8 @@ export LABSIM_GEOMETRY_SITE=/absolute/path/to/geometry/lib/python3.11/site-packa
 
 Project_v1 默认保持 standard；采集、训练及训练内自动验证关闭场景随机化。历史 Size_v1 配额采集与审计仍可显式使用 `collect --phase ...` / `validate`，见[原任务说明](demos/lab_cuvette_size_v1/README.md)；旧冻结资格不自动赋予 Project_v1。
 
+尺寸变体可在独立 demo / eval 中用 `--asset-id cuvette_xy_1030` 选择，也可在独立 YAML 中只设置 `asset_id`。入口会同时更新视觉/碰撞引用、尺寸、质量属性和注册哈希，不自动移动目标轴或改变原座。几何预检及物理成功仍需重新验证；正式 `collect` 固定使用 `cuvette_xy_1000`。
+
 ## GPT-6 Astra 图像闭环
 
 直接后端固定使用 Cubence `https://api.cubence.ai/v1` 和 `gpt-6-astra`，不修改全局 Codex 配置，也不回退到其他模型。在当前终端读取密钥，避免写入 shell 历史、仓库或日志：
@@ -102,9 +104,11 @@ GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信
 
 失败 episode 使用 `--sample-filter failure` 和新的输出文件。读取不启动训练，也不改标签。单集 H5 保存实际图像和状态；多集索引若使用相对链接，传输时保留其 collection 树。
 
+公开小样例若声明为 96 像素图像派生版，`dataset-check` 按 H5 实际 RGB 形状读取并报告派生信息；正式训练配置仍为 256 像素，不能把缩图样例当作原生 256 像素数据。
+
 [Project_v1 ACT](policy/config/task/lab_cuvette_project_v1_act.yaml) / [DP 配置](policy/config/task/lab_cuvette_project_v1_dp.yaml) 直接使用 `side_camera_rgb`、`wrist_camera_rgb`，不需旧相机名称 override。读取器只接受同一指纹的 Project_v1 standard 完整任务；成功 BC 默认只读合格成功，失败用于显式选择的分析或学习方法，train / val 按完整 episode 划分。
 
-公开机器人接口为 `ProjectEnvironment.reset / observe / execute / receipt / status / finish / close`。ACT / DP 的 8 维数据动作是 7 个臂关节位置目标加一个对称夹指位置；实际执行的 9 维双指命令另存。GPT / π0.5 末端动作明确区分米、弧度、world / TCP 参考系和 wxyz 四元数。接口与代码地图见[接入指南](docs/development/ONBOARDING.md)。
+公开机器人接口为 `ProjectEnvironment.reset / observe / execute / receipt / status / finish / close`。ACT / DP 的 8 维数据动作是 7 个臂关节位置目标加一个对称夹指位置；实际执行的 9 维双指命令另存。ACT / DP 的输出通过 `policy.backends.action_adapters.act_dp_joint_action` 转换：第八维为单指位置，转换为双指总开口。GPT / π0.5 末端动作明确区分米、弧度、world / TCP 参考系和 wxyz 四元数。接口与代码地图见[接入指南](docs/development/ONBOARDING.md)。
 
 ## 验证证据与限制
 

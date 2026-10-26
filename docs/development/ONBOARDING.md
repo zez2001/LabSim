@@ -58,6 +58,8 @@ export LABSIM_ASSET_ROOT=/absolute/path/to/new_asset_tree
 
 仿真时长与墙钟耗时分别记录。进程退出 0 不代表任务成功，检查逐集 `result.json`、独立评分与连续视频。读取入口接受 standalone H5、正常 `episode_data.hdf5` 索引或单集目录；索引若有相对外链，须保留对应 collection。等待采集进程完全退出后再检查 HDF5。
 
+`dataset-check` 检查实际 CHW uint8 RGB，并按其真实大小构造读取元数据。公开缩图样例可以保留完整时间序列和真实动作，但其图像派生声明必须随样例保留；正常训练配置的 256 像素要求不会被读取工具自动改写。
+
 合格成功需实际抓取、清槽、搬运、插入、承托、双指脱离、撤离及至少 3 秒稳定。撤离前结束时，`post_retreat_window.status=unavailable`，`stable_after_retreat=null`；最后的中止前窗口另记为 `terminal_window`。不要补零代替未测量值。
 
 `collect --controlled-stop-depth-mm 5` 是 standard 场景中的明确动作偏差组；轨迹必须真正执行到 INSERT 才能作为有效任务失败。几何预检阻塞、初始化/服务错误、中断和短预算诊断单独归档，不能填充失败配额。成功 BC 默认只读合格成功；失败标签不为读取器而修改。
@@ -85,7 +87,7 @@ export LABSIM_ASSET_ROOT=/absolute/path/to/new_asset_tree
 - `policy/backends/cubence.py`、`cubence_tools.py`：独立提供方、预算、通用工具和图像闭环；`rpc.py` 是可选策略的公开适配。
 - `policy/dataset/lab_cuvette_project_v1_dataset.py`：在正常 episode 读取器上检查 Project_v1、standard、完整任务和统一指纹。
 
-相关正式配置位于 [config/lab_cuvette_loading/Project_v1](../../config/lab_cuvette_loading/Project_v1/)。当前固定选择 `cuvette_xy_1000`，原 A 座保持不变。35 个尺寸资产可查询并供独立实验选择；改变正式任务资产时同时更新几何、质量属性、控制引用及场景版本，不能仅改一个显示数字后继承成功资格。
+相关正式配置位于 [config/lab_cuvette_loading/Project_v1](../../config/lab_cuvette_loading/Project_v1/)。当前采集固定选择 `cuvette_xy_1000`，原 A 座保持不变。独立 demo / eval 可用 `--asset-id` 或 YAML 的 `asset_id` 选择已注册变体；入口原子更新视觉/碰撞引用、尺寸、质心、惯量、质量假设、接触元数据及哈希，不自动改目标轴或原座。改变资产会形成独立场景指纹，仍需通过当前几何与实际物理验收，不能继承其他尺寸的成功资格。
 
 ## 策略接口与时序
 

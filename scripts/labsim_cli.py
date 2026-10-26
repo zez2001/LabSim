@@ -88,6 +88,7 @@ def parser():
     demo.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
     demo.add_argument("--scene", choices=("standard",), default="standard")
     demo.add_argument("--backend", choices=("teacher", "gpt6"), default="teacher")
+    demo.add_argument("--asset-id", help="Optional registered hypothesis for a separate demo; does not change the original seat")
     demo.add_argument("--provider-config")
     demo.add_argument("--budget-ledger")
     demo.add_argument("--max-calls", type=int, default=160)
@@ -99,6 +100,7 @@ def parser():
     evaluation.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
     evaluation.add_argument("--scene", choices=("standard",), default="standard")
     evaluation.add_argument("--backend", choices=("teacher", "gpt6"), default="teacher")
+    evaluation.add_argument("--asset-id", help="Optional registered hypothesis for a separate evaluation")
     evaluation.add_argument("--episodes", type=int, default=5)
     evaluation.add_argument("--provider-config")
     evaluation.add_argument("--budget-ledger")
@@ -176,10 +178,12 @@ def build_command(args):
             raise ValueError("Choose --gui or --headless")
         command = [sys.executable, "-m", "demos.lab_cuvette_project_v1.run",
             "--backend", args.backend, "--config", str(PROJECT_CONFIG), "--layout-mode", args.scene,
-            "--seed", "0", "--episodes", str(episodes), "--output", str(output)]
+            "--seed", "0", "--episodes", str(episodes),
+            "--execution-purpose", "eval" if args.command == "serve" else args.command,
+            "--output", str(output)]
         if args.headless:
             command.append("--headless")
-        for name in ("provider_config", "budget_ledger", "max_calls", "controlled_stop_depth_mm", "port"):
+        for name in ("provider_config", "budget_ledger", "max_calls", "controlled_stop_depth_mm", "port", "asset_id"):
             value = getattr(args, name, None)
             if name == "max_calls" and args.backend != "gpt6":
                 continue

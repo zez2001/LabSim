@@ -21,9 +21,10 @@ from typing import Any
 
 
 class ProviderError(RuntimeError):
-    def __init__(self, code: str, *, status: int | None = None, retryable: bool = False):
+    def __init__(self, code: str, *, status: int | None = None, retryable: bool = False, details: dict | None = None):
         super().__init__(code)
         self.code, self.status, self.retryable = code, status, retryable
+        self.details = details
 
 
 class BudgetExceeded(ProviderError):

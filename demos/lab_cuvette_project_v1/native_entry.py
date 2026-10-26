@@ -28,7 +28,7 @@ def build_project_argv(args):
         argv.append('--headless')
     if args.env_mode == 'audit':
         argv.append('--audit-only')
-    for name in ('provider_config', 'budget_ledger'):
+    for name in ('provider_config', 'budget_ledger', 'asset_id'):
         value = getattr(args, name, None)
         if value:
             argv += ['--' + name.replace('_', '-'), str(value)]

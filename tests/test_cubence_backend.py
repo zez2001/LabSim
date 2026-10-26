@@ -136,6 +136,22 @@ class CubenceBackendContracts(unittest.TestCase):
         self.assertFalse(meta['native_recording_changed']);self.assertEqual(observation['images']['side_camera'].shape,(480,640,3))
         self.assertTrue(content[2]['image_url'].startswith('data:image/jpeg;base64,'))
 
+    def test_model_camera_payload_is_compact_without_changing_public_calibration(self):
+        observation=Environment().observe();image=np.zeros((48,64,3),np.uint8)
+        metadata=dict(name='side_camera',intrinsic_matrix_native=[[10.,0.,31.5],[0.,10.,23.5],[0.,0.,1.]],
+            camera_cv_from_world=np.eye(4).tolist(),world_pose_position_m=[1.,2.,3.],world_pose_quaternion_wxyz=[1.,0.,0.,0.],
+            resolution_wh=[64,48],sensor_rendering_time_s=.1,source='verbose source narrative',
+            optical_conventions={'opencv':'verbose optical narrative'},world_from_camera_usd=np.eye(4).tolist(),focal_length_cm=2.)
+        observation['images']={'side_camera':image,'wrist_camera':image}
+        observation['camera_meta']={'side_camera':copy.deepcopy(metadata),'wrist_camera':copy.deepcopy(metadata)}
+        content=observation_content(observation)
+        model=json.loads(content[0]['text'])['camera_meta']['side_camera']
+        self.assertIn('intrinsic_matrix_native',model);self.assertIn('camera_cv_from_world',model)
+        self.assertIn('world_pose_position_m',model);self.assertIn('sensor_rendering_time_s',model)
+        self.assertNotIn('source',model);self.assertNotIn('optical_conventions',model);self.assertNotIn('world_from_camera_usd',model)
+        self.assertEqual(public_observation(observation)['camera_meta']['side_camera']['source'],'verbose source narrative')
+        self.assertEqual(observation['camera_meta']['side_camera'],metadata)
+
     def test_public_observation_denies_truth_and_camera_debug(self):
         observation=Environment().observe();observation["camera_meta"]={"side_camera":dict(intrinsic_matrix_native=[[1]],object_depth_m=9,renderer_debug={"private":1})}
         public=public_observation(observation)
@@ -175,6 +191,17 @@ class CubenceBackendContracts(unittest.TestCase):
         env=Environment();tools=GenericRobotTools(env,self.cfg["action_limits"]);tools.observe()
         with self.assertRaisesRegex(ProviderError,"STALE_OBSERVATION_ID"):tools.execute("move_ee",self.action(observation_id="old"))
         with self.assertRaisesRegex(ProviderError,"TRANSLATION_SPEED_LIMIT"):tools.execute("move_ee",self.action(values=[0,0,.04,0,0,0]))
+        self.assertEqual(env.executions,[])
+
+    def test_norm_limit_rejection_reports_numeric_violation_and_preserves_state(self):
+        env=Environment();tools=GenericRobotTools(env,self.cfg['action_limits']);tools.observe()
+        with self.assertRaises(ProviderError) as caught:
+            tools.execute('move_ee',self.action(values=[0.,-.04,-.04,0.,0.,0.],duration_s=3.))
+        details=caught.exception.details
+        self.assertAlmostEqual(details['translation_norm_m'],.0565685424949238)
+        self.assertEqual(details['max_translation_norm_m'],.04)
+        self.assertEqual(details['violations'],['translation_norm'])
+        self.assertLess(details['linear_speed_m_s'],details['max_linear_speed_m_s'])
         self.assertEqual(env.executions,[])
 
     def test_unknown_execution_queries_receipt_instead_of_replaying(self):
@@ -231,6 +258,14 @@ class CubenceBackendContracts(unittest.TestCase):
         self.assertFalse(summary['task_result']['record_valid'])
         self.assertEqual(env.executions,[])
         self.assertEqual(json.loads((output/'summary.json').read_text()),summary)
+
+    def test_local_context_guard_is_input_contract_error_without_http_attempt(self):
+        self.cfg['max_context_input_tokens']=100
+        client,opener=self.client([]);env=Environment();summary,_=self.episode(env,client)
+        self.assertEqual(summary['backend_failure_type'],'INPUT_CONTRACT_ERROR')
+        self.assertEqual(summary['backend_error_code'],'LOCAL_CONTEXT_TOKEN_BOUND_EXCEEDED')
+        self.assertEqual(summary['network_attempts_this_episode'],0)
+        self.assertEqual(opener.calls,[]);self.assertEqual(env.executions,[])
 
     def test_multiple_model_calls_abort_before_either_motion_and_preserve_calls(self):
         reply=self.tool_reply();reply['output']*=2

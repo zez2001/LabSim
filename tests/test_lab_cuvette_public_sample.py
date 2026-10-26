@@ -113,3 +113,28 @@ def test_compact_sample_is_read_by_normal_project_act_dp_dataset(source, tmp_pat
     assert results[0]["batch"]["obs"]["side_camera_rgb"]["shape"] == [3, 3, 96, 96]
     assert results[1]["batch"]["obs"]["wrist_camera_rgb"]["shape"] == [3, 3, 3, 96, 96]
     assert all(r["batch"]["action"]["shape"] == [3, 16, 8] for r in results)
+    from scripts.read_lab_cuvette_project_v1_data import read_check
+    official = read_check(tmp_path / "public/episode.h5")
+    assert official["recorded_policy_image_shape"] == [3, 96, 96]
+    assert official["public_sample_derivations"][0]["temporal_subsampling"] is False
+
+
+def test_official_reader_reports_failure_labels_without_assuming_all_batch_values_are_tensors(source):
+    pytest.importorskip("torch")
+    from scripts.read_lab_cuvette_project_v1_data import read_check
+    with h5py.File(source, "a") as f:
+        f.attrs.update(task_success=False, eligible_for_success_bc=False,
+            eligible_for_failure_analysis=True, failure_type="BLOCKED", termination_reason="BLOCKED")
+    result = read_check(source, sample_filter="failure")
+    assert result["recorded_policy_image_shape"] == [3, 256, 256]
+    assert result["reader_validation"][0]["batch"]["labels"]["failure_type"] == ["BLOCKED"] * 3
+
+
+def test_recorded_camera_shape_inference_rejects_wrong_dtype(source):
+    pytest.importorskip("torch")
+    from scripts.read_lab_cuvette_project_v1_data import recorded_image_shape
+    with h5py.File(source, "a") as f:
+        del f["wrist_camera_rgb"]
+        f.create_dataset("wrist_camera_rgb", shape=(18, 3, 256, 256), dtype="float32")
+    with pytest.raises(ValueError, match="uint8"):
+        recorded_image_shape(source, "success")

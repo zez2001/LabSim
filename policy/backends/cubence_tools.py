@@ -49,7 +49,7 @@ def backend_failure_class(code):
     """Backend errors cannot be admitted as valid physical task failures."""
     if code in ('COST_BUDGET_EXHAUSTED','REQUEST_BUDGET_EXHAUSTED','POLICY_BUDGET'):
         return None
-    if code.startswith('PROTOCOL'):
+    if code.startswith('PROTOCOL') or code=='LOCAL_CONTEXT_TOKEN_BOUND_EXCEEDED':
         return 'INPUT_CONTRACT_ERROR'
     if code.startswith('PHYSICS') or code=='ACTION_EXECUTION_UNKNOWN_CHECK_RECEIPT':
         return 'PHYSICS_INVALID'
@@ -77,6 +77,20 @@ def public_observation(observation: dict) -> dict:
             except (TypeError,ValueError,OverflowError):valid=False
             if not valid:
                 raise ProviderError("PHYSICS_INVALID_NONFINITE_ROBOT_STATE")
+    return result
+
+
+def compact_camera_metadata(metadata: dict) -> dict:
+    """GPT transport view; complete public calibration stays in API and H5.
+
+    Keep one CV extrinsic, the native K, camera pose/mount and frame time. Drop
+    duplicate USD matrices, optical prose, lens derivations and source narratives.
+    """
+    fields=('name','physical_parent','local_pose_position_m','local_pose_quaternion_wxyz',
+        'world_pose_position_m','world_pose_quaternion_wxyz','camera_cv_from_world',
+        'intrinsic_matrix_native','resolution_wh','sensor_rendering_time_s')
+    result={key:json_safe(metadata[key]) for key in fields if key in metadata}
+    result['frames']='world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz'
     return result
 
 
@@ -111,6 +125,7 @@ There is no object-pose oracle and no expert motion primitive. Infer locations f
 All translations are metres; rotations radians; ee_pose quaternion order wxyz. Gripper opening is total finger separation, not each finger's position.
 Call one tool at a time. Every motion needs the current episode_id, observation_id, and a unique action_id. A receipt acknowledges executed motion; never replay an acknowledged action.
 Use larger bounded moves in free space and small, slower actions near contact. Model requests pause simulation; duration_s advances simulation only during tool execution.
+Translation and rotation limits apply to the Euclidean vector norm. For example, delta[.02,.02,0] has length.028284m and needs at least1.415s at.02m/s. A longer duration cannot make a vector longer than.04m legal; split it into smaller commands. Read numeric rejection details and correct the next command.
 Follow the full task: approach the designated light cuvette in the white rack, physical grasp, extraction, transport, internal-seat insertion, support transfer, symmetric release, retreat, then at least3seconds stable observation.
 Do not declare success from your own assessment: finish only requests the same independent physical scorer used for every backend.
 Avoid pushing after stalled insertion, dropping, collisions, and joint limits. If unsure, observe. You may reduce the gripper force cap during an image/state-confirmed support handoff, but cannot change physics or task thresholds.
@@ -209,14 +224,21 @@ class GenericRobotTools:
             delta=[v[i]-p[i] for i in range(3)] if mode=="ee_pose" else v[:3]
             distance=math.sqrt(sum(x*x for x in delta))
             if distance>float(self.limits["max_translation_m"])+1e-9 or distance/duration>float(self.limits["max_linear_speed_m_s"])+1e-9:
-                raise ProviderError("PROTOCOL_TRANSLATION_SPEED_LIMIT")
+                raise ProviderError("PROTOCOL_TRANSLATION_SPEED_LIMIT",details=dict(translation_norm_m=distance,
+                    duration_s=duration,linear_speed_m_s=distance/duration,max_translation_norm_m=float(self.limits['max_translation_m']),
+                    max_linear_speed_m_s=float(self.limits['max_linear_speed_m_s']),
+                    violations=[name for name,invalid in [('translation_norm',distance>float(self.limits['max_translation_m'])+1e-9),
+                        ('linear_speed',distance/duration>float(self.limits['max_linear_speed_m_s'])+1e-9)] if invalid],
+                    repair='Reduce the translation vector norm or split the move; choose duration >= norm/max_linear_speed within the duration limit.'))
             if mode=="ee_delta":angle=math.sqrt(sum(x*x for x in v[3:]))
             else:
                 norm=math.sqrt(sum(x*x for x in v[3:]));normq=math.sqrt(sum(x*x for x in q))
                 if abs(norm-1)>1e-3:raise ProviderError("PROTOCOL_QUATERNION_NOT_UNIT")
                 angle=2*math.acos(min(1.,abs(sum(v[i+3]*q[i] for i in range(4))/(norm*normq))))
             if angle>float(self.limits["max_rotation_rad"])+1e-9 or angle/duration>float(self.limits["max_angular_speed_rad_s"])+1e-9:
-                raise ProviderError("PROTOCOL_ROTATION_SPEED_LIMIT")
+                raise ProviderError("PROTOCOL_ROTATION_SPEED_LIMIT",details=dict(rotation_norm_rad=angle,duration_s=duration,
+                    angular_speed_rad_s=angle/duration,max_rotation_norm_rad=float(self.limits['max_rotation_rad']),
+                    max_angular_speed_rad_s=float(self.limits['max_angular_speed_rad_s'])))
             action.update(type=mode,values=v,frame=arguments["frame"])
         elif name=="gripper":
             opening=finite_number(arguments.get("opening_m"),"PROTOCOL_GRIPPER_OPENING_LIMIT")
@@ -278,6 +300,8 @@ def observation_content(observation: dict, *, image_config=None) -> list[dict]:
             pixel_convention='zero-based pixel-centre indices: dst=(src+.5)*scale-.5',native_recording_changed=False)
         content.extend([dict(type="input_text",text="Synchronized RGB: "+name),dict(type="input_image",image_url="data:image/jpeg;base64,"+base64.b64encode(transmitted).decode(),detail=settings['detail'])])
     obs['model_image_transforms']=provenance
+    for field in ('camera_meta','camera_calibration'):
+        if field in obs:obs[field]={name:compact_camera_metadata(camera) for name,camera in obs[field].items()}
     try:encoded=json.dumps(json_safe(obs),ensure_ascii=False,allow_nan=False)
     except (ValueError,TypeError):raise ProviderError('PHYSICS_INVALID_OBSERVATION') from None
     return [dict(type='input_text',text=encoded)]+content
@@ -333,7 +357,8 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                 except ProviderError as error:
                     if not error.code.startswith('PROTOCOL'):raise
                     errors+=1
-                    receipt={"status":"REJECTED","error":error.code,"episode_id":obs["episode_id"],"observation_id":obs["observation_id"],"physics_advanced":False}
+                    receipt={"status":"REJECTED","error":error.code,"details":error.details,
+                        "episode_id":obs["episode_id"],"observation_id":obs["observation_id"],"physics_advanced":False}
                 # Preserve complete response-item groups in memory. Some reasoning
                 # models require the reasoning item that accompanies a function call.
                 # The trace stores only the observable action, never hidden reasoning.

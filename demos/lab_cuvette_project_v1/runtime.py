@@ -109,7 +109,7 @@ def run_usd(arguments, *, check=True):
                           env=usd_environment(), check=check)
 
 
-def resolve_config(config):
+def resolve_config(config, asset_id=None):
     """New release-only overrides; historical files and their hashes stay intact."""
     from omegaconf import OmegaConf
     cfg = OmegaConf.create(OmegaConf.to_container(config, resolve=True))
@@ -125,20 +125,10 @@ def resolve_config(config):
             value = OmegaConf.select(cfg, key)
             if value and not Path(value).is_absolute():
                 OmegaConf.update(cfg, key, str(directory / value))
-    registry_path = ROOT / str(cfg.asset_registry)
-    if registry_path.is_file():
-        registry = json.loads(registry_path.read_text())
-        record = registry['assets'][str(cfg.asset_id)]
-        selected = ROOT / str(cfg.source.vessel)
-        import hashlib
-        actual = hashlib.sha256(selected.read_bytes()).hexdigest()
-        if actual != record['asset_sha256']:
-            raise RuntimeError('Selected release asset differs from its registered SHA256: ' + str(selected))
-        cfg.asset_selection.asset_sha256 = actual
-        cfg.asset_selection.registry_sha256 = hashlib.sha256(registry_path.read_bytes()).hexdigest()
-        cfg.asset_selection.source_sha256 = record['source']['sha256']
-        cfg.asset_selection.validation_scope = 'Release registry bytes and selected asset SHA; unchanged geometric metadata, independent geometry and physical checks remain required'
-    return cfg
+    from demos.lab_cuvette_project_v1.asset_selection import select_registered_asset
+    selected = select_registered_asset(OmegaConf.to_container(cfg, resolve=True),
+        asset_root=asset_root, repository_root=ROOT, asset_id=asset_id)
+    return OmegaConf.create(selected)
 
 
 if __name__ == '__main__':

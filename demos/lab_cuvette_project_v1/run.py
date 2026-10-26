@@ -18,6 +18,8 @@ def parser():
     p.add_argument('--layout-mode', '--scene', dest='scene', choices=('standard',), default='standard')
     p.add_argument('--task', choices=('lab_cuvette_loading',), default='lab_cuvette_loading')
     p.add_argument('--episodes', type=int, default=1)
+    p.add_argument('--asset-id', help='Registered XY-size hypothesis; original seat and loading axis stay unchanged')
+    p.add_argument('--execution-purpose', choices=('demo', 'eval', 'collect'), default='eval')
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--headless', action='store_true')
@@ -52,7 +54,10 @@ def main(argv=None):
         raise ValueError('Controlled early-stop is an explicitly separate teacher condition')
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
-    cfg = resolve_config(OmegaConf.load(args.config))
+    cfg = resolve_config(OmegaConf.load(args.config), asset_id=args.asset_id)
+    cfg.env.execution_purpose = args.execution_purpose
+    if args.execution_purpose == 'collect' and cfg.asset_id != 'cuvette_xy_1000':
+        raise ValueError('Fixed Project_v1 collection retains cuvette_xy_1000; use an independent demo/eval configuration for another registered asset')
     if args.controlled_stop_depth_mm is not None:
         depth = args.controlled_stop_depth_mm / 1000
         if not 0 < depth < cfg.geometry.target_depth_m:

@@ -1,0 +1,128 @@
+{
+  "schema": "labsim.Project_v1.optional_actual_regression.v1",
+  "code_commit": "8f5e87e2c5fd6d2fda11c7825adc308c0b2a7864",
+  "scope": "Real short policy/model-to-simulation connectivity; not full-task success or isolated performance",
+  "single_isaac_process": true,
+  "model_service_shared_gpu": true,
+  "models_and_simulation_environment_packages_unchanged": true,
+  "runs": {
+    "pi05": {
+      "backend": "pi05",
+      "subtask": "loading",
+      "layout_mode": "standard",
+      "integration_complete": true,
+      "task_success": false,
+      "actual_model_requests": 1,
+      "executed_actions": 5,
+      "termination_reason": "POLICY_BUDGET",
+      "episode_id": "b8cb2d49-6bc9-4435-aaa0-152f3b009e3d",
+      "reset_info": {
+        "episode_id": "b8cb2d49-6bc9-4435-aaa0-152f3b009e3d",
+        "observation_id": "b8cb2d49-6bc9-4435-aaa0-152f3b009e3d:0",
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_success": null,
+        "termination_reason": null
+      },
+      "startup_terminated": false,
+      "model_service_contacted": true,
+      "model_visible_state_keys": [
+        "episode_id",
+        "step_index",
+        "simulation_time",
+        "task_language",
+        "images",
+        "joint_positions",
+        "joint_velocities",
+        "TCPpose",
+        "camera_meta",
+        "source_slot_id",
+        "target_seat_id"
+      ],
+      "episode_finalized": true,
+      "environment_final_result": {
+        "episode_id": "b8cb2d49-6bc9-4435-aaa0-152f3b009e3d",
+        "observation_id": "b8cb2d49-6bc9-4435-aaa0-152f3b009e3d:15",
+        "simulation_time": 0.26666666666666666,
+        "terminated": true,
+        "task_success": false,
+        "termination_reason": "POLICY_BUDGET"
+      },
+      "requested_termination_reason": "POLICY_BUDGET",
+      "wall_time_s": 6.484950467012823,
+      "finished_utc": "2026-10-26T10:35:25Z"
+    },
+    "harness": {
+      "backend": "harness",
+      "subtask": "loading",
+      "layout_mode": "standard",
+      "integration_complete": true,
+      "task_success": false,
+      "actual_model_requests": null,
+      "executed_actions": 5,
+      "termination_reason": "POLICY_BUDGET",
+      "episode_id": "08ddb915-3788-4cfa-944e-4acd9f9c46dd",
+      "reset_info": {
+        "episode_id": "08ddb915-3788-4cfa-944e-4acd9f9c46dd",
+        "observation_id": "08ddb915-3788-4cfa-944e-4acd9f9c46dd:0",
+        "simulation_time": 0.016666666666666666,
+        "terminated": false,
+        "task_success": null,
+        "termination_reason": null
+      },
+      "startup_terminated": false,
+      "model_service_contacted": true,
+      "model_visible_state_keys": [
+        "episode_id",
+        "step_index",
+        "simulation_time",
+        "task_language",
+        "images",
+        "joint_positions",
+        "joint_velocities",
+        "TCPpose",
+        "camera_meta",
+        "source_slot_id",
+        "target_seat_id"
+      ],
+      "planner_error": null,
+      "planner_finish": {
+        "_finish": true,
+        "status": "failure",
+        "summary": "Five actual VLA actions executed, each with maximum_actions=1 and successor images/proprioception inspected. Budget exhausted. Cuvette remains in rack; grasp and transport were not achieved. Independent environment reported task_success=false."
+      },
+      "planner_stats": {
+        "backend": "codex_sdk",
+        "elapsed_s": 81.8,
+        "output_chars": 992,
+        "output_path": "/media/wujing/软件/LabSim_Project_v1_20261026/harness_short_01/planner/astra.txt",
+        "raw_stream_path": "/media/wujing/软件/LabSim_Project_v1_20261026/harness_short_01/planner/astra.txt.stream.jsonl",
+        "last_message_path": "/media/wujing/软件/LabSim_Project_v1_20261026/harness_short_01/planner/astra.txt.last",
+        "last_message_chars": 192,
+        "turns_used": 2,
+        "tool_calls": 7,
+        "total_input_tokens": 177083,
+        "total_cached_input_tokens": 139904,
+        "total_output_tokens": 801,
+        "total_reasoning_output_tokens": 0
+      },
+      "planner_invocations": 1,
+      "model_request_count_scope": "Codex internal HTTP count unavailable; planner invocation and response messages recorded separately",
+      "planner_response_messages": 2,
+      "actual_vla_predict_requests": 5,
+      "actual_vla_inference": true,
+      "episode_finalized": true,
+      "environment_final_result": {
+        "episode_id": "08ddb915-3788-4cfa-944e-4acd9f9c46dd",
+        "observation_id": "08ddb915-3788-4cfa-944e-4acd9f9c46dd:15",
+        "simulation_time": 0.26666666666666666,
+        "terminated": true,
+        "task_success": false,
+        "termination_reason": "POLICY_BUDGET"
+      },
+      "requested_termination_reason": "PLANNER_ENDED",
+      "wall_time_s": 86.91598849301226,
+      "finished_utc": "2026-10-26T10:38:19Z"
+    }
+  }
+}

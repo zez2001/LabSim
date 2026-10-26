@@ -1,0 +1,308 @@
+{
+  "schema": "labsim.Project_v1.reader_check.v1",
+  "path": "/media/wujing/软件/LabSim_Project_v1_20261026/teacher_gui_01/episode_0000/dataset/episode_0000.h5",
+  "sample_filter": "success",
+  "reader_validation": [
+    {
+      "policy_type": "act",
+      "episodes": [
+        "f3b86cf1-45ba-4514-b829-b8e87fd5fb35"
+      ],
+      "scene_fingerprint": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        },
+        "is_pad": {
+          "shape": [
+            3,
+            16
+          ],
+          "dtype": "torch.bool",
+          "finite": true
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+          "transitions": 6348,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            6348,
+            8
+          ],
+          "executed_command_shape": [
+            6348,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": true,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    },
+    {
+      "policy_type": "dp",
+      "episodes": [
+        "f3b86cf1-45ba-4514-b829-b8e87fd5fb35"
+      ],
+      "scene_fingerprint": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+          "transitions": 6348,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            6348,
+            8
+          ],
+          "executed_command_shape": [
+            6348,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": true,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    }
+  ],
+  "source_labels_modified": false,
+  "actual_episode_audit": {
+    "schema": "labsim.Project_v1.actual_closed_GUI_data_audit.v1",
+    "episode_id": "f3b86cf1-45ba-4514-b829-b8e87fd5fb35",
+    "process_exit": {
+      "schema": "labsim.Project_v1.process_exit.v1",
+      "process_exited": true,
+      "pid": 2708322,
+      "exit_code": 0,
+      "run_directory": "/media/wujing/软件/LabSim_Project_v1_20261026/teacher_gui_01",
+      "code_commit": "d09c5ffce2018702702eb0d4c77d862f1eae6faa",
+      "command": [
+        "./labsim",
+        "demo",
+        "--task",
+        "lab_cuvette_loading",
+        "--scene",
+        "standard",
+        "--backend",
+        "teacher",
+        "--gui",
+        "--output",
+        "/media/wujing/软件/LabSim_Project_v1_20261026/teacher_gui_01"
+      ],
+      "wall_seconds": 861.15472077101,
+      "clean_remote_checkout": true
+    },
+    "episode_transitions": 6348,
+    "first_observation_time_s": 0.016666666666666666,
+    "last_successor_time_s": 105.81666666666666,
+    "action_mapping": {
+      "raw_action_types": [
+        "ee_pose"
+      ],
+      "raw_action_value_widths": [
+        7
+      ],
+      "actual_executed_command_shape": [
+        6348,
+        9
+      ],
+      "normal_dataset_action_shape": [
+        6348,
+        8
+      ],
+      "action8_semantics": "7 arm absolute joint targets in radians + left finger absolute target in metres; symmetric right target retained in command9",
+      "raw7_semantics": "Teacher EE world xyz metres + quaternion wxyz; generic IK produces actual nine-joint command, not directly a seven-joint policy action",
+      "maximum_raw_opening_to_executed_half_opening_difference_m": 1.8477440758002395e-09,
+      "recorded_per_finger_effort_range_N": [
+        0.04999999999999982,
+        8.0
+      ],
+      "force_caps_are_not_measured_contact_force": true
+    },
+    "identity": {
+      "scene_version": "Project_v1",
+      "scene_mode": "standard",
+      "asset_id": "cuvette_xy_1000",
+      "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "source_slot_id": "A1",
+      "target_seat_id": "candidate_far_hinge",
+      "condition_group": "natural",
+      "frozen_scene_sha256": "75d288fe67e88c749cb578f36f3c246664b3e26d8455926bffbccf3576964de6",
+      "code_commit": "d09c5ffce2018702702eb0d4c77d862f1eae6faa",
+      "actual_execution_commit": "d09c5ffce2018702702eb0d4c77d862f1eae6faa"
+    },
+    "initial_state": {
+      "actual_q9": [
+        0.1779361367225647,
+        -1.2082452774047852,
+        -0.8200522661209106,
+        -2.87337064743042,
+        -0.7667176723480225,
+        1.7454451322555542,
+        -0.8053153157234192,
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "object_position_m": [
+        -0.08500000834465027,
+        -0.17499999701976776,
+        0.7430000305175781
+      ],
+      "object_quaternion_wxyz": [
+        0.7071091532707214,
+        1.1641532182693481e-08,
+        -7.450580596923828e-09,
+        0.7071045637130737
+      ],
+      "reset_check": {
+        "errors_m": [
+          9.763786632287495e-09,
+          9.763786632287495e-09
+        ],
+        "passed": true
+      },
+      "initial_physics_steps_recorded": 4
+    },
+    "camera_timestamps": {
+      "side_camera_rgb": {
+        "length": 6348,
+        "monotonic": true,
+        "min_camera_minus_episode_timestamp_s": 0.008333334637184938,
+        "max_camera_minus_episode_timestamp_s": 0.008338851667943459,
+        "engine_clock_origin_s": 0.008333333767950535,
+        "maximum_residual_after_clock_origin_s": 5.517899992923958e-06,
+        "semantics": "Camera timestamps use the engine clock; episode timestamps subtract the saved engine origin. Observed residual is clock numeric drift, not an inferred optical calibration error."
+      },
+      "wrist_camera_rgb": {
+        "length": 6348,
+        "monotonic": true,
+        "min_camera_minus_episode_timestamp_s": 0.008333334637184938,
+        "max_camera_minus_episode_timestamp_s": 0.008338851667943459,
+        "engine_clock_origin_s": 0.008333333767950535,
+        "maximum_residual_after_clock_origin_s": 5.517899992923958e-06,
+        "semantics": "Camera timestamps use the engine clock; episode timestamps subtract the saved engine origin. Observed residual is clock numeric drift, not an inferred optical calibration error."
+      }
+    },
+    "nonportable_HDF5_links": [],
+    "checks": {
+      "all_required_datasets_same_control_length": true,
+      "control_dt_1_over_60_s": true,
+      "successor_time_matches_next_observation": true,
+      "successor_q_matches_next_observation_q": true,
+      "obs_ids_monotonic_and_successor_is_plus_one": true,
+      "raw_actions_reference_same_episode_and_observation": true,
+      "raw_action_values_finite": true,
+      "legacy_actions_exactly_command9_first8_float32": true,
+      "legacy_agent_pose_exactly_measured_q_first8_float32": true,
+      "two_executed_fingers_symmetric": true,
+      "raw_total_opening_maps_to_two_fingers": true,
+      "aux_per_finger_target_matches_executed_q": true,
+      "raw_effort_matches_saved_per_finger_caps": true,
+      "initial_measured_q_matches_first_dataset_observation": true,
+      "initial_object_pose_matches_HDF5_initial_position": true,
+      "first_timestamp_matches_initialization_record": true,
+      "first_observation_follows_recorded_four_physics_steps": true,
+      "scene_fingerprint_matches_saved_contract_and_metadata": true,
+      "correct_source_target_asset": true,
+      "actual_code_commit_matches_closed_process_proof": true,
+      "self_contained_HDF5": true,
+      "stored_source_success_valid_and_closed": true,
+      "camera_timestamps_match_saved_engine_clock_origin_within_10us": true
+    },
+    "all_checks_passed": true,
+    "teacher_truth_pose_used": true,
+    "source_data_or_labels_modified": false,
+    "training_or_optimizer_executed": false,
+    "fingerprint_scope": "Actual GUI episode at d09c5ff before later interface-only fixes; not mixed with the later formal headless scene fingerprint"
+  }
+}
