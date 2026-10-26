@@ -1,0 +1,496 @@
+{
+  "schema": "labsim.Project_v1_1.gpt02_offline_contact_task.v1",
+  "analysis_date_local": "2026-10-27",
+  "episode_id": "f06ff354-2e44-491e-9d4b-c282c436f6fc",
+  "original_result": {
+    "task_success": false,
+    "failure_type": "SAFETY_GEOMETRY_VIOLATION",
+    "failure_domain": "safety",
+    "termination_reason": "INPUT_MATERIAL_PENETRATION",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "grasp_success": false,
+    "source_slot_cleared": true,
+    "transport_success": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    }
+  },
+  "original_score_task_flags": {
+    "loading_sequence_observed": false,
+    "loading_candidate_sequence_observed": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "terminal_window": {
+      "status": "complete",
+      "stable": false,
+      "required_duration_s": 3.0,
+      "measured_duration_s": 3.0,
+      "sample_count": 721,
+      "position_drift_m": 0.014044382837425453,
+      "orientation_change_deg": 115.52411400503154,
+      "criteria": {
+        "position_stable": false,
+        "target_support": null,
+        "target_contains": null,
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null
+      },
+      "start_t": 56.86666666666667,
+      "end_t": 59.86666666666667
+    },
+    "grasp_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 0.01695555798327204,
+      "maximum_orientation_drift_deg": 0.3117973238194896,
+      "maximum_configured_grasp_anchor_drift_m": 0.016957146492425895,
+      "maximum_configured_grasp_anchor_axial_drift_m": 0.016954905404233632,
+      "maximum_configured_grasp_anchor_transverse_drift_m": 0.00029761760295134583,
+      "configured_grasp_anchor_height_m": 0.053,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    }
+  },
+  "observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 14.1125,
+      "physics_step": 3387,
+      "actual_force_N": [
+        1.610750436782837,
+        1.609235405921936
+      ]
+    },
+    "actual_lift_started": {
+      "t": 14.1125,
+      "physics_step": 3387,
+      "actual_lift_m": 0.0015154763052211973
+    },
+    "source_slot_cleared": {
+      "t": 15.370833333333334,
+      "physics_step": 3689,
+      "actual_bottom_world_z_m": 0.7700865705821628,
+      "source_rim_world_z_m": 0.768
+    },
+    "held_transport_observed": {
+      "t": 32.520833333333336,
+      "physics_step": 7805,
+      "horizontal_displacement_m": 0.05006507252802129
+    }
+  },
+  "event_exact_physics_samples": {
+    "3387": {
+      "t": 14.1125,
+      "physics_step": 3387,
+      "phase": "POLICY",
+      "object_position_m": [
+        -0.08481402695178986,
+        -0.17493675649166107,
+        0.7447212934494019
+      ],
+      "object_quaternion_wxyz": [
+        0.7073060274124146,
+        -7.588136941194534e-05,
+        -0.0004351520910859108,
+        0.7069073915481567
+      ],
+      "object_bottom_world_z_m": 0.7447154802497474,
+      "actual_tcp_position_m": [
+        -0.08507661605384091,
+        -0.17484290619344348,
+        0.7945882296566629
+      ],
+      "actual_tcp_quaternion_wxyz": [
+        -0.0005339755358888674,
+        0.7069785482444092,
+        -0.7072347886082213,
+        -3.121921277288346e-05
+      ],
+      "finger_contact_N": [
+        1.610750436782837,
+        1.609235405921936
+      ],
+      "finger_joint_positions_m": [
+        0.005309285596013069,
+        0.005309268832206726
+      ],
+      "gripper_target_m": 0.004499999999999997,
+      "gripper_effort_limit_N": 4.0,
+      "depth_m": null,
+      "xy_error_target_m": [
+        -0.025671220884684754,
+        0.2971836736888272
+      ],
+      "tilt_deg": 0.05061722326424992,
+      "target_region_contains_object": null,
+      "target_bottom_gap_m": null,
+      "target_bottom_support_N": 0.0,
+      "target_whole_seat_net_vertical_N": 0.0,
+      "gripper_object_clearance_m": 0.0,
+      "source_bottom_gap_m": 0.0017154802497474364
+    },
+    "3689": {
+      "t": 15.370833333333334,
+      "physics_step": 3689,
+      "phase": "POLICY",
+      "object_position_m": [
+        -0.0848066508769989,
+        -0.17498411238193512,
+        0.7700911164283752
+      ],
+      "object_quaternion_wxyz": [
+        0.7072601318359375,
+        -0.0002201264724135399,
+        -0.00033786799758672714,
+        0.7069532871246338
+      ],
+      "object_bottom_world_z_m": 0.7700865705821628,
+      "actual_tcp_position_m": [
+        -0.08507255898755653,
+        -0.17487317125223895,
+        0.8199580960708117
+      ],
+      "actual_tcp_quaternion_wxyz": [
+        -0.00043880816801852667,
+        0.7070121693324761,
+        -0.7072012352637833,
+        0.00011271449215311903
+      ],
+      "finger_contact_N": [
+        1.6182849407196045,
+        1.6042824983596802
+      ],
+      "finger_joint_positions_m": [
+        0.00530921621248126,
+        0.005309207830578089
+      ],
+      "gripper_target_m": 0.004499999999999997,
+      "gripper_effort_limit_N": 4.0,
+      "depth_m": null,
+      "xy_error_target_m": [
+        -0.025718576774958802,
+        0.29717629761403624
+      ],
+      "tilt_deg": 0.046209030971004074,
+      "target_region_contains_object": null,
+      "target_bottom_gap_m": null,
+      "target_bottom_support_N": 0.0,
+      "target_whole_seat_net_vertical_N": 0.0,
+      "gripper_object_clearance_m": 0.0,
+      "source_bottom_gap_m": 0.027086570582162794
+    },
+    "7805": {
+      "t": 32.520833333333336,
+      "physics_step": 7805,
+      "phase": "POLICY",
+      "object_position_m": [
+        -0.03594765439629555,
+        -0.16498111188411713,
+        1.062982439994812
+      ],
+      "object_quaternion_wxyz": [
+        0.7072706818580627,
+        -0.0002564014866948128,
+        -0.00035299453884363174,
+        0.7069427371025085
+      ],
+      "object_bottom_world_z_m": 1.062977682276038,
+      "actual_tcp_position_m": [
+        -0.03621727174501382,
+        -0.16486864317656016,
+        1.1128496640598882
+      ],
+      "actual_tcp_quaternion_wxyz": [
+        -0.0004621322219395958,
+        0.7070019350790987,
+        -0.7072114454086148,
+        0.0001473474716666053
+      ],
+      "finger_contact_N": [
+        1.5855522155761719,
+        1.6338071823120117
+      ],
+      "finger_joint_positions_m": [
+        0.0053092013113200665,
+        0.0053091878071427345
+      ],
+      "gripper_target_m": 0.004499999999999997,
+      "gripper_effort_limit_N": 4.0,
+      "depth_m": null,
+      "xy_error_target_m": [
+        -0.015715576277140805,
+        0.2483173011333329
+      ],
+      "tilt_deg": 0.049994876405612725,
+      "target_region_contains_object": null,
+      "target_bottom_gap_m": null,
+      "target_bottom_support_N": 0.0,
+      "target_whole_seat_net_vertical_N": 0.0,
+      "gripper_object_clearance_m": 0.0,
+      "source_bottom_gap_m": 0.31997768227603796
+    }
+  },
+  "final_physics_sample": {
+    "t": 59.86666666666667,
+    "physics_step": 14368,
+    "phase": "POLICY",
+    "object_position_m": [
+      0.21586789190769196,
+      -0.15926581621170044,
+      0.9253687858581543
+    ],
+    "object_quaternion_wxyz": [
+      0.4270176291465759,
+      -0.6592622399330139,
+      -0.5254042148590088,
+      0.3270775377750397
+    ],
+    "object_bottom_world_z_m": 0.8923951550105447,
+    "actual_tcp_position_m": [
+      0.21395121553363147,
+      -0.1510938762297227,
+      0.9968135056956428
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.0005242532215269946,
+      0.706886749906754,
+      -0.7073265129644387,
+      0.00022808418130815505
+    ],
+    "finger_contact_N": [
+      0.0,
+      0.0
+    ],
+    "finger_joint_positions_m": [
+      0.019999945536255836,
+      0.020000038668513298
+    ],
+    "gripper_target_m": 0.02,
+    "gripper_effort_limit_N": 0.5,
+    "depth_m": 0.02160484498945534,
+    "xy_error_target_m": [
+      -0.010000280604724104,
+      -0.003498245170654613
+    ],
+    "tilt_deg": 114.92000549899076,
+    "target_region_contains_object": false,
+    "target_bottom_gap_m": 0.005395155010544661,
+    "target_bottom_support_N": 0.0,
+    "target_whole_seat_net_vertical_N": 1.102017879486084,
+    "gripper_object_clearance_m": 0.054582159460923374,
+    "source_bottom_gap_m": 0.14939515501054468
+  },
+  "maximum_actual_depth_sample": {
+    "t": 59.86666666666667,
+    "physics_step": 14368,
+    "phase": "POLICY",
+    "object_position_m": [
+      0.21586789190769196,
+      -0.15926581621170044,
+      0.9253687858581543
+    ],
+    "object_quaternion_wxyz": [
+      0.4270176291465759,
+      -0.6592622399330139,
+      -0.5254042148590088,
+      0.3270775377750397
+    ],
+    "object_bottom_world_z_m": 0.8923951550105447,
+    "actual_tcp_position_m": [
+      0.21395121553363147,
+      -0.1510938762297227,
+      0.9968135056956428
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.0005242532215269946,
+      0.706886749906754,
+      -0.7073265129644387,
+      0.00022808418130815505
+    ],
+    "finger_contact_N": [
+      0.0,
+      0.0
+    ],
+    "finger_joint_positions_m": [
+      0.019999945536255836,
+      0.020000038668513298
+    ],
+    "gripper_target_m": 0.02,
+    "gripper_effort_limit_N": 0.5,
+    "depth_m": 0.02160484498945534,
+    "xy_error_target_m": [
+      -0.010000280604724104,
+      -0.003498245170654613
+    ],
+    "tilt_deg": 114.92000549899076,
+    "target_region_contains_object": false,
+    "target_bottom_gap_m": 0.005395155010544661,
+    "target_bottom_support_N": 0.0,
+    "target_whole_seat_net_vertical_N": 1.102017879486084,
+    "gripper_object_clearance_m": 0.054582159460923374,
+    "source_bottom_gap_m": 0.14939515501054468
+  },
+  "minimum_actual_target_xy_error_sample": {
+    "t": 45.854166666666664,
+    "physics_step": 11005,
+    "object_position_m": [
+      0.21243110299110413,
+      -0.15099021792411804,
+      1.0354104042053223
+    ],
+    "object_quaternion_wxyz": [
+      0.7072663903236389,
+      -0.0002306690439581871,
+      -0.0003966270014643669,
+      0.7069469690322876
+    ],
+    "object_bottom_world_z_m": 1.0354050764783014,
+    "actual_tcp_position_m": [
+      0.21216030623568596,
+      -0.15088292778289486,
+      1.085277157396813
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.0005015759182675597,
+      0.7070165594986936,
+      -0.7071968039374177,
+      0.00011626233297747894
+    ],
+    "cup_in_hand_position_m": [
+      -0.00013439988513412956,
+      0.00022725615027856746,
+      0.1498669049293339
+    ],
+    "cup_in_hand_quaternion_wxyz": [
+      -6.734252985834371e-06,
+      -0.9999999831058655,
+      -9.834329880148432e-05,
+      -0.0001551499733104585
+    ],
+    "finger_contact_N": [
+      1.5898650884628296,
+      1.6249611377716064
+    ],
+    "finger_joint_positions_m": [
+      0.005309220869094133,
+      0.005309235770255327
+    ],
+    "gripper_target_m": 0.004499999999999997,
+    "gripper_effort_limit_N": 4.0,
+    "depth_m": -0.12140507647830137,
+    "xy_error_target_m": [
+      -0.001724682317141707,
+      -6.145625406678301e-05
+    ],
+    "tilt_deg": 0.05257757517031553,
+    "target_region_contains_object": null,
+    "target_bottom_gap_m": 0.14840507647830137,
+    "target_bottom_support_N": 0.0,
+    "target_whole_seat_net_vertical_N": 0.0,
+    "gripper_object_clearance_m": 0.0,
+    "source_bottom_gap_m": 0.2924050764783014,
+    "target_xy_error_norm_m": 0.0017257769167030854,
+    "source_rack_penetration_m": 0.0,
+    "native_target_overlap_m": null,
+    "native_target_overlap_measured": false,
+    "input_geometry_overlap_observed_m": null,
+    "bottom_drift_from_original_reference_m": 7.919103669891333e-07
+  },
+  "maximum_actual_bottom_support_sample": {
+    "t": 0.0,
+    "physics_step": 0,
+    "phase": "RESET",
+    "object_position_m": [
+      -0.08500000834465027,
+      -0.17499999701976776,
+      0.7432000041007996
+    ],
+    "object_quaternion_wxyz": [
+      0.7071068286895752,
+      -1.1641532182693481e-08,
+      6.51925802230835e-09,
+      0.7071068286895752
+    ],
+    "object_bottom_world_z_m": 0.7432000039445262,
+    "actual_tcp_position_m": [
+      -0.0850003375653958,
+      -0.1750007742893572,
+      1.0229999563320875
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.0003905418804318918,
+      0.7069593053367903,
+      -0.7072540502795801,
+      0.0003105445087524124
+    ],
+    "finger_contact_N": [
+      0.0,
+      0.0
+    ],
+    "finger_joint_positions_m": [
+      0.03999999910593033,
+      0.03999999910593033
+    ],
+    "gripper_target_m": 0.04,
+    "gripper_effort_limit_N": 8.0,
+    "depth_m": null,
+    "xy_error_target_m": [
+      -0.025734461412791444,
+      0.2973696550816876
+    ],
+    "tilt_deg": 1.7075472925031877e-06,
+    "target_region_contains_object": null,
+    "target_bottom_gap_m": null,
+    "target_bottom_support_N": 0.0,
+    "target_whole_seat_net_vertical_N": 0.0,
+    "gripper_object_clearance_m": 0.20297625799490196,
+    "source_bottom_gap_m": 0.00020000394452623915
+  },
+  "physical_record_count": 14369,
+  "original_physics_SHA256": "46e99880ad7c3ac596298e0f13f642a5e0363eb93871323bd822a1da4a17976f",
+  "native_event_count": 81719,
+  "native_original_SHA256": "9b6ff5a1e5813961daffb28b4a4efabb49e163d24aa92e4992088f586f1c978b",
+  "forbidden_event_count": 0,
+  "forbidden_pairs": [],
+  "first_forbidden_event": null,
+  "all_forbidden_events": [],
+  "collision_exact_physics_samples": {},
+  "gpt01_comparison": {
+    "gpt01_source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_collision_offline.json",
+    "gpt01_source_SHA256": "ca553a5bda94ab61c314819c0da38496824b10a66ec699eb673cfbcdf0b716b2",
+    "gpt01_first_t_s": 24.820833333333333,
+    "gpt01_first_pair": [
+      "/World/Franka/panda_hand/geometry/panda_hand",
+      "/World/Instrument/Collision/SourceMesh2"
+    ],
+    "gpt01_first_contact_point_world_m": [
+      0.06435796618461609,
+      -0.15646256506443024,
+      0.9154633283615112
+    ],
+    "gpt02_has_forbidden_contact": false
+  },
+  "use_scope": "Privileged CPU offline actual physics/contact diagnosis only; never written into policy inputs, prompt or tools",
+  "point_semantics": "Native callback collider convention retained, not an independently calibrated pressure distribution",
+  "GPU_used": false,
+  "API_calls": 0,
+  "raw_or_policy_inputs_modified": false,
+  "minimum_actual_target_xy_error_definition": "Euclidean norm of the two measured target-frame XY components",
+  "derived_analysis_revision": 2
+}

@@ -1,0 +1,261 @@
+{
+  "schema": "labsim.Project_v1_1.real_closed_normal_reader.v1",
+  "created_at_utc": "2026-10-26T19:32:25.903373+00:00",
+  "scene_version": "Project_v1_1",
+  "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+  "checks": {
+    "success": {
+      "admitted": false,
+      "rejection": "No eligible episodes from which to infer recorded image shape",
+      "expected_from_original_qualifications": false
+    },
+    "failure": {
+      "admitted": true,
+      "actual_ACT_DP_read": {
+        "schema": "labsim.Project_v1_1.reader_check.v1",
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_02/episode_0000/dataset/episode_0000.h5",
+        "scene_version": "Project_v1_1",
+        "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+        "recorded_policy_image_shape": [
+          3,
+          256,
+          256
+        ],
+        "public_sample_derivations": [],
+        "sample_filter": "failure",
+        "reader_validation": [
+          {
+            "policy_type": "act",
+            "episodes": [
+              "f06ff354-2e44-491e-9d4b-c282c436f6fc"
+            ],
+            "scene_fingerprint": "68af839a55d5a55bbf2ad73aa99922a49fc5ceaaf8a73b99d3b9b4cf800d17a3",
+            "batch": {
+              "obs": {
+                "side_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "wrist_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "agent_pose": {
+                  "shape": [
+                    3,
+                    8
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                }
+              },
+              "action": {
+                "shape": [
+                  3,
+                  16,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "is_pad": {
+                "shape": [
+                  3,
+                  16
+                ],
+                "dtype": "torch.bool",
+                "finite": true
+              },
+              "labels": {
+                "episode_id": [
+                  "f06ff354-2e44-491e-9d4b-c282c436f6fc",
+                  "f06ff354-2e44-491e-9d4b-c282c436f6fc",
+                  "f06ff354-2e44-491e-9d4b-c282c436f6fc"
+                ],
+                "task_success": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "record_valid": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "failure_type": [
+                  "SAFETY_GEOMETRY_VIOLATION",
+                  "SAFETY_GEOMETRY_VIOLATION",
+                  "SAFETY_GEOMETRY_VIOLATION"
+                ],
+                "termination_reason": [
+                  "INPUT_MATERIAL_PENETRATION",
+                  "INPUT_MATERIAL_PENETRATION",
+                  "INPUT_MATERIAL_PENETRATION"
+                ]
+              }
+            },
+            "episode_checks": [
+              {
+                "episode_id": "f06ff354-2e44-491e-9d4b-c282c436f6fc",
+                "transitions": 3591,
+                "observation_action_time_aligned": true,
+                "action_shape": [
+                  3591,
+                  8
+                ],
+                "executed_command_shape": [
+                  3591,
+                  9
+                ],
+                "source_slot_id": "A1",
+                "target_seat_id": "candidate_far_hinge",
+                "asset_id": "cuvette_xy_1000",
+                "record_valid": true,
+                "task_success": false,
+                "condition_group": "natural"
+              }
+            ],
+            "training_or_optimizer_executed": false
+          },
+          {
+            "policy_type": "dp",
+            "episodes": [
+              "f06ff354-2e44-491e-9d4b-c282c436f6fc"
+            ],
+            "scene_fingerprint": "68af839a55d5a55bbf2ad73aa99922a49fc5ceaaf8a73b99d3b9b4cf800d17a3",
+            "batch": {
+              "obs": {
+                "side_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "wrist_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "agent_pose": {
+                  "shape": [
+                    3,
+                    3,
+                    8
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                }
+              },
+              "action": {
+                "shape": [
+                  3,
+                  16,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "labels": {
+                "episode_id": [
+                  "f06ff354-2e44-491e-9d4b-c282c436f6fc",
+                  "f06ff354-2e44-491e-9d4b-c282c436f6fc",
+                  "f06ff354-2e44-491e-9d4b-c282c436f6fc"
+                ],
+                "task_success": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "record_valid": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "failure_type": [
+                  "SAFETY_GEOMETRY_VIOLATION",
+                  "SAFETY_GEOMETRY_VIOLATION",
+                  "SAFETY_GEOMETRY_VIOLATION"
+                ],
+                "termination_reason": [
+                  "INPUT_MATERIAL_PENETRATION",
+                  "INPUT_MATERIAL_PENETRATION",
+                  "INPUT_MATERIAL_PENETRATION"
+                ]
+              }
+            },
+            "episode_checks": [
+              {
+                "episode_id": "f06ff354-2e44-491e-9d4b-c282c436f6fc",
+                "transitions": 3591,
+                "observation_action_time_aligned": true,
+                "action_shape": [
+                  3591,
+                  8
+                ],
+                "executed_command_shape": [
+                  3591,
+                  9
+                ],
+                "source_slot_id": "A1",
+                "target_seat_id": "candidate_far_hinge",
+                "asset_id": "cuvette_xy_1000",
+                "record_valid": true,
+                "task_success": false,
+                "condition_group": "natural"
+              }
+            ],
+            "training_or_optimizer_executed": false
+          }
+        ],
+        "source_labels_modified": false
+      },
+      "expected_from_original_qualifications": true
+    }
+  },
+  "original_qualifications": {
+    "task_success": false,
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "eligible_for_failure_analysis": true,
+    "failure_type": "SAFETY_GEOMETRY_VIOLATION",
+    "failure_domain": "safety"
+  },
+  "source_H5_SHA256": "cd717c91c255c329d099679dab0ea451e906cfd5e2f93baca03cff35112b3abc",
+  "source_H5_unchanged": true,
+  "training_or_optimizer_executed": false,
+  "GPU_used": false,
+  "API_calls": 0
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "labsim.force_hold_v2_independent_review.v1",
+  "scope": "Read-only snapshot source compiled and exercised on CPU. Inputs are synthetic controls/sensors, not physical outcomes.",
+  "source": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+  "source_SHA256": "421cd616f058653896e67a872b571fe963c13ee4f5234d8ac05539470e333f93",
+  "source_unchanged_during_proof": true,
+  "never_open_boundary_examples": [
+    {
+      "prior_command_m": 0.0,
+      "after_persistence_m": 0.002,
+      "increase_m": 0.002,
+      "force_hold_applied": false,
+      "decision": "hold_contact_target"
+    },
+    {
+      "prior_command_m": 0.001,
+      "after_persistence_m": 0.002,
+      "increase_m": 0.001,
+      "force_hold_applied": false,
+      "decision": "hold_contact_target"
+    },
+    {
+      "prior_command_m": 0.00199,
+      "after_persistence_m": 0.002,
+      "increase_m": 1.0000000000000026e-05,
+      "force_hold_applied": false,
+      "decision": "hold_contact_target"
+    },
+    {
+      "prior_command_m": 0.002,
+      "after_persistence_m": 0.002,
+      "increase_m": 0.0,
+      "force_hold_applied": false,
+      "decision": "hold_contact_target"
+    }
+  ],
+  "never_open_requirement_violated": true,
+  "teacher_unload_stale_latch_example": {
+    "tightened_applied_target_m": 0.010351793894870816,
+    "teacher_old_latch_m": 0.010418463,
+    "teacher_first_unload_target_m": 0.010420186427777776,
+    "teacher_nominal_first_step_m": 1.7234277777770923e-06,
+    "actual_helper_first_unload_step_m": 6.839253290696033e-05,
+    "decision": "explicit_opening_ramp"
+  },
+  "constant_underload5s": {
+    "final_applied_target_m": 0.002,
+    "lower_bound_m": 0.002,
+    "maximum_compression_config_m": 0.0003,
+    "measured_minus_target_per_finger_m": [
+      0.00436434,
+      0.00436434
+    ],
+    "same_t_100_calls_additional_closure_m": 0.0
+  },
+  "existing_provided_tests_plus_joint_tracking": {
+    "passed": 58,
+    "failed": 0,
+    "do_not_treat_pass_as_coverage_of_missing_boundary_examples": true
+  },
+  "runtime_modified_by_reviewer": false,
+  "GPU_used": false,
+  "API_calls": 0,
+  "actual_force_hold_physical_effect_not_verified": true
+}

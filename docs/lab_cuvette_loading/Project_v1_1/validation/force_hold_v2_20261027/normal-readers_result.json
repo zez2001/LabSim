@@ -1,0 +1,239 @@
+{
+  "schema": "labsim.Project_v1_1.cpu_regression.v2",
+  "suite": "normal-readers",
+  "HEAD": "b3765fcea3f3e24b75fb42eb5e3ef6ed8c5795e6",
+  "started_at_utc": "2026-10-26T20:04:36.112001+00:00",
+  "finished_at_utc": "2026-10-26T20:04:38.309610+00:00",
+  "wall_seconds": 2.196740147075616,
+  "argv": [
+    "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+    "-c",
+    "import sys;sys.path.append('/tmp/labsim-handoff-ci-py311-20261022/lib/python3.11/site-packages');import pytest;raise SystemExit(pytest.main(sys.argv[1:]))",
+    "-q",
+    "tests/test_lab_cuvette_project_v1_1_data.py",
+    "tests/test_lab_cuvette_project_v1_1_reader_cli.py",
+    "tests/test_lab_cuvette_public_sample.py",
+    "--junitxml=/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/normal-readers_junit.xml"
+  ],
+  "test_files": [
+    "tests/test_lab_cuvette_project_v1_1_data.py",
+    "tests/test_lab_cuvette_project_v1_1_reader_cli.py",
+    "tests/test_lab_cuvette_public_sample.py"
+  ],
+  "exit_code": 0,
+  "counts": {
+    "passed": 22,
+    "skipped": 0,
+    "failed": 0
+  },
+  "test_cases": [
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_bad_record_interval_does_not_relabel_trusted_physics_as_simulation_failure",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_diagnostics_are_not_full_loading_training_data",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_diffusion_reader_uses_the_same_new_qualification_and_8d_actions",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_final_integrity_source_matches_H5_and_preserves_independent_pending_snapshot",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_new_qualification_append_cannot_be_replayed_after_close",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_old_project_reader_refuses_new_scene_and_never_rewrites_the_h5",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_simulation_invalidity_does_not_destroy_an_intact_diagnostic_record",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_success_roundtrip_keeps_hardlinks_action_mapping_and_new_axes",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_data.ProjectV11DataContractTest::test_valid_safety_collision_can_use_normal_failure_reader",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_reader_cli::test_dataset_check_automatically_uses_new_qualified_reader_and_preserves_source[True]",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_reader_cli::test_dataset_check_automatically_uses_new_qualified_reader_and_preserves_source[False]",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_reader_cli::test_legacy_read_check_default_remains_original_class",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_reader_cli::test_explicit_new_class_enforces_physics_qualification",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_project_v1_1_reader_cli::test_mixed_and_unknown_versions_do_not_silently_fall_back_to_historical_reader",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_complete_sequence_preserved_source_untouched_and_both_rgb_resized",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_refuses_external_links_even_when_other_episode_labels_are_valid",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_never_fabricates_success_or_exports_unclosed_file",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_refuses_overwrite_and_size_limit_does_not_truncate",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_source_metadata_with_credential_like_value_is_not_publishable",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_compact_sample_is_read_by_normal_project_act_dp_dataset",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_official_reader_reports_failure_labels_without_assuming_all_batch_values_are_tensors",
+      "status": "passed",
+      "skip_reason": null
+    },
+    {
+      "id": "tests.test_lab_cuvette_public_sample::test_recorded_camera_shape_inference_rejects_wrong_dtype",
+      "status": "passed",
+      "skip_reason": null
+    }
+  ],
+  "CUDA_VISIBLE_DEVICES": "",
+  "plugin_autoload_disabled": true,
+  "source_SHA256_before": {
+    ".github/workflows/cpu-contracts.yml": "5d792b9b81722595044f117cabca462baa7c00f08e9a02976cd04512d720c03d",
+    "config/lab_cuvette_loading/Project_v1_1/standard.yaml": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+    "controllers/lab_cuvette_project_v1_1_controller.py": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+    "data_collectors/lab_cuvette_project_v1_1_collector.py": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1",
+    "demos/lab_cuvette_project_v1_1/camera_audit.py": "386a8bdcf2c7260ac5b206018bba32f8b26acacec004c3f81e0b3580abb278dd",
+    "demos/lab_cuvette_project_v1_1/checked_probes.py": "5f087e64251542eaf0e2da548325ece50c83ed45333054f2c77c684b43e4aaea",
+    "demos/lab_cuvette_project_v1_1/continuous_ik.py": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+    "demos/lab_cuvette_project_v1_1/contract.py": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+    "demos/lab_cuvette_project_v1_1/diagnostics.py": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff",
+    "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+    "demos/lab_cuvette_project_v1_1/free_space_plan.py": "453ff97f91b0baf98eb8a1d10366748577a8d39e0367d248239c128066c2f3be",
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+    "demos/lab_cuvette_project_v1_1/probes.py": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+    "demos/lab_cuvette_project_v1_1/robot_tracking.py": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+    "demos/lab_cuvette_project_v1_1/run.py": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+    "demos/lab_cuvette_project_v1_1/scorer.py": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+    "policy/backends/cubence_project_v1_1_tools.py": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594",
+    "policy/dataset/lab_cuvette_project_v1_1_dataset.py": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+    "requirements/ci-readers.txt": "2bd82248590f25bc8362613fe3a2c5c8436359cd842be165cf36ad6e97be8979",
+    "requirements/ci.txt": "725c2b3ef982e1e6692338dc7ab624d768e0649fc9048acd79af120baab49381",
+    "tasks/lab_cuvette_loading_project_v1_1.py": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+    "tests/test_lab_cuvette_project_v1_1_camera_audit.py": "a69f11eff227239574fe9a9d8b1de54d7b5ec6f610945252c83bc14990e9c991",
+    "tests/test_lab_cuvette_project_v1_1_checked_probes.py": "51bc57babae803010c79bae29bce3695ffdda520d3b7c0df37dd77a3b13fc083",
+    "tests/test_lab_cuvette_project_v1_1_configuration.py": "fe16c4aba19d602b04a8def543cf934fa4d09ee92432059938255a523dc89606",
+    "tests/test_lab_cuvette_project_v1_1_data.py": "c502c6fb07e56a761cb0c1bb3353f4da4f91f9d0c0cd1d9a2501d9246d73be6f",
+    "tests/test_lab_cuvette_project_v1_1_environment.py": "632c7f8d302b043b52708b4dd71c345aadaa95661d4c980e69fa880d07340ced",
+    "tests/test_lab_cuvette_project_v1_1_fault_receipts.py": "8debf88f49c63db5d5a1e50a5ae38dd9c4ee67396a9759c78775e6d46169fb11",
+    "tests/test_lab_cuvette_project_v1_1_force_hold.py": "a9aa06aa639b80406615a8c273329cd59b1a197b21f0e30d9992d5de7cde1a13",
+    "tests/test_lab_cuvette_project_v1_1_free_space_plan.py": "d4933bf2b318c760bd72712f8a7e7380166436ccab1bee2e31a1c5b40b6bcf0c",
+    "tests/test_lab_cuvette_project_v1_1_gripper_hold.py": "8ead9cdfdbcad730292671e97aaf699fdc71d58be229cd92f8eb98037ed08249",
+    "tests/test_lab_cuvette_project_v1_1_ik.py": "8a8a4b20d7d51b9e6c259ae684e0bb2d2fd3b6c59d245b4e85198ced1e770f77",
+    "tests/test_lab_cuvette_project_v1_1_joint_action_semantics.py": "08bd1f8a6b31a63e2f64e6fdb8c1538ac418fcb03ad51926bdadde9847939b14",
+    "tests/test_lab_cuvette_project_v1_1_native_entry.py": "e4610f64a538db821319d373772f4d3159113b61a7cfed5f72b3ca0c901099f8",
+    "tests/test_lab_cuvette_project_v1_1_probes.py": "26cd7b2b17a35b32ace53f86a5014152f4da668d87ddbd666ce12380cc7b92a6",
+    "tests/test_lab_cuvette_project_v1_1_public_goal.py": "23e29147add38b54d61addebcd645f7196604938a3123204f689c2c487808272",
+    "tests/test_lab_cuvette_project_v1_1_reader_cli.py": "d2dcb9aed79ec3e9df8ef08368e6e23e053861d44c18dbc37db1111341f75610",
+    "tests/test_lab_cuvette_project_v1_1_report_builder.py": "9e14943afa82e26ebcec737d2790b549935df900388cc99852e45eb59cf8c827",
+    "tests/test_lab_cuvette_project_v1_1_robot_tracking.py": "6b2ce6b1e2e9f3cb8e2ca31397e9b89f6a013f997ec028caec3666559a5bb9c9",
+    "tests/test_lab_cuvette_project_v1_1_scorer.py": "993ac7c85e72a9ddc204f3b77d0979296d3947cf63de356766b22e85f2d36e2e",
+    "tests/test_lab_cuvette_project_v1_1_teacher_clock.py": "6d46f3e867db334113f0169bf8dddd57afddf64be9c33a1432d22392b63ce8c0",
+    "tests/test_lab_cuvette_project_v1_1_teacher_grasp_orientation.py": "632004a6768dcecee0d8efb47a4a6a88052cd3797a0fa8f3b3d565bcf23cc8c9",
+    "tests/test_lab_cuvette_project_v1_1_teacher_near_contact_close.py": "98c6f9432e20e8ce21c4f7ec33cd0a319dc8a4b2fa99940cf363d38f9bd3d5ba",
+    "tests/test_lab_cuvette_project_v1_1_tracking_integration.py": "c63583710bbe48031ec256993fe1f389a1cb735f66eebe427835ed67584eaaed"
+  },
+  "source_SHA256_after": {
+    ".github/workflows/cpu-contracts.yml": "5d792b9b81722595044f117cabca462baa7c00f08e9a02976cd04512d720c03d",
+    "config/lab_cuvette_loading/Project_v1_1/standard.yaml": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+    "controllers/lab_cuvette_project_v1_1_controller.py": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+    "data_collectors/lab_cuvette_project_v1_1_collector.py": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1",
+    "demos/lab_cuvette_project_v1_1/camera_audit.py": "386a8bdcf2c7260ac5b206018bba32f8b26acacec004c3f81e0b3580abb278dd",
+    "demos/lab_cuvette_project_v1_1/checked_probes.py": "5f087e64251542eaf0e2da548325ece50c83ed45333054f2c77c684b43e4aaea",
+    "demos/lab_cuvette_project_v1_1/continuous_ik.py": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+    "demos/lab_cuvette_project_v1_1/contract.py": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+    "demos/lab_cuvette_project_v1_1/diagnostics.py": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff",
+    "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+    "demos/lab_cuvette_project_v1_1/free_space_plan.py": "453ff97f91b0baf98eb8a1d10366748577a8d39e0367d248239c128066c2f3be",
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+    "demos/lab_cuvette_project_v1_1/probes.py": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+    "demos/lab_cuvette_project_v1_1/robot_tracking.py": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+    "demos/lab_cuvette_project_v1_1/run.py": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+    "demos/lab_cuvette_project_v1_1/scorer.py": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+    "policy/backends/cubence_project_v1_1_tools.py": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594",
+    "policy/dataset/lab_cuvette_project_v1_1_dataset.py": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+    "requirements/ci-readers.txt": "2bd82248590f25bc8362613fe3a2c5c8436359cd842be165cf36ad6e97be8979",
+    "requirements/ci.txt": "725c2b3ef982e1e6692338dc7ab624d768e0649fc9048acd79af120baab49381",
+    "tasks/lab_cuvette_loading_project_v1_1.py": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4",
+    "tests/test_lab_cuvette_project_v1_1_camera_audit.py": "a69f11eff227239574fe9a9d8b1de54d7b5ec6f610945252c83bc14990e9c991",
+    "tests/test_lab_cuvette_project_v1_1_checked_probes.py": "51bc57babae803010c79bae29bce3695ffdda520d3b7c0df37dd77a3b13fc083",
+    "tests/test_lab_cuvette_project_v1_1_configuration.py": "fe16c4aba19d602b04a8def543cf934fa4d09ee92432059938255a523dc89606",
+    "tests/test_lab_cuvette_project_v1_1_data.py": "c502c6fb07e56a761cb0c1bb3353f4da4f91f9d0c0cd1d9a2501d9246d73be6f",
+    "tests/test_lab_cuvette_project_v1_1_environment.py": "632c7f8d302b043b52708b4dd71c345aadaa95661d4c980e69fa880d07340ced",
+    "tests/test_lab_cuvette_project_v1_1_fault_receipts.py": "8debf88f49c63db5d5a1e50a5ae38dd9c4ee67396a9759c78775e6d46169fb11",
+    "tests/test_lab_cuvette_project_v1_1_force_hold.py": "a9aa06aa639b80406615a8c273329cd59b1a197b21f0e30d9992d5de7cde1a13",
+    "tests/test_lab_cuvette_project_v1_1_free_space_plan.py": "d4933bf2b318c760bd72712f8a7e7380166436ccab1bee2e31a1c5b40b6bcf0c",
+    "tests/test_lab_cuvette_project_v1_1_gripper_hold.py": "8ead9cdfdbcad730292671e97aaf699fdc71d58be229cd92f8eb98037ed08249",
+    "tests/test_lab_cuvette_project_v1_1_ik.py": "8a8a4b20d7d51b9e6c259ae684e0bb2d2fd3b6c59d245b4e85198ced1e770f77",
+    "tests/test_lab_cuvette_project_v1_1_joint_action_semantics.py": "08bd1f8a6b31a63e2f64e6fdb8c1538ac418fcb03ad51926bdadde9847939b14",
+    "tests/test_lab_cuvette_project_v1_1_native_entry.py": "e4610f64a538db821319d373772f4d3159113b61a7cfed5f72b3ca0c901099f8",
+    "tests/test_lab_cuvette_project_v1_1_probes.py": "26cd7b2b17a35b32ace53f86a5014152f4da668d87ddbd666ce12380cc7b92a6",
+    "tests/test_lab_cuvette_project_v1_1_public_goal.py": "23e29147add38b54d61addebcd645f7196604938a3123204f689c2c487808272",
+    "tests/test_lab_cuvette_project_v1_1_reader_cli.py": "d2dcb9aed79ec3e9df8ef08368e6e23e053861d44c18dbc37db1111341f75610",
+    "tests/test_lab_cuvette_project_v1_1_report_builder.py": "9e14943afa82e26ebcec737d2790b549935df900388cc99852e45eb59cf8c827",
+    "tests/test_lab_cuvette_project_v1_1_robot_tracking.py": "6b2ce6b1e2e9f3cb8e2ca31397e9b89f6a013f997ec028caec3666559a5bb9c9",
+    "tests/test_lab_cuvette_project_v1_1_scorer.py": "993ac7c85e72a9ddc204f3b77d0979296d3947cf63de356766b22e85f2d36e2e",
+    "tests/test_lab_cuvette_project_v1_1_teacher_clock.py": "6d46f3e867db334113f0169bf8dddd57afddf64be9c33a1432d22392b63ce8c0",
+    "tests/test_lab_cuvette_project_v1_1_teacher_grasp_orientation.py": "632004a6768dcecee0d8efb47a4a6a88052cd3797a0fa8f3b3d565bcf23cc8c9",
+    "tests/test_lab_cuvette_project_v1_1_teacher_near_contact_close.py": "98c6f9432e20e8ce21c4f7ec33cd0a319dc8a4b2fa99940cf363d38f9bd3d5ba",
+    "tests/test_lab_cuvette_project_v1_1_tracking_integration.py": "c63583710bbe48031ec256993fe1f389a1cb735f66eebe427835ed67584eaaed"
+  },
+  "source_files_changed_during_run": [],
+  "Isaac_started": false,
+  "GPU_started": false,
+  "API_called": false,
+  "dependency_installation_performed": false,
+  "scope": "Actual CPU software/normal-reader fixture tests. No simulator, hardware precision or new physical verification."
+}

@@ -58,6 +58,14 @@ export LABSIM_PYTHON=/path/to/existing/python3.11
 
 上述 ledger 与前轮共用，保留既有请求和费用占用；不要用空 ledger 重置预算。
 
+独立的 `policies/cubence_gpt6_context4.json` 只减少历史记忆至两个完整工具回合。每步当前公开观测、任务说明、双图与标定仍然发送。使用上方命令增加以下参数即可选择；不能把 CPU 结构验证当作该配置下的完整任务成功：
+
+```bash
+--provider-config config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json
+```
+
+公开 loading 目标从配置说明名义 27 mm 深度、67.5 mm 器皿高度及 40.5 mm 露出长度，不提供当前器皿位姿或深度。接触保持 v2 使用已声明的手指传感器与 effort 上限，小幅补足既有质量/摩擦假设下的预载；它不改变物理参数或评分，也不保证任务成功。低 effort 和显式慢张爪优先，实际目标、实测力及附加闭合边界均进入逐控制周期记录。
+
 模型控制器通过公开观测和受约束动作接口执行。专家控制器与 GPT 控制器的能力和输入范围分别以运行时元数据记录，不能混用其结果统计。
 
 ## 已有 policy 的 RPC 入口

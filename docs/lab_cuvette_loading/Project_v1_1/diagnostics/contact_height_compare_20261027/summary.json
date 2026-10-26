@@ -1,0 +1,5652 @@
+{
+  "schema": "labsim.Project_v1_1.contact_height_offline.v1",
+  "created_at_utc": "2026-10-26T19:17:48.295534+00:00",
+  "GPU_used": false,
+  "API_calls": 0,
+  "policy_inputs_modified": false,
+  "raw_or_labels_modified": false,
+  "runs": [
+    {
+      "run": "teacher_camera_v2_02",
+      "original_outcome": {
+        "task_success": false,
+        "failure_type": "GRASP_SLIP",
+        "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+        "record_valid": true,
+        "record_integrity_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": false,
+        "grasp_success": false,
+        "transport_success": false
+      },
+      "scorer_reference_t_s": 18.145833333333332,
+      "actual_lift_started_t_s": 19.308333333333334,
+      "source_slot_cleared_t_s": 20.845833333333335,
+      "first_nonzero_impulse_contact": {
+        "right": {
+          "t": 18.020833333333332,
+          "physics_step": 4325
+        },
+        "left": {
+          "t": 18.041666666666668,
+          "physics_step": 4330
+        }
+      },
+      "window_definitions_s": {
+        "scorer_reference_50ms": [
+          18.145833333333332,
+          18.195833333333333
+        ],
+        "before_lift_100ms": [
+          19.208333333333332,
+          19.308333333333334
+        ],
+        "source_clear_50ms": [
+          20.845833333333335,
+          20.895833333333336
+        ]
+      },
+      "sections": {
+        "first_positive_contact_each_finger": {
+          "left": {
+            "positive_impulse_point_count": 2,
+            "physics_steps": [
+              4330
+            ],
+            "actual_t_range_s": [
+              18.041666666666668,
+              18.041666666666668
+            ],
+            "world_z_m": {
+              "min": 0.80162513256073,
+              "median": 0.8016268014907837,
+              "max": 0.8016284704208374
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 58.60280990600586,
+              "median": 58.60447883605957,
+              "max": 58.60614776611328
+            },
+            "world_height_above_material_min_mm": {
+              "min": 58.625277624333116,
+              "median": 58.62694655438683,
+              "max": 58.62861548444054
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.9512861702096544,
+                -4.9804381592603795,
+                58.626515949088336
+              ],
+              "median": [
+                -0.00044437923044693406,
+                -4.980434102599274,
+                58.628305109772555
+              ],
+              "max": [
+                3.9503974117487606,
+                -4.980430045938167,
+                58.630094270456766
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.94753260166959,
+                5.260106851138503,
+                94.37781047502114
+              ],
+              "median": [
+                0.0033095931225191055,
+                5.260167670387624,
+                94.37789178613117
+              ],
+              "max": [
+                3.954151787914628,
+                5.260228489636744,
+                94.37797309724121
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.9129399208125495,
+              -4.9804381207996276,
+              58.630077307623615
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.9166942931499116,
+              5.26010742775903,
+              94.37797232633964
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08499954810699115,
+                -0.17499934788357183,
+                0.7960002519461071
+              ],
+              "median": [
+                -0.08499954810699115,
+                -0.17499934788357183,
+                0.7960002519461071
+              ],
+              "max": [
+                -0.08499954810699115,
+                -0.17499934788357183,
+                0.7960002519461071
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.5470269918441772,
+                0.9568696618080139
+              ],
+              "median": [
+                0.5470269918441772,
+                0.9568696618080139
+              ],
+              "max": [
+                0.5470269918441772,
+                0.9568696618080139
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 18.041666666666668,
+              "physics_step": 4330,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell20",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.0797431617975235,
+                -0.1710490584373474,
+                0.8016284704208374
+              ],
+              "weight": 0.00226847450041757,
+              "event_type": "ContactEventType.CONTACT_FOUND",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9503974117487606,
+                -4.9804381592603795,
+                58.630094270456766
+              ],
+              "hand_local_mm": [
+                3.954151787914628,
+                5.260106851138503,
+                94.37797309724121
+              ],
+              "world_z_m": 0.8016284704208374,
+              "world_z_above_body_origin_mm": 58.60614776611328,
+              "world_z_above_material_min_mm": 58.62861548444054
+            },
+            "first_state": {
+              "t": 18.041666666666668,
+              "physics_step": 4330,
+              "phase": "GRASP",
+              "object_position_m": [
+                -0.0849975049495697,
+                -0.17499996721744537,
+                0.7430223226547241
+              ],
+              "object_quaternion_wxyz": [
+                0.7071905136108398,
+                0.0016357200220227242,
+                0.001656833104789257,
+                0.7070193290710449
+              ],
+              "object_bottom_world_z_m": 0.7429998549363969,
+              "cup_in_hand_position_m": [
+                -2.4088954744073518e-05,
+                -4.2698654980033565e-05,
+                0.15297790665086686
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.002750455107733368,
+                -0.9999961894301289,
+                8.804835364473186e-06,
+                -0.0002367369782180915
+              ],
+              "actual_tcp_position_m": [
+                -0.08499954810699115,
+                -0.17499934788357183,
+                0.7960002519461071
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004552018367632089,
+                0.7070145162106949,
+                -0.7071988733653846,
+                0.00014201892752152694
+              ],
+              "finger_contact_N": [
+                0.5470269918441772,
+                0.9568696618080139
+              ],
+              "finger_joint_positions_m": [
+                0.005363346077501774,
+                0.005363381002098322
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004833333333333269
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 4,
+            "physics_steps": [
+              4325
+            ],
+            "actual_t_range_s": [
+              18.020833333333332,
+              18.020833333333332
+            ],
+            "world_z_m": {
+              "min": 0.7828791737556458,
+              "median": 0.7828812897205353,
+              "max": 0.7828831076622009
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.87854719161987,
+              "median": 39.8806631565094,
+              "max": 39.88248109817505
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.87924894963424,
+              "median": 39.881364914523765,
+              "max": 39.883182856189414
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.79500275926218,
+                5.005418528524376,
+                39.87792858742038
+              ],
+              "median": [
+                -0.0010609094158480215,
+                5.006616661001408,
+                39.879987514408285
+              ],
+              "max": [
+                3.9497881635041523,
+                5.00760630172483,
+                39.88175844891758
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.800965971687974,
+                -5.012163505507464,
+                113.11442476341306
+              ],
+              "median": [
+                -0.007023683984521911,
+                -5.011159843793589,
+                113.1144942666229
+              ],
+              "max": [
+                3.9438257815802076,
+                -5.0099447269544735,
+                113.1145181554814
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              2.823791047820541,
+              5.007324345799044,
+              39.8812608976053
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              2.8178285570677035,
+              -5.011877517798831,
+              113.11443939813103
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08499991032788272,
+                -0.17500002725795605,
+                0.7960000133209897
+              ],
+              "median": [
+                -0.08499991032788272,
+                -0.17500002725795605,
+                0.7960000133209897
+              ],
+              "max": [
+                -0.08499991032788272,
+                -0.17500002725795605,
+                0.7960000133209897
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.0,
+                0.06867524236440659
+              ],
+              "median": [
+                0.0,
+                0.06867524236440659
+              ],
+              "max": [
+                0.0,
+                0.06867524236440659
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 18.020833333333332,
+              "physics_step": 4325,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08999998867511749,
+                -0.1710491180419922,
+                0.7828831076622009
+              ],
+              "weight": 0.00023610479985383911,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9497881635041523,
+                5.00760630172483,
+                39.88175844891758
+              ],
+              "hand_local_mm": [
+                3.9438257815802076,
+                -5.012163455251585,
+                113.11442476341306
+              ],
+              "world_z_m": 0.7828831076622009,
+              "world_z_above_body_origin_mm": 39.88248109817505,
+              "world_z_above_material_min_mm": 39.883182856189414
+            },
+            "first_state": {
+              "t": 18.020833333333332,
+              "physics_step": 4325,
+              "phase": "GRASP",
+              "object_position_m": [
+                -0.08499877899885178,
+                -0.17499971389770508,
+                0.7430006265640259
+              ],
+              "object_quaternion_wxyz": [
+                0.707197368144989,
+                5.193892866373062e-05,
+                4.353746771812439e-05,
+                0.7070162892341614
+              ],
+              "object_bottom_world_z_m": 0.7429999248060115,
+              "cup_in_hand_position_m": [
+                -2.3058604972377358e-05,
+                -4.355538348013835e-05,
+                0.15299936385676366
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0004890900952250783,
+                -0.9999998573750597,
+                1.879237189916783e-06,
+                -0.00021456282898109225
+              ],
+              "actual_tcp_position_m": [
+                -0.08499991032788272,
+                -0.17500002725795605,
+                0.7960000133209897
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004539953378068659,
+                0.7070148146377468,
+                -0.7071985757461312,
+                0.00014224496248779628
+              ],
+              "finger_contact_N": [
+                0.0,
+                0.06867524236440659
+              ],
+              "finger_joint_positions_m": [
+                0.005542724393308163,
+                0.0055427406914532185
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004999999999999936
+            }
+          }
+        },
+        "scorer_reference_50ms": {
+          "left": {
+            "positive_impulse_point_count": 36,
+            "physics_steps": [
+              4355,
+              4356,
+              4357,
+              4358,
+              4359,
+              4360,
+              4361,
+              4362,
+              4363,
+              4364,
+              4365,
+              4366,
+              4367
+            ],
+            "actual_t_range_s": [
+              18.145833333333332,
+              18.195833333333333
+            ],
+            "world_z_m": {
+              "min": 0.7829082608222961,
+              "median": 0.8016250133514404,
+              "max": 0.8016514778137207
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.894163608551025,
+              "median": 58.60316753387451,
+              "max": 58.635592460632324
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.902398807965646,
+              "median": 58.62553810013227,
+              "max": 58.645035030146175
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.9510435649287623,
+                -5.015418610038378,
+                39.88584629532483
+              ],
+              "median": [
+                3.9507117457432335,
+                -4.999998843297573,
+                58.62668587167542
+              ],
+              "max": [
+                3.9517079436245384,
+                -4.959588970899218,
+                58.63065981910686
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.9475142590103878,
+                5.187566971828068,
+                94.37850329814555
+              ],
+              "median": [
+                3.9535624877587328,
+                5.27787704007504,
+                94.37905827288256
+              ],
+              "max": [
+                3.955193372401863,
+                5.278695649225427,
+                113.12061723940953
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.659532096980883,
+              -4.997747663203409,
+              57.72915404191099
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.6630043941407386,
+              5.267907548432958,
+              95.27968907878258
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08499950688920728,
+                -0.17500103836179265,
+                0.7960009674017401
+              ],
+              "median": [
+                -0.08499923596422373,
+                -0.17499917415299987,
+                0.7960013250675098
+              ],
+              "max": [
+                -0.0849458849448111,
+                -0.17499906488955602,
+                0.796021352875068
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.3716346323490143,
+                0.3133583664894104
+              ],
+              "median": [
+                0.7619918882846832,
+                1.3348795175552368
+              ],
+              "max": [
+                0.926289975643158,
+                1.3456836938858032
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 18.145833333333332,
+              "physics_step": 4355,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell10",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07972444593906403,
+                -0.17104853689670563,
+                0.8016284108161926
+              ],
+              "weight": 0.003183115248827241,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9508982508661115,
+                -5.00002076845776,
+                58.630278558128246
+              ],
+              "hand_local_mm": [
+                3.954551821277658,
+                5.278556741548031,
+                94.37877486329326
+              ],
+              "world_z_m": 0.8016284108161926,
+              "world_z_above_body_origin_mm": 58.60632658004761,
+              "world_z_above_material_min_mm": 58.6287233732975
+            },
+            "first_state": {
+              "t": 18.145833333333332,
+              "physics_step": 4355,
+              "phase": "GRASP",
+              "object_position_m": [
+                -0.08499744534492493,
+                -0.1749999076128006,
+                0.743022084236145
+              ],
+              "object_quaternion_wxyz": [
+                0.7072210907936096,
+                0.0016255886293947697,
+                0.0016516521573066711,
+                0.7069886922836304
+              ],
+              "object_bottom_world_z_m": 0.7429996874428951,
+              "cup_in_hand_position_m": [
+                -2.407441535489928e-05,
+                -4.308766280362746e-05,
+                0.15297886020947876
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.00274113030936117,
+                -0.9999962137686786,
+                -3.514895215961378e-05,
+                -0.00023961946002464563
+              ],
+              "actual_tcp_position_m": [
+                -0.08499926056656461,
+                -0.17499923616153176,
+                0.7960009674017401
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004558232906280208,
+                0.7070149927564916,
+                -0.7071983962368492,
+                0.00014353638653499457
+              ],
+              "finger_contact_N": [
+                0.7650852799415588,
+                1.3348219394683838
+              ],
+              "finger_joint_positions_m": [
+                0.00536103080958128,
+                0.005361053626984358
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004833333333333269
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 61,
+            "physics_steps": [
+              4355,
+              4356,
+              4357,
+              4358,
+              4359,
+              4360,
+              4361,
+              4362,
+              4363,
+              4364,
+              4365,
+              4366,
+              4367
+            ],
+            "actual_t_range_s": [
+              18.145833333333332,
+              18.195833333333333
+            ],
+            "world_z_m": {
+              "min": 0.7828688025474548,
+              "median": 0.7828848361968994,
+              "max": 0.8016198873519897
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.852917194366455,
+              "median": 39.86281156539917,
+              "max": 58.60579013824463
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.862359763880306,
+              "median": 39.88522234958003,
+              "max": 58.61402533765925
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.800467603873704,
+                4.987930068383886,
+                39.83605546528419
+              ],
+              "median": [
+                3.950756452020217,
+                5.000042258522787,
+                39.84038265199515
+              ],
+              "max": [
+                4.821745840538077,
+                5.071696633447198,
+                58.61271239683182
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.798714234512315,
+                -4.868308028883269,
+                94.39351919843418
+              ],
+              "median": [
+                3.9460922254376487,
+                -4.824891271011021,
+                113.1138797333039
+              ],
+              "max": [
+                4.816978033763539,
+                -4.759512719683994,
+                113.14243727551765
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.376654014176362,
+              5.005252679148781,
+              41.08606841508448
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.373094024825429,
+              -4.824447644574846,
+              111.87319132395254
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08499950688920728,
+                -0.17500103836179265,
+                0.7960009674017401
+              ],
+              "median": [
+                -0.08499923596422373,
+                -0.17499914473725,
+                0.796001325006554
+              ],
+              "max": [
+                -0.0849458849448111,
+                -0.17499906488955602,
+                0.796021352875068
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.3716346323490143,
+                0.3133583664894104
+              ],
+              "median": [
+                0.7624958753585815,
+                1.3378922939300537
+              ],
+              "max": [
+                0.926289975643158,
+                1.3456836938858032
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 18.145833333333332,
+              "physics_step": 4355,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08981113135814667,
+                -0.17017531394958496,
+                0.7828851938247681
+              ],
+              "weight": 0.0003407517073763022,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                4.82151205652824,
+                4.999973658201123,
+                39.84054552876562
+              ],
+              "hand_local_mm": [
+                4.8168805207876115,
+                -4.8242374660822005,
+                113.11381856910866
+              ],
+              "world_z_m": 0.7828851938247681,
+              "world_z_above_body_origin_mm": 39.86310958862305,
+              "world_z_above_material_min_mm": 39.885506381872936
+            },
+            "first_state": {
+              "t": 18.145833333333332,
+              "physics_step": 4355,
+              "phase": "GRASP",
+              "object_position_m": [
+                -0.08499744534492493,
+                -0.1749999076128006,
+                0.743022084236145
+              ],
+              "object_quaternion_wxyz": [
+                0.7072210907936096,
+                0.0016255886293947697,
+                0.0016516521573066711,
+                0.7069886922836304
+              ],
+              "object_bottom_world_z_m": 0.7429996874428951,
+              "cup_in_hand_position_m": [
+                -2.407441535489928e-05,
+                -4.308766280362746e-05,
+                0.15297886020947876
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.00274113030936117,
+                -0.9999962137686786,
+                -3.514895215961378e-05,
+                -0.00023961946002464563
+              ],
+              "actual_tcp_position_m": [
+                -0.08499926056656461,
+                -0.17499923616153176,
+                0.7960009674017401
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004558232906280208,
+                0.7070149927564916,
+                -0.7071983962368492,
+                0.00014353638653499457
+              ],
+              "finger_contact_N": [
+                0.7650852799415588,
+                1.3348219394683838
+              ],
+              "finger_joint_positions_m": [
+                0.00536103080958128,
+                0.005361053626984358
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004833333333333269
+            }
+          }
+        },
+        "before_lift_100ms": {
+          "left": {
+            "positive_impulse_point_count": 150,
+            "physics_steps": [
+              4610,
+              4611,
+              4612,
+              4613,
+              4614,
+              4615,
+              4616,
+              4617,
+              4618,
+              4619,
+              4620,
+              4621,
+              4622,
+              4623,
+              4624,
+              4625,
+              4626,
+              4627,
+              4628,
+              4629,
+              4630,
+              4631,
+              4632,
+              4633,
+              4634
+            ],
+            "actual_t_range_s": [
+              19.208333333333332,
+              19.308333333333334
+            ],
+            "world_z_m": {
+              "min": 0.7834771871566772,
+              "median": 0.7927066087722778,
+              "max": 0.8027461767196655
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.78770971298218,
+              "median": 48.759132623672485,
+              "max": 58.54076147079468
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.78821340574512,
+              "median": 48.759581795412785,
+              "max": 58.54115612151234
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.953288802668542,
+                -5.001341953786088,
+                39.78817149401972
+              ],
+              "median": [
+                -3.9499763862795128,
+                -5.000085695368062,
+                48.759319340698895
+              ],
+              "max": [
+                3.952324067412457,
+                -4.999067694971182,
+                58.54111911328814
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.9412767601108176,
+                5.224506608179536,
+                94.39087444302992
+              ],
+              "median": [
+                -3.9323300884347487,
+                5.22602487565781,
+                104.17425634131868
+              ],
+              "max": [
+                3.9703469278031283,
+                5.228296490022521,
+                113.14433769567444
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              2.3352359857368845,
+              -5.000102915720524,
+              49.17711474761075
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              2.350486226815119,
+              5.225987259112199,
+              103.757255688499
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08502528431936843,
+                -0.17499876494590028,
+                0.796612890985098
+              ],
+              "median": [
+                -0.08502374142089271,
+                -0.17499718386283328,
+                0.7968825423256876
+              ],
+              "max": [
+                -0.08502220232929306,
+                -0.17499519092929922,
+                0.7971515979536423
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.9440088868141174,
+                0.9452284574508667
+              ],
+              "median": [
+                0.9470715224742889,
+                0.946782648563385
+              ],
+              "max": [
+                0.950480580329895,
+                0.9490690231323242
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 19.208333333333332,
+              "physics_step": 4610,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell20",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07979650050401688,
+                -0.1710304468870163,
+                0.8014038801193237
+              ],
+              "weight": 0.0020896111939375872,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.950833506736022,
+                -5.000412253443591,
+                57.724721621013586
+              ],
+              "hand_local_mm": [
+                3.969106178022744,
+                5.225590484413289,
+                95.21020515591395
+              ],
+              "world_z_m": 0.8014038801193237,
+              "world_z_above_body_origin_mm": 57.72477388381958,
+              "world_z_above_material_min_mm": 57.725171747763035
+            },
+            "first_state": {
+              "t": 19.208333333333332,
+              "physics_step": 4610,
+              "phase": "EXTRACT",
+              "object_position_m": [
+                -0.08479876816272736,
+                -0.17497816681861877,
+                0.7436791062355042
+              ],
+              "object_quaternion_wxyz": [
+                0.7071111798286438,
+                2.9750168323516846e-05,
+                -7.625669240951538e-06,
+                0.707102358341217
+              ],
+              "object_bottom_world_z_m": 0.7436787083715607,
+              "cup_in_hand_position_m": [
+                -2.1467273053012265e-06,
+                0.00022801011671941694,
+                0.1529337708388845
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -2.2678659403024187e-05,
+                -0.9999999841479155,
+                2.697184899047578e-05,
+                -0.000174534714994003
+              ],
+              "actual_tcp_position_m": [
+                -0.08502272171579849,
+                -0.1749972805579556,
+                0.796612890985098
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.00011500418330732932,
+                0.7070832817707018,
+                -0.7071302502266206,
+                -0.0001692006185350465
+              ],
+              "finger_contact_N": [
+                0.9466121792793274,
+                0.946782648563385
+              ],
+              "finger_joint_positions_m": [
+                0.005309305619448423,
+                0.0053092967718839645
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004833333333333269
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 252,
+            "physics_steps": [
+              4610,
+              4611,
+              4612,
+              4613,
+              4614,
+              4615,
+              4616,
+              4617,
+              4618,
+              4619,
+              4620,
+              4621,
+              4622,
+              4623,
+              4624,
+              4625,
+              4626,
+              4627,
+              4628,
+              4629,
+              4630,
+              4631,
+              4632,
+              4633,
+              4634
+            ],
+            "actual_t_range_s": [
+              19.208333333333332,
+              19.308333333333334
+            ],
+            "world_z_m": {
+              "min": 0.7834992408752441,
+              "median": 0.7944409549236298,
+              "max": 0.8027522563934326
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.788782596588135,
+              "median": 50.74158310890198,
+              "max": 58.54666233062744
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.789286289351075,
+              "median": 50.742072233335264,
+              "max": 58.5470569813451
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.796411849984942,
+                4.998659083601529,
+                39.788913517076615
+              ],
+              "median": [
+                -2.1656967196719394,
+                4.999920765682202,
+                50.741542512505866
+              ],
+              "max": [
+                3.9522868103892983,
+                5.0009438651974065,
+                58.54630477499372
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.784845992037576,
+                -4.775525240709693,
+                94.38877581523771
+              ],
+              "median": [
+                -2.1504533562522417,
+                -4.774113546319985,
+                102.19182780267226
+              ],
+              "max": [
+                3.970170737900804,
+                -4.771668891182902,
+                113.14377363687387
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.1518016511149174,
+              4.99990154487429,
+              50.10657347286362
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.166884634367471,
+              -4.774099342404338,
+              102.82853804909342
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08502528431936843,
+                -0.17499876494590028,
+                0.796612890985098
+              ],
+              "median": [
+                -0.08502374142089271,
+                -0.17499721033654783,
+                0.7968825423256876
+              ],
+              "max": [
+                -0.08502220232929306,
+                -0.17499519092929922,
+                0.7971515979536423
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.9440088868141174,
+                0.9452284574508667
+              ],
+              "median": [
+                0.946942150592804,
+                0.9466555118560791
+              ],
+              "max": [
+                0.950480580329895,
+                0.9490690231323242
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 19.208333333333332,
+              "physics_step": 4610,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08979671448469162,
+                -0.17102956771850586,
+                0.7923508882522583
+              ],
+              "weight": 0.0031179433064996874,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.951109393631136,
+                4.999518472585651,
+                48.67141683348571
+              ],
+              "hand_local_mm": [
+                3.9656823316865184,
+                -4.773929512797969,
+                104.26396295475202
+              ],
+              "world_z_m": 0.7923508882522583,
+              "world_z_above_body_origin_mm": 48.67178201675415,
+              "world_z_above_material_min_mm": 48.672179880697605
+            },
+            "first_state": {
+              "t": 19.208333333333332,
+              "physics_step": 4610,
+              "phase": "EXTRACT",
+              "object_position_m": [
+                -0.08479876816272736,
+                -0.17497816681861877,
+                0.7436791062355042
+              ],
+              "object_quaternion_wxyz": [
+                0.7071111798286438,
+                2.9750168323516846e-05,
+                -7.625669240951538e-06,
+                0.707102358341217
+              ],
+              "object_bottom_world_z_m": 0.7436787083715607,
+              "cup_in_hand_position_m": [
+                -2.1467273053012265e-06,
+                0.00022801011671941694,
+                0.1529337708388845
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -2.2678659403024187e-05,
+                -0.9999999841479155,
+                2.697184899047578e-05,
+                -0.000174534714994003
+              ],
+              "actual_tcp_position_m": [
+                -0.08502272171579849,
+                -0.1749972805579556,
+                0.796612890985098
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.00011500418330732932,
+                0.7070832817707018,
+                -0.7071302502266206,
+                -0.0001692006185350465
+              ],
+              "finger_contact_N": [
+                0.9466121792793274,
+                0.946782648563385
+              ],
+              "finger_joint_positions_m": [
+                0.005309305619448423,
+                0.0053092967718839645
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004833333333333269
+            }
+          }
+        },
+        "source_clear_50ms": {
+          "left": {
+            "positive_impulse_point_count": 76,
+            "physics_steps": [
+              5003,
+              5004,
+              5005,
+              5006,
+              5007,
+              5008,
+              5009,
+              5010,
+              5011,
+              5012,
+              5013,
+              5014,
+              5015
+            ],
+            "actual_t_range_s": [
+              20.845833333333335,
+              20.895833333333332
+            ],
+            "world_z_m": {
+              "min": 0.8097565174102783,
+              "median": 0.8110612630844116,
+              "max": 0.8295505046844482
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.68989849090576,
+              "median": 39.73647952079773,
+              "max": 58.46869945526123
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.69089266869508,
+              "median": 39.736885308723714,
+              "max": 58.469102363244204
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.9595513204924506,
+                -5.0139605305784265,
+                39.69088877147502
+              ],
+              "median": [
+                -3.947113961366364,
+                -4.99553417943287,
+                39.736778529469625
+              ],
+              "max": [
+                3.955423021467942,
+                -4.9920722498571,
+                58.46910970860481
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.947381388606592,
+                5.218231149478435,
+                94.46335631782301
+              ],
+              "median": [
+                -3.9294495139131866,
+                5.221535414015273,
+                113.19819313630896
+              ],
+              "max": [
+                3.9730143695169606,
+                5.240580223381036,
+                113.24159342092685
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              2.3322266895619386,
+              -4.999732257698027,
+              48.99347522549934
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              2.34743578163737,
+              5.225659436467919,
+              103.94104061668597
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08504662840687215,
+                -0.1749989734415154,
+                0.8229725688132238
+              ],
+              "median": [
+                -0.08504136912052015,
+                -0.17499434862083402,
+                0.8236209490751732
+              ],
+              "max": [
+                -0.08503352823424873,
+                -0.17499077054490722,
+                0.8242793410797471
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.943159282207489,
+                0.937748908996582
+              ],
+              "median": [
+                0.9452449083328247,
+                0.9493175745010376
+              ],
+              "max": [
+                0.953874409198761,
+                0.9533683061599731
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 20.845833333333335,
+              "physics_step": 5003,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell20",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07981902360916138,
+                -0.1710248738527298,
+                0.8276832103729248
+              ],
+              "weight": 0.0020576555930160744,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9538785843340483,
+                -4.995377315562569,
+                57.64503893191406
+              ],
+              "hand_local_mm": [
+                3.9720710924915905,
+                5.220750175337303,
+                95.29008972692344
+              ],
+              "world_z_m": 0.8276832103729248,
+              "world_z_above_body_origin_mm": 57.644665241241455,
+              "world_z_above_material_min_mm": 57.645408349435215
+            },
+            "first_state": {
+              "t": 20.845833333333335,
+              "physics_step": 5003,
+              "phase": "EXTRACT",
+              "object_position_m": [
+                -0.08482079952955246,
+                -0.17497611045837402,
+                0.7700385451316833
+              ],
+              "object_quaternion_wxyz": [
+                0.7071067690849304,
+                5.545327439904213e-05,
+                2.3039989173412323e-05,
+                0.7071068286895752
+              ],
+              "object_bottom_world_z_m": 0.7700378020234896,
+              "cup_in_hand_position_m": [
+                -1.934680068205843e-06,
+                0.00022822517690511835,
+                0.15293399171235522
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -2.3176167028927544e-05,
+                -0.9999999845756345,
+                2.2750247983205348e-05,
+                -0.0001726094498091574
+              ],
+              "actual_tcp_position_m": [
+                -0.08504069541280751,
+                -0.17499486574296688,
+                0.8229725688132238
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -8.262403178803691e-05,
+                0.7070907018476611,
+                -0.7071228287496689,
+                -0.0001938940894189957
+              ],
+              "finger_contact_N": [
+                0.9449880123138428,
+                0.9493964910507202
+              ],
+              "finger_joint_positions_m": [
+                0.005309287924319506,
+                0.005309285596013069
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004833333333333269
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 162,
+            "physics_steps": [
+              5003,
+              5004,
+              5005,
+              5006,
+              5007,
+              5008,
+              5009,
+              5010,
+              5011,
+              5012,
+              5013,
+              5014,
+              5015
+            ],
+            "actual_t_range_s": [
+              20.845833333333335,
+              20.895833333333332
+            ],
+            "world_z_m": {
+              "min": 0.8099454045295715,
+              "median": 0.8194820284843445,
+              "max": 0.8298051953315735
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.69132900238037,
+              "median": 48.606544733047485,
+              "max": 58.47585201263428
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.69232318016969,
+              "median": 48.60695052097347,
+              "max": 58.476260680503266
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.80251679369097,
+                4.986044998257253,
+                39.690859249343006
+              ],
+              "median": [
+                -2.162817299658556,
+                5.000364173006806,
+                48.60613276372215
+              ],
+              "max": [
+                3.9552326294864164,
+                5.00793324824296,
+                58.47543925118475
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.790795088147069,
+                -4.781780404993547,
+                94.45974315460673
+              ],
+              "median": [
+                -2.147477166126282,
+                -4.774778811950924,
+                104.32928839746734
+              ],
+              "max": [
+                3.9727918570267184,
+                -4.759398962739428,
+                113.24176724642469
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.0851755521786157,
+              5.000344947522776,
+              50.05530285542075
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.1002913097248253,
+              -4.774499195367765,
+              102.87992166116024
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08504662840687215,
+                -0.1749989734415154,
+                0.8229725688132238
+              ],
+              "median": [
+                -0.08504543342656974,
+                -0.17499144031542754,
+                0.8236209490751732
+              ],
+              "max": [
+                -0.08503352823424873,
+                -0.17499077054490722,
+                0.8242793410797471
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.943159282207489,
+                0.937748908996582
+              ],
+              "median": [
+                0.9453009366989136,
+                0.9482905268669128
+              ],
+              "max": [
+                0.953874409198761,
+                0.9533683061599731
+              ]
+            },
+            "effort_limit_N": [
+              8.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 20.845833333333335,
+              "physics_step": 5003,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08982027322053909,
+                -0.17102427780628204,
+                0.8186314105987549
+              ],
+              "weight": 0.0031135781534167594,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.954060520113683,
+                5.004867427950852,
+                48.59212899462049
+              ],
+              "hand_local_mm": [
+                3.968672706148978,
+                -4.779074860759123,
+                104.3434626339922
+              ],
+              "world_z_m": 0.8186314105987549,
+              "world_z_above_body_origin_mm": 48.59286546707153,
+              "world_z_above_material_min_mm": 48.59360857526529
+            },
+            "first_state": {
+              "t": 20.845833333333335,
+              "physics_step": 5003,
+              "phase": "EXTRACT",
+              "object_position_m": [
+                -0.08482079952955246,
+                -0.17497611045837402,
+                0.7700385451316833
+              ],
+              "object_quaternion_wxyz": [
+                0.7071067690849304,
+                5.545327439904213e-05,
+                2.3039989173412323e-05,
+                0.7071068286895752
+              ],
+              "object_bottom_world_z_m": 0.7700378020234896,
+              "cup_in_hand_position_m": [
+                -1.934680068205843e-06,
+                0.00022822517690511835,
+                0.15293399171235522
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -2.3176167028927544e-05,
+                -0.9999999845756345,
+                2.2750247983205348e-05,
+                -0.0001726094498091574
+              ],
+              "actual_tcp_position_m": [
+                -0.08504069541280751,
+                -0.17499486574296688,
+                0.8229725688132238
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -8.262403178803691e-05,
+                0.7070907018476611,
+                -0.7071228287496689,
+                -0.0001938940894189957
+              ],
+              "finger_contact_N": [
+                0.9449880123138428,
+                0.9493964910507202
+              ],
+              "finger_joint_positions_m": [
+                0.005309287924319506,
+                0.005309285596013069
+              ],
+              "gripper_effort_limit_N": 8.0,
+              "gripper_target_m": 0.004833333333333269
+            }
+          }
+        }
+      },
+      "observed_cup_input_collision_shapes": [
+        {
+          "prim": "/Asset/Collision/band1_cell00",
+          "bounds_m": [
+            [
+              -0.00500000214483598,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              -0.003950842091341444,
+              -0.003950842091341444,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell02",
+          "bounds_m": [
+            [
+              -0.00500000214483598,
+              0.003950842091341444,
+              0.005163099057337306
+            ],
+            [
+              -0.003950842091341444,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell10",
+          "bounds_m": [
+            [
+              -0.003950842091341444,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              0.003950842091341444,
+              -0.004213471612787845,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell12",
+          "bounds_m": [
+            [
+              -0.003950842091341444,
+              0.004212799272362844,
+              0.005163099057337306
+            ],
+            [
+              0.003950842091341444,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell20",
+          "bounds_m": [
+            [
+              0.003950842091341444,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              0.00500000214483598,
+              -0.003950842091341444,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell22",
+          "bounds_m": [
+            [
+              0.003950842091341444,
+              0.003950842091341444,
+              0.005163099057337306
+            ],
+            [
+              0.00500000214483598,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        }
+      ],
+      "original_grasp_relative_pose": {
+        "reference_available": true,
+        "maximum_position_drift_m": 0.0006089944131974244,
+        "maximum_orientation_drift_deg": 0.7058963335939142,
+        "maximum_configured_grasp_anchor_drift_m": 6.409641984065671e-05,
+        "maximum_configured_grasp_anchor_axial_drift_m": 4.672923924216826e-05,
+        "maximum_configured_grasp_anchor_transverse_drift_m": 4.624030359635842e-05,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "sources": {
+        "result.json": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/result.json",
+          "SHA256": "339aff86508888bdd894bbee575400f45754da0fa214cb9760bda1ec30254d63",
+          "verified_against_prior_closed_archive": true
+        },
+        "independent_score.json": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/independent_score.json",
+          "SHA256": "9e6134cc4d6c5f54390be06c93bba0cf9f2ec0a35067ea1ffb1cfe71b41acd40",
+          "verified_against_prior_closed_archive": true
+        },
+        "config.yaml": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/config.yaml",
+          "SHA256": "7b304e22a6ebf3eab3852549b586c14eee23a097839866d80f561b565d4dc6d3",
+          "verified_against_prior_closed_archive": true
+        },
+        "physics_records.jsonl.gz": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/physics_records.jsonl.gz",
+          "SHA256": "1649cf6084ec6a532abda58154661f6e6463fc6540c51c035bfd707c5eebca21",
+          "original_SHA256": "2a21398bcf0f95b72fca803931309d15d8a1fa10909eb2a607f4b7e88efd2832",
+          "original_bytes": 1219313252,
+          "whole_decompression_SHA_previously_verified": true
+        },
+        "native_contact_events.jsonl.gz": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/native_contact_events.jsonl.gz",
+          "SHA256": "88ecd77a1f78ebb792e555c4e1009405feeb924e86d7fc118dcfbbed1f375118",
+          "original_SHA256": "3beab825cada7af22d20e1d2c3c20c442ccf6446ece773dc60b4ab3c23f61c01",
+          "original_bytes": 569091044,
+          "whole_decompression_SHA_previously_verified": true
+        }
+      },
+      "native_positive_impulse_points_seen_in_prefix": 11223,
+      "selected_unique_point_count": 743,
+      "state_alignment": "exact physics_step and t, one-to-one; actual hand reconstructed from measured cup world pose and measured cup-in-hand pose, not command FK"
+    },
+    {
+      "run": "grasp_transport_03",
+      "original_outcome": {
+        "task_success": false,
+        "failure_type": "POLICY_BUDGET",
+        "termination_reason": "CONTROL_DIAGNOSTIC_COMPLETE",
+        "record_valid": true,
+        "record_integrity_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": false,
+        "grasp_success": true,
+        "transport_success": false
+      },
+      "scorer_reference_t_s": 21.220833333333335,
+      "actual_lift_started_t_s": 21.254166666666666,
+      "source_slot_cleared_t_s": 23.175,
+      "first_nonzero_impulse_contact": {
+        "right": {
+          "t": 21.104166666666668,
+          "physics_step": 5065
+        },
+        "left": {
+          "t": 21.120833333333334,
+          "physics_step": 5069
+        }
+      },
+      "window_definitions_s": {
+        "scorer_reference_50ms": [
+          21.220833333333335,
+          21.270833333333336
+        ],
+        "before_lift_100ms": [
+          21.154166666666665,
+          21.254166666666666
+        ],
+        "source_clear_50ms": [
+          23.175,
+          23.225
+        ]
+      },
+      "sections": {
+        "first_positive_contact_each_finger": {
+          "left": {
+            "positive_impulse_point_count": 4,
+            "physics_steps": [
+              5069
+            ],
+            "actual_t_range_s": [
+              21.120833333333334,
+              21.120833333333334
+            ],
+            "world_z_m": {
+              "min": 0.8016232848167419,
+              "median": 0.8016251921653748,
+              "max": 0.8016271591186523
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 58.601438999176025,
+              "median": 58.60334634780884,
+              "max": 58.605313301086426
+            },
+            "world_height_above_material_min_mm": {
+              "min": 58.624115734202896,
+              "median": 58.62602308283571,
+              "max": 58.627990036113296
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.950681858318182,
+                -4.957256454901035,
+                58.624404997444316
+              ],
+              "median": [
+                0.00016683741842959954,
+                -4.955866177200768,
+                58.626806522973965
+              ],
+              "max": [
+                3.95101554070673,
+                -4.954475624835251,
+                58.629267652515075
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.9411110903916122,
+                5.234513120090001,
+                94.37737235158588
+              ],
+              "median": [
+                0.009738342265175115,
+                5.235774321652238,
+                94.3775573441579
+              ],
+              "max": [
+                3.9605878016434235,
+                5.237035472955904,
+                94.37772997929144
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              2.995557651123919,
+              -4.954813172025034,
+              58.62839872858648
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.005129605249246,
+              5.234818115906315,
+              94.37769368270101
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08500119999201723,
+                -0.1750001632897651,
+                0.7959983447202548
+              ],
+              "median": [
+                -0.08500119999201723,
+                -0.1750001632897651,
+                0.7959983447202548
+              ],
+              "max": [
+                -0.08500119999201723,
+                -0.1750001632897651,
+                0.7959983447202548
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.4363112449645996,
+                0.727977454662323
+              ],
+              "median": [
+                0.4363112449645996,
+                0.727977454662323
+              ],
+              "max": [
+                0.4363112449645996,
+                0.727977454662323
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 21.120833333333334,
+              "physics_step": 5069,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell20",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07977022230625153,
+                -0.17104369401931763,
+                0.8016268014907837
+              ],
+              "weight": 0.001585368818738912,
+              "event_type": "ContactEventType.CONTACT_FOUND",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.95101554070673,
+                -4.954477272826752,
+                58.62891002844638
+              ],
+              "hand_local_mm": [
+                3.960587641314654,
+                5.234513120090001,
+                94.37772997929144
+              ],
+              "world_z_m": 0.8016268014907837,
+              "world_z_above_body_origin_mm": 58.60495567321777,
+              "world_z_above_material_min_mm": 58.627632408244644
+            },
+            "first_state": {
+              "t": 21.120833333333334,
+              "physics_step": 5069,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08499614149332047,
+                -0.1750003844499588,
+                0.7430218458175659
+              ],
+              "object_quaternion_wxyz": [
+                0.7072234749794006,
+                0.0015847068279981613,
+                0.001673748716711998,
+                0.7069864273071289
+              ],
+              "object_bottom_world_z_m": 0.742999169082539,
+              "cup_in_hand_position_m": [
+                -2.3969603167317105e-05,
+                -3.961116008168116e-05,
+                0.1529764789131746
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0027256609260990676,
+                -0.999996243938122,
+                -1.5494437847263235e-05,
+                -0.00028747536647798574
+              ],
+              "actual_tcp_position_m": [
+                -0.08500119999201723,
+                -0.1750001632897651,
+                0.7959983447202548
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004565966943799507,
+                0.706998778142404,
+                -0.7072146065468089,
+                0.000139683388447402
+              ],
+              "finger_contact_N": [
+                0.4363112449645996,
+                0.727977454662323
+              ],
+              "finger_joint_positions_m": [
+                0.0053627039305865765,
+                0.0053627206943929195
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.0046972219689024805
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 5,
+            "physics_steps": [
+              5065
+            ],
+            "actual_t_range_s": [
+              21.104166666666668,
+              21.104166666666668
+            ],
+            "world_z_m": {
+              "min": 0.7828772068023682,
+              "median": 0.7828775644302368,
+              "max": 0.7828811407089233
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.87628221511841,
+              "median": 39.87663984298706,
+              "max": 39.880216121673584
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.87745778013729,
+              "median": 39.877815408005944,
+              "max": 39.88139168669247
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.7949981789708325,
+                5.009147781951552,
+                39.87526421194799
+              ],
+              "median": [
+                -3.9518905079120055,
+                5.0093973937958,
+                39.87560337977722
+              ],
+              "max": [
+                3.949792664577066,
+                5.011761953537348,
+                39.87900664362314
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.800651048611906,
+                -5.010587522525738,
+                113.11463743923363
+              ],
+              "median": [
+                -3.9575433094102475,
+                -5.008227218291153,
+                113.1146872488052
+              ],
+              "max": [
+                3.9441405971038623,
+                -5.007978040329397,
+                113.11469704385138
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              2.465961348208486,
+              5.011318024640433,
+              39.878367853220865
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              2.4603091430214885,
+              -5.010144351721756,
+              113.11464649528233
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08500163585986445,
+                -0.17500063790463677,
+                0.7959982252531411
+              ],
+              "median": [
+                -0.08500163585986445,
+                -0.17500063790463677,
+                0.7959982252531411
+              ],
+              "max": [
+                -0.08500163585986445,
+                -0.17500063790463677,
+                0.7959982252531411
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.0,
+                0.08998680859804153
+              ],
+              "median": [
+                0.0,
+                0.08998680859804153
+              ],
+              "max": [
+                0.0,
+                0.08998680859804153
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 21.104166666666668,
+              "physics_step": 5065,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell12",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.09000003337860107,
+                -0.17895080149173737,
+                0.7828775644302368
+              ],
+              "weight": 5.419639637810252e-05,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                -3.9518905079120055,
+                5.0093973937958,
+                39.87560337977722
+              ],
+              "hand_local_mm": [
+                -3.9575433094102475,
+                -5.008227218291153,
+                113.1146872488052
+              ],
+              "world_z_m": 0.7828775644302368,
+              "world_z_above_body_origin_mm": 39.87663984298706,
+              "world_z_above_material_min_mm": 39.877815408005944
+            },
+            "first_state": {
+              "t": 21.104166666666668,
+              "physics_step": 5065,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08499837666749954,
+                -0.17499956488609314,
+                0.7430009245872498
+              ],
+              "object_quaternion_wxyz": [
+                0.7072145938873291,
+                8.70400108397007e-05,
+                7.158052176237106e-05,
+                0.7069990634918213
+              ],
+              "object_bottom_world_z_m": 0.7429997490222309,
+              "cup_in_hand_position_m": [
+                -2.2591648133701657e-05,
+                -4.131590477990773e-05,
+                0.15299727985715916
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0005327014176610655,
+                -0.9999998355666246,
+                -1.5605416142649986e-07,
+                -0.00021235795012436331
+              ],
+              "actual_tcp_position_m": [
+                -0.08500163585986445,
+                -0.17500063790463677,
+                0.7959982252531411
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.00045522150969514125,
+                0.7069990170530109,
+                -0.7072143686204392,
+                0.0001395573253112732
+              ],
+              "finger_contact_N": [
+                0.0,
+                0.08998680859804153
+              ],
+              "finger_joint_positions_m": [
+                0.005536804907023907,
+                0.0055368198081851006
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004894443937804957
+            }
+          }
+        },
+        "scorer_reference_50ms": {
+          "left": {
+            "positive_impulse_point_count": 74,
+            "physics_steps": [
+              5093,
+              5094,
+              5095,
+              5096,
+              5097,
+              5098,
+              5099,
+              5100,
+              5101,
+              5102,
+              5103,
+              5104,
+              5105
+            ],
+            "actual_t_range_s": [
+              21.220833333333335,
+              21.270833333333332
+            ],
+            "world_z_m": {
+              "min": 0.7836076021194458,
+              "median": 0.8019074499607086,
+              "max": 0.8030673265457153
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.820969104766846,
+              "median": 57.76315927505493,
+              "max": 58.58689546585083
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.826643271430264,
+              "median": 57.76897224202426,
+              "max": 58.59276924969403
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.948055419103724,
+                -5.0009925691750325,
+                39.815507447747635
+              ],
+              "median": [
+                3.952556188759324,
+                -4.999653215771706,
+                57.7575933729874
+              ],
+              "max": [
+                3.954387273247482,
+                -4.998805374801516,
+                58.58126365198328
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.938059976373434,
+                5.2252756390245105,
+                94.4240420168148
+              ],
+              "median": [
+                3.9614843776775555,
+                5.226686073430686,
+                95.24789312640081
+              ],
+              "max": [
+                3.9638489511395196,
+                5.2283242089980355,
+                113.18991231194008
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.945468182726593,
+              -4.999807657827559,
+              45.46098456669251
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.9534171729065557,
+              5.22654621645529,
+              107.54438878389486
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08501544679974152,
+                -0.17498261782346888,
+                0.7967885906707942
+              ],
+              "median": [
+                -0.08501455436834773,
+                -0.17497629304574153,
+                0.7971491966245745
+              ],
+              "max": [
+                -0.08501230499613566,
+                -0.17496940309489256,
+                0.7975131414307517
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.206464171409607,
+                1.2109650373458862
+              ],
+              "median": [
+                1.217476725578308,
+                1.2179280519485474
+              ],
+              "max": [
+                1.2237000465393066,
+                1.221564531326294
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 21.220833333333335,
+              "physics_step": 5093,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell20",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.0797768160700798,
+                -0.17100942134857178,
+                0.7836076021194458
+              ],
+              "weight": 0.0033675033425946623,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.945429512276959,
+                -5.000031053537111,
+                39.81751951229643
+              ],
+              "hand_local_mm": [
+                3.952239555523927,
+                5.2268831507954685,
+                113.18768915088171
+              ],
+              "world_z_m": 0.7836076021194458,
+              "world_z_above_body_origin_mm": 39.82311487197876,
+              "world_z_above_material_min_mm": 39.82897233128657
+            },
+            "first_state": {
+              "t": 21.220833333333335,
+              "physics_step": 5093,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08475185930728912,
+                -0.1749298870563507,
+                0.743784487247467
+              ],
+              "object_quaternion_wxyz": [
+                0.7072965502738953,
+                -4.2747706174850464e-05,
+                -0.00043847784399986267,
+                0.7069168090820312
+              ],
+              "object_bottom_world_z_m": 0.7437786297881592,
+              "cup_in_hand_position_m": [
+                9.804501661183517e-07,
+                0.00022418734468225747,
+                0.15300429587268322
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                2.45082239701673e-05,
+                -0.9999999920486378,
+                -9.02988059963139e-05,
+                -8.45470107481132e-05
+              ],
+              "actual_tcp_position_m": [
+                -0.08501472934681789,
+                -0.17496940309489256,
+                0.7967885906707942
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0005155990703624925,
+                0.7069806717571513,
+                -0.7072326801833189,
+                3.54179076380251e-07
+              ],
+              "finger_contact_N": [
+                1.2218677997589111,
+                1.2194520235061646
+              ],
+              "finger_joint_positions_m": [
+                0.005309905391186476,
+                0.005309886299073696
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.0046972219689024805
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 164,
+            "physics_steps": [
+              5093,
+              5094,
+              5095,
+              5096,
+              5097,
+              5098,
+              5099,
+              5100,
+              5101,
+              5102,
+              5103,
+              5104,
+              5105
+            ],
+            "actual_t_range_s": [
+              21.220833333333335,
+              21.270833333333332
+            ],
+            "world_z_m": {
+              "min": 0.7835803627967834,
+              "median": 0.7924131155014038,
+              "max": 0.8030601739883423
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.794325828552246,
+              "median": 47.988444566726685,
+              "max": 58.580100536346436
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.799999995215664,
+              "median": 47.99410912789137,
+              "max": 58.585974320189635
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.799291422535285,
+                4.9990162159553435,
+                39.800246383235546
+              ],
+              "median": [
+                -3.9486258013357256,
+                5.000387224572478,
+                47.99012124462884
+              ],
+              "max": [
+                3.9544679618983287,
+                5.001216425858003,
+                58.581519373299535
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.7912441689971645,
+                -4.775540804085668,
+                94.42340997735833
+              ],
+              "median": [
+                -3.9394523174064338,
+                -4.774155502336676,
+                105.01463286610561
+              ],
+              "max": [
+                3.9652736796210895,
+                -4.771719153337358,
+                113.20333319329802
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              -0.07676291527327396,
+              5.0002362240297495,
+              46.80685280817152
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              -0.06751952426552238,
+              -4.773899941816428,
+              106.19744849117004
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08501544679974152,
+                -0.17498261782346888,
+                0.7967885906707942
+              ],
+              "median": [
+                -0.08501455436834773,
+                -0.17497629304574153,
+                0.7971491966245745
+              ],
+              "max": [
+                -0.08501230499613566,
+                -0.17496940309489256,
+                0.7975131414307517
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.206464171409607,
+                1.2109650373458862
+              ],
+              "median": [
+                1.217476725578308,
+                1.2179280519485474
+              ],
+              "max": [
+                1.2237000465393066,
+                1.221564531326294
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 21.220833333333335,
+              "physics_step": 5093,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell12",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08979403227567673,
+                -0.17891596257686615,
+                0.8023177981376648
+              ],
+              "weight": 0.0006631328951363143,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                -3.956012504974498,
+                5.00020327480202,
+                58.53895047178482
+              ],
+              "hand_local_mm": [
+                -3.9442305608825476,
+                -4.773860007356165,
+                94.46443233669595
+              ],
+              "world_z_m": 0.8023177981376648,
+              "world_z_above_body_origin_mm": 58.533310890197754,
+              "world_z_above_material_min_mm": 58.539168349505566
+            },
+            "first_state": {
+              "t": 21.220833333333335,
+              "physics_step": 5093,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08475185930728912,
+                -0.1749298870563507,
+                0.743784487247467
+              ],
+              "object_quaternion_wxyz": [
+                0.7072965502738953,
+                -4.2747706174850464e-05,
+                -0.00043847784399986267,
+                0.7069168090820312
+              ],
+              "object_bottom_world_z_m": 0.7437786297881592,
+              "cup_in_hand_position_m": [
+                9.804501661183517e-07,
+                0.00022418734468225747,
+                0.15300429587268322
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                2.45082239701673e-05,
+                -0.9999999920486378,
+                -9.02988059963139e-05,
+                -8.45470107481132e-05
+              ],
+              "actual_tcp_position_m": [
+                -0.08501472934681789,
+                -0.17496940309489256,
+                0.7967885906707942
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0005155990703624925,
+                0.7069806717571513,
+                -0.7072326801833189,
+                3.54179076380251e-07
+              ],
+              "finger_contact_N": [
+                1.2218677997589111,
+                1.2194520235061646
+              ],
+              "finger_joint_positions_m": [
+                0.005309905391186476,
+                0.005309886299073696
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.0046972219689024805
+            }
+          }
+        },
+        "before_lift_100ms": {
+          "left": {
+            "positive_impulse_point_count": 140,
+            "physics_steps": [
+              5077,
+              5078,
+              5079,
+              5080,
+              5081,
+              5082,
+              5083,
+              5084,
+              5085,
+              5086,
+              5087,
+              5088,
+              5089,
+              5090,
+              5091,
+              5092,
+              5093,
+              5094,
+              5095,
+              5096,
+              5097,
+              5098,
+              5099,
+              5100,
+              5101
+            ],
+            "actual_t_range_s": [
+              21.154166666666665,
+              21.254166666666666
+            ],
+            "world_z_m": {
+              "min": 0.7829225659370422,
+              "median": 0.8012599647045135,
+              "max": 0.8028244376182556
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.820969104766846,
+              "median": 57.771265506744385,
+              "max": 58.61163139343262
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.826643271430264,
+              "median": 57.77701725670403,
+              "max": 58.61704789420163
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.948055419103724,
+                -5.037322505535785,
+                39.815507447747635
+              ],
+              "median": [
+                3.9511085285380467,
+                -5.000484346582234,
+                57.76573885445141
+              ],
+              "max": [
+                3.954387273247482,
+                -4.988888329385093,
+                58.60632781083076
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.938059976373434,
+                5.217525292530823,
+                94.39902572896423
+              ],
+              "median": [
+                3.959989200138372,
+                5.227790018604251,
+                95.23962432003698
+              ],
+              "max": [
+                3.9638489511395196,
+                5.279357152527144,
+                113.18991231194008
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.946939570905837,
+              -5.001061733119295,
+              46.16266622290471
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.954988968371976,
+              5.228277821436038,
+              106.84269512294894
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08501544679974152,
+                -0.17499178806939944,
+                0.7960307708846043
+              ],
+              "median": [
+                -0.08501371798836704,
+                -0.17497480538207405,
+                0.7965876037559415
+              ],
+              "max": [
+                -0.08500207042267528,
+                -0.17496940309489256,
+                0.7972709094000348
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.3645021915435791,
+                0.5005051493644714
+              ],
+              "median": [
+                1.217476725578308,
+                1.2176121473312378
+              ],
+              "max": [
+                1.2237000465393066,
+                1.2223317623138428
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 21.154166666666665,
+              "physics_step": 5077,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell10",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07972610741853714,
+                -0.17104363441467285,
+                0.8016270399093628
+              ],
+              "weight": 0.0015187591784242387,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.942746331701297,
+                -5.037322505535785,
+                58.595229964867436
+              ],
+              "hand_local_mm": [
+                3.9526129293360337,
+                5.279357152527144,
+                94.41008327550918
+              ],
+              "world_z_m": 0.8016270399093628,
+              "world_z_above_body_origin_mm": 58.59363079071045,
+              "world_z_above_material_min_mm": 58.59792717583534
+            },
+            "first_state": {
+              "t": 21.154166666666665,
+              "physics_step": 5077,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08480004221200943,
+                -0.17496313154697418,
+                0.7430334091186523
+              ],
+              "object_quaternion_wxyz": [
+                0.7073671817779541,
+                0.00032124947756528854,
+                8.563045412302017e-05,
+                0.7068462371826172
+              ],
+              "object_bottom_world_z_m": 0.7430291127335275,
+              "cup_in_hand_position_m": [
+                1.9584796166055156e-06,
+                0.0001582602120222448,
+                0.15299751824958427
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0007005210843153128,
+                -0.9999997281396888,
+                -0.00021353086392761336,
+                -8.599609809122246e-05
+              ],
+              "actual_tcp_position_m": [
+                -0.08500207042267528,
+                -0.17499178806939944,
+                0.7960307708846043
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004704296656904762,
+                0.7069971067591561,
+                -0.7072162730411635,
+                0.00011347192940195818
+              ],
+              "finger_contact_N": [
+                0.3645021915435791,
+                0.5005051493644714
+              ],
+              "finger_joint_positions_m": [
+                0.005325701087713242,
+                0.005325703416019678
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.0046972219689024805
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 285,
+            "physics_steps": [
+              5077,
+              5078,
+              5079,
+              5080,
+              5081,
+              5082,
+              5083,
+              5084,
+              5085,
+              5086,
+              5087,
+              5088,
+              5089,
+              5090,
+              5091,
+              5092,
+              5093,
+              5094,
+              5095,
+              5096,
+              5097,
+              5098,
+              5099,
+              5100,
+              5101
+            ],
+            "actual_t_range_s": [
+              21.154166666666665,
+              21.254166666666666
+            ],
+            "world_z_m": {
+              "min": 0.7828841805458069,
+              "median": 0.7918603420257568,
+              "max": 0.8028173446655273
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.794325828552246,
+              "median": 47.988712787628174,
+              "max": 58.59482288360596
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.799999995215664,
+              "median": 47.99437235234638,
+              "max": 58.600360584458834
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.814718674171306,
+                4.985500711041183,
+                39.800246383235546
+              ],
+              "median": [
+                -3.9497114436012493,
+                4.999528229616292,
+                47.99033569063733
+              ],
+              "max": [
+                3.9544679618983287,
+                5.040906107107108,
+                58.597582536423324
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.803767270404141,
+                -4.825129395068075,
+                94.40720246571519
+              ],
+              "median": [
+                -3.939592695447195,
+                -4.773720719326762,
+                105.01460138041068
+              ],
+              "max": [
+                3.965362317128628,
+                -4.759730217585593,
+                113.20333319329802
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              -0.5621370756147025,
+              5.000186734262405,
+              47.157882725282875
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              -0.5520285212422852,
+              -4.7741352416673335,
+              105.84608142742401
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08501544679974152,
+                -0.17499178806939944,
+                0.7960307708846043
+              ],
+              "median": [
+                -0.08501342581818733,
+                -0.1749746721578806,
+                0.7965566092452161
+              ],
+              "max": [
+                -0.08500207042267528,
+                -0.17496940309489256,
+                0.7972709094000348
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.3645021915435791,
+                0.5005051493644714
+              ],
+              "median": [
+                1.217519998550415,
+                1.2183700799942017
+              ],
+              "max": [
+                1.2237000465393066,
+                1.2223317623138428
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 21.154166666666665,
+              "physics_step": 5077,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell12",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08981461077928543,
+                -0.17894433438777924,
+                0.7828845381736755
+              ],
+              "weight": 2.2287585893815513e-06,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                -3.971625817399401,
+                5.034569529358194,
+                39.849562845234395
+              ],
+              "hand_local_mm": [
+                -3.9606743485570495,
+                -4.822167201137348,
+                113.14025737045476
+              ],
+              "world_z_m": 0.7828845381736755,
+              "world_z_above_body_origin_mm": 39.85112905502319,
+              "world_z_above_material_min_mm": 39.85542544014808
+            },
+            "first_state": {
+              "t": 21.154166666666665,
+              "physics_step": 5077,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08480004221200943,
+                -0.17496313154697418,
+                0.7430334091186523
+              ],
+              "object_quaternion_wxyz": [
+                0.7073671817779541,
+                0.00032124947756528854,
+                8.563045412302017e-05,
+                0.7068462371826172
+              ],
+              "object_bottom_world_z_m": 0.7430291127335275,
+              "cup_in_hand_position_m": [
+                1.9584796166055156e-06,
+                0.0001582602120222448,
+                0.15299751824958427
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0007005210843153128,
+                -0.9999997281396888,
+                -0.00021353086392761336,
+                -8.599609809122246e-05
+              ],
+              "actual_tcp_position_m": [
+                -0.08500207042267528,
+                -0.17499178806939944,
+                0.7960307708846043
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004704296656904762,
+                0.7069971067591561,
+                -0.7072162730411635,
+                0.00011347192940195818
+              ],
+              "finger_contact_N": [
+                0.3645021915435791,
+                0.5005051493644714
+              ],
+              "finger_joint_positions_m": [
+                0.005325701087713242,
+                0.005325703416019678
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.0046972219689024805
+            }
+          }
+        },
+        "source_clear_50ms": {
+          "left": {
+            "positive_impulse_point_count": 116,
+            "physics_steps": [
+              5562,
+              5563,
+              5564,
+              5565,
+              5566,
+              5567,
+              5568,
+              5569,
+              5570,
+              5571,
+              5572,
+              5573,
+              5574
+            ],
+            "actual_t_range_s": [
+              23.175,
+              23.225
+            ],
+            "world_z_m": {
+              "min": 0.8098440766334534,
+              "median": 0.8282668590545654,
+              "max": 0.8292471766471863
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.826393127441406,
+              "median": 57.769328355789185,
+              "max": 58.58778953552246
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.83133350977042,
+              "median": 57.774416943485285,
+              "max": 58.59289689796121
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.9554690758789683,
+                -5.007017350478372,
+                39.82378190754725
+              ],
+              "median": [
+                3.9464553642270825,
+                -4.999619194223688,
+                57.76648247730892
+              ],
+              "max": [
+                3.953020048690404,
+                -4.9956318573600935,
+                58.582722156160166
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -3.9486451423798474,
+                5.221313394547788,
+                94.42236655581154
+              ],
+              "median": [
+                3.956245798496564,
+                5.225892662535872,
+                95.23729310587609
+              ],
+              "max": [
+                3.9628337320037654,
+                5.233041961565905,
+                113.1798682800862
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.642202603523121,
+              -5.000005507632591,
+              45.54627688947311
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.6499343134677353,
+              5.2259136351881725,
+              107.45873834069153
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08500995466030743,
+                -0.1749997925395701,
+                0.8230127167454354
+              ],
+              "median": [
+                -0.08500956865210953,
+                -0.174996133182404,
+                0.8233313650578892
+              ],
+              "max": [
+                -0.0850033054940078,
+                -0.17499485312916147,
+                0.8236793350461681
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.2140815258026123,
+                1.2136090993881226
+              ],
+              "median": [
+                1.2159861326217651,
+                1.2173441648483276
+              ],
+              "max": [
+                1.2232455015182495,
+                1.219482660293579
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 23.175,
+              "physics_step": 5562,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell20",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.0797722265124321,
+                -0.1710335910320282,
+                0.8098440766334534
+              ],
+              "weight": 0.0031821479604669523,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9511817724526934,
+                -4.999860720995286,
+                39.83034716336497
+              ],
+              "hand_local_mm": [
+                3.957945149786938,
+                5.225641425874255,
+                113.17467331164556
+              ],
+              "world_z_m": 0.8098440766334534,
+              "world_z_above_body_origin_mm": 39.835333824157715,
+              "world_z_above_material_min_mm": 39.84036711017891
+            },
+            "first_state": {
+              "t": 23.175,
+              "physics_step": 5562,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.0847424566745758,
+                -0.17497186362743378,
+                0.7700087428092957
+              ],
+              "object_quaternion_wxyz": [
+                0.707186758518219,
+                -0.00016635656356811523,
+                -0.000375489704310894,
+                0.7070267200469971
+              ],
+              "object_bottom_world_z_m": 0.7700037095232745,
+              "cup_in_hand_position_m": [
+                -3.7991355228176e-07,
+                0.00022470592916160845,
+                0.1530041762790835
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                1.6934968048567767e-05,
+                -0.9999999956157468,
+                3.467489310804429e-05,
+                -8.53191953562819e-05
+              ],
+              "actual_tcp_position_m": [
+                -0.08500957816156865,
+                -0.174996133182404,
+                0.8230127167454354
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004478055370826922,
+                0.7070021809032285,
+                -0.7072112143801461,
+                0.00011799677336947697
+              ],
+              "finger_contact_N": [
+                1.2152764797210693,
+                1.217160940170288
+              ],
+              "finger_joint_positions_m": [
+                0.0053091407753527164,
+                0.005309132859110832
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.0046972219689024805
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 145,
+            "physics_steps": [
+              5562,
+              5563,
+              5564,
+              5565,
+              5566,
+              5567,
+              5568,
+              5569,
+              5570,
+              5571,
+              5572,
+              5573,
+              5574
+            ],
+            "actual_t_range_s": [
+              23.175,
+              23.225
+            ],
+            "world_z_m": {
+              "min": 0.8098183274269104,
+              "median": 0.8181393146514893,
+              "max": 0.8292221426963806
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 39.804279804229736,
+              "median": 47.96475172042847,
+              "max": 58.57294797897339
+            },
+            "world_height_above_material_min_mm": {
+              "min": 39.809250292637046,
+              "median": 47.96978181521527,
+              "max": 58.57797597305958
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.798735397300928,
+                4.992987197896704,
+                39.80947355225292
+              ],
+              "median": [
+                -3.948947822402298,
+                5.000216900578108,
+                47.96977159362089
+              ],
+              "max": [
+                3.9531210281003655,
+                5.004372969016655,
+                58.57570913897183
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.792838646123468,
+                -4.778691994155414,
+                94.42907180787364
+              ],
+              "median": [
+                -3.9413871153948867,
+                -4.774362594798727,
+                105.03352951568137
+              ],
+              "max": [
+                3.9623191531935307,
+                -4.767004173151023,
+                113.19385090956379
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              2.2067482258435613,
+              5.000040255842323,
+              46.55790768652042
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              2.2140362302588956,
+              -4.774003191872624,
+              106.44645912096709
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08500995466030743,
+                -0.1749997925395701,
+                0.8230127167454354
+              ],
+              "median": [
+                -0.08500956865210953,
+                -0.174996133182404,
+                0.8233313650578892
+              ],
+              "max": [
+                -0.0850033054940078,
+                -0.17499485312916147,
+                0.8236793350461681
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.2140815258026123,
+                1.2136090993881226
+              ],
+              "median": [
+                1.2159861326217651,
+                1.2173441648483276
+              ],
+              "max": [
+                1.2232455015182495,
+                1.219482660293579
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 23.175,
+              "physics_step": 5562,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell12",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08978825062513351,
+                -0.1789386123418808,
+                0.8285555243492126
+              ],
+              "weight": 1.1177818018840324e-05,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                -3.950569066848859,
+                5.000032467923384,
+                58.55180133869142
+              ],
+              "hand_local_mm": [
+                -3.941304396242966,
+                -4.773069742017326,
+                94.4515323319472
+              ],
+              "world_z_m": 0.8285555243492126,
+              "world_z_above_body_origin_mm": 58.54678153991699,
+              "world_z_above_material_min_mm": 58.55181482593819
+            },
+            "first_state": {
+              "t": 23.175,
+              "physics_step": 5562,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.0847424566745758,
+                -0.17497186362743378,
+                0.7700087428092957
+              ],
+              "object_quaternion_wxyz": [
+                0.707186758518219,
+                -0.00016635656356811523,
+                -0.000375489704310894,
+                0.7070267200469971
+              ],
+              "object_bottom_world_z_m": 0.7700037095232745,
+              "cup_in_hand_position_m": [
+                -3.7991355228176e-07,
+                0.00022470592916160845,
+                0.1530041762790835
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                1.6934968048567767e-05,
+                -0.9999999956157468,
+                3.467489310804429e-05,
+                -8.53191953562819e-05
+              ],
+              "actual_tcp_position_m": [
+                -0.08500957816156865,
+                -0.174996133182404,
+                0.8230127167454354
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004478055370826922,
+                0.7070021809032285,
+                -0.7072112143801461,
+                0.00011799677336947697
+              ],
+              "finger_contact_N": [
+                1.2152764797210693,
+                1.217160940170288
+              ],
+              "finger_joint_positions_m": [
+                0.0053091407753527164,
+                0.005309132859110832
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.0046972219689024805
+            }
+          }
+        }
+      },
+      "observed_cup_input_collision_shapes": [
+        {
+          "prim": "/Asset/Collision/band1_cell00",
+          "bounds_m": [
+            [
+              -0.00500000214483598,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              -0.003950842091341444,
+              -0.003950842091341444,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell02",
+          "bounds_m": [
+            [
+              -0.00500000214483598,
+              0.003950842091341444,
+              0.005163099057337306
+            ],
+            [
+              -0.003950842091341444,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell10",
+          "bounds_m": [
+            [
+              -0.003950842091341444,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              0.003950842091341444,
+              -0.004213471612787845,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell12",
+          "bounds_m": [
+            [
+              -0.003950842091341444,
+              0.004212799272362844,
+              0.005163099057337306
+            ],
+            [
+              0.003950842091341444,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell20",
+          "bounds_m": [
+            [
+              0.003950842091341444,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              0.00500000214483598,
+              -0.003950842091341444,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell22",
+          "bounds_m": [
+            [
+              0.003950842091341444,
+              0.003950842091341444,
+              0.005163099057337306
+            ],
+            [
+              0.00500000214483598,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        }
+      ],
+      "original_grasp_relative_pose": {
+        "reference_available": true,
+        "maximum_position_drift_m": 2.6984234285870994e-06,
+        "maximum_orientation_drift_deg": 0.0157547557800929,
+        "maximum_configured_grasp_anchor_drift_m": 1.7713422689930802e-06,
+        "maximum_configured_grasp_anchor_axial_drift_m": 8.47627855166463e-07,
+        "maximum_configured_grasp_anchor_transverse_drift_m": 1.7669365189100938e-06,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "sources": {
+        "result.json": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_03/episode_0000/result.json",
+          "SHA256": "4e40f5659b9bdd12b05882bd7ee6e39f0be61ba4dca8ecd60ac02d806af6ac62",
+          "verified_against_prior_closed_archive": true
+        },
+        "independent_score.json": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_03/episode_0000/independent_score.json",
+          "SHA256": "4cf5de4eb032741531a0fcd99c88da0030c6d9ddea988bad519598abbc8adbfd",
+          "verified_against_prior_closed_archive": true
+        },
+        "config.yaml": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_03/episode_0000/config.yaml",
+          "SHA256": "37a8db7e28946ca93af5820d65e1e6b5649534e0d2a195ec7b3c61206cf0c47d",
+          "verified_against_prior_closed_archive": true
+        },
+        "physics_records.jsonl.gz": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_03/episode_0000/physics_records.jsonl.gz",
+          "SHA256": "81b2c574721d24ce30d2abaf486c677351d89fbb5ff85a7126bb0c288f6cef14",
+          "original_SHA256": "2e23474e078203b05c98f920328367b062c8da2bc0fe5d22dfd382fe100cc6b5",
+          "original_bytes": 327632832,
+          "whole_decompression_SHA_previously_verified": true
+        },
+        "native_contact_events.jsonl.gz": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_03/episode_0000/native_contact_events.jsonl.gz",
+          "SHA256": "9a1d0e7520e60358c294b1dac5f67998ac1bbd3aea4fa5a39973a878eb9ac9a3",
+          "original_SHA256": "7e1f1d8c650d0977e46c1f9c2f05df7bf814aa54175c89f1d10ae699244a8bf8",
+          "original_bytes": 107771516,
+          "whole_decompression_SHA_previously_verified": true
+        }
+      },
+      "native_positive_impulse_points_seen_in_prefix": 10841,
+      "selected_unique_point_count": 766,
+      "state_alignment": "exact physics_step and t, one-to-one; actual hand reconstructed from measured cup world pose and measured cup-in-hand pose, not command FK"
+    },
+    {
+      "run": "gpt_debug_01",
+      "original_outcome": {
+        "task_success": false,
+        "failure_type": "SAFETY_COLLISION",
+        "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+        "record_valid": true,
+        "record_integrity_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": false,
+        "grasp_success": true,
+        "transport_success": true
+      },
+      "scorer_reference_t_s": 16.6125,
+      "actual_lift_started_t_s": 16.6125,
+      "source_slot_cleared_t_s": 18.204166666666666,
+      "first_nonzero_impulse_contact": {
+        "right": {
+          "t": 16.504166666666666,
+          "physics_step": 3961
+        },
+        "left": {
+          "t": 16.5125,
+          "physics_step": 3963
+        }
+      },
+      "window_definitions_s": {
+        "scorer_reference_50ms": [
+          16.6125,
+          16.6625
+        ],
+        "before_lift_100ms": [
+          16.5125,
+          16.6125
+        ],
+        "source_clear_50ms": [
+          18.204166666666666,
+          18.254166666666666
+        ]
+      },
+      "sections": {
+        "first_positive_contact_each_finger": {
+          "left": {
+            "positive_impulse_point_count": 4,
+            "physics_steps": [
+              3963
+            ],
+            "actual_t_range_s": [
+              16.5125,
+              16.5125
+            ],
+            "world_z_m": {
+              "min": 0.7984844446182251,
+              "median": 0.7984863221645355,
+              "max": 0.798488199710846
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 55.46635389328003,
+              "median": 55.468231439590454,
+              "max": 55.47010898590088
+            },
+            "world_height_above_material_min_mm": {
+              "min": 55.48359970138672,
+              "median": 55.48547724769715,
+              "max": 55.48735479400757
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.9507157265278234,
+                -4.950381489538492,
+                55.48436812961208
+              ],
+              "median": [
+                0.00012611754731972624,
+                -4.950144812432882,
+                55.486310899013034
+              ],
+              "max": [
+                3.9509828627828116,
+                -4.949908140339428,
+                55.4882536681828
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.069743567433942,
+                5.218282616486026,
+                94.37755957330337
+              ],
+              "median": [
+                -0.11890118025781127,
+                5.2183007128160295,
+                94.37772196017514
+              ],
+              "max": [
+                3.8319558452807616,
+                5.218318804927873,
+                94.37788435361323
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.100504282612231,
+              -4.949959898199432,
+              55.487607980273026
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              2.981477193551914,
+              5.218286517093232,
+              94.37784300724391
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08505893136097793,
+                -0.1748785194564373,
+                0.7928596832615818
+              ],
+              "median": [
+                -0.08505893136097793,
+                -0.1748785194564373,
+                0.7928596832615818
+              ],
+              "max": [
+                -0.08505893136097793,
+                -0.1748785194564373,
+                0.7928596832615818
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.6672585010528564,
+                1.1740814447402954
+              ],
+              "median": [
+                0.6672585010528564,
+                1.1740814447402954
+              ],
+              "max": [
+                0.6672585010528564,
+                1.1740814447402954
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 16.5125,
+              "physics_step": 3963,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell10",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07984432578086853,
+                -0.1710505336523056,
+                0.798488199710846
+              ],
+              "weight": 0.00010219118983962923,
+              "event_type": "ContactEventType.CONTACT_FOUND",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.950967956639526,
+                -4.949908140339428,
+                55.4882536681828
+              ],
+              "hand_local_mm": [
+                3.8319410755199654,
+                5.218282872898297,
+                94.37758632395868
+              ],
+              "world_z_m": 0.798488199710846,
+              "world_z_above_body_origin_mm": 55.47010898590088,
+              "world_z_above_material_min_mm": 55.48735479400757
+            },
+            "first_state": {
+              "t": 16.5125,
+              "physics_step": 3963,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08499420434236526,
+                -0.17500069737434387,
+                0.7430180907249451
+              ],
+              "object_quaternion_wxyz": [
+                0.7072246074676514,
+                0.0012601879425346851,
+                0.001271585002541542,
+                0.7069867849349976
+              ],
+              "object_bottom_world_z_m": 0.7430008449168384,
+              "cup_in_hand_position_m": [
+                -0.00014413474654906115,
+                2.2584475834701884e-05,
+                0.14984157078920154
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0022133372953762553,
+                -0.9999975240298604,
+                -2.7112438716503373e-05,
+                -0.00022877299120488664
+              ],
+              "actual_tcp_position_m": [
+                -0.08505893136097793,
+                -0.1748785194564373,
+                0.7928596832615818
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004550463825485785,
+                0.7070066770450688,
+                -0.707206710228453,
+                0.00014336780847590418
+              ],
+              "finger_contact_N": [
+                0.6672585010528564,
+                1.1740814447402954
+              ],
+              "finger_joint_positions_m": [
+                0.0053520603105425835,
+                0.005352071486413479
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 3,
+            "physics_steps": [
+              3961
+            ],
+            "actual_t_range_s": [
+              16.504166666666666,
+              16.504166666666666
+            ],
+            "world_z_m": {
+              "min": 0.7797390818595886,
+              "median": 0.7797425389289856,
+              "max": 0.7797425985336304
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 36.7358922958374,
+              "median": 36.739349365234375,
+              "max": 36.73940896987915
+            },
+            "world_height_above_material_min_mm": {
+              "min": 36.73919043784623,
+              "median": 36.742647507243205,
+              "max": 36.74270711188798
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.951768966531722,
+                5.024795099968449,
+                36.7325943911814
+              ],
+              "median": [
+                3.9499142525870328,
+                5.026933901312906,
+                36.735914670025245
+              ],
+              "max": [
+                3.949914253608056,
+                5.026933941334267,
+                36.73597427465657
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.078994993836197,
+                -4.9528949476624025,
+                113.11434589075722
+              ],
+              "median": [
+                3.82268891517552,
+                -4.952894897334473,
+                113.11440012193037
+              ],
+              "max": [
+                3.822688941307512,
+                -4.950727907707899,
+                113.11440549537502
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              2.532186599392294,
+              5.026550183528826,
+              36.73536067912362
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              2.404961155782884,
+              -4.952506100014597,
+              113.11436279453248
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08505924421955698,
+                -0.17487894582570976,
+                0.7928594445768058
+              ],
+              "median": [
+                -0.08505924421955698,
+                -0.17487894582570976,
+                0.7928594445768058
+              ],
+              "max": [
+                -0.08505924421955698,
+                -0.17487894582570976,
+                0.7928594445768058
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.0,
+                0.147624209523201
+              ],
+              "median": [
+                0.0,
+                0.147624209523201
+              ],
+              "max": [
+                0.0,
+                0.147624209523201
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 16.504166666666666,
+              "physics_step": 3961,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08999998867511749,
+                -0.1710491180419922,
+                0.7797425985336304
+              ],
+              "weight": 0.00043070999884900957,
+              "event_type": "ContactEventType.CONTACT_FOUND",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.949914253608056,
+                5.026933941334267,
+                36.73597427465657
+              ],
+              "hand_local_mm": [
+                3.822688941307512,
+                -4.952894897334473,
+                113.11434589075722
+              ],
+              "world_z_m": 0.7797425985336304,
+              "world_z_above_body_origin_mm": 36.73940896987915,
+              "world_z_above_material_min_mm": 36.74270711188798
+            },
+            "first_state": {
+              "t": 16.504166666666666,
+              "physics_step": 3961,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08499881625175476,
+                -0.17499978840351105,
+                0.7430031895637512
+              ],
+              "object_quaternion_wxyz": [
+                0.7072046995162964,
+                0.00024348078295588493,
+                0.00023130234330892563,
+                0.7070088386535645
+              ],
+              "object_bottom_world_z_m": 0.7429998914217424,
+              "cup_in_hand_position_m": [
+                -0.00014268367268796295,
+                1.8365173110448263e-05,
+                0.1498562305282359
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0007579052581447501,
+                -0.9999996906020188,
+                1.9458502288904884e-06,
+                -0.00021064591186913885
+              ],
+              "actual_tcp_position_m": [
+                -0.08505924421955698,
+                -0.17487894582570976,
+                0.7928594445768058
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.00045351272749428724,
+                0.7070073332590763,
+                -0.7072060551404631,
+                0.0001435853742699335
+              ],
+              "finger_contact_N": [
+                0.0,
+                0.147624209523201
+              ],
+              "finger_joint_positions_m": [
+                0.0054639847949147224,
+                0.005463994108140469
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          }
+        },
+        "scorer_reference_50ms": {
+          "left": {
+            "positive_impulse_point_count": 57,
+            "physics_steps": [
+              3987,
+              3988,
+              3989,
+              3990,
+              3991,
+              3992,
+              3993,
+              3994,
+              3995,
+              3996,
+              3997,
+              3998,
+              3999
+            ],
+            "actual_t_range_s": [
+              16.6125,
+              16.6625
+            ],
+            "world_z_m": {
+              "min": 0.7810666561126709,
+              "median": 0.7990546822547913,
+              "max": 0.80016028881073
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 36.66651248931885,
+              "median": 54.59088087081909,
+              "max": 55.437326431274414
+            },
+            "world_height_above_material_min_mm": {
+              "min": 36.67170338489878,
+              "median": 54.59584402124129,
+              "max": 55.44228651761085
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                3.9444452724098737,
+                -5.000551462794373,
+                36.66138016441108
+              ],
+              "median": [
+                3.954739393275288,
+                -4.999894780400969,
+                54.58592495284743
+              ],
+              "max": [
+                4.123197060375172,
+                -4.998570227635878,
+                55.43237195934565
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                3.8182973524198753,
+                5.224552563887667,
+                94.43391690756293
+              ],
+              "median": [
+                3.829426205388051,
+                5.226466084916093,
+                95.28035007248057
+              ],
+              "max": [
+                4.004582075307283,
+                5.227348683376022,
+                113.20487595883051
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.9523133593566597,
+              -4.999749470813324,
+              48.768587139839475
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.831150467748497,
+              5.226142652359713,
+              101.09767389526624
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08507377801742172,
+                -0.17485929642351314,
+                0.7942407309975217
+              ],
+              "median": [
+                -0.08507158289490141,
+                -0.17485128298843514,
+                0.7946771545131839
+              ],
+              "max": [
+                -0.08507068769664416,
+                -0.17484485575478909,
+                0.7951088080125283
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.604580283164978,
+                1.6050894260406494
+              ],
+              "median": [
+                1.6087433099746704,
+                1.6093116998672485
+              ],
+              "max": [
+                1.6134980916976929,
+                1.6129199266433716
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 16.6125,
+              "physics_step": 3987,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell10",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07984933257102966,
+                -0.17101584374904633,
+                0.7989886999130249
+              ],
+              "weight": 3.0137983892803557e-07,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9547392619055284,
+                -5.000437103422115,
+                54.607785681657035
+              ],
+              "hand_local_mm": [
+                3.836050519485135,
+                5.226608333151059,
+                95.25866522679065
+              ],
+              "world_z_m": 0.7989886999130249,
+              "world_z_above_body_origin_mm": 54.612934589385986,
+              "world_z_above_material_min_mm": 54.618143794981975
+            },
+            "first_state": {
+              "t": 16.6125,
+              "physics_step": 3987,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08480869978666306,
+                -0.17495115101337433,
+                0.7443757653236389
+              ],
+              "object_quaternion_wxyz": [
+                0.7072662711143494,
+                -0.00016615819185972214,
+                -0.0003886725753545761,
+                0.7069472074508667
+              ],
+              "object_bottom_world_z_m": 0.7443705561180429,
+              "cup_in_hand_position_m": [
+                -0.00014097841510675481,
+                0.00022862126769550046,
+                0.1498650564008619
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -2.6403245312214757e-05,
+                -0.9999999762969362,
+                -5.466256500047396e-05,
+                -0.0002090956717022982
+              ],
+              "actual_tcp_position_m": [
+                -0.08507377801742172,
+                -0.1748466314804326,
+                0.7942407309975217
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0005178840702423905,
+                0.7069858574311229,
+                -0.707227494649615,
+                -3.142922786607206e-07
+              ],
+              "finger_contact_N": [
+                1.6134980916976929,
+                1.6121702194213867
+              ],
+              "finger_joint_positions_m": [
+                0.005308777093887329,
+                0.005308758933097124
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 96,
+            "physics_steps": [
+              3987,
+              3988,
+              3989,
+              3990,
+              3991,
+              3992,
+              3993,
+              3994,
+              3995,
+              3996,
+              3997,
+              3998,
+              3999
+            ],
+            "actual_t_range_s": [
+              16.6125,
+              16.6625
+            ],
+            "world_z_m": {
+              "min": 0.7810429334640503,
+              "median": 0.7905630767345428,
+              "max": 0.8006635904312134
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 36.64308786392212,
+              "median": 45.60476541519165,
+              "max": 55.42963743209839
+            },
+            "world_height_above_material_min_mm": {
+              "min": 36.64827875950205,
+              "median": 45.60972710266908,
+              "max": 55.43472480277778
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.800493912017505,
+                4.999406481368407,
+                36.64851702258106
+              ],
+              "median": [
+                -3.9467633626071343,
+                5.000230102475607,
+                45.60995927240372
+              ],
+              "max": [
+                3.9555616214927736,
+                5.001520731721576,
+                55.43271359112139
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.925303567611916,
+                -4.776440874141918,
+                94.4339575658387
+              ],
+              "median": [
+                -4.066455617717844,
+                -4.774451326170437,
+                104.25315574293509
+              ],
+              "max": [
+                3.838050140058163,
+                -4.773024716800513,
+                113.21453616127967
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              0.5331881823654553,
+              5.0002703993165865,
+              46.62558853868152
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              0.4123455623753481,
+              -4.774189501853542,
+              103.2397280227398
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08507377801742172,
+                -0.17485929642351314,
+                0.7942407309975217
+              ],
+              "median": [
+                -0.08507158289490141,
+                -0.17485128298843514,
+                0.7946771545131839
+              ],
+              "max": [
+                -0.08507068769664416,
+                -0.17484485575478909,
+                0.7951088080125283
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.604580283164978,
+                1.6050894260406494
+              ],
+              "median": [
+                1.6087433099746704,
+                1.6093116998672485
+              ],
+              "max": [
+                1.6134980916976929,
+                1.6129199266433716
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 16.6125,
+              "physics_step": 3987,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08984231948852539,
+                -0.17100797593593597,
+                0.78990638256073
+              ],
+              "weight": 0.003440711608726542,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9552395742634774,
+                4.999675058659434,
+                45.533310797731374
+              ],
+              "hand_local_mm": [
+                3.833849091968982,
+                -4.773024716800513,
+                104.33366781321202
+              ],
+              "world_z_m": 0.78990638256073,
+              "world_z_above_body_origin_mm": 45.530617237091064,
+              "world_z_above_material_min_mm": 45.53582644268705
+            },
+            "first_state": {
+              "t": 16.6125,
+              "physics_step": 3987,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08480869978666306,
+                -0.17495115101337433,
+                0.7443757653236389
+              ],
+              "object_quaternion_wxyz": [
+                0.7072662711143494,
+                -0.00016615819185972214,
+                -0.0003886725753545761,
+                0.7069472074508667
+              ],
+              "object_bottom_world_z_m": 0.7443705561180429,
+              "cup_in_hand_position_m": [
+                -0.00014097841510675481,
+                0.00022862126769550046,
+                0.1498650564008619
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -2.6403245312214757e-05,
+                -0.9999999762969362,
+                -5.466256500047396e-05,
+                -0.0002090956717022982
+              ],
+              "actual_tcp_position_m": [
+                -0.08507377801742172,
+                -0.1748466314804326,
+                0.7942407309975217
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0005178840702423905,
+                0.7069858574311229,
+                -0.707227494649615,
+                -3.142922786607206e-07
+              ],
+              "finger_contact_N": [
+                1.6134980916976929,
+                1.6121702194213867
+              ],
+              "finger_joint_positions_m": [
+                0.005308777093887329,
+                0.005308758933097124
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          }
+        },
+        "before_lift_100ms": {
+          "left": {
+            "positive_impulse_point_count": 105,
+            "physics_steps": [
+              3963,
+              3964,
+              3965,
+              3966,
+              3967,
+              3968,
+              3969,
+              3970,
+              3971,
+              3972,
+              3973,
+              3974,
+              3975,
+              3976,
+              3977,
+              3978,
+              3979,
+              3980,
+              3981,
+              3982,
+              3983,
+              3984,
+              3985,
+              3986,
+              3987
+            ],
+            "actual_t_range_s": [
+              16.5125,
+              16.6125
+            ],
+            "world_z_m": {
+              "min": 0.779750406742096,
+              "median": 0.7978752851486206,
+              "max": 0.7991517782211304
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 36.667048931121826,
+              "median": 54.60149049758911,
+              "max": 55.47136068344116
+            },
+            "world_height_above_material_min_mm": {
+              "min": 36.67235858212903,
+              "median": 54.60686507149448,
+              "max": 55.4884596853501
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.9527618300460277,
+                -5.0356744455949425,
+                36.66182349856405
+              ],
+              "median": [
+                3.952239835414272,
+                -5.000686192877542,
+                54.59621247691749
+              ],
+              "max": [
+                4.122845859063452,
+                -4.949908140339428,
+                55.48953784601543
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.0791013868947505,
+                5.185307467754371,
+                94.37755957330337
+              ],
+              "median": [
+                3.828172766231498,
+                5.227087721068927,
+                95.26981919315446
+              ],
+              "max": [
+                4.004225276423507,
+                5.2684478667135615,
+                113.20466215775409
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.8844733084695884,
+              -4.999518034127578,
+              48.95139056637074
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.7633016196766724,
+              5.228008845968297,
+              100.91485721100923
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08507492465218448,
+                -0.1748785194564373,
+                0.7928596832615818
+              ],
+              "median": [
+                -0.08507157672388267,
+                -0.17484654557494503,
+                0.7933969691577689
+              ],
+              "max": [
+                -0.08505886506135468,
+                -0.17483874975027966,
+                0.7942407309975217
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.6672585010528564,
+                0.7033476233482361
+              ],
+              "median": [
+                1.6078453063964844,
+                1.6084046363830566
+              ],
+              "max": [
+                1.6134980916976929,
+                2.102938413619995
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell00"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 16.5125,
+              "physics_step": 3963,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell10",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07984432578086853,
+                -0.1710505336523056,
+                0.798488199710846
+              ],
+              "weight": 0.00010219118983962923,
+              "event_type": "ContactEventType.CONTACT_FOUND",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.950967956639526,
+                -4.949908140339428,
+                55.4882536681828
+              ],
+              "hand_local_mm": [
+                3.8319410755199654,
+                5.218282872898297,
+                94.37758632395868
+              ],
+              "world_z_m": 0.798488199710846,
+              "world_z_above_body_origin_mm": 55.47010898590088,
+              "world_z_above_material_min_mm": 55.48735479400757
+            },
+            "first_state": {
+              "t": 16.5125,
+              "physics_step": 3963,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08499420434236526,
+                -0.17500069737434387,
+                0.7430180907249451
+              ],
+              "object_quaternion_wxyz": [
+                0.7072246074676514,
+                0.0012601879425346851,
+                0.001271585002541542,
+                0.7069867849349976
+              ],
+              "object_bottom_world_z_m": 0.7430008449168384,
+              "cup_in_hand_position_m": [
+                -0.00014413474654906115,
+                2.2584475834701884e-05,
+                0.14984157078920154
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0022133372953762553,
+                -0.9999975240298604,
+                -2.7112438716503373e-05,
+                -0.00022877299120488664
+              ],
+              "actual_tcp_position_m": [
+                -0.08505893136097793,
+                -0.1748785194564373,
+                0.7928596832615818
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004550463825485785,
+                0.7070066770450688,
+                -0.707206710228453,
+                0.00014336780847590418
+              ],
+              "finger_contact_N": [
+                0.6672585010528564,
+                1.1740814447402954
+              ],
+              "finger_joint_positions_m": [
+                0.0053520603105425835,
+                0.005352071486413479
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 187,
+            "physics_steps": [
+              3963,
+              3964,
+              3965,
+              3966,
+              3967,
+              3968,
+              3969,
+              3970,
+              3971,
+              3972,
+              3973,
+              3974,
+              3975,
+              3976,
+              3977,
+              3978,
+              3979,
+              3980,
+              3981,
+              3982,
+              3983,
+              3984,
+              3985,
+              3986,
+              3987
+            ],
+            "actual_t_range_s": [
+              16.5125,
+              16.6125
+            ],
+            "world_z_m": {
+              "min": 0.7797662019729614,
+              "median": 0.7892624139785767,
+              "max": 0.7997958064079285
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 36.64350509643555,
+              "median": 45.59403657913208,
+              "max": 55.45985698699951
+            },
+            "world_height_above_material_min_mm": {
+              "min": 36.64881474744275,
+              "median": 45.599437927670074,
+              "max": 55.464724209259074
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.808732071381956,
+                4.958346146920259,
+                36.649056728904036
+              ],
+              "median": [
+                -3.9485402469923767,
+                4.999317123282523,
+                45.59968565284973
+              ],
+              "max": [
+                3.9552395742634774,
+                5.034788014665561,
+                55.46354336073268
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.929685406056969,
+                -4.849333137284304,
+                94.40321147744986
+              ],
+              "median": [
+                -4.067406426452679,
+                -4.773580013660975,
+                104.26349290278262
+              ],
+              "max": [
+                3.837757255024773,
+                -4.732992383523048,
+                113.21421172943984
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              0.5449376335924994,
+              5.000425723482579,
+              45.830477656608046
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              0.42373381782801417,
+              -4.777776220237147,
+              104.031113192888
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.08507492465218448,
+                -0.1748785194564373,
+                0.7928596832615818
+              ],
+              "median": [
+                -0.08507109699850444,
+                -0.1748466314804326,
+                0.793339391439267
+              ],
+              "max": [
+                -0.08505886506135468,
+                -0.17483874975027966,
+                0.7942407309975217
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                0.6672585010528564,
+                0.7033476233482361
+              ],
+              "median": [
+                1.6074711084365845,
+                1.6083972454071045
+              ],
+              "max": [
+                1.6134980916976929,
+                2.102938413619995
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 16.5125,
+              "physics_step": 3963,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.08989610522985458,
+                -0.17104767262935638,
+                0.7797701358795166
+              ],
+              "weight": 0.003516303252870965,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.9507615069387225,
+                5.034788014665561,
+                36.73431982698997
+              ],
+              "hand_local_mm": [
+                3.8237076399342897,
+                -4.849333040624823,
+                113.08713559427903
+              ],
+              "world_z_m": 0.7797701358795166,
+              "world_z_above_body_origin_mm": 36.75204515457153,
+              "world_z_above_material_min_mm": 36.76929096267823
+            },
+            "first_state": {
+              "t": 16.5125,
+              "physics_step": 3963,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08499420434236526,
+                -0.17500069737434387,
+                0.7430180907249451
+              ],
+              "object_quaternion_wxyz": [
+                0.7072246074676514,
+                0.0012601879425346851,
+                0.001271585002541542,
+                0.7069867849349976
+              ],
+              "object_bottom_world_z_m": 0.7430008449168384,
+              "cup_in_hand_position_m": [
+                -0.00014413474654906115,
+                2.2584475834701884e-05,
+                0.14984157078920154
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                0.0022133372953762553,
+                -0.9999975240298604,
+                -2.7112438716503373e-05,
+                -0.00022877299120488664
+              ],
+              "actual_tcp_position_m": [
+                -0.08505893136097793,
+                -0.1748785194564373,
+                0.7928596832615818
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004550463825485785,
+                0.7070066770450688,
+                -0.707206710228453,
+                0.00014336780847590418
+              ],
+              "finger_contact_N": [
+                0.6672585010528564,
+                1.1740814447402954
+              ],
+              "finger_joint_positions_m": [
+                0.0053520603105425835,
+                0.005352071486413479
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          }
+        },
+        "source_clear_50ms": {
+          "left": {
+            "positive_impulse_point_count": 59,
+            "physics_steps": [
+              4369,
+              4370,
+              4371,
+              4372,
+              4373,
+              4374,
+              4375,
+              4376,
+              4377,
+              4378,
+              4379,
+              4380,
+              4381
+            ],
+            "actual_t_range_s": [
+              18.204166666666666,
+              18.254166666666666
+            ],
+            "world_z_m": {
+              "min": 0.8066793084144592,
+              "median": 0.8074831962585449,
+              "max": 0.8262196183204651
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 36.67330741882324,
+              "median": 36.70334815979004,
+              "max": 55.413782596588135
+            },
+            "world_height_above_material_min_mm": {
+              "min": 36.67768082686806,
+              "median": 36.707828470652906,
+              "max": 55.418165653762564
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -3.956400191596573,
+                -5.007432881634824,
+                36.66916733435703
+              ],
+              "median": [
+                3.9530109778234244,
+                -4.9999413904601795,
+                36.69871860350862
+              ],
+              "max": [
+                4.121673065452824,
+                -4.99536300185357,
+                55.40927599404325
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.08280835692361,
+                5.221279176115203,
+                94.45663516999824
+              ],
+              "median": [
+                3.8271347652497703,
+                5.225457552048888,
+                113.16749178355768
+              ],
+              "max": [
+                4.002813127858751,
+                5.23419769350525,
+                113.19367375493678
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              3.9465843406722665,
+              -5.000479220538573,
+              47.84618254673726
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              3.8248523549367532,
+              5.226379647637049,
+              102.02003380681636
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.0850697146540892,
+                -0.1748781365473649,
+                0.8198704778339385
+              ],
+              "median": [
+                -0.08506933710405618,
+                -0.1748734272659757,
+                0.8202718566449765
+              ],
+              "max": [
+                -0.08506273216529123,
+                -0.17487277792216813,
+                0.8206703721719644
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.6047272682189941,
+                1.6033297777175903
+              ],
+              "median": [
+                1.6095329523086548,
+                1.608216643333435
+              ],
+              "max": [
+                1.6110018491744995,
+                1.6112817525863647
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell10"
+              ],
+              [
+                "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+                "/World/Cuvette/Collision/band1_cell20"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 18.204166666666666,
+              "physics_step": 4369,
+              "finger": "left",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell10",
+              "finger_collider": "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+              "point": [
+                -0.07982651144266129,
+                -0.1789514720439911,
+                0.8066793084144592
+              ],
+              "weight": 1.5782154137123403e-05,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                -3.956400191596573,
+                -5.007179239508416,
+                36.669354446899376
+              ],
+              "hand_local_mm": [
+                -4.082690786794409,
+                5.233675379967105,
+                113.19343545019933
+              ],
+              "world_z_m": 0.8066793084144592,
+              "world_z_above_body_origin_mm": 36.67348623275757,
+              "world_z_above_material_min_mm": 36.67785836995052
+            },
+            "first_state": {
+              "t": 18.204166666666666,
+              "physics_step": 4369,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08480077236890793,
+                -0.17499184608459473,
+                0.7700058221817017
+              ],
+              "object_quaternion_wxyz": [
+                0.7072106003761292,
+                -0.00028919242322444916,
+                -0.00032313913106918335,
+                0.7070029973983765
+              ],
+              "object_bottom_world_z_m": 0.7700014500445087,
+              "cup_in_hand_position_m": [
+                -0.00014119101706262208,
+                0.00022941409863642717,
+                0.14986479280929288
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -3.833907144842637e-05,
+                -0.9999999781619026,
+                -1.343943637271972e-05,
+                -0.00020500168715352677
+              ],
+              "actual_tcp_position_m": [
+                -0.085069512602028,
+                -0.1748734272659757,
+                0.8198704778339385
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004410087079902874,
+                0.7070124663509547,
+                -0.7072009362355524,
+                0.00011714613948123326
+              ],
+              "finger_contact_N": [
+                1.6095837354660034,
+                1.60532808303833
+              ],
+              "finger_joint_positions_m": [
+                0.005308607593178749,
+                0.00530859874561429
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          },
+          "right": {
+            "positive_impulse_point_count": 123,
+            "physics_steps": [
+              4369,
+              4370,
+              4371,
+              4372,
+              4373,
+              4374,
+              4375,
+              4376,
+              4377,
+              4378,
+              4379,
+              4380,
+              4381
+            ],
+            "actual_t_range_s": [
+              18.204166666666666,
+              18.254166666666666
+            ],
+            "world_z_m": {
+              "min": 0.8066607713699341,
+              "median": 0.8192089796066284,
+              "max": 0.8262107372283936
+            },
+            "world_height_above_body_origin_mm": {
+              "min": 36.654770374298096,
+              "median": 49.05211925506592,
+              "max": 55.43118715286255
+            },
+            "world_height_above_material_min_mm": {
+              "min": 36.659153431472525,
+              "median": 49.05649139225887,
+              "max": 55.435667463725416
+            },
+            "cup_local_xyz_mm": {
+              "min": [
+                -4.799360021353628,
+                4.992823639972114,
+                36.65935037639654
+              ],
+              "median": [
+                -3.950627088133732,
+                5.000056835526273,
+                49.05664277990097
+              ],
+              "max": [
+                3.9536031856715703,
+                5.0046128490544355,
+                55.43563633518339
+              ]
+            },
+            "hand_local_xyz_mm": {
+              "min": [
+                -4.925385946576387,
+                -4.779065983433077,
+                94.43139958710928
+              ],
+              "median": [
+                -4.073100670321597,
+                -4.774847750931313,
+                100.80705174838953
+              ],
+              "max": [
+                3.8352574182717065,
+                -4.766326737185131,
+                113.20392973661558
+              ]
+            },
+            "impulse_magnitude_weighted_cup_local_xyz_mm": [
+              1.5986963524842581,
+              4.999539483990863,
+              47.66734593702145
+            ],
+            "impulse_magnitude_weighted_hand_local_xyz_mm": [
+              1.4772150241804594,
+              -4.773701997284833,
+              102.19865717022911
+            ],
+            "actual_TCP_world_xyz_m": {
+              "min": [
+                -0.0850697146540892,
+                -0.1748781365473649,
+                0.8198704778339385
+              ],
+              "median": [
+                -0.08506933710405618,
+                -0.1748736086210675,
+                0.8202718566449765
+              ],
+              "max": [
+                -0.08506273216529123,
+                -0.17487277792216813,
+                0.8206703721719644
+              ]
+            },
+            "tensor_finger_forces_N": {
+              "min": [
+                1.6047272682189941,
+                1.6033297777175903
+              ],
+              "median": [
+                1.6083756685256958,
+                1.6084944009780884
+              ],
+              "max": [
+                1.6110018491744995,
+                1.6112817525863647
+              ]
+            },
+            "effort_limit_N": [
+              5.0
+            ],
+            "pairs": [
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell02"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell12"
+              ],
+              [
+                "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+                "/World/Cuvette/Collision/band1_cell22"
+              ]
+            ],
+            "first_actual_point": {
+              "t": 18.204166666666666,
+              "physics_step": 4369,
+              "finger": "right",
+              "cup_collider": "/World/Cuvette/Collision/band1_cell22",
+              "finger_collider": "/World/Franka/panda_rightfinger/geometry/panda_rightfinger",
+              "point": [
+                -0.0898321196436882,
+                -0.1710469275712967,
+                0.8155214786529541
+              ],
+              "weight": 0.004106294290406835,
+              "event_type": "ContactEventType.CONTACT_PERSIST",
+              "possible_duplicate": false,
+              "cup_local_mm": [
+                3.945632161886694,
+                4.9930887080339845,
+                45.51980748511415
+              ],
+              "hand_local_mm": [
+                3.823238263036675,
+                -4.767058600153766,
+                104.34698989067216
+              ],
+              "world_z_m": 0.8155214786529541,
+              "world_z_above_body_origin_mm": 45.51565647125244,
+              "world_z_above_material_min_mm": 45.520028608445394
+            },
+            "first_state": {
+              "t": 18.204166666666666,
+              "physics_step": 4369,
+              "phase": "POLICY",
+              "object_position_m": [
+                -0.08480077236890793,
+                -0.17499184608459473,
+                0.7700058221817017
+              ],
+              "object_quaternion_wxyz": [
+                0.7072106003761292,
+                -0.00028919242322444916,
+                -0.00032313913106918335,
+                0.7070029973983765
+              ],
+              "object_bottom_world_z_m": 0.7700014500445087,
+              "cup_in_hand_position_m": [
+                -0.00014119101706262208,
+                0.00022941409863642717,
+                0.14986479280929288
+              ],
+              "cup_in_hand_quaternion_wxyz": [
+                -3.833907144842637e-05,
+                -0.9999999781619026,
+                -1.343943637271972e-05,
+                -0.00020500168715352677
+              ],
+              "actual_tcp_position_m": [
+                -0.085069512602028,
+                -0.1748734272659757,
+                0.8198704778339385
+              ],
+              "actual_tcp_quaternion_wxyz": [
+                -0.0004410087079902874,
+                0.7070124663509547,
+                -0.7072009362355524,
+                0.00011714613948123326
+              ],
+              "finger_contact_N": [
+                1.6095837354660034,
+                1.60532808303833
+              ],
+              "finger_joint_positions_m": [
+                0.005308607593178749,
+                0.00530859874561429
+              ],
+              "gripper_effort_limit_N": 5.0,
+              "gripper_target_m": 0.004499999999999997
+            }
+          }
+        }
+      },
+      "observed_cup_input_collision_shapes": [
+        {
+          "prim": "/Asset/Collision/band1_cell00",
+          "bounds_m": [
+            [
+              -0.00500000214483598,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              -0.003950842091341444,
+              -0.003950842091341444,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell02",
+          "bounds_m": [
+            [
+              -0.00500000214483598,
+              0.003950842091341444,
+              0.005163099057337306
+            ],
+            [
+              -0.003950842091341444,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell10",
+          "bounds_m": [
+            [
+              -0.003950842091341444,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              0.003950842091341444,
+              -0.004213471612787845,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell12",
+          "bounds_m": [
+            [
+              -0.003950842091341444,
+              0.004212799272362844,
+              0.005163099057337306
+            ],
+            [
+              0.003950842091341444,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell20",
+          "bounds_m": [
+            [
+              0.003950842091341444,
+              -0.00500000214483598,
+              0.005163099057337306
+            ],
+            [
+              0.00500000214483598,
+              -0.003950842091341444,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        },
+        {
+          "prim": "/Asset/Collision/band1_cell22",
+          "bounds_m": [
+            [
+              0.003950842091341444,
+              0.003950842091341444,
+              0.005163099057337306
+            ],
+            [
+              0.00500000214483598,
+              0.00500000214483598,
+              0.06722090468207931
+            ]
+          ],
+          "approximation": "convexHull",
+          "collision_enabled": true,
+          "contact_offset_m": 4.999999873689376e-05,
+          "rest_offset_m": 0.0
+        }
+      ],
+      "original_grasp_relative_pose": {
+        "reference_available": true,
+        "maximum_position_drift_m": 1.7783519446891589e-06,
+        "maximum_orientation_drift_deg": 0.0058156295860193954,
+        "maximum_configured_grasp_anchor_drift_m": 1.1622897948060341e-06,
+        "maximum_configured_grasp_anchor_axial_drift_m": 7.617893774934016e-07,
+        "maximum_configured_grasp_anchor_transverse_drift_m": 1.1577356969482316e-06,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "sources": {
+        "result.json": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_01/episode_0000/result.json",
+          "SHA256": "d0d8c9015932766e333043a845ee3235c0af662916eac4c1023d3570f1233eb7",
+          "verified_against_prior_closed_archive": true
+        },
+        "independent_score.json": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_01/episode_0000/independent_score.json",
+          "SHA256": "7942e72067aa5dd195e69dc97f1d1594f9a3422eabeeab44246cef7943c6d33a",
+          "verified_against_prior_closed_archive": true
+        },
+        "config.yaml": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_01/episode_0000/config.yaml",
+          "SHA256": "7b304e22a6ebf3eab3852549b586c14eee23a097839866d80f561b565d4dc6d3",
+          "verified_against_prior_closed_archive": true
+        },
+        "physics_records.jsonl.gz": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_01/episode_0000/physics_records.jsonl.gz",
+          "SHA256": "7fc96a4deaf6cf874760495c70beb61e253c2bb04226b98176aaf42e57d7fb39",
+          "original_SHA256": "ae42f37a8419c0d71ea5f7affaddced32a8ed1f6d2b243abd8807c0d3116e5c0",
+          "original_bytes": 245568495,
+          "whole_decompression_SHA_previously_verified": true
+        },
+        "native_contact_events.jsonl.gz": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_01/episode_0000/native_contact_events.jsonl.gz",
+          "SHA256": "166ed8380a2d072b26d1fcf9f5fec5195302ad3b64fd47be33fd870bc1558df1",
+          "original_SHA256": "be3e30d6aaa64bd8136d616c192b78655566b1590522ab55afe79c8d1e27989f",
+          "original_bytes": 76822206,
+          "whole_decompression_SHA_previously_verified": true
+        }
+      },
+      "native_positive_impulse_points_seen_in_prefix": 5482,
+      "selected_unique_point_count": 618,
+      "state_alignment": "exact physics_step and t, one-to-one; actual hand reconstructed from measured cup world pose and measured cup-in-hand pose, not command FK"
+    }
+  ],
+  "limitations": [
+    "Privileged offline diagnostic only; these coordinates and colliders were not sent to policy.",
+    "Positive impulse contact samples selected; ContactFound with zero impulse and lost callbacks excluded. Exact duplicate same-step/pair/point removed; point counts and impulse-magnitude weights are descriptive, not independently calibrated pressure distributions.",
+    "Input convex hull bounds and native collider names identify logged input collision shapes; effective PhysX cooked geometry was not independently inspected.",
+    "Different controller, grasp TCP height, closure timing and force limits prevent a causal height-only comparison.",
+    "Small relative pose drifts describe this simulator diagnostic, not hardware precision."
+  ],
+  "grasp03_waypoint_vs_grasp_height_check": {
+    "source": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_03/episode_0000/probe_actions.json",
+    "SHA256": "ac95e0ea0efdb403c46eafb163059a44a6d2f7fc7f7d8865e069c6027a368a42",
+    "actions": [
+      {
+        "index": 8,
+        "tool": "move_ee",
+        "time_before_s": 14.683333333333334,
+        "time_after_s": 16.15,
+        "requested_target_TCP_world_z_m": 0.8260000000000001,
+        "actual_endpoint_TCP_world_z_m": 0.8259993903234137,
+        "requested_opening_m": 0.0799999088048935,
+        "applied_cap_N": 8.0
+      },
+      {
+        "index": 9,
+        "tool": "move_ee",
+        "time_before_s": 16.15,
+        "time_after_s": 17.816666666666666,
+        "requested_target_TCP_world_z_m": 0.8009993903821968,
+        "actual_endpoint_TCP_world_z_m": 0.8009977445096585,
+        "requested_opening_m": 0.0799999088048935,
+        "applied_cap_N": 8.0
+      },
+      {
+        "index": 10,
+        "tool": "move_ee",
+        "time_before_s": 17.816666666666666,
+        "time_after_s": 18.15,
+        "requested_target_TCP_world_z_m": 0.796,
+        "actual_endpoint_TCP_world_z_m": 0.7959982253499871,
+        "requested_opening_m": 0.0799999088048935,
+        "applied_cap_N": 8.0
+      },
+      {
+        "index": 11,
+        "tool": "gripper",
+        "time_before_s": 18.15,
+        "time_after_s": 21.15,
+        "requested_target_TCP_world_z_m": 0.7959982253499871,
+        "actual_endpoint_TCP_world_z_m": 0.7959994178765291,
+        "requested_opening_m": 0.009,
+        "applied_cap_N": 5.0
+      },
+      {
+        "index": 12,
+        "tool": "move_ee",
+        "time_before_s": 21.15,
+        "time_after_s": 24.15,
+        "requested_target_TCP_world_z_m": 0.8359994178765291,
+        "actual_endpoint_TCP_world_z_m": 0.8359980678096894,
+        "requested_opening_m": 0.009,
+        "applied_cap_N": 5.0
+      }
+    ],
+    "conclusion": "0.826m is approach waypoint, not grasp TCP. Closed grasp is at0.796m like teacher02."
+  },
+  "conclusions": [
+    "grasp_transport_03 first physical contact TCP≈0.795998m, matching teacher02≈0.796000m; .826m is an earlier approach waypoint.",
+    "Teacher02 and grasp03 first right contacts are≈39.88mm above body bottom-frame origin, first left≈58.63mm; first left and right contacts occur at different times and pad ends, not a simultaneous pressure centroid.",
+    "GPT01 first right≈36.74mm and first left≈55.49mm, shifted down≈3.14mm consistently with actual TCP height.",
+    "All selected actual native finger pairs identify panda_leftfinger/rightfinger geometry against the same band1_cell00/02/10/12/20/22 input cup wall family, localz5.163099–67.220905mm, excluding bottom and top lip band2.",
+    "No evidence here identifies a teacher-specific collision shape transition at53mm. Same-height grasp03 is stable at5N with generic hold, while teacher02 fails at8N and teacher feedback timing differs; a height-only or force-only causal claim is unsupported.",
+    "Asymmetric first-contact locations can create rocking while source floor supports cup; original teacher02 raw rocking/GRASP feedback evidence remains separately valid."
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "schema": "labsim.Project_v1_1.fixed_commit_hold_mechanism_review.v1",
+  "created_utc": "2026-10-26T19:48:44.498384+00:00",
+  "reviewed_execution_commit": "c793a12b8f097eb47a9158a708d896993a05116c",
+  "source_method": "git show <fixed full commit>:<path>; never substituted current working-tree sources",
+  "read_scope": {
+    "source_only": true,
+    "raw_physics_contact_logs_read": false,
+    "HDF5_read": false,
+    "active_teacher_outputs_read": false,
+    "API_calls": 0,
+    "GPU_started": false,
+    "runtime_or_config_or_report_draft_modified": false
+  },
+  "sources": [
+    {
+      "path": "controllers/lab_cuvette_project_v1_1_controller.py",
+      "git_revision": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "sha256": "b7cee216333d7ebd3e0a018ad70afd3719dd1bc6e8eb98a849bb05f0c603cfca",
+      "line_count": 135,
+      "excerpts": [
+        {
+          "first_line": 15,
+          "last_line": 18,
+          "text": "15: class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):\n16:     VERSION = 'Project_v1_1.teacher_phase_motion_clock.v3'\n17:     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))\n18:     NEAR_CONTACT_MARGIN_M = .002"
+        },
+        {
+          "first_line": 84,
+          "last_line": 107,
+          "text": "84:         previous_opening = self.last_grip_opening\n85:         unlatched_before = self.latch_opening is None\n86:         bilateral = all(float(v) > float(get(self.cfg, 'gripper.contact_threshold_N', .02))\n87:             for v in debug['finger_contact_N'])\n88:         if physical_start is not None:\n89:             self.phase_start = actual_t - motion_elapsed\n90:         try:\n91:             # Actual t drives history, contact-loss, quiet windows, latch times\n92:             # and global watchdogs. Only u=t-phase_start sees the mapped clock.\n93:             action = super().act(public_obs, debug)\n94:         finally:\n95:             if self.phase == source_phase and physical_start is not None:\n96:                 self.phase_start = physical_start\n97:             # _enter uses actual t; preserve its new physical phase_start.\n98:         parent_opening = float(action['gripper_opening_m'])\n99:         slow_zone = bool(source_phase == 'GRASP' and unlatched_before and not bilateral\n100:             and previous_opening <= self.near_contact_close_threshold_m\n101:             and parent_opening < previous_opening and not self.finished)\n102:         if slow_zone:\n103:             action['gripper_opening_m'] = max(parent_opening,\n104:                 previous_opening - self.near_contact_close_speed_m_s / self.hz)\n105:             # Preserve first-contact/latch logic; only bound this closing step.\n106:             # In particular, a single finger contact never marks bilateral.\n107:             self.last_grip_opening = float(action['gripper_opening_m'])"
+        }
+      ]
+    },
+    {
+      "path": "controllers/lab_cuvette_env_v1_controller.py",
+      "git_revision": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "sha256": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb",
+      "line_count": 388,
+      "excerpts": [
+        {
+          "first_line": 125,
+          "last_line": 149,
+          "text": "125:     def _latch(self,debug,t):\n126:         fingers=np.asarray(debug['finger_joint_positions_m'],float)\n127:         mass=float(get(self.cfg,'vessel.mass_kg',.02))\n128:         mu=np.sqrt(float(get(self.cfg,'physics.dynamic_friction',.5))*float(get(self.cfg,'physics.finger_dynamic_friction',.8)))\n129:         kp=float(get(self.cfg,'robot.finger_kp',2000.))\n130:         compression=mass*9.81/(2*max(mu,1e-6))*float(get(self.cfg,'gripper.contact_safety_factor',2.))/kp\n131:         compression=float(np.clip(compression,0.,float(get(self.cfg,'gripper.maximum_compression_m',.0003))))\n132:         half=max(float(np.mean(fingers))-compression,float(get(self.cfg,'gripper.minimum_latched_finger_m',.001)))\n133:         candidate_opening=2*half\n134:         policy=str(get(self.cfg,'gripper.latch_transition_policy','measured_weight_based'))\n135:         if policy=='preserve_first_contact_command' and self._closure_freeze_opening is not None:\n136:             # The persistence window already held this command. Recomputing\n137:             # from later finger positions can reopen the gripper at latch.\n138:             # Keep that existing target; do not add further closure or effort.\n139:             self.latch_opening=float(self._closure_freeze_opening)\n140:         elif policy=='measured_weight_based':self.latch_opening=candidate_opening\n141:         else:raise ValueError('Unknown/unavailable gripper latch transition policy: '+policy)\n142:         self.contact_opening=float(np.sum(fingers));self.latch_time=t\n143:         p,q=self._relative(debug);self.grasp_reference=(p.copy(),q)\n144:         self.events.append(dict(t=t,event='contact_latched',measured_finger_m=fingers.tolist(),\n145:             commanded_total_opening_m=self.latch_opening,per_finger_compression_m=compression,\n146:             latch_transition_policy=policy,weight_based_candidate_opening_m=candidate_opening,\n147:             effective_measured_minus_command_per_finger_m=(fingers-self.latch_opening/2).tolist(),\n148:             compression_semantics='Joint target difference, not measured material penetration; first-contact command may predate measured finger response',\n149:             effort_limit_N=8.,friction_assumption=mu,mass_kg=mass,finger_kp_N_per_m=kp,"
+        },
+        {
+          "first_line": 186,
+          "last_line": 196,
+          "text": "186:         opening=self.latch_opening if self.latch_opening is not None else .08\n187:         effort=8.\n188:         if not self.finished and self.latch_opening is not None and self.phase in ('EXTRACT','TRANSPORT','TRANSPORT_HOLD','ALIGN','INSERT','GATE_RETRACT','DIAGNOSTIC_HOLD'):\n189:             relative,_=self._relative(debug)\n190:             slip=float(np.linalg.norm(relative-self.grasp_reference[0]))\n191:             if slip>float(get(self.cfg,'control.max_grasp_relative_drift_m',.0015)):\n192:                 self._finish('GRASP_SLIP',t)\n193:             if np.all(forces<.005):\n194:                 if self._loss_start is None:self._loss_start=t\n195:                 if t-self._loss_start>.3:self._finish('BILATERAL_CONTACT_LOST',t)\n196:             else:self._loss_start=None"
+        },
+        {
+          "first_line": 213,
+          "last_line": 248,
+          "text": "213:             elif self.phase=='GRASP':\n214:                 self.target=self.anchor.copy()\n215:                 if self.latch_opening is None:\n216:                     bilateral=bool(np.all(forces>float(get(self.cfg,'gripper.contact_threshold_N',.02))))\n217:                     if bilateral:\n218:                         if self.contact_start is None:\n219:                             self.contact_start=t\n220:                             self._first_bilateral_seen=True\n221:                             mass=float(get(self.cfg,'vessel.mass_kg',.02));mu=np.sqrt(float(get(self.cfg,'physics.dynamic_friction',.5))*float(get(self.cfg,'physics.finger_dynamic_friction',.8)))\n222:                             compression=min(float(get(self.cfg,'gripper.maximum_compression_m',.0003)),mass*9.81*float(get(self.cfg,'gripper.contact_safety_factor',2.))/(2*mu*float(get(self.cfg,'robot.finger_kp',2000.))))\n223:                             self._closure_freeze_opening=max(.002,min(self.last_grip_opening,float(np.sum(debug['finger_joint_positions_m']))-2*compression))\n224:                             self.events.append(dict(t=t,event='first_bilateral_contact_stop_closure',\n225:                                 actual_finger_positions_m=list(debug['finger_joint_positions_m']),\n226:                                 previous_total_opening_command_m=self.last_grip_opening,\n227:                                 frozen_total_opening_m=self._closure_freeze_opening,per_finger_compression_m=compression,normal_load_basis='mg/(2*mu)*safety/finger_kp; no wider than previous command'))\n228:                         # Freeze on the very first bilateral sample, before the\n229:                         # persistence timer. Continuing the original time ramp\n230:                         # during this window would add millimetres of compression.\n231:                         opening=self._closure_freeze_opening\n232:                         if t-self.contact_start>=float(get(self.cfg,'gripper.contact_persist_s',.1)):\n233:                             self._latch(debug,t);opening=self.latch_opening\n234:                     else:\n235:                         if self.contact_start is not None:\n236:                             self.events.append(dict(t=t,event='bilateral_contact_lost_resume_bounded_closure',\n237:                                 resume_from_total_opening_m=self.last_grip_opening))\n238:                         self.contact_start=None;self._closure_freeze_opening=None\n239:                         speed=float(get(self.cfg,'gripper.contact_approach_speed_m_s',.002) if self._first_bilateral_seen\n240:                                     else get(self.cfg,'gripper.close_speed_m_s',.02))\n241:                         opening=max(.002,self.last_grip_opening-speed/self.hz)\n242:                     if u>float(get(self.cfg,'gripper.grasp_timeout_s',8.)) and self.latch_opening is None:self._finish('GRASP_FAILED',t)\n243:                 else:\n244:                     opening=self.latch_opening\n245:                     self._feedback(debug)\n246:                     if self.task_type=='grasp_hold':\n247:                         if t-self.latch_time>=3.:self._finish('GRASP_HOLD_COMPLETE',t)\n248:                     elif t-self.latch_time>=.75:self._enter('EXTRACT',t)"
+        },
+        {
+          "first_line": 377,
+          "last_line": 388,
+          "text": "377:         self.last_grip_opening=float(opening)\n378:         relative_position,relative_rotation=self._relative(debug)\n379:         relative_position_drift=None if self.grasp_reference is None else float(np.linalg.norm(relative_position-self.grasp_reference[0]))\n380:         relative_rotation_drift=None if self.grasp_reference is None else float(np.rad2deg((relative_rotation*self.grasp_reference[1].inv()).magnitude()))\n381:         return dict(type='ee_pose',values=np.r_[self.target,wxyz(self.rotation_command)].tolist(),\n382:             gripper_opening_m=float(np.clip(opening,.002,.08)),gripper_effort_limit_N=float(effort),\n383:             episode_id=episode_id,observation_step=public_obs.get('step_index',public_obs.get('observation_step')),\n384:             duration_s=1./self.hz,metadata=dict(teacher_phase=self.phase,teacher_status=self.status,\n385:                 teacher_finished=self.finished,truth_pose_used=True,gripper_control='contact_latched_bounded' if self.latch_opening is not None else 'closing_until_bilateral_contact',\n386:                 latched_total_opening_m=self.latch_opening,closure_frozen_at_first_bilateral_m=self._closure_freeze_opening,relative_position_in_TCP_m=relative_position.tolist(),\n387:                 relative_quaternion_in_TCP_wxyz=wxyz(relative_rotation).tolist(),relative_grasp_position_drift_m=relative_position_drift,\n388:                 relative_grasp_rotation_drift_deg=relative_rotation_drift,actual_result_owned_by_independent_scorer=True))"
+        }
+      ]
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "git_revision": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "sha256": "b115448f7d3f49b9452fe41bbc25e055059a17a02695b5a6921683c7296c8b43",
+      "line_count": 148,
+      "excerpts": [
+        {
+          "first_line": 38,
+          "last_line": 41,
+          "text": "38:         mu = math.sqrt(self.dynamic_friction * self.finger_dynamic_friction)\n39:         self.weight_compression_per_finger_m = min(self.maximum_compression_m,\n40:             self.mass_kg * 9.81 * self.contact_safety_factor /\n41:             (2 * mu * self.finger_kp_N_per_m))"
+        },
+        {
+          "first_line": 78,
+          "last_line": 89,
+          "text": "78:         widening = (self.logical_requested_opening_m is not None and\n79:                     logical > self.logical_requested_opening_m + 1e-10)\n80:         if widening:\n81:             self.frozen_opening_m = None\n82:             self.contact_since_s = None\n83:             self.confirmed = False\n84:             self.recovering = False\n85:             self.release_ramp_active = True\n86:         self.logical_requested_opening_m = logical\n87:         bilateral = all(value > self.contact_threshold_N for value in forces)\n88:         candidate = max(self.minimum_total_opening_m,\n89:                         sum(fingers) - 2 * self.weight_compression_per_finger_m)"
+        },
+        {
+          "first_line": 99,
+          "last_line": 126,
+          "text": "99:         elif bilateral:\n100:             if self.frozen_opening_m is None:\n101:                 # Key invariant: a transient measured contact width must not\n102:                 # widen a tighter command that has already been applied.\n103:                 self.frozen_opening_m = min(previous, candidate)\n104:                 self.contact_since_s = t\n105:                 self.confirmed = False\n106:                 decision = \"first_bilateral_freeze\"\n107:             else:\n108:                 decision = \"hold_contact_target\"\n109:             self.recovering = False\n110:             if t - self.contact_since_s >= self.contact_persist_s - 1e-10:\n111:                 self.confirmed = True\n112:                 self.ever_confirmed = True\n113:             applied = self.frozen_opening_m\n114:         elif self.frozen_opening_m is not None or self.recovering:\n115:             # Never jump to an old, already elapsed closure-ramp target after\n116:             # a transient or established grasp loses contact.\n117:             self.frozen_opening_m = None\n118:             self.contact_since_s = None\n119:             self.confirmed = False\n120:             self.recovering = True\n121:             applied = min(previous, max(logical,\n122:                           previous - self.contact_approach_speed_m_s * dt))\n123:             decision = \"contact_loss_slow_close\"\n124:         else:\n125:             applied = ramped\n126:             decision = \"original_ramp\""
+        }
+      ]
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "git_revision": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "sha256": "466056e58bdca83367687de7f0deaaa529939cd452b9d4f087c4108677ac91b8",
+      "line_count": 190,
+      "excerpts": [
+        {
+          "first_line": 127,
+          "last_line": 136,
+          "text": "127:         logical=float(action.get('raw_model_action',{}).get('gripper_opening_m',opening))\n128:         opening,grip_diagnostics=self.contact_hold.update(t=self.t,logical_requested_opening_m=logical,\n129:             ramped_opening_m=opening,previous_applied_opening_m=self.grip,\n130:             measured_finger_positions_m=self.debug['finger_joint_positions_m'],finger_contact_N=self.debug['finger_contact_N'])\n131:         # Prevent the inherited instantaneous latch from recomputing a wider\n132:         # target from the contact-deformed measured opening. It may still clear\n133:         # this compatibility latch during an explicit release; the generic\n134:         # sensor-only helper above owns its independent continuous-contact state.\n135:         self._policy_latch=opening\n136:         q=np.r_[q7,[opening/2]*2]"
+        }
+      ]
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_env_v1.py",
+      "git_revision": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "sha256": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "line_count": 337,
+      "excerpts": [
+        {
+          "first_line": 230,
+          "last_line": 256,
+          "text": "230:     def step(self,action):\n231:         if self.closed or self.ctx is None:raise RuntimeError('reset first')\n232:         if self.ended:raise RuntimeError('Episode terminated; reset before actions')\n233:         q,opening,effort,ticks,conversion=self._convert_action(action);last=None\n234:         for tick in range(ticks):\n235:             if self.ended:break\n236:             self.phase=str(action.get('metadata',{}).get('teacher_phase',action.get('metadata',{}).get('phase','POLICY')))\n237:             if action['type']=='joint_velocity' and tick:\n238:                 current=self.robot.get_joint_positions().copy();limits=np.asarray(self.ctx['old'].robot.max_velocity[:7]);q[:7]=current[:7]+np.clip(np.asarray(action['values']),-limits,limits)/self.cfg.physics.control_hz\n239:                 q[:7]=np.clip(q[:7],self.robot.dof_properties['lower'][:7],self.robot.dof_properties['upper'][:7])\n240:             applied_opening=opening\n241:             if 'teacher_phase' not in action.get('metadata',{}):\n242:                 actual=np.asarray(self.debug['finger_joint_positions_m']);bilateral=np.all(np.asarray(self.debug['finger_contact_N'])>float(self.cfg.gripper.contact_threshold_N))\n243:                 if opening>float(actual.sum())+.001:self._policy_latch=None\n244:                 elif bilateral and self._policy_latch is None:\n245:                     mu=np.sqrt(self.cfg.physics.dynamic_friction*self.cfg.physics.finger_dynamic_friction)\n246:                     compression=min(float(self.cfg.gripper.maximum_compression_m),self.cfg.vessel.mass_kg*9.81*self.cfg.gripper.contact_safety_factor/(2*mu*self.ctx['old'].robot.finger_kp))\n247:                     self._policy_latch=max(.002,float(actual.sum())-2*compression)\n248:                 if self._policy_latch is not None:applied_opening=max(opening,self._policy_latch)\n249:                 conversion['shared_gripper_contact_latch_total_m']=self._policy_latch\n250:                 conversion['requested_total_opening_m']=opening\n251:             q[7:]=applied_opening/2\n252:             self.qcmd=q.copy();self.grip=applied_opening;self.effort=effort\n253:             conversion['executed_q']=self.qcmd.tolist()\n254:             from isaacsim.core.utils.types import ArticulationAction\n255:             self.ac.set_max_efforts(np.r_[self.ctx['old'].robot.max_effort[:7],[effort,effort]])\n256:             self.ac.apply_action(ArticulationAction(joint_positions=self.qcmd))"
+        }
+      ]
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/run.py",
+      "git_revision": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "sha256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "line_count": 179,
+      "excerpts": [
+        {
+          "first_line": 113,
+          "last_line": 129,
+          "text": "113:         for index in range(args.episodes):\n114:             facade.reset(args.seed + index, dict(mode='standard', teacher=args.backend == 'teacher',\n115:                 policy_id='truth_teacher' if args.backend == 'teacher' else 'cubence_gpt6_astra',\n116:                 demonstrator_id='LabCuvetteTeacher' if args.backend == 'teacher' else 'CubenceGenericTools'))\n117:             if args.backend == 'teacher':\n118:                 teacher = create_controller(cfg.controller_type, env.cfg, env.ctx['fixtures'])\n119:                 teacher.reset(env.get_observation(), env.get_debug_observation())\n120:                 from demos.lab_cuvette_project_v1_1.camera_audit import TeacherCameraAudit\n121:                 camera_qa=TeacherCameraAudit(env.episode_dir/'teacher_camera_audit')\n122:                 camera_qa.capture_if_phase_changed(facade,'RESET')\n123:                 while app.is_running() and not env.ended:\n124:                     action = teacher.act(env.get_observation(), env.get_debug_observation())\n125:                     if teacher.finished:\n126:                         env.finalize_episode(teacher.status, None if teacher.status.endswith('_COMPLETE') else teacher.status)\n127:                         break\n128:                     env.step(action)\n129:                     camera_qa.capture_if_phase_changed(facade,teacher.phase)"
+        }
+      ]
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "git_revision": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "sha256": "eb4e18be304b246b94f35dbad2bb24a678ab45777d3cf39911932fc6bb7e147d",
+      "line_count": 420,
+      "excerpts": [
+        {
+          "first_line": 82,
+          "last_line": 94,
+          "text": "82: derived_directory: assets/lab_cuvette_loading/Size_v1\n83: gripper:\n84:   contact_safety_factor: 2.0\n85:   method: contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp;\n86:     no gain or force-limit change\n87:   mode: contact_latched\n88:   actual_slip_max_m: 0.001\n89:   actual_tilt_max_deg: 1.0\n90:   contact_threshold_N: 0.03\n91:   contact_persist_s: 0.1\n92:   maximum_compression_m: 0.0003\n93:   latch_transition_policy: preserve_first_contact_command\n94: mode: workflow"
+        },
+        {
+          "first_line": 99,
+          "last_line": 102,
+          "text": "99:   control_hz: 60\n100:   dynamic_friction: 0.5\n101:   finger_dynamic_friction: 0.8\n102:   finger_static_friction: 1.0"
+        },
+        {
+          "first_line": 228,
+          "last_line": 234,
+          "text": "228:   outer_xy_m:\n229:   - 0.01\n230:   - 0.01\n231:   height_m: 0.0675\n232:   mass_kg: 0.02\n233:   dimension_source: XY size hypothesis derived from preserved12.5mm control; not measured\n234:   mass_source: retained20g engineering assumption, not measured"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "claim": "Near-contact teacher v3 slowdown is not a post-latch force regulator.",
+      "source": "controllers/lab_cuvette_project_v1_1_controller.py",
+      "lines": [
+        84,
+        107
+      ],
+      "basis": "slow_zone requiresGRASP, unlatched_before and notbilateral; bilateral means both readings above configured detection threshold."
+    },
+    {
+      "id": "F2",
+      "claim": "Teacher first bilateral contact freezes the command; preserve_first_contact_command retains it after persistence and subsequent holding.",
+      "source": "controllers/lab_cuvette_env_v1_controller.py",
+      "lines": [
+        125,
+        149,
+        213,
+        248
+      ],
+      "basis": "The one-time weight/stiffness candidate does not become a continuous normal-force target. Later default opening is latch_opening. Relative-pose/contact-loss stop logic is distinct."
+    },
+    {
+      "id": "F3",
+      "claim": "Generic helper recomputes a candidate but ignores it while already frozen and bilateral. No friction load margin or force error feedback is applied in that branch.",
+      "source": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "lines": [
+        87,
+        113
+      ],
+      "basis": "Oncefrozen, decision=hold_contact_target and applied=frozen; only firstbilateral setsmin(previous,candidate). Threshold .03N is detection, not load adequacy."
+    },
+    {
+      "id": "F4",
+      "claim": "Loss recovery cannot close past the logical request. Withlogical=previous=frozen, it cannot close at all.",
+      "source": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "lines": [
+        114,
+        123
+      ],
+      "equation": "applied=min(P,max(L,P-v*dt)); ifL=P, applied=P.",
+      "basis": "This is a lower-bound restriction on total opening, independent of how much the weight candidate would suggest closing."
+    },
+    {
+      "id": "F5",
+      "claim": "Direct teacher dispatch supplies its already-frozen opening as the generic logical request, rather than an independent deeper closure goal.",
+      "sources": [
+        "demos/lab_cuvette_project_v1_1/run.py",
+        "tasks/lab_cuvette_loading_project_v1_1.py"
+      ],
+      "lines": [
+        [
+          123,
+          128
+        ],
+        [
+          127,
+          135
+        ]
+      ],
+      "basis": "teacher.act returns explicitopening; env.step calls task conversion; without raw_model_action.gripper_opening_m, logical falls back to that opening. Teacher metadata also bypasses inherited policy re-latch branch."
+    }
+  ],
+  "engineering_formula_only": {
+    "configured_mass_kg": 0.02,
+    "gravity_assumption_m_s2": 9.81,
+    "configured_dynamic_friction_body": 0.5,
+    "configured_dynamic_friction_fingers": 0.8,
+    "configured_contact_safety_factor": 2.0,
+    "combined_mu_assumed_by_helper": 0.6324555320336759,
+    "required_per_finger_normal_N_for_symmetric_safety_estimate": 0.31021943846251804,
+    "contact_detection_threshold_N": 0.03,
+    "formula": "N_per_finger=m*g*safety/(2*sqrt(mu_body*mu_finger))",
+    "limitation": "Engineering assumption from code. It does not calibrate true contact normals, effective friction, pressure centres or drive stiffness; no actual run force signal was read by this source-only review."
+  },
+  "finite_conclusion": "c793 guarantees no unintended reopening and bounded contact-loss closure toward a logical goal, but does not actively restore a friction-support margin while contact remains binary-positive. A frozen teacher goal can also block additional generic recovery closure. This is a demonstrated control limitation, not by itself a complete causal proof ofteacher_slow_close_01physicalfailure.",
+  "not_claimed": [
+    "No claim that source-only inspection proves actual force insufficiency, drop onset or exact material slip in the closed run.",
+    "No tuning, gain/force/friction increase, threshold relaxation, new policy oracle or hidden teacher takeover is implemented.",
+    "No reinterpretation of historical success/failure labels."
+  ]
+}

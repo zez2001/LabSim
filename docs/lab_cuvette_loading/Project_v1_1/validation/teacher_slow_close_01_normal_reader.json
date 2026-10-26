@@ -1,0 +1,261 @@
+{
+  "schema": "labsim.Project_v1_1.real_closed_normal_reader.v1",
+  "created_at_utc": "2026-10-26T19:44:44.635047+00:00",
+  "scene_version": "Project_v1_1",
+  "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+  "checks": {
+    "success": {
+      "admitted": false,
+      "rejection": "No eligible episodes from which to infer recorded image shape",
+      "expected_from_original_qualifications": false
+    },
+    "failure": {
+      "admitted": true,
+      "actual_ACT_DP_read": {
+        "schema": "labsim.Project_v1_1.reader_check.v1",
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_slow_close_01/episode_0000/dataset/episode_0000.h5",
+        "scene_version": "Project_v1_1",
+        "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+        "recorded_policy_image_shape": [
+          3,
+          256,
+          256
+        ],
+        "public_sample_derivations": [],
+        "sample_filter": "failure",
+        "reader_validation": [
+          {
+            "policy_type": "act",
+            "episodes": [
+              "478d7da6-3ce7-403d-b489-f0ea9caf5b78"
+            ],
+            "scene_fingerprint": "68af839a55d5a55bbf2ad73aa99922a49fc5ceaaf8a73b99d3b9b4cf800d17a3",
+            "batch": {
+              "obs": {
+                "side_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "wrist_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "agent_pose": {
+                  "shape": [
+                    3,
+                    8
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                }
+              },
+              "action": {
+                "shape": [
+                  3,
+                  16,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "is_pad": {
+                "shape": [
+                  3,
+                  16
+                ],
+                "dtype": "torch.bool",
+                "finite": true
+              },
+              "labels": {
+                "episode_id": [
+                  "478d7da6-3ce7-403d-b489-f0ea9caf5b78",
+                  "478d7da6-3ce7-403d-b489-f0ea9caf5b78",
+                  "478d7da6-3ce7-403d-b489-f0ea9caf5b78"
+                ],
+                "task_success": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "record_valid": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "failure_type": [
+                  "GRASP_SLIP",
+                  "GRASP_SLIP",
+                  "GRASP_SLIP"
+                ],
+                "termination_reason": [
+                  "GRASP_SLIP",
+                  "GRASP_SLIP",
+                  "GRASP_SLIP"
+                ]
+              }
+            },
+            "episode_checks": [
+              {
+                "episode_id": "478d7da6-3ce7-403d-b489-f0ea9caf5b78",
+                "transitions": 1197,
+                "observation_action_time_aligned": true,
+                "action_shape": [
+                  1197,
+                  8
+                ],
+                "executed_command_shape": [
+                  1197,
+                  9
+                ],
+                "source_slot_id": "A1",
+                "target_seat_id": "candidate_far_hinge",
+                "asset_id": "cuvette_xy_1000",
+                "record_valid": true,
+                "task_success": false,
+                "condition_group": "natural"
+              }
+            ],
+            "training_or_optimizer_executed": false
+          },
+          {
+            "policy_type": "dp",
+            "episodes": [
+              "478d7da6-3ce7-403d-b489-f0ea9caf5b78"
+            ],
+            "scene_fingerprint": "68af839a55d5a55bbf2ad73aa99922a49fc5ceaaf8a73b99d3b9b4cf800d17a3",
+            "batch": {
+              "obs": {
+                "side_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "wrist_camera_rgb": {
+                  "shape": [
+                    3,
+                    3,
+                    3,
+                    256,
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                },
+                "agent_pose": {
+                  "shape": [
+                    3,
+                    3,
+                    8
+                  ],
+                  "dtype": "torch.float32",
+                  "finite": true
+                }
+              },
+              "action": {
+                "shape": [
+                  3,
+                  16,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "labels": {
+                "episode_id": [
+                  "478d7da6-3ce7-403d-b489-f0ea9caf5b78",
+                  "478d7da6-3ce7-403d-b489-f0ea9caf5b78",
+                  "478d7da6-3ce7-403d-b489-f0ea9caf5b78"
+                ],
+                "task_success": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "record_valid": {
+                  "shape": [
+                    3
+                  ],
+                  "dtype": "torch.bool",
+                  "finite": true
+                },
+                "failure_type": [
+                  "GRASP_SLIP",
+                  "GRASP_SLIP",
+                  "GRASP_SLIP"
+                ],
+                "termination_reason": [
+                  "GRASP_SLIP",
+                  "GRASP_SLIP",
+                  "GRASP_SLIP"
+                ]
+              }
+            },
+            "episode_checks": [
+              {
+                "episode_id": "478d7da6-3ce7-403d-b489-f0ea9caf5b78",
+                "transitions": 1197,
+                "observation_action_time_aligned": true,
+                "action_shape": [
+                  1197,
+                  8
+                ],
+                "executed_command_shape": [
+                  1197,
+                  9
+                ],
+                "source_slot_id": "A1",
+                "target_seat_id": "candidate_far_hinge",
+                "asset_id": "cuvette_xy_1000",
+                "record_valid": true,
+                "task_success": false,
+                "condition_group": "natural"
+              }
+            ],
+            "training_or_optimizer_executed": false
+          }
+        ],
+        "source_labels_modified": false
+      },
+      "expected_from_original_qualifications": true
+    }
+  },
+  "original_qualifications": {
+    "task_success": false,
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "eligible_for_failure_analysis": true,
+    "failure_type": "GRASP_SLIP",
+    "failure_domain": "task"
+  },
+  "source_H5_SHA256": "47ada9b0c80ad0f31fb665cf23710c6606a08b6462295b4ec7152afe4b1c8676",
+  "source_H5_unchanged": true,
+  "training_or_optimizer_executed": false,
+  "GPU_used": false,
+  "API_calls": 0
+}

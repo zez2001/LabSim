@@ -84,7 +84,7 @@ Project_v1 默认保持 standard；采集、训练及训练内自动验证关闭
 
 ## GPT-6 Astra 图像闭环
 
-新版 GPT 控制显式选择 `Project_v1_1`，其中修复了原版本的末端执行和夹爪保持问题；完整任务能力仍按实际独立判分记录。直接后端固定使用 Cubence `https://api.cubence.ai/v1` 和 `gpt-6-astra`，不修改全局 Codex 配置，也不回退到其他模型。在当前终端读取密钥，避免写入 shell 历史、仓库或日志：
+新版 GPT 控制显式选择 `Project_v1_1`，提供连续 IK、实测动作回执、运行时保护和指端接触保持；完整任务能力按实际独立判分记录。直接后端固定使用 Cubence `https://api.cubence.ai/v1` 和 `gpt-6-astra`，不修改全局 Codex 配置，也不回退到其他模型。在当前终端读取密钥，避免写入 shell 历史、仓库或日志：
 
 ```bash
 read -rsp "Cubence API key: " CUBENCE_API_KEY
@@ -100,6 +100,8 @@ unset CUBENCE_API_KEY
 ```
 
 [提供方配置](config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json) 声明 Responses API、超时、动作限制和估算价格。探针、重试及评测应共用同一预算 ledger；默认硬上限为 **估算 $30 / 1500 次网络请求**，单集默认最多 160 次模型调用。估算费用不等于供应商账单。Project_v1_1 继续共用上述 ledger，保留已有请求和费用占用；先获得完整成功再冻结并运行新版正式五次，不用空 ledger 重置预算。
+
+需要限制历史上下文时，可显式增加 `--provider-config config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json`。该独立配置保留最近两个完整工具回合，每一步仍发送当前双图、目标说明、机器人状态和相机标定；其他提供方设置及预算上限不变。默认配置保留最近六个回合，不能把不同配置的调试与正式成绩混算。详细命令和验收范围见[新版调用说明](docs/lab_cuvette_loading/Project_v1_1/usage.md)。
 
 GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信号，通过通用末端移动、夹爪、等待和结束请求控制；没有专家装载宏、器皿真值位姿或评分内部状态。模型请求期间仿真暂停，执行后产生新观测。过期观测被拒绝，同一动作 ID 查询已有回执，不重复运动。完整成功仍由物理结果判定，API 连通或短动作序列不能当作完成任务。运动工具默认每指 8 N 驱动上限，夹爪工具可显式选择 0–8 N；逐动作保存上限，实测接触力另记。
 

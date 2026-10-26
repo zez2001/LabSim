@@ -1,0 +1,1564 @@
+{
+  "schema": "labsim.Project_v1_1.report_inputs.v1",
+  "project_version": "Project_v1_1",
+  "finalized": false,
+  "metadata": {
+    "title": "LabSim Project v1 1 项目发布与验证报告",
+    "date": "2026-10-27",
+    "audience": "组内使用者 后续开发与评测人员",
+    "author": "LabSim 项目",
+    "conclusion": "新执行器的原异常前缀、自由空间与空爪微位移诊断已改善，公开图像驱动的GPT真实抓持搬运已运行；当前闭合teacher02与GPT01均未达到完整任务成功。新teacher对照和后续GPT完整及冻结评测仍待闭合，本文件是可验证的七页草稿输入，不是最终发布报告。"
+  },
+  "draft_provenance": {
+    "closed_source_index_path": "docs/lab_cuvette_loading/Project_v1_1/report/report_sources_closed.json",
+    "closed_source_index_sha256": "0b68805a4d1b51f4c5537ce6d5ee250a8cfe762f8292e1e52392f0522a712d25",
+    "closed_source_count": 78,
+    "CPU_validation_commit": "590f346251b9a8145e7c0d82e825857cc961f8fe",
+    "evidence_snapshot_utc": "2026-10-26T19:19:48.005542+00:00",
+    "no_DOCX_authoring": true,
+    "no_artifact_marker": true,
+    "no_rendering": true,
+    "no_runtime_change": true,
+    "active_teacher_source_hold_outputs_read": false,
+    "source_hashes_revalidated": true,
+    "actual_image_figure_count": 3,
+    "final_page_count_unverified": true
+  },
+  "sources": [
+    {
+      "id": "closed_001",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/README.md",
+      "sha256": "a634a546c67c0bc85349e4a6f0eb9f7b927a7a1bbe6a023479b8c07689bf4297",
+      "bytes": 1962,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/README.md"
+    },
+    {
+      "id": "closed_002",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/summary.json",
+      "sha256": "a5a8eefeb1f4e4962b4773e07d57e860c23c7a7fee86cb694829c98e2b39e95d",
+      "bytes": 4321,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/summary.json"
+    },
+    {
+      "id": "closed_003",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/runtime_versions.json",
+      "sha256": "ba8ef658f79605dcde041e1c06a07f5b2cc5ea3db0e084bbed597825a150ec22",
+      "bytes": 706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/runtime_versions.json"
+    },
+    {
+      "id": "closed_004",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/contracts_result.json",
+      "sha256": "69053e3a1b0c7e88c27a4c498ae8e21186c54959f22db0e3ff4b2fb8d8394dca",
+      "bytes": 14961,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/contracts_result.json"
+    },
+    {
+      "id": "closed_005",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/normal-readers_result.json",
+      "sha256": "b7df6b36bedf776a0cfbaa48107e73b398e0eb95af08d3cd7aafae495d2351d4",
+      "bytes": 5252,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/normal-readers_result.json"
+    },
+    {
+      "id": "closed_006",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_01_failure_normal_reader.json",
+      "sha256": "fe88a0d09299bd5edad5d745c18bdcec9dc01e6463638ea7df1e3f7685ee37be",
+      "bytes": 6519,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/gpt_debug_01_failure_normal_reader.json"
+    },
+    {
+      "id": "closed_007",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/README.md",
+      "sha256": "53c04b32a2dc7bc438e3326fe71aa5c8b95f6dcb98d5039af3d74529aa956a22",
+      "bytes": 4693,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/README.md"
+    },
+    {
+      "id": "closed_008",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/summary.json",
+      "sha256": "b7bbbc1ea2a7d87947241fcb29678f774f7386a7acbf2042b9113c7a3497a535",
+      "bytes": 55756,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/summary.json"
+    },
+    {
+      "id": "closed_009",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/action_comparison.csv",
+      "sha256": "a9258a997b902883278b4a8b4169030a32a7d2f16b15e8c2d8dbceef41dfa8ca",
+      "bytes": 3135,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/action_comparison.csv"
+    },
+    {
+      "id": "closed_010",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/manifest.json",
+      "sha256": "a4bfd1fdf8f37b787461ce8778aee20f81eb305898bdeaa60fd0cfa2800ed153",
+      "bytes": 2681,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/manifest.json"
+    },
+    {
+      "id": "closed_011",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/README.md",
+      "sha256": "d502190d9011d8f684c1d7970f4875794a3da3927d4f87c85dc8678c68121284",
+      "bytes": 5467,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_012",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/summary.json",
+      "sha256": "53531ef17ccd9cc70ffd81a62d53681346512fed0f313ac08ce9e81595877c43",
+      "bytes": 8241,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_013",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv",
+      "sha256": "5d8b24f2c920254e98f7e82b0b6fe635b8bcea25ee433496d5305310ed9c46a5",
+      "bytes": 1170,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv"
+    },
+    {
+      "id": "closed_014",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json",
+      "sha256": "b1373985531ab01f91783c484fdb9fb8f91b2f3ad9b342717a6dc364d8ff6198",
+      "bytes": 637,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json"
+    },
+    {
+      "id": "closed_015",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png",
+      "sha256": "699a473cf35a0c64b045a7d5f93d67c03f30ac65a0544d1922e885200df673ba",
+      "bytes": 369075,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png"
+    },
+    {
+      "id": "closed_016",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json",
+      "sha256": "7b7ef26ac25032ac3f32db68655c93945b2089cfc1ad3613c58bcc74ff2bd345",
+      "bytes": 1471,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json"
+    },
+    {
+      "id": "closed_017",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_03_closed_read_archive.json",
+      "sha256": "9069680e9d3480ba39777e01ee537924d6acee305f2984fab0e76afbc26b52cb",
+      "bytes": 17104,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_transport_03_closed_read_archive.json"
+    },
+    {
+      "id": "closed_018",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/README.md",
+      "sha256": "01899ad0ee150f5b1d8f33bfbba4bb476807ce67ef39439158c7b7f9c426cc7a",
+      "bytes": 6153,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_019",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json",
+      "sha256": "400aa42408b4757cca7291edcf4c7437b8d5faa4fa1a169e70d2cc63d46c91b9",
+      "bytes": 29469,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_020",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv",
+      "sha256": "eb09ab5f03eda45f32b03dde1c7298c4fd9eaa7c1cff3104bb07a22453e2139d",
+      "bytes": 7436,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv"
+    },
+    {
+      "id": "closed_021",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv",
+      "sha256": "d18ba7500d4c093047631b96389161756f5a2f92f900b203d0316d4169caa6bb",
+      "bytes": 65220,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv"
+    },
+    {
+      "id": "closed_022",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png",
+      "sha256": "6e3dbdaac55fbad13ca28ffa61a277ab190c2c46a11137428059e3b6590f9d98",
+      "bytes": 182651,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png"
+    },
+    {
+      "id": "closed_023",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png",
+      "sha256": "f442304a1c7775b441cf431d0279581876b2f447ff739b4815da90d198a501c2",
+      "bytes": 297882,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png"
+    },
+    {
+      "id": "closed_024",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_02_closed_read_archive.json",
+      "sha256": "dcf9a3038a8ee3468dd174cbf414b7442f82be2b3a375348c153b741a4525b0a",
+      "bytes": 9918,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_025",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/README.md",
+      "sha256": "3dee555eab20713fea2e31627fa3ded56783f5c541d818ea4b29cad6b7977edf",
+      "bytes": 3468,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/README.md"
+    },
+    {
+      "id": "closed_026",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json",
+      "sha256": "d855a59e8d566c59562ea01145d9cc18b6e60c7cd8079f909b0e5174e1c64a48",
+      "bytes": 23557,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/audit.json"
+    },
+    {
+      "id": "closed_027",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_results.csv",
+      "sha256": "55f41d10969b6ce86852cac7b011ab6b834025938e128524e1c722586c0946fd",
+      "bytes": 31816,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_results.csv"
+    },
+    {
+      "id": "closed_028",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/group_results.csv",
+      "sha256": "fcce4e927f7dbb5b297775928f3e39e4bdc6fe723b3f64e599e68bd7c6d30664",
+      "bytes": 890,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/group_results.csv"
+    },
+    {
+      "id": "closed_029",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_metrics.png",
+      "sha256": "0078fa1ea2d2a40cb664570431d47fcb0989f283a4cc5745755370b36e9120e0",
+      "bytes": 255940,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_metrics.png"
+    },
+    {
+      "id": "closed_030",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/hold_velocity_discrepancy.png",
+      "sha256": "b5393e1b197d36bea030dda235e511c59a5be3cae5a7140b86a7b6256c45cc76",
+      "bytes": 212858,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/hold_velocity_discrepancy.png"
+    },
+    {
+      "id": "closed_031",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01_closed_read_archive.json",
+      "sha256": "e5cc8b12c1fa56a68955528e62add15f7d76534185d13aaf851b657f5245d054",
+      "bytes": 36108,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_032",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/README.md",
+      "sha256": "6b620f26096be932967ecfc382496886ebd15e9d43396c4c208ba38bf4ce3a27",
+      "bytes": 2058,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/README.md"
+    },
+    {
+      "id": "closed_033",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json",
+      "sha256": "c6b2947e0c94a82a833373183a049968ada387fa73fe5f27785b79e8b4e46a12",
+      "bytes": 11912,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/audit.json"
+    },
+    {
+      "id": "closed_034",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+      "sha256": "6bc704b45c2410eec53c9e3e1c9fea99ac7025a20d7e98bd2908bf85b746d200",
+      "bytes": 2679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/action_comparison.csv"
+    },
+    {
+      "id": "closed_035",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png",
+      "sha256": "1b75b64ac6c7e09d0e6b7148843c6ea50086d0f461b91029ac10e1e4b2a22709",
+      "bytes": 128896,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/comparison.png"
+    },
+    {
+      "id": "closed_036",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_replay_02_closed_read_archive.json",
+      "sha256": "03e952006d6f5c0c69040ae6e80eab4a8b4bacf2f3846661fbcb7d1892eb29bd",
+      "bytes": 23139,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_replay_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_037",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_closed_read_archive.json",
+      "sha256": "dd913afbaa9ffd860fc0474027432512d26d02a07ac21bc25e6a434b9ba394bf",
+      "bytes": 36879,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_038",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md",
+      "sha256": "ee77ee8a52dfc24faa03ac5938997db1f240130a1af9fcb6e1d6538107c0295e",
+      "bytes": 4715,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md"
+    },
+    {
+      "id": "closed_039",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json",
+      "sha256": "4d4222655c3030f88172ae6068cf9de82f688654703ca6f972e42d4efcd01fdd",
+      "bytes": 25017,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json"
+    },
+    {
+      "id": "closed_040",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.md",
+      "sha256": "47f748803de4921567a47c8def531d84aa0233681a7f6e7bd7c961bedc69f97b",
+      "bytes": 4679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.md"
+    },
+    {
+      "id": "closed_041",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.json",
+      "sha256": "f784402bcceba90f9c335f3024b2f100d5b8d6cb8072bfaacc980b9de4adf7d6",
+      "bytes": 12066,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.json"
+    },
+    {
+      "id": "closed_042",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/README.md",
+      "sha256": "1e5cc68e994a352fa1a35af926d8fc8e3fcb2096b9002efd015f2ad13f3e5795",
+      "bytes": 4039,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/README.md"
+    },
+    {
+      "id": "closed_043",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json",
+      "sha256": "bac32ab5a2f8d04f2f1053148793d57f2062983aa95aefd96022dde127c76491",
+      "bytes": 28889,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json"
+    },
+    {
+      "id": "closed_044",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv",
+      "sha256": "adf896a62c16389fd2c8cf165642a2d9dd877ee6c8b50fc9dbb29abc1b97c929",
+      "bytes": 7376,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv"
+    },
+    {
+      "id": "closed_045",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/manifest.json",
+      "sha256": "6ed6c161994b62ddcaa2302b60ece6f12da174b67c5579f0747abab5a0392c2c",
+      "bytes": 26749,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/manifest.json"
+    },
+    {
+      "id": "closed_046",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_closed_read_archive.json",
+      "sha256": "7820ab51a4d4cf85853515d66cda63e4b2297d912ec3a0ea25274185492576b5",
+      "bytes": 21281,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_047",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_collision_offline.json",
+      "sha256": "ca553a5bda94ab61c314819c0da38496824b10a66ec699eb673cfbcdf0b716b2",
+      "bytes": 8534,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_01_collision_offline.json"
+    },
+    {
+      "id": "closed_048",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/README.md",
+      "sha256": "95b9d497e9db6df08fe4a5d81044c3461d86c5fa0aaa9ede8ce9a4ed5dca3f09",
+      "bytes": 4706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/README.md"
+    },
+    {
+      "id": "closed_049",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/summary.json",
+      "sha256": "7a658e7afa7aae500715d6d0c8edeb6dc2d7550616b1c92846b1482af55a2347",
+      "bytes": 9972,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/summary.json"
+    },
+    {
+      "id": "closed_050",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/action_sequence.csv",
+      "sha256": "72e79d3b7432a77576998f46f4bcfb00dc91eed4895d724020eb775d7524aa69",
+      "bytes": 4862,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/action_sequence.csv"
+    },
+    {
+      "id": "closed_051",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/manifest.json",
+      "sha256": "5860a7e702e119bb599b6df423cf73b54f4b74e8351452acc20ceb4350770aba",
+      "bytes": 11550,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/manifest.json"
+    },
+    {
+      "id": "closed_052",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg",
+      "sha256": "bf3add77fc8462477e8edaece113c30a173ef6c564c2302bf85b125f26f54045",
+      "bytes": 211256,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg"
+    },
+    {
+      "id": "closed_053",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/manifest.json",
+      "sha256": "febe1d6ccba3f8e26a78e359649eb42e6ef652dc3fe2d1e2e6ef5fb50961bf44",
+      "bytes": 1201,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_054",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/public_observation.json",
+      "sha256": "5137922a1a8e660a38b3906ecb6f0e0c11504222b996393e88ef030a72f8aa16",
+      "bytes": 5052,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_055",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_056",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_057",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/manifest.json",
+      "sha256": "058d3d3bcc341fc9e84db790201d41c5b39d73cc68582074d3ba957d04f13f50",
+      "bytes": 1203,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_058",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/public_observation.json",
+      "sha256": "4924e75fc14a5593685a711757cbd7c32b794e977a34f163ccc1e7676c8b7bc7",
+      "bytes": 4994,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_059",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg",
+      "sha256": "4fe307811518d38817239119f9ea8460560cda6b77759ae94bcf00c771e8291f",
+      "bytes": 12821,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_060",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "1b8f7f0c0e4f73bc58ac9fdc64a6c463cdc2611bf3ee8b52e0a92b6a9c86c8d8",
+      "bytes": 15684,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_061",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/README.md",
+      "sha256": "11f0c01136a9aaf3310d361afb547dafc34dd7eb80b169086a8aa9005d26e723",
+      "bytes": 2100,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/README.md"
+    },
+    {
+      "id": "closed_062",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/budget_usage_excerpt.json",
+      "sha256": "a814c3432a3b97c8f161147ef1e9604e1203faa5d6d86fed686fffcb4f2fa973",
+      "bytes": 6585,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/budget_usage_excerpt.json"
+    },
+    {
+      "id": "closed_063",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.csv",
+      "sha256": "6423f6fc93d3696113b2c6a88310df1449349d870fc0534f61d909076ec7e8be",
+      "bytes": 399,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.csv"
+    },
+    {
+      "id": "closed_064",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.json",
+      "sha256": "1c0f26640da92c46e03c9244d6bc1a2d49fe6dc674aa0515b02f639fa32ae3ff",
+      "bytes": 12109,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.json"
+    },
+    {
+      "id": "closed_065",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/manifest.json",
+      "sha256": "6ac358059de6f08aa26a55988e7ef575855b2c58b86871f329e87df75b3a85db",
+      "bytes": 2463,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/manifest.json"
+    },
+    {
+      "id": "closed_066",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/summary.json",
+      "sha256": "90e57773c734e9deb1fa18fb7b8d064316e3b1ca49c46d1a573ec3f4474f05f2",
+      "bytes": 5406,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/summary.json"
+    },
+    {
+      "id": "closed_067",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_068",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_069",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg",
+      "sha256": "ad0d7683196f90f029803e8cd24eec558a0541622ecd8f980681133b0f68be44",
+      "bytes": 9201,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_070",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg",
+      "sha256": "70408c3cce539c407775a907324d4802dea7205a97c07f13ed449e4cbb10d738",
+      "bytes": 11104,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_071",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg",
+      "sha256": "78bf3abdfbadd8c7c1a8ec6638a1387a7272cea8cdbfe1e11269a8a9301e05f1",
+      "bytes": 9556,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg"
+    },
+    {
+      "id": "closed_072",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg",
+      "sha256": "2a57feeb4f838fcb9fa92660446097476b97325ad0267d1ff53451383c8bbb39",
+      "bytes": 12195,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_073",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg",
+      "sha256": "afa840c65cc5d22ed7571e8a67a3a4510298d4c8a95aee285b66902bb812baad",
+      "bytes": 9187,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_074",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg",
+      "sha256": "bba1d6872e0406d970f4106e5c68ea0ab67a3c737c679b618773916998b195aa",
+      "bytes": 10361,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_075",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg",
+      "sha256": "384350d808bbe44966160323e37288d6308c0c7e5301e6c1c88d057bf48efa35",
+      "bytes": 8740,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg"
+    },
+    {
+      "id": "closed_076",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg",
+      "sha256": "0bc7ae6df2835bfa9e0efb27ecbadf79a7106f4dfc42a86d8a8bdafec282f71a",
+      "bytes": 10824,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_077",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg",
+      "sha256": "930671662cbe12091d140ddf7ff75373daf22007429bfd53822264d80d4edba6",
+      "bytes": 8889,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_078",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg",
+      "sha256": "31f175186156c6963afab10d0668979d6f3ff675182a9006c0858c2e8277b3b4",
+      "bytes": 10121,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "cpu590_summary",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/summary.json",
+      "sha256": "3a967b1ef628057c0f89adb983167bbc95bfb7f146da4d64e5995a75c0643691"
+    },
+    {
+      "id": "cpu590_contracts",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/contracts_result.json",
+      "sha256": "461f3405858396c135c2acaaf7401c2ef11cdeb162b4684ca2154ea8d475226b"
+    },
+    {
+      "id": "cpu590_readers",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/normal-readers_result.json",
+      "sha256": "816af5daf54a9fab200175c196ac924d35864b1987f382d1444bd4b950093cb5"
+    },
+    {
+      "id": "cpu590_versions",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/runtime_versions.json",
+      "sha256": "5a936b4bd6836d98780e592aefaf04b03f4243a7a495f567249bc51a5c88a271"
+    },
+    {
+      "id": "cpu590_ci",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/github_ci.json",
+      "sha256": "d9eb3e536f6970e06cdb89c3c4ec862129adb49ed83cc0751591f31826def472"
+    },
+    {
+      "id": "cpu590_protection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/protection_runtime_root_v2.json",
+      "sha256": "b5b8f66a3d12051d631a9f7460fd5a7ece5baf478ef027af2006969e588635c1"
+    },
+    {
+      "id": "cpu590_manifest",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/manifest.json",
+      "sha256": "6a53f4bc72b25046cd17b6957703b3bb521504852b9c1acffdb1acb67196e641"
+    },
+    {
+      "id": "closed_source_index",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/report_sources_closed.json",
+      "sha256": "0b68805a4d1b51f4c5537ce6d5ee250a8cfe762f8292e1e52392f0522a712d25"
+    },
+    {
+      "id": "gpt01_runtime_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/summary.json",
+      "sha256": "299763cc87fb5b0765ed043e764b540b897ea6f7ed338090ab0e02d297a410e6"
+    },
+    {
+      "id": "gpt01_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/controller.json",
+      "sha256": "fd1c709819e94162d84dd0a14e9684054a732d1c28796d5f8590cf57c6769275"
+    },
+    {
+      "id": "current_usage",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/usage.md",
+      "sha256": "1f7336b0450dcdf3a1458d475389a1ebc6ab6d1caabf7ed9f10f056c38aca2d8"
+    },
+    {
+      "id": "hf_pinned_assets",
+      "scope": "release",
+      "url": "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067"
+    }
+  ],
+  "cohorts": [
+    {
+      "kind": "diagnostic",
+      "status": "closed",
+      "completed_count": 2,
+      "planned_count": 2,
+      "summary_source": "closed_033",
+      "note": "此cohort仅计最终fixed_replay_02两条原前缀；72自由探针、24细探针及持物A/B分别报告，不混计任务成功率。"
+    },
+    {
+      "kind": "teacher",
+      "status": "incomplete",
+      "completed_count": 1,
+      "summary_source": "closed_037",
+      "note": "已关闭teacher_camera_v2_02真实完整工作流但独立GRASP_SLIP；新teacher_source_hold尚未纳入关闭证据，最终回归5次与完整成功待补。completed_count不代表正式5次进度。"
+    },
+    {
+      "kind": "gpt_debug",
+      "status": "closed",
+      "completed_count": 1,
+      "summary_source": "closed_049",
+      "note": "本版debug01实际11次API，抓持搬运后SAFETY_COLLISION；不是未运行或完整成功，后续调试待追加。"
+    },
+    {
+      "kind": "gpt_formal",
+      "status": "incomplete",
+      "completed_count": 0,
+      "planned_count": 5,
+      "note": "本版已有真实GPT调试失败；正式cohort需完整成功后冻结运行，当前尚无本版formal结果，不与旧Project_v1正式5次合并。"
+    }
+  ],
+  "pages": [
+    {
+      "title": "当前结论与验证范围",
+      "topics": [
+        "summary"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "这是 Project_v1_1 的报告草稿输入，尚未形成最终发布结论。当前证据证明新执行器可复现有界动作、通用夹爪保持及公开图像闭环；尚未证明本版本 GPT 独立完成原座装载。旧 Project_v1、历史资产与输出保留，本版使用独立配置、reader 和结果目录。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "问题",
+            "当前已证实结果",
+            "边界"
+          ],
+          "rows": [
+            [
+              "原异常动作",
+              "两条原前缀的7个目标均到达，真实退出0",
+              "确定性诊断，未调用GPT"
+            ],
+            [
+              "微小位移",
+              "24个空爪细探针全部达到100 µm诊断目标",
+              "不是持物插入或真实精度认证"
+            ],
+            [
+              "相机与输入",
+              "v2已实际渲染；两种图像profile真实API比较完成",
+              "最终撤离后目标仍部分出腕视"
+            ],
+            [
+              "teacher完整任务",
+              "teacher02走完工作流，原独立GRASP_SLIP",
+              "task_success=false，不算成功"
+            ],
+            [
+              "GPT完整任务",
+              "debug01实际抓持、离架、搬运后安全碰撞",
+              "未插入、释放、撤离；task_success=false"
+            ],
+            [
+              "数据接口",
+              "GPT01有效失败可由正常ACT/DP入口读取",
+              "成功BC过滤仍拒绝该轨迹"
+            ]
+          ],
+          "widths": [
+            2.1,
+            4.6,
+            3.8
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "CPU fixture、确定性物理诊断、真值专家、真实GPT调试和正式评测分别管理。当前运行中的新teacher对照不计入已关闭样本；新版正式GPT五次尚待完整成功后冻结实施。预算未耗尽不能替代任务验收，末窗稳定也不能覆盖早期抓持失败。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_source_index",
+              "label": "本轮78项闭合源索引"
+            },
+            {
+              "source": "closed_033",
+              "label": "原动作闭合回归"
+            },
+            {
+              "source": "closed_046",
+              "label": "GPT01关闭与全读证据"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "动作异常根因与连续执行修复",
+      "topics": [
+        "executor"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "旧执行器在world小动作中曾实际移动超过200 mm。新路径保持原请求目标，用连续局部IK、FK复核和关节步长界限预规划，再以实际跟踪与速度护栏执行；不再把远IK解逐关节截断后宣称到达，也不把目标追随跑偏TCP重定向。拒绝规划时执行零tick，部分执行按真实时间和后继状态记录，不自动重放。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "序列第三动作",
+            "旧净位移 mm",
+            "新净位移 mm",
+            "新终点误差 µm"
+          ],
+          "rows": [
+            [
+              "world 0 40 0 mm",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/0/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/0/third_action/final_fix02_net_displacement_mm",
+                "format": ".6f"
+              },
+              "1.527"
+            ],
+            [
+              "world 0 35 −19 mm",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/1/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/1/third_action/final_fix02_net_displacement_mm",
+                "format": ".6f"
+              },
+              "2.402"
+            ]
+          ],
+          "widths": [
+            3.2,
+            2.3,
+            2.7,
+            2.8
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "closed_035",
+          "caption": "原请求参数保持不变的两条异常前缀。终点改善与动态路径误差分别显示；完整控制边界跟踪峰值仍约0.367/0.251 mm。",
+          "max_height_cm": 5.3
+        },
+        {
+          "type": "paragraph",
+          "text": "最终fixed_replay_02两集共7动作全部到达、真实退出0。首次修复fixed_replay_01虽完成动作，关闭后Python GC退出139仍作为历史缺陷保留，不能写成当时进程正常。相同请求不等于此前实际起点相同，多处控制与工具改动也不能全部归因于单一补偿。另有三个独立reset、world/TCP两种姿态的72个有符号自由空间探针通过；这些均不是完整装载样本。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_032",
+              "label": "新旧前缀说明"
+            },
+            {
+              "source": "closed_034",
+              "label": "全部7动作对照"
+            },
+            {
+              "source": "closed_026",
+              "label": "72探针审计"
+            },
+            {
+              "source": "closed_010",
+              "label": "首次修复及退出缺陷来源"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "微位移控制与通用持物诊断",
+      "topics": [
+        "executor",
+        "grasp"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "细位移A/B在合法空爪预插入位置，比较同24个world正负XYZ、0.1/0.5/1/2 mm条件。B使用仅依赖机器人状态的有界跟踪观测补偿；资产、物理、相机及评分门槛不变。状态依赖的转移点数由68变67，因此按条件配对，不能称整套绝对动作逐条相同。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "24项终点诊断",
+            "A 无补偿",
+            "B 有界补偿"
+          ],
+          "rows": [
+            [
+              "达到100 µm目标",
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_01/fine_endpoint_goal_100um_count",
+                "suffix": "/24"
+              },
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_02/fine_endpoint_goal_100um_count",
+                "suffix": "/24"
+              }
+            ],
+            [
+              "终点误差中位数 µm",
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_01/fine_endpoints/endpoint_error_um/median",
+                "format": ".3f"
+              },
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_02/fine_endpoints/endpoint_error_um/median",
+                "format": ".3f"
+              }
+            ],
+            [
+              "终点误差最大值 µm",
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_01/fine_endpoints/endpoint_error_um/max",
+                "format": ".3f"
+              },
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_02/fine_endpoints/endpoint_error_um/max",
+                "format": ".3f"
+              }
+            ],
+            [
+              "3秒保持整窗最大漂移 µm",
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_01/final_wait_3s/max_distance_from_start_um",
+                "format": ".3f"
+              },
+              {
+                "source": "closed_019",
+                "pointer": "/runs/fine_preinsert_02/final_wait_3s/max_distance_from_start_um",
+                "format": ".3f"
+              }
+            ]
+          ],
+          "widths": [
+            4.4,
+            2.7,
+            2.7
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "closed_022",
+          "caption": "同24条件的终点误差。B细探针1800个控制边界的名义轨迹误差最大32.849 µm；不代表物理子步严格上界或持物精度。",
+          "max_height_cm": 5.1
+        },
+        {
+          "type": "paragraph",
+          "text": "通用接触保持A/B保留相同名义动作与力上限，修复无显式释放时的回张。B完成17个诊断动作，实际器皿短移27.808 mm，双侧保持力约1.217 N；未触发完整搬运门槛，也未装载。细探针B的端点数值接近FK/native表示差异尺度；原生速度与位姿差分仍不一致，A精确probe源码SHA亦有缺口。不能据微米或亚微米记录宣称平台真实精度。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_020",
+              "label": "24条件配对CSV"
+            },
+            {
+              "source": "closed_019",
+              "label": "动态误差与保持完整统计"
+            },
+            {
+              "source": "closed_012",
+              "label": "通用持物A B原标签与指标"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "相机挂点与实际模型输入",
+      "topics": [
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "腕相机v2已在真实teacher阶段帧与GPT输入中渲染。原生640×480经完整图缩放为512×384 JPEG q60、detail low，保存传输后K、原生及发送图像SHA、公开状态和观测ID。teacher预览明确api_sent=false；下图来自GPT01实际发送JPEG。保存范围为公开观测JSON、编码JPEG与公开工具调用/回执，并非完整HTTP请求或全部memory response item组，不宣称保存私有reasoning内容。阶段、对象真值和GT裁剪不进入公开模型输入。"
+        },
+        {
+          "type": "figure",
+          "source": "closed_077",
+          "caption": "GPT01 decision10实际侧视输入，24.0167秒，下一动作发生前。可见整手已接近机身高壁；腕视配对图见来源链接。不是碰撞发生时的追加图像。",
+          "max_height_cm": 6.0
+        },
+        {
+          "type": "table",
+          "headers": [
+            "真实API单帧比较",
+            "512 low",
+            "640 high"
+          ],
+          "rows": [
+            [
+              "输入 tokens",
+              {
+                "source": "closed_066",
+                "pointer": "/profiles/0/input_tokens"
+              },
+              {
+                "source": "closed_066",
+                "pointer": "/profiles/1/input_tokens"
+              }
+            ],
+            [
+              "请求耗时 s",
+              {
+                "source": "closed_066",
+                "pointer": "/profiles/0/wall_seconds",
+                "format": ".2f"
+              },
+              {
+                "source": "closed_066",
+                "pointer": "/profiles/1/wall_seconds",
+                "format": ".2f"
+              }
+            ],
+            [
+              "可确认事实",
+              "杯体 夹指 座边",
+              "未新增可确认事实"
+            ]
+          ],
+          "widths": [
+            3.3,
+            3.1,
+            3.6
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "两次请求使用teacher同一INSERT瞬间，各profile仅一响应，图像边长和detail共同变化，不能泛化延迟或识别优劣。均不能确认底部支撑、目标座可见身份或释放后稳定，继续冻结512 low。实际阶段图确认夹持、装载外观和双指脱离可见；撤离末段目标部分离开腕视且侧视较小，此限制尚未消失。sensor与episode时钟分开保留，不能仅凭时间戳宣称像素与状态完全同刻。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_078",
+              "label": "同决策实际腕视输入"
+            },
+            {
+              "source": "closed_066",
+              "label": "真实API比较与SHA"
+            },
+            {
+              "source": "closed_043",
+              "label": "全部teacher阶段可见性审计"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "GPT 实际调试与正式评测边界",
+      "topics": [
+        "gpt"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "GPT01实际11次API决策，使用双RGB、机器人状态、标定与允许的指端接触，通过五类通用工具执行，无teacher接管、任务宏或器皿真值。前10动作TCP终点到达，9 mm/每指5 N闭爪后抬升两次40 mm，第一段同高度斜向搬运完成；第二段在24.8333秒安全碰撞停。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "项目",
+            "GPT debug01 已关闭"
+          ],
+          "rows": [
+            [
+              "独立结果",
+              "SAFETY_COLLISION / task_success=false"
+            ],
+            [
+              "记录与物理资格",
+              "record_valid=true / physics_trustworthy=true"
+            ],
+            [
+              "控制 tick / 仿真时长",
+              "1489 / 24.833333 s"
+            ],
+            [
+              "最后动作 请求与实际",
+              "150→49 tick / 2.5→0.816667 s"
+            ],
+            [
+              "最后段最大跟踪误差",
+              "0.259601 mm"
+            ],
+            [
+              "尚未执行",
+              "腔内插入 支撑交接 释放 撤离 稳定观察"
+            ]
+          ],
+          "widths": [
+            3.4,
+            6.6
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "最后未到目标余差26.880593 mm是安全停止后的剩余距离，不是执行器跳变；部分动作实际TCP移动12.679963 mm。侧视已能看见仪器高壁，腕视主要覆盖杯与来源架，不能将TCP路径合法当成整手净空证明。离线报告中的接触actor或坐标不回馈policy。"
+        },
+        {
+          "type": "paragraph",
+          "text": "GPT01闭合时共享ledger为108次请求、估算占用6.936872美元；本集11次、估算增量1.063480美元。总数含此前请求和未知usage预留，不是实付账单，更不是最终预算快照。当前上限30美元/1500请求继续共享，不能换空ledger。安全失败并非预算耗尽。"
+        },
+        {
+          "type": "paragraph",
+          "text": "本版本完整GPT成功尚未建立。新的安全提示或调试结果、最终模型/prompt/工具/相机/控制指纹及冻结正式5次结果待补；旧Project_v1正式5次只保留为历史，绝不混入本版本统计。这里记录的是已真实运行的调试失败，不写成GPT未运行。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_049",
+              "label": "公开输入与动作复核"
+            },
+            {
+              "source": "closed_047",
+              "label": "独立离线碰撞定位"
+            },
+            {
+              "source": "gpt01_runtime_summary",
+              "label": "真实请求与闭合预算快照"
+            },
+            {
+              "source": "gpt01_controller",
+              "label": "当次prompt与工具指纹"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "专家回归与正常数据读取",
+      "topics": [
+        "teacher_data"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "teacher_camera_v2_02已真实关闭：124.266667秒、7455转换，控制器工作流结束且实际脱指、撤离及撤离后3秒稳定成立。但独立评分仍为GRASP_SLIP、task_success=false、BC不合格；grasp/transport/loading_sequence资格没有通过。不能把到达终末阶段或稳定末窗写成完整成功。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "证据范围",
+            "已确认",
+            "解释"
+          ],
+          "rows": [
+            [
+              "teacher02抓持",
+              "杯底相对漂移608.994 µm",
+              "超过原200 µm门槛"
+            ],
+            [
+              "峰值定位",
+              "18.245833 s GRASP",
+              "转动杆臂与实际锚点移动并存"
+            ],
+            [
+              "配置抓取锚点漂移",
+              "最大64.096 µm",
+              "仅分析量 不替换成功判据"
+            ],
+            [
+              "新teacher_source_hold对照",
+              "尚未纳入已关闭证据",
+              "结果与后续5次回归待补"
+            ],
+            [
+              "GPT01正常失败读取",
+              "ACT / DP均实际通过",
+              "1489转换 时间对齐 标签未改"
+            ],
+            [
+              "成功BC过滤",
+              "拒绝GPT01失败轨迹",
+              "不改成功标签制造batch"
+            ]
+          ],
+          "widths": [
+            3.0,
+            3.3,
+            3.9
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "新teacher控制修改与正在执行的对照尚不能用CPU验证代替物理结果，需等真实关闭、原独立评分与完整数据读取后补齐。后续本版本teacher五次及最终GPT成功样例也须按冻结配置逐集记录；本草稿不预填未来数值。"
+        },
+        {
+          "type": "paragraph",
+          "text": "590f346提交的本地CPU检查为contracts 445通过/11轻量skip、normal-readers 22通过/0skip；467个具体用例至少通过一次，全部轻量skip由正常reader运行覆盖。GPT01的真实失败H5另由正常ACT/DP入口读取，action batch为3×16×8，观测动作逐条对齐，success过滤拒绝，原文件SHA不变。CPU fixture与真实H5读取是两类证据，均未训练。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_037",
+              "label": "teacher02关闭全读归档"
+            },
+            {
+              "source": "closed_039",
+              "label": "teacher02早期抓持漂移定位"
+            },
+            {
+              "source": "closed_006",
+              "label": "真实GPT失败ACT DP读取"
+            },
+            {
+              "source": "cpu590_summary",
+              "label": "590f346 CPU及保护汇总"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "复现入口与发布待补项",
+      "topics": [
+        "release"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "所有新版调用显式指定Project_v1_1；省略版本仍为历史Project_v1。复用Isaac Sim 5.1与Python3.11，不向其安装CI或模型依赖。新输出目录防覆盖，同一GPU顺序运行；collect/train固定standard，评测随机化需后续明确选择。本轮不启动训练或新增采集配额。以下为有效入口格式，不表示最终同发布提交复现已经完成。"
+        },
+        {
+          "type": "code",
+          "language": "bash",
+          "text": "./labsim demo --project-version Project_v1_1 --backend teacher \\\n  --output outputs/lab_cuvette_loading/Project_v1_1/teacher_NEW\n\n./labsim eval --project-version Project_v1_1 --scene standard \\\n  --backend gpt6 --episodes 1 --max-calls 160 --headless \\\n  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \\\n  --output outputs/lab_cuvette_loading/Project_v1_1/gpt_NEW"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "发布项目",
+            "草稿时已核范围",
+            "最终必须补齐"
+          ],
+          "rows": [
+            [
+              "代码与CI",
+              "590f346 CPU及对应公开CI Success",
+              "实际最终本地远端SHA与同SHA CI"
+            ],
+            [
+              "干净复现",
+              "多次同机闭合运行分别保存运行提交",
+              "最终代码 clean checkout 缓存 GUI headless reset reader"
+            ],
+            [
+              "资产与HF",
+              "固定pin下载83/83验SHA",
+              "本版发布manifest及最终pin 无本版成功样例时明确缺口"
+            ],
+            [
+              "保护检查",
+              "旧18配置 40实现 596资产 880证据未变",
+              "最终提交后再次核对保护与变更范围"
+            ],
+            [
+              "报告与阅读包",
+              "七逻辑页草稿及实体SHA依赖",
+              "最终结果补齐后author 渲染 QA 小包链接检查"
+            ]
+          ],
+          "widths": [
+            2.2,
+            4.3,
+            4.5
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "当前已验证HF资产pin为bb880f098180c291f6f65995f969d48047207067；最终代码和本版本数据发布身份尚不在本草稿中宣告完成。新公开joint语义修正目前只有CPU测试，现有EE运行不能证明joint-action物理验证。新控制/teacher修改后的最终复现、远端CI、HF清单与完整媒体由发布阶段补齐；没有第二台机器时仅声明同机范围。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "current_usage",
+              "label": "新版完整调用与reader说明"
+            },
+            {
+              "source": "cpu590_ci",
+              "label": "590f346公开CI核对"
+            },
+            {
+              "source": "cpu590_protection",
+              "label": "历史与运行资产保护"
+            },
+            {
+              "source": "hf_pinned_assets",
+              "label": "现有固定HF资产pin"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "此输入finalized=false；没有DOCX authoring、marker、渲染或最终页面数验收。最终发布前须更新页5至7的实际闭合运行、全部费用、版本身份和发布核验。",
+    "空爪细位移、FK/native差异、通用持物相对量都不是实物标定精度；不宣称Isaac Sim具有0.1 mm或亚微米真实精度。",
+    "姿态差分与原生速度仍有不一致；控制边界采样不能充当物理子步严格误差上界。孔座有效烹饪碰撞和真实材料/质量/惯量尚未完整真实校准。",
+    "512low与640high只有同一INSERT瞬间各一响应，不能推广一般延迟或识别准确率；最终撤离后目标的腕视截断与侧视遮挡仍存在。",
+    "teacher02的GRASP_SLIP、GPT01的SAFETY_COLLISION和所有null/训练资格原样保留；末窗稳定、API连通或诊断通过不改变任务失败标签。",
+    "实际API返回模型标识符合配置是协议证据，不独立证明上游模型身份；费用为公开价估算且含未知usage预留，不是实付账单。公开观测与exact JPEG记录不等于完整HTTP body及请求上下文；memory response item组可能包含未记录的私有reasoning items。",
+    "新teacher_source_hold及后续运行没有纳入本草稿关闭计数；尚无本版本完整GPT成功与冻结正式5次结果。",
+    "最终同提交clean checkout、GUI/headless/reset、正常reader、Git远端SHA/CI及HF发布清单待补；当前590f346 CPU与CI不能替代未来发布提交的验收。"
+  ]
+}

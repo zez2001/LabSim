@@ -1,0 +1,113 @@
+{
+  "schema": "labsim.Project_v1_1.gpt02_closed_compact.v1",
+  "analysis_date_local": "2026-10-27",
+  "original_result": {
+    "task_success": false,
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "eligible_for_failure_analysis": true,
+    "failure_type": "SAFETY_GEOMETRY_VIOLATION",
+    "failure_domain": "safety"
+  },
+  "actual_execution_commit": "c793a12b8f097eb47a9158a708d896993a05116c",
+  "actual_terminal_simulation_time_s": 59.86666666666667,
+  "transitions": 3591,
+  "accepted_public_actions": 33,
+  "normal_filter_admission": {
+    "success": false,
+    "failure": true
+  },
+  "original_observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 14.1125,
+      "physics_step": 3387,
+      "actual_force_N": [
+        1.610750436782837,
+        1.609235405921936
+      ]
+    },
+    "actual_lift_started": {
+      "t": 14.1125,
+      "physics_step": 3387,
+      "actual_lift_m": 0.0015154763052211973
+    },
+    "source_slot_cleared": {
+      "t": 15.370833333333334,
+      "physics_step": 3689,
+      "actual_bottom_world_z_m": 0.7700865705821628,
+      "source_rim_world_z_m": 0.768
+    },
+    "held_transport_observed": {
+      "t": 32.520833333333336,
+      "physics_step": 7805,
+      "horizontal_displacement_m": 0.05006507252802129
+    }
+  },
+  "original_grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 0.01695555798327204,
+    "maximum_orientation_drift_deg": 0.3117973238194896,
+    "maximum_configured_grasp_anchor_drift_m": 0.016957146492425895,
+    "maximum_configured_grasp_anchor_axial_drift_m": 0.016954905404233632,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 0.00029761760295134583,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "original_release_observed": false,
+  "original_retreat_observed": false,
+  "original_stable_after_retreat": null,
+  "original_post_retreat_window": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "actual_gripper_retreat_not_observed"
+  },
+  "maximum_bilateral_bottom_drift_before_first_actual_cup_seat_contact": {
+    "t_s": 48.52916666666667,
+    "drift_m": 7.124743306018761e-06,
+    "left_right_force_N": [
+      1.6117541790008545,
+      1.612038493156433
+    ],
+    "source_bottom_gap_m": 0.2396291910762346
+  },
+  "first_cup_seat_contact_t_s": 52.9125,
+  "first_200um_drift_t_s": 52.9375,
+  "first_200um_drift_m": 0.00022773713689108136,
+  "first_200um_target_XY_norm_m": 0.0026023955096986977,
+  "maximum_target_floor_support_N": 0,
+  "no_forbidden_robot_environment_native_events": true,
+  "GPU_used": false,
+  "API_calls": 0,
+  "original_H5_raw_labels_policy_inputs_modified": false,
+  "sources": {
+    "geometry_release_summary.json": {
+      "SHA256": "03cb3e7d2905f3048d409ceeebad0592596f5ee5760e176c5226f04f51101bf4",
+      "bytes": 43923
+    },
+    "native_positive_contacts.json": {
+      "SHA256": "9da4c5930c2d894cf26f653fc7a5e7ef3a06bd1063f8d56cee97df8dd93f6d9b",
+      "bytes": 3366
+    },
+    "target_contact_release_curve.csv": {
+      "SHA256": "cf4f2a96011613485581a691648ede76ee77dd8b6c3771bee7ecbd735b4738e0",
+      "bytes": 389791
+    },
+    "target_contact_release_curve.png": {
+      "SHA256": "775bfbe0aa002c5eda9541264a29d45c3f1b58b89e34fd551a304ea621bc6b92",
+      "bytes": 206402
+    }
+  },
+  "closed_read_audit": {
+    "path": "../gpt_debug_02_closed_read_archive.json",
+    "SHA256": "01c53d0354f919ac2c60668a5ecf3fc5c9085dc99320f6afde718c5482f4a252"
+  },
+  "terminal_recorded_input_material_overlap_m": 0.0003854990848526354,
+  "whole_seat_vertical_force_peak_in_target_context_N": 1021.3474235534668,
+  "whole_seat_vertical_force_peak_t_s": 59.84583333333333
+}
