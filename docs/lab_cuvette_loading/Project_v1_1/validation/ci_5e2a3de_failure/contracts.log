@@ -1,0 +1,44 @@
+........................................................................ [ 12%]
+........................................................................ [ 25%]
+........................................................................ [ 38%]
+..........................Fsssssssss.................................... [ 51%]
+........................................................................ [ 64%]
+........................................................................ [ 77%]
+........................................................................ [ 90%]
+.......................................................                  [100%]
+=================================== FAILURES ===================================
+_ ProjectV11ConfigurationTest.test_wrist_changes_fixed_aim_only_and_keeps_global_side_view _
+
+self = <test_lab_cuvette_project_v1_1_configuration.ProjectV11ConfigurationTest testMethod=test_wrist_changes_fixed_aim_only_and_keeps_global_side_view>
+
+    def test_wrist_changes_fixed_aim_only_and_keeps_global_side_view(self):
+>       self.assertEqual(self.current["cameras"]["side_camera"], self.previous["cameras"]["side_camera"])
+E       AssertionError: {'pri[50 chars]5, 1.32], 'target_m': [0.1, -0.1, 1.05], 'foca[139 chars], 1]} != {'pri[50 chars]5, 1.65], 'target_m': [0.1, -0.1, 1.0], 'focal[138 chars], 1]}
+E       - {'eye_m': [-0.7, -0.85, 1.32],
+E       ?                           ^^
+E       
+E       + {'eye_m': [-0.7, -0.85, 1.65],
+E       ?                           ^^
+E       
+E       -  'focal_length_cm': 1.7,
+E       ?                     ^ ^
+E       
+E       +  'focal_length_cm': 2.0,
+E       ?                     ^ ^
+E       
+E          'fps': 60,
+E          'horizontal_aperture_mm': 20.955,
+E          'policy_resolution': [256, 256],
+E          'prim_path': '/World/SideCamera',
+E          'resolution': [640, 480],
+E       -  'target_m': [0.1, -0.1, 1.05],
+E       ?                             -
+E       
+E       +  'target_m': [0.1, -0.1, 1.0],
+E          'upworld': [0, 0, 1]}
+
+tests/test_lab_cuvette_project_v1_1_configuration.py:57: AssertionError
+- generated xml file: /home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Project_v1_1/validation/ci_5e2a3de_failure/contracts_junit.xml -
+=========================== short test summary info ============================
+FAILED tests/test_lab_cuvette_project_v1_1_configuration.py::ProjectV11ConfigurationTest::test_wrist_changes_fixed_aim_only_and_keeps_global_side_view
+1 failed, 549 passed, 11 skipped in 6.59s

@@ -53,8 +53,14 @@ class ProjectV11ConfigurationTest(unittest.TestCase):
             scorer_module="demos.lab_cuvette_project_v1_1.scorer",
             geometry_audit_cache="outputs/lab_cuvette_loading/Project_v1_1/geometry_cache"))
 
-    def test_wrist_changes_fixed_aim_only_and_keeps_global_side_view(self):
-        self.assertEqual(self.current["cameras"]["side_camera"], self.previous["cameras"]["side_camera"])
+    def test_side_v3_changes_only_the_declared_view_parameters(self):
+        before = self.previous["cameras"]["side_camera"]
+        self.assertEqual(self.current["cameras"]["side_camera"], dict(before,
+            eye_m=[*before["eye_m"][:2], 1.32],
+            target_m=[*before["target_m"][:2], 1.05], focal_length_cm=1.7))
+        self.assertEqual(self.current["project"]["camera_version"], "Project_v1_1.side.v3_wrist.v2")
+
+    def test_wrist_v2_keeps_the_fixed_mount_and_recording_calibration(self):
         before = self.previous["cameras"]["wrist_camera"]
         after = self.current["cameras"]["wrist_camera"]
         self.assertEqual(before["localtarget_m"], [0, 0, .35])
