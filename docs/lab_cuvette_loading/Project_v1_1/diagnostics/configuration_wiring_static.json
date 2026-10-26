@@ -1,0 +1,84 @@
+{
+  "schema": "labsim.Project_v1_1.configuration_wiring_static.v1",
+  "scope": "CPU-only configuration/factory AST, byte-compilation, production asset resolver and new scene-contract construction. No Isaac app, GPU, reset, physics step, or provider API.",
+  "checks": {
+    "five_unittest_cases_passed": true,
+    "factories_bytecompiled": true,
+    "existing_Project_v1_config_byte_unchanged": true,
+    "old_factory_registrations_preserved": true,
+    "new_task_and_collector_keys_registered": true,
+    "task_consumed_executor_fields_exactly_match_configuration": true,
+    "asset_resolver_production_read_passed": true,
+    "new_scene_contract_constructed": true,
+    "asset_geometry_physics_acceptance_and_existing_teacher_numeric_parameters_unchanged": true
+  },
+  "test_command": "<existing LabSim Python> -m unittest tests.test_lab_cuvette_project_v1_1_configuration -v",
+  "baseline_config_sha256": "eec8594f8168310c2a4168881827fa4df1b69f4a91fa7c05c882ca8680ca6477",
+  "files": [
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "sha256": "3ac1bdc54679559e5de6c6354484f3942773779c2dc20cf8372765caea3e4601"
+    },
+    {
+      "path": "factories/task_factory.py",
+      "sha256": "27ef73ce6c8d3d5faded68e707326e76ed8cea74931b09f3895f736e79953c4e"
+    },
+    {
+      "path": "factories/collector_factory.py",
+      "sha256": "6822a3d6de1e49d5e4aa09bd8049dd6c78462eca248637a6e5b1d7b97421861a"
+    },
+    {
+      "path": "tests/test_lab_cuvette_project_v1_1_configuration.py",
+      "sha256": "dca299f692ed7051449e6a818ff3a2d574aef8515afa2a9da6bc5b2cda7d6719"
+    }
+  ],
+  "new_routes": {
+    "version": "Project_v1_1",
+    "task_type": "lab_cuvette_project_v1_1",
+    "collector_type": "lab_cuvette_project_v1_1",
+    "controller_type": "lab_cuvette_project_v1_teacher",
+    "output_root": "outputs/lab_cuvette_loading/Project_v1_1"
+  },
+  "geometry_cache": "outputs/lab_cuvette_loading/Project_v1_1/geometry_cache",
+  "scorer_module": "demos.lab_cuvette_project_v1_1.scorer",
+  "project_metadata": {
+    "schema": "labsim.project.v1_1",
+    "scene_version": "Project_v1_1.standard.v1",
+    "scorer_version": "Project_v1_1.independent.v1",
+    "action_interface_version": "Project_v1_1.actions.v1",
+    "release_baseline": "Size_v1 frozen f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+    "backend_gripper_effort_N": 8.0,
+    "camera_names": [
+      "side_camera_rgb",
+      "wrist_camera_rgb"
+    ],
+    "public_observation": "RGB, robot proprioception, camera calibration, task language, bilateral finger force sensors; no vessel truth",
+    "executor_version": "Project_v1_1.continuous_fk_executor.v1",
+    "baseline_version": "Project_v1"
+  },
+  "executor": {
+    "maximum_position_tracking_error_m": 0.005,
+    "maximum_orientation_tracking_error_deg": 2.0,
+    "maximum_actual_TCP_speed_m_s": 0.05,
+    "maximum_actual_joint_speed_factor": 1.25,
+    "ik_position_tolerance_m": 2e-06,
+    "ik_orientation_tolerance_rad": 2e-05,
+    "ik_iterations": 35
+  },
+  "wrist_changes": {
+    "localtarget_before_m": [
+      0,
+      0,
+      0.35
+    ],
+    "localtarget_after_m": [
+      0,
+      0,
+      0.1
+    ],
+    "new_prim": "/World/Franka/panda_hand/WristCameraV11",
+    "physical_mount_position_up_lens_resolution_unchanged": true
+  },
+  "actual_new_camera_rendered": false,
+  "actual_executor_physics_validated": false
+}

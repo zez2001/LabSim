@@ -23,6 +23,11 @@ FROZEN = ROOT / "config/lab_cuvette_loading/Size_v1/frozen_scene.json"
 REGISTRY = ROOT / "assets/lab_cuvette_loading/Size_v1/registry.json"
 OUTPUT_ROOT = ROOT / "outputs/lab_cuvette_loading/Size_v1"
 PROJECT_CONFIG = ROOT / "config/lab_cuvette_loading/Project_v1/standard.yaml"
+PROJECT_RELEASES = {
+    "Project_v1": ("demos.lab_cuvette_project_v1.run", PROJECT_CONFIG),
+    "Project_v1_1": ("demos.lab_cuvette_project_v1_1.run",
+        ROOT / "config/lab_cuvette_loading/Project_v1_1/standard.yaml"),
+}
 
 
 def resolve_path(value):
@@ -138,6 +143,9 @@ def parser():
     dataset.add_argument("--policy", choices=("act", "dp", "both"), default="both")
     dataset.add_argument("--output", required=True, help="New JSON read-check path")
     dataset.add_argument("--dry-run", action="store_true")
+    for command in (demo, evaluation, serve, collect):
+        command.add_argument("--project-version", choices=tuple(PROJECT_RELEASES), default="Project_v1",
+            help="Explicit execution version; omitted keeps the existing Project_v1 API")
     return p
 
 
@@ -169,15 +177,16 @@ def build_command(args):
     """Build real subprocess argv without shell interpolation or output writes."""
     if args.command in ("demo", "eval", "serve") or (args.command == "collect" and args.phase is None):
         if not args.output:
-            raise ValueError("Project_v1 collection requires --output; historical collection uses --phase and --collection")
+            raise ValueError("Project collection requires --output; historical collection uses --phase and --collection")
         output = new_path(args.output)
         episodes = 1 if args.command == "demo" else args.episodes
         if not 1 <= episodes <= 20:
             raise ValueError("--episodes must be1..20")
         if getattr(args, "gui", False) and args.headless:
             raise ValueError("Choose --gui or --headless")
-        command = [sys.executable, "-m", "demos.lab_cuvette_project_v1.run",
-            "--backend", args.backend, "--config", str(PROJECT_CONFIG), "--layout-mode", args.scene,
+        module, config = PROJECT_RELEASES[args.project_version]
+        command = [sys.executable, "-m", module,
+            "--backend", args.backend, "--config", str(config), "--layout-mode", args.scene,
             "--seed", "0", "--episodes", str(episodes),
             "--execution-purpose", "eval" if args.command == "serve" else args.command,
             "--output", str(output)]
@@ -191,6 +200,8 @@ def build_command(args):
                 command += ["--" + name.replace("_", "-"), str(value)]
         return command
     if args.command == "collect":
+        if args.project_version != "Project_v1":
+            raise ValueError("Historical --phase belongs to Size_v1; omit --phase to collect Project_v1_1 episodes")
         if not args.collection:
             raise ValueError("Historical --phase requires --collection")
         collection = collection_path(args.collection)
@@ -310,25 +321,43 @@ def asset_rows(asset_id=None):
     return rows
 
 
-def dataset_check(args):
-    from scripts.validate_lab_cuvette_size_v1_data import validate_reader
-    index, output = dataset_file(args.index), new_path(args.output)
+def dataset_project_version(index):
+    """Inspect all episode headers; never guess a reader from the first group."""
     import h5py
     with h5py.File(index, "r") as source:
-        group = source if "actions" in source else next((source[name] for name in source
-            if isinstance(source[name], h5py.Group) and "actions" in source[name]), None)
-        project = group is not None and group.attrs.get("scene_version") == "Project_v1"
-    if project:
+        groups = [source] if "actions" in source and "agent_pose" in source else [source[name] for name in source
+            if isinstance(source[name], h5py.Group) and "actions" in source[name] and "agent_pose" in source[name]]
+        versions = {str(group.attrs.get("scene_version", "")) for group in groups}
+    project_versions = {version for version in versions if version.startswith("Project_v")}
+    if project_versions and len(versions) != 1:
+        raise ValueError("Do not mix project scene versions in one dataset-check index: " + repr(sorted(versions)))
+    if project_versions:
+        version = next(iter(project_versions))
+        if version not in PROJECT_RELEASES:
+            raise ValueError("Unsupported project scene version: " + version)
+        return version
+    return None  # Historical Size_v1 validation retains its existing route.
+
+
+def dataset_check(args):
+    index, output = dataset_file(args.index), new_path(args.output)
+    version = dataset_project_version(index)
+    if version:
         from scripts.read_lab_cuvette_project_v1_data import read_check
         policies = ("act", "dp") if args.policy == "both" else (args.policy,)
-        value = read_check(index, sample_filter=args.sample_filter, policies=policies)
+        options = {}
+        if version == "Project_v1_1":
+            from policy.dataset.lab_cuvette_project_v1_1_dataset import LabCuvetteProjectV11Dataset
+            options["dataset_class"] = LabCuvetteProjectV11Dataset
+        value = read_check(index, sample_filter=args.sample_filter, policies=policies, **options)
         output.parent.mkdir(parents=True, exist_ok=True)
         with output.open("x", encoding="utf-8") as stream:
             json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
             stream.write("\n")
-        print(json.dumps(dict(output=str(output), scene_version="Project_v1",
+        print(json.dumps(dict(output=str(output), scene_version=version,
             sample_filter=args.sample_filter, policies=list(policies), optimizer_or_training_executed=False)))
         return 0
+    from scripts.validate_lab_cuvette_size_v1_data import validate_reader
     frozen_check()
     policies = ("act", "dp") if args.policy == "both" else (args.policy,)
     results = [validate_reader(index, FROZEN, CONFIG, sample_filter=args.sample_filter, policy_type=policy)

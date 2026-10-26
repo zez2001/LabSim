@@ -399,15 +399,18 @@ def save_observation_artifacts(contents,output,decision_index,request_label):
         public_observation=manifest['public_observation'],images=manifest['images'])
 
 
-def run_episode(environment, client: CubenceClient, output: str | Path, *, max_calls=160, prompt=SYSTEM_PROMPT) -> dict:
+def run_episode(environment, client: CubenceClient, output: str | Path, *, max_calls=160, prompt=SYSTEM_PROMPT,
+                tools_class=GenericRobotTools) -> dict:
     """Run policy on an already-reset facade. The caller owns reset and close."""
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
-    cfg=client.cfg;tools=GenericRobotTools(environment,cfg["action_limits"])
+    cfg=client.cfg;tools=tools_class(environment,cfg["action_limits"])
+    failure_class=getattr(tools,'failure_class',backend_failure_class)
     schema=tool_definitions()
     frozen=dict(schema="labsim.gpt_controller.v1",provider_config=cfg,prompt=prompt,tool_schema=schema,
         object_truth_used=False,teacher_used=False,physics_paused_during_inference=True,
         implementation_sha256={name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest() for name in ('cubence.py','cubence_tools.py')},
         action_meaning="generic EE pose/delta, symmetric gripper or wait; facade performs only IK, interpolation and bounds")
+    if hasattr(tools,'controller_metadata'):frozen['controller_extension']=tools.controller_metadata()
     (output/"controller.json").write_text(json.dumps(frozen,indent=2,ensure_ascii=False)+"\n")
     controller_sha=canonical_hash(frozen)
     started=time.monotonic();calls=0;errors=0;history=[];termination="POLICY_BUDGET";failure=None;backend_error_code=None
@@ -456,6 +459,7 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                     receipt={"status":"REJECTED","error":error.code,"details":error.details,
                         "episode_id":obs["episode_id"],"observation_id":obs["observation_id"],"physics_advanced":False,
                         "model_action_id":call['arguments'].get('action_id'),"execution_action_id":tools.execution_id_for(call['arguments'])}
+                    if hasattr(tools,'rejection_receipt'):receipt=tools.rejection_receipt(error,receipt,call['arguments'])
                 # Preserve complete response-item groups in memory. Some reasoning
                 # models require the reasoning item that accompanies a function call.
                 # The trace stores only the observable action, never hidden reasoning.
@@ -470,7 +474,7 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
                 if call["name"]=="finish" and receipt.get("status")!="REJECTED":termination="POLICY_FINISH_REQUEST";break
                 if errors>=8:termination="PROTOCOL_ERROR_LIMIT";backend_error_code=termination;failure='INPUT_CONTRACT_ERROR';break
             except ProviderError as error:
-                failure=backend_failure_class(error.code)
+                failure=failure_class(error.code)
                 termination=error.code
                 backend_error_code=error.code
                 invalid_calls=[]
@@ -484,7 +488,7 @@ def run_episode(environment, client: CubenceClient, output: str | Path, *, max_c
     except ProviderError as error:
         # Observation/context validation can fail before any API request. It must
         # still flush the physical attempt and retain an explicit nonphysical tag.
-        backend_error_code=termination=error.code;failure=backend_failure_class(error.code)
+        backend_error_code=termination=error.code;failure=failure_class(error.code)
         trace.write(json.dumps(dict(event='error',code=error.code,http_status=error.status,
             episode_id=obs.get('episode_id') if obs else None,observation_id=obs.get('observation_id') if obs else None,
             decision_index=decision_index,request_label=request_label,observation_artifacts=observation_artifacts))+"\n");trace.flush()

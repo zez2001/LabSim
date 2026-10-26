@@ -46,7 +46,9 @@ def recorded_image_shape(path, sample_filter):
     return list(next(iter(images))), derivations
 
 
-def read_check(path, *, sample_filter='success', policies=('act', 'dp')):
+def read_check(path, *, sample_filter='success', policies=('act', 'dp'),
+               dataset_class=LabCuvetteProjectV1Dataset):
+    """Read through the selected normal dataset; the default preserves Project_v1."""
     path = Path(path)
     if path.is_dir():
         candidates = [path / 'episode_data.hdf5', path / 'dataset/episode_0000.h5']
@@ -56,9 +58,9 @@ def read_check(path, *, sample_filter='success', policies=('act', 'dp')):
         'side_camera_rgb': dict(shape=image_shape, type='rgb'),
         'wrist_camera_rgb': dict(shape=image_shape, type='rgb'),
         'agent_pose': dict(shape=[8], type='low_dim')}, action=dict(shape=[8]))
-    results = []
+    results, scene_versions = [], set()
     for policy in policies:
-        dataset = LabCuvetteProjectV1Dataset(shape_meta=shape, dataset_path=path,
+        dataset = dataset_class(shape_meta=shape, dataset_path=path,
             horizon=16, n_obs_steps=1 if policy == 'act' else 3, policy_type=policy,
             sample_filter=sample_filter, val_ratio=0)
         batch = next(iter(DataLoader(dataset, batch_size=min(3, len(dataset)), num_workers=0)))
@@ -74,6 +76,7 @@ def read_check(path, *, sample_filter='success', policies=('act', 'dp')):
             checks = []
             for episode, group_path in dataset.group_paths.items():
                 group = source[group_path]
+                scene_versions.add(str(group.attrs['scene_version']))
                 dt = group['next_timestamp'][:] - group['timestamp'][:]
                 checks.append(dict(episode_id=episode, transitions=len(dt),
                     observation_action_time_aligned=bool(np.allclose(dt, 1 / 60, atol=1e-6)),
@@ -84,6 +87,8 @@ def read_check(path, *, sample_filter='success', policies=('act', 'dp')):
                     task_success=bool(group.attrs['task_success']), condition_group=str(group.attrs['condition_group'])))
         results.append(dict(policy_type=policy, episodes=list(dataset.group_paths), scene_fingerprint=dataset.scene_fingerprint,
             batch=describe(batch), episode_checks=checks, training_or_optimizer_executed=False))
-    return dict(schema='labsim.Project_v1.reader_check.v1', path=str(path),
+    scene_version = next(iter(scene_versions)) if len(scene_versions) == 1 else 'mixed'
+    return dict(schema='labsim.' + scene_version + '.reader_check.v1', path=str(path),
+        scene_version=scene_version, dataset_class=dataset_class.__module__ + '.' + dataset_class.__name__,
         recorded_policy_image_shape=image_shape, public_sample_derivations=derivations,
         sample_filter=sample_filter, reader_validation=results, source_labels_modified=False)
