@@ -1,7 +1,8 @@
-"""Phase-motion-clock adapter; physical teacher watchdogs remain unscaled.
+"""Phase-motion clock and source-constrained grasp teacher adapter.
 
 Only four smooth motion phases are slowed. The original teacher, physics,
-scorer, 60 Hz actions, per-tick feedback gains and contact timers are unchanged.
+scorer, 60 Hz actions and physical contact timers are unchanged. GRASP holds
+the existing EE orientation rather than correcting a vessel still in its rack.
 """
 from __future__ import annotations
 
@@ -12,7 +13,7 @@ from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get
 
 
 class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
-    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v1'
+    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v2'
     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))
 
     def __init__(self, cfg, layout):
@@ -28,7 +29,17 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         self._phase_motion_elapsed = 0.
         self.controller_motion_clock_s = 0.
         self._clock_cached_action = None
+        self._grasp_orientation_feedback_suppressed = False
         return self
+
+    def _feedback(self, debug, desired_cup_xy=None, *, orientation=True):
+        # Rotating a closed hand while the cup remains rack-constrained can
+        # move its bottom about the grasp anchor. Reorient after extraction,
+        # using the unchanged TRANSPORT/ALIGN feedback, not during GRASP.
+        if self.phase == 'GRASP' and orientation:
+            self._grasp_orientation_feedback_suppressed = True
+            orientation = False
+        return super()._feedback(debug, desired_cup_xy, orientation=orientation)
 
     def act(self, public_obs, debug):
         actual_t = super()._time(public_obs, debug)
@@ -57,6 +68,7 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         self.controller_motion_clock_s += dt / scale
         motion_elapsed = self._phase_motion_elapsed
         event_start = len(self.events)
+        self._grasp_orientation_feedback_suppressed = False
         if physical_start is not None:
             self.phase_start = actual_t - motion_elapsed
         try:
@@ -81,6 +93,8 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             controller_motion_clock_s=self.controller_motion_clock_s,
             motion_source_phase=source_phase, physical_phase_elapsed_s=physical_elapsed,
             motion_phase_elapsed_s=motion_elapsed, motion_time_scale=scale,
-            physical_control_hz=self.hz, physical_watchdogs_unscaled=True)
+            physical_control_hz=self.hz, physical_watchdogs_unscaled=True,
+            grasp_orientation_feedback_suppressed=self._grasp_orientation_feedback_suppressed,
+            grasp_orientation_feedback_policy='Hold existing EE orientation during GRASP while source-constrained; unchanged feedback after extraction')
         self._clock_cached_action = copy.deepcopy(action)
         return action

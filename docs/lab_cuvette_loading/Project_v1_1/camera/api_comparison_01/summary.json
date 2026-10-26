@@ -1,0 +1,127 @@
+{
+  "schema": "labsim.Project_v1_1.camera_api_comparison_audit.v1",
+  "evidence_kind": "actual_API_two_request_camera_check",
+  "source_run": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/camera_api_comparison_01",
+  "source_snapshot_stage": "INSERT",
+  "source_snapshot_simulation_time_s": 74.86666666666666,
+  "source_snapshot_observation_id": "b88b5d10-e0a5-42f5-a43c-6424191111fe:4491",
+  "source_frame_count": 1,
+  "cameras_per_request": 2,
+  "requests": 2,
+  "robot_actions_executed": 0,
+  "API_calls_by_this_audit": 0,
+  "GPU_used_by_this_audit": false,
+  "HDF5_read": false,
+  "original_outputs_modified": false,
+  "profiles": [
+    {
+      "profile": "512low",
+      "resolution_wh": "512x384",
+      "jpeg_quality": 60,
+      "detail": "low",
+      "network_attempts": 1,
+      "returned_model": "gpt-6-astra",
+      "wall_seconds": 8.967504761065356,
+      "input_tokens": 2622,
+      "output_tokens": 235,
+      "public_price_estimate_usd": 0.03797,
+      "request_id": "3683eb82-3f02-44f2-b7ec-73bc06b025a9",
+      "status": "COMPLETED"
+    },
+    {
+      "profile": "640high",
+      "resolution_wh": "640x480",
+      "jpeg_quality": 60,
+      "detail": "high",
+      "network_attempts": 1,
+      "returned_model": "gpt-6-astra",
+      "wall_seconds": 8.320214948966168,
+      "input_tokens": 2876,
+      "output_tokens": 244,
+      "public_price_estimate_usd": 0.04096,
+      "request_id": "2deefdc4-f84b-45b6-ae28-9aaae46c339d",
+      "status": "COMPLETED"
+    }
+  ],
+  "artifact_audit": [
+    {
+      "profile": "512low",
+      "camera": "side_camera",
+      "copied_relative_path": "512low/observations/decision_000000/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "same_bytes_as_source_teacher_snapshot": true,
+      "native_rgb_sha256": "8b7c2673d50458186996c276e32c5ebda7ae52bc7b51d72b45f660053b808c1a"
+    },
+    {
+      "profile": "512low",
+      "camera": "wrist_camera",
+      "copied_relative_path": "512low/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "same_bytes_as_source_teacher_snapshot": true,
+      "native_rgb_sha256": "32c8ae6b6a88f8d3924bddbfb8dba5f1b365910be767ca37f6b0376f39fa8ecd"
+    },
+    {
+      "profile": "640high",
+      "camera": "side_camera",
+      "copied_relative_path": "640high/observations/decision_000000/side_camera.jpg",
+      "sha256": "4fe307811518d38817239119f9ea8460560cda6b77759ae94bcf00c771e8291f",
+      "same_bytes_as_source_teacher_snapshot": true,
+      "native_rgb_sha256": "8b7c2673d50458186996c276e32c5ebda7ae52bc7b51d72b45f660053b808c1a"
+    },
+    {
+      "profile": "640high",
+      "camera": "wrist_camera",
+      "copied_relative_path": "640high/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "1b8f7f0c0e4f73bc58ac9fdc64a6c463cdc2611bf3ee8b52e0a92b6a9c86c8d8",
+      "same_bytes_as_source_teacher_snapshot": true,
+      "native_rgb_sha256": "32c8ae6b6a88f8d3924bddbfb8dba5f1b365910be767ca37f6b0376f39fa8ecd"
+    }
+  ],
+  "native_frame_hashes_same_for_both_profiles": true,
+  "budget_before": {
+    "total_network_attempts": 95,
+    "total_estimated_usd": 5.794461999999999,
+    "path": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json"
+  },
+  "budget_after": {
+    "total_network_attempts": 97,
+    "total_estimated_usd": 5.873391999999999,
+    "path": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json"
+  },
+  "incremental_known_usage_estimate_usd": 0.07893,
+  "price_basis": "Input10USD/M +output50USD/M public configured rates; account multipliers/real bill unknown; cumulative ledger totals may include prior unknown-usage reservations.",
+  "visual_claims": {
+    "both_recognized": [
+      "pale open-topped rectangular vessel",
+      "opposing gripper fingers",
+      "instrument opening and square-seat boundary"
+    ],
+    "neither_established": [
+      "bottom contact/support force",
+      "independent physical support",
+      "selected seat identity from visible labels",
+      "release/retreat/final stability from this INSERT-only snapshot"
+    ]
+  },
+  "decision": {
+    "continue_profile": "512low",
+    "reason": "No additional confirmable task fact established by640high in this two-request single-snapshot check.",
+    "configuration_frozen_by_root": true,
+    "provider_or_runtime_modified_by_audit": false,
+    "current_provider_images": {
+      "max_side_px": 512,
+      "jpeg_quality": 60,
+      "detail": "low",
+      "resize_interpolation": "lanczos"
+    },
+    "provider_configuration_source": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json",
+    "provider_configuration_sha256": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41"
+  },
+  "limitations": [
+    "One shared INSERT instant and one response per profile, not a latency or accuracy distribution.",
+    "Image edge length and detail both differ; cannot attribute any difference to a single factor.",
+    "This is an offline visual API check, not robot control or a closed-loop policy demonstration.",
+    "The final post-retreat visibility limitation remains unchanged: target partly outside wrist frame and small/partly occluded in side view.",
+    "Task metadata contains seat/slot identifiers; visible labels did not establish their physical correspondence in this one snapshot."
+  ]
+}

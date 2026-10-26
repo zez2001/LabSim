@@ -1,0 +1,844 @@
+{
+  "schema": "labsim.Project_v1_1.teacher02_grasp_slip_evidence.v1",
+  "analysis_date_local": "2026-10-27",
+  "runtime_commit": "4d19b6ca836ca01c998abf4c4225946e09ffc80a",
+  "original_result": {
+    "task_success": false,
+    "failure_type": "GRASP_SLIP",
+    "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false
+  },
+  "sources": {
+    "independent_score.json": {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/independent_score.json",
+      "SHA256": "9e6134cc4d6c5f54390be06c93bba0cf9f2ec0a35067ea1ffb1cfe71b41acd40",
+      "unchanged_from_closed_archive_before_manifest": true
+    },
+    "result.json": {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/result.json",
+      "SHA256": "339aff86508888bdd894bbee575400f45754da0fa214cb9760bda1ec30254d63",
+      "unchanged_from_closed_archive_before_manifest": true
+    },
+    "teacher_events.json": {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/teacher_events.json",
+      "SHA256": "1639cf0ad40b9ab47e2ff0d1fc85b9081dd14a7ac1aa8f5f4dd2c61338406124",
+      "unchanged_from_closed_archive_before_manifest": true
+    },
+    "config.yaml": {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/config.yaml",
+      "SHA256": "7b304e22a6ebf3eab3852549b586c14eee23a097839866d80f561b565d4dc6d3",
+      "unchanged_from_closed_archive_before_manifest": true
+    },
+    "release_metadata.json": {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/release_metadata.json",
+      "SHA256": "4c96fb30eb502c446c24813dc16ab809421486b9500f08f30bb1767aa3800427",
+      "unchanged_from_closed_archive_before_manifest": true
+    },
+    "tasks/lab_cuvette_loading_env_v1_scorer.py": {
+      "runtime_commit": "4d19b6ca836ca01c998abf4c4225946e09ffc80a",
+      "runtime_blob_SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "current_SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "current_matches_executed_runtime": true
+    },
+    "demos/lab_cuvette_size_v1/scorer.py": {
+      "runtime_commit": "4d19b6ca836ca01c998abf4c4225946e09ffc80a",
+      "runtime_blob_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "current_SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "current_matches_executed_runtime": true
+    },
+    "demos/lab_cuvette_project_v1_1/scorer.py": {
+      "runtime_commit": "4d19b6ca836ca01c998abf4c4225946e09ffc80a",
+      "runtime_blob_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "current_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "current_matches_executed_runtime": true
+    }
+  },
+  "raw_validation": {
+    "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/physics_records.jsonl.gz",
+    "compressed_SHA256": "1649cf6084ec6a532abda58154661f6e6463fc6540c51c035bfd707c5eebca21",
+    "decompressed_SHA256": "2a21398bcf0f95b72fca803931309d15d8a1fa10909eb2a607f4b7e88efd2832",
+    "decompressed_bytes": 1219313252,
+    "full_original_raw_bytes_matched": true,
+    "physical_rows": 29825,
+    "wall_seconds": 11.10695634491276
+  },
+  "original_rules": {
+    "bilateral_force_threshold_N": 0.01,
+    "bilateral_continuous_before_reference_s": 0.1,
+    "bottom_origin_position_limit_m": 0.0002,
+    "relative_orientation_limit_deg": 1.0,
+    "configured_anchor_height_m": 0.053,
+    "anchor_metrics_analysis_only": true,
+    "reference_set_t": 18.145833333333332,
+    "reference_reproduced_from_raw_contact_gate": true,
+    "grasp_metric_gated_sample_count": 21471,
+    "grasp_metric_last_counted_t": 107.60833333333333,
+    "support_cutoff_event": "loaded_pose_candidate; drift is evaluated on this row, then _grasp_supported stops future updates",
+    "release_attempt_end_t": 110.925
+  },
+  "all_five_original_metric_maxima_reproduced": true,
+  "maxima": {
+    "bottom_drift_m": {
+      "value": 0.0006089944131974244,
+      "t": 18.245833333333334,
+      "physics_step": 4379,
+      "phase": "GRASP",
+      "finger_contact_N": [
+        1.4963953495025635,
+        0.8201354146003723
+      ]
+    },
+    "relative_orientation_drift_deg": {
+      "value": 0.7058963335939142,
+      "t": 18.245833333333334,
+      "physics_step": 4379,
+      "phase": "GRASP",
+      "finger_contact_N": [
+        1.4963953495025635,
+        0.8201354146003723
+      ]
+    },
+    "anchor_drift_m": {
+      "value": 6.409641984065193e-05,
+      "t": 18.245833333333334,
+      "physics_step": 4379,
+      "phase": "GRASP",
+      "finger_contact_N": [
+        1.4963953495025635,
+        0.8201354146003723
+      ]
+    },
+    "anchor_axial_abs_m": {
+      "value": 4.672923924216826e-05,
+      "t": 30.804166666666667,
+      "physics_step": 7393,
+      "phase": "TRANSPORT",
+      "finger_contact_N": [
+        0.9444572925567627,
+        0.9438425898551941
+      ]
+    },
+    "anchor_transverse_m": {
+      "value": 4.624030359635843e-05,
+      "t": 18.245833333333334,
+      "physics_step": 4379,
+      "phase": "GRASP",
+      "finger_contact_N": [
+        1.4963953495025635,
+        0.8201354146003723
+      ]
+    }
+  },
+  "bottom_peak_geometry": {
+    "bottom_drift_m": 0.0006089944131974244,
+    "relative_orientation_drift_deg": 0.7058963335939142,
+    "anchor_drift_m": 6.409641984065193e-05,
+    "anchor_axial_abs_m": 4.4386770097696006e-05,
+    "anchor_transverse_m": 4.624030359635843e-05,
+    "bottom_delta_in_hand_m": [
+      -4.96096955842145e-06,
+      0.0006073032189488039,
+      -4.508197357189214e-05
+    ],
+    "rotation_lever_delta_in_hand_m": [
+      -1.0646677336124945e-06,
+      -0.0006529023927632108,
+      4.4165458717299044e-07
+    ],
+    "anchor_delta_in_hand_m": [
+      -6.0256372920339446e-06,
+      -4.5599173814406886e-05,
+      -4.464031898471915e-05
+    ],
+    "reference_object_axis_in_hand": [
+      0.00047904440982366776,
+      0.0054822567063613475,
+      -0.9999848575742832
+    ],
+    "bottom_axial_signed_m": 4.8408306541598814e-05,
+    "anchor_axial_signed_m": 4.4386770097696006e-05,
+    "rotation_lever_norm_m": 0.0006529034102009908,
+    "bottom_opposite_rotation_lever_cosine": 0.9972582100771296,
+    "actual_TCP_orientation_change_deg": 0.13302669984509172,
+    "object_world_orientation_change_deg": 0.5735755979367315,
+    "command_TCP_orientation_change_deg": 0.20618156950902508
+  },
+  "bottom_peak_raw_sample": {
+    "t": 18.245833333333334,
+    "physics_step": 4379,
+    "phase": "GRASP",
+    "cup_in_hand_position_m": [
+      -2.903538491332073e-05,
+      0.0005642155561451764,
+      0.15293377823590687
+    ],
+    "cup_in_hand_quaternion_wxyz": [
+      -0.003418336202245186,
+      -0.9999941297242458,
+      5.2454558397641016e-05,
+      -0.00022965882516565102
+    ],
+    "actual_tcp_position_m": [
+      -0.08510305167018023,
+      -0.17498951963228054,
+      0.7959606916847041
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      0.00031985207938614346,
+      0.7069396820956502,
+      -0.7072734084945863,
+      -0.0007135892366600696
+    ],
+    "object_position_m": [
+      -0.08461620658636093,
+      -0.17498932778835297,
+      0.7430261373519897
+    ],
+    "object_quaternion_wxyz": [
+      0.7072345614433289,
+      -0.0018664514645934105,
+      -0.001934313215315342,
+      0.7069739103317261
+    ],
+    "finger_contact_N": [
+      1.4963953495025635,
+      0.8201354146003723
+    ],
+    "finger_joint_positions_m": [
+      0.005374171305447817,
+      0.0053740935400128365
+    ],
+    "gripper_target_m": 0.004833333333333269,
+    "gripper_effort_limit_N": 8.0,
+    "object_bottom_world_z_m": 0.7429999224796165,
+    "source_bottom_gap_m": -7.752038344577272e-08,
+    "source_rack_penetration_m": 7.752038344577272e-08,
+    "environment_net_force_N": [
+      0.6740392632782459,
+      0.0137886887168861,
+      1.6360608851537108
+    ],
+    "environment_sum_force_magnitudes_N": 1.7695237427927197,
+    "target_bottom_support_N": 0.0,
+    "target_bottom_gap_m": null,
+    "tilt_deg": 0.3080195880289792,
+    "depth_m": null,
+    "teacher_phase_from_events": "GRASP",
+    "command_FK_TCP_pose": {
+      "position_m": [
+        -0.0849606887611188,
+        -0.1751689013615357,
+        0.796067376742833
+      ],
+      "quaternion_wxyz": [
+        0.0011589579789680594,
+        0.707198558456011,
+        -0.7070135083791512,
+        -0.0008687367535447167
+      ]
+    },
+    "command_FK_hand_pose": {
+      "position_m": [
+        -0.08467393509580703,
+        -0.17512782040312455,
+        0.8960669571654043
+      ],
+      "quaternion_wxyz": [
+        -0.0008687367535447167,
+        0.7070135083791512,
+        0.707198558456011,
+        -0.0011589579789680594
+      ]
+    }
+  },
+  "first_bottom_threshold_crossing": {
+    "t": 18.191666666666666,
+    "bottom_drift_m": 0.0002714517474389131,
+    "forces": [
+      0.4676484763622284,
+      0.3133583664894104
+    ]
+  },
+  "segment_metrics": {
+    "static_grasp": {
+      "count": 280,
+      "bottom_max": {
+        "value": 0.0006089944131974244,
+        "t": 18.245833333333334,
+        "phase": "GRASP"
+      },
+      "orientation_max": {
+        "value": 0.7058963335939142,
+        "t": 18.245833333333334,
+        "phase": "GRASP"
+      }
+    },
+    "extraction": {
+      "count": 370,
+      "bottom_max": {
+        "value": 1.3523173685925468e-06,
+        "t": 19.933333333333334,
+        "phase": "EXTRACT"
+      },
+      "orientation_max": {
+        "value": 0.0013146273420570024,
+        "t": 20.720833333333335,
+        "phase": "EXTRACT"
+      }
+    },
+    "transport": {
+      "count": 12718,
+      "bottom_max": {
+        "value": 5.496327983587471e-06,
+        "t": 53.3875,
+        "phase": "TRANSPORT"
+      },
+      "orientation_max": {
+        "value": 0.006656227640092519,
+        "t": 53.3875,
+        "phase": "TRANSPORT"
+      }
+    }
+  },
+  "selected_timeline": [
+    {
+      "t": 17.8,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": false,
+      "bottom_drift_m": 2.117950860389438e-05,
+      "relative_orientation_drift_deg": 0.26648287713596375,
+      "anchor_drift_m": 0.0002483026042537844,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "t": 18.0,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": false,
+      "bottom_drift_m": 2.117950860389438e-05,
+      "relative_orientation_drift_deg": 0.2664831010972783,
+      "anchor_drift_m": 0.0002483028120961817,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "t": 18.05,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": false,
+      "bottom_drift_m": 7.010136452073992e-07,
+      "relative_orientation_drift_deg": 0.0010202963010396816,
+      "anchor_drift_m": 4.6601373064880316e-07,
+      "finger_contact_N": [
+        0.7507073879241943,
+        1.3300399780273438
+      ]
+    },
+    {
+      "t": 18.145833333333332,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0,
+      "relative_orientation_drift_deg": 0.0,
+      "anchor_drift_m": 0.0,
+      "finger_contact_N": [
+        0.7650852799415588,
+        1.3348219394683838
+      ]
+    },
+    {
+      "t": 18.166666666666668,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 3.0021062125860767e-07,
+      "relative_orientation_drift_deg": 7.830551986387725e-05,
+      "anchor_drift_m": 2.98588852556399e-07,
+      "finger_contact_N": [
+        0.7624958753585815,
+        1.338027000427246
+      ]
+    },
+    {
+      "t": 18.183333333333334,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 4.97618810666251e-07,
+      "relative_orientation_drift_deg": 0.00016917649214422798,
+      "anchor_drift_m": 4.422137504341865e-07,
+      "finger_contact_N": [
+        0.7614879012107849,
+        1.3393874168395996
+      ]
+    },
+    {
+      "t": 18.2,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0002703630775218333,
+      "relative_orientation_drift_deg": 0.3136582986088439,
+      "anchor_drift_m": 3.395209877549894e-05,
+      "finger_contact_N": [
+        0.9327265620231628,
+        0.9295592308044434
+      ]
+    },
+    {
+      "t": 18.25,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0005516708121118588,
+      "relative_orientation_drift_deg": 0.6385962604146675,
+      "anchor_drift_m": 5.4876016508929736e-05,
+      "finger_contact_N": [
+        1.0723693370819092,
+        0.5626856684684753
+      ]
+    },
+    {
+      "t": 18.3,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.00027607545232870745,
+      "relative_orientation_drift_deg": 0.3169507033774591,
+      "anchor_drift_m": 5.2911106956211034e-05,
+      "finger_contact_N": [
+        0.9501824378967285,
+        0.9422307014465332
+      ]
+    },
+    {
+      "t": 18.4,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0002764638625119305,
+      "relative_orientation_drift_deg": 0.3172646528486143,
+      "anchor_drift_m": 5.297921577687649e-05,
+      "finger_contact_N": [
+        0.9463724493980408,
+        0.9459345936775208
+      ]
+    },
+    {
+      "t": 18.5,
+      "phase": "GRASP",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0002767556433525146,
+      "relative_orientation_drift_deg": 0.3174363234665671,
+      "anchor_drift_m": 5.276765463064667e-05,
+      "finger_contact_N": [
+        0.946629524230957,
+        0.9465427398681641
+      ]
+    },
+    {
+      "t": 18.916666666666668,
+      "phase": "EXTRACT",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0002766215422760895,
+      "relative_orientation_drift_deg": 0.31745009192752316,
+      "anchor_drift_m": 5.297868864683499e-05,
+      "finger_contact_N": [
+        0.9489325284957886,
+        0.9483643174171448
+      ]
+    },
+    {
+      "t": 19.0,
+      "phase": "EXTRACT",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0002763396676052756,
+      "relative_orientation_drift_deg": 0.3171853098100605,
+      "anchor_drift_m": 5.253685824448566e-05,
+      "finger_contact_N": [
+        0.9469860196113586,
+        0.9461898803710938
+      ]
+    },
+    {
+      "t": 19.308333333333334,
+      "phase": "EXTRACT",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.00027645914462178867,
+      "relative_orientation_drift_deg": 0.3172658539210672,
+      "anchor_drift_m": 5.267309536260403e-05,
+      "finger_contact_N": [
+        0.9484760761260986,
+        0.9482758641242981
+      ]
+    },
+    {
+      "t": 20.845833333333335,
+      "phase": "EXTRACT",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.00027588767080736603,
+      "relative_orientation_drift_deg": 0.3169290974274498,
+      "anchor_drift_m": 5.275431844484908e-05,
+      "finger_contact_N": [
+        0.9449880123138428,
+        0.9493964910507202
+      ]
+    },
+    {
+      "t": 44.3125,
+      "phase": "TRANSPORT",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.0002720807583962754,
+      "relative_orientation_drift_deg": 0.3122815178270949,
+      "anchor_drift_m": 5.199263537959871e-05,
+      "finger_contact_N": [
+        0.9587903618812561,
+        0.9339531660079956
+      ]
+    },
+    {
+      "t": 73.83333333333333,
+      "phase": "ALIGN",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.00027215845946426014,
+      "relative_orientation_drift_deg": 0.31249365163708825,
+      "anchor_drift_m": 5.198396718261121e-05,
+      "finger_contact_N": [
+        0.944819450378418,
+        0.9479531645774841
+      ]
+    },
+    {
+      "t": 107.60833333333333,
+      "phase": "INSERT",
+      "included_in_original_global_grasp_metric": true,
+      "bottom_drift_m": 0.00027157737235970633,
+      "relative_orientation_drift_deg": 0.3118926587802752,
+      "anchor_drift_m": 5.198816845449478e-05,
+      "finger_contact_N": [
+        0.9475212097167969,
+        0.9466741681098938
+      ]
+    },
+    {
+      "t": 110.775,
+      "phase": "OPEN",
+      "included_in_original_global_grasp_metric": false,
+      "bottom_drift_m": 0.00033094208127573514,
+      "relative_orientation_drift_deg": 0.3160308541810654,
+      "anchor_drift_m": 0.00018586549735795033,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "t": 110.925,
+      "phase": "OPEN",
+      "included_in_original_global_grasp_metric": false,
+      "bottom_drift_m": 0.0003308974801614368,
+      "relative_orientation_drift_deg": 0.31605749740548156,
+      "anchor_drift_m": 0.00018570310619068207,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "first_orientation_changes_since_first_contact": {
+    "command_TCP": {
+      "0.01": {
+        "t": 18.1875,
+        "value_deg": 0.09976841190932938,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.05": {
+        "t": 18.1875,
+        "value_deg": 0.09976841190932938,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.1": {
+        "t": 18.2375,
+        "value_deg": 0.20618156950902508,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      }
+    },
+    "actual_TCP": {
+      "0.01": {
+        "t": 18.1875,
+        "value_deg": 0.025396706320700856,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.05": {
+        "t": 18.195833333333333,
+        "value_deg": 0.05666081519392978,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.1": {
+        "t": 18.241666666666667,
+        "value_deg": 0.11242229753075758,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      }
+    },
+    "object_world": {
+      "0.01": {
+        "t": 18.1875,
+        "value_deg": 0.18286508173306812,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.05": {
+        "t": 18.1875,
+        "value_deg": 0.18286508173306812,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.1": {
+        "t": 18.1875,
+        "value_deg": 0.18286508173306812,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      }
+    },
+    "relative": {
+      "0.01": {
+        "t": 18.1875,
+        "value_deg": 0.16140813498400336,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.05": {
+        "t": 18.1875,
+        "value_deg": 0.16140813498400336,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      },
+      "0.1": {
+        "t": 18.1875,
+        "value_deg": 0.16140813498400336,
+        "phase": "GRASP",
+        "before_contact_latch": false
+      }
+    }
+  },
+  "precontact_17_8s_reference": {
+    "first_any_finger_001N": {
+      "t": 18.020833333333332,
+      "forces": [
+        0.0,
+        0.06867524236440659
+      ],
+      "tilt_deg": 0.007766199541461497
+    },
+    "earliest_changes": {
+      "object_world_0.01": {
+        "t": 18.020833333333332,
+        "change_deg": 0.016265175309780142,
+        "forces": [
+          0.0,
+          0.06867524236440659
+        ],
+        "tilt_deg": 0.007766199541461497
+      },
+      "relative_0.01": {
+        "t": 18.020833333333332,
+        "change_deg": 0.016219346121470926,
+        "forces": [
+          0.0,
+          0.06867524236440659
+        ],
+        "tilt_deg": 0.007766199541461497
+      },
+      "object_world_0.05": {
+        "t": 18.025,
+        "change_deg": 0.06999302110849334,
+        "forces": [
+          0.0,
+          0.038291752338409424
+        ],
+        "tilt_deg": 0.06890814854460527
+      },
+      "relative_0.05": {
+        "t": 18.025,
+        "change_deg": 0.07005435846872343,
+        "forces": [
+          0.0,
+          0.038291752338409424
+        ],
+        "tilt_deg": 0.06890814854460527
+      },
+      "object_world_0.1": {
+        "t": 18.029166666666665,
+        "change_deg": 0.1310298955760582,
+        "forces": [
+          0.0,
+          0.027981532737612724
+        ],
+        "tilt_deg": 0.1304294515491494
+      },
+      "relative_0.1": {
+        "t": 18.029166666666665,
+        "change_deg": 0.13104113185645494,
+        "forces": [
+          0.0,
+          0.027981532737612724
+        ],
+        "tilt_deg": 0.1304294515491494
+      },
+      "actual_TCP_0.01": {
+        "t": 18.1875,
+        "change_deg": 0.025513344194237494,
+        "forces": [
+          0.3716346323490143,
+          0.5254741907119751
+        ],
+        "tilt_deg": 0.08357283139330687
+      },
+      "actual_TCP_0.05": {
+        "t": 18.195833333333333,
+        "change_deg": 0.05680920167424408,
+        "forces": [
+          0.926289975643158,
+          0.9407569766044617
+        ],
+        "tilt_deg": 0.10323500685747154
+      },
+      "actual_TCP_0.1": {
+        "t": 18.241666666666667,
+        "change_deg": 0.11224458267969255,
+        "forces": [
+          1.5994759798049927,
+          0.899905264377594
+        ],
+        "tilt_deg": 0.3063906588850163
+      }
+    }
+  },
+  "contact_snapshots": {
+    "18.05": {
+      "t": 18.05,
+      "forces": [
+        0.7507073879241943,
+        1.3300399780273438
+      ],
+      "tilt_deg": 0.2653047200489306,
+      "source_bottom_gap_m": -4.835640140532504e-07,
+      "environment_net_force_N": [
+        -0.5748053099960089,
+        0.08487818168941885,
+        1.5174879294354469
+      ],
+      "normal_contacts_by_path": {
+        "/World/SourceRack/Base/Collision": {
+          "normal_force_vector_on_cup_N": [
+            0.005263457482215017,
+            4.616903424903285e-05,
+            1.5154758095741272
+          ],
+          "positive_force_points": 2
+        }
+      }
+    },
+    "18.145833333333332": {
+      "t": 18.145833333333332,
+      "forces": [
+        0.7650852799415588,
+        1.3348219394683838
+      ],
+      "tilt_deg": 0.2655584300594385,
+      "source_bottom_gap_m": -3.1255710486455257e-07,
+      "environment_net_force_N": [
+        -0.56387251149863,
+        0.07910907958284952,
+        1.3843485561665148
+      ],
+      "normal_contacts_by_path": {
+        "/World/SourceRack/Base/Collision": {
+          "normal_force_vector_on_cup_N": [
+            0.004804676165804267,
+            3.94502758354065e-05,
+            1.3823744356632233
+          ],
+          "positive_force_points": 2
+        }
+      }
+    },
+    "18.166666666666668": {
+      "t": 18.166666666666668,
+      "forces": [
+        0.7624958753585815,
+        1.338027000427246
+      ],
+      "tilt_deg": 0.2656161668049312,
+      "source_bottom_gap_m": -5.005994291318316e-07,
+      "environment_net_force_N": [
+        -0.5690961871296167,
+        0.07944847386170295,
+        1.404476069379598
+      ],
+      "normal_contacts_by_path": {
+        "/World/SourceRack/Base/Collision": {
+          "normal_force_vector_on_cup_N": [
+            0.0048707929090596735,
+            4.072230467500049e-05,
+            1.4024850130081177
+          ],
+          "positive_force_points": 2
+        }
+      }
+    },
+    "18.191666666666666": {
+      "t": 18.191666666666666,
+      "forces": [
+        0.4676484763622284,
+        0.3133583664894104
+      ],
+      "tilt_deg": 0.08837494834215899,
+      "source_bottom_gap_m": 5.862014330504373e-06,
+      "environment_net_force_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "normal_contacts_by_path": {}
+    },
+    "18.245833333333334": {
+      "t": 18.245833333333334,
+      "forces": [
+        1.4963953495025635,
+        0.8201354146003723
+      ],
+      "tilt_deg": 0.3080195880289792,
+      "source_bottom_gap_m": -7.752038344577272e-08,
+      "environment_net_force_N": [
+        0.6740392632782459,
+        0.0137886887168861,
+        1.6360608851537108
+      ],
+      "normal_contacts_by_path": {
+        "/World/SourceRack/Base/Collision": {
+          "normal_force_vector_on_cup_N": [
+            -0.005099397269077599,
+            0.00010526531900723057,
+            1.6338655687868595
+          ],
+          "positive_force_points": 3
+        }
+      }
+    }
+  },
+  "evidence_boundaries": [
+    "Configured anchor is not measured contact centre; axial projection does not isolate all frictional/material slip.",
+    "Teacher phase is used only to localize time; original score uses physical events and exact unchanged thresholds.",
+    "No success relabeling, reference reset, threshold relaxation or runtime change is performed."
+  ],
+  "raw_or_runtime_modified": false,
+  "GPU_used": false,
+  "API_calls": 0
+}

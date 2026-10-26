@@ -1,0 +1,280 @@
+{
+  "schema": "labsim.Project_v1_1.camera_comparison.v1",
+  "evidence_kind": "actual_API_camera_comparison",
+  "requested_model": "gpt-6-astra",
+  "source_snapshot": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/teacher_camera_audit/stage_000007",
+  "source_stage_sha256": "0bb31ebb95045176f98d027db43c9f2b21715504b564da718ee9ef9fc5b56872",
+  "episode_id": "b88b5d10-e0a5-42f5-a43c-6424191111fe",
+  "observation_id": "b88b5d10-e0a5-42f5-a43c-6424191111fe:4491",
+  "no_GT_crop": true,
+  "robot_actions_executed": 0,
+  "prompt": "This is a stationary camera quality check, not robot control. Describe what can actually be seen in the two synchronized RGB images: the gripper, light cuvette, source rack, instrument opening and internal seat. State occlusion or insufficient detail explicitly. Do not invent object coordinates, infer an unobserved task outcome, or issue robot actions.",
+  "max_requests": 2,
+  "retries_per_request": 0,
+  "probes": {
+    "512low": {
+      "request_label": "camera_qa:b88b5d10-e0a5-42f5-a43c-6424191111fe:b88b5d10-e0a5-42f5-a43c-6424191111fe:4491:7:512low",
+      "image_config": {
+        "max_side_px": 512,
+        "jpeg_quality": 60,
+        "detail": "low",
+        "resize_interpolation": "lanczos"
+      },
+      "observation_artifacts": {
+        "manifest_path": "observations/decision_000000/manifest.json",
+        "manifest_sha256": "febe1d6ccba3f8e26a78e359649eb42e6ef652dc3fe2d1e2e6ef5fb50961bf44",
+        "public_observation": {
+          "path": "observations/decision_000000/public_observation.json",
+          "sha256": "5137922a1a8e660a38b3906ecb6f0e0c11504222b996393e88ef030a72f8aa16",
+          "bytes": 5052
+        },
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "observations/decision_000000/side_camera.jpg",
+            "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+            "bytes": 9266,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              512,
+              384
+            ]
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "observations/decision_000000/wrist_camera.jpg",
+            "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+            "bytes": 11374,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              512,
+              384
+            ]
+          }
+        ]
+      },
+      "api_sent": true,
+      "network_attempts": 1,
+      "max_output_tokens": 256,
+      "status": "COMPLETED",
+      "returned_model": "gpt-6-astra",
+      "response_id": "resp_0e07b0ef1bfcb5ef016adfa114774c81939d108d10956a3c82",
+      "usage": {
+        "input_tokens": 2622,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 235,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2857,
+        "attribution": {
+          "items": {
+            "msg_0e07b0ef1bfcb5ef016adfa11478708193bda962d0b9b6663b": {
+              "input_tokens": 2547,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 2072,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 231,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 232,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_0e07b0ef1bfcb5ef016adfa1155a2881938014ebf14eeeaba7": {
+              "input_tokens": 2,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 235,
+              "content": [
+                {
+                  "input_tokens": 2,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 235
+                }
+              ]
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 73,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      },
+      "output_text": "- **Gripper:** The side image shows the gripper extending into the open instrument. The wrist image clearly shows both fingers flanking the upper portion of a pale, upright cuvette; the precise contact surfaces are partly obscured.\n- **Light cuvette:** Its long rectangular body and open top are visible in the wrist view. Its lower end overlaps a small square holder, but the insertion depth and bottom contact cannot be seen.\n- **Source rack:** A white multi-slot rack is visible on the table in the side image, with a blue upright item near one edge. Slot labels and the occupancy of A1 are not discernible.\n- **Instrument opening:** The instrument’s raised lid and open access area are visible in the side image. The wrist view shows the interior platform and surrounding walls.\n- **Internal seat:** A square holder directly beneath the cuvette is visible, though its interior is occluded by the cuvette. Another square receptacle appears to the left. No visible label establishes which is the specified “candidate_far_hinge” seat.\n\nThese frames do not establish support transfer, finger release, retreat, or stable final placement.",
+      "request_id": "3683eb82-3f02-44f2-b7ec-73bc06b025a9",
+      "wall_seconds": 8.967504761065356
+    },
+    "640high": {
+      "request_label": "camera_qa:b88b5d10-e0a5-42f5-a43c-6424191111fe:b88b5d10-e0a5-42f5-a43c-6424191111fe:4491:7:640high",
+      "image_config": {
+        "max_side_px": 640,
+        "jpeg_quality": 60,
+        "detail": "high",
+        "resize_interpolation": "lanczos"
+      },
+      "observation_artifacts": {
+        "manifest_path": "observations/decision_000000/manifest.json",
+        "manifest_sha256": "058d3d3bcc341fc9e84db790201d41c5b39d73cc68582074d3ba957d04f13f50",
+        "public_observation": {
+          "path": "observations/decision_000000/public_observation.json",
+          "sha256": "4924e75fc14a5593685a711757cbd7c32b794e977a34f163ccc1e7676c8b7bc7",
+          "bytes": 4994
+        },
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "observations/decision_000000/side_camera.jpg",
+            "sha256": "4fe307811518d38817239119f9ea8460560cda6b77759ae94bcf00c771e8291f",
+            "bytes": 12821,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "observations/decision_000000/wrist_camera.jpg",
+            "sha256": "1b8f7f0c0e4f73bc58ac9fdc64a6c463cdc2611bf3ee8b52e0a92b6a9c86c8d8",
+            "bytes": 15684,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          }
+        ]
+      },
+      "api_sent": true,
+      "network_attempts": 1,
+      "max_output_tokens": 256,
+      "status": "COMPLETED",
+      "returned_model": "gpt-6-astra",
+      "response_id": "resp_0606c5109f412ecb016adfa11cf2f8819a9e40e7d5acf94b95",
+      "usage": {
+        "input_tokens": 2876,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 244,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3120,
+        "attribution": {
+          "items": {
+            "msg_0606c5109f412ecb016adfa11cf3e4819a9e37243e2c20de4d": {
+              "input_tokens": 2801,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 2066,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 361,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 362,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_0606c5109f412ecb016adfa11e97e0819abdf83bed5d5e23a4": {
+              "input_tokens": 2,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 244,
+              "content": [
+                {
+                  "input_tokens": 2,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 244
+                }
+              ]
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 73,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      },
+      "output_text": "- **Gripper and light cuvette:** The wrist view clearly shows a pale, open-topped rectangular cuvette between the two dark finger pads. Its lower end extends into a small square holder. The fingers appear close against its sides; exact contact and support cannot be established from RGB alone.\n- **Source rack:** The side view shows the white multi-slot rack in front of the instrument, with a blue upright item at one edge. Individual slot identities, including A1, are not readable, so A1 occupancy cannot be confirmed.\n- **Instrument opening:** The instrument lid is raised. The side view shows the gripper reaching into the dark opening, but the gripper and housing obscure much of the interior.\n- **Internal seat:** The wrist view shows the square holder surrounding the cuvette’s lower portion, along with another empty-looking square holder to the left. The cuvette’s bottom and the holder’s internal contact surfaces are occluded, so full seating and support transfer cannot be verified. The named “candidate_far_hinge” seat cannot be independently identified from visible labels.\n\nThese images do not establish finger release, retreat, or that the cuvette remains stable without gripper support.",
+      "request_id": "2deefdc4-f84b-45b6-ae28-9aaae46c339d",
+      "wall_seconds": 8.320214948966168
+    }
+  },
+  "budget_before": {
+    "total_network_attempts": 95,
+    "total_estimated_usd": 5.794461999999999,
+    "path": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json"
+  },
+  "budget_after": {
+    "total_network_attempts": 97,
+    "total_estimated_usd": 5.873391999999999,
+    "path": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json"
+  }
+}
