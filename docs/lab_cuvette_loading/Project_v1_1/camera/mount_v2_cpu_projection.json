@@ -1,0 +1,914 @@
+{
+  "schema": "labsim.Project_v1_1.mount_v2_CPU_projection.v1",
+  "CPU_only": true,
+  "configuration_modified": false,
+  "GPU_rendered": false,
+  "API_calls": 0,
+  "evidence_scope": "Actual saved K and recorded relative vessel poses; static hand triangle geometry, CPU pinhole/ray analysis only.",
+  "process_evidence": {
+    "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_01",
+    "process_exited": true,
+    "session_id": 34718,
+    "exit_code": 0,
+    "completion_evidence": "manifest closed result H5 and videos before app shutdown",
+    "task_termination": "SIMULATION_STATE_INVALID: actual_object_pose_jump_above_declared_limit at29.995833s, after contactloss/axialslip"
+  },
+  "native_K": [
+    [
+      366.4996337890625,
+      0.0,
+      320.0
+    ],
+    [
+      0.0,
+      366.4996337890625,
+      240.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "transmitted512_K": [
+    [
+      293.19970703125,
+      0.0,
+      255.9
+    ],
+    [
+      0.0,
+      293.19970703125,
+      191.9
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "native_resolution_wh": [
+    640,
+    480
+  ],
+  "transmitted_resolution_wh": [
+    512,
+    384
+  ],
+  "mounts": {
+    "v1": {
+      "eye_hand_m": [
+        0.075,
+        0.0,
+        0.0
+      ],
+      "target_hand_m": [
+        0,
+        0,
+        0.1
+      ],
+      "up_hand": [
+        0,
+        0,
+        -1
+      ],
+      "camera_to_hand_USD_R": [
+        [
+          0.0,
+          -0.8,
+          0.6
+        ],
+        [
+          -1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.6,
+          -0.8
+        ]
+      ],
+      "camera_to_hand_quaternion_wxyz": [
+        -0.22360679774997896,
+        0.6708203932499369,
+        -0.6708203932499369,
+        0.22360679774997896
+      ],
+      "CV_from_hand_R": [
+        [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.8,
+          0.0,
+          0.6
+        ],
+        [
+          -0.6,
+          0.0,
+          0.8
+        ]
+      ],
+      "optical_forward_hand": [
+        -0.6,
+        -0.0,
+        0.8
+      ],
+      "axis_projection": [
+        {
+          "hand_z_m": 0.075,
+          "native_xy": [
+            320.0,
+            187.64290945870536
+          ],
+          "transmitted512_xy": [
+            255.9,
+            150.01432756696428
+          ],
+          "optical_depth_m": 0.105
+        },
+        {
+          "hand_z_m": 0.1,
+          "native_xy": [
+            320.0,
+            240.0
+          ],
+          "transmitted512_xy": [
+            255.9,
+            191.9
+          ],
+          "optical_depth_m": 0.125
+        },
+        {
+          "hand_z_m": 0.12,
+          "native_xy": [
+            320.0,
+            271.19145819481383
+          ],
+          "transmitted512_xy": [
+            255.9,
+            216.85316655585106
+          ],
+          "optical_depth_m": 0.14100000000000001
+        },
+        {
+          "hand_z_m": 0.15,
+          "native_xy": [
+            320.0,
+            306.6362970525568
+          ],
+          "transmitted512_xy": [
+            255.9,
+            245.20903764204544
+          ],
+          "optical_depth_m": 0.16499999999999998
+        }
+      ],
+      "hand_body_ray_sample": {
+        "grid_wh": [
+          81,
+          61
+        ],
+        "positive_ray_hits": 2106,
+        "rays_total": 4941,
+        "observed_hit_fraction": 0.4262295081967213,
+        "top_half_hit_fraction": 0.8387096774193549,
+        "bottom_half_hit_fraction": 0.0,
+        "scope": "Two-sided rays against6458 actual source hand triangles only. Sampled geometric occupancy, NOT rendered pixel fraction; excludes finger/arm/instrument occlusion, near clipping and materials."
+      }
+    },
+    "v2": {
+      "eye_hand_m": [
+        0.075,
+        0.0,
+        0.04
+      ],
+      "target_hand_m": [
+        0,
+        0,
+        0.12
+      ],
+      "up_hand": [
+        0,
+        0,
+        -1
+      ],
+      "camera_to_hand_USD_R": [
+        [
+          0.0,
+          -0.729537204140085,
+          0.6839411288813299
+        ],
+        [
+          -1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.6839411288813299,
+          -0.729537204140085
+        ]
+      ],
+      "camera_to_hand_quaternion_wxyz": [
+        -0.26003018856467175,
+        0.6575593517204521,
+        -0.6575593517204521,
+        0.26003018856467175
+      ],
+      "CV_from_hand_R": [
+        [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.729537204140085,
+          0.0,
+          0.6839411288813299
+        ],
+        [
+          -0.6839411288813299,
+          0.0,
+          0.729537204140085
+        ]
+      ],
+      "optical_forward_hand": [
+        -0.6839411288813299,
+        -0.0,
+        0.729537204140085
+      ],
+      "axis_projection": [
+        {
+          "hand_z_m": 0.075,
+          "native_xy": [
+            320.0,
+            93.18263928331325
+          ],
+          "transmitted512_xy": [
+            255.9,
+            74.44611142665062
+          ],
+          "optical_depth_m": 0.07682938681100271
+        },
+        {
+          "hand_z_m": 0.1,
+          "native_xy": [
+            320.0,
+            187.266239742581
+          ],
+          "transmitted512_xy": [
+            255.9,
+            149.71299179406478
+          ],
+          "optical_depth_m": 0.09506781691450483
+        },
+        {
+          "hand_z_m": 0.12,
+          "native_xy": [
+            320.0,
+            240.00000000000003
+          ],
+          "transmitted512_xy": [
+            255.9,
+            191.9
+          ],
+          "optical_depth_m": 0.10965856099730653
+        },
+        {
+          "hand_z_m": 0.15,
+          "native_xy": [
+            320.0,
+            297.1663206950011
+          ],
+          "transmitted512_xy": [
+            255.90000000000003,
+            237.63305655600087
+          ],
+          "optical_depth_m": 0.13154467712150908
+        }
+      ],
+      "hand_body_ray_sample": {
+        "grid_wh": [
+          81,
+          61
+        ],
+        "positive_ray_hits": 810,
+        "rays_total": 4941,
+        "observed_hit_fraction": 0.16393442622950818,
+        "top_half_hit_fraction": 0.3225806451612903,
+        "bottom_half_hit_fraction": 0.0,
+        "scope": "Two-sided rays against6458 actual source hand triangles only. Sampled geometric occupancy, NOT rendered pixel fraction; excludes finger/arm/instrument occlusion, near clipping and materials."
+      }
+    }
+  },
+  "vessel_projection": [
+    {
+      "stage": "initial",
+      "record_time_s": 0.016666666666666666,
+      "observation_step": 0,
+      "mount": "v1",
+      "actual_cup_in_hand_position_m": [
+        -0.00024728382640477653,
+        -0.00017655060264536708,
+        0.37985268578629594
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        0.00042148530268303557,
+        -0.999999878893017,
+        0.00012656696692997518,
+        -0.0002203290583742186
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        313.883953229262,
+        391.63298225937655
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        326.4197847763402,
+        421.8212081558235
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            -0.00024728382640477653,
+            -0.00017655060264536708,
+            0.37985268578629594
+          ],
+          "native_xy": [
+            320.185387029805,
+            416.10792533907795
+          ],
+          "transmitted512_xy": [
+            256.048309623844,
+            332.7863402712624
+          ],
+          "optical_depth_m": 0.34903051892487963
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -0.00021753220750253503,
+            -0.0001196538623549248,
+            0.3123527210909572
+          ],
+          "native_xy": [
+            320.14864816768835,
+            398.06959134286365
+          ],
+          "transmitted512_xy": [
+            256.01891853415066,
+            318.35567307429096
+          ],
+          "optical_depth_m": 0.2950126961972673
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    },
+    {
+      "stage": "initial",
+      "record_time_s": 0.016666666666666666,
+      "observation_step": 0,
+      "mount": "v2",
+      "actual_cup_in_hand_position_m": [
+        -0.00024728382640477653,
+        -0.00017655060264536708,
+        0.37985268578629594
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        0.00042148530268303557,
+        -0.999999878893017,
+        0.00012656696692997518,
+        -0.0002203290583742186
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        312.7625736286226,
+        424.75834968800694
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        327.59685496710915,
+        464.29372721765645
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            -0.00024728382640477653,
+            -0.00017655060264536708,
+            0.37985268578629594
+          ],
+          "native_xy": [
+            320.2161180858041,
+            457.3335501669636
+          ],
+          "transmitted512_xy": [
+            256.07289446864326,
+            365.76684013357095
+          ],
+          "optical_depth_m": 0.2993998904535183
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -0.00021753220750253503,
+            -0.0001196538623549248,
+            0.3123527210909572
+          ],
+          "native_xy": [
+            320.17531715005185,
+            432.5265069724454
+          ],
+          "transmitted512_xy": [
+            256.04025372004145,
+            345.92120557795636
+          ],
+          "optical_depth_m": 0.25013580657430834
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    },
+    {
+      "stage": "before_close",
+      "record_time_s": 18.233333333333334,
+      "observation_step": 1093,
+      "mount": "v1",
+      "actual_cup_in_hand_position_m": [
+        -0.0003908739175896764,
+        -0.00020095274160194422,
+        0.1531972350774972
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        0.00199385469441797,
+        -0.999995269274238,
+        -0.00040111148832533416,
+        -0.0023076139572872903
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        303.25519385657765,
+        200.48968271477972
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        336.2811085264026,
+        319.0297135163884
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            -0.0003908739175896764,
+            -0.00020095274160194422,
+            0.1531972350774972
+          ],
+          "native_xy": [
+            320.43893015804525,
+            309.0344868607109
+          ],
+          "transmitted512_xy": [
+            256.2511441264362,
+            247.12758948856873
+          ],
+          "optical_depth_m": 0.16779231241255155
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -7.945549644150778e-05,
+            6.834130716289533e-05,
+            0.08569849541850703
+          ],
+          "native_xy": [
+            319.7795278373771,
+            212.11255614603272
+          ],
+          "transmitted512_xy": [
+            255.7236222699017,
+            169.5900449168262
+          ],
+          "optical_depth_m": 0.11360646963267054
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    },
+    {
+      "stage": "before_close",
+      "record_time_s": 18.233333333333334,
+      "observation_step": 1093,
+      "mount": "v2",
+      "actual_cup_in_hand_position_m": [
+        -0.0003908739175896764,
+        -0.00020095274160194422,
+        0.1531972350774972
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        0.00199385469441797,
+        -0.999995269274238,
+        -0.00040111148832533416,
+        -0.0023076139572872903
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        297.237537327542,
+        127.21128397435415
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        342.1341820780299,
+        312.8694716869277
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            -0.0003908739175896764,
+            -0.00020095274160194422,
+            0.1531972350774972
+          ],
+          "native_xy": [
+            320.54902809003937,
+            301.25369791322254
+          ],
+          "transmitted512_xy": [
+            256.3392224720315,
+            240.90295833057806
+          ],
+          "optical_depth_m": 0.13414451380937154
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -7.945549644150778e-05,
+            6.834130716289533e-05,
+            0.08569849541850703
+          ],
+          "native_xy": [
+            319.70424543150637,
+            138.22249328491145
+          ],
+          "transmitted512_xy": [
+            255.6633963452051,
+            110.47799462792918
+          ],
+          "optical_depth_m": 0.08468868012905788
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    },
+    {
+      "stage": "closed",
+      "record_time_s": 21.233333333333334,
+      "observation_step": 1273,
+      "mount": "v1",
+      "actual_cup_in_hand_position_m": [
+        -0.0005923949894576578,
+        -0.00016907710799940514,
+        0.15311082837587445
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        0.00401346146530565,
+        -0.9999883831435052,
+        -0.00018208562916927074,
+        -0.002663184170936983
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        302.2678366464793,
+        199.89867808168756
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        335.2841697180123,
+        318.5570438140203
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            -0.0005923949894576578,
+            -0.00016907710799940514,
+            0.15311082837587445
+          ],
+          "native_xy": [
+            320.36919199588624,
+            308.547952972963
+          ],
+          "transmitted512_xy": [
+            256.195353596709,
+            246.73836237837043
+          ],
+          "optical_depth_m": 0.16784409969437417
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -0.0002329679855223967,
+            0.0003727993225448548,
+            0.08561396520111111
+          ],
+          "native_xy": [
+            318.7975915748329,
+            211.55887588354608
+          ],
+          "transmitted512_xy": [
+            254.9380732598663,
+            169.14710070683688
+          ],
+          "optical_depth_m": 0.11363095295220232
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    },
+    {
+      "stage": "closed",
+      "record_time_s": 21.233333333333334,
+      "observation_step": 1273,
+      "mount": "v2",
+      "actual_cup_in_hand_position_m": [
+        -0.0005923949894576578,
+        -0.00016907710799940514,
+        0.15311082837587445
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        0.00401346146530565,
+        -0.9999883831435052,
+        -0.00018208562916927074,
+        -0.002663184170936983
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        295.9036621244386,
+        126.47062893261625
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        340.77285836876104,
+        312.28981784401606
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            -0.0005923949894576578,
+            -0.00016907710799940514,
+            0.15311082837587445
+          ],
+          "native_xy": [
+            320.46168245286117,
+            300.65674914017796
+          ],
+          "transmitted512_xy": [
+            256.2693459622889,
+            240.42539931214242
+          ],
+          "optical_depth_m": 0.1342193054552375
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -0.0002329679855223967,
+            0.0003727993225448548,
+            0.08561396520111111
+          ],
+          "native_xy": [
+            318.38749461826467,
+            137.5400528263878
+          ],
+          "transmitted512_xy": [
+            254.60999569461174,
+            109.93204226111023
+          ],
+          "optical_depth_m": 0.08473200569567287
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    },
+    {
+      "stage": "extracted_snapshot",
+      "record_time_s": 27.233333333333334,
+      "observation_step": 1633,
+      "mount": "v1",
+      "actual_cup_in_hand_position_m": [
+        0.00213742944174169,
+        0.0002269434275369549,
+        0.16369039326762944
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        -1.0671560794375638e-06,
+        -0.9997426151039004,
+        2.7973908470202424e-06,
+        0.02268707861868317
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        304.00068789063357,
+        220.3423766941782
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        334.61093843710347,
+        333.3851118798775
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            0.00213742944174169,
+            0.0002269434275369549,
+            0.16369039326762944
+          ],
+          "native_xy": [
+            319.52381776377484,
+            323.7705911413585
+          ],
+          "transmitted512_xy": [
+            255.5190542110199,
+            258.91647291308686
+          ],
+          "optical_depth_m": 0.17466985694905854
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -0.0009245376488430279,
+            0.00022680796628075074,
+            0.09625988300863995
+          ],
+          "native_xy": [
+            319.32177502014173,
+            231.0778262400776
+          ],
+          "transmitted512_xy": [
+            255.35742001611337,
+            184.76226099206204
+          ],
+          "optical_depth_m": 0.12256262899621778
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    },
+    {
+      "stage": "extracted_snapshot",
+      "record_time_s": 27.233333333333334,
+      "observation_step": 1633,
+      "mount": "v2",
+      "actual_cup_in_hand_position_m": [
+        0.00213742944174169,
+        0.0002269434275369549,
+        0.16369039326762944
+      ],
+      "actual_cup_in_hand_quaternion_wxyz": [
+        -1.0671560794375638e-06,
+        -0.9997426151039004,
+        2.7973908470202424e-06,
+        0.02268707861868317
+      ],
+      "all_source_vertices_in_front": true,
+      "all_source_vertices_inside_image": true,
+      "observed_inside_vertex_fraction": 1.0,
+      "projected_source_vertex_AABB_native_xy_min": [
+        298.6519889550821,
+        162.89785606575154
+      ],
+      "projected_source_vertex_AABB_native_xy_max": [
+        339.49548940803885,
+        333.534746343637
+      ],
+      "top_bottom": {
+        "bottom_centre": {
+          "hand_xyz_m": [
+            0.00213742944174169,
+            0.0002269434275369549,
+            0.16369039326762944
+          ],
+          "native_xy": [
+            319.4061939428929,
+            322.2665419911511
+          ],
+          "transmitted512_xy": [
+            255.42495515431438,
+            257.71323359292086
+          ],
+          "optical_depth_m": 0.1400704524442647
+        },
+        "top_centre": {
+          "hand_xyz_m": [
+            -0.0009245376488430279,
+            0.00022680796628075074,
+            0.09625988300863995
+          ],
+          "native_xy": [
+            319.1059092888225,
+            173.33452675472597
+          ],
+          "transmitted512_xy": [
+            255.184727431058,
+            138.5676214037808
+          ],
+          "optical_depth_m": 0.0929715917447142
+        }
+      },
+      "source_vertex_count": 5292,
+      "scope": "Offline projection of actual source vessel geometry at recorded poses. Ground-truth-relative pose used only for this audit, never fed to policy or runtime camera control."
+    }
+  ],
+  "hand_geometry": {
+    "source_prim": "/Franka/panda_hand/geometry/panda_hand",
+    "points": 3319,
+    "triangles": 6458,
+    "hand_local_bounds_m": [
+      [
+        -0.031519530488206764,
+        -0.10394635976854022,
+        -0.025994909904189584
+      ],
+      [
+        0.03152513332535837,
+        0.10056975657813044,
+        0.06599989195170881
+      ]
+    ],
+    "unit_note": "Use unchanged numeric geometry as referenced into the metre simulation scene, and convert mesh-to-hand transforms. Source robot USD declares .01m per unit but USD references do not automatically rescale numeric geometry; no new .01 scaling applied."
+  },
+  "limitations": [
+    "No newv2 rendering, silhouette pixel measurement, full object visibility or grasp/insertion/retreat acceptance.",
+    "Hand-ray sampling excludes finger, arm, lid and seat occlusion; vessel AABB does not mean surfaces visible.",
+    "Extracted snapshot is from a historical diagnostic that later slipped/terminated, not stable-grasp proof.",
+    "Actual object-relative pose was used only offline; proposed camera mount is a fixed robot-frame transform independent of objects/phases."
+  ],
+  "proposed_config": {
+    "cameras": {
+      "wrist_camera": {
+        "parent_link": "/World/Franka/panda_hand",
+        "localeye_m": [
+          0.075,
+          0,
+          0.04
+        ],
+        "localtarget_m": [
+          0,
+          0,
+          0.12
+        ],
+        "localup": [
+          0,
+          0,
+          -1
+        ],
+        "focal_length_cm": 1.2,
+        "horizontal_aperture_mm": 20.955,
+        "resolution": [
+          640,
+          480
+        ],
+        "fps": 60
+      }
+    }
+  },
+  "sources": [
+    {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_01/process_exit.json",
+      "sha256": "19c1ba694b591be6f29c86ed5502685d6e1fedab11579a553545443d637f5d56",
+      "bytes": 407
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_01/episode_0000/model_input_preview/observations/decision_000003/public_observation.json",
+      "sha256": "9b14c963c62d8a2509bca5ec2a4c6190bad912243bd82e49839bbb615753fc08",
+      "bytes": 5039
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_01/episode_0000/model_input_preview/observations/decision_000003/manifest.json",
+      "sha256": "aebd100a7808b80de36ac8c109f41515c26fde3b2f265a9815e03ee0be7ff223",
+      "bytes": 1110
+    },
+    {
+      "path": "assets/robots/Franka.usd",
+      "sha256": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b",
+      "bytes": 10063498
+    },
+    {
+      "path": "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda",
+      "sha256": "680dad7643f8534caeaa8adf710784de4e2acad8be8fab8a2c7897140a573b79",
+      "bytes": 353002
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Project_v1_1/grasp_transport_01/episode_0000/dataset/episode_0000.h5",
+      "sha256": "314c29c1941d512a26457faf8496a2f0c1df1be88c2dbaa902ae163bebf3c20c",
+      "bytes": 438945082
+    }
+  ],
+  "diagram": {
+    "path": "mount_v2_cpu_projection.png",
+    "sha256": "ed22703dbe2a40b11d954a2fa1bee3cf17efd90ce24837ee10979d9203b35258",
+    "not_a_rendered_image": true
+  },
+  "relative_pose_reading": "Closed source H5 opened read-only; rows at actual0.016667/18.233333/21.233333/27.233333s.",
+  "top_bottom_marker_semantics": "Centres of the source local-Z extrema planes. Open mouth centre is a geometric reference inside the cavity, not a material point."
+}

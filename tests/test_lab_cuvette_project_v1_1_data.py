@@ -80,6 +80,34 @@ class ProjectV11DataContractTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "no complete successful"):
             self.reader()
 
+    def test_final_integrity_source_matches_H5_and_preserves_independent_pending_snapshot(self):
+        self.transition()
+        evidence = self.score()
+        evidence.update(record_integrity_valid=None, record_integrity_source="collector_pending")
+        independent = self.output / "independent_score.json"
+        independent.write_text(json.dumps(evidence, indent=2) + "\n")
+        original_digest = hashlib.sha256(independent.read_bytes()).hexdigest()
+        labels = self.collector.finish_episode({}, independent)
+        expected = "streaming_collector_checks_at_flush_close"
+        self.assertEqual(labels["record_integrity_source"], expected)
+        # This is the same returned-label overlay used by the task's final result.
+        final_result = {**evidence, **labels}
+        self.assertEqual(final_result["record_integrity_source"], expected)
+        summary = json.loads((self.output / "episode_0000_result.json").read_text())
+        index = json.loads((self.output / "dataset/meta/episode.jsonl").read_text())
+        self.assertEqual(summary["labels"]["record_integrity_source"], expected)
+        self.assertEqual(index["labels"]["record_integrity_source"], expected)
+        with h5py.File(self.collector.path) as source:
+            self.assertEqual(source.attrs["record_integrity_source"], final_result["record_integrity_source"])
+            self.assertEqual(json.loads(source["qualification_json"].asstr()[()])["record_integrity_source"], expected)
+            self.assertEqual(json.loads(source["task_properties"].asstr()[()])["labels"]["record_integrity_source"], expected)
+            snapshot = json.loads(source["independent_score_json"].asstr()[()])
+            self.assertEqual(snapshot, evidence)
+            self.assertEqual(snapshot["record_integrity_source"], "collector_pending")
+            self.assertIsNone(snapshot["record_integrity_valid"])
+        self.assertEqual(evidence["record_integrity_source"], "collector_pending")
+        self.assertEqual(original_digest, hashlib.sha256(independent.read_bytes()).hexdigest())
+
     def test_bad_record_interval_does_not_relabel_trusted_physics_as_simulation_failure(self):
         self.transition(bad_interval=True)
         labels = self.collector.finish_episode({}, self.score())
@@ -88,6 +116,7 @@ class ProjectV11DataContractTest(unittest.TestCase):
         self.assertFalse(labels["record_valid"])
         self.assertFalse(labels["success_bc_eligible"])
         self.assertFalse(labels["trajectory_analysis_eligible"])
+        self.assertEqual(labels["record_integrity_source"], "streaming_collector_checks_at_flush_close")
 
     def test_valid_safety_collision_can_use_normal_failure_reader(self):
         self.transition()

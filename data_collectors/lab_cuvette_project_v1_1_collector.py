@@ -49,6 +49,7 @@ class LabCuvetteProjectV11Collector(LabCuvetteEnvV1Collector):
         task_result = copy.deepcopy(evidence.get("task_result", dict(success=labels["task_success"], status="unknown")))
         qualification = dict(schema="labsim.Project_v1_1.qualifications.v1",
             task_result=task_result, record_integrity_valid=integrity,
+            record_integrity_source="streaming_collector_checks_at_flush_close",
             record_integrity_errors=integrity_errors, physics_trustworthy=physics,
             physics_trust_scope=evidence.get("physics_trust_scope", "unavailable"),
             failure_domain=domain, success_bc_eligible=success_bc,
@@ -61,7 +62,7 @@ class LabCuvetteProjectV11Collector(LabCuvetteEnvV1Collector):
         # The inherited writer has now flushed and closed this new file. Never
         # open a historic H5 or change the original independent-score dataset.
         with h5py.File(path, "r+") as output:
-            for key in ("record_integrity_valid", "physics_trustworthy", "success_bc_eligible",
+            for key in ("record_integrity_valid", "record_integrity_source", "physics_trustworthy", "success_bc_eligible",
                         "trajectory_analysis_eligible", "failure_domain", "eligibility_pending_collector_integrity",
                         "record_valid", "eligible_for_success_bc", "eligible_for_failure_analysis"):
                 value = labels[key]

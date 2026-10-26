@@ -177,6 +177,43 @@ def pose_hold(probe):
     probe.call('wait',duration_s=3.)
 
 
+def fine_preinsert(probe):
+    # Empty gripper in the designed pre-insertion free space. Manual design
+    # coordinates are disclosed; none are provided to a GPT policy.
+    target=np.asarray(probe.task.ctx['fixtures']['target_floor'])+[0.,0.,.13]
+    initial=probe.tools.observe()['TCPpose'];q=initial['quaternion_wxyz']
+    write(probe.task.episode_dir/'manual_diagnostic_plan.json',dict(
+        source='fixed scene target fixture design, not online object pose',
+        nominal_TCP_world_m=target.tolist(),quaternion_wxyz=q,
+        held_object=False,original_seat_unchanged=True,precision_goal_m=.0001))
+    def absolute(p,duration):
+        return probe.call('move_ee',mode='ee_pose',values=list(p)+q,frame='world',duration_s=duration)
+    # The same upright fixed quaternion is held across the transit and probes.
+    for waypoint in ([initial['position_m'][0],initial['position_m'][1],1.05],
+                     [target[0],target[1],1.05],target):
+        for _ in range(50):
+            p=np.asarray(probe.tools.observe()['TCPpose']['position_m']);d=np.asarray(waypoint)-p
+            length=np.linalg.norm(d)
+            if length<.00075:break
+            if length>.025:d*=.025/length
+            if not absolute(p+d,float(np.ceil(max(.5,np.linalg.norm(d)/.015)*60)/60)):return
+        else:return
+    probe.snapshot('empty_preinsert_free_pose')
+    if not absolute(target,3.):return
+    for amplitude in (.0001,.0005,.001,.002):
+        for axis in range(3):
+            for sign in (1.,-1.):
+                if not absolute(target,1.):return
+                current=np.asarray(probe.tools.observe()['TCPpose']['position_m']);delta=np.zeros(3);delta[axis]=sign*amplitude
+                completed=absolute(current+delta,max(1.,amplitude/.001))
+                probe.records[-1]['probe_definition']=dict(near_preinsert=True,frame='world',signed_axis=axis,
+                    amplitude_m=sign*amplitude,frozen_orientation_reference_wxyz=q,
+                    comparison='actual displacement from fixed observed start AND actual endpoint minus requested target')
+                if not completed:return
+    if not absolute(target,3.):return
+    probe.call('wait',duration_s=3.)
+
+
 def run_probes(facade, mode, attempts, output):
     results = []
     for attempt in (attempts if mode == 'fixed-replay' else [0]):
@@ -186,6 +223,7 @@ def run_probes(facade, mode, attempts, output):
         if mode == 'fixed-replay':original_prefix(probe, attempt)
         elif mode == 'free-space':free_space(probe)
         elif mode == 'pose-hold':pose_hold(probe)
+        elif mode == 'fine-preinsert':fine_preinsert(probe)
         elif mode == 'grasp-transport':grasp_transport(probe)
         else:raise ValueError('Unknown probe')
         if not facade.task.ended:facade.task.finalize_episode('CONTROL_DIAGNOSTIC_COMPLETE', 'POLICY_BUDGET')

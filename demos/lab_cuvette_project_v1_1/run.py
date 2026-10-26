@@ -30,7 +30,7 @@ def parser():
                    help='Existing shared ledger; previous attempts remain charged to this budget')
     p.add_argument('--max-calls', type=int, default=160)
     p.add_argument('--audit-only', action='store_true')
-    p.add_argument('--probe', choices=('fixed-replay','free-space','pose-hold','grasp-transport'),default='fixed-replay')
+    p.add_argument('--probe', choices=('fixed-replay','free-space','pose-hold','fine-preinsert','grasp-transport'),default='fixed-replay')
     p.add_argument('--attempts',type=int,nargs='+',default=[1,2])
     return p
 

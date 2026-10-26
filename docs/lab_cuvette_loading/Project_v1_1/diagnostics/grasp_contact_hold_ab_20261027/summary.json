@@ -1,0 +1,221 @@
+{
+  "schema": "labsim.Project_v1_1.generic_hold_AB.v1",
+  "analysis_date_local": "2026-10-27",
+  "A": {
+    "name": "grasp_transport_01",
+    "physical_samples": 7201,
+    "transitions": 1799,
+    "terminal_simulation_time_s": 30.0,
+    "actions_attempted": 16,
+    "fully_consumed_action_intervals": 15,
+    "source_clear_time_s": 23.95,
+    "raw_score": {
+      "failure_type": "SIMULATION_FAILURE",
+      "task_success": null,
+      "grasp_success": false,
+      "transport_success": false,
+      "physics_trustworthy": false,
+      "measured_grasp_segments": {
+        "static_grasp": {
+          "status": "measured",
+          "start_t": 21.304166666666667,
+          "end_t": 21.691666666666666,
+          "sample_count": 94,
+          "reference_position_drift_m": 0.004684627128741725,
+          "reference_orientation_drift_deg": 3.5124181806737864,
+          "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+        },
+        "extraction": {
+          "status": "measured",
+          "start_t": 21.691666666666666,
+          "end_t": 23.95,
+          "sample_count": 543,
+          "reference_position_drift_m": 0.0042477603320201325,
+          "reference_orientation_drift_deg": 0.3986578103784398,
+          "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+        },
+        "transport": {
+          "status": "unavailable",
+          "reference_position_drift_m": null,
+          "reference_orientation_drift_deg": null
+        }
+      }
+    },
+    "final_collector_result": {
+      "record_valid": false,
+      "record_integrity_valid": true,
+      "physics_trustworthy": false,
+      "success_bc_eligible": false,
+      "trajectory_analysis_eligible": true,
+      "condition_group": "control_diagnostic"
+    },
+    "original_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 0.027001527671942915,
+      "maximum_orientation_drift_deg": 4.477427808241606,
+      "maximum_configured_grasp_anchor_drift_m": 0.026871335550776403,
+      "maximum_configured_grasp_anchor_axial_drift_m": 0.026866891447355924,
+      "maximum_configured_grasp_anchor_transverse_drift_m": 0.0009105288634786182,
+      "configured_grasp_anchor_height_m": 0.053,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    },
+    "recomputed_contact_gated_anchor_axial_max_m": 0.02686689144735592,
+    "force_wait_2s_mean_N": [
+      0.1601745238113304,
+      0.16102921228522818
+    ],
+    "first_both_zero_after_grasp_s": 29.929166666666667,
+    "short_move": {
+      "start_time_s": 29.233333333333334,
+      "end_time_s": 30.0,
+      "requested_world_delta_m": [
+        0.02,
+        0.0,
+        0.02
+      ],
+      "actual_object_delta_m": [
+        0.008136607706546783,
+        0.0030191540718078613,
+        -0.03113400936126709
+      ],
+      "actual_object_displacement_norm_m": 0.032320987224820616,
+      "actual_TCP_delta_m": [
+        0.007362771198491755,
+        0.00027427874896199245,
+        0.0073564379013570935
+      ],
+      "requested_duration_s": 2.0,
+      "executed_duration_s": 0.7666666666666657,
+      "partial": true,
+      "target_reached": false
+    },
+    "full_loading_attempted": false,
+    "short_move_is_not_full_transport_gate": true
+  },
+  "B": {
+    "name": "grasp_transport_02",
+    "physical_samples": 7977,
+    "transitions": 1993,
+    "terminal_simulation_time_s": 33.233333333333334,
+    "actions_attempted": 17,
+    "fully_consumed_action_intervals": 17,
+    "source_clear_time_s": 23.2875,
+    "raw_score": {
+      "failure_type": "POLICY_BUDGET",
+      "task_success": false,
+      "grasp_success": true,
+      "transport_success": false,
+      "physics_trustworthy": true,
+      "measured_grasp_segments": {
+        "static_grasp": {
+          "status": "measured",
+          "start_t": 21.304166666666667,
+          "end_t": 21.35,
+          "sample_count": 12,
+          "reference_position_drift_m": 7.93177174273839e-07,
+          "reference_orientation_drift_deg": 0.0007493856835466105,
+          "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+        },
+        "extraction": {
+          "status": "measured",
+          "start_t": 21.35,
+          "end_t": 23.2875,
+          "sample_count": 466,
+          "reference_position_drift_m": 1.1148774008091093e-06,
+          "reference_orientation_drift_deg": 0.0017022105515100679,
+          "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+        },
+        "transport": {
+          "status": "unavailable",
+          "reference_position_drift_m": null,
+          "reference_orientation_drift_deg": null
+        }
+      }
+    },
+    "final_collector_result": {
+      "record_valid": true,
+      "record_integrity_valid": true,
+      "physics_trustworthy": true,
+      "success_bc_eligible": false,
+      "trajectory_analysis_eligible": true,
+      "condition_group": "control_diagnostic"
+    },
+    "original_relative_pose": {
+      "reference_available": true,
+      "maximum_position_drift_m": 1.8191218585006187e-06,
+      "maximum_orientation_drift_deg": 0.002146998832486041,
+      "maximum_configured_grasp_anchor_drift_m": 8.1299712484804e-07,
+      "maximum_configured_grasp_anchor_axial_drift_m": 7.959286292900861e-07,
+      "maximum_configured_grasp_anchor_transverse_drift_m": 4.3613029105468495e-07,
+      "configured_grasp_anchor_height_m": 0.053,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "position_limit_m": 0.0002,
+      "orientation_limit_deg": 1.0
+    },
+    "recomputed_contact_gated_anchor_axial_max_m": 7.959286292900861e-07,
+    "force_wait_2s_mean_N": [
+      1.2165937845027868,
+      1.217244836743805
+    ],
+    "first_both_zero_after_grasp_s": null,
+    "short_move": {
+      "start_time_s": 29.233333333333334,
+      "end_time_s": 31.233333333333334,
+      "requested_world_delta_m": [
+        0.02,
+        0.0,
+        0.02
+      ],
+      "actual_object_delta_m": [
+        0.01965886354446411,
+        0.00032788515090942383,
+        0.019665420055389404
+      ],
+      "actual_object_displacement_norm_m": 0.027808401077497404,
+      "actual_TCP_delta_m": [
+        0.019674125114701693,
+        0.0002787229605771824,
+        0.01966532147442468
+      ],
+      "requested_duration_s": 2.0,
+      "executed_duration_s": 2.0,
+      "partial": false,
+      "target_reached": true
+    },
+    "full_loading_attempted": false,
+    "short_move_is_not_full_transport_gate": true
+  },
+  "configuration_content_identical": true,
+  "common_attempted_action_intents_identical": true,
+  "common_action_count": 16,
+  "intent_comparison_excludes_only_episode_and_observation_ids": true,
+  "B_additional_final_wait_action": {
+    "tool": "wait",
+    "arguments": {
+      "action_id": "diagnostic-00016",
+      "duration_s": 2.0
+    }
+  },
+  "first_applied_target_difference": {
+    "time_s": 21.220833333333335,
+    "A_applied_m": 0.0104605037852237,
+    "B_applied_m": 0.009394443937804961,
+    "A_measured_m": 0.010774844326078892,
+    "B_measured_m": 0.010770322289317846,
+    "A_force_N": [
+      0.24913664162158966,
+      0.4686318635940552
+    ],
+    "B_force_N": [
+      0.9766591191291809,
+      1.7535665035247803
+    ]
+  },
+  "physical_acceptance_thresholds_unchanged": true,
+  "nominal_action_plan_and_force_caps_unchanged": true,
+  "analysis_scope": "One deterministic diagnostic A/B, full loading not attempted; simulation relative quantities are not real platform accuracy"
+}
