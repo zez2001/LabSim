@@ -80,7 +80,7 @@ def test_only_fast_motion_phases_follow_parent_at_one_over_1_5_time(fixture, pha
     assert new.cfg == original_cfg and new.hz == 60
 
 
-@pytest.mark.parametrize('phase', ['RESET', 'GRASP', 'ALIGN', 'INSERT', 'SUPPORT_TRANSFER', 'OPEN', 'VERIFY', 'TRANSPORT_HOLD'])
+@pytest.mark.parametrize('phase', ['RESET', 'GRASP', 'ALIGN', 'INSERT', 'OPEN', 'VERIFY', 'TRANSPORT_HOLD'])
 def test_other_phase_clocks_effort_and_per_tick_commands_are_unscaled(fixture, phase):
     make, debug, _, _, _ = fixture
     new, old = make(), make(False)

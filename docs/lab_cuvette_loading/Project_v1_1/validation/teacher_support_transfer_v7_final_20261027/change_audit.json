@@ -1,0 +1,81 @@
+{
+  "schema": "labsim.Project_v1_1.teacher_support_transfer_v7.change_audit.v1",
+  "baseline_HEAD": "63410bf9258ba2f9bd0af4d517194523fca6617c",
+  "candidate_version": "Project_v1_1.teacher_phase_motion_clock.v7",
+  "configuration_only_changes": [
+    {
+      "field": "experiment.controller_version",
+      "before": "Project_v1_1.teacher_phase_motion_clock.v6",
+      "after": "Project_v1_1.teacher_phase_motion_clock.v7"
+    },
+    {
+      "field": "teacher_execution.version",
+      "before": "Project_v1_1.teacher_phase_motion_clock.v6",
+      "after": "Project_v1_1.teacher_phase_motion_clock.v7"
+    }
+  ],
+  "all_other_configuration_values_identical": true,
+  "changed_source_SHA256": {
+    "controllers/lab_cuvette_project_v1_1_controller.py": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+    "config/lab_cuvette_loading/Project_v1_1/standard.yaml": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+    "tests/test_lab_cuvette_project_v1_1_teacher_support_transfer.py": "ec79e3dc77f51aa505ed4fc21a1b9eac35436eff59e469a58c6ff310cc4b4180",
+    "tests/test_lab_cuvette_project_v1_1_teacher_clock.py": "772c861d4b7501f719b3b9fd368aaef1689e6ded9ce544738d4fa976e82c3f4f",
+    "tests/test_lab_cuvette_project_v1_1_teacher_grasp_orientation.py": "630a19c511be8dfde082426f4b96834f38eda3ab4e046a92edac80a22c16523e",
+    "tests/test_lab_cuvette_project_v1_1_teacher_near_contact_close.py": "3a134fe915d75668c80f9ee14f1893d021cf902e8878313efe2edda086fa968f",
+    "tests/test_lab_cuvette_project_v1_1_teacher_approach_orientation.py": "d5758efcb54a1c7e4db706ef2c4a816f3d85a3b6abf8e06d146477cbabd6c08b"
+  },
+  "protected_files": [
+    {
+      "path": "controllers/lab_cuvette_env_v1_controller.py",
+      "SHA256": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb",
+      "unchanged_from_HEAD": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "unchanged_from_HEAD": true
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_env_v1_scorer.py",
+      "SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "unchanged_from_HEAD": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "unchanged_from_HEAD": true
+    },
+    {
+      "path": "demos/lab_cuvette_size_v1/scorer.py",
+      "SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "unchanged_from_HEAD": true
+    }
+  ],
+  "focused_CPU": {
+    "started_at_UTC": "2026-10-26T21:38:04.450209+00:00",
+    "exit_code": 0,
+    "argv": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_teacher_support_transfer.py",
+      "tests/test_lab_cuvette_project_v1_1_teacher_clock.py",
+      "tests/test_lab_cuvette_project_v1_1_teacher_grasp_orientation.py",
+      "tests/test_lab_cuvette_project_v1_1_teacher_near_contact_close.py",
+      "tests/test_lab_cuvette_project_v1_1_teacher_approach_orientation.py",
+      "--junitxml=docs/lab_cuvette_loading/Project_v1_1/validation/teacher_support_transfer_v7_final_20261027/focused_junit.xml"
+    ],
+    "wall_seconds": 0.8584656440652907,
+    "passed": 127,
+    "failed": 0,
+    "log": "focused.log",
+    "scope": "teacher control semantics only"
+  },
+  "full_CPU_evidence": "contracts_result.json",
+  "physical_experiment_performed": false,
+  "GPU_started": false,
+  "API_called": false,
+  "code_committed_by_this_agent": false,
+  "original_v6_physical_failure_preserved": true
+}

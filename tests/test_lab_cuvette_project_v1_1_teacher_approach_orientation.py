@@ -110,7 +110,13 @@ def test_no_new_orientation_schedule_runs_outside_approach(fixture, phase):
         controller.latch_opening = .01
     controller.cfg['control']['extract_orientation_feedback'] = False
     action = helper.act(controller, debug, .1)
-    np.testing.assert_allclose(action_rotation(action).as_matrix(), start.as_matrix(), atol=1e-15)
+    if phase != 'SUPPORT_TRANSFER':
+        np.testing.assert_allclose(action_rotation(action).as_matrix(), start.as_matrix(), atol=1e-15)
+    else:
+        # v7 adds the parent's separate support-alignment feedback, not the
+        # configured open-hand approach interpolation. Its bound is tested in
+        # the support-transfer contract.
+        assert action['metadata']['support_transfer_control_active'] is True
     assert action['metadata']['approach_orientation_active'] is False
 
 

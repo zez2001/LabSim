@@ -3,20 +3,22 @@
 Only four smooth motion phases are slowed. Physics, scorer, 60 Hz actions and
 physical contact timers are unchanged. An open-hand approach aligns to the
 configured orientation; GRASP holds it with optional near-contact slow closure.
-EXTRACT keeps the nominal lateral lift axis.
+EXTRACT keeps the nominal lateral lift axis. Support transfer retains bounded
+pose feedback and pauses only its unloading schedule outside the scorer budget.
 """
 from __future__ import annotations
 
 import copy
 import math
 
+import numpy as np
 from scipy.spatial.transform import Rotation
 
 from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get, wxyz
 
 
 class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
-    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v6'
+    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v7'
     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))
     NEAR_CONTACT_MARGIN_M = .002
 
@@ -62,6 +64,11 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         self._approach_orientation_start = None
         self._approach_orientation_progress = 0.
         self._approach_orientation_fraction = 0.
+        self._support_physical_start = None
+        self._support_last_actual = None
+        self._support_previous_aligned = None
+        self._support_unload_elapsed_s = 0.
+        self._support_gate_context = None
         return self
 
     def _feedback(self, debug, desired_cup_xy=None, *, orientation=True):
@@ -81,7 +88,53 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             desired_cup_xy = None
         return super()._feedback(debug, desired_cup_xy, orientation=orientation)
 
+    def _support_alignment(self, debug):
+        """Same actual-state alignment quantities and norms as the scorer.
+
+        This is explicitly private truth-teacher control. Missing/nonfinite
+        measurements pause unloading rather than silently counting as aligned.
+        The independent scorer still owns every task-success label.
+        """
+        budgets = dict(xy_m=float(get(self.cfg, 'control.alignment_budget_m', .000015)),
+            tilt_deg=float(get(self.cfg, 'control.tilt_budget_deg', .02)),
+            yaw_deg=float(get(self.cfg, 'control.yaw_budget_deg', .1)))
+        reasons = []
+        try:
+            xy = np.asarray(debug.get('xy_error_target_m'), dtype=float)
+            xy_error = float(np.linalg.norm(xy)) if xy.shape == (2,) and np.isfinite(xy).all() else None
+        except (TypeError, ValueError):
+            xy_error = None
+        measured = dict(xy_m=xy_error)
+        for name, key in (('tilt_deg', 'tilt_deg'), ('yaw_deg', 'yaw_error_deg')):
+            try:
+                value = float(debug[key])
+                measured[name] = abs(value) if math.isfinite(value) else None
+            except (KeyError, TypeError, ValueError):
+                measured[name] = None
+        for name, value in measured.items():
+            if value is None:
+                reasons.append(name + '_unavailable_or_nonfinite')
+            elif value > budgets[name]:
+                reasons.append(name + '_outside_original_alignment_budget')
+        return dict(aligned=not reasons, measured=measured, budgets=budgets, reasons=reasons,
+            xy_norm='Euclidean, matching independent scorer', truth_pose_used=True)
+
+    def _supported(self, debug):
+        # Only the SUPPORT_TRANSFER -> OPEN transition gains this gate.
+        # INSERT/OPEN/VERIFY retain the historical physical support predicate.
+        if self.phase == 'SUPPORT_TRANSFER' and self._support_gate_context is not None:
+            context = self._support_gate_context
+            if (not context['alignment']['aligned'] or context['unloading_paused']
+                    or context['physical_watchdog_expired']):
+                # Short-circuit unavailable tilt before the historical helper
+                # attempts float(debug['tilt_deg']). Alignment fails closed.
+                return False
+        return super()._supported(debug)
+
     def act(self, public_obs, debug):
+        debug = dict(debug)
+        if 'object_quaternion_wxyz' not in debug and 'quaternion_wxyz' in debug:
+            debug['object_quaternion_wxyz'] = debug['quaternion_wxyz']
         actual_t = super()._time(public_obs, debug)
         if not math.isfinite(actual_t):
             raise ValueError('Teacher observation time must be finite')
@@ -126,8 +179,40 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             self.rotation_command = Rotation.from_rotvec(fraction * delta.as_rotvec()) * self._approach_orientation_start
             self._approach_orientation_progress = progress
             self._approach_orientation_fraction = fraction
+        support_context = None
+        parent_elapsed = motion_elapsed
+        if source_phase == 'SUPPORT_TRANSFER' and not self.finished:
+            alignment = self._support_alignment(debug)
+            if self._support_physical_start != physical_start:
+                # Also handles explicit private phase entry between samples.
+                self._support_physical_start = physical_start
+                self._support_last_actual = actual_t if physical_start is None else physical_start
+                self._support_previous_aligned = alignment['aligned']
+                self._support_unload_elapsed_s = 0.
+            support_dt = max(0., actual_t - self._support_last_actual)
+            advancing = bool(alignment['aligned'] and self._support_previous_aligned)
+            if advancing:
+                duration = float(get(self.cfg, 'demo_release.unload_seconds', 3.))
+                self._support_unload_elapsed_s = min(duration, self._support_unload_elapsed_s + support_dt)
+            self._support_last_actual = actual_t
+            self._support_previous_aligned = alignment['aligned']
+            support_context = dict(alignment=alignment, unloading_paused=not advancing,
+                pause_reasons=alignment['reasons'] if not alignment['aligned'] else
+                    ([] if advancing else ['awaiting_consecutive_aligned_observations']),
+                unload_elapsed_s=self._support_unload_elapsed_s,
+                unload_duration_s=float(get(self.cfg, 'demo_release.unload_seconds', 3.)),
+                physical_phase_elapsed_s=physical_elapsed,
+                physical_watchdog_s=10., physical_watchdog_expired=physical_elapsed > 10.,
+                feedback_source='Private actual object pose; existing bounded parent XY and orientation feedback',
+                truth_pose_used=True, independent_success_label_assigned=False)
+            self._support_gate_context = support_context
+            # Keep correcting alignment while paused. The parent retains its
+            # exact unloading/force-relief equations; only its local ramp u is
+            # mapped. Contact history, quiet windows and t remain physical.
+            self._feedback(debug, self.floor[:2])
+            parent_elapsed = self._support_unload_elapsed_s
         if physical_start is not None:
-            self.phase_start = actual_t - motion_elapsed
+            self.phase_start = actual_t - parent_elapsed
         try:
             # Actual t drives history, contact-loss, quiet windows, latch times
             # and global watchdogs. Only u=t-phase_start sees the mapped clock.
@@ -136,6 +221,17 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             if self.phase == source_phase and physical_start is not None:
                 self.phase_start = physical_start
             # _enter uses actual t; preserve its new physical phase_start.
+            self._support_gate_context = None
+        if support_context is not None and support_context['physical_watchdog_expired'] and not self.finished:
+            # Parent u is the monotone ramp clock, so retain its original
+            # strict >10 s watchdog explicitly on real phase elapsed time.
+            self._finish('SUPPORT_TRANSFER_FAILED', actual_t)
+            action['metadata'].update(teacher_status=self.status, teacher_finished=True)
+        if source_phase != 'SUPPORT_TRANSFER' and self.phase == 'SUPPORT_TRANSFER':
+            self._support_physical_start = self.phase_start
+            self._support_last_actual = actual_t
+            self._support_previous_aligned = self._support_alignment(debug)['aligned']
+            self._support_unload_elapsed_s = 0.
         if self._approach_orientation_start is None and self.rotation_command is not None:
             # The parent initializes this from the original reset/first-act
             # robot TCP observation. Capture once; later observations do not
@@ -166,6 +262,8 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             motion_source_phase=source_phase, physical_phase_elapsed_s=physical_elapsed,
             motion_phase_elapsed_s=motion_elapsed, motion_time_scale=scale,
             physical_control_hz=self.hz, physical_watchdogs_unscaled=True,
+            support_transfer_control_active=support_context is not None,
+            support_transfer=support_context,
             approach_orientation_active=prealign_active,
             approach_orientation_source='Original reset/first-act robot TCP orientation -> static robot.gripper_yaw_deg; no object truth',
             approach_orientation_start_quaternion_wxyz=wxyz(self._approach_orientation_start).tolist(),

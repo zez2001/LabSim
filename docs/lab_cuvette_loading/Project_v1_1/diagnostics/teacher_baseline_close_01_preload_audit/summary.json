@@ -1,0 +1,198 @@
+{
+  "schema": "labsim.Project_v1_1.closed_preload_control_branch_audit.v1",
+  "analysis_date_local": "2026-10-27",
+  "run": "teacher_baseline_close_01",
+  "actual_runtime_commit": "76936e10a6abcbb34b4c82b4116ce15f363730fb",
+  "original_result": {
+    "task_type": "loading",
+    "condition_group": "natural",
+    "task_success": false,
+    "failure_type": "TASK_INCOMPLETE",
+    "failure_domain": "task",
+    "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+    "simulation_seconds": 124.26666666666667,
+    "grasp_success": true,
+    "transport_success": true,
+    "source_slot_cleared": true,
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false
+  },
+  "helper_versions": [
+    "Project_v1_1.contact_hold.v2"
+  ],
+  "control_ticks": 7455,
+  "decision_counts": {
+    "original_ramp": 1763,
+    "first_bilateral_freeze": 1,
+    "hold_contact_target": 5374,
+    "explicit_opening_ramp": 317
+  },
+  "measured_force_preload_adjustment_ticks": 0,
+  "actual_release_slew_ticks": 0,
+  "preload_adjustment_first": null,
+  "preload_adjustment_last": null,
+  "release_slew_first": null,
+  "release_slew_last": null,
+  "minimum_sensor_N_while_helper_confirmed": 0.7650449872016907,
+  "all_observed_force_closure_and_release_slew_deltas_within_declared_rate": true,
+  "all_observed_preload_targets_within_declared_total_adjustment_bound": true,
+  "original_scored_grasp_maxima_reproduced": {
+    "bottom_position_m": {
+      "value": 1.9511679350357836e-05,
+      "t_s": 18.979166666666668,
+      "physics_step": 4555,
+      "finger_contact_N": [
+        0.9556323289871216,
+        0.9441814422607422
+      ]
+    },
+    "orientation_deg": {
+      "value": 0.021412197124147225,
+      "t_s": 18.979166666666668,
+      "physics_step": 4555,
+      "finger_contact_N": [
+        0.9556323289871216,
+        0.9441814422607422
+      ]
+    },
+    "anchor_position_m": {
+      "value": 2.8276095948938625e-06,
+      "t_s": 32.329166666666666,
+      "physics_step": 7759,
+      "finger_contact_N": [
+        0.9456602931022644,
+        0.9451373219490051
+      ]
+    },
+    "anchor_axial_m": {
+      "value": 2.8055090258360292e-06,
+      "t_s": 32.329166666666666,
+      "physics_step": 7759,
+      "finger_contact_N": [
+        0.9456602931022644,
+        0.9451373219490051
+      ]
+    },
+    "anchor_transverse_m": {
+      "value": 1.0649126811476371e-06,
+      "t_s": 18.966666666666665,
+      "physics_step": 4552,
+      "finger_contact_N": [
+        0.9430484771728516,
+        0.9443398118019104
+      ]
+    }
+  },
+  "original_grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 1.9511679350357836e-05,
+    "maximum_orientation_drift_deg": 0.021412197124147225,
+    "maximum_configured_grasp_anchor_drift_m": 2.8276095948869787e-06,
+    "maximum_configured_grasp_anchor_axial_drift_m": 2.8055090258290903e-06,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 1.064912681147653e-06,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 18.145833333333332,
+      "physics_step": 4355,
+      "actual_force_N": [
+        1.0214643478393555,
+        0.8739928603172302
+      ]
+    },
+    "actual_lift_started": {
+      "t": 19.320833333333333,
+      "physics_step": 4637,
+      "actual_lift_m": 0.0010240291035691351
+    },
+    "source_slot_cleared": {
+      "t": 20.85,
+      "physics_step": 5004,
+      "actual_bottom_world_z_m": 0.7700544667679236,
+      "source_rim_world_z_m": 0.768
+    },
+    "held_transport_observed": {
+      "t": 44.3125,
+      "physics_step": 10635,
+      "horizontal_displacement_m": 0.050010896974999226
+    },
+    "safe_preinsert_observed": {
+      "t": 73.83333333333333,
+      "physics_step": 17720,
+      "actual_depth_m": -0.0029983630908663426,
+      "actual_xy_error_m": 3.3001652503819915e-07
+    },
+    "loaded_pose_candidate": {
+      "t": 107.60833333333333,
+      "physics_step": 25826,
+      "actual_depth_m": 0.026950334472875846,
+      "measured_bottom_support_N": 0.0,
+      "target_region_contains_object": true
+    },
+    "both_fingers_open_and_detached": {
+      "t": 110.78333333333333,
+      "physics_step": 26588,
+      "actual_joint_positions_m": [
+        0.006580837536603212,
+        0.006580936722457409
+      ],
+      "actual_force_N": [
+        0.0,
+        0.0
+      ]
+    },
+    "actual_gripper_retreat": {
+      "t": 114.99583333333334,
+      "physics_step": 27599,
+      "minimum_gripper_object_clearance_m": 0.04005747569364816
+    }
+  },
+  "post_retreat_window": {
+    "status": "complete",
+    "stable": true,
+    "required_duration_s": 3.0,
+    "measured_duration_s": 3.0,
+    "sample_count": 721,
+    "position_drift_m": 1.0848209096909341e-07,
+    "orientation_change_deg": 0.00021621891337688737,
+    "criteria": {
+      "position_stable": true,
+      "target_support": true,
+      "target_contains": true,
+      "observed_input_material_overlap_within_limit": true,
+      "no_finger_contact": true,
+      "upright": true,
+      "retained_loading_depth": true
+    },
+    "start_t": 121.26666666666667,
+    "end_t": 124.26666666666667,
+    "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+  },
+  "raw_physical_rows": 29825,
+  "whole_decompressed_physics_SHA256": "36cc9a1cbe0a534496a1975fe9a8e96227f7c4b4faf19b117c45cdb4a3c96ffe",
+  "whole_decompressed_physics_bytes": 1220045745,
+  "whole_physics_SHA256_equals_prearchive": true,
+  "normal_filter_admission": {
+    "success": false,
+    "failure": true
+  },
+  "closed_read_audit": {
+    "path": "../teacher_baseline_close_01_closed_read_archive.json",
+    "SHA256": "178ee70ef4cf3de04e2bd123fa25e5304f39360e3726ccfcd77b7efb23a0f358"
+  },
+  "force_assumptions": {
+    "mg_N": 0.1962,
+    "nominal_combined_mu": 0.6324555320336759,
+    "per_finger_hold_target_N": 0.310219438462518
+  },
+  "raw_H5_score_labels_runtime_modified": false,
+  "GPU_used": false,
+  "API_calls": 0
+}

@@ -1,0 +1,2737 @@
+{
+  "schema": "labsim.Project_v1_1.baseline_close_supported_event_offline_audit.v1",
+  "analysis_date_local": "2026-10-27",
+  "runs": [
+    {
+      "run": "teacher_baseline_close_01",
+      "original_task_success": false,
+      "original_failure_type": "TASK_INCOMPLETE",
+      "loading_sequence_observed": false,
+      "loading_candidate_sequence_observed": true,
+      "release_observed": true,
+      "retreat_observed": true,
+      "stable_after_retreat": true,
+      "missing_required_event": "correct_target_supported",
+      "limits": {
+        "xy_m": 0.0001,
+        "tilt_deg": 0.15,
+        "yaw_deg": 0.2,
+        "depth_m": 0.027,
+        "tolerance_m": 5e-05,
+        "gap_m": 5e-05,
+        "support_N": 0.1,
+        "teacher_support_tilt_deg": 1.0,
+        "finger_open_each_m": 0.006
+      },
+      "teacher_phase_transition_times_s": {
+        "APPROACH_SOURCE": 4.016666666666667,
+        "GRASP": 14.516666666666667,
+        "EXTRACT": 18.916666666666668,
+        "TRANSPORT": 29.433333333333334,
+        "TRANSPORT_HOLD": 54.93333333333333,
+        "ALIGN": 58.13333333333333,
+        "INSERT": 74.85,
+        "SUPPORT_TRANSFER": 107.61666666666666,
+        "OPEN": 110.61666666666666,
+        "RETREAT": 112.88333333333334,
+        "VERIFY": 121.15
+      },
+      "original_independent_events": {
+        "bilateral_grasp_observed": {
+          "t": 18.145833333333332,
+          "physics_step": 4355,
+          "actual_force_N": [
+            1.0214643478393555,
+            0.8739928603172302
+          ]
+        },
+        "actual_lift_started": {
+          "t": 19.320833333333333,
+          "physics_step": 4637,
+          "actual_lift_m": 0.0010240291035691351
+        },
+        "source_slot_cleared": {
+          "t": 20.85,
+          "physics_step": 5004,
+          "actual_bottom_world_z_m": 0.7700544667679236,
+          "source_rim_world_z_m": 0.768
+        },
+        "held_transport_observed": {
+          "t": 44.3125,
+          "physics_step": 10635,
+          "horizontal_displacement_m": 0.050010896974999226
+        },
+        "safe_preinsert_observed": {
+          "t": 73.83333333333333,
+          "physics_step": 17720,
+          "actual_depth_m": -0.0029983630908663426,
+          "actual_xy_error_m": 3.3001652503819915e-07
+        },
+        "loaded_pose_candidate": {
+          "t": 107.60833333333333,
+          "physics_step": 25826,
+          "actual_depth_m": 0.026950334472875846,
+          "measured_bottom_support_N": 0.0,
+          "target_region_contains_object": true
+        },
+        "both_fingers_open_and_detached": {
+          "t": 110.78333333333333,
+          "physics_step": 26588,
+          "actual_joint_positions_m": [
+            0.006580837536603212,
+            0.006580936722457409
+          ],
+          "actual_force_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "actual_gripper_retreat": {
+          "t": 114.99583333333334,
+          "physics_step": 27599,
+          "minimum_gripper_object_clearance_m": 0.04005747569364816
+        }
+      },
+      "condition_counts_after_held_transport": {
+        "aligned": 13594,
+        "at_bottom_pose": 3999,
+        "supported_pose": 3390,
+        "supported_pose_inside": 3390,
+        "supported_pose_inside_before_OPEN": 113,
+        "teacher_supported_before_OPEN": 113,
+        "detached": 3250
+      },
+      "first_qualifying_samples": {
+        "aligned": {
+          "t": 53.3125,
+          "physics_step": 12795,
+          "phase": "TRANSPORT",
+          "depth_m": -0.06099815797417876,
+          "target_bottom_gap_m": 0.08799815797417876,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": null,
+          "tilt_deg": 0.00016890051073352376,
+          "yaw_error_deg": 0.00030909914136145744,
+          "finger_contact_N": [
+            0.9467425346374512,
+            0.9465632438659668
+          ],
+          "finger_joint_positions_m": [
+            0.005309196189045906,
+            0.005309274420142174
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21227648854255676,
+            -0.14929553866386414,
+            0.9749981760978699
+          ],
+          "object_quaternion_wxyz": [
+            0.7071049213409424,
+            -5.862675607204437e-07,
+            -1.3522803783416748e-06,
+            0.707108736038208
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 9.787048902245375e-05,
+          "xy_error_target_m": [
+            -3.00030568878007e-05,
+            9.315819448058038e-05
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": false,
+            "gap": false,
+            "support": false,
+            "inside": false
+          },
+          "detached_eligible": false
+        },
+        "at_bottom_pose": {
+          "t": 107.60833333333333,
+          "physics_step": 25826,
+          "phase": "INSERT",
+          "depth_m": 0.026950334472875846,
+          "target_bottom_gap_m": 4.9665527124154174e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 8.148060708365174e-05,
+          "yaw_error_deg": -0.00024631334937907923,
+          "finger_contact_N": [
+            0.9462692737579346,
+            0.9464169144630432
+          ],
+          "finger_joint_positions_m": [
+            0.005309160333126783,
+            0.005309255328029394
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2123696506023407,
+            -0.149266317486763,
+            0.887049674987793
+          ],
+          "object_quaternion_wxyz": [
+            0.7071083188056946,
+            -7.082708179950714e-07,
+            6.239861249923706e-08,
+            0.707105278968811
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 7.818893408699353e-07,
+          "xy_error_target_m": [
+            -7.818797866654403e-07,
+            -3.865303355166153e-09
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose": {
+          "t": 110.14583333333333,
+          "physics_step": 26435,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700037633018346,
+          "target_bottom_gap_m": -3.763301834602828e-07,
+          "target_bottom_support_N": 0.2385886311531067,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.20008910074468683,
+          "yaw_error_deg": -0.004483387822887153,
+          "finger_contact_N": [
+            0.1555505245923996,
+            0.16163887083530426
+          ],
+          "finger_joint_positions_m": [
+            0.005310737527906895,
+            0.005310863722115755
+          ],
+          "gripper_target_m": 0.005232699713828379,
+          "gripper_effort_limit_N": 1.330833333333298,
+          "object_position_m": [
+            0.2123684138059616,
+            -0.14907701313495636,
+            0.8870166540145874
+          ],
+          "object_quaternion_wxyz": [
+            0.7071333527565002,
+            0.0012566130608320236,
+            -0.0012123570777475834,
+            0.7070780992507935
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001885265036422196,
+          "xy_error_target_m": [
+            0.00018852247201997518,
+            1.232931075734201e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose_inside": {
+          "t": 110.14583333333333,
+          "physics_step": 26435,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700037633018346,
+          "target_bottom_gap_m": -3.763301834602828e-07,
+          "target_bottom_support_N": 0.2385886311531067,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.20008910074468683,
+          "yaw_error_deg": -0.004483387822887153,
+          "finger_contact_N": [
+            0.1555505245923996,
+            0.16163887083530426
+          ],
+          "finger_joint_positions_m": [
+            0.005310737527906895,
+            0.005310863722115755
+          ],
+          "gripper_target_m": 0.005232699713828379,
+          "gripper_effort_limit_N": 1.330833333333298,
+          "object_position_m": [
+            0.2123684138059616,
+            -0.14907701313495636,
+            0.8870166540145874
+          ],
+          "object_quaternion_wxyz": [
+            0.7071333527565002,
+            0.0012566130608320236,
+            -0.0012123570777475834,
+            0.7070780992507935
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001885265036422196,
+          "xy_error_target_m": [
+            0.00018852247201997518,
+            1.232931075734201e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose_inside_before_OPEN": {
+          "t": 110.14583333333333,
+          "physics_step": 26435,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700037633018346,
+          "target_bottom_gap_m": -3.763301834602828e-07,
+          "target_bottom_support_N": 0.2385886311531067,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.20008910074468683,
+          "yaw_error_deg": -0.004483387822887153,
+          "finger_contact_N": [
+            0.1555505245923996,
+            0.16163887083530426
+          ],
+          "finger_joint_positions_m": [
+            0.005310737527906895,
+            0.005310863722115755
+          ],
+          "gripper_target_m": 0.005232699713828379,
+          "gripper_effort_limit_N": 1.330833333333298,
+          "object_position_m": [
+            0.2123684138059616,
+            -0.14907701313495636,
+            0.8870166540145874
+          ],
+          "object_quaternion_wxyz": [
+            0.7071333527565002,
+            0.0012566130608320236,
+            -0.0012123570777475834,
+            0.7070780992507935
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001885265036422196,
+          "xy_error_target_m": [
+            0.00018852247201997518,
+            1.232931075734201e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "teacher_supported_before_OPEN": {
+          "t": 110.14583333333333,
+          "physics_step": 26435,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700037633018346,
+          "target_bottom_gap_m": -3.763301834602828e-07,
+          "target_bottom_support_N": 0.2385886311531067,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.20008910074468683,
+          "yaw_error_deg": -0.004483387822887153,
+          "finger_contact_N": [
+            0.1555505245923996,
+            0.16163887083530426
+          ],
+          "finger_joint_positions_m": [
+            0.005310737527906895,
+            0.005310863722115755
+          ],
+          "gripper_target_m": 0.005232699713828379,
+          "gripper_effort_limit_N": 1.330833333333298,
+          "object_position_m": [
+            0.2123684138059616,
+            -0.14907701313495636,
+            0.8870166540145874
+          ],
+          "object_quaternion_wxyz": [
+            0.7071333527565002,
+            0.0012566130608320236,
+            -0.0012123570777475834,
+            0.7070780992507935
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001885265036422196,
+          "xy_error_target_m": [
+            0.00018852247201997518,
+            1.232931075734201e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "detached": {
+          "t": 110.72916666666667,
+          "physics_step": 26575,
+          "phase": "OPEN",
+          "depth_m": 0.026999920150564936,
+          "target_bottom_gap_m": 7.984943506400555e-08,
+          "target_bottom_support_N": 0.19619706273078918,
+          "target_region_contains_object": true,
+          "tilt_deg": 4.57944319333714e-05,
+          "yaw_error_deg": -0.007225191041356993,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.006007777061313391,
+            0.006007876247167587
+          ],
+          "gripper_target_m": 0.006465752576788365,
+          "gripper_effort_limit_N": 0.5,
+          "object_position_m": [
+            0.21236757934093475,
+            -0.14907850325107574,
+            0.8870000839233398
+          ],
+          "object_quaternion_wxyz": [
+            0.7071513533592224,
+            -3.012828528881073e-07,
+            2.6263296604156494e-07,
+            0.7070621848106384
+          ],
+          "gripper_object_clearance_m": 0.0007000925698731897,
+          "xy_error_norm_m": 0.00018704378172067129,
+          "xy_error_target_m": [
+            0.00018703235590059042,
+            2.0673961025896695e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "best_supported_alignment_sample": {
+        "max_alignment_threshold_ratio": 1.8696928046780263,
+        "ratios": {
+          "xy": 1.8696928046780263,
+          "tilt": 0.0012144544571576726,
+          "yaw": 0.03672966279424372
+        },
+        "sample": {
+          "t": 110.9875,
+          "physics_step": 26637,
+          "phase": "OPEN",
+          "depth_m": 0.026999931332035907,
+          "target_bottom_gap_m": 6.866796409266129e-08,
+          "target_bottom_support_N": 0.1962142288684845,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.00018216816857365088,
+          "yaw_error_deg": -0.0073459325588487445,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.008923675864934921,
+            0.008923775516450405
+          ],
+          "gripper_target_m": 0.009549361535244605,
+          "gripper_effort_limit_N": 0.5,
+          "object_position_m": [
+            0.21236757934093475,
+            -0.1490785777568817,
+            0.8870000839233398
+          ],
+          "object_quaternion_wxyz": [
+            0.7071521282196045,
+            -1.123175024986267e-06,
+            1.125037670135498e-06,
+            0.7070614695549011
+          ],
+          "gripper_object_clearance_m": 0.0036158265635729825,
+          "xy_error_norm_m": 0.00018696928046780265,
+          "xy_error_target_m": [
+            0.00018695785009462118,
+            2.0673961025896695e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "selected_samples": {
+        "candidate": {
+          "t": 107.60833333333333,
+          "physics_step": 25826,
+          "phase": "INSERT",
+          "depth_m": 0.026950334472875846,
+          "target_bottom_gap_m": 4.9665527124154174e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 8.148060708365174e-05,
+          "yaw_error_deg": -0.00024631334937907923,
+          "finger_contact_N": [
+            0.9462692737579346,
+            0.9464169144630432
+          ],
+          "finger_joint_positions_m": [
+            0.005309160333126783,
+            0.005309255328029394
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2123696506023407,
+            -0.149266317486763,
+            0.887049674987793
+          ],
+          "object_quaternion_wxyz": [
+            0.7071083188056946,
+            -7.082708179950714e-07,
+            6.239861249923706e-08,
+            0.707105278968811
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 7.818893408699353e-07,
+          "xy_error_target_m": [
+            -7.818797866654403e-07,
+            -3.865303355166153e-09
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "SUPPORT_TRANSFER": {
+          "t": 107.61666666666666,
+          "physics_step": 25828,
+          "phase": "INSERT",
+          "depth_m": 0.026951883253664242,
+          "target_bottom_gap_m": 4.811674633575791e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.00010070910691053761,
+          "yaw_error_deg": -0.0003332474611568159,
+          "finger_contact_N": [
+            0.9467262029647827,
+            0.9463802576065063
+          ],
+          "finger_joint_positions_m": [
+            0.005309151019901037,
+            0.005309246480464935
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21236971020698547,
+            -0.14926598966121674,
+            0.8870481252670288
+          ],
+          "object_quaternion_wxyz": [
+            0.7071087956428528,
+            -6.142072379589081e-07,
+            -6.28642737865448e-07,
+            0.7071046829223633
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 4.5846885122288917e-07,
+          "xy_error_target_m": [
+            -4.540542404007919e-07,
+            -6.346994813055676e-08
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "OPEN": {
+          "t": 110.61666666666666,
+          "physics_step": 26548,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.027000179367752872,
+          "target_bottom_gap_m": -1.7936775287274997e-07,
+          "target_bottom_support_N": 0.19060762226581573,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.004303793772466116,
+          "yaw_error_deg": -0.018372155798033418,
+          "finger_contact_N": [
+            0.010100031271576881,
+            0.010314005427062511
+          ],
+          "finger_joint_positions_m": [
+            0.005312166642397642,
+            0.005312291439622641
+          ],
+          "gripper_target_m": 0.005306754406900318,
+          "gripper_effort_limit_N": 0.09416666666666362,
+          "object_position_m": [
+            0.21236835420131683,
+            -0.14907757937908173,
+            0.887000322341919
+          ],
+          "object_quaternion_wxyz": [
+            0.707220196723938,
+            3.7555117160081863e-05,
+            4.3958425521850586e-07,
+            0.7069934606552124
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00018796067209115577,
+          "xy_error_target_m": [
+            0.00018795622789460897,
+            1.2925357205095914e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "detachment_event": {
+          "t": 110.78333333333333,
+          "physics_step": 26588,
+          "phase": "OPEN",
+          "depth_m": 0.02699992842043217,
+          "target_bottom_gap_m": 7.157956782855024e-08,
+          "target_bottom_support_N": 0.19617533683776855,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.00011622616041226662,
+          "yaw_error_deg": -0.007326613905462409,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.006580837536603212,
+            0.006580936722457409
+          ],
+          "gripper_target_m": 0.007043929256498879,
+          "gripper_effort_limit_N": 0.5,
+          "object_position_m": [
+            0.21236751973628998,
+            -0.14907845854759216,
+            0.8870000839233398
+          ],
+          "object_quaternion_wxyz": [
+            0.7071520090103149,
+            9.206123650074005e-07,
+            4.256144165992737e-07,
+            0.7070615887641907
+          ],
+          "gripper_object_clearance_m": 0.001272939610879792,
+          "xy_error_norm_m": 0.00018708915062078907,
+          "xy_error_target_m": [
+            0.00018707705938417196,
+            2.12700074736506e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        },
+        "retreat_event": {
+          "t": 114.99583333333334,
+          "physics_step": 27599,
+          "phase": "RETREAT",
+          "depth_m": 0.026999918198355986,
+          "target_bottom_gap_m": 8.180164401405676e-08,
+          "target_bottom_support_N": 0.1962052434682846,
+          "target_region_contains_object": true,
+          "tilt_deg": 2.5298222219587597e-05,
+          "yaw_error_deg": -0.007389399926950091,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.03999989107251167,
+            0.039999984204769135
+          ],
+          "gripper_target_m": 0.04,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21236756443977356,
+            -0.14907845854759216,
+            0.8870000839233398
+          ],
+          "object_quaternion_wxyz": [
+            0.7071523666381836,
+            1.564621925354004e-07,
+            1.555308699607849e-07,
+            0.7070611715316772
+          ],
+          "gripper_object_clearance_m": 0.04005747569364816,
+          "xy_error_norm_m": 0.00018708864773075827,
+          "xy_error_target_m": [
+            0.00018707705938417196,
+            2.082297263783517e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        },
+        "terminal": {
+          "t": 124.26666666666667,
+          "physics_step": 29824,
+          "phase": "VERIFY",
+          "depth_m": 0.026999921124312574,
+          "target_bottom_gap_m": 7.887568742592777e-08,
+          "target_bottom_support_N": 0.19620485603809357,
+          "target_region_contains_object": true,
+          "tilt_deg": 5.337280438335678e-05,
+          "yaw_error_deg": -0.007239679750767891,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.03999984264373779,
+            0.039999932050704956
+          ],
+          "gripper_target_m": 0.04,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21236754953861237,
+            -0.14907845854759216,
+            0.8870000839233398
+          ],
+          "object_quaternion_wxyz": [
+            0.707151472568512,
+            2.7706846594810486e-07,
+            3.7439167499542236e-07,
+            0.7070621252059937
+          ],
+          "gripper_object_clearance_m": 0.05911227560670286,
+          "xy_error_norm_m": 0.0001870888141740781,
+          "xy_error_target_m": [
+            0.00018707705938417196,
+            2.097198424977365e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "positive_bottom_support_before_OPEN": {
+        "sample_count": 113,
+        "first": {
+          "t": 110.14583333333333,
+          "physics_step": 26435,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700037633018346,
+          "target_bottom_gap_m": -3.763301834602828e-07,
+          "target_bottom_support_N": 0.2385886311531067,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.20008910074468683,
+          "yaw_error_deg": -0.004483387822887153,
+          "finger_contact_N": [
+            0.1555505245923996,
+            0.16163887083530426
+          ],
+          "finger_joint_positions_m": [
+            0.005310737527906895,
+            0.005310863722115755
+          ],
+          "gripper_target_m": 0.005232699713828379,
+          "gripper_effort_limit_N": 1.330833333333298,
+          "object_position_m": [
+            0.2123684138059616,
+            -0.14907701313495636,
+            0.8870166540145874
+          ],
+          "object_quaternion_wxyz": [
+            0.7071333527565002,
+            0.0012566130608320236,
+            -0.0012123570777475834,
+            0.7070780992507935
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001885265036422196,
+          "xy_error_target_m": [
+            0.00018852247201997518,
+            1.232931075734201e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "last": {
+          "t": 110.6125,
+          "physics_step": 26547,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700013545074673,
+          "target_bottom_gap_m": -1.3545074672993707e-07,
+          "target_bottom_support_N": 0.19103693962097168,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.009618482500980697,
+          "yaw_error_deg": -0.012890622304638555,
+          "finger_contact_N": [
+            0.0038831415586173534,
+            0.009027928113937378
+          ],
+          "finger_joint_positions_m": [
+            0.005311969667673111,
+            0.005312077235430479
+          ],
+          "gripper_target_m": 0.005306754406900318,
+          "gripper_effort_limit_N": 0.09416666666666362,
+          "object_position_m": [
+            0.21236838400363922,
+            -0.14907719194889069,
+            0.8870008587837219
+          ],
+          "object_quaternion_wxyz": [
+            0.7071863412857056,
+            7.407832890748978e-05,
+            -3.946945071220398e-05,
+            0.7070272564888
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00018834789098027773,
+          "xy_error_target_m": [
+            0.000188343658085649,
+            1.2627333981218961e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        }
+      },
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/config.yaml",
+          "SHA256": "be1b8e70ba4bce0bf94ad2d35e66338888c3d0db24169751c78eba8482ad66d3"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/teacher_events.json",
+          "SHA256": "d6d4f26c80f164607a9e373edf55f73f6ede073ff3e59a8ff0b7aa72bbc1daa2"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/independent_score.json",
+          "SHA256": "1c0603f6d6f5948a7a54da8797bc05e6542b903ce8264d78b03ad38741596248"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/execution_trace.jsonl",
+          "SHA256": "2ca1eb7795d3ba6ade88ff70cba4d75462708ce4398c30c39bb85e0fe7497f7e"
+        }
+      ],
+      "closed_audit": {
+        "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_closed_read_archive.json",
+        "SHA256": "178ee70ef4cf3de04e2bd123fa25e5304f39360e3726ccfcd77b7efb23a0f358"
+      },
+      "full_physical_rows": 29825,
+      "whole_decompressed_physics_SHA256": "36cc9a1cbe0a534496a1975fe9a8e96227f7c4b4faf19b117c45cdb4a3c96ffe",
+      "whole_decompressed_bytes": 1220045745,
+      "whole_decompressed_SHA_and_bytes_equal_prearchive": true
+    },
+    {
+      "run": "teacher_camera_v2_02",
+      "original_task_success": false,
+      "original_failure_type": "GRASP_SLIP",
+      "loading_sequence_observed": false,
+      "loading_candidate_sequence_observed": true,
+      "release_observed": true,
+      "retreat_observed": true,
+      "stable_after_retreat": true,
+      "missing_required_event": "correct_target_supported",
+      "limits": {
+        "xy_m": 0.0001,
+        "tilt_deg": 0.15,
+        "yaw_deg": 0.2,
+        "depth_m": 0.027,
+        "tolerance_m": 5e-05,
+        "gap_m": 5e-05,
+        "support_N": 0.1,
+        "teacher_support_tilt_deg": 1.0,
+        "finger_open_each_m": 0.006
+      },
+      "teacher_phase_transition_times_s": {
+        "APPROACH_SOURCE": 4.016666666666667,
+        "GRASP": 14.516666666666667,
+        "EXTRACT": 18.916666666666668,
+        "TRANSPORT": 29.433333333333334,
+        "TRANSPORT_HOLD": 54.93333333333333,
+        "ALIGN": 58.13333333333333,
+        "INSERT": 74.85,
+        "SUPPORT_TRANSFER": 107.61666666666666,
+        "OPEN": 110.61666666666666,
+        "RETREAT": 112.88333333333334,
+        "VERIFY": 121.15
+      },
+      "original_independent_events": {
+        "bilateral_grasp_observed": {
+          "t": 18.145833333333332,
+          "physics_step": 4355,
+          "actual_force_N": [
+            0.7650852799415588,
+            1.3348219394683838
+          ]
+        },
+        "actual_lift_started": {
+          "t": 19.308333333333334,
+          "physics_step": 4634,
+          "actual_lift_m": 0.0010172396091419067
+        },
+        "source_slot_cleared": {
+          "t": 20.845833333333335,
+          "physics_step": 5003,
+          "actual_bottom_world_z_m": 0.7700378020234896,
+          "source_rim_world_z_m": 0.768
+        },
+        "held_transport_observed": {
+          "t": 44.3125,
+          "physics_step": 10635,
+          "horizontal_displacement_m": 0.050010872150860364
+        },
+        "safe_preinsert_observed": {
+          "t": 73.83333333333333,
+          "physics_step": 17720,
+          "actual_depth_m": -0.002998357349482863,
+          "actual_xy_error_m": 1.861607370238007e-07
+        },
+        "loaded_pose_candidate": {
+          "t": 107.60833333333333,
+          "physics_step": 25826,
+          "actual_depth_m": 0.026950343941703234,
+          "measured_bottom_support_N": 0.0,
+          "target_region_contains_object": true
+        },
+        "both_fingers_open_and_detached": {
+          "t": 110.775,
+          "physics_step": 26586,
+          "actual_joint_positions_m": [
+            0.006545921787619591,
+            0.006546020973473787
+          ],
+          "actual_force_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "actual_gripper_retreat": {
+          "t": 114.99583333333334,
+          "physics_step": 27599,
+          "minimum_gripper_object_clearance_m": 0.040019541022558835
+        }
+      },
+      "condition_counts_after_held_transport": {
+        "aligned": 13545,
+        "at_bottom_pose": 3999,
+        "supported_pose": 3456,
+        "supported_pose_inside": 3456,
+        "supported_pose_inside_before_OPEN": 179,
+        "teacher_supported_before_OPEN": 179,
+        "detached": 3251
+      },
+      "first_qualifying_samples": {
+        "aligned": {
+          "t": 53.30833333333333,
+          "physics_step": 12794,
+          "phase": "TRANSPORT",
+          "depth_m": -0.06106420215832345,
+          "target_bottom_gap_m": 0.08806420215832345,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": null,
+          "tilt_deg": 0.00013632067751715061,
+          "yaw_error_deg": 1.4488936670886687e-05,
+          "finger_contact_N": [
+            0.9478647708892822,
+            0.9452909827232361
+          ],
+          "finger_joint_positions_m": [
+            0.0053095207549631596,
+            0.005309597123414278
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2122713029384613,
+            -0.14926891028881073,
+            0.975064218044281
+          ],
+          "object_quaternion_wxyz": [
+            0.7071067690849304,
+            -1.189298927783966e-06,
+            2.8870999813079834e-08,
+            0.7071069478988647
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 9.840168289134081e-05,
+          "xy_error_target_m": [
+            -3.3746818343949385e-06,
+            9.834379857603937e-05
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": false,
+            "gap": false,
+            "support": false,
+            "inside": false
+          },
+          "detached_eligible": false
+        },
+        "at_bottom_pose": {
+          "t": 107.60833333333333,
+          "physics_step": 25826,
+          "phase": "INSERT",
+          "depth_m": 0.026950343941703234,
+          "target_bottom_gap_m": 4.965605829676534e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.00021284835563113288,
+          "yaw_error_deg": -6.278577001239682e-05,
+          "finger_contact_N": [
+            0.9475212097167969,
+            0.9466741681098938
+          ],
+          "finger_joint_positions_m": [
+            0.005309525411576033,
+            0.005309621337801218
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21236923336982727,
+            -0.14926621317863464,
+            0.887049674987793
+          ],
+          "object_quaternion_wxyz": [
+            0.7071072459220886,
+            1.3997778296470642e-06,
+            1.2209638953208923e-06,
+            0.7071064710617065
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 7.937101501846367e-07,
+          "xy_error_target_m": [
+            -6.775716583085067e-07,
+            4.133672100725682e-07
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose": {
+          "t": 109.87083333333334,
+          "physics_step": 26369,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02699959143679651,
+          "target_bottom_gap_m": 4.085632034911413e-07,
+          "target_bottom_support_N": 0.22322247922420502,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.19221173171644526,
+          "yaw_error_deg": -0.003780810313770644,
+          "finger_contact_N": [
+            0.17776474356651306,
+            0.14938867092132568
+          ],
+          "finger_joint_positions_m": [
+            0.005310727283358574,
+            0.005310854408890009
+          ],
+          "gripper_target_m": 0.005229107139011208,
+          "gripper_effort_limit_N": 2.0374999999999996,
+          "object_position_m": [
+            0.21237196028232574,
+            -0.14909660816192627,
+            0.8870165348052979
+          ],
+          "object_quaternion_wxyz": [
+            0.7071291208267212,
+            0.0011829817667603493,
+            -0.001189159695059061,
+            0.7070824503898621
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001689432868833337,
+          "xy_error_target_m": [
+            0.00016892744505006552,
+            -2.3135452884015427e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose_inside": {
+          "t": 109.87083333333334,
+          "physics_step": 26369,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02699959143679651,
+          "target_bottom_gap_m": 4.085632034911413e-07,
+          "target_bottom_support_N": 0.22322247922420502,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.19221173171644526,
+          "yaw_error_deg": -0.003780810313770644,
+          "finger_contact_N": [
+            0.17776474356651306,
+            0.14938867092132568
+          ],
+          "finger_joint_positions_m": [
+            0.005310727283358574,
+            0.005310854408890009
+          ],
+          "gripper_target_m": 0.005229107139011208,
+          "gripper_effort_limit_N": 2.0374999999999996,
+          "object_position_m": [
+            0.21237196028232574,
+            -0.14909660816192627,
+            0.8870165348052979
+          ],
+          "object_quaternion_wxyz": [
+            0.7071291208267212,
+            0.0011829817667603493,
+            -0.001189159695059061,
+            0.7070824503898621
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001689432868833337,
+          "xy_error_target_m": [
+            0.00016892744505006552,
+            -2.3135452884015427e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose_inside_before_OPEN": {
+          "t": 109.87083333333334,
+          "physics_step": 26369,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02699959143679651,
+          "target_bottom_gap_m": 4.085632034911413e-07,
+          "target_bottom_support_N": 0.22322247922420502,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.19221173171644526,
+          "yaw_error_deg": -0.003780810313770644,
+          "finger_contact_N": [
+            0.17776474356651306,
+            0.14938867092132568
+          ],
+          "finger_joint_positions_m": [
+            0.005310727283358574,
+            0.005310854408890009
+          ],
+          "gripper_target_m": 0.005229107139011208,
+          "gripper_effort_limit_N": 2.0374999999999996,
+          "object_position_m": [
+            0.21237196028232574,
+            -0.14909660816192627,
+            0.8870165348052979
+          ],
+          "object_quaternion_wxyz": [
+            0.7071291208267212,
+            0.0011829817667603493,
+            -0.001189159695059061,
+            0.7070824503898621
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001689432868833337,
+          "xy_error_target_m": [
+            0.00016892744505006552,
+            -2.3135452884015427e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "teacher_supported_before_OPEN": {
+          "t": 109.87083333333334,
+          "physics_step": 26369,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02699959143679651,
+          "target_bottom_gap_m": 4.085632034911413e-07,
+          "target_bottom_support_N": 0.22322247922420502,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.19221173171644526,
+          "yaw_error_deg": -0.003780810313770644,
+          "finger_contact_N": [
+            0.17776474356651306,
+            0.14938867092132568
+          ],
+          "finger_joint_positions_m": [
+            0.005310727283358574,
+            0.005310854408890009
+          ],
+          "gripper_target_m": 0.005229107139011208,
+          "gripper_effort_limit_N": 2.0374999999999996,
+          "object_position_m": [
+            0.21237196028232574,
+            -0.14909660816192627,
+            0.8870165348052979
+          ],
+          "object_quaternion_wxyz": [
+            0.7071291208267212,
+            0.0011829817667603493,
+            -0.001189159695059061,
+            0.7070824503898621
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001689432868833337,
+          "xy_error_target_m": [
+            0.00016892744505006552,
+            -2.3135452884015427e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "detached": {
+          "t": 110.725,
+          "physics_step": 26574,
+          "phase": "OPEN",
+          "depth_m": 0.026999907894009054,
+          "target_bottom_gap_m": 9.210599094533478e-08,
+          "target_bottom_support_N": 0.19619937241077423,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.001005626849171946,
+          "yaw_error_deg": 0.04209542591368631,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.0060169026255607605,
+            0.006017001811414957
+          ],
+          "gripper_target_m": 0.006515664016207158,
+          "gripper_effort_limit_N": 0.5,
+          "object_position_m": [
+            0.2123732566833496,
+            -0.14909620583057404,
+            0.8870002031326294
+          ],
+          "object_quaternion_wxyz": [
+            0.7068470120429993,
+            -8.294358849525452e-06,
+            2.866610884666443e-06,
+            0.7073665261268616
+          ],
+          "gripper_object_clearance_m": 0.0007004473214111406,
+          "xy_error_norm_m": 0.00016936825230494103,
+          "xy_error_target_m": [
+            0.0001693297764022994,
+            -3.6099463122662888e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "best_supported_alignment_sample": {
+        "max_alignment_threshold_ratio": 1.6859133797187693,
+        "ratios": {
+          "xy": 1.6859133797187693,
+          "tilt": 0.9157161756363574,
+          "yaw": 0.024410555167264647
+        },
+        "sample": {
+          "t": 110.28333333333333,
+          "physics_step": 26468,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.026999596622199504,
+          "target_bottom_gap_m": 4.0337780049526373e-07,
+          "target_bottom_support_N": 0.16680124402046204,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.13735742634545361,
+          "yaw_error_deg": -0.004882111033452929,
+          "finger_contact_N": [
+            0.02822224795818329,
+            0.018103929236531258
+          ],
+          "finger_joint_positions_m": [
+            0.005310984794050455,
+            0.005311099346727133
+          ],
+          "gripper_target_m": 0.005299466926687287,
+          "gripper_effort_limit_N": 0.9774999999999849,
+          "object_position_m": [
+            0.21237114071846008,
+            -0.14909695088863373,
+            0.8870119452476501
+          ],
+          "object_quaternion_wxyz": [
+            0.7071364521980286,
+            0.0008439831435680389,
+            -0.0008511762134730816,
+            0.7070761919021606
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00016859133797187694,
+          "xy_error_target_m": [
+            0.00016858471834260702,
+            -1.4939814227399214e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        }
+      },
+      "selected_samples": {
+        "candidate": {
+          "t": 107.60833333333333,
+          "physics_step": 25826,
+          "phase": "INSERT",
+          "depth_m": 0.026950343941703234,
+          "target_bottom_gap_m": 4.965605829676534e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.00021284835563113288,
+          "yaw_error_deg": -6.278577001239682e-05,
+          "finger_contact_N": [
+            0.9475212097167969,
+            0.9466741681098938
+          ],
+          "finger_joint_positions_m": [
+            0.005309525411576033,
+            0.005309621337801218
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21236923336982727,
+            -0.14926621317863464,
+            0.887049674987793
+          ],
+          "object_quaternion_wxyz": [
+            0.7071072459220886,
+            1.3997778296470642e-06,
+            1.2209638953208923e-06,
+            0.7071064710617065
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 7.937101501846367e-07,
+          "xy_error_target_m": [
+            -6.775716583085067e-07,
+            4.133672100725682e-07
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "SUPPORT_TRANSFER": {
+          "t": 107.61666666666666,
+          "physics_step": 25828,
+          "phase": "INSERT",
+          "depth_m": 0.026952188668478236,
+          "target_bottom_gap_m": 4.78113315217632e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.00016948643406910962,
+          "yaw_error_deg": -2.897800476375778e-05,
+          "finger_contact_N": [
+            0.9466542601585388,
+            0.9457382559776306
+          ],
+          "finger_joint_positions_m": [
+            0.00530950166285038,
+            0.005309596657752991
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2123694121837616,
+            -0.14926579594612122,
+            0.8870478272438049
+          ],
+          "object_quaternion_wxyz": [
+            0.7071069478988647,
+            -8.917413651943207e-07,
+            1.1799857020378113e-06,
+            0.7071065902709961
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 3.504164800927845e-07,
+          "xy_error_target_m": [
+            -2.6033914488077237e-07,
+            2.3455327574639637e-07
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "OPEN": {
+          "t": 110.61666666666666,
+          "physics_step": 26548,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.0269998510443584,
+          "target_bottom_gap_m": 1.4895564159900232e-07,
+          "target_bottom_support_N": 0.19617526233196259,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0005276749384807951,
+          "yaw_error_deg": 0.04274743631961542,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.005350688472390175,
+            0.005350789055228233
+          ],
+          "gripper_target_m": 0.005358100083084018,
+          "gripper_effort_limit_N": 0.09416666666666362,
+          "object_position_m": [
+            0.21237319707870483,
+            -0.1490960568189621,
+            0.8870002031326294
+          ],
+          "object_quaternion_wxyz": [
+            0.7068429589271545,
+            -4.037283360958099e-06,
+            2.214685082435608e-06,
+            0.7073705196380615
+          ],
+          "gripper_object_clearance_m": 3.423497538887488e-05,
+          "xy_error_norm_m": 0.00016951597126150356,
+          "xy_error_target_m": [
+            0.00016947878801423788,
+            -3.5503416674908977e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "detachment_event": {
+          "t": 110.775,
+          "physics_step": 26586,
+          "phase": "OPEN",
+          "depth_m": 0.026999922554672626,
+          "target_bottom_gap_m": 7.744532737330445e-08,
+          "target_bottom_support_N": 0.19619952142238617,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.001204038806265162,
+          "yaw_error_deg": 0.04173802988287889,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.006545921787619591,
+            0.006546020973473787
+          ],
+          "gripper_target_m": 0.0070929801538587274,
+          "gripper_effort_limit_N": 0.5,
+          "object_position_m": [
+            0.21237318217754364,
+            -0.14909596741199493,
+            0.8870002031326294
+          ],
+          "object_quaternion_wxyz": [
+            0.706849217414856,
+            -9.370967745780945e-06,
+            4.752539098262787e-06,
+            0.7073643207550049
+          ],
+          "gripper_object_clearance_m": 0.001229572413478458,
+          "xy_error_norm_m": 0.00016960504735656892,
+          "xy_error_target_m": [
+            0.00016956819498140097,
+            -3.53544050629705e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        },
+        "retreat_event": {
+          "t": 114.99583333333334,
+          "physics_step": 27599,
+          "phase": "RETREAT",
+          "depth_m": 0.026999883083495966,
+          "target_bottom_gap_m": 1.1691650403378162e-07,
+          "target_bottom_support_N": 0.19618715345859528,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0014691611279570237,
+          "yaw_error_deg": 0.04202780990763699,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.039999883621931076,
+            0.039999984204769135
+          ],
+          "gripper_target_m": 0.04,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2123732566833496,
+            -0.14909595251083374,
+            0.8870002627372742
+          ],
+          "object_quaternion_wxyz": [
+            0.7068474292755127,
+            -1.0847579687833786e-05,
+            6.834045052528381e-06,
+            0.7073661088943481
+          ],
+          "gripper_object_clearance_m": 0.040019541022558835,
+          "xy_error_norm_m": 0.00016962151458375203,
+          "xy_error_target_m": [
+            0.00016958309614259481,
+            -3.6099463122662883e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        },
+        "terminal": {
+          "t": 124.26666666666667,
+          "physics_step": 29824,
+          "phase": "VERIFY",
+          "depth_m": 0.026999893355359104,
+          "target_bottom_gap_m": 1.066446408959365e-07,
+          "target_bottom_support_N": 0.19619157910346985,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0015460956763158596,
+          "yaw_error_deg": 0.041998834430273746,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.03999985754489899,
+            0.03999994322657585
+          ],
+          "gripper_target_m": 0.04,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.212373286485672,
+            -0.14909595251083374,
+            0.8870002627372742
+          ],
+          "object_quaternion_wxyz": [
+            0.7068475484848022,
+            -1.1622440069913864e-05,
+            6.852671504020691e-06,
+            0.707365870475769
+          ],
+          "gripper_object_clearance_m": 0.059082826975403215,
+          "xy_error_norm_m": 0.00016962215146445943,
+          "xy_error_target_m": [
+            0.00016958309614259481,
+            -3.6397486346539836e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "positive_bottom_support_before_OPEN": {
+        "sample_count": 179,
+        "first": {
+          "t": 109.87083333333334,
+          "physics_step": 26369,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02699959143679651,
+          "target_bottom_gap_m": 4.085632034911413e-07,
+          "target_bottom_support_N": 0.22322247922420502,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.19221173171644526,
+          "yaw_error_deg": -0.003780810313770644,
+          "finger_contact_N": [
+            0.17776474356651306,
+            0.14938867092132568
+          ],
+          "finger_joint_positions_m": [
+            0.005310727283358574,
+            0.005310854408890009
+          ],
+          "gripper_target_m": 0.005229107139011208,
+          "gripper_effort_limit_N": 2.0374999999999996,
+          "object_position_m": [
+            0.21237196028232574,
+            -0.14909660816192627,
+            0.8870165348052979
+          ],
+          "object_quaternion_wxyz": [
+            0.7071291208267212,
+            0.0011829817667603493,
+            -0.001189159695059061,
+            0.7070824503898621
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.0001689432868833337,
+          "xy_error_target_m": [
+            0.00016892744505006552,
+            -2.3135452884015427e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "last": {
+          "t": 110.6125,
+          "physics_step": 26547,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.026999846819165094,
+          "target_bottom_gap_m": 1.5318083490534207e-07,
+          "target_bottom_support_N": 0.19616194069385529,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0005349203617697645,
+          "yaw_error_deg": 0.04303238552364519,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.005350048188120127,
+            0.0053501492366194725
+          ],
+          "gripper_target_m": 0.005358100083084018,
+          "gripper_effort_limit_N": 0.09416666666666362,
+          "object_position_m": [
+            0.21237316727638245,
+            -0.1490960717201233,
+            0.8870002031326294
+          ],
+          "object_quaternion_wxyz": [
+            0.706841230392456,
+            -3.704335540533066e-06,
+            2.8405338525772095e-06,
+            0.7073723077774048
+          ],
+          "gripper_object_clearance_m": 3.35998264305859e-05,
+          "xy_error_norm_m": 0.00016950045175344439,
+          "xy_error_target_m": [
+            0.00016946388685304403,
+            -3.5205393451032024e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        }
+      },
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/config.yaml",
+          "SHA256": "7b304e22a6ebf3eab3852549b586c14eee23a097839866d80f561b565d4dc6d3"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/teacher_events.json",
+          "SHA256": "1639cf0ad40b9ab47e2ff0d1fc85b9081dd14a7ac1aa8f5f4dd2c61338406124"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/independent_score.json",
+          "SHA256": "9e6134cc4d6c5f54390be06c93bba0cf9f2ec0a35067ea1ffb1cfe71b41acd40"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/episode_0000/execution_trace.jsonl",
+          "SHA256": "5f0e15aa4704e6b109dc8720b4f25985e8cbcc1a09fdaf1c7a285d6d363915b0"
+        }
+      ],
+      "closed_audit": {
+        "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_closed_read_archive.json",
+        "SHA256": "dd913afbaa9ffd860fc0474027432512d26d02a07ac21bc25e6a434b9ba394bf"
+      },
+      "full_physical_rows": 29825,
+      "whole_decompressed_physics_SHA256": "2a21398bcf0f95b72fca803931309d15d8a1fa10909eb2a607f4b7e88efd2832",
+      "whole_decompressed_bytes": 1219313252,
+      "whole_decompressed_SHA_and_bytes_equal_prearchive": true
+    },
+    {
+      "run": "teacher_source_hold_01",
+      "original_task_success": false,
+      "original_failure_type": "GRASP_SLIP",
+      "loading_sequence_observed": false,
+      "loading_candidate_sequence_observed": true,
+      "release_observed": true,
+      "retreat_observed": true,
+      "stable_after_retreat": true,
+      "missing_required_event": "correct_target_supported",
+      "limits": {
+        "xy_m": 0.0001,
+        "tilt_deg": 0.15,
+        "yaw_deg": 0.2,
+        "depth_m": 0.027,
+        "tolerance_m": 5e-05,
+        "gap_m": 5e-05,
+        "support_N": 0.1,
+        "teacher_support_tilt_deg": 1.0,
+        "finger_open_each_m": 0.006
+      },
+      "teacher_phase_transition_times_s": {
+        "APPROACH_SOURCE": 4.016666666666667,
+        "GRASP": 14.516666666666667,
+        "EXTRACT": 18.916666666666668,
+        "TRANSPORT": 29.433333333333334,
+        "TRANSPORT_HOLD": 54.93333333333333,
+        "ALIGN": 58.13333333333333,
+        "INSERT": 74.85,
+        "SUPPORT_TRANSFER": 107.61666666666666,
+        "OPEN": 110.61666666666666,
+        "RETREAT": 112.88333333333334,
+        "VERIFY": 121.15
+      },
+      "original_independent_events": {
+        "bilateral_grasp_observed": {
+          "t": 18.145833333333332,
+          "physics_step": 4355,
+          "actual_force_N": [
+            0.7650852799415588,
+            1.3348219394683838
+          ]
+        },
+        "actual_lift_started": {
+          "t": 19.320833333333333,
+          "physics_step": 4637,
+          "actual_lift_m": 0.0010234735302067088
+        },
+        "source_slot_cleared": {
+          "t": 20.85,
+          "physics_step": 5004,
+          "actual_bottom_world_z_m": 0.7700539646448502,
+          "source_rim_world_z_m": 0.768
+        },
+        "held_transport_observed": {
+          "t": 44.31666666666667,
+          "physics_step": 10636,
+          "horizontal_displacement_m": 0.0500640382597193
+        },
+        "safe_preinsert_observed": {
+          "t": 73.8375,
+          "physics_step": 17721,
+          "actual_depth_m": -0.0029958062014410446,
+          "actual_xy_error_m": 1.3427717144890442e-06
+        },
+        "loaded_pose_candidate": {
+          "t": 107.6125,
+          "physics_step": 25827,
+          "actual_depth_m": 0.026950596349291065,
+          "measured_bottom_support_N": 0.0,
+          "target_region_contains_object": true
+        },
+        "both_fingers_open_and_detached": {
+          "t": 110.775,
+          "physics_step": 26586,
+          "actual_joint_positions_m": [
+            0.006545922253280878,
+            0.006546021439135075
+          ],
+          "actual_force_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "actual_gripper_retreat": {
+          "t": 114.99583333333334,
+          "physics_step": 27599,
+          "minimum_gripper_object_clearance_m": 0.04005771928765306
+        }
+      },
+      "condition_counts_after_held_transport": {
+        "aligned": 13519,
+        "at_bottom_pose": 3998,
+        "supported_pose": 3461,
+        "supported_pose_inside": 3461,
+        "supported_pose_inside_before_OPEN": 184,
+        "teacher_supported_before_OPEN": 184,
+        "detached": 3251
+      },
+      "first_qualifying_samples": {
+        "aligned": {
+          "t": 53.34166666666667,
+          "physics_step": 12802,
+          "phase": "TRANSPORT",
+          "depth_m": -0.060999682599145705,
+          "target_bottom_gap_m": 0.0879996825991457,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": null,
+          "tilt_deg": 0.00037303949033251843,
+          "yaw_error_deg": 0.0004491601774248011,
+          "finger_contact_N": [
+            0.950872004032135,
+            0.9477024078369141
+          ],
+          "finger_joint_positions_m": [
+            0.005310252774506807,
+            0.005310331005603075
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2122773677110672,
+            -0.14929021894931793,
+            0.974999725818634
+          ],
+          "object_quaternion_wxyz": [
+            0.7071040272712708,
+            -3.5995617508888245e-07,
+            -3.2354146242141724e-06,
+            0.7071095705032349
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 9.552322242863707e-05,
+          "xy_error_target_m": [
+            -2.4683342341597088e-05,
+            9.227902597014337e-05
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": false,
+            "gap": false,
+            "support": false,
+            "inside": false
+          },
+          "detached_eligible": false
+        },
+        "at_bottom_pose": {
+          "t": 107.6125,
+          "physics_step": 25827,
+          "phase": "INSERT",
+          "depth_m": 0.026950596349291065,
+          "target_bottom_gap_m": 4.94036507089346e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0002840963078555869,
+          "yaw_error_deg": -0.0006423461055362623,
+          "finger_contact_N": [
+            0.9440882802009583,
+            0.9456276297569275
+          ],
+          "finger_joint_positions_m": [
+            0.005310297943651676,
+            0.005310393404215574
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21237006783485413,
+            -0.14926519989967346,
+            0.8870494365692139
+          ],
+          "object_quaternion_wxyz": [
+            0.7071108222007751,
+            -2.71480530500412e-07,
+            -2.464279532432556e-06,
+            0.70710289478302
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 5.385376166078645e-07,
+          "xy_error_target_m": [
+            3.357073028731339e-07,
+            -4.210978167829005e-07
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose": {
+          "t": 109.85,
+          "physics_step": 26364,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700057848433954,
+          "target_bottom_gap_m": -5.784843395417738e-07,
+          "target_bottom_support_N": 0.12726497650146484,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.22347300074040352,
+          "yaw_error_deg": 0.0031927667172908514,
+          "finger_contact_N": [
+            0.18634779751300812,
+            0.16989102959632874
+          ],
+          "finger_joint_positions_m": [
+            0.005311573389917612,
+            0.0053117102943360806
+          ],
+          "gripper_target_m": 0.005223243823371535,
+          "gripper_effort_limit_N": 2.125833333333328,
+          "object_position_m": [
+            0.21236591041088104,
+            -0.149051696062088,
+            0.8870185017585754
+          ],
+          "object_quaternion_wxyz": [
+            0.7070857286453247,
+            0.0014081727713346481,
+            -0.0013491506688296795,
+            0.7071252465248108
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00021387218400528642,
+          "xy_error_target_m": [
+            0.00021383954488832235,
+            3.7363261563006087e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose_inside": {
+          "t": 109.85,
+          "physics_step": 26364,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700057848433954,
+          "target_bottom_gap_m": -5.784843395417738e-07,
+          "target_bottom_support_N": 0.12726497650146484,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.22347300074040352,
+          "yaw_error_deg": 0.0031927667172908514,
+          "finger_contact_N": [
+            0.18634779751300812,
+            0.16989102959632874
+          ],
+          "finger_joint_positions_m": [
+            0.005311573389917612,
+            0.0053117102943360806
+          ],
+          "gripper_target_m": 0.005223243823371535,
+          "gripper_effort_limit_N": 2.125833333333328,
+          "object_position_m": [
+            0.21236591041088104,
+            -0.149051696062088,
+            0.8870185017585754
+          ],
+          "object_quaternion_wxyz": [
+            0.7070857286453247,
+            0.0014081727713346481,
+            -0.0013491506688296795,
+            0.7071252465248108
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00021387218400528642,
+          "xy_error_target_m": [
+            0.00021383954488832235,
+            3.7363261563006087e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "supported_pose_inside_before_OPEN": {
+          "t": 109.85,
+          "physics_step": 26364,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700057848433954,
+          "target_bottom_gap_m": -5.784843395417738e-07,
+          "target_bottom_support_N": 0.12726497650146484,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.22347300074040352,
+          "yaw_error_deg": 0.0031927667172908514,
+          "finger_contact_N": [
+            0.18634779751300812,
+            0.16989102959632874
+          ],
+          "finger_joint_positions_m": [
+            0.005311573389917612,
+            0.0053117102943360806
+          ],
+          "gripper_target_m": 0.005223243823371535,
+          "gripper_effort_limit_N": 2.125833333333328,
+          "object_position_m": [
+            0.21236591041088104,
+            -0.149051696062088,
+            0.8870185017585754
+          ],
+          "object_quaternion_wxyz": [
+            0.7070857286453247,
+            0.0014081727713346481,
+            -0.0013491506688296795,
+            0.7071252465248108
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00021387218400528642,
+          "xy_error_target_m": [
+            0.00021383954488832235,
+            3.7363261563006087e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "teacher_supported_before_OPEN": {
+          "t": 109.85,
+          "physics_step": 26364,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700057848433954,
+          "target_bottom_gap_m": -5.784843395417738e-07,
+          "target_bottom_support_N": 0.12726497650146484,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.22347300074040352,
+          "yaw_error_deg": 0.0031927667172908514,
+          "finger_contact_N": [
+            0.18634779751300812,
+            0.16989102959632874
+          ],
+          "finger_joint_positions_m": [
+            0.005311573389917612,
+            0.0053117102943360806
+          ],
+          "gripper_target_m": 0.005223243823371535,
+          "gripper_effort_limit_N": 2.125833333333328,
+          "object_position_m": [
+            0.21236591041088104,
+            -0.149051696062088,
+            0.8870185017585754
+          ],
+          "object_quaternion_wxyz": [
+            0.7070857286453247,
+            0.0014081727713346481,
+            -0.0013491506688296795,
+            0.7071252465248108
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00021387218400528642,
+          "xy_error_target_m": [
+            0.00021383954488832235,
+            3.7363261563006087e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "detached": {
+          "t": 110.725,
+          "physics_step": 26574,
+          "phase": "OPEN",
+          "depth_m": 0.026999949817670153,
+          "target_bottom_gap_m": 5.01823298471038e-08,
+          "target_bottom_support_N": 0.19619113206863403,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0008637721271852135,
+          "yaw_error_deg": 0.015435636336036396,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.0060169026255607605,
+            0.006017001811414957
+          ],
+          "gripper_target_m": 0.006515664016207158,
+          "gripper_effort_limit_N": 0.5,
+          "object_position_m": [
+            0.21236595511436462,
+            -0.14905261993408203,
+            0.8870001435279846
+          ],
+          "object_quaternion_wxyz": [
+            0.7070115804672241,
+            -2.879183739423752e-06,
+            6.966292858123779e-06,
+            0.7072020769119263
+          ],
+          "gripper_object_clearance_m": 0.0007091533632181957,
+          "xy_error_norm_m": 0.00021294767395299696,
+          "xy_error_target_m": [
+            0.0002129156728943038,
+            3.6916226727190658e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "best_supported_alignment_sample": {
+        "max_alignment_threshold_ratio": 2.1282745705769326,
+        "ratios": {
+          "xy": 2.1282745705769326,
+          "tilt": 0.005039907141536018,
+          "yaw": 0.07715403039725288
+        },
+        "sample": {
+          "t": 119.275,
+          "physics_step": 28626,
+          "phase": "RETREAT",
+          "depth_m": 0.02699993147857147,
+          "target_bottom_gap_m": 6.852142853119858e-08,
+          "target_bottom_support_N": 0.19617201387882233,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0007559860712304027,
+          "yaw_error_deg": 0.015430806079450576,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.039999820291996,
+            0.03999996557831764
+          ],
+          "gripper_target_m": 0.04,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2123660147190094,
+            -0.14905273914337158,
+            0.8870001435279846
+          ],
+          "object_quaternion_wxyz": [
+            0.7070115804672241,
+            -3.5231932997703552e-06,
+            5.577690899372101e-06,
+            0.7072020173072815
+          ],
+          "gripper_object_clearance_m": 0.044910607447627655,
+          "xy_error_norm_m": 0.00021282745705769327,
+          "xy_error_target_m": [
+            0.00021279646360475302,
+            3.632018027943675e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "selected_samples": {
+        "candidate": {
+          "t": 107.6125,
+          "physics_step": 25827,
+          "phase": "INSERT",
+          "depth_m": 0.026950596349291065,
+          "target_bottom_gap_m": 4.94036507089346e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0002840963078555869,
+          "yaw_error_deg": -0.0006423461055362623,
+          "finger_contact_N": [
+            0.9440882802009583,
+            0.9456276297569275
+          ],
+          "finger_joint_positions_m": [
+            0.005310297943651676,
+            0.005310393404215574
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21237006783485413,
+            -0.14926519989967346,
+            0.8870494365692139
+          ],
+          "object_quaternion_wxyz": [
+            0.7071108222007751,
+            -2.71480530500412e-07,
+            -2.464279532432556e-06,
+            0.70710289478302
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 5.385376166078645e-07,
+          "xy_error_target_m": [
+            3.357073028731339e-07,
+            -4.210978167829005e-07
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "SUPPORT_TRANSFER": {
+          "t": 107.61666666666666,
+          "physics_step": 25828,
+          "phase": "INSERT",
+          "depth_m": 0.02695137617369967,
+          "target_bottom_gap_m": 4.862382630033135e-05,
+          "target_bottom_support_N": 0.0,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0003254389831813812,
+          "yaw_error_deg": 0.00039120396905900634,
+          "finger_contact_N": [
+            0.9544153809547424,
+            0.9509433507919312
+          ],
+          "finger_joint_positions_m": [
+            0.00531023507937789,
+            0.005310331471264362
+          ],
+          "gripper_target_m": 0.004833333333333269,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.2123701572418213,
+            -0.14926500618457794,
+            0.8870486617088318
+          ],
+          "object_quaternion_wxyz": [
+            0.7071043848991394,
+            -1.5227124094963074e-07,
+            -2.835877239704132e-06,
+            0.7071092128753662
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 7.354612228745287e-07,
+          "xy_error_target_m": [
+            5.294223983931534e-07,
+            -5.105047839459864e-07
+          ],
+          "alignment_gate_passes": {
+            "xy": true,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": false,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "OPEN": {
+          "t": 110.61666666666666,
+          "physics_step": 26548,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.026999958917096032,
+          "target_bottom_gap_m": 4.1082903967648576e-08,
+          "target_bottom_support_N": 0.19523119926452637,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0008968273441345183,
+          "yaw_error_deg": 0.015421148886531455,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.005350696854293346,
+            0.005350797437131405
+          ],
+          "gripper_target_m": 0.005358100083084018,
+          "gripper_effort_limit_N": 0.09416666666666362,
+          "object_position_m": [
+            0.21236594021320343,
+            -0.14905261993408203,
+            0.8870001435279846
+          ],
+          "object_quaternion_wxyz": [
+            0.7070116400718689,
+            -1.5771947801113129e-06,
+            7.665716111660004e-06,
+            0.7072019577026367
+          ],
+          "gripper_object_clearance_m": 4.280527079741914e-05,
+          "xy_error_norm_m": 0.00021294793279805636,
+          "xy_error_target_m": [
+            0.0002129156728943038,
+            3.7065238339129134e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "detachment_event": {
+          "t": 110.775,
+          "physics_step": 26586,
+          "phase": "OPEN",
+          "depth_m": 0.026999935560234587,
+          "target_bottom_gap_m": 6.443976541259389e-08,
+          "target_bottom_support_N": 0.19618651270866394,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.000764630449608738,
+          "yaw_error_deg": 0.015396998078074375,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.006545922253280878,
+            0.006546021439135075
+          ],
+          "gripper_target_m": 0.0070929801538587274,
+          "gripper_effort_limit_N": 0.5,
+          "object_position_m": [
+            0.21236592531204224,
+            -0.14905260503292084,
+            0.8870001435279846
+          ],
+          "object_quaternion_wxyz": [
+            0.7070118188858032,
+            -3.129243850708008e-06,
+            5.893409252166748e-06,
+            0.7072018384933472
+          ],
+          "gripper_object_clearance_m": 0.0012383331767666372,
+          "xy_error_norm_m": 0.0002129630915712814,
+          "xy_error_target_m": [
+            0.00021293057405549765,
+            3.721424995106761e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        },
+        "retreat_event": {
+          "t": 114.99583333333334,
+          "physics_step": 27599,
+          "phase": "RETREAT",
+          "depth_m": 0.0269999460806247,
+          "target_bottom_gap_m": 5.391937529797275e-08,
+          "target_bottom_support_N": 0.1961800754070282,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0008277871568431503,
+          "yaw_error_deg": 0.015464615505464963,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.039999887347221375,
+            0.039999984204769135
+          ],
+          "gripper_target_m": 0.04,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.21236591041088104,
+            -0.1490526646375656,
+            0.8870001435279846
+          ],
+          "object_quaternion_wxyz": [
+            0.707011342048645,
+            -2.730637788772583e-06,
+            6.687827408313751e-06,
+            0.7072021961212158
+          ],
+          "gripper_object_clearance_m": 0.04005771928765306,
+          "xy_error_norm_m": 0.0002129037570147763,
+          "xy_error_target_m": [
+            0.00021287096941072225,
+            3.7363261563006087e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        },
+        "terminal": {
+          "t": 124.26666666666667,
+          "physics_step": 29824,
+          "phase": "VERIFY",
+          "depth_m": 0.026999943495778143,
+          "target_bottom_gap_m": 5.650422185699e-08,
+          "target_bottom_support_N": 0.19620206952095032,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0008449396242840622,
+          "yaw_error_deg": 0.015425977687982595,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.03999985009431839,
+            0.039999932050704956
+          ],
+          "gripper_target_m": 0.04,
+          "gripper_effort_limit_N": 8.0,
+          "object_position_m": [
+            0.212365984916687,
+            -0.1490526646375656,
+            0.8870001435279846
+          ],
+          "object_quaternion_wxyz": [
+            0.7070115804672241,
+            -3.511086106300354e-06,
+            6.4838677644729614e-06,
+            0.7072019577026367
+          ],
+          "gripper_object_clearance_m": 0.05911415312584008,
+          "xy_error_norm_m": 0.00021290246251778948,
+          "xy_error_target_m": [
+            0.00021287096941072225,
+            3.6618203503313705e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": true
+        }
+      },
+      "positive_bottom_support_before_OPEN": {
+        "sample_count": 184,
+        "first": {
+          "t": 109.85,
+          "physics_step": 26364,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.02700057848433954,
+          "target_bottom_gap_m": -5.784843395417738e-07,
+          "target_bottom_support_N": 0.12726497650146484,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.22347300074040352,
+          "yaw_error_deg": 0.0031927667172908514,
+          "finger_contact_N": [
+            0.18634779751300812,
+            0.16989102959632874
+          ],
+          "finger_joint_positions_m": [
+            0.005311573389917612,
+            0.0053117102943360806
+          ],
+          "gripper_target_m": 0.005223243823371535,
+          "gripper_effort_limit_N": 2.125833333333328,
+          "object_position_m": [
+            0.21236591041088104,
+            -0.149051696062088,
+            0.8870185017585754
+          ],
+          "object_quaternion_wxyz": [
+            0.7070857286453247,
+            0.0014081727713346481,
+            -0.0013491506688296795,
+            0.7071252465248108
+          ],
+          "gripper_object_clearance_m": 0.0,
+          "xy_error_norm_m": 0.00021387218400528642,
+          "xy_error_target_m": [
+            0.00021383954488832235,
+            3.7363261563006087e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": false,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        },
+        "last": {
+          "t": 110.6125,
+          "physics_step": 26547,
+          "phase": "SUPPORT_TRANSFER",
+          "depth_m": 0.026999940534749387,
+          "target_bottom_gap_m": 5.946525061251151e-08,
+          "target_bottom_support_N": 0.19536453485488892,
+          "target_region_contains_object": true,
+          "tilt_deg": 0.0007665803411588585,
+          "yaw_error_deg": 0.015498422379238264,
+          "finger_contact_N": [
+            0.0,
+            0.0
+          ],
+          "finger_joint_positions_m": [
+            0.005350056570023298,
+            0.005350157618522644
+          ],
+          "gripper_target_m": 0.005358100083084018,
+          "gripper_effort_limit_N": 0.09416666666666362,
+          "object_position_m": [
+            0.21236592531204224,
+            -0.14905260503292084,
+            0.8870001435279846
+          ],
+          "object_quaternion_wxyz": [
+            0.7070111632347107,
+            -2.312939614057541e-06,
+            6.277114152908325e-06,
+            0.7072024345397949
+          ],
+          "gripper_object_clearance_m": 4.2347720231317165e-05,
+          "xy_error_norm_m": 0.0002129630915712814,
+          "xy_error_target_m": [
+            0.00021293057405549765,
+            3.721424995106761e-06
+          ],
+          "alignment_gate_passes": {
+            "xy": false,
+            "tilt": true,
+            "yaw": true,
+            "depth": true,
+            "gap": true,
+            "support": true,
+            "inside": true
+          },
+          "detached_eligible": false
+        }
+      },
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_source_hold_01/episode_0000/config.yaml",
+          "SHA256": "c6940f3a3ee7ec31d111cd56aa27f4731ec1477154c2ea98e7c7089b4d3ed964"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_source_hold_01/episode_0000/teacher_events.json",
+          "SHA256": "d5b895665defd9e3e6d2ce6e1cb5cc504f85b631b459363b5cbbe076374aad2b"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_source_hold_01/episode_0000/independent_score.json",
+          "SHA256": "727dabdf10a605fd3b72c43b15c1c8451fa022e8e59342c7ab3e82e4b2d5ac0f"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_source_hold_01/episode_0000/execution_trace.jsonl",
+          "SHA256": "fdd8afd3325002e2f168c479fb1698e3bda78c8ddfdb7e2833040d6624ed24ed"
+        }
+      ],
+      "closed_audit": {
+        "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_closed_read_archive.json",
+        "SHA256": "6a7ef4929c190cdea4e8706d1bf2ab85173c0acce4b4f7a940e9aba5439235ce"
+      },
+      "full_physical_rows": 29825,
+      "whole_decompressed_physics_SHA256": "85bff989aa246ce0f9c3b896d01a9ab81d56fd634339206f28d413c46afd70fa",
+      "whole_decompressed_bytes": 1216451643,
+      "whole_decompressed_SHA_and_bytes_equal_prearchive": true
+    }
+  ],
+  "conclusion_scope": "Original event logic and raw observations only; no scorer bug, causal sufficiency, new execution or label correction inferred.",
+  "original_scores_labels_H5_runtime_thresholds_modified": false,
+  "GPU_used": false,
+  "API_calls": 0
+}
