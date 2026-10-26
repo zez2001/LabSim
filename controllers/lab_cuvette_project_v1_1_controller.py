@@ -2,7 +2,7 @@
 
 Only four smooth motion phases are slowed. Physics, scorer, 60 Hz actions and
 physical contact timers are unchanged. An open-hand approach aligns to the
-configured orientation; GRASP holds it and slows closure near contact.
+configured orientation; GRASP holds it with optional near-contact slow closure.
 EXTRACT keeps the nominal lateral lift axis.
 """
 from __future__ import annotations
@@ -16,7 +16,7 @@ from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get, wx
 
 
 class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
-    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v5'
+    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v6'
     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))
     NEAR_CONTACT_MARGIN_M = .002
 
@@ -35,6 +35,9 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         self.near_contact_close_speed_m_s = float(get(cfg, 'gripper.contact_approach_speed_m_s', .002))
         if not math.isfinite(self.near_contact_close_speed_m_s) or self.near_contact_close_speed_m_s <= 0:
             raise ValueError('gripper.contact_approach_speed_m_s must be finite and positive')
+        self.near_contact_slow_close_enabled = get(cfg, 'teacher_execution.near_contact_slow_close_enabled', True)
+        if not isinstance(self.near_contact_slow_close_enabled, bool):
+            raise ValueError('teacher_execution.near_contact_slow_close_enabled must be boolean')
         try:
             yaw = float(get(cfg, 'robot.gripper_yaw_deg', -90.))
             self.approach_orientation_duration_s = float(get(cfg, 'control.approach_s', 6.))
@@ -139,7 +142,7 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             # move the interpolation start or accumulate an orientation error.
             self._approach_orientation_start = Rotation.from_quat(self.rotation_command.as_quat())
         parent_opening = float(action['gripper_opening_m'])
-        slow_zone = bool(source_phase == 'GRASP' and unlatched_before and not bilateral
+        slow_zone = bool(self.near_contact_slow_close_enabled and source_phase == 'GRASP' and unlatched_before and not bilateral
             and previous_opening <= self.near_contact_close_threshold_m
             and parent_opening < previous_opening and not self.finished)
         if slow_zone:
@@ -176,6 +179,7 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             extract_lateral_feedback_suppressed=self._extract_lateral_feedback_suppressed,
             extract_lateral_feedback_policy='Fixed nominal XY during EXTRACT; parent XY feedback resumes in TRANSPORT and ALIGN',
             near_contact_slow_close_zone=slow_zone,
+            near_contact_slow_close_enabled=self.near_contact_slow_close_enabled,
             near_contact_slow_close_applied=float(action['gripper_opening_m']) > parent_opening,
             near_contact_nominal_outer_width_m=self.nominal_vessel_outer_width_m,
             near_contact_close_threshold_m=self.near_contact_close_threshold_m,

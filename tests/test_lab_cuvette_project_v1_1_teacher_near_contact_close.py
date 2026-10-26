@@ -13,6 +13,35 @@ spec.loader.exec_module(helper)
 fixture = helper.fixture
 
 
+@pytest.mark.parametrize('opening', [.012, .011, .0107])
+def test_explicit_baseline_closure_restores_parent_rate_and_keeps_cap_and_latch(fixture, opening):
+    make, debug, _, _, cfg = fixture
+    cfg = copy.deepcopy(cfg)
+    cfg.setdefault('teacher_execution', {})['near_contact_slow_close_enabled'] = False
+    new = make(configuration=cfg)
+    old = make(False, configuration=cfg)
+    helper.enter(new, debug, 'GRASP')
+    helper.enter(old, debug, 'GRASP')
+    new.last_grip_opening = old.last_grip_opening = opening
+    actual = helper.act(new, debug, 1 / 60)
+    reference = helper.act(old, debug, 1 / 60)
+    assert actual['gripper_opening_m'] == reference['gripper_opening_m']
+    assert actual['gripper_effort_limit_N'] == reference['gripper_effort_limit_N'] == 8.
+    assert actual['metadata']['near_contact_slow_close_enabled'] is False
+    assert actual['metadata']['near_contact_slow_close_applied'] is False
+    assert actual['metadata']['near_contact_slow_close_zone'] is False
+    assert new.latch_opening is old.latch_opening is None
+
+
+@pytest.mark.parametrize('invalid', [0, 1, None, 'false'])
+def test_close_mode_requires_explicit_boolean(fixture, invalid):
+    make, _, _, _, cfg = fixture
+    cfg = copy.deepcopy(cfg)
+    cfg.setdefault('teacher_execution', {})['near_contact_slow_close_enabled'] = invalid
+    with pytest.raises(ValueError, match='must be boolean'):
+        make(configuration=cfg)
+
+
 def closing_teacher(fixture, opening=.012, forces=(0., 0.), *, configuration=None):
     make, debug, _, _, _ = fixture
     teacher = make(configuration=configuration)
