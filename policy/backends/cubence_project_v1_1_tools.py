@@ -39,6 +39,17 @@ These controls remain generic move, gripper, wait, observe and finish. No expert
 """
 
 
+TEMPORAL_VISUAL_PROMPT = """
+Project_v1_1 temporal visual observation contract:
+The explicitly labelled historical wrist references are stale public observations, not current state. Actions must use only the episode_id and observation_id in the final current observation item. Never copy an identity from a historical frame.
+Compare the current wrist image with both the previous distinct observation and the fixed first public bilateral-contact reference when supplied. That reference was selected only from the public finger contact readings above0.02N. It does not certify persistent contact, successful grasp, insertion, support or a 3D object pose.
+Use the vessel mouth/top edge relative to the black finger pads and the intended seat rim as visual evidence. The wrist camera is attached to the hand, so a vessel rising relative to the pads while the hand is commanded downward is evidence to stop descent and reassess, not evidence of insertion. Account for camera motion, perspective, tilt, occlusion and pixel uncertainty; equal pixels across frames do not establish equal world positions.
+Before another near-seat descent, compare visible exposed length and relative vessel-to-finger placement across the references. Do not accumulate repeated downward millimetres merely because the TCP target was reached. If the relative vessel position visibly moves upward, retention/contact becomes asymmetric, or the expected visual progress cannot be established, stop descending; choose only a visually supported safe backoff or finish without release.
+Historical images are additional observations only. They provide no hidden contact detector, object coordinates, insertion depth, teacher stage, automatic recovery, stop command or success label. Current bilateral contact by itself is not bottom support. The independent task scorer is unchanged.
+"""
+TEMPORAL_SYSTEM_PROMPT = SYSTEM_PROMPT + TEMPORAL_VISUAL_PROMPT
+
+
 _RECEIPT_FIELDS = frozenset((
     'action_id', 'model_action_id', 'execution_action_id', 'episode_id', 'observation_id',
     'status', 'accepted', 'execution_finished', 'target_reached', 'safety_stopped',
@@ -181,7 +192,28 @@ class ProjectV11RobotTools(GenericRobotTools):
         return public
 
 
+class ProjectV11TemporalRobotTools(ProjectV11RobotTools):
+    """The same generic tools; metadata declares opt-in public visual history."""
+    @staticmethod
+    def controller_metadata():
+        from .cubence_project_v1_1_visual_context import VERSION, VISUAL_CONTEXT
+        result = ProjectV11RobotTools.controller_metadata()
+        helper = Path(__file__).with_name('cubence_project_v1_1_visual_context.py')
+        result.update(tools_class='ProjectV11TemporalRobotTools',
+            prompt_version='Project_v1_1.public_tools.v5_temporal',
+            visual_context_version=VERSION, visual_context_profile=copy.deepcopy(VISUAL_CONTEXT),
+            temporal_context_scope='Public already-encoded wrist JPEGs, robot/tactile/time/calibration only; reference is not grasp success; no automatic action/stop/scoring')
+        result['implementation_sha256'][helper.name] = hashlib.sha256(helper.read_bytes()).hexdigest()
+        return result
+
+
 def run_episode(environment,client,output,*,max_calls=160,prompt=SYSTEM_PROMPT):
-    """Use the existing client/ledger with Project_v1_1 measured tool semantics."""
-    return _run_episode(environment,client,output,max_calls=max_calls,prompt=prompt,
-                        tools_class=ProjectV11RobotTools)
+    """Keep legacy v4 exact unless the explicit public visual profile is enabled."""
+    from .cubence_project_v1_1_visual_context import PublicTemporalVisualClient, validate_visual_context
+    visual = validate_visual_context(client.cfg)
+    if visual is None:
+        return _run_episode(environment,client,output,max_calls=max_calls,prompt=prompt,
+                            tools_class=ProjectV11RobotTools)
+    temporal_prompt = TEMPORAL_SYSTEM_PROMPT if prompt == SYSTEM_PROMPT else prompt + TEMPORAL_VISUAL_PROMPT
+    return _run_episode(environment,PublicTemporalVisualClient(client,output),output,
+                        max_calls=max_calls,prompt=temporal_prompt,tools_class=ProjectV11TemporalRobotTools)

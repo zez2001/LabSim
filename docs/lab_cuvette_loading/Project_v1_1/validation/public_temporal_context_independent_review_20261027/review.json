@@ -1,0 +1,106 @@
+{
+  "schema": "labsim.Project_v1_1.public_temporal_visual_context.independent_review.v1",
+  "created_utc": "2026-10-26T22:23:27.450706+00:00",
+  "reviewer": "cubence_backend",
+  "blocking_findings": [],
+  "conclusion": "No clear protocol/lifecycle/budget blocker found in frozen CPU-reviewed opt-in implementation. Runtime efficacy remains untested; old P4 run identities must not be renamed as P5.",
+  "reviewed_source_SHA256": {
+    "policy/backends/cubence_project_v1_1_tools.py": "ac24cc786479a5df1559b97fec903cba355386bd7b90151c7f7c2a96341942b5",
+    "policy/backends/cubence_project_v1_1_visual_context.py": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+    "tests/test_lab_cuvette_project_v1_1_visual_context.py": "a352071037b70f39f638f62e8e1c6756ad8384cb89006c5efb2084eae55d79be"
+  },
+  "checks": [
+    {
+      "topic": "old_default_P4",
+      "status": "confirmed",
+      "locations": [
+        "policy/backends/cubence_project_v1_1_tools.py:210–219"
+      ],
+      "finding": "No visual_context key delegates the identical base client, caller prompt and ProjectV11RobotTools. Existing v4 SYSTEM_PROMPT and five tool schema are unchanged. Source-derived controller fingerprint changes with the edited file and must remain versioned, so this is behavior preservation, not byte-identical controller provenance."
+    },
+    {
+      "topic": "history_reset_duplicate_and_selection",
+      "status": "confirmed",
+      "locations": [
+        "policy/backends/cubence_project_v1_1_visual_context.py:157–222"
+      ],
+      "finding": "Episode change clears both memories. Repeated observation ID cannot establish new motion/reference and requires identical simulation time; a new ID must advance time. The fixed reference is first distinct public bilateral >0.02N, explicitly not a grasp-success detector."
+    },
+    {
+      "topic": "max_images_current_identity_exact_pixels",
+      "status": "confirmed",
+      "locations": [
+        "policy/backends/cubence_project_v1_1_visual_context.py:189–214",
+        "policy/backends/cubence_project_v1_1_visual_context.py:265–286"
+      ],
+      "finding": "At most two historical wrist sources, deduplicated when previous and reference are same source; current side+wrist blocks remain byte-exact and last. Thus 2–4 JPEGs total. Historical frames retain their own stale IDs, time and wrist calibration; actions still bind the current observation."
+    },
+    {
+      "topic": "budget_deadline_delegation",
+      "status": "confirmed",
+      "locations": [
+        "policy/backends/cubence_project_v1_1_visual_context.py:229–240",
+        "policy/backends/cubence.py:247–261"
+      ],
+      "finding": "Augmented items are sent to the existing client once. The original tools/instructions/label/deadline and extra kwargs are forwarded. The client then computes the bound and reserves the same ledger over all images. Its own retries/serial tools remain unchanged; decorator adds no HTTP calls."
+    },
+    {
+      "topic": "no_truth_or_actions",
+      "status": "confirmed",
+      "locations": [
+        "policy/backends/cubence_project_v1_1_visual_context.py:44–112",
+        "policy/backends/cubence_project_v1_1_tools.py:42–51"
+      ],
+      "finding": "Current input enforces existing public-field whitelist. Historical projection uses public robot/tactile/time and wrist calibration only. There is no environment reference, object state, teacher phase, autonomous action/stop or success rewrite."
+    },
+    {
+      "topic": "saved_protocol_memory_privacy",
+      "status": "confirmed_with_scope",
+      "locations": [
+        "policy/backends/cubence_project_v1_1_visual_context.py:115–139",
+        "policy/backends/cubence_project_v1_1_visual_context.py:287–328"
+      ],
+      "finding": "Complete live response item groups including opaque reasoning remain in the actual input for protocol compatibility. Private/unknown typed or encrypted items are represented only by canonical SHA and type in saved projection. exact_full_input_reconstructable is false whenever redacted. When none are private, saved exact JPEGs reconstruct canonical input_items exactly. This does not reconstruct complete HTTP body, headers, instructions/tools serialization or private reasoning."
+    },
+    {
+      "topic": "recording_path_and_fail_closed",
+      "status": "confirmed",
+      "locations": [
+        "policy/backends/cubence_project_v1_1_visual_context.py:242–286"
+      ],
+      "finding": "New decision folder uses exist_ok=False; preflight failure uses exclusive creation. Current public JSON and JPEG bytes must match previously saved runner artifacts before delegate. Wrong/missing artifacts or preflight protocol failure do not call provider. Reconstruction is an offline utility for trusted generated manifests; not a sandbox for arbitrary external manifests."
+    }
+  ],
+  "independent_CPU_test": {
+    "command": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_visual_context.py"
+    ],
+    "exit_code": 0,
+    "passed": 31,
+    "failed": 0,
+    "duration_reported_s": 0.12,
+    "network": "fake opener only"
+  },
+  "prior_author_evidence": {
+    "actual_CPU_focused_passed": 77,
+    "actual_CPU_contracts_passed": 609,
+    "actual_CPU_contracts_skipped": 11,
+    "source": "validation/public_temporal_context_v1_20261027/change_audit.json"
+  },
+  "limitations": [
+    "No actual API or GPU run of prompt5/temporal performed by this review.",
+    "Static bilateral threshold reference can be transient contact; it cannot certify force sufficiency, held pose or support.",
+    "Up to four JPEGs increases actual cost/context bound; no budget increase or cap reset is implied.",
+    "Historical frames can expose perspective/relative motion but do not provide 3D insertion depth, segmentation, exact support, or image-state synchronization proof."
+  ],
+  "API_calls": 0,
+  "GPU_used": false,
+  "H5_raw_read": false,
+  "runtime_modified": false,
+  "real_budget_modified": false
+}

@@ -1,0 +1,2507 @@
+{
+  "schema": "labsim.Project_v1_1.report_inputs.v1",
+  "project_version": "Project_v1_1",
+  "finalized": false,
+  "metadata": {
+    "title": "LabSim Project v1 1 项目发布与验证报告",
+    "date": "2026-10-27",
+    "audience": "组内使用者 后续开发与评测人员",
+    "author": "LabSim 项目",
+    "conclusion": "截至本稿闭合审计，baseline6实际连续动作结束但原TASK_INCOMPLETE，GPT04完成51次真实视觉决策、50次执行后未释放，原GRASP_SLIP。v7首条已有native成功通知，独立全读与同源重复仍待补，不并入本稿结果。四个GPT debug均非正式五次。本文件仅stage4草稿输入。"
+  },
+  "draft_provenance": {
+    "stage": "stage4_closed_GPT04",
+    "previous_draft_path": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.stage4.pending.draft.json",
+    "previous_draft_SHA256_preserved": "07f0502f48bafa3d930fea3a42b57b480366773c97dce4678dad0b0540fd9d04",
+    "previous184_source_entries_preserved": true,
+    "prepared_utc": "2026-10-26T22:20:14.543784+00:00",
+    "development_HEAD": "0b922ece8177cb646890bd4d64dedea384991220",
+    "active_episode_read": false,
+    "pending": [
+      "teacher_v7_independent_full_audit_and_same_source_repeats"
+    ],
+    "no_DOCX_authoring": true,
+    "no_artifact_marker": true,
+    "no_rendering": true,
+    "source_hashes_revalidated": true,
+    "figures": 3,
+    "final_page_count_unverified": true,
+    "page_target": "6–8 actual pages, seven logical groups"
+  },
+  "sources": [
+    {
+      "id": "closed_001",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/README.md",
+      "sha256": "a634a546c67c0bc85349e4a6f0eb9f7b927a7a1bbe6a023479b8c07689bf4297",
+      "bytes": 1962,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/README.md"
+    },
+    {
+      "id": "closed_002",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/summary.json",
+      "sha256": "a5a8eefeb1f4e4962b4773e07d57e860c23c7a7fee86cb694829c98e2b39e95d",
+      "bytes": 4321,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/summary.json"
+    },
+    {
+      "id": "closed_003",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/runtime_versions.json",
+      "sha256": "ba8ef658f79605dcde041e1c06a07f5b2cc5ea3db0e084bbed597825a150ec22",
+      "bytes": 706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/runtime_versions.json"
+    },
+    {
+      "id": "closed_004",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/contracts_result.json",
+      "sha256": "69053e3a1b0c7e88c27a4c498ae8e21186c54959f22db0e3ff4b2fb8d8394dca",
+      "bytes": 14961,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/contracts_result.json"
+    },
+    {
+      "id": "closed_005",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/normal-readers_result.json",
+      "sha256": "b7df6b36bedf776a0cfbaa48107e73b398e0eb95af08d3cd7aafae495d2351d4",
+      "bytes": 5252,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/normal-readers_result.json"
+    },
+    {
+      "id": "closed_006",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_01_failure_normal_reader.json",
+      "sha256": "fe88a0d09299bd5edad5d745c18bdcec9dc01e6463638ea7df1e3f7685ee37be",
+      "bytes": 6519,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/gpt_debug_01_failure_normal_reader.json"
+    },
+    {
+      "id": "closed_007",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/README.md",
+      "sha256": "53c04b32a2dc7bc438e3326fe71aa5c8b95f6dcb98d5039af3d74529aa956a22",
+      "bytes": 4693,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/README.md"
+    },
+    {
+      "id": "closed_008",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/summary.json",
+      "sha256": "b7bbbc1ea2a7d87947241fcb29678f774f7386a7acbf2042b9113c7a3497a535",
+      "bytes": 55756,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/summary.json"
+    },
+    {
+      "id": "closed_009",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/action_comparison.csv",
+      "sha256": "a9258a997b902883278b4a8b4169030a32a7d2f16b15e8c2d8dbceef41dfa8ca",
+      "bytes": 3135,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/action_comparison.csv"
+    },
+    {
+      "id": "closed_010",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/manifest.json",
+      "sha256": "a4bfd1fdf8f37b787461ce8778aee20f81eb305898bdeaa60fd0cfa2800ed153",
+      "bytes": 2681,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/manifest.json"
+    },
+    {
+      "id": "closed_011",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/README.md",
+      "sha256": "d502190d9011d8f684c1d7970f4875794a3da3927d4f87c85dc8678c68121284",
+      "bytes": 5467,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_012",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/summary.json",
+      "sha256": "53531ef17ccd9cc70ffd81a62d53681346512fed0f313ac08ce9e81595877c43",
+      "bytes": 8241,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_013",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv",
+      "sha256": "5d8b24f2c920254e98f7e82b0b6fe635b8bcea25ee433496d5305310ed9c46a5",
+      "bytes": 1170,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv"
+    },
+    {
+      "id": "closed_014",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json",
+      "sha256": "b1373985531ab01f91783c484fdb9fb8f91b2f3ad9b342717a6dc364d8ff6198",
+      "bytes": 637,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json"
+    },
+    {
+      "id": "closed_015",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png",
+      "sha256": "699a473cf35a0c64b045a7d5f93d67c03f30ac65a0544d1922e885200df673ba",
+      "bytes": 369075,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png"
+    },
+    {
+      "id": "closed_016",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json",
+      "sha256": "7b7ef26ac25032ac3f32db68655c93945b2089cfc1ad3613c58bcc74ff2bd345",
+      "bytes": 1471,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json"
+    },
+    {
+      "id": "closed_017",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_03_closed_read_archive.json",
+      "sha256": "9069680e9d3480ba39777e01ee537924d6acee305f2984fab0e76afbc26b52cb",
+      "bytes": 17104,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_transport_03_closed_read_archive.json"
+    },
+    {
+      "id": "closed_018",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/README.md",
+      "sha256": "01899ad0ee150f5b1d8f33bfbba4bb476807ce67ef39439158c7b7f9c426cc7a",
+      "bytes": 6153,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_019",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json",
+      "sha256": "400aa42408b4757cca7291edcf4c7437b8d5faa4fa1a169e70d2cc63d46c91b9",
+      "bytes": 29469,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_020",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv",
+      "sha256": "eb09ab5f03eda45f32b03dde1c7298c4fd9eaa7c1cff3104bb07a22453e2139d",
+      "bytes": 7436,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv"
+    },
+    {
+      "id": "closed_021",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv",
+      "sha256": "d18ba7500d4c093047631b96389161756f5a2f92f900b203d0316d4169caa6bb",
+      "bytes": 65220,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv"
+    },
+    {
+      "id": "closed_022",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png",
+      "sha256": "6e3dbdaac55fbad13ca28ffa61a277ab190c2c46a11137428059e3b6590f9d98",
+      "bytes": 182651,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png"
+    },
+    {
+      "id": "closed_023",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png",
+      "sha256": "f442304a1c7775b441cf431d0279581876b2f447ff739b4815da90d198a501c2",
+      "bytes": 297882,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png"
+    },
+    {
+      "id": "closed_024",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_02_closed_read_archive.json",
+      "sha256": "dcf9a3038a8ee3468dd174cbf414b7442f82be2b3a375348c153b741a4525b0a",
+      "bytes": 9918,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_025",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/README.md",
+      "sha256": "3dee555eab20713fea2e31627fa3ded56783f5c541d818ea4b29cad6b7977edf",
+      "bytes": 3468,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/README.md"
+    },
+    {
+      "id": "closed_026",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json",
+      "sha256": "d855a59e8d566c59562ea01145d9cc18b6e60c7cd8079f909b0e5174e1c64a48",
+      "bytes": 23557,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/audit.json"
+    },
+    {
+      "id": "closed_027",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_results.csv",
+      "sha256": "55f41d10969b6ce86852cac7b011ab6b834025938e128524e1c722586c0946fd",
+      "bytes": 31816,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_results.csv"
+    },
+    {
+      "id": "closed_028",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/group_results.csv",
+      "sha256": "fcce4e927f7dbb5b297775928f3e39e4bdc6fe723b3f64e599e68bd7c6d30664",
+      "bytes": 890,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/group_results.csv"
+    },
+    {
+      "id": "closed_029",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_metrics.png",
+      "sha256": "0078fa1ea2d2a40cb664570431d47fcb0989f283a4cc5745755370b36e9120e0",
+      "bytes": 255940,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_metrics.png"
+    },
+    {
+      "id": "closed_030",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/hold_velocity_discrepancy.png",
+      "sha256": "b5393e1b197d36bea030dda235e511c59a5be3cae5a7140b86a7b6256c45cc76",
+      "bytes": 212858,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/hold_velocity_discrepancy.png"
+    },
+    {
+      "id": "closed_031",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01_closed_read_archive.json",
+      "sha256": "e5cc8b12c1fa56a68955528e62add15f7d76534185d13aaf851b657f5245d054",
+      "bytes": 36108,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_032",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/README.md",
+      "sha256": "6b620f26096be932967ecfc382496886ebd15e9d43396c4c208ba38bf4ce3a27",
+      "bytes": 2058,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/README.md"
+    },
+    {
+      "id": "closed_033",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json",
+      "sha256": "c6b2947e0c94a82a833373183a049968ada387fa73fe5f27785b79e8b4e46a12",
+      "bytes": 11912,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/audit.json"
+    },
+    {
+      "id": "closed_034",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+      "sha256": "6bc704b45c2410eec53c9e3e1c9fea99ac7025a20d7e98bd2908bf85b746d200",
+      "bytes": 2679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/action_comparison.csv"
+    },
+    {
+      "id": "closed_035",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png",
+      "sha256": "1b75b64ac6c7e09d0e6b7148843c6ea50086d0f461b91029ac10e1e4b2a22709",
+      "bytes": 128896,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/comparison.png"
+    },
+    {
+      "id": "closed_036",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_replay_02_closed_read_archive.json",
+      "sha256": "03e952006d6f5c0c69040ae6e80eab4a8b4bacf2f3846661fbcb7d1892eb29bd",
+      "bytes": 23139,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_replay_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_037",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_closed_read_archive.json",
+      "sha256": "dd913afbaa9ffd860fc0474027432512d26d02a07ac21bc25e6a434b9ba394bf",
+      "bytes": 36879,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_038",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md",
+      "sha256": "ee77ee8a52dfc24faa03ac5938997db1f240130a1af9fcb6e1d6538107c0295e",
+      "bytes": 4715,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md"
+    },
+    {
+      "id": "closed_039",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json",
+      "sha256": "4d4222655c3030f88172ae6068cf9de82f688654703ca6f972e42d4efcd01fdd",
+      "bytes": 25017,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json"
+    },
+    {
+      "id": "closed_040",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.md",
+      "sha256": "47f748803de4921567a47c8def531d84aa0233681a7f6e7bd7c961bedc69f97b",
+      "bytes": 4679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.md"
+    },
+    {
+      "id": "closed_041",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.json",
+      "sha256": "f784402bcceba90f9c335f3024b2f100d5b8d6cb8072bfaacc980b9de4adf7d6",
+      "bytes": 12066,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.json"
+    },
+    {
+      "id": "closed_042",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/README.md",
+      "sha256": "1e5cc68e994a352fa1a35af926d8fc8e3fcb2096b9002efd015f2ad13f3e5795",
+      "bytes": 4039,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/README.md"
+    },
+    {
+      "id": "closed_043",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json",
+      "sha256": "bac32ab5a2f8d04f2f1053148793d57f2062983aa95aefd96022dde127c76491",
+      "bytes": 28889,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json"
+    },
+    {
+      "id": "closed_044",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv",
+      "sha256": "adf896a62c16389fd2c8cf165642a2d9dd877ee6c8b50fc9dbb29abc1b97c929",
+      "bytes": 7376,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv"
+    },
+    {
+      "id": "closed_045",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/manifest.json",
+      "sha256": "6ed6c161994b62ddcaa2302b60ece6f12da174b67c5579f0747abab5a0392c2c",
+      "bytes": 26749,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/manifest.json"
+    },
+    {
+      "id": "closed_046",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_closed_read_archive.json",
+      "sha256": "7820ab51a4d4cf85853515d66cda63e4b2297d912ec3a0ea25274185492576b5",
+      "bytes": 21281,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_047",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_collision_offline.json",
+      "sha256": "ca553a5bda94ab61c314819c0da38496824b10a66ec699eb673cfbcdf0b716b2",
+      "bytes": 8534,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_01_collision_offline.json"
+    },
+    {
+      "id": "closed_048",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/README.md",
+      "sha256": "95b9d497e9db6df08fe4a5d81044c3461d86c5fa0aaa9ede8ce9a4ed5dca3f09",
+      "bytes": 4706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/README.md"
+    },
+    {
+      "id": "closed_049",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/summary.json",
+      "sha256": "7a658e7afa7aae500715d6d0c8edeb6dc2d7550616b1c92846b1482af55a2347",
+      "bytes": 9972,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/summary.json"
+    },
+    {
+      "id": "closed_050",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/action_sequence.csv",
+      "sha256": "72e79d3b7432a77576998f46f4bcfb00dc91eed4895d724020eb775d7524aa69",
+      "bytes": 4862,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/action_sequence.csv"
+    },
+    {
+      "id": "closed_051",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/manifest.json",
+      "sha256": "5860a7e702e119bb599b6df423cf73b54f4b74e8351452acc20ceb4350770aba",
+      "bytes": 11550,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/manifest.json"
+    },
+    {
+      "id": "closed_052",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg",
+      "sha256": "bf3add77fc8462477e8edaece113c30a173ef6c564c2302bf85b125f26f54045",
+      "bytes": 211256,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg"
+    },
+    {
+      "id": "closed_053",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/manifest.json",
+      "sha256": "febe1d6ccba3f8e26a78e359649eb42e6ef652dc3fe2d1e2e6ef5fb50961bf44",
+      "bytes": 1201,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_054",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/public_observation.json",
+      "sha256": "5137922a1a8e660a38b3906ecb6f0e0c11504222b996393e88ef030a72f8aa16",
+      "bytes": 5052,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_055",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_056",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_057",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/manifest.json",
+      "sha256": "058d3d3bcc341fc9e84db790201d41c5b39d73cc68582074d3ba957d04f13f50",
+      "bytes": 1203,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_058",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/public_observation.json",
+      "sha256": "4924e75fc14a5593685a711757cbd7c32b794e977a34f163ccc1e7676c8b7bc7",
+      "bytes": 4994,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_059",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg",
+      "sha256": "4fe307811518d38817239119f9ea8460560cda6b77759ae94bcf00c771e8291f",
+      "bytes": 12821,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_060",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "1b8f7f0c0e4f73bc58ac9fdc64a6c463cdc2611bf3ee8b52e0a92b6a9c86c8d8",
+      "bytes": 15684,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_061",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/README.md",
+      "sha256": "11f0c01136a9aaf3310d361afb547dafc34dd7eb80b169086a8aa9005d26e723",
+      "bytes": 2100,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/README.md"
+    },
+    {
+      "id": "closed_062",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/budget_usage_excerpt.json",
+      "sha256": "a814c3432a3b97c8f161147ef1e9604e1203faa5d6d86fed686fffcb4f2fa973",
+      "bytes": 6585,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/budget_usage_excerpt.json"
+    },
+    {
+      "id": "closed_063",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.csv",
+      "sha256": "6423f6fc93d3696113b2c6a88310df1449349d870fc0534f61d909076ec7e8be",
+      "bytes": 399,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.csv"
+    },
+    {
+      "id": "closed_064",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.json",
+      "sha256": "1c0f26640da92c46e03c9244d6bc1a2d49fe6dc674aa0515b02f639fa32ae3ff",
+      "bytes": 12109,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.json"
+    },
+    {
+      "id": "closed_065",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/manifest.json",
+      "sha256": "6ac358059de6f08aa26a55988e7ef575855b2c58b86871f329e87df75b3a85db",
+      "bytes": 2463,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/manifest.json"
+    },
+    {
+      "id": "closed_066",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/summary.json",
+      "sha256": "90e57773c734e9deb1fa18fb7b8d064316e3b1ca49c46d1a573ec3f4474f05f2",
+      "bytes": 5406,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/summary.json"
+    },
+    {
+      "id": "closed_067",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_068",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_069",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg",
+      "sha256": "ad0d7683196f90f029803e8cd24eec558a0541622ecd8f980681133b0f68be44",
+      "bytes": 9201,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_070",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg",
+      "sha256": "70408c3cce539c407775a907324d4802dea7205a97c07f13ed449e4cbb10d738",
+      "bytes": 11104,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_071",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg",
+      "sha256": "78bf3abdfbadd8c7c1a8ec6638a1387a7272cea8cdbfe1e11269a8a9301e05f1",
+      "bytes": 9556,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg"
+    },
+    {
+      "id": "closed_072",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg",
+      "sha256": "2a57feeb4f838fcb9fa92660446097476b97325ad0267d1ff53451383c8bbb39",
+      "bytes": 12195,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_073",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg",
+      "sha256": "afa840c65cc5d22ed7571e8a67a3a4510298d4c8a95aee285b66902bb812baad",
+      "bytes": 9187,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_074",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg",
+      "sha256": "bba1d6872e0406d970f4106e5c68ea0ab67a3c737c679b618773916998b195aa",
+      "bytes": 10361,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_075",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg",
+      "sha256": "384350d808bbe44966160323e37288d6308c0c7e5301e6c1c88d057bf48efa35",
+      "bytes": 8740,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg"
+    },
+    {
+      "id": "closed_076",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg",
+      "sha256": "0bc7ae6df2835bfa9e0efb27ecbadf79a7106f4dfc42a86d8a8bdafec282f71a",
+      "bytes": 10824,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_077",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg",
+      "sha256": "930671662cbe12091d140ddf7ff75373daf22007429bfd53822264d80d4edba6",
+      "bytes": 8889,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_078",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg",
+      "sha256": "31f175186156c6963afab10d0668979d6f3ff675182a9006c0858c2e8277b3b4",
+      "bytes": 10121,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "cpu590_summary",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/summary.json",
+      "sha256": "3a967b1ef628057c0f89adb983167bbc95bfb7f146da4d64e5995a75c0643691"
+    },
+    {
+      "id": "cpu590_contracts",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/contracts_result.json",
+      "sha256": "461f3405858396c135c2acaaf7401c2ef11cdeb162b4684ca2154ea8d475226b"
+    },
+    {
+      "id": "cpu590_readers",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/normal-readers_result.json",
+      "sha256": "816af5daf54a9fab200175c196ac924d35864b1987f382d1444bd4b950093cb5"
+    },
+    {
+      "id": "cpu590_versions",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/runtime_versions.json",
+      "sha256": "5a936b4bd6836d98780e592aefaf04b03f4243a7a495f567249bc51a5c88a271"
+    },
+    {
+      "id": "cpu590_ci",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/github_ci.json",
+      "sha256": "d9eb3e536f6970e06cdb89c3c4ec862129adb49ed83cc0751591f31826def472"
+    },
+    {
+      "id": "cpu590_protection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/protection_runtime_root_v2.json",
+      "sha256": "b5b8f66a3d12051d631a9f7460fd5a7ece5baf478ef027af2006969e588635c1"
+    },
+    {
+      "id": "cpu590_manifest",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/manifest.json",
+      "sha256": "6a53f4bc72b25046cd17b6957703b3bb521504852b9c1acffdb1acb67196e641"
+    },
+    {
+      "id": "closed_source_index",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/report_sources_closed.json",
+      "sha256": "0b68805a4d1b51f4c5537ce6d5ee250a8cfe762f8292e1e52392f0522a712d25"
+    },
+    {
+      "id": "gpt01_runtime_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/summary.json",
+      "sha256": "299763cc87fb5b0765ed043e764b540b897ea6f7ed338090ab0e02d297a410e6"
+    },
+    {
+      "id": "gpt01_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/controller.json",
+      "sha256": "fd1c709819e94162d84dd0a14e9684054a732d1c28796d5f8590cf57c6769275"
+    },
+    {
+      "id": "current_usage",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/usage.md",
+      "sha256": "6f1ebd000fa4d74bf7af01970bd6f2e9c434ab7c007c0c9164dd9f0a077d0f87"
+    },
+    {
+      "id": "hf_pinned_assets",
+      "scope": "release",
+      "url": "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067"
+    },
+    {
+      "id": "stage2_runtime",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage2_runtime_snapshot.json",
+      "sha256": "1750ea268a4b36ea8c244c8dce839ffe83eaee6a38641d0ce4b664b092a0c9d3",
+      "privileged_offline": false
+    },
+    {
+      "id": "runtime_freeze_ci",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_freeze_9e48016.json",
+      "sha256": "d4ec6fda50ce465c4db9a5429bb7bdba1c576b5ebe398dc5cfc4dd3392b8fe56",
+      "privileged_offline": false
+    },
+    {
+      "id": "grasp04_read",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_04_closed_read_archive.json",
+      "sha256": "eb6953a67bd43b7b817e92dca27bcac1c0e20bd205ae23e7d36184dd4cfb923d",
+      "privileged_offline": false
+    },
+    {
+      "id": "grasp04_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/grasp_transport_04_normal_reader.json",
+      "sha256": "f9d05c733f3348cd1a976b9045c639be4cf941da56d07f7adff26a4877c97953",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_read",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_closed_read_archive.json",
+      "sha256": "6a7ef4929c190cdea4e8706d1bf2ab85173c0acce4b4f7a940e9aba5439235ce",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/README.md",
+      "sha256": "2bdf133514028b0df8df38a05fdcf8bd3ce474b33c65e9e5308dccd65c0078f6",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/evidence.json",
+      "sha256": "64a45fcdc7a3e83e7da7ff19dd7ba43c259aa32f8365bab0dd3b3557aea46024",
+      "privileged_offline": true
+    },
+    {
+      "id": "sourcehold_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/early_grasp_extract.csv",
+      "sha256": "9b58aa35c8eefcc29e75ca7ee58161a9196a49a514baea4b7a97e9885bce4fb6",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_read",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_closed_read_archive.json",
+      "sha256": "c913bf26a460d89400c71cc9a2ce090db27de91fa95902da4d66a5519d1e9bee",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/README.md",
+      "sha256": "27546b81c83789c72ac72a67c7c7a465aada6e1e34dcd9401ca984a0370f1c60",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/evidence.json",
+      "sha256": "c31014e7af54beda7d32bb5a6527fcf34f34d042db58a450fd26939fb613aa09",
+      "privileged_offline": true
+    },
+    {
+      "id": "slow_forces_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/physics_force_opening.csv",
+      "sha256": "ccefdf1df641922f8a536ff07a45926b356ac859bd61bd65a5e35749f7529bcf",
+      "privileged_offline": true
+    },
+    {
+      "id": "slow_dispatch_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/control_dispatch.csv",
+      "sha256": "256c2c81f70e94dfd7afffbed93d46d13d1dc448b0621d8727ab88ff2f574468",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_slow_close_01_normal_reader.json",
+      "sha256": "0519b73f7dc9a4ca12cb65a8d54a6a7dc19357e67f9b3df86a954da7f41837a1",
+      "privileged_offline": false
+    },
+    {
+      "id": "hold_mechanism",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_hold_mechanism_review/review.json",
+      "sha256": "8cf8ebbe5fba99d732f5766e67b581aa356e7d93c55645b438a8d0ffab12a0f9",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_read",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_read_archive.json",
+      "sha256": "01c53d0354f919ac2c60668a5ecf3fc5c9085dc99320f6afde718c5482f4a252",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/README.md",
+      "sha256": "6934b43608f7421009a9f4c7d768b06b41c141608b2cebd001d4c7fef4689b7a",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_evidence",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/summary.json",
+      "sha256": "f3f616300c648e66327d21151a1684b966c788d13a1ede41db45a6b59b72b12b",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_curve",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/target_contact_release_curve.png",
+      "sha256": "775bfbe0aa002c5eda9541264a29d45c3f1b58b89e34fd551a304ea621bc6b92",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_curve_csv",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/target_contact_release_curve.csv",
+      "sha256": "cf4f2a96011613485581a691648ede76ee77dd8b6c3771bee7ecbd735b4738e0",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_input_cross",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/wire_inputs_cross_audit.json",
+      "sha256": "c90b87da775a5a36691871afab538ee790a9336d40039a0d9230f37e6a083728",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_public_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/README.md",
+      "sha256": "0ef2f4b4e3c972aee012dfe568dbf274adfb815241b9a560f4d5dbad2200c7b6",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_public_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/summary.json",
+      "sha256": "b366d546655670e36e6060c9e17b3724be14c32a0b4d35d70d934c10a88d0132",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_input_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/manifest.json",
+      "sha256": "ca8ee191f579aaec92b1ff44b8310c49eb50012e69e85b6962448f41acd398b3",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_actions",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/action_sequence.csv",
+      "sha256": "4388cfc6fa6db8d8e54d5eb8f12c97269fe353ec67bc886fc8d17077188c3c7d",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_wrist_27",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/observations/decision_000027/wrist_camera.jpg",
+      "sha256": "15b251ae4bb4dc90c625e7e42274af3b2f9ac7099cc87cdcc3b97557d62372b7",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_side_27",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/observations/decision_000027/side_camera.jpg",
+      "sha256": "4b9bb77b6a632a236966eb3c4b286cf01765ca332a48a64837eab531b3af8943",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_runtime_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/summary.json",
+      "sha256": "48a4c99ec67ac53ee2739d466a865a41ce6cca1f301b4a571a9603cc0693794a",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/controller.json",
+      "sha256": "68f2750b4df8b396fe04931ff643a6605c11dcb3ea98af1018b50e9c207da345",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_02_normal_reader.json",
+      "sha256": "b797faa4be8ce0c4cd913c34b774187b117fd3618a4a1accdab8bfbd6e146358",
+      "privileged_offline": false
+    },
+    {
+      "id": "preload_implementation",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/contact_preload_feedback_v2_implementation.md",
+      "sha256": "b45c6b23c3e229583f6e8c1e9607f16393b7ad68d7838f8542ccd38b2645b838",
+      "privileged_offline": false
+    },
+    {
+      "id": "force2_review_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/force_hold_v2_review_20261027/README_REVISED.md",
+      "sha256": "0ff5e5afb576074952a203a2b149d8e366d18026f5d09c3a4ee8db192cff28bc",
+      "privileged_offline": false
+    },
+    {
+      "id": "force2_review",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/force_hold_v2_review_20261027/review_revised_snapshot.json",
+      "sha256": "cc6d19de8eb6c23e37ec008c8e5285d738db9e44954fb13d864658ef4cf69c30",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/README.md",
+      "sha256": "f5c0c3f2f51209d840e6b69091957ebd2f40ffe70a01d7fbe862dd5ff3d3af03",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/summary.json",
+      "sha256": "b951a0167a6594c1351fe79aa913057effd0db7bf75603614057b11681655b7b",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_contracts",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/contracts_result.json",
+      "sha256": "ebc46e3030ed4133294b9117553110b7a22ab0592fbe05d1f58ec1bf0dae7845",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/normal-readers_result.json",
+      "sha256": "2db2fe231982248623e7935b2177ca8834dd6dec9b18e7a6f9ebd469541b9153",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_protection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/protection.json",
+      "sha256": "f83a74ecfb026f0c76119e400f7ad33fab1af3830dd4481a80706e47fabdfb15",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/README.md",
+      "sha256": "333f30f7dda0f4a5e8f973e9522a3b05fc54c0e4427af8b1950ea72f0828be71",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_cpu",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/context_structure_CPU.json",
+      "sha256": "2fd7d582b518cd392082d2cd645f03fd9bc411d41fba110339be634eea26aeb1",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_projection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/cost_projection.json",
+      "sha256": "6c8066a44c533b6d476e921f87b7a60f6848f68b256c97d9259a64cccf9ba622",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_cli",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/cli_dry_run.json",
+      "sha256": "ebd1577c7d84c51b3a04524386996159e6089e0e53ee3d67a13d6d3c86fd9cd3",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_profile",
+      "scope": "contract",
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json",
+      "sha256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba"
+    },
+    {
+      "id": "gpt03_evidence",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/summary.json",
+      "sha256": "4cdf2467fd53cda59357a52968f65db9ac146c4646e4ec33c2e72b531d7b90c2",
+      "bytes": 35369,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/summary.json"
+    },
+    {
+      "id": "gpt03_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/README.md",
+      "sha256": "afaec14ba8f071027a3c6aa539daf3a060cc4441425e7384125a9410a193913b",
+      "bytes": 5009,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/README.md"
+    },
+    {
+      "id": "gpt03_collision_csv",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/collision_window_physics.csv",
+      "sha256": "3f99aba86e1891f188ad1b23b17366aaeefd8b264db1d06a2cde7e00146c964f",
+      "bytes": 95959,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/collision_window_physics.csv"
+    },
+    {
+      "id": "gpt03_cross",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/wire_inputs_cross_audit.json",
+      "sha256": "7d5d993bc5e9fb7de95031c8bea3fced1db6c223691251fc062838e70e2c3801",
+      "bytes": 1460,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/wire_inputs_cross_audit.json"
+    },
+    {
+      "id": "gpt03_public_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/summary.json",
+      "sha256": "556c41283401612cab7e40079b66d093645447ce2c214f13f3baac83971927b2",
+      "bytes": 19319,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/summary.json"
+    },
+    {
+      "id": "gpt03_public_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/manifest.json",
+      "sha256": "f796a5544f9a0813a93f8992087f3a17b458f2259bcad534cca7f050bbf10cf8",
+      "bytes": 38022,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/manifest.json"
+    },
+    {
+      "id": "gpt03_actions",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/action_sequence.csv",
+      "sha256": "ee38d2d47fa9cf8a0ce3192ce96632f0e976ea71ca2940ccfb428d59905dfe55",
+      "bytes": 8920,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/action_sequence.csv"
+    },
+    {
+      "id": "gpt03_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/controller.json",
+      "sha256": "d36c4e884a0936d89fa3a053b044bb4d62c82d6c45cd2946e9cba5e79de1063a",
+      "bytes": 12394,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/controller.json"
+    },
+    {
+      "id": "gpt03_runtime",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/summary.json",
+      "sha256": "6fa3cd58fb2d5e5ddf0094de4770b12b46f4272384024277bf25be261ab97514",
+      "bytes": 1230,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/summary.json"
+    },
+    {
+      "id": "gpt03_side14",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/side_camera.jpg",
+      "sha256": "b1a064f1154284a1179810e057c7faa9e1775f5d3e2c4ff4810a5dfceeb3a039",
+      "bytes": 9080,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/side_camera.jpg"
+    },
+    {
+      "id": "gpt03_wrist14",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/wrist_camera.jpg",
+      "sha256": "6735038bf54be0f6c99cde65b6bbd55cedb145f2cddb707787bafe7522839f55",
+      "bytes": 10616,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/wrist_camera.jpg"
+    },
+    {
+      "id": "gpt03_read",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_read_archive.json",
+      "sha256": "d825925345a6424affae10feb9a4a323fcda2ceb237df98d1fd475e0db87889c",
+      "bytes": 23064,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_read_archive.json"
+    },
+    {
+      "id": "gpt03_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_03_normal_reader.json",
+      "sha256": "dad2f7f157a444228c6821c5800c08392616a76cb2b4e68785aff7b5166efdf4",
+      "bytes": 8635,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/gpt_debug_03_normal_reader.json"
+    },
+    {
+      "id": "preload_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_preload_audit/summary.json",
+      "sha256": "fac1a6f1cf5e084393ee553d8614abbc2e15c23aac8946c086e11ac801cb798f",
+      "bytes": 6766,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_preload_01_preload_audit/summary.json"
+    },
+    {
+      "id": "preload_causal",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_causal_timing_review/summary.json",
+      "sha256": "a3aed8b2e5f4c09fa85e181df7caef1f6828bca2e50701577b42536613f0725e",
+      "bytes": 18695,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_preload_01_causal_timing_review/summary.json"
+    },
+    {
+      "id": "preload_causal_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_causal_timing_review/README.md",
+      "sha256": "433033223535696e73bcba0a3d020b53f3d09e4fa54ceda0a0ebef95ec33ec57",
+      "bytes": 5876,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_preload_01_causal_timing_review/README.md"
+    },
+    {
+      "id": "preload_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_preload_01_normal_reader.json",
+      "sha256": "3831179eddcbc3236fb3bec0b1db849f90f8efacb602773896b67204206f8cf6",
+      "bytes": 8495,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_preload_01_normal_reader.json"
+    },
+    {
+      "id": "lateral_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_lateral_hold_01_preload_audit/summary.json",
+      "sha256": "1eb0f1d1f4ac03297476fc77fd2814adee1f484e94767161d8fdf9137e3bf7d3",
+      "bytes": 6819,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_lateral_hold_01_preload_audit/summary.json"
+    },
+    {
+      "id": "lateral_ab",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_lateral_hold_01_ab_audit/evidence.json",
+      "sha256": "b9674fbbfd22e9dbbd5f40eb584f103ba727a2caf5c2e7b8d3c9015961d21fe3",
+      "bytes": 9386,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_lateral_hold_01_ab_audit/evidence.json"
+    },
+    {
+      "id": "lateral_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_lateral_hold_01_ab_audit/README.md",
+      "sha256": "0395514f09d77cf32dad8ea6210e2b8a454bd7e983caccf8a9933d41ead0870e",
+      "bytes": 2932,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_lateral_hold_01_ab_audit/README.md"
+    },
+    {
+      "id": "lateral_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_lateral_hold_01_normal_reader.json",
+      "sha256": "e54ab0e2c4a0d68074b5773935ff62f51502f00b8c650cac8924647be89a647e",
+      "bytes": 8500,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_lateral_hold_01_normal_reader.json"
+    },
+    {
+      "id": "preorient_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preorient_01_preload_audit/summary.json",
+      "sha256": "d64f8eacd92870b8f10ae86783366ff6c93d7ab60c050e738d18431b95dea954",
+      "bytes": 6752,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_preorient_01_preload_audit/summary.json"
+    },
+    {
+      "id": "preorient_stage",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preorient_01_ab_audit/stage_pose_and_source_contract.json",
+      "sha256": "fd65e8637c9428afb15e35bc51f7dcf17f2a050a4ffb223fe0c4dffb6010a260",
+      "bytes": 13012,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_preorient_01_ab_audit/stage_pose_and_source_contract.json"
+    },
+    {
+      "id": "preorient_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preorient_01_ab_audit/README.md",
+      "sha256": "60b511c399a7f38caa8c4eb290008cdd67fe0d37182c98b28ca68a74abedb0e2",
+      "bytes": 3864,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_preorient_01_ab_audit/README.md"
+    },
+    {
+      "id": "preorient_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_preorient_01_normal_reader.json",
+      "sha256": "851a997ccaf42abc924a8bfa99fc67992c2b645082dfca9fd679300012dddf9f",
+      "bytes": 8497,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_preorient_01_normal_reader.json"
+    },
+    {
+      "id": "grasp04_evidence",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_04_preload_audit/summary.json",
+      "sha256": "8c3116cccd55faafaf5aa13e2a06f4d35ec3fdc513cc53bb0f6d64b7321bd71b",
+      "bytes": 5171,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_transport_04_preload_audit/summary.json"
+    },
+    {
+      "id": "public_calib4_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/public_robot_calibration_v4/README.md",
+      "sha256": "f0191ca0a45a34e0617c393db2fcc3e535056e58b42a270dcca5aadb28617a61",
+      "bytes": 2002,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/public_robot_calibration_v4/README.md"
+    },
+    {
+      "id": "public_calib4_cpu",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/public_robot_calibration_v4/cpu_validation.json",
+      "sha256": "95a70c8270284fe0b5254ca7b528dd07530fb04192e35576442a302a54ae9258",
+      "bytes": 2710,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/public_robot_calibration_v4/cpu_validation.json"
+    },
+    {
+      "id": "public_frame_audit",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/public_robot_geometry_20261027/audit.json",
+      "sha256": "38b05883e241f9af3ef8ed5dca3bae7ee79f9db71068cf7508e0410c4ac5f01e",
+      "bytes": 9310,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/public_robot_geometry_20261027/audit.json"
+    },
+    {
+      "id": "side_v3_md",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/README.md",
+      "sha256": "be4e6b15c65a0f63bada16cf4f467fe48daec38542bc930fe53a845214b073db",
+      "bytes": 1100,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/README.md"
+    },
+    {
+      "id": "side_v3_selection",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/selection.json",
+      "sha256": "f994827586ae13fbf11b176970c4a0e98aa6c6ead5ae982b81301222bf8789a5",
+      "bytes": 4335,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/selection.json"
+    },
+    {
+      "id": "side_v3_proof",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/process_exit.json",
+      "sha256": "15809ac5bddd2f7ff0ca6e3357a0f87a75836d4bfa5cb93b8eb3f9e1816174af",
+      "bytes": 913,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/process_exit.json"
+    },
+    {
+      "id": "side_v3_manifest",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/manifest.json",
+      "sha256": "b8ce366bc58b291ac10338c98c3ec0dac0b21673d87cc6adaaa42b2bf263ed10",
+      "bytes": 120093,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/manifest.json"
+    },
+    {
+      "id": "side_v3_after_lift",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/state_02/lower_wide/side_camera.png",
+      "sha256": "e0912d6a8c264ef43976f71676811d472634b0dc951248e050f5539630dab97d",
+      "bytes": 149785,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/state_02/lower_wide/side_camera.png"
+    },
+    {
+      "id": "side_v3_old_same_state",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/state_02/original/side_camera.png",
+      "sha256": "bc54635710e3716abda5b64c9efab6977c662a5efcd383b0e821b6c20deb47a6",
+      "bytes": 168846,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/state_02/original/side_camera.png"
+    },
+    {
+      "id": "runtime109e",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_freeze_109e637.json",
+      "sha256": "0c00c7c6524ed9f11c943fc49be5670504f7e96e889772a88fbb711957c5200c",
+      "bytes": 34199,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/runtime_freeze_109e637.json"
+    },
+    {
+      "id": "stage3_runtime",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage3_runtime_snapshot.json",
+      "sha256": "e15afb7f314864aafbe88748cee771c77cf329424d1522329474f604dae857b2",
+      "bytes": 10554,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "stage3_runtime_snapshot.json"
+    },
+    {
+      "id": "baseline_read",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_closed_read_archive.json",
+      "sha256": "178ee70ef4cf3de04e2bd123fa25e5304f39360e3726ccfcd77b7efb23a0f358",
+      "bytes": 39064,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_closed_read_archive.json"
+    },
+    {
+      "id": "baseline_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_baseline_close_01_normal_reader.json",
+      "sha256": "525c6a62b27d39e9910c860c2eab6f3a061f220a75cf6f94ac90c147f4b4c5a3",
+      "bytes": 8645,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_baseline_close_01_normal_reader.json"
+    },
+    {
+      "id": "baseline_ab",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_ab_audit/summary.json",
+      "sha256": "8f501f898ba622eee5df6045b8a81f955cee97d6c664f6e28dd322c6ca614312",
+      "bytes": 76536,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_ab_audit/summary.json"
+    },
+    {
+      "id": "baseline_ab_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_ab_audit/README.md",
+      "sha256": "344e383863e091049e5eb7aff95334095d56ab9c35e5d588a5a116498a424dad",
+      "bytes": 3369,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_ab_audit/README.md"
+    },
+    {
+      "id": "baseline_contract",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_ab_audit/mode_and_reference_contract.json",
+      "sha256": "c8d0c3d62f55bbfb1a40d25b60830821b3b8d2f831458c478c78fb82d9b12bbd",
+      "bytes": 31611,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_ab_audit/mode_and_reference_contract.json"
+    },
+    {
+      "id": "baseline_keep",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_preload_audit/summary.json",
+      "sha256": "00c6310b2db7694d558836920e1e70bb7ead1eee5f6fd1c7c8a641114e26e0fd",
+      "bytes": 6449,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_preload_audit/summary.json"
+    },
+    {
+      "id": "baseline_gate",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/summary.json",
+      "sha256": "db0c36aa2d572ff91fb1e51142896a7be14d53f688fcf8fbaa078987faeed410",
+      "bytes": 90750,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_support_gate_audit/summary.json"
+    },
+    {
+      "id": "baseline_gate_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/README.md",
+      "sha256": "433f74806033519e8cba46b10aaf8ea5140d3a16aa7200b1dc9d8e4a209b939d",
+      "bytes": 3880,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_support_gate_audit/README.md"
+    },
+    {
+      "id": "baseline_gate_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/baseline_support_release_control_boundaries.csv",
+      "sha256": "7b34d4a1f76e3bba3daeac7269c3034f0999800780e5ff649e1c044b6791ea42",
+      "bytes": 593708,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_support_gate_audit/baseline_support_release_control_boundaries.csv"
+    },
+    {
+      "id": "baseline_gate_fig",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/support_alignment_and_opening.png",
+      "sha256": "6131152f8d365e3d788c5df36c68c8740192d5821e428f344ce61ee55d7a8b22",
+      "bytes": 190166,
+      "role": "figure",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_baseline_close_01_support_gate_audit/support_alignment_and_opening.png"
+    },
+    {
+      "id": "v7_doc",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/teacher_support_transfer_v7.md",
+      "sha256": "b07a356d50946eb90060a1cbcf372ac4596a0a01f2f521fb3d1a723bb41a9cfc",
+      "bytes": 5184,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../teacher_support_transfer_v7.md"
+    },
+    {
+      "id": "v7_cpu",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_support_transfer_v7_final_20261027/contracts_result.json",
+      "sha256": "97bdfc3ca371e9e87ca438205c3da9948be00805efc8f68da6531baef20d434e",
+      "bytes": 135918,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_support_transfer_v7_final_20261027/contracts_result.json"
+    },
+    {
+      "id": "context4_high",
+      "scope": "contract",
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+      "sha256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+      "bytes": 1263,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../../../../config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json"
+    },
+    {
+      "id": "stage4_pending",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage4_pending_snapshot.json",
+      "sha256": "380f02d7744538e82c43609f7293cd136473b4aeea85dcfbb77162555c415e83",
+      "bytes": 4562,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "stage4_pending_snapshot.json"
+    },
+    {
+      "id": "gpt04_public",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/summary.json",
+      "sha256": "06ca51c6f84938ac5dfdf5a20b0620ac37ed0337bce4a55503357238ca1563cd",
+      "bytes": 36561,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/summary.json"
+    },
+    {
+      "id": "gpt04_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/manifest.json",
+      "sha256": "a02cd2fb32e4cf163cbc4132fd2c5e7e69bb0239ef11bb282087c6db42625453",
+      "bytes": 117343,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/manifest.json"
+    },
+    {
+      "id": "gpt04_public_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/README.md",
+      "sha256": "a93937e7757c88bb1ac88eac177d6043e32f12c4c7a16dc95121f7531d7b4841",
+      "bytes": 4550,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/README.md"
+    },
+    {
+      "id": "gpt04_actions",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/action_sequence.csv",
+      "sha256": "392275a4cefb75192c2be894bc2a9c0e15d2a7ea203bcd8c399ffb0bb3da24f3",
+      "bytes": 21254,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/action_sequence.csv"
+    },
+    {
+      "id": "gpt04_budget",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/budget_closed_snapshot.json",
+      "sha256": "90552b4e59e3c0aaf2b1c39a78869b91742b306d2c385560627ec1c1a8c58412",
+      "bytes": 616,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/budget_closed_snapshot.json"
+    },
+    {
+      "id": "gpt04_physics",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_evidence/summary.json",
+      "sha256": "0ed27af4bcd5d0ce0debba2b72e4bdde61995316be6684c5e4c2e551afbae245",
+      "bytes": 778758,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_04_closed_evidence/summary.json"
+    },
+    {
+      "id": "gpt04_early",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_evidence/early_axial_markers.json",
+      "sha256": "04d6f42a634a4caf2a73f7a2177ac870a2184ae5f25991ea36094eade8e3260e",
+      "bytes": 9592,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_04_closed_evidence/early_axial_markers.json"
+    },
+    {
+      "id": "gpt04_physics_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_evidence/README.md",
+      "sha256": "188fdc222e1715482f04e6bd4b88f13bbde9eeec3aa93131b337ece9d466986b",
+      "bytes": 5601,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_04_closed_evidence/README.md"
+    },
+    {
+      "id": "gpt04_cross",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_evidence/wire_inputs_cross_audit.json",
+      "sha256": "c5dc3df52b7707a2f1e7ae16d13eb827ea565fa05351413c9ae518b1f06960f2",
+      "bytes": 1465,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_closed_evidence/wire_inputs_cross_audit.json"
+    },
+    {
+      "id": "gpt04_read",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_read_archive.json",
+      "sha256": "41b6b2144ab46cde4ccaf0d7641b0661bc555a532fe26818b9cc16e58bc88082",
+      "bytes": 44170,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_closed_read_archive.json"
+    },
+    {
+      "id": "gpt04_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_04_normal_reader.json",
+      "sha256": "dcda13ac1605b38d1e1ce9a06f2d7c5a226026cdc43a9f26002d345d41c20a65",
+      "bytes": 8555,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/gpt_debug_04_normal_reader.json"
+    },
+    {
+      "id": "gpt04_wrist30",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/wrist_camera.jpg",
+      "sha256": "b93069c32a61c84c364310563742dfecba977c4d6a2c74727bc89496e838bfea",
+      "bytes": 14573,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/wrist_camera.jpg"
+    },
+    {
+      "id": "gpt04_side15",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000015/side_camera.jpg",
+      "sha256": "3513a01a44e054129b510fe9d1464f11dae23e55b6828d424b2e95e1210f5c50",
+      "bytes": 12821,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000015/side_camera.jpg"
+    },
+    {
+      "id": "gpt04_wrist50",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000050/wrist_camera.jpg",
+      "sha256": "951264140e4d2a657a3c1a2c0f93efbaf3f1ff8fef14693008e49127cbc95d7d",
+      "bytes": 13893,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000050/wrist_camera.jpg"
+    },
+    {
+      "id": "gpt04_fullvideo",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/gpt_debug_04_rim_obstruction_full.mp4",
+      "sha256": "9e718e434b4b63468e8034263ab7cf2ea3fd5a8b43d95ff55a100a895922821c",
+      "bytes": 20797188,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../media/gpt_debug_04_rim_obstruction_full.mp4"
+    },
+    {
+      "id": "gpt04_media_receipt",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/gpt_debug_04_rim_obstruction_full_media_receipt.json",
+      "sha256": "f43738e7488c5ad49c57fbe7c7b23986d2cc007d2088cbd58049aa0c1f76ff20",
+      "bytes": 118357,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../media/gpt_debug_04_rim_obstruction_full_media_receipt.json"
+    },
+    {
+      "id": "gpt03_fullvideo",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/gpt_debug_03_collision_full.mp4",
+      "sha256": "af8f4fc71fbcb01ba21ab0452e1c4395c02972cbbd2f327ce0f5dc69e5eaea8c",
+      "bytes": 6988110,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../media/gpt_debug_03_collision_full.mp4"
+    },
+    {
+      "id": "baseline_dualclip",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_dual_clip.mp4",
+      "sha256": "c402ae9067a4db7afbe658ee33c058afc65334b220e54914d36e2ef82886f456",
+      "bytes": 1138359,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../media/teacher_baseline_close_01_support_release_dual_clip.mp4"
+    },
+    {
+      "id": "baseline_wristclip",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_wrist_clip.mp4",
+      "sha256": "a1202398cc6d2144b277d20902f6a9494c26caf15b27efadd644bbd5d6adb87b",
+      "bytes": 739919,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../media/teacher_baseline_close_01_support_release_wrist_clip.mp4"
+    },
+    {
+      "id": "current_media_manifest",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/media_manifest.json",
+      "sha256": "ddfc14acffa52d158f9b8292af4af111bad80b5f6e138e0f5d4f8e5ffea8a468",
+      "bytes": 26859,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../media/media_manifest.json"
+    },
+    {
+      "id": "ci_0b",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_ci_actual_0b922ec.json",
+      "sha256": "86279fd86b7b893653cb830321bc31b129451a6de6ae14ef5bc5dd8834f48861",
+      "bytes": 1087,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/runtime_ci_actual_0b922ec.json"
+    },
+    {
+      "id": "ci_0b_raw",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_ci_actual_0b922ec_raw_response.json",
+      "sha256": "c636c784f5e49c7c45703597b68c193fcbe43cd880855a3083e3c28b33986fde",
+      "bytes": 13115,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/runtime_ci_actual_0b922ec_raw_response.json"
+    },
+    {
+      "id": "stage4_closed",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage4_closed_snapshot.json",
+      "sha256": "b37e0af3cb54e17b13c3d3bfab7026f2d1ddeb90616e99ce39e4d29f804f51c0",
+      "bytes": 740,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "stage4_closed_snapshot.json"
+    }
+  ],
+  "cohorts": [
+    {
+      "kind": "diagnostic",
+      "status": "closed",
+      "completed_count": 2,
+      "planned_count": 2,
+      "summary_source": "closed_033",
+      "note": "仅最终两条异常前缀；自由/细位移/抓持诊断另列，不是完整任务配额。"
+    },
+    {
+      "kind": "teacher",
+      "status": "incomplete",
+      "completed_count": 7,
+      "summary_source": "baseline_keep",
+      "note": "仅七个选定闭合teacher调试版本；baseline6原TASK_INCOMPLETE，其余六条原GRASP_SLIP。不是同冻结配置7次，不含pending v7。"
+    },
+    {
+      "kind": "gpt_debug",
+      "status": "incomplete",
+      "completed_count": 4,
+      "summary_source": "gpt04_public",
+      "note": "GPT01/02/03/04四个独立闭合debug均原任务false，版本不同不合并正式成功率。GPT04为有效任务失败，不是服务异常或物理无效。"
+    },
+    {
+      "kind": "gpt_formal",
+      "status": "not_run",
+      "completed_count": 0,
+      "planned_count": 5,
+      "note": "本版本正式五次尚未启动；需先获得最终冻结配置完整成功，再审费用、同SHA指纹与准入。旧版formal不合并。"
+    }
+  ],
+  "pages": [
+    {
+      "title": "当前结果与闭合范围",
+      "topics": [
+        "summary"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "截至本稿已完成独立审计的范围，baseline6实际走完连续装载动作，但原任务仍false TASK_INCOMPLETE；GPT04已完成51次真实视觉决策，在座口受阻并产生抓持相对滑移后主动finish，未释放或撤离，原false GRASP_SLIP。v7首条native成功已由运行方通报，独立全读及同源重复尚未收口，暂不并入此稿成绩。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "范围",
+            "实际状态",
+            "不能代替"
+          ],
+          "rows": [
+            [
+              "baseline6 teacher",
+              "124.267秒 7455转换，完整动作结束仍原fail",
+              "完整装载成功或成功BC"
+            ],
+            [
+              "此前teacher preload lateral preorient",
+              "三轮原false GRASP_SLIP",
+              "局部修正必然有效"
+            ],
+            [
+              "GPT debug01–04",
+              "四条真实闭合失败；04有效任务失败",
+              "正式成功率或模型服务失败"
+            ],
+            [
+              "teacher v7",
+              "首条native成功通知；独立审计与重复待补",
+              "已完成五次或成功数据发布"
+            ]
+          ],
+          "widths": [
+            3.5,
+            5.2,
+            3.8
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "GPT04实际runtime63410bf、baseline6实际runtime76936e10分别保留。v7提交0b922ec的CPU与CI已通过；其新物理结果将在关闭审计后另行纳入。器皿为10×10×67.5mm尺寸假设资产，原座未改，不是实物配套或真实标定结论。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "baseline_keep",
+              "label": "baseline6原评分与实际阶段"
+            },
+            {
+              "source": "baseline_gate",
+              "label": "缺失支撑精对准事件审计"
+            },
+            {
+              "source": "stage4_closed",
+              "label": "本稿闭合范围与待补项"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "连续执行修复与细位移诊断",
+      "topics": [
+        "executor"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "旧world小动作曾出现超过200mm实际位移。新执行器保持原请求目标，以局部连续IK、FK与关节步长界限预规划，再用实际跟踪和速度护栏执行。规划拒绝不推进时间，部分执行记录真实后继状态与时间，不自动重放。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "相同请求的异常动作",
+            "旧净位移 mm",
+            "新净位移 mm",
+            "新终点误差 µm"
+          ],
+          "rows": [
+            [
+              "world 0 40 0",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/0/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              "40.000868",
+              "1.527"
+            ],
+            [
+              "world 0 35 −19",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/1/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              "39.823226",
+              "2.402"
+            ]
+          ],
+          "widths": [
+            3.8,
+            2.8,
+            3.0,
+            3.0
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "closed_035",
+          "caption": "两条原请求参数保持不变的异常前缀对照；终点误差与动态跟踪峰值分开。新动态峰值仍约0.367/0.251mm。",
+          "max_height_cm": 5.0
+        },
+        {
+          "type": "paragraph",
+          "text": "最终fixed_replay_02两集共7动作到达且真实退出0；首次fixed_replay_01关闭后GC退出139仍保留。另有72个自由探针及24个空爪细位移对照；100µm目标由0/24变24/24，B最大终点误差1.293µm、3秒整窗最大漂移11.529µm。它们不是持物接触成功，也不验证真实微米精度。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_034",
+              "label": "全部7动作CSV"
+            },
+            {
+              "source": "closed_026",
+              "label": "72自由探针"
+            },
+            {
+              "source": "closed_019",
+              "label": "24细位移A B原数据"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "首次接触闭合与有效抓持窗口",
+      "topics": [
+        "grasp",
+        "teacher_data"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "baseline6关闭了v3增加的近接触限速，首次接触前总开口速率由2mm/s恢复20mm/s；首次接触freeze、持续窗口、失触后2mm/s、force-hold v2、8N上限和材料参数未改。实际首双侧接触提前，冻结目标由10.401166mm变为9.666667mm。这是轨迹导致的实际指力变化，不能写成提高了effort cap或摩擦。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "实际闭合对照",
+            "原抓持窗口结果",
+            "完整任务"
+          ],
+          "rows": [
+            [
+              "preorient01 v5",
+              "杯底漂移1.541mm，GRASP_SLIP",
+              "false，来源未清"
+            ],
+            [
+              "baseline6 v6",
+              "19.512µm / 0.021412°，grasp true",
+              "false TASK_INCOMPLETE"
+            ],
+            [
+              "grasp04 generic短前缀",
+              "原峰值2.698µm，grasp true",
+              "false，诊断非完整任务"
+            ]
+          ],
+          "widths": [
+            3.8,
+            5.0,
+            3.9
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "baseline6参考在提取前0.770833秒建立，抓持、来源槽清空和搬运均通过；未触发额外预载反馈或release-slew，确有普通显式开爪。grasp04则在首lift后70.833ms才形成参考；参考前约0.31°杯转和约267µm变化不能追溯改写原评分，也不能当作和teacher等价的全前缀无摇摆。"
+        },
+        {
+          "type": "paragraph",
+          "text": "preload、固定XY、预对准三轮局部对照均未通过，历史标签保留。baseline6支持继续研究闭合接触轨迹，但单次配对尚不足以说明所有失败的物理根因，或推导真实夹持精度与泛化成功率。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "baseline_ab_md",
+              "label": "闭合模式和七组配置保护"
+            },
+            {
+              "source": "baseline_contract",
+              "label": "真实命令与参考契约"
+            },
+            {
+              "source": "baseline_keep",
+              "label": "全部五项指标复算"
+            },
+            {
+              "source": "preload_causal_md",
+              "label": "grasp04晚参考起算限制"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "真实支撑与精对准未同时成立",
+      "topics": [
+        "teacher_data",
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "baseline6不是force为0就直接开爪。107.608333秒先满足几何到位和精对准，但底力为0；107.616667秒明确进入支持卸载探测。110.145833秒实际底部支撑形成，此时XY约188.527µm、tilt0.200089°；110.616667秒OPEN前已有113个supported+inside样本，但XY仍187.961µm，大于原100µm。"
+        },
+        {
+          "type": "figure",
+          "source": "baseline_gate_fig",
+          "caption": "已关闭记录的事后支撑与开爪审计。力、深度、位置和时间仅供独立诊断，不送GPT。实际有支撑，并不等于所有独立装载条件并发成立。",
+          "max_height_cm": 5.3
+        },
+        {
+          "type": "paragraph",
+          "text": "required events唯一缺项为correct_target_supported；独立脱指首次在OPEN之后，撤离后原3秒窗口确实stable true。teacher02与sourcehold历史也曾完成实际动作且末窗稳定，但OPEN时XY分别169.516/212.948µm，并缺同一支撑事件；旧GRASP_SLIP标签不被新发现改写。"
+        },
+        {
+          "type": "paragraph",
+          "text": "v7仅在SUPPORT_TRANSFER沿用parent每tick20µm XY/0.1°姿态反馈；仅连续两帧满足同scorer对齐预算时推进原3秒卸载clock，否则暂停逻辑schedule。真实quiet/global时钟与>10秒watchdog保留，OPEN还需同帧原支撑predicate。深度、inside及任务标签仍由原scorer独立判定；generic已下发目标可能继续追赶，实际卸载不能由逻辑暂停推断。"
+        },
+        {
+          "type": "paragraph",
+          "text": "v7 focused127、完整CPU578（11依赖skip）及对应CI已通过。首条运行已原生关闭并通报成功，但独立全读和同源后续仍在审计/执行，故本稿不据通知扩充已审计cohort；100µm、0.15°、0.2°与原评分门槛不变。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "baseline_gate_md",
+              "label": "完整支撑与脱指解释"
+            },
+            {
+              "source": "baseline_gate_csv",
+              "label": "支撑开爪控制边界CSV"
+            },
+            {
+              "source": "v7_doc",
+              "label": "v7作用范围与限制"
+            },
+            {
+              "source": "v7_cpu",
+              "label": "实际CPU结果"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "GPT04真实视觉执行与座口受阻",
+      "topics": [
+        "gpt",
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "调试",
+            "真实结果",
+            "关键区分"
+          ],
+          "rows": [
+            [
+              "GPT01",
+              "安全碰撞，24.833秒",
+              "hand碰SourceMesh2"
+            ],
+            [
+              "GPT02",
+              "几何安全失败，59.867秒",
+              "座口受阻后继续下压"
+            ],
+            [
+              "GPT03",
+              "安全碰撞，29.667秒",
+              "leftfinger碰SourceMesh2"
+            ],
+            [
+              "GPT04",
+              "GRASP_SLIP，114.717秒",
+              "无机器人禁碰；未释放或撤离"
+            ]
+          ],
+          "widths": [
+            2.0,
+            4.9,
+            5.2
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "gpt04_wrist30",
+          "caption": "GPT04 decision30实际发送的完整腕视JPEG，640×480 q60/high；原帧未裁切。座边可见不能直接确认底部承托或三维装载深度。",
+          "max_height_cm": 4.3
+        },
+        {
+          "type": "paragraph",
+          "text": "51个公开观测和102张exact JPEG逐字节核验，side v3、wrist v2、prompt v4和context4_640high均为实际输入。50次动作全部accepted、TCP target reached，累计6882控制tick/114.7秒动作；TCP到达并不证明器皿同步下降。51次返回model字段均为请求的gpt-6-astra，未验证上游实现身份。"
+        },
+        {
+          "type": "paragraph",
+          "text": "事后独立记录显示71.675秒首先出现座口特征的正冲量；71.891667秒首次超过200µm相对位移，近似轴向上滑。全程未记录分类座底支撑≥0.1N。后续TCP继续下降造成更大相对运动，末尾才在同9mm开口下降effort至0.5N并finish，不能把滑移归因于最后卸载。"
+        },
+        {
+          "type": "paragraph",
+          "text": "模型最终表示可见长度不能证明名义深度或底部支持，拒绝释放。原task false、record/integrity/physics true、BC false；post-retreat unavailable，稳定值null。保存全部实际公开JSON/JPEG、静态prompt/schema及公开工具回执，不等于完整HTTPbody、完整memory response groups或私有reasoning。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt04_fullvideo",
+              "label": "GPT04同一次连续全录像 原失败"
+            },
+            {
+              "source": "gpt04_actions",
+              "label": "51决策与真实动作CSV"
+            },
+            {
+              "source": "gpt04_public_md",
+              "label": "全部公开输入与保存范围"
+            },
+            {
+              "source": "gpt04_early",
+              "label": "正冲量与早期轴向滑移诊断"
+            },
+            {
+              "source": "gpt03_fullvideo",
+              "label": "GPT03历史不同碰撞全录像"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "数据读取与共享预算",
+      "topics": [
+        "teacher_data",
+        "gpt"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "GPT04实际6882转换、闭合H5全读及正常failure ACT/DP读取通过；success过滤拒绝。全部公开输入和回执与原输出交叉SHA一致。baseline6正常failure batch也通过，但其完整动作和末窗稳定不能补缺失事件。本轮未训练。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "固定截止范围",
+            "实际数量或成本"
+          ],
+          "rows": [
+            [
+              "GPT04本集",
+              "51请求；375584输入/8383输出token；估算$4.174990"
+            ],
+            [
+              "GPT04闭合共享前缀",
+              "209请求；总占用$16.006522"
+            ],
+            [
+              "其中已知usage",
+              "202请求；估算$15.303832"
+            ],
+            [
+              "未知usage保守预留",
+              "7请求；$0.702690"
+            ],
+            [
+              "原$30限制剩余",
+              "按该快照$13.993478，并非实际账单余额"
+            ]
+          ],
+          "widths": [
+            4.0,
+            8.0
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "此为GPT04闭合时不可变前缀快照，后续账本可能增长；已知估算和未知usage预留分列，不把timeout按零成本计。全部旧请求继续共用$30/1500请求硬限，不因版本、重跑或新profile清账。"
+        },
+        {
+          "type": "paragraph",
+          "text": "七个已选定teacher闭合调试版本原false、四个不同版本GPT debug原false；不能当同冻结配置成功率。v7新native结果与后续重复待独立审计纳入；本版本GPT正式五次仍未启动。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt04_reader",
+              "label": "正常failure batch读取证据"
+            },
+            {
+              "source": "gpt04_read",
+              "label": "闭合全读与原标签保护"
+            },
+            {
+              "source": "gpt04_budget",
+              "label": "请求usage与保守预留快照"
+            },
+            {
+              "source": "gpt04_cross",
+              "label": "全部公开输入交叉SHA"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "发布复现与下一步验收",
+      "topics": [
+        "release"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "长期分支codex/labsim。GPT04真实runtime63410bf、baseline6真实runtime76936e10；v7提交0b922ec已推送且对应官方CPU CI success。各实际运行版本单列，不能把当前开发HEAD或CI当成历史运行的执行版本，或把CPU通过当物理通过。"
+        },
+        {
+          "type": "code",
+          "language": "bash",
+          "text": "LABSIM_POLICY_DIR=config/lab_cuvette_loading/Project_v1_1/policies\n./labsim eval --project-version Project_v1_1 --scene standard \\\n  --backend gpt6 --episodes 1 --max-calls 160 --headless \\\n  --provider-config \"$LABSIM_POLICY_DIR/cubence_gpt6_context4_640high.json\" \\\n  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \\\n  --output outputs/lab_cuvette_loading/Project_v1_1/gpt_NEW"
+        },
+        {
+          "type": "paragraph",
+          "text": "该命令仅为显式后续入口，本草稿没有执行。保持现有凭据、本账本、独立新输出及单GPU顺序运行。正式回归须先完整成功并冻结实际代码/配置/资产/相机/工具/评分指纹，再按条件开展；新失败保留，不调阈值制造通过。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "待补收口",
+            "当前状态"
+          ],
+          "rows": [
+            [
+              "GPT04闭合与公开输入",
+              "已全量核验51公开观测/102 JPEG；原失败/正常reader完整"
+            ],
+            [
+              "v7 GUI teacher与同源重复",
+              "首条native成功通报；独立审计与重复待补，不读active"
+            ],
+            [
+              "完整成功数据与HF样例",
+              "最终独立资格、冻结版本及可读性待收口"
+            ],
+            [
+              "最终报告与≤80MB阅读包",
+              "本稿仅输入校验与allowlist规划，不author或制作包"
+            ]
+          ],
+          "widths": [
+            5.0,
+            7.0
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "current_usage",
+              "label": "现有使用入口"
+            },
+            {
+              "source": "v7_cpu",
+              "label": "CPU软件范围"
+            },
+            {
+              "source": "hf_pinned_assets",
+              "label": "既有固定HF资产pin"
+            },
+            {
+              "source": "ci_0b",
+              "label": "0b922ec实际官方CI回执"
+            },
+            {
+              "source": "baseline_dualclip",
+              "label": "baseline6支撑至撤离局部片段 原失败"
+            },
+            {
+              "source": "baseline_wristclip",
+              "label": "baseline6腕视局部片段 原失败"
+            },
+            {
+              "source": "gpt04_media_receipt",
+              "label": "GPT04完整主片解码与来源核验"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "finalized=false；仅草稿输入和实体SHA校验。stage4 pending及更早稿保留，未author、marker或渲染。七逻辑组不等于实际页数。",
+    "GPT04四个debug版本不合并成功率；实际taskfalse GRASP_SLIP、有效记录、未释放撤离，post-retreat unavailable/null不改。",
+    "v7首条native成功已通报，但独立全读和后续重复尚未纳入本稿；不读取active输出，不预写正式五次。",
+    "公开JSON/exact JPEG及静态prompt/schema、公开回执不是完整HTTP/memory/private reasoning；独立物体、接触与支撑诊断未送policy。",
+    "微位移和相对抓持小量不是真实精度。当前10mm器皿是尺寸假设，原座不变，实物校准未知。",
+    "正文视频链接已显式注册；两条baseline为局部片段而非完整成功。最终包须保留repo相对布局并检实体和总字节。"
+  ]
+}

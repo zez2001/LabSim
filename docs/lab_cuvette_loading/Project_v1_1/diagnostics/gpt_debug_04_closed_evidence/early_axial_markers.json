@@ -1,0 +1,304 @@
+{
+  "schema": "labsim.Project_v1_1.GPT04.early_axial_relative_motion.v1",
+  "analysis_date_local": "2026-10-27",
+  "reference_t_s": 14.1125,
+  "positive_axis_definition": "Vessel +Z axis at the original independent bilateral reference, expressed in hand coordinates. Positive means body/anchor moves upward along that axis relative to the hand.",
+  "anchor_definition": "Configured body point[0,0,.053], not measured contact centre; separates rotation lever arm from body-origin motion.",
+  "first_native_geometric_contact_event_including_zero_impulse": {
+    "physics_step": 17180,
+    "t": 71.58333333333333,
+    "phase": "POLICY",
+    "colliders": [
+      "/World/Cuvette/Collision/bottomn11",
+      "/World/Instrument/Collision/SourceMesh3"
+    ],
+    "type": "ContactEventType.CONTACT_FOUND",
+    "points": [
+      {
+        "position_m": [
+          0.20757044851779938,
+          -0.15461571514606476,
+          0.9140002727508545
+        ],
+        "normal_raw": [
+          -0.0004151827597524971,
+          0.0003227319975849241,
+          0.9999998807907104
+        ],
+        "impulse_raw_Ns": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "force_raw_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 9.848002082435414e-05,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      },
+      {
+        "position_m": [
+          0.20728875696659088,
+          -0.15461574494838715,
+          0.9140002727508545
+        ],
+        "normal_raw": [
+          -0.0004151827597524971,
+          0.0003227319975849241,
+          0.9999998807907104
+        ],
+        "impulse_raw_Ns": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "force_raw_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 9.82442288659513e-05,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      }
+    ],
+    "possible_duplicate_same_step": false,
+    "forbidden_robot_environment": false,
+    "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+  },
+  "first_threshold_samples": {
+    "body_origin_up_5e-05": {
+      "t_s": 71.75416666666666,
+      "physics_step": 17221,
+      "threshold_m": 5e-05,
+      "body_origin_signed_up_m": 5.41150458701294e-05,
+      "configured_anchor_signed_up_m": 5.411167495101512e-05,
+      "total_body_drift_m": 5.569461113211314e-05,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 1.9981451851759646e-06,
+      "floor_gap_m": 0.026998001854814824,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.043086434317299735,
+      "xy_error_target_m": [
+        -0.0009596716026107621,
+        0.00022475034898344898
+      ],
+      "finger_contact_N": [
+        1.6412713527679443,
+        1.566796064376831
+      ],
+      "bilateral_over_01N": true
+    },
+    "configured_anchor_up_5e-05": {
+      "t_s": 71.75416666666666,
+      "physics_step": 17221,
+      "threshold_m": 5e-05,
+      "body_origin_signed_up_m": 5.41150458701294e-05,
+      "configured_anchor_signed_up_m": 5.411167495101512e-05,
+      "total_body_drift_m": 5.569461113211314e-05,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 1.9981451851759646e-06,
+      "floor_gap_m": 0.026998001854814824,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.043086434317299735,
+      "xy_error_target_m": [
+        -0.0009596716026107621,
+        0.00022475034898344898
+      ],
+      "finger_contact_N": [
+        1.6412713527679443,
+        1.566796064376831
+      ],
+      "bilateral_over_01N": true
+    },
+    "body_origin_up_0.0001": {
+      "t_s": 71.79583333333333,
+      "physics_step": 17231,
+      "threshold_m": 0.0001,
+      "body_origin_signed_up_m": 0.00010102451150034985,
+      "configured_anchor_signed_up_m": 0.00010101746732104623,
+      "total_body_drift_m": 0.00010133275537748193,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 4.375781665986317e-06,
+      "floor_gap_m": 0.026995624218334013,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.054901579333317144,
+      "xy_error_target_m": [
+        -0.0009596716026107621,
+        0.0002252271861416521
+      ],
+      "finger_contact_N": [
+        1.7037456035614014,
+        1.5119482278823853
+      ],
+      "bilateral_over_01N": true
+    },
+    "configured_anchor_up_0.0001": {
+      "t_s": 71.79583333333333,
+      "physics_step": 17231,
+      "threshold_m": 0.0001,
+      "body_origin_signed_up_m": 0.00010102451150034985,
+      "configured_anchor_signed_up_m": 0.00010101746732104623,
+      "total_body_drift_m": 0.00010133275537748193,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 4.375781665986317e-06,
+      "floor_gap_m": 0.026995624218334013,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.054901579333317144,
+      "xy_error_target_m": [
+        -0.0009596716026107621,
+        0.0002252271861416521
+      ],
+      "finger_contact_N": [
+        1.7037456035614014,
+        1.5119482278823853
+      ],
+      "bilateral_over_01N": true
+    },
+    "body_origin_up_0.0002": {
+      "t_s": 71.89166666666667,
+      "physics_step": 17254,
+      "threshold_m": 0.0002,
+      "body_origin_signed_up_m": 0.00020140174599156407,
+      "configured_anchor_signed_up_m": 0.00020137060409655875,
+      "total_body_drift_m": 0.0002014908229399554,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 9.79729817926836e-06,
+      "floor_gap_m": 0.02699020270182073,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.08041793969570561,
+      "xy_error_target_m": [
+        -0.0009595225909988236,
+        0.0002277603835446062
+      ],
+      "finger_contact_N": [
+        1.7967610359191895,
+        1.4111700057983398
+      ],
+      "bilateral_over_01N": true
+    },
+    "configured_anchor_up_0.0002": {
+      "t_s": 71.89166666666667,
+      "physics_step": 17254,
+      "threshold_m": 0.0002,
+      "body_origin_signed_up_m": 0.00020140174599156407,
+      "configured_anchor_signed_up_m": 0.00020137060409655875,
+      "total_body_drift_m": 0.0002014908229399554,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 9.79729817926836e-06,
+      "floor_gap_m": 0.02699020270182073,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.08041793969570561,
+      "xy_error_target_m": [
+        -0.0009595225909988236,
+        0.0002277603835446062
+      ],
+      "finger_contact_N": [
+        1.7967610359191895,
+        1.4111700057983398
+      ],
+      "bilateral_over_01N": true
+    },
+    "body_origin_up_0.001": {
+      "t_s": 72.7,
+      "physics_step": 17448,
+      "threshold_m": 0.001,
+      "body_origin_signed_up_m": 0.0010010598666094072,
+      "configured_anchor_signed_up_m": 0.0010004671304937906,
+      "total_body_drift_m": 0.0010010696404256858,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 4.3656659490663025e-05,
+      "floor_gap_m": 0.026956343340509337,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.2802497348708991,
+      "xy_error_target_m": [
+        -0.0009575854400436234,
+        0.00023011476701323414
+      ],
+      "finger_contact_N": [
+        1.9663488864898682,
+        1.277693510055542
+      ],
+      "bilateral_over_01N": true
+    },
+    "configured_anchor_up_0.001": {
+      "t_s": 72.7,
+      "physics_step": 17448,
+      "threshold_m": 0.001,
+      "body_origin_signed_up_m": 0.0010010598666094072,
+      "configured_anchor_signed_up_m": 0.0010004671304937906,
+      "total_body_drift_m": 0.0010010696404256858,
+      "axis_in_reference_hand": [
+        0.0005096620161228466,
+        -9.625688751021542e-05,
+        -0.9999998654896117
+      ],
+      "depth_m": 4.3656659490663025e-05,
+      "floor_gap_m": 0.026956343340509337,
+      "floor_support_N": 0.0,
+      "tilt_deg": 0.2802497348708991,
+      "xy_error_target_m": [
+        -0.0009575854400436234,
+        0.00023011476701323414
+      ],
+      "finger_contact_N": [
+        1.9663488864898682,
+        1.277693510055542
+      ],
+      "bilateral_over_01N": true
+    }
+  },
+  "thresholds_are_diagnostic_not_new_scoring_gates": true,
+  "source_archives": "Original closed raw gzip already SHA/byte verified by full closed_physics audit; this pass reads only required prefix.",
+  "GPU_used": false,
+  "API_calls": 0,
+  "original_files_modified": false,
+  "first_geometric_contact_actual_state_from_closed_H5": {
+    "t": 71.58333333333333,
+    "physics_step": 17180,
+    "depth_m": -9.446929801351298e-05,
+    "target_bottom_gap_m": 0.027094469298013513,
+    "target_bottom_support_N": 0.0,
+    "target_region_contains_object": false,
+    "tilt_deg": 0.04775679349764359,
+    "xy_error_target_m": [
+      -0.000960073933962996,
+      0.00023640305703703785
+    ],
+    "finger_contact_N": [
+      1.6051075458526611,
+      1.6068971157073975
+    ],
+    "xy_error_norm_m": 0.00098875091102443,
+    "source_H5_row_0based": 4294
+  }
+}

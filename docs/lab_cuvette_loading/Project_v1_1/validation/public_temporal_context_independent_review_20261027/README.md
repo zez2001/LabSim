@@ -1,0 +1,13 @@
+# Temporal public visual context 独立CPU审查
+
+结论：未发现明确阻塞真实小规模验证的协议、生命周期或预算错误。独立31项测试通过；原作者77 focused和609 contracts/11 skip另有证据，不重复宣称物理或模型成功。
+
+未配置visual_context时仍传原client、P4 prompt和原五工具；新profile只显式增加该块。源文件变动会改变controller溯源哈希，不应把“默认行为保留”写成原controller字节不变。
+
+历史仅上一distinct obs的腕图与首次公开双侧>0.02N腕图，二者同源时合并；当前双图最后且未改。reset清记忆，重复ID不替换首次参考；总2–4图。接触参考可能是瞬时接触，不能担保有效抓持、支撑或三维位姿。
+
+扩充后的input_items只委托一次给原client，再按原token bound和共享ledger计费；kwargs、deadline和模型/动作限制保持。helper没有环境引用、teacher阶段、物体真值、自动动作或任务标签。
+
+完整response item组在实时内存中保留以兼容协议；落盘投影明确删除私有/未知provider项内容，仅保类型与SHA。有redaction时exact_full_input_reconstructable=false；无redaction时exact JPEG能重建相同canonical input_items。该哈希和重建范围是input_items，不是完整HTTPbody、headers或私有reasoning。
+
+每decision新目录和preflight错误均防覆盖；当前保存图像/JSON字节不符会在网络前拒绝。离线重建utility面向自身生成的可信manifest，不是任意外部manifest文件读取沙箱。未改runtime、未API/GPU、未读H5/raw或active episode。

@@ -1,0 +1,132 @@
+{
+  "schema": "labsim.Project_v1_1.stage4_pending_compact_plan.v1",
+  "planning_only": true,
+  "package_built": false,
+  "large_media_copied": false,
+  "media_transcoded": false,
+  "hard_limit_bytes": 80000000,
+  "units": "decimalMB, not compressed archive size",
+  "allocation": [
+    {
+      "category": "report",
+      "maximum_bytes": 2000000,
+      "purpose": "最终DOCX/MD/build与QA结论；当前不author"
+    },
+    {
+      "category": "small_results",
+      "maximum_bytes": 4000000,
+      "purpose": "本轮闭合原分数/CSV/JSON、reader、来源SHA；不复制原raw"
+    },
+    {
+      "category": "public_observations",
+      "maximum_bytes": 6000000,
+      "purpose": "GPT04闭合后全部实际公开JSON/exactJPEG/manifest与公开trace；优先于旧重复输入"
+    },
+    {
+      "category": "configuration_reproduction",
+      "maximum_bytes": 1000000,
+      "purpose": "实际最终配置/资产锁/版本/首读说明"
+    },
+    {
+      "category": "one_current_teacher_full",
+      "maximum_bytes": 25000000,
+      "purpose": "baseline6或后续v7二选一的完整连续主录像；不叠加两条近似124秒全程"
+    },
+    {
+      "category": "one_current_GPT_full",
+      "maximum_bytes": 25000000,
+      "purpose": "GPT04或后续最终关闭代表单次全程，按真实原判分"
+    },
+    {
+      "category": "GPT03_prior_failure_optional",
+      "maximum_bytes": 7000000,
+      "purpose": "仅新结果需要独特对照时纳原6.99MB失败录像；否则固定SHA链接"
+    },
+    {
+      "category": "baseline_support_clip_if_main_replaced",
+      "maximum_bytes": 4000000,
+      "purpose": "若v7替换teacher主录像，保留baseline真实支撑→OPEN片段；若主片已是baseline则省去"
+    },
+    {
+      "category": "necessary_closeups",
+      "maximum_bytes": 2000000,
+      "purpose": "来自同一次新运行的必要近景，不拼接成主尝试"
+    },
+    {
+      "category": "reserve",
+      "maximum_bytes": 4000000,
+      "purpose": "编码开销与新观测数量缓冲；总字节硬检80,000,000"
+    }
+  ],
+  "allocation_sum_bytes": 80000000,
+  "report_inputs": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.stage4.pending.draft.json",
+  "report_inputs_SHA256": "07f0502f48bafa3d930fea3a42b57b480366773c97dce4678dad0b0540fd9d04",
+  "prior_stage3_plan_SHA256_preserved": "6ca4f2bd4f77073f9b20340805f687ae279294ce03a6f128388b6412fc1c35da",
+  "baseline_closed_video": {
+    "source": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/dual_view.mp4",
+    "source_bytes": 23494551,
+    "source_SHA256": "0e33b2134dbbe2b12d15fdace37089e83e84eebbd54125097661499abbf55681",
+    "proof_SHA256": "c9b34d090384b51bba557509187abc19e316af022c4f8acd51a9da26d6bd47f7",
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "mpeg4",
+          "width": 1280,
+          "height": 480,
+          "r_frame_rate": "30/1",
+          "nb_frames": "3729"
+        }
+      ],
+      "format": {
+        "duration": "124.300000"
+      }
+    },
+    "original_task_success": false,
+    "failure_type": "TASK_INCOMPLETE",
+    "release_retreat_stability_observed": true,
+    "correct_target_supported": false,
+    "copied": false,
+    "full_decode_by_this_plan": false
+  },
+  "waiting_material": [
+    {
+      "role": "current_GPT_full_and_public_inputs",
+      "run": "gpt_debug_04",
+      "status": "active_pending_proof",
+      "episode_outputs_read": false,
+      "result": null
+    },
+    {
+      "role": "teacher_v7_optional_replacement",
+      "run": "teacher_support_align_01_and_followups",
+      "status": "queued_or_unclosed",
+      "episode_outputs_read": false,
+      "result": null
+    }
+  ],
+  "mandatory_small_evidence": [
+    "baseline6原独立结果/normal reader/闭合全读/支撑gate JSON CSV及图",
+    "baseline6抓持闭合AB与参考起算契约",
+    "GPT04真实关闭后所有实际公开观测及exact JPEG/静态controller/公开调用回执/trace，非完整HTTPbody或memory/private reasoning",
+    "新/旧teacher支撑逻辑范围、v7 CPU证据与新物理结果分别列出",
+    "实际runtime/model/prompt/camera/config/asset/scorer哈希与成功过滤资格"
+  ],
+  "history_policy": [
+    "不复制stage2/3旧包、teacher02/preload/lateral/preorient全套失败视频和旧报告，只用固定SHA来源。",
+    "GPT02座口受阻和GPT03整手碰壁以小表/图/固定来源引用；只有独特比较需要且预算允许，GPT03原全程可选纳入。",
+    "不打包H5/raw/gzip、资产全集、环境、训练权重或凭据。"
+  ],
+  "final_gates": [
+    "所有选中run必须真实proof+PIDgone并独立判分；pending不作false/not_run替换。",
+    "只选一条当前teacher和一条当前GPT主片，原连续范围从初态至实际终止，不拼接或隐藏失败。",
+    "若需presentation转码，明确派生并保存源SHA/frame/PTS/时长/关键事件核验；exactJPEG不转码。",
+    "最终本地report媒体/配置/CSV链接实体全在allowlist并保留相对布局；provenance原H5路径不承诺包内存在。",
+    "最终主片完整解码、逐关键阶段视觉QA、总未压缩字节≤80,000,000；本规划仅stat/hash/ffprobe。",
+    "最终author/marker/render由授权report agent在证据齐全后执行，本任务不执行。"
+  ],
+  "GPU_used": false,
+  "API_calls": 0,
+  "HDF5_raw_read": false,
+  "runtime_modified": false
+}

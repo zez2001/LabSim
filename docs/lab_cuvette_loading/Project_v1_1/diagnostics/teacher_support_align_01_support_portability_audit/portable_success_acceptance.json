@@ -1,0 +1,430 @@
+{
+  "schema": "labsim.Project_v1_1.first_full_success_portability.v1",
+  "normal_success_reader": {
+    "admitted": true,
+    "actual_ACT_DP_batch_read": {
+      "schema": "labsim.Project_v1_1.reader_check.v1",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_support_align_01/episode_0000/dataset/episode_0000.h5",
+      "scene_version": "Project_v1_1",
+      "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+      "recorded_policy_image_shape": [
+        3,
+        256,
+        256
+      ],
+      "public_sample_derivations": [],
+      "sample_filter": "success",
+      "reader_validation": [
+        {
+          "policy_type": "act",
+          "episodes": [
+            "7c136243-c3ff-4f4b-8a56-a085e15ba2ca"
+          ],
+          "scene_fingerprint": "12693a03acfbc85f85bbcd97db6c7230909541f9d789277035ec3eefe76100d0",
+          "batch": {
+            "obs": {
+              "side_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "wrist_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "agent_pose": {
+                "shape": [
+                  3,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              }
+            },
+            "action": {
+              "shape": [
+                3,
+                16,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            },
+            "is_pad": {
+              "shape": [
+                3,
+                16
+              ],
+              "dtype": "torch.bool",
+              "finite": true
+            }
+          },
+          "episode_checks": [
+            {
+              "episode_id": "7c136243-c3ff-4f4b-8a56-a085e15ba2ca",
+              "transitions": 7539,
+              "observation_action_time_aligned": true,
+              "action_shape": [
+                7539,
+                8
+              ],
+              "executed_command_shape": [
+                7539,
+                9
+              ],
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "asset_id": "cuvette_xy_1000",
+              "record_valid": true,
+              "task_success": true,
+              "condition_group": "natural"
+            }
+          ],
+          "training_or_optimizer_executed": false
+        },
+        {
+          "policy_type": "dp",
+          "episodes": [
+            "7c136243-c3ff-4f4b-8a56-a085e15ba2ca"
+          ],
+          "scene_fingerprint": "12693a03acfbc85f85bbcd97db6c7230909541f9d789277035ec3eefe76100d0",
+          "batch": {
+            "obs": {
+              "side_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "wrist_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "agent_pose": {
+                "shape": [
+                  3,
+                  3,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              }
+            },
+            "action": {
+              "shape": [
+                3,
+                16,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            }
+          },
+          "episode_checks": [
+            {
+              "episode_id": "7c136243-c3ff-4f4b-8a56-a085e15ba2ca",
+              "transitions": 7539,
+              "observation_action_time_aligned": true,
+              "action_shape": [
+                7539,
+                8
+              ],
+              "executed_command_shape": [
+                7539,
+                9
+              ],
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "asset_id": "cuvette_xy_1000",
+              "record_valid": true,
+              "task_success": true,
+              "condition_group": "natural"
+            }
+          ],
+          "training_or_optimizer_executed": false
+        }
+      ],
+      "source_labels_modified": false
+    },
+    "expected_admission": true,
+    "base_filter_reason": "accepted"
+  },
+  "normal_failure_filter": {
+    "admitted": false,
+    "rejection": "No eligible episodes from which to infer recorded image shape",
+    "expected_admission": false,
+    "base_filter_reason": "not_task_failure"
+  },
+  "H5_portability": {
+    "external_links": [],
+    "soft_links": [],
+    "external_dataset_storage": [],
+    "external_virtual_sources": [],
+    "unique_groups": 5,
+    "unique_dataset_objects": 40,
+    "no_external_HDF5_data_dependencies": true,
+    "metadata_source_paths_are_provenance_not_runtime_data_links": true,
+    "alternate_path_success_ACT_DP_read": {
+      "schema": "labsim.Project_v1_1.reader_check.v1",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_support_align_01/labsim-preload-success-reader-b9g3_cl9/portable_success.h5",
+      "scene_version": "Project_v1_1",
+      "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+      "recorded_policy_image_shape": [
+        3,
+        256,
+        256
+      ],
+      "public_sample_derivations": [],
+      "sample_filter": "success",
+      "reader_validation": [
+        {
+          "policy_type": "act",
+          "episodes": [
+            "7c136243-c3ff-4f4b-8a56-a085e15ba2ca"
+          ],
+          "scene_fingerprint": "12693a03acfbc85f85bbcd97db6c7230909541f9d789277035ec3eefe76100d0",
+          "batch": {
+            "obs": {
+              "side_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "wrist_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "agent_pose": {
+                "shape": [
+                  3,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              }
+            },
+            "action": {
+              "shape": [
+                3,
+                16,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            },
+            "is_pad": {
+              "shape": [
+                3,
+                16
+              ],
+              "dtype": "torch.bool",
+              "finite": true
+            }
+          },
+          "episode_checks": [
+            {
+              "episode_id": "7c136243-c3ff-4f4b-8a56-a085e15ba2ca",
+              "transitions": 7539,
+              "observation_action_time_aligned": true,
+              "action_shape": [
+                7539,
+                8
+              ],
+              "executed_command_shape": [
+                7539,
+                9
+              ],
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "asset_id": "cuvette_xy_1000",
+              "record_valid": true,
+              "task_success": true,
+              "condition_group": "natural"
+            }
+          ],
+          "training_or_optimizer_executed": false
+        },
+        {
+          "policy_type": "dp",
+          "episodes": [
+            "7c136243-c3ff-4f4b-8a56-a085e15ba2ca"
+          ],
+          "scene_fingerprint": "12693a03acfbc85f85bbcd97db6c7230909541f9d789277035ec3eefe76100d0",
+          "batch": {
+            "obs": {
+              "side_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "wrist_camera_rgb": {
+                "shape": [
+                  3,
+                  3,
+                  3,
+                  256,
+                  256
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              },
+              "agent_pose": {
+                "shape": [
+                  3,
+                  3,
+                  8
+                ],
+                "dtype": "torch.float32",
+                "finite": true
+              }
+            },
+            "action": {
+              "shape": [
+                3,
+                16,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            }
+          },
+          "episode_checks": [
+            {
+              "episode_id": "7c136243-c3ff-4f4b-8a56-a085e15ba2ca",
+              "transitions": 7539,
+              "observation_action_time_aligned": true,
+              "action_shape": [
+                7539,
+                8
+              ],
+              "executed_command_shape": [
+                7539,
+                9
+              ],
+              "source_slot_id": "A1",
+              "target_seat_id": "candidate_far_hinge",
+              "asset_id": "cuvette_xy_1000",
+              "record_valid": true,
+              "task_success": true,
+              "condition_group": "natural"
+            }
+          ],
+          "training_or_optimizer_executed": false
+        }
+      ],
+      "source_labels_modified": false
+    },
+    "alternate_path_method": "Temporary hard link to same read-only closed bytes; zero data duplication; removed after check, not a separate-host deployment test"
+  },
+  "source_H5_SHA256": "b346f1788eee027648dd5e483d6630d340d8be6d5b4af867d8cdda2ba1381a7c",
+  "metadata_action_semantics": {
+    "schema_version": "labsim.lab_cuvette_loading.Project_v1_1.v1",
+    "scene_version": "Project_v1_1",
+    "action_interface_version": "Project_v1_1.actions.v1",
+    "action_semantics": "absolute_7_arm_rad_and_symmetric_finger_metre",
+    "executed_action_semantics": "absolute_position_9d:7_arm_rad+left_and_right_finger_m",
+    "legacy_8d_mapping": "agent_pose/actions=[arm_q0..q6(rad),left_finger_q7(m)]; actual right_finger_q8 stored separately",
+    "observation_alignment": "obs_before_action; next_state_after_explicit_substeps",
+    "quaternion_order": "wxyz",
+    "control_hz": 60.0,
+    "physics_hz": 240.0,
+    "policy_observation_scope": "camera_data+proprioception+task language; privileged/* excluded",
+    "camera_legacy_mapping_json": "{\"camera_1_rgb\": \"side_camera_rgb\", \"camera_2_rgb\": \"wrist_camera_rgb\"}",
+    "record_integrity_source": "streaming_collector_checks_at_flush_close"
+  },
+  "action_storage": {
+    "actions_shape": [
+      7539,
+      8
+    ],
+    "full_command_q_shape": [
+      7539,
+      9
+    ],
+    "measured_joint_positions_shape": [
+      7539,
+      9
+    ],
+    "meaning": "actions: absolute arm joints q0..q6 radians and commanded left-finger metres; full executed symmetric left/right targets stored in control_auxiliary/command_q; measured pre/post states are separate datasets",
+    "symmetric_full_finger_targets": true,
+    "action_float32_projection_matches_command_q": true
+  },
+  "time_alignment": {
+    "obs_before_action_next_state_after_explicit_substeps": true,
+    "first_obs_s": 0.016666666666666666,
+    "last_next_obs_s": 125.66666666666667,
+    "transition_sum_s": 125.65,
+    "minimum_interval_s": 0.01666666666666572,
+    "maximum_interval_s": 0.01666666666667993,
+    "maximum_next_minus_before_minus_interval_error_s": 0.0,
+    "maximum_adjacent_timestamp_gap_s": 0.0,
+    "next_joint_state_equals_following_pre_joint_state_exactly": true,
+    "normal_control_hz": 60,
+    "physics_hz": 240,
+    "terminal_observation_stored": true,
+    "camera_recorded_sensor_clock_range": {
+      "side_camera_rgb": {
+        "first_s": 0.025000001303851604,
+        "last_s": 125.65833988692611
+      },
+      "wrist_camera_rgb": {
+        "first_s": 0.025000001303851604,
+        "last_s": 125.65833988692611
+      }
+    },
+    "sensor_clock_note": "Sensor timestamps and state timestamps remain independent recorded clocks; this check does not imply strict same-exposure pixel synchronization"
+  },
+  "source_H5_bytes": 1944284458,
+  "closed_full_read_audit": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_closed_read_archive.json",
+    "SHA256": "a8c8766d700cf9c337429ba379b34e0ceb34afb8c1b43612978e8baaa3e7a1ed"
+  },
+  "normal_reader_proof": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_support_align_01_normal_reader.json",
+    "SHA256": "8c10bd062577d111998a2fac2109656d3642978746fc0b5f4a55cb21e48adc44"
+  },
+  "training_optimizer_or_new_format_created": false,
+  "scope": "Actual normal ACT/DP batch + self-contained HDF5 dependency/alternate-path check; not a separate-host deployment or training result",
+  "GPU_used": false,
+  "API_calls": 0
+}

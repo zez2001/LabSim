@@ -1,0 +1,671 @@
+{
+  "schema": "labsim.Project_v1_1.current_closed_media.v1",
+  "created_at_UTC": "2026-10-26T21:53:42Z",
+  "originals_modified": false,
+  "GPU_used": false,
+  "API_calls": 0,
+  "H5_or_raw_read": false,
+  "entries": [
+    {
+      "id": "gpt_debug_03_collision_full",
+      "output": "gpt_debug_03_collision_full.mp4",
+      "output_bytes": 6988110,
+      "output_SHA256": "af8f4fc71fbcb01ba21ab0452e1c4395c02972cbbd2f327ce0f5dc69e5eaea8c",
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dual_view.mp4",
+      "source_SHA256": "af8f4fc71fbcb01ba21ab0452e1c4395c02972cbbd2f327ce0f5dc69e5eaea8c",
+      "transformation": "Exact byte-for-byte original complete single-episode dual-view video; no re-encoding, trimming, annotation or stitching",
+      "full_episode": true,
+      "local_clip": false,
+      "independent_task_success": false,
+      "failure_type": "SAFETY_COLLISION",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "record_valid": true,
+      "real_calibrated": false,
+      "process_proof": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/process_exit.json",
+        "SHA256": "c93d2cf263d20982c84033f0049821bdca9cb706159c93b5e3076259c08b2273",
+        "process_exited": true,
+        "pid": 398972,
+        "exit_code": 0,
+        "PID_gone_at_media_build": true,
+        "runtime_commit": "109e637bcb264458ffc231f4e052e60ff6764242"
+      },
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_time": "0.000000",
+            "duration": "29.700000",
+            "nb_frames": "891"
+          }
+        ],
+        "format": {
+          "start_time": "0.000000",
+          "duration": "29.700000"
+        }
+      },
+      "decode_QA": {
+        "full_decoded": true,
+        "actual_decoded_frame_count": 891,
+        "expected_frame_count": 891,
+        "decode_exit_code": 0,
+        "decode_stderr": "",
+        "decode_command": [
+          "ffmpeg",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-nostdin",
+          "-threads",
+          "2",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-i",
+          "<REPO>/docs/lab_cuvette_loading/Project_v1_1/media/gpt_debug_03_collision_full.mp4",
+          "-map",
+          "0:v:0",
+          "-f",
+          "null",
+          "-"
+        ]
+      },
+      "runtime_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "scene_fingerprint": "3c5077c5325f4149933af13c11ea9931efa300ebc72cbeed446bdabb9577fbe7",
+      "asset_id": "cuvette_xy_1000",
+      "asset_SHA256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "controller_sha256": "c4ae3ca7c750ae900b799bff3597c5869da74af06ccc55b12a853d8f39e0e361",
+      "provider": "cubence",
+      "requested_model": "gpt-6-astra",
+      "recorded_input_profile": "GPT03 historical prompt v3/context4/512px low and pre-side-v3 camera; not GPT04",
+      "source_result": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/result.json",
+        "SHA256": "4d7d2b824b63fdfa7feef1d31bbf91c186a83f4d0ac9bacfd1cb15833ce64aae"
+      }
+    },
+    {
+      "id": "teacher_baseline_close_01_support_release_dual_view",
+      "output": "teacher_baseline_close_01_support_release_dual_clip.mp4",
+      "output_bytes": 1138359,
+      "output_SHA256": "c402ae9067a4db7afbe658ee33c058afc65334b220e54914d36e2ef82886f456",
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/dual_view.mp4",
+      "source_SHA256": "0e33b2134dbbe2b12d15fdace37089e83e84eebbd54125097661499abbf55681",
+      "source_probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_time": "0.000000",
+            "duration": "124.300000",
+            "nb_frames": "3729"
+          }
+        ],
+        "format": {
+          "start_time": "0.000000",
+          "duration": "124.300000"
+        }
+      },
+      "output_probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_time": "0.000000",
+            "duration": "17.300000",
+            "nb_frames": "519"
+          }
+        ],
+        "format": {
+          "start_time": "0.000000",
+          "duration": "17.300000"
+        }
+      },
+      "transformation": "Lossy H.264 presentation clip from one original run; original resolution and selected frame order retained; added bottom textual result banner; no crop, geometry edits or stitching",
+      "full_episode": false,
+      "local_clip": true,
+      "independent_task_success": false,
+      "failure_type": "TASK_INCOMPLETE",
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "observed_substages": {
+        "grasp_success": true,
+        "transport_success": true,
+        "release_observed": true,
+        "retreat_observed": true,
+        "stable_after_retreat": true
+      },
+      "missing_required_event": "correct_target_supported",
+      "real_calibrated": false,
+      "process_proof": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/process_exit.json",
+        "SHA256": "c9b34d090384b51bba557509187abc19e316af022c4f8acd51a9da26d6bd47f7",
+        "process_exited": true,
+        "pid": 602515,
+        "exit_code": 0,
+        "PID_gone_at_media_build": true,
+        "runtime_commit": "76936e10a6abcbb34b4c82b4116ce15f363730fb"
+      },
+      "runtime_commit": "76936e10a6abcbb34b4c82b4116ce15f363730fb",
+      "scene_fingerprint": "77ba6c9091646a8447f3179fc8bcbed9734eb914198c12d5bb6c8d05e433caa3",
+      "asset_id": "cuvette_xy_1000",
+      "asset_SHA256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "video_timestamps_source": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/video_timestamps.json",
+        "SHA256": "280dfb9a79fcc194f00321be269dcef1ef5bcf6e0d653733bc4dd832d8822dd5",
+        "native_frame_count": 3729,
+        "terminal_frame_appended_at_finalize": true
+      },
+      "selected_source_frames": {
+        "start_inclusive": 3210,
+        "end_exclusive": 3729,
+        "count": 519,
+        "first_source_video_PTS_s": 107.0,
+        "last_source_video_PTS_s": 124.266667,
+        "first_simulation_s": 107.01666666666667,
+        "last_simulation_s": 124.26666666666667
+      },
+      "PTS_mapping_semantics": "clip frame j is source frame start+j; actual per-frame simulation times come from video_timestamps.json, not PTS. Final forced native frame has a shorter simulation interval but remains one 30fps video frame. Key event uses first sample at or after its physics/controller timestamp. Camera image-to-state exact render synchronization is not certified by this mapping.",
+      "events": [
+        {
+          "event": "teacher_phase_SUPPORT_TRANSFER",
+          "actual_event_simulation_s": 107.61666666666666,
+          "first_video_frame_at_or_after_event": 3228,
+          "sampled_frame_simulation_s": 107.61666666666666,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 107.6,
+          "clip_frame_index": 18,
+          "clip_PTS_s": 0.6
+        },
+        {
+          "event": "first_observed_floor_support",
+          "actual_event_simulation_s": 110.14583333333333,
+          "first_video_frame_at_or_after_event": 3304,
+          "sampled_frame_simulation_s": 110.15,
+          "event_to_next_video_sample_s": 0.004166666666677088,
+          "source_video_PTS_s": 110.133333,
+          "clip_frame_index": 94,
+          "clip_PTS_s": 3.133333
+        },
+        {
+          "event": "teacher_phase_OPEN",
+          "actual_event_simulation_s": 110.61666666666666,
+          "first_video_frame_at_or_after_event": 3318,
+          "sampled_frame_simulation_s": 110.61666666666666,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 110.6,
+          "clip_frame_index": 108,
+          "clip_PTS_s": 3.6
+        },
+        {
+          "event": "actual_fingers_open_and_detached",
+          "actual_event_simulation_s": 110.78333333333333,
+          "first_video_frame_at_or_after_event": 3323,
+          "sampled_frame_simulation_s": 110.78333333333333,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 110.766667,
+          "clip_frame_index": 113,
+          "clip_PTS_s": 3.766667
+        },
+        {
+          "event": "teacher_phase_RETREAT",
+          "actual_event_simulation_s": 112.88333333333334,
+          "first_video_frame_at_or_after_event": 3386,
+          "sampled_frame_simulation_s": 112.88333333333334,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 112.866667,
+          "clip_frame_index": 176,
+          "clip_PTS_s": 5.866667
+        },
+        {
+          "event": "actual_gripper_retreat",
+          "actual_event_simulation_s": 114.99583333333334,
+          "first_video_frame_at_or_after_event": 3450,
+          "sampled_frame_simulation_s": 115.01666666666667,
+          "event_to_next_video_sample_s": 0.020833333333328596,
+          "source_video_PTS_s": 115.0,
+          "clip_frame_index": 240,
+          "clip_PTS_s": 8.0
+        },
+        {
+          "event": "teacher_phase_VERIFY",
+          "actual_event_simulation_s": 121.15,
+          "first_video_frame_at_or_after_event": 3634,
+          "sampled_frame_simulation_s": 121.15,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 121.133333,
+          "clip_frame_index": 424,
+          "clip_PTS_s": 14.133333
+        },
+        {
+          "event": "post_retreat_stability_window_start",
+          "actual_event_simulation_s": 121.26666666666667,
+          "first_video_frame_at_or_after_event": 3638,
+          "sampled_frame_simulation_s": 121.28333333333333,
+          "event_to_next_video_sample_s": 0.01666666666666572,
+          "source_video_PTS_s": 121.266667,
+          "clip_frame_index": 428,
+          "clip_PTS_s": 14.266667
+        },
+        {
+          "event": "post_retreat_stability_window_end",
+          "actual_event_simulation_s": 124.26666666666667,
+          "first_video_frame_at_or_after_event": 3728,
+          "sampled_frame_simulation_s": 124.26666666666667,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 124.266667,
+          "clip_frame_index": 518,
+          "clip_PTS_s": 17.266667
+        }
+      ],
+      "encoding_command": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-threads",
+        "2",
+        "-i",
+        "<REPO>/outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/dual_view.mp4",
+        "-an",
+        "-vf",
+        "trim=start_frame=3210:end_frame=3729,setpts=PTS-STARTPTS,drawbox=x=0:y=ih-42:w=iw:h=42:color=black@0.85:t=fill,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='LOCAL CLIP - BASELINE TEACHER v6':fontcolor=white:fontsize=16:x=8:y=h-39,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='ORIGINAL TASK = FALSE / TASK_INCOMPLETE':fontcolor=white:fontsize=16:x=8:y=h-20",
+        "-vsync",
+        "0",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "23",
+        "-pix_fmt",
+        "yuv420p",
+        "-threads",
+        "2",
+        "-movflags",
+        "+faststart",
+        "<REPO>/docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_dual_clip.mp4"
+      ],
+      "source_support_audit": {
+        "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/summary.json",
+        "SHA256": "db0c36aa2d572ff91fb1e51142896a7be14d53f688fcf8fbaa078987faeed410"
+      },
+      "decode_QA": {
+        "full_decoded": true,
+        "actual_decoded_frame_count": 519,
+        "expected_frame_count": 519,
+        "decode_exit_code": 0,
+        "decode_stderr": "",
+        "decode_command": [
+          "ffmpeg",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-nostdin",
+          "-threads",
+          "2",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-i",
+          "<REPO>/docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_dual_clip.mp4",
+          "-map",
+          "0:v:0",
+          "-f",
+          "null",
+          "-"
+        ]
+      }
+    },
+    {
+      "id": "teacher_baseline_close_01_support_release_wrist_camera",
+      "output": "teacher_baseline_close_01_support_release_wrist_clip.mp4",
+      "output_bytes": 739919,
+      "output_SHA256": "a1202398cc6d2144b277d20902f6a9494c26caf15b27efadd644bbd5d6adb87b",
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/wrist_camera.mp4",
+      "source_SHA256": "ddc02419cbfb5c4b2741ead4c39806e01a077ec84375a2e2c032164d1eccfa57",
+      "source_probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 640,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_time": "0.000000",
+            "duration": "124.300000",
+            "nb_frames": "3729"
+          }
+        ],
+        "format": {
+          "start_time": "0.000000",
+          "duration": "124.300000"
+        }
+      },
+      "output_probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_time": "0.000000",
+            "duration": "17.300000",
+            "nb_frames": "519"
+          }
+        ],
+        "format": {
+          "start_time": "0.000000",
+          "duration": "17.300000"
+        }
+      },
+      "transformation": "Lossy H.264 presentation clip from one original run; original resolution and selected frame order retained; added bottom textual result banner; no crop, geometry edits or stitching",
+      "full_episode": false,
+      "local_clip": true,
+      "independent_task_success": false,
+      "failure_type": "TASK_INCOMPLETE",
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "observed_substages": {
+        "grasp_success": true,
+        "transport_success": true,
+        "release_observed": true,
+        "retreat_observed": true,
+        "stable_after_retreat": true
+      },
+      "missing_required_event": "correct_target_supported",
+      "real_calibrated": false,
+      "process_proof": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/process_exit.json",
+        "SHA256": "c9b34d090384b51bba557509187abc19e316af022c4f8acd51a9da26d6bd47f7",
+        "process_exited": true,
+        "pid": 602515,
+        "exit_code": 0,
+        "PID_gone_at_media_build": true,
+        "runtime_commit": "76936e10a6abcbb34b4c82b4116ce15f363730fb"
+      },
+      "runtime_commit": "76936e10a6abcbb34b4c82b4116ce15f363730fb",
+      "scene_fingerprint": "77ba6c9091646a8447f3179fc8bcbed9734eb914198c12d5bb6c8d05e433caa3",
+      "asset_id": "cuvette_xy_1000",
+      "asset_SHA256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "video_timestamps_source": {
+        "path": "outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/video_timestamps.json",
+        "SHA256": "280dfb9a79fcc194f00321be269dcef1ef5bcf6e0d653733bc4dd832d8822dd5",
+        "native_frame_count": 3729,
+        "terminal_frame_appended_at_finalize": true
+      },
+      "selected_source_frames": {
+        "start_inclusive": 3210,
+        "end_exclusive": 3729,
+        "count": 519,
+        "first_source_video_PTS_s": 107.0,
+        "last_source_video_PTS_s": 124.266667,
+        "first_simulation_s": 107.01666666666667,
+        "last_simulation_s": 124.26666666666667
+      },
+      "PTS_mapping_semantics": "clip frame j is source frame start+j; actual per-frame simulation times come from video_timestamps.json, not PTS. Final forced native frame has a shorter simulation interval but remains one 30fps video frame. Key event uses first sample at or after its physics/controller timestamp. Camera image-to-state exact render synchronization is not certified by this mapping.",
+      "events": [
+        {
+          "event": "teacher_phase_SUPPORT_TRANSFER",
+          "actual_event_simulation_s": 107.61666666666666,
+          "first_video_frame_at_or_after_event": 3228,
+          "sampled_frame_simulation_s": 107.61666666666666,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 107.6,
+          "clip_frame_index": 18,
+          "clip_PTS_s": 0.6
+        },
+        {
+          "event": "first_observed_floor_support",
+          "actual_event_simulation_s": 110.14583333333333,
+          "first_video_frame_at_or_after_event": 3304,
+          "sampled_frame_simulation_s": 110.15,
+          "event_to_next_video_sample_s": 0.004166666666677088,
+          "source_video_PTS_s": 110.133333,
+          "clip_frame_index": 94,
+          "clip_PTS_s": 3.133333
+        },
+        {
+          "event": "teacher_phase_OPEN",
+          "actual_event_simulation_s": 110.61666666666666,
+          "first_video_frame_at_or_after_event": 3318,
+          "sampled_frame_simulation_s": 110.61666666666666,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 110.6,
+          "clip_frame_index": 108,
+          "clip_PTS_s": 3.6
+        },
+        {
+          "event": "actual_fingers_open_and_detached",
+          "actual_event_simulation_s": 110.78333333333333,
+          "first_video_frame_at_or_after_event": 3323,
+          "sampled_frame_simulation_s": 110.78333333333333,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 110.766667,
+          "clip_frame_index": 113,
+          "clip_PTS_s": 3.766667
+        },
+        {
+          "event": "teacher_phase_RETREAT",
+          "actual_event_simulation_s": 112.88333333333334,
+          "first_video_frame_at_or_after_event": 3386,
+          "sampled_frame_simulation_s": 112.88333333333334,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 112.866667,
+          "clip_frame_index": 176,
+          "clip_PTS_s": 5.866667
+        },
+        {
+          "event": "actual_gripper_retreat",
+          "actual_event_simulation_s": 114.99583333333334,
+          "first_video_frame_at_or_after_event": 3450,
+          "sampled_frame_simulation_s": 115.01666666666667,
+          "event_to_next_video_sample_s": 0.020833333333328596,
+          "source_video_PTS_s": 115.0,
+          "clip_frame_index": 240,
+          "clip_PTS_s": 8.0
+        },
+        {
+          "event": "teacher_phase_VERIFY",
+          "actual_event_simulation_s": 121.15,
+          "first_video_frame_at_or_after_event": 3634,
+          "sampled_frame_simulation_s": 121.15,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 121.133333,
+          "clip_frame_index": 424,
+          "clip_PTS_s": 14.133333
+        },
+        {
+          "event": "post_retreat_stability_window_start",
+          "actual_event_simulation_s": 121.26666666666667,
+          "first_video_frame_at_or_after_event": 3638,
+          "sampled_frame_simulation_s": 121.28333333333333,
+          "event_to_next_video_sample_s": 0.01666666666666572,
+          "source_video_PTS_s": 121.266667,
+          "clip_frame_index": 428,
+          "clip_PTS_s": 14.266667
+        },
+        {
+          "event": "post_retreat_stability_window_end",
+          "actual_event_simulation_s": 124.26666666666667,
+          "first_video_frame_at_or_after_event": 3728,
+          "sampled_frame_simulation_s": 124.26666666666667,
+          "event_to_next_video_sample_s": 0.0,
+          "source_video_PTS_s": 124.266667,
+          "clip_frame_index": 518,
+          "clip_PTS_s": 17.266667
+        }
+      ],
+      "encoding_command": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-threads",
+        "2",
+        "-i",
+        "<REPO>/outputs/lab_cuvette_loading/Project_v1_1/teacher_baseline_close_01/episode_0000/wrist_camera.mp4",
+        "-an",
+        "-vf",
+        "trim=start_frame=3210:end_frame=3729,setpts=PTS-STARTPTS,drawbox=x=0:y=ih-42:w=iw:h=42:color=black@0.85:t=fill,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='LOCAL CLIP - BASELINE TEACHER v6':fontcolor=white:fontsize=16:x=8:y=h-39,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='ORIGINAL TASK = FALSE / TASK_INCOMPLETE':fontcolor=white:fontsize=16:x=8:y=h-20",
+        "-vsync",
+        "0",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "23",
+        "-pix_fmt",
+        "yuv420p",
+        "-threads",
+        "2",
+        "-movflags",
+        "+faststart",
+        "<REPO>/docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_wrist_clip.mp4"
+      ],
+      "source_support_audit": {
+        "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/summary.json",
+        "SHA256": "db0c36aa2d572ff91fb1e51142896a7be14d53f688fcf8fbaa078987faeed410"
+      },
+      "decode_QA": {
+        "full_decoded": true,
+        "actual_decoded_frame_count": 519,
+        "expected_frame_count": 519,
+        "decode_exit_code": 0,
+        "decode_stderr": "",
+        "decode_command": [
+          "ffmpeg",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-nostdin",
+          "-threads",
+          "2",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-i",
+          "<REPO>/docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_wrist_clip.mp4",
+          "-map",
+          "0:v:0",
+          "-f",
+          "null",
+          "-"
+        ]
+      }
+    }
+  ],
+  "keyframes": [
+    {
+      "path": "teacher_baseline_close_01_dual_first_observed_floor_support.png",
+      "SHA256": "d7adfb96030334ee41b8d201f2f3051b38964c69e672d6a1995bc854de22e556",
+      "bytes": 340769,
+      "source_clip": "teacher_baseline_close_01_support_release_dual_clip.mp4",
+      "event": "first_observed_floor_support",
+      "actual_event_simulation_s": 110.14583333333333,
+      "first_video_frame_at_or_after_event": 3304,
+      "sampled_frame_simulation_s": 110.15,
+      "event_to_next_video_sample_s": 0.004166666666677088,
+      "source_video_PTS_s": 110.133333,
+      "clip_frame_index": 94,
+      "clip_PTS_s": 3.133333
+    },
+    {
+      "path": "teacher_baseline_close_01_dual_actual_fingers_open_and_detached.png",
+      "SHA256": "6de56f5dc4a87ae20e4a49c1f79c289c55d8097516630ac485666ebc2c3c43a1",
+      "bytes": 340270,
+      "source_clip": "teacher_baseline_close_01_support_release_dual_clip.mp4",
+      "event": "actual_fingers_open_and_detached",
+      "actual_event_simulation_s": 110.78333333333333,
+      "first_video_frame_at_or_after_event": 3323,
+      "sampled_frame_simulation_s": 110.78333333333333,
+      "event_to_next_video_sample_s": 0.0,
+      "source_video_PTS_s": 110.766667,
+      "clip_frame_index": 113,
+      "clip_PTS_s": 3.766667
+    },
+    {
+      "path": "teacher_baseline_close_01_dual_actual_gripper_retreat.png",
+      "SHA256": "debe6b3af92b43e538acbc2acf2592755ca1e2c5b4c3f8fcfd6e410157e6b5c6",
+      "bytes": 341888,
+      "source_clip": "teacher_baseline_close_01_support_release_dual_clip.mp4",
+      "event": "actual_gripper_retreat",
+      "actual_event_simulation_s": 114.99583333333334,
+      "first_video_frame_at_or_after_event": 3450,
+      "sampled_frame_simulation_s": 115.01666666666667,
+      "event_to_next_video_sample_s": 0.020833333333328596,
+      "source_video_PTS_s": 115.0,
+      "clip_frame_index": 240,
+      "clip_PTS_s": 8.0
+    },
+    {
+      "path": "teacher_baseline_close_01_dual_post_retreat_stability_window_end.png",
+      "SHA256": "7da2d6cafca810fbe0c6c60d41ed7d67f1da99c1ba295138ee954f5a1fadac1d",
+      "bytes": 356697,
+      "source_clip": "teacher_baseline_close_01_support_release_dual_clip.mp4",
+      "event": "post_retreat_stability_window_end",
+      "actual_event_simulation_s": 124.26666666666667,
+      "first_video_frame_at_or_after_event": 3728,
+      "sampled_frame_simulation_s": 124.26666666666667,
+      "event_to_next_video_sample_s": 0.0,
+      "source_video_PTS_s": 124.266667,
+      "clip_frame_index": 518,
+      "clip_PTS_s": 17.266667
+    },
+    {
+      "path": "teacher_baseline_close_01_wrist_teacher_phase_OPEN.png",
+      "SHA256": "8296408ad6b1da8c3cf7803d0ff617a22e00e929c523a7a8df0f29ee00b02f65",
+      "bytes": 168273,
+      "source_clip": "teacher_baseline_close_01_support_release_wrist_clip.mp4",
+      "event": "teacher_phase_OPEN",
+      "actual_event_simulation_s": 110.61666666666666,
+      "first_video_frame_at_or_after_event": 3318,
+      "sampled_frame_simulation_s": 110.61666666666666,
+      "event_to_next_video_sample_s": 0.0,
+      "source_video_PTS_s": 110.6,
+      "clip_frame_index": 108,
+      "clip_PTS_s": 3.6
+    }
+  ],
+  "visual_QA": {
+    "status": "passed_keyframe_inspection",
+    "keyframe_count": 5,
+    "teacher_encoded_frames_inspected": [
+      "first_observed_floor_support",
+      "actual_fingers_open_and_detached",
+      "actual_gripper_retreat",
+      "post_retreat_stability_window_end",
+      "teacher_phase_OPEN (wrist)"
+    ],
+    "GPT_exact_full_video_frames_inspected": [
+      0,
+      890
+    ],
+    "checks": [
+      "bottom LOCAL CLIP / ORIGINAL TASK FALSE labels legible and do not obscure the cup or fingers",
+      "original dual-view time/phase text remains visible",
+      "source cup and finger opening visible at support/detachment",
+      "physical retreat visible at the mapped event",
+      "terminal VERIFY frame retained; moving wrist crops the cup at the left edge after retreat, fixed side remains in the dual view",
+      "no image synthesis, model regeneration, GT-driven crop or frame stitching"
+    ],
+    "scope": "All published videos fully decoded. Named keyframes visually inspected; not an all-frame human visual inspection and not a new physical run."
+  },
+  "media_build_sha256_list_excludes_manifest_self": true
+}
