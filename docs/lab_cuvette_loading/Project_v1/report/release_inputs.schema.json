@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project_v1 closed release evidence for the report builder",
+  "type": "object",
+  "required": [
+    "finalized",
+    "date",
+    "runtime_commit",
+    "formal_fingerprint",
+    "conclusion",
+    "teacher",
+    "controlled_failure",
+    "gpt_summary",
+    "gpt_formal",
+    "gpt_capabilities",
+    "gpt_classification",
+    "gpt_budget",
+    "clean_checkout",
+    "validation_summary",
+    "new_data",
+    "remaining",
+    "delivery_status",
+    "evidence"
+  ],
+  "properties": {
+    "finalized": {
+      "const": true,
+      "description": "Set only after every reported run is closed and all five formal GPT attempts have saved evidence."
+    },
+    "date": {
+      "type": "string"
+    },
+    "runtime_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "formal_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "conclusion": {
+      "type": "string"
+    },
+    "teacher": {
+      "$ref": "#/$defs/runGroup"
+    },
+    "controlled_failure": {
+      "$ref": "#/$defs/runGroup"
+    },
+    "gpt_summary": {
+      "$ref": "#/$defs/runGroup"
+    },
+    "gpt_pilots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gptRun"
+      }
+    },
+    "gpt_formal": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/gptRun"
+      }
+    },
+    "gpt_capabilities": {
+      "type": "string"
+    },
+    "gpt_classification": {
+      "type": "string",
+      "description": "Separate task outcomes, infrastructure/model/protocol failures, physics invalidity and budget ends. Preserve unknown task_success as unknown."
+    },
+    "gpt_budget": {
+      "type": "string",
+      "description": "Actual network attempts, usage and rate-based estimate, with conservative unknown-usage reservation separate from known usage cost; no billing claim."
+    },
+    "clean_checkout": {
+      "type": "string"
+    },
+    "validation_summary": {
+      "type": "string"
+    },
+    "new_data": {
+      "type": "string"
+    },
+    "remaining": {
+      "type": "string"
+    },
+    "delivery_status": {
+      "type": "string",
+      "description": "Only actual commit/push/CI status or an explicit pointer to the separately finalized release manifest; never predict a future SHA."
+    },
+    "poster": {
+      "type": "string"
+    },
+    "poster_caption": {
+      "type": "string"
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dependency"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dependency"
+      }
+    },
+    "teacher_runtime_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "gpt_freeze": {
+      "type": "string",
+      "description": "Exact saved model/prompt/tool/limits/scorer freeze and independent-process formal protocol; no parameter changes during formal attempts."
+    }
+  },
+  "$defs": {
+    "runGroup": {
+      "type": "object",
+      "required": [
+        "result",
+        "sim_seconds",
+        "wall_seconds",
+        "control_steps",
+        "note"
+      ],
+      "properties": {
+        "result": {
+          "type": "string"
+        },
+        "sim_seconds": {
+          "type": "string",
+          "description": "Indicate per-episode range or total explicitly."
+        },
+        "wall_seconds": {
+          "type": "string",
+          "description": "Indicate per-episode range or total explicitly; use episode result wall time, with process startup time distinguished."
+        },
+        "control_steps": {
+          "type": "string",
+          "description": "Actual control ticks, not model requests or generic tool calls."
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "gptRun": {
+      "type": "object",
+      "required": [
+        "requests",
+        "actions",
+        "sim_seconds",
+        "wall_seconds",
+        "outcome"
+      ],
+      "properties": {
+        "requests": {
+          "type": [
+            "integer",
+            "string"
+          ],
+          "description": "Actual network attempts including failed requests and retries."
+        },
+        "actions": {
+          "type": [
+            "integer",
+            "string"
+          ],
+          "description": "Actual executed generic actions. Identify observations, rejections and motion separately in outcome when needed."
+        },
+        "sim_seconds": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "wall_seconds": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "source_path": {
+          "type": "string",
+          "description": "Repository-relative source evidence; never a key-bearing raw log or local credential path."
+        },
+        "episode_id": {
+          "type": "string"
+        },
+        "task_success": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "record_valid": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "required": [
+        "label",
+        "path"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "description": "Existing repository-relative file. No absolute paths, parent traversal, symlinks or Git LFS pointers."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schema": "labsim.Project_v1.independent.v1",
+  "episode_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1",
+  "task_type": "loading",
+  "geometry_valid": true,
+  "task_success": false,
+  "workflow_success": false,
+  "full_success": false,
+  "native_pair_success": null,
+  "record_valid": true,
+  "record_valid_scope": "physics-state trace; collector additionally verifies action/sensor/time integrity",
+  "failure_type": "GRASP_SLIP",
+  "termination_reason": "POLICY_FINISH_REQUEST",
+  "eligible_for_success_bc": false,
+  "eligible_for_failure_analysis": true,
+  "real_calibrated": false,
+  "source_slot_cleared": true,
+  "grasp_success": false,
+  "transport_success": false,
+  "loading_sequence_observed": false,
+  "loading_candidate_sequence_observed": false,
+  "release_observed": false,
+  "retreat_observed": false,
+  "stable_after_retreat": null,
+  "post_retreat_window": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "actual_gripper_retreat_not_observed"
+  },
+  "terminal_window": {
+    "status": "complete",
+    "stable": true,
+    "required_duration_s": 3.0,
+    "measured_duration_s": 3.0,
+    "sample_count": 721,
+    "position_drift_m": 1.938583229669584e-07,
+    "orientation_change_deg": 9.797215345799486e-05,
+    "criteria": {
+      "position_stable": true,
+      "target_support": null,
+      "target_contains": null,
+      "native_overlap_within_limit": null,
+      "no_finger_contact": null
+    },
+    "start_t": 26.416666666666668,
+    "end_t": 29.416666666666668
+  },
+  "diagnostic_hold_window": {
+    "status": "not_applicable",
+    "stable": null
+  },
+  "grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 0.01455596254592037,
+    "maximum_orientation_drift_deg": 7.070901246154043,
+    "maximum_configured_grasp_anchor_drift_m": 0.014384316580720577,
+    "maximum_configured_grasp_anchor_axial_drift_m": 0.014260688301088755,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 0.002640859131087905,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "measured_grasp_segments": {
+    "static_grasp": {
+      "status": "measured",
+      "start_t": 23.545833333333334,
+      "end_t": 23.7375,
+      "sample_count": 47,
+      "reference_position_drift_m": 0.0036662134571719615,
+      "reference_orientation_drift_deg": 4.093093123878804,
+      "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+    },
+    "extraction": {
+      "status": "measured",
+      "start_t": 23.7375,
+      "end_t": 25.1375,
+      "sample_count": 337,
+      "reference_position_drift_m": 0.0022210067049056067,
+      "reference_orientation_drift_deg": 0.3754736226587079,
+      "boundary_definition": "Independent observed physical lift/source-clear/near-target events; teacher phase ignored"
+    },
+    "transport": {
+      "status": "unavailable",
+      "reference_position_drift_m": null,
+      "reference_orientation_drift_deg": null
+    }
+  },
+  "grasp_attempts": [],
+  "retry_count": 0,
+  "physics_quality_flags": [
+    "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+    "NATIVE_TARGET_OVERLAP_UNAVAILABLE",
+    "SOURCE_RACK_GEOMETRY_PENETRATION"
+  ],
+  "invalid_state_reasons": [],
+  "observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 23.545833333333334,
+      "physics_step": 5651,
+      "actual_force_N": [
+        0.12259755283594131,
+        0.09196335822343826
+      ]
+    },
+    "actual_lift_started": {
+      "t": 23.7375,
+      "physics_step": 5697,
+      "actual_lift_m": 0.0010733645771632272
+    },
+    "source_slot_cleared": {
+      "t": 25.1375,
+      "physics_step": 6033,
+      "actual_bottom_world_z_m": 0.7700340727286566,
+      "source_rim_world_z_m": 0.768
+    }
+  },
+  "physical_sample_count": 7061,
+  "simulation_duration_s": 29.416666666666668,
+  "stage_labels_used_as_success_proof": false,
+  "geometry_audit_fingerprint": "a44fbd2e9cd44bbbcd293ec599e92e00a5c49372de7ff461404df1216db47dec",
+  "asset_id": "cuvette_xy_1000",
+  "scene_version": "Project_v1",
+  "condition_group": "natural",
+  "variant_pair_success": false,
+  "original_12_5mm_native_pair_verdict_unchanged": true,
+  "acceptance_geometry_scope": "Declared input material geometry checks plus actual physical contact and motion, not calibrated cooked geometry or real accuracy",
+  "scorer_version": "Project_v1.independent.v1",
+  "simulation_seconds": 29.416666666666668,
+  "wall_seconds": 492.00037761201384,
+  "seed": 0,
+  "policy_id": "cubence_gpt6_astra",
+  "actual_control_steps": 1764,
+  "actual_physics_steps": 7060
+}

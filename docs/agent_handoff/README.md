@@ -6,7 +6,9 @@
 
 ## 选择文件
 
-当前默认[清单](package.json)是[项目交接清单](project_handoff/package.json)：根 README、开发规范、统一入口、CPU 工作流及开发接入证据。已有实验通过固定提交的 GitHub 链接引用。
+当前默认[清单](package.json)是 [Project_v1 本轮结果清单](Project_v1_current/package.json)：DOCX/Markdown 发布报告、同次连续 teacher / GPT 代表录像、正式评测与读取证据、公开资产及样例校验、复现配置。结果包保留 `Project_v1/report` 与 `media/assets/data/validation/evaluation/policy_evidence` 的相对层级，使 DOCX 的本地媒体链接有效。先读 [本轮说明](Project_v1_current/00_给Agent阅读说明.md)。
+
+纯项目交接的旧配置仍保留在 [project_handoff/package.json](project_handoff/package.json)，历史实验通过固定提交的 GitHub 链接引用。
 
 清单支持整个目录和独立文件，可组合使用：
 
@@ -33,7 +35,7 @@ Markdown里已选中的文件链接会改为包内相对链接；未复制的仓
 先验证改动、提交推送并核对远端SHA，再在工程根目录运行：
 
 ```bash
-python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_项目开发交接包_NEW
+python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_Project_v1_本轮结果阅读包_NEW
 ```
 
 输出目录必须尚不存在。实验资料通常控制在20MiB内；纯工程整理应更小。不要为接近体积预算而复制不相关历史媒体。

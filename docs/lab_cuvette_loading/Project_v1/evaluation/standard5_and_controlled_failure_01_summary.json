@@ -1,0 +1,319 @@
+{
+  "schema": "labsim.Project_v1.actual_closed_validation_summary.v1",
+  "audited_at_utc": "2026-10-26T12:19:00.047065+00:00",
+  "source_state_sha256": "7ba55d661a52cca4477ce28e53be24034ffce4cd7f2592997edc7c5a8a75d03e",
+  "state_finished_verified_before_H5": true,
+  "source_process_proofs": [
+    {
+      "schema": "labsim.Project_v1.closed_process_proof.v1",
+      "logical_run_id": "teacher_standard5_01",
+      "process_proof_sha256": "b86c346144d896ac270139490390c326af9277e97d70403c22f8158b40b90c85",
+      "actual_source_proof": {
+        "name": "teacher_standard5_01",
+        "command": [
+          "./labsim",
+          "eval",
+          "--task",
+          "lab_cuvette_loading",
+          "--scene",
+          "standard",
+          "--backend",
+          "teacher",
+          "--episodes",
+          "5",
+          "--headless",
+          "--output",
+          "run://teacher_standard5_01"
+        ],
+        "run_directory": "run://teacher_standard5_01",
+        "started_utc": "2026-10-26T10:51:51.739503+00:00",
+        "code_commit": "43649a259112846bbc9b25acf2c3945b421a2281",
+        "status": "CLOSED",
+        "pid": 2956549,
+        "exit_code": 0,
+        "wall_seconds": 4477.788287028961,
+        "process_exited": true
+      }
+    },
+    {
+      "schema": "labsim.Project_v1.closed_process_proof.v1",
+      "logical_run_id": "controlled_failure_01",
+      "process_proof_sha256": "168a59064b1a80eb19231188e6b4b49b79bd741b6deece11b92baed16b15ce41",
+      "actual_source_proof": {
+        "name": "controlled_failure_01",
+        "command": [
+          "./labsim",
+          "collect",
+          "--task",
+          "lab_cuvette_loading",
+          "--scene",
+          "standard",
+          "--backend",
+          "teacher",
+          "--controlled-stop-depth-mm",
+          "5",
+          "--headless",
+          "--output",
+          "run://controlled_failure_01"
+        ],
+        "run_directory": "run://controlled_failure_01",
+        "started_utc": "2026-10-26T12:07:10.920911+00:00",
+        "code_commit": "43649a259112846bbc9b25acf2c3945b421a2281",
+        "status": "CLOSED",
+        "pid": 3134021,
+        "exit_code": 0,
+        "wall_seconds": 505.0540707060136,
+        "process_exited": true
+      }
+    }
+  ],
+  "all_runs_closed_before_H5_open": true,
+  "single_gpu_sequence": true,
+  "standard": {
+    "planned": 5,
+    "observed": 5,
+    "completed": 5,
+    "qualified_successes": 5,
+    "valid_task_failures": 0,
+    "invalid_or_unknown": 0,
+    "each_episode_all_audit_checks_passed": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "controlled_failure": {
+    "observed": 1,
+    "qualified_failures": 1,
+    "condition_groups": [
+      "deterministic_action_deviation"
+    ],
+    "not_natural_failures": true
+  },
+  "identity_sets": {
+    "code_commit": [
+      "43649a259112846bbc9b25acf2c3945b421a2281"
+    ],
+    "actual_execution_commit": [
+      "43649a259112846bbc9b25acf2c3945b421a2281"
+    ],
+    "frozen_scene_sha256": [
+      "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e"
+    ],
+    "control_config_sha256": [
+      "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e"
+    ],
+    "asset_id": [
+      "cuvette_xy_1000"
+    ],
+    "asset_sha256": [
+      "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537"
+    ],
+    "source_slot_id": [
+      "A1"
+    ],
+    "target_seat_id": [
+      "candidate_far_hinge"
+    ],
+    "scene_mode": [
+      "standard"
+    ],
+    "scene_version": [
+      "Project_v1"
+    ]
+  },
+  "same_scene_asset_slot_seat_and_execution_commit_across_cohorts": true,
+  "reset_comparison": {
+    "reference_episode": "teacher_standard5_01/episode_0000",
+    "actual_initial_sample_t_s": 0.016666666666666666,
+    "max_arm_delta_rad": 0.0,
+    "max_finger_delta_m": 0.0,
+    "max_object_position_delta_m": 0.0,
+    "max_object_orientation_delta_deg": 0.0
+  },
+  "episodes": [
+    {
+      "cohort": "teacher_standard5_01",
+      "episode_id": "f0f6fdef-5398-4ce2-bf1c-59017e887251",
+      "logical_episode": "teacher_standard5_01/episode_0000",
+      "task_success": true,
+      "record_valid": true,
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "transitions": 6348,
+      "all_audit_checks_passed": true,
+      "post_retreat_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": true,
+          "target_contains": true,
+          "observed_input_material_overlap_within_limit": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666,
+        "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+      }
+    },
+    {
+      "cohort": "teacher_standard5_01",
+      "episode_id": "18ddcf2b-dd29-4963-a457-00fb6daff656",
+      "logical_episode": "teacher_standard5_01/episode_0001",
+      "task_success": true,
+      "record_valid": true,
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "transitions": 6348,
+      "all_audit_checks_passed": true,
+      "post_retreat_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": true,
+          "target_contains": true,
+          "observed_input_material_overlap_within_limit": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666,
+        "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+      }
+    },
+    {
+      "cohort": "teacher_standard5_01",
+      "episode_id": "922c3097-c870-450c-b4b7-fc56d0c90873",
+      "logical_episode": "teacher_standard5_01/episode_0002",
+      "task_success": true,
+      "record_valid": true,
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "transitions": 6348,
+      "all_audit_checks_passed": true,
+      "post_retreat_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": true,
+          "target_contains": true,
+          "observed_input_material_overlap_within_limit": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666,
+        "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+      }
+    },
+    {
+      "cohort": "teacher_standard5_01",
+      "episode_id": "a2c360b8-7a09-4cc9-9617-1c381d0f0ce1",
+      "logical_episode": "teacher_standard5_01/episode_0003",
+      "task_success": true,
+      "record_valid": true,
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "transitions": 6348,
+      "all_audit_checks_passed": true,
+      "post_retreat_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": true,
+          "target_contains": true,
+          "observed_input_material_overlap_within_limit": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666,
+        "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+      }
+    },
+    {
+      "cohort": "teacher_standard5_01",
+      "episode_id": "b5d53d9c-caa7-49ef-9b4e-d5e62dd78948",
+      "logical_episode": "teacher_standard5_01/episode_0004",
+      "task_success": true,
+      "record_valid": true,
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "transitions": 6348,
+      "all_audit_checks_passed": true,
+      "post_retreat_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 2.388837865275353e-07,
+        "orientation_change_deg": 0.0007131989862548174,
+        "criteria": {
+          "position_stable": true,
+          "target_support": true,
+          "target_contains": true,
+          "observed_input_material_overlap_within_limit": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true
+        },
+        "start_t": 102.81666666666666,
+        "end_t": 105.81666666666666,
+        "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+      }
+    },
+    {
+      "cohort": "controlled_failure_01",
+      "episode_id": "6db06194-9e67-4476-a95f-4686649c4d63",
+      "logical_episode": "controlled_failure_01/episode_0000",
+      "task_success": false,
+      "record_valid": true,
+      "termination_reason": "CONTROLLED_EARLY_STOP",
+      "transitions": 3981,
+      "all_audit_checks_passed": true,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      }
+    }
+  ],
+  "all_episode_audit_checks_passed": true,
+  "original_source_files_modified": false,
+  "training_or_optimizer_executed": false,
+  "limitations": [
+    "Fixed-scene deterministic repeats only, not broad success probability.",
+    "Teacher uses simulator object truth; this audit is not policy performance.",
+    "Recorded physics warnings are retained; no real calibration or cooked-surface accuracy claimed.",
+    "Controlled action-deviation failure is separate from natural failure.",
+    "Audit reader batches test interface/data admission, not model training."
+  ]
+}

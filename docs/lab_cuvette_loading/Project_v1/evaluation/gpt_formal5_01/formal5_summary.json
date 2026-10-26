@@ -1,0 +1,3001 @@
+{
+  "schema": "labsim.Project_v1.gpt_formal5_audit.v1",
+  "generated_unix_s": 1793019153.6421537,
+  "finished_state_sha256": "8af00d74c22fa2296c418acfc64c9bdcb1c4f21e873e72738568ceeb4b376e63",
+  "execution_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+  "canonical_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+  "committed_provider_source_sha256": {
+    "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+    "cubence_tools.py": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864"
+  },
+  "process_proof_scope": "Supervisor process wait/exit evidence and closed result files; all5 were actual sequential attempts, not successful workflows.",
+  "protocol": "Five fresh sequential Isaac processes, one episode each, one frozen model/controller/scorer/standard scene; shared budget ledger; no tuning between formal attempts",
+  "formal_attempts": 5,
+  "closed_processes": 5,
+  "sequential_process_windows": [
+    {
+      "attempt": 0,
+      "started_utc": "2026-10-26T12:23:04.374978+00:00",
+      "exited_utc_from_wait_duration": "2026-10-26T12:28:12.846072+00:00",
+      "gap_after_previous_exit_s": null
+    },
+    {
+      "attempt": 1,
+      "started_utc": "2026-10-26T12:28:14.382575+00:00",
+      "exited_utc_from_wait_duration": "2026-10-26T12:29:51.781402+00:00",
+      "gap_after_previous_exit_s": 1.536503
+    },
+    {
+      "attempt": 2,
+      "started_utc": "2026-10-26T12:29:52.240611+00:00",
+      "exited_utc_from_wait_duration": "2026-10-26T12:31:43.602888+00:00",
+      "gap_after_previous_exit_s": 0.459209
+    },
+    {
+      "attempt": 3,
+      "started_utc": "2026-10-26T12:31:44.052752+00:00",
+      "exited_utc_from_wait_duration": "2026-10-26T12:40:03.455914+00:00",
+      "gap_after_previous_exit_s": 0.449864
+    },
+    {
+      "attempt": 4,
+      "started_utc": "2026-10-26T12:40:05.595884+00:00",
+      "exited_utc_from_wait_duration": "2026-10-26T12:47:23.068039+00:00",
+      "gap_after_previous_exit_s": 2.13997
+    }
+  ],
+  "task_outcome_counts": {
+    "true": 0,
+    "false": 1,
+    "null": 4
+  },
+  "valid_records": 1,
+  "qualified_complete_successes": 0,
+  "valid_task_failures": 1,
+  "invalid_or_unknown_outcomes": 4,
+  "success_rate_among_valid_task_outcomes": 0.0,
+  "actual_api_decisions": 55,
+  "all_decision_image_json_audits_passed": true,
+  "all_formal_audits_passed": true,
+  "audit_errors": [],
+  "formal_results": [
+    {
+      "name": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000",
+      "episode_id": "5b21869b-4a1c-47b1-9588-39123a988204",
+      "formal": true,
+      "code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "canonical_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_document_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "source_hash_supervisor_field": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "provider_implementation_sha256": {
+        "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+        "cubence_tools.py": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864"
+      },
+      "images": {
+        "max_side_px": 512,
+        "jpeg_quality": 60,
+        "detail": "low",
+        "resize_interpolation": "lanczos"
+      },
+      "scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "exit_code": 0,
+      "process_exited": true,
+      "api_decisions": 13,
+      "network_attempts": 13,
+      "executed_action_receipts": 12,
+      "completed_action_receipts": 12,
+      "rejected_tool_decisions": 1,
+      "provider_episode_wall_seconds": 295.7786690889625,
+      "simulation_seconds": 23.983333333333334,
+      "action_simulation_seconds": 23.96666666666667,
+      "actual_control_steps": 1438,
+      "wall_seconds": 308.4710935429903,
+      "record_valid": false,
+      "task_success": null,
+      "failure_type_raw": "PHYSICS_INVALID",
+      "termination_reason_raw": "ROBOT_ENVIRONMENT_COLLISION",
+      "derived_failure_cause": "ROBOT_ENVIRONMENT_COLLISION_SAFETY_STOP",
+      "underlying_control_or_ik_errors": [],
+      "source_slot_cleared": false,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "stable_after_retreat": null,
+      "eligible_for_success_bc": false,
+      "eligible_for_failure_analysis": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 1.666000468656264e-08,
+        "orientation_change_deg": 3.423621675895667e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 20.983333333333334,
+        "end_t": 23.983333333333334
+      },
+      "observed_events": {},
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [
+        "robot_contact_with_original_instrument_or_rack"
+      ],
+      "artifacts": {
+        "decisions": 13,
+        "jpeg_files": 26,
+        "all_passed": true,
+        "errors": [],
+        "decisions_audit": [
+          {
+            "decision_index": 0,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:0:decision0",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:0",
+            "public_json_sha256": "63bceadec14ba8d515baef9c1ccc9609e5d0a464277fb7a2c674ba30aad77192",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+                "sha256": "064238583aeb835e8a9de98f057d56888d1644d2d2813bf9f0b8697c70321c50",
+                "bytes": 8923,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+                "sha256": "4e40cdf964afaca5335d30e18b5391738ab661a2d7060a56b074ed853ad7cff3",
+                "bytes": 10032,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 1,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:120:decision1",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:120",
+            "public_json_sha256": "a7a21000e42a0d873908a9561aa78aa43ab69fd398c63e565e0693eb4f60266e",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+                "sha256": "0e86d947d0c008cac75f5179ca953092ad180c6c602f734221ffcd0cb63dc294",
+                "bytes": 8878,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+                "sha256": "c472852c33644308f522f902c071010a7b829ad5ef8de094b7412d9fe3b0bef0",
+                "bytes": 9976,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 2,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:240:decision2",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:240",
+            "public_json_sha256": "0c1de50a84b53e6fab6c1b80f9571acc1a8aad41f24a0eb973e72268e85b3135",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+                "sha256": "ba9b9b5a81b3b0562a3eccfd313a95692018bb9f3e768298a287a2cc731fedd7",
+                "bytes": 8666,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+                "sha256": "e16980ce6903e9b13fa9adfeacae7c0ccc4431985ec3edb473e46b70187b6bec",
+                "bytes": 9493,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 3,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:360:decision3",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:360",
+            "public_json_sha256": "d8274fa7eaa4b896d283583c0b82795131e63a43e21f96a63349d40cf8f1e03e",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000003/side_camera.jpg",
+                "sha256": "c044c358368d3114bb70ca32eb28c3619712a673c69f0e66b89ddc2b4a9756aa",
+                "bytes": 8739,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000003/wrist_camera.jpg",
+                "sha256": "e125a94c8d984adb80c6f4be8b4bd8cc2f361c45d5a4d55d6139baa04b37901e",
+                "bytes": 9424,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 4,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:480:decision4",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:480",
+            "public_json_sha256": "7e44755843bbeb84c6b54e207aa1cb90697c61bf87711c51a20fe23f8ee802b1",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000004/side_camera.jpg",
+                "sha256": "261488ebbc80d555cbf155dbdb7b9f6c663950a5e593941d9ea70771355de481",
+                "bytes": 8778,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000004/wrist_camera.jpg",
+                "sha256": "9e4f38df18c7d45366da50062188e594b776e002f3c77b4383683e485b0f8097",
+                "bytes": 10079,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 5,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:600:decision5",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:600",
+            "public_json_sha256": "d88fdb2e1164017891141dcf0756ea47d2396b767d9677b2bada59efd07f30d2",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000005/side_camera.jpg",
+                "sha256": "f04a193fcf2455f96d34c75075d99ef57ab9bc56e6de0b8eb26159285e04418a",
+                "bytes": 8750,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000005/wrist_camera.jpg",
+                "sha256": "b3e1368dd74f844cad948e91178815ff608918352115e7711924dff901972dfb",
+                "bytes": 9518,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 6,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:720:decision6",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:720",
+            "public_json_sha256": "c25b9a6b408e57260861f42da5b9364aa5f360e33b2fda950ad958a47422fda1",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000006/side_camera.jpg",
+                "sha256": "54934be324b3e2afe27a624a73936d305ad37567f0ff88f0884d4cf4a32fa495",
+                "bytes": 8725,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000006/wrist_camera.jpg",
+                "sha256": "1cb8aa9c0487f152f486669856ae5cf61994d493b06686de6d9d6cdb3b135300",
+                "bytes": 9390,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 7,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:840:decision7",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:840",
+            "public_json_sha256": "ee61ad18d350d6dcc9eea588c3d791ffb3e73369adc6432059869c7b7678f323",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000007/side_camera.jpg",
+                "sha256": "36bdc131be36c9d333280be0d84d62e7288c08a467143ca09c6f78f93e8dea5e",
+                "bytes": 8848,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000007/wrist_camera.jpg",
+                "sha256": "cfc42cc7dfd20c58d52ad26e749d7fbf6cd5a480268890ececaa19d0efd8913f",
+                "bytes": 8397,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 8,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:960:decision8",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:960",
+            "public_json_sha256": "71ac6f5b4588289af5224b70f44915fc188181e8b2d5407ffc75019f3e671977",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000008/side_camera.jpg",
+                "sha256": "fb051ee2fe77f25b7541b9d5f2afa68af7b7cbf30238cb17092d0aabb3784c62",
+                "bytes": 8875,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000008/wrist_camera.jpg",
+                "sha256": "538615f803c1bef5420fdb9a4a89e802118482f272c41c0e3c2b737e5d8d4758",
+                "bytes": 7538,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 9,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:1080:decision9",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:1080",
+            "public_json_sha256": "d437a6a30361c7aaf0b0b2faaad562564b094c54e7449cc73bea6b5a5d98f978",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000009/side_camera.jpg",
+                "sha256": "efa53d9ce0c0ce98225de55b40ec87c814bcf2ae118b61342b304c6c5578624d",
+                "bytes": 8847,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000009/wrist_camera.jpg",
+                "sha256": "3fdc42eefcb1a6c52da37c56e933954b3a0c9406fa1973c0e2538cac341bbd28",
+                "bytes": 8599,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 10,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:1200:decision10",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:1200",
+            "public_json_sha256": "e33bc8388b8969768dcd021cde5612f606a24c8faa52231c921497b698e9ecb7",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000010/side_camera.jpg",
+                "sha256": "c08554c49c69fbcd80b49ec336314234fb2bb6cf777d602f3641c3c5ce7b6a74",
+                "bytes": 8772,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000010/wrist_camera.jpg",
+                "sha256": "eb94df7a026303d1f47f8f03c67cdce6035b7c19cd1834b3e81eb0c33f41fa11",
+                "bytes": 8712,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 11,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:1200:decision11",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:1200",
+            "public_json_sha256": "e33bc8388b8969768dcd021cde5612f606a24c8faa52231c921497b698e9ecb7",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000011/side_camera.jpg",
+                "sha256": "c08554c49c69fbcd80b49ec336314234fb2bb6cf777d602f3641c3c5ce7b6a74",
+                "bytes": 8772,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000011/wrist_camera.jpg",
+                "sha256": "eb94df7a026303d1f47f8f03c67cdce6035b7c19cd1834b3e81eb0c33f41fa11",
+                "bytes": 8712,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 12,
+            "request_label": "policy:5b21869b-4a1c-47b1-9588-39123a988204:1320:decision12",
+            "observation_id": "5b21869b-4a1c-47b1-9588-39123a988204:1320",
+            "public_json_sha256": "997b9ce2b3326b2ad947ed43aba4850e6316cf2d507fa7e99a15614551dd8676",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000012/side_camera.jpg",
+                "sha256": "86b03c4ec8f37239854e3b5d8f549521022d063c2dd9eef86c965a387ffb2551",
+                "bytes": 8780,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0000/episode_0000/gpt_control/observations/decision_000012/wrist_camera.jpg",
+                "sha256": "c181153995963a11dc84e88e666484eec944633c2d253a3d20108b73d72b77af",
+                "bytes": 9215,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          }
+        ],
+        "scope": "Exact transmitted JPEG and public JSON file/hash/identity audit; native RGB hashes cannot be reconstructed from lossy JPEG or resized policy H5."
+      },
+      "timing": [
+        {
+          "model_action_id": "a1",
+          "execution_action_id": "gpt:6ace4d0449577b5d23997aacb3171c273d2ad6ce0f611df69804cdb04041b14e",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a2",
+          "execution_action_id": "gpt:6c993f96f1666054b6d6a23c08912c7c907a2a8cc7190f49567c0d3f104ad893",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a3",
+          "execution_action_id": "gpt:e884a6b4fa48e393a5b35ed8b72fcb0eeff762091a21294b12fd01650e8e1ed4",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a4",
+          "execution_action_id": "gpt:f77f172aca1e91e7c50ef7af9069ecf6d5c49aaa98c0752a5a5d4f68f2ceb095",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.000000000000001,
+          "measured_executed_duration_s": 2.000000000000001,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a5",
+          "execution_action_id": "gpt:a9be40faca27db40e5f0a7534c644668e24a2e2b5780070f2a1b5f47f6276f82",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a6",
+          "execution_action_id": "gpt:dab9fbef4a0bb5403900d47f721ea94137566dfd4f401e9df78d8285ee7e8293",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a7",
+          "execution_action_id": "gpt:c6ef22216fe108c857e5105376fc7284155d37d7048695ccf10f0ed99de00848",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a8",
+          "execution_action_id": "gpt:e75b60ea5bab3d5dace8b42d157fc55161b9857d5dff8111f1f1ef1f658000e3",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 1.9999999999999982,
+          "measured_executed_duration_s": 1.9999999999999982,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a9",
+          "execution_action_id": "gpt:a94d5b8a2dd9d15e687e050b2174a10775281f802551fd53e6e3f2a31af8ab9a",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a10",
+          "execution_action_id": "gpt:50e8bdce1379c6e1150b28d0b3635541554b76b52b6eb303c34691c11d690661",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a12",
+          "execution_action_id": "gpt:2de2bc3d44ec3e585dca8d70f5e57e7310fa3a7e2bd09d6f804de3c1cfa69030",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a13",
+          "execution_action_id": "gpt:7e40521fd8606b5b0930e7dd45affb637af98db7f3d232317a1caf5ab9329c99",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 1.9666666666666686,
+          "measured_executed_duration_s": 1.9666666666666686,
+          "executed_control_ticks": 118,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": true,
+          "underlying_error_type": null,
+          "underlying_error": null
+        }
+      ],
+      "simulation_pause_checks": {
+        "checked_intervals": 13,
+        "all_observed_unchanged": true
+      },
+      "physics_log_audit": {
+        "rows": 5757,
+        "first": {
+          "t": 0.0,
+          "step": 0,
+          "engine_time": 0.008333333767950535
+        },
+        "last": {
+          "t": 23.983333333333334,
+          "step": 5756,
+          "engine_time": 23.99166791792959
+        },
+        "physics_step_or_dt_errors": 0,
+        "engine_clock_increment_errors": 0,
+        "maximum_abs_engine_minus_recorded_dt_s": 2.1730883759119024e-10,
+        "engine_dt_comparison_tolerance_s": 1e-05,
+        "row_count_matches_recorded_physics": true,
+        "final_simulation_time_matches_result": true,
+        "scope": "All physics JSONL rows, including reset; engine-clock versus recorded-step increments plus action-receipt timing. No HDF5 was opened."
+      },
+      "audit_errors": [],
+      "audit_passed": true
+    },
+    {
+      "name": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001",
+      "episode_id": "993b2c27-e75b-4b4a-af0d-bb7bff86dc80",
+      "formal": true,
+      "code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "canonical_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_document_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "source_hash_supervisor_field": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "provider_implementation_sha256": {
+        "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+        "cubence_tools.py": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864"
+      },
+      "images": {
+        "max_side_px": 512,
+        "jpeg_quality": 60,
+        "detail": "low",
+        "resize_interpolation": "lanczos"
+      },
+      "scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "exit_code": 0,
+      "process_exited": true,
+      "api_decisions": 4,
+      "network_attempts": 4,
+      "executed_action_receipts": 4,
+      "completed_action_receipts": 3,
+      "rejected_tool_decisions": 0,
+      "provider_episode_wall_seconds": 84.79082792298868,
+      "simulation_seconds": 6.083333333333333,
+      "action_simulation_seconds": 6.066666666666666,
+      "actual_control_steps": 364,
+      "wall_seconds": 97.39882655499969,
+      "record_valid": false,
+      "task_success": null,
+      "failure_type_raw": "PHYSICS_INVALID",
+      "termination_reason_raw": "PHYSICS_ACTION_EXECUTION_FAILURE",
+      "derived_failure_cause": "KNOWN_CONTROL_OR_IK_FAILURE",
+      "underlying_control_or_ik_errors": [
+        "CONTROL_OR_IK_FAILURE"
+      ],
+      "source_slot_cleared": false,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "stable_after_retreat": null,
+      "eligible_for_success_bc": false,
+      "eligible_for_failure_analysis": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 2.9999999999999996,
+        "sample_count": 721,
+        "position_drift_m": 1.666000468656264e-08,
+        "orientation_change_deg": 3.3893845988869204e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 3.0833333333333335,
+        "end_t": 6.083333333333333
+      },
+      "observed_events": {},
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [],
+      "artifacts": {
+        "decisions": 4,
+        "jpeg_files": 8,
+        "all_passed": true,
+        "errors": [],
+        "decisions_audit": [
+          {
+            "decision_index": 0,
+            "request_label": "policy:993b2c27-e75b-4b4a-af0d-bb7bff86dc80:0:decision0",
+            "observation_id": "993b2c27-e75b-4b4a-af0d-bb7bff86dc80:0",
+            "public_json_sha256": "7c7874715baa78c17e7989708d1f8fa88b521086adfc555132a70af104b17d3b",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+                "sha256": "cb6ca65e1d11014b5e0d4c089c2d50dd55ec7b0a074cb29c838a05dfdf9899d2",
+                "bytes": 8893,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+                "sha256": "59ae0b6753eb9828310b87ed4d6e905625e3934243f9c01334b6ee2f52ec1a22",
+                "bytes": 10021,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 1,
+            "request_label": "policy:993b2c27-e75b-4b4a-af0d-bb7bff86dc80:120:decision1",
+            "observation_id": "993b2c27-e75b-4b4a-af0d-bb7bff86dc80:120",
+            "public_json_sha256": "9f86656221f35c1ea902a2f40a061fcf8dd8c1fa88ca21e402f160eb942933c5",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+                "sha256": "b1216b76157f9c7a5735fa59ebac74740576956d883cce6a34046978df581824",
+                "bytes": 8872,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+                "sha256": "060854880526018675da7c2d37966afc165d9543da8b35710d9bb8fd04b2769a",
+                "bytes": 9959,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 2,
+            "request_label": "policy:993b2c27-e75b-4b4a-af0d-bb7bff86dc80:240:decision2",
+            "observation_id": "993b2c27-e75b-4b4a-af0d-bb7bff86dc80:240",
+            "public_json_sha256": "221aaa34933012e85fb2fa2d620fc1969c7bc74a9df76ab64aeac3ff2e453e6d",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+                "sha256": "8b4a1a7ca2404066fc25499e45af40cc7999d8f24b9b6c3ae0fa0eaca06b39d5",
+                "bytes": 8677,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+                "sha256": "3c79e9c65189d9519067596acadef669633d5fd15450a461cf08da405aac0cdb",
+                "bytes": 9507,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 3,
+            "request_label": "policy:993b2c27-e75b-4b4a-af0d-bb7bff86dc80:360:decision3",
+            "observation_id": "993b2c27-e75b-4b4a-af0d-bb7bff86dc80:360",
+            "public_json_sha256": "d219102bcd39506fe1112a574d20dedfbe5eb56b32d8586ae18a24822f242904",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000003/side_camera.jpg",
+                "sha256": "b19f51b3589f53069f1715adc896232d5a02155084b8cc76a44f56b25da4f9b1",
+                "bytes": 9108,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/observations/decision_000003/wrist_camera.jpg",
+                "sha256": "c9517ee9f9526116119a09bc562c62012a83b4b2885e2e4912286054748c1ba8",
+                "bytes": 9520,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          }
+        ],
+        "scope": "Exact transmitted JPEG and public JSON file/hash/identity audit; native RGB hashes cannot be reconstructed from lossy JPEG or resized policy H5."
+      },
+      "timing": [
+        {
+          "model_action_id": "a1",
+          "execution_action_id": "gpt:923fc9796dde52840121cf92fbcc1665cdec1ab72461acf06fd0d2a0548838c0",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a2",
+          "execution_action_id": "gpt:56cb29f0bcbd1272bce53c648e4c114a25cae14de4fc085bc48db49c3ed0627d",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a3",
+          "execution_action_id": "gpt:4628ff7333377d0cde010c8845f04b49e2b55e1df7f56603954b27fe5e345014",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a4",
+          "execution_action_id": "gpt:e311e8270dce10e7a1c6741ef32385372a600f899ac072aecc775991be2db634",
+          "tool": "wait",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": null,
+          "measured_executed_duration_s": 0.06666666666666643,
+          "executed_control_ticks": 4,
+          "historical_duration_field_mismatch": false,
+          "completed": false,
+          "terminated": false,
+          "underlying_error_type": "RuntimeError",
+          "underlying_error": "CONTROL_OR_IK_FAILURE"
+        }
+      ],
+      "simulation_pause_checks": {
+        "checked_intervals": 4,
+        "all_observed_unchanged": true
+      },
+      "physics_log_audit": {
+        "rows": 1461,
+        "first": {
+          "t": 0.0,
+          "step": 0,
+          "engine_time": 0.008333333767950535
+        },
+        "last": {
+          "t": 6.083333333333333,
+          "step": 1460,
+          "engine_time": 6.091666984371841
+        },
+        "physics_step_or_dt_errors": 0,
+        "engine_clock_increment_errors": 0,
+        "maximum_abs_engine_minus_recorded_dt_s": 2.1730883759119024e-10,
+        "engine_dt_comparison_tolerance_s": 1e-05,
+        "row_count_matches_recorded_physics": true,
+        "final_simulation_time_matches_result": true,
+        "scope": "All physics JSONL rows, including reset; engine-clock versus recorded-step increments plus action-receipt timing. No HDF5 was opened."
+      },
+      "audit_errors": [],
+      "audit_passed": true
+    },
+    {
+      "name": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002",
+      "episode_id": "81d2d7f2-de36-463a-ab16-69df84ca3e0a",
+      "formal": true,
+      "code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "canonical_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_document_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "source_hash_supervisor_field": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "provider_implementation_sha256": {
+        "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+        "cubence_tools.py": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864"
+      },
+      "images": {
+        "max_side_px": 512,
+        "jpeg_quality": 60,
+        "detail": "low",
+        "resize_interpolation": "lanczos"
+      },
+      "scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "exit_code": 0,
+      "process_exited": true,
+      "api_decisions": 3,
+      "network_attempts": 3,
+      "executed_action_receipts": 3,
+      "completed_action_receipts": 2,
+      "rejected_tool_decisions": 0,
+      "provider_episode_wall_seconds": 98.70280858199112,
+      "simulation_seconds": 5.916666666666667,
+      "action_simulation_seconds": 5.9,
+      "actual_control_steps": 354,
+      "wall_seconds": 111.36227683199104,
+      "record_valid": false,
+      "task_success": null,
+      "failure_type_raw": "PHYSICS_INVALID",
+      "termination_reason_raw": "PHYSICS_ACTION_EXECUTION_FAILURE",
+      "derived_failure_cause": "KNOWN_CONTROL_OR_IK_FAILURE",
+      "underlying_control_or_ik_errors": [
+        "CONTROL_OR_IK_FAILURE"
+      ],
+      "source_slot_cleared": false,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "stable_after_retreat": null,
+      "eligible_for_success_bc": false,
+      "eligible_for_failure_analysis": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0000000000000004,
+        "sample_count": 721,
+        "position_drift_m": 1.666000468656264e-08,
+        "orientation_change_deg": 3.4065461496091986e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 2.9166666666666665,
+        "end_t": 5.916666666666667
+      },
+      "observed_events": {},
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [],
+      "artifacts": {
+        "decisions": 3,
+        "jpeg_files": 6,
+        "all_passed": true,
+        "errors": [],
+        "decisions_audit": [
+          {
+            "decision_index": 0,
+            "request_label": "policy:81d2d7f2-de36-463a-ab16-69df84ca3e0a:0:decision0",
+            "observation_id": "81d2d7f2-de36-463a-ab16-69df84ca3e0a:0",
+            "public_json_sha256": "320df43edc26cab19a065a3875e55c27f28ffde61479330f2378d66fb57e52b4",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+                "sha256": "1afd2d96df5a53f7486aac920229eb66fe9c4b192899b2d910c67a27331bcd1e",
+                "bytes": 8881,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+                "sha256": "3871ee6f5adb0cc2a8eb3098f4173945538007a7ce6918bf5fca37dff3d339cf",
+                "bytes": 9967,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 1,
+            "request_label": "policy:81d2d7f2-de36-463a-ab16-69df84ca3e0a:120:decision1",
+            "observation_id": "81d2d7f2-de36-463a-ab16-69df84ca3e0a:120",
+            "public_json_sha256": "24f22706d08eeecd6c5b5d2ae37225f875d1d95b215d3b54bf05bd2a4556cd83",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+                "sha256": "502f5a2f64716c7f69ac3e18cfd60682419b1daa85c8ba8003aa29b7112cbe3c",
+                "bytes": 8874,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+                "sha256": "e92a1294e4d921845331481430d1010a5cfae58e5539cc98e00f1aa32a9d9755",
+                "bytes": 9959,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 2,
+            "request_label": "policy:81d2d7f2-de36-463a-ab16-69df84ca3e0a:240:decision2",
+            "observation_id": "81d2d7f2-de36-463a-ab16-69df84ca3e0a:240",
+            "public_json_sha256": "074c586064f503715147da598511c71b174dba0d92e320621eaae7f94cc6446a",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+                "sha256": "4325f71bf43fc5e5cd5aed24eb142dae6f5a88ff6a320434dd60a7b56ac8ef1c",
+                "bytes": 8683,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+                "sha256": "75eea5f0c29b5106d0e346488a52fccec065c98fcded601b3e32d0fa56d6d10f",
+                "bytes": 9481,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          }
+        ],
+        "scope": "Exact transmitted JPEG and public JSON file/hash/identity audit; native RGB hashes cannot be reconstructed from lossy JPEG or resized policy H5."
+      },
+      "timing": [
+        {
+          "model_action_id": "a1",
+          "execution_action_id": "gpt:06257ae29a230ef3c3d127c94b73110406bdee8a84a666728846633cc79da4ef",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a2",
+          "execution_action_id": "gpt:d4c76b3af6d218b7a243cae9784d8db4524ddfe17a8ac495f85708eaa43296de",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a3",
+          "execution_action_id": "gpt:27763d50ddefc444fe33274333be7df117aa9b6cb7d67d99920fa78ef57fd6e7",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": null,
+          "measured_executed_duration_s": 1.9000000000000004,
+          "executed_control_ticks": 114,
+          "historical_duration_field_mismatch": false,
+          "completed": false,
+          "terminated": false,
+          "underlying_error_type": "RuntimeError",
+          "underlying_error": "CONTROL_OR_IK_FAILURE"
+        }
+      ],
+      "simulation_pause_checks": {
+        "checked_intervals": 3,
+        "all_observed_unchanged": true
+      },
+      "physics_log_audit": {
+        "rows": 1421,
+        "first": {
+          "t": 0.0,
+          "step": 0,
+          "engine_time": 0.008333333767950535
+        },
+        "last": {
+          "t": 5.916666666666667,
+          "step": 1420,
+          "engine_time": 5.92500030901283
+        },
+        "physics_step_or_dt_errors": 0,
+        "engine_clock_increment_errors": 0,
+        "maximum_abs_engine_minus_recorded_dt_s": 2.1730883759119024e-10,
+        "engine_dt_comparison_tolerance_s": 1e-05,
+        "row_count_matches_recorded_physics": true,
+        "final_simulation_time_matches_result": true,
+        "scope": "All physics JSONL rows, including reset; engine-clock versus recorded-step increments plus action-receipt timing. No HDF5 was opened."
+      },
+      "audit_errors": [],
+      "audit_passed": true
+    },
+    {
+      "name": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003",
+      "episode_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1",
+      "formal": true,
+      "code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "canonical_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_document_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "source_hash_supervisor_field": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "provider_implementation_sha256": {
+        "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+        "cubence_tools.py": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864"
+      },
+      "images": {
+        "max_side_px": 512,
+        "jpeg_quality": 60,
+        "detail": "low",
+        "resize_interpolation": "lanczos"
+      },
+      "scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "exit_code": 0,
+      "process_exited": true,
+      "api_decisions": 18,
+      "network_attempts": 18,
+      "executed_action_receipts": 16,
+      "completed_action_receipts": 16,
+      "rejected_tool_decisions": 0,
+      "provider_episode_wall_seconds": 487.85927992902,
+      "simulation_seconds": 29.416666666666668,
+      "action_simulation_seconds": 29.400000000000002,
+      "actual_control_steps": 1764,
+      "wall_seconds": 499.40316154499305,
+      "record_valid": true,
+      "task_success": false,
+      "failure_type_raw": "GRASP_SLIP",
+      "termination_reason_raw": "POLICY_FINISH_REQUEST",
+      "derived_failure_cause": "VALID_TASK_FAILURE_GRASP_SLIP",
+      "underlying_control_or_ik_errors": [],
+      "source_slot_cleared": true,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "stable_after_retreat": null,
+      "eligible_for_success_bc": false,
+      "eligible_for_failure_analysis": true,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 1.938583229669584e-07,
+        "orientation_change_deg": 9.797215345799486e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 26.416666666666668,
+        "end_t": 29.416666666666668
+      },
+      "observed_events": {
+        "bilateral_grasp_observed": {
+          "t": 23.545833333333334,
+          "physics_step": 5651,
+          "actual_force_N": [
+            0.12259755283594131,
+            0.09196335822343826
+          ]
+        },
+        "actual_lift_started": {
+          "t": 23.7375,
+          "physics_step": 5697,
+          "actual_lift_m": 0.0010733645771632272
+        },
+        "source_slot_cleared": {
+          "t": 25.1375,
+          "physics_step": 6033,
+          "actual_bottom_world_z_m": 0.7700340727286566,
+          "source_rim_world_z_m": 0.768
+        }
+      },
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE",
+        "SOURCE_RACK_GEOMETRY_PENETRATION"
+      ],
+      "invalid_state_reasons": [],
+      "artifacts": {
+        "decisions": 18,
+        "jpeg_files": 36,
+        "all_passed": true,
+        "errors": [],
+        "decisions_audit": [
+          {
+            "decision_index": 0,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:0:decision0",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:0",
+            "public_json_sha256": "9ed44ecf718d4c6496212c4d39770df1fc5a06982e2a6a4b9264332d8462fcb8",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+                "sha256": "eb5ce4266aa6cb3d8b0d4d806df28d1e4282d04d6e4c07ead32f917181e93aff",
+                "bytes": 8892,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+                "sha256": "74d93fb21903089dc1fb0b585f2893a712036abb49c59ee460ab66ff9c40d9be",
+                "bytes": 10005,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 1,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:120:decision1",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:120",
+            "public_json_sha256": "85d65f203f4009f85ad692c864b0f1e6e2c94b8914bd69438658c1aff080d6de",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+                "sha256": "b022ece50ac89a89c8d7aafa2feabed49b4c243bc14fe2ef88729d1d1050388c",
+                "bytes": 9060,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+                "sha256": "be9dd0fe381a22ee4e0f27a63baf7a8a655794437d9ef434952bbc959d0bf1eb",
+                "bytes": 9754,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 2,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:240:decision2",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:240",
+            "public_json_sha256": "507ca710a5d700ada4370b460d4be58d449a49996142a2000438129a1819e650",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+                "sha256": "bbcb94ca5d669e5346bf0b0ea7800cae6798fd3e72cc20da1bc9e08ee8ad0df4",
+                "bytes": 8835,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+                "sha256": "e7b908c573b400248977905c8fa938fbfb364db6f453f72a35c1f32a74931b59",
+                "bytes": 9961,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 3,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:360:decision3",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:360",
+            "public_json_sha256": "f70c603f57d93632f02f20ed107f3863771be7e2572d38a6abe903a234bdccc6",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000003/side_camera.jpg",
+                "sha256": "d64abf9cffe1330ae6ff3319fac8772b7a66d1d70f9b9c2f2bd9fb17b72575a3",
+                "bytes": 8690,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000003/wrist_camera.jpg",
+                "sha256": "b23c290156acc9744d269eb4e16364ad6e0202e6fdad535edfee0e3ef712172f",
+                "bytes": 10021,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 4,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:480:decision4",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:480",
+            "public_json_sha256": "7a35503fcab2d3c09317a3fa2f33429d68bb6c29a88ef47803fba672013627ab",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000004/side_camera.jpg",
+                "sha256": "9e7feb7754820cfeb1a7a3f79692547998afd3414d7d8e840ab75e9d397787c2",
+                "bytes": 8727,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000004/wrist_camera.jpg",
+                "sha256": "21ad0e73c4d8de332fd79a6f573ce5dd032b08c55298c8523b7808d849c91d00",
+                "bytes": 9293,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 5,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:600:decision5",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:600",
+            "public_json_sha256": "1a907392a5db8a7bec807547c1cfec677db97d0da2e407c3f685a5b7ad81923b",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000005/side_camera.jpg",
+                "sha256": "28dadd080d373fe92d7b00f77f3d5d761b97152f7451b17a5b545d7f2a4b6c9b",
+                "bytes": 8779,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000005/wrist_camera.jpg",
+                "sha256": "680964833d122c0147468e45faa9cd3225edb0b78b7cc47c5a8cc150df1c5a7e",
+                "bytes": 9451,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 6,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:720:decision6",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:720",
+            "public_json_sha256": "344348885da9b18715c6206988e342fd3248d640048af3745231195e2b074148",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000006/side_camera.jpg",
+                "sha256": "22219bfbd3b7575cf6c017fa0fa59b58f95d98960fc79d3d51aad1d896ef67cb",
+                "bytes": 8807,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000006/wrist_camera.jpg",
+                "sha256": "a9ab14424c52a003aad713308f3534c402474c3a3946e82357871b478b667bd4",
+                "bytes": 9222,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 7,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:840:decision7",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:840",
+            "public_json_sha256": "f726e1749cc1fb8d47c0c70fac517ff9293798cc9d9a8ba01be603e67c48fa47",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000007/side_camera.jpg",
+                "sha256": "3616e8d75e68af9e80344ab49793919741f4a2d5723a5d0df68ae1957d52539c",
+                "bytes": 8827,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000007/wrist_camera.jpg",
+                "sha256": "6bce29fabdf8ef01d889cb3550b86557330028c3fe7ae4db88023d8c6284e3b0",
+                "bytes": 8448,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 8,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:912:decision8",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:912",
+            "public_json_sha256": "01194143d8db22f94811cadbbe3cd2649cbf54f10421a1bbcdf40019d1534aba",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000008/side_camera.jpg",
+                "sha256": "3c5f6186571c22b724543d12831475bf31622f7dfc6a9cc97bc92f1bf01e1969",
+                "bytes": 8909,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000008/wrist_camera.jpg",
+                "sha256": "85fa35437c34557f53359c8684ade7843a38f48e607f2fcad7067998bce0d482",
+                "bytes": 7555,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 9,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1032:decision9",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1032",
+            "public_json_sha256": "baf191d7fa8a81e1d656d2c393a23c725ad663ad4ddbebdfc10f0b3bd7f83dd3",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000009/side_camera.jpg",
+                "sha256": "1f8c2152d794bdea634ef9ab2e609aaa91141b1c9e8867585fccabc170d7d508",
+                "bytes": 8866,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000009/wrist_camera.jpg",
+                "sha256": "903986fd20cc420e35d71d73cba0eea88cc7e1b96cc86077ba4f92061f431be3",
+                "bytes": 8893,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 10,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1152:decision10",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1152",
+            "public_json_sha256": "9a29b30cab013a62f39c3891f31bbf6efdb418c169b4d312aad13c8a81d798cc",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000010/side_camera.jpg",
+                "sha256": "0424e6ce929b6d71d37f7c1551ae4b6b0ba8918095d5c08214f4bc1b93cb74be",
+                "bytes": 8793,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000010/wrist_camera.jpg",
+                "sha256": "79a6a9f3eaebfa306a20962aabd40d6aea1280f24f614488918ae1eb46cedc12",
+                "bytes": 8816,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 11,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1224:decision11",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1224",
+            "public_json_sha256": "4409bcc978bd92a4a1f2552b6ab181026aeb2a48ddfd3b19a442e53260ef3353",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000011/side_camera.jpg",
+                "sha256": "0f6103afcf3807aa9ba07f40b8b7580d2dec3e90e7ec192ca6b17b329b47356e",
+                "bytes": 8870,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000011/wrist_camera.jpg",
+                "sha256": "8680851cb28b87afd2555454c94a4219adf63ed467b5d84d995d0349eef6e3e3",
+                "bytes": 8119,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 12,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1284:decision12",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1284",
+            "public_json_sha256": "c3f2164a87df4e4b3abaace2f52e03663aad5c90348c8098f0048ebf781a4a04",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000012/side_camera.jpg",
+                "sha256": "fa860c04df06d1a17433900e34bba937ed4075f896a8c8568184885a6a0400ff",
+                "bytes": 8882,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000012/wrist_camera.jpg",
+                "sha256": "b6a9f2f88580575d440fd87dd55d23d1c54607e8356936fd59a5813614030156",
+                "bytes": 7447,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 13,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1404:decision13",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1404",
+            "public_json_sha256": "57d9dbc93425ee20a567e49f4f1334795c713bd059458f843be62c02cb739305",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000013/side_camera.jpg",
+                "sha256": "02700229b2d2b761ad102e028e7152543ff0cf5e586849e05d37b35df478f439",
+                "bytes": 8941,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000013/wrist_camera.jpg",
+                "sha256": "c3ecb36a8dfb94625c4946f30baefb84c8191f0da08f78f72ec816dc8e5b8644",
+                "bytes": 7030,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 14,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1524:decision14",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1524",
+            "public_json_sha256": "219f045dd1731f50d3843d2a79afac517e8ec7a85ff39cd80f43eff121ce70e5",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000014/side_camera.jpg",
+                "sha256": "55afc4d634ca59ced63e6d86fd85e3bbe635c2ec401c3eea8c8c520c462ef629",
+                "bytes": 8812,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000014/wrist_camera.jpg",
+                "sha256": "80410d295cbb1fc316666e8f02131bdf9543f33ee7a6a47f7053d76e973d971d",
+                "bytes": 7987,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 15,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1644:decision15",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1644",
+            "public_json_sha256": "dd96139d15a8498d220588a9028f6e221e909a6b7426bf8435b9e1017e68d279",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000015/side_camera.jpg",
+                "sha256": "dd021b67fdbc99c8565d67b82775ddcd3c35df921b54d3e1d453e20974de0aa8",
+                "bytes": 8653,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000015/wrist_camera.jpg",
+                "sha256": "d41d448af55064ed549b34f471c1cc5038436cc8752daab455d5607287886d4b",
+                "bytes": 8917,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 16,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1764:decision16",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1764",
+            "public_json_sha256": "4b3942ded9bbd4aa386fe4341ecb105f425a191381512a9e355106ba62a0d656",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000016/side_camera.jpg",
+                "sha256": "bbfec0cc9d7ff0a7b210979aa9c66aeb71eb6a1c62befd01b2925a289f32462e",
+                "bytes": 8706,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000016/wrist_camera.jpg",
+                "sha256": "44cdcccbf4bd241f33da9b9e5197eff31b9cd41d7c82826f0e9070048ddac3a0",
+                "bytes": 7820,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 17,
+            "request_label": "policy:77157fcf-3dea-4a46-be7e-83b5c025b8a1:1764:decision17",
+            "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1764",
+            "public_json_sha256": "4b3942ded9bbd4aa386fe4341ecb105f425a191381512a9e355106ba62a0d656",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000017/side_camera.jpg",
+                "sha256": "bbfec0cc9d7ff0a7b210979aa9c66aeb71eb6a1c62befd01b2925a289f32462e",
+                "bytes": 8706,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000017/wrist_camera.jpg",
+                "sha256": "44cdcccbf4bd241f33da9b9e5197eff31b9cd41d7c82826f0e9070048ddac3a0",
+                "bytes": 7820,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          }
+        ],
+        "scope": "Exact transmitted JPEG and public JSON file/hash/identity audit; native RGB hashes cannot be reconstructed from lossy JPEG or resized policy H5."
+      },
+      "timing": [
+        {
+          "model_action_id": "a1",
+          "execution_action_id": "gpt:add7cc1fd7ce5538255a0aca4dd8d46bb70a4dd702f421d9fa8f8b0e4761d604",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a2",
+          "execution_action_id": "gpt:276189afbeee7e65078e48f96c295f76e65c0b4edfd9fdb813dd453d0396e2b3",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a3",
+          "execution_action_id": "gpt:75317125a1ffbee48bb3edd6b4d6e01bc2eb686e6b6b54ccdb2c07fa48fc6feb",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a4",
+          "execution_action_id": "gpt:c656e268fbc84578888a72ffd460f02ba043cb3be5a8f8074478c50e0a9ea2e7",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.000000000000001,
+          "measured_executed_duration_s": 2.000000000000001,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a5",
+          "execution_action_id": "gpt:eb4158800d8244ce73c804596508e70d877a47cd1c3c17bbf365a1072b1156d7",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a6",
+          "execution_action_id": "gpt:f1167c9bde6f7d0d9cf42adbc5150d29c6992907addc2bb5a52327d74f71addf",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a7",
+          "execution_action_id": "gpt:6485e42e64d2d31a330aab6250a7c347622eea250f13e609c7290774bb28c068",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a8",
+          "execution_action_id": "gpt:94950306f57ef1934653b81e8cdd8e06aa9421143c680d0b480feeb14971dbd3",
+          "tool": "move_ee",
+          "requested_duration_s": 1.2,
+          "reported_executed_duration_s": 1.1999999999999993,
+          "measured_executed_duration_s": 1.1999999999999993,
+          "executed_control_ticks": 72,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a9",
+          "execution_action_id": "gpt:739c332f92e1b244dcd21bae0e6f1104a40d0fa468b812cb01093c62034ea10e",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 1.9999999999999982,
+          "measured_executed_duration_s": 1.9999999999999982,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a10",
+          "execution_action_id": "gpt:9a013cb7568969315ac07f2d3ed3ad8225bb0fd1057754499fe67bbd6178e145",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a11",
+          "execution_action_id": "gpt:2ce4d7c358abb20f446de85b44e4621c6bb8f6022637b789c43af0a7be06aeed",
+          "tool": "move_ee",
+          "requested_duration_s": 1.2,
+          "reported_executed_duration_s": 1.2000000000000028,
+          "measured_executed_duration_s": 1.2000000000000028,
+          "executed_control_ticks": 72,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a12",
+          "execution_action_id": "gpt:6bfb48775304130ebf461ef9e01bb63c5dabb4ec4be312684d2bc86300abede7",
+          "tool": "move_ee",
+          "requested_duration_s": 1,
+          "reported_executed_duration_s": 1.0,
+          "measured_executed_duration_s": 1.0,
+          "executed_control_ticks": 60,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a13",
+          "execution_action_id": "gpt:a60e8e30a624e4b69a22426551e9c5f8b14daa2a50d2a45a2194694e3a73a9b4",
+          "tool": "gripper",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a14",
+          "execution_action_id": "gpt:faa7d7f5bf88e6680de0c76b004f2ea10a6e6dd43ca7d2b4b84fd75f5423a7d4",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a15",
+          "execution_action_id": "gpt:0f3063bcb7710d9dc21d790c758b3ccaf41b6f5fde0708cc3daa74b34bd5a8dd",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a16",
+          "execution_action_id": "gpt:0c6ed3c3b17585be26f783d419b38d05a5aa99b28ca0748beffbed2b90aba51d",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        }
+      ],
+      "simulation_pause_checks": {
+        "checked_intervals": 18,
+        "all_observed_unchanged": true
+      },
+      "physics_log_audit": {
+        "rows": 7061,
+        "first": {
+          "t": 0.0,
+          "step": 0,
+          "engine_time": 0.008333333767950535
+        },
+        "last": {
+          "t": 29.416666666666668,
+          "step": 7060,
+          "engine_time": 29.42500153463334
+        },
+        "physics_step_or_dt_errors": 0,
+        "engine_clock_increment_errors": 0,
+        "maximum_abs_engine_minus_recorded_dt_s": 2.1730883759119024e-10,
+        "engine_dt_comparison_tolerance_s": 1e-05,
+        "row_count_matches_recorded_physics": true,
+        "final_simulation_time_matches_result": true,
+        "scope": "All physics JSONL rows, including reset; engine-clock versus recorded-step increments plus action-receipt timing. No HDF5 was opened."
+      },
+      "audit_errors": [],
+      "audit_passed": true
+    },
+    {
+      "name": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004",
+      "episode_id": "d033ee0b-c695-44de-8318-693baf5f810c",
+      "formal": true,
+      "code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "canonical_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_document_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "source_hash_supervisor_field": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "provider_implementation_sha256": {
+        "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+        "cubence_tools.py": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864"
+      },
+      "images": {
+        "max_side_px": 512,
+        "jpeg_quality": 60,
+        "detail": "low",
+        "resize_interpolation": "lanczos"
+      },
+      "scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "exit_code": 0,
+      "process_exited": true,
+      "api_decisions": 17,
+      "network_attempts": 17,
+      "executed_action_receipts": 17,
+      "completed_action_receipts": 17,
+      "rejected_tool_decisions": 0,
+      "provider_episode_wall_seconds": 424.78098021104233,
+      "simulation_seconds": 32.35,
+      "action_simulation_seconds": 32.333333333333336,
+      "actual_control_steps": 1940,
+      "wall_seconds": 437.4721545309876,
+      "record_valid": false,
+      "task_success": null,
+      "failure_type_raw": "PHYSICS_INVALID",
+      "termination_reason_raw": "ROBOT_ENVIRONMENT_COLLISION",
+      "derived_failure_cause": "ROBOT_ENVIRONMENT_COLLISION_SAFETY_STOP",
+      "underlying_control_or_ik_errors": [],
+      "source_slot_cleared": true,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "stable_after_retreat": null,
+      "eligible_for_success_bc": false,
+      "eligible_for_failure_analysis": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 7.450580596923828e-09,
+        "orientation_change_deg": 4.829673078902933e-06,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 29.35,
+        "end_t": 32.35
+      },
+      "observed_events": {
+        "bilateral_grasp_observed": {
+          "t": 22.170833333333334,
+          "physics_step": 5321,
+          "actual_force_N": [
+            0.1426924169063568,
+            0.1256239265203476
+          ]
+        },
+        "actual_lift_started": {
+          "t": 22.320833333333333,
+          "physics_step": 5357,
+          "actual_lift_m": 0.0010826064253797174
+        },
+        "source_slot_cleared": {
+          "t": 23.704166666666666,
+          "physics_step": 5689,
+          "actual_bottom_world_z_m": 0.7700162638687891,
+          "source_rim_world_z_m": 0.768
+        }
+      },
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [
+        "robot_contact_with_original_instrument_or_rack"
+      ],
+      "artifacts": {
+        "decisions": 17,
+        "jpeg_files": 34,
+        "all_passed": true,
+        "errors": [],
+        "decisions_audit": [
+          {
+            "decision_index": 0,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:0:decision0",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:0",
+            "public_json_sha256": "a152a5927a7d16489afba2b6a0054d7582447f0bce11bba5d90bbae79831c347",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+                "sha256": "2785a044cac80ce450f3b0a0320178381da7546aa3a4ac92582f6eb0835623a4",
+                "bytes": 8881,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+                "sha256": "9724e2258f4f1db5a6a133280132a717f29b91f1931882847505d3a2c2e1e62c",
+                "bytes": 9959,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 1,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:120:decision1",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:120",
+            "public_json_sha256": "e8146e2e67bd54f5b5bca4f19077c56db64b1ff7852a2b9070c97033c4e6695f",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+                "sha256": "c98f258ec1128ff47d511f081a97a7e8bf4a8b3b38f3b5fa1469f6d1a88bc8d3",
+                "bytes": 8886,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+                "sha256": "6cdcd56f812fc8e6b699e8c8f1000de52058397a51fb5f9faee8573400354858",
+                "bytes": 9995,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 2,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:240:decision2",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:240",
+            "public_json_sha256": "1417ffd7cb6585c70bdbe85ccfd24ccf81864ac4118bae87510ea52beffc93d7",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+                "sha256": "651938ad68ce995ba6fff1b8029a8c7053f097280651af9c89e0ea20d8c17fe3",
+                "bytes": 8672,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+                "sha256": "329476540193ffeb65861b25ea8883d2d48c9897ee6a3980a694f4f210a8ea0e",
+                "bytes": 9472,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 3,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:360:decision3",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:360",
+            "public_json_sha256": "1caf3e7623d5f19b1d091e02b0b45616fc241b930a2373e8ecbc613f4425412c",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000003/side_camera.jpg",
+                "sha256": "ff7628f32fa2b6f2c6fe27c42837e6b4c9c32123c4a9dce4ced850f8d67c674b",
+                "bytes": 8761,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000003/wrist_camera.jpg",
+                "sha256": "9f634dce876f8acdabf963ac93071cbe5fc07db5b28f816a929a7c1b03932637",
+                "bytes": 9430,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 4,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:480:decision4",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:480",
+            "public_json_sha256": "7dbb268c5ec33d5dc39c0342b277b7d939b85d64f7fb9ca2b19ace5d7666c371",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000004/side_camera.jpg",
+                "sha256": "7e8325f627151947f48bbb21ac8810ae785b733b85023c27b4cc13efe1cae9a8",
+                "bytes": 8804,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000004/wrist_camera.jpg",
+                "sha256": "3cfe682e5139c47ac2c8f3552aaa89632349620726653f3cdf1596dc2149ed78",
+                "bytes": 9373,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 5,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:600:decision5",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:600",
+            "public_json_sha256": "ed5e878e05f185e305dc6ee39736e92255a15af85c95c05efde5ad4b035b5e26",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000005/side_camera.jpg",
+                "sha256": "95395985ac5909aa932e9f1df3edf2422d49ebb7339edcca43c915b16c43bd2f",
+                "bytes": 8855,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000005/wrist_camera.jpg",
+                "sha256": "7d71bea7c1e435e194a9093164cbf1e9555f0da7724f79be5d9eb66f627ec5e4",
+                "bytes": 8595,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 6,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:720:decision6",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:720",
+            "public_json_sha256": "e995397983bbc34d64f8249c49d407f1b8fc80620d487c16cf433ad613ba6736",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000006/side_camera.jpg",
+                "sha256": "1cc0730bdf16c707e229d799b5ced2157f00229d07e70a5cfb8ed02523818b3e",
+                "bytes": 8806,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000006/wrist_camera.jpg",
+                "sha256": "54fa2e139677919a88cf15cf68ab77c6324ea3e2ff6ea097d3470d9b82a3f2ad",
+                "bytes": 8039,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 7,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:840:decision7",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:840",
+            "public_json_sha256": "44398a9339fe9b9f77c7c12c86d281f843f8a23d9bcd447b1c40f8aa676426b4",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000007/side_camera.jpg",
+                "sha256": "58ebef961ddc3a61344cbc9e571a8c064752ab39c9996052530e499d760e8403",
+                "bytes": 8791,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000007/wrist_camera.jpg",
+                "sha256": "b4f7232b2292ac9dd3076b48598fb4a2e71d0d591a3d3a9a1cdc4da415a01fdf",
+                "bytes": 9152,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 8,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:960:decision8",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:960",
+            "public_json_sha256": "c0cbc018d26215662f800733aac692206e727044e6132e01e24e3de0276fcc4c",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000008/side_camera.jpg",
+                "sha256": "8fd734c8326055fe0f76612fcd7e4c82e9617fef973ef62ae1cd3536ea979f21",
+                "bytes": 8702,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000008/wrist_camera.jpg",
+                "sha256": "dabef7009a24fa8eedb9166bf9a13be4923da52588ac13e11b32f547f464c247",
+                "bytes": 9724,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 9,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1080:decision9",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1080",
+            "public_json_sha256": "42170fcde2dcf065aba9471ef003419f611db8aed0e80a9e2895e806b559b758",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000009/side_camera.jpg",
+                "sha256": "92c0d99f01dc5eb0d437a2e8ced90ff44dcf8c0ff612aab08fbe5e6c870bd397",
+                "bytes": 8753,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000009/wrist_camera.jpg",
+                "sha256": "9c3a7d0837d43b938f3a2cce9ce8caabe04747ee1b75b241b691247d14d8e0fa",
+                "bytes": 8881,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 10,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1200:decision10",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1200",
+            "public_json_sha256": "529f253de2fb41c799772083103bddbca887b812ed7cbbf4632e57a48f6f7b25",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000010/side_camera.jpg",
+                "sha256": "34940a11104ed35bc6da2a795fe35278a43dbae6b6642930743e4ee47d0bda62",
+                "bytes": 8801,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000010/wrist_camera.jpg",
+                "sha256": "ff45c9432ca9cebfcd40cc4e18b606efee8cd996b38c6b3c3b7f72b1369afdaf",
+                "bytes": 7971,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 11,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1320:decision11",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1320",
+            "public_json_sha256": "b4e4465ea5a0419f72294ff0ddcb9855e9cc6d0200bd8c6cd33e0ff57d93f2f9",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000011/side_camera.jpg",
+                "sha256": "e289d8f1ab2eeb4dd63b319953a88a9195d5f445e65c4cfea86c89e4ddbf9692",
+                "bytes": 8944,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000011/wrist_camera.jpg",
+                "sha256": "492c0fc0fc8f213ecfa6c81b83dde2902a7840e10492d0af1af1e55f23373c7f",
+                "bytes": 7785,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 12,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1440:decision12",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1440",
+            "public_json_sha256": "4e8a908b73d15ac3439da98184cf7de317e9047670c167b3c8a33d7f058d3505",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000012/side_camera.jpg",
+                "sha256": "c9f195e21fe20b465489f4fd939fc83bd8acb575e0223575135cad8eb39be2b9",
+                "bytes": 8811,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000012/wrist_camera.jpg",
+                "sha256": "bae4ea31b027e85979af7e0e498ec970fc181e939ff0ebff6e2a9684daefe6ab",
+                "bytes": 8493,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 13,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1560:decision13",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1560",
+            "public_json_sha256": "4ab10d649567630deef384d9b2b88a14a06dc218316c6134e42a662cceae0139",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000013/side_camera.jpg",
+                "sha256": "a5d1f776ccde21b1ec738534d99c2abb6376f75a77bea36b3b513197a421f82d",
+                "bytes": 8655,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000013/wrist_camera.jpg",
+                "sha256": "e3f2c57b0c71e68a996d3be9c903fd31fed96a05ba324cbaff61b3f79eee3a22",
+                "bytes": 9197,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 14,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1680:decision14",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1680",
+            "public_json_sha256": "c5ec4f340474d06d639ba95cc5f42cac087f4b48ecd89e65a40dbf475732807b",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000014/side_camera.jpg",
+                "sha256": "4b89f5ce92dae77e63be8f9434d0349be5012058f74923778aa26a6660811e50",
+                "bytes": 8777,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000014/wrist_camera.jpg",
+                "sha256": "7a14b6c988e41b3ae00f54efb6029a9b4beffe1b31491741da65c0aa4c95cbd7",
+                "bytes": 8479,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 15,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1740:decision15",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1740",
+            "public_json_sha256": "920de48cb9976d5ab374c4b908e694e4e2f4b4e02227b1f6954b144d515fdfe2",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000015/side_camera.jpg",
+                "sha256": "a95f08439692e86ef89504196a670d9c4cf1fd023ad30fc2c0064c82057cf207",
+                "bytes": 8887,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000015/wrist_camera.jpg",
+                "sha256": "f206affdda43a8aed56c7e232e9de8684d4a892c54f8deef367d6f60cff3ec33",
+                "bytes": 8727,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          },
+          {
+            "decision_index": 16,
+            "request_label": "policy:d033ee0b-c695-44de-8318-693baf5f810c:1860:decision16",
+            "observation_id": "d033ee0b-c695-44de-8318-693baf5f810c:1860",
+            "public_json_sha256": "0be16cd12b471880b2a1a3d4a999c5ea2d57690ae078a2781445b42ba7b5c4a1",
+            "images": [
+              {
+                "camera_name": "side_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000016/side_camera.jpg",
+                "sha256": "3e6bb41f5cb97a635502d1dd1f9edd7a476d50012afc457a5f6bed799e40702f",
+                "bytes": 8738,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              },
+              {
+                "camera_name": "wrist_camera",
+                "path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0004/episode_0000/gpt_control/observations/decision_000016/wrist_camera.jpg",
+                "sha256": "6cc8bef5949ec440b2a98f3282f02084a40f2523e7b3854c4814d7d975b40139",
+                "bytes": 7737,
+                "resolution_wh": [
+                  512,
+                  384
+                ]
+              }
+            ],
+            "verified": true
+          }
+        ],
+        "scope": "Exact transmitted JPEG and public JSON file/hash/identity audit; native RGB hashes cannot be reconstructed from lossy JPEG or resized policy H5."
+      },
+      "timing": [
+        {
+          "model_action_id": "a1",
+          "execution_action_id": "gpt:68a3c85908a6c0bd3994a0d726a7d43c89956207399779a17729633210e2dea7",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a2",
+          "execution_action_id": "gpt:e0c0a04bd5ad4c0b014da70ea5db5bc41786a3c898b8430eb39e5fbc847582e4",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a3",
+          "execution_action_id": "gpt:b079305ab62ca13607be3bab50bcacab94320e75f0d5ba02e466ea723f249726",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a4",
+          "execution_action_id": "gpt:67b0ccfb3a98ede3e1ea70ba700594699d649ae99af773afcd3c5fd85ab23ff6",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.000000000000001,
+          "measured_executed_duration_s": 2.000000000000001,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a5",
+          "execution_action_id": "gpt:8d8dca82690cda3f129c14f126a790f013f66a2916cb66007ddaddc39d706d5e",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a6",
+          "execution_action_id": "gpt:c9e734fee6ce831289500bde1571b5217a727c17c5ad2d5e46863af3538990ae",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a7",
+          "execution_action_id": "gpt:449b913ab894e1acc18e567c98e2fa1308883542a3fb5d131beb48852f593dd4",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a8",
+          "execution_action_id": "gpt:cc02cce3570c0d1b7b821dde99cd3b02999ed45806fa151710838f56842e0df4",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 1.9999999999999982,
+          "measured_executed_duration_s": 1.9999999999999982,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a9",
+          "execution_action_id": "gpt:52a371ddd72e940272c21accb9f4a7e1f1c0ea8d9e37361352bce72a6b763224",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a10",
+          "execution_action_id": "gpt:137388e0fd299df08179e9f843d49ad8af6c09aef9536bf1cc9c22162ff3ac46",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a11",
+          "execution_action_id": "gpt:9aea251ec3892e589963b8198ca75e7472e33c6e70888e05137462fc3b4c7131",
+          "tool": "gripper",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a12",
+          "execution_action_id": "gpt:1a61881fb83375daf0d3787ea75fb236c680032595e0d2a59caff38709930376",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a13",
+          "execution_action_id": "gpt:5f1ccef2100317a59950dccd37c3b9dce07cc1ab67ee57c4bbc8b873583a24c4",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a14",
+          "execution_action_id": "gpt:173ec4cf2634df94932b46da2717f4fe39287bc1f0e0c3214a7ee49faf84c253",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a15",
+          "execution_action_id": "gpt:c538f855ee7c8c88ac013323edb43d02c9c8a837a1af6d6837f0163223cbeba1",
+          "tool": "gripper",
+          "requested_duration_s": 1,
+          "reported_executed_duration_s": 1.0,
+          "measured_executed_duration_s": 1.0,
+          "executed_control_ticks": 60,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a16",
+          "execution_action_id": "gpt:8aeabf097c7cae9b6c3967f5bb0e24ac5a509a610e3eb24d8668842fe1ddcd2e",
+          "tool": "move_ee",
+          "requested_duration_s": 2,
+          "reported_executed_duration_s": 2.0,
+          "measured_executed_duration_s": 2.0,
+          "executed_control_ticks": 120,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": false,
+          "underlying_error_type": null,
+          "underlying_error": null
+        },
+        {
+          "model_action_id": "a17",
+          "execution_action_id": "gpt:01aac9781eb1ca97c7e28acfad26c0b1cc9c4476c9011b3e84c27b20c29f2621",
+          "tool": "move_ee",
+          "requested_duration_s": 1.5,
+          "reported_executed_duration_s": 1.3333333333333357,
+          "measured_executed_duration_s": 1.3333333333333357,
+          "executed_control_ticks": 80,
+          "historical_duration_field_mismatch": false,
+          "completed": true,
+          "terminated": true,
+          "underlying_error_type": null,
+          "underlying_error": null
+        }
+      ],
+      "simulation_pause_checks": {
+        "checked_intervals": 17,
+        "all_observed_unchanged": true
+      },
+      "physics_log_audit": {
+        "rows": 7765,
+        "first": {
+          "t": 0.0,
+          "step": 0,
+          "engine_time": 0.008333333767950535
+        },
+        "last": {
+          "t": 32.35,
+          "step": 7764,
+          "engine_time": 32.35833502095193
+        },
+        "physics_step_or_dt_errors": 0,
+        "engine_clock_increment_errors": 0,
+        "maximum_abs_engine_minus_recorded_dt_s": 2.1731239030486904e-10,
+        "engine_dt_comparison_tolerance_s": 1e-05,
+        "row_count_matches_recorded_physics": true,
+        "final_simulation_time_matches_result": true,
+        "scope": "All physics JSONL rows, including reset; engine-clock versus recorded-step increments plus action-receipt timing. No HDF5 was opened."
+      },
+      "audit_errors": [],
+      "audit_passed": true
+    }
+  ],
+  "debug_pilots_separate": true,
+  "labels_rewritten": false,
+  "hdf5_opened_by_this_script": false,
+  "source_hash_field_note": "Supervisor process_exit.controller_sha256 is tools.py source SHA; canonical_controller_sha256 hashes the entire controller document canonically."
+}

@@ -1,0 +1,250 @@
+{
+  "schema": "labsim.Project_v1.debug_pilot_media.v1",
+  "created_at_utc": "2026-10-26T12:30:15.555518+00:00",
+  "source_run_id": "Project_v1/gpt_pilot_03/episode_0000",
+  "scope": "Debug pilot only; not a formal GPT repetition result. Full actual single attempt to the physical anomaly stop.",
+  "backend": "gpt6",
+  "provider": "cubence",
+  "requested_model": "gpt-6-astra",
+  "provider_identity_scope": "Requested Cubence gateway route; upstream model identity not independently verified.",
+  "controller_identity": {
+    "frozen_controller_canonical_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+    "canonicalization": "SHA256(UTF-8 json.dumps(controller.json, sort_keys=True, separators=(comma,colon)))",
+    "controller_file_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+    "tools_implementation_sha256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+    "wrapper_controller_sha256_field_means_tools_source": true,
+    "wrapper_reported_controller_sha256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+    "warning": "Wrapper field identifies cubence_tools.py bytes, not the canonical frozen controller. These hashes are intentionally distinguished."
+  },
+  "source_code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+  "source_frozen_scene_sha256": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+  "source_process_exited": true,
+  "source_process_exit_code": 0,
+  "source_process_wall_seconds": 426.43502035801066,
+  "source_process_proof_sha256": "956d39377cd59760c9e598ad00ee4c53f4b5ffa1c0642d2768fc3836c0b570e8",
+  "api_decisions": 14,
+  "accepted_action_decisions": 14,
+  "accepted_tool_counts": {
+    "gripper": 1,
+    "move_ee": 13
+  },
+  "protocol_rejections": 0,
+  "actual_control_ticks": 1566,
+  "simulation_time_end_s": 26.116666666666667,
+  "accepted_action_simulation_duration_s": 26.1,
+  "duration_measurement": "Sum receipt.simulation_time_after - simulation_time_before; 1566 control ticks / 60 Hz = 26.1 s. Initial observation starts at 0.0166667 s, ending at 26.1166667 s.",
+  "last_accepted_action": {
+    "action_id": "a14",
+    "requested_duration_s": 2,
+    "measured_executed_duration_s": 0.10000000000000142,
+    "executed_control_ticks": 6,
+    "stopped_by_environment": true
+  },
+  "object_truth_used": false,
+  "teacher_used": false,
+  "physics_paused_during_inference": true,
+  "task_success": null,
+  "workflow_success": null,
+  "record_valid": false,
+  "failure_type": "PHYSICS_INVALID",
+  "termination_reason": "PHYSICS_INVALID",
+  "source_slot_cleared": true,
+  "grasp_success": false,
+  "transport_success": false,
+  "release_observed": false,
+  "retreat_observed": false,
+  "post_retreat_window": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "actual_gripper_retreat_not_observed"
+  },
+  "terminal_window": {
+    "status": "complete",
+    "stable": false,
+    "required_duration_s": 3.0,
+    "measured_duration_s": 3.0,
+    "sample_count": 721,
+    "position_drift_m": 0.0436727494691708,
+    "orientation_change_deg": 2.333215597316756,
+    "criteria": {
+      "position_stable": false,
+      "target_support": null,
+      "target_contains": null,
+      "native_overlap_within_limit": null,
+      "no_finger_contact": null
+    },
+    "start_t": 23.116666666666667,
+    "end_t": 26.116666666666667
+  },
+  "invalid_state_reasons": [
+    "actual_object_pose_jump_above_declared_limit"
+  ],
+  "physics_quality_flags": [
+    "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+    "NATIVE_TARGET_OVERLAP_UNAVAILABLE",
+    "SOURCE_RACK_GEOMETRY_PENETRATION"
+  ],
+  "grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 0.0268371840681918,
+    "maximum_orientation_drift_deg": 4.335719784099481,
+    "maximum_configured_grasp_anchor_drift_m": 0.026824611589498455,
+    "maximum_configured_grasp_anchor_axial_drift_m": 0.026819503876320747,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 0.0008360604528662678,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 22.141666666666666,
+      "physics_step": 5314,
+      "actual_force_N": [
+        0.17399737238883972,
+        0.17493529617786407
+      ]
+    },
+    "actual_lift_started": {
+      "t": 22.233333333333334,
+      "physics_step": 5336,
+      "actual_lift_m": 0.0010551281800449397
+    },
+    "source_slot_cleared": {
+      "t": 23.608333333333334,
+      "physics_step": 5666,
+      "actual_bottom_world_z_m": 0.7700609062042584,
+      "source_rim_world_z_m": 0.768
+    }
+  },
+  "event_interpretation": "Bilateral finger contact, actual lift and source-slot clearance were observed. These events do not establish a stable grasp or held transport: grasp_success=false, transport_success=false and final PHYSICS_INVALID. Relative bottom-frame pose drift 26.837 mm includes rotational lever-arm effects; it is not isolated measured axial slip.",
+  "final_result_label_semantics": "Final independent PHYSICS_INVALID verdict for this debug run; no invented intermediate BLOCKED/success labels. Original POLICY stage and sampled simulation time retained.",
+  "source_files": [
+    {
+      "logical_source": "dual_view.mp4",
+      "sha256": "143729f0a0bd54382eed8f44e39174368ff9c6cbe899b884751b03a251e7f369",
+      "bytes": 5565975
+    },
+    {
+      "logical_source": "result.json",
+      "sha256": "360f67913195e555ec9d71cbf4efa9192b19004468c4400f9080a35af200ae66",
+      "bytes": 5161
+    },
+    {
+      "logical_source": "independent_score.json",
+      "sha256": "bb55c9672c5a2b18c6bced941d1495c4a8d2add3f5f9425219f7821d06462084",
+      "bytes": 5062
+    },
+    {
+      "logical_source": "video_timestamps.json",
+      "sha256": "5aad9d14f909338d5ff227bf5bb73fb97b63e696e0f080df0424995a9ead1043",
+      "bytes": 15681
+    },
+    {
+      "logical_source": "release_metadata.json",
+      "sha256": "efdc8bfcaeb8f99b799b2ce7bd045e547bd40bb62cce4243fc6a50ba06f66ff1",
+      "bytes": 621
+    },
+    {
+      "logical_source": "gpt_control/summary.json",
+      "sha256": "a215c2d72c508bebfb83973c7cafd2f77bde178a738b9c86aff6505a821d4cf0",
+      "bytes": 1186
+    },
+    {
+      "logical_source": "gpt_control/policy_trace.jsonl",
+      "sha256": "7b048f897b8f29a6606e6f7527f91cb80d46a9aadd49a3a2e6dcc4306f0e5ea8",
+      "bytes": 118833
+    },
+    {
+      "logical_source": "gpt_control/controller.json",
+      "sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "bytes": 8085
+    }
+  ],
+  "source_video_probe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "mpeg4",
+        "width": 1280,
+        "height": 480,
+        "avg_frame_rate": "30/1",
+        "duration": "26.133333",
+        "nb_frames": "784",
+        "nb_read_frames": "784"
+      }
+    ],
+    "format": {
+      "duration": "26.134000",
+      "size": "5565975"
+    }
+  },
+  "full_video": {
+    "file": "gpt_pilot03_full_attempt.mp4",
+    "sha256": "db418d6b0a309075a4fd84f2c425a2a6de1c7eec8160b111b4f194296065c1da",
+    "bytes": 1819600,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 480,
+          "avg_frame_rate": "30/1",
+          "duration": "26.133333",
+          "nb_frames": "784",
+          "nb_read_frames": "784"
+        }
+      ],
+      "format": {
+        "duration": "26.134000",
+        "size": "1819600"
+      }
+    },
+    "source_frame_range_inclusive": [
+      0,
+      783
+    ],
+    "source_frame_count": 784,
+    "source_simulation_time_range_s": [
+      0.016666666666666666,
+      26.116666666666667
+    ],
+    "source_terminal_frame_appended_at_finalize": false,
+    "source_frame_selection": "Every source frame, original order; full attempt including anomaly endpoint; no stitching, frame skipping, time truncation or speed change.",
+    "encoding": {
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "medium",
+      "pixel_format": "yuv420p",
+      "resolution_changed": false,
+      "frame_rate_changed": false,
+      "playback_speed_changed": false,
+      "overlay_added": [
+        "DEBUG PILOT 03 | Cubence gpt-6-astra",
+        "FINAL RESULT: PHYSICS_INVALID"
+      ]
+    },
+    "ffmpeg_video_filter": "drawtext=fontfile=DejaVuSans.ttf:text='DEBUG PILOT 03 | Cubence gpt-6-astra':x=w-tw-8:y=8:fontsize=15:fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=3,drawtext=fontfile=DejaVuSans.ttf:text='FINAL RESULT\\: PHYSICS_INVALID':x=w-tw-8:y=29:fontsize=15:fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=3",
+    "full_decode_exit_code": 0
+  },
+  "final_frame": {
+    "file": "gpt_pilot03_final_physics_invalid.png",
+    "sha256": "c647446665994e576dc0ba2a406560b46b8e83901def3d8e0a3b19d25e1faafd",
+    "bytes": 320610,
+    "source_frame_index": 783,
+    "source_simulation_time_s": 26.116666666666667,
+    "controller_stage": "POLICY"
+  },
+  "limitations": [
+    "A debug run, not one of the later formal five evaluation attempts.",
+    "Final task_success=null and record_valid=false; excluded from success BC and valid physical failure quota.",
+    "Source-slot clearance and bilateral contact alone do not mean a stable grasp/transport succeeded.",
+    "No release, retreat or post-retreat stable window occurred.",
+    "Actual object pose jump exceeded the unchanged declared limit; source-rack geometry penetration flag is retained.",
+    "H264 is a lossy viewing derivative; original numeric records remain authoritative."
+  ],
+  "source_files_unchanged": true
+}

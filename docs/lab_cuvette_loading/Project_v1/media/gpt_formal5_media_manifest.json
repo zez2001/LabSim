@@ -1,0 +1,798 @@
+{
+  "schema": "labsim.Project_v1.formal_gpt_media.v1",
+  "created_at_utc": "2026-10-26T12:52:53.265862+00:00",
+  "state_finished_verified": true,
+  "state_proof_sha256": "8af00d74c22fa2296c418acfc64c9bdcb1c4f21e873e72738568ceeb4b376e63",
+  "all_five_processes_closed_before_media_read": true,
+  "cohort_scope": "Five formal fixed-standard attempts, each in its own independent sequential process; debug pilots excluded.",
+  "cohort_counts": {
+    "attempts": 5,
+    "complete_task_successes": 0,
+    "valid_task_failures": 1,
+    "valid_failure_types": {
+      "GRASP_SLIP": 1
+    },
+    "physics_invalid_outcome_unknown": 4
+  },
+  "provider_identity_scope": "Cubence requested gpt-6-astra route; upstream identity not independently verified.",
+  "controller_hash_scope": {
+    "canonical_frozen_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+    "canonicalization": "SHA256 of UTF-8 json.dumps(controller.json, sort_keys=True, separators=(comma,colon))",
+    "wrapper_controller_sha256_actually_tools_source": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+    "raw_file_byte_sha256": "Listed separately for each attempt; not interchangeable with canonical controller hash."
+  },
+  "full_representative_attempt": {
+    "formal_attempt_number": 4,
+    "file": "gpt_formal04_of05_full_attempt.mp4",
+    "sha256": "ba1f1d6a346eec9376de76129f3933cdcae19a4d40a46293969d9bfb2284e550",
+    "bytes": 1997156,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 480,
+          "avg_frame_rate": "30/1",
+          "duration": "29.433333",
+          "nb_frames": "883",
+          "nb_read_frames": "883"
+        }
+      ],
+      "format": {
+        "duration": "29.434000",
+        "size": "1997156"
+      }
+    },
+    "source_video_sha256": "27075ed50277219c984e25b8267756ba218970cb519c719116cd02daa33dd6ec",
+    "source_video_bytes": 5971947,
+    "source_video_probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "mpeg4",
+          "width": 1280,
+          "height": 480,
+          "avg_frame_rate": "30/1",
+          "duration": "29.433333",
+          "nb_frames": "883",
+          "nb_read_frames": "883"
+        }
+      ],
+      "format": {
+        "duration": "29.434000",
+        "size": "5971947"
+      }
+    },
+    "source_frame_range_inclusive": [
+      0,
+      882
+    ],
+    "source_frame_count": 883,
+    "source_simulation_time_range_s": [
+      0.016666666666666666,
+      29.416666666666668
+    ],
+    "selection": "Every source frame from one same continuous attempt, original order, including final endpoint. No attempt stitching, frame skipping, time truncation, or playback speed change.",
+    "encoding": {
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "medium",
+      "pixel_format": "yuv420p",
+      "resolution_changed": false,
+      "frame_rate_changed": false,
+      "overlay_added": [
+        "FORMAL 04/5 | Cubence gpt-6-astra",
+        "FINAL RESULT: GRASP_SLIP"
+      ]
+    },
+    "ffmpeg_video_filter": "drawtext=fontfile=DejaVuSans.ttf:text='FORMAL 04/5 | Cubence gpt-6-astra':x=w-tw-8:y=8:fontsize=15:fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=3,drawtext=fontfile=DejaVuSans.ttf:text='FINAL RESULT\\: GRASP_SLIP':x=w-tw-8:y=29:fontsize=15:fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=3",
+    "full_decode_exit_code": 0,
+    "final_frame": {
+      "file": "gpt_formal04_of05_final_grasp_slip.png",
+      "sha256": "6d098fbba561ed6da77b40b8e931f726d7c79ece19ed365ed1487a170d0173ef",
+      "bytes": 301388,
+      "source_frame_index": 882,
+      "source_simulation_time_s": 29.416666666666668
+    },
+    "label_scope": "FINAL RESULT is the independent final verdict; intermediate POLICY phase and sampled simulation time are original source overlays."
+  },
+  "physics_invalid_contrast_frame": {
+    "formal_attempt_number": 5,
+    "file": "gpt_formal05_of05_final_physics_invalid.png",
+    "sha256": "c1f073e432fb3cacef1ada9e5f36ac305e30185d8459cb4f6b908025eefe4c72",
+    "bytes": 270366,
+    "source_video_sha256": "e4c96857a9317ca82ee1bfc47317007efb3b72d033bad2a690c39dc3d815f1bb",
+    "source_video_bytes": 6698262,
+    "source_frame_index": 970,
+    "source_simulation_time_s": 32.35,
+    "source_frame_count": 971,
+    "labels_added": [
+      "FORMAL 05/5 | Cubence gpt-6-astra",
+      "FINAL RESULT: PHYSICS_INVALID"
+    ],
+    "second_long_video_created": false
+  },
+  "attempts": [
+    {
+      "formal_attempt_number": 1,
+      "logical_source": "Project_v1/gpt_formal5_01/attempt_0000/episode_0000",
+      "episode_id": "5b21869b-4a1c-47b1-9588-39123a988204",
+      "source_code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "source_scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "frozen_controller_canonical_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_file_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "wrapper_controller_field_means_tools_source_sha256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "source_process": {
+        "status": "CLOSED",
+        "process_exited": true,
+        "exit_code": 0,
+        "process_proof_sha256": "88b0ebb17ba07dcede0fba062b2d9b5353ee30ffe8a6e2055889dc8b8229f8c6",
+        "wall_seconds": 308.4710935429903
+      },
+      "provider": "cubence",
+      "requested_model": "gpt-6-astra",
+      "api_decisions": 13,
+      "accepted_action_decisions": 12,
+      "accepted_tool_counts": {
+        "move_ee": 12
+      },
+      "all_tool_counts": {
+        "move_ee": 13
+      },
+      "protocol_rejections": 1,
+      "actual_control_ticks": 1438,
+      "measured_accepted_action_time_s": 23.96666666666667,
+      "simulation_end_s": 23.983333333333334,
+      "task_success": null,
+      "workflow_success": null,
+      "record_valid": false,
+      "failure_type": "PHYSICS_INVALID",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "source_slot_cleared": false,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 1.666000468656264e-08,
+        "orientation_change_deg": 3.423621675895667e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 20.983333333333334,
+        "end_t": 23.983333333333334
+      },
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [
+        "robot_contact_with_original_instrument_or_rack"
+      ],
+      "grasp_relative_pose": {
+        "reference_available": false,
+        "maximum_position_drift_m": null,
+        "maximum_orientation_drift_deg": null,
+        "maximum_configured_grasp_anchor_drift_m": null,
+        "maximum_configured_grasp_anchor_axial_drift_m": null,
+        "maximum_configured_grasp_anchor_transverse_drift_m": null,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "observed_events": {},
+      "object_truth_used": false,
+      "teacher_used": false,
+      "physics_paused_during_inference": true,
+      "source_files": [
+        {
+          "logical_source": "result.json",
+          "sha256": "558a43210677ed87d995e285664151dcca3545f43339593aa1970dfba9014ca0",
+          "bytes": 4009
+        },
+        {
+          "logical_source": "independent_score.json",
+          "sha256": "876c61d9ace27cb2da349b69fb4baab432270c629b244a9cd64c31753ccc7612",
+          "bytes": 3910
+        },
+        {
+          "logical_source": "release_metadata.json",
+          "sha256": "efdc8bfcaeb8f99b799b2ce7bd045e547bd40bb62cce4243fc6a50ba06f66ff1",
+          "bytes": 621
+        },
+        {
+          "logical_source": "video_timestamps.json",
+          "sha256": "6b49a848be3f990cb23303519a94ac21617d74faf9a8da6b4cbd4378276c14b6",
+          "bytes": 14418
+        },
+        {
+          "logical_source": "gpt_control/controller.json",
+          "sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+          "bytes": 8085
+        },
+        {
+          "logical_source": "gpt_control/policy_trace.jsonl",
+          "sha256": "0728267594e98125ec03f5b80f14414c663e07495118a304caa9b4be03a731b1",
+          "bytes": 107442
+        },
+        {
+          "logical_source": "gpt_control/summary.json",
+          "sha256": "e3b492df8e7e159923380ac3326eab1e05fe1fcc39f79044b1e683b6e9c3056e",
+          "bytes": 1198
+        }
+      ]
+    },
+    {
+      "formal_attempt_number": 2,
+      "logical_source": "Project_v1/gpt_formal5_01/attempt_0001/episode_0000",
+      "episode_id": "993b2c27-e75b-4b4a-af0d-bb7bff86dc80",
+      "source_code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "source_scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "frozen_controller_canonical_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_file_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "wrapper_controller_field_means_tools_source_sha256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "source_process": {
+        "status": "CLOSED",
+        "process_exited": true,
+        "exit_code": 0,
+        "process_proof_sha256": "b53b7a5ab7ee607f54d1bb85196af1b0aeb1622d2698f3720e917bbe4c077427",
+        "wall_seconds": 97.39882655499969
+      },
+      "provider": "cubence",
+      "requested_model": "gpt-6-astra",
+      "api_decisions": 4,
+      "accepted_action_decisions": 3,
+      "accepted_tool_counts": {
+        "move_ee": 3
+      },
+      "all_tool_counts": {
+        "move_ee": 3,
+        "null": 1
+      },
+      "protocol_rejections": 0,
+      "actual_control_ticks": 360,
+      "measured_accepted_action_time_s": 6.0,
+      "simulation_end_s": 6.083333333333333,
+      "task_success": null,
+      "workflow_success": null,
+      "record_valid": false,
+      "failure_type": "PHYSICS_INVALID",
+      "termination_reason": "PHYSICS_ACTION_EXECUTION_FAILURE",
+      "source_slot_cleared": false,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 2.9999999999999996,
+        "sample_count": 721,
+        "position_drift_m": 1.666000468656264e-08,
+        "orientation_change_deg": 3.3893845988869204e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 3.0833333333333335,
+        "end_t": 6.083333333333333
+      },
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [],
+      "grasp_relative_pose": {
+        "reference_available": false,
+        "maximum_position_drift_m": null,
+        "maximum_orientation_drift_deg": null,
+        "maximum_configured_grasp_anchor_drift_m": null,
+        "maximum_configured_grasp_anchor_axial_drift_m": null,
+        "maximum_configured_grasp_anchor_transverse_drift_m": null,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "observed_events": {},
+      "object_truth_used": false,
+      "teacher_used": false,
+      "physics_paused_during_inference": true,
+      "source_files": [
+        {
+          "logical_source": "result.json",
+          "sha256": "9ff1b40c10724fff5aa674027bc1d3584c804284b601ef9385107e9b29a6c656",
+          "bytes": 3968
+        },
+        {
+          "logical_source": "independent_score.json",
+          "sha256": "724afdbfb30e781ec41efd94db7666b228799ba694652fe16e5b05b471531a38",
+          "bytes": 3870
+        },
+        {
+          "logical_source": "release_metadata.json",
+          "sha256": "efdc8bfcaeb8f99b799b2ce7bd045e547bd40bb62cce4243fc6a50ba06f66ff1",
+          "bytes": 621
+        },
+        {
+          "logical_source": "video_timestamps.json",
+          "sha256": "f3c6b7083e4229d99408a54d68e58101d60911963d995d5a3c0042ff350d01d1",
+          "bytes": 3973
+        },
+        {
+          "logical_source": "gpt_control/controller.json",
+          "sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+          "bytes": 8085
+        },
+        {
+          "logical_source": "gpt_control/policy_trace.jsonl",
+          "sha256": "675fc4dbf44be2bacb4d02f2eb0e7ef3aabf92ededa850e6a12a54d8d41fb316",
+          "bytes": 22219
+        },
+        {
+          "logical_source": "gpt_control/summary.json",
+          "sha256": "d244eaebd1898d4f53814b669189b59a97ce59d1b71842cb2d12fbef6daadec0",
+          "bytes": 1250
+        }
+      ]
+    },
+    {
+      "formal_attempt_number": 3,
+      "logical_source": "Project_v1/gpt_formal5_01/attempt_0002/episode_0000",
+      "episode_id": "81d2d7f2-de36-463a-ab16-69df84ca3e0a",
+      "source_code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "source_scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "frozen_controller_canonical_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_file_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "wrapper_controller_field_means_tools_source_sha256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "source_process": {
+        "status": "CLOSED",
+        "process_exited": true,
+        "exit_code": 0,
+        "process_proof_sha256": "6a6273373f03893413db58ff71038caac57eeadb9fc2beb0e284cbf8a02a9f02",
+        "wall_seconds": 111.36227683199104
+      },
+      "provider": "cubence",
+      "requested_model": "gpt-6-astra",
+      "api_decisions": 3,
+      "accepted_action_decisions": 2,
+      "accepted_tool_counts": {
+        "move_ee": 2
+      },
+      "all_tool_counts": {
+        "move_ee": 2,
+        "null": 1
+      },
+      "protocol_rejections": 0,
+      "actual_control_ticks": 240,
+      "measured_accepted_action_time_s": 4.0,
+      "simulation_end_s": 5.916666666666667,
+      "task_success": null,
+      "workflow_success": null,
+      "record_valid": false,
+      "failure_type": "PHYSICS_INVALID",
+      "termination_reason": "PHYSICS_ACTION_EXECUTION_FAILURE",
+      "source_slot_cleared": false,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0000000000000004,
+        "sample_count": 721,
+        "position_drift_m": 1.666000468656264e-08,
+        "orientation_change_deg": 3.4065461496091986e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 2.9166666666666665,
+        "end_t": 5.916666666666667
+      },
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [],
+      "grasp_relative_pose": {
+        "reference_available": false,
+        "maximum_position_drift_m": null,
+        "maximum_orientation_drift_deg": null,
+        "maximum_configured_grasp_anchor_drift_m": null,
+        "maximum_configured_grasp_anchor_axial_drift_m": null,
+        "maximum_configured_grasp_anchor_transverse_drift_m": null,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "observed_events": {},
+      "object_truth_used": false,
+      "teacher_used": false,
+      "physics_paused_during_inference": true,
+      "source_files": [
+        {
+          "logical_source": "result.json",
+          "sha256": "e95e9d28ca1bfc04dc69efd0958435c15f6cb8533a90a29fea7a8ced76d90e0a",
+          "bytes": 3968
+        },
+        {
+          "logical_source": "independent_score.json",
+          "sha256": "52452024f1fd52b66b015226ac3bc0c72c8efeeda4ca67d19520a46470b7a054",
+          "bytes": 3870
+        },
+        {
+          "logical_source": "release_metadata.json",
+          "sha256": "efdc8bfcaeb8f99b799b2ce7bd045e547bd40bb62cce4243fc6a50ba06f66ff1",
+          "bytes": 621
+        },
+        {
+          "logical_source": "video_timestamps.json",
+          "sha256": "dbf2e7c4f1a925f0b7522085054015bc6e5dd2b672ad468435d87b7bfd272f43",
+          "bytes": 3884
+        },
+        {
+          "logical_source": "gpt_control/controller.json",
+          "sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+          "bytes": 8085
+        },
+        {
+          "logical_source": "gpt_control/policy_trace.jsonl",
+          "sha256": "a1f627f523be2b5ab49c3421fe0727d17d98083491b4912f09f5b589970b112f",
+          "bytes": 15349
+        },
+        {
+          "logical_source": "gpt_control/summary.json",
+          "sha256": "71f51b1397d34d2c50f248b52f998e0201b8b6e0ab3562d76537e07fd75ff8e9",
+          "bytes": 1251
+        }
+      ]
+    },
+    {
+      "formal_attempt_number": 4,
+      "logical_source": "Project_v1/gpt_formal5_01/attempt_0003/episode_0000",
+      "episode_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1",
+      "source_code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "source_scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "frozen_controller_canonical_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_file_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "wrapper_controller_field_means_tools_source_sha256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "source_process": {
+        "status": "CLOSED",
+        "process_exited": true,
+        "exit_code": 0,
+        "process_proof_sha256": "7807fc1b5b28162ea329c5eeb1843c22a6ba7f7651e70b2a66e69cf765ffb4af",
+        "wall_seconds": 499.40316154499305
+      },
+      "provider": "cubence",
+      "requested_model": "gpt-6-astra",
+      "api_decisions": 18,
+      "accepted_action_decisions": 16,
+      "accepted_tool_counts": {
+        "move_ee": 15,
+        "gripper": 1
+      },
+      "all_tool_counts": {
+        "move_ee": 15,
+        "gripper": 1,
+        "observe": 1,
+        "finish": 1
+      },
+      "protocol_rejections": 0,
+      "actual_control_ticks": 1764,
+      "measured_accepted_action_time_s": 29.4,
+      "simulation_end_s": 29.416666666666668,
+      "task_success": false,
+      "workflow_success": false,
+      "record_valid": true,
+      "failure_type": "GRASP_SLIP",
+      "termination_reason": "POLICY_FINISH_REQUEST",
+      "source_slot_cleared": true,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 1.938583229669584e-07,
+        "orientation_change_deg": 9.797215345799486e-05,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 26.416666666666668,
+        "end_t": 29.416666666666668
+      },
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE",
+        "SOURCE_RACK_GEOMETRY_PENETRATION"
+      ],
+      "invalid_state_reasons": [],
+      "grasp_relative_pose": {
+        "reference_available": true,
+        "maximum_position_drift_m": 0.01455596254592037,
+        "maximum_orientation_drift_deg": 7.070901246154043,
+        "maximum_configured_grasp_anchor_drift_m": 0.014384316580720577,
+        "maximum_configured_grasp_anchor_axial_drift_m": 0.014260688301088755,
+        "maximum_configured_grasp_anchor_transverse_drift_m": 0.002640859131087905,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "observed_events": {
+        "bilateral_grasp_observed": {
+          "t": 23.545833333333334,
+          "physics_step": 5651,
+          "actual_force_N": [
+            0.12259755283594131,
+            0.09196335822343826
+          ]
+        },
+        "actual_lift_started": {
+          "t": 23.7375,
+          "physics_step": 5697,
+          "actual_lift_m": 0.0010733645771632272
+        },
+        "source_slot_cleared": {
+          "t": 25.1375,
+          "physics_step": 6033,
+          "actual_bottom_world_z_m": 0.7700340727286566,
+          "source_rim_world_z_m": 0.768
+        }
+      },
+      "object_truth_used": false,
+      "teacher_used": false,
+      "physics_paused_during_inference": true,
+      "source_files": [
+        {
+          "logical_source": "result.json",
+          "sha256": "6f69b3c7c7b82a27d2392dbdcc4a8943c850326efa1860365e34e62699a96da0",
+          "bytes": 5061
+        },
+        {
+          "logical_source": "independent_score.json",
+          "sha256": "eb4900fe808fb4f21eec92fb7962a6599c994ec6a318d11d5c52d8ff9f32d41c",
+          "bytes": 4963
+        },
+        {
+          "logical_source": "release_metadata.json",
+          "sha256": "efdc8bfcaeb8f99b799b2ce7bd045e547bd40bb62cce4243fc6a50ba06f66ff1",
+          "bytes": 621
+        },
+        {
+          "logical_source": "video_timestamps.json",
+          "sha256": "d7ee7a96f6cfde8b6ea4d84e78bd89840fe870672cb204e4af226600c1e8c9c4",
+          "bytes": 17628
+        },
+        {
+          "logical_source": "gpt_control/controller.json",
+          "sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+          "bytes": 8085
+        },
+        {
+          "logical_source": "gpt_control/policy_trace.jsonl",
+          "sha256": "325b183d9dc95ceb9a4022ad7f19ef766c8b3100188ab71e6ddc3f405512c35c",
+          "bytes": 152802
+        },
+        {
+          "logical_source": "gpt_control/summary.json",
+          "sha256": "b48e76ea00f903bf97ca4d4cd48da2129e3ff270ba64115cb929f0c8a68d15a7",
+          "bytes": 1180
+        }
+      ]
+    },
+    {
+      "formal_attempt_number": 5,
+      "logical_source": "Project_v1/gpt_formal5_01/attempt_0004/episode_0000",
+      "episode_id": "d033ee0b-c695-44de-8318-693baf5f810c",
+      "source_code_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+      "source_scene_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+      "frozen_controller_canonical_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+      "controller_file_bytes_sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+      "wrapper_controller_field_means_tools_source_sha256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "source_process": {
+        "status": "CLOSED",
+        "process_exited": true,
+        "exit_code": 0,
+        "process_proof_sha256": "0411b5f94805950a81b169853be92fd90608f34f4fbc3032a0c46e93ec7e27dc",
+        "wall_seconds": 437.4721545309876
+      },
+      "provider": "cubence",
+      "requested_model": "gpt-6-astra",
+      "api_decisions": 17,
+      "accepted_action_decisions": 17,
+      "accepted_tool_counts": {
+        "move_ee": 15,
+        "gripper": 2
+      },
+      "all_tool_counts": {
+        "move_ee": 15,
+        "gripper": 2
+      },
+      "protocol_rejections": 0,
+      "actual_control_ticks": 1940,
+      "measured_accepted_action_time_s": 32.333333333333336,
+      "simulation_end_s": 32.35,
+      "task_success": null,
+      "workflow_success": null,
+      "record_valid": false,
+      "failure_type": "PHYSICS_INVALID",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "source_slot_cleared": true,
+      "grasp_success": false,
+      "transport_success": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "terminal_window": {
+        "status": "complete",
+        "stable": true,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 7.450580596923828e-09,
+        "orientation_change_deg": 4.829673078902933e-06,
+        "criteria": {
+          "position_stable": true,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 29.35,
+        "end_t": 32.35
+      },
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "invalid_state_reasons": [
+        "robot_contact_with_original_instrument_or_rack"
+      ],
+      "grasp_relative_pose": {
+        "reference_available": true,
+        "maximum_position_drift_m": 0.026849492805193477,
+        "maximum_orientation_drift_deg": 3.0742981414123682,
+        "maximum_configured_grasp_anchor_drift_m": 0.026798266045753045,
+        "maximum_configured_grasp_anchor_axial_drift_m": 0.026797224726636957,
+        "maximum_configured_grasp_anchor_transverse_drift_m": 0.0003876758530020513,
+        "configured_grasp_anchor_height_m": 0.053,
+        "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+        "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+        "position_limit_m": 0.0002,
+        "orientation_limit_deg": 1.0
+      },
+      "observed_events": {
+        "bilateral_grasp_observed": {
+          "t": 22.170833333333334,
+          "physics_step": 5321,
+          "actual_force_N": [
+            0.1426924169063568,
+            0.1256239265203476
+          ]
+        },
+        "actual_lift_started": {
+          "t": 22.320833333333333,
+          "physics_step": 5357,
+          "actual_lift_m": 0.0010826064253797174
+        },
+        "source_slot_cleared": {
+          "t": 23.704166666666666,
+          "physics_step": 5689,
+          "actual_bottom_world_z_m": 0.7700162638687891,
+          "source_rim_world_z_m": 0.768
+        }
+      },
+      "object_truth_used": false,
+      "teacher_used": false,
+      "physics_paused_during_inference": true,
+      "source_files": [
+        {
+          "logical_source": "result.json",
+          "sha256": "4c9e3424517e05ca595b4fbaef557d6fe65d7d9965bb01fe938d494645c7e9b1",
+          "bytes": 5429
+        },
+        {
+          "logical_source": "independent_score.json",
+          "sha256": "170d5a36c70ca42204a56ef28a0194be178e4dd04218e9278faa9b1986ec9c16",
+          "bytes": 5330
+        },
+        {
+          "logical_source": "release_metadata.json",
+          "sha256": "efdc8bfcaeb8f99b799b2ce7bd045e547bd40bb62cce4243fc6a50ba06f66ff1",
+          "bytes": 621
+        },
+        {
+          "logical_source": "video_timestamps.json",
+          "sha256": "472517291335c2c3a66f591217569c37c5542f1c0593ae50aa59bd351e7da920",
+          "bytes": 19332
+        },
+        {
+          "logical_source": "gpt_control/controller.json",
+          "sha256": "f0ec04c85b6e6c3d5080443847deff73142b6e3648c5775bed850e2144a3412a",
+          "bytes": 8085
+        },
+        {
+          "logical_source": "gpt_control/policy_trace.jsonl",
+          "sha256": "3f5fa912da653689dcde89d361d932801870555158d86d7efcf89bda970489de",
+          "bytes": 142239
+        },
+        {
+          "logical_source": "gpt_control/summary.json",
+          "sha256": "b46c2675ab4b8c56ab025625a0b3d9c4cc3876a1e281d568c9c145f5ddf25e60",
+          "bytes": 1185
+        }
+      ]
+    }
+  ],
+  "interpretation": [
+    "Formal attempt4 is a valid GRASP_SLIP task failure, not a successful grasp or held transport: source-slot clearance occurred but grasp_success=false and transport_success=false.",
+    "Its final terminal_window was stable in place, but post_retreat_window remains unavailable and stable=null. Terminal stability cannot be called successful loading/release/retreat.",
+    "Formal attempt5 cleared the source before a robot/environment collision; final task_success=null and record_valid=false.",
+    "No formal attempt completed insertion, release, retreat and post-retreat stability. One valid failure and four physics-invalid records remain separate categories.",
+    "All pose/contact quality flags and unchanged acceptance limits remain recorded.",
+    "The fixed-standard five-attempt results do not estimate broad generalization or certify real-world precision."
+  ],
+  "source_files_unchanged": true,
+  "H5_files_opened_for_media": false
+}

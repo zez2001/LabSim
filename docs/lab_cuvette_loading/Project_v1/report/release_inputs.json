@@ -1,0 +1,184 @@
+{
+  "finalized": true,
+  "date": "2026年10月26日",
+  "runtime_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+  "teacher_runtime_commit": "43649a259112846bbc9b25acf2c3945b421a2281",
+  "formal_fingerprint": "a0f3cf36edd1472a7e7a3b88c9c9f745487523904ab8a9cede1637e49fee397e",
+  "conclusion": "Project_v1已完成公开资产获取、同机干净checkout的完整teacher演示、统一接口与新数据闭合。固定standard场景teacher正式5/5成功。GPT已实际完成图像闭环和冻结配置5次尝试，未取得完整成功：1条有效抓持滑移失败，4条物理无效且任务结果未知。",
+  "teacher": {
+    "result": "5/5",
+    "sim_seconds": "105.82/集",
+    "wall_seconds": "874.25-934.01/集",
+    "control_steps": "6348/集",
+    "note": "同进程5集均实际支撑、脱指、退让及稳定3秒；进程总4477.79秒"
+  },
+  "controlled_failure": {
+    "result": "0/1",
+    "sim_seconds": "66.37",
+    "wall_seconds": "496.55",
+    "control_steps": "3981",
+    "note": "5 mm插入阈值受控停止；记录有效，未开爪或退让，不是自然失败"
+  },
+  "gpt_summary": {
+    "result": "0/5尝试",
+    "sim_seconds": "合计97.75",
+    "wall_seconds": "合计1413.15",
+    "control_steps": "5860",
+    "note": "0完整成功；1有效抓持滑移失败，4物理无效且任务结果未知"
+  },
+  "gpt_pilots": [
+    {
+      "requests": 4,
+      "actions": 0,
+      "sim_seconds": 0.016666666666666666,
+      "wall_seconds": 62.44053307903232,
+      "outcome": "本地上下文保护；3拒绝加1观察，0运动，任务未知",
+      "episode_id": "52747694-71a8-46db-aa1d-1eb31a05b6eb",
+      "task_success": null,
+      "record_valid": false,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/debug_pilots_summary.json"
+    },
+    {
+      "requests": 6,
+      "actions": 5,
+      "sim_seconds": 8.866666666666667,
+      "wall_seconds": 120.99055133404909,
+      "outcome": "环境碰撞；未抓取，任务未知、记录无效；末动作仅0.85秒",
+      "episode_id": "7dc81135-60fd-47d2-91f3-3348938a65a2",
+      "task_success": null,
+      "record_valid": false,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/debug_pilots_summary.json"
+    },
+    {
+      "requests": 14,
+      "actions": 14,
+      "sim_seconds": 26.116666666666667,
+      "wall_seconds": 418.4781048700097,
+      "outcome": "曾接触、抬升和离架，后位姿跳变；未稳定抓取或搬运，任务未知",
+      "episode_id": "4aaa761d-8b05-409f-a7ac-d2bc719fe80f",
+      "task_success": null,
+      "record_valid": false,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/debug_pilots_summary.json"
+    }
+  ],
+  "gpt_formal": [
+    {
+      "requests": 13,
+      "actions": 12,
+      "sim_seconds": 23.983333333333334,
+      "wall_seconds": 300.06239626801107,
+      "outcome": "环境碰撞安全停；未离架，任务未知、记录无效",
+      "episode_id": "5b21869b-4a1c-47b1-9588-39123a988204",
+      "task_success": null,
+      "record_valid": false,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/formal5_summary.json"
+    },
+    {
+      "requests": 4,
+      "actions": 4,
+      "sim_seconds": 6.083333333333333,
+      "wall_seconds": 89.07277963595698,
+      "outcome": "控制或IK部分执行后安全停；3完整加1部分，任务未知、记录无效",
+      "episode_id": "993b2c27-e75b-4b4a-af0d-bb7bff86dc80",
+      "task_success": null,
+      "record_valid": false,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/formal5_summary.json"
+    },
+    {
+      "requests": 3,
+      "actions": 3,
+      "sim_seconds": 5.916666666666667,
+      "wall_seconds": 102.9974846499972,
+      "outcome": "控制或IK部分执行后安全停；2完整加1部分，任务未知、记录无效",
+      "episode_id": "81d2d7f2-de36-463a-ab16-69df84ca3e0a",
+      "task_success": null,
+      "record_valid": false,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/formal5_summary.json"
+    },
+    {
+      "requests": 18,
+      "actions": 16,
+      "sim_seconds": 29.416666666666668,
+      "wall_seconds": 492.00037761201384,
+      "outcome": "GRASP_SLIP有效任务失败；曾离架，未搬运，task=false",
+      "episode_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1",
+      "task_success": false,
+      "record_valid": true,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/formal5_summary.json"
+    },
+    {
+      "requests": 17,
+      "actions": 17,
+      "sim_seconds": 32.35,
+      "wall_seconds": 429.02131405303953,
+      "outcome": "曾离架后环境碰撞；任务未知、记录无效，未搬运",
+      "episode_id": "d033ee0b-c695-44de-8318-693baf5f810c",
+      "task_success": null,
+      "record_valid": false,
+      "source_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/formal5_summary.json"
+    }
+  ],
+  "gpt_capabilities": "Cubence Responses API的文本、实际相机图像、结构化工具与多轮反馈已真实验证；请求与返回模型名为gpt-6-astra，未独立认证底层模型身份。原始640×480 PNG曾超时；512×384 JPEG low通过。1次high-detail响应缺模型名，另列为身份未确认，不推断发生模型替换。",
+  "gpt_freeze": "正式5次为5个顺序关闭的单集Isaac进程，使用同一冻结模型、提示词、工具、限幅、评分与standard场景，期间未调参。图像最长边512、JPEG质量60、detail=low。独立进程用于存储保护，场景未随机化；控制器完整SHA见末页。",
+  "gpt_classification": "正式55次请求均返回匹配模型名；无服务失败或预算结束。5次中2次环境碰撞、2次已知控制或IK部分执行后停机，均保留task_success=null、record_valid=false；第4次为有效GRASP_SLIP失败。曾出现接触、抬升和离架事件，但grasp_success/transport_success均未通过；没有插入、释放、退让或装载稳定成功。55份实际公开输入JSON、110张传输JPEG、动作时序与暂停区间核验通过。",
+  "gpt_budget": "全部探针、3次调试与5次正式尝试共95次网络请求；正式55次。返回usage累计446950输入token（含11392缓存）和14496输出token，按配置价格估算5.091772美元；7次超时未知usage保守预留0.702690美元，预算占用合计5.794462美元，正式部分3.656570美元。未耗尽30美元/1500次上限。5次重试、无HTTP429；参数错误探针仅超时，未验证400/422拒绝。以上不是供应方实付账单。",
+  "clean_checkout": "已从公开codex/labsim代码建立同机新目录，运行资产来自无凭据、空缓存的固定revision公开下载；复用已验证的Isaac安装。GUI完整teacher在d09c5ff代码上真实成功；正式headless评测在43649a2代码上单个Isaac进程连续5集，随后另采1条5 mm受控失败。6集实际初始关节、夹指及器皿位姿完全一致，确认连续reset及重新启动恢复。",
+  "validation_summary": "CPU契约214通过、1跳过；最小CPU环境缺h5py的样例测试，已由真实Isaac环境的H5读取另行验证。6集teacher/受控失败各22项审计与ACT/DP读取通过；全部进程关闭后才打开H5。7a7cbb运行代码已推送，GitHub CPU contracts于run 40317505769完成且success；CPU与GPU结果分别记录。",
+  "new_data": "本轮正式5成功和1条受控失败共35721个转换，全部6集逐集22项审计通过，并由正常ACT/DP reader分别重新打开。成功筛选接受5条；失败筛选只接受受控停止1条；all_valid接受6条。受控失败post_retreat_window不可用、stable_after_retreat未知；中止前terminal窗口stable=false单列，未补零或冒称已测退让稳定。完整H5与高频旁文件保存在本轮运行目录，未上传Git或初次HF发布。 GPT正式第4次的1764转换有效失败已通过正常ACT/DP读取，其余4条无效记录不作为合格任务失败或成功BC数据。未执行模型或优化器训练。",
+  "remaining": "GPT仍未完成完整装载，且预算未耗尽，不能把结果解释为预算不足。下一版本需依据碰撞、控制/IK部分执行和抓持滑移证据改进通用控制与视觉反馈，再重新冻结评测；本轮不在正式结果中调参或由teacher接管。固定场景确定性5次重复不代表跨资产、随机布局或真机成功率。",
+  "delivery_status": "运行代码7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0已推送，所对应GitHub CPU contracts成功。包含本报告的最终交付提交与远端核对由阅读包文件清单记录；运行代码、资产和评分对应关系以发布manifest为准。",
+  "poster": "docs/lab_cuvette_loading/Project_v1/media/06_final_stable.png",
+  "poster_caption": "本轮GUI teacher完整同一次运行，105.8167秒，独立测得退让后3秒稳定窗结束。图像属于d09c5ff代码与75d288场景指纹，和正式重复评测快照分开保存。",
+  "media": [
+    {
+      "label": "完整teacher双视角录像 105.83秒",
+      "path": "docs/lab_cuvette_loading/Project_v1/media/teacher_full_continuous.mp4"
+    },
+    {
+      "label": "GPT调试03完整尝试 26.13秒 物理无效",
+      "path": "docs/lab_cuvette_loading/Project_v1/media/gpt_pilot03_full_attempt.mp4"
+    },
+    {
+      "label": "GPT正式第4次完整尝试 29.43秒 抓持滑移失败",
+      "path": "docs/lab_cuvette_loading/Project_v1/media/gpt_formal04_of05_full_attempt.mp4"
+    }
+  ],
+  "evidence": [
+    {
+      "label": "teacher5与受控失败 逐集结果和关闭证明",
+      "path": "docs/lab_cuvette_loading/Project_v1/evaluation/standard5_and_controlled_failure_01_summary.json"
+    },
+    {
+      "label": "GPT全部正式5次结果 真实输入与动作审计",
+      "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/formal5_summary.json"
+    },
+    {
+      "label": "GPT全部调试与预算能力证据",
+      "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/budget_capability_summary.json"
+    },
+    {
+      "label": "公开发布 固定revision与匿名下载摘要",
+      "path": "docs/lab_cuvette_loading/Project_v1/assets/release_status_summary_20261026.json"
+    },
+    {
+      "label": "公开完整H5样例 匿名下载与ACT DP读取",
+      "path": "docs/lab_cuvette_loading/Project_v1/data/public_sample_anonymous_verification.json"
+    },
+    {
+      "label": "已执行运行代码的GitHub CI结果",
+      "path": "docs/lab_cuvette_loading/Project_v1/validation/runtime_ci_actual.json"
+    }
+  ],
+  "gpt_controller_sha256": "af2238443e8210b6b53243d297603c22ca4e8a654b415562a7c9dc8b726e2b85",
+  "metric_scope": {
+    "wall_seconds": "Episode result.json wall_seconds in report tables; process startup and provider loop scopes remain separately recorded in source evidence.",
+    "gpt_action_counts": "Native executed generic actions including partial execution; observe/finish and rejections do not count as motion.",
+    "teacher_and_aggregate_steps": "Actual executed control ticks, not policy API calls."
+  },
+  "source_evidence": {
+    "formal_summary_sha256": "9f8bc481c228ac77a332cb060451a9cd436773048e2a2d864e5b55f33a282b9d",
+    "budget_summary_sha256": "a208eecd7f20c2280871b0840c3864f0ff6f361536a3507717def7ad2ad8bd22",
+    "labels_rewritten": false,
+    "final_delivery_commit": "Recorded by the final reading package manifest; no future SHA embedded"
+  }
+}
