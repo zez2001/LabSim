@@ -58,3 +58,6 @@ from tasks.lab_cuvette_loading_env_v1 import LabCuvetteLoadingEnvV1
 register_task("lab_cuvette_env_v1", LabCuvetteLoadingEnvV1)
 
 register_task("lab_cuvette_size_v1", LabCuvetteLoadingEnvV1)
+
+from tasks.lab_cuvette_loading_project_v1 import LabCuvetteProjectV1
+register_task("lab_cuvette_project_v1", LabCuvetteProjectV1)

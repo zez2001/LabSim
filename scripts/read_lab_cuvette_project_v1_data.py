@@ -1,0 +1,45 @@
+"""Read a real recorded Project_v1 episode/index through the normal ACT/DP reader."""
+import json
+from pathlib import Path
+import h5py
+import numpy as np
+import torch
+from torch.utils.data import DataLoader
+from policy.dataset.lab_cuvette_project_v1_dataset import LabCuvetteProjectV1Dataset
+
+
+def read_check(path, *, sample_filter='success', policies=('act', 'dp')):
+    path = Path(path)
+    if path.is_dir():
+        candidates = [path / 'episode_data.hdf5', path / 'dataset/episode_0000.h5']
+        path = next((p for p in candidates if p.is_file()), candidates[0])
+    shape = dict(obs={
+        'side_camera_rgb': dict(shape=[3, 256, 256], type='rgb'),
+        'wrist_camera_rgb': dict(shape=[3, 256, 256], type='rgb'),
+        'agent_pose': dict(shape=[8], type='low_dim')}, action=dict(shape=[8]))
+    results = []
+    for policy in policies:
+        dataset = LabCuvetteProjectV1Dataset(shape_meta=shape, dataset_path=path,
+            horizon=16, n_obs_steps=1 if policy == 'act' else 3, policy_type=policy,
+            sample_filter=sample_filter, val_ratio=0)
+        batch = next(iter(DataLoader(dataset, batch_size=min(3, len(dataset)), num_workers=0)))
+        def describe(value):
+            if isinstance(value, dict):
+                return {key: describe(item) for key, item in value.items()}
+            return dict(shape=list(value.shape), dtype=str(value.dtype), finite=bool(torch.isfinite(value).all()))
+        with h5py.File(path, 'r') as source:
+            checks = []
+            for episode, group_path in dataset.group_paths.items():
+                group = source[group_path]
+                dt = group['next_timestamp'][:] - group['timestamp'][:]
+                checks.append(dict(episode_id=episode, transitions=len(dt),
+                    observation_action_time_aligned=bool(np.allclose(dt, 1 / 60, atol=1e-6)),
+                    action_shape=list(group['actions'].shape),
+                    executed_command_shape=list(group['control_auxiliary/command_q'].shape),
+                    source_slot_id=str(group.attrs['source_slot_id']), target_seat_id=str(group.attrs['target_seat_id']),
+                    asset_id=str(group.attrs['asset_id']), record_valid=bool(group.attrs['record_valid']),
+                    task_success=bool(group.attrs['task_success']), condition_group=str(group.attrs['condition_group'])))
+        results.append(dict(policy_type=policy, episodes=list(dataset.group_paths), scene_fingerprint=dataset.scene_fingerprint,
+            batch=describe(batch), episode_checks=checks, training_or_optimizer_executed=False))
+    return dict(schema='labsim.Project_v1.reader_check.v1', path=str(path),
+        sample_filter=sample_filter, reader_validation=results, source_labels_modified=False)

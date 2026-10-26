@@ -28,3 +28,4 @@ register_collector("minimal_precision_insertion", MinimalPrecisionInsertionColle
 
 from data_collectors.lab_cuvette_env_v1_collector import LabCuvetteEnvV1Collector
 register_collector("lab_cuvette_env_v1", LabCuvetteEnvV1Collector)
+register_collector("lab_cuvette_project_v1", LabCuvetteEnvV1Collector)

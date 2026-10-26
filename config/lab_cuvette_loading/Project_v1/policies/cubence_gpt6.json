@@ -1,0 +1,37 @@
+{
+  "schema": "labsim.cubence_provider.v1",
+  "provider": "cubence",
+  "base_url": "https://api.cubence.ai/v1",
+  "model": "gpt-6-astra",
+  "credential_env": "CUBENCE_API_KEY",
+  "endpoint": "responses",
+  "request_timeout_s": 120,
+  "episode_timeout_s": 1800,
+  "max_output_tokens": 1024,
+  "max_context_messages": 12,
+  "max_context_input_tokens": 40000,
+  "max_requests": 1500,
+  "max_estimated_usd": 30.0,
+  "max_retries": 2,
+  "retry_delay_s": 1,
+  "reasoning_effort": "low",
+  "pricing": {
+    "source": "https://cubence.com/pricing",
+    "observed_date": "2026-10-26",
+    "input_usd_per_million": 10.0,
+    "output_usd_per_million": 50.0,
+    "cached_input_usd_per_million": 1.0,
+    "billing_note": "Published <=272000-token tier; account group multipliers are unknown. This is a local estimate, not a billing claim."
+  },
+  "action_limits": {
+    "max_translation_m": 0.04,
+    "max_rotation_rad": 0.15,
+    "max_linear_speed_m_s": 0.02,
+    "max_angular_speed_rad_s": 0.15,
+    "max_duration_s": 3.0,
+    "min_duration_s": 0.05,
+    "control_hz": 60,
+    "max_gripper_opening_m": 0.08,
+    "gripper_effort_limit_N": 8.0
+  }
+}

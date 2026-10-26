@@ -1,0 +1,14 @@
+defaults:
+  - train_act_image_workspace
+  - override task: lab_cuvette_project_v1_act
+  - _self_
+name: train_lab_cuvette_project_v1_act
+horizon: 16
+policy:
+  camera_names: [side_camera_rgb, wrist_camera_rgb]
+dataloader: {batch_size: 8, num_workers: 0}
+val_dataloader: {batch_size: 8, num_workers: 0}
+training:
+  resume: false
+  use_ema: false
+logging: {mode: disabled, project: labsim}

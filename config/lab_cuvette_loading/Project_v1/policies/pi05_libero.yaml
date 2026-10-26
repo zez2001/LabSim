@@ -1,0 +1,21 @@
+policy_id: RLinf-Pi05-LIBERO-130-fullshot-SFT
+backend: rpent_pi05
+checkpoint_env: LABSIM_PI05_CHECKPOINT
+runtime_python_env: LABSIM_POLICY_PYTHON
+rpent_root_env: RPENT_REPO_ROOT
+checkpoint_id: RLinf-Pi05-LIBERO-130-fullshot-SFT
+embodiment: libero
+expected_weights_sha256: 4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683
+policy_action_hz: 20.0
+control_hz: 60.0
+trained_translation_scale_m: 0.05
+trained_rotation_scale_rad: 0.5
+execution_translation_cap_m: 0.0005
+execution_rotation_cap_rad: 0.004
+maximum_chunk: 5
+gripper_single_finger_delta_m: 0.008
+gripper_effort_limit_N: 8.0
+truth_observation_allowed: false
+is_labsim_finetuned: false
+transfer_dynamics_calibrated: false
+adaptation_note: New per-axis caps respect the shared ProjectEnvironment norm speed limits at20Hz; this is an engineering transfer, not the historical Env_v1 controller.

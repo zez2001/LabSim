@@ -22,6 +22,7 @@ CONFIG = ROOT / "config/lab_cuvette_loading/Size_v1/standard.yaml"
 FROZEN = ROOT / "config/lab_cuvette_loading/Size_v1/frozen_scene.json"
 REGISTRY = ROOT / "assets/lab_cuvette_loading/Size_v1/registry.json"
 OUTPUT_ROOT = ROOT / "outputs/lab_cuvette_loading/Size_v1"
+PROJECT_CONFIG = ROOT / "config/lab_cuvette_loading/Project_v1/standard.yaml"
 
 
 def resolve_path(value):
@@ -44,6 +45,16 @@ def existing_file(value):
     return value
 
 
+def dataset_file(value):
+    value = resolve_path(value)
+    if value.is_dir():
+        for candidate in (value / "episode_data.hdf5", value / "dataset/episode_data.hdf5", value / "dataset/episode_0000.h5"):
+            if candidate.is_file():
+                return candidate
+        raise ValueError("No normal episode/index HDF5 found in " + str(value))
+    return existing_file(value)
+
+
 def sha256(path):
     digest = hashlib.sha256()
     with Path(path).open("rb") as stream:
@@ -63,15 +74,52 @@ def parser():
     doctor = commands.add_parser("doctor", help="CPU-only runtime, LFS and frozen-scene checks")
     doctor.add_argument("--json", action="store_true", help="Print a machine-readable diagnostic")
     assets = commands.add_parser("assets", help="List registered size hypotheses; no simulation")
+    assets.add_argument("operation", nargs="?", choices=("list", "download", "install", "check"), default="list")
     assets.add_argument("--asset-id")
     assets.add_argument("--json", action="store_true")
+    assets.add_argument("--cache", type=Path)
+    assets.add_argument("--asset-root", type=Path)
+    assets.add_argument("--private-root", type=Path)
+    assets.add_argument("--offline", action="store_true")
     demo = commands.add_parser("demo", help="Run one complete frozen standard teacher episode (GUI by default)")
     demo.add_argument("--output", required=True, help="New output directory; never overwrite an episode")
     demo.add_argument("--headless", action="store_true")
+    demo.add_argument("--gui", action="store_true")
+    demo.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
+    demo.add_argument("--scene", choices=("standard",), default="standard")
+    demo.add_argument("--backend", choices=("teacher", "gpt6"), default="teacher")
+    demo.add_argument("--provider-config")
+    demo.add_argument("--budget-ledger")
+    demo.add_argument("--max-calls", type=int, default=160)
     demo.add_argument("--dry-run", action="store_true")
+    evaluation = commands.add_parser("eval", help="Sequential physical episodes with the same independent scorer")
+    for flag in ("--headless", "--gui", "--dry-run"):
+        evaluation.add_argument(flag, action="store_true")
+    evaluation.add_argument("--output", required=True)
+    evaluation.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
+    evaluation.add_argument("--scene", choices=("standard",), default="standard")
+    evaluation.add_argument("--backend", choices=("teacher", "gpt6"), default="teacher")
+    evaluation.add_argument("--episodes", type=int, default=5)
+    evaluation.add_argument("--provider-config")
+    evaluation.add_argument("--budget-ledger")
+    evaluation.add_argument("--max-calls", type=int, default=160)
+    serve = commands.add_parser("serve", help="Loopback policy RPC for existing Harness/pi0.5 adapters; physics pauses between requests")
+    serve.add_argument("--output", required=True)
+    serve.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
+    serve.add_argument("--scene", choices=("standard",), default="standard")
+    serve.add_argument("--port", type=int, default=8097)
+    serve.add_argument("--headless", action="store_true")
+    serve.add_argument("--dry-run", action="store_true")
+    serve.set_defaults(backend="rpc", episodes=1)
     collect = commands.add_parser("collect", help="Existing sequential standard collector; one Isaac process at a time")
-    collect.add_argument("--phase", required=True, choices=("verify5", "success", "controlled_failure"))
-    collect.add_argument("--collection", required=True, help="Dedicated directory below outputs/lab_cuvette_loading/Size_v1")
+    collect.add_argument("--phase", choices=("verify5", "success", "controlled_failure"), help="Explicit historical Size_v1 collector")
+    collect.add_argument("--collection", help="Dedicated historical Size_v1 collection")
+    collect.add_argument("--output", help="New Project_v1 episode directory")
+    collect.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
+    collect.add_argument("--scene", choices=("standard",), default="standard")
+    collect.add_argument("--backend", choices=("teacher",), default="teacher")
+    collect.add_argument("--episodes", type=int, default=1)
+    collect.add_argument("--controlled-stop-depth-mm", type=float)
     collect.add_argument("--episodes-per-process", type=int, choices=range(1, 6), default=5)
     collect.add_argument("--max-processes", type=int, default=8)
     collect.add_argument("--allow-after-verified-five", action="store_true")
@@ -83,7 +131,7 @@ def parser():
     validate.add_argument("--output", required=True, help="New JSON audit path")
     validate.add_argument("--dry-run", action="store_true")
     dataset = commands.add_parser("dataset-check", help="Read actual ACT/DP batches from an existing index; never train")
-    dataset.add_argument("--index", required=True)
+    dataset.add_argument("--index", "--path", dest="index", required=True)
     dataset.add_argument("--sample-filter", choices=("success", "failure"), default="success")
     dataset.add_argument("--policy", choices=("act", "dp", "both"), default="both")
     dataset.add_argument("--output", required=True, help="New JSON read-check path")
@@ -117,15 +165,30 @@ def closed_collection(collection):
 
 def build_command(args):
     """Build real subprocess argv without shell interpolation or output writes."""
-    if args.command == "demo":
+    if args.command in ("demo", "eval", "serve") or (args.command == "collect" and args.phase is None):
+        if not args.output:
+            raise ValueError("Project_v1 collection requires --output; historical collection uses --phase and --collection")
         output = new_path(args.output)
-        command = ["bash", str(ROOT / "demos/lab_cuvette_size_v1/run.sh"),
-            "--mode", "teacher", "--config", str(CONFIG), "--layout-mode", "standard",
-            "--seed", "0", "--episodes", "1", "--output", str(output)]
+        episodes = 1 if args.command == "demo" else args.episodes
+        if not 1 <= episodes <= 20:
+            raise ValueError("--episodes must be1..20")
+        if getattr(args, "gui", False) and args.headless:
+            raise ValueError("Choose --gui or --headless")
+        command = [sys.executable, "-m", "demos.lab_cuvette_project_v1.run",
+            "--backend", args.backend, "--config", str(PROJECT_CONFIG), "--layout-mode", args.scene,
+            "--seed", "0", "--episodes", str(episodes), "--output", str(output)]
         if args.headless:
             command.append("--headless")
+        for name in ("provider_config", "budget_ledger", "max_calls", "controlled_stop_depth_mm", "port"):
+            value = getattr(args, name, None)
+            if name == "max_calls" and args.backend != "gpt6":
+                continue
+            if value is not None:
+                command += ["--" + name.replace("_", "-"), str(value)]
         return command
     if args.command == "collect":
+        if not args.collection:
+            raise ValueError("Historical --phase requires --collection")
         collection = collection_path(args.collection)
         if args.max_processes < 1:
             raise ValueError("--max-processes must be positive")
@@ -154,7 +217,7 @@ def build_command(args):
             str(collection), "--config", str(CONFIG), "--frozen-scene", str(FROZEN),
             "--admission-scope", "official_collection", "--index", str(index), "--output-json", str(output)]
     if args.command == "dataset-check":
-        index, output = existing_file(args.index), new_path(args.output)
+        index, output = dataset_file(args.index), new_path(args.output)
         return [sys.executable, str(Path(__file__).resolve()), "dataset-check", "--index", str(index),
             "--sample-filter", args.sample_filter, "--policy", args.policy, "--output", str(output)]
     raise ValueError("No subprocess command for " + args.command)
@@ -169,97 +232,67 @@ def frozen_check():
 
 
 def doctor_report():
-    """Do not import SimulationApp, initialize CUDA or edit/install anything."""
-    modules = {}
+    """Portable CPU-only preflight; never starts SimulationApp or installs packages."""
+    from demos.lab_cuvette_project_v1.runtime import isaac_paths, geometry_site, usd_environment
+    result = dict(schema="labsim.project_doctor.v2", repository=str(ROOT), python=sys.executable,
+        python_version=sys.version.split()[0], simulation_started=False, GPU_initialized=False,
+        files_modified=False, config=str(PROJECT_CONFIG), warnings=[], errors=[])
+    result["modules"] = {}
     for name in ("omegaconf", "h5py", "numpy", "torch", "cv2", "scipy", "isaacsim"):
         try:
             spec = importlib.util.find_spec(name)
-            modules[name] = dict(available=spec is not None, origin=spec.origin if spec else None)
+            result["modules"][name] = dict(available=spec is not None, origin=spec.origin if spec else None)
+            if spec is None:
+                result["errors"].append("Missing runtime module: " + name)
         except (ImportError, ValueError) as error:
-            modules[name] = dict(available=False, error=str(error))
-    versions = {}
-    for name in ("isaacsim", "numpy", "omegaconf", "h5py", "torch"):
-        try:
-            versions[name] = importlib.metadata.version(name)
-        except importlib.metadata.PackageNotFoundError:
-            versions[name] = None
-    result = dict(schema="labsim.project_doctor.v1", repository=str(ROOT), python=sys.executable,
-        python_version=sys.version.split()[0], modules=modules, versions=versions,
-        simulation_started=False, GPU_initialized=False, files_modified=False,
-        config=str(CONFIG), frozen_manifest=str(FROZEN), warnings=[], errors=[])
+            result["modules"][name] = dict(available=False, error=str(error))
+            result["errors"].append("Runtime module lookup failed: " + name)
     if sys.version_info[:2] != (3, 11):
-        result["errors"].append("Validated Isaac Sim5.1 runtime requires Python3.11; select it with LABSIM_PYTHON")
-    missing = [name for name, value in modules.items() if not value["available"]]
-    if missing:
-        result["errors"].append("Missing runtime modules: " + ", ".join(missing))
+        result["errors"].append("Isaac Sim5.1 requires Python3.11; select existing runtime with LABSIM_PYTHON")
     try:
-        manifest = json.loads(FROZEN.read_text())
-        paths = {ROOT / key for key in manifest["assets"]}
-        registry = json.loads(REGISTRY.read_text())
-        paths.update(ROOT / item["asset_path"] for item in registry["assets"].values())
-        pointers = [str(path.relative_to(ROOT)) for path in sorted(paths) if path.is_file() and lfs_pointer(path)]
-        absent = [str(path.relative_to(ROOT)) for path in sorted(paths) if not path.is_file()]
-        result["assets"] = dict(registered_variants=len(registry["assets"]),
-            inspected_files=len(paths), missing=absent, LFS_pointers=pointers)
-        if pointers or absent:
-            result["errors"].append("Missing asset contents; run git lfs pull and re-run doctor")
-    except (ValueError, KeyError, OSError) as error:
-        result["errors"].append("Asset manifest check: " + str(error))
-    try:
-        result["frozen_scene"] = frozen_check()
-    except Exception as error:
-        result["errors"].append("Frozen-scene check: " + str(error))
-    try:
-        from omegaconf import OmegaConf
-        cfg = OmegaConf.load(CONFIG)
-        site = Path(str(cfg.env.shapely_site))
-        result["geometry_dependency"] = dict(configured_site=str(site), exists=site.is_dir(),
-            source="frozen standard config; runtime-only absolute dependency path")
-        if not site.is_dir():
-            result["errors"].append("Configured isolated geometry site is missing: " + str(site))
-        else:
-            probe = subprocess.run([sys.executable, "-c", "import sys;sys.path.insert(0,sys.argv[1]);import shapely;from shapely import constrained_delaunay_triangles;print(shapely.__version__)", str(site)],
-                cwd=ROOT, capture_output=True, text=True, timeout=30)
-            result["geometry_dependency"].update(import_exit_code=probe.returncode, shapely_version=probe.stdout.strip())
-            if probe.returncode:
-                result["errors"].append("Geometry dependency import failed: " + probe.stderr.strip()[-1200:])
-    except Exception as error:
-        result["errors"].append("Geometry dependency check: " + str(error))
-    helper = ROOT / "demos/lab_cuvette_external/usd_python.sh"
-    sibling = ROOT.parent / "labutopia-env"
-    result["USD_bootstrap"] = dict(script=str(helper), expected_sibling_environment=str(sibling),
-        sibling_environment_exists=sibling.is_dir(),
-        layout_requirement="Existing frozen USD helper contains Isaac5.1 extcache paths under the sibling labutopia-env; LABSIM_PYTHON selects Python but does not rewrite those paths")
-    if not sibling.is_dir():
-        result["errors"].append("USD helper expects the existing sibling labutopia-env; this checkout needs explicit runtime setup")
-    else:
-        try:
-            probe = subprocess.run(["bash", str(helper), "-c",
-                "from pxr import Usd, UsdGeom, PhysxSchema;print(Usd.GetVersion())"],
-                cwd=ROOT, env=dict(os.environ, LABSIM_PYTHON=sys.executable),
-                capture_output=True, text=True, timeout=30)
-            result["USD_bootstrap"].update(import_exit_code=probe.returncode, USD_version=probe.stdout.strip())
-            if probe.returncode:
-                result["errors"].append("Existing USD/PhysxSchema bootstrap failed: " + probe.stderr.strip()[-1200:])
-        except (OSError, subprocess.TimeoutExpired) as error:
-            result["errors"].append("USD bootstrap check: " + str(error))
-    try:
-        probe = subprocess.run(["git", "lfs", "version"], cwd=ROOT, capture_output=True, text=True, timeout=10)
-        result["git_lfs"] = dict(available=probe.returncode == 0, version=probe.stdout.strip())
+        paths = isaac_paths()
+        result["USD_bootstrap"] = {key:str(value) for key,value in paths.items()}
+        probe = subprocess.run([sys.executable, "-c", "from pxr import Usd,PhysxSchema;print(Usd.GetVersion())"],
+            cwd=ROOT, env=usd_environment(), capture_output=True, text=True, timeout=30)
+        result["USD_bootstrap"].update(import_exit_code=probe.returncode, USD_version=probe.stdout.strip())
         if probe.returncode:
-            result["warnings"].append("git-lfs unavailable; existing assets may run, but cloning/pushing LFS assets requires git-lfs")
-    except (OSError, subprocess.TimeoutExpired) as error:
-        result["git_lfs"] = dict(available=False, error=str(error))
-        result["warnings"].append("git-lfs check unavailable")
-    result["warnings"].append("CPU checks do not establish GPU/GUI readiness or successful physical execution; no package installation or runtime upgrade is performed")
+            result["errors"].append("Discovered USD/PhysX bootstrap failed: " + probe.stderr[-1200:])
+    except Exception as error:
+        result["errors"].append("USD runtime discovery: " + str(error))
+    try:
+        geometry = geometry_site()
+        probe = subprocess.run([sys.executable, "-c", "import sys;sys.path.insert(0,sys.argv[1]);import shapely;from shapely import constrained_delaunay_triangles;print(shapely.__version__)", geometry],
+            cwd=ROOT, capture_output=True, text=True, timeout=30)
+        result["geometry_dependency"] = dict(configured_site=geometry, import_exit_code=probe.returncode,
+            shapely_version=probe.stdout.strip(), source="LABSIM_GEOMETRY_SITE, isolated default, or selected interpreter")
+        if probe.returncode:
+            result["errors"].append("Geometry dependency import failed: " + probe.stderr[-1200:])
+    except Exception as error:
+        result["errors"].append("Geometry dependency: " + str(error))
+    try:
+        from demos.lab_cuvette_project_v1.assets import check_assets
+        from demos.lab_cuvette_project_v1.runtime import selected_asset_root
+        asset_root = selected_asset_root()
+        result["assets"] = check_assets(asset_root)
+        if not result["assets"]["all_files_verified"]:
+            result["warnings"].append("Pinned portable release not installed at selected asset root. Run ./labsim assets install --asset-root NEW_ROOT, then set LABSIM_ASSET_ROOT. Historical repository assets remain unchanged.")
+    except Exception as error:
+        result["errors"].append("Asset release check: " + str(error))
+    result["warnings"].append("CPU preflight does not certify GUI/GPU operation or physical task success")
     result["ready_for_existing_runtime"] = not result["errors"]
     return result
 
 
 def asset_rows(asset_id=None):
-    if lfs_pointer(REGISTRY):
+    registry_path = REGISTRY
+    if REGISTRY == ROOT / "assets/lab_cuvette_loading/Size_v1/registry.json":
+        from demos.lab_cuvette_project_v1.runtime import selected_asset_root
+        cached = selected_asset_root() / "assets/lab_cuvette_loading/Size_v1/registry.json"
+        if cached.is_file():
+            registry_path = cached
+    if lfs_pointer(registry_path):
         raise ValueError("Asset registry is a Git LFS pointer; run git lfs pull and retry")
-    registry = json.loads(REGISTRY.read_text())
+    registry = json.loads(registry_path.read_text())
     if asset_id and asset_id not in registry["assets"]:
         raise ValueError(f"Unknown asset_id: {asset_id}")
     rows = []
@@ -275,7 +308,23 @@ def asset_rows(asset_id=None):
 
 def dataset_check(args):
     from scripts.validate_lab_cuvette_size_v1_data import validate_reader
-    index, output = existing_file(args.index), new_path(args.output)
+    index, output = dataset_file(args.index), new_path(args.output)
+    import h5py
+    with h5py.File(index, "r") as source:
+        group = source if "actions" in source else next((source[name] for name in source
+            if isinstance(source[name], h5py.Group) and "actions" in source[name]), None)
+        project = group is not None and group.attrs.get("scene_version") == "Project_v1"
+    if project:
+        from scripts.read_lab_cuvette_project_v1_data import read_check
+        policies = ("act", "dp") if args.policy == "both" else (args.policy,)
+        value = read_check(index, sample_filter=args.sample_filter, policies=policies)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with output.open("x", encoding="utf-8") as stream:
+            json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
+            stream.write("\n")
+        print(json.dumps(dict(output=str(output), scene_version="Project_v1",
+            sample_filter=args.sample_filter, policies=list(policies), optimizer_or_training_executed=False)))
+        return 0
     frozen_check()
     policies = ("act", "dp") if args.policy == "both" else (args.policy,)
     results = [validate_reader(index, FROZEN, CONFIG, sample_filter=args.sample_filter, policy_type=policy)
@@ -304,7 +353,7 @@ def main(argv=None):
                 print(json.dumps(result, ensure_ascii=False, indent=2))
             else:
                 print(f"LabSim runtime: {result['python']} (Python {result['python_version']})")
-                print("Frozen standard: " + ("PASS" if "frozen_scene" in result else "FAIL"))
+                print("Project release: " + str(PROJECT_CONFIG.relative_to(ROOT)))
                 print("Assets: " + json.dumps(result.get("assets", {}), ensure_ascii=False))
                 for level in ("errors", "warnings"):
                     for message in result[level]:
@@ -312,6 +361,15 @@ def main(argv=None):
                 print("CPU preflight: " + ("PASS" if result["ready_for_existing_runtime"] else "FAIL"))
             return 0 if result["ready_for_existing_runtime"] else 2
         if args.command == "assets":
+            if args.operation != "list" or any((args.cache, args.asset_root, args.private_root, args.offline)):
+                command = [sys.executable, str(ROOT / "scripts/labsim_assets.py"), args.operation]
+                for name in ("cache", "asset_root", "private_root"):
+                    value = getattr(args, name)
+                    if value:
+                        command += ["--" + name.replace("_", "-"), str(value)]
+                if args.offline:
+                    command.append("--offline")
+                return subprocess.run(command, cwd=ROOT, check=False).returncode
             rows = asset_rows(args.asset_id)
             if args.json:
                 print(json.dumps(rows, ensure_ascii=False, indent=2))
@@ -329,7 +387,8 @@ def main(argv=None):
             return 0
         if args.command == "dataset-check":
             return dataset_check(args)
-        frozen_check()
+        if args.command in ("validate",) or (args.command == "collect" and args.phase is not None):
+            frozen_check()
         environment = dict(os.environ, LABSIM_PYTHON=sys.executable)
         return subprocess.run(command, cwd=ROOT, env=environment, check=False).returncode
     except (ValueError, OSError, ImportError) as error:

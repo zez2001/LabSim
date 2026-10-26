@@ -1,0 +1,27 @@
+name: lab_cuvette_project_v1
+image_shape: [3, 256, 256]
+dataset_path: outputs/lab_cuvette_loading/Project_v1/dataset
+sample_filter: success
+scene_mode: standard
+scene_randomization_enabled: false
+automatic_validation_mode: standard
+camera_names: [side_camera_rgb, wrist_camera_rgb]
+shape_meta:
+  obs:
+    side_camera_rgb: {shape: '${task.image_shape}', type: rgb}
+    wrist_camera_rgb: {shape: '${task.image_shape}', type: rgb}
+    agent_pose: {shape: [8], type: low_dim}
+  action: {shape: [8]}
+dataset:
+  _target_: policy.dataset.lab_cuvette_project_v1_dataset.LabCuvetteProjectV1Dataset
+  shape_meta: ${task.shape_meta}
+  dataset_path: ${task.dataset_path}
+  horizon: ${horizon}
+  n_obs_steps: ${n_obs_steps}
+  policy_type: act
+  sample_filter: ${task.sample_filter}
+  seed: 42
+  val_ratio: 0.1
+  scene_mode: ${task.scene_mode}
+  scene_randomization_enabled: ${task.scene_randomization_enabled}
+  automatic_validation_mode: ${task.automatic_validation_mode}
