@@ -1,0 +1,78 @@
+{
+  "schema": "labsim.Project_v1_1.closed_v6_v7_support_figure.v1",
+  "analysis_date_local": "2026-10-27",
+  "sources": [
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/summary.json",
+      "SHA256": "db0c36aa2d572ff91fb1e51142896a7be14d53f688fcf8fbaa078987faeed410",
+      "bytes": 90750
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_baseline_close_01_support_gate_audit/baseline_support_release_control_boundaries.csv",
+      "SHA256": "7b34d4a1f76e3bba3daeac7269c3034f0999800780e5ff649e1c044b6791ea42",
+      "bytes": 593708
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/summary.json",
+      "SHA256": "db0dd8c30bc38cedaeb1fc68b470dfd546f17742998758afc9298675218ef934",
+      "bytes": 282025
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/support_release_physics_control_boundaries.csv",
+      "SHA256": "e24dd916c80da40f9d8e32270f1e9f58623021270681e08fdb5e9a02f437154f",
+      "bytes": 645759
+    }
+  ],
+  "plotted_records": [
+    {
+      "label": "v6: TASK_INCOMPLETE",
+      "support_start_t_s": 107.61666666666666,
+      "OPEN_t_s": 110.61666666666666,
+      "relative_OPEN_t_s": 3.0,
+      "plotted_native_control_boundary_samples": 309,
+      "correct_target_supported_original_physical_sample": null,
+      "original_task_success": false
+    },
+    {
+      "label": "v7: SUCCESS",
+      "support_start_t_s": 107.61666666666666,
+      "OPEN_t_s": 112.01666666666667,
+      "relative_OPEN_t_s": 4.400000000000006,
+      "plotted_native_control_boundary_samples": 309,
+      "correct_target_supported_original_physical_sample": {
+        "relative_t_s": 2.4375,
+        "xy_um": 29.829044899356045,
+        "tilt_deg": 0.07093517930002283,
+        "support_N": 0.3761737048625946
+      },
+      "original_task_success": true
+    }
+  ],
+  "alignment": "Subtract each run original SUPPORT_TRANSFER transition only; each curve retains own recorded timestamps. No resampling, time warping, common-duration assumption or paired-sample inference.",
+  "correct_event_marker": "Original independently derived physical sample, may lie between plotted control-boundary samples; teacher phase is only an axis origin, not success proof.",
+  "original_gates_preserved": {
+    "XY_m": 0.0001,
+    "tilt_deg": 0.15,
+    "classified_floor_support_N": 0.1,
+    "weight_reference_N": 0.1962
+  },
+  "plot_range_relative_s": [
+    0,
+    5.15
+  ],
+  "figure": {
+    "path": "teacher_v6_v7_support_gate_comparison.png",
+    "SHA256": "9f7d8c2a563624d1ad1e30e61d4ba2349028774abba4cd2c953535c722b141e1",
+    "bytes": 277077
+  },
+  "script": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/plot_support_comparison.py",
+    "SHA256": "e7a7fa38c4f98f37e2a1a485ea6cfc37a19c0a1048f9efb0322cc74a1a0d4de4"
+  },
+  "reproduction_command": "/home/wujing/Desktop/vla/labutopia-env/bin/python docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/plot_support_comparison.py --repo-root /home/wujing/Desktop/vla/LabSim --output-dir /tmp/labsim-support-comparison-reproduction",
+  "GPU_used": false,
+  "API_calls": 0,
+  "original_data_labels_or_runtime_modified": false,
+  "visual_QA_completed": true,
+  "visual_QA_notes": "Final1540x1408PNG inspected: all three panels/units/gates/weight-reference/actualOPEN markers and independent support diamond readable; legend outside plots, full curves visible, no clipped labels. v7 transient excursions preserved."
+}
