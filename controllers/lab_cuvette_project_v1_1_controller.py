@@ -1,19 +1,22 @@
 """Phase-motion clock and source-constrained grasp teacher adapter.
 
 Only four smooth motion phases are slowed. Physics, scorer, 60 Hz actions and
-physical contact timers are unchanged. GRASP holds the existing EE orientation
-and slows closure near contact. EXTRACT keeps the nominal lateral lift axis.
+physical contact timers are unchanged. An open-hand approach aligns to the
+configured orientation; GRASP holds it and slows closure near contact.
+EXTRACT keeps the nominal lateral lift axis.
 """
 from __future__ import annotations
 
 import copy
 import math
 
-from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get
+from scipy.spatial.transform import Rotation
+
+from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get, wxyz
 
 
 class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
-    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v4'
+    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v5'
     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))
     NEAR_CONTACT_MARGIN_M = .002
 
@@ -32,6 +35,16 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         self.near_contact_close_speed_m_s = float(get(cfg, 'gripper.contact_approach_speed_m_s', .002))
         if not math.isfinite(self.near_contact_close_speed_m_s) or self.near_contact_close_speed_m_s <= 0:
             raise ValueError('gripper.contact_approach_speed_m_s must be finite and positive')
+        try:
+            yaw = float(get(cfg, 'robot.gripper_yaw_deg', -90.))
+            self.approach_orientation_duration_s = float(get(cfg, 'control.approach_s', 6.))
+        except (TypeError, ValueError):
+            raise ValueError('Approach yaw and duration must be finite numbers') from None
+        if not math.isfinite(yaw) or not math.isfinite(self.approach_orientation_duration_s) or self.approach_orientation_duration_s <= 0:
+            raise ValueError('Approach yaw must be finite and duration must be positive')
+        # Same extrinsic XYZ convention as make_scene/plan_arm: Rz(yaw) Rx(pi).
+        # This target is a static robot configuration, never a measured cup pose.
+        self.approach_orientation_goal = Rotation.from_euler('xyz', [math.pi, 0., math.radians(yaw)])
         super().__init__(cfg, layout)
 
     def reset(self, public_obs=None, debug=None):
@@ -43,6 +56,9 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         self._clock_cached_action = None
         self._grasp_orientation_feedback_suppressed = False
         self._extract_lateral_feedback_suppressed = False
+        self._approach_orientation_start = None
+        self._approach_orientation_progress = 0.
+        self._approach_orientation_fraction = 0.
         return self
 
     def _feedback(self, debug, desired_cup_xy=None, *, orientation=True):
@@ -95,6 +111,18 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         unlatched_before = self.latch_opening is None
         bilateral = all(float(v) > float(get(self.cfg, 'gripper.contact_threshold_N', .02))
             for v in debug['finger_contact_N'])
+        prealign_active = bool(source_phase == 'APPROACH_SOURCE' and not self.finished
+            and previous_opening >= .08 - 1e-10
+            and all(float(v) <= float(get(self.cfg, 'gripper.contact_threshold_N', .02))
+                    for v in debug['finger_contact_N'])
+            and self._approach_orientation_start is not None)
+        if prealign_active:
+            progress = min(1., max(0., motion_elapsed / self.approach_orientation_duration_s))
+            fraction = progress * progress * (3. - 2. * progress)
+            delta = self.approach_orientation_goal * self._approach_orientation_start.inv()
+            self.rotation_command = Rotation.from_rotvec(fraction * delta.as_rotvec()) * self._approach_orientation_start
+            self._approach_orientation_progress = progress
+            self._approach_orientation_fraction = fraction
         if physical_start is not None:
             self.phase_start = actual_t - motion_elapsed
         try:
@@ -105,6 +133,11 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             if self.phase == source_phase and physical_start is not None:
                 self.phase_start = physical_start
             # _enter uses actual t; preserve its new physical phase_start.
+        if self._approach_orientation_start is None and self.rotation_command is not None:
+            # The parent initializes this from the original reset/first-act
+            # robot TCP observation. Capture once; later observations do not
+            # move the interpolation start or accumulate an orientation error.
+            self._approach_orientation_start = Rotation.from_quat(self.rotation_command.as_quat())
         parent_opening = float(action['gripper_opening_m'])
         slow_zone = bool(source_phase == 'GRASP' and unlatched_before and not bilateral
             and previous_opening <= self.near_contact_close_threshold_m
@@ -130,6 +163,14 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             motion_source_phase=source_phase, physical_phase_elapsed_s=physical_elapsed,
             motion_phase_elapsed_s=motion_elapsed, motion_time_scale=scale,
             physical_control_hz=self.hz, physical_watchdogs_unscaled=True,
+            approach_orientation_active=prealign_active,
+            approach_orientation_source='Original reset/first-act robot TCP orientation -> static robot.gripper_yaw_deg; no object truth',
+            approach_orientation_start_quaternion_wxyz=wxyz(self._approach_orientation_start).tolist(),
+            approach_orientation_goal_quaternion_wxyz=wxyz(self.approach_orientation_goal).tolist(),
+            approach_orientation_motion_progress=self._approach_orientation_progress,
+            approach_orientation_smooth_fraction=self._approach_orientation_fraction,
+            approach_orientation_motion_duration_s=self.approach_orientation_duration_s,
+            approach_orientation_uses_object_truth=False,
             grasp_orientation_feedback_suppressed=self._grasp_orientation_feedback_suppressed,
             grasp_orientation_feedback_policy='Hold existing EE orientation during GRASP while source-constrained; unchanged feedback after extraction',
             extract_lateral_feedback_suppressed=self._extract_lateral_feedback_suppressed,

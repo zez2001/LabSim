@@ -1,0 +1,100 @@
+{
+  "schema": "labsim.Project_v1_1.teacher_v5_CPU_delivery.v1",
+  "checked_at_utc": "2026-10-26T20:45:46.708347+00:00",
+  "base_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+  "uncommitted_candidate": true,
+  "version": "Project_v1_1.teacher_phase_motion_clock.v5",
+  "source_SHA256": {
+    "controllers/lab_cuvette_project_v1_1_controller.py": "3f7c419d6936362dca11cc071c9fe2356c9748187dfcedf5f7407b00c59c9ad4",
+    "config/lab_cuvette_loading/Project_v1_1/standard.yaml": "ecf3a91b6f243404539fee1db28c3a153f58635a6b399688c7e346c30127ac19",
+    "tests/test_lab_cuvette_project_v1_1_teacher_approach_orientation.py": "751da77aff7ead1cc6f335e6de7b992c776ec5285be664f1aa42c0acb3a3f742",
+    "docs/lab_cuvette_loading/Project_v1_1/teacher_approach_orientation_v5.md": "0b91846bb5df7966d785d208ca3e840caeb2e785111b91db1daf75d38291523f"
+  },
+  "configuration_changed_fields": [
+    {
+      "path": "experiment.controller_version",
+      "before": "Project_v1_1.teacher_phase_motion_clock.v4",
+      "after": "Project_v1_1.teacher_phase_motion_clock.v5"
+    },
+    {
+      "path": "teacher_execution.version",
+      "before": "Project_v1_1.teacher_phase_motion_clock.v4",
+      "after": "Project_v1_1.teacher_phase_motion_clock.v5"
+    }
+  ],
+  "protected_files": {
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": {
+      "unchanged": true,
+      "SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6"
+    },
+    "demos/lab_cuvette_project_v1_1/scorer.py": {
+      "unchanged": true,
+      "SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f"
+    },
+    "tasks/lab_cuvette_loading_env_v1_scorer.py": {
+      "unchanged": true,
+      "SHA256": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611"
+    },
+    "demos/lab_cuvette_size_v1/scorer.py": {
+      "unchanged": true,
+      "SHA256": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74"
+    },
+    "controllers/lab_cuvette_env_v1_controller.py": {
+      "unchanged": true,
+      "SHA256": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb"
+    },
+    "demos/lab_cuvette_project_v1_1/environment.py": {
+      "unchanged": true,
+      "SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d"
+    },
+    "tasks/lab_cuvette_loading_project_v1_1.py": {
+      "unchanged": true,
+      "SHA256": "917d87e2749d925ff143528bb6f54a14616cfa24b28400972dc0a81c4dcb4cb4"
+    },
+    "policy/backends/cubence_project_v1_1_tools.py": {
+      "unchanged": true,
+      "SHA256": "c264b1c52530bf7bea363a3448c41f46d35d1ef65b70667426b2276358f8e594"
+    },
+    "config/lab_cuvette_loading/Project_v1/assets.lock.json": {
+      "unchanged": true,
+      "SHA256": "054bcdd8fff283a877fc2e2da897e55aaa53bc63935cdca1f3c2504b68e03beb"
+    }
+  },
+  "tracked_assets_git_diff_empty": true,
+  "test_execution": {
+    "command_argv": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_teacher_clock.py",
+      "tests/test_lab_cuvette_project_v1_1_teacher_grasp_orientation.py",
+      "tests/test_lab_cuvette_project_v1_1_teacher_near_contact_close.py",
+      "tests/test_lab_cuvette_project_v1_1_force_hold.py",
+      "tests/test_lab_cuvette_project_v1_1_teacher_approach_orientation.py",
+      "--junitxml=/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Project_v1_1/validation/teacher_approach_orientation_v5_CPU.xml"
+    ],
+    "command_environment": {
+      "CUDA_VISIBLE_DEVICES": "",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    },
+    "passed": 117,
+    "failed": 0,
+    "original_regression_cases": 94,
+    "new_targeted_cases": 23,
+    "wall_seconds": 0.5165380929829553,
+    "exit_code": 0,
+    "source_bytes_unchanged_during_saved_run": true,
+    "log_SHA256": "7de1a14e89cc0cd3df2c0968945e51e8bdc0306a45d73f6eafaa326e23f2da9e",
+    "JUnit_SHA256": "30b4fe8e2a49b04eeb1d21c4dbe80ffcb5b27f39dd344d018cc999245f7b5bb2"
+  },
+  "clean_execution_checkout": {
+    "current_HEAD": "109e637bcb264458ffc231f4e052e60ff6764242",
+    "modified_by_this_agent": false
+  },
+  "physical_candidate_run_performed": false,
+  "root_commit_or_push_performed_by_this_agent": false,
+  "GPU_started": false,
+  "provider_API_calls": 0,
+  "known_scope": "Only a CPU-tested teacher approach candidate; does not establish physical contact improvement or whole-task success."
+}
