@@ -39,7 +39,7 @@ def test_grasp_latched_truth_tilt_does_not_reorient_closed_hand_and_declares_sup
         assert action['gripper_effort_limit_N'] == 8.
         assert action['duration_s'] == 1 / 60
         assert action['metadata']['grasp_orientation_feedback_suppressed'] is True
-        assert action['metadata']['teacher_controller_version'].endswith('.v2')
+        assert action['metadata']['teacher_controller_version'] == controller.VERSION
         assert action['metadata']['truth_teacher'] is True
         assert action['metadata']['physical_watchdogs_unscaled'] is True
     assert controller.phase == 'GRASP'

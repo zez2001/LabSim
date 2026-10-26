@@ -1,0 +1,243 @@
+{
+  "schema": "labsim.Project_v1_1.reader_check.v1",
+  "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_01/episode_0000/dataset/episode_0000.h5",
+  "scene_version": "Project_v1_1",
+  "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+  "recorded_policy_image_shape": [
+    3,
+    256,
+    256
+  ],
+  "public_sample_derivations": [],
+  "sample_filter": "failure",
+  "reader_validation": [
+    {
+      "policy_type": "act",
+      "episodes": [
+        "21fb50c4-b0f1-4e75-975e-bccd640b3763"
+      ],
+      "scene_fingerprint": "9ce9cb1fc879fd0f5a70e2ccf1767e59a4bdd4c449647b1b74c7945bde10f163",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        },
+        "is_pad": {
+          "shape": [
+            3,
+            16
+          ],
+          "dtype": "torch.bool",
+          "finite": true
+        },
+        "labels": {
+          "episode_id": [
+            "21fb50c4-b0f1-4e75-975e-bccd640b3763",
+            "21fb50c4-b0f1-4e75-975e-bccd640b3763",
+            "21fb50c4-b0f1-4e75-975e-bccd640b3763"
+          ],
+          "task_success": {
+            "shape": [
+              3
+            ],
+            "dtype": "torch.bool",
+            "finite": true
+          },
+          "record_valid": {
+            "shape": [
+              3
+            ],
+            "dtype": "torch.bool",
+            "finite": true
+          },
+          "failure_type": [
+            "SAFETY_COLLISION",
+            "SAFETY_COLLISION",
+            "SAFETY_COLLISION"
+          ],
+          "termination_reason": [
+            "ROBOT_ENVIRONMENT_COLLISION",
+            "ROBOT_ENVIRONMENT_COLLISION",
+            "ROBOT_ENVIRONMENT_COLLISION"
+          ]
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "21fb50c4-b0f1-4e75-975e-bccd640b3763",
+          "transitions": 1489,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            1489,
+            8
+          ],
+          "executed_command_shape": [
+            1489,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": false,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    },
+    {
+      "policy_type": "dp",
+      "episodes": [
+        "21fb50c4-b0f1-4e75-975e-bccd640b3763"
+      ],
+      "scene_fingerprint": "9ce9cb1fc879fd0f5a70e2ccf1767e59a4bdd4c449647b1b74c7945bde10f163",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        },
+        "labels": {
+          "episode_id": [
+            "21fb50c4-b0f1-4e75-975e-bccd640b3763",
+            "21fb50c4-b0f1-4e75-975e-bccd640b3763",
+            "21fb50c4-b0f1-4e75-975e-bccd640b3763"
+          ],
+          "task_success": {
+            "shape": [
+              3
+            ],
+            "dtype": "torch.bool",
+            "finite": true
+          },
+          "record_valid": {
+            "shape": [
+              3
+            ],
+            "dtype": "torch.bool",
+            "finite": true
+          },
+          "failure_type": [
+            "SAFETY_COLLISION",
+            "SAFETY_COLLISION",
+            "SAFETY_COLLISION"
+          ],
+          "termination_reason": [
+            "ROBOT_ENVIRONMENT_COLLISION",
+            "ROBOT_ENVIRONMENT_COLLISION",
+            "ROBOT_ENVIRONMENT_COLLISION"
+          ]
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "21fb50c4-b0f1-4e75-975e-bccd640b3763",
+          "transitions": 1489,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            1489,
+            8
+          ],
+          "executed_command_shape": [
+            1489,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": false,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    }
+  ],
+  "source_labels_modified": false,
+  "analysis_date_local": "2026-10-27",
+  "CPU_only": true,
+  "CUDA_VISIBLE_DEVICES": "",
+  "GPU_initialized": false,
+  "source_H5_SHA256_before": "49a2fb312a1f7a19166ccf615149bf216c4af39a225f77a1ae10661de157bcce",
+  "source_H5_SHA256_after": "49a2fb312a1f7a19166ccf615149bf216c4af39a225f77a1ae10661de157bcce",
+  "source_H5_unchanged": true,
+  "original_success_bc_eligible": false,
+  "success_filter_rejected": true,
+  "success_filter_rejection": "No eligible episodes from which to infer recorded image shape",
+  "task_type": "loading",
+  "actual_full_loading_success": false,
+  "qualification_scope": "Valid real safety-failure trajectory, not success BC and not a completed loading task",
+  "training_optimizer_or_model_execution": false
+}

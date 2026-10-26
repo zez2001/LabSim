@@ -2,7 +2,7 @@
 
 Only four smooth motion phases are slowed. The original teacher, physics,
 scorer, 60 Hz actions and physical contact timers are unchanged. GRASP holds
-the existing EE orientation rather than correcting a vessel still in its rack.
+the existing EE orientation and slows closure near the nominal vessel width.
 """
 from __future__ import annotations
 
@@ -13,13 +13,25 @@ from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher, get
 
 
 class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
-    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v2'
+    VERSION = 'Project_v1_1.teacher_phase_motion_clock.v3'
     SLOWED_PHASES = frozenset(('APPROACH_SOURCE', 'EXTRACT', 'TRANSPORT', 'RETREAT'))
+    NEAR_CONTACT_MARGIN_M = .002
 
     def __init__(self, cfg, layout):
         self.motion_time_scale = float(get(cfg, 'teacher_execution.motion_time_scale', 1.5))
         if not math.isfinite(self.motion_time_scale) or self.motion_time_scale < 1:
             raise ValueError('teacher_execution.motion_time_scale must be finite and at least 1')
+        try:
+            dimensions = tuple(float(v) for v in get(cfg, 'vessel.outer_xy_m'))
+        except (TypeError, ValueError):
+            raise ValueError('vessel.outer_xy_m must contain two finite positive nominal dimensions') from None
+        if len(dimensions) != 2 or any(not math.isfinite(v) or v <= 0 for v in dimensions):
+            raise ValueError('vessel.outer_xy_m must contain two finite positive nominal dimensions')
+        self.nominal_vessel_outer_width_m = max(dimensions)
+        self.near_contact_close_threshold_m = self.nominal_vessel_outer_width_m + self.NEAR_CONTACT_MARGIN_M
+        self.near_contact_close_speed_m_s = float(get(cfg, 'gripper.contact_approach_speed_m_s', .002))
+        if not math.isfinite(self.near_contact_close_speed_m_s) or self.near_contact_close_speed_m_s <= 0:
+            raise ValueError('gripper.contact_approach_speed_m_s must be finite and positive')
         super().__init__(cfg, layout)
 
     def reset(self, public_obs=None, debug=None):
@@ -69,6 +81,10 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
         motion_elapsed = self._phase_motion_elapsed
         event_start = len(self.events)
         self._grasp_orientation_feedback_suppressed = False
+        previous_opening = self.last_grip_opening
+        unlatched_before = self.latch_opening is None
+        bilateral = all(float(v) > float(get(self.cfg, 'gripper.contact_threshold_N', .02))
+            for v in debug['finger_contact_N'])
         if physical_start is not None:
             self.phase_start = actual_t - motion_elapsed
         try:
@@ -79,6 +95,16 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             if self.phase == source_phase and physical_start is not None:
                 self.phase_start = physical_start
             # _enter uses actual t; preserve its new physical phase_start.
+        parent_opening = float(action['gripper_opening_m'])
+        slow_zone = bool(source_phase == 'GRASP' and unlatched_before and not bilateral
+            and previous_opening <= self.near_contact_close_threshold_m
+            and parent_opening < previous_opening and not self.finished)
+        if slow_zone:
+            action['gripper_opening_m'] = max(parent_opening,
+                previous_opening - self.near_contact_close_speed_m_s / self.hz)
+            # Preserve first-contact/latch logic; only bound this closing step.
+            # In particular, a single finger contact never marks bilateral.
+            self.last_grip_opening = float(action['gripper_opening_m'])
         if self.phase != source_phase:
             self._phase_motion_elapsed = 0.
         self._clock_phase = self.phase
@@ -95,6 +121,15 @@ class LabCuvetteProjectV11Teacher(LabCuvetteTeacher):
             motion_phase_elapsed_s=motion_elapsed, motion_time_scale=scale,
             physical_control_hz=self.hz, physical_watchdogs_unscaled=True,
             grasp_orientation_feedback_suppressed=self._grasp_orientation_feedback_suppressed,
-            grasp_orientation_feedback_policy='Hold existing EE orientation during GRASP while source-constrained; unchanged feedback after extraction')
+            grasp_orientation_feedback_policy='Hold existing EE orientation during GRASP while source-constrained; unchanged feedback after extraction',
+            near_contact_slow_close_zone=slow_zone,
+            near_contact_slow_close_applied=float(action['gripper_opening_m']) > parent_opening,
+            near_contact_nominal_outer_width_m=self.nominal_vessel_outer_width_m,
+            near_contact_close_threshold_m=self.near_contact_close_threshold_m,
+            near_contact_close_speed_m_s=self.near_contact_close_speed_m_s,
+            near_contact_previous_opening_m=previous_opening,
+            near_contact_parent_opening_m=parent_opening,
+            near_contact_dispatched_opening_m=float(action['gripper_opening_m']),
+            near_contact_bilateral_sensor_observed=bilateral)
         self._clock_cached_action = copy.deepcopy(action)
         return action

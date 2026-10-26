@@ -29,7 +29,7 @@ def fixture(monkeypatch):
     monkeypatch.setitem(sys.modules, 'controllers.lab_cuvette_env_v1_controller', parent)
     module = load('teacher_clock_cpu', ROOT / 'controllers/lab_cuvette_project_v1_1_controller.py')
     cfg = dict(env=dict(task_type='loading'), physics=dict(control_hz=60, dynamic_friction=.5, finger_dynamic_friction=.8),
-        teacher_execution=dict(motion_time_scale=1.5), vessel=dict(mass_kg=.02, yaw_deg=90),
+        teacher_execution=dict(motion_time_scale=1.5), vessel=dict(mass_kg=.02, yaw_deg=90, outer_xy_m=[.01, .01]),
         robot=dict(finger_kp=2000), gripper=dict(contact_safety_factor=2), control=dict(timeout_s=160.))
     layout = dict(source_floor=[-.085, -.175, .743], target_floor=[.21237, -.1499, .887],
         instrument_rotation=np.eye(3), target_rim_z=.914, source_rim_z=.768, opening_direction_world=[-1., 0., 0.])
