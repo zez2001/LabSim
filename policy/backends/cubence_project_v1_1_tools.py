@@ -156,7 +156,7 @@ class ProjectV11RobotTools(GenericRobotTools):
             raise ProviderError('EXECUTOR_INTERVAL_UNFINISHED',details=public)
         if receipt.get('executor_error_type') or receipt.get('error_type') or reason.startswith('EXECUTOR'):
             raise ProviderError('EXECUTOR_ACTION_PARTIAL' if receipt['partial_execution'] else 'EXECUTOR_ACTION_STOPPED',details=public)
-        if reason.startswith(('NONFINITE','SIMULATION','PHYSICS_INVALID','OBJECT_POSE_JUMP')):
+        if reason!='SIMULATION_TIMEOUT' and reason.startswith(('NONFINITE','SIMULATION','PHYSICS_INVALID','OBJECT_POSE_JUMP')):
             raise ProviderError('SIMULATION_STATE_STOPPED',details=public)
         if receipt['safety_stopped']:
             # Independent task verdicts already ended by grasp/drop/timeout are

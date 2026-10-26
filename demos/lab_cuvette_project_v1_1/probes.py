@@ -160,6 +160,23 @@ def grasp_transport(probe):
     probe.call('wait', duration_s=2.)
 
 
+def pose_hold(probe):
+    # Public robot pose measured in closed free_space_02, action58. This is a
+    # manual free-space probe, not a target/object pose or a task primitive.
+    p=[-.08589575538213295,-.17337017742961916,1.0505144070640076]
+    q=[-.007534587183567482,.7470404534418813,-.6644407602178849,-.019805733472933462]
+    write(probe.task.episode_dir/'manual_diagnostic_plan.json',dict(
+        source='free_space_02 public robot state before action58',reference_TCP=dict(position_m=p,quaternion_wxyz=q),
+        purpose='Complete the pose1 wait/gripper checks after original170s timeout; do not relabel the timeout run'))
+    if not probe.call('move_ee',mode='ee_pose',values=p+q,frame='world',duration_s=3.):return
+    probe.snapshot('safe_rotated_pose')
+    if not probe.call('wait',duration_s=1.):return
+    if not probe.call('gripper',opening_m=.06,effort_limit_N=5.,duration_s=1.):return
+    if not probe.call('gripper',opening_m=.08,effort_limit_N=5.,duration_s=1.):return
+    if not probe.call('move_ee',mode='ee_pose',values=p+q,frame='world',duration_s=3.):return
+    probe.call('wait',duration_s=3.)
+
+
 def run_probes(facade, mode, attempts, output):
     results = []
     for attempt in (attempts if mode == 'fixed-replay' else [0]):
@@ -168,6 +185,7 @@ def run_probes(facade, mode, attempts, output):
         probe = ManualProbe(facade)
         if mode == 'fixed-replay':original_prefix(probe, attempt)
         elif mode == 'free-space':free_space(probe)
+        elif mode == 'pose-hold':pose_hold(probe)
         elif mode == 'grasp-transport':grasp_transport(probe)
         else:raise ValueError('Unknown probe')
         if not facade.task.ended:facade.task.finalize_episode('CONTROL_DIAGNOSTIC_COMPLETE', 'POLICY_BUDGET')

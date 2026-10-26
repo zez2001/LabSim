@@ -136,6 +136,24 @@ def test_already_scored_ordinary_task_failure_remains_task_failure(cfg):
     assert env.finish('ENVIRONMENT_TERMINATED',failure_type=None)['failure_type']=='GRASP_SLIP'
 
 
+def test_normal_simulation_time_limit_is_not_numerical_instability(cfg):
+    env=ReceiptEnvironment(('slip',));original=env.execute
+    def timeout(action):
+        receipt=original(action);receipt['stop_reason']='SIMULATION_TIMEOUT'
+        env.saved[action['action_id']]=copy.deepcopy(receipt)
+        env.result=dict(task_success=False,failure_type='TIMEOUT',record_valid=True,
+                        termination_reason='SIMULATION_TIMEOUT')
+        return receipt
+    env.execute=timeout
+    tools=ProjectV11RobotTools(env,cfg['action_limits'])
+    result=tools.execute('wait',args(env))
+    assert result['partial_execution'] and result['safety_stopped']
+    assert result['stop_reason']=='SIMULATION_TIMEOUT'
+    assert len(env.executions)==1 and env.step==5
+    preserved=env.finish('ENVIRONMENT_TERMINATED',failure_type=None)
+    assert preserved['failure_type']=='TIMEOUT' and preserved['record_valid'] is True
+
+
 def test_reused_id_with_changed_payload_cannot_be_misread_as_previous_success(cfg):
     env=ReceiptEnvironment();tools=ProjectV11RobotTools(env,cfg['action_limits']);command=args(env)
     tools.execute('wait',command)

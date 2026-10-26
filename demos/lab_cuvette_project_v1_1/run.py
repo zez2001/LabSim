@@ -30,7 +30,7 @@ def parser():
                    help='Existing shared ledger; previous attempts remain charged to this budget')
     p.add_argument('--max-calls', type=int, default=160)
     p.add_argument('--audit-only', action='store_true')
-    p.add_argument('--probe', choices=('fixed-replay','free-space','grasp-transport'),default='fixed-replay')
+    p.add_argument('--probe', choices=('fixed-replay','free-space','pose-hold','grasp-transport'),default='fixed-replay')
     p.add_argument('--attempts',type=int,nargs='+',default=[1,2])
     return p
 
@@ -143,12 +143,14 @@ def main(argv=None):
         (output/'runner_failure.json').write_text(json.dumps(dict(type=type(error).__name__,error=str(error),traceback=traceback.format_exc()),indent=2)+'\n')
         raise
     finally:
-        if env is not None:
-            env.close()
-        from omni.kit.app import get_app
-        get_app().post_quit(0)
-        app.close()
-        lock.close()
+        try:
+            if env is not None:env.close()
+        finally:
+            try:
+                from omni.kit.app import get_app
+                get_app().post_quit(0)
+                app.close()
+            finally:lock.close()
 
 
 if __name__ == '__main__':
@@ -159,6 +161,8 @@ if __name__ == '__main__':
     import os
     try:
         code=main()
+    except SystemExit as error:
+        code=int(error.code or 0)
     except BaseException:
         import traceback
         traceback.print_exc()

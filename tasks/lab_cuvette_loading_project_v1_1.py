@@ -18,6 +18,14 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
             control_config_sha256=self.release_contract['frozen_scene_sha256'],action_interface_version='Project_v1_1.actions.v1')
         self.collector.file.attrs.update(metadata);self._write(path,metadata)
         self._tick_trace=None;self._write(self.episode_dir/'executor_configuration.json',dict(self.cfg.executor))
+        from demos.lab_cuvette_project_v1_1.gripper_hold import GenericContactHold
+        self.contact_hold=GenericContactHold(control_hz=self.cfg.physics.control_hz,mass_kg=self.cfg.vessel.mass_kg,
+            dynamic_friction=self.cfg.physics.dynamic_friction,finger_dynamic_friction=self.cfg.physics.finger_dynamic_friction,
+            finger_kp_N_per_m=self.ctx['old'].robot.finger_kp,contact_safety_factor=self.cfg.gripper.contact_safety_factor,
+            maximum_compression_m=self.cfg.gripper.maximum_compression_m,contact_threshold_N=self.cfg.gripper.contact_threshold_N,
+            contact_persist_s=self.cfg.gripper.contact_persist_s,contact_approach_speed_m_s=self.cfg.gripper.get('contact_approach_speed_m_s',.002),
+            minimum_total_opening_m=2*self.cfg.gripper.get('minimum_latched_finger_m',.001))
+        self._write(self.episode_dir/'contact_hold_configuration.json',dict(self.contact_hold.__dict__))
         return observation,info
 
     def forward(self,q):
@@ -85,14 +93,24 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
         else:raise ValueError('Unknown low-level action')
         lo,hi,speed=self.joint_bounds()
         if q7.shape!=(7,) or not np.isfinite(q7).all() or np.any(q7<lo) or np.any(q7>hi) or np.any(abs(q7-seed)>speed/self.cfg.physics.control_hz+1e-9):raise RuntimeError('JOINT_CONTINUITY_OR_LIMIT_FAILURE')
+        logical=float(action.get('raw_model_action',{}).get('gripper_opening_m',opening))
+        opening,grip_diagnostics=self.contact_hold.update(t=self.t,logical_requested_opening_m=logical,
+            ramped_opening_m=opening,previous_applied_opening_m=self.grip,
+            measured_finger_positions_m=self.debug['finger_joint_positions_m'],finger_contact_N=self.debug['finger_contact_N'])
+        # Prevent the inherited instantaneous latch from recomputing a wider
+        # target from the contact-deformed measured opening. It may still clear
+        # this compatibility latch during an explicit release; the generic
+        # sensor-only helper above owns its independent continuous-contact state.
+        self._policy_latch=opening
         q=np.r_[q7,[opening/2]*2]
         # Seed is always an executed command; no raw unexecuted branch is retained.
         self._ik_seed=q7.copy();self._ik_goal=None;self._ik_solution=None
         conversion=dict(input_type=kind,control_hz=int(self.cfg.physics.control_hz),physics_hz=int(self.cfg.physics.hz),duration_s=duration,ticks=1,
             target_pose=reference,raw_values=v.tolist(),executed_q=q.tolist(),effort_limit_N=effort,truth_used_by_environment=False,
             IK=None if solution is None else {k:copy.deepcopy(v) for k,v in solution.items() if k!='q'},
+            generic_contact_hold=grip_diagnostics,
             no_post_IK_joint_clipping=True,seed_semantics='previous applied command',gripper_semantics='persistent applied symmetric opening target; explicit changes only')
-        self._tick_trace=dict(t_before=self.t,control_tick_before=self.control_steps,action=copy.deepcopy(action),seed_q7=seed.tolist(),command_q9=q.tolist(),reference_TCP=reference,IK=conversion['IK'])
+        self._tick_trace=dict(t_before=self.t,control_tick_before=self.control_steps,action=copy.deepcopy(action),seed_q7=seed.tolist(),command_q9=q.tolist(),reference_TCP=reference,IK=conversion['IK'],generic_contact_hold=grip_diagnostics)
         return q,opening,effort,1,conversion
 
     def hold_actual_joints(self):
@@ -129,6 +147,7 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
                 trace['FK_vs_native_TCP_position_error_m']=float(np.linalg.norm(fk_actual_p-actual_p))
                 if stop and not self.ended:
                     self.hold_actual_joints();self.finalize_episode(stop,'SIMULATION_FAILURE' if stop=='NONFINITE_ACTUAL_STATE' else 'EXECUTOR_FAILURE')
+                    result=(self.get_observation(),0.,True,False,self._public_info())
             return result
         finally:
             if self._tick_trace is not None:
