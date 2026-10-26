@@ -1,0 +1,305 @@
+{
+  "schema": "labsim.Project_v1_1.public_joint_semantics_review.v1",
+  "scope": "Actual facade and actual task conversion AST with explicit redundant FK and ideal drive stubs; no Isaac, API or H5.",
+  "toy_FK": "q0..q2 map to position, q3..q5 to rotation vector, q6 is redundant. This is not a Franka kinematic model.",
+  "runtime_source_SHA256": {
+    "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+    "tasks/lab_cuvette_loading_project_v1_1.py": "466056e58bdca83367687de7f0deaaa529939cd452b9d4f087c4108677ac91b8",
+    "policy/backends/action_adapters.py": "6ef0ed77a1f578ff3648d04d21c50c4d3e536bef0fab3fcff1f24594df2307f8",
+    "data_collectors/lab_cuvette_env_v1_collector.py": "ca4cbf867ba0c2c4a89572997c4249bd378adc1d44d7b55a4709a6831ca173ce"
+  },
+  "current_public_joint_targets_changed": false,
+  "cases": [
+    {
+      "request_type": "joint_position",
+      "cartesian_tracking_enabled": true,
+      "requested_arm_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "executed_arm_command_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "maximum_arm_target_change_rad": 0.0,
+      "redundant_coordinate_requested_rad": 0.001,
+      "redundant_coordinate_executed_rad": 0.001,
+      "low_level_type": "ee_pose",
+      "preserved_raw_public_type": "joint_position",
+      "conversion_input_type": "ee_pose",
+      "cartesian_bias_applied": false,
+      "previous_command_FK_minus_actual_m": null,
+      "requested_qplan": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "applied_gripper_total_opening_m": 0.01,
+      "nominal_TCP_reference": {
+        "position_m": [
+          0.0001,
+          0.0,
+          0.0
+        ],
+        "quaternion_wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "effective_IK_goal": null,
+      "receipt_target_reached": true,
+      "receipt_final_TCP_error_m": 0.0,
+      "receipt_target_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+      "all_runtime_stops": [
+        null
+      ]
+    },
+    {
+      "request_type": "joint_velocity",
+      "cartesian_tracking_enabled": true,
+      "requested_arm_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "executed_arm_command_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "maximum_arm_target_change_rad": 0.0,
+      "redundant_coordinate_requested_rad": 0.001,
+      "redundant_coordinate_executed_rad": 0.001,
+      "low_level_type": "ee_pose",
+      "preserved_raw_public_type": "joint_velocity",
+      "conversion_input_type": "ee_pose",
+      "cartesian_bias_applied": false,
+      "previous_command_FK_minus_actual_m": null,
+      "requested_qplan": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "applied_gripper_total_opening_m": 0.01,
+      "nominal_TCP_reference": {
+        "position_m": [
+          0.0001,
+          0.0,
+          0.0
+        ],
+        "quaternion_wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "effective_IK_goal": null,
+      "receipt_target_reached": true,
+      "receipt_final_TCP_error_m": 0.0,
+      "receipt_target_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+      "all_runtime_stops": [
+        null
+      ]
+    },
+    {
+      "request_type": "joint_position",
+      "cartesian_tracking_enabled": false,
+      "requested_arm_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "executed_arm_command_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "maximum_arm_target_change_rad": 0.0,
+      "redundant_coordinate_requested_rad": 0.001,
+      "redundant_coordinate_executed_rad": 0.001,
+      "low_level_type": "ee_pose",
+      "preserved_raw_public_type": "joint_position",
+      "conversion_input_type": "ee_pose",
+      "cartesian_bias_applied": false,
+      "previous_command_FK_minus_actual_m": null,
+      "requested_qplan": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "applied_gripper_total_opening_m": 0.01,
+      "nominal_TCP_reference": {
+        "position_m": [
+          0.0001,
+          0.0,
+          0.0
+        ],
+        "quaternion_wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "effective_IK_goal": null,
+      "receipt_target_reached": true,
+      "receipt_final_TCP_error_m": 0.0,
+      "receipt_target_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+      "all_runtime_stops": [
+        null
+      ]
+    },
+    {
+      "request_type": "ee_delta",
+      "cartesian_tracking_enabled": true,
+      "requested_arm_q7_rad": null,
+      "executed_arm_command_q7_rad": [
+        0.0005,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maximum_arm_target_change_rad": null,
+      "redundant_coordinate_requested_rad": null,
+      "redundant_coordinate_executed_rad": 0.0,
+      "low_level_type": "ee_pose",
+      "preserved_raw_public_type": "ee_delta",
+      "conversion_input_type": "ee_pose",
+      "cartesian_bias_applied": true,
+      "previous_command_FK_minus_actual_m": [
+        0.0004,
+        0.0,
+        0.0
+      ],
+      "requested_qplan": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "applied_gripper_total_opening_m": 0.01,
+      "nominal_TCP_reference": {
+        "position_m": [
+          0.0001,
+          0.0,
+          0.0
+        ],
+        "quaternion_wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "effective_IK_goal": {
+        "position_m": [
+          0.0005,
+          0.0,
+          0.0
+        ],
+        "quaternion_wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "receipt_target_reached": true,
+      "receipt_final_TCP_error_m": 0.0004,
+      "receipt_target_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+      "all_runtime_stops": [
+        null
+      ]
+    },
+    {
+      "request_type": "direct_joint_position",
+      "cartesian_tracking_enabled": true,
+      "requested_arm_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "executed_arm_command_q7_rad": [
+        0.0001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "maximum_arm_target_change_rad": 0.0,
+      "redundant_coordinate_requested_rad": 0.001,
+      "redundant_coordinate_executed_rad": 0.001,
+      "low_level_type": "joint_position",
+      "preserved_raw_public_type": null,
+      "conversion_input_type": "joint_position",
+      "cartesian_bias_applied": false,
+      "previous_command_FK_minus_actual_m": null,
+      "requested_qplan": null,
+      "applied_gripper_total_opening_m": 0.01,
+      "nominal_TCP_reference": null,
+      "effective_IK_goal": null,
+      "receipt_target_reached": null,
+      "receipt_final_TCP_error_m": null,
+      "receipt_target_scope": null,
+      "all_runtime_stops": [
+        null
+      ]
+    }
+  ],
+  "runtime_modified": false,
+  "active_simulation_touched": false,
+  "HDF5_opened": false
+}

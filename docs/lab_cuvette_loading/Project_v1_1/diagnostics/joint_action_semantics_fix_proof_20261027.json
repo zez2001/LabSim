@@ -1,0 +1,38 @@
+{
+  "schema": "labsim.Project_v1_1.public_joint_semantics_fix.v1",
+  "runtime_edit_gate": {
+    "source": "outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_02/process_exit.json",
+    "source_SHA256": "3798220ff825451c3d708846c0f303c9e766d31fe93c8b9a3f5af5f50fd63c04",
+    "process_exited": true,
+    "pid": 75973,
+    "exit_code": 0,
+    "completion_evidence": "Observed Popen.wait after full child shutdown; task verdict is separate",
+    "pid_absent_independently_verified": true,
+    "verified_again_utc": "2026-10-26T18:49:04.870144+00:00"
+  },
+  "runtime_files_modified": [
+    "tasks/lab_cuvette_loading_project_v1_1.py"
+  ],
+  "runtime_postfix_SHA256": "466056e58bdca83367687de7f0deaaa529939cd452b9d4f087c4108677ac91b8",
+  "unmodified_runtime_sources": [
+    "demos/lab_cuvette_project_v1_1/environment.py",
+    "policy/backends/action_adapters.py",
+    "data_collectors/lab_cuvette_env_v1_collector.py"
+  ],
+  "cpu_test_result": {
+    "passed": 48,
+    "failed": 0,
+    "test_files": [
+      "tests/test_lab_cuvette_project_v1_1_joint_action_semantics.py",
+      "tests/test_lab_cuvette_project_v1_1_tracking_integration.py",
+      "tests/test_lab_cuvette_project_v1_1_robot_tracking.py"
+    ],
+    "hardware_scope": "Explicit CPU robot/FK/actuator and in-memory collector stubs, actual facade/task/collector method bodies. Not Isaac dynamics."
+  },
+  "counterexample_before": "joint_action_semantics_review_20261027.json",
+  "counterexample_after": "joint_action_semantics_fixed_20261027.json",
+  "physics_or_config_or_scoring_modified": false,
+  "historical_data_modified": false,
+  "GPU_or_API_started": false,
+  "postfix_physical_run_performed_by_this_agent": false
+}

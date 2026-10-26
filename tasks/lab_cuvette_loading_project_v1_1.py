@@ -72,6 +72,12 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
         duration=float(action.get('duration_s',1/self.cfg.physics.control_hz))
         if abs(duration-1/self.cfg.physics.control_hz)>1e-6:raise ValueError('Use the facade for bounded multi-tick actions')
         kind=action.get('type');v=np.asarray(action.get('values',[]),float)
+        raw=action.get('raw_model_action',{})
+        origin_type=raw.get('type',kind) if isinstance(raw,dict) else kind
+        # The facade retains an EE/FK reference for runtime guards even when
+        # the public policy requested joints. Preserve that explicit qplan;
+        # Cartesian bias/re-IK would change absolute targets and redundancy.
+        preserve_joint_target=origin_type in ('joint_position','joint_velocity') and '_executor_q7' in action
         if not np.isfinite(v).all():raise ValueError('Nonfinite command')
         opening=float(action.get('gripper_opening_m',self.grip));effort=float(action.get('gripper_effort_limit_N',self.effort))
         if not np.isfinite([opening,effort]).all() or not 0<=opening<=.08 or not 0<=effort<=8:raise ValueError('Invalid gripper command')
@@ -87,7 +93,7 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
                 elif action.get('frame')=='tcp':p=p+r.apply(v[:3]);r=r*Rotation.from_rotvec(v[3:])
                 else:raise ValueError('Unknown frame')
             reference=dict(position_m=p.tolist(),quaternion_wxyz=np.roll(r.as_quat(),1).tolist())
-            if self.tracking_compensator is not None:
+            if self.tracking_compensator is not None and not preserve_joint_target:
                 if self._tracking_sample_control_step!=self.control_steps:
                     command_p,command_R=self.forward(seed)
                     corrected=self.tracking_compensator.update(nominal_position_m=p,nominal_rotation_matrix=r.as_matrix(),
@@ -100,7 +106,7 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
                 p=corrected.command_position_m;r=Rotation.from_matrix(corrected.command_rotation_matrix)
                 tracking_diagnostics=corrected.diagnostics
                 effective_reference=dict(position_m=p.tolist(),quaternion_wxyz=np.roll(r.as_quat(),1).tolist())
-            if '_executor_q7' in action and self.tracking_compensator is None:
+            if '_executor_q7' in action and (self.tracking_compensator is None or preserve_joint_target):
                 q7=np.asarray(action['_executor_q7'],float)
                 fp,fR=self.forward(q7);pe=float(np.linalg.norm(fp-p));oe=float((r*Rotation.from_matrix(fR).inv()).magnitude())
                 solution=dict(success=pe<=self.cfg.executor.ik_position_tolerance_m and oe<=self.cfg.executor.ik_orientation_tolerance_rad,
@@ -130,14 +136,16 @@ class LabCuvetteProjectV11(LabCuvetteProjectV1):
         q=np.r_[q7,[opening/2]*2]
         # Seed is always an executed command; no raw unexecuted branch is retained.
         self._ik_seed=q7.copy();self._ik_goal=None;self._ik_solution=None
-        conversion=dict(input_type=kind,control_hz=int(self.cfg.physics.control_hz),physics_hz=int(self.cfg.physics.hz),duration_s=duration,ticks=1,
+        semantics=dict(origin_type=origin_type,compensation_applied=tracking_diagnostics is not None,
+            joint_target_preserved=bool(preserve_joint_target or kind in ('joint_position','joint_velocity')))
+        conversion=dict(input_type=kind,**semantics,control_hz=int(self.cfg.physics.control_hz),physics_hz=int(self.cfg.physics.hz),duration_s=duration,ticks=1,
             target_pose=reference,raw_values=v.tolist(),executed_q=q.tolist(),effort_limit_N=effort,truth_used_by_environment=False,
             IK=None if solution is None else {k:copy.deepcopy(v) for k,v in solution.items() if k!='q'},
             generic_contact_hold=grip_diagnostics,
             robot_tracking=tracking_diagnostics,effective_IK_goal_TCP=effective_reference,
-            FK_validation_scope='effective IK goal; actual tracking guard compares the unchanged nominal reference',
+            FK_validation_scope=('unmodified nominal FK of preserved public joint plan' if preserve_joint_target else 'effective IK goal')+'; actual tracking guard compares the unchanged nominal reference',
             no_post_IK_joint_clipping=True,seed_semantics='previous applied command',gripper_semantics='persistent applied symmetric opening target; explicit changes only')
-        self._tick_trace=dict(t_before=self.t,control_tick_before=self.control_steps,action=copy.deepcopy(action),seed_q7=seed.tolist(),command_q9=q.tolist(),reference_TCP=reference,IK=conversion['IK'],generic_contact_hold=grip_diagnostics,robot_tracking=tracking_diagnostics,effective_IK_goal_TCP=effective_reference)
+        self._tick_trace=dict(t_before=self.t,control_tick_before=self.control_steps,action=copy.deepcopy(action),seed_q7=seed.tolist(),command_q9=q.tolist(),reference_TCP=reference,IK=conversion['IK'],generic_contact_hold=grip_diagnostics,robot_tracking=tracking_diagnostics,effective_IK_goal_TCP=effective_reference,**semantics)
         return q,opening,effort,1,conversion
 
     def hold_actual_joints(self):
