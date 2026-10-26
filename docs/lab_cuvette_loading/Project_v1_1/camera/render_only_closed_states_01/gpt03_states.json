@@ -1,0 +1,836 @@
+{
+  "schema": "labsim.Project_v1_1.render_reconstruction_states.v1",
+  "analysis_date_local": "2026-10-27",
+  "purpose": "Static reconstruction for render-only camera visibility QA. These are measured states from a closed run, not a new executed trajectory.",
+  "state_usage": "Apply recorded articulation positions and vessel world pose only to a separate reconstruction. No physics advance or trajectory success claim is authorized by this data file.",
+  "restrictions": [
+    "Privileged cup poses and native collision coordinates are offline diagnostic evidence, never sent to a model or used for control.",
+    "Reconstruction renders are new views of saved states, not original model inputs and not evidence a new action executed.",
+    "No relabeling, physics/scorer/asset changes, or task-success claim.",
+    "Camera sensor timestamps remain independent from state time; a static reconstruction does not establish original pixel simultaneity."
+  ],
+  "source_run_scope": {
+    "original_task_success": false,
+    "original_failure_type": "SAFETY_COLLISION",
+    "original_grasp_success": false,
+    "physics_trustworthy": true,
+    "record_integrity_valid": true,
+    "full_loading_success": false
+  },
+  "closed_audit": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_read_archive.json",
+    "SHA256": "d825925345a6424affae10feb9a4a323fcda2ceb237df98d1fd475e0db87889c"
+  },
+  "states": [
+    {
+      "id": "gpt03_initial",
+      "run": "gpt_debug_03",
+      "scene_version": "Project_v1_1",
+      "actual_execution_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "phase": "RESET_INITIALIZATION",
+      "simulation_time_s": 0.016666666666666666,
+      "physics_step": 4,
+      "control_step": 0,
+      "decision_index": 0,
+      "joint_values_units": [
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "m",
+        "m"
+      ],
+      "joint_order_scope": "Recorded Franka articulation order: first7 arm positions, final2 finger positions; reconstruct using the same asset and articulation ordering, not guessed USD names.",
+      "cup_world_pose": {
+        "position_m": [
+          -0.08500000834465027,
+          -0.17499999701976776,
+          0.7430000305175781
+        ],
+        "quaternion_wxyz": [
+          0.7071091532707214,
+          1.1641532182693481e-08,
+          -7.450580596923828e-09,
+          0.7071045637130737
+        ],
+        "frame_scope": "Recorded vessel object/bottom frame; not COM. Preserve the original asset transform convention."
+      },
+      "actual_TCP_world_pose": {
+        "position_m": [
+          -0.08505931596479005,
+          -0.1748760546046365,
+          1.0228528475162522
+        ],
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ]
+      },
+      "measured_gripper_opening_m": 0.0799999088048935,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "sources": {
+        "raw_archive": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/physics_records.jsonl.gz",
+          "SHA256": "74309f6d1f6fe88b76e69052d63ba5d9c0d835463f9240f964a802e8b4f2e478",
+          "original_decompressed_SHA256": "5b64c045e48fbdffb9aa666df40d2da5e84a9f37754cff1af80d25834e56b06d",
+          "line_1based": 5
+        },
+        "H5": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dataset/episode_0000.h5",
+          "SHA256": "16c2971a2e4b5be1ae7bb35060a930f3f27c103b04def3d1373113fc3c064ec7",
+          "dataset_state": "privileged/state_json",
+          "dataset_joints": "joint_positions",
+          "row_0based": 0
+        },
+        "public_observation": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+          "SHA256": "e2c707e293556895f8a2f3958d1aa3216323145364de9fd6cffbd363a7209033"
+        }
+      },
+      "cross_checks": {
+        "raw_state_exactly_equal_H5_privileged_state": true,
+        "raw_actual_q9_exactly_equal_H5_and_public_observation": true,
+        "time_match_tolerance_s": 1e-10
+      },
+      "camera_reference": {
+        "side_camera": {
+          "name": "side_camera",
+          "physical_parent": "/World",
+          "local_pose_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "local_pose_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "world_pose_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "world_pose_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "camera_cv_from_world": [
+            [
+              0.6839411134189798,
+              -0.7295372186360379,
+              -9.656349795943038e-09,
+              -0.14134786606110555
+            ],
+            [
+              -0.3719924470539977,
+              -0.3487428929130277,
+              -0.8602325348284794,
+              0.8625574861633942
+            ],
+            [
+              0.6275716474714141,
+              0.5883484012619107,
+              -0.5099019376532793,
+              1.7807344858195973
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "intrinsic_matrix_native": [
+            [
+              610.832763671875,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              610.8327026367188,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "sensor_rendering_time_s": 0.025000001303851604,
+          "frames": "world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz"
+        },
+        "wrist_camera": {
+          "name": "wrist_camera",
+          "physical_parent": "/World/Franka/panda_hand",
+          "local_pose_position_m": [
+            0.07500000298023224,
+            0.0,
+            0.03999999910593033
+          ],
+          "local_pose_quaternion_wxyz": [
+            -0.2600301802158356,
+            0.6575593535868104,
+            -0.6575593535868104,
+            0.26003018747428563
+          ],
+          "world_pose_position_m": [
+            -0.08509044689988551,
+            -0.09990249580850138,
+            1.0828858806503685
+          ],
+          "world_pose_quaternion_wxyz": [
+            0.00027571167282437856,
+            -0.0003442176242332244,
+            0.36753326618443516,
+            0.9300102707739855
+          ],
+          "camera_cv_from_world": [
+            [
+              -0.9999996109946008,
+              0.00025980651957241196,
+              -0.0008429182751133257,
+              -0.08415167418084726
+            ],
+            [
+              0.0007658522304232202,
+              0.7298384444617492,
+              -0.683619234995633,
+              0.8132594661650462
+            ],
+            [
+              0.0004375854285598795,
+              -0.6836196146149011,
+              -0.729838359524056,
+              0.7220735833416261
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "intrinsic_matrix_native": [
+            [
+              366.4996337890625,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              366.4996337890625,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "sensor_rendering_time_s": 0.025000001303851604,
+          "frames": "world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz"
+        }
+      },
+      "source_run": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03",
+      "joint_positions": [
+        0.1779361367225647,
+        -1.2082452774047852,
+        -0.8200522661209106,
+        -2.87337064743042,
+        -0.7667176723480225,
+        1.7454451322555542,
+        -0.8053153157234192,
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "object_position_m": [
+        -0.08500000834465027,
+        -0.17499999701976776,
+        0.7430000305175781
+      ],
+      "object_quaternion_wxyz": [
+        0.7071091532707214,
+        1.1641532182693481e-08,
+        -7.450580596923828e-09,
+        0.7071045637130737
+      ],
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/physics_records.jsonl.gz",
+          "sha256": "74309f6d1f6fe88b76e69052d63ba5d9c0d835463f9240f964a802e8b4f2e478"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dataset/episode_0000.h5",
+          "sha256": "16c2971a2e4b5be1ae7bb35060a930f3f27c103b04def3d1373113fc3c064ec7"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+          "sha256": "e2c707e293556895f8a2f3958d1aa3216323145364de9fd6cffbd363a7209033"
+        }
+      ],
+      "purpose": "camera visibility reconstruction, not execution"
+    },
+    {
+      "id": "gpt03_after_close_before_first_lift",
+      "run": "gpt_debug_03",
+      "scene_version": "Project_v1_1",
+      "actual_execution_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "phase": "POLICY",
+      "simulation_time_s": 14.016666666666667,
+      "physics_step": 3364,
+      "control_step": 840,
+      "decision_index": 7,
+      "joint_values_units": [
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "m",
+        "m"
+      ],
+      "joint_order_scope": "Recorded Franka articulation order: first7 arm positions, final2 finger positions; reconstruct using the same asset and articulation ordering, not guessed USD names.",
+      "cup_world_pose": {
+        "position_m": [
+          -0.08498610556125641,
+          -0.1750004142522812,
+          0.7430172562599182
+        ],
+        "quaternion_wxyz": [
+          0.7072275876998901,
+          0.0012487396597862244,
+          0.0012506842613220215,
+          0.7069836854934692
+        ],
+        "frame_scope": "Recorded vessel object/bottom frame; not COM. Preserve the original asset transform convention."
+      },
+      "actual_TCP_world_pose": {
+        "position_m": [
+          -0.08506018701568527,
+          -0.17487957775157273,
+          0.7908610796700684
+        ],
+        "quaternion_wxyz": [
+          -0.00045353017046343764,
+          0.707005216965098,
+          -0.7072081707675228,
+          0.00014385469498029793
+        ]
+      },
+      "measured_gripper_opening_m": 0.010699243284761906,
+      "finger_contact_N": [
+        1.1830836534500122,
+        2.0114026069641113
+      ],
+      "sources": {
+        "raw_archive": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/physics_records.jsonl.gz",
+          "SHA256": "74309f6d1f6fe88b76e69052d63ba5d9c0d835463f9240f964a802e8b4f2e478",
+          "original_decompressed_SHA256": "5b64c045e48fbdffb9aa666df40d2da5e84a9f37754cff1af80d25834e56b06d",
+          "line_1based": 3365
+        },
+        "H5": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dataset/episode_0000.h5",
+          "SHA256": "16c2971a2e4b5be1ae7bb35060a930f3f27c103b04def3d1373113fc3c064ec7",
+          "dataset_state": "privileged/state_json",
+          "dataset_joints": "joint_positions",
+          "row_0based": 840
+        },
+        "public_observation": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/gpt_control/observations/decision_000007/public_observation.json",
+          "SHA256": "27cb044ab91a4403b01564d8d18eabac91446ef0fe500a14687019a3bccea643"
+        }
+      },
+      "cross_checks": {
+        "raw_state_exactly_equal_H5_privileged_state": true,
+        "raw_actual_q9_exactly_equal_H5_and_public_observation": true,
+        "time_match_tolerance_s": 1e-10
+      },
+      "camera_reference": {
+        "side_camera": {
+          "name": "side_camera",
+          "physical_parent": "/World",
+          "local_pose_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "local_pose_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "world_pose_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "world_pose_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "camera_cv_from_world": [
+            [
+              0.6839411134189798,
+              -0.7295372186360379,
+              -9.656349795943038e-09,
+              -0.14134786606110555
+            ],
+            [
+              -0.3719924470539977,
+              -0.3487428929130277,
+              -0.8602325348284794,
+              0.8625574861633942
+            ],
+            [
+              0.6275716474714141,
+              0.5883484012619107,
+              -0.5099019376532793,
+              1.7807344858195973
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "intrinsic_matrix_native": [
+            [
+              610.832763671875,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              610.8327026367188,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "sensor_rendering_time_s": 14.02500073146075,
+          "frames": "world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz"
+        },
+        "wrist_camera": {
+          "name": "wrist_camera",
+          "physical_parent": "/World/Franka/panda_hand",
+          "local_pose_position_m": [
+            0.07500000298023224,
+            0.0,
+            0.03999999910593033
+          ],
+          "local_pose_quaternion_wxyz": [
+            -0.2600301802158356,
+            0.6575593535868104,
+            -0.6575593535868104,
+            0.26003018747428563
+          ],
+          "world_pose_position_m": [
+            -0.08508936049107016,
+            -0.09990585460948559,
+            0.8508939085358249
+          ],
+          "world_pose_quaternion_wxyz": [
+            0.00028879227709899117,
+            -0.0003400470123960649,
+            0.3675345371844517,
+            0.9300097660474652
+          ],
+          "camera_cv_from_world": [
+            [
+              -0.9999996019340998,
+              0.0002872012334786045,
+              -0.0008447763566994264,
+              -0.08434181847923106
+            ],
+            [
+              0.0007871173187659924,
+              0.7298365611512629,
+              -0.6836212214766482,
+              0.6546710537766502
+            ],
+            [
+              0.0004202118130753482,
+              -0.6836216142884525,
+              -0.7298364966892801,
+              0.5527513832094766
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "intrinsic_matrix_native": [
+            [
+              366.4996337890625,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              366.4996337890625,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "sensor_rendering_time_s": 14.02500073146075,
+          "frames": "world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz"
+        }
+      },
+      "source_run": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03",
+      "joint_positions": [
+        0.6773985028266907,
+        -0.7358101606369019,
+        -1.8499175310134888,
+        -2.9108152389526367,
+        -1.5867869853973389,
+        2.441122531890869,
+        -0.45558962225914,
+        0.00534960487857461,
+        0.005349638406187296
+      ],
+      "object_position_m": [
+        -0.08498610556125641,
+        -0.1750004142522812,
+        0.7430172562599182
+      ],
+      "object_quaternion_wxyz": [
+        0.7072275876998901,
+        0.0012487396597862244,
+        0.0012506842613220215,
+        0.7069836854934692
+      ],
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/physics_records.jsonl.gz",
+          "sha256": "74309f6d1f6fe88b76e69052d63ba5d9c0d835463f9240f964a802e8b4f2e478"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dataset/episode_0000.h5",
+          "sha256": "16c2971a2e4b5be1ae7bb35060a930f3f27c103b04def3d1373113fc3c064ec7"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/gpt_control/observations/decision_000007/public_observation.json",
+          "sha256": "27cb044ab91a4403b01564d8d18eabac91446ef0fe500a14687019a3bccea643"
+        }
+      ],
+      "purpose": "camera visibility reconstruction, not execution"
+    },
+    {
+      "id": "gpt03_decision000014_before_last_horizontal_motion",
+      "run": "gpt_debug_03",
+      "scene_version": "Project_v1_1",
+      "actual_execution_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "phase": "POLICY",
+      "simulation_time_s": 28.016666666666666,
+      "physics_step": 6724,
+      "control_step": 1680,
+      "decision_index": 14,
+      "joint_values_units": [
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "rad",
+        "m",
+        "m"
+      ],
+      "joint_order_scope": "Recorded Franka articulation order: first7 arm positions, final2 finger positions; reconstruct using the same asset and articulation ordering, not guessed USD names.",
+      "cup_world_pose": {
+        "position_m": [
+          0.02318718656897545,
+          -0.12699316442012787,
+          0.9029795527458191
+        ],
+        "quaternion_wxyz": [
+          0.7071764469146729,
+          -0.0002234191633760929,
+          -0.000320974737405777,
+          0.7070369720458984
+        ],
+        "frame_scope": "Recorded vessel object/bottom frame; not COM. Preserve the original asset transform convention."
+      },
+      "actual_TCP_world_pose": {
+        "position_m": [
+          0.022924225998036687,
+          -0.12687895562451582,
+          0.9508457827531619
+        ],
+        "quaternion_wxyz": [
+          -0.0004320513762364528,
+          0.7070143461193927,
+          -0.7071990609042075,
+          0.00012636923290405206
+        ]
+      },
+      "measured_gripper_opening_m": 0.01061702985316515,
+      "finger_contact_N": [
+        1.6117621660232544,
+        1.601443886756897
+      ],
+      "sources": {
+        "raw_archive": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/physics_records.jsonl.gz",
+          "SHA256": "74309f6d1f6fe88b76e69052d63ba5d9c0d835463f9240f964a802e8b4f2e478",
+          "original_decompressed_SHA256": "5b64c045e48fbdffb9aa666df40d2da5e84a9f37754cff1af80d25834e56b06d",
+          "line_1based": 6725
+        },
+        "H5": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dataset/episode_0000.h5",
+          "SHA256": "16c2971a2e4b5be1ae7bb35060a930f3f27c103b04def3d1373113fc3c064ec7",
+          "dataset_state": "privileged/state_json",
+          "dataset_joints": "joint_positions",
+          "row_0based": 1680
+        },
+        "public_observation": {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/gpt_control/observations/decision_000014/public_observation.json",
+          "SHA256": "6ecabe01d8aa332cd2642da0f267b779a302dcf6557d57b5e356a2a3c3541a64"
+        }
+      },
+      "cross_checks": {
+        "raw_state_exactly_equal_H5_privileged_state": true,
+        "raw_actual_q9_exactly_equal_H5_and_public_observation": true,
+        "time_match_tolerance_s": 1e-10
+      },
+      "camera_reference": {
+        "side_camera": {
+          "name": "side_camera",
+          "physical_parent": "/World",
+          "local_pose_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "local_pose_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "world_pose_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "world_pose_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "camera_cv_from_world": [
+            [
+              0.6839411134189798,
+              -0.7295372186360379,
+              -9.656349795943038e-09,
+              -0.14134786606110555
+            ],
+            [
+              -0.3719924470539977,
+              -0.3487428929130277,
+              -0.8602325348284794,
+              0.8625574861633942
+            ],
+            [
+              0.6275716474714141,
+              0.5883484012619107,
+              -0.5099019376532793,
+              1.7807344858195973
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "intrinsic_matrix_native": [
+            [
+              610.832763671875,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              610.8327026367188,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "sensor_rendering_time_s": 28.02500146161765,
+          "frames": "world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz"
+        },
+        "wrist_camera": {
+          "name": "wrist_camera",
+          "physical_parent": "/World/Franka/panda_hand",
+          "local_pose_position_m": [
+            0.07500000298023224,
+            0.0,
+            0.03999999910593033
+          ],
+          "local_pose_quaternion_wxyz": [
+            -0.2600301802158356,
+            0.6575593535868104,
+            -0.6575593535868104,
+            0.26003018747428563
+          ],
+          "world_pose_position_m": [
+            0.022896408900859623,
+            -0.05190489400909151,
+            1.010878189553698
+          ],
+          "world_pose_quaternion_wxyz": [
+            0.00026666715928664534,
+            -0.00031916840321680623,
+            0.3675371680624172,
+            0.930008740342162
+          ],
+          "camera_cv_from_world": [
+            [
+              -0.9999996540403127,
+              0.0002613930756908505,
+              -0.0007896789943443378,
+              0.023708237831644993
+            ],
+            [
+              0.0007306180799041667,
+              0.7298327179625691,
+              -0.6836253871738447,
+              0.7289271550591486
+            ],
+            [
+              0.0003976386241863089,
+              -0.6836257276207705,
+              -0.729832656448377,
+              0.7022792889971232
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "intrinsic_matrix_native": [
+            [
+              366.4996337890625,
+              0.0,
+              320.0
+            ],
+            [
+              0.0,
+              366.4996337890625,
+              240.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "resolution_wh": [
+            640,
+            480
+          ],
+          "sensor_rendering_time_s": 28.02500146161765,
+          "frames": "world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz"
+        }
+      },
+      "source_run": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03",
+      "joint_positions": [
+        0.6176683306694031,
+        -0.7857851386070251,
+        -1.0860884189605713,
+        -2.790635347366333,
+        -0.8473130464553833,
+        2.1545472145080566,
+        -0.5405623912811279,
+        0.005308503285050392,
+        0.0053085265681147575
+      ],
+      "object_position_m": [
+        0.02318718656897545,
+        -0.12699316442012787,
+        0.9029795527458191
+      ],
+      "object_quaternion_wxyz": [
+        0.7071764469146729,
+        -0.0002234191633760929,
+        -0.000320974737405777,
+        0.7070369720458984
+      ],
+      "source_files": [
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/physics_records.jsonl.gz",
+          "sha256": "74309f6d1f6fe88b76e69052d63ba5d9c0d835463f9240f964a802e8b4f2e478"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dataset/episode_0000.h5",
+          "sha256": "16c2971a2e4b5be1ae7bb35060a930f3f27c103b04def3d1373113fc3c064ec7"
+        },
+        {
+          "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/gpt_control/observations/decision_000014/public_observation.json",
+          "sha256": "6ecabe01d8aa332cd2642da0f267b779a302dcf6557d57b5e356a2a3c3541a64"
+        }
+      ],
+      "purpose": "camera visibility reconstruction, not execution"
+    }
+  ],
+  "GPU_used": false,
+  "API_calls": 0,
+  "original_files_modified": false
+}
