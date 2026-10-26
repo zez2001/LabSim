@@ -57,9 +57,10 @@ def main():
         for _ in range(8):
             world.render()
         profiles = dict(original=dict(eye_m=list(cfg.cameras.side_camera.eye_m),
-                            target_m=list(cfg.cameras.side_camera.target_m)),
-            lower_oblique=dict(eye_m=[-.70, -.85, 1.32], target_m=[.10, -.10, .98]),
-            lower_front=dict(eye_m=[-.45, -1.05, 1.27], target_m=[.10, -.10, .98]))
+                            target_m=list(cfg.cameras.side_camera.target_m), focal_length_cm=float(cfg.cameras.side_camera.focal_length_cm)),
+            lower_oblique=dict(eye_m=[-.70, -.85, 1.32], target_m=[.10, -.10, .98], focal_length_cm=2.),
+            lower_front=dict(eye_m=[-.45, -1.05, 1.27], target_m=[.10, -.10, .98], focal_length_cm=2.),
+            lower_wide=dict(eye_m=[-.70, -.85, 1.32], target_m=[.10, -.10, 1.05], focal_length_cm=1.7))
         records = []
         for index, state in enumerate(states['states']):
             q = np.asarray(state['joint_positions'], float)
@@ -85,6 +86,7 @@ def main():
                 rig.specifications['side_camera'].update(profile)
                 _, quat = look_at_usd(profile['eye_m'], profile['target_m'], [0.,0.,1.])
                 rig.cameras['side_camera'].set_world_pose(np.asarray(profile['eye_m']),quat,camera_axes='usd')
+                rig.cameras['side_camera'].set_focal_length(profile['focal_length_cm'])
                 for _ in range(6):
                     world.render()
                 pictures = rig.get_images()
