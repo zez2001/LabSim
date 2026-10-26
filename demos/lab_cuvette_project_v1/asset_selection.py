@@ -84,4 +84,10 @@ def select_registered_asset(config, *, asset_root, repository_root, asset_id=Non
         original_rack_and_instrument_preserved=True, target_offset_automatically_adjusted=False,
         mass_distribution_assumption=record['mass_distribution_assumption'],
         validation_scope='Registered USD/source/sidecar hashes and atomic geometric/mass/contact metadata; independent geometry, cooked collision and physical execution still required')
+    width = float(record['nominal_outer_xy_mm'][0])
+    slot = value.get('rack', {}).get('selected_slot_id', 'A1')
+    seat = value.get('adapter', {}).get('selected_target_seat_id', 'candidate_far_hinge')
+    value.setdefault('task', {})['instruction'] = (
+        f'Physically load the {width:g}mm XY size-hypothesis cuvette from fixed white rack slot {slot} '
+        f'into unchanged original internal seat {seat}, transfer support, release, retreat and leave stable for3seconds.')
     return value

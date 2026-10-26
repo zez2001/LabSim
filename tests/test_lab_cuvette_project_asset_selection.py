@@ -70,6 +70,7 @@ def test_yaml_asset_id_alone_atomically_switches_all_asset_fields(family):
     assert selected['vessel']['center_of_mass_m'] == record['mass_properties']['com_body_m']
     assert selected['vessel']['registered_collision_input_shapes'] == record['collision_input_shapes']
     assert selected['asset_selection']['asset_sha256'] == record['asset_sha256']
+    assert '10.3mm' in selected['task']['instruction']
     for key in ('geometry', 'physics', 'adapter'):
         assert selected[key] == family[1][key]
     assert family[1]['source']['vessel'] == 'old_1000.usda'
