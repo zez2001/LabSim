@@ -1,0 +1,1210 @@
+{
+  "schema": "labsim.Project_v1_1.read_only_camera_review.v1",
+  "source_task_instruction_attachment": "ed19ec81-b7b6-4f47-87d1-41d778e17281",
+  "source_formal_attempt": "Project_v1/gpt_formal5_01/attempt_0003",
+  "source_execution_commit": "7a7cbb81c6fcede84b48d1e9b60f66c68dfac0f0",
+  "review_scope": "Read-only source/config,18 actual serialized model observations/36 exact wire JPEGs, CPU pinhole projection using public robot proprioception and calibration. No GPU, model API, H5, code/config or historical-data modifications.",
+  "actual_wire_artifacts_verified": {
+    "observations": 18,
+    "JPEGs": 36,
+    "all_manifest_and_transform_sha256_match": true,
+    "native_resolution_wh": [
+      640,
+      480
+    ],
+    "model_resolution_wh": [
+      512,
+      384
+    ],
+    "JPEG_quality": 60,
+    "detail": "low",
+    "crop": null,
+    "resize": "Pillow LANCZOS, aspect ratio preserved",
+    "pixel_center_transform": [
+      [
+        0.8,
+        0,
+        -0.1
+      ],
+      [
+        0,
+        0.8,
+        -0.1
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "dataset_policy_256_square_is_not_GPT_wire_image": true
+  },
+  "existing_wrist": {
+    "parent": "/World/Franka/panda_hand",
+    "localeye_m": [
+      0.075,
+      0,
+      0
+    ],
+    "localtarget_m": [
+      0,
+      0,
+      0.35
+    ],
+    "localup": [
+      0,
+      0,
+      -1
+    ],
+    "local_pose_quaternion_wxyz_observed": [
+      -0.07449427247047428,
+      0.7031718162435051,
+      -0.7031718162435051,
+      0.07449427528820775
+    ],
+    "intrinsic_matrix_native": [
+      [
+        366.4996337890625,
+        0.0,
+        320.0
+      ],
+      [
+        0.0,
+        366.4996337890625,
+        240.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "intrinsic_matrix_model512": [
+      [
+        293.19970703125,
+        0.0,
+        255.9
+      ],
+      [
+        0.0,
+        293.19970703125,
+        191.9
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "fov_horizontal_vertical_deg": [
+      82.25004833190926,
+      66.43706842094727
+    ],
+    "TCP_projected_u_range_px": [
+      255.8999818396203,
+      255.90002999577106
+    ],
+    "TCP_projected_v_range_px": [
+      56.57705390258974,
+      56.57705418047626
+    ],
+    "TCP_vertical_fraction": 0.14733607819825825,
+    "source_of_TCP": "Allowed public robot TCPpose, not object truth.",
+    "root_cause_supported": "The fixed optical axis aims250mm beyond the declared100mm hand-frame TCP. The TCP is at14.7% image height for every observation, while the75mm hand-axis point is at~2px; actual close/lift images visibly crop the upper vessel/gripper. Provider did not crop these frames."
+  },
+  "side_view": {
+    "keep_global_view": true,
+    "observed_limitation": "Full layout remains visible but hand occludes the vessel around grasp, with too few lateral pixels for contact diagnosis.",
+    "nominal10mm_frontoparallel_width_at_public_TCP_depth_px_range": [
+      3.9741270666805653,
+      4.430694971127547
+    ],
+    "size_estimate_scope": "Pinhole10mm span normal to camera optical axis at public TCP depth, not a measured vessel image bbox."
+  },
+  "stage_availability": [
+    {
+      "stage": "initial",
+      "availability": "actual_model_input_available",
+      "decisions": [
+        0
+      ]
+    },
+    {
+      "stage": "pregrasp_approach",
+      "availability": "actual_model_input_available",
+      "decisions": [
+        4,
+        7,
+        12
+      ]
+    },
+    {
+      "stage": "gripper_closure",
+      "availability": "actual_model_input_available",
+      "decisions": [
+        13
+      ],
+      "note": "Closed contact feedback at23.4167s; independently persistent bilateral event only starts23.5458s."
+    },
+    {
+      "stage": "lift_and_source_clearance",
+      "availability": "actual_model_input_available",
+      "decisions": [
+        14
+      ],
+      "note": "Source cleared25.1375s; decision14=25.4167s. Stable grasp still false."
+    },
+    {
+      "stage": "held_transport",
+      "availability": "not_verified_or_reached",
+      "decisions": [
+        15,
+        16
+      ],
+      "note": "Contact feedback zero; these are actual images of further/lateral moves, not a verified held-transport sample."
+    },
+    {
+      "stage": "preinsertion",
+      "availability": "unavailable_not_executed",
+      "decisions": []
+    },
+    {
+      "stage": "insertion_and_support_transfer",
+      "availability": "unavailable_not_executed",
+      "decisions": []
+    },
+    {
+      "stage": "open_and_retreat",
+      "availability": "unavailable_not_executed",
+      "decisions": []
+    }
+  ],
+  "candidate_fixed_installation": {
+    "status": "CPU_projection_supported_proposal_not_rendered_or_adopted",
+    "version_name": "wrist_tcp_centered_v11_candidate01",
+    "scope": "Fixed installation and robot geometry only; no phase switch, camera look-at tracking, live object pose or truth-driven crop.",
+    "config_override": {
+      "cameras": {
+        "wrist_camera": {
+          "parent_link": "/World/Franka/panda_hand",
+          "prim_path": "/World/Franka/panda_hand/WristCameraV11",
+          "localeye_m": [
+            0.075,
+            0,
+            0
+          ],
+          "localtarget_m": [
+            0,
+            0,
+            0.1
+          ],
+          "localup": [
+            0,
+            0,
+            -1
+          ],
+          "focal_length_cm": 1.2,
+          "horizontal_aperture_mm": 20.955,
+          "resolution": [
+            640,
+            480
+          ],
+          "fps": 60,
+          "policy_resolution": [
+            256,
+            256
+          ]
+        }
+      }
+    },
+    "expected_local_camera_quaternion_wxyz": [
+      -0.22360679774997896,
+      0.6708203932499369,
+      -0.6708203932499369,
+      0.22360679774997896
+    ],
+    "expected_optical_forward_in_hand": [
+      -0.6,
+      -0.0,
+      0.8
+    ],
+    "fov_horizontal_vertical_deg": [
+      82.25004833190926,
+      66.43706842094727
+    ],
+    "expected_TCP_pixel_model512": [
+      255.9,
+      191.9
+    ],
+    "aim_change_deg": 24.77514056883192,
+    "reason": "Point the optical axis at the known hand-frame TCP [0,0,.1] instead of hand z=.35; retain physical mounting position/lens/FOV initially to isolate orientation."
+  },
+  "fixed_robot_axis_projection_comparison": [
+    {
+      "camera_configuration": "Project_v1_existing",
+      "hand_fixed_points_m": [
+        [
+          0.0,
+          0.0,
+          0.075
+        ],
+        [
+          0.0,
+          0.0,
+          0.1
+        ],
+        [
+          0.0,
+          0.0,
+          0.15
+        ]
+      ],
+      "model_512x384_projected_pixels": [
+        [
+          255.90000000000003,
+          2.1825425091911974
+        ],
+        [
+          255.90000000000003,
+          56.577058293269296
+        ],
+        [
+          255.90000000000003,
+          116.23555947580647
+        ]
+      ],
+      "scope": "Synthetic fixed robot-frame axis points only. Not measured vessel points, object bounding boxes, occlusion checks or new rendered observations."
+    },
+    {
+      "camera_configuration": "Project_v1_1_proposed",
+      "hand_fixed_points_m": [
+        [
+          0.0,
+          0.0,
+          0.075
+        ],
+        [
+          0.0,
+          0.0,
+          0.1
+        ],
+        [
+          0.0,
+          0.0,
+          0.15
+        ]
+      ],
+      "model_512x384_projected_pixels": [
+        [
+          255.90000000000003,
+          150.01432756696428
+        ],
+        [
+          255.90000000000003,
+          191.9
+        ],
+        [
+          255.90000000000003,
+          245.20903764204547
+        ]
+      ],
+      "scope": "Synthetic fixed robot-frame axis points only. Not measured vessel points, object bounding boxes, occlusion checks or new rendered observations."
+    }
+  ],
+  "optional_FOV_followup": {
+    "only_if_fixed_aim_has_verified_edge_clipping": true,
+    "single_factor_focal_length_cm": 1.0,
+    "same_aperture_mm": 20.955,
+    "estimated_fov_horizontal_vertical_deg": [
+      92.67159346960152,
+      76.32141147841067
+    ],
+    "tradeoff": "Wider view reduces edge cropping but also reduces object pixels; do not widen before testing aim-only."
+  },
+  "detail_crop_proposal": {
+    "enabled_by_default": false,
+    "basis": "Fixed native camera pixel coordinates, identical at every observation; no truth boxes or phase-conditioned moving ROI.",
+    "native640x480_ROI_xywh": [
+      160,
+      80,
+      320,
+      320
+    ],
+    "output_size_wh": [
+      320,
+      320
+    ],
+    "upsampling": false,
+    "pixel_from_native": [
+      [
+        1,
+        0,
+        -160
+      ],
+      [
+        0,
+        1,
+        -80
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "intrinsics_rule": "K_ROI = T_crop @ K_native; retain global side+wrist views alongside optional detail.",
+    "implementation_contract_warning": "Current serializer/artifact saver assumes exactly two RGB channels/five content blocks. A third detail image needs an explicitly versioned wire schema, saved image SHA/ROI/K and regression, not an undocumented insertion."
+  },
+  "clarity_followup_after_framing_passes": {
+    "baseline": {
+      "native_wh": [
+        640,
+        480
+      ],
+      "transmitted_wh": [
+        512,
+        384
+      ],
+      "jpeg_quality": 60,
+      "detail": "low"
+    },
+    "candidate": {
+      "native_wh": [
+        640,
+        480
+      ],
+      "max_side_px": 640,
+      "transmitted_wh": [
+        640,
+        480
+      ],
+      "jpeg_quality": 80,
+      "detail": "high",
+      "resize_interpolation": "lanczos"
+    },
+    "status": "not_run_no_cost_or_recognition_claim",
+    "comparison": "First reuse the same closed diagnostic frames for human visibility; then a small bounded model comparison on equivalent frozen snapshots. Report transmitted bytes, gateway usage, inference latency/ledger delta and observed identification errors; upstream hidden resize unknown."
+  },
+  "proposed_stage_acceptance": {
+    "status": "Proposed camera-QA gates; not physical success gates and not yet tested.",
+    "capture_stages": [
+      "reset",
+      "pregrasp",
+      "closure",
+      "lift/extract",
+      "held_transport",
+      "preinsert",
+      "insert/support",
+      "open",
+      "retreat"
+    ],
+    "render_first_then_small_model_comparison": true,
+    "same_rig_all_stages": true,
+    "required_saved_fields": [
+      "source observation ID and logical/engine/render timestamps",
+      "wire JPEG SHA256, resolution, quality,detail,crop and pixel homography",
+      "parent/local/world camera poses and K_native/K_transmitted",
+      "full side+wrist images plus fixed ROI if enabled",
+      "actual public finger opening/contact and tool receipt"
+    ],
+    "visibility_checks": [
+      "Both distal pads, exposed vessel body and immediate work region visible during grasp/lift/insert/open.",
+      "Manual image-only review confirms relevant contours are not touching frame edges; proposed minimum8px margin at512x384, and projected robot TCP inside central40% by40% when working near fingers.",
+      "Side view continues covering full rack, robot and instrument, with wrist supplying contact details.",
+      "At release the vessel and both separated fingers remain visible; after retreat show target support region.",
+      "Occlusion is visually reviewed; pinhole projection alone is not accepted as visibility proof."
+    ],
+    "missing_stage_semantics": "If a stage is not actually executed, mark actual model input unavailable rather than reusing a teacher image as a GPT image.",
+    "diagnostic_path": "Use a declared deterministic/teacher sensor-only traversal to inspect future-stage camera framing first; these are diagnostic captures, not GPT decisions or task success. Then preserve every real GPT decision input through actual reached stages.",
+    "no_truth_crop": true
+  },
+  "source_code_files": [
+    {
+      "path": "config/lab_cuvette_loading/Project_v1/standard.yaml",
+      "sha256_current_read": "eec8594f8168310c2a4168881827fa4df1b69f4a91fa7c05c882ca8680ca6477",
+      "sha256_at_formal_execution_commit": "eec8594f8168310c2a4168881827fa4df1b69f4a91fa7c05c882ca8680ca6477",
+      "current_bytes_match_formal_execution_commit": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1/policies/cubence_gpt6.json",
+      "sha256_current_read": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+      "sha256_at_formal_execution_commit": "11fb7ea0f4e0bde3c05d5e049051c31772afaccb433c39d34e0eed051b32bb41",
+      "current_bytes_match_formal_execution_commit": true
+    },
+    {
+      "path": "demos/lab_cuvette_env_v1/cameras.py",
+      "sha256_current_read": "2c27af819aaa8f1a6f73508cef95fbfe329fb0f34a2cfd2f0635a8936c791d6f",
+      "sha256_at_formal_execution_commit": "2c27af819aaa8f1a6f73508cef95fbfe329fb0f34a2cfd2f0635a8936c791d6f",
+      "current_bytes_match_formal_execution_commit": true
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "sha256_current_read": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "sha256_at_formal_execution_commit": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "current_bytes_match_formal_execution_commit": true
+    }
+  ],
+  "actual_observations": [
+    {
+      "decision_index": 0,
+      "simulation_time_s": 0.016666666666666666,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:0",
+      "gripper_opening_m": 0.0799999088048935,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.8999818396203,
+        56.57705396730976
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492405316286,
+      "manual_actual_image_review": "Initial full rack and instrument context visible; fingers near top, most wrist image is tabletop.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+          "sha256": "eb5ce4266aa6cb3d8b0d4d806df28d1e4282d04d6e4c07ead32f917181e93aff",
+          "bytes": 8892,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+          "sha256": "74d93fb21903089dc1fb0b585f2893a712036abb49c59ee460ab66ff9c40d9be",
+          "bytes": 10005,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+      "public_observation_sha256": "9ed44ecf718d4c6496212c4d39770df1fc5a06982e2a6a4b9264332d8462fcb8"
+    },
+    {
+      "decision_index": 1,
+      "simulation_time_s": 2.0166666666666666,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:120",
+      "gripper_opening_m": 0.07999985665082932,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90000111629584,
+        56.57705396732596
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492404603301,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+          "sha256": "b022ece50ac89a89c8d7aafa2feabed49b4c243bc14fe2ef88729d1d1050388c",
+          "bytes": 9060,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+          "sha256": "be9dd0fe381a22ee4e0f27a63baf7a8a655794437d9ef434952bbc959d0bf1eb",
+          "bytes": 9754,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000001/public_observation.json",
+      "public_observation_sha256": "85d65f203f4009f85ad692c864b0f1e6e2c94b8914bd69438658c1aff080d6de"
+    },
+    {
+      "decision_index": 2,
+      "simulation_time_s": 4.016666666666667,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:240",
+      "gripper_opening_m": 0.0799998864531517,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90002039965125,
+        56.57705398313768
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492404776218,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+          "sha256": "bbcb94ca5d669e5346bf0b0ea7800cae6798fd3e72cc20da1bc9e08ee8ad0df4",
+          "bytes": 8835,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+          "sha256": "e7b908c573b400248977905c8fa938fbfb364db6f453f72a35c1f32a74931b59",
+          "bytes": 9961,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000002/public_observation.json",
+      "public_observation_sha256": "507ca710a5d700ada4370b460d4be58d449a49996142a2000438129a1819e650"
+    },
+    {
+      "decision_index": 3,
+      "simulation_time_s": 6.016666666666667,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:360",
+      "gripper_opening_m": 0.0799998864531517,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90002041328987,
+        56.57705403918237
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492404553985,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000003/side_camera.jpg",
+          "sha256": "d64abf9cffe1330ae6ff3319fac8772b7a66d1d70f9b9c2f2bd9fb17b72575a3",
+          "bytes": 8690,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000003/wrist_camera.jpg",
+          "sha256": "b23c290156acc9744d269eb4e16364ad6e0202e6fdad535edfee0e3ef712172f",
+          "bytes": 10021,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000003/public_observation.json",
+      "public_observation_sha256": "f70c603f57d93632f02f20ed107f3863771be7e2572d38a6abe903a234bdccc6"
+    },
+    {
+      "decision_index": 4,
+      "simulation_time_s": 8.016666666666667,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:480",
+      "gripper_opening_m": 0.07999978587031364,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90002038674913,
+        56.577054027918834
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492405057471,
+      "manual_actual_image_review": "Approach: rack visible near top; finger ends remain at upper image edge.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000004/side_camera.jpg",
+          "sha256": "9e7feb7754820cfeb1a7a3f79692547998afd3414d7d8e840ab75e9d397787c2",
+          "bytes": 8727,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000004/wrist_camera.jpg",
+          "sha256": "21ad0e73c4d8de332fd79a6f573ce5dd032b08c55298c8523b7808d849c91d00",
+          "bytes": 9293,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000004/public_observation.json",
+      "public_observation_sha256": "7a35503fcab2d3c09317a3fa2f33429d68bb6c29a88ef47803fba672013627ab"
+    },
+    {
+      "decision_index": 5,
+      "simulation_time_s": 10.016666666666667,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:600",
+      "gripper_opening_m": 0.0799998827278614,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90002045594153,
+        56.577054118552496
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492404517247,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000005/side_camera.jpg",
+          "sha256": "28dadd080d373fe92d7b00f77f3d5d761b97152f7451b17a5b545d7f2a4b6c9b",
+          "bytes": 8779,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000005/wrist_camera.jpg",
+          "sha256": "680964833d122c0147468e45faa9cd3225edb0b78b7cc47c5a8cc150df1c5a7e",
+          "bytes": 9451,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000005/public_observation.json",
+      "public_observation_sha256": "1a907392a5db8a7bec807547c1cfec677db97d0da2e407c3f685a5b7ad81923b"
+    },
+    {
+      "decision_index": 6,
+      "simulation_time_s": 12.016666666666667,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:720",
+      "gripper_opening_m": 0.07999984547495842,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90000104571706,
+        56.57705390258974
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492405199191,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000006/side_camera.jpg",
+          "sha256": "22219bfbd3b7575cf6c017fa0fa59b58f95d98960fc79d3d51aad1d896ef67cb",
+          "bytes": 8807,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000006/wrist_camera.jpg",
+          "sha256": "a9ab14424c52a003aad713308f3534c402474c3a3946e82357871b478b667bd4",
+          "bytes": 9222,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000006/public_observation.json",
+      "public_observation_sha256": "344348885da9b18715c6206988e342fd3248d640048af3745231195e2b074148"
+    },
+    {
+      "decision_index": 7,
+      "simulation_time_s": 14.016666666666667,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:840",
+      "gripper_opening_m": 0.07999962940812111,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90000124624214,
+        56.57705410866095
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492403302264,
+      "manual_actual_image_review": "Low approach: rack and vessel occupy top band; much of frame remains tabletop.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000007/side_camera.jpg",
+          "sha256": "3616e8d75e68af9e80344ab49793919741f4a2d5723a5d0df68ae1957d52539c",
+          "bytes": 8827,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000007/wrist_camera.jpg",
+          "sha256": "6bce29fabdf8ef01d889cb3550b86557330028c3fe7ae4db88023d8c6284e3b0",
+          "bytes": 8448,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000007/public_observation.json",
+      "public_observation_sha256": "f726e1749cc1fb8d47c0c70fac517ff9293798cc9d9a8ba01be603e67c48fa47"
+    },
+    {
+      "decision_index": 8,
+      "simulation_time_s": 15.216666666666667,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:912",
+      "gripper_opening_m": 0.07999958842992783,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.8999822203134,
+        56.57705418047626
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492401090666,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000008/side_camera.jpg",
+          "sha256": "3c5f6186571c22b724543d12831475bf31622f7dfc6a9cc97bc92f1bf01e1969",
+          "bytes": 8909,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000008/wrist_camera.jpg",
+          "sha256": "85fa35437c34557f53359c8684ade7843a38f48e607f2fcad7067998bce0d482",
+          "bytes": 7555,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000008/public_observation.json",
+      "public_observation_sha256": "01194143d8db22f94811cadbbe3cd2649cbf54f10421a1bbcdf40019d1534aba"
+    },
+    {
+      "decision_index": 9,
+      "simulation_time_s": 17.216666666666665,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1032",
+      "gripper_opening_m": 0.0799998790025711,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.89998209453645,
+        56.57705408963382
+      ],
+      "wrist_TCP_optical_depth_m": 0.1134949240242713,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000009/side_camera.jpg",
+          "sha256": "1f8c2152d794bdea634ef9ab2e609aaa91141b1c9e8867585fccabc170d7d508",
+          "bytes": 8866,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000009/wrist_camera.jpg",
+          "sha256": "903986fd20cc420e35d71d73cba0eea88cc7e1b96cc86077ba4f92061f431be3",
+          "bytes": 8893,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000009/public_observation.json",
+      "public_observation_sha256": "baf191d7fa8a81e1d656d2c393a23c725ad663ad4ddbebdfc10f0b3bd7f83dd3"
+    },
+    {
+      "decision_index": 10,
+      "simulation_time_s": 19.216666666666665,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1152",
+      "gripper_opening_m": 0.07999952509999275,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90000123769116,
+        56.577054072278344
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492403637174,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000010/side_camera.jpg",
+          "sha256": "0424e6ce929b6d71d37f7c1551ae4b6b0ba8918095d5c08214f4bc1b93cb74be",
+          "bytes": 8793,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000010/wrist_camera.jpg",
+          "sha256": "79a6a9f3eaebfa306a20962aabd40d6aea1280f24f614488918ae1eb46cedc12",
+          "bytes": 8816,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000010/public_observation.json",
+      "public_observation_sha256": "9a29b30cab013a62f39c3891f31bbf6efdb418c169b4d312aad13c8a81d798cc"
+    },
+    {
+      "decision_index": 11,
+      "simulation_time_s": 20.416666666666668,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1224",
+      "gripper_opening_m": 0.07999979704618454,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.89998222944433,
+        56.577053987176924
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492403080697,
+      "manual_actual_image_review": "Reviewed in the18-frame wrist contact sheet; same fixed hand-relative upper-frame framing.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000011/side_camera.jpg",
+          "sha256": "0f6103afcf3807aa9ba07f40b8b7580d2dec3e90e7ec192ca6b17b329b47356e",
+          "bytes": 8870,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000011/wrist_camera.jpg",
+          "sha256": "8680851cb28b87afd2555454c94a4219adf63ed467b5d84d995d0349eef6e3e3",
+          "bytes": 8119,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000011/public_observation.json",
+      "public_observation_sha256": "4409bcc978bd92a4a1f2552b6ab181026aeb2a48ddfd3b19a442e53260ef3353"
+    },
+    {
+      "decision_index": 12,
+      "simulation_time_s": 21.416666666666668,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1284",
+      "gripper_opening_m": 0.07999958842992783,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.9000012846009,
+        56.577054164607155
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492402787276,
+      "manual_actual_image_review": "Immediately before closure: vessel/finger region is pressed against upper frame boundary.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000012/side_camera.jpg",
+          "sha256": "fa860c04df06d1a17433900e34bba937ed4075f896a8c8568184885a6a0400ff",
+          "bytes": 8882,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000012/wrist_camera.jpg",
+          "sha256": "b6a9f2f88580575d440fd87dd55d23d1c54607e8356936fd59a5813614030156",
+          "bytes": 7447,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000012/public_observation.json",
+      "public_observation_sha256": "c3f2164a87df4e4b3abaace2f52e03663aad5c90348c8098f0048ebf781a4a04"
+    },
+    {
+      "decision_index": 13,
+      "simulation_time_s": 23.416666666666668,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1404",
+      "gripper_opening_m": 0.01062632817775011,
+      "finger_contact_N": [
+        1.6056909561157227,
+        1.6046403646469116
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.8999819823487,
+        56.577053996994735
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492403164774,
+      "manual_actual_image_review": "After gripper command: both contact readings about1.6N; upper vessel/gripper portions cut by image top; visible finger ends and lower vessel confined to top quarter.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000013/side_camera.jpg",
+          "sha256": "02700229b2d2b761ad102e028e7152543ff0cf5e586849e05d37b35df478f439",
+          "bytes": 8941,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000013/wrist_camera.jpg",
+          "sha256": "c3ecb36a8dfb94625c4946f30baefb84c8191f0da08f78f72ec816dc8e5b8644",
+          "bytes": 7030,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000013/public_observation.json",
+      "public_observation_sha256": "57d9dbc93425ee20a567e49f4f1334795c713bd059458f843be62c02cb739305"
+    },
+    {
+      "decision_index": 14,
+      "simulation_time_s": 25.416666666666668,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1524",
+      "gripper_opening_m": 0.010621667373925447,
+      "finger_contact_N": [
+        0.3200076222419739,
+        0.31388163566589355
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.8999819658366,
+        56.57705401099331
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492403561234,
+      "manual_actual_image_review": "After lift/source clearance: vessel and finger area remains at top; contact force about0.32N. This does not prove stable grasp.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000014/side_camera.jpg",
+          "sha256": "55afc4d634ca59ced63e6d86fd85e3bbe635c2ec401c3eea8c8c520c462ef629",
+          "bytes": 8812,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000014/wrist_camera.jpg",
+          "sha256": "80410d295cbb1fc316666e8f02131bdf9543f33ee7a6a47f7053d76e973d971d",
+          "bytes": 7987,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000014/public_observation.json",
+      "public_observation_sha256": "219f045dd1731f50d3843d2a79afac517e8ec7a85ff39cd80f43eff121ce70e5"
+    },
+    {
+      "decision_index": 15,
+      "simulation_time_s": 27.416666666666668,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1644",
+      "gripper_opening_m": 0.010316113941371441,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90000111557669,
+        56.57705396431449
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492404631023,
+      "manual_actual_image_review": "Following further lift: finger contact readings zero; image shows a shifted/tilted vessel near rack, not verified held transport.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000015/side_camera.jpg",
+          "sha256": "dd021b67fdbc99c8565d67b82775ddcd3c35df921b54d3e1d453e20974de0aa8",
+          "bytes": 8653,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000015/wrist_camera.jpg",
+          "sha256": "d41d448af55064ed549b34f471c1cc5038436cc8752daab455d5607287886d4b",
+          "bytes": 8917,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000015/public_observation.json",
+      "public_observation_sha256": "dd96139d15a8498d220588a9028f6e221e909a6b7426bf8435b9e1017e68d279"
+    },
+    {
+      "decision_index": 16,
+      "simulation_time_s": 29.416666666666668,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1764",
+      "gripper_opening_m": 0.010316106956452131,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90002999577106,
+        56.57705396260405
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492403348993,
+      "manual_actual_image_review": "Lateral move after contact loss; no stable held transport established.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000016/side_camera.jpg",
+          "sha256": "bbfec0cc9d7ff0a7b210979aa9c66aeb71eb6a1c62befd01b2925a289f32462e",
+          "bytes": 8706,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000016/wrist_camera.jpg",
+          "sha256": "44cdcccbf4bd241f33da9b9e5197eff31b9cd41d7c82826f0e9070048ddac3a0",
+          "bytes": 7820,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000016/public_observation.json",
+      "public_observation_sha256": "4b3942ded9bbd4aa386fe4341ecb105f425a191381512a9e355106ba62a0d656"
+    },
+    {
+      "decision_index": 17,
+      "simulation_time_s": 29.416666666666668,
+      "observation_id": "77157fcf-3dea-4a46-be7e-83b5c025b8a1:1764",
+      "gripper_opening_m": 0.010316106956452131,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "wrist_projection_of_public_robot_TCP_px": [
+        255.90002999577106,
+        56.57705396260405
+      ],
+      "wrist_TCP_optical_depth_m": 0.11349492403348993,
+      "manual_actual_image_review": "Observe/finish at unchanged terminal simulation time; not insertion or release.",
+      "images": [
+        {
+          "camera": "side_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000017/side_camera.jpg",
+          "sha256": "bbfec0cc9d7ff0a7b210979aa9c66aeb71eb6a1c62befd01b2925a289f32462e",
+          "bytes": 8706,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        },
+        {
+          "camera": "wrist_camera",
+          "path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000017/wrist_camera.jpg",
+          "sha256": "44cdcccbf4bd241f33da9b9e5197eff31b9cd41d7c82826f0e9070048ddac3a0",
+          "bytes": 7820,
+          "resolution_wh": [
+            512,
+            384
+          ],
+          "matches_exact_wire_JPEG_record": true
+        }
+      ],
+      "public_observation_path": "docs/lab_cuvette_loading/Project_v1/evaluation/gpt_formal5_01/attempt_0003/episode_0000/gpt_control/observations/decision_000017/public_observation.json",
+      "public_observation_sha256": "4b3942ded9bbd4aa386fe4341ecb105f425a191381512a9e355106ba62a0d656"
+    }
+  ],
+  "not_executed": [
+    "No new camera was installed or rendered.",
+    "No model comparison, latency/cost measurement or API request.",
+    "No claim that insertion/release images exist in the failed formal attempt."
+  ]
+}

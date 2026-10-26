@@ -1,0 +1,760 @@
+{
+  "schema": "labsim.Project_v1_1.legacy_reproduction_analysis.v1",
+  "analysis_scope": "Read-only CPU analysis of the two complete read-only-instrumented legacy replay03 traces, preserving original action prefixes and actual stops. No GPU, API, rerun, source-data relabeling or code change.",
+  "source_run": "outputs/lab_cuvette_loading/Project_v1_1/legacy_replay_03",
+  "run_manifest": {
+    "mode": "legacy-replay",
+    "wall_seconds": 82.63333314890042,
+    "model_calls": 0,
+    "source_commit": "f94f9451ea10022b2e747dae92e419b636f1f695",
+    "diagnostic_source_sha256": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff",
+    "baseline_interface": "Unmodified Project_v1 ProjectEnvironment and GenericRobotTools; read-only IK instrumentation"
+  },
+  "run_manifest_sha256": "f5d161455137002bd215cc3aedb7554c7ca28747c0798fcbb1c43eb11620cd71",
+  "diagnostic_summary_sha256": "94994af67de387c2282a55104af7312e5bbcb7913e31f153315cd34bb2c3e270",
+  "process_evidence": {
+    "independent_process_exit_proof_file_exists": false,
+    "analysis_did_not_observe_exec_session": 50387,
+    "parent_reported_exit_code": 0,
+    "parent_report_is_not_an_independent_local_process_proof": true,
+    "run_manifest_normal_return_record_present": true
+  },
+  "excluded_instrumentation_debug_runs": {
+    "legacy_replay_01": "Excluded: instrumentation error logging aborted debug run; not counted as a physical task failure.",
+    "legacy_replay_02": "Excluded: instrumentation error logging aborted debug run; not counted as a physical task failure."
+  },
+  "metrics_definitions": {
+    "first_raw_discontinuity": "First valid raw IK solution with maximum absolute difference from previous applied command greater than0.2 rad; diagnostic detection marker only, not a changed task acceptance threshold.",
+    "FK_residual": "Raw IK FK and clipped-command FK errors are relative to the effective low-level solver goal; public-reference errors are measured separately.",
+    "sampled_path_length": "Sum of chords between recorded control-endpoint TCP positions; not a continuous-time path-length bound from physics substeps.",
+    "TCP_speed": "Endpoint position difference divided by actually advanced control duration; not a continuous instantaneous TCP maximum.",
+    "native_joint_speed": "Native joint velocity API read after the physical step, separately compared to configured per-joint limits.",
+    "unavailable_measurements": "Failed conversion has no applied command/FK; CSV cells left empty and no missing values imputed as zero."
+  },
+  "confirmed_execution_chain": [
+    "Public facade uses one fixed start and linearly interpolated world goal; recorded targets do not repeatedly accumulate the requested delta.",
+    "Before the first discontinuity raw IK FK follows its intended/effective target to micrometre-scale residuals.",
+    "A valid raw IK solution jumps about1.98/2.11rad from the prior command while still fitting the Cartesian IK goal.",
+    "Componentwise joint-rate clipping produces an intermediate joint configuration whose FK is already9.28/9.71mm away from the same goal on the first jump tick.",
+    "The next warm start equals the previous full raw IK solution, not the rate-clipped command or measured joint pose.",
+    "After tracking leaves the10mm neighbourhood, the legacy low-level converter replaces the fixed public interpolation point with a point10mm from the actual TCP toward that reference. Thus the solver target moves with the divergent actual pose.",
+    "The first replay exhausts120 ticks and reports completed=true despite large end error, then wait advances4 ticks before invalid IK. The second replay stops within the third action after114 ticks."
+  ],
+  "unknown_or_not_proven": [
+    "Why Lula selected that distant valid joint solution: internal seed search, branch ranking, singularity handling and active limit margins are not logged. Joint4 near-3.0418rad is correlation, not proof of an internal cause.",
+    "Exact continuous-time/physics-substep peak TCP speed, torques and full dynamic contribution to the divergence were not measured by this control-endpoint trace.",
+    "Recorded forbidden robot/environment flag remains false; this is not a new exhaustive collision or penetration audit.",
+    "No repaired-control result has been run or analyzed here; this is baseline evidence only."
+  ],
+  "episodes": [
+    {
+      "sequence": 1,
+      "replay_episode": "episode_0000",
+      "original_formal_attempt_zero_based": 1,
+      "original_formal_attempt_number": 2,
+      "trace_rows_including_failed_conversion": 365,
+      "executed_control_ticks": 364,
+      "failed_conversion_count": 1,
+      "source_action_sequence": [
+        {
+          "source_decision": 0,
+          "tool": "move_ee",
+          "requested_arguments": {
+            "duration_s": 2,
+            "frame": "world",
+            "mode": "ee_delta",
+            "values": [
+              0,
+              0,
+              -0.04,
+              0,
+              0,
+              0
+            ]
+          },
+          "executed_ticks": 120,
+          "measured_duration_s": 1.9999999999999998,
+          "first_t_s": 0.016666666666666666,
+          "last_t_s": 2.0166666666666666,
+          "conversion_errors": []
+        },
+        {
+          "source_decision": 1,
+          "tool": "move_ee",
+          "requested_arguments": {
+            "duration_s": 2,
+            "frame": "world",
+            "mode": "ee_delta",
+            "values": [
+              0,
+              0,
+              -0.04,
+              0,
+              0,
+              0
+            ]
+          },
+          "executed_ticks": 120,
+          "measured_duration_s": 2.0,
+          "first_t_s": 2.0166666666666666,
+          "last_t_s": 4.016666666666667,
+          "conversion_errors": []
+        },
+        {
+          "source_decision": 2,
+          "tool": "move_ee",
+          "requested_arguments": {
+            "duration_s": 2,
+            "frame": "world",
+            "mode": "ee_delta",
+            "values": [
+              0,
+              0.04,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "executed_ticks": 120,
+          "measured_duration_s": 2.0,
+          "first_t_s": 4.016666666666667,
+          "last_t_s": 6.016666666666667,
+          "conversion_errors": []
+        },
+        {
+          "source_decision": 3,
+          "tool": "wait",
+          "requested_arguments": {
+            "duration_s": 2
+          },
+          "executed_ticks": 4,
+          "measured_duration_s": 0.06666666666666643,
+          "first_t_s": 6.016666666666667,
+          "last_t_s": 6.083333333333333,
+          "conversion_errors": [
+            "CONTROL_OR_IK_FAILURE"
+          ]
+        }
+      ],
+      "third_action": {
+        "frame": "world",
+        "requested_delta_m": [
+          0.0,
+          0.04,
+          0.0
+        ],
+        "requested_translation_norm_mm": 40.0,
+        "requested_duration_s": 2,
+        "fixed_start_m": [
+          -0.08507347563968845,
+          -0.17446875239430248,
+          0.9431826503373588
+        ],
+        "fixed_final_target_m": [
+          -0.08507347563968845,
+          -0.13446875239430248,
+          0.9431826503373588
+        ],
+        "measured_endpoint_m": [
+          -0.22051596186558597,
+          -0.06761448330558754,
+          1.0693528525038811
+        ],
+        "measured_net_displacement_mm": 213.73212629896577,
+        "measured_sampled_path_length_mm": 241.8729689816741,
+        "endpoint_position_error_vs_fixed_target_mm": 196.80721603940202,
+        "endpoint_orientation_error_deg": 19.231924493232476,
+        "executed_ticks": 120,
+        "actual_executed_duration_s": 2.0,
+        "original_recorded_endpoint_m": [
+          -0.22051596186558597,
+          -0.06761448330558754,
+          1.0693528525038811
+        ],
+        "reproduction_endpoint_difference_from_original_mm": 0.0,
+        "max_actual_sampled_TCP_speed_m_s": 0.7309153862820051,
+        "max_actual_path_error_mm": 196.80721603940202,
+        "max_low_level_goal_shift_mm": 176.35673742686532,
+        "public_reference_interpolation_max_error_m": 2.7755575615628914e-17,
+        "public_fixed_start_max_variation_m": 0.0,
+        "receipt_completed": true
+      },
+      "first_discontinuous_raw_solution": {
+        "control_tick_before": 340,
+        "t_before_s": 5.683333333333334,
+        "t_after_s": 5.7,
+        "source_decision": 2,
+        "raw_solution_valid": true,
+        "warm_start_rad": [
+          0.1709289346178925,
+          -1.1296723650601586,
+          -0.9805879926733533,
+          -3.0417999137169636,
+          -0.9402701770187766,
+          1.9526719109102422,
+          -0.7071595022636064
+        ],
+        "seed_before_rad": [
+          0.1709289346178925,
+          -1.1296723650601586,
+          -0.9805879926733533,
+          -3.0417999137169636,
+          -0.9402701770187766,
+          1.9526719109102422,
+          -0.7071595022636064
+        ],
+        "previous_command_rad": [
+          0.1709289401769638,
+          -1.1296724081039429,
+          -0.9805880188941956,
+          -3.041800022125244,
+          -0.940270185470581,
+          1.9526718854904175,
+          -0.7071595191955566
+        ],
+        "raw_solution_rad": [
+          -1.3461796764572562,
+          -1.1510714881791928,
+          0.9947500922895538,
+          -3.041719968428276,
+          0.961670398643217,
+          1.9328809704985848,
+          -2.042227638448554
+        ],
+        "raw_delta_from_previous_command_rad": [
+          -1.51710861663422,
+          -0.021399080075249932,
+          1.9753381111837494,
+          8.005369696828524e-05,
+          1.901940584113798,
+          -0.01979091499183272,
+          -1.3350681192529974
+        ],
+        "max_raw_delta_rad": 1.9753381111837494,
+        "applied_rate_clipped_command_rad": [
+          0.1346789449453354,
+          -1.1510714292526245,
+          -0.9443380236625671,
+          -3.041719913482666,
+          -0.896770179271698,
+          1.9328809976577759,
+          -0.7506595253944397
+        ],
+        "applied_command_delta_rad": [
+          -0.03624999523162842,
+          -0.02139902114868164,
+          0.03624999523162842,
+          8.0108642578125e-05,
+          0.04350000619888306,
+          -0.0197908878326416,
+          -0.04350000619888306
+        ],
+        "configured_per_tick_rate_rad": [
+          0.03625,
+          0.03625,
+          0.03625,
+          0.03625,
+          0.0435,
+          0.0435,
+          0.0435
+        ],
+        "raw_FK_residual_mm": 0.0005861249079887219,
+        "raw_FK_orientation_residual_deg": 0.08264287754871075,
+        "command_FK_residual_mm": 9.282176864161782,
+        "command_FK_orientation_residual_deg": 0.8016609991020313,
+        "actual_before_m": [
+          -0.08523152678788226,
+          -0.14114979345688564,
+          0.9429760260534041
+        ],
+        "actual_after_m": [
+          -0.08778998412376052,
+          -0.14026114480072926,
+          0.9464201404956274
+        ],
+        "intended_reference_m": [
+          -0.08507347563968845,
+          -0.1408020857276358,
+          0.9431826503373588
+        ],
+        "effective_IK_goal_m": [
+          -0.08507347563968845,
+          -0.1408020857276358,
+          0.9431826503373588
+        ],
+        "joint4_index3": {
+          "seed_rad": -3.0417999137169636,
+          "raw_rad": -3.041719968428276,
+          "command_rad": -3.041719913482666,
+          "actual_before_rad": -3.042288303375244,
+          "actual_after_rad": -3.0426361560821533
+        },
+        "forbidden_contact_flag": false,
+        "next_tick_seed_rad": [
+          -1.3461796764572562,
+          -1.1510714881791928,
+          0.9947500922895538,
+          -3.041719968428276,
+          0.961670398643217,
+          1.9328809704985848,
+          -2.042227638448554
+        ],
+        "next_tick_seed_vs_raw_max_difference_rad": 0.0,
+        "next_tick_seed_vs_previous_applied_command_max_difference_rad": 1.939088115952121
+      },
+      "first_low_level_reference_remap": {
+        "tick": 343,
+        "t_before_s": 5.733333333333333,
+        "intended_reference_m": [
+          -0.08507347563968845,
+          -0.1398020857276358,
+          0.9431826503373588
+        ],
+        "effective_goal_m": [
+          -0.08779641434448017,
+          -0.14042823890675651,
+          0.94800581149717
+        ],
+        "actual_before_m": [
+          -0.09268149575203559,
+          -0.14155158745963486,
+          0.9566587917739476
+        ],
+        "goal_reference_shift_mm": 5.573988389590253,
+        "effective_goal_distance_from_actual_before_mm": 10.000000000000012
+      },
+      "execution_chain_checks": {
+        "warm_start_equals_seed_before_all_calls": true,
+        "seed_vs_previous_valid_raw_solution_max_error_rad": 0.0,
+        "applied_q_matches_componentwise_rateclip_raw_q_max_error_rad": 1.1914925313050162e-07,
+        "remapped_goal_matches_actual_centered_10mm_sphere_max_error_m": 0.0,
+        "all_recorded_forbidden_contact_flags_false": true,
+        "all_recorded_finger_contact_forces_zero": true,
+        "public_interpolation_fixed_start_and_delta_not_reaccumulated": true
+      },
+      "native_joint_velocity": {
+        "configured_limits_rad_s": [
+          2.175,
+          2.175,
+          2.175,
+          2.175,
+          2.61,
+          2.61,
+          2.61
+        ],
+        "observed_poststep_abs_max_rad_s": [
+          2.0525128841400146,
+          1.983238935470581,
+          2.0530240535736084,
+          0.8557714223861694,
+          2.4488937854766846,
+          2.41925048828125,
+          2.4255800247192383
+        ],
+        "observed_poststep_abs_max_limit_ratio": 0.9439191050913143,
+        "measurement_scope": "Actual native get_joint_velocities at recorded control endpoints; not a continuous-time maximum."
+      },
+      "q4_scope": "panda_joint4 = zero-based vector index3. Position near -3.0418 rad is observed; this report does not infer Lula internal branch selection, active limit/margin or singularity from that alone.",
+      "termination": {
+        "t_before_s": 6.083333333333333,
+        "t_after_s": 6.083333333333333,
+        "conversion_error": "CONTROL_OR_IK_FAILURE",
+        "IK_valid": false,
+        "failed_call_had_no_physics_advance": true,
+        "underlying_stop_after_completed_third_action_wait_ticks": 4
+      },
+      "source_provenance": {
+        "trace": "outputs/lab_cuvette_loading/Project_v1_1/legacy_replay_03/episode_0000/execution_trace.jsonl",
+        "trace_sha256": "b7f7173c45af326dc0cb0c4987a5584175ecfd4537dcea084f1b9973ed3c361a",
+        "trace_bytes": 2201829,
+        "replay_source": {
+          "original_attempt": 1,
+          "source_path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0001/episode_0000/gpt_control/policy_trace.jsonl",
+          "sha256": "675fc4dbf44be2bacb4d02f2eb0e7ef3aabf92ededa850e6a12a54d8d41fb316",
+          "original_actions_unchanged_except_episode_observation_ID": true,
+          "no_model_calls": true,
+          "diagnostic_not_task_demonstration": true
+        },
+        "replay_source_sha256": "067ab76505eb96ab0d994c41ec26b6d34c5527e6ff72b2bf194b57eed8acf510",
+        "original_trace_sha256_current": "675fc4dbf44be2bacb4d02f2eb0e7ef3aabf92ededa850e6a12a54d8d41fb316"
+      }
+    },
+    {
+      "sequence": 2,
+      "replay_episode": "episode_0001",
+      "original_formal_attempt_zero_based": 2,
+      "original_formal_attempt_number": 3,
+      "trace_rows_including_failed_conversion": 355,
+      "executed_control_ticks": 354,
+      "failed_conversion_count": 1,
+      "source_action_sequence": [
+        {
+          "source_decision": 0,
+          "tool": "move_ee",
+          "requested_arguments": {
+            "duration_s": 2,
+            "frame": "world",
+            "mode": "ee_delta",
+            "values": [
+              0,
+              0,
+              -0.04,
+              0,
+              0,
+              0
+            ]
+          },
+          "executed_ticks": 120,
+          "measured_duration_s": 1.9999999999999998,
+          "first_t_s": 0.016666666666666666,
+          "last_t_s": 2.0166666666666666,
+          "conversion_errors": []
+        },
+        {
+          "source_decision": 1,
+          "tool": "move_ee",
+          "requested_arguments": {
+            "duration_s": 2,
+            "frame": "world",
+            "mode": "ee_delta",
+            "values": [
+              0,
+              0,
+              -0.04,
+              0,
+              0,
+              0
+            ]
+          },
+          "executed_ticks": 120,
+          "measured_duration_s": 2.0,
+          "first_t_s": 2.0166666666666666,
+          "last_t_s": 4.016666666666667,
+          "conversion_errors": []
+        },
+        {
+          "source_decision": 2,
+          "tool": "move_ee",
+          "requested_arguments": {
+            "duration_s": 2,
+            "frame": "world",
+            "mode": "ee_delta",
+            "values": [
+              0,
+              0.035,
+              -0.019,
+              0,
+              0,
+              0
+            ]
+          },
+          "executed_ticks": 114,
+          "measured_duration_s": 1.9000000000000004,
+          "first_t_s": 4.016666666666667,
+          "last_t_s": 5.916666666666667,
+          "conversion_errors": [
+            "CONTROL_OR_IK_FAILURE"
+          ]
+        }
+      ],
+      "third_action": {
+        "frame": "world",
+        "requested_delta_m": [
+          0.0,
+          0.035,
+          -0.019
+        ],
+        "requested_translation_norm_mm": 39.824615503479755,
+        "requested_duration_s": 2,
+        "fixed_start_m": [
+          -0.08507347563968845,
+          -0.17446875239430248,
+          0.9431826503373588
+        ],
+        "fixed_final_target_m": [
+          -0.08507347563968845,
+          -0.13946875239430248,
+          0.9241826503373588
+        ],
+        "measured_endpoint_m": [
+          -0.2360180795847763,
+          -0.04906111128079173,
+          1.0641662284766327
+        ],
+        "measured_net_displacement_mm": 230.53931571247523,
+        "measured_sampled_path_length_mm": 275.7635116699562,
+        "endpoint_position_error_vs_fixed_target_mm": 224.84042603705186,
+        "endpoint_orientation_error_deg": 23.85987721019235,
+        "executed_ticks": 114,
+        "actual_executed_duration_s": 1.9000000000000004,
+        "original_recorded_endpoint_m": [
+          -0.2360180795847763,
+          -0.04906111128079173,
+          1.0641662284766327
+        ],
+        "reproduction_endpoint_difference_from_original_mm": 0.0,
+        "max_actual_sampled_TCP_speed_m_s": 0.7322124461057211,
+        "max_actual_path_error_mm": 224.96141919439353,
+        "max_low_level_goal_shift_mm": 209.3636187086473,
+        "public_reference_interpolation_max_error_m": 1.1443916996305594e-16,
+        "public_fixed_start_max_variation_m": 0.0,
+        "receipt_completed": false
+      },
+      "first_discontinuous_raw_solution": {
+        "control_tick_before": 331,
+        "t_before_s": 5.533333333333333,
+        "t_after_s": 5.55,
+        "source_decision": 2,
+        "raw_solution_valid": true,
+        "warm_start_rad": [
+          0.17583437340616503,
+          -1.086621698456273,
+          -1.0463947506290137,
+          -3.0417944161703776,
+          -0.9998805697086,
+          2.00110547735899,
+          -0.7080424932032198
+        ],
+        "seed_before_rad": [
+          0.17583437340616503,
+          -1.086621698456273,
+          -1.0463947506290137,
+          -3.0417944161703776,
+          -0.9998805697086,
+          2.00110547735899,
+          -0.7080424932032198
+        ],
+        "previous_command_rad": [
+          0.17583437263965607,
+          -1.086621642112732,
+          -1.0463947057724,
+          -3.0417943000793457,
+          -0.9998805522918701,
+          2.001105546951294,
+          -0.7080425024032593
+        ],
+        "raw_solution_rad": [
+          -1.3959544734691012,
+          -1.1090071603741625,
+          1.0618154623274592,
+          -3.0409845676789975,
+          1.0226328053665923,
+          1.9786868253224603,
+          -2.087376917262623
+        ],
+        "raw_delta_from_previous_command_rad": [
+          -1.5717888461087572,
+          -0.022385518261430537,
+          2.108210168099859,
+          0.0008097324003482065,
+          2.0225133576584624,
+          -0.022418721628833627,
+          -1.3793344148593638
+        ],
+        "max_raw_delta_rad": 2.108210168099859,
+        "applied_rate_clipped_command_rad": [
+          0.13958437740802765,
+          -1.1090071201324463,
+          -1.0101447105407715,
+          -3.040984630584717,
+          -0.9563805460929871,
+          1.978686809539795,
+          -0.7515425086021423
+        ],
+        "applied_command_delta_rad": [
+          -0.03624999523162842,
+          -0.022385478019714355,
+          0.03624999523162842,
+          0.0008096694946289062,
+          0.04350000619888306,
+          -0.022418737411499023,
+          -0.04350000619888306
+        ],
+        "configured_per_tick_rate_rad": [
+          0.03625,
+          0.03625,
+          0.03625,
+          0.03625,
+          0.0435,
+          0.0435,
+          0.0435
+        ],
+        "raw_FK_residual_mm": 0.001115544785515788,
+        "raw_FK_orientation_residual_deg": 0.08427879978440668,
+        "command_FK_residual_mm": 9.705014461539871,
+        "command_FK_orientation_residual_deg": 0.7453737246647294,
+        "actual_before_m": [
+          -0.08515799564135364,
+          -0.14794340621426544,
+          0.9287779248536976
+        ],
+        "actual_after_m": [
+          -0.08774025830012291,
+          -0.14744100128935528,
+          0.9322052434494351
+        ],
+        "intended_reference_m": [
+          -0.08507347563968845,
+          -0.14763541906096914,
+          0.9286159836706921
+        ],
+        "effective_IK_goal_m": [
+          -0.08507347563968845,
+          -0.14763541906096914,
+          0.9286159836706921
+        ],
+        "joint4_index3": {
+          "seed_rad": -3.0417944161703776,
+          "raw_rad": -3.0409845676789975,
+          "command_rad": -3.040984630584717,
+          "actual_before_rad": -3.042128801345825,
+          "actual_after_rad": -3.0421924591064453
+        },
+        "forbidden_contact_flag": false,
+        "next_tick_seed_rad": [
+          -1.3959544734691012,
+          -1.1090071603741625,
+          1.0618154623274592,
+          -3.0409845676789975,
+          1.0226328053665923,
+          1.9786868253224603,
+          -2.087376917262623
+        ],
+        "next_tick_seed_vs_raw_max_difference_rad": 0.0,
+        "next_tick_seed_vs_previous_applied_command_max_difference_rad": 2.0719601728682306
+      },
+      "first_low_level_reference_remap": {
+        "tick": 333,
+        "t_before_s": 5.566666666666666,
+        "intended_reference_m": [
+          -0.08507347563968845,
+          -0.1470520857276358,
+          0.9282993170040255
+        ],
+        "effective_goal_m": [
+          -0.08519918090090019,
+          -0.14708272736507422,
+          0.928533151208789
+        ],
+        "actual_before_m": [
+          -0.08990295105439805,
+          -0.1482293080113234,
+          0.9372830025883674
+        ],
+        "goal_reference_shift_mm": 0.26724363034244436,
+        "effective_goal_distance_from_actual_before_mm": 10.000000000000025
+      },
+      "execution_chain_checks": {
+        "warm_start_equals_seed_before_all_calls": true,
+        "seed_vs_previous_valid_raw_solution_max_error_rad": 0.0,
+        "applied_q_matches_componentwise_rateclip_raw_q_max_error_rad": 1.1914925313050162e-07,
+        "remapped_goal_matches_actual_centered_10mm_sphere_max_error_m": 0.0,
+        "all_recorded_forbidden_contact_flags_false": true,
+        "all_recorded_finger_contact_forces_zero": true,
+        "public_interpolation_fixed_start_and_delta_not_reaccumulated": true
+      },
+      "native_joint_velocity": {
+        "configured_limits_rad_s": [
+          2.175,
+          2.175,
+          2.175,
+          2.175,
+          2.61,
+          2.61,
+          2.61
+        ],
+        "observed_poststep_abs_max_rad_s": [
+          2.0409138202667236,
+          2.003298282623291,
+          2.0439720153808594,
+          0.1872618943452835,
+          2.4226250648498535,
+          2.372135877609253,
+          2.4176831245422363
+        ],
+        "observed_poststep_abs_max_limit_ratio": 0.9397572484509699,
+        "measurement_scope": "Actual native get_joint_velocities at recorded control endpoints; not a continuous-time maximum."
+      },
+      "q4_scope": "panda_joint4 = zero-based vector index3. Position near -3.0418 rad is observed; this report does not infer Lula internal branch selection, active limit/margin or singularity from that alone.",
+      "termination": {
+        "t_before_s": 5.916666666666667,
+        "t_after_s": 5.916666666666667,
+        "conversion_error": "CONTROL_OR_IK_FAILURE",
+        "IK_valid": false,
+        "failed_call_had_no_physics_advance": true,
+        "underlying_stop_after_completed_third_action_wait_ticks": 0
+      },
+      "source_provenance": {
+        "trace": "outputs/lab_cuvette_loading/Project_v1_1/legacy_replay_03/episode_0001/execution_trace.jsonl",
+        "trace_sha256": "cf0e674e0b57dc21f29c08cf17621439f900aca8b4a209266cf5d5d32bbe0ccf",
+        "trace_bytes": 2142974,
+        "replay_source": {
+          "original_attempt": 2,
+          "source_path": "outputs/lab_cuvette_loading/Project_v1/gpt_formal5_01/attempt_0002/episode_0000/gpt_control/policy_trace.jsonl",
+          "sha256": "a1f627f523be2b5ab49c3421fe0727d17d98083491b4912f09f5b589970b112f",
+          "original_actions_unchanged_except_episode_observation_ID": true,
+          "no_model_calls": true,
+          "diagnostic_not_task_demonstration": true
+        },
+        "replay_source_sha256": "e01d65e000c42c4af606f3a1e4145eb32f8121b3f69a14f1c75eda501ffe8671",
+        "original_trace_sha256_current": "a1f627f523be2b5ab49c3421fe0727d17d98083491b4912f09f5b589970b112f"
+      }
+    }
+  ],
+  "source_code_at_replay_commit": [
+    {
+      "path": "tasks/lab_cuvette_loading_env_v1.py",
+      "baseline_commit": "f94f9451ea10022b2e747dae92e419b636f1f695",
+      "sha256_at_baseline_commit": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "current_read_matches_baseline": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/environment.py",
+      "baseline_commit": "f94f9451ea10022b2e747dae92e419b636f1f695",
+      "sha256_at_baseline_commit": "0dcfb00d53ca54c12459df907793e97277669b8caffa12d31678c81ae3041c7d",
+      "current_read_matches_baseline": true
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "baseline_commit": "f94f9451ea10022b2e747dae92e419b636f1f695",
+      "sha256_at_baseline_commit": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "current_read_matches_baseline": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1/standard.yaml",
+      "baseline_commit": "f94f9451ea10022b2e747dae92e419b636f1f695",
+      "sha256_at_baseline_commit": "eec8594f8168310c2a4168881827fa4df1b69f4a91fa7c05c882ca8680ca6477",
+      "current_read_matches_baseline": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/V0.yaml",
+      "baseline_commit": "f94f9451ea10022b2e747dae92e419b636f1f695",
+      "sha256_at_baseline_commit": "e594e058663f0b77e943178b3aa44cd1e31a6648d535fb7c00f1daa002f213b9",
+      "current_read_matches_baseline": true
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "legacy_reproduction.csv",
+      "sha256": "f5a9b02142b8e318edad6673f4e7410a9b245e3254c78055793724fd223b5dac",
+      "bytes": 1104067
+    },
+    {
+      "file": "legacy_reproduction_errors.png",
+      "sha256": "d0f5e482a1dbcf3d95cb27f8da2a658b245232a042104a5e927035392859c863",
+      "bytes": 214478
+    },
+    {
+      "file": "legacy_reproduction_joint4.png",
+      "sha256": "3cf181e2156fa9c54a7c24aa8900c02c16d1f71e0e161083a3551ebbff6203bb",
+      "bytes": 189607
+    },
+    {
+      "file": "legacy_reproduction_trajectories.png",
+      "sha256": "c349bb818235ab5f92d2ee666ad2d98a67aea665728d0d53561952e01a17871e",
+      "bytes": 241719
+    }
+  ],
+  "original_trace_files_modified": false
+}
