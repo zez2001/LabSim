@@ -1,0 +1,32 @@
+{
+  "schema": "labsim.Project_v1_1.side_v3_actual_API_comparison_summary.v1",
+  "API_calls": 2,
+  "estimated_usd": 0.08853000000000044,
+  "physical_task_executed": false,
+  "source": "Same explicitly render-only reconstruction, no GT crop and no actions",
+  "selected_profile": "640high",
+  "selection_basis": "Single qualitative pair:640 description explicitly identifies upright open cuvette and overlap of fingers/cuvette with housing front edge. More native detail is retained; this is an engineering choice, not accuracy or latency statistics.",
+  "new_provider": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+  "new_provider_sha256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+  "unchanged_limits_model_budget_context": true,
+  "observations": {
+    "512low": {
+      "status": "COMPLETED",
+      "input_tokens": 2666,
+      "output_tokens": 364,
+      "wall_seconds": 19.456006700987928
+    },
+    "640high": {
+      "status": "COMPLETED",
+      "input_tokens": 2912,
+      "output_tokens": 291,
+      "wall_seconds": 11.73226134001743
+    }
+  },
+  "limitations": [
+    "One image state and one request/profile; no recognition accuracy or timing distribution.",
+    "Both views remain insufficient for precise alignment, support or final task outcome in this reconstructed state.",
+    "Historical512low trials remain distinct; next run must verify actual new model images and independent outcomes."
+  ],
+  "comparison_sha256": "0d958d576704fa86243dbd4c1a1deaf8869593ee14f90172d50da8ca9c12cad1"
+}

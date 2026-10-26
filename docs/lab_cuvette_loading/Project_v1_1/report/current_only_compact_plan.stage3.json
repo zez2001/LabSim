@@ -1,0 +1,223 @@
+{
+  "schema": "labsim.Project_v1_1.stage3_current_only_package_plan.v1",
+  "created_utc": "2026-10-26T21:14:43.833570+00:00",
+  "planning_only": true,
+  "package_built": false,
+  "large_media_copied": false,
+  "media_transcoded": false,
+  "hard_limit_bytes": 80000000,
+  "units": "decimalMB;80,000,000 bytes =76.294MiB",
+  "allocation": [
+    {
+      "category": "report",
+      "maximum_bytes": 2000000,
+      "purpose": "最终DOCX MD build与全页QA结论；草稿不author"
+    },
+    {
+      "category": "small_results",
+      "maximum_bytes": 4000000,
+      "purpose": "必要CSV/JSON 全部独立原结果与正常读取证明，不复制大控制raw"
+    },
+    {
+      "category": "public_observations",
+      "maximum_bytes": 4000000,
+      "purpose": "优先GPT03全部15公开JSON/30exactJPEG；最终代表run闭合后再选，不收完整HTTP或私有reasoning"
+    },
+    {
+      "category": "configuration_reproduction",
+      "maximum_bytes": 1000000,
+      "purpose": "冻结配置/资产锁/版本/SHA/首读说明，不复制资产全集"
+    },
+    {
+      "category": "GPT03_continuous_video",
+      "maximum_bytes": 8000000,
+      "purpose": "当前机壳左指碰撞完整连续真实失败"
+    },
+    {
+      "category": "GPT02_blocked_failure_video_optional",
+      "maximum_bytes": 14000000,
+      "purpose": "仅当最终说明继续引用座口受阻失败时保留；否则固定来源链接并释放额度"
+    },
+    {
+      "category": "teacher_preorient_failure_video",
+      "maximum_bytes": 4000000,
+      "purpose": "最新预对准仍失败的完整短片；不叠加preload/lateral重复视频"
+    },
+    {
+      "category": "final_teacher_continuous_video",
+      "maximum_bytes": 20000000,
+      "purpose": "最终选定关闭teacher单次全程，按真实独立判分命名"
+    },
+    {
+      "category": "final_GPT_continuous_video",
+      "maximum_bytes": 20000000,
+      "purpose": "最终选定关闭GPT单次全程；若失败仍保存实际停止不伪装成功"
+    },
+    {
+      "category": "key_clips",
+      "maximum_bytes": 1000000,
+      "purpose": "仅必要同集近景片段；不替代完整主录像"
+    },
+    {
+      "category": "reserve",
+      "maximum_bytes": 2000000,
+      "purpose": "媒体软额度可借，最终所有文件总字节仍≤80,000,000"
+    }
+  ],
+  "allocation_sum_bytes": 80000000,
+  "report_inputs": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.stage3.draft.json",
+  "report_inputs_SHA256": "0c26f72f139a703900a916014ee001c15d07f6b944c58234db01db512dbc4810",
+  "current_HEAD": "5e2a3deb4ddf0f7766cf9a0721415549b53019ec",
+  "previous_plan_preserved_SHA256": "64db907236aa2a63594c4107380c55f180a393ba19be4dfc04687cd4eeb519cc",
+  "closed_media_candidates": [
+    {
+      "run": "gpt_debug_03",
+      "role": "GPT03_continuous_video",
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/dual_view.mp4",
+      "source_bytes": 6988110,
+      "source_SHA256": "af8f4fc71fbcb01ba21ab0452e1c4395c02972cbbd2f327ce0f5dc69e5eaea8c",
+      "process_proof": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/process_exit.json",
+      "process_proof_SHA256": "c93d2cf263d20982c84033f0049821bdca9cb706159c93b5e3076259c08b2273",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "nb_frames": "891"
+          }
+        ],
+        "format": {
+          "duration": "29.700000"
+        }
+      },
+      "copied": false,
+      "full_decode_or_visual_QA_by_this_plan": false,
+      "actual_result": "false SAFETY_COLLISION"
+    },
+    {
+      "run": "teacher_preorient_01",
+      "role": "teacher_preorient_failure_video",
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/teacher_preorient_01/episode_0000/dual_view.mp4",
+      "source_bytes": 3892847,
+      "source_SHA256": "e8a47dcec47d84566b63c2d231aebc8009046cf9914bc1d7a5d561e42f2c1e0c",
+      "process_proof": "outputs/lab_cuvette_loading/Project_v1_1/teacher_preorient_01/process_exit.json",
+      "process_proof_SHA256": "8e51cc6e34df47d682a5761aa91fbcf35fa294a31abf2ea2e18a54c1e4c4a8e1",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "nb_frames": "602"
+          }
+        ],
+        "format": {
+          "duration": "20.067000"
+        }
+      },
+      "copied": false,
+      "full_decode_or_visual_QA_by_this_plan": false,
+      "actual_result": "false GRASP_SLIP"
+    },
+    {
+      "run": "gpt_debug_02",
+      "role": "GPT02_blocked_failure_video_optional",
+      "source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_02/episode_0000/dual_view.mp4",
+      "source_bytes": 13358060,
+      "source_SHA256": "5b6c1dfe8c95ceeee03831c9710a7b5d2a04a771f0dc8722948ea4cb008b85d3",
+      "process_proof": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_02/process_exit.json",
+      "process_proof_SHA256": "7f04f23dee16072edcb7f8182d3394765d2e4d7af2cc2b564f9871736cec1004",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "mpeg4",
+            "width": 1280,
+            "height": 480,
+            "r_frame_rate": "30/1",
+            "nb_frames": "1797"
+          }
+        ],
+        "format": {
+          "duration": "59.900000"
+        }
+      },
+      "copied": false,
+      "full_decode_or_visual_QA_by_this_plan": false,
+      "actual_result": "false SAFETY_GEOMETRY_VIOLATION"
+    }
+  ],
+  "waiting_material": [
+    {
+      "role": "final_teacher_continuous_video",
+      "source": null,
+      "reason": "teacher_baseline_close01为root报告active，未读其输出、不赋结果；等真实proof/独立评分后选材"
+    },
+    {
+      "role": "final_GPT_continuous_video",
+      "source": null,
+      "reason": "GPT04在本阶段授权截止点未运行，不提前生成结果或统计"
+    }
+  ],
+  "essential_small_evidence": [
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/summary.json",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/collision_window_physics.csv",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preorient_01_ab_audit/stage_pose_and_source_contract.json",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_causal_timing_review/summary.json",
+    "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/selection.json",
+    "docs/lab_cuvette_loading/Project_v1_1/camera/public_robot_calibration_v4/cpu_validation.json",
+    "docs/lab_cuvette_loading/Project_v1_1/report/stage3_runtime_snapshot.json"
+  ],
+  "local_report_dependency_policy": [
+    "最终所有正文中的本地figure/video/CSV/config链接必须纳入allowlist并保留相对目录；不以失效GitHub输出链接替代缺文件。",
+    "170个sources是可验证的报告证据库，不要求复制未在最终正文使用的全部历史内容；最终inputs/allowlist应收敛到实际需要的来源。",
+    "manifest/公开JSON中的原H5/raw绝对路径仅为provenance，明确它们不是包内承诺文件；完整数据通过既有发布渠道另交付。"
+  ],
+  "media_policy": [
+    "单次连续主录像从初态到实际终止，不能拼接尝试或删掉失败前后；完整工作流动作与独立成功分开。",
+    "优先复制原字节。若超预算只可明确标注派生presentation转码，并记录源SHA、时长、frame/PTS及关键事件一致性；不可改变exact model JPEG。",
+    "同集只选一条同步dual或清晰主视角，不重复收side/wrist/dual全部媒体。preload/lateral/preorient三次近似前缀只保留最新代表视频，其余保留逐集结果。",
+    "最终视频需完整解码与视觉QA；本规划只stat/hash/ffprobe元数据，未做最终视频验收。",
+    "总字节超80,000,000时先去重和删除optional片段；不能截短连续主录像、隐藏失败、篡改标签或把原观测降质凑包。"
+  ],
+  "fixed_history_links": [
+    {
+      "label": "既有Project_v1历史代码证据",
+      "url": "https://github.com/zez2001/LabSim/tree/f94f9451ea10022b2e747dae92e419b636f1f695/docs/lab_cuvette_loading/Project_v1",
+      "copy": false
+    },
+    {
+      "label": "早期teacher02闭合审计动作完整但原判fail",
+      "url": "https://github.com/zez2001/LabSim/blob/5e2a3deb4ddf0f7766cf9a0721415549b53019ec/docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_closed_read_archive.json",
+      "copy": false
+    },
+    {
+      "label": "固定HF资产revision",
+      "url": "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067",
+      "copy": false
+    }
+  ],
+  "exclude": [
+    "旧完整包/旧报告/全套历史视频重复复制",
+    "原H5、原大JSONL/gzip、环境、checkpoint、模型权重、资产全集、源附件",
+    "凭据token、HTTP headers、完整私有reasoning",
+    "active输出、未发生的Gpt04/正式结果、假最终CI/HF状态",
+    "内部渲染页PDF、临时转码副本与重复视角"
+  ],
+  "final_gates": [
+    "只在真实进程关闭后取最终样本，保留原null/false和逐集失败。",
+    "补最终发布SHA/同SHA CI/clean checkout/新相机实际输入及真实HF样例结果。",
+    "由授权report agent做marker/author/全页渲染QA；本任务不执行。",
+    "新建独立current-only阅读文件夹，复核链接/实体/SHA及全部字节硬限。"
+  ],
+  "API_calls": 0,
+  "GPU_used": false,
+  "HDF5_or_raw_read": false,
+  "runtime_modified": false
+}

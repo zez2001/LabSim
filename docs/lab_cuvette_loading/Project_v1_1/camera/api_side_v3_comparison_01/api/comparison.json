@@ -1,0 +1,286 @@
+{
+  "schema": "labsim.Project_v1_1.camera_comparison.v1",
+  "evidence_kind": "actual_API_camera_comparison",
+  "requested_model": "gpt-6-astra",
+  "source_snapshot": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Project_v1_1/camera/api_side_v3_comparison_01/snapshot",
+  "source_stage_sha256": "8d9e7de12dc81afac3fcee39ffd9e682d5acd4e0d56e3ecef1371ef8d4d6899c",
+  "episode_id": "render-reconstruction-side-v3-visibility03",
+  "observation_id": "render-reconstruction-side-v3-visibility03:0",
+  "no_GT_crop": true,
+  "robot_actions_executed": 0,
+  "prompt": "This is a stationary camera quality check, not robot control. Describe what can actually be seen in the two synchronized RGB images: the gripper, light cuvette, source rack, instrument opening and internal seat. State occlusion or insufficient detail explicitly. Do not invent object coordinates, infer an unobserved task outcome, or issue robot actions.",
+  "max_requests": 2,
+  "retries_per_request": 0,
+  "probes": {
+    "512low": {
+      "request_label": "camera_qa:render-reconstruction-side-v3-visibility03:render-reconstruction-side-v3-visibility03:0:0:512low",
+      "image_config": {
+        "max_side_px": 512,
+        "jpeg_quality": 60,
+        "detail": "low",
+        "resize_interpolation": "lanczos"
+      },
+      "observation_artifacts": {
+        "manifest_path": "observations/decision_000000/manifest.json",
+        "manifest_sha256": "3b406f2029dd8176371702630ae9fc34e9b907d8d39b995e52da0142abcb50a3",
+        "public_observation": {
+          "path": "observations/decision_000000/public_observation.json",
+          "sha256": "a36bac516dd0539aea8008ca39540e7d5400dd29dfd591aaa51ae30cd305b579",
+          "bytes": 5488
+        },
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "observations/decision_000000/side_camera.jpg",
+            "sha256": "2793788475adfa349f0fe09fd8cc37d83271959ad08ec4558050dcf37c0888a3",
+            "bytes": 9481,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              512,
+              384
+            ]
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "observations/decision_000000/wrist_camera.jpg",
+            "sha256": "0615dea56176535aedd66f1bf09c8c033803b6b0e71d0fb8be882b34196edaed",
+            "bytes": 10811,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              512,
+              384
+            ]
+          }
+        ]
+      },
+      "api_sent": true,
+      "network_attempts": 1,
+      "max_output_tokens": 256,
+      "status": "COMPLETED",
+      "returned_model": "gpt-6-astra",
+      "response_id": "resp_05704c8aff8f90a9016adfc22b26e48198bf0cb8f2176484f0",
+      "usage": {
+        "input_tokens": 2666,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 364,
+        "output_tokens_details": {
+          "reasoning_tokens": 62
+        },
+        "total_tokens": 3030,
+        "attribution": {
+          "items": {
+            "msg_05704c8aff8f90a9016adfc22b27148198b6968cbeca76695b": {
+              "input_tokens": 2591,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 2116,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 231,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 232,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_05704c8aff8f90a9016adfc22dc87c8198b5a84fdfaa1041b1": {
+              "input_tokens": 0,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 302,
+              "content": [
+                {
+                  "input_tokens": 0,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 302
+                }
+              ]
+            },
+            "rs_05704c8aff8f90a9016adfc22da0708198841b01d00d4c2337": {
+              "input_tokens": 2,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 62
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 73,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      },
+      "output_text": "- **Side camera:** The robot gripper is visible above and in front of the open instrument. A light-colored, narrow cuvette-like object appears between/just below the fingers, but the view is low-detail and partly occluded by the gripper and instrument front. The white source rack is visible on the table below the instrument, though its individual slots are small and the A1 contents cannot be confirmed clearly. The instrument lid is open, and the front opening/interior is visible. An internal support/seat area can be seen inside, but its exact geometry and which of the two candidate seats is farther from the hinge are not distinguishable with confidence.\n\n- **Wrist camera:** The gripper fingers dominate the foreground. A pale vertical object is visible between them, consistent in appearance with the light cuvette, but its lower end and contact/support relationship are obscured. The white source rack and multiple empty-looking compartments are clearly visible to the right/below; the specific A1 slot and whether it contains a cuvette are not sufficiently resolved. The instrument interior is mostly blocked by the gripper and the close camera angle, so the opening and internal seat are not adequately visible.\n\n- **Overall:** The images show the gripper, a possible light cuvette, the source rack, and an open instrument, but occlusion and limited image detail prevent confirming the cuvette’s exact grasp, rack slot, insertion depth, seat identity, or final support/stability.",
+      "request_id": "d7b1ced3-77f6-4d91-be30-51acb1f09ff3",
+      "wall_seconds": 19.456006700987928
+    },
+    "640high": {
+      "request_label": "camera_qa:render-reconstruction-side-v3-visibility03:render-reconstruction-side-v3-visibility03:0:0:640high",
+      "image_config": {
+        "max_side_px": 640,
+        "jpeg_quality": 60,
+        "detail": "high",
+        "resize_interpolation": "lanczos"
+      },
+      "observation_artifacts": {
+        "manifest_path": "observations/decision_000000/manifest.json",
+        "manifest_sha256": "c2fc495fa40855b77b08a2547a8e4daefe050834db94bef63995fe3f9cae0a74",
+        "public_observation": {
+          "path": "observations/decision_000000/public_observation.json",
+          "sha256": "d2be8c4f1957f2e4f107ff53ece159f5a3098a341bc748350bba5e005986ebb7",
+          "bytes": 5425
+        },
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "observations/decision_000000/side_camera.jpg",
+            "sha256": "b88fc805c0fad4c57b557003ca62192407294fe61a4b599c707b6a1ab87e0b5f",
+            "bytes": 13074,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "observations/decision_000000/wrist_camera.jpg",
+            "sha256": "e81b152d37d6dd13e052f8d2c051f21a184cd512609583536c990a0edb786018",
+            "bytes": 14857,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          }
+        ]
+      },
+      "api_sent": true,
+      "network_attempts": 1,
+      "max_output_tokens": 256,
+      "status": "COMPLETED",
+      "returned_model": "gpt-6-astra",
+      "response_id": "resp_0743f4f953b79927016adfc235da488190a8084e1dbdd216f0",
+      "usage": {
+        "input_tokens": 2912,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens": 291,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3203,
+        "attribution": {
+          "items": {
+            "msg_0743f4f953b79927016adfc235db08819084235d5053440b3a": {
+              "input_tokens": 2837,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0,
+              "content": [
+                {
+                  "input_tokens": 2102,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 361,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 6,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                },
+                {
+                  "input_tokens": 362,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 0
+                }
+              ]
+            },
+            "msg_0743f4f953b79927016adfc2372f9881909ae45c901d8002af": {
+              "input_tokens": 2,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 291,
+              "content": [
+                {
+                  "input_tokens": 2,
+                  "cached_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "output_tokens": 291
+                }
+              ]
+            }
+          },
+          "request_fields": {
+            "instructions": {
+              "input_tokens": 73,
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "output_tokens": 0
+            }
+          }
+        }
+      },
+      "output_text": "### Side camera\n- The robot arm and gripper are visible beside the open instrument. The fingers and light-colored cuvette overlap the instrument’s front edge; their lower portions are partly occluded.\n- The white source rack is visible on the table in front of the instrument, but individual slot identities, including **A1**, are not readable.\n- The instrument lid is raised, exposing a dark, elongated opening. Some interior detail is visible near the hinge, but the internal seats are not clearly resolved. The designated **candidate_far_hinge** seat cannot be reliably identified.\n\n### Wrist camera\n- The gripper is shown close-up, with two black finger pads flanking a pale, upright rectangular cuvette. Its open top and much of its long body are clearly visible; the pads obscure portions of its sides.\n- The white rack and its grid of square openings are clearly visible behind and to the right of the cuvette. No slot labels are legible, and the cuvette’s relationship to slot A1 cannot be established.\n- The instrument housing occupies the left side, but its loading opening and internal seat are outside the useful view or occluded.\n\n**Visibility assessment:** The wrist view provides the clearest evidence of the cuvette between the fingers; the side view provides the instrument-opening context. Neither image provides sufficient detail to verify target-seat alignment, insertion depth, seat support, release, or a completed transfer.",
+      "request_id": "b92775d0-2861-46a8-9540-ba80f63ca7be",
+      "wall_seconds": 11.73226134001743
+    }
+  },
+  "budget_before": {
+    "total_network_attempts": 156,
+    "total_estimated_usd": 11.743002000000002,
+    "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json"
+  },
+  "budget_after": {
+    "total_network_attempts": 158,
+    "total_estimated_usd": 11.831532000000003,
+    "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json"
+  }
+}

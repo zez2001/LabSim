@@ -1,0 +1,2143 @@
+{
+  "schema": "labsim.Project_v1_1.report_inputs.v1",
+  "project_version": "Project_v1_1",
+  "finalized": false,
+  "metadata": {
+    "title": "LabSim Project v1 1 项目发布与验证报告",
+    "date": "2026-10-27",
+    "audience": "组内使用者 后续开发与评测人员",
+    "author": "LabSim 项目",
+    "conclusion": "完整GPT装载仍未通过。执行器与数据读取已形成可复核接口；新增GPT03真实离架搬运后安全碰机身，teacher预载、固定提取XY及预对准三轮均独立失败。public calibration v4与side v3仅有CPU或render-only证据，新活动运行不计入。本文件是七逻辑组stage3草稿，尚非最终发布报告。"
+  },
+  "draft_provenance": {
+    "stage": "stage3",
+    "previous_draft_path": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.stage2.draft.json",
+    "previous_draft_sha256_preserved": "5c0f4e110bb1e2c7c9dda42eee976daeb89f4c60dfbdb9b3781bb448bd50de16",
+    "original_draft_sha256_preserved": "e3a748930f36fe4f878782a435c64c95ae2615395d416f0c30b78d26732cb642",
+    "previous_source_count_preserved": 133,
+    "previous_sources_canonical_sha256": "fd87789317adb105d03d5d00efe14c3eab0f1e72c44a95e4e804a62862406f67",
+    "previous_source_entries_unchanged": true,
+    "development_commit": "5e2a3deb4ddf0f7766cf9a0721415549b53019ec",
+    "evidence_snapshot_utc": "2026-10-26T21:12:41.580009+00:00",
+    "no_DOCX_authoring": true,
+    "no_artifact_marker": true,
+    "no_rendering": true,
+    "source_hashes_revalidated": true,
+    "figures": 3,
+    "excluded_active_run_names": [
+      "teacher_baseline_close01"
+    ],
+    "not_run_names": [
+      "gpt_debug_04"
+    ],
+    "active_outputs_read": false,
+    "final_page_count_unverified": true,
+    "page_target": "6–8 actual rendered pages, seven logical groups; not verified until final rendering"
+  },
+  "sources": [
+    {
+      "id": "closed_001",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/README.md",
+      "sha256": "a634a546c67c0bc85349e4a6f0eb9f7b927a7a1bbe6a023479b8c07689bf4297",
+      "bytes": 1962,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/README.md"
+    },
+    {
+      "id": "closed_002",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/summary.json",
+      "sha256": "a5a8eefeb1f4e4962b4773e07d57e860c23c7a7fee86cb694829c98e2b39e95d",
+      "bytes": 4321,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/summary.json"
+    },
+    {
+      "id": "closed_003",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/runtime_versions.json",
+      "sha256": "ba8ef658f79605dcde041e1c06a07f5b2cc5ea3db0e084bbed597825a150ec22",
+      "bytes": 706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/runtime_versions.json"
+    },
+    {
+      "id": "closed_004",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/contracts_result.json",
+      "sha256": "69053e3a1b0c7e88c27a4c498ae8e21186c54959f22db0e3ff4b2fb8d8394dca",
+      "bytes": 14961,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/contracts_result.json"
+    },
+    {
+      "id": "closed_005",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/cpu_regression_20261027/normal-readers_result.json",
+      "sha256": "b7df6b36bedf776a0cfbaa48107e73b398e0eb95af08d3cd7aafae495d2351d4",
+      "bytes": 5252,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/cpu_regression_20261027/normal-readers_result.json"
+    },
+    {
+      "id": "closed_006",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_01_failure_normal_reader.json",
+      "sha256": "fe88a0d09299bd5edad5d745c18bdcec9dc01e6463638ea7df1e3f7685ee37be",
+      "bytes": 6519,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/gpt_debug_01_failure_normal_reader.json"
+    },
+    {
+      "id": "closed_007",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/README.md",
+      "sha256": "53c04b32a2dc7bc438e3326fe71aa5c8b95f6dcb98d5039af3d74529aa956a22",
+      "bytes": 4693,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/README.md"
+    },
+    {
+      "id": "closed_008",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/summary.json",
+      "sha256": "b7bbbc1ea2a7d87947241fcb29678f774f7386a7acbf2042b9113c7a3497a535",
+      "bytes": 55756,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/summary.json"
+    },
+    {
+      "id": "closed_009",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/action_comparison.csv",
+      "sha256": "a9258a997b902883278b4a8b4169030a32a7d2f16b15e8c2d8dbceef41dfa8ca",
+      "bytes": 3135,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/action_comparison.csv"
+    },
+    {
+      "id": "closed_010",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_reproduction/manifest.json",
+      "sha256": "a4bfd1fdf8f37b787461ce8778aee20f81eb305898bdeaa60fd0cfa2800ed153",
+      "bytes": 2681,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_reproduction/manifest.json"
+    },
+    {
+      "id": "closed_011",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/README.md",
+      "sha256": "d502190d9011d8f684c1d7970f4875794a3da3927d4f87c85dc8678c68121284",
+      "bytes": 5467,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_012",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/summary.json",
+      "sha256": "53531ef17ccd9cc70ffd81a62d53681346512fed0f313ac08ce9e81595877c43",
+      "bytes": 8241,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_013",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv",
+      "sha256": "5d8b24f2c920254e98f7e82b0b6fe635b8bcea25ee433496d5305310ed9c46a5",
+      "bytes": 1170,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/comparison_metrics.csv"
+    },
+    {
+      "id": "closed_014",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json",
+      "sha256": "b1373985531ab01f91783c484fdb9fb8f91b2f3ad9b342717a6dc364d8ff6198",
+      "bytes": 637,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/pre_latch_measured_prefix_comparison.json"
+    },
+    {
+      "id": "closed_015",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png",
+      "sha256": "699a473cf35a0c64b045a7d5f93d67c03f30ac65a0544d1922e885200df673ba",
+      "bytes": 369075,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/contact_hold_AB.png"
+    },
+    {
+      "id": "closed_016",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json",
+      "sha256": "7b7ef26ac25032ac3f32db68655c93945b2089cfc1ad3613c58bcc74ff2bd345",
+      "bytes": 1471,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_contact_hold_ab_20261027/archive_summary.json"
+    },
+    {
+      "id": "closed_017",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_03_closed_read_archive.json",
+      "sha256": "9069680e9d3480ba39777e01ee537924d6acee305f2984fab0e76afbc26b52cb",
+      "bytes": 17104,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_transport_03_closed_read_archive.json"
+    },
+    {
+      "id": "closed_018",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/README.md",
+      "sha256": "01899ad0ee150f5b1d8f33bfbba4bb476807ce67ef39439158c7b7f9c426cc7a",
+      "bytes": 6153,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/README.md"
+    },
+    {
+      "id": "closed_019",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json",
+      "sha256": "400aa42408b4757cca7291edcf4c7437b8d5faa4fa1a169e70d2cc63d46c91b9",
+      "bytes": 29469,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_020",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv",
+      "sha256": "eb09ab5f03eda45f32b03dde1c7298c4fd9eaa7c1cff3104bb07a22453e2139d",
+      "bytes": 7436,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_24_conditions.csv"
+    },
+    {
+      "id": "closed_021",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv",
+      "sha256": "d18ba7500d4c093047631b96389161756f5a2f92f900b203d0316d4169caa6bb",
+      "bytes": 65220,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/all_action_endpoints.csv"
+    },
+    {
+      "id": "closed_022",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png",
+      "sha256": "6e3dbdaac55fbad13ca28ffa61a277ab190c2c46a11137428059e3b6590f9d98",
+      "bytes": 182651,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/matched_endpoint_errors.png"
+    },
+    {
+      "id": "closed_023",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png",
+      "sha256": "f442304a1c7775b441cf431d0279581876b2f447ff739b4815da90d198a501c2",
+      "bytes": 297882,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/dynamic_tracking_and_compensation.png"
+    },
+    {
+      "id": "closed_024",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_02_closed_read_archive.json",
+      "sha256": "dcf9a3038a8ee3468dd174cbf414b7442f82be2b3a375348c153b741a4525b0a",
+      "bytes": 9918,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_025",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/README.md",
+      "sha256": "3dee555eab20713fea2e31627fa3ded56783f5c541d818ea4b29cad6b7977edf",
+      "bytes": 3468,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/README.md"
+    },
+    {
+      "id": "closed_026",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json",
+      "sha256": "d855a59e8d566c59562ea01145d9cc18b6e60c7cd8079f909b0e5174e1c64a48",
+      "bytes": 23557,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/audit.json"
+    },
+    {
+      "id": "closed_027",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_results.csv",
+      "sha256": "55f41d10969b6ce86852cac7b011ab6b834025938e128524e1c722586c0946fd",
+      "bytes": 31816,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_results.csv"
+    },
+    {
+      "id": "closed_028",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/group_results.csv",
+      "sha256": "fcce4e927f7dbb5b297775928f3e39e4bdc6fe723b3f64e599e68bd7c6d30664",
+      "bytes": 890,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/group_results.csv"
+    },
+    {
+      "id": "closed_029",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/probe_metrics.png",
+      "sha256": "0078fa1ea2d2a40cb664570431d47fcb0989f283a4cc5745755370b36e9120e0",
+      "bytes": 255940,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/probe_metrics.png"
+    },
+    {
+      "id": "closed_030",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/hold_velocity_discrepancy.png",
+      "sha256": "b5393e1b197d36bea030dda235e511c59a5be3cae5a7140b86a7b6256c45cc76",
+      "bytes": 212858,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/hold_velocity_discrepancy.png"
+    },
+    {
+      "id": "closed_031",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01_closed_read_archive.json",
+      "sha256": "e5cc8b12c1fa56a68955528e62add15f7d76534185d13aaf851b657f5245d054",
+      "bytes": 36108,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_032",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/README.md",
+      "sha256": "6b620f26096be932967ecfc382496886ebd15e9d43396c4c208ba38bf4ce3a27",
+      "bytes": 2058,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/README.md"
+    },
+    {
+      "id": "closed_033",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json",
+      "sha256": "c6b2947e0c94a82a833373183a049968ada387fa73fe5f27785b79e8b4e46a12",
+      "bytes": 11912,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/audit.json"
+    },
+    {
+      "id": "closed_034",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+      "sha256": "6bc704b45c2410eec53c9e3e1c9fea99ac7025a20d7e98bd2908bf85b746d200",
+      "bytes": 2679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/action_comparison.csv"
+    },
+    {
+      "id": "closed_035",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png",
+      "sha256": "1b75b64ac6c7e09d0e6b7148843c6ea50086d0f461b91029ac10e1e4b2a22709",
+      "bytes": 128896,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/comparison.png"
+    },
+    {
+      "id": "closed_036",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fixed_replay_02_closed_read_archive.json",
+      "sha256": "03e952006d6f5c0c69040ae6e80eab4a8b4bacf2f3846661fbcb7d1892eb29bd",
+      "bytes": 23139,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fixed_replay_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_037",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_closed_read_archive.json",
+      "sha256": "dd913afbaa9ffd860fc0474027432512d26d02a07ac21bc25e6a434b9ba394bf",
+      "bytes": 36879,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_closed_read_archive.json"
+    },
+    {
+      "id": "closed_038",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md",
+      "sha256": "ee77ee8a52dfc24faa03ac5938997db1f240130a1af9fcb6e1d6538107c0295e",
+      "bytes": 4715,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/README.md"
+    },
+    {
+      "id": "closed_039",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json",
+      "sha256": "4d4222655c3030f88172ae6068cf9de82f688654703ca6f972e42d4efcd01fdd",
+      "bytes": 25017,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_camera_v2_02_grasp_slip_analysis/evidence.json"
+    },
+    {
+      "id": "closed_040",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.md",
+      "sha256": "47f748803de4921567a47c8def531d84aa0233681a7f6e7bd7c961bedc69f97b",
+      "bytes": 4679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.md"
+    },
+    {
+      "id": "closed_041",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_grasp_orientation_review_20261027.json",
+      "sha256": "f784402bcceba90f9c335f3024b2f100d5b8d6cb8072bfaacc980b9de4adf7d6",
+      "bytes": 12066,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_source_grasp_orientation_review_20261027.json"
+    },
+    {
+      "id": "closed_042",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/README.md",
+      "sha256": "1e5cc68e994a352fa1a35af926d8fc8e3fcb2096b9002efd015f2ad13f3e5795",
+      "bytes": 4039,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/README.md"
+    },
+    {
+      "id": "closed_043",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json",
+      "sha256": "bac32ab5a2f8d04f2f1053148793d57f2062983aa95aefd96022dde127c76491",
+      "bytes": 28889,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/visibility_summary.json"
+    },
+    {
+      "id": "closed_044",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv",
+      "sha256": "adf896a62c16389fd2c8cf165642a2d9dd877ee6c8b50fc9dbb29abc1b97c929",
+      "bytes": 7376,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/stage_visibility.csv"
+    },
+    {
+      "id": "closed_045",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/manifest.json",
+      "sha256": "6ed6c161994b62ddcaa2302b60ece6f12da174b67c5579f0747abab5a0392c2c",
+      "bytes": 26749,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/manifest.json"
+    },
+    {
+      "id": "closed_046",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_closed_read_archive.json",
+      "sha256": "7820ab51a4d4cf85853515d66cda63e4b2297d912ec3a0ea25274185492576b5",
+      "bytes": 21281,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_closed_read_archive.json"
+    },
+    {
+      "id": "closed_047",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_collision_offline.json",
+      "sha256": "ca553a5bda94ab61c314819c0da38496824b10a66ec699eb673cfbcdf0b716b2",
+      "bytes": 8534,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_01_collision_offline.json"
+    },
+    {
+      "id": "closed_048",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/README.md",
+      "sha256": "95b9d497e9db6df08fe4a5d81044c3461d86c5fa0aaa9ede8ce9a4ed5dca3f09",
+      "bytes": 4706,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/README.md"
+    },
+    {
+      "id": "closed_049",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/summary.json",
+      "sha256": "7a658e7afa7aae500715d6d0c8edeb6dc2d7550616b1c92846b1482af55a2347",
+      "bytes": 9972,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/summary.json"
+    },
+    {
+      "id": "closed_050",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/action_sequence.csv",
+      "sha256": "72e79d3b7432a77576998f46f4bcfb00dc91eed4895d724020eb775d7524aa69",
+      "bytes": 4862,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/action_sequence.csv"
+    },
+    {
+      "id": "closed_051",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/manifest.json",
+      "sha256": "5860a7e702e119bb599b6df423cf73b54f4b74e8351452acc20ceb4350770aba",
+      "bytes": 11550,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/manifest.json"
+    },
+    {
+      "id": "closed_052",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg",
+      "sha256": "bf3add77fc8462477e8edaece113c30a173ef6c564c2302bf85b125f26f54045",
+      "bytes": 211256,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/key_actual_inputs_contact_sheet.jpg"
+    },
+    {
+      "id": "closed_053",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/manifest.json",
+      "sha256": "febe1d6ccba3f8e26a78e359649eb42e6ef652dc3fe2d1e2e6ef5fb50961bf44",
+      "bytes": 1201,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_054",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/public_observation.json",
+      "sha256": "5137922a1a8e660a38b3906ecb6f0e0c11504222b996393e88ef030a72f8aa16",
+      "bytes": 5052,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_055",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_056",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/512low/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_057",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/manifest.json",
+      "sha256": "058d3d3bcc341fc9e84db790201d41c5b39d73cc68582074d3ba957d04f13f50",
+      "bytes": 1203,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/manifest.json"
+    },
+    {
+      "id": "closed_058",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/public_observation.json",
+      "sha256": "4924e75fc14a5593685a711757cbd7c32b794e977a34f163ccc1e7676c8b7bc7",
+      "bytes": 4994,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/public_observation.json"
+    },
+    {
+      "id": "closed_059",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg",
+      "sha256": "4fe307811518d38817239119f9ea8460560cda6b77759ae94bcf00c771e8291f",
+      "bytes": 12821,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "id": "closed_060",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "1b8f7f0c0e4f73bc58ac9fdc64a6c463cdc2611bf3ee8b52e0a92b6a9c86c8d8",
+      "bytes": 15684,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/640high/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_061",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/README.md",
+      "sha256": "11f0c01136a9aaf3310d361afb547dafc34dd7eb80b169086a8aa9005d26e723",
+      "bytes": 2100,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/README.md"
+    },
+    {
+      "id": "closed_062",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/budget_usage_excerpt.json",
+      "sha256": "a814c3432a3b97c8f161147ef1e9604e1203faa5d6d86fed686fffcb4f2fa973",
+      "bytes": 6585,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/budget_usage_excerpt.json"
+    },
+    {
+      "id": "closed_063",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.csv",
+      "sha256": "6423f6fc93d3696113b2c6a88310df1449349d870fc0534f61d909076ec7e8be",
+      "bytes": 399,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.csv"
+    },
+    {
+      "id": "closed_064",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/comparison.json",
+      "sha256": "1c0f26640da92c46e03c9244d6bc1a2d49fe6dc674aa0515b02f639fa32ae3ff",
+      "bytes": 12109,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/comparison.json"
+    },
+    {
+      "id": "closed_065",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/manifest.json",
+      "sha256": "6ac358059de6f08aa26a55988e7ef575855b2c58b86871f329e87df75b3a85db",
+      "bytes": 2463,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/manifest.json"
+    },
+    {
+      "id": "closed_066",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/api_comparison_01/summary.json",
+      "sha256": "90e57773c734e9deb1fa18fb7b8d064316e3b1ca49c46d1a573ec3f4474f05f2",
+      "bytes": 5406,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/api_comparison_01/summary.json"
+    },
+    {
+      "id": "closed_067",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg",
+      "sha256": "31359a51a18755d64a566b046504154b737ae12a399d74e4d510c2966b1f7353",
+      "bytes": 9266,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_068",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg",
+      "sha256": "aa10201af08e25a71207adf3fb37cab902f3c931f065171fadb1ecf3657a7672",
+      "bytes": 11374,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_069",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg",
+      "sha256": "ad0d7683196f90f029803e8cd24eec558a0541622ecd8f980681133b0f68be44",
+      "bytes": 9201,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_070",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg",
+      "sha256": "70408c3cce539c407775a907324d4802dea7205a97c07f13ed449e4cbb10d738",
+      "bytes": 11104,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_071",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg",
+      "sha256": "78bf3abdfbadd8c7c1a8ec6638a1387a7272cea8cdbfe1e11269a8a9301e05f1",
+      "bytes": 9556,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/side_camera.jpg"
+    },
+    {
+      "id": "closed_072",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg",
+      "sha256": "2a57feeb4f838fcb9fa92660446097476b97325ad0267d1ff53451383c8bbb39",
+      "bytes": 12195,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/teacher_camera_v2_02_stage_visibility/images/stage_000012/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_073",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg",
+      "sha256": "afa840c65cc5d22ed7571e8a67a3a4510298d4c8a95aee285b66902bb812baad",
+      "bytes": 9187,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/side_camera.jpg"
+    },
+    {
+      "id": "closed_074",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg",
+      "sha256": "bba1d6872e0406d970f4106e5c68ea0ab67a3c737c679b618773916998b195aa",
+      "bytes": 10361,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000007/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_075",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg",
+      "sha256": "384350d808bbe44966160323e37288d6308c0c7e5301e6c1c88d057bf48efa35",
+      "bytes": 8740,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/side_camera.jpg"
+    },
+    {
+      "id": "closed_076",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg",
+      "sha256": "0bc7ae6df2835bfa9e0efb27ecbadf79a7106f4dfc42a86d8a8bdafec282f71a",
+      "bytes": 10824,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000009/wrist_camera.jpg"
+    },
+    {
+      "id": "closed_077",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg",
+      "sha256": "930671662cbe12091d140ddf7ff75373daf22007429bfd53822264d80d4edba6",
+      "bytes": 8889,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/side_camera.jpg"
+    },
+    {
+      "id": "closed_078",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg",
+      "sha256": "31f175186156c6963afab10d0668979d6f3ff675182a9006c0858c2e8277b3b4",
+      "bytes": 10121,
+      "role": "actual_policy_input",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_01_perception/gpt_control/observations/decision_000010/wrist_camera.jpg"
+    },
+    {
+      "id": "cpu590_summary",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/summary.json",
+      "sha256": "3a967b1ef628057c0f89adb983167bbc95bfb7f146da4d64e5995a75c0643691"
+    },
+    {
+      "id": "cpu590_contracts",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/contracts_result.json",
+      "sha256": "461f3405858396c135c2acaaf7401c2ef11cdeb162b4684ca2154ea8d475226b"
+    },
+    {
+      "id": "cpu590_readers",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/normal-readers_result.json",
+      "sha256": "816af5daf54a9fab200175c196ac924d35864b1987f382d1444bd4b950093cb5"
+    },
+    {
+      "id": "cpu590_versions",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/runtime_versions.json",
+      "sha256": "5a936b4bd6836d98780e592aefaf04b03f4243a7a495f567249bc51a5c88a271"
+    },
+    {
+      "id": "cpu590_ci",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/github_ci.json",
+      "sha256": "d9eb3e536f6970e06cdb89c3c4ec862129adb49ed83cc0751591f31826def472"
+    },
+    {
+      "id": "cpu590_protection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/protection_runtime_root_v2.json",
+      "sha256": "b5b8f66a3d12051d631a9f7460fd5a7ece5baf478ef027af2006969e588635c1"
+    },
+    {
+      "id": "cpu590_manifest",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/new590f346/manifest.json",
+      "sha256": "6a53f4bc72b25046cd17b6957703b3bb521504852b9c1acffdb1acb67196e641"
+    },
+    {
+      "id": "closed_source_index",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/report_sources_closed.json",
+      "sha256": "0b68805a4d1b51f4c5537ce6d5ee250a8cfe762f8292e1e52392f0522a712d25"
+    },
+    {
+      "id": "gpt01_runtime_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/summary.json",
+      "sha256": "299763cc87fb5b0765ed043e764b540b897ea6f7ed338090ab0e02d297a410e6"
+    },
+    {
+      "id": "gpt01_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_perception/gpt_control/controller.json",
+      "sha256": "fd1c709819e94162d84dd0a14e9684054a732d1c28796d5f8590cf57c6769275"
+    },
+    {
+      "id": "current_usage",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/usage.md",
+      "sha256": "6f1ebd000fa4d74bf7af01970bd6f2e9c434ab7c007c0c9164dd9f0a077d0f87"
+    },
+    {
+      "id": "hf_pinned_assets",
+      "scope": "release",
+      "url": "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067"
+    },
+    {
+      "id": "stage2_runtime",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage2_runtime_snapshot.json",
+      "sha256": "1750ea268a4b36ea8c244c8dce839ffe83eaee6a38641d0ce4b664b092a0c9d3",
+      "privileged_offline": false
+    },
+    {
+      "id": "runtime_freeze_ci",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_freeze_9e48016.json",
+      "sha256": "d4ec6fda50ce465c4db9a5429bb7bdba1c576b5ebe398dc5cfc4dd3392b8fe56",
+      "privileged_offline": false
+    },
+    {
+      "id": "grasp04_read",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_04_closed_read_archive.json",
+      "sha256": "eb6953a67bd43b7b817e92dca27bcac1c0e20bd205ae23e7d36184dd4cfb923d",
+      "privileged_offline": false
+    },
+    {
+      "id": "grasp04_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/grasp_transport_04_normal_reader.json",
+      "sha256": "f9d05c733f3348cd1a976b9045c639be4cf941da56d07f7adff26a4877c97953",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_read",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_closed_read_archive.json",
+      "sha256": "6a7ef4929c190cdea4e8706d1bf2ab85173c0acce4b4f7a940e9aba5439235ce",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/README.md",
+      "sha256": "2bdf133514028b0df8df38a05fdcf8bd3ce474b33c65e9e5308dccd65c0078f6",
+      "privileged_offline": false
+    },
+    {
+      "id": "sourcehold_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/evidence.json",
+      "sha256": "64a45fcdc7a3e83e7da7ff19dd7ba43c259aa32f8365bab0dd3b3557aea46024",
+      "privileged_offline": true
+    },
+    {
+      "id": "sourcehold_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_source_hold_01_grasp_compare/early_grasp_extract.csv",
+      "sha256": "9b58aa35c8eefcc29e75ca7ee58161a9196a49a514baea4b7a97e9885bce4fb6",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_read",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_closed_read_archive.json",
+      "sha256": "c913bf26a460d89400c71cc9a2ce090db27de91fa95902da4d66a5519d1e9bee",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/README.md",
+      "sha256": "27546b81c83789c72ac72a67c7c7a465aada6e1e34dcd9401ca984a0370f1c60",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/evidence.json",
+      "sha256": "c31014e7af54beda7d32bb5a6527fcf34f34d042db58a450fd26939fb613aa09",
+      "privileged_offline": true
+    },
+    {
+      "id": "slow_forces_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/physics_force_opening.csv",
+      "sha256": "ccefdf1df641922f8a536ff07a45926b356ac859bd61bd65a5e35749f7529bcf",
+      "privileged_offline": true
+    },
+    {
+      "id": "slow_dispatch_csv",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_force_hold/control_dispatch.csv",
+      "sha256": "256c2c81f70e94dfd7afffbed93d46d13d1dc448b0621d8727ab88ff2f574468",
+      "privileged_offline": false
+    },
+    {
+      "id": "slow_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_slow_close_01_normal_reader.json",
+      "sha256": "0519b73f7dc9a4ca12cb65a8d54a6a7dc19357e67f9b3df86a954da7f41837a1",
+      "privileged_offline": false
+    },
+    {
+      "id": "hold_mechanism",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_slow_close_01_hold_mechanism_review/review.json",
+      "sha256": "8cf8ebbe5fba99d732f5766e67b581aa356e7d93c55645b438a8d0ffab12a0f9",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_read",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_read_archive.json",
+      "sha256": "01c53d0354f919ac2c60668a5ecf3fc5c9085dc99320f6afde718c5482f4a252",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/README.md",
+      "sha256": "6934b43608f7421009a9f4c7d768b06b41c141608b2cebd001d4c7fef4689b7a",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_evidence",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/summary.json",
+      "sha256": "f3f616300c648e66327d21151a1684b966c788d13a1ede41db45a6b59b72b12b",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_curve",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/target_contact_release_curve.png",
+      "sha256": "775bfbe0aa002c5eda9541264a29d45c3f1b58b89e34fd551a304ea621bc6b92",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_curve_csv",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/target_contact_release_curve.csv",
+      "sha256": "cf4f2a96011613485581a691648ede76ee77dd8b6c3771bee7ecbd735b4738e0",
+      "privileged_offline": true
+    },
+    {
+      "id": "gpt02_input_cross",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_closed_evidence/wire_inputs_cross_audit.json",
+      "sha256": "c90b87da775a5a36691871afab538ee790a9336d40039a0d9230f37e6a083728",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_public_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/README.md",
+      "sha256": "0ef2f4b4e3c972aee012dfe568dbf274adfb815241b9a560f4d5dbad2200c7b6",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_public_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/summary.json",
+      "sha256": "b366d546655670e36e6060c9e17b3724be14c32a0b4d35d70d934c10a88d0132",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_input_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/manifest.json",
+      "sha256": "ca8ee191f579aaec92b1ff44b8310c49eb50012e69e85b6962448f41acd398b3",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_actions",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/action_sequence.csv",
+      "sha256": "4388cfc6fa6db8d8e54d5eb8f12c97269fe353ec67bc886fc8d17077188c3c7d",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_wrist_27",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/observations/decision_000027/wrist_camera.jpg",
+      "sha256": "15b251ae4bb4dc90c625e7e42274af3b2f9ac7099cc87cdcc3b97557d62372b7",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_side_27",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/observations/decision_000027/side_camera.jpg",
+      "sha256": "4b9bb77b6a632a236966eb3c4b286cf01765ca332a48a64837eab531b3af8943",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_runtime_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/summary.json",
+      "sha256": "48a4c99ec67ac53ee2739d466a865a41ce6cca1f301b4a571a9603cc0693794a",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_02_perception/gpt_control/controller.json",
+      "sha256": "68f2750b4df8b396fe04931ff643a6605c11dcb3ea98af1018b50e9c207da345",
+      "privileged_offline": false
+    },
+    {
+      "id": "gpt02_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_02_normal_reader.json",
+      "sha256": "b797faa4be8ce0c4cd913c34b774187b117fd3618a4a1accdab8bfbd6e146358",
+      "privileged_offline": false
+    },
+    {
+      "id": "preload_implementation",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/contact_preload_feedback_v2_implementation.md",
+      "sha256": "b45c6b23c3e229583f6e8c1e9607f16393b7ad68d7838f8542ccd38b2645b838",
+      "privileged_offline": false
+    },
+    {
+      "id": "force2_review_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/force_hold_v2_review_20261027/README_REVISED.md",
+      "sha256": "0ff5e5afb576074952a203a2b149d8e366d18026f5d09c3a4ee8db192cff28bc",
+      "privileged_offline": false
+    },
+    {
+      "id": "force2_review",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/force_hold_v2_review_20261027/review_revised_snapshot.json",
+      "sha256": "cc6d19de8eb6c23e37ec008c8e5285d738db9e44954fb13d864658ef4cf69c30",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/README.md",
+      "sha256": "f5c0c3f2f51209d840e6b69091957ebd2f40ffe70a01d7fbe862dd5ff3d3af03",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/summary.json",
+      "sha256": "b951a0167a6594c1351fe79aa913057effd0db7bf75603614057b11681655b7b",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_contracts",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/contracts_result.json",
+      "sha256": "ebc46e3030ed4133294b9117553110b7a22ab0592fbe05d1f58ec1bf0dae7845",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/normal-readers_result.json",
+      "sha256": "2db2fe231982248623e7935b2177ca8834dd6dec9b18e7a6f9ebd469541b9153",
+      "privileged_offline": false
+    },
+    {
+      "id": "cpu527_protection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/force_hold_v2_20261027/protection.json",
+      "sha256": "f83a74ecfb026f0c76119e400f7ad33fab1af3830dd4481a80706e47fabdfb15",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/README.md",
+      "sha256": "333f30f7dda0f4a5e8f973e9522a3b05fc54c0e4427af8b1950ea72f0828be71",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_cpu",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/context_structure_CPU.json",
+      "sha256": "2fd7d582b518cd392082d2cd645f03fd9bc411d41fba110339be634eea26aeb1",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_projection",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/cost_projection.json",
+      "sha256": "6c8066a44c533b6d476e921f87b7a60f6848f68b256c97d9259a64cccf9ba622",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_cli",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context4_20261027/cli_dry_run.json",
+      "sha256": "ebd1577c7d84c51b3a04524386996159e6089e0e53ee3d67a13d6d3c86fd9cd3",
+      "privileged_offline": false
+    },
+    {
+      "id": "context4_profile",
+      "scope": "contract",
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json",
+      "sha256": "f10f8d9ad36341adedf9a32837201c66878f21a5d12edd9e1e8eb2659da6ccba"
+    },
+    {
+      "id": "gpt03_evidence",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/summary.json",
+      "sha256": "4cdf2467fd53cda59357a52968f65db9ac146c4646e4ec33c2e72b531d7b90c2",
+      "bytes": 35369,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/summary.json"
+    },
+    {
+      "id": "gpt03_md",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/README.md",
+      "sha256": "afaec14ba8f071027a3c6aa539daf3a060cc4441425e7384125a9410a193913b",
+      "bytes": 5009,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/README.md"
+    },
+    {
+      "id": "gpt03_collision_csv",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/collision_window_physics.csv",
+      "sha256": "3f99aba86e1891f188ad1b23b17366aaeefd8b264db1d06a2cde7e00146c964f",
+      "bytes": 95959,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/collision_window_physics.csv"
+    },
+    {
+      "id": "gpt03_cross",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/wire_inputs_cross_audit.json",
+      "sha256": "7d5d993bc5e9fb7de95031c8bea3fced1db6c223691251fc062838e70e2c3801",
+      "bytes": 1460,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_evidence/wire_inputs_cross_audit.json"
+    },
+    {
+      "id": "gpt03_public_summary",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/summary.json",
+      "sha256": "556c41283401612cab7e40079b66d093645447ce2c214f13f3baac83971927b2",
+      "bytes": 19319,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/summary.json"
+    },
+    {
+      "id": "gpt03_public_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/manifest.json",
+      "sha256": "f796a5544f9a0813a93f8992087f3a17b458f2259bcad534cca7f050bbf10cf8",
+      "bytes": 38022,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/manifest.json"
+    },
+    {
+      "id": "gpt03_actions",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/action_sequence.csv",
+      "sha256": "ee38d2d47fa9cf8a0ce3192ce96632f0e976ea71ca2940ccfb428d59905dfe55",
+      "bytes": 8920,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/action_sequence.csv"
+    },
+    {
+      "id": "gpt03_controller",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/controller.json",
+      "sha256": "d36c4e884a0936d89fa3a053b044bb4d62c82d6c45cd2946e9cba5e79de1063a",
+      "bytes": 12394,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/controller.json"
+    },
+    {
+      "id": "gpt03_runtime",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/summary.json",
+      "sha256": "6fa3cd58fb2d5e5ddf0094de4770b12b46f4272384024277bf25be261ab97514",
+      "bytes": 1230,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/summary.json"
+    },
+    {
+      "id": "gpt03_side14",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/side_camera.jpg",
+      "sha256": "b1a064f1154284a1179810e057c7faa9e1775f5d3e2c4ff4810a5dfceeb3a039",
+      "bytes": 9080,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/side_camera.jpg"
+    },
+    {
+      "id": "gpt03_wrist14",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/wrist_camera.jpg",
+      "sha256": "6735038bf54be0f6c99cde65b6bbd55cedb145f2cddb707787bafe7522839f55",
+      "bytes": 10616,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_perception/gpt_control/observations/decision_000014/wrist_camera.jpg"
+    },
+    {
+      "id": "gpt03_read",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_read_archive.json",
+      "sha256": "d825925345a6424affae10feb9a4a323fcda2ceb237df98d1fd475e0db87889c",
+      "bytes": 23064,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/gpt_debug_03_closed_read_archive.json"
+    },
+    {
+      "id": "gpt03_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_03_normal_reader.json",
+      "sha256": "dad2f7f157a444228c6821c5800c08392616a76cb2b4e68785aff7b5166efdf4",
+      "bytes": 8635,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/gpt_debug_03_normal_reader.json"
+    },
+    {
+      "id": "preload_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_preload_audit/summary.json",
+      "sha256": "fac1a6f1cf5e084393ee553d8614abbc2e15c23aac8946c086e11ac801cb798f",
+      "bytes": 6766,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_preload_01_preload_audit/summary.json"
+    },
+    {
+      "id": "preload_causal",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_causal_timing_review/summary.json",
+      "sha256": "a3aed8b2e5f4c09fa85e181df7caef1f6828bca2e50701577b42536613f0725e",
+      "bytes": 18695,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_preload_01_causal_timing_review/summary.json"
+    },
+    {
+      "id": "preload_causal_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preload_01_causal_timing_review/README.md",
+      "sha256": "433033223535696e73bcba0a3d020b53f3d09e4fa54ceda0a0ebef95ec33ec57",
+      "bytes": 5876,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_preload_01_causal_timing_review/README.md"
+    },
+    {
+      "id": "preload_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_preload_01_normal_reader.json",
+      "sha256": "3831179eddcbc3236fb3bec0b1db849f90f8efacb602773896b67204206f8cf6",
+      "bytes": 8495,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_preload_01_normal_reader.json"
+    },
+    {
+      "id": "lateral_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_lateral_hold_01_preload_audit/summary.json",
+      "sha256": "1eb0f1d1f4ac03297476fc77fd2814adee1f484e94767161d8fdf9137e3bf7d3",
+      "bytes": 6819,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_lateral_hold_01_preload_audit/summary.json"
+    },
+    {
+      "id": "lateral_ab",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_lateral_hold_01_ab_audit/evidence.json",
+      "sha256": "b9674fbbfd22e9dbbd5f40eb584f103ba727a2caf5c2e7b8d3c9015961d21fe3",
+      "bytes": 9386,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_lateral_hold_01_ab_audit/evidence.json"
+    },
+    {
+      "id": "lateral_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_lateral_hold_01_ab_audit/README.md",
+      "sha256": "0395514f09d77cf32dad8ea6210e2b8a454bd7e983caccf8a9933d41ead0870e",
+      "bytes": 2932,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_lateral_hold_01_ab_audit/README.md"
+    },
+    {
+      "id": "lateral_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_lateral_hold_01_normal_reader.json",
+      "sha256": "e54ab0e2c4a0d68074b5773935ff62f51502f00b8c650cac8924647be89a647e",
+      "bytes": 8500,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_lateral_hold_01_normal_reader.json"
+    },
+    {
+      "id": "preorient_evidence",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preorient_01_preload_audit/summary.json",
+      "sha256": "d64f8eacd92870b8f10ae86783366ff6c93d7ab60c050e738d18431b95dea954",
+      "bytes": 6752,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_preorient_01_preload_audit/summary.json"
+    },
+    {
+      "id": "preorient_stage",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preorient_01_ab_audit/stage_pose_and_source_contract.json",
+      "sha256": "fd65e8637c9428afb15e35bc51f7dcf17f2a050a4ffb223fe0c4dffb6010a260",
+      "bytes": 13012,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_preorient_01_ab_audit/stage_pose_and_source_contract.json"
+    },
+    {
+      "id": "preorient_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_preorient_01_ab_audit/README.md",
+      "sha256": "60b511c399a7f38caa8c4eb290008cdd67fe0d37182c98b28ca68a74abedb0e2",
+      "bytes": 3864,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_preorient_01_ab_audit/README.md"
+    },
+    {
+      "id": "preorient_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_preorient_01_normal_reader.json",
+      "sha256": "851a997ccaf42abc924a8bfa99fc67992c2b645082dfca9fd679300012dddf9f",
+      "bytes": 8497,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_preorient_01_normal_reader.json"
+    },
+    {
+      "id": "grasp04_evidence",
+      "scope": "grasp",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_transport_04_preload_audit/summary.json",
+      "sha256": "8c3116cccd55faafaf5aa13e2a06f4d35ec3fdc513cc53bb0f6d64b7321bd71b",
+      "bytes": 5171,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/grasp_transport_04_preload_audit/summary.json"
+    },
+    {
+      "id": "public_calib4_md",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/public_robot_calibration_v4/README.md",
+      "sha256": "f0191ca0a45a34e0617c393db2fcc3e535056e58b42a270dcca5aadb28617a61",
+      "bytes": 2002,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/public_robot_calibration_v4/README.md"
+    },
+    {
+      "id": "public_calib4_cpu",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/public_robot_calibration_v4/cpu_validation.json",
+      "sha256": "95a70c8270284fe0b5254ca7b528dd07530fb04192e35576442a302a54ae9258",
+      "bytes": 2710,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/public_robot_calibration_v4/cpu_validation.json"
+    },
+    {
+      "id": "public_frame_audit",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/public_robot_geometry_20261027/audit.json",
+      "sha256": "38b05883e241f9af3ef8ed5dca3bae7ee79f9db71068cf7508e0410c4ac5f01e",
+      "bytes": 9310,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/public_robot_geometry_20261027/audit.json"
+    },
+    {
+      "id": "side_v3_md",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/README.md",
+      "sha256": "be4e6b15c65a0f63bada16cf4f467fe48daec38542bc930fe53a845214b073db",
+      "bytes": 1100,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/README.md"
+    },
+    {
+      "id": "side_v3_selection",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/selection.json",
+      "sha256": "f994827586ae13fbf11b176970c4a0e98aa6c6ead5ae982b81301222bf8789a5",
+      "bytes": 4335,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/selection.json"
+    },
+    {
+      "id": "side_v3_proof",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/process_exit.json",
+      "sha256": "15809ac5bddd2f7ff0ca6e3357a0f87a75836d4bfa5cb93b8eb3f9e1816174af",
+      "bytes": 913,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/process_exit.json"
+    },
+    {
+      "id": "side_v3_manifest",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/manifest.json",
+      "sha256": "b8ce366bc58b291ac10338c98c3ec0dac0b21673d87cc6adaaa42b2bf263ed10",
+      "bytes": 120093,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/manifest.json"
+    },
+    {
+      "id": "side_v3_after_lift",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/state_02/lower_wide/side_camera.png",
+      "sha256": "e0912d6a8c264ef43976f71676811d472634b0dc951248e050f5539630dab97d",
+      "bytes": 149785,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/state_02/lower_wide/side_camera.png"
+    },
+    {
+      "id": "side_v3_old_same_state",
+      "scope": "camera",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/side_v3_visibility/state_02/original/side_camera.png",
+      "sha256": "bc54635710e3716abda5b64c9efab6977c662a5efcd383b0e821b6c20deb47a6",
+      "bytes": 168846,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../camera/side_v3_visibility/state_02/original/side_camera.png"
+    },
+    {
+      "id": "runtime109e",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_freeze_109e637.json",
+      "sha256": "0c00c7c6524ed9f11c943fc49be5670504f7e96e889772a88fbb711957c5200c",
+      "bytes": 34199,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/runtime_freeze_109e637.json"
+    },
+    {
+      "id": "stage3_runtime",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage3_runtime_snapshot.json",
+      "sha256": "e15afb7f314864aafbe88748cee771c77cf329424d1522329474f604dae857b2",
+      "bytes": 10554,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "stage3_runtime_snapshot.json"
+    }
+  ],
+  "cohorts": [
+    {
+      "kind": "diagnostic",
+      "status": "closed",
+      "completed_count": 2,
+      "planned_count": 2,
+      "summary_source": "closed_033",
+      "note": "仅最终两条异常前缀；自由/细位移/抓持诊断另列，不是完整任务配额。"
+    },
+    {
+      "kind": "teacher",
+      "status": "incomplete",
+      "completed_count": 6,
+      "summary_source": "preorient_evidence",
+      "note": "选定闭合调试版本teacher02、sourcehold、slowclose、preload、lateral、preorient六条均原false GRASP_SLIP；不是同冻结配置6次或全部历史运行数。active baseline_close01不计。"
+    },
+    {
+      "kind": "gpt_debug",
+      "status": "incomplete",
+      "completed_count": 3,
+      "summary_source": "gpt03_evidence",
+      "note": "debug01/02/03均真实关闭且失败，各版本prompt/相机/路径不同，不作正式成功率；GPT04未运行。"
+    },
+    {
+      "kind": "gpt_formal",
+      "status": "not_run",
+      "completed_count": 0,
+      "planned_count": 5,
+      "note": "本版本正式五次尚未启动；需先获得最终冻结配置完整成功，再审费用、同SHA指纹与准入。旧版formal不合并。"
+    }
+  ],
+  "pages": [
+    {
+      "title": "当前结论与交付边界",
+      "topics": [
+        "summary"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Project_v1_1已修复连续执行接口并保留可读数据；截至本快照，仍未获得该版本GPT完整装载成功。GPT03确实抓取离架并搬运，随后触发机身碰撞安全停止。最新三轮teacher对照均独立失败，不能由预对准到位或抓持短前缀通过替代完整任务。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "范围",
+            "实际闭合结果",
+            "资格边界"
+          ],
+          "rows": [
+            [
+              "执行与细位移",
+              "原异常前缀及24空爪细位移改善",
+              "不代表接触插入或真实精度"
+            ],
+            [
+              "GPT调试01 02 03",
+              "3条真实失败；类型分别保留",
+              "不是正式成功率或未运行"
+            ],
+            [
+              "teacher preload lateral preorient",
+              "3条均false GRASP_SLIP",
+              "不是已通过teacher门槛"
+            ],
+            [
+              "新公开标定与侧视v3",
+              "CPU66和三状态render-only检查",
+              "尚非新GPT实际输入验证"
+            ]
+          ],
+          "widths": [
+            3.8,
+            4.8,
+            4.0
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "开发HEAD为5e2a3deb4ddf0f7766cf9a0721415549b53019ec，root已报告推送；GPT03实际运行身份仍为109e637，不能改写。teacher_baseline_close01在本快照由root报告仍活动，GPT04未运行，二者均不计入。正式五次尚未启动。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "stage3_runtime",
+              "label": "本阶段身份与预算快照"
+            },
+            {
+              "source": "gpt03_evidence",
+              "label": "GPT03原始结果与碰撞时序"
+            },
+            {
+              "source": "preorient_md",
+              "label": "预对准到位仍失败"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "连续执行修复与细位移诊断",
+      "topics": [
+        "executor"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "旧world小动作曾出现超过200mm实际位移。新执行器保持原请求目标，以局部连续IK、FK与关节步长界限预规划，再用实际跟踪和速度护栏执行。规划拒绝不推进时间，部分执行记录真实后继状态与时间，不自动重放。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "相同请求的异常动作",
+            "旧净位移 mm",
+            "新净位移 mm",
+            "新终点误差 µm"
+          ],
+          "rows": [
+            [
+              "world 0 40 0",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/0/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              "40.000868",
+              "1.527"
+            ],
+            [
+              "world 0 35 −19",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/1/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              "39.823226",
+              "2.402"
+            ]
+          ],
+          "widths": [
+            3.8,
+            2.8,
+            3.0,
+            3.0
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "closed_035",
+          "caption": "两条原请求参数保持不变的异常前缀对照；终点误差与动态跟踪峰值分开。新动态峰值仍约0.367/0.251mm。",
+          "max_height_cm": 5.0
+        },
+        {
+          "type": "paragraph",
+          "text": "最终fixed_replay_02两集共7动作到达且真实退出0；首次fixed_replay_01关闭后GC退出139仍保留。另有72个自由探针及24个空爪细位移对照；100µm目标由0/24变24/24，B最大终点误差1.293µm、3秒整窗最大漂移11.529µm。它们不是持物接触成功，也不验证真实微米精度。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "closed_034",
+              "label": "全部7动作CSV"
+            },
+            {
+              "source": "closed_026",
+              "label": "72自由探针"
+            },
+            {
+              "source": "closed_019",
+              "label": "24细位移A B原数据"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "抓持诊断与teacher独立失败",
+      "topics": [
+        "grasp",
+        "teacher_data"
+      ],
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "独立版本",
+            "仿真 s",
+            "原任务结果",
+            "关键对照"
+          ],
+          "rows": [
+            [
+              "teacher02 与source_hold01",
+              "各124.267",
+              "false GRASP_SLIP",
+              "完成过实际流程仍非成功"
+            ],
+            [
+              "preload01",
+              "20.017",
+              "false GRASP_SLIP",
+              "预载4tick，未清来源槽"
+            ],
+            [
+              "lateral_hold01",
+              "20.067",
+              "false GRASP_SLIP",
+              "固定EXTRACT XY仍越界"
+            ],
+            [
+              "preorient01",
+              "20.050",
+              "false GRASP_SLIP",
+              "预对准生效仍越界"
+            ],
+            [
+              "grasp_transport04",
+              "33.150",
+              "false POLICY_BUDGET",
+              "短诊断，原grasp true"
+            ]
+          ],
+          "widths": [
+            3.4,
+            1.9,
+            3.5,
+            4.4
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "preload与lateral首200µm杯底相对漂移均在19.533333秒；冻结XY这一项并不足以通过。preorient将闭爪前工具下轴偏离竖直从0.054545°降至0.000210°，但首越界仍在EXTRACT后54.167ms。名义朝向固定，杯转明显大于实际手转；这些配对不支持把失败直接归为teacher纠姿或单一XY反应。"
+        },
+        {
+          "type": "paragraph",
+          "text": "grasp04原参考形成比首lift指令晚70.833ms；此前约0.31°杯转和约267µm相对将来参考的变化不在原评分窗口。参考后原峰值2.698µm与grasp true保留，却不能据此宣称和teacher同起点全程无摇摆。它是control_diagnostic，正常完整任务成功/失败reader均排除。"
+        },
+        {
+          "type": "paragraph",
+          "text": "force-hold v2使用指位/接触与既有预载目标，反馈预算仍0.6mm、速率2mm/s，原摩擦、力上限和200µm/1°判分未放宽。释放分支没有在这些提取早停run执行；CPU527和实际预载分支发生都不能当完整装载或释放通过。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "preload_causal_md",
+              "label": "控制区间先后与晚参考边界"
+            },
+            {
+              "source": "lateral_ab",
+              "label": "固定XY对照和配置保护"
+            },
+            {
+              "source": "preorient_stage",
+              "label": "真实预对准姿态与原评分"
+            },
+            {
+              "source": "grasp04_evidence",
+              "label": "grasp04原分数与实际分支"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "实际视觉输入与新公共机器人标定",
+      "topics": [
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "GPT03实际使用prompt v3、context4与原侧视，512×384 JPEG q60 low；下图是其最后一次实际发送侧视。腕视保留杯和指端，但不能单独判断前方整手与机壳净空。停止后没有补造新模型观测。"
+        },
+        {
+          "type": "figure",
+          "source": "gpt03_side14",
+          "caption": "GPT03 decision14实际发送的完整侧视JPEG，28.0167秒；1.65秒后发生安全停止。不是碰撞瞬间帧或新side v3输入。",
+          "max_height_cm": 4.2
+        },
+        {
+          "type": "figure",
+          "source": "side_v3_after_lift",
+          "caption": "同一已关闭状态的side v3 render-only重建；仅机位检查，未执行物理任务、未发送给GPT，不是新策略轨迹。",
+          "max_height_cm": 4.2
+        },
+        {
+          "type": "paragraph",
+          "text": "HEAD5e新增的公开语言仅声明机器人自身静态标定：panda_hand→right_gripper为[0,0,0.1]m、wxyz[0,0,0,1]；100mm是frame原点距离，不是整手包络。prompt v4要求用双图建立视觉支持的整手净空后再水平移动。未提供目标/障碍坐标、安全高度、专家路径或器皿真值。66项CPU通过，尚无新GPT验证。"
+        },
+        {
+          "type": "paragraph",
+          "text": "侧视v3较低且更宽，腕视v2和图像编码不变。三状态只验证渲染与原生位置同步；腔内座仍可能遮挡。全部15次GPT03公开JSON、30张exact JPEG与静态prompt/schema/公开回执保存并核SHA；不含完整HTTPbody、完整memory response组或私有reasoning。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt03_wrist14",
+              "label": "同决策实际腕视"
+            },
+            {
+              "source": "gpt03_cross",
+              "label": "全部公开输入交叉SHA"
+            },
+            {
+              "source": "side_v3_selection",
+              "label": "机位选择与render-only边界"
+            },
+            {
+              "source": "public_calib4_cpu",
+              "label": "标定与prompt v4 CPU证据"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "GPT真实失败与独立判分",
+      "topics": [
+        "gpt"
+      ],
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "调试",
+            "API数 仿真 s",
+            "原失败",
+            "实际到达范围"
+          ],
+          "rows": [
+            [
+              "GPT01",
+              "11  24.833",
+              "SAFETY_COLLISION",
+              "panda_hand碰SourceMesh2"
+            ],
+            [
+              "GPT02",
+              "33  59.867",
+              "SAFETY_GEOMETRY_VIOLATION",
+              "座口受阻后不当下降与释放"
+            ],
+            [
+              "GPT03",
+              "15  29.667",
+              "SAFETY_COLLISION",
+              "leftfinger碰SourceMesh2"
+            ]
+          ],
+          "widths": [
+            2.0,
+            2.7,
+            4.3,
+            4.4
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "GPT03先下降232mm、闭爪，再上抬4×40mm并横移。首原生碰撞在29.654167秒，左指与仪器SourceMesh2接触；它与GPT01的手掌接触不是同一机器人形状。碰撞前合格双侧样本相对杯底漂移最大2.068µm；首次超过200µm与碰撞同tick，末值841.508µm。不能称碰撞前已滑脱，也不能用小的碰撞前漂移覆盖原grasp false。"
+        },
+        {
+          "type": "paragraph",
+          "text": "末动作请求[36,16,0]mm/2秒，执行99/120tick、1.65秒后安全停止；实际TCP合位移32.800mm，距未完成目标6.603mm，已执行控制边界最大跟踪误差0.406mm。剩余距离是中止后的未执行目标，不是213mm异常复发或执行器数值失稳。"
+        },
+        {
+          "type": "paragraph",
+          "text": "GPT02在座口受阻后继续下降，杯手相对变化16.956mm，之后开爪仍未完成合法承托；原材料几何安全失败保留。三条均有真实有效失败数据，未获完整成功。GPT03未插入、未卸载或撤离，post_retreat_window为unavailable、stable_after_retreat为null。此处碰撞/器皿状态均为事后离线证据，不输入policy。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt03_actions",
+              "label": "15动作实际时长与回执"
+            },
+            {
+              "source": "gpt03_collision_csv",
+              "label": "碰撞前后逐物理步CSV"
+            },
+            {
+              "source": "gpt02_curve_csv",
+              "label": "GPT02受阻与释放时序"
+            },
+            {
+              "source": "gpt03_public_manifest",
+              "label": "公开输入完整文件清单"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "数据读取与共享费用边界",
+      "topics": [
+        "teacher_data",
+        "gpt"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "GPT03与preload、lateral、preorient的闭合H5均完成40个唯一dataset全读与正常failure ACT/DP batch验证；success过滤拒绝。数据动作与观测后继时间对齐，原record/integrity/physics为true、BC不合格。没有为训练batch改标签，也未启动训练。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "GPT03闭合账本快照",
+            "数值"
+          ],
+          "rows": [
+            [
+              "本集网络请求 估算增量",
+              "15 / 1.106340 USD"
+            ],
+            [
+              "共享总请求 总估算占用",
+              "156 / 11.743002 USD"
+            ],
+            [
+              "已知usage估算 149次",
+              "11.040312 USD"
+            ],
+            [
+              "未知usage保守预留 7次",
+              "0.702690 USD"
+            ],
+            [
+              "距30美元硬限的估算余量",
+              "18.256998 USD"
+            ]
+          ],
+          "widths": [
+            7.5,
+            4.7
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "费用是按公开价的本地估算，不是实付账单；预留不能写成已知消费。context4现已在GPT03真实15决策运行，不能再说仅CPU配置；该次失败不能验证长流程上下文质量。每次仍提供当前任务、标定与双图，完整memory item组并未落盘。预算未耗尽，但重复同类碰撞不能靠继续调用代替修复。"
+        },
+        {
+          "type": "paragraph",
+          "text": "provider/controller循环331.338秒、run manifest335.721秒、进程总墙钟386.557秒与29.667秒仿真时长分别记录。1779控制tick/7116执行物理步，末部分动作时长一致；这验证记录的步进计数，不证明渲染像素和状态严格同刻。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt03_reader",
+              "label": "GPT03正常失败batch"
+            },
+            {
+              "source": "preorient_reader",
+              "label": "预对准teacher正常读取"
+            },
+            {
+              "source": "stage3_runtime",
+              "label": "费用占用与未知usage拆分"
+            },
+            {
+              "source": "cpu527",
+              "label": "较早527项CPU范围"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "复现入口与最终发布门槛",
+      "topics": [
+        "release"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "HEAD5e与本地缓存origin/codex/labsim相同，root报告已推送。最终同SHA CI、干净checkout完整流程和新样例HF发布仍需另证；不能用109e或9e的旧CI替代。当前标准场景仍是一台仪器、原座、选定10mm尺寸假设资产；原始CAD及实物标定结论不改。"
+        },
+        {
+          "type": "code",
+          "language": "bash",
+          "text": "LABSIM_POLICY_DIR=config/lab_cuvette_loading/Project_v1_1/policies\n./labsim eval --project-version Project_v1_1 --scene standard \\\n  --backend gpt6 --episodes 1 --max-calls 160 --headless \\\n  --provider-config \"$LABSIM_POLICY_DIR/cubence_gpt6_context4.json\" \\\n  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \\\n  --output outputs/lab_cuvette_loading/Project_v1_1/gpt_NEW"
+        },
+        {
+          "type": "paragraph",
+          "text": "以上是后续显式入口示例，本草稿没有执行；当前应先完成可见性/姿态诊断并核实新关闭结果，再决定调用。沿用已有授权凭据和共享账本，不重置费用、不覆盖输出，同GPU顺序运行。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "收口项",
+            "本快照状态"
+          ],
+          "rows": [
+            [
+              "teacher_baseline_close01",
+              "root报告仍活动；不读输出或赋结果"
+            ],
+            [
+              "GPT04 与正式5次",
+              "GPT04未运行；正式5次未启动"
+            ],
+            [
+              "可重复完整成功及数据样例",
+              "仍有缺口，失败数据保留"
+            ],
+            [
+              "新相机实际GPT输入与最终CI HF",
+              "待实际闭合、指纹和发布证据"
+            ],
+            [
+              "6至8页报告与≤80MB阅读包",
+              "仅草稿输入和预算，不author或打包"
+            ]
+          ],
+          "widths": [
+            4.8,
+            7.3
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "current_usage",
+              "label": "现有入口和reader使用说明"
+            },
+            {
+              "source": "context4_profile",
+              "label": "显式context4配置"
+            },
+            {
+              "source": "side_v3_md",
+              "label": "新侧视验证边界"
+            },
+            {
+              "source": "hf_pinned_assets",
+              "label": "既有固定HF资产revision"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "finalized=false；仅校验输入，未author DOCX、marker或渲染。七逻辑组不是真实页数；原draft、stage2及133源SHA保留。",
+    "GPT03为安全碰撞失败，碰撞前2.068µm不覆盖全程原grasp false；postretreat unavailable/null不补值。teacher三项局部修正均未取得完整成功。",
+    "side v3只是已关闭状态render-only，public calibration v4只有CPU验证；不能称实际新GPT输入或策略成功。active baseline和未运行GPT04不计。",
+    "公开观测exact JPEG/JSON与静态prompt/schema、公开回执不等于完整HTTPbody或memory/private reasoning；所有器皿/接触真值仅作事后分析。",
+    "空爪细位移、相对漂移与FK一致性不是真实精度认证。质量、惯量、摩擦等仍含假设；完整稳定装载、正式回归、同发布SHA CI及新HF样例仍待证。"
+  ]
+}
