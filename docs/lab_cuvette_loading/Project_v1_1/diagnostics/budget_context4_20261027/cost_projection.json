@@ -1,0 +1,123 @@
+{
+  "schema": "labsim.Project_v1_1.context4_cost_projection.v1",
+  "snapshot_utc": "2026-10-26T19:45:16.657883+00:00",
+  "source_request_stats": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/budget_context_20261027/gpt02_settled_request_stats.csv",
+  "source_request_stats_SHA256": "93ac260d913d3745b13d023c2034bc80f5bd3c378c3b1c110fec08481ea72e75",
+  "source_12_context_actual_requests": 33,
+  "source_12_context_actual_cost_usd": 3.69979,
+  "current_ledger": {
+    "path": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+    "SHA256": "e9fc2d214d9650274521f9c9db74e8c1cc702b0db23774a5b38d59f6d8dff0e6",
+    "attempts": 141,
+    "used_local_estimate_usd": 10.636662000000001,
+    "remaining_local_estimate_usd": 19.363338,
+    "retained_unknown_usage_reservations_usd": 0.70269,
+    "ledger_bytes_unchanged_during_projection": true
+  },
+  "method": {
+    "tokens_per_prior_turn_OLS_from_GPT02": 1208.9074941451988,
+    "context12_prior_complete_turns": 6,
+    "context4_prior_complete_turns": 2,
+    "expected_saved_input_tokens_per_steady_decision": 4835.629976580795,
+    "projected_steady_context4_cost_usd": 0.07142407060456242,
+    "cached_discount_assumed": false,
+    "outputs_assumed_same_as_observed_GPT02": true,
+    "uncertainties": [
+      "Actual context4 requests, provider tokenization and output length have not been measured.",
+      "Shorter memory may alter behavior, rejection/retry rates and total decisions.",
+      "40-60 decisions for a complete successful task is an assumption, not established success.",
+      "Unknown-usage retries retain full conservative reservations; actual account billing multipliers remain unknown."
+    ]
+  },
+  "one_complete_episode_projection_usd": {
+    "40": 2.8216039509064106,
+    "50": 3.5358446569520345,
+    "60": 4.250085362997659
+  },
+  "scenarios": [
+    {
+      "genuine_success_debug_assumed_decisions": 40,
+      "formal_each_assumed_decisions": 40,
+      "full_debug_plus_formal5_estimated_usd": 16.929623705438463,
+      "remaining_after_projected_completion_usd": 2.433714294561536,
+      "fits_with_two_usd_reserve_under_assumptions": true,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 40,
+      "formal_each_assumed_decisions": 50,
+      "full_debug_plus_formal5_estimated_usd": 20.500827235666584,
+      "remaining_after_projected_completion_usd": -1.1374892356665853,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 40,
+      "formal_each_assumed_decisions": 60,
+      "full_debug_plus_formal5_estimated_usd": 24.072030765894706,
+      "remaining_after_projected_completion_usd": -4.708692765894707,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 50,
+      "formal_each_assumed_decisions": 40,
+      "full_debug_plus_formal5_estimated_usd": 17.64386441148409,
+      "remaining_after_projected_completion_usd": 1.7194735885159105,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 50,
+      "formal_each_assumed_decisions": 50,
+      "full_debug_plus_formal5_estimated_usd": 21.215067941712206,
+      "remaining_after_projected_completion_usd": -1.8517299417122075,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 50,
+      "formal_each_assumed_decisions": 60,
+      "full_debug_plus_formal5_estimated_usd": 24.786271471940328,
+      "remaining_after_projected_completion_usd": -5.422933471940329,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 60,
+      "formal_each_assumed_decisions": 40,
+      "full_debug_plus_formal5_estimated_usd": 18.35810511752971,
+      "remaining_after_projected_completion_usd": 1.0052328824702883,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 60,
+      "formal_each_assumed_decisions": 50,
+      "full_debug_plus_formal5_estimated_usd": 21.929308647757832,
+      "remaining_after_projected_completion_usd": -2.5659706477578332,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    },
+    {
+      "genuine_success_debug_assumed_decisions": 60,
+      "formal_each_assumed_decisions": 60,
+      "full_debug_plus_formal5_estimated_usd": 25.500512177985954,
+      "remaining_after_projected_completion_usd": -6.137174177985955,
+      "fits_with_two_usd_reserve_under_assumptions": false,
+      "type": "Projection only, not an execution or admission decision."
+    }
+  ],
+  "admission_and_budget": {
+    "genuine_full_success_required_before_formal5": true,
+    "short_diagnostic_does_not_admit_formal": true,
+    "next_action": "Explicitly select context4 for the next complete debug attempt; inspect actual cost and independent full-task success before deciding whether formal5 can be admitted and funded.",
+    "reserve_target_usd": 2.0,
+    "max_single_request_current_conservative_bound_usd": 0.8512,
+    "budget_cap_and_request_cap_unchanged": true,
+    "default_provider_unchanged": true,
+    "no_formal5_guarantee": true
+  },
+  "API_calls": 0,
+  "provider_or_ledger_modified": false
+}

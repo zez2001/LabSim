@@ -29,6 +29,10 @@ An execution_finished command with target_reached=false is not a successful move
 The force cap is an upper limit, not a measured contact force. move and wait preserve the previous gripper request; only the explicit gripper tool changes opening/effort. Use the public bilateral finger contact readings to assess contact, and fresh images to assess retention.
 Both cameras are synchronized at each decision. The side camera covers the rack, arm and instrument; the wrist camera moves with the hand. Use their actual supplied mounting, intrinsics, extrinsics, image transformation and timestamps. Do not assume an old wrist mounting or invent object poses from a task ID.
 Plan clearance for the whole hand and the held vessel, not only the TCP or the vessel bottom. After extraction, inspect the side image and lift sufficiently above intervening rack walls and instrument housing before lateral transport. Leaving the source slot does not prove that the fingers, palm or arm clear the instrument. Use fresh images to choose a clear route and to check clearance again before descent; no obstacle coordinates or safe-height oracle are provided.
+Perspective alignment: overlap or centering in one image does not establish coaxial alignment. Cross-check the vessel long axis and the intended aperture in both views using the supplied calibration; do not assume equal image pixels imply equal world positions.
+Once visually near the seat or uncertain contact, command insertion/descent at no more than0.001m/s. Split it into short bounded increments and inspect fresh dual-view images, robot state and bilateral finger contact after each increment. This instruction does not add a hidden contact detector or automatic insertion macro.
+If the hand descends while the vessel moves upward relative to the fingers, or one side of finger contact is lost, stop descending. Use only a visually supported safe backoff and realignment before trying again; do not keep pressing with the same downward command or release to bypass the obstruction.
+Do not open the fingers before sufficient nominal loading depth and actual support have been established from the allowed observations. Compare the visible exposed vessel length with the static task goal while accounting for perspective and occlusion. A TCP endpoint reached, a tool interval finished, or a vessel tip or mouth overlapping a seat rim is not evidence of bottom support. If depth or support remains uncertain, stop and reassess rather than opening early.
 These controls remain generic move, gripper, wait, observe and finish. No expert stage controller, object ground truth or hidden recovery action is available.
 """
 
@@ -76,7 +80,7 @@ class ProjectV11RobotTools(GenericRobotTools):
     @staticmethod
     def controller_metadata():
         return dict(version='Project_v1_1',tools_class='ProjectV11RobotTools',
-            prompt_version='Project_v1_1.public_tools.v2',
+            prompt_version='Project_v1_1.public_tools.v3',
             receipt_contract='accepted/execution_finished/target_reached/safety_stopped/partial_execution',
             implementation_sha256={Path(__file__).name:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
             observation_scope='Same public RGB/robot/calibration/tactile whitelist as Project_v1; no object truth')
