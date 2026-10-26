@@ -37,6 +37,8 @@ def main():
     try:
         import numpy as np
         from PIL import Image
+        from pxr import UsdGeom
+        import omni.physx
         from omegaconf import OmegaConf
         from demos.lab_cuvette_project_v1.runtime import resolve_config
         from demos.lab_cuvette_env_v1.scene import build_context
@@ -70,6 +72,13 @@ def main():
             ctx['cup'].set_world_pose(p,r)
             ctx['cup'].set_linear_velocity(np.zeros(3))
             ctx['cup'].set_angular_velocity(np.zeros(3))
+            # Native pose setters do not themselves guarantee renderer USD
+            # writeback without another physical step. Explicitly synchronize
+            # transforms without integrating the reconstructed state.
+            omni.physx.get_physx_interface().update_transformations(False, True, True, False)
+            cup_usd = np.asarray(UsdGeom.Xformable(ctx['stage'].GetPrimAtPath('/World/Cuvette')).ComputeLocalToWorldTransform(0.).ExtractTranslation(),float)
+            if np.linalg.norm(cup_usd-p) > 1e-6:
+                raise RuntimeError('Reconstructed native and rendered vessel transforms disagree')
             for name, profile in profiles.items():
                 folder = output / f'state_{index:02d}' / name
                 folder.mkdir(parents=True)
@@ -88,6 +97,8 @@ def main():
                     physics_steps_after_pose_initialization=0,
                     measured_robot_q9=ctx['robot'].get_joint_positions().tolist(),
                     measured_vessel_position_m=ctx['cup'].get_world_pose()[0].tolist(),
+                    rendered_vessel_position_m=cup_usd.tolist(),
+                    USD_transform_writeback='IPhysx.update_transformations(False,True,True,False); no integration',
                     original_state_source=state))
                 print('RENDER_ONLY',index,name,flush=True)
         manifest = dict(schema='labsim.Project_v1_1.render_visibility_comparison.v1',
