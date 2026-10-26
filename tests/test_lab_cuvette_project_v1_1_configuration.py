@@ -29,12 +29,13 @@ class ProjectV11ConfigurationTest(unittest.TestCase):
         self.current = OmegaConf.to_container(OmegaConf.load(CONFIG), resolve=True)
         self.previous = OmegaConf.to_container(OmegaConf.load(PREVIOUS), resolve=True)
 
-    def test_new_version_has_independent_paths_and_existing_teacher(self):
+    def test_new_version_has_independent_paths_and_retimed_teacher(self):
         c = self.current
         self.assertEqual(c["version"], "Project_v1_1")
         self.assertEqual(c["task_type"], "lab_cuvette_project_v1_1")
         self.assertEqual(c["collector_type"], "lab_cuvette_project_v1_1")
-        self.assertEqual(c["controller_type"], "lab_cuvette_project_v1_teacher")
+        self.assertEqual(c["controller_type"], "lab_cuvette_project_v1_1_teacher")
+        self.assertEqual(c["teacher_execution"]["motion_time_scale"], 1.5)
         self.assertEqual(c["output_root"], "outputs/lab_cuvette_loading/Project_v1_1")
         self.assertEqual(c["env"]["geometry_audit_cache"], c["output_root"] + "/geometry_cache")
         self.assertEqual(c["env"]["scorer_module"], "demos.lab_cuvette_project_v1_1.scorer")

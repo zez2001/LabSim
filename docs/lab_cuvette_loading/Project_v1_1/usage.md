@@ -118,9 +118,11 @@ CI 的轻量契约任务覆盖新配置、执行器、独立判分、环境与�
 以下入口不调用模型。`free-space-checked` 将两种固定完整位姿和 world/TCP 的 72 个有符号位移分为三个独立 reset 的 episode，避免旧诊断的累计时长和朝向漂移。`fine-preinsert` 在合法空爪预插入位置测量 0.1、0.5、1、2 mm；`grasp-transport` 是公开通用工具的人工动作诊断，不是 GPT 完整任务成功。
 
 ```bash
-$LABSIM_PYTHON -m demos.lab_cuvette_project_v1_1.run \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_v1_1.run \
   --backend diagnostic --probe free-space-checked --headless \
   --output outputs/lab_cuvette_loading/Project_v1_1/free_checked_new
 ```
 
 新配置显式启用仅用机器人状态的有界跟踪补偿，并使用腕相机 v2 固定挂点。实际效果与未完成项目见本版本诊断和最终结果记录。teacher 每次阶段变化保存无 GT 裁剪的原生帧和两种编码预览，均标明未发送 API；GPT 的真正发送输入位于 `gpt_control/observations`。
+
+配置版本字段分别为 `project.camera_version`、`project.executor_version`、`robot_tracking.version`。新 teacher 的 `teacher_execution.motion_time_scale` 只放慢快速移动阶段；插入、支撑交接、开爪、稳定观察和安全计时仍使用真实仿真时间。原保护阈值、物理参数和历史 teacher 保持原样。

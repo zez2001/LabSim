@@ -1,0 +1,524 @@
+{
+  "schema": "labsim.Project_v1_1.free_space_checked.closed_audit.v1",
+  "audit_UTC": "2026-10-26T18:07:38.258482+00:00",
+  "source_run": "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01",
+  "actual_process_evidence": {
+    "run_directory": "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01",
+    "process_exited": true,
+    "session_id": 40474,
+    "pid": 4003768,
+    "exit_code": 0,
+    "completion_evidence": "Observed unified exec exit0 after all3 groups/72signed probes and epilogues; app and writers closed"
+  },
+  "process_exit_sha256": "b6f05282481d256c51d5cfed6dcd3aed6d1cf117bb3305a54ce368ca218f003d",
+  "PID_absent_observed_at_audit": true,
+  "audit_scope": {
+    "JSON_and_JSONL_only": true,
+    "HDF5_opened": false,
+    "source_labels_modified": false,
+    "raw_files_compressed": false,
+    "simulator_or_model_started": false,
+    "source_hashes_unchanged_during_read": true
+  },
+  "groups": [
+    {
+      "group": "pose0_world",
+      "episode_directory": "episode_0000",
+      "metadata": {
+        "scene_version": "Project_v1_1",
+        "scene_mode": "standard",
+        "frozen_scene_sha256": "18f5d7c25abc2c31dc1c4174d48538f9885df125cef850d5555abdde245cbf56",
+        "control_config_sha256": "18f5d7c25abc2c31dc1c4174d48538f9885df125cef850d5555abdde245cbf56",
+        "code_commit": "9750a37e09a377e1f86fee5a8b52d2bebf3282eb",
+        "actual_execution_commit": "9750a37e09a377e1f86fee5a8b52d2bebf3282eb",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "condition_group": "control_diagnostic",
+        "deterministic_action_deviation_json": "{}",
+        "fixed_collection_eligible": true,
+        "action_interface_version": "Project_v1_1.actions.v1"
+      },
+      "diagnostic_passed": true,
+      "declared_failure": null,
+      "signed_probes_completed": 24,
+      "simulation_duration_s": 62.21666666666667,
+      "control_samples": 3732,
+      "action_records": 60,
+      "task_success": false,
+      "record_valid": true,
+      "physics_trustworthy": true,
+      "failure_domain": "budget",
+      "termination_reason": "CONTROL_DIAGNOSTIC_COMPLETE",
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "runtime_stop_count": 0,
+      "forbidden_contact_count": 0,
+      "all_anchor_checks_reached": true,
+      "anchor_position_error_m": {
+        "count": 26,
+        "minimum": 7.235527985701695e-07,
+        "maximum": 1.796774040419323e-05,
+        "mean": 6.187944157950088e-06,
+        "rms": 8.438825594180287e-06,
+        "p95": 1.7001971222735748e-05
+      },
+      "anchor_orientation_error_rad": {
+        "count": 26,
+        "minimum": 3.416464378398424e-06,
+        "maximum": 3.4423382347844614e-05,
+        "mean": 8.180886851792764e-06,
+        "rms": 1.0336212488034377e-05,
+        "p95": 1.7181210736653507e-05
+      },
+      "endpoint_error_m": {
+        "count": 24,
+        "minimum": 5.364475040255881e-07,
+        "maximum": 1.1625353397745529e-05,
+        "mean": 2.980384962722332e-06,
+        "rms": 4.031429218809529e-06,
+        "p95": 8.594478034443396e-06
+      },
+      "endpoint_orientation_error_rad": {
+        "count": 24,
+        "minimum": 7.47125666854807e-07,
+        "maximum": 9.705971552618173e-06,
+        "mean": 5.600296815344696e-06,
+        "rms": 6.158701867375748e-06,
+        "p95": 9.3302515421864e-06
+      },
+      "maximum_path_tracking_error_m": 0.0003046072780990289,
+      "maximum_lateral_path_deviation_m": 0.00023893620088267392,
+      "maximum_path_orientation_error_rad": 0.00047472336103895354,
+      "maximum_actual_TCP_FD_speed_m_s": 0.01807814083226116,
+      "maximum_actual_TCP_FD_angular_speed_rad_s": 0.021771248498939626,
+      "maximum_native_arm_joint_speed_rad_s": 0.06936299800872803,
+      "maximum_FD_arm_joint_speed_rad_s": 0.06596803665161508,
+      "maximum_native_minus_FD_arm_speed_rad_s": 0.03581609041430266,
+      "per_joint_native_minus_FD_RMS_rad_s": [
+        0.006850834720698914,
+        0.019615724107243618,
+        0.021581636309862758,
+        0.02539781217320861,
+        0.008957503746497708,
+        0.012000395653593105,
+        0.008236195900087671
+      ],
+      "maximum_recorded_TCP_FD_disagreement_m_s": 0.0,
+      "maximum_recorded_joint_FD_disagreement_rad_s": 3.725293795664442e-09,
+      "maximum_FK_native_position_error_m": 5.100770518680653e-07,
+      "maximum_FK_native_orientation_error_rad": 9.688944515265985e-07,
+      "tracking": {
+        "sample_count_last": 3732,
+        "actual_updates": 3732,
+        "maximum_position_bias_m": 0.0006802548989000358,
+        "maximum_rotation_bias_rad": 0.001120055849112543,
+        "position_saturation_count": 0,
+        "rotation_saturation_count": 0
+      },
+      "robot_absolute_hold": {
+        "start_t": 59.21666666666667,
+        "duration_s": 3.0,
+        "control_samples": 180,
+        "maximum_position_drift_m": 0.0,
+        "maximum_orientation_drift_rad": 0.0,
+        "maximum_native_arm_joint_speed_rad_s": 0.024462774395942688,
+        "maximum_FD_arm_joint_speed_rad_s": 0.0,
+        "unique_recorded_arm_q7_rows": 1,
+        "unique_recorded_native_arm_velocity_rows": 180,
+        "native_arm_velocity_range_per_joint_rad_s": [
+          1.7916318029165268e-07,
+          7.078051567077637e-08,
+          3.725290298461914e-07,
+          3.0174851417541504e-07,
+          6.717164069414139e-08,
+          5.66127710044384e-06,
+          5.611218512058258e-08
+        ]
+      },
+      "initial_robot": {
+        "joints9": [
+          0.1779361367225647,
+          -1.2082452774047852,
+          -0.8200522661209106,
+          -2.87337064743042,
+          -0.7667176723480225,
+          1.7454451322555542,
+          -0.8053153157234192,
+          0.03999993950128555,
+          0.03999996930360794
+        ],
+        "TCP": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        }
+      },
+      "source_hashes": {
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/probe_actions.json": "cd648339c088e2318c03659f9da940cbb73b447fe73f635080cd1c83faed7684",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/execution_trace.jsonl": "0e18dbdc942ae53096b68302967d2c4ff0e611ffe31cf5d0a164a42366a83106",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/initial_debug.json": "d3f5700eda52fdc4390d45927196e2254a1e8d74bbf185f879e449dd94dca1e4",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/result.json": "cde173e1470f2dcbec56c2f3d68b7209e6d53f557eee9cf89e2de584760f1d08",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/release_metadata.json": "e4e4ee8ce37c679ab7a8233f51168ead03ed4b1ef9afdd356f722c953253dfb1",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/project_scene_contract.json": "b7ccb5d8cb1c1749a3adcabbf52340f77e43f598b90fa0b0d398e1c0f38b30e7",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/robot_tracking_configuration.json": "ab941eda6d14d748bee072d625b60e8c5950a2caa865d2a5449eb7455aef9454",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0000/executor_configuration.json": "275a19ec786432c6995c83cc828f56391686f254f3af62ea3edf35c41fd82503"
+      },
+      "all_receipts_consistent": true
+    },
+    {
+      "group": "pose1_world",
+      "episode_directory": "episode_0001",
+      "metadata": {
+        "scene_version": "Project_v1_1",
+        "scene_mode": "standard",
+        "frozen_scene_sha256": "18f5d7c25abc2c31dc1c4174d48538f9885df125cef850d5555abdde245cbf56",
+        "control_config_sha256": "18f5d7c25abc2c31dc1c4174d48538f9885df125cef850d5555abdde245cbf56",
+        "code_commit": "9750a37e09a377e1f86fee5a8b52d2bebf3282eb",
+        "actual_execution_commit": "9750a37e09a377e1f86fee5a8b52d2bebf3282eb",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "condition_group": "control_diagnostic",
+        "deterministic_action_deviation_json": "{}",
+        "fixed_collection_eligible": true,
+        "action_interface_version": "Project_v1_1.actions.v1"
+      },
+      "diagnostic_passed": true,
+      "declared_failure": null,
+      "signed_probes_completed": 24,
+      "simulation_duration_s": 63.93333333333333,
+      "control_samples": 3835,
+      "action_records": 61,
+      "task_success": false,
+      "record_valid": true,
+      "physics_trustworthy": true,
+      "failure_domain": "budget",
+      "termination_reason": "CONTROL_DIAGNOSTIC_COMPLETE",
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "runtime_stop_count": 0,
+      "forbidden_contact_count": 0,
+      "all_anchor_checks_reached": true,
+      "anchor_position_error_m": {
+        "count": 26,
+        "minimum": 5.294172737932247e-07,
+        "maximum": 1.633436032898383e-05,
+        "mean": 5.576093806177093e-06,
+        "rms": 7.655184100588864e-06,
+        "p95": 1.5958006092780515e-05
+      },
+      "anchor_orientation_error_rad": {
+        "count": 26,
+        "minimum": 2.103218053895302e-06,
+        "maximum": 1.557918683379775e-05,
+        "mean": 6.806229505774783e-06,
+        "rms": 7.544956804464352e-06,
+        "p95": 1.2855292554423468e-05
+      },
+      "endpoint_error_m": {
+        "count": 24,
+        "minimum": 2.745465297944397e-07,
+        "maximum": 1.2120130275886893e-05,
+        "mean": 3.2234433739234154e-06,
+        "rms": 4.553133260998756e-06,
+        "p95": 1.0131893286895832e-05
+      },
+      "endpoint_orientation_error_rad": {
+        "count": 24,
+        "minimum": 2.890327936343334e-07,
+        "maximum": 2.8475812336831066e-05,
+        "mean": 6.0578024221114995e-06,
+        "rms": 8.001838654096043e-06,
+        "p95": 1.0259356373632515e-05
+      },
+      "maximum_path_tracking_error_m": 0.00030047257088227264,
+      "maximum_lateral_path_deviation_m": 0.00023601364878774069,
+      "maximum_path_orientation_error_rad": 0.0004982254184617859,
+      "maximum_actual_TCP_FD_speed_m_s": 0.01807931293128731,
+      "maximum_actual_TCP_FD_angular_speed_rad_s": 0.05168346820723267,
+      "maximum_native_arm_joint_speed_rad_s": 0.06813879311084747,
+      "maximum_FD_arm_joint_speed_rad_s": 0.06277084350586294,
+      "maximum_native_minus_FD_arm_speed_rad_s": 0.037626810604708696,
+      "per_joint_native_minus_FD_RMS_rad_s": [
+        0.0059860471691927,
+        0.020381651459382553,
+        0.02132086444965121,
+        0.026235853359394833,
+        0.008549641156601328,
+        0.011716647941559468,
+        0.008314721734296336
+      ],
+      "maximum_recorded_TCP_FD_disagreement_m_s": 0.0,
+      "maximum_recorded_joint_FD_disagreement_rad_s": 3.725293823420017e-09,
+      "maximum_FK_native_position_error_m": 5.158856271105261e-07,
+      "maximum_FK_native_orientation_error_rad": 9.040413059669511e-07,
+      "tracking": {
+        "sample_count_last": 3835,
+        "actual_updates": 3835,
+        "maximum_position_bias_m": 0.000678257150666055,
+        "maximum_rotation_bias_rad": 0.0011040237143499988,
+        "position_saturation_count": 0,
+        "rotation_saturation_count": 0
+      },
+      "robot_absolute_hold": {
+        "start_t": 60.93333333333333,
+        "duration_s": 3.0,
+        "control_samples": 180,
+        "maximum_position_drift_m": 6.488666013385916e-07,
+        "maximum_orientation_drift_rad": 1.900248085854036e-06,
+        "maximum_native_arm_joint_speed_rad_s": 0.025553831830620766,
+        "maximum_FD_arm_joint_speed_rad_s": 5.722045898435386e-05,
+        "unique_recorded_arm_q7_rows": 4,
+        "unique_recorded_native_arm_velocity_rows": 180,
+        "native_arm_velocity_range_per_joint_rad_s": [
+          2.7234898880124092e-05,
+          8.935108780860901e-06,
+          1.6976147890090942e-05,
+          6.48200511932373e-07,
+          1.3611424947157502e-05,
+          5.07943332195282e-05,
+          1.6677193343639374e-05
+        ]
+      },
+      "initial_robot": {
+        "joints9": [
+          0.1779361367225647,
+          -1.2082452774047852,
+          -0.8200522661209106,
+          -2.87337064743042,
+          -0.7667176723480225,
+          1.7454451322555542,
+          -0.8053153157234192,
+          0.03999993950128555,
+          0.03999996930360794
+        ],
+        "TCP": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        }
+      },
+      "source_hashes": {
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/probe_actions.json": "03feacac6eb79fafccb30d261fc9a65cdf7bd91d4ca37db5fd0f87010d79bc23",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/execution_trace.jsonl": "8fedfafa12e0e28824a658a6fcffef626614e8a7752774aa3bf078415f0f709e",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/initial_debug.json": "aa830d232d84ec62d176ee2aec75c469490ca7d3d6ad04427128aafc152a432f",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/result.json": "be544607dcb9c4648348521f5127477fe65d107fc4882681e9db89ecc22dff5d",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/release_metadata.json": "e4e4ee8ce37c679ab7a8233f51168ead03ed4b1ef9afdd356f722c953253dfb1",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/project_scene_contract.json": "b7ccb5d8cb1c1749a3adcabbf52340f77e43f598b90fa0b0d398e1c0f38b30e7",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/robot_tracking_configuration.json": "ab941eda6d14d748bee072d625b60e8c5950a2caa865d2a5449eb7455aef9454",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0001/executor_configuration.json": "275a19ec786432c6995c83cc828f56391686f254f3af62ea3edf35c41fd82503"
+      },
+      "all_receipts_consistent": true
+    },
+    {
+      "group": "pose1_tcp",
+      "episode_directory": "episode_0002",
+      "metadata": {
+        "scene_version": "Project_v1_1",
+        "scene_mode": "standard",
+        "frozen_scene_sha256": "18f5d7c25abc2c31dc1c4174d48538f9885df125cef850d5555abdde245cbf56",
+        "control_config_sha256": "18f5d7c25abc2c31dc1c4174d48538f9885df125cef850d5555abdde245cbf56",
+        "code_commit": "9750a37e09a377e1f86fee5a8b52d2bebf3282eb",
+        "actual_execution_commit": "9750a37e09a377e1f86fee5a8b52d2bebf3282eb",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "condition_group": "control_diagnostic",
+        "deterministic_action_deviation_json": "{}",
+        "fixed_collection_eligible": true,
+        "action_interface_version": "Project_v1_1.actions.v1"
+      },
+      "diagnostic_passed": true,
+      "declared_failure": null,
+      "signed_probes_completed": 24,
+      "simulation_duration_s": 63.96666666666667,
+      "control_samples": 3837,
+      "action_records": 61,
+      "task_success": false,
+      "record_valid": true,
+      "physics_trustworthy": true,
+      "failure_domain": "budget",
+      "termination_reason": "CONTROL_DIAGNOSTIC_COMPLETE",
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "physics_quality_flags": [
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "runtime_stop_count": 0,
+      "forbidden_contact_count": 0,
+      "all_anchor_checks_reached": true,
+      "anchor_position_error_m": {
+        "count": 26,
+        "minimum": 5.83556172984664e-07,
+        "maximum": 1.6699878566050783e-05,
+        "mean": 5.560854826646362e-06,
+        "rms": 7.671412449895396e-06,
+        "p95": 1.5907461976849586e-05
+      },
+      "anchor_orientation_error_rad": {
+        "count": 26,
+        "minimum": 2.103218053895302e-06,
+        "maximum": 1.556319949774655e-05,
+        "mean": 6.049719318592019e-06,
+        "rms": 6.676393024300531e-06,
+        "p95": 1.1007671288765153e-05
+      },
+      "endpoint_error_m": {
+        "count": 24,
+        "minimum": 2.1408195057359136e-07,
+        "maximum": 1.2866524619797276e-05,
+        "mean": 3.352692367131395e-06,
+        "rms": 4.738562017065138e-06,
+        "p95": 1.0282796008773242e-05
+      },
+      "endpoint_orientation_error_rad": {
+        "count": 24,
+        "minimum": 1.0849833305210223e-06,
+        "maximum": 3.2303885704016455e-05,
+        "mean": 6.616058545057334e-06,
+        "rms": 9.144068203229603e-06,
+        "p95": 1.5040907949276866e-05
+      },
+      "maximum_path_tracking_error_m": 0.00030171647935847907,
+      "maximum_lateral_path_deviation_m": 0.00022445354777504294,
+      "maximum_path_orientation_error_rad": 0.0005402141432021251,
+      "maximum_actual_TCP_FD_speed_m_s": 0.01807931293128731,
+      "maximum_actual_TCP_FD_angular_speed_rad_s": 0.05168346820723267,
+      "maximum_native_arm_joint_speed_rad_s": 0.06552714109420776,
+      "maximum_FD_arm_joint_speed_rad_s": 0.05938768386841158,
+      "maximum_native_minus_FD_arm_speed_rad_s": 0.037620190531017686,
+      "per_joint_native_minus_FD_RMS_rad_s": [
+        0.005982785746851514,
+        0.02037955344219503,
+        0.021319103952206847,
+        0.026237600587963893,
+        0.008551874474368094,
+        0.011703636645667618,
+        0.008306796773865517
+      ],
+      "maximum_recorded_TCP_FD_disagreement_m_s": 0.0,
+      "maximum_recorded_joint_FD_disagreement_rad_s": 3.725293677703245e-09,
+      "maximum_FK_native_position_error_m": 4.799631903065689e-07,
+      "maximum_FK_native_orientation_error_rad": 9.572929656663425e-07,
+      "tracking": {
+        "sample_count_last": 3837,
+        "actual_updates": 3837,
+        "maximum_position_bias_m": 0.0006781991481660837,
+        "maximum_rotation_bias_rad": 0.0011043247532251353,
+        "position_saturation_count": 0,
+        "rotation_saturation_count": 0
+      },
+      "robot_absolute_hold": {
+        "start_t": 60.96666666666667,
+        "duration_s": 3.0,
+        "control_samples": 180,
+        "maximum_position_drift_m": 1.3439499980922267e-07,
+        "maximum_orientation_drift_rad": 3.031622420221033e-07,
+        "maximum_native_arm_joint_speed_rad_s": 0.025553591549396515,
+        "maximum_FD_arm_joint_speed_rad_s": 2.1457672119141845e-05,
+        "unique_recorded_arm_q7_rows": 2,
+        "unique_recorded_native_arm_velocity_rows": 180,
+        "native_arm_velocity_range_per_joint_rad_s": [
+          9.493669494986534e-08,
+          3.91155481338501e-08,
+          2.6635825634002686e-07,
+          1.993030309677124e-07,
+          1.1033262126147747e-06,
+          2.3116357624530792e-05,
+          6.973277777433395e-08
+        ]
+      },
+      "initial_robot": {
+        "joints9": [
+          0.1779361367225647,
+          -1.2082452774047852,
+          -0.8200522661209106,
+          -2.87337064743042,
+          -0.7667176723480225,
+          1.7454451322555542,
+          -0.8053153157234192,
+          0.03999993950128555,
+          0.03999996930360794
+        ],
+        "TCP": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        }
+      },
+      "source_hashes": {
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/probe_actions.json": "fbc5395875986aaee425b5ce0b8652c07efb38bfb58d6e46956d0818bcb41534",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/execution_trace.jsonl": "1eda376971a0e895af76b9d23edfc7a0fb0cdb456487716a66dceee2bf5d22c7",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/initial_debug.json": "71e383cfac13af93393e7120726ccb81fef186bd9f597977f8195cf1eb77dfd6",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/result.json": "6968861219a800ad40a347140e1e81636b0e3e732f2a70cf94337dc96f76820d",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/release_metadata.json": "e4e4ee8ce37c679ab7a8233f51168ead03ed4b1ef9afdd356f722c953253dfb1",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/project_scene_contract.json": "b7ccb5d8cb1c1749a3adcabbf52340f77e43f598b90fa0b0d398e1c0f38b30e7",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/robot_tracking_configuration.json": "ab941eda6d14d748bee072d625b60e8c5950a2caa865d2a5449eb7455aef9454",
+        "outputs/lab_cuvette_loading/Project_v1_1/free_space_checked_01/episode_0002/executor_configuration.json": "275a19ec786432c6995c83cc828f56391686f254f3af62ea3edf35c41fd82503"
+      },
+      "all_receipts_consistent": true
+    }
+  ],
+  "total_signed_probes": 72,
+  "all_diagnostic_groups_passed": true,
+  "all_endpoints_target_reached": true,
+  "all_receipts_consistent": true,
+  "all_delta_frame_targets_consistent": true,
+  "identical_actual_reset_robot_states": true,
+  "observed_measurement_issue": "Nonzero native arm velocities coexist with identical recorded arm q7/TCP in ep0 hold and submicrometre pose changes with much smaller FD speeds in ep1/ep2. Native and interval FD signals are retained independently. Mechanism remains unknown.",
+  "limits": [
+    "Diagnostic pass is not full loading success; all raw task_success labels remain false.",
+    "Endpoint error does not bound transient path error or physics-substep extrema.",
+    "Zero recorded hold drift is not an exact physical zero-motion claim, particularly with the native/FD discrepancy.",
+    "Native joint velocity is an instantaneous articulation API sample; FD is the interval average. Native TCP velocity is not supplied by execution_trace.",
+    "This is one configuration, three reset groups, not real calibration or broad-scene success probability."
+  ],
+  "separate_HDF5_audit": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01_closed_read_archive.json",
+    "sha256": "e5cc8b12c1fa56a68955528e62add15f7d76534185d13aaf851b657f5245d054",
+    "performed_by": "separate release audit agent; not this JSONL analysis",
+    "all_full_reads_and_time_receipt_audits_passed": true,
+    "total_control_transitions": 11404,
+    "all_protected_original_hashes_unchanged": true
+  }
+}

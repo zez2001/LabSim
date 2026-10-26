@@ -1,0 +1,821 @@
+{
+  "schema": "labsim.Project_v1_1.fine_tracking_AB.v1",
+  "source_outputs_modified": false,
+  "API_calls": 0,
+  "GPU_used": false,
+  "HDF5_read": false,
+  "raw_labels_retained": true,
+  "comparison": {
+    "same_fine_condition_keys": true,
+    "conditions": 24,
+    "same_fine_duration_s": true,
+    "scene_config_equal_excluding_robot_tracking": true,
+    "assets_equal": true,
+    "acceptance_version_equal": true,
+    "physics_equal": true,
+    "cameras_equal": true,
+    "acceptance_equal": true,
+    "robot_tracking_A": null,
+    "robot_tracking_B": {
+      "enabled": true,
+      "time_constant_s": 0.1,
+      "max_position_bias_m": 0.001,
+      "max_rotation_bias_rad": 0.002,
+      "version": "Project_v1_1.robot_tracking.v1"
+    },
+    "full_absolute_actions_identical": false,
+    "why_not_identical": "Transit uses state-dependent .025m waypoints and .75mm stop; observer changes achieved states so67 vs68 commands and actual preprobe starts differ. Pair by frame/axis/signed amplitude/duration/frozen R, not absolute action index.",
+    "initial_observed_TCP_equal": true,
+    "initial_command_seed_q7_equal": true,
+    "nominal_preinsert_plan_equal": true,
+    "same_probe_generation_source_at_recorded_commits": false,
+    "probe_source_provenance_note": "The baseline records commit115e988, which predates the committed fine_preinsert helper; this diagnostic was run with a local added probe function. Runtime trace/probe_definition demonstrate matched24 conditions and nominal plan, but exact baseline probe source SHA is not present in the scene contract. Do not claim identical full executables or same clean checkout.",
+    "changed_dependency_hashes": {
+      "data_collectors/lab_cuvette_project_v1_1_collector.py": {
+        "A": "18eff54614d381dd7e078bfbf1a6b4a06a4a3d75aab6e40e71d4381604495291",
+        "B": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1"
+      },
+      "demos/lab_cuvette_project_v1_1/contract.py": {
+        "A": "51ad89d9bad4633e88d9b928640b1175ebfcac4fa870025edab23c644f1fa110",
+        "B": "83f83ca59699bf73cea3193568fea20bfc47cafe76a68cd5ff1d1cd5152edf5e"
+      },
+      "demos/lab_cuvette_project_v1_1/robot_tracking.py": {
+        "A": null,
+        "B": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917"
+      },
+      "tasks/lab_cuvette_loading_project_v1_1.py": {
+        "A": "2611145b8c68d111d3f8784a6b01a6d43afaffcc612d2e8451e8bef39216d51f",
+        "B": "4cef5e77ea4c09f03d3f19070c54a54fb187b5124fe5b59988018c3488115cb1"
+      }
+    },
+    "all_other_dependency_hashes_unchanged": true,
+    "same_fine_duration_and_frozen_orientation_and_mode": true,
+    "matched_conditions_independently_asserted_count": 24
+  },
+  "runs": {
+    "fine_preinsert_01": {
+      "name": "fine_preinsert_01",
+      "actions": 68,
+      "fine_probes": 24,
+      "result": {
+        "record_valid": true,
+        "physics_trustworthy": true,
+        "failure_type": "POLICY_BUDGET",
+        "termination_reason": "CONTROL_DIAGNOSTIC_COMPLETE",
+        "actual_control_steps": 5271,
+        "actual_physics_steps": 21088,
+        "simulation_seconds": 87.86666666666666,
+        "wall_seconds": 634.1903086720267
+      },
+      "all_trace": {
+        "rows": 5271,
+        "position_error_um": {
+          "n": 5271,
+          "min": 161.58735836614133,
+          "median": 619.7758577745439,
+          "p95": 750.9400836794135,
+          "max": 789.358347054906,
+          "mean": 618.9097106455257
+        },
+        "orientation_error_deg": {
+          "n": 5271,
+          "min": 0.01972599766349239,
+          "median": 0.0674170045340363,
+          "p95": 0.06914572842074557,
+          "max": 0.06986727317629805,
+          "mean": 0.06366442563961922
+        },
+        "FK_vs_native_um": {
+          "n": 5271,
+          "min": 0.018520048391472317,
+          "median": 0.2021724516179926,
+          "p95": 0.33446981441047424,
+          "max": 0.6184819834153465,
+          "mean": 0.2077155666965846
+        },
+        "FK_vs_native_deg": {
+          "n": 5271,
+          "min": 1.164885719473557e-06,
+          "median": 1.637008369431814e-05,
+          "p95": 3.1978452667105945e-05,
+          "max": 5.447214492729496e-05,
+          "mean": 1.7162956488351734e-05
+        },
+        "IK_effective_goal_error_um": {
+          "n": 5271,
+          "min": 0.0,
+          "median": 1.1443916996305594e-10,
+          "p95": 2.676650779074573e-10,
+          "max": 1.666666666955141,
+          "mean": 0.009485866196435915
+        },
+        "IK_effective_goal_orientation_deg": {
+          "n": 5271,
+          "min": 2.0882001849777711e-16,
+          "median": 1.809389126861336e-14,
+          "p95": 3.8543702646718427e-14,
+          "max": 0.001135151720075571,
+          "mean": 6.4607383228999e-06
+        },
+        "actual_TCP_speed_mm_s": {
+          "n": 5271,
+          "min": 0.0,
+          "median": 1.1878947996437343,
+          "p95": 14.994995258338136,
+          "max": 22.52894326398642,
+          "mean": 5.089246668843111
+        },
+        "runtime_stop_count": 0,
+        "forbidden_contact_count": 0,
+        "max_finger_contact_N": 0.0,
+        "compensation": {
+          "enabled": false,
+          "rows": 0,
+          "position_saturation_rows": 0,
+          "rotation_saturation_rows": 0,
+          "position_bias_max_um": null,
+          "rotation_bias_max_deg": null,
+          "position_cap_m": null,
+          "rotation_cap_rad": null,
+          "uses_object_truth_any": false,
+          "observation_used_rows": 0,
+          "sample_count_last": null
+        }
+      },
+      "fine_trace": {
+        "rows": 1800,
+        "position_error_um": {
+          "n": 1800,
+          "min": 274.86954706150254,
+          "median": 611.7847561867495,
+          "p95": 630.5066655525101,
+          "max": 631.4104204594489,
+          "mean": 604.5377348196407
+        },
+        "orientation_error_deg": {
+          "n": 1800,
+          "min": 0.031457109944026486,
+          "median": 0.06751523582887048,
+          "p95": 0.06852274523165733,
+          "max": 0.06888747896900166,
+          "mean": 0.06670321205280218
+        },
+        "FK_vs_native_um": {
+          "n": 1800,
+          "min": 0.026491167406123138,
+          "median": 0.18715622543720709,
+          "p95": 0.32521362129401465,
+          "max": 0.5627037824121544,
+          "mean": 0.1959198326059745
+        },
+        "FK_vs_native_deg": {
+          "n": 1800,
+          "min": 1.164885719473557e-06,
+          "median": 1.5527619210067243e-05,
+          "p95": 2.5202721416600706e-05,
+          "max": 3.383505840969776e-05,
+          "mean": 1.565280651693821e-05
+        },
+        "IK_effective_goal_error_um": {
+          "n": 1800,
+          "min": 0.0,
+          "median": 1.1102230246251565e-10,
+          "p95": 2.676650779074573e-10,
+          "max": 1.666666666955141,
+          "mean": 0.027777777906315786
+        },
+        "IK_effective_goal_orientation_deg": {
+          "n": 1800,
+          "min": 5.244940411517488e-16,
+          "median": 1.7045573046644736e-14,
+          "p95": 3.918083312321187e-14,
+          "max": 0.001135151720075571,
+          "mean": 1.8919195352143017e-05
+        },
+        "actual_TCP_speed_mm_s": {
+          "n": 1800,
+          "min": 0.054209388233200706,
+          "median": 0.9941684941099265,
+          "p95": 2.092456809078635,
+          "max": 17.40155372425001,
+          "mean": 1.1642538543644183
+        },
+        "runtime_stop_count": 0,
+        "forbidden_contact_count": 0,
+        "max_finger_contact_N": 0.0,
+        "compensation": {
+          "enabled": false,
+          "rows": 0,
+          "position_saturation_rows": 0,
+          "rotation_saturation_rows": 0,
+          "position_bias_max_um": null,
+          "rotation_bias_max_deg": null,
+          "position_cap_m": null,
+          "rotation_cap_rad": null,
+          "uses_object_truth_any": false,
+          "observation_used_rows": 0,
+          "sample_count_last": null
+        }
+      },
+      "fine_endpoints": {
+        "endpoint_error_um": {
+          "n": 24,
+          "min": 596.089416336589,
+          "median": 611.7522699449646,
+          "p95": 630.0158418231767,
+          "max": 631.0605739351656,
+          "mean": 612.3718693328187
+        },
+        "orientation_error_deg": {
+          "n": 24,
+          "min": 0.0662071913965977,
+          "median": 0.06752019836847195,
+          "p95": 0.06851081303552119,
+          "max": 0.06867075466772318,
+          "mean": 0.06759732633675726
+        },
+        "perpendicular_displacement_um": {
+          "n": 24,
+          "min": 378.00083404043556,
+          "median": 479.7730187579517,
+          "p95": 612.9106359805866,
+          "max": 614.7052500920628,
+          "mean": 490.87530436231947
+        },
+        "axis_error_um": {
+          "n": 24,
+          "min": -498.4422321878661,
+          "median": -379.73154648215933,
+          "p95": -15.814474532110365,
+          "max": -8.465699372630157,
+          "mean": -296.0859052608955
+        },
+        "endpoint_FK_vs_native_um": {
+          "n": 24,
+          "min": 0.06930699151189694,
+          "median": 0.18111351855116178,
+          "p95": 0.3233652662347025,
+          "max": 0.38656511463671916,
+          "mean": 0.19119729712878364
+        },
+        "endpoint_FK_vs_native_deg": {
+          "n": 24,
+          "min": 5.179057929954559e-06,
+          "median": 1.5581519376517355e-05,
+          "p95": 2.1913047516741045e-05,
+          "max": 2.2140857600431118e-05,
+          "mean": 1.4379057315414343e-05
+        }
+      },
+      "fine_endpoint_mean_error_vector_um": [
+        -379.8672404212896,
+        -28.748191178358763,
+        -479.35130355500337
+      ],
+      "fine_endpoint_goal_100um_count": 0,
+      "fine_endpoint_interface_reached_count": 24,
+      "final_wait_3s": {
+        "action_index": 67,
+        "duration_s": 3.0,
+        "control_ticks": 180,
+        "requested_pose_is_observed_start": true,
+        "start_to_end_drift_um": 613.8060789933495,
+        "max_distance_from_start_um": 613.9269131373562,
+        "per_axis_peak_to_peak_um": [
+          380.93098061972586,
+          38.893800939548974,
+          480.8619715674922
+        ],
+        "orientation_start_to_end_deg": 0.06714290672503175,
+        "orientation_max_from_start_deg": 0.06714390294249754,
+        "last_1s_position_peak_to_peak_um": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "last_1s_max_distance_from_first_um": 0.0,
+        "stop_reason": "INTERVAL_FINISHED",
+        "last_1s_max_native_joint_velocity_rad_s": 0.026166871190071106,
+        "last_1s_max_FD_joint_velocity_rad_s": 0.0,
+        "last_1s_max_TCP_pose_difference_speed_m_s": 0.0,
+        "raw_native_velocity_disagrees_with_position_difference": true
+      },
+      "all_actions_accepted": 68,
+      "all_actions_execution_finished": 68,
+      "time_alignment": {
+        "control_ticks_contiguous": true,
+        "max_control_dt_deviation_s": 1.3263695697318667e-14,
+        "max_gap_s": 0.0
+      },
+      "manual_plan": {
+        "source": "fixed scene target fixture design, not online object pose",
+        "nominal_TCP_world_m": [
+          0.21236964673703734,
+          -0.14926553560697634,
+          1.017
+        ],
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "held_object": false,
+        "original_seat_unchanged": true,
+        "precision_goal_m": 0.0001
+      },
+      "run_manifest": {
+        "schema": "labsim.Project_v1_1.diagnostic.v1",
+        "mode": "fine-preinsert",
+        "episodes_completed": 1,
+        "model_calls": 0,
+        "diagnostic_not_GPT_demonstration": true,
+        "sequential_single_GPU": true,
+        "frozen_scene_sha256": "4d7e65948fab45a687071a9bdbc759e7cee9cb92f61fd00dc74a5169e91f3ecc"
+      },
+      "release_metadata": {
+        "scene_version": "Project_v1_1",
+        "scene_mode": "standard",
+        "frozen_scene_sha256": "4d7e65948fab45a687071a9bdbc759e7cee9cb92f61fd00dc74a5169e91f3ecc",
+        "control_config_sha256": "4d7e65948fab45a687071a9bdbc759e7cee9cb92f61fd00dc74a5169e91f3ecc",
+        "code_commit": "115e988c8c2b5d909546b5175e4063cc0d8b39f3",
+        "actual_execution_commit": "115e988c8c2b5d909546b5175e4063cc0d8b39f3",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "condition_group": "control_diagnostic",
+        "deterministic_action_deviation_json": "{}",
+        "fixed_collection_eligible": true,
+        "action_interface_version": "Project_v1_1.actions.v1"
+      },
+      "process_exit": {
+        "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/fine_preinsert_01",
+        "process_exited": true,
+        "session_id": 24840,
+        "exit_code": 0,
+        "completion_evidence": "all68 probe actions completed and writers closed; 24fine signed movements, no GPT/full loading"
+      },
+      "paired_axis_gain": {
+        "n": 12,
+        "min": 0.9804551016223684,
+        "median": 0.9852956574924188,
+        "p95": 0.9908389531276031,
+        "max": 0.9911647123163059,
+        "mean": 0.985339285220825
+      },
+      "dynamic_joint_record": {
+        "max_command_delta_per_control_rad": [
+          0.0021135350495806726,
+          0.0008383008131844782,
+          0.0020141101176485154,
+          0.001821638735766573,
+          0.0007507215330853634,
+          0.0007404577916552135,
+          0.0004349801925909169
+        ],
+        "max_actual_delta_per_control_rad": [
+          0.002101898193359375,
+          0.0008378028869628906,
+          0.002002716064453125,
+          0.0007760524749755859,
+          0.0007506906986236572,
+          0.0006587505340576172,
+          0.0004349350929260254
+        ],
+        "max_native_abs_velocity_rad_s": [
+          0.0869581401348114,
+          0.055544283241033554,
+          0.07330449670553207,
+          0.06074041873216629,
+          0.026271145790815353,
+          0.025942085310816765,
+          0.015234367921948433
+        ],
+        "max_abs_FD_velocity_rad_s": [
+          0.1261138916015625,
+          0.05026816949248314,
+          0.1201629564166069,
+          0.04656314477324486,
+          0.045041438192129135,
+          0.03952502831816673,
+          0.026096103712916374
+        ],
+        "coverage": "completed control boundaries; native velocity and position-difference velocity retained as different signals"
+      },
+      "all_action_endpoints": {
+        "endpoint_error_um": {
+          "n": 68,
+          "min": 388.1249419174333,
+          "median": 626.3819967559427,
+          "p95": 740.9403213915032,
+          "max": 789.358347054906,
+          "mean": 627.306054954408
+        },
+        "orientation_error_deg": {
+          "n": 68,
+          "min": 0.04115342291745781,
+          "median": 0.06769533333140837,
+          "p95": 0.0692495854819393,
+          "max": 0.06980520324976446,
+          "mean": 0.06531281291114711
+        },
+        "actual_TCP_speed_max_mm_s": {
+          "n": 68,
+          "min": 9.082258094068706,
+          "median": 16.618146365722488,
+          "p95": 17.36136352576874,
+          "max": 22.52894326398642,
+          "mean": 16.42392227770526
+        }
+      },
+      "dynamic_record_finite": true
+    },
+    "fine_preinsert_02": {
+      "name": "fine_preinsert_02",
+      "actions": 67,
+      "fine_probes": 24,
+      "result": {
+        "record_valid": true,
+        "physics_trustworthy": true,
+        "failure_type": "POLICY_BUDGET",
+        "termination_reason": "CONTROL_DIAGNOSTIC_COMPLETE",
+        "actual_control_steps": 5238,
+        "actual_physics_steps": 20956,
+        "simulation_seconds": 87.31666666666666,
+        "wall_seconds": 684.3129633049248
+      },
+      "all_trace": {
+        "rows": 5238,
+        "position_error_um": {
+          "n": 5238,
+          "min": 0.01403160582931122,
+          "median": 0.9972298213052841,
+          "p95": 12.958446258356641,
+          "max": 493.34130131291084,
+          "mean": 4.333340969156632
+        },
+        "orientation_error_deg": {
+          "n": 5238,
+          "min": 3.0372689501810583e-06,
+          "median": 9.687820045113742e-05,
+          "p95": 0.0006713192007405037,
+          "max": 0.04567499858262866,
+          "mean": 0.0003512829070175531
+        },
+        "FK_vs_native_um": {
+          "n": 5238,
+          "min": 0.014772516839523632,
+          "median": 0.1871777203649302,
+          "p95": 0.3099059422372472,
+          "max": 0.5403434134435328,
+          "mean": 0.19100892372528638
+        },
+        "FK_vs_native_deg": {
+          "n": 5238,
+          "min": 1.4694475121579226e-06,
+          "median": 1.5735805132871934e-05,
+          "p95": 3.221094158227735e-05,
+          "max": 5.031871396354452e-05,
+          "mean": 1.7139259402485382e-05
+        },
+        "IK_effective_goal_error_um": {
+          "n": 5238,
+          "min": 0.0,
+          "median": 1.4152622167509189e-10,
+          "p95": 1.7548687212272496,
+          "max": 1.9970710017344733,
+          "mean": 0.1757644385365345
+        },
+        "IK_effective_goal_orientation_deg": {
+          "n": 5238,
+          "min": 4.133007824451103e-16,
+          "median": 1.7852002487289914e-14,
+          "p95": 7.997895764940243e-05,
+          "max": 0.00025976609930918276,
+          "mean": 9.180321610537459e-06
+        },
+        "actual_TCP_speed_mm_s": {
+          "n": 5238,
+          "min": 0.0,
+          "median": 0.9995889982029472,
+          "p95": 15.008357304661985,
+          "max": 18.036025547569718,
+          "mean": 4.61654434432017
+        },
+        "runtime_stop_count": 0,
+        "forbidden_contact_count": 0,
+        "max_finger_contact_N": 0.0,
+        "compensation": {
+          "enabled": true,
+          "rows": 5238,
+          "position_saturation_rows": 0,
+          "rotation_saturation_rows": 0,
+          "position_bias_max_um": 782.8120262436511,
+          "rotation_bias_max_deg": 0.0687939415251254,
+          "position_cap_m": 0.001,
+          "rotation_cap_rad": 0.002,
+          "uses_object_truth_any": false,
+          "observation_used_rows": 5238,
+          "sample_count_last": 5238
+        }
+      },
+      "fine_trace": {
+        "rows": 1800,
+        "position_error_um": {
+          "n": 1800,
+          "min": 0.01403160582931122,
+          "median": 0.3703882010869076,
+          "p95": 7.597005950482048,
+          "max": 32.849401340321265,
+          "mean": 1.416661220521053
+        },
+        "orientation_error_deg": {
+          "n": 1800,
+          "min": 3.0372689501810583e-06,
+          "median": 5.364616148788763e-05,
+          "p95": 0.00042192825471566383,
+          "max": 0.0017997173209677677,
+          "mean": 0.00010418768229155611
+        },
+        "FK_vs_native_um": {
+          "n": 1800,
+          "min": 0.01860758642354815,
+          "median": 0.1767296969899924,
+          "p95": 0.28675497712642656,
+          "max": 0.45176639607974495,
+          "mean": 0.1808792603845952
+        },
+        "FK_vs_native_deg": {
+          "n": 1800,
+          "min": 1.7134486333808689e-06,
+          "median": 1.5134416043165394e-05,
+          "p95": 2.4235006555845748e-05,
+          "max": 3.265012543930531e-05,
+          "mean": 1.534888469158284e-05
+        },
+        "IK_effective_goal_error_um": {
+          "n": 1800,
+          "min": 0.0,
+          "median": 1.1775693440128312e-10,
+          "p95": 1.7687720012533639,
+          "max": 1.9567860525812377,
+          "mean": 0.17437941379401972
+        },
+        "IK_effective_goal_orientation_deg": {
+          "n": 1800,
+          "min": 6.388512303166932e-16,
+          "median": 1.6906125397813916e-14,
+          "p95": 9.542050625055296e-06,
+          "max": 0.0001094689977842539,
+          "mean": 1.4543084376905351e-06
+        },
+        "actual_TCP_speed_mm_s": {
+          "n": 1800,
+          "min": 0.0,
+          "median": 0.9905155353270397,
+          "p95": 1.0207306415254538,
+          "max": 1.5764466802780257,
+          "mean": 0.7252881334156385
+        },
+        "runtime_stop_count": 0,
+        "forbidden_contact_count": 0,
+        "max_finger_contact_N": 0.0,
+        "compensation": {
+          "enabled": true,
+          "rows": 1800,
+          "position_saturation_rows": 0,
+          "rotation_saturation_rows": 0,
+          "position_bias_max_um": 640.0999119938192,
+          "rotation_bias_max_deg": 0.06834562244258205,
+          "position_cap_m": 0.001,
+          "rotation_cap_rad": 0.002,
+          "uses_object_truth_any": false,
+          "observation_used_rows": 1800,
+          "sample_count_last": 4878
+        }
+      },
+      "fine_endpoints": {
+        "endpoint_error_um": {
+          "n": 24,
+          "min": 0.049312541450332543,
+          "median": 0.2868315128524623,
+          "p95": 1.1079937255414867,
+          "max": 1.2929639286737271,
+          "mean": 0.4020699856171593
+        },
+        "orientation_error_deg": {
+          "n": 24,
+          "min": 1.7260584703446126e-05,
+          "median": 4.576200800871858e-05,
+          "p95": 9.773705336611364e-05,
+          "max": 0.00012616369671981906,
+          "mean": 5.3336301205146564e-05
+        },
+        "perpendicular_displacement_um": {
+          "n": 24,
+          "min": 0.03714980759311187,
+          "median": 0.23947128036026094,
+          "p95": 0.5826437178550785,
+          "max": 1.2082684733460105,
+          "mean": 0.27553349493408824
+        },
+        "axis_error_um": {
+          "n": 24,
+          "min": -1.0563628966397114,
+          "median": -0.018059235022769432,
+          "p95": 0.8651426258165211,
+          "max": 0.9370451921174853,
+          "mean": 0.00796452119533607
+        },
+        "endpoint_FK_vs_native_um": {
+          "n": 24,
+          "min": 0.055202294452359,
+          "median": 0.16807052864869704,
+          "p95": 0.24429882037470108,
+          "max": 0.24832224062464828,
+          "mean": 0.1620657729204464
+        },
+        "endpoint_FK_vs_native_deg": {
+          "n": 24,
+          "min": 8.196250033240285e-06,
+          "median": 1.7248739381913437e-05,
+          "p95": 2.2968315272777863e-05,
+          "max": 2.868668614572968e-05,
+          "mean": 1.7246405881170132e-05
+        }
+      },
+      "fine_endpoint_mean_error_vector_um": [
+        -0.0021437081184257543,
+        -0.08157632513823103,
+        0.07451046092158779
+      ],
+      "fine_endpoint_goal_100um_count": 24,
+      "fine_endpoint_interface_reached_count": 24,
+      "final_wait_3s": {
+        "action_index": 66,
+        "duration_s": 3.0,
+        "control_ticks": 180,
+        "requested_pose_is_observed_start": true,
+        "start_to_end_drift_um": 0.428126364952267,
+        "max_distance_from_start_um": 11.528510554229312,
+        "per_axis_peak_to_peak_um": [
+          3.549705028277339,
+          4.405019338765692,
+          10.729601243930631
+        ],
+        "orientation_start_to_end_deg": 7.99788890790371e-05,
+        "orientation_max_from_start_deg": 0.0007784252462215474,
+        "last_1s_position_peak_to_peak_um": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "last_1s_max_distance_from_first_um": 0.0,
+        "stop_reason": "INTERVAL_FINISHED",
+        "last_1s_max_native_joint_velocity_rad_s": 0.026169486343860626,
+        "last_1s_max_FD_joint_velocity_rad_s": 0.0,
+        "last_1s_max_TCP_pose_difference_speed_m_s": 0.0,
+        "raw_native_velocity_disagrees_with_position_difference": true
+      },
+      "all_actions_accepted": 67,
+      "all_actions_execution_finished": 67,
+      "time_alignment": {
+        "control_ticks_contiguous": true,
+        "max_control_dt_deviation_s": 1.3263695697318667e-14,
+        "max_gap_s": 0.0
+      },
+      "manual_plan": {
+        "source": "fixed scene target fixture design, not online object pose",
+        "nominal_TCP_world_m": [
+          0.21236964673703734,
+          -0.14926553560697634,
+          1.017
+        ],
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "held_object": false,
+        "original_seat_unchanged": true,
+        "precision_goal_m": 0.0001
+      },
+      "run_manifest": {
+        "schema": "labsim.Project_v1_1.diagnostic.v1",
+        "mode": "fine-preinsert",
+        "episodes_completed": 1,
+        "model_calls": 0,
+        "diagnostic_not_GPT_demonstration": true,
+        "sequential_single_GPU": true,
+        "frozen_scene_sha256": "d3cc091f872794e0ca993b09ec9d9525fb5ef927ae3db07de04dec1c84413e92"
+      },
+      "release_metadata": {
+        "scene_version": "Project_v1_1",
+        "scene_mode": "standard",
+        "frozen_scene_sha256": "d3cc091f872794e0ca993b09ec9d9525fb5ef927ae3db07de04dec1c84413e92",
+        "control_config_sha256": "d3cc091f872794e0ca993b09ec9d9525fb5ef927ae3db07de04dec1c84413e92",
+        "code_commit": "21a0c7e44f2c7e1742a802b1acf27a5082586436",
+        "actual_execution_commit": "21a0c7e44f2c7e1742a802b1acf27a5082586436",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "condition_group": "control_diagnostic",
+        "deterministic_action_deviation_json": "{}",
+        "fixed_collection_eligible": true,
+        "action_interface_version": "Project_v1_1.actions.v1"
+      },
+      "process_exit": {
+        "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/fine_preinsert_02",
+        "process_exited": true,
+        "session_id": 34629,
+        "pid": 3833125,
+        "exit_code": 0,
+        "completion_evidence": "Observed unified exec completion after67 actions,24 fine signed probes,writer and SimulationApp shutdown"
+      },
+      "paired_axis_gain": {
+        "n": 12,
+        "min": 0.9923667058743536,
+        "median": 0.9999415088974424,
+        "p95": 1.000073543740937,
+        "max": 1.0001063311443348,
+        "mean": 0.998180156604608
+      },
+      "dynamic_joint_record": {
+        "max_command_delta_per_control_rad": [
+          0.0023683430678687056,
+          0.0009476290716046165,
+          0.002249125835507071,
+          0.0007745376750505351,
+          0.0007713411208304377,
+          0.0006925880560348929,
+          0.0004451348160559032
+        ],
+        "max_actual_delta_per_control_rad": [
+          0.0023554563522338867,
+          0.0009230375289916992,
+          0.0022391080856323242,
+          0.0007734298706054688,
+          0.0007712841033935547,
+          0.0006809234619140625,
+          0.0004451274871826172
+        ],
+        "max_native_abs_velocity_rad_s": [
+          0.09739253669977188,
+          0.05944453924894333,
+          0.08373143523931503,
+          0.060632385313510895,
+          0.026989061385393143,
+          0.02634599804878235,
+          0.015599438920617104
+        ],
+        "max_abs_FD_velocity_rad_s": [
+          0.1413273811340332,
+          0.055382248014211655,
+          0.13434648513793945,
+          0.04640578851103783,
+          0.04627704247832298,
+          0.04085540398955345,
+          0.026707647368311882
+        ],
+        "coverage": "completed control boundaries; native velocity and position-difference velocity retained as different signals"
+      },
+      "all_action_endpoints": {
+        "endpoint_error_um": {
+          "n": 67,
+          "min": 0.049312541450332543,
+          "median": 0.43295833431700426,
+          "p95": 2.941157233175288,
+          "max": 5.8302236291200185,
+          "mean": 0.9256130538547931
+        },
+        "orientation_error_deg": {
+          "n": 67,
+          "min": 1.1017249735351305e-05,
+          "median": 6.569413127013108e-05,
+          "p95": 0.0004606151369813957,
+          "max": 0.000793013026460334,
+          "mean": 0.00012997439451500252
+        },
+        "actual_TCP_speed_max_mm_s": {
+          "n": 67,
+          "min": 0.0,
+          "median": 1.1070500416388653,
+          "p95": 15.034271527842332,
+          "max": 18.036025547569718,
+          "mean": 4.380224994073963
+        }
+      },
+      "dynamic_record_finite": true
+    }
+  },
+  "method": {
+    "conditions": "Matched by world frame, signedaxis, amplitude, duration and frozen target quaternion; not absolute target XYZ or action index",
+    "actual_delta": "actual_endpoint_TCP minus actual observed start of that action",
+    "endpoint_error": "actual_endpoint_TCP minus requested nominal target, not compensated effective IK goal",
+    "perpendicular": "norm of the other two world-axis actual displacements",
+    "orientation": "WXYZ normalized sign-invariant SO(3) geodesic angle",
+    "timing": "t_after at completed60Hz control boundary;240Hz physical substep maxima not inferred",
+    "scope": "Empty gripper in preinsert free space, no held vessel/no insertion/no GPT.100um diagnostic goal distinct from unchanged1mm interface target_reached tolerance.",
+    "limitations": "Small measured endpoint differences are not real-world accuracy. FK/native discrepancy is observed cross-reader agreement, not a full uncertainty bound. Only one sequence per controller; no broad repeatability or loaded-contact claim."
+  },
+  "read_scope": "Closed JSON/JSONL only, no HDF5 read, no raw output edits, no log compression or archiving by this audit."
+}

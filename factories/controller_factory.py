@@ -66,3 +66,6 @@ register_controller("lab_cuvette_loading", LabCuvetteLoadingController)
 from controllers.lab_cuvette_env_v1_controller import LabCuvetteTeacher
 register_controller("lab_cuvette_env_v1_teacher", LabCuvetteTeacher)
 register_controller("lab_cuvette_project_v1_teacher", LabCuvetteTeacher)
+
+from controllers.lab_cuvette_project_v1_1_controller import LabCuvetteProjectV11Teacher
+register_controller("lab_cuvette_project_v1_1_teacher", LabCuvetteProjectV11Teacher)

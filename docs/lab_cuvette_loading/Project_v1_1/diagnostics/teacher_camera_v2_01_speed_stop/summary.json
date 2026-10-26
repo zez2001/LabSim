@@ -1,0 +1,119 @@
+{
+  "schema": "labsim.Project_v1_1.teacher_speed_stop.v1",
+  "source_run": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_01",
+  "process_exit": {
+    "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_camera_v2_01",
+    "process_exited": true,
+    "pid": 40295,
+    "exit_code": 0,
+    "completion_evidence": "Observed Popen.wait return from the sequential regression supervisor after child process shutdown"
+  },
+  "raw_result": {
+    "task_success": null,
+    "workflow_success": null,
+    "record_valid": false,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "failure_type": "EXECUTOR_FAILURE",
+    "failure_domain": "executor",
+    "termination_reason": "EXECUTOR_ACTUAL_SPEED_LIMIT",
+    "actual_control_steps": 360,
+    "actual_physics_steps": 1444,
+    "simulation_seconds": 6.016666666666667,
+    "wall_seconds": 42.792691514943726,
+    "grasp_success": false,
+    "source_slot_cleared": false,
+    "transport_success": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "invalid_state_reasons": []
+  },
+  "observed_phases": {
+    "APPROACH_SOURCE": 120,
+    "RESET": 240
+  },
+  "teacher_events": [
+    {
+      "t": 4.016666666666667,
+      "event": "teacher_phase_transition",
+      "source": "RESET",
+      "target": "APPROACH_SOURCE"
+    }
+  ],
+  "recorded_control_rows": 360,
+  "physical_record_count": 1445,
+  "physical_record_steps_contiguous": true,
+  "physical_forbidden_count": 0,
+  "final_control_row": {
+    "t_before_s": 6.0,
+    "t_after_s": 6.016666666666667,
+    "control_tick_before": 359,
+    "teacher_phase": "APPROACH_SOURCE",
+    "nominal_reference_speed_mm_s": 50.09258865795017,
+    "actual_TCP_speed_mm_s": 50.09655536827111,
+    "tracking_error_um": 41.39680883270782,
+    "orientation_error_deg": 0.004763065068449287,
+    "actual_TCP_X_m": -0.08503032554992607,
+    "actual_TCP_Y_m": -0.17491259025076722,
+    "actual_TCP_Z_m": 0.9649163028020563,
+    "nominal_TCP_X_m": -0.08504415911281368,
+    "nominal_TCP_Y_m": -0.1749077297390511,
+    "nominal_TCP_Z_m": 0.9648775897067884,
+    "gripper_actual_opening_m": 0.07999992743134499,
+    "gripper_applied_target_m": 0.08,
+    "effort_limit_N": 8.0,
+    "finger_left_contact_N": 0.0,
+    "finger_right_contact_N": 0.0,
+    "forbidden_contact": false,
+    "runtime_stop": "EXECUTOR_ACTUAL_SPEED_LIMIT",
+    "FK_native_TCP_discrepancy_um": 0.18175747947512697
+  },
+  "maximum_recorded_nominal_speed_mm_s": 50.09258865795017,
+  "maximum_recorded_actual_speed_mm_s": 50.09655536827111,
+  "maximum_recorded_tracking_error_um": 284.8986248638582,
+  "maximum_recorded_orientation_error_deg": 0.03172093602768328,
+  "runtime_stop_count": 1,
+  "finger_contact_N_max": 0.0,
+  "analytic_original_approach": {
+    "method": "Controller cubic smoothstep3s^2-2s^3; v_peak=1.5*distance/duration",
+    "phase_start_s": 4.016666666666667,
+    "initial_TCP_m": [
+      -0.08505931596479005,
+      -0.1748760546046365,
+      1.0228528475162522
+    ],
+    "destination_from_recorded_source_origin_plus_nominal53mm_grasp_m": [
+      -0.08500000834465027,
+      -0.17499999701976776,
+      0.7960000305175782
+    ],
+    "distance_m": 0.2268528586096061,
+    "duration_s": 6.0,
+    "theoretical_peak_speed_mm_s": 56.713214652401525,
+    "configured_guard_mm_s": 50.0,
+    "scope": "Analytical original planned profile; remainder not physically executed",
+    "no_guard_relaxation": true
+  },
+  "interpretation": {
+    "physical_solver_invalidity_proven": false,
+    "not_PHYSICS_INVALID": true,
+    "executor_speed_guard_correctly_detected_command_schedule_exceedance": true,
+    "task_outcome": null,
+    "grasp_was_not_attempted": true,
+    "full_loading_not_executed": true,
+    "terminal_window_does_not_prove_post_release_stability": true
+  },
+  "API_calls": 0,
+  "GPU_used_by_audit": false,
+  "HDF5_read": false,
+  "original_outputs_modified": false
+}

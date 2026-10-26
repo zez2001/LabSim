@@ -259,7 +259,7 @@ vessel:
   - 1.0
   xy_scale_basis: legacy original14.85mm CAD helper only; loaded USD already transformed
 task_type: lab_cuvette_project_v1_1
-controller_type: lab_cuvette_project_v1_teacher
+controller_type: lab_cuvette_project_v1_1_teacher
 collector_type: lab_cuvette_project_v1_1
 env:
   task_type: loading
@@ -353,7 +353,7 @@ experiment:
   id: Project_v1_1_standard
   condition_group: natural
   truth_teacher: true
-  controller_version: Project_v1.teacher.continuous_latch.v1
+  controller_version: Project_v1_1.teacher_phase_motion_clock.v1
   original_seat_unchanged: true
   run_role: standard_collection
 collection:
@@ -414,3 +414,7 @@ robot_tracking:
   max_position_bias_m: 0.001
   max_rotation_bias_rad: 0.002
   version: Project_v1_1.robot_tracking.v1
+
+teacher_execution:
+  motion_time_scale: 1.5
+  version: Project_v1_1.teacher_phase_motion_clock.v1

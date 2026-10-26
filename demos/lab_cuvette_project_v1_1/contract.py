@@ -38,6 +38,7 @@ def scene_contract(cfg, geometry_audit=None):
              'demos/lab_cuvette_env_v1/physics_capture.py', 'demos/lab_cuvette_size_v1/runtime_geometry.py']
     names += ['demos/lab_cuvette_project_v1_1/'+name for name in ('environment.py','continuous_ik.py','contract.py','scorer.py')]
     names += ['tasks/lab_cuvette_loading_project_v1_1.py','data_collectors/lab_cuvette_project_v1_1_collector.py']
+    names += ['controllers/lab_cuvette_project_v1_1_controller.py']
     names += ['demos/lab_cuvette_project_v1_1/gripper_hold.py','demos/lab_cuvette_project_v1_1/robot_tracking.py']
     for name in sorted(set(names)):
         code[name] = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
