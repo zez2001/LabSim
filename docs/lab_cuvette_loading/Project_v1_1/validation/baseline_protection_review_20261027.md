@@ -1,0 +1,13 @@
+# 相对 Project_v1 基线的保护检查
+
+检查基线：`f94f9451ea10022b2e747dae92e419b636f1f695`；日期2026-10-27。使用Git对比当前工作树，未额外重读大H5。机器可读范围与SHA见[检查JSON](baseline_protection_review_20261027.json)。
+
+18个旧Project_v1/Size_v1/Env_v1配置、40个旧独立实现条目、596个受追踪资产、880个旧版本发布证据条目均无受追踪变更或新增旧namespace文件。全部107个受追踪USD/USDA/USDC/USDZ来源条目也无变化。这是Git受追踪范围的结论，不覆盖未追踪的外部资产缓存。
+
+共享源码有明确的兼容扩展，不能称整个旧工程字节不变：factory新增独立注册；CLI新增显式版本选择且默认仍为Project_v1；reader新增可选dataset_class并保留旧默认，同时增加输出元数据；Cubence runner新增可选tools_class、拒绝回执/失败分类/controller metadata hooks。默认工具类仍是GenericRobotTools，旧客户端和RPC实现没有改动。旧版、共享及新旧路由CPU回归通过。
+
+共享Cubence文件的源码SHA变化会改变implementation/controller fingerprint，即使继续使用旧默认类也不能把旧正式评测的controller SHA冒充新运行指纹。历史结果仍固定引用基线提交和原始manifest；实际新运行必须使用本次保存的运行身份。
+
+复用了5份已完成闭合集归档读审计，合计256个局部原非raw文件在各自归档前后SHA不变，H5/labels/video没有为归档修改。这个证据只覆盖各自归档操作，不等于所有历史输出在整个开发过程中的全局不变证明。
+
+root未找到可用于全局比较的历史大输出before manifest。因此历史ignored H5、视频、raw日志缺少完整before/after快照，无法完整核验其全局字节不变；本轮不补造这类结论，也不重新散列所有旧大数据。报告与小包使用固定提交的历史链接，保留该边界。

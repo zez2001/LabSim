@@ -30,7 +30,7 @@ def parser():
                    help='Existing shared ledger; previous attempts remain charged to this budget')
     p.add_argument('--max-calls', type=int, default=160)
     p.add_argument('--audit-only', action='store_true')
-    p.add_argument('--probe', choices=('fixed-replay','free-space','pose-hold','fine-preinsert','grasp-transport'),default='fixed-replay')
+    p.add_argument('--probe', choices=('fixed-replay','free-space','free-space-checked','pose-hold','fine-preinsert','grasp-transport'),default='fixed-replay')
     p.add_argument('--attempts',type=int,nargs='+',default=[1,2])
     return p
 
@@ -99,6 +99,9 @@ def main(argv=None):
             serve_environment(facade, port=args.port, ready_path=output / 'rpc_ready.json')
             return 0
         if args.backend == 'diagnostic':
+            if args.probe == 'free-space-checked':
+                from demos.lab_cuvette_project_v1_1.checked_probes import run_checked_free_space
+                return run_checked_free_space(facade,output)
             from demos.lab_cuvette_project_v1_1.probes import run_probes
             return run_probes(facade,args.probe,args.attempts,output)
         client = None
@@ -114,14 +117,19 @@ def main(argv=None):
             if args.backend == 'teacher':
                 teacher = create_controller(cfg.controller_type, env.cfg, env.ctx['fixtures'])
                 teacher.reset(env.get_observation(), env.get_debug_observation())
+                from demos.lab_cuvette_project_v1_1.camera_audit import TeacherCameraAudit
+                camera_qa=TeacherCameraAudit(env.episode_dir/'teacher_camera_audit')
+                camera_qa.capture_if_phase_changed(facade,'RESET')
                 while app.is_running() and not env.ended:
                     action = teacher.act(env.get_observation(), env.get_debug_observation())
                     if teacher.finished:
                         env.finalize_episode(teacher.status, None if teacher.status.endswith('_COMPLETE') else teacher.status)
                         break
                     env.step(action)
+                    camera_qa.capture_if_phase_changed(facade,teacher.phase)
                     if env.control_steps % 600 == 0:
                         print('PROJECT_PROGRESS', index, round(env.t, 3), env.phase, flush=True)
+                camera_qa.capture(facade,teacher.phase,event='terminal')
                 env._write(env.episode_dir / 'teacher_events.json', teacher.events)
             else:
                 from policy.backends.cubence_project_v1_1_tools import run_episode

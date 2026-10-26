@@ -1,0 +1,145 @@
+{
+  "schema": "labsim.Project_v1_1.baseline_protection_review.v1",
+  "analysis_date_local": "2026-10-27",
+  "baseline_commit": "f94f9451ea10022b2e747dae92e419b636f1f695",
+  "current_HEAD": "21a0c7e44f2c7e1742a802b1acf27a5082586436",
+  "checks": {
+    "old_configs": {
+      "paths": [
+        "config/lab_cuvette_loading/Project_v1/",
+        "config/lab_cuvette_loading/Size_v1/",
+        "config/lab_cuvette_loading/Env_v1/"
+      ],
+      "baseline_tracked_files": 18,
+      "changed_tracked_paths": [],
+      "new_untracked_paths": []
+    },
+    "old_version_implementation": {
+      "paths": [
+        "demos/lab_cuvette_project_v1/",
+        "demos/lab_cuvette_size_v1/",
+        "demos/lab_cuvette_env_v1/",
+        "tasks/lab_cuvette_loading_project_v1.py",
+        "tasks/lab_cuvette_loading_env_v1.py",
+        "tasks/lab_cuvette_loading_env_v1_scorer.py",
+        "controllers/lab_cuvette_env_v1_controller.py",
+        "data_collectors/lab_cuvette_env_v1_collector.py",
+        "policy/dataset/lab_cuvette_project_v1_dataset.py",
+        "policy/dataset/lab_cuvette_size_v1_dataset.py",
+        "policy/dataset/lab_cuvette_env_v1_dataset.py"
+      ],
+      "baseline_tracked_files": 40,
+      "changed_tracked_paths": [],
+      "new_untracked_paths": []
+    },
+    "tracked_assets": {
+      "paths": [
+        "assets/"
+      ],
+      "baseline_tracked_files": 596,
+      "changed_tracked_paths": [],
+      "new_untracked_paths": []
+    },
+    "old_release_evidence": {
+      "paths": [
+        "docs/lab_cuvette_loading/Project_v1/",
+        "docs/lab_cuvette_loading/Size_v1/",
+        "docs/lab_cuvette_loading/Env_v1/"
+      ],
+      "baseline_tracked_files": 880,
+      "changed_tracked_paths": [],
+      "new_untracked_paths": []
+    },
+    "tracked_source_USD": {
+      "baseline_tracked_files": 107,
+      "changed_tracked_paths": [],
+      "scope": "Git-tracked composed/source USD files; external ignored caches are not globally hashed here"
+    }
+  },
+  "all_named_tracked_old_scopes_unchanged": true,
+  "shared_optional_API_changes": [
+    {
+      "path": "factories/task_factory.py",
+      "classification": "Add distinct lab_cuvette_project_v1_1 task registration; existing registrations remain.",
+      "baseline_SHA256": "d3c6c8fd4b80ff833e5f7e77197567470c174e6cf673e89fe4f6220ea6363170",
+      "current_SHA256": "27ef73ce6c8d3d5faded68e707326e76ed8cea74931b09f3895f736e79953c4e",
+      "changed": true
+    },
+    {
+      "path": "factories/collector_factory.py",
+      "classification": "Add distinct new collector registration; old collector registration remains.",
+      "baseline_SHA256": "64170ef75544039dad15412b65d4caf45d59347eef6042d684a3b6c9bc4a0aa0",
+      "current_SHA256": "6822a3d6de1e49d5e4aa09bd8049dd6c78462eca248637a6e5b1d7b97421861a",
+      "changed": true
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "classification": "Optional tools_class injection, controller metadata, rejection_receipt and failure classifier hooks; default GenericRobotTools remains. Shared source SHA/canonical controller fingerprint changes even with legacy default, so old historical fingerprints are not reused as new-run proof.",
+      "baseline_SHA256": "0e0af868f2b15d26902c630f703971359c2ff63b813d4fe7f42474457f75a864",
+      "current_SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "changed": true
+    },
+    {
+      "path": "scripts/labsim_cli.py",
+      "classification": "Explicit --project-version with Project_v1 default; new routing and mixed/unsupported H5 version rejection. Existing Size phase path preserved with incompatible flags rejected.",
+      "baseline_SHA256": "8889ca42889a96bd1bacd27de54eb639c364b47c8eb86c492aa3cb96a232b0d5",
+      "current_SHA256": "e02ce8c3c515d36665c44fbeed8dd430f3c3760c0eccef6619d28a6d9e3729e5",
+      "changed": true
+    },
+    {
+      "path": "scripts/read_lab_cuvette_project_v1_data.py",
+      "classification": "Optional dataset_class defaults to old Project_v1 reader; adds scene_version/dataset_class output metadata. Normal new ACT/DP reader is opt-in/CLI scene-selected.",
+      "baseline_SHA256": "a35dea9ccbd0a754c8858b07abd2dbefd301d6df13e42060e459cd2c068c670b",
+      "current_SHA256": "8847a205a917654b0652a3be7ee0b57c4d6a749c07e1d778422af41e29e399b7",
+      "changed": true
+    }
+  ],
+  "shared_optional_policy_client_source_changed": [],
+  "existing_closed_archive_local_protection_evidence": [
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_02_closed_read_audit.json",
+      "SHA256": "76c9ada8fd8e73936a7c03def1f4b520b4541f3254ea4d75ef3daacbf900f78d",
+      "audit_scope": "Earlier closed-run archive operation only; reused without rehashing large H5",
+      "protected_files": 46,
+      "non_raw_unchanged": true,
+      "H5_labels_videos_modified": false
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/grasp_transport_01_closed_read_archive.json",
+      "SHA256": "5187645bfd73d9d5da500e123efd47abaa5b474ad5aee08895eeb9870483bd50",
+      "audit_scope": "Earlier closed-run archive operation only; reused without rehashing large H5",
+      "protected_files": 59,
+      "non_raw_unchanged": true,
+      "H5_labels_videos_modified": false
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/grasp_transport_02_closed_read_archive.json",
+      "SHA256": "7d679bf8eecac089a06010f66a88918975acc211d4577931597ed964523a9fa2",
+      "audit_scope": "Earlier closed-run archive operation only; reused without rehashing large H5",
+      "protected_files": 64,
+      "non_raw_unchanged": true,
+      "H5_labels_videos_modified": false
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/grasp_contact_hold_ab_20261027/pose_hold_01_closed_read_archive.json",
+      "SHA256": "618a71beccbfce83271bc00aff77da644f4799de1d1ad2b7a4d1c35e83b9b7fb",
+      "audit_scope": "Earlier closed-run archive operation only; reused without rehashing large H5",
+      "protected_files": 43,
+      "non_raw_unchanged": true,
+      "H5_labels_videos_modified": false
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_01_closed_read_archive.json",
+      "SHA256": "98d17c17eb59cfd50a37ddc1bd45995ede2fb66625aef79963a9fd8a0fea3966",
+      "audit_scope": "Earlier closed-run archive operation only; reused without rehashing large H5",
+      "protected_files": 44,
+      "non_raw_unchanged": true,
+      "H5_labels_videos_modified": false
+    }
+  ],
+  "historical_ignored_large_outputs_global_before_after_bytewise_snapshot_available": false,
+  "historical_ignored_large_outputs_global_unchanged_claim": false,
+  "historical_output_scope_note": "No complete before manifest was located or asserted by root. Existing localized closure/archive proofs do not establish that all historical ignored H5/video/raw outputs are globally unchanged. No new global hashing performed.",
+  "external_ignored_asset_cache_global_hash_verification_this_pass": false,
+  "final_release_reaudit_required": true
+}

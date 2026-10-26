@@ -166,7 +166,8 @@ class ProjectEnvironment(Previous):
         if domain is None:
             domain='executor' if reason not in ('CONTROL_PLAN_REJECTED','JOINT_PLAN_REJECTED') and reason and (reason.startswith('EXECUTOR') or reason.startswith('JOINT_')) else 'none'
         safe=domain in ('safety','executor','simulation')
-        receipt.update(execution_finished=True,completed=True,target_reached=bool(endpoint_valid and receipt['accepted'] and n==ticks and pe<=.001 and oe<=np.deg2rad(.5) and not safe),
+        receipt.update(status='REJECTED' if not receipt['accepted'] else ('STOPPED' if safe or n<ticks or partial_control else 'FINISHED'),
+            execution_finished=True,completed=True,target_reached=bool(endpoint_valid and receipt['accepted'] and n==ticks and pe<=.001 and oe<=np.deg2rad(.5) and not safe),
             safety_stopped=safe,partial_execution=bool(elapsed>0 and (n<ticks or partial_control)),executed_duration_s=elapsed,
             executed_physics_steps=physics_steps,incomplete_control_interval=partial_control,
             simulation_time_after=float(self.task.t),observation_id_after=after['observation_id'] if successor_available else None,

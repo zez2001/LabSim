@@ -55,6 +55,7 @@ def test_target_and_interval_are_independent(tmp_path):
     receipt=ProjectEnvironment(task).execute(command())
     assert receipt['accepted'] and receipt['execution_finished'] and receipt['completed']
     assert not receipt['target_reached'] and not receipt['safety_stopped']
+    assert receipt['status']=='FINISHED'
     assert receipt['final_position_error_m']==pytest.approx(.002)
     assert receipt['executed_control_ticks']==60 and receipt['executed_physics_steps']==240
     assert receipt['executed_duration_s']==pytest.approx(1.)
@@ -64,6 +65,7 @@ def test_plan_rejection_is_not_partial_and_reserves_id(tmp_path):
     task=FakeTask(tmp_path); task.reject=True; env=ProjectEnvironment(task)
     receipt=env.execute(command())
     assert not receipt['accepted'] and not receipt['partial_execution']
+    assert receipt['status']=='REJECTED'
     assert receipt['execution_finished'] and not receipt['target_reached']
     assert receipt['executed_control_ticks']==0 and receipt['executed_duration_s']==0
     assert receipt['observation_id_after']=='new:0' and not task.commands
@@ -86,6 +88,7 @@ def test_exception_uses_actual_counters_and_never_replays(tmp_path,fault,complet
     assert result['executed_physics_steps']==physics
     assert result['executed_duration_s']==pytest.approx(elapsed)
     assert result['partial_execution'] and result['safety_stopped'] and task.held
+    assert result['status']=='STOPPED'
     assert env.execute(command())==result and len(task.commands)==1
 
 

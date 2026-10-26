@@ -57,7 +57,7 @@ class ProjectV11ConfigurationTest(unittest.TestCase):
         before = self.previous["cameras"]["wrist_camera"]
         after = self.current["cameras"]["wrist_camera"]
         self.assertEqual(before["localtarget_m"], [0, 0, .35])
-        self.assertEqual(after, dict(before, localtarget_m=[0, 0, .10],
+        self.assertEqual(after, dict(before, localeye_m=[.075,0,.04], localtarget_m=[0, 0, .12],
             prim_path="/World/Franka/panda_hand/WristCameraV11"))
 
     def test_executor_fields_match_the_new_tasks_actual_consumers(self):

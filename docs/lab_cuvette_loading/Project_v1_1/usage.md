@@ -52,9 +52,11 @@ export LABSIM_PYTHON=/path/to/existing/python3.11
 
 ```bash
 ./labsim demo --project-version Project_v1_1 --backend gpt6 --max-calls 160 --headless \
-  --budget-ledger outputs/lab_cuvette_loading/Project_v1_1/gpt_budget_01.json \
+  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \
   --output outputs/lab_cuvette_loading/Project_v1_1/gpt_demo_01
 ```
+
+上述 ledger 与前轮共用，保留既有请求和费用占用；不要用空 ledger 重置预算。
 
 模型控制器通过公开观测和受约束动作接口执行。专家控制器与 GPT 控制器的能力和输入范围分别以运行时元数据记录，不能混用其结果统计。
 
@@ -110,3 +112,15 @@ CI 的轻量契约任务覆盖新配置、执行器、独立判分、环境与�
 - 读取验证：`scripts/read_lab_cuvette_project_v1_data.py`。
 
 资产、物理参数和判分门槛是否发生变化，应以版本配置及提交差异核对；本调用入口本身不修改这些内容。
+
+## 确定性执行诊断
+
+以下入口不调用模型。`free-space-checked` 将两种固定完整位姿和 world/TCP 的 72 个有符号位移分为三个独立 reset 的 episode，避免旧诊断的累计时长和朝向漂移。`fine-preinsert` 在合法空爪预插入位置测量 0.1、0.5、1、2 mm；`grasp-transport` 是公开通用工具的人工动作诊断，不是 GPT 完整任务成功。
+
+```bash
+$LABSIM_PYTHON -m demos.lab_cuvette_project_v1_1.run \
+  --backend diagnostic --probe free-space-checked --headless \
+  --output outputs/lab_cuvette_loading/Project_v1_1/free_checked_new
+```
+
+新配置显式启用仅用机器人状态的有界跟踪补偿，并使用腕相机 v2 固定挂点。实际效果与未完成项目见本版本诊断和最终结果记录。teacher 每次阶段变化保存无 GT 裁剪的原生帧和两种编码预览，均标明未发送 API；GPT 的真正发送输入位于 `gpt_control/observations`。
