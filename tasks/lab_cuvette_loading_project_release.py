@@ -24,7 +24,8 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
             control_config_sha256=self.release_contract['frozen_scene_sha256'],
             action_interface_version='Project_release_v1.actions.v1',
             physical_baseline='Project_v1_1',
-            lifecycle_version='Project_release_v1.transactional_lifecycle.v1')
+            lifecycle_version='Project_release_v1.transactional_lifecycle.v1',
+            record_purpose=self.collector.record_purpose)
         condition = self.options.get('lifecycle_condition')
         if condition:
             metadata['lifecycle_condition'] = str(condition)
@@ -32,6 +33,11 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
                 metadata['condition_group'] = 'controlled_lifecycle_diagnostic'
         self._write(metadata_path, metadata)
         self.collector.file.attrs.update(metadata)
+        # Keep the portable embedded episode metadata consistent with attrs.
+        embedded = json.loads(self.collector.file['episode_metadata_json'].asstr()[()])
+        embedded.update(metadata)
+        from data_collectors.lab_cuvette_env_v1_collector import json_text
+        self.collector.file['episode_metadata_json'][()] = json_text(embedded)
         self._write(self.episode_dir / 'reset_audit.json', dict(
             schema='labsim.Project_release_v1.reset.v1', episode_id=self.episode_id,
             episode_index=self.episode_index, control_steps=self.control_steps,
@@ -103,6 +109,7 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
                     publication_state='prepared_for_commit', episode_id=self.episode_id))
                 final_labels = self.collector.prepared_labels(final=True)
                 self._result.update(final_labels)
+                self._result['record_purpose'] = self.collector.record_purpose
                 from data_collectors.lab_cuvette_project_release_collector import atomic_text
                 from data_collectors.lab_cuvette_env_v1_collector import json_text
                 atomic_text(self.episode_dir / 'result.json', json_text(self._result) + '\n')
@@ -131,5 +138,10 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
         options = dict(kwargs.get('options') or (args[1] if len(args) > 1 else {}) or {})
         if options.get('source_slot_id', self.base_cfg.rack.selected_slot_id) != self.base_cfg.rack.selected_slot_id:
             raise ValueError('Project_release_v1 standard reset cannot change the frozen source slot')
+        if 'record_purpose' in options:
+            from demos.lab_cuvette_project_release_v1.usage_metadata import record_purpose
+            declared = record_purpose(self.base_cfg.release.get('record_purpose'), allow_unknown=True)
+            if options['record_purpose'] != declared:
+                raise ValueError('Reset record_purpose cannot change the run intent; start a separately declared run')
         self._finalization_error = None
         return super().reset(*args, **kwargs)

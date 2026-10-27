@@ -30,6 +30,13 @@ PROJECT_RELEASES = {
     "Project_release_v1": ("demos.lab_cuvette_project_release_v1.launch",
         ROOT / "config/lab_cuvette_loading/Project_release_v1/standard.yaml"),
 }
+CURRENT_PROJECT_VERSION = "Project_release_v1"
+RECORD_PURPOSES = ("demonstration", "policy_evaluation", "lifecycle_diagnostic", "resource_probe")
+
+
+def project_version(value):
+    """Resolve the documented current alias before routing or recording argv."""
+    return CURRENT_PROJECT_VERSION if value == "current" else value
 
 
 def resolve_path(value):
@@ -80,8 +87,8 @@ def parser():
     commands = p.add_subparsers(dest="command", required=True)
     doctor = commands.add_parser("doctor", help="CPU-only runtime, LFS and frozen-scene checks")
     doctor.add_argument("--json", action="store_true", help="Print a machine-readable diagnostic")
-    doctor.add_argument("--project-version", choices=tuple(PROJECT_RELEASES), default="Project_v1",
-        help="Configuration to inspect; omitted preserves the historical Project_v1 default")
+    doctor.add_argument("--project-version", type=project_version, choices=tuple(PROJECT_RELEASES), default="Project_v1",
+        help="Configuration to inspect; current=Project_release_v1; omitted preserves Project_v1")
     doctor.add_argument("--config", help="Optional explicit config; its version must match --project-version")
     assets = commands.add_parser("assets", help="List registered size hypotheses; no simulation")
     assets.add_argument("operation", nargs="?", choices=("list", "download", "install", "check"), default="list")
@@ -153,8 +160,10 @@ def parser():
             help="Release-only same-process acceptance: teacher/finish/time-limit/unreachable; service_timeout/user_interrupt are controlled injections. Omit for the normal selected backend")
         command.add_argument("--record-mode", choices=("collect", "eval", "diagnostic"),
             help="Explicit Project_release_v1 persistence mode; omitted preserves each version's default")
-        command.add_argument("--project-version", choices=tuple(PROJECT_RELEASES), default="Project_v1",
-            help="Explicit execution version; omitted keeps the existing Project_v1 API")
+        command.add_argument("--record-purpose", choices=RECORD_PURPOSES,
+            help="Release record intent, independent of success and qualification; ordinary teacher demo/collect=demonstration, eval/serve=policy_evaluation, sequence=lifecycle_diagnostic")
+        command.add_argument("--project-version", type=project_version, choices=tuple(PROJECT_RELEASES), default="Project_v1",
+            help="Explicit execution version; current=Project_release_v1; omitted keeps Project_v1")
     return p
 
 
@@ -186,12 +195,16 @@ def build_command(args):
     """Build real subprocess argv without shell interpolation or output writes."""
     if getattr(args, "record_mode", None) is not None and getattr(args, "project_version", None) != "Project_release_v1":
         raise ValueError("--record-mode is supported only by --project-version Project_release_v1")
+    if getattr(args, "record_purpose", None) is not None and getattr(args, "project_version", None) != "Project_release_v1":
+        raise ValueError("--record-purpose is supported only by --project-version Project_release_v1")
     sequence = getattr(args, "sequence", None)
     if sequence is not None:
         if args.project_version != "Project_release_v1" or args.command not in ("demo", "collect", "eval"):
             raise ValueError("--sequence requires Project_release_v1 demo/collect/eval; serve has no acceptance sequence")
         if args.backend != "teacher" or getattr(args, "phase", None) is not None:
             raise ValueError("--sequence is an explicit teacher/lifecycle diagnostic, not a policy or historical collection")
+        if args.record_purpose not in (None, "lifecycle_diagnostic", "resource_probe"):
+            raise ValueError("--sequence records require lifecycle_diagnostic or resource_probe purpose")
         if any(getattr(args, key, None) is not None for key in ("provider_config", "budget_ledger", "asset_id", "controlled_stop_depth_mm")):
             raise ValueError("--sequence cannot silently ignore policy, asset or stop-depth overrides")
         if getattr(args, "gui", False) and args.headless:
@@ -204,6 +217,7 @@ def build_command(args):
         command = [sys.executable, "-m", "demos.lab_cuvette_project_release_v1.run",
             "--config", str(config), "--output", str(output), "--seed", "0",
             "--execution-purpose", args.command, "--record-mode", record_mode,
+            "--record-purpose", args.record_purpose or "lifecycle_diagnostic",
             "--sequence", *sequence]
         if args.headless:
             command.append("--headless")
@@ -229,7 +243,10 @@ def build_command(args):
             command.append("--headless")
         if args.project_version == "Project_release_v1":
             record_mode = getattr(args, "record_mode", None) or ("collect" if args.command == "collect" else "eval")
-            command += ["--record-mode", record_mode]
+            record_purpose = getattr(args, "record_purpose", None) or (
+                "demonstration" if args.command in ("demo", "collect") and args.backend == "teacher"
+                else "policy_evaluation")
+            command += ["--record-mode", record_mode, "--record-purpose", record_purpose]
         for name in ("provider_config", "budget_ledger", "max_calls", "controlled_stop_depth_mm", "port", "asset_id"):
             value = getattr(args, name, None)
             if name == "max_calls" and args.backend != "gpt6":

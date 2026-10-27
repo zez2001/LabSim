@@ -52,6 +52,39 @@ def test_finish_idempotent_and_cannot_relabel(tmp_path):
         assert episode_matches_filter(f.attrs, 'success') == (True, 'accepted')
 
 
+@pytest.mark.parametrize('purpose', ['demonstration', 'policy_evaluation', 'lifecycle_diagnostic', 'resource_probe'])
+@pytest.mark.parametrize('success', [True, False])
+def test_record_purpose_survives_real_h5_publication_without_changing_labels(tmp_path, purpose, success):
+    c = collector(tmp_path)
+    c.configuration['release'] = dict(record_purpose=purpose)
+    c.begin_episode(0, episode_id='purpose-fixture')
+    transition(c)
+    labels = c.finish_episode({}, score(c, success=success))
+    assert labels['task_success'] is success
+    assert labels['success_bc_eligible'] is success
+    assert 'record_purpose' not in labels  # membership and qualification are separate
+    with h5py.File(c.path) as source:
+        assert source.attrs['record_purpose'] == purpose
+        assert json.loads(source['episode_metadata_json'].asstr()[()])['record_purpose'] == purpose
+        assert json.loads(source['task_properties'].asstr()[()])['record_purpose'] == purpose
+    marker = json.loads((tmp_path / 'episode_0000_complete.json').read_text())
+    assert marker['record_purpose'] == purpose
+    row = json.loads((tmp_path / 'dataset/meta/episode.jsonl').read_text())
+    assert row['record_purpose'] == purpose
+
+
+def test_reset_cannot_redeclare_run_intent_before_mutating_episode():
+    from omegaconf import OmegaConf
+    from tasks.lab_cuvette_loading_project_release import LabCuvetteProjectRelease
+    task = LabCuvetteProjectRelease.__new__(LabCuvetteProjectRelease)
+    task.base_cfg = OmegaConf.create(dict(rack=dict(selected_slot_id='A1'),
+        release=dict(record_purpose='policy_evaluation')))
+    task._finalization_error = {'type': 'old-failure'}
+    with pytest.raises(ValueError, match='run intent'):
+        task.reset(seed=0, options={'mode': 'standard', 'record_purpose': 'demonstration'})
+    assert task._finalization_error == {'type': 'old-failure'}
+
+
 def test_close_only_incomplete_never_indexes(tmp_path):
     c = collector(tmp_path)
     c.begin_episode(0, episode_id='incomplete')

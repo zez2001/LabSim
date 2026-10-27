@@ -7,6 +7,66 @@ from scripts import labsim_cli as cli
 
 
 class ReleaseCLIContracts(unittest.TestCase):
+    def test_current_alias_resolves_to_real_version_and_keeps_explicit_old_routes(self):
+        args = cli.parser().parse_args(['doctor', '--project-version', 'current'])
+        self.assertEqual(args.project_version, 'Project_release_v1')
+        self.assertEqual(cli.doctor_configuration(args.project_version), cli.PROJECT_RELEASES['Project_release_v1'][1])
+        for command in ('demo', 'collect', 'eval', 'serve'):
+            args = cli.parser().parse_args([command, '--project-version', 'current',
+                '--output', 'outputs/new-not-created', '--dry-run'])
+            argv = cli.build_command(args)
+            self.assertEqual(args.project_version, 'Project_release_v1')
+            self.assertEqual(argv[2], 'demos.lab_cuvette_project_release_v1.launch')
+            self.assertNotIn('current', argv)
+        for version in ('Project_v1', 'Project_v1_1'):
+            args = cli.parser().parse_args(['demo', '--project-version', version,
+                '--output', 'outputs/new-not-created'])
+            self.assertEqual(cli.build_command(args)[2], cli.PROJECT_RELEASES[version][0])
+
+    def test_record_intent_is_explicit_and_not_derived_from_qualifications(self):
+        for command, expected in (('demo', 'demonstration'), ('collect', 'demonstration'),
+                                  ('eval', 'policy_evaluation'), ('serve', 'policy_evaluation')):
+            args = cli.parser().parse_args([command, '--project-version', 'current',
+                '--output', 'outputs/new-not-created'])
+            argv = cli.build_command(args)
+            self.assertEqual(argv[argv.index('--record-purpose') + 1], expected)
+        args = cli.parser().parse_args(['eval', '--project-version', 'current', '--backend', 'teacher',
+            '--record-purpose', 'resource_probe', '--output', 'outputs/new-not-created'])
+        argv = cli.build_command(args)
+        self.assertEqual(argv[argv.index('--record-purpose') + 1], 'resource_probe')
+        for purpose in ('demonstration', 'policy_evaluation'):
+            args = cli.parser().parse_args(['demo', '--project-version', 'current', '--sequence', 'early_finish',
+                '--record-purpose', purpose, '--output', 'outputs/new-not-created'])
+            with self.assertRaisesRegex(ValueError, 'sequence'):
+                cli.build_command(args)
+
+    def test_ordinary_teacher_cli_resolves_real_release_task_and_collector(self):
+        from omegaconf import OmegaConf
+        from demos.lab_cuvette_project_release_v1 import launch
+        for command, mode in (('demo', 'eval'), ('collect', 'collect')):
+            argv = cli.build_command(cli.parser().parse_args([command, '--project-version', 'current',
+                '--backend', 'teacher', '--headless', '--output', 'outputs/new-not-created']))
+            parsed = launch.parser().parse_args(argv[3:])
+            cfg = OmegaConf.load(parsed.config)
+            self.assertEqual(cfg.version, 'Project_release_v1')
+            self.assertEqual(cfg.task_type, 'lab_cuvette_project_release_v1')
+            self.assertEqual(cfg.collector_type, 'lab_cuvette_project_release_v1')
+            self.assertEqual(cfg.controller_type, 'lab_cuvette_project_v1_1_teacher')
+            self.assertEqual(parsed.record_mode, mode)
+            self.assertEqual(parsed.record_purpose, 'demonstration')
+            self.assertEqual(parsed.episodes, 1)
+            self.assertNotIn('--sequence', argv)
+
+    def test_usage_intent_does_not_change_physical_scene_fingerprint(self):
+        from omegaconf import OmegaConf
+        from demos.lab_cuvette_project_release_v1.contract import scene_contract
+        cfg = OmegaConf.load(cli.PROJECT_RELEASES['Project_release_v1'][1])
+        original = scene_contract(cfg)
+        cfg.release.record_purpose = 'demonstration'
+        self.assertEqual(scene_contract(cfg), original)
+        cfg.release.record_purpose = 'resource_probe'
+        self.assertEqual(scene_contract(cfg), original)
+
     def test_doctor_uses_explicit_release_config_and_refuses_conflict(self):
         args = cli.parser().parse_args(["doctor", "--project-version", "Project_release_v1", "--json"])
         selected = cli.doctor_configuration(args.project_version, args.config)

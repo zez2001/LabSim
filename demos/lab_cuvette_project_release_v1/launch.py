@@ -11,6 +11,9 @@ import sys
 import time
 from omegaconf import OmegaConf
 from demos.lab_cuvette_project_v1.runtime import ROOT, resolve_config, usd_environment
+from demos.lab_cuvette_project_release_v1.usage_metadata import (
+    RECORD_PURPOSES, announce_startup, select_record_purpose,
+)
 
 
 def parser():
@@ -35,6 +38,8 @@ def parser():
     p.add_argument('--audit-only', action='store_true')
     p.add_argument('--record-mode', choices=('collect', 'eval', 'diagnostic'), default=None,
                    help='Persistence only; online safety/scoring sample rates are unchanged')
+    p.add_argument('--record-purpose', choices=RECORD_PURPOSES,
+                   help='Explicit dataset intent; independent of outcome and qualification')
     return p
 
 
@@ -67,6 +72,8 @@ def main(argv=None):
     if args.asset_id is not None and args.asset_id != 'cuvette_xy_1000':
         raise ValueError('This release freezes cuvette_xy_1000; use a separate version for another asset')
     cfg.release.record_mode = args.record_mode or ('collect' if args.execution_purpose == 'collect' else 'eval')
+    cfg.release.record_purpose = select_record_purpose(args.record_purpose, backend=args.backend,
+        execution_purpose=args.execution_purpose)
     cfg.experiment.truth_teacher = args.backend == 'teacher'
     if args.execution_purpose == 'collect' and cfg.asset_id != 'cuvette_xy_1000':
         raise ValueError('Fixed Project_v1 collection retains cuvette_xy_1000; use an independent demo/eval configuration for another registered asset')
@@ -85,10 +92,16 @@ def main(argv=None):
         code_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         source_config_sha256=hashlib.sha256(args.config.read_bytes()).hexdigest(),
         resolved_config_sha256=hashlib.sha256((output / 'launch_config.yaml').read_bytes()).hexdigest(),
-        asset_revision=asset_lock['revision'], version=cfg.version, record_mode=cfg.release.record_mode)
+        asset_revision=asset_lock['revision'], version=cfg.version, record_mode=cfg.release.record_mode,
+        record_purpose=cfg.release.record_purpose)
     (output / 'launch_identity.json').write_text(json.dumps(identity, indent=2) + '\n')
     audit = ensure_audit(cfg, output)
     (output / 'geometry_audit.json').write_text(json.dumps(audit, indent=2) + '\n')
+    startup = announce_startup(cfg, source_config=args.config, output=output,
+        backend=args.backend, geometry_audit=audit)
+    identity.update(project_scene_fingerprint=startup['project_scene_fingerprint'],
+        task=startup['task'], scene=startup['scene'], asset_id=startup['asset_id'])
+    (output / 'launch_identity.json').write_text(json.dumps(identity, indent=2) + '\n')
     if args.audit_only:
         return 0 if audit.get('geometry_valid') is True else 2
     if audit.get('geometry_valid') is not True:

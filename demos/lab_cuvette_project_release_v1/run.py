@@ -13,6 +13,9 @@ from omegaconf import OmegaConf
 
 from demos.lab_cuvette_project_v1.runtime import ROOT, resolve_config
 from demos.lab_cuvette_project_v1_1.run import ensure_audit
+from demos.lab_cuvette_project_release_v1.usage_metadata import (
+    RECORD_PURPOSES, announce_startup, select_record_purpose,
+)
 
 CONDITIONS = ('teacher', 'early_finish', 'no_progress', 'unreachable', 'service_timeout', 'user_interrupt')
 
@@ -112,6 +115,8 @@ def parser():
     p.add_argument('--gui', action='store_true')
     p.add_argument('--record-mode', choices=('diagnostic', 'collect', 'eval'), default=None)
     p.add_argument('--execution-purpose', choices=('demo', 'collect', 'eval'), default=None)
+    p.add_argument('--record-purpose', choices=RECORD_PURPOSES,
+                   help='Acceptance sequence intent: lifecycle_diagnostic or resource_probe')
     return p
 
 
@@ -132,6 +137,8 @@ def main(argv=None):
         cfg.release.record_mode = args.record_mode
     if args.execution_purpose is not None:
         cfg.env.execution_purpose = args.execution_purpose
+    cfg.release.record_purpose = select_record_purpose(args.record_purpose, backend='teacher',
+        execution_purpose=cfg.env.get('execution_purpose'), sequence=True)
     from demos.lab_cuvette_project_v1.assets import load_lock
     asset_revision = load_lock()['revision']
     print('LABSIM_RELEASE', json.dumps(dict(version=cfg.version, config=str(args.config.resolve()),
@@ -142,6 +149,8 @@ def main(argv=None):
         physics_hz=int(cfg.physics.hz), control_hz=int(cfg.physics.control_hz))), flush=True)
     OmegaConf.save(cfg, output / 'launch_config.yaml')
     audit = ensure_audit(cfg, output)
+    startup = announce_startup(cfg, source_config=args.config, output=output,
+        backend='lifecycle_sequence', geometry_audit=audit)
     if audit.get('geometry_valid') is not True:
         raise RuntimeError('Geometry precheck failed; no physical episode started')
     lock = open('/tmp/labsim-V0_ext01-gpu.lock', 'a')
@@ -219,6 +228,9 @@ def main(argv=None):
         env._write(output / 'run_manifest.json', dict(schema='labsim.Project_release_v1.same_process.v1',
             process_id=os.getpid(), sequence=args.sequence, seed=args.seed, standard_randomization=False,
             record_mode=str(cfg.release.record_mode),
+            record_purpose=str(cfg.release.record_purpose),
+            version=str(cfg.version), task=str(cfg.task_type), scene=str(cfg.scene_mode),
+            asset_id=str(cfg.asset_id), project_scene_fingerprint=startup['project_scene_fingerprint'],
             execution_purpose=str(cfg.env.get('execution_purpose', 'eval')),
             asset_revision=asset_revision,
             episodes_requested=len(args.sequence), episodes_completed=len(results),

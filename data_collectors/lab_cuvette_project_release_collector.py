@@ -53,6 +53,14 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
         self._prepared = None
 
     def begin_episode(self, *args, **kwargs):
+        from demos.lab_cuvette_project_release_v1.usage_metadata import record_purpose
+        declared = self.configuration.get('release', {}).get('record_purpose')
+        metadata = dict(kwargs.get('metadata') or {})
+        self.record_purpose = record_purpose(declared, allow_unknown=True)
+        if 'record_purpose' in metadata and metadata['record_purpose'] != self.record_purpose:
+            raise ValueError('Episode record_purpose cannot override the declared run intent')
+        metadata['record_purpose'] = self.record_purpose
+        kwargs['metadata'] = metadata
         super().begin_episode(*args, **kwargs)
         self._finalized = self._finalize_fingerprint = None
         self._finalizing = self._publication_failed = False
@@ -63,6 +71,7 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
             publication_state='recording', finalization_id='',
             record_integrity_valid='unknown', physics_trustworthy='unknown',
             success_bc_eligible=False, trajectory_analysis_eligible=False,
+            record_purpose=self.record_purpose,
         )
 
     def _index_rows(self):
@@ -168,7 +177,7 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
                 record_integrity_json=json_text(labels['record_integrity_errors']),
                 camera_black_frame_counts_json=json_text(self._camera_black_counts))
             self.file.attrs.update(attrs)
-            properties = dict(result=result, labels=labels,
+            properties = dict(result=result, labels=labels, record_purpose=self.record_purpose,
                 record_integrity_errors=labels['record_integrity_errors'], finalization_id=finalization_id)
             for name, value in (('independent_score_json', evidence), ('task_properties', properties),
                                 ('qualification_json', qualification), ('task_result_json', task_result)):
@@ -232,13 +241,15 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
             atomic_text(summary, json.dumps(json_safe(properties), ensure_ascii=False, indent=2, allow_nan=False) + '\n')
             atomic_text(marker, json_text(dict(schema='labsim.Project_release_v1.complete.v1',
                 episode_id=self.episode_id, finalization_id=pending['finalization_id'], h5=self.path.name,
-                result=summary.name, finalize_wall_seconds=time.perf_counter() - pending['wall_started'])) + '\n')
+                result=summary.name, record_purpose=self.record_purpose,
+                finalize_wall_seconds=time.perf_counter() - pending['wall_started'])) + '\n')
             with h5py.File(self.path, 'r+') as output:
                 output['task_properties'][()] = json_text(properties)
                 output.attrs.update(publication_state='complete', complete=True)
                 output.flush()
             self._publish_index(dict(episode_id=self.episode_id, episode_index=self.index,
-                length=self.count, labels=labels, finalization_id=pending['finalization_id']))
+                length=self.count, labels=labels, record_purpose=self.record_purpose,
+                finalization_id=pending['finalization_id']))
             self._finalized = copy.deepcopy(labels)
             self._finalize_fingerprint = pending['fingerprint']
             self.episode_count += 1
