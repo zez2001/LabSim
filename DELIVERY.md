@@ -6,7 +6,7 @@
 
 ## 下载数字资产
 
-- HF 仓库：<https://huggingface.co/datasets/PercyM/labsim-cell-assets>（Private，需要访问权限）。
+- HF 仓库：<https://huggingface.co/datasets/PercyM/labsim-cell-assets>（Public，免登录下载）。
 - 完整仪器源包：<https://huggingface.co/datasets/PercyM/labsim-cell-assets/resolve/f6b0f9f2dbe5046c0833fb099121e5a551d208f7/assets/LabSim-digital-assets.zip?download=true>。
 - 固定版本：`f6b0f9f2dbe5046c0833fb099121e5a551d208f7`，7 个注册条目、307 个源文件；许可与能力边界见 [发布与调用指南](docs/cell_assets/HuggingFace上传指南.md)。
 - 在可运行的 LabSim 工程根目录解压到 `local_assets/` 后，使用 `fetch_asset(..., offline=True)`，再在 Isaac Sim 5.1 内转换和加载。也可通过 `LABSIM_ASSET_CACHE` 指向完整实验工程的缓存。

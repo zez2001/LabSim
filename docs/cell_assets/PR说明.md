@@ -29,7 +29,7 @@ python -m pytest -q -p no:cacheprovider tests/test_cell_assets.py tests/test_exp
 
 新设备使用独立命名空间，不改写上游冻结场景、既有数据标签或历史证据。质量、摩擦及布局仍有未标定假设；未做真机和现场测量。
 
-大型资产、40 段 MP4、单文件 HTML 和仿真证据位于 [HF 私有仓库 PercyM/labsim-cell-assets](https://huggingface.co/datasets/PercyM/labsim-cell-assets/tree/f6b0f9f2dbe5046c0833fb099121e5a551d208f7)。固定 revision：`f6b0f9f2dbe5046c0833fb099121e5a551d208f7`，53 个发布文件均已回读核对大小和 SHA256；需由资产所有者授予接手者访问权限。各来源许可单独保留，代码许可不覆盖模型。
+大型资产、40 段 MP4、单文件 HTML 和仿真证据位于 [HF 公开仓库 PercyM/labsim-cell-assets](https://huggingface.co/datasets/PercyM/labsim-cell-assets/tree/f6b0f9f2dbe5046c0833fb099121e5a551d208f7)。固定 revision：`f6b0f9f2dbe5046c0833fb099121e5a551d208f7`，53 个发布文件均已回读核对大小和 SHA256；2026-10-27 已改为 Public，下载无需登录或申请权限。各来源许可单独保留，代码许可不覆盖模型。
 
 [`assets/README.md`](../../assets/README.md) 保留为普通 Git 文本下载入口。HF 源包解压至 `local_assets/`，调用 `fetch_asset(..., offline=True)`；默认在线源仍是目录中固定的上游来源，未实现自动从 HF 镜像下载。原 LabSim 基础资源需保留，HF 新仪器包不包含其全部内容。
 
