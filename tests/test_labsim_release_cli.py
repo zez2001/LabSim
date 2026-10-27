@@ -57,6 +57,26 @@ class ReleaseCLIContracts(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "sequence"):
                 cli.build_command(args)
 
+    def test_all_native_termination_cases_use_release_only_official_cli(self):
+        from demos.lab_cuvette_project_release_v1.run import CONDITIONS
+        requested = ["early_finish", "no_progress", "unreachable", "service_timeout", "user_interrupt"]
+        declared = next(action.choices for action in cli.parser()._subparsers._group_actions[0].choices["demo"]._actions
+                        if action.dest == "sequence")
+        self.assertEqual(tuple(declared), tuple(CONDITIONS))
+        for purpose in ("demo", "collect", "eval"):
+            args = cli.parser().parse_args([purpose, "--project-version", "Project_release_v1",
+                "--sequence", *requested, "--output", "outputs/new-not-created", "--headless", "--dry-run"])
+            argv = cli.build_command(args)
+            start = argv.index("--sequence") + 1
+            self.assertEqual(argv[start:start + len(requested)], requested)
+            self.assertEqual(argv[2], "demos.lab_cuvette_project_release_v1.run")
+            self.assertEqual(argv[argv.index("--execution-purpose") + 1], purpose)
+        for purpose, version in (("serve", "Project_release_v1"), ("demo", "Project_v1"), ("collect", "Project_v1_1")):
+            args = cli.parser().parse_args([purpose, "--project-version", version,
+                "--sequence", *requested, "--output", "outputs/new-not-created", "--dry-run"])
+            with self.assertRaisesRegex(ValueError, "sequence"):
+                cli.build_command(args)
+
     def test_release_index_is_identified_and_mixed_version_rejected(self):
         try:
             import h5py

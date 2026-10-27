@@ -149,8 +149,8 @@ def parser():
     dataset.add_argument("--output", required=True, help="New JSON read-check path")
     dataset.add_argument("--dry-run", action="store_true")
     for command in (demo, evaluation, serve, collect):
-        command.add_argument("--sequence", nargs="+", choices=("teacher", "early_finish", "no_progress"),
-            help="Release-only same-process acceptance sequence; omitting runs the normal selected backend")
+        command.add_argument("--sequence", nargs="+", choices=("teacher", "early_finish", "no_progress", "unreachable", "service_timeout", "user_interrupt"),
+            help="Release-only same-process acceptance: teacher/finish/time-limit/unreachable; service_timeout/user_interrupt are controlled injections. Omit for the normal selected backend")
         command.add_argument("--record-mode", choices=("collect", "eval", "diagnostic"),
             help="Explicit Project_release_v1 persistence mode; omitted preserves each version's default")
         command.add_argument("--project-version", choices=tuple(PROJECT_RELEASES), default="Project_v1",
