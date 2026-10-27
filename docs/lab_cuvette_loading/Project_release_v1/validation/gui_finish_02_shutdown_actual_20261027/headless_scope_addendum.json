@@ -1,0 +1,72 @@
+{
+  "schema": "labsim.Project_release_v1.shutdown_callback_scope_addendum.v1",
+  "observed_utc": "2026-10-27T10:48:51.346164+00:00",
+  "source_originals_modified": false,
+  "GPU_started": false,
+  "source": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "finding": "The same known ManipulatorFactory NameError is observed during menu dependency teardown in GUI and headless experiences that load these UI extensions. Do not describe it as exclusive to GUI.",
+  "scope": "Extension shutdown after environment recording/world closure; all three actual processes exited0. No assertion that individual extension callback cleanup was exception-free.",
+  "evidence": [
+    {
+      "run": "gui_finish_02",
+      "headless": false,
+      "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+      "exit_code": 0,
+      "process_exited": true,
+      "native_log": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02.native.log",
+      "native_log_sha256": "f7975b703f52cdc3a387cdc4912dfa61321ae12724e28d303546419ca1883f69",
+      "hits": [
+        {
+          "source_line_1based": 842,
+          "text": "2026-10-27T09:46:34Z [33,337ms] [Error] [carb.scripting-python.plugin] NameError: name 'ManipulatorFactory' is not defined"
+        },
+        {
+          "source_line_1based": 857,
+          "text": "2026-10-27T09:46:34Z [33,337ms] [Error] [omni.ext.plugin] Failed while calling `shutdown_extensions` function: /home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.manipulator.prim.core-107.0.8+69cbf6ad"
+        }
+      ],
+      "old_get_stage_state_error_observed": false
+    },
+    {
+      "run": "same_process_collect_01",
+      "headless": true,
+      "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+      "exit_code": 0,
+      "process_exited": true,
+      "native_log": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/same_process_collect_01.native.log",
+      "native_log_sha256": "f109db5f0901eb8acdd6ed18ae69ab00f5fba240c3a4f32a356fc4d530162adf",
+      "hits": [
+        {
+          "source_line_1based": 31117,
+          "text": "2026-10-27T10:26:32Z [2,353,954ms] [Error] [carb.scripting-python.plugin] NameError: name 'ManipulatorFactory' is not defined"
+        },
+        {
+          "source_line_1based": 31132,
+          "text": "2026-10-27T10:26:32Z [2,353,954ms] [Error] [omni.ext.plugin] Failed while calling `shutdown_extensions` function: /home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.manipulator.prim.core-107.0.8+69cbf6ad"
+        }
+      ],
+      "old_get_stage_state_error_observed": false
+    },
+    {
+      "run": "pi05_standard_01_env",
+      "headless": true,
+      "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+      "exit_code": 0,
+      "process_exited": true,
+      "native_log": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env.native.log",
+      "native_log_sha256": "f24812b555015d26fa885ebdb449d2c814f74bc1384e449cb9b05a6cd4d46e5f",
+      "hits": [
+        {
+          "source_line_1based": 2977,
+          "text": "2026-10-27T10:37:48Z [606,911ms] [Error] [carb.scripting-python.plugin] NameError: name 'ManipulatorFactory' is not defined"
+        },
+        {
+          "source_line_1based": 2992,
+          "text": "2026-10-27T10:37:48Z [606,911ms] [Error] [omni.ext.plugin] Failed while calling `shutdown_extensions` function: /home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.manipulator.prim.core-107.0.8+69cbf6ad"
+        }
+      ],
+      "old_get_stage_state_error_observed": false
+    }
+  ],
+  "candidate_clear_menu_data_tested": false
+}

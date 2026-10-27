@@ -1,0 +1,270 @@
+{
+  "schema": "labsim.Project_release_v1.publication_freeze.v1",
+  "frozen_utc": "2026-10-27T11:13:43.210111+00:00",
+  "mainline": "codex/labsim",
+  "native_core_runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "termination_CLI_runtime_commit": "73b1a9db9470f9706a3068a8ce24e7e09d8cfc65",
+  "qualified_reader_runtime_commit": "4a716359376de0132cc83cba3e5c7d27c791069e",
+  "final_publication_commit_authority": "Git commit containing this file and generated package 文件清单.json; no future SHA prefilled",
+  "asset_repository": "https://huggingface.co/datasets/Txie000/SLAI-Labsim",
+  "asset_revision": "bb880f098180c291f6f65995f969d48047207067",
+  "task": "lab_cuvette_project_release_v1",
+  "scene_version": "Project_release_v1.standard.v1",
+  "asset_id": "cuvette_xy_1000",
+  "original_A_seat_unchanged": true,
+  "real_calibrated": false,
+  "controller": "lab_cuvette_project_v1_1_teacher",
+  "teacher_uses_vessel_truth": true,
+  "public_policy_vessel_truth": false,
+  "contact_hold": {
+    "contact_safety_factor": 2.0,
+    "method": "contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp; no gain or force-limit change",
+    "mode": "contact_latched",
+    "actual_slip_max_m": 0.001,
+    "actual_tilt_max_deg": 1.0,
+    "contact_threshold_N": 0.03,
+    "contact_persist_s": 0.1,
+    "maximum_compression_m": 0.0003,
+    "latch_transition_policy": "preserve_first_contact_command"
+  },
+  "robot_tracking": {
+    "enabled": true,
+    "time_constant_s": 0.1,
+    "max_position_bias_m": 0.001,
+    "max_rotation_bias_rad": 0.002,
+    "version": "Project_v1_1.robot_tracking.v1"
+  },
+  "executor": {
+    "maximum_position_tracking_error_m": 0.005,
+    "maximum_orientation_tracking_error_deg": 2.0,
+    "maximum_actual_TCP_speed_m_s": 0.05,
+    "maximum_actual_joint_speed_factor": 1.25,
+    "ik_position_tolerance_m": 2e-06,
+    "ik_orientation_tolerance_rad": 2e-05,
+    "ik_iterations": 35
+  },
+  "physics": {
+    "ccd": true,
+    "contact_offset_m": 5e-05,
+    "control_hz": 60,
+    "dynamic_friction": 0.5,
+    "finger_dynamic_friction": 0.8,
+    "finger_static_friction": 1.0,
+    "hz": 240,
+    "position_iterations": 64,
+    "rest_offset_m": 0.0,
+    "restitution": 0.0,
+    "solver": "TGS",
+    "static_friction": 0.6,
+    "velocity_iterations": 1
+  },
+  "cameras": {
+    "side_camera": {
+      "prim_path": "/World/SideCamera",
+      "eye_m": [
+        -0.7,
+        -0.85,
+        1.32
+      ],
+      "target_m": [
+        0.1,
+        -0.1,
+        1.05
+      ],
+      "focal_length_cm": 1.7,
+      "horizontal_aperture_mm": 20.955,
+      "resolution": [
+        640,
+        480
+      ],
+      "fps": 60,
+      "policy_resolution": [
+        256,
+        256
+      ],
+      "upworld": [
+        0,
+        0,
+        1
+      ]
+    },
+    "wrist_camera": {
+      "parent_link": "/World/Franka/panda_hand",
+      "prim_path": "/World/Franka/panda_hand/WristCameraV11",
+      "focal_length_cm": 1.2,
+      "horizontal_aperture_mm": 20.955,
+      "resolution": [
+        640,
+        480
+      ],
+      "fps": 60,
+      "policy_resolution": [
+        256,
+        256
+      ],
+      "localeye_m": [
+        0.075,
+        0,
+        0.04
+      ],
+      "localtarget_m": [
+        0,
+        0,
+        0.12
+      ],
+      "localup": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "policy_names": [
+      "side_camera_rgb",
+      "wrist_camera_rgb"
+    ]
+  },
+  "scorer": "Project_v1_1.independent.v1",
+  "action_schema": "Project_release_v1.actions.v1",
+  "data_schema": "labsim.lab_cuvette_loading.Project_release_v1.v1",
+  "observation_contract": "demos/lab_cuvette_project_release_v1/contract.py; public RGB/robot state/camera calibration/language/filtered finger normal contact only",
+  "record_modes": {
+    "collect": "lossless gzip physics/contact; H5 60Hz unchanged; native3video30Hz; no fourth duplicate video",
+    "eval": "same persistence as collect at this release",
+    "diagnostic": "plain full physics/contact JSONL and fourth collector video"
+  },
+  "CLI_default_if_version_omitted": "Project_v1",
+  "config_file_raw_module_record_default": "diagnostic; official CLI overrides by explicit --record-mode or purpose default",
+  "scene_randomization": false,
+  "training_performed": false,
+  "paid_model_calls_this_round": 0,
+  "source_files": [
+    {
+      "path": "config/lab_cuvette_loading/Project_release_v1/standard.yaml",
+      "sha256": "45cfd2f4361dc7a73411b727ae15e92823b0569ff03ef5d4ede4521213d4e40d"
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+      "sha256": "054bcdd8fff283a877fc2e2da897e55aaa53bc63935cdca1f3c2504b68e03beb"
+    },
+    {
+      "path": "data_collectors/lab_cuvette_project_release_collector.py",
+      "sha256": "8e8dd0737062da8a150c88efdacf3da7d0f552db2e22fd09c9d765d04dfa6a57"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/__init__.py",
+      "sha256": "c9961d8245f2c3953e4138a477024695aaef47b2e8effc3ceff7e62c686ec228"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/contract.py",
+      "sha256": "d73ca5a8aacfc51ebae05e7946808081cdd82a196f438d114b76a1de5903c8df"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/dataset_index.py",
+      "sha256": "d7633dc674b62d1df4dafb04fbb5408e19cfbbf6714466d69c5f98aa292f17ac"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/environment.py",
+      "sha256": "f33aeea59e4b598ad3da1c6e130337f4adb144fc6f21e4c45c76b21d8bec2a98"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/launch.py",
+      "sha256": "6ff004dafe92aa80919b7495af5ab6b748d05c031c4aaa31d817872a6e7f78b6"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/recording.py",
+      "sha256": "19ca97b8a531618ef6f620049283a8d17d912bb0919e3839e183c1e226148474"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/rpc.py",
+      "sha256": "b8569b9f8d030888131f150dc631c527be69f8265e7732b3780db64cb4032b3c"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/run.py",
+      "sha256": "0a68290420e0e56565b05d3de371fd8eb506526dbe3b5f75aa901b3b2e71fac0"
+    },
+    {
+      "path": "demos/lab_cuvette_project_release_v1/shutdown.py",
+      "sha256": "4579d5a35fc4a845cdb4b132c0fd29cf5c90864b1997bfd956dea6ae88dbcf7b"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/camera_audit.py",
+      "sha256": "386a8bdcf2c7260ac5b206018bba32f8b26acacec004c3f81e0b3580abb278dd"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/checked_probes.py",
+      "sha256": "5f087e64251542eaf0e2da548325ece50c83ed45333054f2c77c684b43e4aaea"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/closed_trace_probe.py",
+      "sha256": "14865ccd3b908da113b613bbacde69af82f1c3e9af1c271b8e34120f7089c5b2"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/continuous_ik.py",
+      "sha256": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/contract.py",
+      "sha256": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/diagnostics.py",
+      "sha256": "665785b48085faef5e7467654e2402b009fc7b496f7e36665a3dd6faf07450ff"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/environment.py",
+      "sha256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/free_space_plan.py",
+      "sha256": "453ff97f91b0baf98eb8a1d10366748577a8d39e0367d248239c128066c2f3be"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "sha256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/probes.py",
+      "sha256": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/robot_tracking.py",
+      "sha256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/run.py",
+      "sha256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "sha256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/temporal_observation_qa.py",
+      "sha256": "79b5ad08a26fcd707f11775239b73df7e00feddf7fcb3c7bd956a0f458042e33"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/visibility_probe.py",
+      "sha256": "d9a92aee71c0d50b41b7d9aac983aea2076b1714d4337e81e022f9d485cbe588"
+    },
+    {
+      "path": "policy/dataset/lab_cuvette_project_release_dataset.py",
+      "sha256": "80f0b400b1553a438d6f2c17364fd00ddf9009dd950cd6c1aed0d14f65a911d8"
+    },
+    {
+      "path": "policy/dataset/lab_cuvette_project_v1_1_dataset.py",
+      "sha256": "475b073e835b7d933fca3c1d537deee5371ef4e8f7c786396905640bfba4496d"
+    },
+    {
+      "path": "scripts/labsim_cli.py",
+      "sha256": "28a90d8a9b3010ee7a89556d0008d2a9414ee45162d0b1cbd31270012d8e8784"
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_release.py",
+      "sha256": "804f4e0aae80600d5975a139ccc067a1ed97c72406145b6eedb41997a6af3b50"
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "sha256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11"
+    }
+  ]
+}

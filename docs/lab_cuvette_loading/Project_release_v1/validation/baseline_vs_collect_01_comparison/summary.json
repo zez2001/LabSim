@@ -1,0 +1,209 @@
+{
+  "schema": "labsim.Project_release_v1.baseline_collect_same_scope_comparison.v1",
+  "UTC": "2026-10-27T10:32:37.409906+00:00",
+  "source_baseline_audit_SHA256": "55f13ec7db6bb44b4b27c19eee23cb2041f52fb5fca86f4846665d2737ac2191",
+  "source_collect_audit_SHA256": "d123b7b256e23bb1a75d84a596afbcfbfb6bce52f74ce01df1f896df64b7b1e2",
+  "performance": {
+    "baseline_episode": "baseline_diagnostic_01/episode_0000",
+    "optimized_first_teacher": "same_process_collect_01/episode_0000",
+    "baseline_total_episode_bytes": 3878360980,
+    "collect_total_episode_bytes": 2327380401,
+    "saved_bytes": 1550980579,
+    "saved_fraction": 0.3999061941366788,
+    "baseline_physics_contact_bytes": 1809906946,
+    "collect_physics_contact_stored_bytes": 269707641,
+    "physics_contact_stored_reduction_fraction": 0.8509825924498109,
+    "baseline_H5_bytes": 1944570883,
+    "collect_H5_bytes": 1945888286,
+    "H5_delta_bytes": 1317403,
+    "baseline_video_count": 4,
+    "collect_video_count": 3,
+    "baseline_video_bytes": 55591990,
+    "collect_video_bytes": 43491888,
+    "baseline_first_teacher_rollout_s": 1129.264555573929,
+    "collect_first_teacher_rollout_s": 1086.5978266109014,
+    "observed_first_teacher_rollout_change_fraction": -0.03778275759424954,
+    "collect_third_episode_teacher_rollout_s": 1191.8855043429649,
+    "controlled_performance_claim": "Storage reduction measured; speed is observational across these runs, not an isolated benchmark or reliable throughput improvement.",
+    "same_simulation_steps_and_duration": true,
+    "full_unique_H5_read_times_s": {
+      "baseline": 13.625110002001747,
+      "collect_first": 14.182783724041656,
+      "collect_third": 14.594537277007475
+    },
+    "close_timing_scope": "New two-phase task timing stops before final commit; baseline stops after earlier publication. Preserve raw intervals and do not call their difference an isolated writer optimization."
+  },
+  "resource_trend": {
+    "episode_end_RSS_bytes": [
+      8337670144,
+      8517632000,
+      8919863296
+    ],
+    "after_reset_RSS_bytes": [
+      5024276480,
+      8517734400,
+      8642215936
+    ],
+    "end_RSS_delta_first_to_third_bytes": 582193152,
+    "end_RSS_delta_first_to_third_fraction": 0.06982683914630039,
+    "after_reset_FDs": [
+      338,
+      338,
+      338
+    ],
+    "episode_end_FDs": [
+      332,
+      332,
+      332
+    ],
+    "episode_end_VRAM_MiB": [
+      3591.0,
+      3591.0,
+      3591.0
+    ],
+    "after_reset_VRAM_MiB": [
+      3591.0,
+      3591.0,
+      3591.0
+    ],
+    "reset_resource_conclusion": "FD and sampled VRAM return to the same levels across all three episodes. RSS grows by about 0.58GB between first/third episode ends; this is not proof of a leak or memory plateau. Process exits, but long-run RSS stability remains unverified.",
+    "scope": "Sparse process RSS/VRAM/FD samples and kernel high-water reports; no reconstructed continuous VRAM peak or post-exit live memory.",
+    "source": "outputs/lab_cuvette_loading/Project_release_v1/same_process_collect_01/resource_samples.json",
+    "source_sha256": "c26aaf0d5f609d278096abd0623a7f2d1f78d1bedee407a7928f69e344bf3e86"
+  },
+  "initial_actual_state_comparison": [
+    {
+      "episode": "episode_0000",
+      "source_sha256": "4affb86ae973b065743a400383824d8048674477dc139f5ec6320e3cadf2e52f",
+      "object_position_m": [
+        -0.08500000834465027,
+        -0.17499999701976776,
+        0.7430000305175781
+      ],
+      "object_quaternion_wxyz": [
+        0.7071091532707214,
+        1.1641532182693481e-08,
+        -7.450580596923828e-09,
+        0.7071045637130737
+      ],
+      "source_bottom_gap_m": 3.0360991498668e-08,
+      "source_rack_penetration_m": 0.0,
+      "object_bottom_world_z_m": 0.7430000303609915,
+      "joints9": [
+        0.1779361367225647,
+        -1.2082452774047852,
+        -0.8200522661209106,
+        -2.87337064743042,
+        -0.7667176723480225,
+        1.7454451322555542,
+        -0.8053153157234192,
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "finger_joint_positions_m": [
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "gripper_target_native_m": 0.04,
+      "gripper_effort_limit_N": 8.0,
+      "t": 0.016666666666666666,
+      "physics_step": 4,
+      "object_position_distance_from_first_m": 0.0,
+      "object_orientation_difference_from_first_deg": 0.0,
+      "joint9_max_absolute_difference_from_first": 0.0
+    },
+    {
+      "episode": "episode_0001",
+      "source_sha256": "c29472a907c4c3685b7f74399014101f6db6a31cfdcdd76e27a38260c7135736",
+      "object_position_m": [
+        -0.08500000834465027,
+        -0.17499999701976776,
+        0.7430000305175781
+      ],
+      "object_quaternion_wxyz": [
+        0.7071091532707214,
+        1.1641532182693481e-08,
+        -7.450580596923828e-09,
+        0.7071045637130737
+      ],
+      "source_bottom_gap_m": 3.0360991498668e-08,
+      "source_rack_penetration_m": 0.0,
+      "object_bottom_world_z_m": 0.7430000303609915,
+      "joints9": [
+        0.1779361367225647,
+        -1.2082452774047852,
+        -0.8200522661209106,
+        -2.87337064743042,
+        -0.7667176723480225,
+        1.7454451322555542,
+        -0.8053153157234192,
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "finger_joint_positions_m": [
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "gripper_target_native_m": 0.04,
+      "gripper_effort_limit_N": 8.0,
+      "t": 0.016666666666666666,
+      "physics_step": 4,
+      "object_position_distance_from_first_m": 0.0,
+      "object_orientation_difference_from_first_deg": 0.0,
+      "joint9_max_absolute_difference_from_first": 0.0
+    },
+    {
+      "episode": "episode_0002",
+      "source_sha256": "34d44295f0a2c5c29da4385dc74c3798597dc0d7cc9fec056aab1be484d3d4a4",
+      "object_position_m": [
+        -0.08500000834465027,
+        -0.17499999701976776,
+        0.7430000305175781
+      ],
+      "object_quaternion_wxyz": [
+        0.7071091532707214,
+        1.1641532182693481e-08,
+        -7.450580596923828e-09,
+        0.7071045637130737
+      ],
+      "source_bottom_gap_m": 3.0360991498668e-08,
+      "source_rack_penetration_m": 0.0,
+      "object_bottom_world_z_m": 0.7430000303609915,
+      "joints9": [
+        0.1779361367225647,
+        -1.2082452774047852,
+        -0.8200522661209106,
+        -2.87337064743042,
+        -0.7667176723480225,
+        1.7454451322555542,
+        -0.8053153157234192,
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "finger_joint_positions_m": [
+        0.03999993950128555,
+        0.03999996930360794
+      ],
+      "gripper_target_native_m": 0.04,
+      "gripper_effort_limit_N": 8.0,
+      "t": 0.016666666666666666,
+      "physics_step": 4,
+      "object_position_distance_from_first_m": 0.0,
+      "object_orientation_difference_from_first_deg": 0.0,
+      "joint9_max_absolute_difference_from_first": 0.0
+    }
+  ],
+  "normal_reader_filter_counts": {
+    "success": 2,
+    "failure": 1,
+    "all_valid": 3,
+    "incomplete": 0
+  },
+  "dataset_admission_scope": "Normal ACT/DP readers use truthful qualification fields. Controlled early_finish task failure is distinct from real model service failure or human interruption.",
+  "caveats": [
+    "No random scenarios or policy optimization.",
+    "RAM plateau not established; GPU/FD samples stable across this three-episode run.",
+    "Speed change is not an isolated controlled benchmark.",
+    "No source run files, labels, H5 or raw logs modified."
+  ]
+}

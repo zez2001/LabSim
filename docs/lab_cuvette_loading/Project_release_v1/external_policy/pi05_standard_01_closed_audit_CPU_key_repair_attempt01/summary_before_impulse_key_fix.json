@@ -1,0 +1,330 @@
+{
+  "schema": "labsim.Project_release_v1.pi05.closed_raw_action_audit.v1",
+  "observed_utc": "2026-10-27T10:42:23.689386+00:00",
+  "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "all_model_policy_environment_PIDs_absent": true,
+  "H5_opened": false,
+  "actual_model_requests": 69,
+  "actual_model_forward_records": 69,
+  "actual_action_receipts": 341,
+  "model_input_output_exact_crosschecks_passed": 69,
+  "model_input_keys": [
+    "main_images",
+    "wrist_images",
+    "states"
+  ],
+  "actual_input_shapes": {
+    "main_images": {
+      "shape": [
+        1,
+        480,
+        640,
+        3
+      ],
+      "dtype": "uint8",
+      "sha256": "aa6cec2c0e46cfd03d2ae9996ef04ac8a93e3f0a7925635750030650dbeb1798"
+    },
+    "wrist_images": {
+      "shape": [
+        1,
+        480,
+        640,
+        3
+      ],
+      "dtype": "uint8",
+      "sha256": "16134b87a29fbb3a1c8c7726b1b5d11efa0f844b838f9224e3997ba0fbe25269"
+    },
+    "states": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "sha256": "9911ec6978c2a77a392ad30eed64bfa3941f5de7720df66da5e61346b4c6b9ce"
+    }
+  },
+  "raw_model_output_shape": [
+    1,
+    5,
+    7
+  ],
+  "normalization": "inherited checkpoint quantile unnormalization; server output7D, not internal diffusion latent",
+  "model_metadata": {
+    "schema": "labsim.Env_v1.pi05_endpoint.v1",
+    "checkpoint_id": "RLinf-Pi05-LIBERO-130-fullshot-SFT",
+    "checkpoint_path": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT",
+    "weights_sha256": "4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683",
+    "norm_stats_sha256": "dae37d79a22108af83df9189c6710a3ec8e077d65b28e34bdf1da724e5ae30f1",
+    "embodiment": "libero",
+    "output_action_dim": 7,
+    "output_semantics": "libero_normalized_osc_pose_delta_and_gripper_sign",
+    "output_unnormalized_by_server": true,
+    "model_class": "rlinf.models.embodiment.openpi.openpi_action_model.OpenPi0ForRLActionPrediction",
+    "action_chunk": 5,
+    "action_horizon": 10,
+    "model_load_and_hash_wall_s": 37.10458702093456,
+    "torch_seed": 0,
+    "truth_observation_used": false,
+    "checkpoint_is_labsim_finetuned": false
+  },
+  "adapter_pure_replay_exact_actions": 341,
+  "environment_nested_raw_requests_exact_actions": 341,
+  "actual9D_commands_trace_and_physics_exact_boundaries": 1021,
+  "full_intervals": 340,
+  "partial_intervals": 1,
+  "actual_policy_simulation_duration_s": 17.01666666666667,
+  "physics_steps_including_initialization": 4088,
+  "actual_action_physics_steps": 4084,
+  "simulation_endpoint_s": 17.033333333333335,
+  "all69_model_wait_pause_checks_exact": true,
+  "unused_last_chunk_rows": 4,
+  "contact_event_records": 16353,
+  "forbidden_contact_events": 1,
+  "first_forbidden_event": {
+    "physics_step": 4088,
+    "t": 17.033333333333335,
+    "phase": "POLICY",
+    "colliders": [
+      "/World/Franka/panda_hand/geometry/panda_hand",
+      "/World/Instrument/Collision/SourceMesh2"
+    ],
+    "type": "ContactEventType.CONTACT_FOUND",
+    "points": [
+      {
+        "position_m": [
+          0.08017998933792114,
+          0.010159005410969257,
+          0.9591425657272339
+        ],
+        "normal_raw": [
+          -0.5852541327476501,
+          0.16576911509037018,
+          0.7937242388725281
+        ],
+        "impulse_raw_Ns": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "force_raw_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": -0.00012855231761932373,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      },
+      {
+        "position_m": [
+          0.07842230796813965,
+          0.007414014544337988,
+          0.9582030773162842
+        ],
+        "normal_raw": [
+          -0.5852541327476501,
+          0.16576911509037018,
+          0.7937242388725281
+        ],
+        "impulse_raw_Ns": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "force_raw_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 4.350021481513977e-05,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      },
+      {
+        "position_m": [
+          0.07842233777046204,
+          0.009180829860270023,
+          0.9582030177116394
+        ],
+        "normal_raw": [
+          -0.5852541327476501,
+          0.16576911509037018,
+          0.7937242388725281
+        ],
+        "impulse_raw_Ns": [
+          -0.15654146671295166,
+          0.044339269399642944,
+          0.21230222284793854
+        ],
+        "force_raw_N": [
+          -37.5699520111084,
+          10.641424655914307,
+          50.95253348350525
+        ],
+        "separation_m": -0.00024938397109508514,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      },
+      {
+        "position_m": [
+          0.07706424593925476,
+          0.008251667022705078,
+          0.9570884704589844
+        ],
+        "normal_raw": [
+          -0.5852541327476501,
+          0.16576911509037018,
+          0.7937242388725281
+        ],
+        "impulse_raw_Ns": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "force_raw_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": -5.49610967937042e-06,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      }
+    ],
+    "possible_duplicate_same_step": false,
+    "forbidden_robot_environment": true,
+    "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+  },
+  "first_forbidden_physics_state": {
+    "physics_step": 4088,
+    "t": 17.033333333333335,
+    "phase": "POLICY",
+    "actual_tcp_position_m": [
+      0.06050505405230314,
+      -0.08959423864964614,
+      1.0090877788242631
+    ],
+    "forbidden_robot_environment_contact_this_step": true
+  },
+  "forbidden_points": 4,
+  "positive_impulse_points": 0,
+  "physics_phase_counts": {
+    "RESET": 1,
+    "RESET_INITIALIZATION": 4,
+    "POLICY": 4084
+  },
+  "task_result": {
+    "task_success": false,
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "failure_type": "SAFETY_COLLISION",
+    "failure_domain": "safety",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "complete": true,
+    "publication_state": "complete",
+    "eligible_for_failure_analysis": true,
+    "eligible_for_success_bc": false,
+    "real_calibrated": false,
+    "source_slot_cleared": false,
+    "grasp_success": false,
+    "transport_success": false,
+    "post_retreat_window": {
+      "reason": "actual_gripper_retreat_not_observed",
+      "sample_count": 0,
+      "stable": null,
+      "status": "unavailable"
+    }
+  },
+  "forward_wall_sum_s": 7.637430738657713,
+  "forward_wall_max_s": 0.6011809220071882,
+  "model_token_truncation_warning_count": 69,
+  "model_language_modified_for_run": false,
+  "cubence_ledger_unchanged": true,
+  "termination": "Actual natural safety collision before20s cap; no task success, no forced completion or replay.",
+  "limitations": [
+    "Physics trust is declared input geometry/recorded state scope; no cooked global geometry or real calibration certificate.",
+    "Whole task did not grasp or clear the source, release or retreat.",
+    "This is one real zero-shot backend integration attempt, not a policy success-rate estimate.",
+    "Read H5 and videos separately through normal reader after closure; this audit has not opened H5.",
+    "Scheduler terminal environment_service_running boolean remained stale true although its phase/proofs/PID checks establish all services closed."
+  ],
+  "source_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy/policy_events.jsonl",
+      "bytes": 2393985,
+      "sha256": "f4d639241bbacb3a93f4ab94af56b323db203d3b0a9a87192a801b184788b6b7"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy/request.json",
+      "bytes": 2035,
+      "sha256": "b23961ef1016d9a39002940bfee1cee57757e80eadde7cd0a39572d0077b6cf6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy/result.json",
+      "bytes": 1958,
+      "sha256": "7f9b95d09542761905e6e0128da158fd8c0ac700a2a1dc0d7acd08522a284c52"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy/process_exit.json",
+      "bytes": 895,
+      "sha256": "f047deb70b0763e6d1705b0be8fb71c6e32b995ca52e930ac3a05dd1696e8a41"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_model/inference.jsonl",
+      "bytes": 180678,
+      "sha256": "3bc764f6dbe0f5fd92243bb10209803cceac84d67ac71a9ff92620a17425d520"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_model/model_metadata.json",
+      "bytes": 848,
+      "sha256": "c14466595dee4b104c4e887f185e223c08425fece633d263a1b0cadeffca71a1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_model/process_exit.json",
+      "bytes": 835,
+      "sha256": "e29a892a99fc41d31aaba2f8f9fb6e25c74aefd2212d4d0f1867d4756e0e72b8"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/action_receipts.jsonl",
+      "bytes": 1035097,
+      "sha256": "48912e8de6249a25f7592bebd8fac4f130a81adc8c12d3dbeaa1157fca5d0708"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/execution_trace.jsonl",
+      "bytes": 8158994,
+      "sha256": "a04c6e7810249b662b808692202328434d56cc6e3fecacde2c158e351f0e851a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/physics_records.jsonl.gz",
+      "bytes": 22238872,
+      "sha256": "414f0aef554d161851c26279bdcc8730f28eba06e876a06e0f4aeb885c48de0f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/native_contact_events.jsonl.gz",
+      "bytes": 5419144,
+      "sha256": "b705f9672e02a5239cf96c4544ab2bb337dd6fdf50bec8803f8cda4f4052e67b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/result.json",
+      "bytes": 5096,
+      "sha256": "33d4de45c2af342ad57633e41c535650617913252194ec0cd37930a598b9d9a3"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/recording_closed_receipt.json",
+      "bytes": 1217,
+      "sha256": "374c8d276a6a304ed5f74aa0a2752ee35ced58c1e158907537473c2adc12d728"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/process_exit.json",
+      "bytes": 978,
+      "sha256": "c52e545eeb4ba4c64004e72bfd03509e04dacdb22a9dad7b70dfe0d9400916fc"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/run_manifest.json",
+      "bytes": 823,
+      "sha256": "6ff41523e9885dfbcee2091d48185c6ea0a964372c9d6c41b7b5894fa1c56982"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_model.native.log",
+      "bytes": 11601,
+      "sha256": "ea860ef9fcbd436f595766a78c708fdfce5810995352d5b52d3818acf98e1b5f"
+    }
+  ]
+}

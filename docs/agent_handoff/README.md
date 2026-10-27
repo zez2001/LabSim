@@ -6,9 +6,9 @@
 
 ## 选择文件
 
-当前默认[清单](package.json)是 [Project_v1_1 本轮结果清单](Project_v1_1_current/package.json)：8页DOCX及Markdown报告、完整teacher成功与释放近景、GPT座口滑移和最新未完成尝试、逐条结果与复现证据，约18MB。先读 [本轮说明](Project_v1_1_current/00_给Agent阅读说明.md)。
+当前默认[清单](package.json)是 [Project_release_v1 环境发布技术反馈清单](Project_release_v1_current/package.json)：本轮验收报告、同进程三集、真实 π0.5 接入、五类终止闭合、正式 ACT/DP 读取、性能对比和必要源码。先读 [本轮说明](Project_release_v1_current/00_给Agent阅读说明.md)。不携带多 GB H5、环境或模型权重；来源位置、大小、SHA 与获取方式在包内。
 
-包内保持仓库相对层级，DOCX本地视频和图片链接可直接使用。旧 [Project_v1结果清单](Project_v1_current/package.json) 及其他历史包保留。
+本轮另行生成仅一个四页 DOCX 和两段原样视频的组会 ZIP，组会包不混入技术证据。历史 [Project_v1_1 清单](Project_v1_1_current/package.json)、[Project_v1 清单](Project_v1_current/package.json) 及旧包均保留。
 
 纯项目交接的旧配置仍保留在 [project_handoff/package.json](project_handoff/package.json)，历史实验通过固定提交的 GitHub 链接引用。
 
@@ -37,7 +37,7 @@ Markdown里已选中的文件链接会改为包内相对链接；未复制的仓
 先验证改动、提交推送并核对远端SHA，再在工程根目录运行：
 
 ```bash
-python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_Project_v1_1_本轮结果阅读包_NEW
+python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_Project_release_v1_技术反馈包_NEW
 ```
 
 输出目录必须尚不存在。实验资料通常控制在20MiB内；纯工程整理应更小。不要为接近体积预算而复制不相关历史媒体。

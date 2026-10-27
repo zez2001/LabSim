@@ -1,0 +1,262 @@
+{
+  "schema": "labsim.Project_release_v1.pi05.client_closed_audit.v1",
+  "observed_utc": "2026-10-27T10:37:06.373917+00:00",
+  "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "actual_model_requests": 69,
+  "actions_submitted_acknowledged": 341,
+  "unique_action_ids": 341,
+  "actual_control_ticks": 1021,
+  "actual_physics_steps_from_action_receipts": 4084,
+  "actual_policy_simulation_duration_s": 17.01666666666667,
+  "model_wait_checks": 69,
+  "all69_pause_checks_passed": true,
+  "full_intervals": 340,
+  "partial_intervals": 1,
+  "last_action": {
+    "action_id": "pi05:d31ee852135bbfe3e6d575e1a671617d5e101ee67e999e1de85528de419ec3d1",
+    "episode_id": "510b10af-2470-41af-bc58-2468ed7cc690",
+    "observation_id": "510b10af-2470-41af-bc58-2468ed7cc690:1020",
+    "accepted": true,
+    "execution_finished": true,
+    "target_reached": false,
+    "safety_stopped": true,
+    "completed": true,
+    "completed_semantics": "Execution interval ended; target_reached independently measures actual endpoint.",
+    "requested_duration_s": 0.05,
+    "executed_duration_s": 0.016666666666669272,
+    "executed_control_ticks": 1,
+    "partial_execution": true,
+    "simulation_time_before": 17.016666666666666,
+    "requested_start_TCP": {
+      "position_m": [
+        0.06036054904611583,
+        -0.08967224634648002,
+        1.0089916408887223
+      ],
+      "quaternion_wxyz": [
+        0.4340666893029427,
+        0.0004279911285860148,
+        -0.8267349748235002,
+        0.3579039081440199
+      ]
+    },
+    "requested_target_TCP": {
+      "position_m": [
+        0.06086054904611583,
+        -0.08917224634648002,
+        1.0084916408887223
+      ],
+      "quaternion_wxyz": [
+        0.43643421391333886,
+        -0.0013778033397341778,
+        -0.8251469323721435,
+        0.35868623974254216
+      ]
+    },
+    "maximum_position_tracking_error_m": 0.00027824056330531664,
+    "maximum_orientation_tracking_error_rad": 0.0023975036344531316,
+    "stop_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "control_steps_before": 1020,
+    "physics_steps_before": 4084,
+    "plan": {
+      "planned_ticks": 3,
+      "requested_ticks": 3,
+      "maximum_FK_position_error_m": 2.5210253502251575e-16,
+      "maximum_FK_orientation_error_rad": 3.4219371797089426e-16,
+      "maximum_joint_step_rad": 0.002393340030883928,
+      "wall_seconds": 0.02104336000047624,
+      "scope": "Continuous kinematics only; not collision or dynamics certification",
+      "FK_goal_scope": "nominal + frozen current robot tracking estimate",
+      "runtime_feedback_revalidation": true
+    },
+    "status": "STOPPED",
+    "executed_physics_steps": 4,
+    "incomplete_control_interval": false,
+    "simulation_time_after": 17.033333333333335,
+    "observation_id_after": "510b10af-2470-41af-bc58-2468ed7cc690:1021",
+    "successor_observation_available": true,
+    "actual_endpoint_valid": true,
+    "actual_endpoint_TCP": {
+      "position_m": [
+        0.06050505405230314,
+        -0.08959423864964614,
+        1.0090877788242631
+      ],
+      "quaternion_wxyz": [
+        0.43534145577214134,
+        0.0008003115256503573,
+        -0.8261680192697157,
+        0.35766406071006007
+      ]
+    },
+    "TCPpose": {
+      "position_m": [
+        0.06050505405230314,
+        -0.08959423864964614,
+        1.0090877788242631
+      ],
+      "quaternion_wxyz": [
+        0.43534145577214134,
+        0.0008003115256503573,
+        -0.8261680192697157,
+        0.35766406071006007
+      ]
+    },
+    "final_position_error_m": 0.0008123020575796831,
+    "final_orientation_error_rad": 0.00566596100112272,
+    "tracking_error_coverage_complete": true,
+    "tracking_error_sampling": "completed control boundaries; not a physics-substep maximum",
+    "target_reached_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+    "requested_gripper_opening_m": 0.08,
+    "applied_gripper_opening_m": 0.08,
+    "requested_effort_limit_N": 8.0,
+    "applied_effort_limit_N": 8.0,
+    "stop_domain": "safety",
+    "endpoint_tolerances": {
+      "position_m": 0.001,
+      "orientation_rad": 0.008726646259971648
+    },
+    "wall_seconds": 0.189220427069813,
+    "terminated": true,
+    "gripper_opening_m": 0.07998701184988022
+  },
+  "raw_actions_match_adapted_request_raw_field_all341": true,
+  "RPC_receipts_match_environment_small_receipt_log_all341": true,
+  "no_replayed_actions": true,
+  "unused_last_chunk_rows": 4,
+  "model_process_proof": {
+    "schema": "labsim.Project_release_v1.pi05_model_process.v1",
+    "pid": 1647240,
+    "process_exited": true,
+    "exit_code": 0,
+    "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+    "command": [
+      "/home/wujing/Desktop/vla/rpent/.venv/bin/python",
+      "-m",
+      "policy_backends.lab_cuvette_env_v1.pi05_server",
+      "--model-path",
+      "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_model",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8098",
+      "--seed",
+      "0"
+    ],
+    "wall_seconds": 333.3539769750787,
+    "completion_evidence": "parent Popen.wait returned; actual model PID absent",
+    "credentials_in_child": false,
+    "UTC": "2026-10-27T10:33:21.916759+00:00"
+  },
+  "policy_process_proof": {
+    "schema": "labsim.Project_release_v1.pi05_policy_process.v1",
+    "pid": 1653522,
+    "process_exited": true,
+    "exit_code": 0,
+    "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+    "command": [
+      "/home/wujing/Desktop/vla/rpent/.venv/bin/python",
+      "-m",
+      "policy.backends.rpent_compat",
+      "--backend",
+      "pi05",
+      "--env-endpoint",
+      "http://127.0.0.1:8097",
+      "--vla-endpoint",
+      "http://127.0.0.1:8098",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy",
+      "--max-simulation-s",
+      "20",
+      "--max-model-requests",
+      "80",
+      "--max-actions",
+      "400",
+      "--seed",
+      "0"
+    ],
+    "wall_seconds": 170.1717315290589,
+    "completion_evidence": "parent Popen.wait returned; actual policy PID absent",
+    "credentials_in_child": false,
+    "UTC": "2026-10-27T10:31:16.786325+00:00"
+  },
+  "environment_still_running_at_this_audit": true,
+  "H5_or_raw_physics_contact_streams_opened": false,
+  "task_labels": {
+    "task_success": false,
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "failure_domain": "safety",
+    "failure_type": "SAFETY_COLLISION",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "complete": true,
+    "publication_state": "complete",
+    "eligible_for_failure_analysis": true,
+    "eligible_for_success_bc": false,
+    "real_calibrated": false,
+    "source_slot_cleared": false,
+    "grasp_success": false,
+    "transport_success": false
+  },
+  "actual_collision_pair": "unknown until full closed-environment contact audit",
+  "pending": [
+    "model input NPZ/outputNPY source-byte crosscheck and raw→adapter pure replay",
+    "actual9D low-level command/execution trace and collision shape attribution",
+    "closed-process H5/normal reader/video validation"
+  ],
+  "source_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy/policy_events.jsonl",
+      "bytes": 2393985,
+      "sha256": "f4d639241bbacb3a93f4ab94af56b323db203d3b0a9a87192a801b184788b6b7"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy/process_exit.json",
+      "bytes": 895,
+      "sha256": "f047deb70b0763e6d1705b0be8fb71c6e32b995ca52e930ac3a05dd1696e8a41"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_policy/result.json",
+      "bytes": 1958,
+      "sha256": "7f9b95d09542761905e6e0128da158fd8c0ac700a2a1dc0d7acd08522a284c52"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_model/process_exit.json",
+      "bytes": 835,
+      "sha256": "e29a892a99fc41d31aaba2f8f9fb6e25c74aefd2212d4d0f1867d4756e0e72b8"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_model/model_metadata.json",
+      "bytes": 848,
+      "sha256": "c14466595dee4b104c4e887f185e223c08425fece633d263a1b0cadeffca71a1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/action_receipts.jsonl",
+      "bytes": 1035097,
+      "sha256": "48912e8de6249a25f7592bebd8fac4f130a81adc8c12d3dbeaa1157fca5d0708"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/result.json",
+      "bytes": 5096,
+      "sha256": "33d4de45c2af342ad57633e41c535650617913252194ec0cd37930a598b9d9a3"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/independent_score.json",
+      "bytes": 5336,
+      "sha256": "02f63b7550e7c3275f23c8ee87148b0e70b266dffb0d3622eab40964c1c32356"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/episode_0000_complete.json",
+      "bytes": 303,
+      "sha256": "cf6c7a1bc68c38a7c2c4803371175a6faaf26ed0a7100f508d835fc8a74acd99"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/recording_closed_receipt.json",
+      "bytes": 1217,
+      "sha256": "374c8d276a6a304ed5f74aa0a2752ee35ced58c1e158907537473c2adc12d728"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "labsim.Env_v1.normal_dataset_read.v1",
+  "source": "/home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Project_release_v1/validation/pi05_standard_01_env_closed/real_policy_evaluation_only_index.hdf5",
+  "sample_filter": "all_valid",
+  "policy_type": "act",
+  "episodes": [
+    "episode_0000"
+  ],
+  "episode_labels": {
+    "episode_0000": {
+      "task_success": false,
+      "record_valid": true,
+      "failure_type": "SAFETY_COLLISION",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION"
+    }
+  },
+  "excluded_episodes": {},
+  "transitions": 1021,
+  "selected_indices": [
+    0,
+    510,
+    1020
+  ],
+  "checks": [
+    {
+      "episode_id": "episode_0000",
+      "transition": 0,
+      "raw_task_success": false,
+      "exact_executed_actions": true,
+      "exact_saved_RGB": true
+    },
+    {
+      "episode_id": "episode_0000",
+      "transition": 510,
+      "raw_task_success": false,
+      "exact_executed_actions": true,
+      "exact_saved_RGB": true
+    },
+    {
+      "episode_id": "episode_0000",
+      "transition": 1020,
+      "raw_task_success": false,
+      "exact_executed_actions": true,
+      "exact_saved_RGB": true
+    }
+  ],
+  "batch_shapes": {
+    "obs/side_camera_rgb": [
+      3,
+      3,
+      256,
+      256
+    ],
+    "obs/wrist_camera_rgb": [
+      3,
+      3,
+      256,
+      256
+    ],
+    "obs/agent_pose": [
+      3,
+      8
+    ],
+    "action": [
+      3,
+      16,
+      8
+    ]
+  },
+  "source_labels_unchanged": true,
+  "temporary_or_fake_indexes_created": false,
+  "optimizer_or_training_executed": false
+}

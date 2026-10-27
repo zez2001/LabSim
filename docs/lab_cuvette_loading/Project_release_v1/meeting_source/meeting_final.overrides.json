@@ -1,0 +1,65 @@
+{
+  "opening": "LabSim 已完成固定standard场景的同进程连续运行、失败后reset恢复、双视角采集和正式入口的数据读取。真实π0.5策略也已通过正式RPC持续交互，最终由碰撞安全守卫结束。环境验收区分任务失败、服务异常和数据故障；本轮不以零样本装载成功率为门槛。",
+  "scene_picture": "release_teacher_scene.png",
+  "retreat_picture": "release_teacher_retreat.png",
+  "teacher_video": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/same_process_collect_01/episode_0000/dual_view.mp4",
+  "baseline": "本轮在同一个Isaac进程实际完成：teacher完整成功 → 3秒受控提前结束 → reset后teacher再次完整成功。三集UUID唯一，旧动作拒绝且零步执行，初态记录一致。正式dataset-check已在干净checkout通过，ACT/DP的成功、失败、全部有效筛选均为2/1/3。",
+  "capability_rows": [
+    [
+      "完整任务与连续reset",
+      "已实际通过",
+      "同进程成功—受控结束—成功，未重启Isaac"
+    ],
+    [
+      "控制状态与动作ID",
+      "已核查",
+      "接触保持、跟踪补偿重置；旧动作拒绝零步"
+    ],
+    [
+      "数据闭合与正常读取",
+      "正式入口已通过",
+      "三集H5全读；干净checkout正式CLI的ACT/DP读取"
+    ],
+    [
+      "索引与标签筛选",
+      "正式入口已通过",
+      "success 2 / failure 1 / all_valid 3"
+    ],
+    [
+      "真实π0.5零样本接入",
+      "已持续执行",
+      "69次推理、341动作、17.017秒；碰撞安全结束"
+    ],
+    [
+      "日志与重复录像",
+      "体积有实测收益",
+      "同口径完整episode减少约40%；H5图像未删减"
+    ],
+    [
+      "关闭与异常处理",
+      "五类闭合已核验",
+      "服务与中止为明确注入；退出SDK扩展错误仍有残留"
+    ],
+    [
+      "长期资源稳定性",
+      "仍需定位",
+      "三集FD/VRAM稳定，RSS累计增加约0.58 GB"
+    ]
+  ],
+  "changes": "本轮把数据发布改为明确的两阶段闭合：先完成H5、资格和视频，再提交完成标记及索引；重复finish不重复写入，未完成记录不进入正式训练索引。reset清理评分、接触保持、跟踪补偿及动作回执，第二集没有污染第三集。独立发布reader补齐受控结束组的正式资格读取，保留原标签和成功BC门槛。常规记录用lossless gzip保存完整高频日志，并去掉一份重复录像。",
+  "teacher_details": "本包teacher视频来自2026年10月27日Project_release_v1同进程三集验收的第1集，实际运行代码122c4c0。单次连续125.667秒仿真完成来源架取物、腔内装载、双指脱离、整手撤离及3秒独立稳定。原始双视角MP4为1280×480，3771帧；未转码、剪切或调速。",
+  "policy_video": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/dual_view.mp4",
+  "policy_video_name": "pi05_collision.mp4",
+  "policy_video_label": "pi05_collision.mp4  π0.5真实零样本接入 碰撞安全结束",
+  "policy_picture": "release_pi05_terminal.png",
+  "policy_caption": "图3  π0.5通过正式RPC持续控制  最终触发碰撞安全停止",
+  "policy_details": "π0.5使用现有LIBERO SFT checkpoint，通过显式工程动作迁移接入，没有LabSim训练或调优。69次真实推理、341个动作取得回执，推进1021控制步、17.017秒；最后一个动作部分执行后触发碰撞安全停止。整集17.033秒仿真，环境进程已正常关闭。任务失败，当前判据下记录完整且物理有效；不进入成功BC。69次检查确认推理期间物理暂停。264-token提示词超200被截断的警告保留。",
+  "usage": "获取codex/labsim固定提交，选择已有Isaac Sim 5.1的Python 3.11，下载并校验固定revision资产。运行时显式选择Project_release_v1及记录模式；省略版本仍进入旧Project_v1。下面命令复现本轮同进程三集，所有输出必须使用新目录。",
+  "command": "./labsim collect --project-version Project_release_v1 --headless \\\n  --record-mode collect --sequence teacher early_finish teacher \\\n  --output outputs/lab_cuvette_loading/Project_release_v1/collect_NEW",
+  "remaining": [
+    "长程内存仍需定位：三集末RSS增加约0.58 GB，后续短reset资源探针也有增长。目前不把它定性为内存泄漏，也不宣称已达到长期稳定平台。",
+    "五类受控终止闭合已核验，服务超时与用户中止为明确注入，不冒充真实断线或实际按键。退出阶段SDK扩展错误仍有残留，但当前数据与进程闭合正常；继续保留并定位该问题。",
+    "同口径完整episode从3.878 GB降至2.327 GB，约减少40%。首集rollout从1129秒降至1087秒，但第3集为1192秒，因此只确认存储收益，不承诺吞吐提速。"
+  ],
+  "release_note": "固定资产revision bb880f0；物理运行122c4c0，终止CLI 73b1a9d，正式reader修复4a71635。完整数据来源和可解析核查在独立技术包中。没有第二台机器验证，未开展训练、random采集或真机校准。"
+}

@@ -1,32 +1,80 @@
 {
   "schema": "labsim.Project_release_v1.package_readiness.v1",
-  "status": "draft_not_final_delivery",
-  "inspected_checkout": "73b1a9db9470f9706a3068a8ce24e7e09d8cfc65",
+  "status": "closed_evidence_and_media_recipe_ready_for_final_commit",
+  "source_commit_at_preparation": "4a716359376de0132cc83cba3e5c7d27c791069e",
   "runtime_source_sha": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "termination_CLI_sha": "73b1a9db9470f9706a3068a8ce24e7e09d8cfc65",
+  "qualified_reader_sha": "4a716359376de0132cc83cba3e5c7d27c791069e",
+  "final_delivery_commit_authority": "generated 文件清单.json source_commit at post-commit package build; not the older preparation snapshot",
   "closed_runs_with_metadata_selected": [
     "baseline_diagnostic_01",
-    "gui_finish_02"
-  ],
-  "running_or_not_started_runs_not_selected": [
+    "gui_finish_02",
     "same_process_collect_01",
     "pi05_standard_01_env",
     "termination_cases_01"
   ],
-  "final_publication_gates": [
-    "Same-process three-episode proof, closed H5/result/index agreement and reset audit",
-    "Real pi0.5 RPC rollout closed proof, model/action receipts, labels and normal reader",
-    "Termination diagnostics with actual/injected evidence separated",
-    "Like-for-like optimized teacher measurement and caveats",
-    "Final report/README/CI/remote SHA and clean-checkout validation",
-    "Final media source/hash/full-decode/relocated DOCX QA; add selected actual native videos explicitly",
-    "Validate final package after commit; refresh this manifest only after all files stop changing"
+  "unclosed_native_runs": [],
+  "actual_evidence": {
+    "same_process_results": [
+      true,
+      false,
+      true
+    ],
+    "formal_clean_reader_counts": {
+      "success": 2,
+      "failure": 1,
+      "all_valid": 3
+    },
+    "actual_pi05_model_episodes": 1,
+    "reset_resource_probe_episodes": 10,
+    "actual_pi05_inferences": 69,
+    "actual_pi05_actions": 341,
+    "actual_pi05_control_ticks": 1021,
+    "actual_pi05_action_sim_seconds": 17.016666666666666,
+    "actual_pi05_result": "SAFETY_COLLISION",
+    "pi05_formal_clean_reader_counts": {
+      "failure": 1,
+      "all_valid": 1
+    },
+    "termination_checks": 145,
+    "authoritative_qualification_checks": 35,
+    "termination_service_timeout_and_interrupt": "controlled injection, task_success=null, record_valid=false"
+  },
+  "remaining_product_limitations": [
+    "SDK ManipulatorFactory shutdown NameError persists after valid data closure",
+    "RSS growth attribution and long-lived process memory plateau not resolved",
+    "Second-machine installation and real-world calibration not verified"
   ],
-  "pending_media": [],
-  "pending_media_policy": "No nonexistent or active media path selected; root adds actual closed native teacher and policy videos at final freeze",
+  "preparation_snapshot_scope": "This records the pre-package recipe; final source commit and copied-file authority are generated 文件清单.json",
+  "post_freeze_procedure": [
+    "Final commit/push and actual remote/CI check by root",
+    "Build final technical ZIP only after final commit; verify moved package links/checksums",
+    "Build separate meeting ZIP with exactly one DOCX and two native videos"
+  ],
+  "selected_meeting_material": [
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/report/LabSim_环境与评测进展_20261028.docx",
+      "destination": "组会材料/LabSim_环境与评测进展_20261028.docx",
+      "bytes": 668732,
+      "sha256": "7ae9c86b90d5fb79dff3755faa9f243f175e4ec2ed739f8404276a9f944bd3b1"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4",
+      "destination": "组会材料/teacher_full.mp4",
+      "bytes": 22277134,
+      "sha256": "cca2fdc3f2759111f519c8023b84286a4c0c45fa3cd73e29da83045b4ce65b3f"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/media/pi05_collision.mp4",
+      "destination": "组会材料/pi05_collision.mp4",
+      "bytes": 3379233,
+      "sha256": "4273c79caa00fd6ec6320128cac1c077456844f2db1d68719e055807f97550ba"
+    }
+  ],
   "exclusions": [
-    "all H5/HDF5, including small external-link indices",
-    "Isaac environment, model checkpoints, source attachments with credentials, tokens",
-    "historical reports and old media except provenance needed to identify preview"
+    "all H5/HDF5 including small external-link indices",
+    "CPU attempt audit copies as primary evidence",
+    "Isaac environment, weights, credentials and credential-bearing task attachments"
   ],
   "package_built": false
 }
