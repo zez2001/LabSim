@@ -1,0 +1,86 @@
+{
+  "schema": "labsim.Project_v1_1.GPT08.remaining_blockers.public_only.v1",
+  "runtime": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+  "proof_SHA256": "deb999a8b75e19511f30681eccf93ef19fcf4e35355a9cefa4a02ccc9678d157",
+  "original_labels": {
+    "schema": "labsim.Project_v1_1.independent.v1",
+    "task_type": "loading",
+    "condition_group": "natural",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "record_integrity_source": "streaming_collector_checks_at_flush_close",
+    "physics_trustworthy": true,
+    "task_success": false,
+    "workflow_success": false,
+    "failure_type": "TASK_INCOMPLETE",
+    "failure_domain": "task",
+    "termination_reason": "POLICY_FINISH_REQUEST",
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "loading_sequence_observed": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "stable_after_retreat": null,
+    "success_bc_eligible": false,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ]
+  },
+  "actual_requests": 34,
+  "provider_wall_s": 831.2265277359402,
+  "native_wall_s": 896.5187011649832,
+  "simulation_endpoint_s": 65.11666666666666,
+  "original_final_reason": "Stopped without release: bilateral retention remains, but current dual views do not establish free passage into the seat or loading depth/support. Further descent or opening would be unsupported; task completion is not claimed.",
+  "final_is_voluntary_not_budget_or_safety_stop": true,
+  "blockers": [
+    {
+      "id": "policy_public_observation_uncertainty",
+      "finding": "The policy voluntarily finished after three accepted100µm steps because it did not establish free passage/depth/support from current views. This is not an observed BLOCKED/contact-stop verdict.",
+      "evidence": [
+        "final_public_trace_record.json",
+        "D30_D32_comparison.json",
+        "public_frames/decision_000033/wrist_camera.jpg"
+      ]
+    },
+    {
+      "id": "limited_support_observability",
+      "finding": "Public finger_contact_N remains bilateral around1.61N; it is filtered finger normal magnitude, not seat support/contact or insertion depth. Robot-own frames/INPUT boxes supply no obstacle/seat/held-object truth. Current views do not establish seating, so no release or successful insertion can be inferred.",
+      "evidence": [
+        "public_observations/decision_000033.json",
+        "public_frames/decision_000033/current_robot_self_state.json"
+      ]
+    },
+    {
+      "id": "closed_lifecycle_and_finite_remaining_budget",
+      "finding": "The actual process is closed and finish is irreversible in the exposed API. No same-episode resume exists. Remaining budget does not cover another run at the observed34-call/$3.050670 scale; this does not prove every possible future policy must cost that amount.",
+      "evidence": [
+        "continuation_interface_audit.json",
+        "original_public_audit_summary.json"
+      ]
+    }
+  ],
+  "budget": {
+    "prefix_attempts": 333,
+    "prefix_occupancy_USD": 27.8942,
+    "known_usage_USD": 26.48523,
+    "unknown_usage_reservation_USD": 1.40897,
+    "unknown_usage_attempts": 8,
+    "original_cap_USD": 30.0,
+    "remaining_USD": 2.1058,
+    "current_episode_USD": 3.05067,
+    "remaining_is_not_exhausted": true,
+    "not_invoice_or_future_cost_prediction": true
+  },
+  "conclusion": "This condition ended by policy choice with the vessel held. GPT loading/release/retreat remained incomplete. Preserve the remaining budget; do not launch a repeated reset already unsupported at the observed run scale, and do not silently replay/teacher/GT-continue the closed episode.",
+  "API_calls_by_this_audit": 0,
+  "GPU": false,
+  "H5_or_physics_raw_read": false,
+  "active_teacher_read": false
+}

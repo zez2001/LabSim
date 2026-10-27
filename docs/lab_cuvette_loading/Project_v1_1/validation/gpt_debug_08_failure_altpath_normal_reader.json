@@ -1,0 +1,256 @@
+{
+  "schema": "labsim.Project_v1_1.P9.failure_normal_reader_altpath.v1",
+  "created_utc": "2026-10-27T02:30:04.019641+00:00",
+  "run": "gpt_debug_08",
+  "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+  "native_closed_PID": 2024986,
+  "native_PID_gone": true,
+  "native_exit_code": 0,
+  "normal_reader": "scripts.read_lab_cuvette_project_v1_data.read_check",
+  "dataset": "LabCuvetteProjectV11Dataset",
+  "sample_filter": "failure",
+  "actual_ACT_DP_batch_read": {
+    "schema": "labsim.Project_v1_1.reader_check.v1",
+    "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/p9_closed_cpu_auditor_02/failure-portable-path-5v13_4iq/unrelated_name.h5",
+    "scene_version": "Project_v1_1",
+    "dataset_class": "policy.dataset.lab_cuvette_project_v1_1_dataset.LabCuvetteProjectV11Dataset",
+    "recorded_policy_image_shape": [
+      3,
+      256,
+      256
+    ],
+    "public_sample_derivations": [],
+    "sample_filter": "failure",
+    "reader_validation": [
+      {
+        "policy_type": "act",
+        "episodes": [
+          "265a03f0-cbf9-4117-8eba-716b3f0e0c82"
+        ],
+        "scene_fingerprint": "12693a03acfbc85f85bbcd97db6c7230909541f9d789277035ec3eefe76100d0",
+        "batch": {
+          "obs": {
+            "side_camera_rgb": {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            },
+            "wrist_camera_rgb": {
+              "shape": [
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            },
+            "agent_pose": {
+              "shape": [
+                3,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            }
+          },
+          "action": {
+            "shape": [
+              3,
+              16,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "is_pad": {
+            "shape": [
+              3,
+              16
+            ],
+            "dtype": "torch.bool",
+            "finite": true
+          },
+          "labels": {
+            "episode_id": [
+              "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+              "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+              "265a03f0-cbf9-4117-8eba-716b3f0e0c82"
+            ],
+            "task_success": {
+              "shape": [
+                3
+              ],
+              "dtype": "torch.bool",
+              "finite": true
+            },
+            "record_valid": {
+              "shape": [
+                3
+              ],
+              "dtype": "torch.bool",
+              "finite": true
+            },
+            "failure_type": [
+              "TASK_INCOMPLETE",
+              "TASK_INCOMPLETE",
+              "TASK_INCOMPLETE"
+            ],
+            "termination_reason": [
+              "POLICY_FINISH_REQUEST",
+              "POLICY_FINISH_REQUEST",
+              "POLICY_FINISH_REQUEST"
+            ]
+          }
+        },
+        "episode_checks": [
+          {
+            "episode_id": "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+            "transitions": 3906,
+            "observation_action_time_aligned": true,
+            "action_shape": [
+              3906,
+              8
+            ],
+            "executed_command_shape": [
+              3906,
+              9
+            ],
+            "source_slot_id": "A1",
+            "target_seat_id": "candidate_far_hinge",
+            "asset_id": "cuvette_xy_1000",
+            "record_valid": true,
+            "task_success": false,
+            "condition_group": "natural"
+          }
+        ],
+        "training_or_optimizer_executed": false
+      },
+      {
+        "policy_type": "dp",
+        "episodes": [
+          "265a03f0-cbf9-4117-8eba-716b3f0e0c82"
+        ],
+        "scene_fingerprint": "12693a03acfbc85f85bbcd97db6c7230909541f9d789277035ec3eefe76100d0",
+        "batch": {
+          "obs": {
+            "side_camera_rgb": {
+              "shape": [
+                3,
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            },
+            "wrist_camera_rgb": {
+              "shape": [
+                3,
+                3,
+                3,
+                256,
+                256
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            },
+            "agent_pose": {
+              "shape": [
+                3,
+                3,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true
+            }
+          },
+          "action": {
+            "shape": [
+              3,
+              16,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "labels": {
+            "episode_id": [
+              "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+              "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+              "265a03f0-cbf9-4117-8eba-716b3f0e0c82"
+            ],
+            "task_success": {
+              "shape": [
+                3
+              ],
+              "dtype": "torch.bool",
+              "finite": true
+            },
+            "record_valid": {
+              "shape": [
+                3
+              ],
+              "dtype": "torch.bool",
+              "finite": true
+            },
+            "failure_type": [
+              "TASK_INCOMPLETE",
+              "TASK_INCOMPLETE",
+              "TASK_INCOMPLETE"
+            ],
+            "termination_reason": [
+              "POLICY_FINISH_REQUEST",
+              "POLICY_FINISH_REQUEST",
+              "POLICY_FINISH_REQUEST"
+            ]
+          }
+        },
+        "episode_checks": [
+          {
+            "episode_id": "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+            "transitions": 3906,
+            "observation_action_time_aligned": true,
+            "action_shape": [
+              3906,
+              8
+            ],
+            "executed_command_shape": [
+              3906,
+              9
+            ],
+            "source_slot_id": "A1",
+            "target_seat_id": "candidate_far_hinge",
+            "asset_id": "cuvette_xy_1000",
+            "record_valid": true,
+            "task_success": false,
+            "condition_group": "natural"
+          }
+        ],
+        "training_or_optimizer_executed": false
+      }
+    ],
+    "source_labels_modified": false
+  },
+  "H5_SHA256": "6efe17debe6b5a3dc1ba31c7dfbd60408b26f678d3ed3de1ed7ddc4f8035bef3",
+  "original_H5_labels_metadata_SHA_unchanged": true,
+  "all_temporary_files_removed": true,
+  "method": "Read-only temporary hard link in an unrelated new directory/name; source bytes/inode unchanged and normal failure reader ACT+DP batch actually read",
+  "portable_scope": "No HDF5 external data dependency verified by full audit. Alternate path is a same-host byte-level reader check, not a separate-machine Isaac deployment.",
+  "source_closed_read_audit_SHA256": "b0fe3b7ce1c72225fd9ccd796e5b934f203e1ce73370738dc8a0b22ff67064d3",
+  "source_hashes": {
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/dataset/episode_0000.h5": "6efe17debe6b5a3dc1ba31c7dfbd60408b26f678d3ed3de1ed7ddc4f8035bef3",
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/result.json": "d0125c2d3c76476738897f1a65556ad896f47b15cfa700a282e343cfe5bb3444",
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/independent_score.json": "9948461ae7a9fac17494483cbb8bc448aca05f94e48b1810637c35dc36ea446a",
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/release_metadata.json": "1620c38357734ff50ed1e93b7ca5a01d868bd570bd838c6f59da5217101279eb"
+  },
+  "training_optimizer_executed": false,
+  "GPU_used": false,
+  "API_calls": 0
+}

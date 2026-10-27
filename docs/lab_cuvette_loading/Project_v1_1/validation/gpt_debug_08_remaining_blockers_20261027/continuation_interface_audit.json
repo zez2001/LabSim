@@ -1,0 +1,66 @@
+{
+  "schema": "labsim.Project_v1_1.GPT08.closed_no_resume_interface_audit.v1",
+  "runtime": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+  "actual_process_exit": 0,
+  "actual_PID_gone": true,
+  "same_episode_continuation_supported": false,
+  "reason": "finish immediately finalizes scorer/collector/video and marks ended; execute refuses ended episodes; launcher closes native app/process. No checkpoint/restore/resume command is exposed.",
+  "source_evidence": [
+    {
+      "path": "demos/lab_cuvette_project_v1_1/environment.py",
+      "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+      "SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "start_line": 24,
+      "end_line": 43,
+      "excerpt": "24:     def finish(self,reason='POLICY_FINISH_REQUEST',*,failure_type=None):\n25:         allowed={None,'MODEL_SERVICE_ERROR','INPUT_CONTRACT_ERROR','PROCESS_INTERRUPTED',\n26:                  'PHYSICS_INVALID','EXECUTOR_FAILURE','SIMULATION_FAILURE','SAFETY_FAILURE'}\n27:         if failure_type not in allowed:raise ValueError('Unsupported backend failure classification')\n28:         if not self.task.ended:self.task.finalize_episode(str(reason),failure_type)\n29:         return self.status()\n30: \n31:     def execute(self,action):\n32:         if not isinstance(action,dict):raise ValueError('Explicit action envelope required')\n33:         action=_jsonable(action);aid=str(action.get('action_id',''))\n34:         if not aid or len(aid)>128:raise ValueError('action_id must contain1..128 characters')\n35:         digest=hashlib.sha256(json.dumps(action,sort_keys=True,allow_nan=False).encode()).hexdigest()\n36:         if aid in self._receipts:\n37:             if self._payload_hashes[aid]!=digest:raise ValueError('action_id reused with different payload')\n38:             return self.receipt(aid)\n39:         if self.task.ended:raise ValueError('Episode ended; reset before actions')\n40:         obs=self.task.get_observation()\n41:         if action.get('episode_id')!=obs['episode_id'] or action.get('observation_id')!=obs['observation_id']:raise ValueError('Stale episode_id or observation_id')\n42:         if action.get('metadata'):raise ValueError('Public policies cannot select private phases')\n43:         hz=float(self.task.cfg.physics.control_hz);duration=float(action.get('duration_s',1/hz))"
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+      "SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "start_line": 246,
+      "end_line": 252,
+      "excerpt": "246:                 if expected is None or expected[0]!=canonical_hash({\"name\":name,\"arguments\":arguments}):\n247:                     raise ProviderError(\"PROTOCOL_ACTION_ID_REUSED\")\n248:                 return {**self._timed_receipt(prior,arguments),\"idempotent_replay\":True}\n249:         self._validate_identity(arguments)\n250:         if name==\"finish\":\n251:             result=self.env.finish(reason=\"POLICY_FINISH_REQUEST\")\n252:             return dict(status=\"FINISH_REQUESTED\", result=json_safe(result))"
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+      "SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "start_line": 416,
+      "end_line": 425,
+      "excerpt": "416:     started=time.monotonic();calls=0;errors=0;history=[];termination=\"POLICY_BUDGET\";failure=None;backend_error_code=None\n417:     budget_before=client.ledger.summary()\n418:     trace=(output/\"policy_trace.jsonl\").open(\"x\")\n419:     obs=None;observations_saved=0;observation_artifacts=None;request_label=None;decision_index=None\n420:     try:\n421:         while calls<int(max_calls):\n422:             status=environment.status()\n423:             if status.get(\"terminated\") or status.get(\"ended\"):\n424:                 termination=\"ENVIRONMENT_TERMINATED\";break\n425:             if time.monotonic()-started>float(cfg[\"episode_timeout_s\"]):"
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+      "SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "start_line": 470,
+      "end_line": 501,
+      "excerpt": "470:                     model_action_id=call['arguments'].get('action_id'),execution_action_id=receipt.get('execution_action_id'),\n471:                     decision_index=decision_index,request_label=request_label,observation_artifacts=observation_artifacts,\n472:                     image_channels=[\"side_camera\",\"wrist_camera\"],model_image_transforms=image_provenance,truth_exposed=False)\n473:                 trace.write(json.dumps(json_safe(record),ensure_ascii=False,allow_nan=False)+\"\\n\");trace.flush()\n474:                 if call[\"name\"]==\"finish\" and receipt.get(\"status\")!=\"REJECTED\":termination=\"POLICY_FINISH_REQUEST\";break\n475:                 if errors>=8:termination=\"PROTOCOL_ERROR_LIMIT\";backend_error_code=termination;failure='INPUT_CONTRACT_ERROR';break\n476:             except ProviderError as error:\n477:                 failure=failure_class(error.code)\n478:                 termination=error.code\n479:                 backend_error_code=error.code\n480:                 invalid_calls=[]\n481:                 if isinstance(response,dict) and isinstance(response.get('output'),list):\n482:                     invalid_calls=[{k:item.get(k) for k in ('name','arguments','call_id')} for item in response['output'] if isinstance(item,dict) and item.get('type')=='function_call']\n483:                 partial_receipt=tools.execution_receipt(call['arguments']) if call and call.get('arguments',{}).get('action_id') else None\n484:                 trace.write(json.dumps(dict(event=\"error\",code=error.code,http_status=error.status,episode_id=obs[\"episode_id\"],observation_id=obs[\"observation_id\"],simulation_time_s=before,\n485:                     model_tool_calls=invalid_calls,action_receipt=json_safe(partial_receipt),response_id=response.get('id') if response else None,request_id=meta.get('request_id') if meta else None,\n486:                     decision_index=decision_index,request_label=request_label,observation_artifacts=observation_artifacts))+\"\\n\");trace.flush()\n487:                 break\n488:     except ProviderError as error:\n489:         # Observation/context validation can fail before any API request. It must\n490:         # still flush the physical attempt and retain an explicit nonphysical tag.\n491:         backend_error_code=termination=error.code;failure=failure_class(error.code)\n492:         trace.write(json.dumps(dict(event='error',code=error.code,http_status=error.status,\n493:             episode_id=obs.get('episode_id') if obs else None,observation_id=obs.get('observation_id') if obs else None,\n494:             decision_index=decision_index,request_label=request_label,observation_artifacts=observation_artifacts))+\"\\n\");trace.flush()\n495:     finally:\n496:         trace.close()\n497:     result=environment.finish(reason=termination,failure_type=failure)\n498:     budget_after=client.ledger.summary()\n499:     summary=dict(schema=\"labsim.cubence_episode.v1\",controller_sha256=controller_sha,provider=cfg[\"provider\"],requested_model=cfg[\"model\"],\n500:         endpoint=cfg[\"endpoint\"],api_decisions=calls,protocol_rejections=errors,wall_seconds=time.monotonic()-started,\n501:         termination_reason=termination,backend_failure_type=failure,backend_error_code=backend_error_code,"
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_env_v1.py",
+      "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+      "SHA256": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "start_line": 313,
+      "end_line": 339,
+      "excerpt": "313:     def finalize_episode(self,termination_reason='POLICY_BUDGET',failure_type=None):\n314:         if self._result is not None:return copy.deepcopy(self._result)\n315:         if self.ctx is None:return None\n316:         self._result=self.scorer.finalize(self.episode_id,self.cfg.env.task_type,termination_reason,failure_type)\n317:         self._result.update(scene_version=str(self.cfg.get('version','Env_v1')),simulation_seconds=self.t,wall_seconds=time.perf_counter()-self.episode_wall,\n318:             seed=int(self.cfg.env.seed),policy_id=self.options.get('policy_id','teacher'),actual_control_steps=self.control_steps,actual_physics_steps=self.steps)\n319:         physical_score=copy.deepcopy(self._result);self._write(self.episode_dir/'independent_score.json',physical_score)\n320:         labels=self.collector.finish_episode(self._result,independent_score=physical_score)\n321:         self._result.update(labels);self._result['record_valid_scope']='independent physical trace AND collector action/sensor/time integrity'\n322:         self._result['physical_score_record_valid']=physical_score.get('record_valid')\n323:         self._result['record_integrity_errors']=list(self.collector._integrity_errors)\n324:         self._write(self.episode_dir/'final_camera_meta.json',{n:self.rig.get_meta(n) for n in self.rig.names})\n325:         terminal_frame_appended=self._write_video(force=True)\n326:         self._write(self.episode_dir/'video_timestamps.json',dict(schema='labsim.Env_v1.native_video_timestamps.v1',\n327:             videos=['side_camera.mp4','wrist_camera.mp4','dual_view.mp4'],nominal_fps=30,\n328:             frame_simulation_times_s=self._video_frame_times,terminal_simulation_time_s=self.t,\n329:             terminal_frame_appended_at_finalize=terminal_frame_appended,\n330:             semantics='Actual sampled simulation times; final state appended once if not already sampled. Constant-rate MP4 endpoint spacing may differ from the final simulation interval.'))\n331:         for writer in self._video_writers.values():writer.release()\n332:         self._video_writers={};self.ended=True;self._write(self.episode_dir/'result.json',self._result)\n333:         return copy.deepcopy(self._result)\n334:     def close(self):\n335:         if self.closed:return\n336:         if not self.ended:self.finalize_episode('ENVIRONMENT_CLOSED','PROCESS_INTERRUPTED')\n337:         self._cleanup_episode();self.closed=True"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/run.py",
+      "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+      "SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "start_line": 140,
+      "end_line": 177,
+      "excerpt": "140:             env._write(output / 'summary.json', results)\n141:             print('PROJECT_RESULT', json.dumps(env._result, default=str), flush=True)\n142:         env._write(output / 'run_manifest.json', dict(schema='labsim.Project_v1_1.run.v1',\n143:             backend=args.backend, episodes_requested=args.episodes, episodes_completed=len(results),\n144:             wall_seconds=time.perf_counter() - wall, physics_hz=int(cfg.physics.hz),\n145:             control_hz=int(cfg.physics.control_hz), sequential_single_gpu=True,\n146:             teacher_object_truth=args.backend == 'teacher', physics_paused_during_provider_requests=True,\n147:             project_scene_fingerprint=env.release_contract['frozen_scene_sha256']))\n148:         return 0\n149:     except BaseException as error:\n150:         import traceback\n151:         (output/'runner_failure.json').write_text(json.dumps(dict(type=type(error).__name__,error=str(error),traceback=traceback.format_exc()),indent=2)+'\\n')\n152:         raise\n153:     finally:\n154:         try:\n155:             if env is not None:env.close()\n156:         finally:\n157:             try:\n158:                 from omni.kit.app import get_app\n159:                 get_app().post_quit(0)\n160:                 app.close()\n161:             finally:lock.close()\n162: \n163: \n164: if __name__ == '__main__':\n165:     # Isaac5.1 extension teardown can leave Python finalizers pointing into\n166:     # unloaded native modules. Writers and app have already closed in main;\n167:     # leave without running those finalizers a second time. Preserve failures\n168:     # rather than the toolkit fastShutdown path's unconditional zero exit.\n169:     import os\n170:     try:\n171:         code=main()\n172:     except SystemExit as error:\n173:         code=int(error.code or 0)\n174:     except BaseException:\n175:         import traceback\n176:         traceback.print_exc()\n177:         code=1"
+    }
+  ],
+  "not_performed": [
+    "No source/label editing",
+    "No replay or teacher takeover",
+    "No state teleport/restore",
+    "No additional model request",
+    "No new reset"
+  ],
+  "distinction": "A future explicitly declared prefix replay would be a new diagnostic episode, not continuation of this closed episode or a change to its failure label."
+}

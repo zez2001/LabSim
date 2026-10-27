@@ -1,0 +1,3471 @@
+{
+  "schema": "labsim.Project_v1_1.P9.closed_physical_timeline.v1",
+  "created_utc": "2026-10-27T02:46:37.435906+00:00",
+  "name": "teacher_p9_regression_01",
+  "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+  "process_proof": {
+    "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_p9_regression_01",
+    "process_exited": true,
+    "pid": 2081568,
+    "exit_code": 0,
+    "wall_seconds": 1162.6702205740148,
+    "command": [
+      "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+      "-m",
+      "demos.lab_cuvette_project_v1_1.run",
+      "--backend",
+      "teacher",
+      "--episodes",
+      "1",
+      "--headless",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/teacher_p9_regression_01"
+    ],
+    "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+    "checkout": "/tmp/labsim-project-v1-1-clean-20261027",
+    "utc": "2026-10-27T02:45:32.006055+00:00",
+    "completion_evidence": "Supervisor observed Popen.wait return and PIDgone after native shutdown",
+    "parent_interrupted": false,
+    "parent_wall_timeout": false
+  },
+  "actual_simulation_seconds": 125.66666666666667,
+  "actual_control_steps": 7539,
+  "actual_physics_rows": 30161,
+  "physical_events": {
+    "bilateral_grasp_observed": {
+      "observed": true,
+      "t": 18.145833333333332,
+      "physics_step": 4355
+    },
+    "source_slot_cleared": {
+      "observed": true,
+      "t": 20.85,
+      "physics_step": 5004
+    },
+    "held_transport_observed": {
+      "observed": true,
+      "t": 44.3125,
+      "physics_step": 10635
+    },
+    "correct_target_supported": {
+      "observed": true,
+      "t": 110.05416666666666,
+      "physics_step": 26413
+    },
+    "both_fingers_open_and_detached": {
+      "observed": true,
+      "t": 112.19166666666666,
+      "physics_step": 26926
+    },
+    "actual_gripper_retreat": {
+      "observed": true,
+      "t": 116.41666666666667,
+      "physics_step": 27940
+    }
+  },
+  "all_observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 18.145833333333332,
+      "physics_step": 4355,
+      "actual_force_N": [
+        1.0214643478393555,
+        0.8739928603172302
+      ]
+    },
+    "actual_lift_started": {
+      "t": 19.320833333333333,
+      "physics_step": 4637,
+      "actual_lift_m": 0.0010240291035691351
+    },
+    "source_slot_cleared": {
+      "t": 20.85,
+      "physics_step": 5004,
+      "actual_bottom_world_z_m": 0.7700544667679236,
+      "source_rim_world_z_m": 0.768
+    },
+    "held_transport_observed": {
+      "t": 44.3125,
+      "physics_step": 10635,
+      "horizontal_displacement_m": 0.050010896974999226
+    },
+    "safe_preinsert_observed": {
+      "t": 73.83333333333333,
+      "physics_step": 17720,
+      "actual_depth_m": -0.0029983630908663426,
+      "actual_xy_error_m": 3.3001652503819915e-07
+    },
+    "loaded_pose_candidate": {
+      "t": 107.60833333333333,
+      "physics_step": 25826,
+      "actual_depth_m": 0.026950334472875846,
+      "measured_bottom_support_N": 0.0,
+      "target_region_contains_object": true
+    },
+    "loaded_supported_candidate": {
+      "t": 110.05416666666666,
+      "physics_step": 26413,
+      "actual_depth_m": 0.027000478908804058,
+      "classified_bottom_support_N": 0.3761737048625946,
+      "target_region_contains_object": true
+    },
+    "correct_target_supported": {
+      "t": 110.05416666666666,
+      "physics_step": 26413
+    },
+    "both_fingers_open_and_detached": {
+      "t": 112.19166666666666,
+      "physics_step": 26926,
+      "actual_joint_positions_m": [
+        0.006596352439373732,
+        0.006596452556550503
+      ],
+      "actual_force_N": [
+        0.0,
+        0.0
+      ]
+    },
+    "actual_gripper_retreat": {
+      "t": 116.41666666666667,
+      "physics_step": 27940,
+      "minimum_gripper_object_clearance_m": 0.04003430043573267
+    }
+  },
+  "success_evidence": {
+    "all_actual_milestones": true,
+    "post_retreat_actual_stable": true,
+    "post_retreat_criteria_match": true,
+    "grasp_metrics_recomputed_match": true,
+    "recorded_task_success": true
+  },
+  "post_retreat_original": {
+    "status": "complete",
+    "stable": true,
+    "required_duration_s": 3.0,
+    "measured_duration_s": 3.0,
+    "sample_count": 721,
+    "position_drift_m": 4.198850036741904e-07,
+    "orientation_change_deg": 0.015113222901683161,
+    "criteria": {
+      "position_stable": true,
+      "target_support": true,
+      "target_contains": true,
+      "observed_input_material_overlap_within_limit": true,
+      "no_finger_contact": true,
+      "upright": true,
+      "retained_loading_depth": true
+    },
+    "start_t": 122.66666666666667,
+    "end_t": 125.66666666666667,
+    "geometry_scope": "Independent actual-pose input-material samples/intersection checks; actual cooked surface global error remains unknown"
+  },
+  "post_retreat_recomputed": {
+    "status": "complete",
+    "stable": true,
+    "actual_duration_s": 3.0,
+    "sample_count": 721,
+    "start_t": 122.66666666666667,
+    "end_t": 125.66666666666667,
+    "position_drift_m": 4.198850036741904e-07,
+    "orientation_change_deg": 0.015113222901683161,
+    "criteria": {
+      "position_stable": true,
+      "target_support": true,
+      "target_contains": true,
+      "observed_input_material_overlap_within_limit": true,
+      "no_finger_contact": true,
+      "upright": true,
+      "retained_loading_depth": true
+    },
+    "recorded_criteria_equal": true,
+    "recorded_stable_equal": true,
+    "minimum_bottom_support_N": 0.1954268366098404,
+    "maximum_absolute_bottom_gap_m": 7.421080737701757e-07,
+    "maximum_observed_input_overlap_m": 1.8988953922871587e-07,
+    "minimum_gripper_object_clearance_m": 0.05901913460080628,
+    "actual_native_overlap_available": false
+  },
+  "terminal_window_original": {
+    "status": "complete",
+    "stable": true,
+    "required_duration_s": 3.0,
+    "measured_duration_s": 3.0,
+    "sample_count": 721,
+    "position_drift_m": 4.198850036741904e-07,
+    "orientation_change_deg": 0.015113222901683161,
+    "criteria": {
+      "position_stable": true,
+      "target_support": null,
+      "target_contains": null,
+      "native_overlap_within_limit": null,
+      "no_finger_contact": null
+    },
+    "start_t": 122.66666666666667,
+    "end_t": 125.66666666666667
+  },
+  "original_qualification": {
+    "task_type": "loading",
+    "condition_group": "natural",
+    "task_success": true,
+    "failure_type": "NONE",
+    "failure_domain": "none",
+    "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": true,
+    "eligible_for_failure_analysis": false,
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "release_observed": true,
+    "retreat_observed": true,
+    "stable_after_retreat": true,
+    "physics_quality_flags": [
+      "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ]
+  },
+  "original_grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 1.9511679350357836e-05,
+    "maximum_orientation_drift_deg": 0.021412197124147225,
+    "maximum_configured_grasp_anchor_drift_m": 2.8276095948869787e-06,
+    "maximum_configured_grasp_anchor_axial_drift_m": 2.8055090258290903e-06,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 1.064912681147653e-06,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "offline_grasp_metric_comparison": {
+    "maximum_position_drift_m": {
+      "recorded": 1.9511679350357836e-05,
+      "offline_recomputed": 1.9511679350357836e-05,
+      "absolute_difference": 0.0,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_orientation_drift_deg": {
+      "recorded": 0.021412197124147225,
+      "offline_recomputed": 0.021412197124147225,
+      "absolute_difference": 0.0,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_drift_m": {
+      "recorded": 2.8276095948869787e-06,
+      "offline_recomputed": 2.8276095948938625e-06,
+      "absolute_difference": 6.883836762335699e-18,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_axial_drift_m": {
+      "recorded": 2.8055090258290903e-06,
+      "offline_recomputed": 2.8055090258360292e-06,
+      "absolute_difference": 6.938893903907228e-18,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_transverse_drift_m": {
+      "recorded": 1.064912681147653e-06,
+      "offline_recomputed": 1.0649126811476371e-06,
+      "absolute_difference": 1.588186776101813e-20,
+      "within_numeric_comparison_tolerance": true
+    }
+  },
+  "first_observed_grasp_threshold_crossing": null,
+  "grasp_attempts_count": 1,
+  "native_event_rows": 168647,
+  "native_forbidden_event_rows": 0,
+  "first_forbidden_native_contact": null,
+  "first_forbidden_physics_state": null,
+  "terminal_actual_physics_sample": {
+    "t": 125.66666666666667,
+    "simulation_time": 125.66666666666667,
+    "engine_time": 125.67500655446202,
+    "physics_step": 30160,
+    "phase": "VERIFY",
+    "object_position_m": [
+      0.21237331628799438,
+      -0.14926990866661072,
+      0.8870011568069458
+    ],
+    "position": [
+      0.21237331628799438,
+      -0.14926990866661072,
+      0.8870011568069458
+    ],
+    "quaternion_wxyz": [
+      0.7071273326873779,
+      -6.887968629598618e-05,
+      7.625296711921692e-05,
+      0.7070863246917725
+    ],
+    "object_quaternion_wxyz": [
+      0.7071273326873779,
+      -6.887968629598618e-05,
+      7.625296711921692e-05,
+      0.7070863246917725
+    ],
+    "com_world_m": [
+      0.21237301044811155,
+      -0.14926334654868323,
+      0.9160287875825984
+    ],
+    "source_bottom_z_m": 0.8870001250454119,
+    "object_bottom_world_z_m": 0.8870001250454119,
+    "source_bottom_gap_m": 0.14400012504541193,
+    "source_rack_penetration_m": 0.0,
+    "target_bottom_gap_m": 1.250454119139377e-07,
+    "depth_m": 0.026999874954588086,
+    "xy_error_target_m": [
+      -4.3730596343827255e-06,
+      -3.66955095704169e-06
+    ],
+    "tilt_deg": 0.011775042237792223,
+    "yaw_error_deg": -0.0033227535766116034,
+    "linear_velocity_native_m_s": [
+      0.0001557560171931982,
+      0.0010866668308153749,
+      -9.433265222469345e-05
+    ],
+    "angular_velocity_native_rad_s": [
+      -0.03632397577166557,
+      0.00416319677606225,
+      -0.01104759145528078
+    ],
+    "linear_velocity_USD_m_s": [
+      0.0001557560171931982,
+      0.0010866668308153749,
+      -9.433265222469345e-05
+    ],
+    "angular_velocity_USD_deg_s": [
+      -2.0812106132507324,
+      0.2385336011648178,
+      -0.6329803466796875
+    ],
+    "fd_com_velocity_m_s": [
+      0.00015983394267409236,
+      -2.7423220267872828e-05,
+      6.518412476436492e-09
+    ],
+    "fd_angular_velocity_rad_s": [
+      0.0005751241443761618,
+      0.004643809502739335,
+      -0.00018255336135685653
+    ],
+    "actual_tcp_position_m": [
+      0.09214106897379587,
+      -0.14916497098659287,
+      1.0000742692815607
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      0.011789140223074347,
+      0.7070408459929219,
+      -0.7069801684696863,
+      0.011545547236405756
+    ],
+    "cup_in_hand_position_m": [
+      0.003615049369645851,
+      0.12027133896566768,
+      0.21297375585637893
+    ],
+    "cup_in_hand_quaternion_wxyz": [
+      -0.00016655040761600834,
+      -0.9998655353340297,
+      -7.183021961304492e-05,
+      0.016397510560315607
+    ],
+    "commanded_bottom_z_m": 0.8875247163947144,
+    "command_FK_hand_pose": {
+      "position_m": [
+        0.09242611421103897,
+        -0.14589746513020646,
+        1.1004367565509716
+      ],
+      "quaternion_wxyz": [
+        0.012015137678787634,
+        0.7069562140431942,
+        0.7070601525987822,
+        -0.011596917662025379
+      ]
+    },
+    "command_FK_TCP_pose": {
+      "position_m": [
+        0.09248549662618753,
+        -0.1492362440534846,
+        1.0004925269575116
+      ],
+      "quaternion_wxyz": [
+        0.01159691766202538,
+        0.7070601525987823,
+        -0.7069562140431943,
+        0.012015137678787636
+      ]
+    },
+    "command_FK_error": null,
+    "command_bottom_prediction_contact_qualified": false,
+    "commanded_bottom_semantics": "currentmeasuredcup-in-hand frozenonlyforhypotheticalFKprediction; dynamicactualbottomstoredseparately",
+    "joints9": [
+      0.7241588830947876,
+      -0.582135796546936,
+      -1.0557382106781006,
+      -2.552126884460449,
+      -0.6456084847450256,
+      2.141413450241089,
+      -0.6546230316162109,
+      0.039999861270189285,
+      0.03999994322657585
+    ],
+    "joint_velocities9": [
+      -0.0008998754783533514,
+      0.004270337056368589,
+      0.015518095344305038,
+      0.024617644026875496,
+      0.00028486025985330343,
+      0.002893988974392414,
+      -0.0002512835490051657,
+      2.3397606128128245e-06,
+      2.3397569748340175e-06
+    ],
+    "finger_contact_N": [
+      0.0,
+      0.0
+    ],
+    "finger_normal_force_on_cup_N": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "finger_friction_force_on_cup_N": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "finger_joint_positions_m": [
+      0.039999861270189285,
+      0.03999994322657585
+    ],
+    "environment_normal_force_matrix_N": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        -1.5407035789394286e-06,
+        9.813672932068584e-07,
+        0.1955087035894394
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "environment_friction_force_matrix_N": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        -0.0008839992224238813,
+        -0.0017800508067011833,
+        7.756578490614174e-09
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "environment_net_force_N": [
+      -0.0008855399260028207,
+      -0.0017790694394079765,
+      0.19550871134601788
+    ],
+    "environment_sum_force_magnitudes_N": 0.19551881106740426,
+    "target_whole_seat_net_force_N": [
+      -0.0008855399260028207,
+      -0.0017790694394079765,
+      0.19550871134601788
+    ],
+    "target_whole_seat_net_vertical_N": 0.19550871134601788,
+    "target_bottom_support_N": 0.1955086886882782,
+    "target_bottom_normal_force_vector_N": [
+      -1.5407034652525908e-06,
+      9.813671795200207e-07,
+      0.1955086886882782
+    ],
+    "wall_contact_N": 0.0,
+    "entrance_feature_contact_N": 0.0,
+    "target_normal_contact_points": [
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21317018568515778,
+          -0.1541808843612671,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -2.4728857169975527e-05,
+          1.2282529496587813e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 3.702992762555368e-05,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -0.004915348754290755,
+          -0.0008005389481204331,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21718326210975647,
+          -0.14928454160690308,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -2.4728857169975527e-05,
+          1.2282529496587813e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.0760123814179678e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.900599992674083e-05,
+          -0.004813615372719127,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21718330681324005,
+          -0.1538589596748352,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -2.4728857169975527e-05,
+          1.2282529496587813e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 2.0118707197980257e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -0.00459342406785887,
+          -0.004813660076202708,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21238794922828674,
+          -0.14928460121154785,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -2.4728857169975527e-05,
+          1.2282529496587813e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.013078303913062e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.9065604571516515e-05,
+          -1.8302491249400088e-05,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21257637441158295,
+          -0.14928460121154785,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -2.4728857169975527e-05,
+          1.2282529496587813e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.013078303913062e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.90656045715165e-05,
+          -0.0002067276745456037,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21238797903060913,
+          -0.151234433054924,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -2.4728857169975527e-05,
+          1.2282529496587813e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.4303097941592569e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -0.001968897447947676,
+          -1.8332293571787905e-05,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.2130851000547409,
+          -0.1542263627052307,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -0.00017624020983930677,
+          0.4714938998222351,
+          0.8818693161010742
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 6.102707266109064e-05,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -0.004960827098254378,
+          -0.000715453317703563,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.20759335160255432,
+          -0.14928463101387024,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -4.434597485669656e-06,
+          1.1641308446996845e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 9.834936918196036e-07,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.90954068939045e-05,
+          0.004776295134483022,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21238793432712555,
+          -0.14448997378349304,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -4.434597485669656e-06,
+          1.1641308446996845e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 4.47710988282779e-08,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          0.004775561823483293,
+          -1.828759008820595e-05,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21237047016620636,
+          -0.14928460121154785,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -4.434597485669656e-06,
+          1.1641308446996845e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.0138890047528548e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.9065604571516515e-05,
+          -8.234291690167884e-07,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.20761016011238098,
+          -0.14450685679912567,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -4.434597485669656e-06,
+          1.1641308446996845e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 7.986860509845428e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          0.004758678807850664,
+          0.004759486624656362,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.20781420171260834,
+          -0.14449001848697662,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -4.434597485669656e-06,
+          1.1641308446996845e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 3.661733694038105e-10,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          0.0047755171199997115,
+          0.004555445024429006,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.20806336402893066,
+          -0.14449001848697662,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -4.434597485669656e-06,
+          1.1641308446996845e-05,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 5.495908728114784e-10,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          0.0047755171199997115,
+          0.004306282708106679,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.20754289627075195,
+          -0.15392571687698364,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -8.168677595676854e-06,
+          5.046584192314185e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 9.924065125233028e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -0.0046601812700073075,
+          0.00482675046628539,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21237047016620636,
+          -0.14928460121154785,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -8.168677595676854e-06,
+          5.046584192314185e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.0138890047528548e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.9065604571516515e-05,
+          -8.234291690167884e-07,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21157078444957733,
+          -0.1541808843612671,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -8.168677595676854e-06,
+          5.046584192314185e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 3.701523382915184e-05,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -0.004915348754290755,
+          0.0007988622874600112,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.20759335160255432,
+          -0.14928463101387024,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -8.168677595676854e-06,
+          5.046584192314185e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 9.834936918196036e-07,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.90954068939045e-05,
+          0.004776295134483022,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21179644763469696,
+          -0.15152986347675323,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -8.168677595676854e-06,
+          5.046584192314185e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.18657420575618744,
+        "normal_force_on_cup_N": [
+          -1.5240644870573306e-06,
+          9.415624617759022e-07,
+          0.18657420575618744
+        ],
+        "separation_m": 4.490435756565603e-08,
+        "force_sign_resolved": true,
+        "target_region": "bottom",
+        "seat_local_position_m": [
+          -0.0022643278697769,
+          0.0005731991023403825,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          9.415624617759021e-07,
+          1.5240644870573306e-06,
+          0.18657420575618744
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21179644763469696,
+          -0.15152986347675323,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -8.168677595676854e-06,
+          5.046584192314185e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0021946034394204617,
+        "normal_force_on_cup_N": [
+          -1.7927007434082043e-08,
+          1.1075250938574754e-08,
+          0.0021946034394204617
+        ],
+        "separation_m": 4.443372603191165e-08,
+        "force_sign_resolved": true,
+        "target_region": "bottom",
+        "seat_local_position_m": [
+          -0.0022643278697769,
+          0.0005731991023403825,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          1.1075250938574753e-08,
+          1.7927007434082043e-08,
+          0.0021946034394204617
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21165557205677032,
+          -0.15422621369361877,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          -0.00017624020983930677,
+          0.4714939296245575,
+          0.8818693161010742
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 6.096566721680574e-05,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -0.004960678086642439,
+          0.000714074680267018,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21238794922828674,
+          -0.14928460121154785,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          1.9110343885131442e-07,
+          4.26259930463857e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.013078303913062e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.9065604571516515e-05,
+          -1.8302491249400088e-05,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21704711019992828,
+          -0.14457470178604126,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          1.9110343885131442e-07,
+          4.26259930463857e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.006739892065525055,
+        "normal_force_on_cup_N": [
+          1.2880165822792833e-09,
+          2.8729459700116422e-08,
+          0.006739892065525055
+        ],
+        "separation_m": 9.009956158934074e-08,
+        "force_sign_resolved": true,
+        "target_region": "bottom",
+        "seat_local_position_m": [
+          0.004690833820935075,
+          -0.004677463462890941,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          2.8729459700116422e-08,
+          -1.2880165822792814e-09,
+          0.006739892065525055
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21718326210975647,
+          -0.14928454160690308,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          1.9110343885131442e-07,
+          4.26259930463857e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 1.0728953157013166e-06,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          -1.900599992674083e-05,
+          -0.004813615372719127,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21238793432712555,
+          -0.14448997378349304,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          1.9110343885131442e-07,
+          4.26259930463857e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 4.47710988282779e-08,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          0.004775561823483293,
+          -1.828759008820595e-05,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21238793432712555,
+          -0.1454114317893982,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          1.9110343885131442e-07,
+          4.26259930463857e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 2.2358511841957807e-07,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          0.0038541038175781417,
+          -1.8287590088206003e-05,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3",
+        "position_m": [
+          0.21238793432712555,
+          -0.1454114317893982,
+          0.8870002031326294
+        ],
+        "normal_raw": [
+          1.9110343885131442e-07,
+          4.26259930463857e-06,
+          1.0
+        ],
+        "normal_force_raw_scalar_N": 0.0,
+        "normal_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "separation_m": 2.2322529957818915e-07,
+        "force_sign_resolved": true,
+        "target_region": "wall_or_other",
+        "seat_local_position_m": [
+          0.0038541038175781417,
+          -1.8287590088206003e-05,
+          2.031326293838731e-07
+        ],
+        "seat_local_force_on_cup_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "contact_force_sign_checks": [
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 0,
+        "filter_path": "/World/Ground/geom"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 1,
+        "filter_path": "/World/Ground/collisionPlane"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 2,
+        "filter_path": "/World/Table"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 3,
+        "filter_path": "/World/SourceRack/Base/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 4,
+        "filter_path": "/World/SourceRack/XWall_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 5,
+        "filter_path": "/World/SourceRack/XWall_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 6,
+        "filter_path": "/World/SourceRack/XWall_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 7,
+        "filter_path": "/World/SourceRack/XWall_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 8,
+        "filter_path": "/World/SourceRack/XWall_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 9,
+        "filter_path": "/World/SourceRack/XWall_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 10,
+        "filter_path": "/World/SourceRack/XWall_6/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 11,
+        "filter_path": "/World/SourceRack/YWall_0_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 12,
+        "filter_path": "/World/SourceRack/YWall_0_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 13,
+        "filter_path": "/World/SourceRack/YWall_0_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 14,
+        "filter_path": "/World/SourceRack/YWall_0_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 15,
+        "filter_path": "/World/SourceRack/YWall_0_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 16,
+        "filter_path": "/World/SourceRack/YWall_0_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 17,
+        "filter_path": "/World/SourceRack/YWall_1_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 18,
+        "filter_path": "/World/SourceRack/YWall_1_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 19,
+        "filter_path": "/World/SourceRack/YWall_1_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 20,
+        "filter_path": "/World/SourceRack/YWall_1_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 21,
+        "filter_path": "/World/SourceRack/YWall_1_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 22,
+        "filter_path": "/World/SourceRack/YWall_1_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 23,
+        "filter_path": "/World/SourceRack/YWall_2_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 24,
+        "filter_path": "/World/SourceRack/YWall_2_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 25,
+        "filter_path": "/World/SourceRack/YWall_2_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 26,
+        "filter_path": "/World/SourceRack/YWall_2_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 27,
+        "filter_path": "/World/SourceRack/YWall_2_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 28,
+        "filter_path": "/World/SourceRack/YWall_2_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 29,
+        "filter_path": "/World/SourceRack/YWall_3_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 30,
+        "filter_path": "/World/SourceRack/YWall_3_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 31,
+        "filter_path": "/World/SourceRack/YWall_3_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 32,
+        "filter_path": "/World/SourceRack/YWall_3_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 33,
+        "filter_path": "/World/SourceRack/YWall_3_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 34,
+        "filter_path": "/World/SourceRack/YWall_3_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 35,
+        "filter_path": "/World/SourceRack/YWall_4_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 36,
+        "filter_path": "/World/SourceRack/YWall_4_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 37,
+        "filter_path": "/World/SourceRack/YWall_4_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 38,
+        "filter_path": "/World/SourceRack/YWall_4_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 39,
+        "filter_path": "/World/SourceRack/YWall_4_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 40,
+        "filter_path": "/World/SourceRack/YWall_4_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 41,
+        "filter_path": "/World/SourceRack/YWall_5_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 42,
+        "filter_path": "/World/SourceRack/YWall_5_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 43,
+        "filter_path": "/World/SourceRack/YWall_5_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 44,
+        "filter_path": "/World/SourceRack/YWall_5_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 45,
+        "filter_path": "/World/SourceRack/YWall_5_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 46,
+        "filter_path": "/World/SourceRack/YWall_5_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 47,
+        "filter_path": "/World/SourceRack/YWall_6_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 48,
+        "filter_path": "/World/SourceRack/YWall_6_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 49,
+        "filter_path": "/World/SourceRack/YWall_6_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 50,
+        "filter_path": "/World/SourceRack/YWall_6_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 51,
+        "filter_path": "/World/SourceRack/YWall_6_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 52,
+        "filter_path": "/World/SourceRack/YWall_6_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 53,
+        "filter_path": "/World/Instrument/Collision/SourceMesh0"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 54,
+        "filter_path": "/World/Instrument/Collision/SourceMesh1"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 55,
+        "filter_path": "/World/Instrument/Collision/SourceMesh2"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 2.328306441864003e-09,
+        "plus_residual_N": 2.328306441864003e-09,
+        "minus_residual_N": 0.39101740486763986,
+        "aggregate_norm_N": 0.19550870359797315,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 57,
+        "filter_path": "/World/Instrument/Collision/SourceMesh4"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 58,
+        "filter_path": "/World/Instrument/Collision/SourceMesh5"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 59,
+        "filter_path": "/World/Instrument/Collision/SourceMesh6"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 60,
+        "filter_path": "/World/Instrument/Collision/SourceMesh7"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 61,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottomn1n1"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 62,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottomn11"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 63,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottom1n1"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 64,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottom11"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 65,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell00"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 66,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell01"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 67,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell02"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 68,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell10"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 69,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell12"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 70,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell20"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 71,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell21"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 72,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell22"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 73,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell00"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 74,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell01"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 75,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell02"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 76,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell10"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 77,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell12"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 78,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell20"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 79,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell21"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 80,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell22"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 81,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell00"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 82,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell01"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 83,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell02"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 84,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell10"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 85,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell12"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 86,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell20"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 87,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell21"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 88,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell22"
+      }
+    ],
+    "environment_friction_points": [
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.21317018568515778,
+          -0.1541808843612671,
+          0.8870002031326294
+        ],
+        "force_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.21718326210975647,
+          -0.14928454160690308,
+          0.8870002031326294
+        ],
+        "force_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.2130851000547409,
+          -0.1542263627052307,
+          0.8870002031326294
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.20759330689907074,
+          -0.14928457140922546,
+          0.8870000839233398
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.21238785982131958,
+          -0.14448986947536469,
+          0.8870000839233398
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.20754282176494598,
+          -0.15392573177814484,
+          0.8869994282722473
+        ],
+        "force_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.212370365858078,
+          -0.14928455650806427,
+          0.8869998455047607
+        ],
+        "force_N": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.21165557205677032,
+          -0.15422621369361877,
+          0.8870002031326294
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.21238787472248077,
+          -0.14928454160690308,
+          0.8870002031326294
+        ],
+        "force_N": [
+          -0.0006665644468739629,
+          -0.0010281928116455674,
+          4.5101566925609404e-09
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 56,
+        "position_m": [
+          0.21704702079296112,
+          -0.1445746272802353,
+          0.8870000839233398
+        ],
+        "force_N": [
+          -0.00021743476099800318,
+          -0.0007518579950556159,
+          3.246421798053234e-09
+        ]
+      }
+    ],
+    "finger_friction_points": [],
+    "native_target_overlap_m": null,
+    "native_target_overlap_measured": false,
+    "target_region_contains_object": true,
+    "reference_12_6_square_envelope_contains": true,
+    "reference_12_6_envelope_warning": "Necessary rectangularreference only; retainedoriginalfeatures not represented; not legal-voidproof",
+    "gripper_object_clearance_m": 0.059030501408592104,
+    "gripper_clearance_scope": "AABB separation lowerbound fromactual threegripperlink inputvertices; notcookedshapes",
+    "source_clearance_m": 0.11900012504541191,
+    "source_reference_inside": false,
+    "forbidden_robot_environment_contact": false,
+    "forbidden_robot_environment_contact_this_step": false,
+    "command_q9": [
+      0.7241903437573828,
+      -0.5821086801049234,
+      -1.055222919051258,
+      -2.551312648745781,
+      -0.6456022332351993,
+      2.1414896756045025,
+      -0.6546284963559209,
+      0.04,
+      0.04
+    ],
+    "gripper_target_m": 0.04,
+    "gripper_effort_limit_N": 8.0,
+    "record_api_sample_time": "aftercompletedphysicsstep,nointerveningstep",
+    "native_contact_events_count": 168647,
+    "input_geometry_sample_time_s": 125.66666666666667,
+    "input_geometry_cache_age_s": 0.0,
+    "input_geometry_near_selected_seat": true,
+    "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+    "input_geometry_overlap_observed_m": 0.0,
+    "target_region_contains_object_sampled": true,
+    "input_geometry_surface_crossing_count": 0,
+    "input_geometry_min_sample_surface_distance_m": 1.2516462118128403e-07,
+    "input_geometry_observed_worst_point_world_m": null,
+    "input_geometry_sign_qualified": true,
+    "input_method": "All vertices plus deterministic face-centroid samples; exact point-to-triangle signed distances and complete unique-edge crossing checks in mm. Qualified input-mesh observation, not cooked PhysX.",
+    "input_limitations": [
+      "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+      "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+      "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+      "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+    ],
+    "input_geometry_assessment": "sampled_input_material_within_tolerance",
+    "input_geometry_sampled_material_query_available": true,
+    "input_geometry_crossing_without_resolved_depth": false,
+    "input_geometry_observed_worst_direction": null,
+    "input_geometry_query_sample_counts": {
+      "vessel": 629,
+      "target": 77
+    },
+    "input_geometry_crossing_queries": {
+      "vessel_edges": {
+        "count": 0,
+        "point_mm": null,
+        "tested_segments": 1526
+      },
+      "target_edges_local": {
+        "count": 0,
+        "point_mm": null,
+        "tested_segments": 0
+      }
+    },
+    "input_geometry_reference_envelope_contains": true,
+    "input_geometry_aabb_distance_lower_bound_m": 0.0,
+    "input_geometry_compute_wall_s": 0.1356184990145266
+  },
+  "actual_model_tool_trace": null,
+  "normal_reader_admission": {
+    "success": true,
+    "failure": false,
+    "all_valid": true
+  },
+  "raw_stream_full_SHA_verified_against_closed_archive": true,
+  "physics_decoded_SHA256": "93d67646936f3cfe25d3763882009067be2949a0a639981431c0f7ddbe5dfb3d",
+  "native_decoded_SHA256": "5a408763f902387611340119c79ff7cc3fee5167db7578b03c7585caa6bf81bc",
+  "source_H5_original_labels_videos_modified": false,
+  "acceptance_thresholds_modified": false,
+  "analysis_GPU_used": false,
+  "analysis_API_calls": 0,
+  "limits": [
+    "Offline observation of one actual closed run; model/service usage is audited separately from physical task results.",
+    "Native callback contact candidates, actual raw impulse/force, and sampled input-material overlap are distinct.",
+    "Effective cooked collision global error and real-world calibration remain unknown.",
+    "Teacher stage strings and final tool/finish names are not taken as task-success evidence.",
+    "Unavailable post-retreat measurements stay unavailable; terminal windows never substitute for them."
+  ]
+}

@@ -1,0 +1,2708 @@
+{
+  "schema": "labsim.Project_v1_1.P9.closed_physical_timeline.v1",
+  "created_utc": "2026-10-27T02:26:52.482144+00:00",
+  "name": "gpt_debug_08",
+  "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+  "process_proof": {
+    "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08",
+    "process_exited": true,
+    "pid": 2024986,
+    "exit_code": 0,
+    "wall_seconds": 896.5187011649832,
+    "command": [
+      "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+      "-m",
+      "demos.lab_cuvette_project_v1_1.run",
+      "--backend",
+      "gpt6",
+      "--episodes",
+      "1",
+      "--headless",
+      "--max-calls",
+      "160",
+      "--provider-config",
+      "/tmp/labsim-project-v1-1-clean-20261027/config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json",
+      "--budget-ledger",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08"
+    ],
+    "runtime_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+    "checkout": "/tmp/labsim-project-v1-1-clean-20261027",
+    "utc": "2026-10-27T02:26:09.322037+00:00",
+    "completion_evidence": "Supervisor observed Popen.wait return and PIDgone after native shutdown",
+    "parent_interrupted": false,
+    "parent_wall_timeout": false
+  },
+  "actual_simulation_seconds": 65.11666666666666,
+  "actual_control_steps": 3906,
+  "actual_physics_rows": 15629,
+  "physical_events": {
+    "bilateral_grasp_observed": {
+      "observed": true,
+      "t": 15.6125,
+      "physics_step": 3747
+    },
+    "source_slot_cleared": {
+      "observed": true,
+      "t": 17.670833333333334,
+      "physics_step": 4241
+    },
+    "held_transport_observed": {
+      "observed": true,
+      "t": 41.22083333333333,
+      "physics_step": 9893
+    },
+    "correct_target_supported": {
+      "observed": false,
+      "t": null,
+      "physics_step": null
+    },
+    "both_fingers_open_and_detached": {
+      "observed": false,
+      "t": null,
+      "physics_step": null
+    },
+    "actual_gripper_retreat": {
+      "observed": false,
+      "t": null,
+      "physics_step": null
+    }
+  },
+  "all_observed_events": {
+    "bilateral_grasp_observed": {
+      "t": 15.6125,
+      "physics_step": 3747,
+      "actual_force_N": [
+        1.6105983257293701,
+        1.6103196144104004
+      ]
+    },
+    "actual_lift_started": {
+      "t": 15.625,
+      "physics_step": 3750,
+      "actual_lift_m": 0.0010380822127957767
+    },
+    "source_slot_cleared": {
+      "t": 17.670833333333334,
+      "physics_step": 4241,
+      "actual_bottom_world_z_m": 0.7700436486891133,
+      "source_rim_world_z_m": 0.768
+    },
+    "held_transport_observed": {
+      "t": 41.22083333333333,
+      "physics_step": 9893,
+      "horizontal_displacement_m": 0.05005912222009954
+    }
+  },
+  "success_evidence": {
+    "all_actual_milestones": false,
+    "post_retreat_actual_stable": null,
+    "post_retreat_criteria_match": null,
+    "grasp_metrics_recomputed_match": true,
+    "recorded_task_success": false
+  },
+  "post_retreat_original": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "actual_gripper_retreat_not_observed"
+  },
+  "post_retreat_recomputed": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "No actual post-retreat window in original scorer; terminal hold is not post-retreat proof"
+  },
+  "terminal_window_original": {
+    "status": "complete",
+    "stable": false,
+    "required_duration_s": 3.0,
+    "measured_duration_s": 2.999999999999993,
+    "sample_count": 721,
+    "position_drift_m": 0.02631431840932074,
+    "orientation_change_deg": 0.010791370481956582,
+    "criteria": {
+      "position_stable": false,
+      "target_support": null,
+      "target_contains": null,
+      "native_overlap_within_limit": null,
+      "no_finger_contact": null
+    },
+    "start_t": 62.11666666666667,
+    "end_t": 65.11666666666666
+  },
+  "original_qualification": {
+    "task_type": "loading",
+    "condition_group": "natural",
+    "task_success": false,
+    "failure_type": "TASK_INCOMPLETE",
+    "failure_domain": "task",
+    "termination_reason": "POLICY_FINISH_REQUEST",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "eligible_for_failure_analysis": true,
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ]
+  },
+  "original_grasp_relative_pose": {
+    "reference_available": true,
+    "maximum_position_drift_m": 1.4445889568221543e-05,
+    "maximum_orientation_drift_deg": 0.01823644082295879,
+    "maximum_configured_grasp_anchor_drift_m": 1.6484579801447526e-06,
+    "maximum_configured_grasp_anchor_axial_drift_m": 1.6278110748011668e-06,
+    "maximum_configured_grasp_anchor_transverse_drift_m": 7.621438036926782e-07,
+    "configured_grasp_anchor_height_m": 0.053,
+    "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+    "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+    "position_limit_m": 0.0002,
+    "orientation_limit_deg": 1.0
+  },
+  "offline_grasp_metric_comparison": {
+    "maximum_position_drift_m": {
+      "recorded": 1.4445889568221543e-05,
+      "offline_recomputed": 1.4445889568221543e-05,
+      "absolute_difference": 0.0,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_orientation_drift_deg": {
+      "recorded": 0.01823644082295879,
+      "offline_recomputed": 0.01823644082295879,
+      "absolute_difference": 0.0,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_drift_m": {
+      "recorded": 1.6484579801447526e-06,
+      "offline_recomputed": 1.6484579801379e-06,
+      "absolute_difference": 6.852708301524103e-18,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_axial_drift_m": {
+      "recorded": 1.6278110748011668e-06,
+      "offline_recomputed": 1.627811074794228e-06,
+      "absolute_difference": 6.938893903907228e-18,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_transverse_drift_m": {
+      "recorded": 7.621438036926782e-07,
+      "offline_recomputed": 7.62143803692681e-07,
+      "absolute_difference": 2.8587361969832636e-21,
+      "within_numeric_comparison_tolerance": true
+    }
+  },
+  "first_observed_grasp_threshold_crossing": null,
+  "grasp_attempts_count": 1,
+  "native_event_rows": 86362,
+  "native_forbidden_event_rows": 0,
+  "first_forbidden_native_contact": null,
+  "first_forbidden_physics_state": null,
+  "terminal_actual_physics_sample": {
+    "t": 65.11666666666666,
+    "simulation_time": 65.11666666666666,
+    "engine_time": 65.12500339653343,
+    "physics_step": 15628,
+    "phase": "POLICY",
+    "object_position_m": [
+      0.21019978821277618,
+      -0.11498965322971344,
+      0.9976577162742615
+    ],
+    "position": [
+      0.21019978821277618,
+      -0.11498965322971344,
+      0.9976577162742615
+    ],
+    "quaternion_wxyz": [
+      0.7072799205780029,
+      -0.0002070590853691101,
+      -0.000414886511862278,
+      0.7069334983825684
+    ],
+    "object_quaternion_wxyz": [
+      0.7072799205780029,
+      -0.0002070590853691101,
+      -0.000414886511862278,
+      0.7069334983825684
+    ],
+    "com_world_m": [
+      0.21017364603663657,
+      -0.11499757404356939,
+      1.0266853349407983
+    ],
+    "source_bottom_z_m": 0.9976521505599393,
+    "object_bottom_world_z_m": 0.9976521505599393,
+    "source_bottom_gap_m": 0.2546521505599393,
+    "source_rack_penetration_m": 0.0,
+    "target_bottom_gap_m": null,
+    "depth_m": null,
+    "xy_error_target_m": [
+      0.034275882377262895,
+      0.002169858524261161
+    ],
+    "tilt_deg": 0.05313444924425904,
+    "yaw_error_deg": -0.028062651497208435,
+    "linear_velocity_native_m_s": [
+      0.011060969904065132,
+      0.0007952671148814261,
+      0.014221020974218845
+    ],
+    "angular_velocity_native_rad_s": [
+      -0.09338804334402084,
+      -0.08961725234985352,
+      -0.3114452660083771
+    ],
+    "linear_velocity_USD_m_s": [
+      0.011060969904065132,
+      0.0007952671148814261,
+      0.014221020974218845
+    ],
+    "angular_velocity_USD_deg_s": [
+      -5.350740909576416,
+      -5.134690284729004,
+      -17.844499588012695
+    ],
+    "fd_com_velocity_m_s": [
+      -5.3521978042918414e-05,
+      0.0001455405670049084,
+      -0.00037200422038841634
+    ],
+    "fd_angular_velocity_rad_s": [
+      0.01069681627022262,
+      0.0002512678911169876,
+      -0.0026049962741825955
+    ],
+    "actual_tcp_position_m": [
+      0.20992481735707066,
+      -0.11488886363218483,
+      1.0545310435500432
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.00043786527182716143,
+      0.707006833185496,
+      -0.7072065683392575,
+      0.00012570135774775601
+    ],
+    "cup_in_hand_position_m": [
+      -0.00012582602597287465,
+      0.00022967455127260626,
+      0.15687347835629825
+    ],
+    "cup_in_hand_quaternion_wxyz": [
+      -4.1313467841828235e-05,
+      -0.9999999910471773,
+      -0.00010368487241324556,
+      -7.381253335809742e-05
+    ],
+    "commanded_bottom_z_m": 0.9981372445855777,
+    "command_FK_hand_pose": {
+      "position_m": [
+        0.2100974484951959,
+        -0.11484848875439832,
+        1.1550208478112487
+      ],
+      "quaternion_wxyz": [
+        0.0005455051249947444,
+        0.707120242834989,
+        0.7070926272363194,
+        0.000825290969447844
+      ]
+    },
+    "command_FK_TCP_pose": {
+      "position_m": [
+        0.2102913090157417,
+        -0.11480892486572486,
+        1.0550210435474539
+      ],
+      "quaternion_wxyz": [
+        -0.0008252909694478441,
+        0.7070926272363195,
+        -0.7071202428349891,
+        0.0005455051249947445
+      ]
+    },
+    "command_FK_error": null,
+    "command_bottom_prediction_contact_qualified": true,
+    "commanded_bottom_semantics": "currentmeasuredcup-in-hand frozenonlyforhypotheticalFKprediction; dynamicactualbottomstoredseparately",
+    "joints9": [
+      1.073254942893982,
+      -0.18947339057922363,
+      -1.2530394792556763,
+      -2.1764230728149414,
+      -0.20905640721321106,
+      2.1075730323791504,
+      -0.8515625596046448,
+      0.005308862775564194,
+      0.005308927968144417
+    ],
+    "joint_velocities9": [
+      -0.0007898301701061428,
+      -0.002504180185496807,
+      0.007678343448787928,
+      0.026784518733620644,
+      -0.001121976412832737,
+      0.003356957109645009,
+      -4.826229996979237e-06,
+      0.0005967036122456193,
+      0.0005967037286609411
+    ],
+    "finger_contact_N": [
+      1.608995795249939,
+      1.6087052822113037
+    ],
+    "finger_normal_force_on_cup_N": [
+      [
+        -1.6089953184127808,
+        0.000321319792419672,
+        -0.0011499426327645779
+      ],
+      [
+        1.6086974143981934,
+        -0.004869620315730572,
+        0.0014084905851632357
+      ]
+    ],
+    "finger_friction_force_on_cup_N": [
+      [
+        -0.0006467451457865536,
+        -0.13841727375984192,
+        0.8662464618682861
+      ],
+      [
+        0.0012539030285552144,
+        0.13681969046592712,
+        -0.6792192459106445
+      ]
+    ],
+    "finger_joint_positions_m": [
+      0.005308862775564194,
+      0.005308927968144417
+    ],
+    "environment_normal_force_matrix_N": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "environment_friction_force_matrix_N": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "environment_net_force_N": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "environment_sum_force_magnitudes_N": 0.0,
+    "target_whole_seat_net_force_N": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "target_whole_seat_net_vertical_N": 0.0,
+    "target_bottom_support_N": 0.0,
+    "target_bottom_normal_force_vector_N": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "wall_contact_N": 0.0,
+    "entrance_feature_contact_N": 0.0,
+    "target_normal_contact_points": [],
+    "contact_force_sign_checks": [
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 0,
+        "filter_path": "/World/Ground/geom"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 1,
+        "filter_path": "/World/Ground/collisionPlane"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 2,
+        "filter_path": "/World/Table"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 3,
+        "filter_path": "/World/SourceRack/Base/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 4,
+        "filter_path": "/World/SourceRack/XWall_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 5,
+        "filter_path": "/World/SourceRack/XWall_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 6,
+        "filter_path": "/World/SourceRack/XWall_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 7,
+        "filter_path": "/World/SourceRack/XWall_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 8,
+        "filter_path": "/World/SourceRack/XWall_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 9,
+        "filter_path": "/World/SourceRack/XWall_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 10,
+        "filter_path": "/World/SourceRack/XWall_6/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 11,
+        "filter_path": "/World/SourceRack/YWall_0_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 12,
+        "filter_path": "/World/SourceRack/YWall_0_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 13,
+        "filter_path": "/World/SourceRack/YWall_0_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 14,
+        "filter_path": "/World/SourceRack/YWall_0_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 15,
+        "filter_path": "/World/SourceRack/YWall_0_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 16,
+        "filter_path": "/World/SourceRack/YWall_0_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 17,
+        "filter_path": "/World/SourceRack/YWall_1_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 18,
+        "filter_path": "/World/SourceRack/YWall_1_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 19,
+        "filter_path": "/World/SourceRack/YWall_1_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 20,
+        "filter_path": "/World/SourceRack/YWall_1_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 21,
+        "filter_path": "/World/SourceRack/YWall_1_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 22,
+        "filter_path": "/World/SourceRack/YWall_1_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 23,
+        "filter_path": "/World/SourceRack/YWall_2_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 24,
+        "filter_path": "/World/SourceRack/YWall_2_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 25,
+        "filter_path": "/World/SourceRack/YWall_2_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 26,
+        "filter_path": "/World/SourceRack/YWall_2_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 27,
+        "filter_path": "/World/SourceRack/YWall_2_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 28,
+        "filter_path": "/World/SourceRack/YWall_2_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 29,
+        "filter_path": "/World/SourceRack/YWall_3_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 30,
+        "filter_path": "/World/SourceRack/YWall_3_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 31,
+        "filter_path": "/World/SourceRack/YWall_3_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 32,
+        "filter_path": "/World/SourceRack/YWall_3_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 33,
+        "filter_path": "/World/SourceRack/YWall_3_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 34,
+        "filter_path": "/World/SourceRack/YWall_3_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 35,
+        "filter_path": "/World/SourceRack/YWall_4_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 36,
+        "filter_path": "/World/SourceRack/YWall_4_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 37,
+        "filter_path": "/World/SourceRack/YWall_4_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 38,
+        "filter_path": "/World/SourceRack/YWall_4_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 39,
+        "filter_path": "/World/SourceRack/YWall_4_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 40,
+        "filter_path": "/World/SourceRack/YWall_4_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 41,
+        "filter_path": "/World/SourceRack/YWall_5_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 42,
+        "filter_path": "/World/SourceRack/YWall_5_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 43,
+        "filter_path": "/World/SourceRack/YWall_5_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 44,
+        "filter_path": "/World/SourceRack/YWall_5_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 45,
+        "filter_path": "/World/SourceRack/YWall_5_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 46,
+        "filter_path": "/World/SourceRack/YWall_5_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 47,
+        "filter_path": "/World/SourceRack/YWall_6_0/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 48,
+        "filter_path": "/World/SourceRack/YWall_6_1/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 49,
+        "filter_path": "/World/SourceRack/YWall_6_2/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 50,
+        "filter_path": "/World/SourceRack/YWall_6_3/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 51,
+        "filter_path": "/World/SourceRack/YWall_6_4/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 52,
+        "filter_path": "/World/SourceRack/YWall_6_5/Collision"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 53,
+        "filter_path": "/World/Instrument/Collision/SourceMesh0"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 54,
+        "filter_path": "/World/Instrument/Collision/SourceMesh1"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 55,
+        "filter_path": "/World/Instrument/Collision/SourceMesh2"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 56,
+        "filter_path": "/World/Instrument/Collision/SourceMesh3"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 57,
+        "filter_path": "/World/Instrument/Collision/SourceMesh4"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 58,
+        "filter_path": "/World/Instrument/Collision/SourceMesh5"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 59,
+        "filter_path": "/World/Instrument/Collision/SourceMesh6"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 60,
+        "filter_path": "/World/Instrument/Collision/SourceMesh7"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 61,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottomn1n1"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 62,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottomn11"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 63,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottom1n1"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 64,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/bottom11"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 65,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell00"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 66,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell01"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 67,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell02"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 68,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell10"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 69,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell12"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 70,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell20"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 71,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell21"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 72,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band0_cell22"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 73,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell00"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 74,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell01"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 75,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell02"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 76,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell10"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 77,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell12"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 78,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell20"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 79,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell21"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 80,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band1_cell22"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 81,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell00"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 82,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell01"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 83,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell02"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 84,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell10"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 85,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell12"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 86,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell20"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 87,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell21"
+      },
+      {
+        "sign": 1,
+        "resolved": true,
+        "residual_N": 0.0,
+        "plus_residual_N": 0.0,
+        "minus_residual_N": 0.0,
+        "aggregate_norm_N": 0.0,
+        "method": "min || sign*sum(rawscalar*normal)-samepair_force_matrix ||; tolerance max1uN or0.5percent",
+        "filter_index": 88,
+        "filter_path": "/World/NeighborCuvette_F6/Collision/band2_cell22"
+      }
+    ],
+    "environment_friction_points": [],
+    "finger_friction_points": [
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21514540910720825,
+          -0.11105898767709732,
+          1.059346318244934
+        ],
+        "force_N": [
+          -0.00037887407233938575,
+          -0.056884635239839554,
+          0.5142243504524231
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21515940129756927,
+          -0.11018001288175583,
+          1.0414246320724487
+        ],
+        "force_N": [
+          -0.0002678710734471679,
+          -0.08153264224529266,
+          0.3520221412181854
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21514761447906494,
+          -0.11105847358703613,
+          1.0593454837799072
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21514172852039337,
+          -0.11016958206892014,
+          1.0601603984832764
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21516339480876923,
+          -0.11105401068925858,
+          1.0414234399795532
+        ],
+        "force_N": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.2151438295841217,
+          -0.11896015703678131,
+          1.0593398809432983
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21514689922332764,
+          -0.11105867475271225,
+          1.0601600408554077
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.2151438295841217,
+          -0.11896015703678131,
+          1.0593421459197998
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.2151438295841217,
+          -0.11896016448736191,
+          1.0593422651290894
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21515312790870667,
+          -0.11984862387180328,
+          1.0414197444915771
+        ],
+        "force_N": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.2151438295841217,
+          -0.11896016448736191,
+          1.0593422651290894
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 0,
+        "position_m": [
+          0.21513661742210388,
+          -0.11985329538583755,
+          1.0601564645767212
+        ],
+        "force_N": [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.20515066385269165,
+          -0.11016452312469482,
+          1.0601104497909546
+        ],
+        "force_N": [
+          0.00068264378933236,
+          0.10967782139778137,
+          -0.36392131447792053
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.20515625178813934,
+          -0.11105075478553772,
+          1.050220251083374
+        ],
+        "force_N": [
+          0.0005396437481977046,
+          0.09862221032381058,
+          -0.24249224364757538
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.2051633894443512,
+          -0.11104921251535416,
+          1.041416049003601
+        ],
+        "force_N": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.20516172051429749,
+          -0.11017077416181564,
+          1.049562931060791
+        ],
+        "force_N": [
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.20514315366744995,
+          -0.11895556002855301,
+          1.0601041316986084
+        ],
+        "force_N": [
+          7.747512427158654e-06,
+          -0.0018268481362611055,
+          -0.009792949073016644
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.2051556408405304,
+          -0.11105141043663025,
+          1.0502201318740845
+        ],
+        "force_N": [
+          6.0741554079868365e-06,
+          -0.0028958022594451904,
+          -0.00847444124519825
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.2051524817943573,
+          -0.1189529225230217,
+          1.049515724182129
+        ],
+        "force_N": [
+          2.526516482248553e-06,
+          -0.0183375533670187,
+          -0.01122491154819727
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.20516343414783478,
+          -0.11104920506477356,
+          1.0413730144500732
+        ],
+        "force_N": [
+          8.532750143785961e-06,
+          -0.013097023591399193,
+          -0.01568426750600338
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.20514272153377533,
+          -0.11979866027832031,
+          1.0601341724395752
+        ],
+        "force_N": [
+          9.1871406766586e-06,
+          -0.00337572512216866,
+          -0.012951996177434921
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.20515188574790955,
+          -0.11895308643579483,
+          1.0501832962036133
+        ],
+        "force_N": [
+          -8.859366289470927e-07,
+          -0.010779015719890594,
+          -0.006723013240844011
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.2051524817943573,
+          -0.1189529225230217,
+          1.049513816833496
+        ],
+        "force_N": [
+          1.1546926543815061e-06,
+          -0.009875440038740635,
+          -0.005863271653652191
+        ]
+      },
+      {
+        "shape": 0,
+        "filter_index": 1,
+        "position_m": [
+          0.2051592469215393,
+          -0.11979398876428604,
+          1.0413668155670166
+        ],
+        "force_N": [
+          -2.7215828595217317e-06,
+          -0.011292935349047184,
+          -0.0020909039303660393
+        ]
+      }
+    ],
+    "native_target_overlap_m": null,
+    "native_target_overlap_measured": false,
+    "target_region_contains_object": null,
+    "reference_12_6_square_envelope_contains": null,
+    "reference_12_6_envelope_warning": "Necessary rectangularreference only; retainedoriginalfeatures not represented; not legal-voidproof",
+    "gripper_object_clearance_m": 0.0,
+    "gripper_clearance_scope": "AABB separation lowerbound fromactual threegripperlink inputvertices; notcookedshapes",
+    "source_clearance_m": 0.22965215055993926,
+    "source_reference_inside": false,
+    "forbidden_robot_environment_contact": false,
+    "forbidden_robot_environment_contact_this_step": false,
+    "command_q9": [
+      1.0733400523316619,
+      -0.1896365870593386,
+      -1.252708250049142,
+      -2.1754763299730033,
+      -0.2090474360483653,
+      2.1076645182513043,
+      -0.8515695166067379,
+      0.004499999999999997,
+      0.004499999999999997
+    ],
+    "gripper_target_m": 0.004499999999999997,
+    "gripper_effort_limit_N": 3.0,
+    "record_api_sample_time": "aftercompletedphysicsstep,nointerveningstep",
+    "native_contact_events_count": 86362,
+    "input_geometry_sample_time_s": 65.06666666666666,
+    "input_geometry_cache_age_s": 0.04999999999999716,
+    "input_geometry_near_selected_seat": false,
+    "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+    "input_geometry_overlap_observed_m": null,
+    "target_region_contains_object_sampled": null,
+    "input_geometry_surface_crossing_count": null,
+    "input_geometry_min_sample_surface_distance_m": null,
+    "input_geometry_observed_worst_point_world_m": null,
+    "input_geometry_sign_qualified": true,
+    "input_method": "All vertices plus deterministic face-centroid samples; exact point-to-triangle signed distances and complete unique-edge crossing checks in mm. Qualified input-mesh observation, not cooked PhysX.",
+    "input_limitations": [
+      "Finite surface samples can miss a maximum penetration between samples; reported depth is an observed value, not a global upper bound.",
+      "Segment crossing detects transverse triangle crossings, not every coplanar overlap; coplanar contact is additionally sampled by point-to-triangle distance.",
+      "Original seat input mesh has open boundary edges. Its signed-distance side classification uses local face orientation/ray parity and is qualified near open boundaries.",
+      "No access to effective cooked PhysX shapes or solver material deformation; no claim to exclude all cooked-shape penetration."
+    ],
+    "input_geometry_assessment": "unavailable_remote_from_selected_seat",
+    "input_geometry_compute_wall_s": 0.0010810570092871785
+  },
+  "actual_model_tool_trace": {
+    "recorded_rows": 34,
+    "tool_records": 34,
+    "last_record_event": "decision",
+    "last_tool": {
+      "event": "decision",
+      "decision_index": 33,
+      "tool": "finish",
+      "arguments_json": "{\"episode_id\": \"265a03f0-cbf9-4117-8eba-716b3f0e0c82\", \"observation_id\": \"265a03f0-cbf9-4117-8eba-716b3f0e0c82:3906\", \"reason\": \"Stopped without release: bilateral retention remains, but current dual views do not establish free passage into the seat or loading depth/support. Further descent or opening would be unsupported; task completion is not claimed.\"}",
+      "simulation_time_s": 65.11666666666666,
+      "simulation_time_before": null,
+      "simulation_time_after": null,
+      "target_reached": null,
+      "partial_execution": null,
+      "executed_control_ticks": null,
+      "stop_reason": null,
+      "error_type": null
+    }
+  },
+  "normal_reader_admission": {
+    "success": false,
+    "failure": true,
+    "all_valid": true
+  },
+  "raw_stream_full_SHA_verified_against_closed_archive": true,
+  "physics_decoded_SHA256": "103d77e0e32e4fec75be33d3960366e4b09957907421bd609bc8ec62d0ee4232",
+  "native_decoded_SHA256": "c2c65e4f80b57b3fb86694e617c1c891b0900bb6a0a287f9ebba87b5a004099e",
+  "source_H5_original_labels_videos_modified": false,
+  "acceptance_thresholds_modified": false,
+  "analysis_GPU_used": false,
+  "analysis_API_calls": 0,
+  "limits": [
+    "Offline observation of one actual closed run; model/service usage is audited separately from physical task results.",
+    "Native callback contact candidates, actual raw impulse/force, and sampled input-material overlap are distinct.",
+    "Effective cooked collision global error and real-world calibration remain unknown.",
+    "Teacher stage strings and final tool/finish names are not taken as task-success evidence.",
+    "Unavailable post-retreat measurements stay unavailable; terminal windows never substitute for them."
+  ]
+}
