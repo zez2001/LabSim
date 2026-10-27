@@ -1,51 +1,85 @@
-# π0.5 外部策略接入契约
+# π0.5 外部策略契约
 
-本入口使用已经部署的 `RLinf-Pi05-LIBERO-130-fullshot-SFT`，没有进行 LabSim 训练或微调。LIBERO 到本任务的动作转换属于显式工程迁移，不能解释为两个仿真器动力学等价。预检记录见 [preflight_20261027.json](preflight_20261027.json)；预检与实际运行分开留证；本轮已经完成 69 次真实推理、341 个动作后自然安全停止，见 [本轮全链路审计](pi05_standard_01_closed_audit/summary.json) 和 [正式正常读取结果](../validation/official_pi05_dataset_check_clean_4a71635/failure.json)。
+当前环境为 `Project_release_v1`，使用固定 standard 场景及统一 RPC。策略接收双相机 RGB、机器人本体状态和任务文本，经显式动作转换调用环境执行器。推荐从 [当前使用指南](../README.md) 开始。
 
-## 模型与观察
+本接口采用独立部署的 `RLinf-Pi05-LIBERO-130-fullshot-SFT`。权重 SHA256 为 `4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683`，归一化统计 SHA256 为 `dae37d79a22108af83df9189c6710a3ec8e077d65b28e34bdf1da724e5ae30f1`。服务校验 checkpoint 身份，执行器保存请求、实际动作和后继状态。该 checkpoint 在 LIBERO 上微调，当前以零样本方式接入 LabSim。
 
-- 权重 SHA256：`4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683`。
-- 归一化统计 SHA256：`dae37d79a22108af83df9189c6710a3ec8e077d65b28e34bdf1da724e5ae30f1`。客户端同时检查这两个摘要与端点身份。
-- 侧视、腕视来自两个实际独立传感器。原生 640×480 图像先按既有公共观察契约拉伸为 256×256（CHW uint8）；客户端转 HWC RGB、添加 batch 维。随后原 π0.5 处理链执行 224×224 保持输入比例的填充缩放，此时输入已是方形，不能把它描述成保留原生 4:3 比例。没有把腕视复制为侧视。模型中的第三路零图像明确 masked，不是第三个相机。
-- 模型状态为 8 维 `float32`：相对机器人基座的 TCP xyz（m）、旋转向量（rad）、左指关节位置（m）、取负号的右指关节位置（m）。实际机器人基座变换来自公开环境元数据，允许显式覆盖并记录。
-- 模型接收图像、机器人状态及任务语言；相机标定另存审计记录，不增加器皿或目标座真值。公共触觉存在于环境接口，但这个 LIBERO 8 维编码没有额外拼入触觉。
-- 原模型处理链使用 checkpoint 内的 q01/q99 quantile normalize/unnormalize。服务返回的 7 维动作已经恢复成 LIBERO 数据的 OSC 幅度约定；客户端不再进行一次统计反归一化。这里所称“模型原始动作”指该服务原输出，不是内部 diffusion latent。
+## 图像：环境、训练数据和 checkpoint 三层接口
 
-## 动作及实际执行
+| 层级 | 字段与规格 | 转换位置 |
+|---|---|---|
+| 原生相机与公开观察 | `images.side_camera`、`images.wrist_camera`；每路 `[480,640,3]`，HWC RGB `uint8`，0–255 | `CameraRig.get_images()` 读取两个独立传感器；任务 `_public_observation()` 原样复制，保留 4:3 比例 |
+| H5 采集 | `side_camera_rgb`、`wrist_camera_rgb`；每帧 `[3,256,256]`，CHW RGB `uint8` | `_collector_state()` 调用 `policy_image()`：OpenCV `INTER_AREA` 拉伸为 256×256，再 HWC→CHW；这条分支用于数据记录 |
+| 正常 ACT/DP reader | ACT batch 为 `[B,3,256,256]`；DP 为 `[B,n_obs_steps,3,256,256]`，`float32`，0–1 | `MinimalPickDataset.__getitem__()` 从 H5 取帧并除以 255，不再次缩放 |
+| π0.5 适配器及 RPC 线上的服务输入 | `main_images`、`wrist_images` 为 `[1,480,640,3]`，NHWC RGB `uint8`；`states` 为 `[1,8] float32` | `Pi05LiberoAdapter.encode_observation()` 使用公开的原生图像；RPent `_encode_obs_libero()` 只添加 batch 维，没有先经过 H5 的 256×256 分支 |
+| 已部署 checkpoint 的图像 processor | 三路 `[224,224,3] uint8`；前两路为实际相机，第三路全零且 mask=false | 安装的 `ResizeImages(224,224)` 调用 `openpi_client.image_tools.resize_with_pad()`，使用 PIL BILINEAR：640×480→224×168，再上下各填 28 像素黑边 |
+| 模型 Observation | 每路 `[1,3,224,224] float32`，范围 −1 到 1 | 安装的 `Observation.from_dict()` 对 Torch uint8 张量作 NHWC→NCHW，并计算 `image / 255 * 2 - 1`；第三路无效 mask 保持 false |
 
-显式迁移配置为 [pi05_libero.yaml](../../../../config/lab_cuvette_loading/Project_v1/policies/pi05_libero.yaml)。本轮没有改变它的数值。
+`camera_meta.policy_transform`、`intrinsic_matrix_policy_256` 描述既有的 256×256 数据表示；当前 π0.5 适配器不使用该字段缩放公开图像。相机原生标定另行保存。帧读取时间、传感器时间和重复帧状态均保留。
 
-1. 将返回动作裁到 `[-1,1]`。前三项按 LIBERO 的 0.05 m 标度、旋转三项按 0.5 rad 标度转换，再按每轴 0.0005 m、0.004 rad 工程限幅。从机器人基座旋转到 world，发送 `ee_delta`。
-2. 第七项遵循原 Panda 的正号关闭、负号张开语义。通过有界、带状态的单指位移 ±0.008 m 更新 0–0.04 m 单指目标，再发送双指总开口 0–0.08 m。力上限保留 8 N。它不是把第七个数直接当成米或关节角。
-3. 策略动作频率 20 Hz，每动作 0.05 s，对应环境 60 Hz 的 3 个控制周期及 240 Hz 的 12 个物理步。模型 action horizon=10、返回 action chunk=5，最多执行前 5 项后重新推理。
-4. 每项动作绑定实际当前 episode/observation，并有稳定 action ID。chunk 内每项使用前一项的实际后继观察。拒绝、部分执行、无可用后继或终止会丢弃剩余项，不自动补完或重新执行。
-5. 模型等待时不推进物理。客户端在真实推理前后比较 episode、step、仿真时间；环境被其他客户端改变时拒绝旧 chunk。
+2026-10-28 已逐项比对真实服务首末 NPZ、69 次推理记录及部署 processor，见 [输入事实与文本审计](../internal_use/20261028/input_audit/README.md)。此前本页将 256×256 数据记录分支写成模型服务输入，现已按代码与保存的实际输入修正。
 
-同一环境执行器仍有共同的 EE 距离、速度、旋转及关节运动学限制，并运行原有机器人状态跟踪补偿与 GenericContactHold。π0.5 的每轴迁移限幅比公共 EE 单次上限更小；不同动作空间不能概括成相同数值限幅。GenericContactHold 只根据实际双指接触维持目标，不使用器皿位姿，不是抓取任务宏。其实际下发值由采集器保存，不能用适配器请求替代。
+## 机器人状态与任务文本
 
-`target_reached` 仅表示实际 TCP 端点符合执行器当前的 1 mm / 0.5° 容差，不表示抓取、插入或任务成功，更不是 0.1 mm 的实物精度。在线独立评分器根据物理状态判定任务。触觉标量是器皿过滤后的双指法向接触向量模长，不等于全部触觉、力矩、摩擦或底部承托测量。
+状态为 8 维 `float32`：相对机器人基座的 TCP xyz（m）、旋转向量（rad）、左指关节位置（m）、取负号的右指关节位置（m）。基座变换来自公开环境元数据。原 checkpoint 的 q01/q99 统计执行 quantile normalize，随后状态补零到 32 维。输入包含图像、本体状态与任务语言，不包含独立评分器的器皿或目标真值。
 
-## 证据分层与结束
+部署的 `pi05_libero` 配置为 `max_token_len=200`、`discrete_state_input=false`。PaliGemma SentencePiece tokenizer 先去首尾空白，将下划线和换行替换为空格，再执行 `encode(cleaned_text, add_bos=True) + encode("\n")`。该配置不添加 `Task/State/Action` 前缀，不把状态离散成文本，不添加 EOS。有效语言 mask 为 true，补齐位置为 false。
 
-- 模型服务保存实际输入 NPZ、逐路 shape/dtype/SHA256、输出 NPY、原返回数组、推理用时及 GPU 内存。
-- 策略客户端 `policy_events.jsonl` 保存完整返回数组、选择的 chunk、原动作、适配请求、action receipt、真实后继 ID、仿真时间及推理暂停检查。
-- 环境 `action_receipts.jsonl` 保存实际执行周期、部分执行、目标到达和安全停止；H5 的 `control_auxiliary/command_q` 保存最终实际 9 维关节命令。常规 8 维训练动作保持既有语义。
-- `executed_actions` 只统计取得回执且确实推进的动作；拒绝的零步请求不计入。未获回执的请求不猜测执行量，关闭后的环境记录才是最终依据。
-- `--max-simulation-s`、`--max-model-requests`、`--max-actions` 分别限制实际仿真时长、模型次数及动作请求数。模型等待不消耗仿真时间。任务失败可以是有效评测，服务异常单独分类。
-- `finalize_episode` 只结束当前集，不关闭共享环境；`env.close` / `shutdown` 用于结束服务。旧安全终止结果不能被随后发生的客户端错误改写。
-- release RPC 对完整 chunk 的 canonical 请求建立回执缓存；同请求重试返回原结果，不随新状态重新展开。部分 chunk 及异常中断不得通过重试恢复。
+当前实际任务文本来自任务 `get_task_language()`，服务的 `inference.jsonl.task_descriptions` 保存实际传输文本。本地审计测得 264 个原始 tokens，保留前 200 个，尾部 64 个被截断；有效末尾落在 TCP 固定变换四元数中，后续四元数结尾及整手净空提醒未进入模型。文本及动作转换保持当前基线。完整有效 token IDs、mask、decode、文本 SHA256、tokenizer 文件 SHA256、处理源码位置和版本见审计文件。
 
-## 本机已有部署的启动方式
+以后启动此服务时，`effective_input_audit.jsonl` 按 request index 保存**原 processor 实际产生**的 token IDs/mask、截断核对、图像 shape/dtype/hash 及图像 mask。包装器只调用原 processor 一次，并将同一结果对象返回模型。
 
-以下为配置完成后的正式命令；真实验收状态另见本轮运行结果。路径由使用者替换为已有的隔离模型运行环境和 checkpoint，不安装进 Isaac Python。
+本地离线预检使用现有策略 Python，不加载权重、不启动模型服务。输入文件取自已关闭的模型服务目录；输出须为新目录：
 
 ```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+"$LABSIM_POLICY_PYTHON" -m policy_backends.lab_cuvette_env_v1.input_audit \
+  --model-path "$LABSIM_PI05_CHECKPOINT" \
+  --input-npz "$MODEL_RUN/input_000001.npz" \
+  --inference-log "$MODEL_RUN/inference.jsonl" \
+  --request-index 1 --output outputs/input_audit_NEW
+```
+
+该入口限定已有本地 tokenizer/cache；缺少时明确报出所需路径。有效 processor 输入另存 NPZ，原服务输入与日志只读。
+
+## 动作与执行
+
+当前动作迁移配置仍为 [pi05_libero.yaml](../../../../config/lab_cuvette_loading/Project_v1/policies/pi05_libero.yaml)；配置目录名称为兼容路径，运行环境明确选择 `Project_release_v1`。
+
+1. 服务返回 7 维 LIBERO OSC 动作，已通过 checkpoint 统计反归一化。客户端将其裁至 `[-1,1]`，前三项乘 0.05 m、旋转三项乘 0.5 rad，再分别限幅到每轴 0.0005 m 与 0.004 rad。基座坐标转换为 world，调用 `ee_delta`。
+2. 第七项正号关闭、负号张开。适配器按 ±0.008 m 更新有界单指目标，再发送双指总开口 0–0.08 m；夹爪力上限 8 N。
+3. 策略 20 Hz，每动作 0.05 s，对应 60 Hz 的 3 个控制周期和 240 Hz 的 12 个物理步。模型 action horizon=10，返回 chunk=5，最多执行前 5 项后重新推理。
+4. 每项动作绑定当前 episode、observation 和稳定 action ID，chunk 内使用前一项真实后继观察。拒绝、部分执行、终止或缺少后继时丢弃剩余动作。
+5. 模型等待时物理暂停；推理前后核对 episode、step 和仿真时间。执行器保留共同的运动学限制、连续 IK、状态跟踪和接触锁存。
+
+`target_reached` 为仿真 TCP 执行端点标志，使用当前 1 mm / 0.5° 容差；精细控制诊断结果的测量对象为空夹爪仿真 TCP。任务成功由独立评分器判定。触觉标量是器皿过滤后的左右指法向接触向量模长。实际双指关节命令及力限制由采集器另存。
+
+## 回执、记录与结束
+
+- 模型服务：实际线输入 NPZ、图像/状态 hash、有效输入审计、输出 NPY、推理用时与 GPU 内存。
+- 策略客户端 `policy_events.jsonl`：返回数组、动作转换、请求、回执、后继 ID 和推理暂停检查。
+- 环境 `action_receipts.jsonl`：实际执行周期、部分执行、目标到达和安全停止；H5 的 `control_auxiliary/command_q` 保存最终实际 9 维关节命令。
+- `executed_actions` 只统计取得回执且推进了物理的动作。模型服务输出是 checkpoint 反归一化后的动作数组。
+- `--max-simulation-s`、`--max-model-requests`、`--max-actions` 分别限制实际仿真时长、推理次数和动作请求数。失败评测与服务异常分别分类。
+- `finalize_episode` 结束当前集；RPC `shutdown` 关闭共享环境。既有安全终止结果保留。
+- 完整 chunk 的 canonical 请求有回执缓存；同请求重试返回原结果，部分 chunk 或异常中断不通过重试补执行。
+
+## 本机部署与启动
+
+使用现有隔离的 RPent Python 和 checkpoint，不安装进 Isaac Python：
+
+```bash
+export RPENT_REPO_ROOT=/path/to/rpent
+export LABSIM_POLICY_PYTHON="$RPENT_REPO_ROOT/.venv/bin/python"
+export LABSIM_PI05_CHECKPOINT=/path/to/RLinf-Pi05-LIBERO-130-fullshot-SFT
+
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
 "$LABSIM_POLICY_PYTHON" -m policy_backends.lab_cuvette_env_v1.pi05_server \
   --model-path "$LABSIM_PI05_CHECKPOINT" --port 8098 \
   --output outputs/lab_cuvette_loading/Project_release_v1/pi05_model_NEW
 
 ./labsim serve --project-version Project_release_v1 --headless \
-  --record-mode eval --port 8097 \
+  --record-mode eval --record-purpose policy_evaluation --port 8097 \
   --output outputs/lab_cuvette_loading/Project_release_v1/pi05_env_NEW
 
 "$LABSIM_POLICY_PYTHON" -m policy.backends.rpent_compat --backend pi05 \
@@ -54,4 +88,11 @@
   --output outputs/lab_cuvette_loading/Project_release_v1/pi05_policy_NEW
 ```
 
-本机原部署为 `/home/wujing/Desktop/vla/rpent/.venv/bin/python` 与其 `checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT`。模型服务明确要求 CUDA；与一个 Isaac 进程组成同一评测，须统一调度 GPU。所有输出目录必须为新目录。没有自动训练、自动 checkpoint 下载或付费 API 回退。
+服务使用 CUDA；一个策略模型和一个 Isaac 进程按评测调度共用 GPU。输出必须为新目录。关闭使用 RPC `shutdown`，等待数据和进程完成闭合后再构建索引。
+
+## 验收与历史记录
+
+- [发布版实际连续模型运行](pi05_standard_01_closed_audit/summary.json)：69 次推理、341 个动作后安全终止，完成记录回读。
+- [正式数据入口读取结果](../validation/official_pi05_dataset_check_clean_4a71635/failure.json)。
+- [2026-10-27 部署预检快照](preflight_20261027.json)。
+- 早期五动作连通性实验保留在 [Project_v1 历史证据](../../Project_v1/policy_evidence/optional_physics_regressions_actual.json)。

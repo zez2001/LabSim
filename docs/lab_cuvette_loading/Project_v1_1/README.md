@@ -1,5 +1,8 @@
 # LabSim Project_v1_1
 
+> 历史版本：**Project_v1_1**，保留物理与接口验收原始记录。当前使用请从 [Project_release_v1](../Project_release_v1/README.md) 或 [组内指南](../../development/ONBOARDING.md) 开始；以下命令用于复现本历史版本。
+
+
 `lab_cuvette_loading` 的独立执行版本：Franka 从白色 6×6 来源架取出比色皿，搬运至单台开盖仪器的内部 A 座，插入、交接支撑、松爪、撤离，再观察至少 3 秒。提供确定性 teacher、GPT 图像控制、本地 policy RPC、连续录像、H5 采集和独立判分。
 
 本版本复用原资产与物理基线，增加连续 IK、动作执行回执、机器人状态跟踪补偿与接触保持。teacher 可以使用器皿真值；GPT 只接收公开 RGB、机器人状态、相机标定与指端接触。二者的控制能力和成绩分别记录。公开 `finger_contact_N` 是按器皿过滤的左右指法向接触向量模长，不能解释为全物体触觉、摩擦力或目标底部支撑力。场景包含工程假设，`real_calibrated=false`；尺寸适配任务成功不等于原型号配套或真实仪器校准。

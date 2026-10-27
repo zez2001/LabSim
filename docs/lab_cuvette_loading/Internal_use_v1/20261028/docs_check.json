@@ -1,0 +1,1172 @@
+{
+  "schema": "labsim.current_usage_docs.v1",
+  "root": "/home/wujing/Desktop/vla/LabSim",
+  "simulation_started": false,
+  "network_accessed": false,
+  "guides": [
+    {
+      "path": "README.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "README_EN.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "README_CN.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/media/teacher_preview.png",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格",
+          "exists": true,
+          "anchor": "资产与物理规格"
+        },
+        {
+          "target": "docs/development/ONBOARDING.md#准备环境与资产",
+          "exists": true,
+          "anchor": "准备环境与资产"
+        },
+        {
+          "target": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md#安装检查与生命周期验收",
+          "exists": true,
+          "anchor": "安装检查与生命周期验收"
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md#策略接口与时序",
+          "exists": true,
+          "anchor": "策略接口与时序"
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "policy/backends/OPTIONAL_POLICIES.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/history/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "CONTRIBUTING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/agent_handoff/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/upstream/README.labutopia.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "LICENSE",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [
+        "https://huggingface.co/datasets/Txie000/SLAI-Labsim",
+        "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067",
+        "https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml",
+        "https://github.com/Rui-li023/LabUtopia"
+      ],
+      "commands": [
+        {
+          "line": 37,
+          "argv": [
+            "./labsim",
+            "doctor",
+            "--project-version",
+            "Project_release_v1",
+            "--json"
+          ],
+          "project_version": "Project_release_v1",
+          "module": null
+        },
+        {
+          "line": 45,
+          "argv": [
+            "./labsim",
+            "demo",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--gui",
+            "--record-mode",
+            "collect",
+            "--record-purpose",
+            "demonstration",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/demo_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 58,
+          "argv": [
+            "./labsim",
+            "collect",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--headless",
+            "--episodes",
+            "1",
+            "--record-mode",
+            "collect",
+            "--record-purpose",
+            "demonstration",
+            "--output",
+            "$LABSIM_RUN"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 85,
+          "argv": [
+            "./labsim",
+            "eval",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--headless",
+            "--episodes",
+            "1",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/eval_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 90,
+          "argv": [
+            "./labsim",
+            "serve",
+            "--project-version",
+            "Project_release_v1",
+            "--headless",
+            "--port",
+            "8097",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/rpc_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "README_EN.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/media/teacher_preview.png",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格",
+          "exists": true,
+          "anchor": "资产与物理规格"
+        },
+        {
+          "target": "docs/development/ONBOARDING.md#准备环境与资产",
+          "exists": true,
+          "anchor": "准备环境与资产"
+        },
+        {
+          "target": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md#安装检查与生命周期验收",
+          "exists": true,
+          "anchor": "安装检查与生命周期验收"
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md#策略接口与时序",
+          "exists": true,
+          "anchor": "策略接口与时序"
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "policy/backends/OPTIONAL_POLICIES.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/history/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "CONTRIBUTING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/agent_handoff/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/upstream/README.labutopia.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "LICENSE",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [
+        "https://huggingface.co/datasets/Txie000/SLAI-Labsim",
+        "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067",
+        "https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml",
+        "https://github.com/Rui-li023/LabUtopia"
+      ],
+      "commands": [
+        {
+          "line": 37,
+          "argv": [
+            "./labsim",
+            "doctor",
+            "--project-version",
+            "Project_release_v1",
+            "--json"
+          ],
+          "project_version": "Project_release_v1",
+          "module": null
+        },
+        {
+          "line": 45,
+          "argv": [
+            "./labsim",
+            "demo",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--gui",
+            "--record-mode",
+            "collect",
+            "--record-purpose",
+            "demonstration",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/demo_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 58,
+          "argv": [
+            "./labsim",
+            "collect",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--headless",
+            "--episodes",
+            "1",
+            "--record-mode",
+            "collect",
+            "--record-purpose",
+            "demonstration",
+            "--output",
+            "$LABSIM_RUN"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 85,
+          "argv": [
+            "./labsim",
+            "eval",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--headless",
+            "--episodes",
+            "1",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/eval_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 90,
+          "argv": [
+            "./labsim",
+            "serve",
+            "--project-version",
+            "Project_release_v1",
+            "--headless",
+            "--port",
+            "8097",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/rpc_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "README_CN.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/development/ONBOARDING.md#准备环境与资产",
+          "exists": true,
+          "anchor": "准备环境与资产"
+        },
+        {
+          "target": "README.md#完整任务快速开始",
+          "exists": true,
+          "anchor": "完整任务快速开始"
+        },
+        {
+          "target": "README.md#标准采集与数据读取",
+          "exists": true,
+          "anchor": "标准采集与数据读取"
+        },
+        {
+          "target": "README.md#策略接入与评测",
+          "exists": true,
+          "anchor": "策略接入与评测"
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/lab_cuvette_loading/Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "docs/history/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "README_EN.md",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [],
+      "commands": [],
+      "errors": []
+    },
+    {
+      "path": "docs/development/ONBOARDING.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "../../README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../lab_cuvette_loading/Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../config/lab_cuvette_loading/Project_v1/assets.lock.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../lab_cuvette_loading/Project_v1/assets/portable_usd_semantics.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../lab_cuvette_loading/Project_release_v1/data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../config/lab_cuvette_loading/Project_v1/public_samples.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../policy/backends/OPTIONAL_POLICIES.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../README.md#策略接入与评测",
+          "exists": true,
+          "anchor": "策略接入与评测"
+        },
+        {
+          "target": "../lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../lab_cuvette_loading/Internal_use_v1/20261028/data_usage/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../lab_cuvette_loading/Project_release_v1/lifecycle.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../config/lab_cuvette_loading/Project_release_v1/standard.yaml",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../lab_cuvette_loading/Size_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../.github/workflows/cpu-contracts.yml",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../requirements/ci.txt",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../CONTRIBUTING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../agent_handoff/README.md",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [],
+      "commands": [
+        {
+          "line": 33,
+          "argv": [
+            "./labsim",
+            "doctor",
+            "--project-version",
+            "Project_release_v1",
+            "--json"
+          ],
+          "project_version": "Project_release_v1",
+          "module": null
+        },
+        {
+          "line": 53,
+          "argv": [
+            "./labsim",
+            "demo",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--gui",
+            "--record-mode",
+            "collect",
+            "--record-purpose",
+            "demonstration",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/demo_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 74,
+          "argv": [
+            "./labsim",
+            "collect",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--headless",
+            "--episodes",
+            "1",
+            "--record-mode",
+            "collect",
+            "--record-purpose",
+            "demonstration",
+            "--output",
+            "$LABSIM_RUN"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 114,
+          "argv": [
+            "./labsim",
+            "eval",
+            "--project-version",
+            "Project_release_v1",
+            "--backend",
+            "teacher",
+            "--headless",
+            "--episodes",
+            "1",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/eval_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 122,
+          "argv": [
+            "./labsim",
+            "serve",
+            "--project-version",
+            "Project_release_v1",
+            "--headless",
+            "--port",
+            "8097",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/rpc_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        },
+        {
+          "line": 160,
+          "argv": [
+            "./labsim",
+            "demo",
+            "--project-version",
+            "Project_release_v1",
+            "--sequence",
+            "early_finish",
+            "--gui",
+            "--record-mode",
+            "diagnostic",
+            "--record-purpose",
+            "lifecycle_diagnostic",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/install_check_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.run"
+        },
+        {
+          "line": 168,
+          "argv": [
+            "./labsim",
+            "collect",
+            "--project-version",
+            "Project_release_v1",
+            "--headless",
+            "--sequence",
+            "teacher",
+            "early_finish",
+            "teacher",
+            "--record-mode",
+            "collect",
+            "--record-purpose",
+            "lifecycle_diagnostic",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/lifecycle_001"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.run"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_release_v1/README.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "../../../README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../development/ONBOARDING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../development/ONBOARDING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../policy/backends/OPTIONAL_POLICIES.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "lifecycle.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../config/lab_cuvette_loading/Project_v1/assets.lock.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../assets/lab_cuvette_loading/Size_v1/registry.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../config/lab_cuvette_loading/Project_release_v1/standard.yaml",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../development/ONBOARDING.md#策略接口与时序",
+          "exists": true,
+          "anchor": "策略接口与时序"
+        },
+        {
+          "target": "data_usage.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../Internal_use_v1/20261028/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../Internal_use_v1/20261028/previous_guides/Project_release_v1_README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/same_process_collect_01_closed/summary.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/official_dataset_check_clean_4a71635/success.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/official_dataset_check_clean_4a71635/failure.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/official_dataset_check_clean_4a71635/all_valid.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/gui_finish_02_shutdown_actual_20261027/receipt.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/termination_cases_01_closed/summary.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/termination_cases_01_closed/authoritative_fields_addendum.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "external_policy/pi05_standard_01_client_closed/receipt.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/pi05_standard_01_env_closed/summary.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "validation/baseline_vs_collect_01_comparison/summary.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../Project_v1_1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../development/ONBOARDING.md#常见问题与处理",
+          "exists": true,
+          "anchor": "常见问题与处理"
+        }
+      ],
+      "external_links": [
+        "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067"
+      ],
+      "commands": [],
+      "errors": []
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_release_v1/data_usage.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "../Internal_use_v1/20261028/data_usage/README.md",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [],
+      "commands": [],
+      "errors": []
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "../README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../internal_use/20261028/input_audit/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../../config/lab_cuvette_loading/Project_v1/policies/pi05_libero.yaml",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "pi05_standard_01_closed_audit/summary.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../validation/official_pi05_dataset_check_clean_4a71635/failure.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "preflight_20261027.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../Project_v1/policy_evidence/optional_physics_regressions_actual.json",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [],
+      "commands": [
+        {
+          "line": 81,
+          "argv": [
+            "./labsim",
+            "serve",
+            "--project-version",
+            "Project_release_v1",
+            "--headless",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--port",
+            "8097",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/pi05_env_NEW"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "policy/backends/OPTIONAL_POLICIES.md",
+      "current": true,
+      "local_links": [
+        {
+          "target": "../../docs/lab_cuvette_loading/Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../scripts/audit_lab_cuvette_external_policies.py",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md#图像环境训练数据和-checkpoint-三层接口",
+          "exists": true,
+          "anchor": "图像环境训练数据和-checkpoint-三层接口"
+        },
+        {
+          "target": "../../docs/lab_cuvette_loading/Project_release_v1/internal_use/20261028/input_audit/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../config/lab_cuvette_loading/Project_v1/policies/pi05_libero.yaml",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../docs/lab_cuvette_loading/Project_release_v1/external_policy/pi05_standard_01_closed_audit/summary.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../docs/lab_cuvette_loading/Project_release_v1/validation/official_pi05_dataset_check_clean_4a71635/failure.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../docs/lab_cuvette_loading/Project_v1/policy_evidence/optional_physics_regressions_actual.json",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [],
+      "commands": [
+        {
+          "line": 35,
+          "argv": [
+            "./labsim",
+            "serve",
+            "--project-version",
+            "Project_release_v1",
+            "--headless",
+            "--record-mode",
+            "eval",
+            "--record-purpose",
+            "policy_evaluation",
+            "--port",
+            "8097",
+            "--output",
+            "outputs/lab_cuvette_loading/Project_release_v1/pi05_env_NEW"
+          ],
+          "project_version": "Project_release_v1",
+          "module": "demos.lab_cuvette_project_release_v1.launch"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "docs/lab_cuvette_loading/Project_v1_1/README.md",
+      "current": false,
+      "local_links": [
+        {
+          "target": "../Project_release_v1/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../development/ONBOARDING.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "diagnostics/gpt_debug_08_physical_timeline/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "media/reading/teacher_support_align_01_full.mp4",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "media/reading/teacher_support_align_01_release_wrist_clip.mp4",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "diagnostics/teacher_support_align_01_support_portability_audit/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "public_temporal_visual_context_v1.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "fixed_side_detail_P7.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "public_robot_self_state_p9.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../config/lab_cuvette_loading/Project_v1/assets.lock.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "diagnostics/teacher_p9_regression_01_closed_read_archive.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "diagnostics/teacher_standard_v7_closed_data_cohort_01.json",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "public_active_view_p8.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "public_robot_self_state_p9.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "public_temporal_visual_context_v1.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "camera/temporal_public_qa_actual_D35/README.md",
+          "exists": true,
+          "anchor": null
+        },
+        {
+          "target": "../../../policy/backends/OPTIONAL_POLICIES.md",
+          "exists": true,
+          "anchor": null
+        }
+      ],
+      "external_links": [
+        "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067"
+      ],
+      "commands": [],
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "command_count": 19,
+  "local_link_count": 138,
+  "passed": true
+}
