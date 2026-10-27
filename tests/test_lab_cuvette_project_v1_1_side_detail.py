@@ -6,7 +6,6 @@ import importlib.util
 import io
 import json
 from pathlib import Path
-import subprocess
 import types
 
 import numpy as np
@@ -266,7 +265,10 @@ def test_packet_collision_does_not_overwrite_previous_detail(tmp_path):
 def test_P4_and_P6_actual_payloads_match_frozen58da_without_detail(profile_name,tmp_path,monkeypatch):
     """Compare wire body, not source-derived controller metadata SHA."""
     from policy.backends import cubence_project_v1_1_tools as current
-    source=subprocess.check_output(['git','show','58da857e14a0a1152884e13984607a286547a046:policy/backends/cubence_project_v1_1_tools.py'],cwd=ROOT,text=True)
+    frozen_source=ROOT/'tests/fixtures/lab_cuvette_project_v1_1/cubence_project_v1_1_tools_58da857e.py'
+    source_bytes=frozen_source.read_bytes()
+    assert hashlib.sha256(source_bytes).hexdigest()=='173b9eca096a257c7db009d5a1cd29ae0b638754f2becb7c8c02a67ae49fc474'
+    source=source_bytes.decode()
     frozen_file=tmp_path/'frozen/cubence_project_v1_1_tools.py';frozen_file.parent.mkdir()
     frozen_file.write_text(source)
     frozen_file.with_name('cubence_project_v1_1_visual_context.py').write_bytes((ROOT/'policy/backends/cubence_project_v1_1_visual_context.py').read_bytes())
