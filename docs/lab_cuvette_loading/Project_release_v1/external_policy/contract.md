@@ -17,7 +17,7 @@
 
 `camera_meta.policy_transform`、`intrinsic_matrix_policy_256` 描述既有的 256×256 数据表示；当前 π0.5 适配器不使用该字段缩放公开图像。相机原生标定另行保存。帧读取时间、传感器时间和重复帧状态均保留。
 
-2026-10-28 已逐项比对真实服务首末 NPZ、69 次推理记录及部署 processor，见 [输入事实与文本审计](../internal_use/20261028/input_audit/README.md)。此前本页将 256×256 数据记录分支写成模型服务输入，现已按代码与保存的实际输入修正。
+真实服务输入、H5分支和部署processor的对应证据见[输入事实与文本审计](../internal_use/20261028/input_audit/README.md)。
 
 ## 机器人状态与任务文本
 

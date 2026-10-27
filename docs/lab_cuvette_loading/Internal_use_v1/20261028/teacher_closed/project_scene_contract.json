@@ -1,0 +1,1989 @@
+{
+  "schema": "labsim.Project_release_v1.scene_contract.v1",
+  "physical_and_execution_baseline": {
+    "schema": "labsim.Project_v1_1.scene_contract.v1",
+    "config": {
+      "acceptance": {
+        "actual_retreat_clearance_m": 0.04,
+        "angular_speed_rad_s": 0.02,
+        "hold_s": 1.0,
+        "lift_m": 0.04,
+        "linear_speed_m_s": 0.001,
+        "orientation_change_deg": 1.0,
+        "position_drift_m": 0.0002,
+        "release_bottom_gap_m": 5e-05,
+        "release_support_force_N": 0.1,
+        "scope": "fixed engineering gates; NOT calibrated accuracy or insertion acceptance",
+        "steady_source_penetration_m": 5e-05,
+        "support_geometry_m": 5e-05,
+        "upright_after_release_deg": 1.0,
+        "window_s": 3.0
+      },
+      "calibrated": false,
+      "control": {
+        "final_speed_m_s": 0.0002,
+        "insert_speed_m_s": 0.001,
+        "retreat_m": 0.1,
+        "timeout_s": 168.0,
+        "transport_bottom_z_m": 0.975,
+        "approach_s": 6.0,
+        "extract_s": 6.0,
+        "transport_s": 16.0,
+        "transport_route": "source_y_then_target_x",
+        "retreat_lift_m": 0.06,
+        "retreat_lateral_m": [
+          -0.12,
+          0
+        ],
+        "retreat_route": "lift_then_outward_X",
+        "alignment_budget_m": 0.0001,
+        "tilt_budget_deg": 0.15,
+        "yaw_budget_deg": 0.2,
+        "jam_detection": {
+          "window_s": 0.3,
+          "command_down_min_m": 0.00015,
+          "vessel_down_max_m": 2.5e-05,
+          "relative_slip_m": 0.00015,
+          "wall_force_N": 0.5,
+          "force_rise_N": 0.2,
+          "action": "stop downward target; retract to preinsert safe height; save actual failure"
+        },
+        "grip_schedule": {
+          "transport_effort_N": 8.0,
+          "unload_effort_start_N": 8.0,
+          "unload_effort_end_N": 0.05,
+          "unload_seconds": 3.0,
+          "open_effort_N": 0.5,
+          "open_seconds": 3.0,
+          "truth_object_pose_used": true
+        },
+        "diagnostic_safe_bottom_above_rim_m": 0.001,
+        "diagnostic_alignment_budget_m": 0.0001,
+        "diagnostic_approach_speed_m_s": 0.002,
+        "diagnostic_near_speed_m_s": 0.0005,
+        "extract_orientation_feedback": false,
+        "transport_hold_before_align_s": 3.2,
+        "transport_hold_timeout_s": 10.0,
+        "loading_preapproach": true,
+        "preinsert_bottom_above_rim_m": 0.002,
+        "preapproach_speed_m_s": 0.005,
+        "insert_timeout_s": 60.0,
+        "allow_geometric_support_transfer": true,
+        "alignment_budget_basis": "10mm full-path clearance>=.35mm: .10mm XY +27mm*sin(.15deg)=.071mm + yaw .2deg envelope .025mm <.35mm; release penetration50um and stability200um/1deg/3s unchanged"
+      },
+      "demo_release": {
+        "bottom_distance_m": 5e-05,
+        "clear_seconds": 0.5,
+        "max_actual_pose_step_m": 0.003,
+        "max_actual_tilt_deg": 10.0,
+        "max_tilt_deg": 1.0,
+        "min_support_N": 0.1,
+        "native_velocity_policy": "retain and flag discrepancy; finite check and actual pose motion are hard gates; speed mismatch alone does not veto opening",
+        "observe_s": 3.0,
+        "open_seconds": 3.0,
+        "orientation_change_deg": 1.0,
+        "penetration_m": 5e-05,
+        "position_drift_m": 0.0002,
+        "support_window_s": 0.5,
+        "unload_seconds": 3.0
+      },
+      "derived_directory": "assets/lab_cuvette_loading/Size_v1",
+      "gripper": {
+        "contact_safety_factor": 2.0,
+        "method": "contact_latched uses measured bilateral joint position minus mg/(2*combined_dynamic_friction)*safety/finger_kp; no gain or force-limit change",
+        "mode": "contact_latched",
+        "actual_slip_max_m": 0.001,
+        "actual_tilt_max_deg": 1.0,
+        "contact_threshold_N": 0.03,
+        "contact_persist_s": 0.1,
+        "maximum_compression_m": 0.0003,
+        "latch_transition_policy": "preserve_first_contact_command"
+      },
+      "mode": "workflow",
+      "output_root": "outputs/lab_cuvette_loading/Project_release_v1",
+      "physics": {
+        "ccd": true,
+        "contact_offset_m": 5e-05,
+        "control_hz": 60,
+        "dynamic_friction": 0.5,
+        "finger_dynamic_friction": 0.8,
+        "finger_static_friction": 1.0,
+        "hz": 240,
+        "position_iterations": 64,
+        "rest_offset_m": 0.0,
+        "restitution": 0.0,
+        "solver": "TGS",
+        "static_friction": 0.6,
+        "velocity_iterations": 1
+      },
+      "robot": {
+        "base_m": [
+          -0.3,
+          0,
+          0.74
+        ],
+        "grasp_above_bottom_m": 0.053,
+        "initial_tcp_m": [
+          -0.085,
+          -0.175,
+          1.0230000000000001
+        ],
+        "tcp_local_m": [
+          0,
+          0,
+          0.1
+        ],
+        "usd_path": "assets/robots/Franka.usd",
+        "gripper_yaw_deg": -90.0,
+        "tcp_quaternion_wxyz": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "tcp_frame": "right_gripper",
+        "initial_joint_positions": [
+          0.1779404569926203,
+          -1.208031663591094,
+          -0.8197921486914327,
+          -2.872999113364274,
+          -0.7667170833832817,
+          1.7454942736950525,
+          -0.8053155743445266,
+          0.04,
+          0.04
+        ],
+        "initial_joint_basis": "Env_v1 arm_plan_01 seed1; sampled full11-link input triangle pathcheck, actual dynamics still required"
+      },
+      "scene": {
+        "initial_bottom_gap_m": 0.0002,
+        "instrument_xyz_m": [
+          0.36,
+          0,
+          0.74
+        ],
+        "table_size_m": [
+          2.2,
+          1.8,
+          0.08
+        ],
+        "table_top_m": 0.74,
+        "instrument_count": 1,
+        "instrument_yaw_policy": "explicit video-informed hypothesis with lateral rack offset; not automatic pointing",
+        "design_rack_origin_m": [
+          -0.04,
+          -0.22,
+          0.74
+        ],
+        "design_instrument_origin_m": [
+          0.36,
+          0.18,
+          0.74
+        ],
+        "instrument_yaw_deg": 90.0
+      },
+      "variant": "xy_size_hypothesis",
+      "version": "Project_release_v1",
+      "scene_mode": "standard",
+      "asset_directory": "assets/lab_cuvette_loading/V0_demo04",
+      "rack": {
+        "rows": 6,
+        "columns": 6,
+        "inner_m": 0.016,
+        "wall_m": 0.002,
+        "depth_m": 0.025,
+        "base_m": 0.003,
+        "selected_slot_id": "A1",
+        "blue_slot_id": "F6",
+        "yaw_deg": -90.0,
+        "origin_m": [
+          -0.04,
+          -0.22,
+          0.74
+        ]
+      },
+      "adapter": {
+        "selected_target_seat_id": "candidate_far_hinge",
+        "inner_m": 0.0126,
+        "outer_m": 0.0204,
+        "height_m": 0.029,
+        "base_m": 0.002,
+        "geometry": "original CAD mesh3; no engineering adapter"
+      },
+      "task": {
+        "instruction": "Physically load the 10mm XY size-hypothesis cuvette from fixed white rack slot A1 into unchanged original internal seat candidate_far_hinge, transfer support, release, retreat and leave stable for3seconds.",
+        "control_hz": 60
+      },
+      "source": {
+        "instrument": "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda",
+        "vessel": "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda",
+        "vessel_collision": "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda"
+      },
+      "randomization": {
+        "legal_slots": [
+          "A1",
+          "A2",
+          "B1",
+          "B2",
+          "C1"
+        ],
+        "rack_translation_half_range_m": 0.0,
+        "instrument_translation_half_range_m": 0.0,
+        "yaw_half_range_deg": 0.0,
+        "in_slot_translation_m": 0.0,
+        "scope": "only execute after geometry valid and one full task succeeds; keep whole assemblies together",
+        "enabled": false,
+        "asset_randomization_enabled": false,
+        "light_randomization_enabled": false,
+        "physics_randomization_enabled": false,
+        "layout_randomization_enabled": false
+      },
+      "video": {
+        "main_focal_length_cm": 1.1,
+        "main_resolution": [
+          1920,
+          1080
+        ],
+        "fps": 30,
+        "render_hz": 60
+      },
+      "collision_scheme": "cuvette_xy_1000",
+      "vessel": {
+        "outer_xy_m": [
+          0.01,
+          0.01
+        ],
+        "height_m": 0.0675,
+        "mass_kg": 0.02,
+        "dimension_source": "Registered XY size hypothesis; not a real measured cuvette dimension",
+        "mass_source": "retained20g engineering assumption, not measured",
+        "xy_scale": 0.6734006734006734,
+        "yaw_deg": 90.0,
+        "asset_id": "cuvette_xy_1000",
+        "actual_outer_dimensions_m": [
+          0.01000000350177288,
+          0.01000000350177288,
+          0.06749999523162842
+        ],
+        "center_of_mass_m": [
+          6.042121449604159e-07,
+          6.087301784440295e-07,
+          0.029027631688380916
+        ],
+        "inertia_body_kg_m2": [
+          [
+            9.211088376712258e-06,
+            1.1337154717373428e-14,
+            -8.832234243109803e-11
+          ],
+          [
+            1.1337154713867837e-14,
+            9.211088649686659e-06,
+            -8.898320448212892e-11
+          ],
+          [
+            -8.832234243125229e-11,
+            -8.898320448218497e-11,
+            5.195387870064674e-07
+          ]
+        ],
+        "axis_scale_from_control": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "xy_scale_basis": "Legacy original14.85mm CAD helper only; selected USD already derived; no second scale applied",
+        "principal_inertia_kg_m2": [
+          5.195387851979465e-07,
+          9.211088377061946e-06,
+          9.211088651145487e-06
+        ],
+        "principal_axes_quaternion_wxyz": [
+          -0.48869514756955607,
+          0.5110598141840352,
+          0.48869541364097613,
+          0.5110496177030411
+        ],
+        "mass_distribution_assumption": "Uniform closed visual material volume, cavity excluded; fixed total mass means numerical density varies; no constant-density claim",
+        "inner_cavity_sections": [
+          {
+            "height_above_bottom_mm": 10.0,
+            "actual_central_inner_clear_width_X_mm": 8.426265325397253,
+            "actual_central_inner_clear_width_Y_mm": 8.426270447671413,
+            "method": "Nearest actual triangle-surface hit from cavity centre along each signedXY axis; local corners not replaced by this measurement"
+          },
+          {
+            "height_above_bottom_mm": 26.5,
+            "actual_central_inner_clear_width_X_mm": 8.426265325397253,
+            "actual_central_inner_clear_width_Y_mm": 8.426270447671413,
+            "method": "Nearest actual triangle-surface hit from cavity centre along each signedXY axis; local corners not replaced by this measurement"
+          },
+          {
+            "height_above_bottom_mm": 60.0,
+            "actual_central_inner_clear_width_X_mm": 8.426265325397253,
+            "actual_central_inner_clear_width_Y_mm": 8.426270447671413,
+            "method": "Nearest actual triangle-surface hit from cavity centre along each signedXY axis; local corners not replaced by this measurement"
+          }
+        ],
+        "registered_material_attributes": [
+          {
+            "prim": "/Asset/Looks/DerivedVisual",
+            "attributes": {
+              "outputs:displacement": "None",
+              "outputs:surface": "None",
+              "outputs:volume": "None"
+            }
+          },
+          {
+            "prim": "/Asset/Looks/Physics",
+            "attributes": {
+              "outputs:displacement": "None",
+              "outputs:surface": "None",
+              "outputs:volume": "None",
+              "physics:density": "0.0",
+              "physics:dynamicFriction": "0.5",
+              "physics:restitution": "0.0",
+              "physics:staticFriction": "0.6000000238418579",
+              "physxMaterial:compliantContactAccelerationSpring": "False",
+              "physxMaterial:compliantContactDamping": "0.0",
+              "physxMaterial:compliantContactStiffness": "0.0",
+              "physxMaterial:dampingCombineMode": "average",
+              "physxMaterial:frictionCombineMode": "average",
+              "physxMaterial:restitutionCombineMode": "average"
+            }
+          }
+        ],
+        "registered_collision_input_shapes": [
+          {
+            "prim": "/Asset/Collision/bottomn1n1",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                -0.00500000214483598,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.004883990042920672
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/bottomn11",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.00500000214483598,
+                0.004883990042920672
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/bottom1n1",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.0,
+                -0.00500000214483598,
+                0.0
+              ],
+              [
+                0.00500000214483598,
+                0.0,
+                0.004883990042920672
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/bottom11",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.00500000214483598,
+                0.00500000214483598,
+                0.004883990042920672
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell00",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                -0.00500000214483598,
+                0.00488408970189147
+              ],
+              [
+                -0.003950842091341444,
+                -0.003950842091341444,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell01",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                -0.003950842091341444,
+                0.00488408970189147
+              ],
+              [
+                -0.003952989050748229,
+                0.003950842091341444,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell02",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                0.003950842091341444,
+                0.00488408970189147
+              ],
+              [
+                -0.003950842091341444,
+                0.00500000214483598,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell10",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.003950842091341444,
+                -0.00500000214483598,
+                0.00488408970189147
+              ],
+              [
+                0.003950842091341444,
+                -0.00395298404395783,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell12",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.003950842091341444,
+                0.003952311465114239,
+                0.00488408970189147
+              ],
+              [
+                0.003950842091341444,
+                0.00500000214483598,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell20",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.003950842091341444,
+                -0.00500000214483598,
+                0.00488408970189147
+              ],
+              [
+                0.00500000214483598,
+                -0.003950842091341444,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell21",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.003952311465114239,
+                -0.003950842091341444,
+                0.00488408970189147
+              ],
+              [
+                0.00500000214483598,
+                0.003950842091341444,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band0_cell22",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.003950842091341444,
+                0.003950842091341444,
+                0.00488408970189147
+              ],
+              [
+                0.00500000214483598,
+                0.00500000214483598,
+                0.005163099057337306
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell00",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                -0.00500000214483598,
+                0.005163099057337306
+              ],
+              [
+                -0.003950842091341444,
+                -0.003950842091341444,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell01",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                -0.003950842091341444,
+                0.005163099057337306
+              ],
+              [
+                -0.004213466367578855,
+                0.003950842091341444,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell02",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                0.003950842091341444,
+                0.005163099057337306
+              ],
+              [
+                -0.003950842091341444,
+                0.00500000214483598,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell10",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.003950842091341444,
+                -0.00500000214483598,
+                0.005163099057337306
+              ],
+              [
+                0.003950842091341444,
+                -0.004213471612787845,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell12",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.003950842091341444,
+                0.004212799272362844,
+                0.005163099057337306
+              ],
+              [
+                0.003950842091341444,
+                0.00500000214483598,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell20",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.003950842091341444,
+                -0.00500000214483598,
+                0.005163099057337306
+              ],
+              [
+                0.00500000214483598,
+                -0.003950842091341444,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell21",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.004212799272362844,
+                -0.003950842091341444,
+                0.005163099057337306
+              ],
+              [
+                0.00500000214483598,
+                0.003950842091341444,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band1_cell22",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.003950842091341444,
+                0.003950842091341444,
+                0.005163099057337306
+              ],
+              [
+                0.00500000214483598,
+                0.00500000214483598,
+                0.06722090468207931
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell00",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                -0.00500000214483598,
+                0.06722090468207931
+              ],
+              [
+                -0.003950842091341444,
+                -0.003950842091341444,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell01",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                -0.003950842091341444,
+                0.06722090468207931
+              ],
+              [
+                -0.004213466367578855,
+                0.003950842091341444,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell02",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.00500000214483598,
+                0.003950842091341444,
+                0.06722090468207931
+              ],
+              [
+                -0.003950842091341444,
+                0.00500000214483598,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell10",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.003950842091341444,
+                -0.00500000214483598,
+                0.06722090468207931
+              ],
+              [
+                0.003950842091341444,
+                -0.004213471612787845,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell12",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                -0.003950842091341444,
+                0.004212799272362844,
+                0.06722090468207931
+              ],
+              [
+                0.003950842091341444,
+                0.00500000214483598,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell20",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.003950842091341444,
+                -0.00500000214483598,
+                0.06722090468207931
+              ],
+              [
+                0.00500000214483598,
+                -0.003950842091341444,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell21",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.004212799272362844,
+                -0.003950842091341444,
+                0.06722090468207931
+              ],
+              [
+                0.00500000214483598,
+                0.003950842091341444,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          },
+          {
+            "prim": "/Asset/Collision/band2_cell22",
+            "approximation": "convexHull",
+            "collision_enabled": true,
+            "contact_offset_m": 4.999999873689376e-05,
+            "rest_offset_m": 0.0,
+            "bounds_m": [
+              [
+                0.003950842091341444,
+                0.003950842091341444,
+                0.06722090468207931
+              ],
+              [
+                0.00500000214483598,
+                0.00500000214483598,
+                0.06749999557668307
+              ]
+            ],
+            "configuration_attributes_excluding_vertex_arrays": {
+              "accelerations": "None",
+              "cornerIndices": "[]",
+              "cornerSharpnesses": "[]",
+              "creaseIndices": "[]",
+              "creaseLengths": "[]",
+              "creaseSharpnesses": "[]",
+              "doubleSided": "True",
+              "faceVaryingLinearInterpolation": "cornersPlus1",
+              "holeIndices": "[]",
+              "interpolateBoundary": "edgeAndCorner",
+              "normals": "None",
+              "orientation": "rightHanded",
+              "physics:approximation": "convexHull",
+              "physics:collisionEnabled": "True",
+              "physxCollision:contactOffset": "4.999999873689376e-05",
+              "physxCollision:minTorsionalPatchRadius": "0.0",
+              "physxCollision:restOffset": "0.0",
+              "physxCollision:torsionalPatchRadius": "0.0",
+              "physxConvexHullCollision:hullVertexLimit": "256",
+              "physxConvexHullCollision:minThickness": "0.0",
+              "primvars:displayColor": "None",
+              "primvars:displayOpacity": "None",
+              "purpose": "default",
+              "subdivisionScheme": "none",
+              "triangleSubdivisionRule": "catmullClark",
+              "velocities": "None",
+              "visibility": "invisible",
+              "xformOp:scale": "(0.001, 0.001, 0.001)",
+              "xformOpOrder": "[xformOp:scale]"
+            }
+          }
+        ]
+      },
+      "task_type": "lab_cuvette_project_release_v1",
+      "controller_type": "lab_cuvette_project_v1_1_teacher",
+      "collector_type": "lab_cuvette_project_release_v1",
+      "env": {
+        "task_type": "loading",
+        "controller": "teacher",
+        "mode": "standard",
+        "seed": 0,
+        "timeout_s": 170.0,
+        "sync_inference": true,
+        "control_hz": 60,
+        "physics_hz": 240,
+        "policy_hz": 20,
+        "record": true,
+        "action_max_translation_m": 0.01,
+        "action_max_rotation_rad": 0.1,
+        "action_max_joint_delta_rad": 0.1,
+        "max_action_duration_s": 0.5,
+        "gripper_effort_max_N": 8.0,
+        "geometry_safe_stop_above_rim_m": 0.001,
+        "render_zero_delay": true,
+        "scene_randomization_enabled": false,
+        "geometry_audit_module": "demos.lab_cuvette_project_v1.geometry_audit",
+        "scene_layout_module": "demos.lab_cuvette_size_v1.scene",
+        "scorer_module": "demos.lab_cuvette_project_v1_1.scorer",
+        "material_geometry_module": "demos.lab_cuvette_size_v1.runtime_geometry",
+        "material_geometry_check_hz": 15,
+        "render_flush_passes_per_control": 1,
+        "probe_cooked_collision": true
+      },
+      "geometry": {
+        "target_loading_offset_local_m": [
+          0.00065,
+          1e-06,
+          0
+        ],
+        "target_depth_m": 0.027,
+        "scene_assets_unmodified": true,
+        "target_loading_axis_definition": "Selected original seat frame plus target_loading_offset_local_m; physical seat unchanged"
+      },
+      "cameras": {
+        "side_camera": {
+          "prim_path": "/World/SideCamera",
+          "eye_m": [
+            -0.7,
+            -0.85,
+            1.32
+          ],
+          "target_m": [
+            0.1,
+            -0.1,
+            1.05
+          ],
+          "focal_length_cm": 1.7,
+          "horizontal_aperture_mm": 20.955,
+          "resolution": [
+            640,
+            480
+          ],
+          "fps": 60,
+          "policy_resolution": [
+            256,
+            256
+          ],
+          "upworld": [
+            0,
+            0,
+            1
+          ]
+        },
+        "wrist_camera": {
+          "parent_link": "/World/Franka/panda_hand",
+          "prim_path": "/World/Franka/panda_hand/WristCameraV11",
+          "focal_length_cm": 1.2,
+          "horizontal_aperture_mm": 20.955,
+          "resolution": [
+            640,
+            480
+          ],
+          "fps": 60,
+          "policy_resolution": [
+            256,
+            256
+          ],
+          "localeye_m": [
+            0.075,
+            0,
+            0.04
+          ],
+          "localtarget_m": [
+            0,
+            0,
+            0.12
+          ],
+          "localup": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "policy_names": [
+          "side_camera_rgb",
+          "wrist_camera_rgb"
+        ]
+      },
+      "experiment": {
+        "id": "Project_release_v1_standard",
+        "truth_teacher": true,
+        "controller_version": "Project_v1_1.teacher_phase_motion_clock.v7",
+        "original_seat_unchanged": true,
+        "run_role": "standard_collection"
+      },
+      "collection": {
+        "mode": "standard",
+        "scene_randomization_enabled": false
+      },
+      "training_scene": {
+        "mode": "standard",
+        "scene_randomization_enabled": false,
+        "automatic_validation_mode": "standard",
+        "automatic_validation_randomization_enabled": false
+      },
+      "asset_id": "cuvette_xy_1000",
+      "collector": {
+        "compression": "gzip"
+      },
+      "asset_registry": "assets/lab_cuvette_loading/Size_v1/registry.json",
+      "asset_selection": {
+        "schema": "labsim.Project_v1.atomic_asset_selection.v1",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "source_path": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda",
+        "source_sha256": "4ccd39708e34d9851dbe17db293734c4882ea9f6e660df83114e120cb0c2f3da",
+        "registry_path": "assets/lab_cuvette_loading/Size_v1/registry.json",
+        "registry_sha256": "c619f9fb914509cc791f2b586df186b92be309df31cb95134dc9507256c695e4",
+        "original_rack_and_instrument_preserved": true,
+        "target_offset_automatically_adjusted": false,
+        "mass_distribution_assumption": "Uniform closed visual material volume, cavity excluded; fixed total mass means numerical density varies; no constant-density claim",
+        "validation_scope": "Registered USD/source/sidecar hashes and atomic geometric/mass/contact metadata; independent geometry, cooked collision and physical execution still required"
+      },
+      "project": {
+        "schema": "labsim.project.v1_1",
+        "scene_version": "Project_release_v1.standard.v1",
+        "scorer_version": "Project_v1_1.independent.v1",
+        "action_interface_version": "Project_release_v1.actions.v1",
+        "release_baseline": "Size_v1 frozen f435d2a43aae5ba78f71bbc754b0ecaf401924e9b56db462606c0c5406fbd59b",
+        "backend_gripper_effort_N": 8.0,
+        "camera_names": [
+          "side_camera_rgb",
+          "wrist_camera_rgb"
+        ],
+        "public_observation": "RGB, robot proprioception, camera calibration, task language, bilateral finger force sensors; no vessel truth",
+        "executor_version": "Project_v1_1.continuous_fk_executor.v1",
+        "camera_version": "Project_v1_1.side.v3_wrist.v2",
+        "baseline_version": "Project_v1"
+      },
+      "executor": {
+        "maximum_position_tracking_error_m": 0.005,
+        "maximum_orientation_tracking_error_deg": 2.0,
+        "maximum_actual_TCP_speed_m_s": 0.05,
+        "maximum_actual_joint_speed_factor": 1.25,
+        "ik_position_tolerance_m": 2e-06,
+        "ik_orientation_tolerance_rad": 2e-05,
+        "ik_iterations": 35
+      },
+      "robot_tracking": {
+        "enabled": true,
+        "time_constant_s": 0.1,
+        "max_position_bias_m": 0.001,
+        "max_rotation_bias_rad": 0.002,
+        "version": "Project_v1_1.robot_tracking.v1"
+      },
+      "teacher_execution": {
+        "motion_time_scale": 1.5,
+        "version": "Project_v1_1.teacher_phase_motion_clock.v7",
+        "near_contact_slow_close_enabled": false
+      },
+      "release": {
+        "version": "Project_release_v1",
+        "physical_baseline": "Project_v1_1",
+        "lifecycle_version": "transactional_lifecycle.v1",
+        "record_mode": "collect",
+        "defer_publication": true,
+        "randomization_enabled": false,
+        "schema_version": "labsim.lab_cuvette_loading.Project_release_v1.v1"
+      }
+    },
+    "dependencies": {
+      "controllers/lab_cuvette_env_v1_controller.py": "8a7b910b1e01881fb50fd88ba0b8b098f6a4673030679e8458492a62c0d67afb",
+      "controllers/lab_cuvette_project_v1_1_controller.py": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+      "data_collectors/lab_cuvette_env_v1_collector.py": "ca4cbf867ba0c2c4a89572997c4249bd378adc1d44d7b55a4709a6831ca173ce",
+      "data_collectors/lab_cuvette_project_v1_1_collector.py": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1",
+      "demos/lab_cuvette_env_v1/physics_capture.py": "10d6d6a40455d16c6234701c661516212f7367fc85f3201ba6c7066020358276",
+      "demos/lab_cuvette_project_v1_1/continuous_ik.py": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+      "demos/lab_cuvette_project_v1_1/contract.py": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+      "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "demos/lab_cuvette_project_v1_1/gripper_hold.py": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "demos/lab_cuvette_project_v1_1/robot_tracking.py": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+      "demos/lab_cuvette_project_v1_1/scorer.py": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "demos/lab_cuvette_size_v1/runtime_geometry.py": "852a4604f057e0cc2642fc7269c103545a6bc4c16e8b8004d4861d7fb72c5948",
+      "demos/lab_cuvette_size_v1/scorer.py": "3428984dfebe984319d8cb31a8665587cc777bf5d811d26bd1ccd96a2b1d4f74",
+      "tasks/lab_cuvette_loading_env_v1.py": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747",
+      "tasks/lab_cuvette_loading_env_v1_scorer.py": "9c467cce3e15b4207819ee32161ce33d02fe1599e06c9f4b9ba2f255ebaa6611",
+      "tasks/lab_cuvette_loading_project_v1.py": "e4e130481c0d8593a8721bbd48dd7319ec1659f3bd07d2a68d902301a366c72f",
+      "tasks/lab_cuvette_loading_project_v1_1.py": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11"
+    },
+    "assets": {
+      "assets/lab_cuvette_loading/Size_v1/cuvette_xy_1000.usda": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "assets/lab_cuvette_loading/V0_demo02/video_pose_verified/instrument_native.usda": "2c075c4e4273ce23fcc0843e56ed0b42c66c030aeb9cf6fc1fbed89da4bd8c77",
+      "assets/lab_cuvette_loading/V0_demo03/rack.usda": "4739e631592cad3a023957f541e7dffb3bf3733b163197d43c1898cb0e296549",
+      "assets/lab_cuvette_loading/V0_demo04/instrument_native.usda": "b7145d71ca9668630466648a6144c26de9d555ca228259e22ecb3bf4e02a3a4e",
+      "assets/lab_cuvette_loading/V0_demo04/rack.usda": "b1a5e809d22ff0a204c85c53e867a07f7fbef1e49604c9f8ec647af202626c91",
+      "assets/lab_cuvette_loading/V0_ext01/source/newnew4.usd": "8261714be7250b61466e9b3537a25438a5cc441c20a465ea6b3c27b43383a1dc",
+      "assets/robots/Franka.usd": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b"
+    },
+    "acceptance_version": "Project_v1_1.independent.v1",
+    "frozen_scene_sha256": "d01c4c2835adb8483ba066d2a8d9603922c0d13fd9942b32613918b7f90fe3c7"
+  },
+  "acceptance_version": "Project_v1_1.independent.v1",
+  "lifecycle_version": "Project_release_v1.transactional_lifecycle.v1",
+  "publication_dependencies": {
+    "tasks/lab_cuvette_loading_project_release.py": "1465d4ed6f55ab38c727542d511579518f654d446c2f58d3c394e8e409f59eaa",
+    "data_collectors/lab_cuvette_project_release_collector.py": "b63e466b289a392382ada0560517ccce4c207210e1645614b566e5e20e0b1139",
+    "demos/lab_cuvette_project_release_v1/environment.py": "f33aeea59e4b598ad3da1c6e130337f4adb144fc6f21e4c45c76b21d8bec2a98",
+    "demos/lab_cuvette_project_release_v1/contract.py": "c2e302b7fd5cd165ffc98048483cd53152c3e349abec2bad629379fa26c56a0c",
+    "demos/lab_cuvette_project_release_v1/recording.py": "19ca97b8a531618ef6f620049283a8d17d912bb0919e3839e183c1e226148474",
+    "demos/lab_cuvette_project_release_v1/shutdown.py": "4579d5a35fc4a845cdb4b132c0fd29cf5c90864b1997bfd956dea6ae88dbcf7b",
+    "utils/episode_selection.py": "abedd6a71e85bd9124812fb0c95dd2828dd4790f6f56a34e337ae87c9ef50175"
+  },
+  "frozen_scene_sha256": "3a7d9138c3991f2be9eb344da49cbcaf60f81d5d81cd06a744c0956d6eda3246"
+}

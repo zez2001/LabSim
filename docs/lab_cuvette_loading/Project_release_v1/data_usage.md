@@ -22,19 +22,19 @@
 
 ```bash
 # 正式示范集合。
-python -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
   --purpose demonstration --mode relative-links --output "$RUN/index/demonstrations.hdf5"
 ./labsim dataset-check --index "$RUN/index/demonstrations.hdf5" \
   --sample-filter success --output "$RUN/index/success_reader.json"
 
 # 正式策略评测集合；该模块 CLI 默认即为 policy_evaluation。
-python -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
   --purpose policy_evaluation --output "$RUN/index/policy_evaluation.hdf5"
 ./labsim dataset-check --index "$RUN/index/policy_evaluation.hdf5" \
   --sample-filter all_valid --output "$RUN/index/policy_reader.json"
 
 # 开发诊断：明确查看所有已完成记录，包括未知用途的历史记录。
-python -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
   --purpose all-completed --output "$RUN/index/diagnostic_completed.hdf5"
 ```
 
@@ -59,10 +59,10 @@ Python 兼容 API `build_index()` 未指定 `purpose` 时仍保留历史的 `all
 复用已审查的 π0.5 成员清单：
 
 ```bash
-python -m demos.lab_cuvette_project_release_v1.membership "$RUN" \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.membership "$RUN" \
   --curated-policy-manifest docs/lab_cuvette_loading/Project_release_v1/validation/pi05_standard_01_env_closed/curated_index_manifest.json \
   --output "$RUN/purpose_members.json"
-python -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
   --members "$RUN/purpose_members.json" --purpose policy_evaluation \
   --output "$RUN/index/policy_only.hdf5"
 ```
@@ -72,7 +72,7 @@ python -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
 显式标注自有历史记录：
 
 ```bash
-python -m demos.lab_cuvette_project_release_v1.membership "$RUN" \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.membership "$RUN" \
   --assign lifecycle_diagnostic=EPISODE_UUID_1 \
   --assign lifecycle_diagnostic=EPISODE_UUID_2 \
   --output "$RUN/purpose_members.json"
@@ -96,7 +96,7 @@ handoff/
 依赖检查列出每个源文件的完整解析路径、是否存在、身份可读性及必须一起携带的文件：
 
 ```bash
-python -m demos.lab_cuvette_project_release_v1.transfer \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.transfer \
   handoff/index/demonstrations.hdf5 --verify-sha256 \
   --output handoff/dependencies.json
 ```
@@ -106,7 +106,7 @@ python -m demos.lab_cuvette_project_release_v1.transfer \
 ### 单文件：`copy`
 
 ```bash
-python -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
+"$LABSIM_PYTHON" -m demos.lab_cuvette_project_release_v1.dataset_index "$RUN" \
   --purpose demonstration --mode copy --output handoff/demonstrations.hdf5
 ```
 

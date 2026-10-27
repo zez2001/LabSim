@@ -1,8 +1,8 @@
 # 历史实验与证据索引
 
-当前项目功能、安装和稳定调用入口见[项目主页](../../README.md)，开发接入见[ONBOARDING](../development/ONBOARDING.md)。本页保留历史实验的原有范围、结果和局限，不把旧阶段的阻塞或临时工程成功混入当前正式任务。
+当前项目功能、安装和稳定调用入口见[项目主页](../../README.md)，开发接入见[ONBOARDING](../development/ONBOARDING.md)。推荐使用版本为 [Project_release_v1](../lab_cuvette_loading/Project_release_v1/README.md)。本页保留历史实验的原有范围、结果和局限，不把旧阶段的阻塞或临时工程成功混入当前正式任务。
 
-- **Size_v1，当前正式器皿任务**：[使用说明](../../demos/lab_cuvette_size_v1/README.md)、[最终报告与连续视频](../lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)、[40 条数据审计](../lab_cuvette_loading/Size_v1/data/final40_actual/README.md)。固定原 A 座，以尺寸变体完成完整装载和标准场景 20 成功 / 20 受控失败。
+- **Size_v1，历史固定场景尺寸实验**：[使用说明](../../demos/lab_cuvette_size_v1/README.md)、[最终报告与连续视频](../lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)、[40 条数据审计](../lab_cuvette_loading/Size_v1/data/final40_actual/README.md)。固定原 A 座，以尺寸变体完成完整装载和标准场景 20 成功 / 20 受控失败。
 - **Env_v1**：[环境和策略接口](../lab_cuvette_loading/Env_v1/README.md)、[报告](../lab_cuvette_loading/Env_v1/results_20261021/LabSim_Env_v1_本轮进展报告.md)。12.5 mm 器皿预插入及三条策略短链，不能作为完整原座装载成功。
 - **V0_demo04**：[说明](../../demos/lab_cuvette_demo04/README.md)、[报告](../lab_cuvette_loading/V0_demo04/report.md)。单台仪器、12.5 mm 器皿和原座的尺寸及干涉核查。
 - **V0_demo03**：[说明](../../demos/lab_cuvette_demo03/README.md)、[报告](../lab_cuvette_loading/V0_demo03/report.md)。6×6 来源架及腔内 16 mm 派生适配座的视频场景演示，不能解释为原座配套验证。

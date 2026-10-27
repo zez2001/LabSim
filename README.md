@@ -8,9 +8,9 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 
 ## 完整演示
 
-[![Franka 连续器皿装载](docs/lab_cuvette_loading/Project_release_v1/media/teacher_preview.png)](docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4)
+[![Franka 连续器皿装载](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/scene.png)](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/teacher_full.mp4)
 
-[观看连续 Teacher 完整任务](docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4)。Teacher 使用任务真值完成物理抓取与装载，视频覆盖来源架初态至撤离后稳定。各策略的使用范围见下方策略表。
+[观看连续 Teacher 完整任务](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/teacher_full.mp4)。Teacher 使用任务真值完成物理抓取与装载，视频覆盖来源架初态至撤离后稳定。各策略的使用范围见下方策略表。
 
 ## 当前能力
 

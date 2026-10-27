@@ -1,5 +1,8 @@
 # LabSim Env_v1 完成状态和正式入口
 
+> 历史版本：**Env_v1**。以下原文的分支、当前状态及命令属于该版本验收时点。当前使用请从 [Project_release_v1](../Project_release_v1/README.md) 或 [组内指南](../../development/ONBOARDING.md) 开始。
+
+
 当前分支 [`codex/lab-cuvette-env-v1`](https://github.com/zez2001/LabSim/tree/codex/lab-cuvette-env-v1)。这是正式任务集成版本，**完整原座装载仍未完成**。V0至demo04及全部历史输出保留，[阶段状态](../../../TASK_STATUS.md)持续更新；[机器可读完成矩阵](completion_matrix.json)分别记录已运行范围及限制。
 
 本轮交付：[DOCX报告](results_20261021/LabSim_Env_v1_本轮进展报告.docx)、[Markdown及本地视频](results_20261021/LabSim_Env_v1_本轮进展报告.md)、[24条实际运行](results_20261021/actual_runs.csv)、[5次策略尝试](results_20261021/policy_attempts.csv)。报告8页逐页核查通过；完整便携H5与小阅读包分别保存。

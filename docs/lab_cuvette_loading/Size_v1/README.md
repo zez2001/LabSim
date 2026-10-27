@@ -1,5 +1,8 @@
 # Size_v1 固定原座的比色皿尺寸实验
 
+> 历史版本：**Size_v1**。以下原文的分支、当前状态及命令属于该版本验收时点。当前使用请从 [Project_release_v1](../Project_release_v1/README.md) 或 [组内指南](../../development/ONBOARDING.md) 开始。
+
+
 当前开发与交接分支为`codex/labsim`。Size_v1原实验末端保存在`archive/20261022/lab-cuvette-size-v1`标签。原A座candidate_far_hinge、整机、来源架及其物理参数不变。尺寸是XY仿射派生假设，不是实物测量；高度67.5mm、质量假设20g不变，质心惯量按相同材料体积分模型重算，密度不假设同时保持。
 
 [阶段A全部35个资产与几何结果](geometry/family_20261021_02/README.md)、[注册清单](../../../../assets/lab_cuvette_loading/Size_v1/registry.json)、[实际烹饪探针](physics/cooked_preview01_summary.md)。10.00mm开发演示已实际完整成功，包含松爪、撤离及3秒稳定；未冻结开发轨迹不计正式配额。10.50mm边界探索独立判分失败，不能由最终留在座内推断完整成功。

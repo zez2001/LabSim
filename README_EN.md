@@ -8,9 +8,9 @@ The recommended version is **`Project_release_v1`**, on the long-lived **`codex/
 
 ## Complete demonstration
 
-[![Continuous cuvette loading](docs/lab_cuvette_loading/Project_release_v1/media/teacher_preview.png)](docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4)
+[![Continuous cuvette loading](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/scene.png)](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/teacher_full.mp4)
 
-[Watch a continuous complete Teacher episode](docs/lab_cuvette_loading/Project_release_v1/media/teacher_full.mp4), from the rack initial state through post-retreat stability. Teacher uses privileged task state for physical grasping and loading. Policy-specific capabilities are listed below.
+[Watch a continuous complete Teacher episode](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/teacher_full.mp4), from the rack initial state through post-retreat stability. Teacher uses privileged task state for physical grasping and loading. Policy-specific capabilities are listed below.
 
 ## Capabilities
 

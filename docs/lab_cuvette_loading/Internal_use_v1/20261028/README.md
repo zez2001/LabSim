@@ -17,7 +17,10 @@
 
 - [历史数据用途、移交及标签保护](data_usage/README.md)：π0.5正式评测1条，诊断11条，探针10条；生命周期资格2/1/3；14个原H5及标签保持。
 - [实际部署输入审计](../../Project_release_v1/internal_use/20261028/input_audit/README.md)：69份真实输入；首末tokenizer/processor本地重建；264→200截断；H5/模型图像分支对齐。
-- 普通Teacher完整标准任务：运行代码 `5c6b6422f9ba6fc16ac7b4374799c5ed7e426e47`；结果在本次闭合验收后补充。
+- [普通Teacher完整标准任务](teacher_closed/summary.json)：运行代码 `5c6b6422f9ba6fc16ac7b4374799c5ed7e426e47`；独立完整成功，7539条transition，3秒撤离后稳定，进程退出0。
+- [正式ACT/DP实际成功batch](teacher_closed/read_success.json)、[时间戳与后继状态](teacher_closed/transition_clock.json)、[原始连续视频](media/teacher_full.mp4)。
+- [最短双reset](reset_closed/summary.json)：两集唯一身份、旧动作拒绝且零步执行，诊断用途完整写入，正式策略索引纳入0条。
+- [本次技术反馈](feedback.md) · [精简DOCX](LabSim_内部使用优化反馈_20261028.docx) · [命令](commands.sh)。
 
 ## 文档分类
 

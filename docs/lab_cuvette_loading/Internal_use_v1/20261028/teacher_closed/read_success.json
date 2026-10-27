@@ -1,0 +1,167 @@
+{
+  "schema": "labsim.Project_release_v1.reader_check.v1",
+  "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/index/demonstrations.hdf5",
+  "scene_version": "Project_release_v1",
+  "dataset_class": "policy.dataset.lab_cuvette_project_release_dataset.LabCuvetteProjectReleaseDataset",
+  "recorded_policy_image_shape": [
+    3,
+    256,
+    256
+  ],
+  "public_sample_derivations": [],
+  "sample_filter": "success",
+  "reader_validation": [
+    {
+      "policy_type": "act",
+      "episodes": [
+        "episode_0000"
+      ],
+      "scene_fingerprint": "3a7d9138c3991f2be9eb344da49cbcaf60f81d5d81cd06a744c0956d6eda3246",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        },
+        "is_pad": {
+          "shape": [
+            3,
+            16
+          ],
+          "dtype": "torch.bool",
+          "finite": true
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "episode_0000",
+          "transitions": 7539,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            7539,
+            8
+          ],
+          "executed_command_shape": [
+            7539,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": true,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    },
+    {
+      "policy_type": "dp",
+      "episodes": [
+        "episode_0000"
+      ],
+      "scene_fingerprint": "3a7d9138c3991f2be9eb344da49cbcaf60f81d5d81cd06a744c0956d6eda3246",
+      "batch": {
+        "obs": {
+          "side_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "wrist_camera_rgb": {
+            "shape": [
+              3,
+              3,
+              3,
+              256,
+              256
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          },
+          "agent_pose": {
+            "shape": [
+              3,
+              3,
+              8
+            ],
+            "dtype": "torch.float32",
+            "finite": true
+          }
+        },
+        "action": {
+          "shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true
+        }
+      },
+      "episode_checks": [
+        {
+          "episode_id": "episode_0000",
+          "transitions": 7539,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            7539,
+            8
+          ],
+          "executed_command_shape": [
+            7539,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": true,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    }
+  ],
+  "source_labels_modified": false
+}

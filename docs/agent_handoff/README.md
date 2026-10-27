@@ -6,9 +6,9 @@
 
 ## 选择文件
 
-当前默认[清单](package.json)是 [Project_release_v1 环境发布技术反馈清单](Project_release_v1_current/package.json)：本轮验收报告、同进程三集、真实 π0.5 接入、五类终止闭合、正式 ACT/DP 读取、性能对比和必要源码。先读 [本轮说明](Project_release_v1_current/00_给Agent阅读说明.md)。不携带多 GB H5、环境或模型权重；来源位置、大小、SHA 与获取方式在包内。
+当前默认[清单](package.json)是 [Internal_use_v1 文档与内部使用优化清单](Internal_use_v1_current/package.json)：只收本次修改、当前使用指南、普通Teacher原始连续视频、正式reader、用途/移交与输入审计。先读[本次说明](Internal_use_v1_current/00_给Agent阅读说明.md)。完整H5、资产及模型权重单独管理。
 
-本轮另行生成仅一个四页 DOCX 和两段原样视频的组会 ZIP，组会包不混入技术证据。历史 [Project_v1_1 清单](Project_v1_1_current/package.json)、[Project_v1 清单](Project_v1_current/package.json) 及旧包均保留。
+历史[Project_release_v1环境发布包](Project_release_v1_current/package.json)、[Project_v1_1](Project_v1_1_current/package.json)、[Project_v1](Project_v1_current/package.json)及旧包保留。
 
 纯项目交接的旧配置仍保留在 [project_handoff/package.json](project_handoff/package.json)，历史实验通过固定提交的 GitHub 链接引用。
 
@@ -37,7 +37,7 @@ Markdown里已选中的文件链接会改为包内相对链接；未复制的仓
 先验证改动、提交推送并核对远端SHA，再在工程根目录运行：
 
 ```bash
-python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_Project_release_v1_技术反馈包_NEW
+python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_内部使用优化_NEW
 ```
 
 输出目录必须尚不存在。实验资料通常控制在20MiB内；纯工程整理应更小。不要为接近体积预算而复制不相关历史媒体。
