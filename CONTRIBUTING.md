@@ -2,7 +2,7 @@
 
 ## 最新本地交付规则（2026-10-27，优先于下文历史要求）
 
-用户当前要求本地整理，不自动提交、推送或创建 PR。完整实验工程为 `SLAI_Lab/labsim/`，新增仪器缓存在 `local_assets/`，最终证据在 `results/final/`，本机记录与安装包在 `local_setup/`。每轮本地改动/实验完成后，验证并更新中文交接说明，再运行 `python scripts/export_code_snapshot.py`，维护同级 `codex/labsim_junjie_yao_YYYYMMDD/` 最新代码快照。快照保留 `assets/README.md` 资产获取入口，不含模型文件/媒体/环境/.git，不在那里做实验；HF 下载及基线依赖见 `DELIVERY.md`。以工作区 `AGENTS.md` 的最新要求为准。原始运行证据中的旧路径和源码指纹不改写。
+用户于 2026-10-27 明确授权本次上传 GitHub 并创建 PR：使用 `codex/labsim_junjie_yao_20261027` 功能分支，目标 `codex/labsim`，不直接推送或合并集成分支。后续未获单独授权的本地整理仍不自动推送。完整实验工程为 `SLAI_Lab/labsim/`，新增仪器缓存在 `local_assets/`，最终证据在 `results/final/`，本机记录与安装包在 `local_setup/`。每轮本地改动/实验完成后，验证并更新中文交接说明，再运行 `python scripts/export_code_snapshot.py`，维护同级 `codex/labsim_junjie_yao_YYYYMMDD/` 最新代码快照。快照保留 `assets/README.md` 资产获取入口，不含模型文件/媒体/环境/.git，不在那里做实验；HF 下载及基线依赖见 `DELIVERY.md`。以工作区 `AGENTS.md` 的最新要求为准。原始运行证据中的旧路径和源码指纹不改写。
 
 ## 分支与提交
 
