@@ -2,6 +2,8 @@
 
 本文件同时进入自动生成的 `codex/labsim_junjie_yao_YYYYMMDD/` 交付副本。副本包含当前已保存的源码、配置、测试、依赖说明和中文 Markdown，包含尚未提交的工作树改动；不带 Git 历史、不自动提交或上传。建议后续功能分支名与副本相同。
 
+当前 GitHub 交付：[PR #1](https://github.com/zez2001/LabSim/pull/1)，分支 `codex/labsim_junjie_yao_20261027` → `codex/labsim`，未合并。
+
 ## 下载数字资产
 
 - HF 仓库：<https://huggingface.co/datasets/PercyM/labsim-cell-assets>（Private，需要访问权限）。
