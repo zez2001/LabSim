@@ -24,7 +24,7 @@ license_link: https://huggingface.co/datasets/PercyM/labsim-cell-assets/blob/mai
 | 单独看或下载 MP4 | [进入视频目录与索引](https://huggingface.co/datasets/PercyM/labsim-cell-assets/tree/main/videos) | 按 19 个演示任务分文件夹，共 40 段视频，含正面、侧面及部分细节视角。 |
 | 查看判分和执行记录 | [下载仿真证据包](https://huggingface.co/datasets/PercyM/labsim-cell-assets/resolve/main/evidence/simulation-evidence.zip?download=true) | 结果 JSON、必要轨迹及规划记录；用于复核演示结果。 |
 
-> 当前仓库为 **Private**，下载者需要获得访问权限并登录 Hugging Face。资产包是源模型集合，不是开箱即用的完整动态 USD 场景；还需要本轮 LabSim 源码和配置。
+> 当前仓库为 **Public（公开、无访问审批）**，成员和其他访问者均可免登录下载。资产包是源模型集合，不是开箱即用的完整动态 USD 场景；还需要本轮 LabSim 源码和配置。
 
 ## 资产包里有哪些设备？
 
@@ -54,11 +54,11 @@ license_link: https://huggingface.co/datasets/PercyM/labsim-cell-assets/blob/mai
 
 ## 下载后怎么用？
 
-1. 下载 **`assets/LabSim-digital-assets.zip`**，解压到一个独立的资产缓存目录，例如 `local_assets/`。目录内应直接出现 `chemlab/`、`magsep/`、`diynafluor/`、`openflexure_counter/`、`poseidon/`。
+1. 下载 **`assets/LabSim-digital-assets.zip`**，解压到一个独立的资产缓存目录，例如 `~/LabSim-hf-assets/`。目录内应直接出现 `chemlab/`、`magsep/`、`diynafluor/`、`openflexure_counter/`、`poseidon/`。
 2. 沿用现有 LabSim / Isaac Sim 5.1 环境，将 `LABSIM_ASSET_CACHE` 设置为上述解压根目录。
 3. 在本轮 LabSim 源码中使用 `fetch_asset(asset_id, offline=True)` 校验和定位模型；启动 Isaac Sim 后调用 `convert_asset()`、`load_asset()`。详细示例和源文件校验见 [资产使用说明](https://huggingface.co/datasets/PercyM/labsim-cell-assets/blob/main/assets/README.md)。
 
-代码项目：[zez2001/LabSim](https://github.com/zez2001/LabSim)。本轮新增代码仍为本地实现，尚未提交 GitHub；接手者需要另行取得这批代码。仅下载模型不能自动运行气弹簧、动态帽子和装载流程。
+代码项目：[zez2001/LabSim](https://github.com/zez2001/LabSim)。本轮源码已上传至 [功能分支 codex/labsim_junjie_yao_20261027](https://github.com/zez2001/LabSim/tree/codex/labsim_junjie_yao_20261027)，见 [PR #1](https://github.com/zez2001/LabSim/pull/1)，尚未合并到集成分支。仅下载模型不能自动运行气弹簧、动态帽子和装载流程。
 
 ## 仓库目录
 
@@ -73,6 +73,6 @@ docs/        来源、许可与适配限制
 
 ## Licenses
 
-本集合复用 ChemLab、MagSep、DIYNAFLUOR、OpenFlexure 和 Poseidon 的开源模型。不同资产分别适用 CC BY-NC 4.0、CC BY-SA 4.0、GPL v3、CERN-OHL-S、BSD-2-Clause 等许可，**不能统一按 MIT 使用**；私有仓库不改变原许可义务。详见 [原始来源与许可](https://huggingface.co/datasets/PercyM/labsim-cell-assets/blob/main/docs/SOURCES_AND_LICENSES.md)，资产包保留原始声明和对应源文件。
+本集合复用 ChemLab、MagSep、DIYNAFLUOR、OpenFlexure 和 Poseidon 的开源模型。不同资产分别适用 CC BY-NC 4.0、CC BY-SA 4.0、GPL v3、CERN-OHL-S、BSD-2-Clause 等许可，**不能统一按 MIT 使用**；公开下载不改变原许可义务。详见 [原始来源与许可](https://huggingface.co/datasets/PercyM/labsim-cell-assets/blob/main/docs/SOURCES_AND_LICENSES.md)，资产包保留原始声明和对应源文件。
 
 所有通过结论来自固定布局仿真；质量、摩擦和布局未实物标定，没有真机或完整生化实验验证，也不代表厂商 CAD 或 NVIDIA SimReady 认证。目录整理不改变资产或视频内容，不产生新的 GPU 验证结论。

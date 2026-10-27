@@ -2,10 +2,10 @@
 
 更新：2026-10-27。**上传完成，53 个文件已从固定提交重新下载，大小与 SHA256 全部匹配。**
 
-- 仓库：<https://huggingface.co/datasets/PercyM/labsim-cell-assets>，Dataset，**Private**，账号 PercyM。
+- 仓库：<https://huggingface.co/datasets/PercyM/labsim-cell-assets>，Dataset，**Public（公开、无访问审批）**，账号 PercyM。
 - 固定资产版本：`f6b0f9f2dbe5046c0833fb099121e5a551d208f7`。
 - 本次上传：53 个文件、187,100,920 字节（约 187 MB）；仓库另有自动维护的 `.gitattributes`，共 54 个文件。
-- GitHub：代码仍为本地未提交实现，未推送、未创建 PR。
+- GitHub：代码已推送至 `codex/labsim_junjie_yao_20261027`，[PR #1](https://github.com/zez2001/LabSim/pull/1) 等待评审，未合并。
 - 验证边界：完成文件回读校验；本轮没有重跑下载后的 GPU 仿真或真机验证。
 
 ## 下载入口与目录
@@ -33,7 +33,7 @@
 
 ## 下载、解压和离线调用
 
-沿用现有 `labsim` Conda 环境，不在项目内另建环境。私有仓库需要有访问权限并在本机完成 `hf auth login`；不在代码或聊天中写 Token。网络若需要代理，沿用本机已配置且可用的代理即可。
+沿用现有 `labsim` Conda 环境，不在项目内另建环境。仓库已公开，下载不需要 `hf auth login` 或 Token；示例使用 `token=False` 明确执行匿名下载。网络若需要代理，沿用本机已配置且可用的代理即可。
 
 在本轮 LabSim 源码目录运行：
 
@@ -48,8 +48,8 @@ from utils.cell_assets import list_assets, fetch_asset
 
 repo_id = "PercyM/labsim-cell-assets"
 revision = "f6b0f9f2dbe5046c0833fb099121e5a551d208f7"
-archive = hf_hub_download(repo_id, "assets/LabSim-digital-assets.zip", repo_type="dataset", revision=revision)
-manifest = hf_hub_download(repo_id, "metadata/asset-files.json", repo_type="dataset", revision=revision)
+archive = hf_hub_download(repo_id, "assets/LabSim-digital-assets.zip", repo_type="dataset", revision=revision, token=False)
+manifest = hf_hub_download(repo_id, "metadata/asset-files.json", repo_type="dataset", revision=revision, token=False)
 cache = Path("local_assets")
 cache.mkdir(exist_ok=False)
 with ZipFile(archive) as package:
@@ -85,6 +85,12 @@ python -m demos.cell_assets.handling --offline --output /new/path/hf-handling
 
 ## 许可和分享
 
-ChemLab 模型 CC BY-NC 4.0、MagSep CC BY-SA 4.0、DIYNAFLUOR GPL v3、OpenFlexure 上游硬件 CERN-OHL-S-2.0 或 README 规定的后续版本／定制部件仓库 GPL v3、Poseidon BSD-2-Clause。原许可、署名与对应源文件随源包保留；Private 不取消许可条件。
+ChemLab 模型 CC BY-NC 4.0、MagSep CC BY-SA 4.0、DIYNAFLUOR GPL v3、OpenFlexure 上游硬件 CERN-OHL-S-2.0 或 README 规定的后续版本／定制部件仓库 GPL v3、Poseidon BSD-2-Clause。原许可、署名与对应源文件随源包保留；公开下载不取消许可条件。
 
-未发布未筛选的 `references/来源材料.zip`、整个工程、Conda、凭据或无关文件。仓库目前只有获准账号可访问；直接把链接发给他人不等于对方获得访问权限。
+未发布未筛选的 `references/来源材料.zip`、整个工程、Conda、凭据或无关文件。仓库公开后，任何人均可通过链接下载。若将来只允许项目成员访问，可迁入团队 Organization 的私有数据集并授予成员读取权限；本轮按用户要求选择公开。
+
+## 公开共享（2026-10-27）
+
+已按用户要求改为 Public，未开启 gated 访问审批。公开说明版本为 `0eac1b793c889c20adbbdf6f684069f557add0b8`；仅更新首页、资产下载说明和上传清单。原固定资产版本 `f6b0f9f2dbe5046c0833fb099121e5a551d208f7` 继续可用，模型、视频和历史仿真证据未改动。
+
+匿名验证已通过：不携带认证头完整下载资产 ZIP、代表 MP4 和更新后的三份说明／清单，大小与 SHA256 一致；新旧版本对象核对证明其余 51 个仓库文件未变。验证记录保存在本地 `results/final/HuggingFace发布记录.json`，不将本轮下载检查当作新增物理实验。
