@@ -127,8 +127,6 @@ GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信
 
 公开完整成功样例约 284 MB，保留全部 6,348 个 transition；两路 RGB 缩为 96 像素，其余数值轨迹保留。使用独立安装的 HF CLI，无需登录即可下载；目录必须另选未使用的路径：
 
-单细胞前流程设备见[设备资产与 API](demos/cell_assets/README.md)：固定版本下载并加载 PCR、移液工作站、恒温摇床、磁珠分离架体及 DNA 定量仪、细胞计数器打印件装配，另含 Poseidon 固定显微支架辅助资产，提供 Franka 的 IKA 装载／开关盖、DIYNAFLUOR 取帽／停放／盖回及 Flex／MagSep 架体装载／取回接触示例，[本地交接汇报](docs/cell_assets/交接汇报.md) 汇总当前状态。大型源模型和运行结果存放在项目外；类别替代、机构验证范围、许可和未覆盖设备见该文档。
-
 ```bash
 HF_HUB_DISABLE_IMPLICIT_TOKEN=1 hf download Txie000/SLAI-Labsim \
   --repo-type dataset --revision 82317fe33089aca5a20827da2adc592a1e0fdddc \
@@ -166,6 +164,10 @@ Project_v1 发布、匿名资产验证和该版本执行证据集中在 [Project
 - 资产缺失或 SHA 不符：执行 `./labsim assets download` 重新获取声明文件；离线模式需要此前完整校验的缓存。不要手工把不同版本 USD 混进同一缓存。
 - 输出目录已存在：选择新的目录，入口会拒绝覆盖旧结果。GUI 缺少显示环境时使用 `--headless`。
 - GPT 缺凭据、超时或返回模型不符：检查当前进程的环境变量和 provider 配置；错误会保留在本次独立目录，不会替换模型、接管任务或伪造成功。统计结果时分别查看任务结果与服务/协议/物理错误。
+
+## 单细胞前流程数字资产
+
+单细胞前流程设备见[设备资产与 API](demos/cell_assets/README.md)：固定版本下载并加载 PCR、移液工作站、恒温摇床、磁珠分离架体及 DNA 定量仪、细胞计数器打印件装配，另含 Poseidon 固定显微支架辅助资产，提供 Franka 的 IKA 装载／开关盖、DIYNAFLUOR 取帽／停放／盖回及 Flex／MagSep 架体装载／取回接触示例，[交接汇报](docs/cell_assets/交接汇报.md) 汇总当前状态。新增大型源模型和运行结果分别存放于 Git 忽略的 `local_assets/`、`results/final/`；类别替代、机构验证范围、许可和未覆盖设备见该文档。
 
 ## 开发与来源
 
