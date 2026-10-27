@@ -1,0 +1,646 @@
+{
+  "schema": "labsim.agent_results_package.v1",
+  "repository_url": "https://github.com/zez2001/LabSim",
+  "readme": "docs/agent_handoff/Project_v1_1_current/00_给Agent阅读说明.md",
+  "directories": [],
+  "files": [
+    {
+      "source": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+      "destination": "config/lab_cuvette_loading/Project_v1/assets.lock.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1/public_samples.json",
+      "destination": "config/lab_cuvette_loading/Project_v1/public_samples.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json",
+      "destination": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view.json",
+      "destination": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json",
+      "destination": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+      "destination": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json",
+      "destination": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1_1/robot_self/franka_nominal_kinematics.json",
+      "destination": "config/lab_cuvette_loading/Project_v1_1/robot_self/franka_nominal_kinematics.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "destination": "config/lab_cuvette_loading/Project_v1_1/standard.yaml"
+    },
+    {
+      "source": "controllers/lab_cuvette_project_v1_1_controller.py",
+      "destination": "controllers/lab_cuvette_project_v1_1_controller.py"
+    },
+    {
+      "source": "data_collectors/lab_cuvette_project_v1_1_collector.py",
+      "destination": "data_collectors/lab_cuvette_project_v1_1_collector.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_v1_1/environment.py",
+      "destination": "demos/lab_cuvette_project_v1_1/environment.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "destination": "demos/lab_cuvette_project_v1_1/gripper_hold.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "destination": "demos/lab_cuvette_project_v1_1/scorer.py"
+    },
+    {
+      "source": "demos/lab_cuvette_size_v1/scorer.py",
+      "destination": "demos/lab_cuvette_size_v1/scorer.py"
+    },
+    {
+      "source": "docs/agent_handoff/Project_v1_1_current/current_results.csv",
+      "destination": "docs/agent_handoff/Project_v1_1_current/current_results.csv"
+    },
+    {
+      "source": "docs/agent_handoff/Project_v1_1_current/version_scope.json",
+      "destination": "docs/agent_handoff/Project_v1_1_current/version_scope.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/README.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/README.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/closed_trace_probe.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/closed_trace_probe.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/contracts_review.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/contracts_review.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/active_view_probe_06_01_held_motion/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/active_view_probe_06_01_held_motion/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/action_request_and_receipt_comparison.csv",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/action_request_and_receipt_comparison.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_clearance_05_02_collision_audit/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_clearance_05_02_collision_audit/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000047/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/gpt_control/observations/decision_000024/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_closed_read_archive.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_closed_read_archive.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000000/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000009/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000010/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000018/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000030/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000031/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000032/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/call_outcome.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/call_outcome.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/current_robot_self_state.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/current_robot_self_state.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/current_side_detail.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/current_side_detail.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/current_side_detail.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/current_side_detail.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/historical_00_public_observation.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/historical_00_public_observation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/historical_00_wrist.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/historical_00_wrist.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/input_items_manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/temporal_visual_context/decision_000033/input_items_manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/ledger_episode_and_closed_prefix.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/ledger_episode_and_closed_prefix.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_physical_timeline/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_physical_timeline/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/RESULT.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/RESULT.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/last_three_actions_and_source_states.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/last_three_actions_and_source_states.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/last_three_step_geometry.csv",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/last_three_step_geometry.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/source_manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/source_manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/legacy_reproduction.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/legacy_reproduction.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/p9_closed_physical_CPU_analysis_cohort_01.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/p9_closed_physical_CPU_analysis_cohort_01.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/p9_release_closed_CPU_audit_cohort_01.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/p9_release_closed_CPU_audit_cohort_01.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/public_tactile_vector_feasibility_20261027/review.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/public_tactile_vector_feasibility_20261027/review.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_p9_regression_01_closed_read_archive.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_p9_regression_01_closed_read_archive.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_p9_regression_01_physical_timeline/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_p9_regression_01_physical_timeline/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_closed_data_cohort_01.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_closed_data_cohort_01.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/GUI_shutdown_warning.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/GUI_shutdown_warning.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/support_controller_actual.csv",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/support_controller_actual.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/README.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/README.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/XY_report_figure_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/XY_report_figure_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_XY_report.png",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_XY_report.png"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_support_gate_comparison.png",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_support_gate_comparison.png"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_04_rim_obstruction_full.mp4",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_04_rim_obstruction_full.mp4"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_04_rim_obstruction_full_reading_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_04_rim_obstruction_full_reading_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_08_self_state_incomplete_full.mp4",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_08_self_state_incomplete_full.mp4"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_08_self_state_incomplete_full_reading_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_08_self_state_incomplete_full_reading_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full.mp4",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full.mp4"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full_reading_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full_reading_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.mp4",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.mp4"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/public_active_view_p8.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/public_active_view_p8.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/public_robot_self_state_p9.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/public_robot_self_state_p9.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/GPT_closed_cohort.final.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/GPT_closed_cohort.final.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/actual_model_stage_images.final.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/actual_model_stage_images.final.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/media_scope.final.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/media_scope.final.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/reading_media_index.final.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/reading_media_index.final.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.final.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.final.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/release_snapshot.final.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/release_snapshot.final.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/report_dependency_selection.final.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/report_dependency_selection.final.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/robot_tracking.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/robot_tracking.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/teacher_support_transfer_v7.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/teacher_support_transfer_v7.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/usage.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/usage.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/CI43_actual_9a88ea0_20261027.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/CI43_actual_9a88ea0_20261027.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_comparison.csv",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_comparison.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_comparison.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_comparison.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_public_actions_and_receipts.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_public_actions_and_receipts.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/README.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/README.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/continuation_interface_audit.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/continuation_interface_audit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/final_public_trace_record.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/final_public_trace_record.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/original_public_audit_summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/original_public_audit_summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/process_exit.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/process_exit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_frames/decision_000033/current_robot_self_state.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_frames/decision_000033/current_robot_self_state.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_frames/decision_000033/side_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_frames/decision_000033/side_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_frames/decision_000033/wrist_camera.jpg",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_frames/decision_000033/wrist_camera.jpg"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000030.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000030.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000031.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000031.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000032.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000032.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000033.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/public_observations/decision_000033.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/source_and_copy_manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/source_and_copy_manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_geometry_p9_frames_20261027/compatibility.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_geometry_p9_frames_20261027/compatibility.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_20261027/change_audit.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_20261027/change_audit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_20261027/closed_06_07_bounds/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_20261027/closed_06_07_bounds/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_independent_review_20261027/review.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_independent_review_20261027/review.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_source_equivalence_9a88ea0.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_source_equivalence_9a88ea0.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_p9_regression_01_normal_reader.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_p9_regression_01_normal_reader.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_support_align_01_normal_reader.json",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_support_align_01_normal_reader.json"
+    },
+    {
+      "source": "policy/backends/cubence_project_v1_1_active_view.py",
+      "destination": "policy/backends/cubence_project_v1_1_active_view.py"
+    },
+    {
+      "source": "policy/backends/cubence_project_v1_1_self_state.py",
+      "destination": "policy/backends/cubence_project_v1_1_self_state.py"
+    },
+    {
+      "source": "policy/backends/cubence_project_v1_1_side_detail.py",
+      "destination": "policy/backends/cubence_project_v1_1_side_detail.py"
+    },
+    {
+      "source": "policy/dataset/lab_cuvette_project_v1_1_dataset.py",
+      "destination": "policy/dataset/lab_cuvette_project_v1_1_dataset.py"
+    },
+    {
+      "source": "policy/robot_self_kinematics.py",
+      "destination": "policy/robot_self_kinematics.py"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.docx",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.docx"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.md",
+      "destination": "docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.md"
+    }
+  ],
+  "status": "final_candidate_wait_author_QA_commit_push",
+  "root_must_verify_before_build": [
+    "FinalDOCX/MD authored with exactly-once marker and allpages visually inspected.",
+    "Actual final HEAD committed/pushed andremote matches; package manifest recordsrealHEAD.",
+    "Materialized LFS movies match selected receipts; source/directDOCXtargets keptsame hierarchy.",
+    "Build new output directory only; verify fullportablelinks/SHA/media/actualbytes<=25MB."
+  ],
+  "no_build_performed": true,
+  "preferred_bytes": 25000000,
+  "hard_limit_bytes": 80000000
+}

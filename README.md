@@ -2,11 +2,11 @@
 
 LabSim 是基于 LabUtopia 与 Isaac Sim 的科学实验机器人仿真项目。默认稳定入口为 **`lab_cuvette_loading / Project_v1 / standard`**：Franka 从完整白色 6×6 来源架取出比色皿，搬运到单台开盖仪器的内部 A 座，完成插入、支撑交接、松爪、撤离与至少 3 秒稳定观察。
 
-[Project_v1_1 使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md) · [开发分支 `codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim) · [开发接入](docs/development/ONBOARDING.md) · [历史实验](docs/history/README.md)
+[Project_v1_1 使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md) · [验证报告](docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.docx) · [结果阅读包说明](docs/agent_handoff/Project_v1_1_current/00_给Agent阅读说明.md) · [开发分支 `codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim) · [开发接入](docs/development/ONBOARDING.md) · [历史实验](docs/history/README.md)
 
-[观看 Project_v1 完整 teacher 演示](docs/lab_cuvette_loading/Project_v1/media/teacher_full_continuous.mp4) · [松爪与撤离近景](docs/lab_cuvette_loading/Project_v1/media/teacher_release_wrist_closeup.mp4)
+[观看 Project_v1_1 完整 teacher 演示](docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full.mp4) · [松爪与撤离近景](docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.mp4)
 
-以上历史视频来自 Project_v1 同一次连续 GUI 运行，侧视与腕视全程保留，完整执行至撤离后稳定。模型评测及物理质量告警另行记录。
+以上视频来自 Project_v1_1 同一次连续 teacher 运行，完整执行至撤离后稳定；近景标明其局部时间段。teacher 可完成全流程；GPT 已验证稳定抓取和搬运，尚未完成独立装载、释放与撤离。
 
 ## 提供的能力
 
@@ -51,7 +51,7 @@ export LABSIM_PYTHON=/absolute/path/to/isaac-python
   --output outputs/lab_cuvette_loading/Project_v1_1/demo_NEW --dry-run
 ```
 
-去掉 `--dry-run` 后可用 `--gui` 实际运行示范，或使用 `collect / eval / serve` 同样显式选择版本。[Project_v1_1 使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md)集中说明独立缓存、采集、默认 P4 / 可选 P6、共享预算和正常 reader；下面省略版本的历史示例仍属于 Project_v1。完整物理与 GPT 回归以各版本的实际证据为准。
+去掉 `--dry-run` 后可用 `--gui` 实际运行示范，或使用 `collect / eval / serve` 同样显式选择版本。[Project_v1_1 使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md)集中说明独立缓存、采集、显式版本、可选观测配置、共享预算和正常 reader；下面省略版本的历史示例仍属于 Project_v1。完整物理与 GPT 回归以各版本的实际证据为准。
 
 所有输出目录必须是新目录。无桌面显示时将 `--gui` 换为 `--headless`；可先加 `--dry-run` 查看启动命令。`doctor` 只做 CPU 预检，不等同于 GPU、GUI 或物理任务通过。
 
@@ -93,6 +93,7 @@ printf '\n'
 
 ./labsim eval --project-version Project_v1_1 --task lab_cuvette_loading --scene standard --backend gpt6 \
   --episodes 1 --max-calls 160 --headless \
+  --provider-config config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json \
   --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \
   --output outputs/lab_cuvette_loading/Project_v1_1/gpt_attempt_001
 
@@ -101,13 +102,13 @@ unset CUBENCE_API_KEY
 
 [提供方配置](config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json) 声明 Responses API、超时、动作限制和估算价格。探针、重试及评测应共用同一预算 ledger；默认硬上限为 **估算 $30 / 1500 次网络请求**，单集默认最多 160 次模型调用。估算费用不等于供应商账单。Project_v1_1 继续共用上述 ledger，保留已有请求和费用占用；先获得完整成功再冻结并运行新版正式五次，不用空 ledger 重置预算。
 
-需要限制历史上下文时，可显式增加 `--provider-config config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json`。该独立配置保留最近两个完整工具回合，每一步仍发送当前双图、目标说明、机器人状态和相机标定；其他提供方设置及预算上限不变。默认配置保留最近六个回合，不能把不同配置的调试与正式成绩混算。详细命令和验收范围见[新版使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md)。
+需要比较历史上下文配置时，可用 `config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json` 替换上例的 `--provider-config` 参数值。该独立配置保留最近两个完整工具回合，每一步仍发送当前双图、目标说明、机器人状态和相机标定；其他提供方设置及预算上限不变。兼容默认 P4 保留最近六个回合，不能把不同配置的调试与正式成绩混算。详细命令和验收范围见[新版使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md)。
 
-本版本默认 provider 是 **P4 / 512 像素最大边 / low detail**。显式选择 `cubence_gpt6_context4_640high_temporal.json` 才启用 **P6 / 640 high / 公开历史腕图**；该候选已经实际开展抓取搬运调试，近座插入提示尚未在该条件下验证。P6 提示接触敏感区每次最多 100 µm 下降后再观察，没有改变工具上限、物理或评分，不能解释为精度保证。配置选择与限制见[历史图像输入说明](docs/lab_cuvette_loading/Project_v1_1/public_temporal_visual_context_v1.md)。
+省略 `--provider-config` 时保持兼容的 P4 / 512 low 配置。上例显式选择 P9：640 high 双图、固定规则侧部细节图、公开历史腕图，以及从公开关节和 TCP 推导的机器人自身连杆坐标。连杆包络只描述机器人输入几何，不能证明障碍净空。模型仍自行选择通用动作，配置没有自动路线或任务宏。[观测配置与实际验收范围](docs/lab_cuvette_loading/Project_v1_1/README.md)区分默认配置、各候选及真实失败；近座 100 µm 动作提示不构成精度或成功保证。
 
 GPT 读取两路 RGB、相机标定、机器人状态及允许的指端接触信号，通过通用末端移动、夹爪、等待和结束请求控制；没有专家装载宏、器皿真值位姿或评分内部状态。模型请求期间仿真暂停，执行后产生新观测。过期观测被拒绝，同一动作 ID 查询已有回执，不重复运动。完整成功仍由物理结果判定，API 连通或短动作序列不能当作完成任务。运动工具默认每指 8 N 驱动上限，夹爪工具可显式选择 0–8 N；逐动作保存上限，实测接触力另记。
 
-可选 π0.5 / Harness 通过 `./labsim serve` 接入，部署与有限预算调用见[策略适配说明](policy/backends/OPTIONAL_POLICIES.md)。本轮各实际执行了 5 个动作、0.25 秒仿真的短程连通回归；均未完成完整装载。依赖不自动安装。
+可选 π0.5 / Harness 通过 `./labsim serve` 接入，部署与有限预算调用见[策略适配说明](policy/backends/OPTIONAL_POLICIES.md)。历史 Project_v1 各实际执行了 5 个动作、0.25 秒仿真的短程连通回归；均未完成完整装载。依赖不自动安装。
 
 ## 读取数据与接入策略
 

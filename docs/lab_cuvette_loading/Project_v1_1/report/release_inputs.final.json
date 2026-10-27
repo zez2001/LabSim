@@ -1,0 +1,1242 @@
+{
+  "schema": "labsim.Project_v1_1.report_inputs.v1",
+  "project_version": "Project_v1_1",
+  "finalized": true,
+  "metadata": {
+    "title": "LabSim Project v1 1 项目发布与验证报告",
+    "date": "2026-10-27",
+    "audience": "组内使用者 后续开发与评测人员",
+    "author": "LabSim 项目",
+    "conclusion": "固定standard场景原计划teacher五条完整成功；另58da、9a、422、9a88各一条同源单次回归成功。GPT01–08八个不同调试均未完整装载；最新P9/GPT08实际抓持、离架和搬运，执行三次100µm下降后仍未建立目标定位、下降通行及承托证据，主动finish。正式评测未启动（已完成0/计划5）；预算未耗尽。"
+  },
+  "draft_provenance": {
+    "basis": "Preserved stage7/stage8/stage9 cutoff inputs; final current-only actual closed evidence.",
+    "finalized_utc": "2026-10-27T03:03:09.073859+00:00",
+    "actual_latest_runtime": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+    "evidence_LFS_publication_commit": "487b282b7d1147f61d97c213d0b038a1d731e214",
+    "author_marker_render_build_performed_by_this_finalization": false,
+    "no_GPU_API_H5_raw_or_active_episode_read": true,
+    "actual_documentation_evidence_HEAD": "193c2f8028309809fede0baaed8a71a9de1338ed"
+  },
+  "sources": [
+    {
+      "id": "baseline_wristclip",
+      "scope": "history",
+      "url": "https://github.com/zez2001/LabSim/blob/9a4713cf8c71bed4d697625ab052b378608780cc/docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_wrist_clip.mp4",
+      "role": "fixed_current_round_prior_v6_failed_local_clip_not_copied"
+    },
+    {
+      "id": "closed_019",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json",
+      "sha256": "400aa42408b4757cca7291edcf4c7437b8d5faa4fa1a169e70d2cc63d46c91b9",
+      "bytes": 29469,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/fine_preinsert_ab_20261027/summary.json"
+    },
+    {
+      "id": "closed_026",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json",
+      "sha256": "d855a59e8d566c59562ea01145d9cc18b6e60c7cd8079f909b0e5174e1c64a48",
+      "bytes": 23557,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/free_space_checked_01/audit.json"
+    },
+    {
+      "id": "closed_033",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json",
+      "sha256": "c6b2947e0c94a82a833373183a049968ada387fa73fe5f27785b79e8b4e46a12",
+      "bytes": 11912,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/audit.json"
+    },
+    {
+      "id": "closed_034",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+      "sha256": "6bc704b45c2410eec53c9e3e1c9fea99ac7025a20d7e98bd2908bf85b746d200",
+      "bytes": 2679,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/action_comparison.csv"
+    },
+    {
+      "id": "closed_035",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png",
+      "sha256": "1b75b64ac6c7e09d0e6b7148843c6ea50086d0f461b91029ac10e1e4b2a22709",
+      "bytes": 128896,
+      "role": "figure",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/final_fixed_prefix_02/comparison.png"
+    },
+    {
+      "id": "current_usage",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/usage.md",
+      "sha256": "549351ef18273c8479cf404c650802dddf2ef257d98b510bfe5a1f8e5abd15be",
+      "previous_stage5_SHA256": "6f1ebd000fa4d74bf7af01970bd6f2e9c434ab7c007c0c9164dd9f0a077d0f87",
+      "bytes": 8133,
+      "report_relative_target": "../usage.md",
+      "previous_stage6_SHA256": "549351ef18273c8479cf404c650802dddf2ef257d98b510bfe5a1f8e5abd15be",
+      "previous_stage7_SHA256": "549351ef18273c8479cf404c650802dddf2ef257d98b510bfe5a1f8e5abd15be",
+      "previous_stage8_SHA256": "549351ef18273c8479cf404c650802dddf2ef257d98b510bfe5a1f8e5abd15be"
+    },
+    {
+      "id": "gpt04_fullvideo",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_04_rim_obstruction_full.mp4",
+      "sha256": "181a6fdd3713b0c84c47ff0ed455975ca3749a629158c655bcd6e5236be36ee2",
+      "bytes": 4198952,
+      "report_relative_target": "../media/reading/gpt_debug_04_rim_obstruction_full.mp4",
+      "role": "full_reading_video"
+    },
+    {
+      "id": "hf_pinned_assets",
+      "scope": "release",
+      "url": "https://huggingface.co/datasets/Txie000/SLAI-Labsim/tree/bb880f098180c291f6f65995f969d48047207067"
+    },
+    {
+      "id": "support_ab_fig",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_support_gate_comparison.png",
+      "sha256": "9f7d8c2a563624d1ad1e30e61d4ba2349028774abba4cd2c953535c722b141e1",
+      "bytes": 277077,
+      "role": "figure",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_support_gate_comparison.png"
+    },
+    {
+      "id": "support_ab_md",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/README.md",
+      "sha256": "39ea67e96bd1be1976f8961f6902f80e86b386815284f3bbe62060bba6e98232",
+      "bytes": 2362,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_support_v6_v7_comparison_20261027/README.md"
+    },
+    {
+      "id": "teacher1_control",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/support_controller_actual.csv",
+      "sha256": "4c2bdc949e63061527a9cc3e49f041b439b77f3a4767066b891f92b54358b45e",
+      "bytes": 547952,
+      "role": "evidence",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_support_align_01_support_portability_audit/support_controller_actual.csv"
+    },
+    {
+      "id": "teacher1_fullvideo",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full.mp4",
+      "sha256": "2babc971f0a2fad8c742a1bcb34a5d3697dccff1321609fe0fc13abe15892702",
+      "bytes": 4726042,
+      "report_relative_target": "../media/reading/teacher_support_align_01_full.mp4",
+      "role": "full_reading_video"
+    },
+    {
+      "id": "teacher1_portable",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json",
+      "sha256": "e6e05360baf99640a8150f54d9dd55a46f593f758266737c6c2a0feb76b9eaf4",
+      "bytes": 13817,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json"
+    },
+    {
+      "id": "teacher1_reader",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_support_align_01_normal_reader.json",
+      "sha256": "8c10bd062577d111998a2fac2109656d3642978746fc0b5f4a55cb21e48adc44",
+      "bytes": 11446,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../validation/teacher_support_align_01_normal_reader.json"
+    },
+    {
+      "id": "teacher1_warning",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/GUI_shutdown_warning.json",
+      "sha256": "7a5164e3313c93737aec0265d4ff9389ee03a023474c8c148a989d9ee8bdfae8",
+      "bytes": 1182,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_support_align_01_support_portability_audit/GUI_shutdown_warning.json"
+    },
+    {
+      "id": "teacher5",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_closed_data_cohort_01.json",
+      "sha256": "1c039df310f4474a7324e0071a24438268114c9f451f94cd5d8f26549d516631",
+      "bytes": 28268,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_standard_v7_closed_data_cohort_01.json"
+    },
+    {
+      "id": "gpt_debug_cohort",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/GPT_closed_cohort.final.json",
+      "sha256": "b1b612f973311f56bf6732bcfa93bbe10e04e46e2917d6bec578832e643002b4",
+      "bytes": 40947,
+      "report_relative_target": "GPT_closed_cohort.final.json"
+    },
+    {
+      "id": "support_xy_receipt",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/XY_report_figure_receipt.json",
+      "sha256": "b2d5f39360fbfba6bceab6270bee78608c6f70347a4096890485916b0bb5388b",
+      "bytes": 4080,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../diagnostics/teacher_support_v6_v7_comparison_20261027/XY_report_figure_receipt.json"
+    },
+    {
+      "id": "support_xy",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_XY_report.png",
+      "sha256": "503fc06ef75053d99028b93aa159e79c17449b56e1844a5742b8bac8d2aab610",
+      "bytes": 125763,
+      "role": "figure",
+      "privileged_offline": true,
+      "report_relative_target": "../diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_XY_report.png"
+    },
+    {
+      "id": "current_project_readme",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/README.md",
+      "sha256": "41e63b68e3a1ae78bce262177e12a3174abe8a7d16f730af7fd6c0118b7d3d3f",
+      "bytes": 14555,
+      "role": "evidence",
+      "privileged_offline": false,
+      "report_relative_target": "../README.md",
+      "previous_stage6_SHA256": "f07fec3e34213a8bfc457d4e44af04d36245f926490801fdb7b0b4018eea13e0",
+      "previous_stage7_SHA256": "c3a2376bdd6d2448fc461055f436c5a0f91b3ca59140b6f2dc8e71874c501985",
+      "previous_stage8_SHA256": "b8a14c0d224e606e77762ef945e6bc5a967d8af1ebdd91adc27ee4c8d39a8fdf"
+    },
+    {
+      "id": "reading_index",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/reading_media_index.final.json",
+      "sha256": "0e78904447c33184721fab34b5eb8d8f5d9ccb8f18a863d8d72fb93634d8b62e",
+      "bytes": 5242,
+      "report_relative_target": "reading_media_index.final.json"
+    },
+    {
+      "id": "media_readme",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/media_scope.final.md",
+      "sha256": "13bf4da1375b9ce032aebf4383e241217b69ba8ca5e93fb9070ce365dc8669be",
+      "bytes": 1195,
+      "report_relative_target": "media_scope.final.md"
+    },
+    {
+      "id": "replay05",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/summary.json",
+      "sha256": "37beb45fe0f382041819d211b2f145f1b0a1458c13f8517035f0adde31e235dc",
+      "bytes": 27192,
+      "report_relative_target": "../diagnostics/closed_trace_collision_repro_05/summary.json"
+    },
+    {
+      "id": "variant05",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_clearance_05_02_collision_audit/summary.json",
+      "sha256": "0206e1cbdce87d9b1c7017bf8da5d484682ccb3dc217581b55034e66c76dd688",
+      "bytes": 14170,
+      "report_relative_target": "../diagnostics/collision_clearance_05_02_collision_audit/summary.json"
+    },
+    {
+      "id": "tactile_scope",
+      "scope": "contract",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/public_tactile_vector_feasibility_20261027/review.json",
+      "sha256": "4ab9a1c7c0e4ee86899d57b7da84747cf07e76d69de147855abea73f2de143ad",
+      "bytes": 4741,
+      "report_relative_target": "../diagnostics/public_tactile_vector_feasibility_20261027/review.json"
+    },
+    {
+      "id": "held06",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/active_view_probe_06_01_held_motion/summary.json",
+      "sha256": "fc7463aed965cb8f158aaf686ec7bcc761fbe43863aaffcbea7473382b727e5d",
+      "bytes": 134288,
+      "report_relative_target": "../diagnostics/active_view_probe_06_01_held_motion/summary.json"
+    },
+    {
+      "id": "stage9_scope",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/release_snapshot.final.json",
+      "sha256": "610893ffdccf3e124ea0289db49ce1d3413e6e69e90d1d482a355a8b6e70772d",
+      "bytes": 9338,
+      "report_relative_target": "release_snapshot.final.json"
+    },
+    {
+      "id": "p9_cpu",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_20261027/change_audit.json",
+      "sha256": "ef294067b8ce1c54ae47d65b2798765c5dc478f53cb5b7ec297d54bd75019090",
+      "bytes": 6969,
+      "report_relative_target": "../validation/public_robot_self_state_p9_20261027/change_audit.json",
+      "privileged_offline": false
+    },
+    {
+      "id": "p9_frames",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_geometry_p9_frames_20261027/compatibility.json",
+      "sha256": "34f07aff18c740c3442b1790f8e32398957cf0f87a0a2fe7237d9a947c1e3768",
+      "bytes": 55933,
+      "report_relative_target": "../validation/public_robot_self_geometry_p9_frames_20261027/compatibility.json",
+      "privileged_offline": false
+    },
+    {
+      "id": "p9_bounds",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_20261027/closed_06_07_bounds/summary.json",
+      "sha256": "e3918d09b65e57d9ee24103bc17868d6b497de1a0c86864ec01f5789650bce21",
+      "bytes": 60532,
+      "report_relative_target": "../validation/public_robot_self_state_p9_20261027/closed_06_07_bounds/summary.json",
+      "privileged_offline": false
+    },
+    {
+      "id": "p9_doc",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/public_robot_self_state_p9.md",
+      "sha256": "aa12791960a8bd35f5cd04d97241e64d16e4aa3fd673b9380c2423292c29b854",
+      "bytes": 4646,
+      "report_relative_target": "../public_robot_self_state_p9.md",
+      "privileged_offline": false
+    },
+    {
+      "id": "teacher_near_receipt",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.receipt.json",
+      "sha256": "83872610bd038363473e59c8182c209a8a3d30bb8f6f6f75a7c0c0102a697154",
+      "bytes": 4107,
+      "report_relative_target": "../media/reading/teacher_support_align_01_release_wrist_clip.receipt.json",
+      "privileged_offline": false
+    },
+    {
+      "id": "teacher_near",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.mp4",
+      "sha256": "e974d720260b10d9e46fa08183318d8b3176461d7381c2c3b17b1024c8040810",
+      "bytes": 585269,
+      "report_relative_target": "../media/reading/teacher_support_align_01_release_wrist_clip.mp4",
+      "role": "same_success_local_clip"
+    },
+    {
+      "id": "p9_review",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_independent_review_20261027/review.json",
+      "sha256": "aa024668199799c6937a03d3b08484cd25a51f0ec6966f6746b545fae3658df8",
+      "bytes": 17459,
+      "report_relative_target": "../validation/public_robot_self_state_p9_independent_review_20261027/review.json"
+    },
+    {
+      "id": "ci43",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/CI43_actual_9a88ea0_20261027.json",
+      "sha256": "ac7d833569dde04cc7e7300b22c6a179ef8ba0737bf01e026a84be3a250e126d",
+      "bytes": 11748,
+      "report_relative_target": "../validation/CI43_actual_9a88ea0_20261027.json"
+    },
+    {
+      "id": "equivalence_9a88",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_source_equivalence_9a88ea0.json",
+      "sha256": "856af626597149652b1cbb51f81b60670e8d6be6d714023fdecfb81652542776",
+      "bytes": 480358,
+      "report_relative_target": "../validation/runtime_source_equivalence_9a88ea0.json"
+    },
+    {
+      "id": "actual_model_stages",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/actual_model_stage_images.final.json",
+      "sha256": "697e30514031d04ba4c5b26081c2b52dbc875545b9eed5eec4ab69a2091b7fee",
+      "bytes": 13615,
+      "report_relative_target": "actual_model_stage_images.final.json"
+    },
+    {
+      "id": "gpt08_public",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/summary.json",
+      "sha256": "021d1bb703f84c02aff77ce117494e7bbf3f18d85a38284faca7675b0c872458",
+      "bytes": 259180,
+      "report_relative_target": "../diagnostics/gpt_debug_08_perception/summary.json"
+    },
+    {
+      "id": "gpt08_source_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/manifest.json",
+      "sha256": "8f5079cddf209a7d767f6e33597703835d1d14dd3daf04c8fcfa2ed6fd4245b6",
+      "bytes": 458682,
+      "report_relative_target": "../diagnostics/gpt_debug_08_perception/manifest.json"
+    },
+    {
+      "id": "gpt08_read",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_closed_read_archive.json",
+      "sha256": "b0fe3b7ce1c72225fd9ccd796e5b934f203e1ce73370738dc8a0b22ff67064d3",
+      "bytes": 97001,
+      "report_relative_target": "../diagnostics/gpt_debug_08_closed_read_archive.json"
+    },
+    {
+      "id": "gpt08_timeline",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_physical_timeline/summary.json",
+      "sha256": "9de4118139af4a7b54b804e0fd70febb0d7be320d91efc6e54a03fa673e33c7d",
+      "bytes": 68834,
+      "report_relative_target": "../diagnostics/gpt_debug_08_physical_timeline/summary.json"
+    },
+    {
+      "id": "gpt08_ledger",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/ledger_episode_and_closed_prefix.json",
+      "sha256": "1f116c5cc95bcf8fed238c794bbbaf4fc93a4d05c6e9ea221605bb6b29d47d2d",
+      "bytes": 218152,
+      "report_relative_target": "../diagnostics/gpt_debug_08_perception/ledger_episode_and_closed_prefix.json"
+    },
+    {
+      "id": "gpt08_blockers",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/summary.json",
+      "sha256": "1fa5d206ca8bccb7da13847a3c4eba82aa2ff2e71c72c93bb1b2f2ebd030ed78",
+      "bytes": 3955,
+      "report_relative_target": "../validation/gpt_debug_08_remaining_blockers_20261027/summary.json"
+    },
+    {
+      "id": "gpt08_blockers_note",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/README.md",
+      "sha256": "f6028b614154fc726dc4c20f2e27f149c8d19b50320511f20e2d8009ec2e0015",
+      "bytes": 2825,
+      "report_relative_target": "../validation/gpt_debug_08_remaining_blockers_20261027/README.md"
+    },
+    {
+      "id": "gpt08_micro_csv",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_comparison.csv",
+      "sha256": "0c5ced72017346f3114978739f602a67ccee00a9f9f99f227450f93a14e97db0",
+      "bytes": 4283,
+      "report_relative_target": "../validation/gpt_debug_08_remaining_blockers_20261027/D30_D32_comparison.csv"
+    },
+    {
+      "id": "gpt08_continuation",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_08_remaining_blockers_20261027/continuation_interface_audit.json",
+      "sha256": "70f9e958f24112a4b00947132252555a4de2c5925125edf4ded954260448db3d",
+      "bytes": 13075,
+      "report_relative_target": "../validation/gpt_debug_08_remaining_blockers_20261027/continuation_interface_audit.json"
+    },
+    {
+      "id": "gpt08_side33",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/side_camera.jpg",
+      "sha256": "13cc223f3df3984a20f9d3517810130091887eff2fa4e394cf0c45a0162a188a",
+      "bytes": 12859,
+      "report_relative_target": "../diagnostics/gpt_debug_08_perception/gpt_control/observations/decision_000033/side_camera.jpg"
+    },
+    {
+      "id": "gpt08_fullvideo",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_08_self_state_incomplete_full.mp4",
+      "sha256": "4cceba1ca8d3bf425c001a02ac62045a2f889120bcc8d78f8bd416f8dc130c6c",
+      "bytes": 2547678,
+      "report_relative_target": "../media/reading/gpt_debug_08_self_state_incomplete_full.mp4"
+    },
+    {
+      "id": "gpt08_media",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_08_self_state_incomplete_full_reading_receipt.json",
+      "sha256": "5bf71cfb2f93bee02152d3c33fe9049fdc9ea508e56f6a422016498636176c20",
+      "bytes": 40832,
+      "report_relative_target": "../media/reading/gpt_debug_08_self_state_incomplete_full_reading_receipt.json"
+    },
+    {
+      "id": "teacher_p9",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_p9_regression_01_closed_read_archive.json",
+      "sha256": "b25e8e7b68dd1a5359a0cdcca72d9c55a57f841f338dd14d23fa29cfada9cefb",
+      "bytes": 39461,
+      "report_relative_target": "../diagnostics/teacher_p9_regression_01_closed_read_archive.json"
+    },
+    {
+      "id": "teacher_p9_timeline",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_p9_regression_01_physical_timeline/summary.json",
+      "sha256": "79d78d262b9d3f9f91fe75ced779f2f691f55506b96056085cb25883990112ca",
+      "bytes": 89811,
+      "report_relative_target": "../diagnostics/teacher_p9_regression_01_physical_timeline/summary.json"
+    },
+    {
+      "id": "teacher_p9_reader",
+      "scope": "teacher",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_p9_regression_01_normal_reader.json",
+      "sha256": "f2658fb48ec66d1402e1b0a30c5d67ab7ba8d1914c9a3e4079d5a95ae7980872",
+      "bytes": 18698,
+      "report_relative_target": "../validation/teacher_p9_regression_01_normal_reader.json"
+    },
+    {
+      "id": "p9_closed_cohort",
+      "scope": "release",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/p9_release_closed_CPU_audit_cohort_01.json",
+      "sha256": "697fc8db00f8238d883c1afd9c6080c845731ef6b5e7e5107b17f7a8f493a59d",
+      "bytes": 5305,
+      "report_relative_target": "../diagnostics/p9_release_closed_CPU_audit_cohort_01.json"
+    },
+    {
+      "id": "gpt08_geometry",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/summary.json",
+      "sha256": "7a9ef33da0449ff5efb7f68c4eeb3220b86dfe726e3d4ec10296a65f4ff5c976",
+      "bytes": 8520,
+      "report_relative_target": "../diagnostics/gpt_debug_08_terminal_geometry/summary.json"
+    },
+    {
+      "id": "gpt08_geometry_note",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/RESULT.md",
+      "sha256": "9920b12b7643cf5c99e148300d1c794a326d7789e70dc677bc703701967a44b9",
+      "bytes": 898,
+      "report_relative_target": "../diagnostics/gpt_debug_08_terminal_geometry/RESULT.md"
+    },
+    {
+      "id": "gpt08_geometry_manifest",
+      "scope": "gpt_debug",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_08_terminal_geometry/source_manifest.json",
+      "sha256": "1f53577700f82e2df7b2eb9381eba68b4b4478374fcc6bd2b12bdb36ae29ee63",
+      "bytes": 3262,
+      "report_relative_target": "../diagnostics/gpt_debug_08_terminal_geometry/source_manifest.json"
+    },
+    {
+      "id": "legacy_cause",
+      "scope": "diagnostic",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/legacy_reproduction.md",
+      "sha256": "fd5614a1d51fc85b794c212349aaa71af980826189e744366bd156d2b9cd125c",
+      "bytes": 5345,
+      "report_relative_target": "../diagnostics/legacy_reproduction.md"
+    }
+  ],
+  "cohorts": [
+    {
+      "kind": "diagnostic",
+      "status": "closed",
+      "completed_count": 2,
+      "planned_count": 2,
+      "summary_source": "closed_033",
+      "note": "仅最终两条异常前缀；自由/细位移/抓持诊断另列，不是完整任务配额。"
+    },
+    {
+      "kind": "teacher",
+      "status": "closed",
+      "completed_count": 5,
+      "planned_count": 5,
+      "summary_source": "teacher5",
+      "note": "原计划五个0b独立进程完整成功；另58da/9a/422/9a88四次单次回归单列。最新9a88只实际回归1条，不说同提交跑5次或9/5。"
+    },
+    {
+      "kind": "gpt_debug",
+      "status": "closed",
+      "completed_count": 8,
+      "summary_source": "gpt_debug_cohort",
+      "note": "八个不同条件closed debug：4safety+4task，0完整成功；08=34决策/34请求/33物理动作+finish。正式未启动，不汇成成功概率。"
+    },
+    {
+      "kind": "gpt_formal",
+      "status": "not_run",
+      "completed_count": 0,
+      "planned_count": 5,
+      "note": "本版本正式五次未启动，已完成0/计划5；GPT完整成功前置gate未满足。旧Project_v1 formal不混入。"
+    }
+  ],
+  "pages": [
+    {
+      "title": "当前可用结果与验证范围",
+      "topics": [
+        "summary"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "原座不变的固定standard场景，10×10×67.5mm尺寸假设器皿已有v7 teacher五条真实完整成功：各自由6×6来源架A1抓取、提取、搬运至candidate_far_hinge，插入、承托、松爪、撤离并观察三秒。五条原task/record/integrity/physics/BC均通过；real_calibrated仍false。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "范围",
+            "实际已完成",
+            "结论边界"
+          ],
+          "rows": [
+            [
+              "teacher原计划v7",
+              "5/5完整闭合；125.667秒/7539转换",
+              "固定standard确定性重复"
+            ],
+            [
+              "额外同源teacher",
+              "58da、9a、422、9a88各1条完整成功",
+              "4条单独回归；非9/5"
+            ],
+            [
+              "GPT01–08不同debug",
+              "8条有效失败；0完整成功",
+              "4safety+4task；非正式成功率"
+            ],
+            [
+              "最终P9与正式GPT",
+              "08主动finish；同源teacher单条成功",
+              "正式已完成0/计划5；非0/5成功率"
+            ]
+          ],
+          "widths": [
+            3.0,
+            4.8,
+            4.3
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "teacher使用仿真真值专家控制，与仅公开RGB、机器人和触觉的GPT评测分开。该成功不证明GPT会完成，也不把10mm假设反推为实物尺寸。原器皿对照、原座、历史失败和物理质量告警保留。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "teacher1_fullvideo",
+              "label": "teacher首条完整成功"
+            },
+            {
+              "source": "teacher_near",
+              "label": "同次成功释放撤离腕部局部"
+            },
+            {
+              "source": "gpt08_fullvideo",
+              "label": "GPT08完整主动结束主片"
+            },
+            {
+              "source": "stage9_scope",
+              "label": "完整闭合范围与运行身份"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "连续执行修复与细位移诊断",
+      "topics": [
+        "executor"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "原异常已零API确定性复现：Lula raw IK在两条前缀中分别跳1.975338/2.108210rad，但raw FK仍接近有效目标；逐关节post-clip后FK误差变9.282177/9.705014mm。未完整执行的raw解继续当下一seed，随后旧低层逐tick按实际TCP建立10mm局部目标，把有效目标带离原参考，约40mm请求最终实际位移213.732/230.539mm。已排除world/TCP坐标混用、四元数顺序和增量逐帧累加；Lula内部为何选远分支仍未知。"
+        },
+        {
+          "type": "paragraph",
+          "text": "新执行器保持原请求目标，以局部连续IK、FK与关节步长界限预规划，实际跟踪和速度守卫执行。accepted只表示身份/边界/预检通过；execution_finished表示该动作生命周期闭合，含拒绝或partial；target_reached只指实际TCP终点容差；safety_stopped标安全/执行器/仿真守卫停止。旧completed仅表示循环结束，不证明到达或完整消耗请求区间。拒绝为0 tick/0时间；partial先查真实后继与回执，不能自动重放。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "相同请求的异常动作",
+            "旧净位移 mm",
+            "新净位移 mm",
+            "新终点误差 µm"
+          ],
+          "rows": [
+            [
+              "world 0 40 0",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/0/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              "40.000868",
+              "1.527"
+            ],
+            [
+              "world 0 35 −19",
+              {
+                "source": "closed_033",
+                "pointer": "/episodes/1/third_action/legacy_net_displacement_mm",
+                "format": ".3f"
+              },
+              "39.823226",
+              "2.402"
+            ]
+          ],
+          "widths": [
+            3.8,
+            2.8,
+            3.0,
+            3.0
+          ],
+          "align": [
+            "left",
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "closed_035",
+          "caption": "两条原请求参数保持不变的异常前缀对照；终点误差与动态跟踪峰值分开。新动态峰值仍约0.367/0.251mm。",
+          "max_height_cm": 5.0
+        },
+        {
+          "type": "paragraph",
+          "text": "fixed_replay_02两集7动作到达且真实退出0；首次fixed_replay_01关闭后GC退出139保留。72个自由探针全部target_reached：最大终点误差12.87µm、控制边界路径误差峰0.30461mm，返回anchor最大位置误差17.97µm/姿态0.0344mrad。原native速度与差分速度差异保留。这是无接触控制边界诊断，不是接触精度或子步全路径保证。"
+        },
+        {
+          "type": "paragraph",
+          "text": "另外24个空爪细位移对照：100µm目标由0/24变24/24，新版最大终点误差1.293µm、3秒保持整窗最大漂移11.529µm。与72自由探针分别统计；均未执行持物插入，不验证真实微米精度。"
+        },
+        {
+          "type": "paragraph",
+          "text": "另以cd827ed零模型调用重放GPT05全部25个非ID请求，首次碰撞仍为49.908333秒的link6—SourceMesh5；11981物理行选定运动学字段相同，3项指力字段有小于0.48µN末位差，不能称全物理bitwise一致。显式上抬变式在累计59.864mm时link7碰同盖板停止，后续横移/等待未执行，不构成安全路线或GPT成功。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "legacy_cause",
+              "label": "原Lula跳解至目标重映射完整因果证据"
+            },
+            {
+              "source": "closed_034",
+              "label": "全部7动作CSV"
+            },
+            {
+              "source": "closed_026",
+              "label": "72自由探针"
+            },
+            {
+              "source": "closed_019",
+              "label": "24细位移A B原数据"
+            },
+            {
+              "source": "replay05",
+              "label": "25动作闭合碰撞复现"
+            },
+            {
+              "source": "variant05",
+              "label": "显式变式实际partial及未执行项"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "完整teacher流程与可读成功数据",
+      "topics": [
+        "grasp",
+        "teacher_data"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "原计划v7五条实际runtime均0b922ec，固定来源A1与目标candidate_far_hinge，独立进程seeds0..4，首条GUI；各7539转换/125.666667秒，完整成功。另58da、9a、422、9a88各一条单次完整回归通过；最新9a88只跑了1条，不能说同提交跑5次或9/5。以下为首条代表，不把固定初态重复当随机泛化率。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "实际事件",
+            "仿真时间 s",
+            "独立证据"
+          ],
+          "rows": [
+            [
+              "双侧抓持",
+              "18.145833",
+              "实际两指接触"
+            ],
+            [
+              "来源槽清出",
+              "20.850000",
+              "器皿实际底部离架"
+            ],
+            [
+              "持物搬运",
+              "44.312500",
+              "实际水平位移≥50mm"
+            ],
+            [
+              "正确座内支撑",
+              "110.054167",
+              "原深度/对准/底力/inside同样本通过"
+            ],
+            [
+              "双指张开脱离",
+              "112.191667",
+              "实测开口与零接触"
+            ],
+            [
+              "实际撤离",
+              "116.416667",
+              "最小手爪—器皿净空40.034mm"
+            ],
+            [
+              "撤离后三秒",
+              "122.666667–125.666667",
+              "721物理样本，原稳定判据通过"
+            ]
+          ],
+          "widths": [
+            3.8,
+            3.2,
+            5.1
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "五条H5各40个唯一dataset全读，183份受保护原文件SHA逐集不变；正常success过滤逐集读出ACT与DP batch，failure过滤拒绝。首条另验动作[3,16,8]、无ExternalLink/外部storage/VDS、替代路径读取。约1.944GB的单集H5仅给出处和SHA，不冒充已在小包或已完成异机部署/训练。"
+        },
+        {
+          "type": "paragraph",
+          "text": "数据actions为7个绝对关节目标(rad)+左指目标(m)；9D实际命令另含右指且对称。wxyz四元数，obs在动作前、next state在物理子步后，间隔1/60秒；相机/状态独立时钟保留，严格同刻曝光未认证。GPT初始化每指effort上限8N；move/wait保留上一显式上限，gripper可选0至8N，不按teacher阶段/真值自动调力。记录是驱动上限，不是实测接触力。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "teacher5",
+              "label": "原计划五条真实审计"
+            },
+            {
+              "source": "teacher1_portable",
+              "label": "成功batch与数据自含性"
+            },
+            {
+              "source": "teacher1_reader",
+              "label": "正常ACT DP reader证明"
+            },
+            {
+              "source": "teacher_p9",
+              "label": "最终9a88单次全H5/便携回归"
+            },
+            {
+              "source": "teacher_p9_timeline",
+              "label": "同源完整事件与3秒原判据"
+            },
+            {
+              "source": "teacher_p9_reader",
+              "label": "同源success ACT DP正常读取"
+            },
+            {
+              "source": "teacher_near",
+              "label": "同次成功释放撤离腕部LOCAL CLIP"
+            },
+            {
+              "source": "teacher_near_receipt",
+              "label": "局部选窗与原SHA/事件QA"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "支撑交接修复及原门槛对照",
+      "topics": [
+        "teacher_data",
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "v6实际已有底部支撑并完成开爪撤离，但OPEN时XY187.961µm超过原100µm，原TASK_INCOMPLETE保留。v7在SUPPORT_TRANSFER加入有界XY/姿态反馈，未连续满足原对准预算时暂停教师逻辑卸载clock，真实quiet和10秒watchdog仍按物理时钟。几何、摩擦、effort上限与独立评分不变。"
+        },
+        {
+          "type": "figure",
+          "source": "support_xy",
+          "caption": "实际XY误差对各自SUPPORT起点；100µm线、各自OPEN线与原独立支撑点。v7中间振荡保留，未重采样成同一轨迹。完整tilt/底力三panel另链。",
+          "max_height_cm": 6.0
+        },
+        {
+          "type": "paragraph",
+          "text": "v7首次correct_target_supported为110.054167秒：XY29.829µm、tilt0.070935°、深度27.000479mm、底力0.376174N；OPEN在112.016667秒，同帧XY5.581µm、tilt0.012933°、底力0.239238N及其余原门均通过。此后才实际脱指与撤离；最终三秒位置漂移0.420µm、姿态变化0.015113°。这些是声明范围内的仿真量。"
+        },
+        {
+          "type": "paragraph",
+          "text": "支撑阶段264控制tick中80tick逻辑暂停，generic helper仍可能追赶原调度或回闭：26tick开口增加、8tick回闭。因此“暂停卸载时钟”不等于实测夹爪冻结。原NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT和NATIVE_TARGET_OVERLAP_UNAVAILABLE保留，有效cooked碰撞表面的全局误差仍未知。"
+        },
+        {
+          "type": "paragraph",
+          "text": "GUI退出阶段有真实UI context=None回调异常，supervisor原退出0、数据闭合审计通过；准确日志片段单独保存，不宣称日志无错误。VERIFY末段腕视局部被裁出画幅，侧视目标小且有遮挡，成功不由末帧图片推断。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "support_ab_fig",
+              "label": "完整XY tilt 底力三panel附件"
+            },
+            {
+              "source": "support_xy_receipt",
+              "label": "报告宽图输入SHA与生成回执"
+            },
+            {
+              "source": "support_ab_md",
+              "label": "v6 v7图源与比较方法"
+            },
+            {
+              "source": "teacher1_control",
+              "label": "逻辑与实际开口CSV"
+            },
+            {
+              "source": "teacher1_warning",
+              "label": "真实GUI退出警告与限定"
+            },
+            {
+              "source": "baseline_wristclip",
+              "label": "v6原失败腕视局部对照"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "GPT实际进展与未完成原因",
+      "topics": [
+        "gpt",
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "不同debug",
+            "决策 / 请求 / 终点t 秒",
+            "原失败分类"
+          ],
+          "rows": [
+            [
+              "01 / 初始提示",
+              "11 /11 /24.833",
+              "SAFETY_COLLISION"
+            ],
+            [
+              "02 / prompt v2",
+              "33 /33 /59.867",
+              "SAFETY_GEOMETRY_VIOLATION"
+            ],
+            [
+              "03 / prompt v3",
+              "15 /15 /29.667",
+              "SAFETY_COLLISION"
+            ],
+            [
+              "04 / prompt v4",
+              "51 /51 /114.717",
+              "GRASP_SLIP"
+            ],
+            [
+              "05 / P6 temporal",
+              "25 /25 /49.917",
+              "SAFETY_COLLISION"
+            ],
+            [
+              "06 / P7 detail",
+              "17 /18 /36.017",
+              "TASK_INCOMPLETE"
+            ],
+            [
+              "07 / P8 active view",
+              "46 /46 /90.017",
+              "TASK_INCOMPLETE"
+            ],
+            [
+              "08 / P9 self state",
+              "34 /34 /65.117",
+              "TASK_INCOMPLETE"
+            ]
+          ],
+          "widths": [
+            3.2,
+            3.6,
+            5.3
+          ],
+          "align": [
+            "left",
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "figure",
+          "source": "gpt08_side33",
+          "caption": "GPT08 decision33实际side全幅JPEG，原双图与P7细节均保留。此时杯和手可见，但模型不确认整手下降通行、入座深度与承托；主动finish未宣称完成。",
+          "max_height_cm": 3.6
+        },
+        {
+          "type": "paragraph",
+          "text": "GPT04的TCP到达未保证器皿同步下降：座口正冲量后出现相对漂移，未记录分类座底支撑≥0.1N。GPT05在49.908333秒先发生link6—SourceMesh5碰撞，随后才超过200µm；当前可见升起盖板与碰撞网格变换一致，不能因旧整机高度估算把接触判为虚空。回调力仍未经独立实物标定。"
+        },
+        {
+          "type": "paragraph",
+          "text": "最新GPT08运行P9：34决策/34请求、33物理动作加finish，3906转换/终点65.116667秒。15.6125秒抓持、17.670833秒离架、41.220833秒持物搬运；无原生禁碰或抓持越界。D30–32三次−100µm/0.2秒请求完成，实际TCP Z为−114.323/−100.732/−99.897µm，控制边界pathmax68.263/5.178/0.783µm；不是子步全路径或器皿插入精度。"
+        },
+        {
+          "type": "paragraph",
+          "text": "最新08仍停留于稳定搬运：离线CAD/真实末态推导杯底高于原座口83.652mm、底110.652mm，对原A轴XY34.993mm；最后三动作杯底合计下降0.314892mm。该特权事后量未送模型，原depth/gap/inputoverlap仍null、底力0。模型因双图不建立通行、深度/承托主动结束，未释放/撤离。八条原task false、record/integrity/physics true、BC false、post-retreat unavailable/stable null均保留；本轮最远座口接触来自旧04，随后滑移。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "gpt_debug_cohort",
+              "label": "八条不同调试真实分类"
+            },
+            {
+              "source": "gpt08_public",
+              "label": "08实际公开输入范围"
+            },
+            {
+              "source": "actual_model_stages",
+              "label": "08各实际阶段双图/未到阶段"
+            },
+            {
+              "source": "gpt08_read",
+              "label": "08全H5/正常failure读取"
+            },
+            {
+              "source": "gpt08_fullvideo",
+              "label": "08同次完整阅读主片"
+            },
+            {
+              "source": "gpt08_geometry",
+              "label": "08末态离线几何及原null"
+            },
+            {
+              "source": "gpt08_blockers",
+              "label": "08剩余三项未建立证据"
+            },
+            {
+              "source": "gpt08_micro_csv",
+              "label": "三次100µm实际TCP回执"
+            },
+            {
+              "source": "gpt04_fullvideo",
+              "label": "旧04座口滑移完整对照"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "公开观测边界与最终GPT尝试",
+      "topics": [
+        "gpt",
+        "camera"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "公开finger_contact_N是按器皿身份过滤的双指法向范数，不是全物体触觉、摩擦或座底支撑。P9实际08已使用机器人自身状态与通用接触提示；看清杯和手、双侧保持接触或TCP到达，都不直接建立整手路线、自由入座或底部承托。"
+        },
+        {
+          "type": "paragraph",
+          "text": "P9在P8上追加机器人自身CURRENT JSON及通用接触推进提示，非单因素A/B。它由公开q7和actualTCP求名义FK，给link6/link7/hand位姿与authored INPUT局部盒；runtime不读障碍/器皿/座位姿，不提供距离、规划或自动动作。盒不含手指、持物、cooked、接触偏置或扫掠体。08使用该输入后仍原TASK_INCOMPLETE，不能把自身几何信息当全局安全证明。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "截至08闭合的固定共享前缀",
+            "数量或估价"
+          ],
+          "rows": [
+            [
+              "GPT08真实episode",
+              "34决策/34请求；估价$3.050670"
+            ],
+            [
+              "累计前缀",
+              "333尝试；$27.894200占用"
+            ],
+            [
+              "已知usage / 未知预留",
+              "$26.485230 /$1.408970（8次）"
+            ],
+            [
+              "相对$30上限剩余",
+              "$2.105800；未耗尽，不是供应商账单"
+            ]
+          ],
+          "widths": [
+            4.6,
+            7.4
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "原finish立即结束采集并关闭进程，接口不支持同episode续跑，不能暗中重放或用teacher/真值接续。剩$2.1058未耗尽；未解决视觉定位/深度和安全通道之前停止重复reset。P9绑定760项CPU通过/13skip、Git-free82、独审130和CI43成功，实际同源teacher单次也通过；均不能替代GPT完整任务。原$30/1500网络请求、80k输入、1024输出、160模型调用不提高。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "p9_cpu",
+              "label": "P9冻结源码与CPU结果"
+            },
+            {
+              "source": "p9_review",
+              "label": "P9独立130项审查"
+            },
+            {
+              "source": "p9_frames",
+              "label": "自身名义模型兼容边界"
+            },
+            {
+              "source": "p9_bounds",
+              "label": "闭合06/07反事实输入上界"
+            },
+            {
+              "source": "gpt08_ledger",
+              "label": "333条固定费用前缀"
+            },
+            {
+              "source": "gpt08_continuation",
+              "label": "finish关闭与无同episode resume"
+            },
+            {
+              "source": "gpt08_blockers_note",
+              "label": "双图未建立通行/深度/支撑"
+            },
+            {
+              "source": "tactile_scope",
+              "label": "杯筛选法向触觉的范围"
+            },
+            {
+              "source": "held06",
+              "label": "0API局部held诊断 非模型成绩"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "运行与发布信息",
+      "topics": [
+        "release"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "长期分支codex/labsim。最新GPT08与额外teacher真实runtime均9a88ea0，CI43 completed/success；原计划teacher五条为0b922ec，四次额外回归分列。历史资料/媒体LFS提交487b282不替代运行代码身份。9a88的52项共享源码、17项物理依赖与旧资产/选定旧输出保护已核；不声称全部ignored历史输出有全局快照。最终交付提交由推送后真实包清单记录。"
+        },
+        {
+          "type": "code",
+          "language": "bash",
+          "text": "export LABSIM_ASSET_CACHE=\"${XDG_CACHE_HOME:-$HOME/.cache}/labsim/assets\"\nLABSIM_ASSET_REV=bb880f098180c291f6f65995f969d48047207067\n./labsim assets download\n./labsim assets check --asset-root \"$LABSIM_ASSET_CACHE/$LABSIM_ASSET_REV\"\n./labsim doctor --json\n\n./labsim eval --project-version Project_v1_1 --scene standard \\\n  --backend teacher --episodes 1 --gui \\\n  --output outputs/lab_cuvette_loading/Project_v1_1/teacher_NEW\n\n# P9显式版本；--dry-run仅打印，实际运行时移除\nLABSIM_POLICIES=config/lab_cuvette_loading/Project_v1_1/policies\nLABSIM_PROFILE=cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json\n./labsim eval --project-version Project_v1_1 --scene standard \\\n  --backend gpt6 --episodes 1 --max-calls 160 --headless --dry-run \\\n  --provider-config \"$LABSIM_POLICIES/$LABSIM_PROFILE\" \\\n  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \\\n  --output outputs/lab_cuvette_loading/Project_v1_1/gpt_P9_NEW"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "使用与边界",
+            "当前验证"
+          ],
+          "rows": [
+            [
+              "teacher原计划/额外回归",
+              "0b固定5/5；58da/9a/422/9a88各1条通过"
+            ],
+            [
+              "GPT/正式五次",
+              "八次不同debug无完整成功；正式未启动0/计划5"
+            ],
+            [
+              "数据读取/记录资格",
+              "成功与有效任务失败ACT/DP通过；诊断不进BC"
+            ],
+            [
+              "资产/样例",
+              "HF固定资产pin；旧Project1样例不冒充本版数据"
+            ]
+          ],
+          "widths": [
+            4.2,
+            7.8
+          ],
+          "align": [
+            "left",
+            "left"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "需要已有Linux/Isaac Sim 5.1/Python3.11/NVIDIA环境，凭据仅环境变量；详见版本README。省略--project-version仍走旧Project_v1。teacher原计划五个--episodes 1独立进程，示例只演示单集，无随机化/训练。阅读包保留当前报告、关键证据与四段阅读媒体（teacher full/同次near、04失败、08未完成），大H5/raw与环境不随包；正常dataset-check成功/失败操作见usage，保留repo相对层级。"
+        },
+        {
+          "type": "links",
+          "items": [
+            {
+              "source": "current_project_readme",
+              "label": "版本入口、资产与P9操作命令"
+            },
+            {
+              "source": "current_usage",
+              "label": "正常reader/失败资格与部署"
+            },
+            {
+              "source": "ci43",
+              "label": "9a88实际CI43成功"
+            },
+            {
+              "source": "equivalence_9a88",
+              "label": "9a88物理/旧资产/选定历史保护"
+            },
+            {
+              "source": "reading_index",
+              "label": "四段当前媒体来源与SHA"
+            },
+            {
+              "source": "media_readme",
+              "label": "完整/局部与模型输入范围"
+            },
+            {
+              "source": "p9_doc",
+              "label": "P9自身信息与未认证边界"
+            },
+            {
+              "source": "hf_pinned_assets",
+              "label": "固定HF资产入口"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "原计划五条固定standard确定性teacher及四条额外单次回归分列；最新9a88只回归1条，不说同提交5次/9of5或随机泛化。没有训练或硬件精度结论。",
+    "GPT八个不同调试均未完整装载，正式0/计划5未启动；不得写0/5正式成功率或把teacher成功换成GPT成功。",
+    "实际08的100µm请求是公开TCP控制边界量，未到座口/预插入口，不认证器皿插入精度；原depth/gap/inputoverlap未知保持null，post-retreat unavailable/stable null。",
+    "特权离线CAD/pose只用于判分分析，未送模型；输入mesh/hull/自身盒不等于cooked或连续全路线证书。",
+    "公开触觉为杯过滤法向范数，不是全物体触觉/摩擦/底部支撑。独立相机/状态时钟保留，严格曝光同刻未认证。",
+    "全部公开JSON/exactJPEG、静态prompt/schema及工具回执不等于完整HTTPbody/全部memory/private reasoning；返回model名称不能独立验证上游实现。",
+    "10mm尺寸/20g质量为工程假设、real_calibrated=false；两个native qualityflags、GUI退出warning、全局cooked误差及真实力标定未知保留。",
+    "阅读完整片保留全帧时序但有损；teacher腕近景是同次成功LOCAL CLIP，不能当GPT输入。H5/raw不随包；final package需按实际提交、相对目标、媒体SHA和总字节再核。",
+    "预算截至08为333尝试/$27.894200，已知估价与8次未知预留分开，剩$2.1058未耗尽；不是供应商账单。finish关闭后无同episode resume，不以回放/新reset冒充原尝试继续。"
+  ]
+}

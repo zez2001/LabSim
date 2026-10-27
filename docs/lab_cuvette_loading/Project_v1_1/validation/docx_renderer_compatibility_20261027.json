@@ -1,0 +1,129 @@
+{
+  "schema": "labsim.Project_v1_1.bundled_DOCX_renderer_host_compatibility.v1",
+  "created_utc": "2026-10-27T03:11:11.735477+00:00",
+  "status": "actual_isolated_bundled_render_and_root_all_page_QA_passed",
+  "input_document": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.docx",
+    "SHA256_at_check": "81425c3b33efb04be177c8e27d80d1cac0c5308b7d161867e6c5824902a7fa8b",
+    "unchanged_by_auditor": true,
+    "SHA256_after_render": "81425c3b33efb04be177c8e27d80d1cac0c5308b7d161867e6c5824902a7fa8b",
+    "unchanged_after_render": true
+  },
+  "initial_host_failure": {
+    "host_glibc": "glibc 2.35",
+    "root_actual_render_failed": true,
+    "required_symbol_examples": [
+      "GLIBC_2.38",
+      "GLIBCXX_3.4.31",
+      "GLIBCXX_3.4.32"
+    ],
+    "independent_ldd_corrob_log": "/tmp/labsim-bundled-render-compat-20261027/logs/original_bundled_lo_ldd.txt",
+    "ldd_log_SHA256": "573aabd10149ed709e6f5bd4bdd725945ca7b687636509066a97c4a70d67d99e",
+    "ldd_log_bytes": 27335,
+    "ldd_exit_code_is_not_success_evidence": true,
+    "read_only_error_excerpt": [
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.31' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libuno_sal.so.3)",
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libuno_sal.so.3)",
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.31' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libsofficeapp.so)",
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libsofficeapp.so)",
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.38' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libicuuc.so.78)",
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libicuuc.so.78)",
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libcomphelper.so)",
+      "BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/soffice.bin: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.31' not found (required by BUNDLED_DEPS/native/libreoffice-headless/libreoffice/program/libcomphelper.so)"
+    ]
+  },
+  "isolated_compatibility_method": {
+    "helper_path": "/tmp/labsim_render_bundled_docx_isolated.py",
+    "helper_SHA256": "966b2a88932667ca7b8363450d922072669c30338f9377350b28f1e9047ec3d3",
+    "preexisting_image": "47442d7252b7",
+    "image_full_id": "sha256:47442d7252b7f0ce6384d45043bc218b7d907a7e14404e69e3b6551a4ec64b75",
+    "image_inspect_actual_passed": true,
+    "platform": "linux/amd64",
+    "read_only_container": true,
+    "network": "none",
+    "GPU_passthrough": false,
+    "tmpfs": "/tmp",
+    "only_QA_output_writable": true,
+    "host_non_glibc_font_NSS_curl_dependencies_read_only": true,
+    "container_own_glibc_and_cpp_runtime": true,
+    "bundled_renderer": "/home/wujing/.codex/plugins/cache/openai-primary-runtime/documents/26.1015.12040/skills/documents/render_docx.py",
+    "bundled_python": "/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "underlying_LO_binary": "/home/wujing/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/soffice.bin",
+    "LO_binary_SHA256": "d905a74dc92eaccb22481ba2de1345666a074a5f0d48322aaad1b6dc8a9e1e40",
+    "bundle_input_skill_and_fonts_read_only": true,
+    "system_or_desktop_LibreOffice_used": false,
+    "system_Isaac_or_managed_bundle_modified": false,
+    "new_OS_packages_downloaded_or_installed": false
+  },
+  "compatibility_exploration": {
+    "temporary_root": "/tmp/labsim-bundled-render-compat-20261027",
+    "only_official_Ubuntu_directory_HTML_downloaded": true,
+    "libc_deb_downloaded": false,
+    "extracted_runtime_or_custom_loader_created": false,
+    "stopped_on_existing_isolation_solution": true
+  },
+  "actual_isolated_render": {
+    "started_by": "root",
+    "root_unified_exec_session": 54744,
+    "process_exit_code": 0,
+    "process_exit_evidence": "Root observed actual session54744 completion with exit0; child reviewer did not launch or poll this rendering process.",
+    "output_directory": "/tmp/labsim-project-v1-1-final-docx-QA-20261027",
+    "pages": 8,
+    "PDF_path": "/tmp/labsim-project-v1-1-final-docx-QA-20261027/LabSim_Project_v1_1_项目发布与验证报告.pdf",
+    "PDF_SHA256": "fe88fe761a5de434fe3db4630173a7a74cee87179741e61910944ddb4c9673c0",
+    "PDF_bytes": 860271,
+    "all_page_PNG_visual_QA_complete": true,
+    "visual_QA_performed_by": "root",
+    "visual_QA_evidence": "Root explicitly reported original-detail view_image inspection of every page1–8: no clipping, overlap, missing glyphs or broken tables. Child reviewer only verified files/hash/count, not independent visual inspection.",
+    "visual_QA_result": "pass_all8",
+    "page_PNG_manifest": [
+      {
+        "name": "page-1.png",
+        "bytes": 335618,
+        "SHA256": "ca4e0c9daef0f3034d9236788b58be87be8d8576cf462c65cccb898f54e69737"
+      },
+      {
+        "name": "page-2.png",
+        "bytes": 639156,
+        "SHA256": "856ccbaed98e8dc20bcca2670c651c20b82377ab6185ff64b51f7bcde89af687"
+      },
+      {
+        "name": "page-3.png",
+        "bytes": 403343,
+        "SHA256": "61f3445ca939d53f06a3445b6dacb6a12f79d65160678ad1ee31e4e4c22742b6"
+      },
+      {
+        "name": "page-4.png",
+        "bytes": 550249,
+        "SHA256": "5896cfe83f5b959d85f6de6fe7feaa6a7dace594ef5b40fa6ae741a6026ba853"
+      },
+      {
+        "name": "page-5.png",
+        "bytes": 518130,
+        "SHA256": "e82fe4933c81dd18fd5a51b4e21361ef7f64699ce9f30c1d6faa8b425f3852a4"
+      },
+      {
+        "name": "page-6.png",
+        "bytes": 385842,
+        "SHA256": "55c1fd48bd922e61f91bb29ab9fb68c4e8fc412f4e51ce4499d48cf855d005a4"
+      },
+      {
+        "name": "page-7.png",
+        "bytes": 566662,
+        "SHA256": "796451256610f5307649b77c07ffe17c12c82ab701b49a47ac36114ff817a1ed"
+      },
+      {
+        "name": "page-8.png",
+        "bytes": 226818,
+        "SHA256": "d049e4ac950900cd4f0d1e8e9b1a9443914f8def8961f213a0720034c5794617"
+      }
+    ],
+    "pending_fields_require_actual_root_result": false
+  },
+  "scope": "Bundled renderer compatibility and root-reported actual8page visualQA provenance. Child reviewer verified output entities/count/hash and originalDOCX preservation, without claiming to have independently viewed the pages. Not a simulator or policy result.",
+  "authoring_by_auditor": false,
+  "render_or_convert_by_auditor": false,
+  "real_provider_API_calls": 0,
+  "GPU_runs": 0,
+  "completed_utc": "2026-10-27T03:14:24.311350+00:00"
+}

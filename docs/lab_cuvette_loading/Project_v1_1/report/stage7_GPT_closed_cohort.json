@@ -1,0 +1,840 @@
+{
+  "schema": "labsim.Project_v1_1.stage7_GPT_closed_cohort.v1",
+  "created_utc": "2026-10-27T00:34:31.159303+00:00",
+  "closed_debug_count": 5,
+  "full_task_success_count": 0,
+  "formal_episode_count": 0,
+  "scope": "Five different debug conditions, not a frozen formal trial or pooled success-rate estimate.",
+  "old4_closed_summary": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_04_closed_cohort/summary.json",
+    "sha256": "20365c47b28825f51bb4da2fe0f01102f8b5b605afe64cb725f424d2613dc5a1"
+  },
+  "GPT05_closed_summary": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/summary.json",
+    "sha256": "1794fd2732c67e79b2c7d754f93e418d011424ee50f47e7c8289baa46f466b9f"
+  },
+  "old4_rows_preserved": [
+    {
+      "run": "gpt_debug_01",
+      "condition": "independent_debug_condition_1",
+      "runtime_commit": "09b0c41fc37db7a7f80618d87ee87d4c6d11ab93",
+      "runtime_commit_source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_01/episode_0000/release_metadata.json",
+      "prompt_version_recorded": null,
+      "prompt_label": "unversioned_initial_ProjectV11_prompt (serialized version absent)",
+      "prompt_text_SHA256": "b2a185f5377ec79e1cb0ae14f712544ba6aff0ee46267a6ec24d8c518188aa66",
+      "controller_canonical_SHA256": "8fd14e7b14e522f6298a867043e84f10643aa531483a00653ca89184dffdff07",
+      "score_snapshot_record_integrity_valid": null,
+      "score_snapshot_record_integrity_source": "collector_pending",
+      "final_result_record_integrity_source": "streaming_collector_checks_at_flush_close",
+      "provider_config_canonical_SHA256": "d9925df3325009ed314c70a4d59648fc4cb0bfce80326b221b564d438dd77939",
+      "provider_config_command_line_path": null,
+      "profile_label": "512x384 q60 low; context12",
+      "physical_camera_label": "original elevated side + wrist.v2",
+      "camera": {
+        "side_camera": {
+          "physical_parent": "/World",
+          "local_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "local_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            512,
+            384
+          ],
+          "detail": "low",
+          "jpeg_quality": 60,
+          "crop": null
+        },
+        "wrist_camera": {
+          "physical_parent": "/World/Franka/panda_hand",
+          "local_position_m": [
+            0.07500000298023224,
+            0.0,
+            0.03999999910593033
+          ],
+          "local_quaternion_wxyz": [
+            -0.2600301802158356,
+            0.6575593535868104,
+            -0.6575593535868104,
+            0.26003018747428563
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            512,
+            384
+          ],
+          "detail": "low",
+          "jpeg_quality": 60,
+          "crop": null
+        }
+      },
+      "temporal_history_enabled": false,
+      "full_task_success": false,
+      "record_valid": true,
+      "record_integrity_valid": true,
+      "physics_trustworthy": true,
+      "success_BC_eligible": false,
+      "failure_domain": "safety",
+      "failure_type": "SAFETY_COLLISION",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "simulation_end_s": 24.833333333333332,
+      "control_transitions": 1489,
+      "native_physics_steps_including_initialization": 5960,
+      "model_API_decisions": 11,
+      "shared_ledger_attempts_joined": 11,
+      "actual_ledger_request_ids": [
+        "13036219-580b-49ae-8167-b82c88cb94b3",
+        "4ffd3414-1300-47e7-8214-583f862b615d",
+        "78276267-a64d-40f1-8150-942078109699",
+        "304b5fa0-407b-47cc-8397-a01c8155ea0d",
+        "153493fb-1bc9-47d5-bf31-ce66d2ee3710",
+        "d16b7352-b0ef-4181-b71f-b838e440e3ea",
+        "670e59eb-2c0f-4735-a87f-c6f097b5a58d",
+        "a1657d52-6a18-4263-81db-f60fcd9cce78",
+        "4805857d-82fb-4b28-bff7-eb35f0405894",
+        "0e306e16-63e8-4919-b58e-28abe26157c0",
+        "d2c1379b-a271-476f-a68e-60166f4d8c6d"
+      ],
+      "episode_known_usage_estimated_USD": 1.06348,
+      "episode_input_tokens": 97698,
+      "episode_output_tokens": 1730,
+      "cost_scope": "Exact matching request IDs in the existing Project_v1 shared ledger; published-rate estimate, not invoice; no unknown usage for these requests.",
+      "furthest_independently_observed_required_event": "held_transport_observed",
+      "furthest_event_time_s": 24.666666666666668,
+      "observed_required_events": {
+        "bilateral_grasp_observed": 16.6125,
+        "actual_lift_started": 16.6125,
+        "source_slot_cleared": 18.204166666666666,
+        "held_transport_observed": 24.666666666666668
+      },
+      "grasp_success": true,
+      "transport_success": true,
+      "actual_physical_progress_note": "Palm/hand collided with original instrument SourceMesh2 during early transport.",
+      "gripper_opening_commands_executed": [],
+      "actual_unqualified_opening_public_sample": null,
+      "release_observed": false,
+      "retreat_observed": false,
+      "release_retreat_scope": "No independent qualified release or retreat event.",
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "stable_after_retreat": null,
+      "terminal_window": {
+        "status": "complete",
+        "stable": false,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 0.047257697005348084,
+        "orientation_change_deg": 0.0659744588495274,
+        "criteria": {
+          "position_stable": false,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 21.833333333333332,
+        "end_t": 24.833333333333332
+      },
+      "normal_reader": {
+        "existing_evidence_only": true,
+        "failure_ACT_DP_batch_passed": true,
+        "success_filter_rejected": true,
+        "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_01_failure_normal_reader.json",
+        "SHA256": "fe88a0d09299bd5edad5d745c18bdcec9dc01e6463638ea7df1e3f7685ee37be",
+        "H5_opened_by_this_cohort": false
+      },
+      "process": {
+        "pid": 109695,
+        "process_exited": true,
+        "exit_code": 0,
+        "PID_gone_checked": true,
+        "process_wall_s": 311.55222644202877
+      },
+      "original_scope": "Original final result/independent score preserved; legacy guard entries inside scorer diagnostics do not override final safety/task classification."
+    },
+    {
+      "run": "gpt_debug_02",
+      "condition": "independent_debug_condition_2",
+      "runtime_commit": "c793a12b8f097eb47a9158a708d896993a05116c",
+      "runtime_commit_source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_02/episode_0000/release_metadata.json",
+      "prompt_version_recorded": "Project_v1_1.public_tools.v2",
+      "prompt_label": "Project_v1_1.public_tools.v2",
+      "prompt_text_SHA256": "aaf3b0126e5ef3a5b3eba21478f670c58fe709caf7be3443a62c49e3042fa03b",
+      "controller_canonical_SHA256": "3681ac6e020271453c5abbdf5dced4cade8987bce501e8b00267e5e9e6262272",
+      "score_snapshot_record_integrity_valid": null,
+      "score_snapshot_record_integrity_source": "collector_pending",
+      "final_result_record_integrity_source": "streaming_collector_checks_at_flush_close",
+      "provider_config_canonical_SHA256": "d9925df3325009ed314c70a4d59648fc4cb0bfce80326b221b564d438dd77939",
+      "provider_config_command_line_path": null,
+      "profile_label": "512x384 q60 low; context12",
+      "physical_camera_label": "original elevated side + wrist.v2",
+      "camera": {
+        "side_camera": {
+          "physical_parent": "/World",
+          "local_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "local_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            512,
+            384
+          ],
+          "detail": "low",
+          "jpeg_quality": 60,
+          "crop": null
+        },
+        "wrist_camera": {
+          "physical_parent": "/World/Franka/panda_hand",
+          "local_position_m": [
+            0.07500000298023224,
+            0.0,
+            0.03999999910593033
+          ],
+          "local_quaternion_wxyz": [
+            -0.2600301802158356,
+            0.6575593535868104,
+            -0.6575593535868104,
+            0.26003018747428563
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            512,
+            384
+          ],
+          "detail": "low",
+          "jpeg_quality": 60,
+          "crop": null
+        }
+      },
+      "temporal_history_enabled": false,
+      "full_task_success": false,
+      "record_valid": true,
+      "record_integrity_valid": true,
+      "physics_trustworthy": true,
+      "success_BC_eligible": false,
+      "failure_domain": "safety",
+      "failure_type": "SAFETY_GEOMETRY_VIOLATION",
+      "termination_reason": "INPUT_MATERIAL_PENETRATION",
+      "simulation_end_s": 59.86666666666667,
+      "control_transitions": 3591,
+      "native_physics_steps_including_initialization": 14368,
+      "model_API_decisions": 33,
+      "shared_ledger_attempts_joined": 33,
+      "actual_ledger_request_ids": [
+        "a6cc5742-38a5-4051-a4d6-f4573935b557",
+        "a325e306-d724-4a21-93c7-66ee19d3c9c2",
+        "2fba75f5-aebd-4148-86a2-7a8c735fc0a4",
+        "eacbdb95-1c5f-40ff-91e5-c9aecb5b0381",
+        "003cd6c7-80ea-4ada-bfac-daf71aea526a",
+        "1dba22f8-ae80-482b-99e6-bb1654396b61",
+        "85026301-0bc0-403f-823b-4c59d3278788",
+        "aed35d0c-a53f-4a1d-862e-5f07d60a2353",
+        "28ca5946-f3e2-4cdb-a39b-084215f9f78d",
+        "580698b6-1331-448a-b9dc-7b87fddfb126",
+        "a4545425-48f3-4f94-a86a-3524baee4673",
+        "8a8995af-d5b1-4886-b275-883a10f125de",
+        "24f16e0f-612f-4541-b24a-cc74f700b2f4",
+        "75a4a2ea-25fe-4966-b290-cbcb61e96064",
+        "3bd42646-e43b-49e5-ba57-29f42b0cbc14",
+        "72f5124f-3c42-4a1b-9ca6-de1eab7dd04a",
+        "f6647a33-9d24-4b04-8e5c-1e48179335c7",
+        "57320c5b-96ae-4ec7-bf07-3381d2d175ec",
+        "f9d777c0-58e4-477d-b222-acbe2d4228d7",
+        "f6ac7c4a-22fc-429d-bc4a-29426c292d45",
+        "4c7bb1d3-d1fa-4925-87cc-140338094fbc",
+        "ccdcd5fb-9b56-446c-88b1-0ce05fc725b5",
+        "06714903-1318-44d0-be5a-a06be1cb4e9a",
+        "a0bcaf09-8426-4d11-b717-00b3fcf5aa63",
+        "7b3db94d-fc5a-4677-bd1c-bd83adee01db",
+        "ae9df4cf-5f8a-41be-9f2a-d3157c0bc189",
+        "067566e9-1290-4723-99d7-36bff3be93ff",
+        "04a50d8d-3a55-4ff3-8f26-8c97c7994382",
+        "02548d89-2ac1-4526-a0a6-065266544190",
+        "f050c62d-0a38-4752-a707-fe6c7d12c45f",
+        "e44f254b-9243-4716-81ab-8f99e00b9e88",
+        "3334671b-5aa6-415a-a4ea-5bf9d9fe2be2",
+        "a26e9558-094d-4059-a73c-52a0e9251386"
+      ],
+      "episode_known_usage_estimated_USD": 3.69979,
+      "episode_input_tokens": 345284,
+      "episode_output_tokens": 4939,
+      "cost_scope": "Exact matching request IDs in the existing Project_v1 shared ledger; published-rate estimate, not invoice; no unknown usage for these requests.",
+      "furthest_independently_observed_required_event": "held_transport_observed",
+      "furthest_event_time_s": 32.520833333333336,
+      "observed_required_events": {
+        "bilateral_grasp_observed": 14.1125,
+        "actual_lift_started": 14.1125,
+        "source_slot_cleared": 15.370833333333334,
+        "held_transport_observed": 32.520833333333336
+      },
+      "grasp_success": false,
+      "transport_success": false,
+      "actual_physical_progress_note": "Reached original seat rim, blocked; continued descent then opening and retreat attempts ended in material geometry safety violation.",
+      "gripper_opening_commands_executed": [
+        {
+          "decision": 29,
+          "time_s": 55.016666666666666,
+          "requested_opening_m": 0.011,
+          "effort_limit_N": 0.5,
+          "accepted": true
+        },
+        {
+          "decision": 30,
+          "time_s": 56.016666666666666,
+          "requested_opening_m": 0.04,
+          "effort_limit_N": 0.5,
+          "accepted": true
+        }
+      ],
+      "actual_unqualified_opening_public_sample": {
+        "t_s": 57.016666666666666,
+        "measured_total_opening_m": 0.03877795487642288,
+        "finger_contact_N": [
+          0.0,
+          0.0
+        ],
+        "scope": "Actual opening and zero bilateral public contact, not correct supported release."
+      },
+      "release_observed": false,
+      "retreat_observed": false,
+      "release_retreat_scope": "Actual opening to40mm requested and public measured38.778mm/zero contact after57.0167s; +35mm retreat tool completed then a second+35mm was partial. No independently qualified supported-release/40mm-clearance retreat event; post-retreat remains unavailable.",
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "stable_after_retreat": null,
+      "terminal_window": {
+        "status": "complete",
+        "stable": false,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 0.014044382837425453,
+        "orientation_change_deg": 115.52411400503154,
+        "criteria": {
+          "position_stable": false,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 56.86666666666667,
+        "end_t": 59.86666666666667
+      },
+      "normal_reader": {
+        "existing_evidence_only": true,
+        "failure_ACT_DP_batch_passed": true,
+        "success_filter_rejected": true,
+        "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_02_normal_reader.json",
+        "SHA256": "b797faa4be8ce0c4cd913c34b774187b117fd3618a4a1accdab8bfbd6e146358",
+        "H5_opened_by_this_cohort": false
+      },
+      "process": {
+        "pid": 147063,
+        "process_exited": true,
+        "exit_code": 0,
+        "PID_gone_checked": true,
+        "process_wall_s": 750.7201510519953
+      },
+      "original_scope": "Original final result/independent score preserved; legacy guard entries inside scorer diagnostics do not override final safety/task classification."
+    },
+    {
+      "run": "gpt_debug_03",
+      "condition": "independent_debug_condition_3",
+      "runtime_commit": "109e637bcb264458ffc231f4e052e60ff6764242",
+      "runtime_commit_source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_03/episode_0000/release_metadata.json",
+      "prompt_version_recorded": "Project_v1_1.public_tools.v3",
+      "prompt_label": "Project_v1_1.public_tools.v3",
+      "prompt_text_SHA256": "c3d97cc8905cbb44c933f53d38edb2c77af51e1517a1629ba2b96d1999e76f11",
+      "controller_canonical_SHA256": "c4ae3ca7c750ae900b799bff3597c5869da74af06ccc55b12a853d8f39e0e361",
+      "score_snapshot_record_integrity_valid": null,
+      "score_snapshot_record_integrity_source": "collector_pending",
+      "final_result_record_integrity_source": "streaming_collector_checks_at_flush_close",
+      "provider_config_canonical_SHA256": "fc3dddeb24ad0ab526a0c10294fb7680902b89575381449e02f30b7e97d89216",
+      "provider_config_command_line_path": "/tmp/labsim-project-v1-1-clean-20261027/config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4.json",
+      "profile_label": "512x384 q60 low; context4",
+      "physical_camera_label": "original elevated side + wrist.v2",
+      "camera": {
+        "side_camera": {
+          "physical_parent": "/World",
+          "local_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.649999976158142
+          ],
+          "local_quaternion_wxyz": [
+            0.7972744107246399,
+            0.45422909496549013,
+            -0.19678658607789346,
+            -0.34540481008567026
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            512,
+            384
+          ],
+          "detail": "low",
+          "jpeg_quality": 60,
+          "crop": null
+        },
+        "wrist_camera": {
+          "physical_parent": "/World/Franka/panda_hand",
+          "local_position_m": [
+            0.07500000298023224,
+            0.0,
+            0.03999999910593033
+          ],
+          "local_quaternion_wxyz": [
+            -0.2600301802158356,
+            0.6575593535868104,
+            -0.6575593535868104,
+            0.26003018747428563
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            512,
+            384
+          ],
+          "detail": "low",
+          "jpeg_quality": 60,
+          "crop": null
+        }
+      },
+      "temporal_history_enabled": false,
+      "full_task_success": false,
+      "record_valid": true,
+      "record_integrity_valid": true,
+      "physics_trustworthy": true,
+      "success_BC_eligible": false,
+      "failure_domain": "safety",
+      "failure_type": "SAFETY_COLLISION",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "simulation_end_s": 29.666666666666668,
+      "control_transitions": 1779,
+      "native_physics_steps_including_initialization": 7120,
+      "model_API_decisions": 15,
+      "shared_ledger_attempts_joined": 15,
+      "actual_ledger_request_ids": [
+        "96964671-cb51-47ca-91b7-35cc685d965a",
+        "988d4a56-88b8-4e92-97e3-050972dce8c1",
+        "7ab7adee-2857-44bf-9eee-0a6b2e3e4da0",
+        "bdeb3bde-4493-4264-b9ab-fe3ac82a3936",
+        "2d680c9f-b15d-42c4-be52-08cb07cda0f8",
+        "7c2ca8ac-6d8b-4156-b3e8-f9a66e1a8e28",
+        "bac2cee6-8482-4036-93b7-7cdb89eedbc5",
+        "ccf10ec1-69b7-4bce-8645-2b2691402a50",
+        "6d33a123-0b9a-4776-a6c3-256234bf0e2f",
+        "abb6d500-226e-4b10-b598-8141ae72565d",
+        "4e6412f9-53fa-4734-a709-2419d849b732",
+        "28b8faae-4ab1-4b10-8061-23e5575076ac",
+        "1cf53f21-0746-46f4-a2f9-942f43606cde",
+        "3714bbb9-e4a1-4d30-b694-c5053e63a588",
+        "1fecd727-96e2-41b2-a635-9bde9bb290bc"
+      ],
+      "episode_known_usage_estimated_USD": 1.10634,
+      "episode_input_tokens": 98314,
+      "episode_output_tokens": 2464,
+      "cost_scope": "Exact matching request IDs in the existing Project_v1 shared ledger; published-rate estimate, not invoice; no unknown usage for these requests.",
+      "furthest_independently_observed_required_event": "held_transport_observed",
+      "furthest_event_time_s": 24.545833333333334,
+      "observed_required_events": {
+        "bilateral_grasp_observed": 14.1125,
+        "actual_lift_started": 14.1125,
+        "source_slot_cleared": 15.370833333333334,
+        "held_transport_observed": 24.545833333333334
+      },
+      "grasp_success": false,
+      "transport_success": false,
+      "actual_physical_progress_note": "Left finger collided with original SourceMesh2 during early transport; no preimpact grasp-slip attribution.",
+      "gripper_opening_commands_executed": [],
+      "actual_unqualified_opening_public_sample": null,
+      "release_observed": false,
+      "retreat_observed": false,
+      "release_retreat_scope": "No independent qualified release or retreat event.",
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "stable_after_retreat": null,
+      "terminal_window": {
+        "status": "complete",
+        "stable": false,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 0.059117353699373223,
+        "orientation_change_deg": 0.6194071344115749,
+        "criteria": {
+          "position_stable": false,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 26.666666666666668,
+        "end_t": 29.666666666666668
+      },
+      "normal_reader": {
+        "existing_evidence_only": true,
+        "failure_ACT_DP_batch_passed": true,
+        "success_filter_rejected": true,
+        "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_03_normal_reader.json",
+        "SHA256": "dad2f7f157a444228c6821c5800c08392616a76cb2b4e68785aff7b5166efdf4",
+        "H5_opened_by_this_cohort": false
+      },
+      "process": {
+        "pid": 398972,
+        "process_exited": true,
+        "exit_code": 0,
+        "PID_gone_checked": true,
+        "process_wall_s": 386.55659610801376
+      },
+      "original_scope": "Original final result/independent score preserved; legacy guard entries inside scorer diagnostics do not override final safety/task classification."
+    },
+    {
+      "run": "gpt_debug_04",
+      "condition": "independent_debug_condition_4",
+      "runtime_commit": "63410bf9258ba2f9bd0af4d517194523fca6617c",
+      "runtime_commit_source": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/release_metadata.json",
+      "prompt_version_recorded": "Project_v1_1.public_tools.v4",
+      "prompt_label": "Project_v1_1.public_tools.v4",
+      "prompt_text_SHA256": "ac9ac4d33b2e329dfe684bfcd8461b4962274ac5b57659c94194da2af0ce2ddf",
+      "controller_canonical_SHA256": "00c22ce18856b428bd4c8ab1bb7a5d76f7575a96f96b2901457b6f867bded388",
+      "score_snapshot_record_integrity_valid": null,
+      "score_snapshot_record_integrity_source": "collector_pending",
+      "final_result_record_integrity_source": "streaming_collector_checks_at_flush_close",
+      "provider_config_canonical_SHA256": "9c273d0815d81db5aad1a54e41dd93508b80a6ddb8d0d0a2e0076895c5f69eaf",
+      "provider_config_command_line_path": "/tmp/labsim-project-v1-1-clean-20261027/config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+      "profile_label": "640x480 q60 high; context4",
+      "physical_camera_label": "side.v3 lowered + wrist.v2",
+      "camera": {
+        "side_camera": {
+          "physical_parent": "/World",
+          "local_position_m": [
+            -0.699999988079071,
+            -0.8500000238418579,
+            1.3200000524520874
+          ],
+          "local_quaternion_wxyz": [
+            0.72224223613739,
+            0.5659829784132289,
+            -0.24520192217047324,
+            -0.3128984465440159
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            640,
+            480
+          ],
+          "detail": "high",
+          "jpeg_quality": 60,
+          "crop": null
+        },
+        "wrist_camera": {
+          "physical_parent": "/World/Franka/panda_hand",
+          "local_position_m": [
+            0.07500000298023224,
+            0.0,
+            0.03999999910593033
+          ],
+          "local_quaternion_wxyz": [
+            -0.2600301802158356,
+            0.6575593535868104,
+            -0.6575593535868104,
+            0.26003018747428563
+          ],
+          "native_resolution_wh": [
+            640,
+            480
+          ],
+          "transmitted_resolution_wh": [
+            640,
+            480
+          ],
+          "detail": "high",
+          "jpeg_quality": 60,
+          "crop": null
+        }
+      },
+      "temporal_history_enabled": false,
+      "full_task_success": false,
+      "record_valid": true,
+      "record_integrity_valid": true,
+      "physics_trustworthy": true,
+      "success_BC_eligible": false,
+      "failure_domain": "task",
+      "failure_type": "GRASP_SLIP",
+      "termination_reason": "POLICY_FINISH_REQUEST",
+      "simulation_end_s": 114.71666666666667,
+      "control_transitions": 6882,
+      "native_physics_steps_including_initialization": 27532,
+      "model_API_decisions": 51,
+      "shared_ledger_attempts_joined": 51,
+      "actual_ledger_request_ids": [
+        "b6843a86-777e-43d7-9872-0d1baa2fcec0",
+        "90d2db55-d27e-4bc2-82dc-6a140959b6e1",
+        "77acd538-e64a-4464-9286-3a1a63ce43be",
+        "ca3314a8-9dd9-4686-90a0-e9c1ae99fb87",
+        "110c4e1a-8685-4741-bb8c-0c76cd5152c0",
+        "4a284ccc-64b0-4b3c-9d24-2e16dbb95276",
+        "f11d5c61-d097-49a2-aa27-42ab0cd8b65e",
+        "1eeb6c2c-2da3-4236-a160-7e63fa137fc6",
+        "39f77bf1-3dd7-4acf-928d-3ec8aec2c917",
+        "47ff479e-eb4b-4dbe-af04-a9e552f0d779",
+        "3594b6cf-6e10-4257-a596-3972037a8d70",
+        "765ebe9d-19d6-476b-ac4c-2400387ba055",
+        "fe6a9865-2659-44bf-93ad-aa8151400eb5",
+        "c111d9af-bd5b-4fa9-afee-18a28f9367d7",
+        "e6ad112c-2ced-4e9d-9277-a7777fe07c2e",
+        "92f442ab-a37f-4ac7-9930-ff989ae9cb34",
+        "d7329f0b-0ab5-494e-8ab4-c6495ec1a964",
+        "2a6fbcd0-b5b7-427a-b86f-338b15583c30",
+        "3ba4c26c-5608-4ffc-9fce-88524b329da5",
+        "8fedd22e-5677-451a-94d6-3265f0ea2ecf",
+        "169db4f1-0418-409e-a1e6-92abe56b8875",
+        "8adb97cb-8967-48ff-9ed9-dc280f37ffac",
+        "1492fc9e-c8e5-430f-a33d-9e34a88a0f4e",
+        "990c27e1-ac52-4cbd-9559-b122cc24eb00",
+        "edc5c56a-b358-41b7-889b-e6110b51dc59",
+        "a775496d-290a-4255-88bb-b4478e30f56e",
+        "cddb0833-b091-44ca-909c-15328cf0058f",
+        "664279c9-7ea4-45bc-a017-aad16181e909",
+        "76c903f7-8c5a-469a-87d0-5628f90332b9",
+        "9a0c2fbc-1b1c-4c9a-a570-0f74c702a922",
+        "5df4fd71-ae02-45d6-8e89-bd70774892dd",
+        "9fc070df-0ede-4f28-9a61-9e50ce376070",
+        "c4966cbc-72ca-4c4b-a4bd-df5f3c7a7923",
+        "b6476a86-d9e6-46d0-a964-eec846c61126",
+        "573d1cc5-797c-4413-a0fc-2b1d21b52378",
+        "f3795897-a090-47db-9f78-e84e974014c2",
+        "eb8e2e1b-0af0-492e-8a25-177ded902982",
+        "d5867ab7-54e9-457d-a8b1-2f38fb9132da",
+        "f3988e65-c129-40b9-8bf8-8139cab10212",
+        "85a74b4d-7710-466d-aacd-2ff5ad5665e2",
+        "a0ace589-f7fa-4cb4-9c7b-b09ba6ff1231",
+        "a4e1d4a5-3a00-4af8-b972-f0ff71bceafd",
+        "bdb43aff-0fc1-430b-a3a2-dac37adaa662",
+        "e777e915-d8c1-4f78-8d70-13ba6ae4e853",
+        "a5e4d433-0247-46a6-a582-3fc7d4c09ed1",
+        "d97d63f0-6bcc-4e6d-b22a-2deb42987e08",
+        "cbbcb47b-027a-44a2-9512-ecb7f8782e69",
+        "59e967e3-7bb7-4d52-9792-1fea0cece632",
+        "2937eeff-491c-451a-9e81-8b5745acd69b",
+        "73c7abc3-510a-4d9b-920f-a4bbd80032e4",
+        "b7f1a84b-2bf7-42ce-bb3f-8e7b1629315e"
+      ],
+      "episode_known_usage_estimated_USD": 4.17499,
+      "episode_input_tokens": 375584,
+      "episode_output_tokens": 8383,
+      "cost_scope": "Exact matching request IDs in the existing Project_v1 shared ledger; published-rate estimate, not invoice; no unknown usage for these requests.",
+      "furthest_independently_observed_required_event": "held_transport_observed",
+      "furthest_event_time_s": 32.50833333333333,
+      "observed_required_events": {
+        "bilateral_grasp_observed": 14.1125,
+        "actual_lift_started": 14.1125,
+        "source_slot_cleared": 15.5625,
+        "held_transport_observed": 32.50833333333333
+      },
+      "grasp_success": false,
+      "transport_success": false,
+      "actual_physical_progress_note": "Reached original seat rim; relative axial slip developed during descent, no classified bottom support; model finished without opening.",
+      "gripper_opening_commands_executed": [],
+      "actual_unqualified_opening_public_sample": null,
+      "release_observed": false,
+      "retreat_observed": false,
+      "release_retreat_scope": "No independent qualified release or retreat event.",
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "stable_after_retreat": null,
+      "terminal_window": {
+        "status": "complete",
+        "stable": false,
+        "required_duration_s": 3.0,
+        "measured_duration_s": 3.0,
+        "sample_count": 721,
+        "position_drift_m": 0.0009456496987263377,
+        "orientation_change_deg": 0.22068364540658458,
+        "criteria": {
+          "position_stable": false,
+          "target_support": null,
+          "target_contains": null,
+          "native_overlap_within_limit": null,
+          "no_finger_contact": null
+        },
+        "start_t": 111.71666666666667,
+        "end_t": 114.71666666666667
+      },
+      "normal_reader": {
+        "existing_evidence_only": true,
+        "failure_ACT_DP_batch_passed": true,
+        "success_filter_rejected": true,
+        "source": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_04_normal_reader.json",
+        "SHA256": "dcda13ac1605b38d1e1ce9a06f2d7c5a226026cdc43a9f26002d345d41c20a65",
+        "H5_opened_by_this_cohort": false
+      },
+      "process": {
+        "pid": 826605,
+        "process_exited": true,
+        "exit_code": 0,
+        "PID_gone_checked": true,
+        "process_wall_s": 1393.7862632679753
+      },
+      "original_scope": "Original final result/independent score preserved; legacy guard entries inside scorer diagnostics do not override final safety/task classification."
+    }
+  ],
+  "GPT05": {
+    "runtime_commit": "58da857e14a0a1152884e13984607a286547a046",
+    "controller_SHA256": "cdec41d417647f485eb602388505ef13635bbc8339904fc9673267169a179aea",
+    "prompt_version": "Project_v1_1.public_tools.v6_temporal",
+    "actual_profile": {
+      "side": "side.v3",
+      "wrist": "wrist.v2",
+      "native_wh": [
+        640,
+        480
+      ],
+      "transmitted_wh": [
+        640,
+        480
+      ],
+      "JPEG_quality": 60,
+      "detail": "high",
+      "crop": null,
+      "context_messages": 4,
+      "visual_context": {
+        "enabled": true,
+        "previous_distinct_wrist": true,
+        "first_public_bilateral_wrist": true,
+        "bilateral_contact_threshold_N": 0.02
+      }
+    },
+    "original_labels": {
+      "schema": "labsim.Project_v1_1.independent.v1",
+      "task_type": "loading",
+      "condition_group": "natural",
+      "record_valid": true,
+      "record_integrity_valid": true,
+      "record_integrity_source": "streaming_collector_checks_at_flush_close",
+      "physics_trustworthy": true,
+      "task_success": false,
+      "workflow_success": false,
+      "failure_type": "SAFETY_COLLISION",
+      "failure_domain": "safety",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "source_slot_cleared": true,
+      "grasp_success": false,
+      "transport_success": false,
+      "loading_sequence_observed": false,
+      "release_observed": false,
+      "retreat_observed": false,
+      "post_retreat_window": {
+        "status": "unavailable",
+        "stable": null,
+        "sample_count": 0,
+        "reason": "actual_gripper_retreat_not_observed"
+      },
+      "stable_after_retreat": null,
+      "success_bc_eligible": false,
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ]
+    },
+    "actual_counts": {
+      "API_decisions": 25,
+      "network_attempts": 25,
+      "public_observations": 25,
+      "current_JPEGs": 50,
+      "additional_historical_exact_wrist_JPEG_files": 40,
+      "total_sent_image_blocks": 90,
+      "first_public_bilateral_decision": 7,
+      "executed_actions": 25,
+      "fully_executed_actions": 24,
+      "partial_actions": 1,
+      "targets_reached": 24,
+      "control_ticks": 2994,
+      "executed_physics_steps": 11976,
+      "native_physics_steps_including_initialization": 11980,
+      "simulation_start_s": 0.016666666666666666,
+      "simulation_end_s": 49.916666666666664,
+      "sum_action_duration_s": 49.9,
+      "protocol_rejections": 0,
+      "full_input_items_reconstructable_decisions": 6,
+      "redacted_private_provider_item_count": 25,
+      "provider_loop_wall_s": 568.2429476319812,
+      "process_wall_s": 632.5523712020367
+    },
+    "budget": {
+      "episode_estimated_USD": 2.778234,
+      "episode_input_tokens": 268192,
+      "episode_output_tokens": 3493,
+      "all25_request_IDs_join_old_shared_ledger": true,
+      "all25_status_OK_and_returned_model_matches": true,
+      "no_unknown_usage_for_episode": true
+    }
+  },
+  "final_domains": {
+    "safety": 4,
+    "task": 1
+  },
+  "all_record_integrity_physics_true": true,
+  "normal_failure_ACT_DP_passed_count": 5,
+  "success_BC_eligible_count": 0,
+  "model_API_decisions_sum": 135,
+  "matching_known_usage_estimated_USD_sum": 12.822834,
+  "GPT06": "pending_not_counted",
+  "P7_actual_task": "not_run_at_this_cutoff",
+  "formal_gate": "GPT complete-task-success prerequisite unmet; teacher5 success does not satisfy GPT gate.",
+  "original_nulls_preserved": true,
+  "no_raw_H5_API_GPU_read_by_this_aggregate": true
+}

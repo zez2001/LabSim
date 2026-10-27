@@ -4,7 +4,9 @@
 
 本版本复用原资产与物理基线，增加连续 IK、动作执行回执、机器人状态跟踪补偿与接触保持。teacher 可以使用器皿真值；GPT 只接收公开 RGB、机器人状态、相机标定与指端接触。二者的控制能力和成绩分别记录。公开 `finger_contact_N` 是按器皿过滤的左右指法向接触向量模长，不能解释为全物体触觉、摩擦力或目标底部支撑力。场景包含工程假设，`real_calibrated=false`；尺寸适配任务成功不等于原型号配套或真实仪器校准。
 
-[项目首页](../../../README.md) · [完整 teacher 录像](media/teacher_support_align_01_full.mp4) · [首条成功与便携读取证据](diagnostics/teacher_support_align_01_support_portability_audit/README.md) · [公开图像历史输入与 P6](public_temporal_visual_context_v1.md) · [固定侧视细节候选 P7](fixed_side_detail_P7.md)
+闭合证据已验证固定 standard 的完整 teacher，以及 GPT 的实际抓持、离架和持物搬运；已闭合 GPT01–08 尚未完成独立完整装载、受支持释放和撤离。最新 GPT08 实际完成抓持、离架和搬运，并执行三次 100µm 下降请求，仍在无法确认整手通行、插入深度及承托时主动结束，原 `TASK_INCOMPLETE` 保留。teacher 完整任务可运行；GPT08 的闭合独立判分为未完成，握持、搬运或 TCP 到达不等于完成。看清器皿和双指不等于已建立完整安全路线；当前能力范围见[闭合物理时序](diagnostics/gpt_debug_08_physical_timeline/README.md)，不能据 CPU 测试或工具到达声明 GPT 任务成功。
+
+[项目首页](../../../README.md) · [完整 teacher 阅读录像](media/reading/teacher_support_align_01_full.mp4) · [同次成功释放撤离腕部局部](media/reading/teacher_support_align_01_release_wrist_clip.mp4) · [首条成功与便携读取证据](diagnostics/teacher_support_align_01_support_portability_audit/README.md) · [公开图像历史输入与 P6](public_temporal_visual_context_v1.md) · [固定侧视细节 P7](fixed_side_detail_P7.md) · [机器人自身状态 P9](public_robot_self_state_p9.md)
 
 ## 运行准备
 
@@ -64,7 +66,7 @@ export LABSIM_ASSET_ROOT=/absolute/path/to/labsim-asset-install
 
 每次运行的 `summary.json` 汇总逐集结果；`episode_0000/` 内包含 `result.json`、`independent_score.json`、连续 `side_camera.mp4 / wrist_camera.mp4 / dual_view.mp4`，以及 `dataset/episode_0000.h5`、实际动作/状态/接触/事件。等待进程关闭后读取，不打开仍在写入的 H5。完整成功必须有实际松爪、脱指、撤离与后续稳定；到达阶段或返回 `finish` 不等于成功。
 
-已关闭的 `teacher_support_align_01` 保存完整成功及 7,539 个 transition；原 H5 无外部 HDF5 数据依赖，已通过正常 ACT/DP batch 和替代路径读取。见[便携验收](diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json)。该 H5 约 1.94 GB，未放入精简阅读包。[固定场景回归及关闭后读取汇总](diagnostics/teacher_standard_v7_closed_data_cohort_01.json)记录五个独立进程的完整成功；相同初态的重复运行不代表一般场景成功概率。这不是跨机器部署或训练验证。
+已关闭的 `teacher_support_align_01` 保存完整成功及 7,539 个 transition；原 H5 无外部 HDF5 数据依赖，已通过正常 ACT/DP batch 和替代路径读取。见[便携验收](diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json)。该 H5 约 1.94 GB，未放入精简阅读包。 同一最终运行提交 `9a88ea0` 的单次 teacher 回归也完整成功，关闭后正常 success ACT/DP 与替代路径读取均通过；它单列于原计划五条之外，见[同源回归审计](diagnostics/teacher_p9_regression_01_closed_read_archive.json)。[固定场景回归及关闭后读取汇总](diagnostics/teacher_standard_v7_closed_data_cohort_01.json)记录五个独立进程的完整成功；相同初态的重复运行不代表一般场景成功概率。这不是跨机器部署或训练验证。
 
 ## GPT-6 Astra
 
@@ -95,7 +97,21 @@ unset CUBENCE_API_KEY
 
 - `config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view.json`：**P8** 复用 P7 的图像和工具，仅增加通用主动观察提示；在下一局部动作有可见净空依据时换视角再观察，不提供目标坐标、路线或自动动作。见[主动观察说明](public_active_view_p8.md)。
 
-P6/P7/P8 是候选控制提示，不能据 CPU 检查声称完整任务成功。P6 要求入口接触敏感区和接近底部时以最多 100 µm 的下降请求、最多 1 mm/s 再观察；这是模型应遵守的指令，**没有修改通用动作上限、自动阶段、物理或评分**，也不保证实际位移精度。历史接触参考不是有效抓取或承托标签。完整输入、精确 JPEG 与适配边界见[实现说明](public_temporal_visual_context_v1.md)。闭合旧公开帧的一次[观察 QA](camera/temporal_public_qa_d35_plan/README.md)是独立诊断，不是控制任务。
+- `config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json`：**P9** 显式版本，在 P8 上追加由公开实际 q7 与 actual TCP 计算的机器人自身名义 FK、link6/link7/hand authored INPUT 局部盒，并补充通用接触推进提示；不是单因素 A/B。没有器皿、座或障碍位姿/距离、碰撞规划与自动动作；盒不含手指、持物、cooked 形状、接触偏置或扫掠体。CPU/离线检查及 GPT08 闭合判分已完成，实际完整装载未完成；见[输入范围和用法](public_robot_self_state_p9.md)。
+
+P9 的仅打印计划示例（不启动仿真或 API）：
+
+```bash
+LABSIM_POLICIES=config/lab_cuvette_loading/Project_v1_1/policies
+LABSIM_P9=cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json
+./labsim eval --project-version Project_v1_1 --backend gpt6 \
+  --episodes 1 --max-calls 160 --headless --dry-run \
+  --provider-config "$LABSIM_POLICIES/$LABSIM_P9" \
+  --budget-ledger outputs/lab_cuvette_loading/Project_v1/cubence_budget.json \
+  --output outputs/lab_cuvette_loading/Project_v1_1/gpt_P9_NEW
+```
+
+P6/P7/P8/P9 已分别有真实调试记录，均没有完整 GPT 任务成功；最新 P9/GPT08 的三次 100µm 下降请求已正常执行，仍未建立入座与底部承托证据。P6 要求入口接触敏感区和接近底部时以最多 100 µm 的下降请求、最多 1 mm/s 再观察；这是模型应遵守的指令，**没有修改通用动作上限、自动阶段、物理或评分**，也不保证实际位移精度。历史接触参考不是有效抓取或承托标签。完整输入、精确 JPEG 与适配边界见[实现说明](public_temporal_visual_context_v1.md)。闭合旧公开帧的一次[实际观察 QA](camera/temporal_public_qa_actual_D35/README.md)是独立诊断，不是控制任务。
 
 所有配置继续共享上面的旧预算文件，保留已有费用与未知 usage 预留；硬上限为估算 $30 / 1500 网络请求。默认单集最多 160 次逻辑模型调用，超时重试也消耗网络配额；估算不等于供应商账单。先获得真实完整成功后再冻结正式评测，调试、服务错误、物理异常和正式成绩分开。不要创建空账本来重置预算。
 

@@ -1,0 +1,146 @@
+{
+  "schema": "labsim.Project_v1_1.independent_final_release_review.v1",
+  "created_utc": "2026-10-27T03:07:14.609959+00:00",
+  "reviewer": "release_final_audit",
+  "development_HEAD": "193c2f8028309809fede0baaed8a71a9de1338ed",
+  "verdict": "Final60513b input, compact evidence and candidate selection pass independent read-only semantic/entity checks. Authoring/rendering/build/finalpush delivery validation remains for root; this is not full GPT task success.",
+  "summary": {
+    "final_input_SHA256": "60513b084444cbb97b280450af76b94c3bcef4b30744857af55cc337aa4eb2db",
+    "registered_sources": 58,
+    "local_sources": 56,
+    "all_local_SHA_bytes_match": true,
+    "selected_dependency_count": 110,
+    "selected_dependency_bytes": 16388883,
+    "all_selected_dependency_SHA_bytes_match": true,
+    "package_file_entries": 157,
+    "package_existing_files": 156,
+    "package_existing_bytes": 17223878,
+    "missing_pending_authored_reports": [
+      "docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.docx",
+      "docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.md"
+    ],
+    "no_H5_raw_environment_or_weights_selected": true,
+    "all_direct_local_targets_selected": true,
+    "direct_target_occurrences": 51,
+    "CSV_categories": {
+      "teacher_planned5": 5,
+      "teacher_extra_regression": 4,
+      "gpt_debug": 8,
+      "control_diagnostic": 3
+    },
+    "GPT08": {
+      "decisions": 34,
+      "network_attempts": 34,
+      "physical_actions": 33,
+      "finish": 1,
+      "control_transitions": 3906,
+      "simulation_end_s": 65.11666666666666,
+      "episode_estimated_USD": 3.05067,
+      "voluntary_finish_not_budget_or_collision": true,
+      "task_success": false,
+      "grasp_success": true,
+      "transport_success": true,
+      "release": false,
+      "retreat": false,
+      "post_retreat_stable": null,
+      "derived_bottom_above_rim_mm": 83.65215556672945,
+      "derived_XY_to_original_A_mm": 34.99328344929578,
+      "raw_depth_gap_overlap": null,
+      "geometry_not_public_payload": true
+    },
+    "final_input_stable": true,
+    "explicit_file_entries_existing_count": 155,
+    "explicit_file_entries_existing_bytes": 17218843,
+    "root_firstread_separately_selected": true,
+    "root_firstread_bytes": 5035
+  },
+  "checked_input_files": {
+    "docs/lab_cuvette_loading/Project_v1_1/report/release_inputs.final.json": "60513b084444cbb97b280450af76b94c3bcef4b30744857af55cc337aa4eb2db",
+    "docs/lab_cuvette_loading/Project_v1_1/report/report_dependency_selection.final.json": "ae9135a1cd521bd7768ac03afb65dbc1b793b0ab94fb5d93ce29399ea9167845",
+    "docs/agent_handoff/Project_v1_1_current/package.final_candidate.json": "e556d04c86d3a970fd51d40fe1fe6fababec547d7dd7af17ce00f9fa5facc10a",
+    "docs/lab_cuvette_loading/Project_v1_1/report/release_snapshot.final.json": "610893ffdccf3e124ea0289db49ce1d3413e6e69e90d1d482a355a8b6e70772d",
+    "docs/lab_cuvette_loading/Project_v1_1/report/GPT_closed_cohort.final.json": "b1b612f973311f56bf6732bcfa93bbe10e04e46e2917d6bec578832e643002b4",
+    "docs/agent_handoff/Project_v1_1_current/current_results.csv": "3ea816d9830c9de12fd80ae883968f45d6810f616f49128f02b5b2f8210e18ba"
+  },
+  "checks": [
+    {
+      "item": "completed_vs_not_run",
+      "status": "pass",
+      "detail": "Five0b teacher planned runs and four separate single regression runs stated accurately;9a88 hasone extra, notfive/nineofive. Eight different debug failures not pooledformalprobability. Formal0completed/planned5, not startedbeforeGPTsuccess."
+    },
+    {
+      "item": "latest_GPT08",
+      "status": "pass",
+      "detail": "34decisions/34networkrequests/33physicalactions+finish,65.116667s/3906transitions,$3.050670 supported. Grasp/sourceclear/transport observed; noforbiddencontact/graspthresholdcrossing, nosupport/open/retreat. 100µm requests executed faraboveandlaterallyoffA; not actualinsertion or precisionvalidation."
+    },
+    {
+      "item": "unknowns_and_truth_boundary",
+      "status": "pass",
+      "detail": "Original rawdepth/gap/inputoverlap remainnull; post-retreat unavailable/stable null. OfflineactualCAD+pose83.652156mmaboveA rim/34.993283mmXY notsenttoGPT. 34savedpublicJSONtopkeys checked againstpublicwhitelist; robotselfnominalfacts distinguishedfrom object/seat/environmenttruth. FullHTTP/privateproviderinput reconstruction notclaimed."
+    },
+    {
+      "item": "budget_and_lifecycle",
+      "status": "pass",
+      "detail": "333attempt/$27.894200 occupancy,$26.485230known+$1.408970unknownreserve8,$2.105800 remains/notexhausted. Voluntaryfinishclosedtheepisode, no covertresume/replay/teachercontinuation. No providerbillor guaranteedfuturecostclaim."
+    },
+    {
+      "item": "executor_and_data_semantics",
+      "status": "pass",
+      "detail": "LegacyrawIKjump/postclipFK/recenterchain describedwith unknownLulainternalcause preserved. accepted/execution_finished/target_reached/safety_stopped separated; endpointvscontrolboundarypathvssubstepdistinguished. GPTinitialeffort8N,move/waitpreserveexplicitcap;8Dactions/9Dcommand,normalACTDPandHDF5selfcontainment relyonclosedproof, no newtrainingclaim."
+    },
+    {
+      "item": "portable_usage",
+      "status": "resolved_and_actual_CPU_pass",
+      "detail": "Initialfinaldraft assetcheckwithoutrootreallyexited2. Revisedinput givescache+fixedrevision+--asset-root; actualexplicitindependentcachecommandpassed83requiredfilechecks. Priorv1defaultvsProject_v1_1explicitrouting,CPUdoctorvsphysicalproofscope retained."
+    },
+    {
+      "item": "media_and_pack",
+      "status": "candidate_pass_pending_build",
+      "detail": "Four localreadingmedia only: teacherfull/same-runlocalreleaseclip,GPT04failure,GPT08incomplete. Everyreportdirectlocaltargetselectedwithcorrectrelativerepositorylayout. NoH5/raw/environment/checkpoint/wholeperceptionselected;candidateexistingbytes17,223,878includingseparatefirstread,authoredreportfilespending. Thisreviewdidnotencode/decodevideosor inspectrenderedDOCX; existingactualmediaQAreceipts reused."
+    },
+    {
+      "item": "version_source_protection",
+      "status": "pass_existing_evidence",
+      "detail": "Actualruntime9a88/CI43distinctfrom0bteacher5/487historicalLFS/evidencepublication193c/finaldeliverySHA.52/17namedsourceprotectionand596/83/22/256/35historyscope accuratelylimited; noallignoredoutputs/cookedrealcalibrationclaim."
+    }
+  ],
+  "findings_resolved": [
+    {
+      "id": "asset_check_missing_root",
+      "severity": "blocking_usage",
+      "initial_report_SHA256": "75dc0163d66c02839d80fefa350c4273dddf519b9f6e40255a102f551aeb19c1",
+      "actual_initial_exit_code": 2,
+      "resolution": "60513b explicitcache/revision/root; actualCPU83filecheckexit0",
+      "receipt": "asset_command_receipt.json"
+    },
+    {
+      "id": "effort_inheritance_wording",
+      "severity": "clarity",
+      "resolution": "GPTinitial8N;move/waitretainlastexplicitcap;gripper0..8N,notphysicalcontactforce"
+    },
+    {
+      "id": "snapshot_inherited_docs_HEAD",
+      "severity": "clarity",
+      "resolution": "Snapshotnowmarksactual193cdocs/evidenceHEADseparatefromruntime9a88/old487LFS"
+    }
+  ],
+  "remaining_release_gates": [
+    "Author final DOCX/MD only after artifact marker; renderandinspecteveryactualpage; noneperformedbyreviewer.",
+    "Finalize candidatepackage.json andnewdesktopfolderafteractualcommit/push; verifyremoteSHA+matchingCI andrecordactualdeliverySHA.",
+    "Afterauthor/build validateallsource/mediaSHA,relativeDOCX/MDtargets,SHA256SUMS,totalbytes andmaterializedLFS; thisisnotanactualbuiltpackaudit.",
+    "GPTcompleteworkflowandsuccessformal5remainunachieved; reportclearlystatesincomplete andremainingbudget."
+  ],
+  "scope": {
+    "read_only_sources": true,
+    "active_episode_read": false,
+    "H5_or_raw_payload_read": false,
+    "real_API_calls": 0,
+    "GPU_runs": 0,
+    "author_marker_render_or_build_performed": false,
+    "code_assets_reports_or_package_sources_modified": false,
+    "only_new_review_directory_written": true,
+    "commit_created": false
+  },
+  "entity_checks_SHA256": "65fc619e6407922f49af98d4e273fe989a1871adfdc9f306134651848176a0ce",
+  "asset_command_receipt_SHA256": "c0c44ea11f27554aa0032fa8d429a636dca333650208b729919112e8331fdeaf"
+}
