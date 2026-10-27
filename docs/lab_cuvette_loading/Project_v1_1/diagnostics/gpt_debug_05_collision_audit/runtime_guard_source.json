@@ -1,0 +1,108 @@
+{
+  "runtime_commit": "58da857e14a0a1152884e13984607a286547a046",
+  "path": "demos/lab_cuvette_env_v1/physics_capture.py",
+  "SHA256": "10d6d6a40455d16c6234701c661516212f7367fc85f3201ba6c7066020358276",
+  "lines": [
+    {
+      "line": 163,
+      "text": "        self._seen.clear();self.forbidden_this_step=False"
+    },
+    {
+      "line": 164,
+      "text": ""
+    },
+    {
+      "line": 165,
+      "text": "    def _callback(self,headers,data):"
+    },
+    {
+      "line": 166,
+      "text": "        tools=self._PhysicsSchemaTools"
+    },
+    {
+      "line": 167,
+      "text": "        for header in headers:"
+    },
+    {
+      "line": 168,
+      "text": "            paths=[str(tools.intToSdfPath(header.collider0)),str(tools.intToSdfPath(header.collider1))]"
+    },
+    {
+      "line": 169,
+      "text": "            cup=any(p.startswith('/World/Cuvette') for p in paths)"
+    },
+    {
+      "line": 170,
+      "text": "            robot=any(p.startswith('/World/Franka') for p in paths)"
+    },
+    {
+      "line": 171,
+      "text": "            environment=any(p.startswith('/World/'+prefix) for prefix in ('Instrument','SourceRack','NeighborCuvette') for p in paths)"
+    },
+    {
+      "line": 172,
+      "text": "            if not (cup or (robot and environment)):continue"
+    },
+    {
+      "line": 173,
+      "text": "            points=[]"
+    },
+    {
+      "line": 174,
+      "text": "            for i in range(header.contact_data_offset,header.contact_data_offset+header.num_contact_data):"
+    },
+    {
+      "line": 175,
+      "text": "                item=data[i];vector=lambda v:[float(v.x),float(v.y),float(v.z)]"
+    },
+    {
+      "line": 176,
+      "text": "                impulse=np.asarray(vector(item.impulse));force=impulse/self.dt"
+    },
+    {
+      "line": 177,
+      "text": "                points.append(dict(position_m=vector(item.position),normal_raw=vector(item.normal),"
+    },
+    {
+      "line": 178,
+      "text": "                    impulse_raw_Ns=impulse,force_raw_N=force,separation_m=float(item.separation),"
+    },
+    {
+      "line": 179,
+      "text": "                    force_raw_convention='PhysX callback collider convention retained; not independently force-on-cup signed'))"
+    },
+    {
+      "line": 180,
+      "text": "            forbidden=bool(robot and environment and not cup and any(np.linalg.norm(p['force_raw_N'])>.01 or p['separation_m']<-.00005 for p in points))"
+    },
+    {
+      "line": 181,
+      "text": "            if forbidden:self.forbidden_contact=True;self.forbidden_this_step=True"
+    },
+    {
+      "line": 182,
+      "text": "            key=(tuple(sorted(paths)),tuple((tuple(np.round(p['position_m'],7)),tuple(np.round(p['impulse_raw_Ns'],8))) for p in points))"
+    },
+    {
+      "line": 183,
+      "text": "            duplicate=key in self._seen;self._seen.add(key)"
+    },
+    {
+      "line": 184,
+      "text": "            event=dict(physics_step=self._step,t=self._t,phase=self._phase,colliders=paths,type=str(header.type),"
+    },
+    {
+      "line": 185,
+      "text": "                points=points,possible_duplicate_same_step=duplicate,forbidden_robot_environment=forbidden,"
+    },
+    {
+      "line": 186,
+      "text": "                association='before_step declares current executing physics step; callback not used to doublecount tensor forces')"
+    },
+    {
+      "line": 187,
+      "text": "            self._contacts.write(json.dumps(safe(event),ensure_ascii=False,separators=(',',':'),allow_nan=False)+'\\n')"
+    }
+  ],
+  "scope": "Read-only frozen source; guard is impulse/dt norm>.01N OR separation<−50µm for robot/environment pair excluding cup; callback side sign convention is raw/unverified."
+}

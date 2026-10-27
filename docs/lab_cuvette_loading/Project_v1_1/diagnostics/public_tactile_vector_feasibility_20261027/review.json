@@ -1,0 +1,124 @@
+{
+  "schema": "labsim.Project_v1_1.public_tactile_vector_readonly_feasibility.v1",
+  "analysis_date_local": "2026-10-27",
+  "inspection_HEAD_not_a_new_execution": "b469ac2fa590a55cf02cf3a98464512a37530238",
+  "inspected_workingtree_source_files": [
+    {
+      "path": "demos/lab_cuvette_env_v1/physics_capture.py",
+      "SHA256": "10d6d6a40455d16c6234701c661516212f7367fc85f3201ba6c7066020358276"
+    },
+    {
+      "path": "demos/lab_cuvette_demo04/run.py",
+      "SHA256": "92088545ce6d9d3240dbb853505fa38884f404ff2ed6a8ae410b0ebce9e53fed"
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1.py",
+      "SHA256": "e4e130481c0d8593a8721bbd48dd7319ec1659f3bd07d2a68d902301a366c72f"
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "SHA256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/environment.py",
+      "SHA256": "0dcfb00d53ca54c12459df907793e97277669b8caffa12d31678c81ae3041c7d"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/environment.py",
+      "SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d"
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1/rpc.py",
+      "SHA256": "ca9572d508863d97b899487759987be1ad7443cf11bbf5b5b8465b301992d44f"
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23"
+    },
+    {
+      "path": "policy/backends/cubence_project_v1_1_visual_context.py",
+      "SHA256": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6"
+    },
+    {
+      "path": "policy/backends/cubence_project_v1_1_tools.py",
+      "SHA256": "173b9eca096a257c7db009d5a1cd29ae0b638754f2becb7c8c02a67ae49fc474"
+    },
+    {
+      "path": "policy_backends/lab_cuvette_env_v1/policy_adapters.py",
+      "SHA256": "6d2733c89f5b7faac63cbd29bbaab11fe06dd8a7398060ca2136000fb2b27ae4"
+    },
+    {
+      "path": "policy_backends/lab_cuvette_env_v1/rpent_extension.py",
+      "SHA256": "3a52ade0bd7e4273d99491ae54fa15af763da8d51043e2a9bddf687ea9c41002"
+    },
+    {
+      "path": "data_collectors/lab_cuvette_project_v1_1_collector.py",
+      "SHA256": "1d5c5c497c153ddab40d3b8f613ea3c6e79a7c9bb0be94be012a9f135e2b93d1"
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "SHA256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad"
+    }
+  ],
+  "closed_evidence": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_finger_observability/summary.json",
+    "SHA256": "06e4e615a81a07dea19e0fb83dc7eda21c60aaac2a83ab8c27ef9b89c9452713"
+  },
+  "installed_API_sources_from_prior_closed_audit": [
+    {
+      "kind": "installed_API_source_read_only",
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.core.api/isaacsim/core/api/sensors/rigid_contact_view.py",
+      "SHA256": "6b48c4c48633a742b794b391275bc8a2274004a1177c882c2b1d057a76004b1b",
+      "excerpt_line_ranges_1based": [
+        [
+          250,
+          261
+        ],
+        [
+          293,
+          311
+        ],
+        [
+          483,
+          499
+        ]
+      ]
+    },
+    {
+      "kind": "installed_API_source_read_only",
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.physics.tensors-107.3.26+107.3.3.lx64.r.cp311.u353/omni/physics/tensors/impl/api.py",
+      "SHA256": "5dd16f8a37eccc94ac82338d6c1127e785cccf761cae1f6f18ef03d55b0f325f",
+      "excerpt_line_ranges_1based": [
+        [
+          5810,
+          5821
+        ],
+        [
+          5841,
+          5858
+        ],
+        [
+          5961,
+          5973
+        ],
+        [
+          5980,
+          5988
+        ]
+      ]
+    }
+  ],
+  "conclusion": "Conditionally feasible as explicit versioned task-object-filtered simulated tactile measurement. No vessel pose or target-seat truth needed for vector projection; cup identity association already exists and must be disclosed. Not automatically an object-agnostic real fingertip sensor.",
+  "current_cross_backend_caveat": "GPT keeps existingscalar; RPent/Harness projection currently drops it; pi05LIBERO fixed8Dstate has no tactile channel. Common availability is not proof all models consume a modality.",
+  "not_independently_verified": [
+    "hardware force/frame/action-reaction calibration",
+    "full contact patch coverage",
+    "early slip detection from vectors",
+    "success or support/safety certification"
+  ],
+  "implementation_or_new_public_fields_added": false,
+  "P6_result_assumed": false,
+  "active_episode_read": false,
+  "GPU_used": false,
+  "API_calls": 0
+}

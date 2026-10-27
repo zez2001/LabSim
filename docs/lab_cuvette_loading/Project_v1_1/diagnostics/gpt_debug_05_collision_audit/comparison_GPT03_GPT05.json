@@ -1,0 +1,450 @@
+{
+  "scope": "Two distinct closed debug conditions; original prior audit reused, no old raw/H5 reread. Same original instrument assembly is not the same colliding shape or causal geometry.",
+  "GPT03": {
+    "source": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_03_closed_evidence/summary.json",
+    "source_SHA256": "4cdf2467fd53cda59357a52968f65db9ac146c4646e4ec33c2e72b531d7b90c2",
+    "first_native_forbidden_contact": {
+      "physics_step": 7117,
+      "t": 29.654166666666665,
+      "phase": "POLICY",
+      "colliders": [
+        "/World/Franka/panda_leftfinger/geometry/panda_leftfinger",
+        "/World/Instrument/Collision/SourceMesh2"
+      ],
+      "type": "ContactEventType.CONTACT_FOUND",
+      "points": [
+        {
+          "position_m": [
+            0.07296422123908997,
+            -0.11942743510007858,
+            0.9377999901771545
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.20291219651699066,
+            1.941042171438312e-08,
+            0.16652579605579376
+          ],
+          "force_raw_N": [
+            -48.69892716407776,
+            4.658501211451949e-06,
+            39.9661910533905
+          ],
+          "separation_m": -8.938752580434084e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.07296809554100037,
+            -0.1072077602148056,
+            0.9378046989440918
+          ],
+          "normal_raw": [
+            -0.7730103731155396,
+            7.394556433837352e-08,
+            0.6343934535980225
+          ],
+          "impulse_raw_Ns": [
+            -0.014887038618326187,
+            1.4240824075528735e-09,
+            0.012217480689287186
+          ],
+          "force_raw_N": [
+            -3.572889268398285,
+            3.4177977781268964e-07,
+            2.9321953654289246
+          ],
+          "separation_m": -8.852686733007431e-05,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        }
+      ],
+      "possible_duplicate_same_step": false,
+      "forbidden_robot_environment": true,
+      "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+    },
+    "last_receipt": {
+      "action_id": "gpt:3c43a4dacea2b436e709fc42fb0e8dc5d0d1f7ce7cd2fefcfacc3541cc5cac93",
+      "episode_id": "0294af20-b684-4e2c-b842-6f1facb450e0",
+      "observation_id": "0294af20-b684-4e2c-b842-6f1facb450e0:1680",
+      "accepted": true,
+      "execution_finished": true,
+      "target_reached": false,
+      "safety_stopped": true,
+      "completed": true,
+      "completed_semantics": "Execution interval ended; target_reached independently measures actual endpoint.",
+      "requested_duration_s": 2.0,
+      "executed_duration_s": 1.6500000000000021,
+      "executed_control_ticks": 99,
+      "partial_execution": true,
+      "simulation_time_before": 28.016666666666666,
+      "requested_start_TCP": {
+        "position_m": [
+          0.022924225998036687,
+          -0.12687895562451582,
+          0.9508457827531619
+        ],
+        "quaternion_wxyz": [
+          -0.0004320513762364528,
+          0.7070143461193927,
+          -0.7071990609042075,
+          0.00012636923290405206
+        ]
+      },
+      "requested_target_TCP": {
+        "position_m": [
+          0.058924225998036685,
+          -0.11087895562451582,
+          0.9508457827531619
+        ],
+        "quaternion_wxyz": [
+          -0.0004320513762364528,
+          0.7070143461193927,
+          -0.7071990609042075,
+          0.00012636923290405206
+        ]
+      },
+      "maximum_position_tracking_error_m": 0.0004060152681158374,
+      "maximum_orientation_tracking_error_rad": 0.0024841555947096015,
+      "stop_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "control_steps_before": 1680,
+      "physics_steps_before": 6724,
+      "plan": {
+        "planned_ticks": 120,
+        "requested_ticks": 120,
+        "maximum_FK_position_error_m": 3.428263042070008e-16,
+        "maximum_FK_orientation_error_rad": 8.809154612190301e-16,
+        "maximum_joint_step_rad": 0.00129698448179294,
+        "wall_seconds": 0.7917318859836087,
+        "scope": "Continuous kinematics only; not collision or dynamics certification",
+        "FK_goal_scope": "nominal + frozen current robot tracking estimate",
+        "runtime_feedback_revalidation": true
+      },
+      "status": "STOPPED",
+      "executed_physics_steps": 396,
+      "incomplete_control_interval": false,
+      "simulation_time_after": 29.666666666666668,
+      "observation_id_after": "0294af20-b684-4e2c-b842-6f1facb450e0:1779",
+      "successor_observation_available": true,
+      "actual_endpoint_valid": true,
+      "actual_endpoint_TCP": {
+        "position_m": [
+          0.053005345474100476,
+          -0.11380489455917366,
+          0.9509069033523514
+        ],
+        "quaternion_wxyz": [
+          -0.0008736075807942932,
+          0.7069808945109528,
+          -0.7072309359783958,
+          0.0012863908465366805
+        ]
+      },
+      "TCPpose": {
+        "position_m": [
+          0.053005345474100476,
+          -0.11380489455917366,
+          0.9509069033523514
+        ],
+        "quaternion_wxyz": [
+          -0.0008736075807942932,
+          0.7069808945109528,
+          -0.7072309359783958,
+          0.0012863908465366805
+        ]
+      },
+      "final_position_error_m": 0.006602878238588328,
+      "final_orientation_error_rad": 0.0024841555947096015,
+      "tracking_error_coverage_complete": true,
+      "tracking_error_sampling": "completed control boundaries; not a physics-substep maximum",
+      "target_reached_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+      "requested_gripper_opening_m": 0.009,
+      "applied_gripper_opening_m": 0.008999999999999994,
+      "requested_effort_limit_N": 4.0,
+      "applied_effort_limit_N": 4.0,
+      "stop_domain": "safety",
+      "endpoint_tolerances": {
+        "position_m": 0.001,
+        "orientation_rad": 0.008726646259971648
+      },
+      "wall_seconds": 12.58765239699278,
+      "terminated": true,
+      "gripper_opening_m": 0.009841607417911291
+    }
+  },
+  "GPT05": {
+    "first_native_forbidden_contact": {
+      "physics_step": 11978,
+      "t": 49.90833333333333,
+      "phase": "POLICY",
+      "colliders": [
+        "/World/Franka/panda_link6/geometry/panda_link6",
+        "/World/Instrument/Collision/SourceMesh5"
+      ],
+      "type": "ContactEventType.CONTACT_FOUND",
+      "points": [
+        {
+          "position_m": [
+            0.2593122124671936,
+            -0.16573531925678253,
+            1.316608190536499
+          ],
+          "normal_raw": [
+            -0.9985211491584778,
+            -0.03456518054008484,
+            -0.041960250586271286
+          ],
+          "impulse_raw_Ns": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "force_raw_N": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "separation_m": -0.0004036426544189453,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.2593121826648712,
+            -0.1585693210363388,
+            1.316414475440979
+          ],
+          "normal_raw": [
+            -0.9985211491584778,
+            -0.03456518054008484,
+            -0.041960250586271286
+          ],
+          "impulse_raw_Ns": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "force_raw_N": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "separation_m": -0.00016407668590545654,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.2593121826648712,
+            -0.16577284038066864,
+            1.317000389099121
+          ],
+          "normal_raw": [
+            -0.9985211491584778,
+            -0.03456518054008484,
+            -0.041960250586271286
+          ],
+          "impulse_raw_Ns": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "force_raw_N": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "separation_m": -0.00038848817348480225,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.2593122124671936,
+            -0.15852758288383484,
+            1.317000389099121
+          ],
+          "normal_raw": [
+            -0.9985211491584778,
+            -0.03456518054008484,
+            -0.041960250586271286
+          ],
+          "impulse_raw_Ns": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "force_raw_N": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "separation_m": -0.0001380443572998047,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.2593122124671936,
+            -0.1588125228881836,
+            1.3130004405975342
+          ],
+          "normal_raw": [
+            -0.9985211491584778,
+            -0.03456518054008484,
+            -0.041960250586271286
+          ],
+          "impulse_raw_Ns": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "force_raw_N": [
+            -0.0,
+            -0.0,
+            -0.0
+          ],
+          "separation_m": -0.00031572580337524414,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        },
+        {
+          "position_m": [
+            0.2593122124671936,
+            -0.1653902530670166,
+            1.3130004405975342
+          ],
+          "normal_raw": [
+            -0.9985211491584778,
+            -0.03456518054008484,
+            -0.041960250586271286
+          ],
+          "impulse_raw_Ns": [
+            -26.65807342529297,
+            -0.9228058457374573,
+            -1.1202361583709717
+          ],
+          "force_raw_N": [
+            -6397.9376220703125,
+            -221.47340297698975,
+            -268.8566780090332
+          ],
+          "separation_m": -0.0005430877208709717,
+          "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+        }
+      ],
+      "possible_duplicate_same_step": false,
+      "forbidden_robot_environment": true,
+      "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+    },
+    "last_receipt": {
+      "action_id": "gpt:ee00e2a5e1cb939ae4e36fbcceac8e93325d2c70ebdc0bae71723fd62d270612",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2880",
+      "accepted": true,
+      "execution_finished": true,
+      "target_reached": false,
+      "safety_stopped": true,
+      "completed": true,
+      "completed_semantics": "Execution interval ended; target_reached independently measures actual endpoint.",
+      "requested_duration_s": 2.0,
+      "executed_duration_s": 1.8999999999999986,
+      "executed_control_ticks": 114,
+      "partial_execution": true,
+      "simulation_time_before": 48.016666666666666,
+      "requested_start_TCP": {
+        "position_m": [
+          0.18492637576778254,
+          -0.15488356141743756,
+          1.1178353472804041
+        ],
+        "quaternion_wxyz": [
+          -0.0004313962385853199,
+          0.7070151515339649,
+          -0.7071982570013651,
+          0.00012121436067674671
+        ]
+      },
+      "requested_target_TCP": {
+        "position_m": [
+          0.21992637576778254,
+          -0.15488356141743756,
+          1.1178353472804041
+        ],
+        "quaternion_wxyz": [
+          -0.0004313962385853199,
+          0.7070151515339649,
+          -0.7071982570013651,
+          0.00012121436067674671
+        ]
+      },
+      "maximum_position_tracking_error_m": 0.0003877758535659589,
+      "maximum_orientation_tracking_error_rad": 0.0037796938240858492,
+      "stop_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "control_steps_before": 2880,
+      "physics_steps_before": 11524,
+      "plan": {
+        "planned_ticks": 120,
+        "requested_ticks": 120,
+        "maximum_FK_position_error_m": 3.597533769998862e-16,
+        "maximum_FK_orientation_error_rad": 7.225231076755581e-16,
+        "maximum_joint_step_rad": 0.0021003435150621086,
+        "wall_seconds": 0.9018806939711794,
+        "scope": "Continuous kinematics only; not collision or dynamics certification",
+        "FK_goal_scope": "nominal + frozen current robot tracking estimate",
+        "runtime_feedback_revalidation": true
+      },
+      "status": "STOPPED",
+      "executed_physics_steps": 456,
+      "incomplete_control_interval": false,
+      "simulation_time_after": 49.916666666666664,
+      "observation_id_after": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2994",
+      "successor_observation_available": true,
+      "actual_endpoint_valid": true,
+      "actual_endpoint_TCP": {
+        "position_m": [
+          0.2178959753701977,
+          -0.1547928805444435,
+          1.117721521437311
+        ],
+        "quaternion_wxyz": [
+          -0.0016926037413971474,
+          0.7079383452752661,
+          -0.7062719186821065,
+          0.0006412975820216042
+        ]
+      },
+      "TCPpose": {
+        "position_m": [
+          0.2178959753701977,
+          -0.1547928805444435,
+          1.117721521437311
+        ],
+        "quaternion_wxyz": [
+          -0.0016926037413971474,
+          0.7079383452752661,
+          -0.7062719186821065,
+          0.0006412975820216042
+        ]
+      },
+      "final_position_error_m": 0.002035609274344045,
+      "final_orientation_error_rad": 0.0037796938240858492,
+      "tracking_error_coverage_complete": true,
+      "tracking_error_sampling": "completed control boundaries; not a physics-substep maximum",
+      "target_reached_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+      "requested_gripper_opening_m": 0.009,
+      "applied_gripper_opening_m": 0.008999999999999994,
+      "requested_effort_limit_N": 4.0,
+      "applied_effort_limit_N": 4.0,
+      "stop_domain": "safety",
+      "endpoint_tolerances": {
+        "position_m": 0.001,
+        "orientation_rad": 0.008726646259971648
+      },
+      "wall_seconds": 15.186020351015031,
+      "terminated": true,
+      "gripper_opening_m": 0.010616082232445478
+    }
+  },
+  "same_robot_link": false,
+  "same_instrument_collision_prim": false,
+  "same_world_contact_height": false
+}

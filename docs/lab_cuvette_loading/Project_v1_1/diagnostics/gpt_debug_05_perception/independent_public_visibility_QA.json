@@ -1,0 +1,20 @@
+{
+  "schema": "labsim.Project_v1_1.GPT05_public_visibility_independent_QA.v1",
+  "reviewed_inputs": [
+    "decision_000021",
+    "decision_000023",
+    "decision_000024"
+  ],
+  "scope": "Only exact public side/wrist JPEGs and corresponding public calibration/robot states; no H5/raw/objecttruth",
+  "reviewer": "/root/cubence_backend/p6_prompt_review",
+  "conclusions": [
+    "The upright lid and parts of its outline are visible in all three side images; wrist/palm contours overlap or occlude portions in2D. The obstacle risk is not absent from all imagery.",
+    "Wrist views show vessel, black pads, parts of fingers and housing mouth, but do not jointly reveal whole palm/wrist and rear lid. They cannot certify positive3D whole-hand clearance.",
+    "Public robot calibration states100mm TCP-to-hand frame translation, not the complete hand envelope or obstacle3D coordinates.",
+    "Recorded TCP endpoints stay around1.11784m; D21→D23 lateral change roughly(+40,−40)mm and D23→D24 roughly(0,+40)mm. This endpoint observation is not continuous collision-clearance validation.",
+    "Neither actual collision nor specific native prim is inferred from pixels; separate native closed audit owns that attribution."
+  ],
+  "API_calls": 0,
+  "GPU_used": false,
+  "original_source_modified": false
+}

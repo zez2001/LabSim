@@ -1,0 +1,22 @@
+{
+  "schema": "labsim.Project_v1_1.CI_shallow_fixture_fix.v1",
+  "failed_run_url": "https://github.com/zez2001/LabSim/actions/runs/40426521482",
+  "failed_execution_commit": "c8313066bd101ec745adbeff0104beed97b46250",
+  "failed_job": "contracts",
+  "actual_contract_counts": {
+    "passed": 715,
+    "failed": 2,
+    "skipped": 13
+  },
+  "failure_reason": "Two P4/P6 wire-compatibility CPU tests used git show on a prior commit missing in Actions shallow checkout.",
+  "failed_tests": [
+    "test_P4_and_P6_actual_payloads_match_frozen58da_without_detail[cubence_gpt6_context4_640high.json]",
+    "test_P4_and_P6_actual_payloads_match_frozen58da_without_detail[cubence_gpt6_context4_640high_temporal.json]"
+  ],
+  "fix": "Exact frozen source fixture with hardcoded SHA and provenance; same wire-body comparison without Git history, no skipped tests.",
+  "fixed_commit": "9a4713cf8c71bed4d697625ab052b378608780cc",
+  "actual_success_run_url": "https://github.com/zez2001/LabSim/actions/runs/40427067270",
+  "actual_success_run_raw": "CI39_actual_9a4713c_20261027.json",
+  "runtime_controller_or_physics_changed_by_fix": false,
+  "local_no_git_receipt": "public_fixed_side_detail_p7_shallow_fixture_fix_20261027/git_free_receipt.json"
+}

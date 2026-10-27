@@ -1,0 +1,206 @@
+{
+  "event": "decision",
+  "episode_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872",
+  "observation_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872:2160",
+  "simulation_time_s": 36.016666666666666,
+  "requested_model": "gpt-6-astra",
+  "returned_model": "gpt-6-astra",
+  "request_id": "0908c7c9-fd1f-4cf5-a152-9a1b3cbc8688",
+  "response_id": "resp_0ce65abe87bba2e0016adff40f27f481978364ab1ab49efb2a",
+  "inference_wall_seconds": 9.092896629008465,
+  "usage": {
+    "input_tokens": 6958,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 5504
+    },
+    "output_tokens": 173,
+    "output_tokens_details": {
+      "reasoning_tokens": 62
+    },
+    "total_tokens": 7131
+  },
+  "tool_call": {
+    "name": "finish",
+    "arguments": {
+      "episode_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872",
+      "observation_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872:2160",
+      "reason": "Stopping without release: vessel remains held, but whole-hand and terminal-arm clearance past the upright lid and a safe route to the internal seat cannot be established confidently from the current views. Insertion and support transfer have not been completed; requesting independent scoring without claiming success."
+    },
+    "call_id": "call_w8qERplqbGBXHS5udnJu8CHK"
+  },
+  "receipt": {
+    "status": "FINISH_REQUESTED",
+    "result": {
+      "episode_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872",
+      "observation_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872:2160",
+      "simulation_time": 36.016666666666666,
+      "terminated": true,
+      "task_success": false,
+      "termination_reason": "POLICY_FINISH_REQUEST"
+    }
+  },
+  "controller_sha256": "b6ee534a8992ad827b568753e9b33966e59fd313a4e4037c1b4356f204bb862d",
+  "model_action_id": null,
+  "execution_action_id": null,
+  "decision_index": 16,
+  "request_label": "policy:0183656a-c9a8-464e-ad9e-fa77e40f9872:2160:decision16",
+  "observation_artifacts": {
+    "manifest_path": "observations/decision_000016/manifest.json",
+    "manifest_sha256": "8fe335eb1208ee242466ea57d2345929ce1a96b44f673b1542701f0e7d60df3d",
+    "public_observation": {
+      "path": "observations/decision_000016/public_observation.json",
+      "sha256": "6e17251aa4e0217df36d76cbc98e3c28dc1b88b82598f8af042f05ed9288430c",
+      "bytes": 5911
+    },
+    "images": [
+      {
+        "camera_name": "side_camera",
+        "path": "observations/decision_000016/side_camera.jpg",
+        "sha256": "c948f6d3f279b001eb17519a04965911f17a593f542b3966dd74e3b36e670168",
+        "bytes": 12740,
+        "content_type": "image/jpeg",
+        "resolution_wh": [
+          640,
+          480
+        ]
+      },
+      {
+        "camera_name": "wrist_camera",
+        "path": "observations/decision_000016/wrist_camera.jpg",
+        "sha256": "9851d52f3e686e137b005e1ed0b53ae5868e304d3dfd7075a1d8925612e706bb",
+        "bytes": 10727,
+        "content_type": "image/jpeg",
+        "resolution_wh": [
+          640,
+          480
+        ]
+      }
+    ]
+  },
+  "image_channels": [
+    "side_camera",
+    "wrist_camera"
+  ],
+  "model_image_transforms": {
+    "side_camera": {
+      "native_resolution_wh": [
+        640,
+        480
+      ],
+      "transmitted_resolution_wh": [
+        640,
+        480
+      ],
+      "scale_xy": [
+        1.0,
+        1.0
+      ],
+      "native_rgb_sha256": "15e96fcb571a59bd64de5886ecc584b6a5fafbd5f2ed5fcf0f8b0acba339ae01",
+      "transmitted_jpeg_sha256": "c948f6d3f279b001eb17519a04965911f17a593f542b3966dd74e3b36e670168",
+      "transmitted_bytes": 12740,
+      "jpeg_quality": 60,
+      "detail": "high",
+      "resize_interpolation": "Pillow LANCZOS",
+      "crop": null,
+      "rotation_deg": 0,
+      "color_space": "RGB",
+      "transmitted_pixel_from_native_pixel": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "intrinsic_matrix_transmitted": [
+        [
+          519.2078247070312,
+          0.0,
+          320.0
+        ],
+        [
+          0.0,
+          519.2078247070312,
+          240.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+      "native_recording_changed": false
+    },
+    "wrist_camera": {
+      "native_resolution_wh": [
+        640,
+        480
+      ],
+      "transmitted_resolution_wh": [
+        640,
+        480
+      ],
+      "scale_xy": [
+        1.0,
+        1.0
+      ],
+      "native_rgb_sha256": "9fbc8624aa6797109c87a3fff1baf458228756e3dfb6cc53748ee3fb399aca30",
+      "transmitted_jpeg_sha256": "9851d52f3e686e137b005e1ed0b53ae5868e304d3dfd7075a1d8925612e706bb",
+      "transmitted_bytes": 10727,
+      "jpeg_quality": 60,
+      "detail": "high",
+      "resize_interpolation": "Pillow LANCZOS",
+      "crop": null,
+      "rotation_deg": 0,
+      "color_space": "RGB",
+      "transmitted_pixel_from_native_pixel": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "intrinsic_matrix_transmitted": [
+        [
+          366.4996337890625,
+          0.0,
+          320.0
+        ],
+        [
+          0.0,
+          366.4996337890625,
+          240.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+      "native_recording_changed": false
+    }
+  },
+  "truth_exposed": false
+}

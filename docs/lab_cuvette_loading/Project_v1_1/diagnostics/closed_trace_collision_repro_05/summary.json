@@ -1,0 +1,755 @@
+{
+  "schema": "labsim.Project_v1_1.closed_trace_collision_reproduction.v1",
+  "created_utc": "2026-10-27T00:25:27.245840+00:00",
+  "source_run": "gpt_debug_05",
+  "diagnostic_replay": "collision_replay_05_01",
+  "original_GPT_task_success": false,
+  "diagnostic_task_success": false,
+  "diagnostic_model_calls": 0,
+  "diagnostic_is_GPT_attempt": false,
+  "full_loading_training_admission": false,
+  "conditions": {
+    "asset_id": "cuvette_xy_1000",
+    "asset_SHA256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+    "frozen_scene_SHA256": "12693a03acfbc85f85bbcd97db6c7230909541f9d789277035ec3eefe76100d0"
+  },
+  "physics_stream_alignment": {
+    "key": "physics_step",
+    "matched_rows": 11981,
+    "first_step": 0,
+    "last_step": 11980,
+    "unmatched_steps": {
+      "gpt_debug_05": [],
+      "collision_replay_05_01": []
+    },
+    "resampled_or_interpolated": false,
+    "absent_or_null_values_filled": false,
+    "forbidden_flag_mismatch_rows": 0,
+    "first_forbidden_physics_record": {
+      "gpt_debug_05": {
+        "physics_step": 11978,
+        "t": 49.90833333333333
+      },
+      "collision_replay_05_01": {
+        "physics_step": 11978,
+        "t": 49.90833333333333
+      }
+    }
+  },
+  "numeric_fields": [
+    {
+      "field": "joints9",
+      "units": "rad (arm7),m (fingers2)",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 107829,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "joint_velocities9",
+      "units": "rad/s (arm7),m/s (fingers2)",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 107829,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "command_q9",
+      "units": "rad (arm7),m (fingers2)",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 107829,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "actual_tcp_position_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 35943,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "actual_tcp_quaternion_wxyz",
+      "units": "unit quaternion wxyz",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 47924,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "object_position_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 35943,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "object_quaternion_wxyz",
+      "units": "unit quaternion wxyz",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 47924,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "com_world_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 35943,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "cup_in_hand_position_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 35943,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "cup_in_hand_quaternion_wxyz",
+      "units": "unit quaternion wxyz",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 47924,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "finger_contact_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 23962,
+      "unequal_numeric_rows": 2840,
+      "max_component_abs_difference": 4.76837158203125e-07,
+      "max_vector_L2_difference": 4.76837158203125e-07,
+      "first_difference_physics_step": 3367,
+      "component_RMS_difference": 5.52920768056821e-08
+    },
+    {
+      "field": "finger_normal_force_on_cup_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 71886,
+      "unequal_numeric_rows": 7199,
+      "max_component_abs_difference": 3.5762786865234375e-07,
+      "max_vector_L2_difference": 3.5762794451757574e-07,
+      "first_difference_physics_step": 3363,
+      "component_RMS_difference": 2.8735608746298238e-08
+    },
+    {
+      "field": "finger_friction_force_on_cup_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 71886,
+      "unequal_numeric_rows": 7879,
+      "max_component_abs_difference": 8.940696716308594e-08,
+      "max_vector_L2_difference": 1.0745380543812571e-07,
+      "first_difference_physics_step": 3363,
+      "component_RMS_difference": 9.541876066942839e-09
+    },
+    {
+      "field": "finger_joint_positions_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 23962,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "environment_net_force_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 35943,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "target_whole_seat_net_force_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 35943,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "target_whole_seat_net_vertical_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "target_bottom_support_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "target_bottom_normal_force_vector_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 35943,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "wall_contact_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "entrance_feature_contact_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "object_bottom_world_z_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "source_bottom_gap_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "target_bottom_gap_m",
+      "units": "m",
+      "matched_numeric_rows": 290,
+      "both_null_rows": 11691,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 290,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "depth_m",
+      "units": "m",
+      "matched_numeric_rows": 290,
+      "both_null_rows": 11691,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 290,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "xy_error_target_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 23962,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "tilt_deg",
+      "units": "deg",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "yaw_error_deg",
+      "units": "deg",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "gripper_target_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "gripper_effort_limit_N",
+      "units": "N",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "input_geometry_overlap_observed_m",
+      "units": "m",
+      "matched_numeric_rows": 0,
+      "both_null_rows": 11981,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 0,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": null,
+      "max_vector_L2_difference": null,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": null
+    },
+    {
+      "field": "input_geometry_min_sample_surface_distance_m",
+      "units": "m",
+      "matched_numeric_rows": 0,
+      "both_null_rows": 11981,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 0,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": null,
+      "max_vector_L2_difference": null,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": null
+    },
+    {
+      "field": "gripper_object_clearance_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "source_clearance_m",
+      "units": "m",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "simulation_time",
+      "units": "s",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    },
+    {
+      "field": "engine_time",
+      "units": "s",
+      "matched_numeric_rows": 11981,
+      "both_null_rows": 0,
+      "one_null_or_missing_rows": 0,
+      "shape_mismatch_rows": 0,
+      "nonfinite_rows": 0,
+      "numeric_elements": 11981,
+      "unequal_numeric_rows": 0,
+      "max_component_abs_difference": 0.0,
+      "max_vector_L2_difference": 0.0,
+      "first_difference_physics_step": null,
+      "component_RMS_difference": 0.0
+    }
+  ],
+  "all_compared_finite_physical_values_exactly_equal": false,
+  "native_first_forbidden_event_identical": true,
+  "native_first_forbidden_physics_step": 11978,
+  "native_first_forbidden_t": 49.90833333333333,
+  "native_first_forbidden_pair": [
+    "/World/Franka/panda_link6/geometry/panda_link6",
+    "/World/Instrument/Collision/SourceMesh5"
+  ],
+  "all_25_source_non_ID_requests_and_executed_intervals_identical": true,
+  "original_and_replay_failure_type": [
+    "SAFETY_COLLISION",
+    "SAFETY_COLLISION"
+  ],
+  "original_and_replay_simulation_seconds": [
+    49.916666666666664,
+    49.916666666666664
+  ],
+  "original_and_replay_control_steps": [
+    2994,
+    2994
+  ],
+  "logical_stream_SHA": {
+    "gpt_debug_05/physics_records.jsonl": {
+      "rows": 11981,
+      "decoded_SHA256": "2684e4a305528d79ae8cd344b1a734d14869a06731babd00005c7bc6c1666784",
+      "decoded_bytes": 475831742,
+      "archive_SHA256": "b23f9dc9cb95ce6eb202b570595fa0d07fa2ac85e58b62b0f483a604759cdbfb",
+      "archive_manifest_decoded_SHA_and_bytes_match": true
+    },
+    "collision_replay_05_01/physics_records.jsonl": {
+      "rows": 11981,
+      "decoded_SHA256": "3daa72232b62793939cc83a4f5bf60d8fd55ee78a3bf026cb48527b57e527de9",
+      "decoded_bytes": 475831834,
+      "archive_SHA256": "1f07f0b00caaec525817a2493b7210f4b20bfccdc58684599acd05a04b8bf791",
+      "archive_manifest_decoded_SHA_and_bytes_match": true
+    },
+    "gpt_debug_05/native_contact_events.jsonl": {
+      "rows": 65189,
+      "decoded_SHA256": "c5d35b79a3638a04e19534d3029511c97ba74ee05641859d482973ef8b2a75df",
+      "decoded_bytes": 214146656,
+      "archive_SHA256": "c42d2933623b247390efcda3117e830726d4099957b18b7fb6ecd0e55a8c3733",
+      "archive_manifest_decoded_SHA_and_bytes_match": true
+    },
+    "collision_replay_05_01/native_contact_events.jsonl": {
+      "rows": 65189,
+      "decoded_SHA256": "2084ba21f8ce0a702827a1127b8f9c9d62fa114c659c195cf970f4407716e4eb",
+      "decoded_bytes": 214146656,
+      "archive_SHA256": "6eb3848cba052cfa701d256b4b0161368a450bad4594541b636d0da47fed268d",
+      "archive_manifest_decoded_SHA_and_bytes_match": true
+    }
+  },
+  "source_artifacts": {
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/process_exit.json": {
+      "SHA256": "c76dc3f3770b2925c08fc85a5f7c87cc6e470e2275b280bcbabcdf526b756d22",
+      "bytes": 1094
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/result.json": {
+      "SHA256": "b20134e847a2b6093495aa600c6ed6d334fb299b651cf4001d1267bafd6e1290",
+      "bytes": 7045
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/independent_score.json": {
+      "SHA256": "7548c834e2fe40f1e1ef771aaafc5ad7416bc93a9b9a4fa1e3be8c22cafe90c1",
+      "bytes": 6499
+    },
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_closed_read_archive.json": {
+      "SHA256": "5656e6a6635ce69f022874f7fe395ee0c71fc8b04cc1db39094699cec7889158",
+      "bytes": 50715
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/process_exit.json": {
+      "SHA256": "ab35b0e0a876dcc262c7098943a5414375180e27c5c3f03376d5c02990bdcae5",
+      "bytes": 1031
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/episode_0000/result.json": {
+      "SHA256": "2b51e54a88f80886dfadde2afa3dae51c4901b3c4fa7792ea3808a2581ced129",
+      "bytes": 7069
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/episode_0000/independent_score.json": {
+      "SHA256": "9b9aa297ebdab2a330375c2b57bd3ef03fda55dfd4081bab4c8e0d228d3efc0a",
+      "bytes": 6523
+    },
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_replay_05_01_closed_read_archive.json": {
+      "SHA256": "903e238d96a5dc6c9237fcc3ba93cd44499100780f41bb79478fb27e6a4d0f5b",
+      "bytes": 32610
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/release_metadata.json": {
+      "SHA256": "1c4bf1beb6d33e17ec46fc8480fe659d832e9a8bd600d0f06a9c271a1c93acb1",
+      "bytes": 680
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/episode_0000/release_metadata.json": {
+      "SHA256": "f1c5d2d7953794afd5682e385799524ac6e8b9c6dad089731ad9dcbc4d7fd6ac",
+      "bytes": 691
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/run_manifest.json": {
+      "SHA256": "6342f44dddec0ce2375a978fc9548d15621c10f5ae8ce08b25084a91d8581988",
+      "bytes": 2934
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/physics_records.jsonl.gz": {
+      "SHA256": "b23f9dc9cb95ce6eb202b570595fa0d07fa2ac85e58b62b0f483a604759cdbfb",
+      "bytes": 65263349
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/episode_0000/physics_records.jsonl.gz": {
+      "SHA256": "1f07f0b00caaec525817a2493b7210f4b20bfccdc58684599acd05a04b8bf791",
+      "bytes": 65222070
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/native_contact_events.jsonl.gz": {
+      "SHA256": "c42d2933623b247390efcda3117e830726d4099957b18b7fb6ecd0e55a8c3733",
+      "bytes": 34635110
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/episode_0000/native_contact_events.jsonl.gz": {
+      "SHA256": "6eb3848cba052cfa701d256b4b0161368a450bad4594541b636d0da47fed268d",
+      "bytes": 34673779
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/action_receipts.jsonl": {
+      "SHA256": "6b7031e44efbe7b855dc260630f1be3ea84a4f35217a4078486cd91ea33b147c",
+      "bytes": 76750
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/episode_0000/action_receipts.jsonl": {
+      "SHA256": "cd3ad4b06677710320be3c1c40b1f530c3030801aacdb7e2fcb7fe6031fecfd2",
+      "bytes": 76748
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/gpt_control/policy_trace.jsonl": {
+      "SHA256": "4c95935cd004185decb19ba01a436b5072aea8765eaf7db93a523fcca7090c59",
+      "bytes": 234404
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/replay_receipts.json": {
+      "SHA256": "29eb3080494b76b761756d30603bdcfccda53a65284cc1ef5d607c64a2a20c5d",
+      "bytes": 146903
+    }
+  },
+  "methods": [
+    "Serial gzip decoded physics rows merged on exact integer physics_step; no interpolation, nearest-time match, skipped initialization or zero imputation.",
+    "Numeric fields were selected only when actually present; null/no-observation counts are retained. Maximum component/L2 differences are raw parsed-float comparisons, not toleranced success labels.",
+    "Physics wall-clock compute duration is intentionally excluded; it is not a physical state. Whole decoded physics JSON hashes can differ because of this field.",
+    "Native events fully streamed; first flagged forbidden contact is recorded with the complete original collider/point data.",
+    "Recorded UUIDs/action IDs and provider inference/wall times are provenance and are not expected to match replay IDs/latencies."
+  ],
+  "limits": [
+    "This is a single fixed-state replay on the same installed simulator/GPU, not a cross-host or stochastic repeatability guarantee.",
+    "The diagnostic supplied recorded generic commands offline. It is not model reasoning, a successful GPT task, teacher takeover or a path made available to GPT.",
+    "Raw native force/separation conventions and effective cooked-collision uncertainties are unchanged; exact replay does not certify real-world force or precision.",
+    "Original task and qualification labels are preserved; control_diagnostic is rejected by the normal full-task reader."
+  ],
+  "GPU_used": false,
+  "API_calls": 0,
+  "source_H5_opened_by_this_comparison": false,
+  "selected_kinematic_fields_exactly_equal": {
+    "joints9": true,
+    "command_q9": true,
+    "actual_tcp_position_m": true,
+    "actual_tcp_quaternion_wxyz": true,
+    "object_position_m": true,
+    "object_quaternion_wxyz": true,
+    "com_world_m": true,
+    "cup_in_hand_position_m": true,
+    "cup_in_hand_quaternion_wxyz": true
+  },
+  "observed_force_component_max_differences_N": {
+    "finger_contact_N": 4.76837158203125e-07,
+    "finger_normal_force_on_cup_N": 3.5762786865234375e-07,
+    "finger_friction_force_on_cup_N": 8.940696716308594e-08
+  },
+  "unmeasured_geometric_quantities": {
+    "input_geometry_overlap_observed_m": {
+      "both_null_rows": 11981,
+      "numeric_samples": 0,
+      "interpretation": "unavailable; not zero or absence of overlap"
+    },
+    "input_geometry_min_sample_surface_distance_m": {
+      "both_null_rows": 11981,
+      "numeric_samples": 0,
+      "interpretation": "unavailable; not zero or absence of overlap"
+    }
+  },
+  "additional_limit": "Sub-micro-newton differences in three recorded finger-force fields are observed; their internal cause was not established. Kinematic equality does not imply every physical record or native callback is byte-identical."
+}

@@ -1,0 +1,948 @@
+{
+  "schema": "labsim.Project_v1_1.independent_release_coverage_review.v1",
+  "created_utc": "2026-10-27T00:46:52.307812+00:00",
+  "reviewer": "release_final_audit",
+  "development_HEAD": "9a4713cf8c71bed4d697625ab052b378608780cc",
+  "verdict": "Stage7 is accurate as an explicitly incomplete cutoff draft; final release remains pending actual GPT06/same-source regression, final source/CI and authored/rendered deliverables.",
+  "scope": {
+    "active_episode_read": false,
+    "H5_or_raw_read": false,
+    "GPU_used": false,
+    "API_calls": 0,
+    "assets_or_runtime_modified": false,
+    "only_new_review_files_written": true
+  },
+  "draft_SHA256": "e2786e401da8a91f1769b410db8758dcebe9b5d34135d477f44400ce1a51b582",
+  "source_registry_count": 91,
+  "local_source_count": 90,
+  "all_local_SHA_and_bytes_match": false,
+  "checks": [
+    {
+      "id": "draft_cutoff",
+      "status": "pass_at_stated_cutoff",
+      "detail": "Stage7 finalized=false. Teacher5/5 at0b922ec, extra58da teacher success separately; GPT01–05 distinct debug failures, formal0/5. GPT06 explicitly pending; no future result claimed."
+    },
+    {
+      "id": "source_registry",
+      "status": "pass",
+      "detail": "90/90 local source SHA256 and declared bytes match; one pinned HF URL is not a local entity. This audit does not refetch HF or inspect H5."
+    },
+    {
+      "id": "environment_invocation",
+      "status": "CPU_dry_run_pass_only",
+      "detail": "Actual ./labsim eval --project-version Project_v1_1 --scene standard --backend teacher --episodes1 --headless --dry-run routes to new module/config. files_created=false/simulation_started=false; output directory absent. No new native environment run by reviewer."
+    },
+    {
+      "id": "portable_setup",
+      "status": "documentation_and_existing_proof",
+      "detail": "Explicit existing IsaacPython, isolated Shapely, pinned independent revision cache83files/82HF+externalFranka; cache and install alternatives distinguished, no original workstation absolute path needed in documented commands. Existing closed H5 proof shows40datasets/noExternalLink/externalstorage/VDS and alternate-path ACT/DP; not second-machine deployment."
+    },
+    {
+      "id": "public_GPT_scope",
+      "status": "pass_static_and_existing_closed_proof",
+      "detail": "Whitelist RGB side/wrist,robot joints/TCP,static task goals/calibration,IDs and declared finger-contact scalars. Generic move/gripper/wait/observe/finish only; public facade rejects private phase metadata. P7 fixed JPEG crop only; no GT bbox, current object/seat pose, expert action/route or hidden automatic task stage. Teacher truth use explicitly separate."
+    },
+    {
+      "id": "generic_hold",
+      "status": "pass_static_and_existing_closed_proof",
+      "detail": "GenericContactHold inputs: public measuredfinger positions/contact plus requested/ramped/applied opening, time, effort, configured mass/friction assumptions. No object pose or teacher phase; explicit release wins. It does not change physical gains/friction/score. Static sensor is object-filtered cup_fingers pair, not all-fingertip total contact."
+    },
+    {
+      "id": "taxonomy_reader",
+      "status": "pass_static_and_existing_closed_proof",
+      "detail": "Stage7 safety collisions remain record/integrity/physics true with BCfalse; task slip separate. Reader rejects execution/service/simulation and control_diagnostic; accepts qualifying loading natural/deviation task/safety/budget failures, success additionally needs BC eligibility. Null post_retreat stable preserved when no actual retreat. physics_trustworthy means current checks, not full cooked geometry/force calibration."
+    },
+    {
+      "id": "numerical_claims",
+      "status": "no_new_unsupported_number_identified_in_selected_checks",
+      "detail": "Teacher5 and7539 transitions;40dataset/1,944,284,458B portable proof; GPT05 normal failure ACT/DP and success rejection;717CPU/13skip all supported by named compact evidence. This is not an independent recomputation from raw physical streams or H5."
+    }
+  ],
+  "pending": [
+    {
+      "priority": 1,
+      "field": "gpt_complete_task_success",
+      "status": "pending_GPT06_actual_end_result",
+      "criterion": "Only actual standard-reset GPT grasp/extract/transport/originalA loading/support/open/detach/retreat/stable3s can satisfy. Do not replace with teacher or replay."
+    },
+    {
+      "priority": 1,
+      "field": "gpt_formal5",
+      "status": "not_run_gate_unmet_at_stage7",
+      "criterion": "Start only after actual full GPT debug success, freeze all policy/vision/tools/control/scorer; budget may limit actual completedcount."
+    },
+    {
+      "priority": 1,
+      "field": "final_runtime_release",
+      "status": "pending_current_native_and_closed_data_audits",
+      "criterion": "Record exact9a4713c/current final runtime, clean checkout/independentcache proof, same-source teacher and GPT exit0/closedH5/normalreader/videoactualinput QA; final remoteSHA+CI receipt. OlderCI37 cannot certify final source."
+    },
+    {
+      "priority": 2,
+      "field": "visual_observability",
+      "status": "partially_verified",
+      "criterion": "Teacher stage previews are not model inputs. P7 offline D24 is not actualmodelinput. Final GPT06 actual JPEG/manifest+requestbinding required. Prior actualQA did notrecognize earlysmallslip; no claim allstagesunoccluded. WristVERIFYclip/sideocclusion remain."
+    },
+    {
+      "priority": 2,
+      "field": "reset_repeatability",
+      "status": "scope_limit",
+      "criterion": "Five teacher runs are five independentprocesses, not a fiveepisode sameprocess reset test. Existing free-space3reset diagnostic does not prove full-loading repeatedreset. Keep commandcapability distinct from actualtested scope."
+    },
+    {
+      "priority": 2,
+      "field": "report_and_reading_pack",
+      "status": "not_authored_or_packaged_at_stage7",
+      "criterion": "Final actual inputs/SHAs, DOCX allpages render QA, allrelative video/image/config dependencies, fullreading videos provenance and ≤80MB validation; keepnative/oldoutputs unchanged."
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "wording",
+      "path": "README.md",
+      "detail": "P6 尚待真实策略验证 is stale after actual GPT05 P6 transport run. Prefer 已有真实搬运调试，100µm近座插入策略尚未验证. No performance improvement inference."
+    },
+    {
+      "priority": "sensor_declaration",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/README.md",
+      "detail": "Clarify public finger_contact_N is norm of normal-force vector on cuvette filtered separately by left/rightfinger (cup_fingers), not total all-object fingertip contact, friction vector, forcecap or target support. This identity-conditioned sensor is already implemented, not a new GT pose feed."
+    },
+    {
+      "priority": "API_semantics",
+      "path": "final_report",
+      "detail": "completed only interval ended; target_reached is actualTCP1mm/.5deg only, not task/gripper. Maximum receipt trackingerror is sampled at completedcontrolboundaries; physics-substep extrema are separate. Use no broad micrometreaccuracy or guaranteedcollisionfree language."
+    }
+  ],
+  "source_hashes": {
+    "AGENTS.md": "0291a66bcf51a7a02fe8f462c45266401f3b6c952bc88f5ba69e6a24879176f9",
+    "README.md": "796c30348f3b288d257602e315109e5ba82386faba786a58419e9a10fa2e2246",
+    "docs/lab_cuvette_loading/Project_v1_1/README.md": "c3a2376bdd6d2448fc461055f436c5a0f91b3ca59140b6f2dc8e71874c501985",
+    "docs/lab_cuvette_loading/Project_v1_1/usage.md": "549351ef18273c8479cf404c650802dddf2ef257d98b510bfe5a1f8e5abd15be",
+    "policy/backends/cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+    "policy/backends/cubence_project_v1_1_tools.py": "381df32220a223eb7374b070333dfc12324cfb1d60938807d450f19e01f6f9d5",
+    "policy/backends/cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+    "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+    "tasks/lab_cuvette_loading_project_v1.py": "e4e130481c0d8593a8721bbd48dd7319ec1659f3bd07d2a68d902301a366c72f",
+    "tasks/lab_cuvette_loading_project_v1_1.py": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+    "policy/dataset/lab_cuvette_project_v1_1_dataset.py": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+    "demos/lab_cuvette_demo04/run.py": "92088545ce6d9d3240dbb853505fa38884f404ff2ed6a8ae410b0ebce9e53fed",
+    "demos/lab_cuvette_env_v1/physics_capture.py": "10d6d6a40455d16c6234701c661516212f7367fc85f3201ba6c7066020358276",
+    "scripts/labsim_cli.py": "e02ce8c3c515d36665c44fbeed8dd430f3c3760c0eccef6619d28a6d9e3729e5",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_closed_data_cohort_01.json": "1c039df310f4474a7324e0071a24438268114c9f451f94cd5d8f26549d516631",
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json": "e6e05360baf99640a8150f54d9dd55a46f593f758266737c6c2a0feb76b9eaf4",
+    "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_05_normal_reader.json": "4777011bb2033cdd736e85b02bf451a9294a68efe6c5e398fb0b4f5e0891298f"
+  },
+  "local_source_checks": [
+    {
+      "id": "baseline_wristclip",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/teacher_baseline_close_01_support_release_wrist_clip.mp4",
+      "expected_SHA256": "a1202398cc6d2144b277d20902f6a9494c26caf15b27efadd644bbd5d6adb87b",
+      "actual_SHA256": "a1202398cc6d2144b277d20902f6a9494c26caf15b27efadd644bbd5d6adb87b",
+      "match": true,
+      "bytes": 739919,
+      "bytes_match": true
+    },
+    {
+      "id": "ci_0b",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_ci_actual_0b922ec.json",
+      "expected_SHA256": "86279fd86b7b893653cb830321bc31b129451a6de6ae14ef5bc5dd8834f48861",
+      "actual_SHA256": "86279fd86b7b893653cb830321bc31b129451a6de6ae14ef5bc5dd8834f48861",
+      "match": true,
+      "bytes": 1087,
+      "bytes_match": true
+    },
+    {
+      "id": "closed_019",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/fine_preinsert_ab_20261027/summary.json",
+      "expected_SHA256": "400aa42408b4757cca7291edcf4c7437b8d5faa4fa1a169e70d2cc63d46c91b9",
+      "actual_SHA256": "400aa42408b4757cca7291edcf4c7437b8d5faa4fa1a169e70d2cc63d46c91b9",
+      "match": true,
+      "bytes": 29469,
+      "bytes_match": true
+    },
+    {
+      "id": "closed_026",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/free_space_checked_01/audit.json",
+      "expected_SHA256": "d855a59e8d566c59562ea01145d9cc18b6e60c7cd8079f909b0e5174e1c64a48",
+      "actual_SHA256": "d855a59e8d566c59562ea01145d9cc18b6e60c7cd8079f909b0e5174e1c64a48",
+      "match": true,
+      "bytes": 23557,
+      "bytes_match": true
+    },
+    {
+      "id": "closed_033",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/audit.json",
+      "expected_SHA256": "c6b2947e0c94a82a833373183a049968ada387fa73fe5f27785b79e8b4e46a12",
+      "actual_SHA256": "c6b2947e0c94a82a833373183a049968ada387fa73fe5f27785b79e8b4e46a12",
+      "match": true,
+      "bytes": 11912,
+      "bytes_match": true
+    },
+    {
+      "id": "closed_034",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/action_comparison.csv",
+      "expected_SHA256": "6bc704b45c2410eec53c9e3e1c9fea99ac7025a20d7e98bd2908bf85b746d200",
+      "actual_SHA256": "6bc704b45c2410eec53c9e3e1c9fea99ac7025a20d7e98bd2908bf85b746d200",
+      "match": true,
+      "bytes": 2679,
+      "bytes_match": true
+    },
+    {
+      "id": "closed_035",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/final_fixed_prefix_02/comparison.png",
+      "expected_SHA256": "1b75b64ac6c7e09d0e6b7148843c6ea50086d0f461b91029ac10e1e4b2a22709",
+      "actual_SHA256": "1b75b64ac6c7e09d0e6b7148843c6ea50086d0f461b91029ac10e1e4b2a22709",
+      "match": true,
+      "bytes": 128896,
+      "bytes_match": true
+    },
+    {
+      "id": "current_usage",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/usage.md",
+      "expected_SHA256": "549351ef18273c8479cf404c650802dddf2ef257d98b510bfe5a1f8e5abd15be",
+      "actual_SHA256": "549351ef18273c8479cf404c650802dddf2ef257d98b510bfe5a1f8e5abd15be",
+      "match": true,
+      "bytes": 8133,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_actions",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/action_sequence.csv",
+      "expected_SHA256": "392275a4cefb75192c2be894bc2a9c0e15d2a7ea203bcd8c399ffb0bb3da24f3",
+      "actual_SHA256": "392275a4cefb75192c2be894bc2a9c0e15d2a7ea203bcd8c399ffb0bb3da24f3",
+      "match": true,
+      "bytes": 21254,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_budget",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/budget_closed_snapshot.json",
+      "expected_SHA256": "90552b4e59e3c0aaf2b1c39a78869b91742b306d2c385560627ec1c1a8c58412",
+      "actual_SHA256": "90552b4e59e3c0aaf2b1c39a78869b91742b306d2c385560627ec1c1a8c58412",
+      "match": true,
+      "bytes": 616,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_cross",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_evidence/wire_inputs_cross_audit.json",
+      "expected_SHA256": "c5dc3df52b7707a2f1e7ae16d13eb827ea565fa05351413c9ae518b1f06960f2",
+      "actual_SHA256": "c5dc3df52b7707a2f1e7ae16d13eb827ea565fa05351413c9ae518b1f06960f2",
+      "match": true,
+      "bytes": 1465,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_early",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_evidence/early_axial_markers.json",
+      "expected_SHA256": "04d6f42a634a4caf2a73f7a2177ac870a2184ae5f25991ea36094eade8e3260e",
+      "actual_SHA256": "04d6f42a634a4caf2a73f7a2177ac870a2184ae5f25991ea36094eade8e3260e",
+      "match": true,
+      "bytes": 9592,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_fullvideo",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_04_rim_obstruction_full.mp4",
+      "expected_SHA256": "181a6fdd3713b0c84c47ff0ed455975ca3749a629158c655bcd6e5236be36ee2",
+      "actual_SHA256": "181a6fdd3713b0c84c47ff0ed455975ca3749a629158c655bcd6e5236be36ee2",
+      "match": true,
+      "bytes": 4198952,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_manifest",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/manifest.json",
+      "expected_SHA256": "a02cd2fb32e4cf163cbc4132fd2c5e7e69bb0239ef11bb282087c6db42625453",
+      "actual_SHA256": "a02cd2fb32e4cf163cbc4132fd2c5e7e69bb0239ef11bb282087c6db42625453",
+      "match": true,
+      "bytes": 117343,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_media_receipt",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_04_rim_obstruction_full_reading_receipt.json",
+      "expected_SHA256": "752ae76a20d6b0db37bf80b283d6cc803fc6e3090e12c78829861ac22cee1913",
+      "actual_SHA256": "752ae76a20d6b0db37bf80b283d6cc803fc6e3090e12c78829861ac22cee1913",
+      "match": true,
+      "bytes": 68931,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_public",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/summary.json",
+      "expected_SHA256": "06ca51c6f84938ac5dfdf5a20b0620ac37ed0337bce4a55503357238ca1563cd",
+      "actual_SHA256": "06ca51c6f84938ac5dfdf5a20b0620ac37ed0337bce4a55503357238ca1563cd",
+      "match": true,
+      "bytes": 36561,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_public_md",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/README.md",
+      "expected_SHA256": "a93937e7757c88bb1ac88eac177d6043e32f12c4c7a16dc95121f7531d7b4841",
+      "actual_SHA256": "a93937e7757c88bb1ac88eac177d6043e32f12c4c7a16dc95121f7531d7b4841",
+      "match": true,
+      "bytes": 4550,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_closed_read_archive.json",
+      "expected_SHA256": "41b6b2144ab46cde4ccaf0d7641b0661bc555a532fe26818b9cc16e58bc88082",
+      "actual_SHA256": "41b6b2144ab46cde4ccaf0d7641b0661bc555a532fe26818b9cc16e58bc88082",
+      "match": true,
+      "bytes": 44170,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_04_normal_reader.json",
+      "expected_SHA256": "dcda13ac1605b38d1e1ce9a06f2d7c5a226026cdc43a9f26002d345d41c20a65",
+      "actual_SHA256": "dcda13ac1605b38d1e1ce9a06f2d7c5a226026cdc43a9f26002d345d41c20a65",
+      "match": true,
+      "bytes": 8555,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt04_wrist30",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_perception/gpt_control/observations/decision_000030/wrist_camera.jpg",
+      "expected_SHA256": "b93069c32a61c84c364310563742dfecba977c4d6a2c74727bc89496e838bfea",
+      "actual_SHA256": "b93069c32a61c84c364310563742dfecba977c4d6a2c74727bc89496e838bfea",
+      "match": true,
+      "bytes": 14573,
+      "bytes_match": true
+    },
+    {
+      "id": "support_ab_fig",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_support_gate_comparison.png",
+      "expected_SHA256": "9f7d8c2a563624d1ad1e30e61d4ba2349028774abba4cd2c953535c722b141e1",
+      "actual_SHA256": "9f7d8c2a563624d1ad1e30e61d4ba2349028774abba4cd2c953535c722b141e1",
+      "match": true,
+      "bytes": 277077,
+      "bytes_match": true
+    },
+    {
+      "id": "support_ab_manifest",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/figure_source_manifest.json",
+      "expected_SHA256": "89266626b35324bfda844debff0756b4330bb14171814afbfbcd3dcfe6725ab1",
+      "actual_SHA256": "89266626b35324bfda844debff0756b4330bb14171814afbfbcd3dcfe6725ab1",
+      "match": true,
+      "bytes": 3701,
+      "bytes_match": true
+    },
+    {
+      "id": "support_ab_md",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/README.md",
+      "expected_SHA256": "39ea67e96bd1be1976f8961f6902f80e86b386815284f3bbe62060bba6e98232",
+      "actual_SHA256": "39ea67e96bd1be1976f8961f6902f80e86b386815284f3bbe62060bba6e98232",
+      "match": true,
+      "bytes": 2362,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/summary.json",
+      "expected_SHA256": "db0dd8c30bc38cedaeb1fc68b470dfd546f17742998758afc9298675218ef934",
+      "actual_SHA256": "db0dd8c30bc38cedaeb1fc68b470dfd546f17742998758afc9298675218ef934",
+      "match": true,
+      "bytes": 282025,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_control",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/support_controller_actual.csv",
+      "expected_SHA256": "4c2bdc949e63061527a9cc3e49f041b439b77f3a4767066b891f92b54358b45e",
+      "actual_SHA256": "4c2bdc949e63061527a9cc3e49f041b439b77f3a4767066b891f92b54358b45e",
+      "match": true,
+      "bytes": 547952,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_fullvideo",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full.mp4",
+      "expected_SHA256": "2babc971f0a2fad8c742a1bcb34a5d3697dccff1321609fe0fc13abe15892702",
+      "actual_SHA256": "2babc971f0a2fad8c742a1bcb34a5d3697dccff1321609fe0fc13abe15892702",
+      "match": true,
+      "bytes": 4726042,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_md",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/README.md",
+      "expected_SHA256": "8c09f7e6df7a8986592cdda89818b22ba9b287c57d0c8e6c6597157b65c832ac",
+      "actual_SHA256": "8c09f7e6df7a8986592cdda89818b22ba9b287c57d0c8e6c6597157b65c832ac",
+      "match": true,
+      "bytes": 6090,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_media",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full_reading_receipt.json",
+      "expected_SHA256": "d68501d079b6eafe82331b958efaf7fb3d9328b6cadae19dff25552fd0a6ff7d",
+      "actual_SHA256": "d68501d079b6eafe82331b958efaf7fb3d9328b6cadae19dff25552fd0a6ff7d",
+      "match": true,
+      "bytes": 75479,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_physics",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/support_release_physics_control_boundaries.csv",
+      "expected_SHA256": "e24dd916c80da40f9d8e32270f1e9f58623021270681e08fdb5e9a02f437154f",
+      "actual_SHA256": "e24dd916c80da40f9d8e32270f1e9f58623021270681e08fdb5e9a02f437154f",
+      "match": true,
+      "bytes": 645759,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_portable",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json",
+      "expected_SHA256": "e6e05360baf99640a8150f54d9dd55a46f593f758266737c6c2a0feb76b9eaf4",
+      "actual_SHA256": "e6e05360baf99640a8150f54d9dd55a46f593f758266737c6c2a0feb76b9eaf4",
+      "match": true,
+      "bytes": 13817,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_closed_read_archive.json",
+      "expected_SHA256": "a8c8766d700cf9c337429ba379b34e0ceb34afb8c1b43612978e8baaa3e7a1ed",
+      "actual_SHA256": "a8c8766d700cf9c337429ba379b34e0ceb34afb8c1b43612978e8baaa3e7a1ed",
+      "match": true,
+      "bytes": 39409,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_support_align_01_normal_reader.json",
+      "expected_SHA256": "8c10bd062577d111998a2fac2109656d3642978746fc0b5f4a55cb21e48adc44",
+      "actual_SHA256": "8c10bd062577d111998a2fac2109656d3642978746fc0b5f4a55cb21e48adc44",
+      "match": true,
+      "bytes": 11446,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher1_warning",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/GUI_shutdown_warning.json",
+      "expected_SHA256": "7a5164e3313c93737aec0265d4ff9389ee03a023474c8c148a989d9ee8bdfae8",
+      "actual_SHA256": "7a5164e3313c93737aec0265d4ff9389ee03a023474c8c148a989d9ee8bdfae8",
+      "match": true,
+      "bytes": 1182,
+      "bytes_match": true
+    },
+    {
+      "id": "temporal_profile",
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json",
+      "expected_SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "actual_SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "match": true,
+      "bytes": 1432,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher5",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_closed_data_cohort_01.json",
+      "expected_SHA256": "1c039df310f4474a7324e0071a24438268114c9f451f94cd5d8f26549d516631",
+      "actual_SHA256": "1c039df310f4474a7324e0071a24438268114c9f451f94cd5d8f26549d516631",
+      "match": true,
+      "bytes": 28268,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt_debug_cohort",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage7_GPT_closed_cohort.json",
+      "expected_SHA256": "1e2f878b34a9979b50b6e24620d6ccdec6f574161aa2bc32b6bee7a0ea168d05",
+      "actual_SHA256": "1e2f878b34a9979b50b6e24620d6ccdec6f574161aa2bc32b6bee7a0ea168d05",
+      "match": true,
+      "bytes": 33627,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt_debug_rows",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_04_closed_cohort/episodes.csv",
+      "expected_SHA256": "8ff96af356f9df6994e2a089bd48510928c14a28578b9a586e5f9ffaf2026d89",
+      "actual_SHA256": "8ff96af356f9df6994e2a089bd48510928c14a28578b9a586e5f9ffaf2026d89",
+      "match": true,
+      "bytes": 2850,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt_debug_manifest",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_04_closed_cohort/evidence_manifest.json",
+      "expected_SHA256": "a4c5f949d3ebc570f901e98105c278bcf6b1bbacf26f4236ca05fd38545f87c8",
+      "actual_SHA256": "a4c5f949d3ebc570f901e98105c278bcf6b1bbacf26f4236ca05fd38545f87c8",
+      "match": true,
+      "bytes": 709,
+      "bytes_match": true
+    },
+    {
+      "id": "p6_cpu",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_temporal_prompt_p6_qa_ready_20261027/contracts_result.json",
+      "expected_SHA256": "6c5fa79c264a6012f2f7571c1c780a4066a89cf8c982363ae3fa6f5fb72e9d47",
+      "actual_SHA256": "6c5fa79c264a6012f2f7571c1c780a4066a89cf8c982363ae3fa6f5fb72e9d47",
+      "match": true,
+      "bytes": 148739,
+      "bytes_match": true
+    },
+    {
+      "id": "p6_change",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_temporal_prompt_p6_qa_ready_20261027/change_audit.json",
+      "expected_SHA256": "18cdd58f86b96e7feb3ffd28de4e8d9230fa62332e4dde486b786a20e73cf483",
+      "actual_SHA256": "18cdd58f86b96e7feb3ffd28de4e8d9230fa62332e4dde486b786a20e73cf483",
+      "match": true,
+      "bytes": 10483,
+      "bytes_match": true
+    },
+    {
+      "id": "p6_review",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_temporal_prompt_p6_qa_independent_final_20261027/review.json",
+      "expected_SHA256": "627bb23e5ce9e276732afec5c1d9ff75a7026ad458893f40d94d92a8d396f4b5",
+      "actual_SHA256": "627bb23e5ce9e276732afec5c1d9ff75a7026ad458893f40d94d92a8d396f4b5",
+      "match": true,
+      "bytes": 5817,
+      "bytes_match": true
+    },
+    {
+      "id": "actual_observation_qa",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/temporal_public_qa_actual_D35/audit_summary.json",
+      "expected_SHA256": "1f4d48a65b0d78184ca0f05ea5af6f19e69b250e014ccb5935fc7b15303d9616",
+      "actual_SHA256": "1f4d48a65b0d78184ca0f05ea5af6f19e69b250e014ccb5935fc7b15303d9616",
+      "match": true,
+      "bytes": 3436,
+      "bytes_match": true
+    },
+    {
+      "id": "actual_observation_visible",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/temporal_public_qa_actual_D35/model_visible_assessment.json",
+      "expected_SHA256": "8f61e176bf4068afd09e5bff8663007577f55bee1410a37b408014e11dc3ea60",
+      "actual_SHA256": "8f61e176bf4068afd09e5bff8663007577f55bee1410a37b408014e11dc3ea60",
+      "match": true,
+      "bytes": 2046,
+      "bytes_match": true
+    },
+    {
+      "id": "actual_observation_manifest",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/temporal_public_qa_actual_D35/evidence_manifest.json",
+      "expected_SHA256": "f9e40e9074d97e676c2777b7a1b0552715799a56490520ca4342395f24ea0306",
+      "actual_SHA256": "f9e40e9074d97e676c2777b7a1b0552715799a56490520ca4342395f24ea0306",
+      "match": true,
+      "bytes": 4284,
+      "bytes_match": true
+    },
+    {
+      "id": "actual_observation_ledger",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/temporal_public_qa_actual_D35/ledger_actual_request_and_prefix.json",
+      "expected_SHA256": "02fac70c95ee50929cfa6731bf46e1570283d6d313065cd8c5fa4a5797f47b6f",
+      "actual_SHA256": "02fac70c95ee50929cfa6731bf46e1570283d6d313065cd8c5fa4a5797f47b6f",
+      "match": true,
+      "bytes": 4517,
+      "bytes_match": true
+    },
+    {
+      "id": "equivalence_58da",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_source_equivalence_58da857.json",
+      "expected_SHA256": "5e2b676f408ffa60273e171f1870879ce5125408c2287ba4b677a29b8e9116ce",
+      "actual_SHA256": "5e2b676f408ffa60273e171f1870879ce5125408c2287ba4b677a29b8e9116ce",
+      "match": true,
+      "bytes": 36800,
+      "bytes_match": true
+    },
+    {
+      "id": "ci_58da",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_ci_actual_58da857.json",
+      "expected_SHA256": "1ab64eb2a4a69768df20043e0bb53e2f35594549d0284228935edb73f761daba",
+      "actual_SHA256": "1ab64eb2a4a69768df20043e0bb53e2f35594549d0284228935edb73f761daba",
+      "match": true,
+      "bytes": 732,
+      "bytes_match": true
+    },
+    {
+      "id": "ci_58da_raw",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/runtime_ci_actual_58da857_raw_response.json",
+      "expected_SHA256": "5158cd613c5e24e3ab1c2788f81949521ca213eed0c82bafb6560f3f6d0fa238",
+      "actual_SHA256": "5158cd613c5e24e3ab1c2788f81949521ca213eed0c82bafb6560f3f6d0fa238",
+      "match": true,
+      "bytes": 11774,
+      "bytes_match": true
+    },
+    {
+      "id": "support_xy_receipt",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/XY_report_figure_receipt.json",
+      "expected_SHA256": "b2d5f39360fbfba6bceab6270bee78608c6f70347a4096890485916b0bb5388b",
+      "actual_SHA256": "b2d5f39360fbfba6bceab6270bee78608c6f70347a4096890485916b0bb5388b",
+      "match": true,
+      "bytes": 4080,
+      "bytes_match": true
+    },
+    {
+      "id": "finger_observability",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_04_finger_observability/summary.json",
+      "expected_SHA256": "06e4e615a81a07dea19e0fb83dc7eda21c60aaac2a83ab8c27ef9b89c9452713",
+      "actual_SHA256": "06e4e615a81a07dea19e0fb83dc7eda21c60aaac2a83ab8c27ef9b89c9452713",
+      "match": true,
+      "bytes": 74190,
+      "bytes_match": true
+    },
+    {
+      "id": "support_xy",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_v6_v7_comparison_20261027/teacher_v6_v7_XY_report.png",
+      "expected_SHA256": "503fc06ef75053d99028b93aa159e79c17449b56e1844a5742b8bac8d2aab610",
+      "actual_SHA256": "503fc06ef75053d99028b93aa159e79c17449b56e1844a5742b8bac8d2aab610",
+      "match": true,
+      "bytes": 125763,
+      "bytes_match": true
+    },
+    {
+      "id": "current_readme",
+      "path": "README.md",
+      "expected_SHA256": "48cfc85022b68a2b5c45fcd6f27d03f4dbfc0f12e75df852c0ada1fb40f15e48",
+      "actual_SHA256": "796c30348f3b288d257602e315109e5ba82386faba786a58419e9a10fa2e2246",
+      "match": false,
+      "bytes": 17784,
+      "bytes_match": false
+    },
+    {
+      "id": "current_project_readme",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/README.md",
+      "expected_SHA256": "c3a2376bdd6d2448fc461055f436c5a0f91b3ca59140b6f2dc8e71874c501985",
+      "actual_SHA256": "c3a2376bdd6d2448fc461055f436c5a0f91b3ca59140b6f2dc8e71874c501985",
+      "match": true,
+      "bytes": 11604,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher2_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_02_closed_read_archive.json",
+      "expected_SHA256": "567cf9cbc7573811c4126f2f466dfdf3a04a396e3912c3d29a9856df822cd02a",
+      "actual_SHA256": "567cf9cbc7573811c4126f2f466dfdf3a04a396e3912c3d29a9856df822cd02a",
+      "match": true,
+      "bytes": 39395,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher2_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_standard_v7_02_normal_reader.json",
+      "expected_SHA256": "7e3b4ab87ca424449df940162da38136f5547c3ae0ef4b230982f09ee4a79dec",
+      "actual_SHA256": "7e3b4ab87ca424449df940162da38136f5547c3ae0ef4b230982f09ee4a79dec",
+      "match": true,
+      "bytes": 11442,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher3_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_03_closed_read_archive.json",
+      "expected_SHA256": "07f9f1973e558785ba5340db66eff8621432b030ecdd8e523f9d74457b0125c5",
+      "actual_SHA256": "07f9f1973e558785ba5340db66eff8621432b030ecdd8e523f9d74457b0125c5",
+      "match": true,
+      "bytes": 39394,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher3_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_standard_v7_03_normal_reader.json",
+      "expected_SHA256": "daba1753b61e3c4107b541b17001442c3fc1a1f438661c5d8d0671bd82144477",
+      "actual_SHA256": "daba1753b61e3c4107b541b17001442c3fc1a1f438661c5d8d0671bd82144477",
+      "match": true,
+      "bytes": 11442,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher4_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_04_closed_read_archive.json",
+      "expected_SHA256": "70c6d6631254620bb143396b68b51d4fbe541817b4e41cfc4d1ebe05d64a01db",
+      "actual_SHA256": "70c6d6631254620bb143396b68b51d4fbe541817b4e41cfc4d1ebe05d64a01db",
+      "match": true,
+      "bytes": 39395,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher4_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_standard_v7_04_normal_reader.json",
+      "expected_SHA256": "c8271abdddc65a8936d895164618f395dd63f7a73701ab705b8a41a8334d23bb",
+      "actual_SHA256": "c8271abdddc65a8936d895164618f395dd63f7a73701ab705b8a41a8334d23bb",
+      "match": true,
+      "bytes": 11442,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher5_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_standard_v7_05_closed_read_archive.json",
+      "expected_SHA256": "dbc5f692e9f969a38f7cf92b5268a4f6ef29be25ab60663cd9e3c6a09d37b114",
+      "actual_SHA256": "dbc5f692e9f969a38f7cf92b5268a4f6ef29be25ab60663cd9e3c6a09d37b114",
+      "match": true,
+      "bytes": 39396,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher5_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_standard_v7_05_normal_reader.json",
+      "expected_SHA256": "7be8e808ed7aa3519b5ce148c97c321dab69a7a0cabef32cb8537948668698e0",
+      "actual_SHA256": "7be8e808ed7aa3519b5ce148c97c321dab69a7a0cabef32cb8537948668698e0",
+      "match": true,
+      "bytes": 11442,
+      "bytes_match": true
+    },
+    {
+      "id": "stage7_scope",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage7_snapshot.json",
+      "expected_SHA256": "7bb6a22ebe8b56875a7e0a1e7bb1152ddceec52cc790a85a0533abcef5b3ec2a",
+      "actual_SHA256": "7bb6a22ebe8b56875a7e0a1e7bb1152ddceec52cc790a85a0533abcef5b3ec2a",
+      "match": true,
+      "bytes": 4185,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt_debug_01_04",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_01_04_closed_cohort/summary.json",
+      "expected_SHA256": "20365c47b28825f51bb4da2fe0f01102f8b5b605afe64cb725f424d2613dc5a1",
+      "actual_SHA256": "20365c47b28825f51bb4da2fe0f01102f8b5b605afe64cb725f424d2613dc5a1",
+      "match": true,
+      "bytes": 31663,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_fullvideo",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_05_link6_collision_full.mp4",
+      "expected_SHA256": "5542cd8f78bfcbd18abe1adb640322bef5159d867c748e06d30cac7a7232bd55",
+      "actual_SHA256": "5542cd8f78bfcbd18abe1adb640322bef5159d867c748e06d30cac7a7232bd55",
+      "match": true,
+      "bytes": 2050385,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_media",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/gpt_debug_05_link6_collision_full_reading_receipt.json",
+      "expected_SHA256": "2c87338ca40939d674688cc153d6e3e7ccf095c1ded02c16da1b094dbdba22fb",
+      "actual_SHA256": "2c87338ca40939d674688cc153d6e3e7ccf095c1ded02c16da1b094dbdba22fb",
+      "match": true,
+      "bytes": 31441,
+      "bytes_match": true
+    },
+    {
+      "id": "reading_index",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/reading/reading_index.json",
+      "expected_SHA256": "4f5a7d3c3f2013e744cb0eb9340674c263b56ce03905d1b9011ffc3d8777c13a",
+      "actual_SHA256": "4f5a7d3c3f2013e744cb0eb9340674c263b56ce03905d1b9011ffc3d8777c13a",
+      "match": true,
+      "bytes": 211922,
+      "bytes_match": true
+    },
+    {
+      "id": "media_readme",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/media/README.md",
+      "expected_SHA256": "9e8907e02fb67a5ebb5ebb003d9f22fa9876ad912081e1743d796bf7736f7e85",
+      "actual_SHA256": "9e8907e02fb67a5ebb5ebb003d9f22fa9876ad912081e1743d796bf7736f7e85",
+      "match": true,
+      "bytes": 4169,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher_extra",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_temporal_release_01_closed_read_archive.json",
+      "expected_SHA256": "407d6d64243975133ba48717fe7629eff2ae45c3edeafab19cf10d79ade64f20",
+      "actual_SHA256": "407d6d64243975133ba48717fe7629eff2ae45c3edeafab19cf10d79ade64f20",
+      "match": true,
+      "bytes": 39421,
+      "bytes_match": true
+    },
+    {
+      "id": "teacher_extra_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/teacher_temporal_release_01_normal_reader.json",
+      "expected_SHA256": "425d29831ca9913a306950ac3e5af77561fa410f306ae526f8fde849969ea7d3",
+      "actual_SHA256": "425d29831ca9913a306950ac3e5af77561fa410f306ae526f8fde849969ea7d3",
+      "match": true,
+      "bytes": 11455,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_public",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/summary.json",
+      "expected_SHA256": "1794fd2732c67e79b2c7d754f93e418d011424ee50f47e7c8289baa46f466b9f",
+      "actual_SHA256": "1794fd2732c67e79b2c7d754f93e418d011424ee50f47e7c8289baa46f466b9f",
+      "match": true,
+      "bytes": 34028,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_public_manifest",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/evidence_manifest.json",
+      "expected_SHA256": "c13c017f832e5e04cc6c561e4274b55ee45624e380cbf6314de39a863e2fd3ef",
+      "actual_SHA256": "c13c017f832e5e04cc6c561e4274b55ee45624e380cbf6314de39a863e2fd3ef",
+      "match": true,
+      "bytes": 50099,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_public_md",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/README.md",
+      "expected_SHA256": "eaefa9a9823dcc34ee74bd51dca4fd44ab9733d73810c303e83859acc404fdf3",
+      "actual_SHA256": "eaefa9a9823dcc34ee74bd51dca4fd44ab9733d73810c303e83859acc404fdf3",
+      "match": true,
+      "bytes": 3873,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_closed_read_archive.json",
+      "expected_SHA256": "5656e6a6635ce69f022874f7fe395ee0c71fc8b04cc1db39094699cec7889158",
+      "actual_SHA256": "5656e6a6635ce69f022874f7fe395ee0c71fc8b04cc1db39094699cec7889158",
+      "match": true,
+      "bytes": 50715,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_reader",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/gpt_debug_05_normal_reader.json",
+      "expected_SHA256": "4777011bb2033cdd736e85b02bf451a9294a68efe6c5e398fb0b4f5e0891298f",
+      "actual_SHA256": "4777011bb2033cdd736e85b02bf451a9294a68efe6c5e398fb0b4f5e0891298f",
+      "match": true,
+      "bytes": 8638,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_ledger",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_perception/ledger_episode_and_closed_prefix.json",
+      "expected_SHA256": "1f711c9e9053438e45e8b52e731b79ad87eca72b1ade60ee93cd0570b1322b67",
+      "actual_SHA256": "1f711c9e9053438e45e8b52e731b79ad87eca72b1ade60ee93cd0570b1322b67",
+      "match": true,
+      "bytes": 156169,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_collision",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_collision_audit/summary.json",
+      "expected_SHA256": "7ce20cd424ca7b20143820af70fdb6deb366e66e68ecfc6f7ac6bdfefaa3bc6c",
+      "actual_SHA256": "7ce20cd424ca7b20143820af70fdb6deb366e66e68ecfc6f7ac6bdfefaa3bc6c",
+      "match": true,
+      "bytes": 10700,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_collision_md",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_collision_audit/README.md",
+      "expected_SHA256": "e05aaa1d2e6f6b4475aaab566023141dd3c19b0eb9393ddcafd03bab817effc2",
+      "actual_SHA256": "e05aaa1d2e6f6b4475aaab566023141dd3c19b0eb9393ddcafd03bab817effc2",
+      "match": true,
+      "bytes": 7239,
+      "bytes_match": true
+    },
+    {
+      "id": "gpt05_visible_geometry",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/gpt_debug_05_collision_audit/visual_geometry_addendum.md",
+      "expected_SHA256": "b848b512cc4a3b562364249b123f9ab66acbe06a4760c891efd902e1558a4fda",
+      "actual_SHA256": "b848b512cc4a3b562364249b123f9ab66acbe06a4760c891efd902e1558a4fda",
+      "match": true,
+      "bytes": 1827,
+      "bytes_match": true
+    },
+    {
+      "id": "replay05",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/summary.json",
+      "expected_SHA256": "37beb45fe0f382041819d211b2f145f1b0a1458c13f8517035f0adde31e235dc",
+      "actual_SHA256": "37beb45fe0f382041819d211b2f145f1b0a1458c13f8517035f0adde31e235dc",
+      "match": true,
+      "bytes": 27192,
+      "bytes_match": true
+    },
+    {
+      "id": "replay05_md",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/README.md",
+      "expected_SHA256": "5c2eb18b6ad13742864eab1d3f8ab813dd7384aae2b09d493191b0eec83739e4",
+      "actual_SHA256": "5c2eb18b6ad13742864eab1d3f8ab813dd7384aae2b09d493191b0eec83739e4",
+      "match": true,
+      "bytes": 2444,
+      "bytes_match": true
+    },
+    {
+      "id": "variant05",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_clearance_05_02_collision_audit/summary.json",
+      "expected_SHA256": "0206e1cbdce87d9b1c7017bf8da5d484682ccb3dc217581b55034e66c76dd688",
+      "actual_SHA256": "0206e1cbdce87d9b1c7017bf8da5d484682ccb3dc217581b55034e66c76dd688",
+      "match": true,
+      "bytes": 14170,
+      "bytes_match": true
+    },
+    {
+      "id": "variant05_read",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_clearance_05_02_closed_read_archive.json",
+      "expected_SHA256": "238878d9211632d7fec113abb9d60d2cecae4490c209e7d23ad874ba9df1f90a",
+      "actual_SHA256": "238878d9211632d7fec113abb9d60d2cecae4490c209e7d23ad874ba9df1f90a",
+      "match": true,
+      "bytes": 32962,
+      "bytes_match": true
+    },
+    {
+      "id": "variant05_md",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_clearance_05_02_collision_audit/README.md",
+      "expected_SHA256": "c0671e0de2628f7a1102badf3c9ae13db4070677bc02dfc2fe6f2338046404bf",
+      "actual_SHA256": "c0671e0de2628f7a1102badf3c9ae13db4070677bc02dfc2fe6f2338046404bf",
+      "match": true,
+      "bytes": 1699,
+      "bytes_match": true
+    },
+    {
+      "id": "p7_cpu",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_fixed_side_detail_p7_20261027/release/change_audit.json",
+      "expected_SHA256": "f9afa99218c4d9a8fd70e5f06ec43d40093b3c261cd8f766d17e7759ba10ab6c",
+      "actual_SHA256": "f9afa99218c4d9a8fd70e5f06ec43d40093b3c261cd8f766d17e7759ba10ab6c",
+      "match": true,
+      "bytes": 7084,
+      "bytes_match": true
+    },
+    {
+      "id": "p7_bounds",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_fixed_side_detail_p7_20261027/release/closed_context_bounds/summary.json",
+      "expected_SHA256": "844e52ca8bc60a81206927edd7b282c6784f05b4b83c1f32b3287e607806f4cf",
+      "actual_SHA256": "844e52ca8bc60a81206927edd7b282c6784f05b4b83c1f32b3287e607806f4cf",
+      "match": true,
+      "bytes": 58686,
+      "bytes_match": true
+    },
+    {
+      "id": "p7_review",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_fixed_side_detail_p7_independent_review_20261027/review.json",
+      "expected_SHA256": "1cd14782add45420b156155e6f759a6223335012a7f36ff64b6326bd8b9c027a",
+      "actual_SHA256": "1cd14782add45420b156155e6f759a6223335012a7f36ff64b6326bd8b9c027a",
+      "match": true,
+      "bytes": 8883,
+      "bytes_match": true
+    },
+    {
+      "id": "p7_preview",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/camera/fixed_side_detail_P7_D24_preview/artifact_manifest.json",
+      "expected_SHA256": "579d417aa86bc7e2aaba3bba35b294a8f7868387c6ab49d93987843c934592f6",
+      "actual_SHA256": "579d417aa86bc7e2aaba3bba35b294a8f7868387c6ab49d93987843c934592f6",
+      "match": true,
+      "bytes": 3744,
+      "bytes_match": true
+    },
+    {
+      "id": "ci37_raw",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/validation/CI37_actual_20261027.json",
+      "expected_SHA256": "cd8252781f41f809f576991862a83145c7c835fe56bafb84b869dee884b22571",
+      "actual_SHA256": "cd8252781f41f809f576991862a83145c7c835fe56bafb84b869dee884b22571",
+      "match": true,
+      "bytes": 13099,
+      "bytes_match": true
+    },
+    {
+      "id": "ci37",
+      "path": "docs/lab_cuvette_loading/Project_v1_1/report/stage7_CI37_receipt.json",
+      "expected_SHA256": "a523a30011ff6328f5602b6a42cb45acd7433e3403c0547369e977da7a59103c",
+      "actual_SHA256": "a523a30011ff6328f5602b6a42cb45acd7433e3403c0547369e977da7a59103c",
+      "match": true,
+      "bytes": 568,
+      "bytes_match": true
+    },
+    {
+      "id": "p7_profile",
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json",
+      "expected_SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "actual_SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "match": true,
+      "bytes": 2258,
+      "bytes_match": true
+    }
+  ]
+}

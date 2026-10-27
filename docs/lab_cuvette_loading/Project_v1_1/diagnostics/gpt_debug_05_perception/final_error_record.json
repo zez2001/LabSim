@@ -1,0 +1,160 @@
+{
+  "event": "error",
+  "code": "SAFETY_ACTION_STOPPED",
+  "http_status": null,
+  "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+  "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2880",
+  "simulation_time_s": 48.016666666666666,
+  "model_tool_calls": [
+    {
+      "name": "move_ee",
+      "arguments": "{\"action_id\":\"a25\",\"duration_s\":2,\"episode_id\":\"23702d4d-6791-414c-bc4c-cd2cc8276d44\",\"frame\":\"world\",\"mode\":\"ee_delta\",\"observation_id\":\"23702d4d-6791-414c-bc4c-cd2cc8276d44:2880\",\"values\":[0.035,0,0,0,0,0]}",
+      "call_id": "call_e0ec29d4a8194764ab0714316c5622ae"
+    }
+  ],
+  "action_receipt": {
+    "action_id": "gpt:ee00e2a5e1cb939ae4e36fbcceac8e93325d2c70ebdc0bae71723fd62d270612",
+    "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+    "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2880",
+    "accepted": true,
+    "execution_finished": true,
+    "target_reached": false,
+    "safety_stopped": true,
+    "completed": true,
+    "completed_semantics": "Execution interval ended; target_reached independently measures actual endpoint.",
+    "requested_duration_s": 2.0,
+    "executed_duration_s": 1.8999999999999986,
+    "executed_control_ticks": 114,
+    "partial_execution": true,
+    "simulation_time_before": 48.016666666666666,
+    "requested_start_TCP": {
+      "position_m": [
+        0.18492637576778254,
+        -0.15488356141743756,
+        1.1178353472804041
+      ],
+      "quaternion_wxyz": [
+        -0.0004313962385853199,
+        0.7070151515339649,
+        -0.7071982570013651,
+        0.00012121436067674671
+      ]
+    },
+    "requested_target_TCP": {
+      "position_m": [
+        0.21992637576778254,
+        -0.15488356141743756,
+        1.1178353472804041
+      ],
+      "quaternion_wxyz": [
+        -0.0004313962385853199,
+        0.7070151515339649,
+        -0.7071982570013651,
+        0.00012121436067674671
+      ]
+    },
+    "maximum_position_tracking_error_m": 0.0003877758535659589,
+    "maximum_orientation_tracking_error_rad": 0.0037796938240858492,
+    "stop_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "control_steps_before": 2880,
+    "physics_steps_before": 11524,
+    "plan": {
+      "planned_ticks": 120,
+      "requested_ticks": 120,
+      "maximum_FK_position_error_m": 3.597533769998862e-16,
+      "maximum_FK_orientation_error_rad": 7.225231076755581e-16,
+      "maximum_joint_step_rad": 0.0021003435150621086,
+      "wall_seconds": 0.9018806939711794,
+      "scope": "Continuous kinematics only; not collision or dynamics certification",
+      "FK_goal_scope": "nominal + frozen current robot tracking estimate",
+      "runtime_feedback_revalidation": true
+    },
+    "status": "STOPPED",
+    "executed_physics_steps": 456,
+    "incomplete_control_interval": false,
+    "simulation_time_after": 49.916666666666664,
+    "observation_id_after": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2994",
+    "successor_observation_available": true,
+    "actual_endpoint_valid": true,
+    "actual_endpoint_TCP": {
+      "position_m": [
+        0.2178959753701977,
+        -0.1547928805444435,
+        1.117721521437311
+      ],
+      "quaternion_wxyz": [
+        -0.0016926037413971474,
+        0.7079383452752661,
+        -0.7062719186821065,
+        0.0006412975820216042
+      ]
+    },
+    "TCPpose": {
+      "position_m": [
+        0.2178959753701977,
+        -0.1547928805444435,
+        1.117721521437311
+      ],
+      "quaternion_wxyz": [
+        -0.0016926037413971474,
+        0.7079383452752661,
+        -0.7062719186821065,
+        0.0006412975820216042
+      ]
+    },
+    "final_position_error_m": 0.002035609274344045,
+    "final_orientation_error_rad": 0.0037796938240858492,
+    "tracking_error_coverage_complete": true,
+    "tracking_error_sampling": "completed control boundaries; not a physics-substep maximum",
+    "target_reached_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+    "requested_gripper_opening_m": 0.009,
+    "applied_gripper_opening_m": 0.008999999999999994,
+    "requested_effort_limit_N": 4.0,
+    "applied_effort_limit_N": 4.0,
+    "stop_domain": "safety",
+    "endpoint_tolerances": {
+      "position_m": 0.001,
+      "orientation_rad": 0.008726646259971648
+    },
+    "wall_seconds": 15.186020351015031,
+    "terminated": true,
+    "gripper_opening_m": 0.010616082232445478
+  },
+  "response_id": "resp_04150aff5113b45c016adfe3dc24908199be38614ddb615136",
+  "request_id": "218dd838-59f3-4e21-a34a-6684774e3e0a",
+  "decision_index": 24,
+  "request_label": "policy:23702d4d-6791-414c-bc4c-cd2cc8276d44:2880:decision24",
+  "observation_artifacts": {
+    "manifest_path": "observations/decision_000024/manifest.json",
+    "manifest_sha256": "812ed8aeb6fcd763a268b9df5f27b8aa6921bafab27d632c9f2c05d3a8c53042",
+    "public_observation": {
+      "path": "observations/decision_000024/public_observation.json",
+      "sha256": "c38c47d9286cd4277b1ae6cf5c15744e9e3b56f90e018bd1bf23a08a4b52187d",
+      "bytes": 5918
+    },
+    "images": [
+      {
+        "camera_name": "side_camera",
+        "path": "observations/decision_000024/side_camera.jpg",
+        "sha256": "45e715c0d80a0c8fcb4354e9a2566f7f5a12dfef6b90073f350d751fb910c3ab",
+        "bytes": 13022,
+        "content_type": "image/jpeg",
+        "resolution_wh": [
+          640,
+          480
+        ]
+      },
+      {
+        "camera_name": "wrist_camera",
+        "path": "observations/decision_000024/wrist_camera.jpg",
+        "sha256": "155a65381906056c3339fac9ceb081c90a929efbf53d87cc868478c858d12360",
+        "bytes": 13396,
+        "content_type": "image/jpeg",
+        "resolution_wh": [
+          640,
+          480
+        ]
+      }
+    ]
+  }
+}

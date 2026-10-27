@@ -2,9 +2,9 @@
 
 `lab_cuvette_loading` 的独立执行版本：Franka 从白色 6×6 来源架取出比色皿，搬运至单台开盖仪器的内部 A 座，插入、交接支撑、松爪、撤离，再观察至少 3 秒。提供确定性 teacher、GPT 图像控制、本地 policy RPC、连续录像、H5 采集和独立判分。
 
-本版本复用原资产与物理基线，增加连续 IK、动作执行回执、机器人状态跟踪补偿与接触保持。teacher 可以使用器皿真值；GPT 只接收公开 RGB、机器人状态、相机标定与指端接触。二者的控制能力和成绩分别记录。场景包含工程假设，`real_calibrated=false`；尺寸适配任务成功不等于原型号配套或真实仪器校准。
+本版本复用原资产与物理基线，增加连续 IK、动作执行回执、机器人状态跟踪补偿与接触保持。teacher 可以使用器皿真值；GPT 只接收公开 RGB、机器人状态、相机标定与指端接触。二者的控制能力和成绩分别记录。公开 `finger_contact_N` 是按器皿过滤的左右指法向接触向量模长，不能解释为全物体触觉、摩擦力或目标底部支撑力。场景包含工程假设，`real_calibrated=false`；尺寸适配任务成功不等于原型号配套或真实仪器校准。
 
-[项目首页](../../../README.md) · [完整 teacher 录像](media/teacher_support_align_01_full.mp4) · [首条成功与便携读取证据](diagnostics/teacher_support_align_01_support_portability_audit/README.md) · [公开图像历史输入与 P6](public_temporal_visual_context_v1.md)
+[项目首页](../../../README.md) · [完整 teacher 录像](media/teacher_support_align_01_full.mp4) · [首条成功与便携读取证据](diagnostics/teacher_support_align_01_support_portability_audit/README.md) · [公开图像历史输入与 P6](public_temporal_visual_context_v1.md) · [固定侧视细节候选 P7](fixed_side_detail_P7.md)
 
 ## 运行准备
 
@@ -64,7 +64,7 @@ export LABSIM_ASSET_ROOT=/absolute/path/to/labsim-asset-install
 
 每次运行的 `summary.json` 汇总逐集结果；`episode_0000/` 内包含 `result.json`、`independent_score.json`、连续 `side_camera.mp4 / wrist_camera.mp4 / dual_view.mp4`，以及 `dataset/episode_0000.h5`、实际动作/状态/接触/事件。等待进程关闭后读取，不打开仍在写入的 H5。完整成功必须有实际松爪、脱指、撤离与后续稳定；到达阶段或返回 `finish` 不等于成功。
 
-已关闭的 `teacher_support_align_01` 保存完整成功及 7,539 个 transition；原 H5 无外部 HDF5 数据依赖，已通过正常 ACT/DP batch 和替代路径读取。见[便携验收](diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json)。该 H5 约 1.94 GB，未放入精简阅读包；这不是跨机器部署或训练验证，也不预先宣称后续五次完成。
+已关闭的 `teacher_support_align_01` 保存完整成功及 7,539 个 transition；原 H5 无外部 HDF5 数据依赖，已通过正常 ACT/DP batch 和替代路径读取。见[便携验收](diagnostics/teacher_support_align_01_support_portability_audit/portable_success_acceptance.json)。该 H5 约 1.94 GB，未放入精简阅读包。[固定场景回归及关闭后读取汇总](diagnostics/teacher_standard_v7_closed_data_cohort_01.json)记录五个独立进程的完整成功；相同初态的重复运行不代表一般场景成功概率。这不是跨机器部署或训练验证。
 
 ## GPT-6 Astra
 
@@ -91,7 +91,11 @@ unset CUBENCE_API_KEY
 - `config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json`：P4、两个完整回合、640 / high。
 - `config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json`：显式启用 **P6**，两个完整回合、640 / high，额外附上一不同观测及首次公开双侧接触的腕图，去重后总计最多四图。
 
-P6 当前是候选控制提示，不能据 CPU 检查声称完整任务成功。它要求入口接触敏感区和接近底部时以最多 100 µm 的下降请求、最多 1 mm/s 再观察；这是模型应遵守的指令，**没有修改通用动作上限、自动阶段、物理或评分**，也不保证实际位移精度。历史接触参考不是有效抓取或承托标签。完整输入、精确 JPEG 与适配边界见[实现说明](public_temporal_visual_context_v1.md)。闭合旧公开帧的一次[观察 QA](camera/temporal_public_qa_d35_plan/README.md)是独立诊断，不是控制任务。
+- `config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json`：显式启用 **P7**，一个完整工具回合、当前双图原样保留、固定侧图局部细节及最多一张公开接触历史腕图，总计三至四图。固定裁剪只来自已有 JPEG，不能增加传感器分辨率或物理精度；这是与 P6 分开的组合候选。
+
+- `config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view.json`：**P8** 复用 P7 的图像和工具，仅增加通用主动观察提示；在下一局部动作有可见净空依据时换视角再观察，不提供目标坐标、路线或自动动作。见[主动观察说明](public_active_view_p8.md)。
+
+P6/P7/P8 是候选控制提示，不能据 CPU 检查声称完整任务成功。P6 要求入口接触敏感区和接近底部时以最多 100 µm 的下降请求、最多 1 mm/s 再观察；这是模型应遵守的指令，**没有修改通用动作上限、自动阶段、物理或评分**，也不保证实际位移精度。历史接触参考不是有效抓取或承托标签。完整输入、精确 JPEG 与适配边界见[实现说明](public_temporal_visual_context_v1.md)。闭合旧公开帧的一次[观察 QA](camera/temporal_public_qa_d35_plan/README.md)是独立诊断，不是控制任务。
 
 所有配置继续共享上面的旧预算文件，保留已有费用与未知 usage 预留；硬上限为估算 $30 / 1500 网络请求。默认单集最多 160 次逻辑模型调用，超时重试也消耗网络配额；估算不等于供应商账单。先获得真实完整成功后再冻结正式评测，调试、服务错误、物理异常和正式成绩分开。不要创建空账本来重置预算。
 

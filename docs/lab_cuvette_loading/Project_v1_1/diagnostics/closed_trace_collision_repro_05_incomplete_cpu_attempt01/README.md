@@ -1,0 +1,1 @@
+Incomplete CPU analysis attempt. A CSV writer accumulator-key mismatch interrupted output formatting; no physical experiment or API was run and no source file was modified. This partial CSV is not the final comparison. The corrected complete comparison is in the sibling closed_trace_collision_repro_05 directory.

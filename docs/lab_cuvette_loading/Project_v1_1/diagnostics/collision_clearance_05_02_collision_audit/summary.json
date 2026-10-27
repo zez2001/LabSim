@@ -1,0 +1,374 @@
+{
+  "schema": "labsim.Project_v1_1.closed_clearance_intervention.v1",
+  "created_utc": "2026-10-27T00:30:10.583230+00:00",
+  "run": "collision_clearance_05_02",
+  "proof": {
+    "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02",
+    "process_exited": true,
+    "pid": 1423786,
+    "exit_code": 0,
+    "wall_seconds": 479.5217712080339,
+    "command": [
+      "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+      "-m",
+      "demos.lab_cuvette_project_v1_1.closed_trace_probe",
+      "--source",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/gpt_control/policy_trace.jsonl",
+      "--proof",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/process_exit.json",
+      "--prefix-actions",
+      "24",
+      "--suffix-plan",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/diagnostic_inputs_collision_05_01/manual_raise_clearance_suffix.json",
+      "--headless",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02"
+    ],
+    "checkout": "/tmp/labsim-project-v1-1-clean-20261027",
+    "runtime_commit": "cd827ed70f7da4b2d06a766db4136e459a39b64b",
+    "completion_evidence": "Observed Popen.wait after native process actually exited",
+    "utc": "2026-10-27T00:27:09.028998+00:00"
+  },
+  "source_trace_SHA256": "4c95935cd004185decb19ba01a436b5072aea8765eaf7db93a523fcca7090c59",
+  "derived_plan_SHA256": "23cbfa7ac27405d28329301103cf8df1ef88aa93befc9f44eb01846b0f3593cb",
+  "model_calls": 0,
+  "is_GPT_attempt": false,
+  "full_loading_training_admission": false,
+  "common_prefix": {
+    "source_run": "gpt_debug_05",
+    "source_action_count": 24,
+    "matched_physics_rows": 11525,
+    "first_step": 0,
+    "last_step": 11524,
+    "terminal_common_prefix_t": 48.016666666666666,
+    "fields": [
+      {
+        "field": "joints9",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "command_q9",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "actual_tcp_position_m",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "actual_tcp_quaternion_wxyz",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "object_position_m",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "object_quaternion_wxyz",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "cup_in_hand_position_m",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "cup_in_hand_quaternion_wxyz",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 0.0,
+        "unequal_rows": 0
+      },
+      {
+        "field": "finger_contact_N",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 4.76837158203125e-07,
+        "unequal_rows": 2607
+      },
+      {
+        "field": "finger_normal_force_on_cup_N",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 3.5762786865234375e-07,
+        "unequal_rows": 6672
+      },
+      {
+        "field": "finger_friction_force_on_cup_N",
+        "matched_numeric_rows": 11525,
+        "both_null_rows": 0,
+        "max_component_abs_difference": 8.940696716308594e-08,
+        "unequal_rows": 7334
+      }
+    ],
+    "method": "Exact physics_step pair within common prefix only; no interpolation, no null substitution; suffix deliberately differs."
+  },
+  "declared_suffix_actual_execution": [
+    {
+      "plan_action_index": 24,
+      "suffix_index": 0,
+      "tool": "move_ee",
+      "declared_values_json": "[0.0, 0.0, 0.04, 0.0, 0.0, 0.0]",
+      "declared_frame": "world",
+      "requested_duration_s": 2.0,
+      "actually_started": true,
+      "target_reached": true,
+      "executed_control_ticks": 120,
+      "executed_physics_steps": 480,
+      "actual_duration_s": 2.0,
+      "actual_Z_displacement_m": 0.03999495513690743,
+      "terminal_reason": "INTERVAL_FINISHED"
+    },
+    {
+      "plan_action_index": 25,
+      "suffix_index": 1,
+      "tool": "move_ee",
+      "declared_values_json": "[0.0, 0.0, 0.04, 0.0, 0.0, 0.0]",
+      "declared_frame": "world",
+      "requested_duration_s": 2.0,
+      "actually_started": true,
+      "target_reached": false,
+      "executed_control_ticks": 60,
+      "executed_physics_steps": 240,
+      "actual_duration_s": 1.0,
+      "actual_Z_displacement_m": 0.01986893980374993,
+      "terminal_reason": "ROBOT_ENVIRONMENT_COLLISION"
+    },
+    {
+      "plan_action_index": 26,
+      "suffix_index": 2,
+      "tool": "move_ee",
+      "declared_values_json": "[0.035, 0.0, 0.0, 0.0, 0.0, 0.0]",
+      "declared_frame": "world",
+      "requested_duration_s": 2.0,
+      "actually_started": false,
+      "target_reached": null,
+      "executed_control_ticks": null,
+      "executed_physics_steps": null,
+      "actual_duration_s": null,
+      "actual_Z_displacement_m": null,
+      "terminal_reason": "NOT_EXECUTED"
+    },
+    {
+      "plan_action_index": 27,
+      "suffix_index": 3,
+      "tool": "wait",
+      "declared_values_json": "null",
+      "declared_frame": null,
+      "requested_duration_s": 3.0,
+      "actually_started": false,
+      "target_reached": null,
+      "executed_control_ticks": null,
+      "executed_physics_steps": null,
+      "actual_duration_s": null,
+      "actual_Z_displacement_m": null,
+      "terminal_reason": "NOT_EXECUTED"
+    }
+  ],
+  "actual_total_Z_lift_before_stop_m": 0.05986389494065736,
+  "first_forbidden_contact": {
+    "row_index": 66759,
+    "physics_step": 12243,
+    "t": 51.0125,
+    "phase": "POLICY",
+    "colliders": [
+      "/World/Franka/panda_link7/geometry/panda_link7",
+      "/World/Instrument/Collision/SourceMesh5"
+    ],
+    "type": "ContactEventType.CONTACT_FOUND",
+    "points": [
+      {
+        "position_m": [
+          0.25931236147880554,
+          -0.15911172330379486,
+          1.313000202178955
+        ],
+        "normal_raw": [
+          -0.5210592150688171,
+          0.003790410468354821,
+          -0.8535121083259583
+        ],
+        "impulse_raw_Ns": [
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        "force_raw_N": [
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        "separation_m": 7.259286940097809e-05,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      },
+      {
+        "position_m": [
+          0.25931236147880554,
+          -0.13404588401317596,
+          1.313000202178955
+        ],
+        "normal_raw": [
+          -0.5210592150688171,
+          0.003790410468354821,
+          -0.8535121083259583
+        ],
+        "impulse_raw_Ns": [
+          -0.0780302956700325,
+          0.0005676262080669403,
+          -0.12781620025634766
+        ],
+        "force_raw_N": [
+          -18.7272709608078,
+          0.13623028993606567,
+          -30.675888061523438
+        ],
+        "separation_m": -2.2415071725845337e-05,
+        "force_raw_convention": "PhysX callback collider convention retained; not independently force-on-cup signed"
+      }
+    ],
+    "possible_duplicate_same_step": false,
+    "forbidden_robot_environment": true,
+    "association": "before_step declares current executing physics step; callback not used to doublecount tensor forces"
+  },
+  "first_forbidden_time_s": 51.0125,
+  "control_interval_terminal_time_s": 51.016666666666666,
+  "first_callback_to_control_interval_end_s": 0.004166666666662877,
+  "native_rows_fully_read": 66772,
+  "native_forbidden_event_rows": 2,
+  "native_decoded_SHA256": "6015435009b6e164c258a77c06f3deb426dc331c698a33c98f0a644cc7dfdafd",
+  "native_decoded_bytes": 219803521,
+  "original_result": {
+    "task_success": false,
+    "failure_type": "SAFETY_COLLISION",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true,
+    "source_slot_cleared": true,
+    "grasp_success": true,
+    "transport_success": true,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ]
+  },
+  "post_retreat_window": {
+    "status": "unavailable",
+    "stable": null,
+    "sample_count": 0,
+    "reason": "actual_gripper_retreat_not_observed"
+  },
+  "normal_reader_checks": {
+    "success": {
+      "admitted": false,
+      "rejection": "No eligible episodes from which to infer recorded image shape",
+      "expected_admission": false,
+      "base_filter_reason": "not_task_success"
+    },
+    "failure": {
+      "admitted": false,
+      "rejection": "Unknown condition group: 63e4428a-1a18-4eaa-9ebe-33c19bc97ce6",
+      "expected_admission": false,
+      "base_filter_reason": "accepted"
+    },
+    "all_valid": {
+      "admitted": false,
+      "rejection": "Unknown condition group: 63e4428a-1a18-4eaa-9ebe-33c19bc97ce6",
+      "expected_admission": false,
+      "base_filter_reason": "accepted"
+    }
+  },
+  "closed_archive_audit_SHA256": "238878d9211632d7fec113abb9d60d2cecae4490c209e7d23ad874ba9df1f90a",
+  "interpretation": "The first40mm upward request completed. The second40mm upward request collided with the same lid geometry via panda_link7 after only about19.869mm more actual lift. The planned80mm lift, subsequentX35mm andwait were not completed/executed. This does not establish a safe raised route or a successful loading task.",
+  "limits": [
+    "The native callback reports contact candidates and actual raw impulse/force separately. One first-event point has positive separation and zero impulse; the other has negative22.415um separation and nonzero impulse.",
+    "Raw callback force convention and effective-cooked-collision/calibration limitations are unchanged.",
+    "This is one explicit offline collision control, not policy performance or a route supplied to GPT.",
+    "Original scores and null post-retreat semantics remain unchanged."
+  ],
+  "source_artifacts": {
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/process_exit.json": {
+      "SHA256": "548235957900bcfab915d4a3dc5359c4d457e7a71445f74e44fdc79e3d6a1874",
+      "bytes": 1240
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/run_manifest.json": {
+      "SHA256": "d0cb5b433b59e5c110b41ce0df1379f61fd589dc4c1ebf5cc5c5d58a9b69901a",
+      "bytes": 2933
+    },
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/collision_clearance_05_02_closed_read_archive.json": {
+      "SHA256": "238878d9211632d7fec113abb9d60d2cecae4490c209e7d23ad874ba9df1f90a",
+      "bytes": 32962
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/derived_plan.json": {
+      "SHA256": "f9fa4581e47cca951f5c93cd289f4ce446668d14f9adba455bb7054356a8eee4",
+      "bytes": 62610
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/diagnostic_summary.json": {
+      "SHA256": "dede7aad1cfc2bcda19b846b0d19ce9726a7f1f0e2d8da0c4ece9e8171a8b6ec",
+      "bytes": 169417
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/replay_receipts.json": {
+      "SHA256": "a9316ede1f0971b35ec16b53407c3d62ac2fedcaa2b8e2eb8a61f33ad233b151",
+      "bytes": 152317
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/episode_0000/result.json": {
+      "SHA256": "582f52b7f48b9d2b24d4d90eec0e651d9f22f1ede04145fec9f63858037804b3",
+      "bytes": 7020
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/episode_0000/independent_score.json": {
+      "SHA256": "135587fef2086eba126557972e03a3a7c8bb135135c9d601d16621ca8365d374",
+      "bytes": 6474
+    },
+    "docs/lab_cuvette_loading/Project_v1_1/validation/collision_clearance_05_02_normal_reader.json": {
+      "SHA256": "3d9e2a9852f2cfda50d7bb366e4e36c8730136b21ec0d9cbccf9b4c89e0badab",
+      "bytes": 1769
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/episode_0000/native_contact_events.jsonl.gz": {
+      "SHA256": "25bd1ef1bb2611501ef4f0508d2a8979379710a81d9067ff66346a9990bd141a",
+      "bytes": 35823211
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/physics_records.jsonl.gz": {
+      "SHA256": "b23f9dc9cb95ce6eb202b570595fa0d07fa2ac85e58b62b0f483a604759cdbfb",
+      "bytes": 65263349
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/episode_0000/physics_records.jsonl.gz": {
+      "SHA256": "c1e9963904351127fb966193d9df8625b387d6bbd1478f99b0274a903d52cc9c",
+      "bytes": 66684402
+    },
+    "docs/lab_cuvette_loading/Project_v1_1/diagnostics/closed_trace_collision_repro_05/summary.json": {
+      "SHA256": "37beb45fe0f382041819d211b2f145f1b0a1458c13f8517035f0adde31e235dc",
+      "bytes": 27192
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/diagnostic_summary.json": {
+      "SHA256": "0c7a5f16eb7f828338a56e635c6fd0abf189a5029d82705026f5da7e3e9b8791",
+      "bytes": 163715
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/episode_0000/result.json": {
+      "SHA256": "2b51e54a88f80886dfadde2afa3dae51c4901b3c4fa7792ea3808a2581ced129",
+      "bytes": 7069
+    }
+  },
+  "GPU_used": false,
+  "API_calls": 0
+}

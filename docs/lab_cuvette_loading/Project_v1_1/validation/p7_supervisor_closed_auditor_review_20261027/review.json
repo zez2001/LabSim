@@ -1,0 +1,121 @@
+{
+  "schema": "labsim.Project_v1_1.P7_supervisor_readonly_review.v1",
+  "reviewed_utc": "2026-10-27T00:35:44.225572+00:00",
+  "reviewed_script": "/tmp/labsim-project-v1-1-p7-gpt06-then-teacher-supervisor.py",
+  "script_SHA256": "9fde1a79315f5a2290ce9d36891fad57c8de4047b01a5910a3c849053953d5d2",
+  "target_runtime_commit": "9a4713cf8c71bed4d697625ab052b378608780cc",
+  "actual_teacher_output_name": "teacher_p7_regression_01",
+  "plan_only_exercise": {
+    "returncode": 0,
+    "no_output_created": true,
+    "credential_function_replaced_with_failure": true,
+    "git_function_replaced_with_failure": true,
+    "Popen_replaced_with_failure": true,
+    "actual_plan": {
+      "plan_only": true,
+      "target_sha": "9a4713cf8c71bed4d697625ab052b378608780cc",
+      "waiting_for": [
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/process_exit.json",
+        "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/process_exit.json"
+      ],
+      "commands": [
+        [
+          "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+          "-m",
+          "demos.lab_cuvette_project_v1_1.run",
+          "--backend",
+          "gpt6",
+          "--episodes",
+          "1",
+          "--headless",
+          "--provider-config",
+          "/tmp/labsim-project-v1-1-clean-20261027/config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json",
+          "--budget-ledger",
+          "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+          "--output",
+          "/tmp/labsim-p7-independent-plan-only-never-created-20261027-GPT"
+        ],
+        [
+          "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+          "-m",
+          "demos.lab_cuvette_project_v1_1.run",
+          "--backend",
+          "teacher",
+          "--episodes",
+          "1",
+          "--headless",
+          "--output",
+          "/tmp/labsim-p7-independent-plan-only-never-created-20261027-teacher"
+        ]
+      ],
+      "automatic_formal_launch": false,
+      "credential_read": false,
+      "clean_checkout_updated": false
+    }
+  },
+  "actual_closed_prerequisites": {
+    "collision_replay_05_01": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/collision_replay_05_01/process_exit.json",
+      "SHA256": "ab35b0e0a876dcc262c7098943a5414375180e27c5c3f03376d5c02990bdcae5",
+      "pid": 1390431,
+      "process_exited": true,
+      "exit_code": 0,
+      "PID_gone": true
+    },
+    "collision_clearance_05_02": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/collision_clearance_05_02/process_exit.json",
+      "SHA256": "548235957900bcfab915d4a3dc5359c4d457e7a71445f74e44fdc79e3d6a1874",
+      "pid": 1423786,
+      "process_exited": true,
+      "exit_code": 0,
+      "PID_gone": true
+    }
+  },
+  "parent_metadata_checked_only": {
+    "path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_06_sequence_state.json",
+    "target_sha": "9a4713cf8c71bed4d697625ab052b378608780cc",
+    "first_job_name": "gpt_debug_06",
+    "same_existing_ledger_path": true,
+    "automatic_formal_launch": false
+  },
+  "credential_metadata_only": {
+    "file_outside_repositories": true,
+    "regular_non_symlink": true,
+    "owner_uid_matches": true,
+    "mode_octal": "0600",
+    "contents_read_by_reviewer": false
+  },
+  "review_findings": {
+    "default_plan_requires_execute_to_read_credential_or_update_checkout": true,
+    "clean_checkout_ff_only_and_exact_HEAD_before_children": true,
+    "each_child_waited_and_PID_gone_before_proof_and_successor": true,
+    "standard_reset_seed_default": 0,
+    "episodes_per_child": 1,
+    "teacher_and_GPT_same_source": true,
+    "old_ledger_not_created_reset_or_written_by_supervisor": true,
+    "GPT_only_child_env_key": true,
+    "teacher_key_removed": true,
+    "two_jobs_only_no_formal_auto": true,
+    "actual_fixed_parameter_launch_has_no_blocking_issue": true
+  },
+  "optional_custom_parameter_hardening_notes": [
+    "closed_proof exit_code!=0 does not separately reject boolean False; actual current proofs have integer zero and are verified.",
+    "Custom distinct output paths are not explicitly checked for mutual nesting or parent symlinks; actual default output paths are distinct new siblings."
+  ],
+  "closed_cpu_auditor": {
+    "launch_record": "closed_CPU_auditor_launch.json",
+    "PID": 1528735,
+    "expected_runtime_commit": "9a4713cf8c71bed4d697625ab052b378608780cc",
+    "names": [
+      "gpt_debug_06",
+      "teacher_p7_regression_01"
+    ],
+    "only_metadata_before_actual_proof_and_PID_gone": true,
+    "one_helper_attempt_per_closed_job": true,
+    "original_P6_helper_unmodified": true
+  },
+  "GPU_started_by_review": false,
+  "API_called_by_review": false,
+  "active_episode_H5_raw_or_images_read": false,
+  "source_or_supervisor_modified": false
+}

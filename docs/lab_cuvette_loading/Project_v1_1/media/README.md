@@ -1,23 +1,18 @@
 # 本轮已关闭实验的阅读媒体
 
-这里只整理已经关闭的原运行，不包含正在运行的 GPT04 或未来 teacher 结果。原始输出、判分和视频保持不变。总计约 10 MB，适合加入本轮小阅读包。
+默认阅读入口是以下三条**同一次运行的完整连续视频**，合计 10,975,379 字节（约 10.98 MB）。它们是原生 `dual_view.mp4` 的 H.264 CRF23 有损阅读派生版，保留全部源帧、顺序、分辨率及 PTS（核对容差 1.1 µs）；没有截取、拼接、变速、增添标注或改写状态。派生像素不与原视频逐字节相同，也不构成新实验。
 
-- [GPT03 完整连续失败录像](gpt_debug_03_collision_full.mp4)：原始 `dual_view.mp4` 逐字节复制，891 帧、29.700 秒视频；实际仿真结束于 29.666667 秒。真实运行版本 `109e637`，原独立结果为 `task_success=false / SAFETY_COLLISION`。该视频没有重新编码、加字幕、裁切或拼接，也不是新相机/GPT04 的结果。
-- [baseline teacher 支撑交接与释放双视片段](teacher_baseline_close_01_support_release_dual_clip.mp4)：同一次 `teacher_baseline_close_01` 的局部展示。
-- [相同时间窗的腕部近景](teacher_baseline_close_01_support_release_wrist_clip.mp4)：原腕部相机，未按物体真值裁图。撤离后腕部相机随手移动，器皿在画面左侧出现裁切；请结合双视图的固定侧视和原独立位姿记录判断稳定性。
+- [teacher v7 首条完整成功](reading/teacher_support_align_01_full.mp4)：`teacher_support_align_01`，实际 runtime `0b922ec`；3771 帧，视频约 125.7 秒、实际仿真结束于 125.666667 秒。原独立 `task_success / record_valid / record_integrity_valid / physics_trustworthy / success_bc_eligible` 均为 true。该条是固定场景五条闭合成功的代表；其余重复不重复复制视频。[阅读派生回执](reading/teacher_support_align_01_full_reading_receipt.json)；[原主片来源及关闭证明](teacher_support_align_01_full_media_receipt.json)。
+- [GPT04 座口受阻完整失败](reading/gpt_debug_04_rim_obstruction_full.mp4)：实际 runtime `63410bf`、prompt v4，3442 帧，视频约 114.733 秒、实际仿真结束于 114.716667 秒。原结果为 `false / GRASP_SLIP`，模型最后主动 finish，没有独立合格的释放、撤离；post-retreat 为 unavailable / stable null。[阅读派生回执](reading/gpt_debug_04_rim_obstruction_full_reading_receipt.json)；[原主片来源回执](gpt_debug_04_rim_obstruction_full_media_receipt.json)。
+- [GPT05 末端臂段碰盖完整失败](reading/gpt_debug_05_link6_collision_full.mp4)：实际 runtime `58da857`、P6 temporal，1498 帧，视频约 49.933 秒、实际仿真结束于 49.916667 秒。原结果为 `false / SAFETY_COLLISION`，有效物理中的 `panda_link6` 与 `SourceMesh5` 接触触发安全停机；不是执行器/IK 故障，未到入口、未验证 P6 的 100 µm 停看策略，也未释放、撤离。[阅读派生回执](reading/gpt_debug_05_link6_collision_full_reading_receipt.json)；[闭合碰撞审计](../diagnostics/gpt_debug_05_collision_audit/README.md)。
 
-两段 teacher 视频均为 **局部片段**，不是从来源架开始的完整运行。原版本为 `76936e1` / teacher v6，原独立结果仍是 **false / TASK_INCOMPLETE**：实际抓取、搬运、释放、撤离和退让后 3 秒稳定被观察到，但缺少 `correct_target_supported`。首次承托时 XY 约 188.527 µm、倾角约 0.200089°，未满足原 100 µm / 0.15° 对准门槛。片段中的原生阶段标注不代表独立任务成功。
+[阅读派生总清单](reading/reading_index.json) 保存原/派生 SHA256、原生媒体回执、完整逐帧仿真时间与 PTS 检查、编码命令和实际视觉 QA 范围。三条均已 CPU 全解码通过，并实际检查各自关键帧；没有新 GPU、API 或原运行修改。原视频及其闭合来源仍可按回执追溯，不要求小阅读包重复携带较大的原生 MP4 或 H5/raw。严格同时曝光、实物标定、全局 cooked 几何精度及真实接触力均未由媒体认证。
 
-teacher 选窗保留原帧索引 `[3210, 3729)`，519 帧，视频 17.300 秒；对应实际仿真时间 **107.016667–124.266667 秒**，包含：
+teacher 的正确支撑、开爪脱离、撤离及三秒稳定来自独立判分和闭合物理记录，不能用阶段字幕或最后一帧替代。其 VERIFY 末段腕视存在左侧裁切，侧视目标较小且有遮挡；GPT04 腕视可见杯/手相对移动，但不能直接确认座底支撑；GPT05 两个视角不能认证整个末端臂段的三维净空。
 
-- `SUPPORT_TRANSFER` 进入：107.616667 秒。
-- 首次底部承托：110.145833 秒；下一视频采样为 110.150000 秒。
-- `OPEN`：110.616667 秒；实际双指脱离：110.783333 秒。
-- 实际撤离净空达标：114.995833 秒。
-- `VERIFY`：121.150000 秒；原完整退让后稳定窗口 121.266667–124.266667 秒。
+## 保留的较早对照附件
 
-clip 中添加了 `LOCAL CLIP` 与原始任务失败标签，使用 H.264 CRF23 有损展示编码，保持原分辨率、选中帧顺序和 30 fps 视频时序。没有删减选窗内部帧、变速、拼接尝试或改写原结果。
+- [GPT03 原完整失败主片](gpt_debug_03_collision_full.mp4)：原 `dual_view.mp4` 字节复制，891 帧 / 29.700 秒视频，实际仿真 29.666667 秒；runtime `109e637`，原 `false / SAFETY_COLLISION`，不是 P7 或 GPT06 结果。
+- [teacher v6 支撑释放双视局部](teacher_baseline_close_01_support_release_dual_clip.mp4)及[同窗腕部近景](teacher_baseline_close_01_support_release_wrist_clip.mp4)：仅同一次 `teacher_baseline_close_01` 的局部片段，原 `false / TASK_INCOMPLETE` 保留。视频含 `LOCAL CLIP` 和原失败标注，不是完整成功。选窗 `[3210,3729)` 共 519 帧 / 17.300 秒，对应实际仿真 107.016667–124.266667 秒。原 OPEN 时 XY 187.961 µm 超过原 100 µm，缺独立 `correct_target_supported`；退让后三秒稳定不补足该缺门。
 
-[媒体清单](media_manifest.json) 保存源/派生 SHA256、原始运行与资产身份、实际关闭证明、精确选窗、编码命令和逐事件 PTS 映射。映射依据原 `video_timestamps.json` 逐帧仿真时间及实际 MP4 PTS；最后强制补写的原生终态帧保持不丢。相机渲染像素与物理状态严格同刻仍未单独认证。
-
-所有三条视频均已完整解码通过，且核对实际帧数；已检查支撑、松爪、撤离、稳定末帧及 GPT03 首末帧。关键 PNG 均从已编码展示片段读取。原始 H5/raw 仅在 manifest 中记录来源，不作为本媒体目录随附内容；本次未读取 H5/raw、未调用 API、未启动 GPU 或新仿真。
+[较早媒体清单](media_manifest.json) 只覆盖其原有 GPT03 / v6 局部附件，保持原快照；新增完整主片与 reading 派生各用独立回执。P7 离线固定 ROI 预览不在本视频列表，不是模型实发输入；GPT06 的任务及媒体尚待实际闭合，不预填结果。

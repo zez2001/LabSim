@@ -1,0 +1,285 @@
+{
+  "schema": "labsim.Project_v1_1.closed_GPT05_collision_attribution.v1",
+  "created_utc": "2026-10-26T23:47:55.546338+00:00",
+  "runtime_commit": "58da857e14a0a1152884e13984607a286547a046",
+  "process": {
+    "pid": 1211605,
+    "exit_code": 0,
+    "PID_gone_checked": true,
+    "proof_path": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/process_exit.json",
+    "proof_SHA256": "c76dc3f3770b2925c08fc85a5f7c87cc6e470e2275b280bcbabcdf526b756d22"
+  },
+  "original_qualification": {
+    "task_success": false,
+    "failure_domain": "safety",
+    "failure_type": "SAFETY_COLLISION",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "record_integrity_source": "streaming_collector_checks_at_flush_close",
+    "physics_trustworthy": true,
+    "success_bc_eligible": false,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    }
+  },
+  "actual_model_requests": 25,
+  "last_current_observation_decision": 24,
+  "last_current_observation_t_s": 48.016666666666666,
+  "collision": {
+    "first_callback_t_s": 49.90833333333333,
+    "first_physics_step": 11978,
+    "colliders": [
+      "/World/Franka/panda_link6/geometry/panda_link6",
+      "/World/Instrument/Collision/SourceMesh5"
+    ],
+    "robot_part": "panda_link6 wrist/forearm rigid link, not panda_hand or fingers",
+    "instrument_part": "SourceMesh5; authored input geometry corresponds to raised cover assembly, exact source-node semantic mapping tracked separately",
+    "native_robot_instrument_events": 3,
+    "native_forbidden_events": 3,
+    "cup_instrument_events": 0,
+    "first_points": 6,
+    "first_nonzero_impulse_points": 1,
+    "first_zero_impulse_points": 5,
+    "minimum_reported_separation_m": -0.0005430877208709717,
+    "force_point_position_m": [
+      0.2593122124671936,
+      -0.1653902530670166,
+      1.3130004405975342
+    ],
+    "raw_impulse_Ns": [
+      -26.65807342529297,
+      -0.9228058457374573,
+      -1.1202361583709717
+    ],
+    "raw_force_impulse_divided_by_dt_N": [
+      -6397.9376220703125,
+      -221.47340297698975,
+      -268.8566780090332
+    ],
+    "force_interpretation": "Raw simulated PhysX callback vectors, collider convention retained; native source declares impulse Ns and divides by1/240s into N. Sign, magnitude/calibration and actual physical contact force are not independently validated. Never sum callback into tensor forces.",
+    "guard_branches_at_first_event": {
+      "has_nonzero_force_above_0p01N": true,
+      "has_separation_below_minus50um": true
+    },
+    "state_capture_t_s": 49.90833333333333,
+    "actual_TCP_position_m": [
+      0.21802566680942997,
+      -0.15521655874983947,
+      1.1176798353397843
+    ],
+    "actual_TCP_quaternion_wxyz": [
+      -0.0011918427409329125,
+      0.7078683506689507,
+      -0.7063415180602627,
+      0.0016240370758974474
+    ],
+    "actual_q9": [
+      0.993638813495636,
+      -0.17199942469596863,
+      -1.2242271900177002,
+      -2.0093417167663574,
+      -0.17378707230091095,
+      1.9492342472076416,
+      -0.9492513537406921,
+      0.005307854153215885,
+      0.005307890009135008
+    ]
+  },
+  "geometry": {
+    "source_mesh5_world_AABB_m": [
+      [
+        0.25931238442659377,
+        -0.18025000393390656,
+        0.9480000042915344
+      ],
+      [
+        0.4767420074343681,
+        -0.03224999830126762,
+        1.3170000219345093
+      ]
+    ],
+    "source_mesh5_world_row_matrix": [
+      [
+        2.220446049250313e-16,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        -1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.36,
+        0.0,
+        0.74,
+        1.0
+      ]
+    ],
+    "source_mesh5_authored_approximation": "none",
+    "link6_world_AABB_m": [
+      [
+        0.07925593294274068,
+        -0.20227203178493613,
+        1.273301059144082
+      ],
+      [
+        0.2614168876087526,
+        -0.11107022454695498,
+        1.4062511866872864
+      ]
+    ],
+    "FK_TCP_vs_raw_position_error_m": 2.936993401993256e-07,
+    "FK_TCP_vs_raw_rotation_error_rad": 2.583109642155533e-07,
+    "minimum_contact_to_authored_mesh5_distance_m": 1.7195940016367928e-07,
+    "maximum_contact_to_authored_mesh5_distance_m": 4.189482603660174e-07,
+    "authored_input_material_and_hull_SAT_crossings": "Both present at sampled49.9000/49.904167/49.908333/49.9125s; witness triangles saved, not an attached cooked shape collision-time certificate.",
+    "interpretation": "Contact coordinates are consistent with actual transformed high cover input material; old1.178m whole-CAD height is inapplicable to this open-cover pose. This audit does not require a pure convex-fill-only explanation, and does not certify exact effective cooked geometry or exclude millimetre-scale input/cooked differences.",
+    "whole_robot_scope": "11 collision-bearing rigid links reconstructed from source input meshes and recorded joints via CPU URDF FK; all transforms/AABBs saved. No live native link pose/cooked shape buffer readback."
+  },
+  "last_action": {
+    "accepted": true,
+    "execution_finished": true,
+    "target_reached": false,
+    "safety_stopped": true,
+    "partial_execution": true,
+    "requested_duration_s": 2.0,
+    "executed_duration_s": 1.8999999999999986,
+    "executed_control_ticks": 114,
+    "executed_physics_steps": 456,
+    "simulation_time_before": 48.016666666666666,
+    "simulation_time_after": 49.916666666666664,
+    "requested_start_TCP": {
+      "position_m": [
+        0.18492637576778254,
+        -0.15488356141743756,
+        1.1178353472804041
+      ],
+      "quaternion_wxyz": [
+        -0.0004313962385853199,
+        0.7070151515339649,
+        -0.7071982570013651,
+        0.00012121436067674671
+      ]
+    },
+    "requested_target_TCP": {
+      "position_m": [
+        0.21992637576778254,
+        -0.15488356141743756,
+        1.1178353472804041
+      ],
+      "quaternion_wxyz": [
+        -0.0004313962385853199,
+        0.7070151515339649,
+        -0.7071982570013651,
+        0.00012121436067674671
+      ]
+    },
+    "actual_endpoint_TCP": {
+      "position_m": [
+        0.2178959753701977,
+        -0.1547928805444435,
+        1.117721521437311
+      ],
+      "quaternion_wxyz": [
+        -0.0016926037413971474,
+        0.7079383452752661,
+        -0.7062719186821065,
+        0.0006412975820216042
+      ]
+    },
+    "final_position_error_m": 0.002035609274344045,
+    "maximum_position_tracking_error_m": 0.0003877758535659589,
+    "stop_reason": "ROBOT_ENVIRONMENT_COLLISION"
+  },
+  "preimpact_grasp": {
+    "reference_t": 14.1125,
+    "pre_impact_max_body": {
+      "t": 37.11666666666667,
+      "body_drift_m": 1.839166876559745e-06,
+      "orientation_drift_deg": 0.008378913176472567,
+      "configured_anchor_drift_m": 1.092464535889825e-06,
+      "finger_contact_N": [
+        1.6143020391464233,
+        1.6010602712631226
+      ]
+    },
+    "pre_impact_max_anchor": {
+      "t": 29.0,
+      "body_drift_m": 1.3447264132643692e-06,
+      "orientation_drift_deg": 0.008442708114143247,
+      "configured_anchor_drift_m": 1.4468002659498916e-06,
+      "finger_contact_N": [
+        1.6061837673187256,
+        1.607620120048523
+      ]
+    },
+    "first_over_200um": {
+      "t": 49.9125,
+      "body_drift_m": 0.0007067162711145843,
+      "orientation_drift_deg": 0.6966024600610589,
+      "configured_anchor_drift_m": 7.076513252595049e-05,
+      "finger_contact_N": [
+        1.8409713506698608,
+        1.4375333786010742
+      ]
+    },
+    "last": {
+      "t": 49.916666666666664,
+      "body_drift_m": 0.0007060373335223679,
+      "orientation_drift_deg": 0.6958826964448126,
+      "configured_anchor_drift_m": 7.076101574629627e-05,
+      "finger_contact_N": [
+        1.5021198987960815,
+        1.669090986251831
+      ]
+    }
+  },
+  "public_view_review": {
+    "viewed_exact_current_JPEGs": "D22/23/24 side+wrist, six original640×480 q60 high JPEGs, copied unchanged. D24 also had previous D23 and first bilateral D7 wrist images, stale and clearly labelled.",
+    "side_view": "Raised cover and upper wrist/link6 are visible and close in projection; RGB cannot certify their3D clearance or signed collision separation.",
+    "wrist_view": "Shows grasped vessel and lower chamber; link6 and high cover contact region are outside its useful field of view. Historical wrist images do not reveal that whole-arm gap.",
+    "offline_contact_side_projection": {
+      "uv_pixels": [
+        391.6107127872202,
+        115.45628183922778
+      ],
+      "camera_depth_m": 1.1358859181970227,
+      "scope": "Uses actual later collision world point projected through fixed D24 side camera; not a point supplied to policy and not same-time rendered pixel/visibility certification."
+    },
+    "restriction": "World contact points, mesh distances and object truth are offline diagnostics only; none was supplied to policy."
+  },
+  "comparison_to_GPT03": {
+    "same_link_or_shape": false,
+    "GPT03_robot": "panda_leftfinger",
+    "GPT03_instrument": "SourceMesh2",
+    "GPT03_first_contact_t_s": 29.654166666666665,
+    "GPT03_contact_world_z_m": 0.9377999901771545,
+    "scope": "Shared general whole-robot obstacle-clearance problem, different link/shape/height and changed camera/prompt; no claim of identical collision cause."
+  },
+  "limitations": [
+    "Callback force fields are simulation interface quantities, not calibrated real force measurements; the large value is retained without a physical magnitude conclusion.",
+    "Callback points/separation and after-step q/FK are different solver-time views; their surface distances need not equal raw separation. Input SAT crossings do not establish exact native collision onset.",
+    "All robot geometry here is authored-input/FK reconstruction; finger declared convex-decomposition and actual attached cooked surfaces are not read back.",
+    "P6 requested entry/near-bottom100µm observation cadence was never exercised: collision occurred during world+X transport; no P6 contact-policy success or failure-compliance inference.",
+    "Original SAFETY_COLLISION/taskfalse/record valid/physics true preserved. Firstbody>200µm occurs after collision, not evidence of preimpact grasp failure.",
+    "No counterfactual path/IK/reset/physics/API/render/training or active teacher data read; a deterministic same-prefix physical check remains separate future work."
+  ],
+  "API_calls": 0,
+  "GPU_used": false,
+  "H5_read": false,
+  "raw_logs_read_only": true,
+  "runtime_or_labels_modified": false
+}

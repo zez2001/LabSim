@@ -1,0 +1,916 @@
+{
+  "schema": "labsim.Project_v1_1.actual_temporal_GPT05_public_audit.v1",
+  "source_run": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05",
+  "closed_process": {
+    "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05",
+    "process_exited": true,
+    "pid": 1211605,
+    "exit_code": 0,
+    "wall_seconds": 632.5523712020367,
+    "command": [
+      "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+      "-m",
+      "demos.lab_cuvette_project_v1_1.run",
+      "--backend",
+      "gpt6",
+      "--episodes",
+      "1",
+      "--headless",
+      "--provider-config",
+      "/tmp/labsim-project-v1-1-clean-20261027/config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json",
+      "--budget-ledger",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05"
+    ],
+    "checkout": "/tmp/labsim-project-v1-1-clean-20261027",
+    "runtime_commit": "58da857e14a0a1152884e13984607a286547a046",
+    "completion_evidence": "Observed Popen.wait return after native shutdown; sequential prerequisite for next GPU child",
+    "utc": "2026-10-26T23:37:13.255571+00:00"
+  },
+  "runtime_commit": "58da857e14a0a1152884e13984607a286547a046",
+  "controller_SHA256": "cdec41d417647f485eb602388505ef13635bbc8339904fc9673267169a179aea",
+  "prompt_version": "Project_v1_1.public_tools.v6_temporal",
+  "actual_profile": {
+    "side": "side.v3",
+    "wrist": "wrist.v2",
+    "native_wh": [
+      640,
+      480
+    ],
+    "transmitted_wh": [
+      640,
+      480
+    ],
+    "JPEG_quality": 60,
+    "detail": "high",
+    "crop": null,
+    "context_messages": 4,
+    "visual_context": {
+      "enabled": true,
+      "previous_distinct_wrist": true,
+      "first_public_bilateral_wrist": true,
+      "bilateral_contact_threshold_N": 0.02
+    }
+  },
+  "scope": {
+    "public_RGB_robot_camera_tactile_only": true,
+    "all_persisted_public_observation_JSON_exact_JPEGs_and_public_tool_receipts_copied": true,
+    "full_HTTP_body_or_complete_private_memory_saved": false,
+    "private_provider_reasoning_text_saved": false,
+    "H5_raw_or_active_other_run_read": false,
+    "API_calls": 0,
+    "GPU_used": false,
+    "runtime_modified": false
+  },
+  "original_labels": {
+    "schema": "labsim.Project_v1_1.independent.v1",
+    "task_type": "loading",
+    "condition_group": "natural",
+    "record_valid": true,
+    "record_integrity_valid": true,
+    "record_integrity_source": "streaming_collector_checks_at_flush_close",
+    "physics_trustworthy": true,
+    "task_success": false,
+    "workflow_success": false,
+    "failure_type": "SAFETY_COLLISION",
+    "failure_domain": "safety",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "source_slot_cleared": true,
+    "grasp_success": false,
+    "transport_success": false,
+    "loading_sequence_observed": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "post_retreat_window": {
+      "status": "unavailable",
+      "stable": null,
+      "sample_count": 0,
+      "reason": "actual_gripper_retreat_not_observed"
+    },
+    "stable_after_retreat": null,
+    "success_bc_eligible": false,
+    "physics_quality_flags": [
+      "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ]
+  },
+  "actual_counts": {
+    "API_decisions": 25,
+    "network_attempts": 25,
+    "public_observations": 25,
+    "current_JPEGs": 50,
+    "additional_historical_exact_wrist_JPEG_files": 40,
+    "total_sent_image_blocks": 90,
+    "first_public_bilateral_decision": 7,
+    "executed_actions": 25,
+    "fully_executed_actions": 24,
+    "partial_actions": 1,
+    "targets_reached": 24,
+    "control_ticks": 2994,
+    "executed_physics_steps": 11976,
+    "native_physics_steps_including_initialization": 11980,
+    "simulation_start_s": 0.016666666666666666,
+    "simulation_end_s": 49.916666666666664,
+    "sum_action_duration_s": 49.9,
+    "protocol_rejections": 0,
+    "full_input_items_reconstructable_decisions": 6,
+    "redacted_private_provider_item_count": 25,
+    "provider_loop_wall_s": 568.2429476319812,
+    "process_wall_s": 632.5523712020367
+  },
+  "budget": {
+    "episode_estimated_USD": 2.778234,
+    "episode_input_tokens": 268192,
+    "episode_output_tokens": 3493,
+    "all25_request_IDs_join_old_shared_ledger": true,
+    "all25_status_OK_and_returned_model_matches": true,
+    "no_unknown_usage_for_episode": true
+  },
+  "observations": [
+    {
+      "decision_index": 0,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:0",
+      "simulation_time_s": 0.016666666666666666,
+      "source_manifest_SHA256": "e67447903f87530291bcc029ab5881401d2222d6c093c0247b705ab6d140390d",
+      "camera_sensor_times": {
+        "side_camera": 0.025000001303851604,
+        "wrist_camera": 0.025000001303851604
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 1,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:120",
+      "simulation_time_s": 2.0166666666666666,
+      "source_manifest_SHA256": "4474b09a43b0b4ff07857323715c8f2b5df616e11a69b11d27b5f785c701f627",
+      "camera_sensor_times": {
+        "side_camera": 2.02500010561198,
+        "wrist_camera": 2.02500010561198
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 2,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:240",
+      "simulation_time_s": 4.016666666666667,
+      "source_manifest_SHA256": "73149327fe4f61246e40c28d8094a2e1fe780e23f518f32fd6e705f066819d68",
+      "camera_sensor_times": {
+        "side_camera": 4.025000209920108,
+        "wrist_camera": 4.025000209920108
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 3,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:360",
+      "simulation_time_s": 6.016666666666667,
+      "source_manifest_SHA256": "26d07a94c6b1707f172479c2c0b3f4315067675a1b675ec437d440d167d35229",
+      "camera_sensor_times": {
+        "side_camera": 6.025000314228237,
+        "wrist_camera": 6.025000314228237
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 4,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:480",
+      "simulation_time_s": 8.016666666666667,
+      "source_manifest_SHA256": "f6382fa4242f60cfb8eb174029f3686adba6aeadd519128aa2b3bb0411394f9f",
+      "camera_sensor_times": {
+        "side_camera": 8.025000418536365,
+        "wrist_camera": 8.025000418536365
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 5,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:600",
+      "simulation_time_s": 10.016666666666667,
+      "source_manifest_SHA256": "3237c9bab596e1cbee619bc23655b5b260c8a2ddf3267b3b315816463a6dcc66",
+      "camera_sensor_times": {
+        "side_camera": 10.025000522844493,
+        "wrist_camera": 10.025000522844493
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 6,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:720",
+      "simulation_time_s": 12.016666666666667,
+      "source_manifest_SHA256": "75ce1156ab2e3458d3e0431ae43c9a7dc6d107cdf39a66e34c0634ecc918e70c",
+      "camera_sensor_times": {
+        "side_camera": 12.025000627152622,
+        "wrist_camera": 12.025000627152622
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 7,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:840",
+      "simulation_time_s": 14.016666666666667,
+      "source_manifest_SHA256": "00a89455cbc3d1a2c46849f49e730d24bfc67fc344c8cd5d6f538b4c8bbc8153",
+      "camera_sensor_times": {
+        "side_camera": 14.02500073146075,
+        "wrist_camera": 14.02500073146075
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 8,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:960",
+      "simulation_time_s": 16.016666666666666,
+      "source_manifest_SHA256": "d36d4f6d47361b3653f6c3620d90cd4b5816b533b16b095336cc90ce9cff8b9c",
+      "camera_sensor_times": {
+        "side_camera": 16.02500083576888,
+        "wrist_camera": 16.02500083576888
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 9,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1080",
+      "simulation_time_s": 18.016666666666666,
+      "source_manifest_SHA256": "55bc18a7c3512eab7f9112b4ceb25ad2e8e1c0de0cb7f1d1159f5f8cd18cee2d",
+      "camera_sensor_times": {
+        "side_camera": 18.025000940077007,
+        "wrist_camera": 18.025000940077007
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 10,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1200",
+      "simulation_time_s": 20.016666666666666,
+      "source_manifest_SHA256": "63548d191e2a94fbf0058f1b7dc71615bda5a1bd017334b82870d1676cf552a1",
+      "camera_sensor_times": {
+        "side_camera": 20.025001044385135,
+        "wrist_camera": 20.025001044385135
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 11,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1320",
+      "simulation_time_s": 22.016666666666666,
+      "source_manifest_SHA256": "372673cf122a98bedadbd4384a78e3197377d55ccfac36789607d221a7a78114",
+      "camera_sensor_times": {
+        "side_camera": 22.025001148693264,
+        "wrist_camera": 22.025001148693264
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 12,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1440",
+      "simulation_time_s": 24.016666666666666,
+      "source_manifest_SHA256": "a06d8b5c3c80e5b34d43c481112cd50e322870e1444527703bf7c0bab40b0c12",
+      "camera_sensor_times": {
+        "side_camera": 24.025001253001392,
+        "wrist_camera": 24.025001253001392
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 13,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1560",
+      "simulation_time_s": 26.016666666666666,
+      "source_manifest_SHA256": "8ecda1e612f0cbf2a7a8b611f5f5b93af50d45d33934da70460000aa3ac7d736",
+      "camera_sensor_times": {
+        "side_camera": 26.02500135730952,
+        "wrist_camera": 26.02500135730952
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 14,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1680",
+      "simulation_time_s": 28.016666666666666,
+      "source_manifest_SHA256": "6064d3fca1fbc8df429bc9fd886274fc9436484c1b5a04ea48845e89c9f9876f",
+      "camera_sensor_times": {
+        "side_camera": 28.02500146161765,
+        "wrist_camera": 28.02500146161765
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 15,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1800",
+      "simulation_time_s": 30.016666666666666,
+      "source_manifest_SHA256": "d0368a7fdebe1615de3acd2acdf204c86082e0ef467f8dae7f4d2b90282cc2c4",
+      "camera_sensor_times": {
+        "side_camera": 30.025001565925777,
+        "wrist_camera": 30.025001565925777
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 16,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1920",
+      "simulation_time_s": 32.016666666666666,
+      "source_manifest_SHA256": "e6d6dce4df8e6fe8c572383e533f2f0e0192ceee0668dacab05e06c9cc1a5f8d",
+      "camera_sensor_times": {
+        "side_camera": 32.025001670233905,
+        "wrist_camera": 32.025001670233905
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 17,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2040",
+      "simulation_time_s": 34.016666666666666,
+      "source_manifest_SHA256": "41660450638d2332abbe2c42e06fba652260b68e6cf22d13125314ee35910add",
+      "camera_sensor_times": {
+        "side_camera": 34.025001774542034,
+        "wrist_camera": 34.025001774542034
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 18,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2160",
+      "simulation_time_s": 36.016666666666666,
+      "source_manifest_SHA256": "c68b0ee424892bcf4e48c5a6065cce2dae467d032d86d40ce189ce8471142bac",
+      "camera_sensor_times": {
+        "side_camera": 36.02500187885016,
+        "wrist_camera": 36.02500187885016
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 19,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2280",
+      "simulation_time_s": 38.016666666666666,
+      "source_manifest_SHA256": "715a4533637782bd3b4a62d2c46c11a187618f06cc94f5341f35d3d816c1c69f",
+      "camera_sensor_times": {
+        "side_camera": 38.02500198315829,
+        "wrist_camera": 38.02500198315829
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 20,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2400",
+      "simulation_time_s": 40.016666666666666,
+      "source_manifest_SHA256": "36259c1580745203e0d2290af9b71495b1d47e4bb81ac6e533b05e8ed74a9fbd",
+      "camera_sensor_times": {
+        "side_camera": 40.02500208746642,
+        "wrist_camera": 40.02500208746642
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 21,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2520",
+      "simulation_time_s": 42.016666666666666,
+      "source_manifest_SHA256": "3a559a804c242166edcd76c4d3266e4fc24aa50785e86cea84a879890ce490ef",
+      "camera_sensor_times": {
+        "side_camera": 42.02500219177455,
+        "wrist_camera": 42.02500219177455
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 22,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2640",
+      "simulation_time_s": 44.016666666666666,
+      "source_manifest_SHA256": "af264d933808ee74b5395b737c3c3109631491e6640eeca1f51874f054b1ca86",
+      "camera_sensor_times": {
+        "side_camera": 44.025002296082675,
+        "wrist_camera": 44.025002296082675
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 23,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2760",
+      "simulation_time_s": 46.016666666666666,
+      "source_manifest_SHA256": "45d91e1b8f7e9ed3d131ea6c52b6f3ea7087c3eae9c98b9f774920031cddc5a4",
+      "camera_sensor_times": {
+        "side_camera": 46.025002400390804,
+        "wrist_camera": 46.025002400390804
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    },
+    {
+      "decision_index": 24,
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2880",
+      "simulation_time_s": 48.016666666666666,
+      "source_manifest_SHA256": "812ed8aeb6fcd763a268b9df5f27b8aa6921bafab27d632c9f2c05d3a8c53042",
+      "camera_sensor_times": {
+        "side_camera": 48.02500250469893,
+        "wrist_camera": 48.02500250469893
+      },
+      "public_whitelist": true,
+      "returned_model": "gpt-6-astra",
+      "exact_current_JPEGs_SHA_valid": true,
+      "action_binds_current_identity": true
+    }
+  ],
+  "temporal_inputs": [
+    {
+      "decision_index": 0,
+      "total_images": 2,
+      "previous_source_decision": null,
+      "first_public_bilateral_source_decision": null,
+      "current_last": true,
+      "private_provider_items_redacted": 0,
+      "exact_full_input_reconstructable": true,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": true
+    },
+    {
+      "decision_index": 1,
+      "total_images": 3,
+      "previous_source_decision": 0,
+      "first_public_bilateral_source_decision": null,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 2,
+      "total_images": 3,
+      "previous_source_decision": 1,
+      "first_public_bilateral_source_decision": null,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 3,
+      "total_images": 3,
+      "previous_source_decision": 2,
+      "first_public_bilateral_source_decision": null,
+      "current_last": true,
+      "private_provider_items_redacted": 0,
+      "exact_full_input_reconstructable": true,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": true
+    },
+    {
+      "decision_index": 4,
+      "total_images": 3,
+      "previous_source_decision": 3,
+      "first_public_bilateral_source_decision": null,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 5,
+      "total_images": 3,
+      "previous_source_decision": 4,
+      "first_public_bilateral_source_decision": null,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 6,
+      "total_images": 3,
+      "previous_source_decision": 5,
+      "first_public_bilateral_source_decision": null,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 7,
+      "total_images": 3,
+      "previous_source_decision": 6,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 8,
+      "total_images": 3,
+      "previous_source_decision": 7,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 0,
+      "exact_full_input_reconstructable": true,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": true
+    },
+    {
+      "decision_index": 9,
+      "total_images": 4,
+      "previous_source_decision": 8,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 0,
+      "exact_full_input_reconstructable": true,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": true
+    },
+    {
+      "decision_index": 10,
+      "total_images": 4,
+      "previous_source_decision": 9,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 11,
+      "total_images": 4,
+      "previous_source_decision": 10,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 12,
+      "total_images": 4,
+      "previous_source_decision": 11,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 0,
+      "exact_full_input_reconstructable": true,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": true
+    },
+    {
+      "decision_index": 13,
+      "total_images": 4,
+      "previous_source_decision": 12,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 14,
+      "total_images": 4,
+      "previous_source_decision": 13,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 15,
+      "total_images": 4,
+      "previous_source_decision": 14,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 0,
+      "exact_full_input_reconstructable": true,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": true
+    },
+    {
+      "decision_index": 16,
+      "total_images": 4,
+      "previous_source_decision": 15,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 17,
+      "total_images": 4,
+      "previous_source_decision": 16,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 18,
+      "total_images": 4,
+      "previous_source_decision": 17,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 1,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 19,
+      "total_images": 4,
+      "previous_source_decision": 18,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 2,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 20,
+      "total_images": 4,
+      "previous_source_decision": 19,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 2,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 21,
+      "total_images": 4,
+      "previous_source_decision": 20,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 2,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 22,
+      "total_images": 4,
+      "previous_source_decision": 21,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 2,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 23,
+      "total_images": 4,
+      "previous_source_decision": 22,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 2,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    },
+    {
+      "decision_index": 24,
+      "total_images": 4,
+      "previous_source_decision": 23,
+      "first_public_bilateral_source_decision": 7,
+      "current_last": true,
+      "private_provider_items_redacted": 2,
+      "exact_full_input_reconstructable": false,
+      "public_projection_SHA_verified": true,
+      "source_current_and_historical_JPEGs_SHA_verified": true,
+      "full_input_hash_recomputed": false
+    }
+  ],
+  "last_error": {
+    "event": "error",
+    "code": "SAFETY_ACTION_STOPPED",
+    "raw_record": "final_error_record.json",
+    "model_tool_calls_original_retained": true,
+    "partial_receipt_retained": true,
+    "action": {
+      "decision_index": 24,
+      "event": "error",
+      "error_code": "SAFETY_ACTION_STOPPED",
+      "analyst_public_motion_segment": "horizontal_transport",
+      "not_model_stage_label": true,
+      "simulation_time_before_s": 48.016666666666666,
+      "simulation_time_after_s": 49.916666666666664,
+      "tool": "move_ee",
+      "model_action_id": "a25",
+      "execution_action_id": "gpt:ee00e2a5e1cb939ae4e36fbcceac8e93325d2c70ebdc0bae71723fd62d270612",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2880",
+      "requested_arguments_original": "{\"action_id\":\"a25\",\"duration_s\":2,\"episode_id\":\"23702d4d-6791-414c-bc4c-cd2cc8276d44\",\"frame\":\"world\",\"mode\":\"ee_delta\",\"observation_id\":\"23702d4d-6791-414c-bc4c-cd2cc8276d44:2880\",\"values\":[0.035,0,0,0,0,0]}",
+      "requested_duration_s": 2,
+      "executed_duration_s": 1.8999999999999986,
+      "executed_control_ticks": 114,
+      "executed_physics_steps": 456,
+      "accepted": true,
+      "target_reached": false,
+      "safety_stopped": true,
+      "partial_execution": true,
+      "stop_reason": "ROBOT_ENVIRONMENT_COLLISION",
+      "requested_target_TCP": {
+        "position_m": [
+          0.21992637576778254,
+          -0.15488356141743756,
+          1.1178353472804041
+        ],
+        "quaternion_wxyz": [
+          -0.0004313962385853199,
+          0.7070151515339649,
+          -0.7071982570013651,
+          0.00012121436067674671
+        ]
+      },
+      "actual_endpoint_TCP": {
+        "position_m": [
+          0.2178959753701977,
+          -0.1547928805444435,
+          1.117721521437311
+        ],
+        "quaternion_wxyz": [
+          -0.0016926037413971474,
+          0.7079383452752661,
+          -0.7062719186821065,
+          0.0006412975820216042
+        ]
+      },
+      "requested_gripper_opening_m": 0.009,
+      "applied_gripper_opening_m": 0.008999999999999994,
+      "requested_effort_limit_N": 4.0,
+      "applied_effort_limit_N": 4.0,
+      "request_id": "218dd838-59f3-4e21-a34a-6684774e3e0a"
+    }
+  },
+  "phase_scope": {
+    "analyst_public_actions_only": true,
+    "source_approach_decisions": [
+      0,
+      5
+    ],
+    "gripper_close_decision": 6,
+    "vertical_extract_lift_decisions": [
+      7,
+      14
+    ],
+    "horizontal_transport_decisions": [
+      15,
+      24
+    ],
+    "postgrasp_insertion_descent_requested": false,
+    "entry100um_cadence_reached": false,
+    "P6_entrance_or_near_bottom_performance_validated": false,
+    "reason": "After closure all8 vertical commands lifted40mm; remaining10 were horizontal transport. No instrument descent, insertion, release, retreat or stable window occurred."
+  },
+  "public_visual_findings": [
+    {
+      "decisions": [
+        15,
+        21,
+        23,
+        24
+      ],
+      "source": "Uncropped actual side JPEGs",
+      "finding": "Open upright lid is visible beside the moving whole hand; hand/arm contour approaches or overlaps its outline in projection. Actual3D distance or collision pair cannot be certified from this view alone."
+    },
+    {
+      "decisions": [
+        24
+      ],
+      "source": "Uncropped actual wrist JPEG",
+      "finding": "Cup and black finger pads are visible looking down into instrument region; the entire vertical lid and whole-hand envelope are not jointly unobstructed in this camera. Intrinsics/extrinsics describe the camera/robot, not obstacle3D geometry."
+    },
+    {
+      "decisions": [
+        24
+      ],
+      "source": "Actual public tool request",
+      "finding": "Despite that ambiguous visual clearance, model requested another35mm world+X translation at held TCP height. No private reasoning was saved, so belief or intent cannot be inferred."
+    },
+    {
+      "decisions": [
+        0,
+        24
+      ],
+      "source": "Public state and temporal manifests",
+      "finding": "All state/action IDs use current observations; historical frames are explicitly stale, same episode, with distinct earlier simulation times. No teacher phases or object/seat truth were supplied."
+    }
+  ],
+  "limits": [
+    "Original final SAFETY_COLLISION is safety-domain failure, not executor/IK instability. Exact native contact pair left to separate closed physics audit.",
+    "TCP target reach does not establish grasp/transport/fulltask success; originalgrasp/transport flags false retained.",
+    "Some live prior reasoning/opaque response items were intentionally not persisted. Fullinputhash is recorded but cannot be independently recomputed for those decisions; publicprojection/images/source bindings are independently verified.",
+    "P6 temporal wiring and real inputs were exercised, but entry100um and near-bottom cadence were never reached, so no contact-sensitive improvement or task-success claim.",
+    "Sensor rendering and simulation state timestamps both remain; no strict same-exposure claim."
+  ],
+  "key_input_decisions": [
+    0,
+    6,
+    7,
+    15,
+    21,
+    22,
+    23,
+    24
+  ]
+}

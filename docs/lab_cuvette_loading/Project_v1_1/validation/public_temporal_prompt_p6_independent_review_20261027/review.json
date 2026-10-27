@@ -1,0 +1,83 @@
+{
+  "schema": "labsim.Project_v1_1.P6_prompt_independent_review.v1",
+  "created_utc": "2026-10-26T22:58:35.325893+00:00",
+  "reviewed_source_SHA256": {
+    "policy/backends/cubence_project_v1_1_tools.py": "173b9eca096a257c7db009d5a1cd29ae0b638754f2becb7c8c02a67ae49fc474",
+    "policy/backends/cubence_project_v1_1_visual_context.py": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+    "tests/test_lab_cuvette_project_v1_1_visual_context.py": "b888a2045a1d71f0eb36a1ce63ff640d205819dd03d58c20a21b182f2bb160f6",
+    "tests/test_lab_cuvette_project_v1_1_temporal_prompt_cadence.py": "92a0039ba2af705bb002783a58ae940c529945f5fab7512f91604e2648a8cbbe",
+    "docs/lab_cuvette_loading/Project_v1_1/camera/temporal_public_qa_d35_plan/plan.json": "97dcba86eda72a969da8e67262d292af0218096b39a856ee22a7d13674d8bdf0"
+  },
+  "prompt_review": {
+    "blocking_findings": [],
+    "status": "accepted_for_limited_actual_validation",
+    "default_P4_unchanged": true,
+    "only_opt_in_prompt_version_changes_to_P6": true,
+    "no_new_tool_limits_detector_macro_or_GT": true,
+    "units": {
+      "downward_request_per_decision_m": 0.0001,
+      "downward_speed_m_s": 0.001,
+      "nominal_last_part_m": 0.001
+    },
+    "semantics": "Model observation cadence guidance only, not executor-enforced region detection or100um achieved accuracy; public image uncertainty and backoff/finish remain explicit.",
+    "contact_signal_scope": "Existing public finger contact only; no actual seat contact event/depth/support truth supplied."
+  },
+  "actual_independent_CPU_tests": {
+    "passed": 35,
+    "failed": 0,
+    "reported_duration_s": 0.12,
+    "command": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_visual_context.py",
+      "tests/test_lab_cuvette_project_v1_1_temporal_prompt_cadence.py"
+    ],
+    "API_calls": 0,
+    "GPU_used": false
+  },
+  "secondary_readonly_reviewer": "/root/cubence_backend/p6_prompt_review",
+  "secondary_conclusion": "No additional policy/units/GT issue; agrees QA remains design only.",
+  "QA_plan_review": {
+    "status": "design_acceptable_with_pre_send_checks",
+    "source_sha_verified_files": 7,
+    "raw_or_H5_used": false,
+    "current_D35_previous_D34_first_public_bilateral_D7": true,
+    "first_reference_not_actual_first_contact_or_grasp_success": true,
+    "original_JPEGs_full_frame_no_reencoding": true,
+    "current_not_last_in_reviewed_plan": true,
+    "required_before_actual_send": [
+      "Keep neutral observation-only questions in instructions, remove duplicated trailing user question so CURRENT remains last. This does not change images/labels.",
+      "Implement preparation only from closed public JSON/JPEG and record API_sent=false until actual one-call send. No control runner/env/execute/finish.",
+      "Construct normal Responses payload with pinned model/reasoning/outputcap/storefalse, toolsNone and unchanged shared BudgetLedger. client.request allow_retry=False and120s monotonic deadline.",
+      "Recompute actual final payload token bound through original client, preserve request/model/usage/reservations and exact public input manifest.",
+      "Save only visible model answer and public request projection, not private provider reasoning/headers/credentials.",
+      "Classify as retrospective observation diagnostic, not a policy episode/task success/P6 action-compliance test."
+    ],
+    "offline_design_token_bound": {
+      "images": 4,
+      "input_tokens_upper_bound": 48923,
+      "context_cap": 80000,
+      "output_token_reservation": 1024,
+      "USD_reservation_bound": 0.54043,
+      "actual_network_attempts": 0,
+      "actual_payload_saved": false,
+      "note": "Illustrative exact-JPEG/public-projection build with neutral instructions and history→CURRENT order; final implementation must recompute."
+    },
+    "implementation_and_actual_request_not_verified": true
+  },
+  "limitations": [
+    "If free passage cannot be established,100um steps across all27mm can exceed160 calls,1800s or remaining shared budget. Do not silently increase limits.",
+    "Short request size cannot guarantee <=100um actual displacement/overshoot or protect every contact; robot tracking and independent score remain separate.",
+    "A single historical four-image answer cannot establish3D depth/bottom support, real precision, model action compliance or full-task success.",
+    "P5 remains CPU-only history; cancelled prelaunch GPT05 queue with0 native/0 API is not an attempt/failure."
+  ],
+  "runtime_modified": false,
+  "API_calls": 0,
+  "GPU_used": false,
+  "H5_raw_read": false,
+  "real_ledger_modified": false,
+  "stage5_draft_modified": false
+}

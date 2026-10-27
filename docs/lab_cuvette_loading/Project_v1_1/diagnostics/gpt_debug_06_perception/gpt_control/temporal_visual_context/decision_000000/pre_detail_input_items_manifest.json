@@ -1,0 +1,75 @@
+{
+  "schema": "Project_v1_1.public_temporal_visual_context.v1",
+  "decision_index": 0,
+  "request_label": "policy:0183656a-c9a8-464e-ad9e-fa77e40f9872:0:decision0",
+  "current": {
+    "episode_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872",
+    "observation_id": "0183656a-c9a8-464e-ad9e-fa77e40f9872:0",
+    "simulation_time_s": 0.016666666666666666,
+    "source_decision_index": 0,
+    "source_request_label": "policy:0183656a-c9a8-464e-ad9e-fa77e40f9872:0:decision0",
+    "wrist_jpeg_sha256": "72e80b6d289433aebe8835138044468045ba8d6897b0975d9fcf56fdfcd65e6c"
+  },
+  "previous": null,
+  "first_public_bilateral_reference": null,
+  "current_observation_is_duplicate_id": false,
+  "first_reference_selected_this_observation": false,
+  "first_reference_selection": "First distinct public observation with both finite finger_contact_N >0.02N; not persistence, grasp success or object truth",
+  "historical_references": [],
+  "historical_images_inserted": 0,
+  "total_image_count": 2,
+  "expanded_input": false,
+  "current_user_item_preserved": true,
+  "current_user_item_index": 1,
+  "input_items_public_projection": [
+    {
+      "role": "user",
+      "content": "Task: Pick the light cuvette from white rack slot A1 and transport it to the candidate_far_hinge internal seat of the single open instrument. Insert, transfer support, open both fingers, retreat and leave the vessel stable. The selected target is candidate_far_hinge, the internal seat farther from the lid hinge among the two seats. Nominal task geometry: loading depth 27 mm, cuvette height 67.5 mm, and 40.5 mm of the cuvette remaining above the seat entrance at the nominal loaded pose. These are static configured task goals, not measurements of the current vessel pose, insertion depth or support. Static robot calibration: TCPpose is the world pose of frame right_gripper, not the panda_hand/palm origin. The fixed transform from right_gripper coordinates into parent frame panda_hand has translation [0.0, 0.0, 0.1] metres and quaternion [0.0, 0.0, 0.0, 1.0] in wxyz order. This 100 mm frame-origin separation is not the whole-hand collision envelope. Confirm clearance for the entire hand, fingers and held vessel in both camera views; this fixed robot calibration provides no current object or obstacle pose, safe height or motion path."
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "{\"episode_id\": \"0183656a-c9a8-464e-ad9e-fa77e40f9872\", \"step_index\": 0, \"simulation_time\": 0.016666666666666666, \"joint_positions\": [0.1779361367225647, -1.2082452774047852, -0.8200522661209106, -2.87337064743042, -0.7667176723480225, 1.7454451322555542, -0.8053153157234192, 0.03999993950128555, 0.03999996930360794], \"joint_velocities\": [0.0010142129613086581, 0.00918547622859478, 0.009416138753294945, 0.008577585220336914, 0.00032430345891043544, 0.00214076298289001, -1.1982684554823209e-05, 1.4414921679417603e-05, 1.4414922588912304e-05], \"TCPpose\": {\"position_m\": [-0.08505931596479005, -0.1748760546046365, 1.0228528475162522], \"quaternion_wxyz\": [-0.00045383827446051326, 0.7070149041122215, -0.7071984863989618, 0.00014222877477737954]}, \"task_language\": \"Pick the light cuvette from white rack slot A1 and transport it to the candidate_far_hinge internal seat of the single open instrument. Insert, transfer support, open both fingers, retreat and leave the vessel stable. The selected target is candidate_far_hinge, the internal seat farther from the lid hinge among the two seats. Nominal task geometry: loading depth 27 mm, cuvette height 67.5 mm, and 40.5 mm of the cuvette remaining above the seat entrance at the nominal loaded pose. These are static configured task goals, not measurements of the current vessel pose, insertion depth or support. Static robot calibration: TCPpose is the world pose of frame right_gripper, not the panda_hand/palm origin. The fixed transform from right_gripper coordinates into parent frame panda_hand has translation [0.0, 0.0, 0.1] metres and quaternion [0.0, 0.0, 0.0, 1.0] in wxyz order. This 100 mm frame-origin separation is not the whole-hand collision envelope. Confirm clearance for the entire hand, fingers and held vessel in both camera views; this fixed robot calibration provides no current object or obstacle pose, safe height or motion path.\", \"source_slot_id\": \"A1\", \"target_seat_id\": \"candidate_far_hinge\", \"observation_id\": \"0183656a-c9a8-464e-ad9e-fa77e40f9872:0\", \"gripper_opening_m\": 0.0799999088048935, \"gripper_effort_limit_N\": 8.0, \"finger_contact_N\": [0.0, 0.0], \"camera_meta\": {\"side_camera\": {\"name\": \"side_camera\", \"physical_parent\": \"/World\", \"local_pose_position_m\": [-0.699999988079071, -0.8500000238418579, 1.3200000524520874], \"local_pose_quaternion_wxyz\": [0.72224223613739, 0.5659829784132289, -0.24520192217047324, -0.3128984465440159], \"world_pose_position_m\": [-0.699999988079071, -0.8500000238418579, 1.3200000524520874], \"world_pose_quaternion_wxyz\": [0.72224223613739, 0.5659829784132289, -0.24520192217047324, -0.3128984465440159], \"camera_cv_from_world\": [[0.6839411590284936, -0.7295371758771174, -2.0284531455158232e-08, -0.14134778694675726], [-0.17441671898634484, -0.1635156605936646, -0.9710002249632363, 1.0206403312680965], [0.7083807585788866, 0.6641070228162453, -0.23907857102079172, 1.375941234075633], [0.0, 0.0, 0.0, 1.0]], \"intrinsic_matrix_native\": [[519.2078247070312, 0.0, 320.0], [0.0, 519.2078247070312, 240.0], [0.0, 0.0, 1.0]], \"resolution_wh\": [640, 480], \"sensor_rendering_time_s\": 0.025000001303851604, \"frames\": \"world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz\"}, \"wrist_camera\": {\"name\": \"wrist_camera\", \"physical_parent\": \"/World/Franka/panda_hand\", \"local_pose_position_m\": [0.07500000298023224, 0.0, 0.03999999910593033], \"local_pose_quaternion_wxyz\": [-0.2600301802158356, 0.6575593535868104, -0.6575593535868104, 0.26003018747428563], \"world_pose_position_m\": [-0.08509044689988551, -0.09990249580850138, 1.0828858806503685], \"world_pose_quaternion_wxyz\": [0.00027571167282437856, -0.0003442176242332244, 0.36753326618443516, 0.9300102707739855], \"camera_cv_from_world\": [[-0.9999996109946008, 0.00025980651957241196, -0.0008429182751133257, -0.08415167418084726], [0.0007658522304232202, 0.7298384444617492, -0.683619234995633, 0.8132594661650462], [0.0004375854285598795, -0.6836196146149011, -0.729838359524056, 0.7220735833416261], [0.0, 0.0, 0.0, 1.0]], \"intrinsic_matrix_native\": [[366.4996337890625, 0.0, 320.0], [0.0, 366.4996337890625, 240.0], [0.0, 0.0, 1.0]], \"resolution_wh\": [640, 480], \"sensor_rendering_time_s\": 0.025000001303851604, \"frames\": \"world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz\"}}, \"model_image_transforms\": {\"side_camera\": {\"native_resolution_wh\": [640, 480], \"transmitted_resolution_wh\": [640, 480], \"scale_xy\": [1.0, 1.0], \"native_rgb_sha256\": \"bab23610443f1e2b8f20002de3e74af7c6e9229c7574f664e5fa4c81b9172dea\", \"transmitted_jpeg_sha256\": \"fd1109d444bea7f5b73624a8ad16e96298d40e7dc2c8795254ea1c992acffc47\", \"transmitted_bytes\": 12441, \"jpeg_quality\": 60, \"detail\": \"high\", \"resize_interpolation\": \"Pillow LANCZOS\", \"crop\": null, \"rotation_deg\": 0, \"color_space\": \"RGB\", \"transmitted_pixel_from_native_pixel\": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]], \"intrinsic_matrix_transmitted\": [[519.2078247070312, 0.0, 320.0], [0.0, 519.2078247070312, 240.0], [0.0, 0.0, 1.0]], \"pixel_convention\": \"zero-based pixel-centre indices: dst=(src+.5)*scale-.5\", \"native_recording_changed\": false}, \"wrist_camera\": {\"native_resolution_wh\": [640, 480], \"transmitted_resolution_wh\": [640, 480], \"scale_xy\": [1.0, 1.0], \"native_rgb_sha256\": \"b259868863385d4a691cad9ae13c68dbbe1abd5f6bb073b867bd9453a1d6a4ba\", \"transmitted_jpeg_sha256\": \"72e80b6d289433aebe8835138044468045ba8d6897b0975d9fcf56fdfcd65e6c\", \"transmitted_bytes\": 14032, \"jpeg_quality\": 60, \"detail\": \"high\", \"resize_interpolation\": \"Pillow LANCZOS\", \"crop\": null, \"rotation_deg\": 0, \"color_space\": \"RGB\", \"transmitted_pixel_from_native_pixel\": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]], \"intrinsic_matrix_transmitted\": [[366.4996337890625, 0.0, 320.0], [0.0, 366.4996337890625, 240.0], [0.0, 0.0, 1.0]], \"pixel_convention\": \"zero-based pixel-centre indices: dst=(src+.5)*scale-.5\", \"native_recording_changed\": false}}}"
+        },
+        {
+          "type": "input_text",
+          "text": "Synchronized RGB: side_camera"
+        },
+        {
+          "type": "input_image",
+          "image_url": {
+            "encoding": "data:image/jpeg;base64",
+            "path": "../../observations/decision_000000/side_camera.jpg",
+            "sha256": "fd1109d444bea7f5b73624a8ad16e96298d40e7dc2c8795254ea1c992acffc47",
+            "bytes": 12441
+          },
+          "detail": "high"
+        },
+        {
+          "type": "input_text",
+          "text": "Synchronized RGB: wrist_camera"
+        },
+        {
+          "type": "input_image",
+          "image_url": {
+            "encoding": "data:image/jpeg;base64",
+            "path": "../../observations/decision_000000/wrist_camera.jpg",
+            "sha256": "72e80b6d289433aebe8835138044468045ba8d6897b0975d9fcf56fdfcd65e6c",
+            "bytes": 14032
+          },
+          "detail": "high"
+        }
+      ]
+    }
+  ],
+  "full_wire_input_canonical_sha256": "d8525938d29641b7a8a469d305423ff972e7b2712ea46228e37a0375d717e27b",
+  "exact_full_input_reconstructable": true,
+  "private_provider_items_redacted": [],
+  "public_projection_canonical_sha256": "b44d4ee9d8233352b5bc38820f0e4334390a2e37a42e06e6c81d9a7634ee9952",
+  "private_reasoning_credentials_headers_saved": false,
+  "source_scope": "Only already-encoded public RGB, robot/tactile/time and public wrist calibration; no environment/object truth/teacher stages",
+  "no_action_or_success_label_generated": true,
+  "budget_scope": "Augmented input delegated before the unchanged client computes token bound/reserves shared ledger; no extra network request"
+}
