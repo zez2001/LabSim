@@ -23,6 +23,7 @@ from rpent.utils.logging import init_output_dir
 
 from .policy_adapters import LiberoTransferContract, Pi05LiberoAdapter, append_event, policy_observation, sensor_meta
 from .rpent_extension import LabSimEnvClient, LabSimToolkit, _system_prompt
+from .pi05_rollout import PolicyStageError, run_pi05_rollout
 
 
 class RestrictedLabSimCodexPlanner(CodexPlanner):
@@ -60,14 +61,20 @@ def main(argv=None):
     p.add_argument("--layout-mode", choices=["standard", "random"], default="standard", help="passed as reset options.mode; assemblies remain governed by the scene randomizer")
     p.add_argument("--max-model-requests", "--max-planner-turns", dest="max_model_requests", type=int, default=100, help="pi05 predict-call budget; Astra/Harness RPent message-turn budget, not underlying HTTP request count")
     p.add_argument("--max-actions", type=int, default=1000)
+    p.add_argument("--max-simulation-s", type=float, help="pi05 explicit executed simulation-time cap; model waiting does not consume it")
     p.add_argument("--planner-timeout-s", type=int, default=600)
     p.add_argument("--robot-base-position-m", type=float, nargs=3)
-    p.add_argument("--robot-base-quaternion-xyzw", type=float, nargs=4, default=[0, 0, 0, 1])
+    p.add_argument("--robot-base-quaternion-xyzw", type=float, nargs=4,
+                   help="explicit override; otherwise use environment launch metadata, then identity")
     p.add_argument("--codex-bin", default="/usr/lib/chatgpt/resources/codex")
     p.add_argument("--reasoning-effort", choices=["low", "medium", "high", "xhigh"], default="medium")
     args = p.parse_args(argv)
     if args.max_model_requests < 1 or args.max_actions < 1:
         p.error("model and action budgets must be positive")
+    if args.max_simulation_s is not None:
+        import math
+        if args.backend != "pi05" or not math.isfinite(args.max_simulation_s) or args.max_simulation_s <= 0:
+            p.error("--max-simulation-s must be finite positive and is currently pi05-only")
     policy_cfg = {}
     if args.policy_config:
         policy_cfg = yaml.safe_load(Path(args.policy_config).read_text()) or {}
@@ -125,35 +132,12 @@ def main(argv=None):
             stage = "MODEL_CONNECT"
             result["model_service_contacted"] = True
             adapter = Pi05LiberoAdapter(HttpRpcClient(args.vla_endpoint), contract=contract, robot_base_position_m=base,
-                                       robot_base_quaternion_xyzw=args.robot_base_quaternion_xyzw)
+                                       robot_base_quaternion_xyzw=args.robot_base_quaternion_xyzw or env.meta.get("robot_base_quaternion_xyzw", [0, 0, 0, 1]))
         if args.backend == "pi05":
-            terminated = truncated = False
-            for call in range(args.max_model_requests):
-                stage = "MODEL_INFERENCE"
-                raw, inference = adapter.infer(dict(obs, camera_meta=camera_meta))
-                result["actual_model_requests"] += 1
-                append_event(out / "policy_events.jsonl", {"event": "actual_model_inference", "inference": inference, "raw_actions": raw})
-                for row in raw:
-                    if result["executed_actions"] >= args.max_actions:
-                        break
-                    action = adapter.convert_action(row, obs)
-                    action["inference_wall_time_s"] = inference["inference_wall_s"]
-                    action["policy_inference_call"] = inference["inference_call"]
-                    stage = "ENV_ACTION"
-                    obs, reward, terminated, truncated, info = env.step(action)
-                    result["executed_actions"] += 1
-                    result["task_success"] = info.get("task_success")
-                    result["integration_complete"] = True
-                    append_event(out / "policy_events.jsonl", {"event": "model_action", "action": action,
-                                 "successor_episode_id": obs["episode_id"], "successor_step_index": obs["step_index"],
-                                 "simulation_time": obs["simulation_time"], "reward": reward,
-                                 "terminated": terminated, "truncated": truncated})
-                    if terminated or truncated:
-                        result["termination_reason"] = info.get("termination_reason")
-                        break
-                if terminated or truncated or result["executed_actions"] >= args.max_actions:
-                    break
-            result["termination_reason"] = result["termination_reason"] or "POLICY_BUDGET"
+            stage = "POLICY_ROLLOUT"
+            obs = run_pi05_rollout(env, adapter, dict(obs, camera_meta=camera_meta), result,
+                output=out, maximum_model_requests=args.max_model_requests,
+                maximum_actions=args.max_actions, maximum_simulation_s=args.max_simulation_s)
         else:
             os.environ["CODEX_BIN"] = args.codex_bin
             toolkit = LabSimToolkit(env, output_dir=out / "planner", mode="direct" if args.backend == "astra" else "harness",
@@ -193,7 +177,13 @@ def main(argv=None):
             actual_vla = any(r.get("event") == "vla_inference" for r in rows)
             result["actual_vla_inference"] = actual_vla
             result["integration_complete"] = bool(physical_calls and (args.backend == "astra" or actual_vla))
+    except KeyboardInterrupt:
+        result.update(error_type="KeyboardInterrupt", error="user interrupted policy runner",
+                      error_stage=stage, termination_reason="USER_INTERRUPTED",
+                      finalization_failure_type="PROCESS_INTERRUPTED")
     except Exception as exc:
+        if isinstance(exc, PolicyStageError):
+            stage, exc = exc.stage, exc.cause
         reason = "GEOMETRY_PREFLIGHT_BLOCKED" if "GEOMETRY" in str(exc).upper() and stage == "ENV_RESET" else stage + "_ERROR"
         result.update(error_type=type(exc).__name__, error=str(exc), error_stage=stage, termination_reason=reason)
     finally:
@@ -202,7 +192,12 @@ def main(argv=None):
         # pass task_success. Service errors remain distinct from valid failures.
         if env is not None and result.get("episode_id"):
             try:
-                failure_type = ("model_service_error" if stage.startswith("MODEL_") else "environment_service_error") if result.get("error") or result.get("planner_error") else None
+                failure_type = result.get("finalization_failure_type")
+                if failure_type is None and (result.get("error") or result.get("planner_error")):
+                    failure_type = ("MODEL_SERVICE_ERROR" if stage.startswith("MODEL_") else
+                                    "INPUT_CONTRACT_ERROR" if stage in {"POLICY_ACTION_ADAPTATION", "ENV_POST_INFERENCE_OBSERVATION"} else
+                                    "SIMULATION_FAILURE")
+                result["finalization_failure_type"] = failure_type
                 finalized = env.finalize_episode(termination_reason=result.get("termination_reason") or "POLICY_BUDGET",
                                                  failure_type=failure_type)
                 result["episode_finalized"] = True
@@ -219,7 +214,7 @@ def main(argv=None):
         result["finished_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         (out / "result.json").write_text(json.dumps(result, indent=2, default=lambda x: x.tolist() if hasattr(x, "tolist") else str(x)) + "\n")
         print(json.dumps(result, indent=2, default=str))
-    return 0 if result["integration_complete"] else 2
+    return 0 if result["integration_complete"] and result.get("episode_finalized") is True and not result.get("error") else 2
 
 
 if __name__ == "__main__":

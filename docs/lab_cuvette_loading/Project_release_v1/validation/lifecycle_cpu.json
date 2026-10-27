@@ -1,0 +1,63 @@
+{
+  "schema": "labsim.Project_release_v1.lifecycle_cpu_validation.v1",
+  "timestamp": "2026-10-27T14:58:10.708076+08:00",
+  "base_commit": "abf75561246b4a953d3ceb8468e306827170c240",
+  "cpu_only": true,
+  "physical_run_executed": false,
+  "external_provider_called": false,
+  "physical_configuration_unchanged": {
+    "acceptance": true,
+    "control": true,
+    "demo_release": true,
+    "gripper": true,
+    "physics": true,
+    "robot": true,
+    "scene": true,
+    "rack": true,
+    "adapter": true,
+    "source": true,
+    "randomization": true,
+    "vessel": true,
+    "cameras": true,
+    "executor": true,
+    "robot_tracking": true,
+    "teacher_execution": true
+  },
+  "old_sources_byte_unchanged": {
+    "tasks/lab_cuvette_loading_env_v1.py": true,
+    "tasks/lab_cuvette_loading_project_v1.py": true,
+    "tasks/lab_cuvette_loading_project_v1_1.py": true,
+    "data_collectors/lab_cuvette_env_v1_collector.py": true,
+    "data_collectors/lab_cuvette_project_v1_1_collector.py": true,
+    "demos/lab_cuvette_project_v1_1/environment.py": true,
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": true,
+    "demos/lab_cuvette_project_v1_1/robot_tracking.py": true,
+    "demos/lab_cuvette_project_v1_1/scorer.py": true,
+    "controllers/lab_cuvette_project_v1_1_controller.py": true,
+    "config/lab_cuvette_loading/Project_v1_1/standard.yaml": true
+  },
+  "tests": {
+    "passed": 29,
+    "junit": "lifecycle_cpu.xml",
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=/tmp/labsim-handoff-ci-py311-20261022/lib/python3.11/site-packages /home/wujing/Desktop/vla/labutopia-env/bin/python -m pytest -q tests/test_lab_cuvette_project_release_lifecycle.py tests/test_lab_cuvette_project_v1_1_environment.py tests/test_lab_cuvette_env_v1_collector.py"
+  },
+  "source_sha256": {
+    "data_collectors/lab_cuvette_project_release_collector.py": "7afa5318852281976e77c415ec59fbfea9c914f34db8abfe9fe422da779e33ec",
+    "demos/lab_cuvette_project_release_v1/environment.py": "f33aeea59e4b598ad3da1c6e130337f4adb144fc6f21e4c45c76b21d8bec2a98",
+    "demos/lab_cuvette_project_release_v1/contract.py": "c24d4117b655bd6755453468a7a672a7ec6f70b93a6710677505b9200fd52a6b",
+    "demos/lab_cuvette_project_release_v1/run.py": "f78c3d8df96172ebbedfb5993dc4123d4c6fd1063ac1bce8df5701ec4d8e1411",
+    "demos/lab_cuvette_project_release_v1/dataset_index.py": "d7633dc674b62d1df4dafb04fbb5408e19cfbbf6714466d69c5f98aa292f17ac",
+    "tasks/lab_cuvette_loading_project_release.py": "49d56beb156d5e7227020c60a1ed8a65ca32d095a4b82663602b51253f910621",
+    "tests/test_lab_cuvette_project_release_lifecycle.py": "2ec6705ed91cdeb366ab26aee7b8c3e4174f2193060a79aaf07c99727f4d8705",
+    "config/lab_cuvette_loading/Project_release_v1/standard.yaml": "c410b3615daf506c79dc59a332da6281625955571eb187a86dcc6555f4aad278",
+    "utils/episode_selection.py": "abedd6a71e85bd9124812fb0c95dd2828dd4790f6f56a34e337ae87c9ef50175",
+    ".github/workflows/cpu-contracts.yml": "62e4ca83c42630e2379ea2e36e0c6f9d3f6b9f643d0d86f945d84bc646b2d8f4"
+  },
+  "limitations": [
+    "CPU fault injection is not native process crash evidence",
+    "same-process physical reset and resources require actual Isaac run",
+    "relative-links index requires moving all declared source H5 together"
+  ],
+  "junit_sha256": "445ae7a0d7a994fd0f5665dfc8523d7fcdc844e3e73b3ddeb0ec4e42345e3cb4",
+  "portable_copy_preserves_camera_hard_links": true
+}

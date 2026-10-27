@@ -1,0 +1,50 @@
+{
+  "schema": "labsim.Project_release_v1.external_policy.cpu_change_review.v1",
+  "observed_utc": "2026-10-27T06:54:51.604033+00:00",
+  "actual_model_inference": false,
+  "actual_Isaac_run": false,
+  "paid_API_calls": 0,
+  "checkpoint_changed": false,
+  "scene_changed": false,
+  "physics_or_score_changed": false,
+  "modified_source_files": [
+    {
+      "path": "policy_backends/lab_cuvette_env_v1/policy_adapters.py",
+      "bytes": 13916,
+      "sha256": "bc58d05ab88d26c3c502253f51db724c6567ca99ea0756cd2cae2f461e298dde"
+    },
+    {
+      "path": "policy_backends/lab_cuvette_env_v1/policy_runner.py",
+      "bytes": 15774,
+      "sha256": "62860709199e84aceb7863c32f08efa8fab6e4422116b21267368e61a3723594"
+    },
+    {
+      "path": "policy_backends/lab_cuvette_env_v1/pi05_rollout.py",
+      "bytes": 8250,
+      "sha256": "b17c08f316a9641bf9c0a519c6701af8fd3674e8e7c805f3c247ab0fc112e86b"
+    },
+    {
+      "path": "tests/test_lab_cuvette_external_policy_rollout.py",
+      "bytes": 6777,
+      "sha256": "069d69df0269c69256856a6d3cc3e998d1419696b17d7141d412ae7ccebeb837"
+    }
+  ],
+  "changes": [
+    "Distinguish submitted/accepted/actually advanced/rejected/partial/target_reached actions from RPC receipt; zero-tick rejected action no longer counts as executed.",
+    "Persist full returned7D actions, selected chunk count, input RGB shape/dtype/hash, adapted action, actual action receipt; lower-level actual9D commands remain in environment collector.",
+    "Check environment episode/step/simulation time unchanged across model waiting; refuse stale chunk.",
+    "Stop on rejected/partial/unavailable successor/terminal result, discarding unexecuted chunk remainder; unique deterministic action IDs; no motion retry.",
+    "Explicit policy simulation-time cap plus independent request/action budgets; actual time from successor observations.",
+    "Require expected norm-stat SHA as well as checkpoint identity; use server-declared robot-base quaternion unless explicitly overridden.",
+    "Preserve backend failure classification and controlled user interruption during finalization; require successful finalize for integration exit0."
+  ],
+  "validation": {
+    "command": "/home/wujing/Desktop/vla/rpent/.venv/bin/python -m pytest -q tests/test_lab_cuvette_external_policy_rollout.py tests/test_lab_cuvette_policy_contract.py tests/test_lab_cuvette_project_optional_policies.py tests/test_lab_cuvette_env_v1_rpc.py",
+    "result": "26 passed",
+    "scope": "CPU pure conversion, protocol fixtures and real loopback fixture transport; not model/Isaac evidence"
+  },
+  "pending": [
+    "root-scheduled real checkpoint plus release Isaac RPC lifecycle",
+    "closed H5 reader and media verification after actual attempt"
+  ]
+}

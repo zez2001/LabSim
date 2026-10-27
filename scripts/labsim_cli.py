@@ -27,6 +27,8 @@ PROJECT_RELEASES = {
     "Project_v1": ("demos.lab_cuvette_project_v1.run", PROJECT_CONFIG),
     "Project_v1_1": ("demos.lab_cuvette_project_v1_1.run",
         ROOT / "config/lab_cuvette_loading/Project_v1_1/standard.yaml"),
+    "Project_release_v1": ("demos.lab_cuvette_project_release_v1.launch",
+        ROOT / "config/lab_cuvette_loading/Project_release_v1/standard.yaml"),
 }
 
 
@@ -139,11 +141,13 @@ def parser():
     validate.add_argument("--dry-run", action="store_true")
     dataset = commands.add_parser("dataset-check", help="Read actual ACT/DP batches from an existing index; never train")
     dataset.add_argument("--index", "--path", dest="index", required=True)
-    dataset.add_argument("--sample-filter", choices=("success", "failure"), default="success")
+    dataset.add_argument("--sample-filter", choices=("success", "failure", "all_valid"), default="success")
     dataset.add_argument("--policy", choices=("act", "dp", "both"), default="both")
     dataset.add_argument("--output", required=True, help="New JSON read-check path")
     dataset.add_argument("--dry-run", action="store_true")
     for command in (demo, evaluation, serve, collect):
+        command.add_argument("--record-mode", choices=("collect", "eval", "diagnostic"),
+            help="Explicit Project_release_v1 persistence mode; omitted preserves each version's default")
         command.add_argument("--project-version", choices=tuple(PROJECT_RELEASES), default="Project_v1",
             help="Explicit execution version; omitted keeps the existing Project_v1 API")
     return p
@@ -175,6 +179,8 @@ def closed_collection(collection):
 
 def build_command(args):
     """Build real subprocess argv without shell interpolation or output writes."""
+    if getattr(args, "record_mode", None) is not None and getattr(args, "project_version", None) != "Project_release_v1":
+        raise ValueError("--record-mode is supported only by --project-version Project_release_v1")
     if args.command in ("demo", "eval", "serve") or (args.command == "collect" and args.phase is None):
         if not args.output:
             raise ValueError("Project collection requires --output; historical collection uses --phase and --collection")
@@ -192,6 +198,8 @@ def build_command(args):
             "--output", str(output)]
         if args.headless:
             command.append("--headless")
+        if args.project_version == "Project_release_v1" and getattr(args, "record_mode", None) is not None:
+            command += ["--record-mode", args.record_mode]
         for name in ("provider_config", "budget_ledger", "max_calls", "controlled_stop_depth_mm", "port", "asset_id"):
             value = getattr(args, name, None)
             if name == "max_calls" and args.backend != "gpt6":
@@ -328,7 +336,7 @@ def dataset_project_version(index):
         groups = [source] if "actions" in source and "agent_pose" in source else [source[name] for name in source
             if isinstance(source[name], h5py.Group) and "actions" in source[name] and "agent_pose" in source[name]]
         versions = {str(group.attrs.get("scene_version", "")) for group in groups}
-    project_versions = {version for version in versions if version.startswith("Project_v")}
+    project_versions = {version for version in versions if version.startswith("Project_v") or version == "Project_release_v1"}
     if project_versions and len(versions) != 1:
         raise ValueError("Do not mix project scene versions in one dataset-check index: " + repr(sorted(versions)))
     if project_versions:
@@ -349,6 +357,9 @@ def dataset_check(args):
         if version == "Project_v1_1":
             from policy.dataset.lab_cuvette_project_v1_1_dataset import LabCuvetteProjectV11Dataset
             options["dataset_class"] = LabCuvetteProjectV11Dataset
+        elif version == "Project_release_v1":
+            from policy.dataset.lab_cuvette_project_release_dataset import LabCuvetteProjectReleaseDataset
+            options["dataset_class"] = LabCuvetteProjectReleaseDataset
         value = read_check(index, sample_filter=args.sample_filter, policies=policies, **options)
         output.parent.mkdir(parents=True, exist_ok=True)
         with output.open("x", encoding="utf-8") as stream:

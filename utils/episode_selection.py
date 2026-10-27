@@ -40,6 +40,10 @@ def episode_matches_filter(attributes, sample_filter):
     historical false label alone does not establish physical failure validity.
     New failure/all-valid selection requires explicit record_valid evidence.
     """
+    # Release files explicitly declare their transactional publication state.
+    # Historical files have no such field and retain their original semantics.
+    if "publication_state" in attributes and attributes.get("publication_state") != "complete":
+        return False, "publication_not_complete"
     if _optional_bool(attributes.get("complete")) is not True:
         return False, "incomplete_record"
     labels = episode_labels(attributes)
@@ -64,4 +68,3 @@ def episode_matches_filter(attributes, sample_filter):
     if _optional_bool(attributes.get("eligible_for_failure_analysis")) is not True:
         return False, "not_failure_analysis_eligible"
     return True, "accepted"
-

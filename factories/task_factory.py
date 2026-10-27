@@ -64,3 +64,6 @@ register_task("lab_cuvette_project_v1", LabCuvetteProjectV1)
 
 from tasks.lab_cuvette_loading_project_v1_1 import LabCuvetteProjectV11
 register_task("lab_cuvette_project_v1_1", LabCuvetteProjectV11)
+
+from tasks.lab_cuvette_loading_project_release import LabCuvetteProjectRelease
+register_task("lab_cuvette_project_release_v1", LabCuvetteProjectRelease)

@@ -91,6 +91,7 @@ class LiberoTransferContract:
     checkpoint_id: str = "RLinf-Pi05-LIBERO-130-fullshot-SFT"
     embodiment: str = "libero"
     expected_weights_sha256: str = "4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683"
+    expected_norm_stats_sha256: str = "dae37d79a22108af83df9189c6710a3ec8e077d65b28e34bdf1da724e5ae30f1"
     policy_action_hz: float = 20.0
     control_hz: float = 60.0
     trained_translation_scale_m: float = 0.05
@@ -131,6 +132,7 @@ class Pi05LiberoAdapter:
         self.server_metadata = vla_rpc_client.call("vla.get_metadata", timeout_s=30)
         expected = {"checkpoint_id": self.contract.checkpoint_id,
                     "weights_sha256": self.contract.expected_weights_sha256,
+                    "norm_stats_sha256": self.contract.expected_norm_stats_sha256,
                     "embodiment": "libero", "output_action_dim": 7,
                     "output_semantics": "libero_normalized_osc_pose_delta_and_gripper_sign",
                     "output_unnormalized_by_server": True}
@@ -187,9 +189,14 @@ class Pi05LiberoAdapter:
             "started_wall_unix_s": started_unix_s, "finished_wall_unix_s": time.time(),
             "input_image_sha256": {name: hashlib.sha256(encoded[key].tobytes()).hexdigest()
                                    for name, key in (("side_camera", "main_images"), ("wrist_camera", "wrist_images"))},
+            "input_image_specs": {name: {"shape": list(encoded[key].shape), "dtype": str(encoded[key].dtype), "layout": "HWC_RGB"}
+                                  for name, key in (("side_camera", "main_images"), ("wrist_camera", "wrist_images"))},
             "contract_sha256": self.contract.contract_sha256,
             "state_vector": encoded["states"].tolist(),
-            "raw_output_shape": list(raw.shape), "inference_call": self.inference_calls,
+            "raw_output_shape": list(raw.shape), "raw_output_actions": raw.tolist(),
+            "selected_chunk_length": min(raw.shape[0], self.contract.maximum_chunk),
+            "raw_action_scope": "server output after checkpoint unnormalization; not internal diffusion latents",
+            "inference_call": self.inference_calls,
             "truth_used": False, "dynamics_equivalent_to_libero": False,
             "server_metadata": self.server_metadata,
         }

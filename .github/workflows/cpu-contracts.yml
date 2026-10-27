@@ -63,6 +63,9 @@ jobs:
             tests/test_lab_cuvette_action_adapters.py \
             tests/test_labsim_project_versions.py \
             tests/test_lab_cuvette_project_v1_1_*.py \
+            tests/test_lab_cuvette_release_rpc.py \
+            tests/test_labsim_release_cli.py \
+            tests/test_lab_cuvette_external_policy_rollout.py \
             tests/test_cubence_project_v1_1_tools.py
   normal-readers:
     runs-on: ubuntu-latest
@@ -90,4 +93,7 @@ jobs:
           python -m pytest -q \
             tests/test_lab_cuvette_project_v1_1_data.py \
             tests/test_lab_cuvette_project_v1_1_reader_cli.py \
+            tests/test_lab_cuvette_project_release_lifecycle.py \
+            tests/test_lab_cuvette_project_release_reader.py \
+            tests/test_labsim_release_cli.py \
             tests/test_lab_cuvette_public_sample.py

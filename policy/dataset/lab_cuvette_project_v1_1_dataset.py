@@ -9,6 +9,8 @@ from utils.episode_selection import _optional_bool
 
 
 class LabCuvetteProjectV11Dataset(MinimalPickDataset):
+    SCENE_VERSION = "Project_v1_1"
+
     def __init__(self, *args, scene_mode="standard", scene_randomization_enabled=False,
                  automatic_validation_mode="standard", scene_contract_path=None, **kwargs):
         if scene_mode != "standard" or scene_randomization_enabled is not False or automatic_validation_mode != "standard":
@@ -21,7 +23,7 @@ class LabCuvetteProjectV11Dataset(MinimalPickDataset):
         with h5py.File(self.path, "r") as source:
             for episode, group_path in self.group_paths.items():
                 attrs = source[group_path].attrs
-                if attrs.get("scene_version") != "Project_v1_1" or attrs.get("scene_mode") != "standard":
+                if attrs.get("scene_version") != self.SCENE_VERSION or attrs.get("scene_mode") != "standard":
                     raise ValueError("Not a Project_v1_1 fixed standard episode: " + episode)
                 if attrs.get("task_type") != "loading":
                     raise ValueError("Diagnostic subtasks cannot enter the full-loading dataset: " + episode)

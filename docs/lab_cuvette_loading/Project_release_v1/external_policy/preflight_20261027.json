@@ -1,0 +1,132 @@
+{
+  "schema": "labsim.Project_release_v1.external_policy.preflight.v1",
+  "observed_utc": "2026-10-27T06:53:12.741434+00:00",
+  "actual_model_inference": false,
+  "actual_environment_actions": false,
+  "GPU_model_started": false,
+  "checkpoint_is_labsim_finetuned": false,
+  "paid_API_calls": 0,
+  "Cubence_ledger_modified": false,
+  "rpent_commit": "0d72dfac1e75417564e220e31ba7e4b5d8e83665",
+  "python": "3.11.16 (main, Aug 27 2026, 14:44:21) [GCC 14.3.0]",
+  "packages": {
+    "rpent-openpi": "0.2.2",
+    "rpent-rlinf": "0.3.0",
+    "torch": "2.7.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "omegaconf": "2.3.0"
+  },
+  "checkpoint": [
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT/model.safetensors",
+      "bytes": 7473091464,
+      "sha256": "4d9089c941793f170b625c2ed0ac7a3aa09b6f103e52dbbc82e67301529d6683"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT/metadata.pt",
+      "bytes": 3236,
+      "sha256": "8eba92f1159903755c6f529320913033a142a691bb148f90a96db0b6b91d6528"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT/physical-intelligence/libero/norm_stats.json",
+      "bytes": 4507,
+      "sha256": "dae37d79a22108af83df9189c6710a3ec8e077d65b28e34bdf1da724e5ae30f1"
+    }
+  ],
+  "implementation_sources": [
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/rpent/robots/components/pi05_vla_server.py",
+      "bytes": 7911,
+      "sha256": "c9984b3c4d9ab98760f52d80da8c174500766d551763aff828014c3a4c293fa7"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/rpent/robots/components/pi05_vla_client.py",
+      "bytes": 4137,
+      "sha256": "4196010940582d22bcef1198378ca7afc276f013716d0448b6b1e3dfa10b2800"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/.venv/lib/python3.11/site-packages/rlinf/models/embodiment/openpi/__init__.py",
+      "bytes": 5012,
+      "sha256": "4dc635147841a83282b2e2e208569db01bab69438a60c0c68edf941be2db5fec"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/.venv/lib/python3.11/site-packages/rlinf/models/embodiment/openpi/openpi_action_model.py",
+      "bytes": 56892,
+      "sha256": "da8ac1bdd5341793422e3697f84f8e907a793e23c7f0c8748f9392e487335609"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/.venv/lib/python3.11/site-packages/openpi/training/config.py",
+      "bytes": 44203,
+      "sha256": "b54b77a123537bcb304ffe4ad3ed191ee065890f8d7d6a0973d13a0231b93cec"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/.venv/lib/python3.11/site-packages/openpi/policies/libero_policy.py",
+      "bytes": 4320,
+      "sha256": "ad01e5be74516d9ec9aeb1f76294d5c9f7f7179a60f1f7fbbb35e7646534f81a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/.venv/lib/python3.11/site-packages/openpi/transforms.py",
+      "bytes": 15752,
+      "sha256": "a1b94e9e72849a18834778f229c6bb389a495eb7fbe0aa800edea728b9424ff4"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/.venv/lib/python3.11/site-packages/robosuite/models/grippers/panda_gripper.py",
+      "bytes": 1750,
+      "sha256": "df0449a9b003e9a019fad4ef59b435ae2b9accd2705026da041165dd99faab8d"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/rpent/.venv/lib/python3.11/site-packages/robosuite/controllers/config/default/parts/osc_pose.json",
+      "bytes": 515,
+      "sha256": "42ebbfee36cdd287b73da31eb251acce5c91718819feb48c5b978f7a5e8d4b9d"
+    }
+  ],
+  "services": {
+    "8097": {
+      "tcp_listening": false,
+      "identity_verified": false
+    },
+    "8098": {
+      "tcp_listening": false,
+      "identity_verified": false
+    }
+  },
+  "model_runtime": "existing isolated RPent .venv; model server requires CUDA (.cuda() in installed facade)",
+  "readiness": "local checkpoint and implementation present; no current service at preflight; actual release integration not yet run",
+  "contract": {
+    "real_images": "two independent actual HWC uint8 RGB; native 640x480, no camera substitution",
+    "wire_images": "Pi05VLAClient adds batch dimension; main_images/wrist_images; extra_view_images=None",
+    "model_images": "inherited pi05 pipeline maps side->base_0_rgb, wrist->left_wrist_0_rgb, masked zero right_wrist; ResizeImages(224,224) with pad",
+    "robot_state": "8 float32: TCP xyz[m] and rotvec[rad] relative to declared robot base, then left q[m], negative right q[m]",
+    "normalization": "checkpoint state/action q01-q99 quantile transforms inherited; returned7D output is already unnormalized into LIBERO action convention; do not denormalize again",
+    "action": "first6 normalized LIBERO OSC magnitude convention, +gripper close / -open; clipped [-1,1], mapped to explicit engineering transfer",
+    "transfer_config": "config/lab_cuvette_loading/Project_v1/policies/pi05_libero.yaml",
+    "source_translation_scale_m": 0.05,
+    "source_rotation_scale_rad": 0.5,
+    "execution_translation_cap_per_axis_m": 0.0005,
+    "execution_rotation_cap_per_axis_rad": 0.004,
+    "gripper": "stateful single-finger +/- .008 m per model action, clipped0..04; transmitted total opening0..08m; existing GenericContactHold may change applied opening based on actual contact",
+    "gripper_effort_limit_N": 8.0,
+    "policy_action_hz": 20.0,
+    "control_hz": 60.0,
+    "physics_hz": 240.0,
+    "ticks_per_policy_action": 3,
+    "physics_steps_per_policy_action": 12,
+    "model_action_chunk": 5,
+    "model_action_horizon": 10,
+    "maximum_executed_chunk": 5,
+    "chunk_semantics": "infer one chunk; execute each row against preceding actual successor; preserve source inference origin; rejected/partial/termination discards remainder; no automatic replay",
+    "waiting": "same sim time+episode+step checked across actual model inference; environment waits without physics stepping",
+    "truth": "only public RGB/robot proprio/language/calibration, no object/seat truth, no teacher"
+  },
+  "planned_actual_acceptance": {
+    "backend": "pi05",
+    "simulation_time_cap_s": 20.0,
+    "maximum_model_requests": 80,
+    "maximum_actions": 400,
+    "scene_mode": "standard",
+    "success_not_required": true,
+    "stop_on_rejection_partial_safety": true
+  },
+  "historical_scope": "Env_v1 actual pi05 5 actions0.25s is short integration only, not current release lifecycle acceptance"
+}
