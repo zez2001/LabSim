@@ -1,0 +1,76 @@
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 30%]
+......................................................................ss [ 40%]
+......sssssssss......................................................... [ 50%]
+........................................................................ [ 60%]
+..................................................................F..... [ 70%]
+..F..................................................................... [ 81%]
+........................................................................ [ 91%]
+..............................................................           [100%]
+=================================== FAILURES ===================================
+________ test_actual_five_images_enter_one_original_client_reservation _________
+
+tmp_path = PosixPath('/tmp/pytest-of-wujing/pytest-188/test_actual_five_images_enter_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7470885e5c50>
+
+    def test_actual_five_images_enter_one_original_client_reservation(tmp_path,monkeypatch):
+        cfg=load_config(PROFILE);ledger=BudgetLedger(tmp_path/'budget.json',cfg)
+        opener=helpers._Opener([dict(model='gpt-6-astra',output=[],usage=dict(input_tokens=10,output_tokens=1)) for _ in range(4)])
+        monkeypatch.setenv('CUBENCE_API_KEY','CPU-fixed-side-key')
+        monkeypatch.setattr('policy.backends.cubence.time.monotonic',lambda:0.)
+        base=CubenceClient(cfg,ledger,opener=opener,sleeper=lambda _:None)
+        client=detail.PublicFixedSideDetailClient(base,tmp_path/'episode')
+        for i,forces in enumerate([(0.,0.),(.2,.2),(.2,.2),(.2,.2)]):
+            record,path,_=send(client,tmp_path/'episode',i,forces=forces)
+        assert len(opener.bodies)==ledger.summary()['total_network_attempts']==4
+        assert record['total_image_count']==5 and record['historical_images_inserted']==2
+        assert reconstruct_input_items(path)==opener.bodies[-1]['input']
+        body=opener.bodies[-1]
+>       assert sum(c.get('type')=='input_image' for x in body['input'] for c in x.get('content',[]))==5
+
+tests/test_lab_cuvette_project_v1_1_side_detail.py:135: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x747088caf910>
+
+>   assert sum(c.get('type')=='input_image' for x in body['input'] for c in x.get('content',[]))==5
+E   AttributeError: 'str' object has no attribute 'get'
+
+tests/test_lab_cuvette_project_v1_1_side_detail.py:135: AttributeError
+___________ test_packet_collision_does_not_overwrite_previous_detail ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-wujing/pytest-188/test_packet_collision_does_not0')
+
+    def test_packet_collision_does_not_overwrite_previous_detail(tmp_path):
+        base=Client();client=detail.PublicFixedSideDetailClient(base,tmp_path)
+        _,path,_=send(client,tmp_path,0)
+        before=path.read_bytes();image=(path.parent/'current_side_detail.jpg').read_bytes()
+        second=detail.PublicFixedSideDetailClient(base,tmp_path)
+>       items,label=request(second,tmp_path,0)
+
+tests/test_lab_cuvette_project_v1_1_side_detail.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab_cuvette_project_v1_1_side_detail.py:59: in request
+    save_observation_artifacts(contents,output,index,label)
+policy/backends/cubence_tools.py:386: in save_observation_artifacts
+    folder.mkdir(parents=True,exist_ok=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-wujing/pytest-188/test_packet_collision_does_not0/observations/decision_000000')
+mode = 511, parents = True, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileExistsError: [Errno 17] File exists: '/tmp/pytest-of-wujing/pytest-188/test_packet_collision_does_not0/observations/decision_000000'
+
+../labutopia-env/lib/python3.11/pathlib.py:1116: FileExistsError
+- generated xml file: /home/wujing/Desktop/vla/LabSim/docs/lab_cuvette_loading/Project_v1_1/validation/closed_trace_probe_output_isolation_20261027/contracts_junit.xml -
+=========================== short test summary info ============================
+FAILED tests/test_lab_cuvette_project_v1_1_side_detail.py::test_actual_five_images_enter_one_original_client_reservation
+FAILED tests/test_lab_cuvette_project_v1_1_side_detail.py::test_packet_collision_does_not_overwrite_previous_detail
+2 failed, 697 passed, 13 skipped in 7.25s

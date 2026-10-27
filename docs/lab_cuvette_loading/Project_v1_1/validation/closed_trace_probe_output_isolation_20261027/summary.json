@@ -1,0 +1,77 @@
+{
+  "schema": "labsim.Project_v1_1.closed_trace_probe_validation.v2",
+  "source_sha256": {
+    "demos/lab_cuvette_project_v1_1/closed_trace_probe.py": "14865ccd3b908da113b613bbacde69af82f1c3e9af1c271b8e34120f7089c5b2",
+    "tests/test_lab_cuvette_project_v1_1_closed_trace_probe.py": "47cda74fa328d3e020b2fad812c65851d67c312855b8b9ba6610fa45cb053cab",
+    "docs/lab_cuvette_loading/Project_v1_1/closed_trace_probe.md": "8801afcfc09fa9c4f861326fe4ef4987a4954183a964bdd977b0766f766f2603"
+  },
+  "CPU_focused": {
+    "passed": 50,
+    "failed": 0,
+    "skipped": 0,
+    "source_unchanged": true
+  },
+  "frozen_CI_selection": {
+    "counts": {
+      "passed": 697,
+      "skipped": 13,
+      "failed": 2
+    },
+    "exit_code": 1,
+    "source_unchanged": true,
+    "failures_in_unrelated_concurrent_side_detail_tests": [
+      "test_actual_five_images_enter_one_original_client_reservation",
+      "test_packet_collision_does_not_overwrite_previous_detail"
+    ],
+    "note": "Root was notified to resolve the separately authored side_detail fixture failures; this result is not represented as CI success"
+  },
+  "source_dry_run": {
+    "command": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "demos.lab_cuvette_project_v1_1.closed_trace_probe",
+      "--source",
+      "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/gpt_control/policy_trace.jsonl",
+      "--proof",
+      "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/process_exit.json",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/closed_trace_cpu_preview_never_created_20261027",
+      "--dry-run"
+    ],
+    "exit_code": 0,
+    "recorded_actions": 25,
+    "consumed_source_files": 110,
+    "source_trace_sha256": "4c95935cd004185decb19ba01a436b5072aea8765eaf7db93a523fcca7090c59",
+    "derived_plan_sha256": "b62e30894763bde9e68021d075da0e4ec9fcce95a55719c5e4ead5caeeb300cf",
+    "last_action": {
+      "origin": "closed_source_trace",
+      "source_line": 25,
+      "source_decision_index": 24,
+      "source_event": "error",
+      "source_tool_call_sha256": "10053014ba1f8a9dbc8772c1766be911ac97986a848256fe4298db4e27faf1fc",
+      "tool": "move_ee",
+      "arguments": {
+        "action_id": "a25",
+        "duration_s": 2,
+        "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+        "frame": "world",
+        "mode": "ee_delta",
+        "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2880",
+        "values": [
+          0.035,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "output_created": false
+  },
+  "GPU_started": false,
+  "API_called": false,
+  "environment_modified": false,
+  "source_H5_opened": false,
+  "original_physical_score_or_labels_modified": false
+}

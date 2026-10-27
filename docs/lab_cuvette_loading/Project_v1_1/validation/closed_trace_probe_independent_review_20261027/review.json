@@ -1,0 +1,122 @@
+{
+  "schema": "labsim.Project_v1_1.closed_trace_probe_independent_review.v1",
+  "reviewed_utc": "2026-10-27T00:01:42.834183+00:00",
+  "reviewer": "release_report independent CPU/static reviewer",
+  "development_HEAD": "b469ac2fa590a55cf02cf3a98464512a37530238",
+  "verdict": "No remaining blocking finding for the declared diagnostic runner contract at these exact source hashes. No native replay executed by this review.",
+  "source_SHA256": {
+    "demos/lab_cuvette_project_v1_1/closed_trace_probe.py": "14865ccd3b908da113b613bbacde69af82f1c3e9af1c271b8e34120f7089c5b2",
+    "tests/test_lab_cuvette_project_v1_1_closed_trace_probe.py": "47cda74fa328d3e020b2fad812c65851d67c312855b8b9ba6610fa45cb053cab",
+    "docs/lab_cuvette_loading/Project_v1_1/closed_trace_probe.md": "8801afcfc09fa9c4f861326fe4ef4987a4954183a964bdd977b0766f766f2603",
+    "demos/lab_cuvette_project_v1_1/probes.py": "a0466d89946f651a39b9e9180826106fc6e847235d2b6858e594c89c66ea7c93",
+    "policy/backends/cubence_project_v1_1_tools.py": "173b9eca096a257c7db009d5a1cd29ae0b638754f2becb7c8c02a67ae49fc474",
+    "policy/backends/cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+    "demos/lab_cuvette_project_v1_1/run.py": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+    "demos/lab_cuvette_project_v1_1/contract.py": "8a005a14ed6771fcd8d805b7cf7aaa88cf2c9ff984812db2a684638c90484fca",
+    "policy/dataset/lab_cuvette_project_v1_1_dataset.py": "dfd60e9dd44298a0f6787d52338cf8cbbd2404790b51dd798c187f45dc2f30d6",
+    "tasks/lab_cuvette_loading_env_v1.py": "47ce4e6143266c942ba2bcb97604858a6d55a44df356e889022b214c04c3b747"
+  },
+  "finding_resolved": {
+    "priority": "P2",
+    "initial_finding": "Original output.resolve()+exists allowed creating a new diagnostic child inside an already closed source run or historical/asset trees.",
+    "resolution": "isolated_output requires a new direct child of current Project_v1_1 output base or exact-tail verified source version output base; rejects source overlap, existing path, nested old run, parent traversal and all existing/broken symlink components.",
+    "negative_cases_covered": [
+      "source_child",
+      "source_ancestor",
+      "asset",
+      "historical_version",
+      "arbitrary",
+      "existing_run_child",
+      "traversal",
+      "existing_symlink_parent",
+      "broken_symlink"
+    ]
+  },
+  "independent_tests": [
+    {
+      "environment": "existing light CPU CI Python",
+      "passed": 48,
+      "skipped": 2,
+      "failed": 0,
+      "wall_reported_s": 0.38,
+      "command": [
+        "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_lab_cuvette_project_v1_1_closed_trace_probe.py"
+      ],
+      "evidence": "independent_focused.xml",
+      "skip_scope": "Normal-reader fixtures need native data dependencies absent from light CI."
+    },
+    {
+      "environment": "existing LabUtopia data Python; append only existing pytest framework; CUDA empty/plugin autoload disabled",
+      "passed": 2,
+      "deselected": 48,
+      "skipped": 0,
+      "failed": 0,
+      "wall_reported_s": 0.8,
+      "command": [
+        "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+        "-c",
+        "import sys;sys.path.append('/tmp/labsim-handoff-ci-py311-20261022/lib/python3.11/site-packages');import pytest;raise SystemExit(pytest.main(sys.argv[1:]))",
+        "-q",
+        "tests/test_lab_cuvette_project_v1_1_closed_trace_probe.py",
+        "-k",
+        "normal_full_loading_reader"
+      ],
+      "evidence": "independent_normal_reader.xml",
+      "coverage": "Real new collector and normal reader fixtures with both original task_success true/false. Both control_diagnostic groups rejected; original H5 task_success/record_valid and bytes unchanged."
+    }
+  ],
+  "contract_checks": [
+    {
+      "item": "diagnostic-only/provider/API",
+      "status": "pass",
+      "evidence": "No CubenceClient/BudgetLedger/run_episode construction in runner. Real ManualProbe->ProjectV11RobotTools only; no online path search, object-truth feedback, provider, RPC or hidden recovery. CPU help/dryrun forbidden-provider/simulator tests pass."
+    },
+    {
+      "item": "closed identity and source integrity",
+      "status": "pass",
+      "evidence": "Explicit Popen-exited proof, absent/reused-PID refusal, exact output identity/40SHA commit, release/result/options/scene/assets/controller limits consistency, canonical source fingerprint. Every referenced public JSON/JPEG includes last error row and has exact hash/size. Sources rechecked before snapshot, before launch and after lock. ActualGPT05 source110 files reverified by this review."
+    },
+    {
+      "item": "prefix/error row/3IDs",
+      "status": "pass",
+      "evidence": "Source default25 commands includes final model_tool_calls JSON-string error command +X35mm/2s, not114tick/1.9s replacement. Only episode_id/observation_id/action_id rebound via real ManualProbe; all other original values unchanged. Receipts retain original decision/line/event/source tool SHA."
+    },
+    {
+      "item": "suffix intervention",
+      "status": "pass",
+      "evidence": "Requires explicit prefix count, schema, human description, exact action list and original limits. No computed avoidance, new coordinates, retries or automatic continuation after partial/rejection/stop. Source finish is preserved; suffix finish disallowed."
+    },
+    {
+      "item": "no historical H5/label edits; normal-reader isolation",
+      "status": "pass",
+      "evidence": "Source preflight reads small metadata/public images only, never source H5/raw. New task uses ordinary collector/scorer and control_diagnostic; normal full-loading reader rejects both success/failure fixture groups without changing actual labels/H5 bytes."
+    },
+    {
+      "item": "GPU/lifecycle/exit",
+      "status": "pass_static_CPU",
+      "evidence": "Same nonblocking global single-GPU flock before SimulationApp. Nested finally closes task/writers then app then lock; existing task.close finalizes interrupted episode. Launcher returns0 for a reproduced physical failure while original task remainsfalse; setup/execution/argparse errors retain nonzero wrapper code. Parent Popen.wait proof remains required; child never asserts its own PID gone."
+    },
+    {
+      "item": "outputs",
+      "status": "pass_after_fix",
+      "evidence": "Refuses preexisting output, source overlap, traversal, symlink components and any non-dedicated direct destination; snapshots exclusive xb. Real dryrun requested allowed new sibling and created no output."
+    }
+  ],
+  "scope_limits": [
+    "This review does not run SimulationApp, GPU, provider/API, physics replay, video rendering, training or original H5 access. CPU fixtures and static code are not physical same-prefix reproducibility proof.",
+    "Actual native shutdown/write closure and process proof must be observed after the separately authorized replay; CPU stub closure does not certify native runtime behavior.",
+    "Author reported larger full CI contains2 failures in separately authored side-detail tests; this review did not rerun that full suite and does not label overall CI green. These are separate from this runner focused50 cases; root retains integration gate.",
+    "Executable exact hashes are frozen for review. Any later implementation/test changes require targeted recheck; current development HEAD is not substituted for the original GPT05 runtime58da."
+  ],
+  "API_calls": 0,
+  "GPU_used": false,
+  "Isaac_started": false,
+  "packages_installed": false,
+  "runtime_or_test_code_modified_by_reviewer": false,
+  "original_GPT05_sources_modified": false,
+  "original_H5_read": false
+}

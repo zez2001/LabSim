@@ -1,0 +1,87 @@
+{
+  "schema": "labsim.Project_v1_1.closed_trace_probe_cpu_validation.v1",
+  "checks": [
+    {
+      "command": [
+        "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_lab_cuvette_project_v1_1_closed_trace_probe.py"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.4968826010590419,
+      "output": "focused.txt",
+      "sha256": "90f33711e99a2fef9a53f9798659af6d1d2bd7f5d3408350fffebe7f657001d5"
+    },
+    {
+      "command": [
+        "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests"
+      ],
+      "returncode": 2,
+      "wall_seconds": 0.6043069040169939,
+      "output": "full_cpu.txt",
+      "sha256": "c0185c63f27c6f081053d77ab1f7edf7930147115272b660ca13336188859e26"
+    }
+  ],
+  "source_sha256": {
+    "demos/lab_cuvette_project_v1_1/closed_trace_probe.py": "18196caf0bb27feff8d3ae44318e6f52b4f55a8b87cfedb7a5ebceb60c127037",
+    "tests/test_lab_cuvette_project_v1_1_closed_trace_probe.py": "bb3bc19c388492fa7c377dfa97affcacc0da6453281c38a6fbb0651d76e1d9db",
+    "docs/lab_cuvette_loading/Project_v1_1/closed_trace_probe.md": "3143d3142fbfa5d3a0cadc86af84b09d4c0e83a7a6bdf5fabab057d1eaa04076"
+  },
+  "GPU_or_API_executed": false,
+  "scope": "CPU fixtures and source dry-run; no physical replay",
+  "runtime": "isolated existing CI Python; no environment modifications",
+  "supported_CI_contracts_result": "contracts_result.json",
+  "unsupported_unfiltered_suite_note": "full_cpu.txt records an initial unfiltered legacy-suite collection attempt in the small CI environment; it lacked h5py/cv2/trimesh. No dependency or simulation environment was modified. The supported frozen CI selection subsequently passed669/13skip.",
+  "native_python_focused": {
+    "interpreter": "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+    "pytest_only_appended_site": "/tmp/labsim-handoff-ci-py311-20261022/lib/python3.11/site-packages",
+    "CUDA_VISIBLE_DEVICES": "",
+    "passed": 41,
+    "failed": 0,
+    "skipped": 0,
+    "junit": "native_python_focused_junit.xml",
+    "scope": "CPU fixture tests, including two normal-reader rejection checks; not a physical run"
+  },
+  "actual_closed_source_dry_run": {
+    "argv": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "demos.lab_cuvette_project_v1_1.closed_trace_probe",
+      "--source",
+      "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/gpt_control/policy_trace.jsonl",
+      "--proof",
+      "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/process_exit.json",
+      "--dry-run"
+    ],
+    "exit_code": 0,
+    "source_trace_sha256": "4c95935cd004185decb19ba01a436b5072aea8765eaf7db93a523fcca7090c59",
+    "derived_plan_sha256": "b62e30894763bde9e68021d075da0e4ec9fcce95a55719c5e4ead5caeeb300cf",
+    "recorded_actions": 25,
+    "consumed_source_files": 110,
+    "last_source_event": "error",
+    "last_tool": "move_ee",
+    "last_non_ID_arguments": {
+      "duration_s": 2,
+      "frame": "world",
+      "mode": "ee_delta",
+      "values": [
+        0.035,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "source_files_unchanged": true,
+    "output_directory_created": false,
+    "API_calls": 0,
+    "GPU_started": false
+  }
+}
