@@ -18,6 +18,7 @@ import torch
 from rpent.robots.components.pi05_vla_server import Pi05VLAFacade
 
 from .policy_adapters import append_event
+from .input_audit import AuditedInputTransform
 
 
 def _file_sha256(path):
@@ -38,6 +39,11 @@ class AuditedPi05VLAFacade(Pi05VLAFacade):
         checkpoint = Path(model_path).resolve()
         started = time.perf_counter()
         super().__init__(model_path=str(checkpoint), embodiment='libero')
+        # Inspect the exact inherited processor result. It is called once and
+        # returned unchanged; no image, text, state or action conversion changes.
+        self._model._input_transform = AuditedInputTransform(
+            self._model._input_transform, self.output / 'effective_input_audit.jsonl',
+            lambda: self.request_index)
         self.metadata = {
             'schema': 'labsim.Env_v1.pi05_endpoint.v1',
             'checkpoint_id': 'RLinf-Pi05-LIBERO-130-fullshot-SFT',
@@ -54,6 +60,8 @@ class AuditedPi05VLAFacade(Pi05VLAFacade):
             'torch_seed': self.seed,
             'truth_observation_used': False,
             'checkpoint_is_labsim_finetuned': False,
+            'effective_input_audit': 'effective_input_audit.jsonl',
+            'input_audit_scope': 'actual inherited transform output before tensor batching/device transfer',
         }
         self._rpc['vla.get_metadata'] = self.get_metadata
         self._readonly_methods.add('vla.get_metadata')
