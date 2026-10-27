@@ -1,0 +1,231 @@
+{
+  "schema": "labsim.Project_v1_1.P8_independent_CPU_review.v1",
+  "created_utc": "2026-10-27T01:05:48.970929+00:00",
+  "reviewer": "release_final_audit",
+  "development_HEAD": "9a4713cf8c71bed4d697625ab052b378608780cc",
+  "verdict": "No blocking issue found for exact frozen P8 candidate; CPU/fake-wire only, no P8 physical or genuine-model task performance established.",
+  "source_SHA256": {
+    "policy/backends/cubence_project_v1_1_active_view.py": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view.json": "3679ae68f23f52fc53f4306d3896be6ad1492bb3a3a276d73a5700334b01bd92",
+    "tests/test_lab_cuvette_project_v1_1_active_view.py": "00c277a164d24a23eab7182d9066f73c7ed583a66c46133a55a061ebe05a41a6",
+    "policy/backends/cubence_project_v1_1_tools.py": "b764b502f3e4fe2549a0770293e50282ba4ba87ff1487bf749499438e38c7347",
+    "policy/backends/cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318"
+  },
+  "independent_focused": {
+    "schema": "labsim.Project_v1_1.P8_independent_focused_CPU.v1",
+    "command": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_active_view.py",
+      "tests/test_lab_cuvette_project_v1_1_side_detail.py",
+      "tests/test_lab_cuvette_project_v1_1_visual_context.py",
+      "tests/test_lab_cuvette_project_v1_1_temporal_prompt_cadence.py",
+      "tests/test_cubence_project_v1_1_tools.py",
+      "--junitxml=docs/lab_cuvette_loading/Project_v1_1/validation/public_active_view_p8_independent_review_20261027/focused.xml"
+    ],
+    "exit_code": 0,
+    "passed": 100,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "reported_wall_s": 0.63,
+    "XML": "focused.xml",
+    "XML_SHA256": "e38248b7478c042f759477e82f4ec7c1f353110f4b793517f7342d6d76cebf6d",
+    "network_transport": "injected fake opener only",
+    "real_API_calls": 0,
+    "GPU_runs": 0,
+    "source_SHA256": {
+      "policy/backends/cubence_project_v1_1_active_view.py": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843",
+      "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view.json": "3679ae68f23f52fc53f4306d3896be6ad1492bb3a3a276d73a5700334b01bd92",
+      "tests/test_lab_cuvette_project_v1_1_active_view.py": "00c277a164d24a23eab7182d9066f73c7ed583a66c46133a55a061ebe05a41a6",
+      "policy/backends/cubence_project_v1_1_tools.py": "b764b502f3e4fe2549a0770293e50282ba4ba87ff1487bf749499438e38c7347",
+      "policy/backends/cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318"
+    }
+  },
+  "author_full_CPU": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_active_view_p8_20261027/contracts.xml",
+    "SHA256": "96784c32366ab4d78c67f1f1b1e6104d96ad976d987d01e7cf838a1c09a21aa9",
+    "counts": {
+      "tests": 743,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 13,
+      "passed": 730
+    },
+    "reviewer_reran_full_suite": false
+  },
+  "author_change_audit": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_active_view_p8_20261027/change_audit.json",
+    "SHA256": "652e2ec5623eecc838ddbfbe83eb99adcaa29d984700032baeacd943b642a21d"
+  },
+  "protected_runtime": [
+    {
+      "path": "policy/backends/cubence_project_v1_1_side_detail.py",
+      "current_SHA256": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "recorded_SHA256": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "base_9a_SHA256": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "pass_": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json",
+      "current_SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "recorded_SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "base_9a_SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "pass_": true
+    },
+    {
+      "path": "policy/backends/cubence_project_v1_1_visual_context.py",
+      "current_SHA256": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "recorded_SHA256": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "base_9a_SHA256": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "pass_": true
+    },
+    {
+      "path": "policy/backends/cubence.py",
+      "current_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "recorded_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "base_9a_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "pass_": true
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "current_SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "recorded_SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "base_9a_SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "pass_": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "current_SHA256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+      "recorded_SHA256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+      "base_9a_SHA256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+      "pass_": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/run.py",
+      "current_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "recorded_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "base_9a_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "pass_": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/environment.py",
+      "current_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "recorded_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "base_9a_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "pass_": true
+    },
+    {
+      "path": "controllers/lab_cuvette_project_v1_1_controller.py",
+      "current_SHA256": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+      "recorded_SHA256": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+      "base_9a_SHA256": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+      "pass_": true
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "current_SHA256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+      "recorded_SHA256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+      "base_9a_SHA256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+      "pass_": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "current_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "recorded_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "base_9a_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "pass_": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "current_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "recorded_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "base_9a_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "pass_": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json",
+      "current_SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "recorded_SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "base_9a_SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "pass_": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+      "current_SHA256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+      "recorded_SHA256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+      "base_9a_SHA256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+      "pass_": true
+    }
+  ],
+  "profile_difference": {
+    "only_added_key": "active_view_control",
+    "value": {
+      "enabled": true,
+      "version": "Project_v1_1.active_view_prompt.v1",
+      "scope": "prompt_only_no_automatic_action"
+    },
+    "other_fields_equal_P7": true
+  },
+  "checks": [
+    {
+      "item": "prompt scope",
+      "status": "pass",
+      "detail": "P8 adds generic safe local information-gathering clarification only. No actual obstacle/seat/object coordinates, axis/distance, safeheight, actioncount, waypoint, expert path, feedback planner, GT detector or task macro. It requires current views to support whole moving arm/hand/vessel clearance; retains stop/finish on unsupported local motion or safety anomaly. No motion is automatically generated."
+    },
+    {
+      "item": "image and public information domain",
+      "status": "pass",
+      "detail": "PublicActiveViewClient only validates then inherits P7 exact fixed crop/history/projection/delegation. P8/P7 fake live image bodies equal through four public-observation decisions, including bilateral reference; original CURRENT remains last. No new sensor/GT field or physical camera."
+    },
+    {
+      "item": "generic tool and runtime isolation",
+      "status": "pass",
+      "detail": "Tool subclass overrides metadata only. Original5tool schemas remain exact, generic action and safety executor unchanged. Public runner adds exactly3 explicit active_view_control dispatch lines before P7; absent optin preserves older routes, invalid optin fails before client/execution."
+    },
+    {
+      "item": "P4 P6 P7 preservation",
+      "status": "pass",
+      "detail": "Independent100test focused run includes frozen58da P4/P6 wire compatibility, P7 direct-vs-public dispatch, same fake P7/P8 input bodies differing only instructions, and exact protected P7/P6/client/core SHA checks. Implementation hash honestly changes for dispatch and new P8 module; not a claim all metadata hashes stay identical."
+    },
+    {
+      "item": "prompt metadata and requests",
+      "status": "pass",
+      "detail": "Default/custom final prompts and final request instructions SHA agree with captured fake wire. Two fake modelresponses yield exactly two reserved/delegated fake requests, one actualfake wait action, then finish; no actual task success. Does not invoke native environment."
+    },
+    {
+      "item": "caps and budget ledger",
+      "status": "pass",
+      "detail": "P8 profile differs from P7 only active_view_control. Existing30USD/1500network/80kinput/1024output/lowreasoning/context2/160defaultcalls and genericmotioncaps remain. Original client checks actual full input/reserves caller ledger before HTTP. No reset or new budget namespace introduced."
+    },
+    {
+      "item": "counterfactual bound scope",
+      "status": "existing_closed_evidence_checked",
+      "detail": "Author17closed P7 decisions/18attempts estimate adds993 serializedinstructionbytes; max68805,minmargin11195. This is a past-prefix counterfactual, not actualP8API usage or guarantee future private output fits. No private content reconstruction claimed."
+    },
+    {
+      "item": "full CPU",
+      "status": "author_receipt_independently_parsed",
+      "detail": "Author contracts.xml independently parsed730passed/13skipped/0failure/0error;14listed protected runtime/config/client files byte-equal9a4713c and recordedSHA. Reviewer didnotrerunfullsuite. Author Git-free52case proof is separate, not added to reviewer100count."
+    }
+  ],
+  "limitations": [
+    "P8 genuine API/task not run by this reviewer; success still requires actual standard-reset physical full workflow.",
+    "No activeepisode/H5/raw stream read. No API/GPU, no assets/control/scorer/runtime mutation. Only this review directory written.",
+    "Local-view instruction is policy guidance, not safety proof, automatic planner or enforced information-gathering maneuver.",
+    "Past context bound does not certify future capacity or account billing; original cap remains fail-closed."
+  ],
+  "scope": {
+    "real_API_calls": 0,
+    "GPU_runs": 0,
+    "active_episode_read": false,
+    "H5_or_raw_read": false,
+    "frozen_runtime_files_modified": false,
+    "report_authoring": false,
+    "commit_created": false
+  }
+}
