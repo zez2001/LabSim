@@ -1,0 +1,158 @@
+{
+  "schema": "labsim.Project_release_v1.GUI_shutdown_actual.v1",
+  "observed_utc": "2026-10-27T09:53:41.487621+00:00",
+  "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "validation_scope": "one real GUI standard early_finish episode through official CLI, followed by full cleanup; no H5 read in this audit",
+  "native_PID": 1389478,
+  "CLI_wrapper_PID": 1389477,
+  "both_PIDs_gone": true,
+  "wrapper_wait_exit_code": 0,
+  "parent_wall_seconds": 75.00471166300122,
+  "GUI_requested": true,
+  "sequence": [
+    "early_finish"
+  ],
+  "record_mode": "eval",
+  "execution_purpose": "demo",
+  "task_success": false,
+  "task_termination": "CONTROLLED_EARLY_FINISH",
+  "task_result_scope": "controlled early finish is a valid task-incomplete record, not a full teacher success",
+  "cleanup": {
+    "schema": "labsim.Project_release_v1.application_shutdown.v1",
+    "version": "menu_callback_owner_order.v1",
+    "steps": [
+      {
+        "step": "close_environment_writers_and_world",
+        "ok": true,
+        "wall_seconds": 0.2712088009575382
+      },
+      {
+        "step": "unload_menu_owners_before_USD",
+        "USD_context_available_before": true,
+        "menu_extensions": [
+          {
+            "extension": "isaacsim.gui.menu",
+            "enabled_before": true,
+            "enabled_after": false,
+            "API_return": true,
+            "USD_context_available": true,
+            "wall_seconds": 1.1160506299929693
+          },
+          {
+            "extension": "omni.kit.menu.utils",
+            "enabled_before": true,
+            "enabled_after": false,
+            "API_return": true,
+            "USD_context_available": true,
+            "wall_seconds": 19.088296805042773
+          }
+        ],
+        "API": "ExtensionManager.set_extension_enabled_immediate(name, False)",
+        "ok": true,
+        "wall_seconds": 20.204379300936125
+      },
+      {
+        "step": "SimulationApp.close_full_cleanup",
+        "ok": true,
+        "wall_seconds": 18.82939415902365
+      }
+    ],
+    "errors": [],
+    "application_close_returned": true,
+    "native_warning_absence_verified": false,
+    "menu_extensions": [
+      {
+        "extension": "isaacsim.gui.menu",
+        "enabled_before": true,
+        "enabled_after": false,
+        "API_return": true,
+        "USD_context_available": true,
+        "wall_seconds": 1.1160506299929693
+      },
+      {
+        "extension": "omni.kit.menu.utils",
+        "enabled_before": true,
+        "enabled_after": false,
+        "API_return": true,
+        "USD_context_available": true,
+        "wall_seconds": 19.088296805042773
+      }
+    ],
+    "wall_seconds": 39.30499899305869,
+    "successful_cleanup_calls": true
+  },
+  "log_counts": {
+    "Traceback (most recent call last):": 0,
+    "AttributeError": 0,
+    "NoneType": 0,
+    "get_stage_state": 0,
+    "No adjacent samples found for interpolation": 384,
+    "[Error]": 2,
+    "[Warning]": 517
+  },
+  "old_exact_callback_traceback_observed": false,
+  "native_log_scan_scope": "complete closed native stdout/stderr file, matched literal strings; not proof all warnings or all GUI teardown variants are absent",
+  "confirmed_change": "Both menu owners were actually enabled, then disabled by official extension API while USD context remained available; SDK full close returned; no captured old get_stage_state/NoneType AttributeError in this run.",
+  "unchanged_uncertainties": [
+    "Original exact retained menu entry ownership after FileMenu.on_shutdown remains unknown.",
+    "Interpolation No adjacent samples warnings remain and are not fixed by menu teardown.",
+    "One short GUI run does not certify all UI configurations or long-running teardown.",
+    "Do not compare this 39.3s GUI cleanup with the prior headless/full-task close as a controlled performance speedup.",
+    "A distinct ManipulatorFactory NameError callback remains; this run is not an exception-free GUI teardown."
+  ],
+  "source_files": [
+    {
+      "role": "process_exit.json",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/process_exit.json",
+      "bytes": 971,
+      "sha256": "6df11637f1b077287bfe28bc7dd2695750748b63484e30c2b88cc9ec548ebfec"
+    },
+    {
+      "role": "run_manifest.json",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/run_manifest.json",
+      "bytes": 785,
+      "sha256": "4364f9ed9360ead5c17529723df7938e5f3e9edf000d19da3bc91d2ea107a4d2"
+    },
+    {
+      "role": "application_shutdown.json",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/application_shutdown.json",
+      "bytes": 1786,
+      "sha256": "0917d3ed5e0b22ceea37f3b076cd68cfdc85d514e37adbb6ecb1cf9e6db65f05"
+    },
+    {
+      "role": "summary.json",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/summary.json",
+      "bytes": 6130,
+      "sha256": "e7f8295a251c6a1e03bc36fe4a0c189ebe3fab0e00d4c15dd1786cc81ba9e31b"
+    },
+    {
+      "role": "native_log",
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02.native.log",
+      "bytes": 126943,
+      "sha256": "f7975b703f52cdc3a387cdc4912dfa61321ae12724e28d303546419ca1883f69"
+    }
+  ],
+  "old_source_audit": "docs/lab_cuvette_loading/Project_release_v1/validation/GUI_shutdown_source_audit_20261027.json",
+  "source_originals_modified": false,
+  "additional_GPU_processes_started": false,
+  "API_calls": 0,
+  "residual_GUI_shutdown_errors": [
+    {
+      "source_line_1based": 842,
+      "text": "2026-10-27T09:46:34Z [33,337ms] [Error] [carb.scripting-python.plugin] NameError: name 'ManipulatorFactory' is not defined"
+    },
+    {
+      "source_line_1based": 857,
+      "text": "2026-10-27T09:46:34Z [33,337ms] [Error] [omni.ext.plugin] Failed while calling `shutdown_extensions` function: /home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.manipulator.prim.core-107.0.8+69cbf6ad"
+    }
+  ],
+  "cleanup_report_scope": "successful_cleanup_calls means official APIs returned and verified target extensions disabled; it does not certify callbacks emitted no logged errors.",
+  "residual_error_source_audit": {
+    "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.manipulator.prim.core-107.0.8+69cbf6ad/omni/kit/manipulator/prim/core/extension.py",
+    "sha256": "3c135a37c2e794af80492c8b471ea4fb4a051336994fac927dec3bf757d2ec1c",
+    "startup_local_import_line": 45,
+    "shutdown_global_name_reference_line": 66,
+    "finding": "ManipulatorFactory is imported inside on_startup only, then referenced as an unbound module global in on_shutdown when a legacy marker exists; installed extension bug. The captured callback did fail while the overall extension-unload API still returned true.",
+    "fix_status": "not modified or patched; frozen runtime remains122c4c0; precise residual shutdown issue retained"
+  }
+}

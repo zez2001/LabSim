@@ -1,0 +1,9 @@
+{
+  "reason": "Auditor incorrectly expected direct native PID; public CLI intentionally wraps a synchronous child",
+  "proof_launcher_pid": 1389477,
+  "native_manifest_pid": 1389478,
+  "both_now_absent": true,
+  "code_runtime_correct": true,
+  "source_H5_not_read": true,
+  "fix": "Guard both PIDs before payload and verify exact CLI synchronous subprocess.run contract"
+}

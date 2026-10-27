@@ -1,0 +1,78 @@
+{
+  "schema": "labsim.Project_release_v1.GUI_shutdown_closed_CPU_audit.v1",
+  "UTC": "2026-10-27T09:53:11.240830+00:00",
+  "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "source_run": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02",
+  "native_PID": 1389477,
+  "native_PID_absent_verified": true,
+  "exit_code": 0,
+  "outer_wall_seconds": 75.00471166300122,
+  "task_success": false,
+  "record_valid": true,
+  "failure_type": "TASK_INCOMPLETE",
+  "termination_reason": "CONTROLLED_EARLY_FINISH",
+  "episode_scope": "Controlled early_finish short GUI lifecycle; not a complete teacher loading success",
+  "application_close_returned": true,
+  "all_cleanup_API_calls_returned_successfully": true,
+  "menu_owners_unloaded_while_USD_available": true,
+  "prior_get_stage_state_AttributeError_observed": false,
+  "native_traceback_observed": false,
+  "remaining_warning_count": 517,
+  "error_or_fatal_count": 2,
+  "native_log_warning_free": false,
+  "native_warning_absence_flag_in_runtime_receipt": false,
+  "shutdown_helper_wall_seconds": 39.30499899305869,
+  "shutdown_steps": [
+    {
+      "step": "close_environment_writers_and_world",
+      "ok": true,
+      "wall_seconds": 0.2712088009575382
+    },
+    {
+      "step": "unload_menu_owners_before_USD",
+      "USD_context_available_before": true,
+      "menu_extensions": [
+        {
+          "extension": "isaacsim.gui.menu",
+          "enabled_before": true,
+          "enabled_after": false,
+          "API_return": true,
+          "USD_context_available": true,
+          "wall_seconds": 1.1160506299929693
+        },
+        {
+          "extension": "omni.kit.menu.utils",
+          "enabled_before": true,
+          "enabled_after": false,
+          "API_return": true,
+          "USD_context_available": true,
+          "wall_seconds": 19.088296805042773
+        }
+      ],
+      "API": "ExtensionManager.set_extension_enabled_immediate(name, False)",
+      "ok": true,
+      "wall_seconds": 20.204379300936125
+    },
+    {
+      "step": "SimulationApp.close_full_cleanup",
+      "ok": true,
+      "wall_seconds": 18.82939415902365
+    }
+  ],
+  "conclusion": "The prior get_stage_state AttributeError did not recur, but two native extension shutdown errors remain: ManipulatorFactory NameError and prim.core shutdown_extensions failure. API close returned and exit0 do not certify warning/error-free extension shutdown.",
+  "GUI_relaunched_by_auditor": false,
+  "source_H5_or_raw_logs_read": false,
+  "source_files_rewritten": false,
+  "original_source_SHA256": {
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/process_exit.json": "6df11637f1b077287bfe28bc7dd2695750748b63484e30c2b88cc9ec548ebfec",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/application_shutdown.json": "0917d3ed5e0b22ceea37f3b076cd68cfdc85d514e37adbb6ecb1cf9e6db65f05",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02.native.log": "f7975b703f52cdc3a387cdc4912dfa61321ae12724e28d303546419ca1883f69",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02.supervisor.json": "6df11637f1b077287bfe28bc7dd2695750748b63484e30c2b88cc9ec548ebfec",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/controlled_termination.json": "8e07f87fd7bdcdd5c12128681b309d60c25f0af591cf8132c54512a993a84a9d",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/result.json": "44ef471cafaa8434a4cd3914d0eb54de1a1fb93e5c986165df203b6d0c16c79f",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/run_manifest.json": "4364f9ed9360ead5c17529723df7938e5f3e9edf000d19da3bc91d2ea107a4d2",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_01.supervisor.json": "4fedaf9327bc1e93133ffc288f947a4b4de4d593f981f71f1bfae3438cb0a603",
+    "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_01.native.log": "d2938f9cec2a009dc499629119ff5d23032a345e4f476c144359e3a11c11d8d8"
+  },
+  "all_source_SHA256_unchanged": true
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "labsim.Project_release_v1.GUI_shutdown_ManipulatorFactory_known_issue.v1",
+  "observed_utc": "2026-10-27T10:04:26.730392+00:00",
+  "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "scope": "read-only installed-source and closed-native-log audit; no GPU/model/H5 opened",
+  "root_cause": "ManipulatorFactory is function-local in on_startup at line45; on_shutdown references it as a module-global at line66 when _legacy_marker is not None. The global is absent in this installed file.",
+  "source_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.manipulator.prim.core-107.0.8+69cbf6ad/omni/kit/manipulator/prim/core/extension.py",
+      "sha256": "3c135a37c2e794af80492c8b471ea4fb4a051336994fac927dec3bf757d2ec1c",
+      "bytes": 3607
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.manipulator.prim.core-107.0.8+69cbf6ad/config/extension.toml",
+      "sha256": "b74f08f2604c4c9acc245c8f35d8e47902c43be790af10281eae60cafadf3627",
+      "bytes": 6542
+    }
+  ],
+  "source_locations": {
+    "local_import_line": 45,
+    "legacy_marker_creation_lines": [
+      47,
+      49
+    ],
+    "shutdown_start_line": 59,
+    "global_name_reference_line": 66,
+    "cleanup_after_exception_skipped_lines": [
+      69,
+      79
+    ]
+  },
+  "declared_dependencies": {
+    "omni.kit.manipulator.viewport": "optional=true",
+    "omni.usd": "required",
+    "omni.kit.viewport.manipulator.transform": "required"
+  },
+  "actual_order": [
+    {
+      "runtime_s": 2.997,
+      "event": "omni.kit.manipulator.viewport startup"
+    },
+    {
+      "runtime_s": 3.714,
+      "event": "omni.kit.manipulator.prim.core startup"
+    },
+    {
+      "runtime_s": 31.912,
+      "event": "isaacsim.gui.menu shutdown"
+    },
+    {
+      "runtime_s": 33.349,
+      "event": "prim.core on_shutdown during release helper menu-owner unload cascade"
+    },
+    {
+      "runtime_s": 33.337,
+      "clock_note": "logger timestamp and extension-print timestamps differ slightly",
+      "event": "NameError logged at prim.core on_shutdown line66; extension manager also logs shutdown_extensions callback failure"
+    },
+    {
+      "runtime_s": 62.035,
+      "event": "omni.kit.manipulator.viewport shutdown later"
+    }
+  ],
+  "dependency_missing_explanation_rejected": "Viewport dependency was still enabled when core shutdown failed. An earlier import into another function scope does not bind a module-global; simply unloading it later/earlier cannot correct the bare name.",
+  "actual_impact": [
+    "One GUI tool extension callback aborts partway through cleanup; official unload API still returned true and target menu extensions became disabled.",
+    "This occurs after episode writers/world are closed, not during robot execution or data collection.",
+    "The overall actual native/CLI processes subsequently exited0 and PIDs are absent; this observation is nonfatal for this run.",
+    "No claim is made that every GUI resource owner cleaned explicitly or that no other shutdown configurations can fail."
+  ],
+  "reproduce_official_command": [
+    "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+    "/tmp/labsim-project-v1-1-clean-20261027/scripts/labsim_cli.py",
+    "demo",
+    "--project-version",
+    "Project_release_v1",
+    "--output",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02",
+    "--gui",
+    "--record-mode",
+    "eval",
+    "--sequence",
+    "early_finish"
+  ],
+  "reproduce_note": "Use a new output path and the actual frozen122c4c0 checkout, existing Isaac5.1, currentGUI experience, --sequence early_finish. The copied command source output must not be overwritten.",
+  "current_fix_status": "122c4c0 implementation frozen as requested; no installed-source edit or monkeypatch, residual SDK error retained.",
+  "candidate_not_implemented_or_validated": "After writers/world close, close USD stage while context is alive, disable only isaacsim.gui.menu, use public MenuUtilsExtension.clear_menu_data/rebuild_menus then SDK natural close. This narrows manual dependency unload; it does not repair the installed local-import bug and is NOT reported as a tested fix.",
+  "old_warning_scope": "Old get_stage_state/NoneType AttributeError was not observed in the complete captured gui_finish_02 log; exact retained menu-entry owner in historical shutdown remains unknown.",
+  "SDK_log_caveat": "SimulationApp.close itself disables carb logging before framework shutdown in installed implementation. Lack of a prior logged NameError is not proof that the old natural shutdown never encountered it.",
+  "installed_files_modified": false,
+  "historical_logs_modified": false
+}

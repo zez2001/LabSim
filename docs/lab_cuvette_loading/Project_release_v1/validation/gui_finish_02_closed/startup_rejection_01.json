@@ -1,0 +1,37 @@
+{
+  "classification": "CLI_STARTUP_ARGUMENT_REJECTION_NOT_TASK_FAILURE",
+  "proof": {
+    "started_utc": "2026-10-27T09:42:37.435850+00:00",
+    "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_01",
+    "pid": 1377870,
+    "runtime_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+    "checkout": "/tmp/labsim-project-v1-1-clean-20261027",
+    "command": [
+      "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+      "/tmp/labsim-project-v1-1-clean-20261027/scripts/labsim_cli.py",
+      "demo",
+      "--project-version",
+      "Project_release_v1",
+      "--output",
+      "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/gui_finish_01",
+      "--gui",
+      "--record-mode",
+      "eval",
+      "--sequence",
+      "early_finish",
+      "--early-finish-after-s",
+      "3"
+    ],
+    "status": "closed",
+    "credentials_in_child": false,
+    "wall_seconds": 5.0005436959909275,
+    "process_exited": true,
+    "exit_code": 2,
+    "UTC": "2026-10-27T09:42:42.436394+00:00",
+    "completion_evidence": "Parent observed Popen.wait; native PID gone"
+  },
+  "episode_started": false,
+  "run_output_directory_created": false,
+  "reason": "Top-level public CLI did not expose --early-finish-after-s; corrected next call used supported flags",
+  "raw_log": "usage: labsim_cli.py [-h]\n                     {doctor,assets,demo,eval,serve,collect,validate,dataset-check}\n                     ...\nlabsim_cli.py: error: unrecognized arguments: --early-finish-after-s 3\n"
+}

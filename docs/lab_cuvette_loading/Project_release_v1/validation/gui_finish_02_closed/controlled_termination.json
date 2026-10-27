@@ -1,0 +1,128 @@
+{
+  "schema": "labsim.Project_release_v1.controlled_termination.v1",
+  "condition": "early_finish",
+  "controlled_fault_injection": false,
+  "real_model_service_failure": false,
+  "actual_user_keyboard_action": false,
+  "declared_duration_s": 3.0,
+  "control_steps_advanced": 180,
+  "action_receipts": [
+    {
+      "action_id": "cf4ef20f-e763-44ec-8a85-bbf7b5825f04:wait:0",
+      "episode_id": "cf4ef20f-e763-44ec-8a85-bbf7b5825f04",
+      "observation_id": "cf4ef20f-e763-44ec-8a85-bbf7b5825f04:0",
+      "accepted": true,
+      "execution_finished": true,
+      "target_reached": true,
+      "safety_stopped": false,
+      "completed": true,
+      "completed_semantics": "Execution interval ended; target_reached independently measures actual endpoint.",
+      "requested_duration_s": 3.0,
+      "executed_duration_s": 3.0,
+      "executed_control_ticks": 180,
+      "partial_execution": false,
+      "simulation_time_before": 0.016666666666666666,
+      "requested_start_TCP": {
+        "position_m": [
+          -0.08505931596479005,
+          -0.1748760546046365,
+          1.0228528475162522
+        ],
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ]
+      },
+      "requested_target_TCP": {
+        "position_m": [
+          -0.08505931596479005,
+          -0.1748760546046365,
+          1.0228528475162522
+        ],
+        "quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ]
+      },
+      "maximum_position_tracking_error_m": 0.0002848986248638582,
+      "maximum_orientation_tracking_error_rad": 0.0005536347754975643,
+      "stop_reason": "INTERVAL_FINISHED",
+      "control_steps_before": 0,
+      "physics_steps_before": 4,
+      "plan": {
+        "planned_ticks": 180,
+        "requested_ticks": 180,
+        "maximum_FK_position_error_m": 1.4946834900704541e-16,
+        "maximum_FK_orientation_error_rad": 4.02521906064234e-16,
+        "maximum_joint_step_rad": 0.000383227402550812,
+        "wall_seconds": 0.10027354001067579,
+        "scope": "Continuous kinematics only; not collision or dynamics certification",
+        "FK_goal_scope": "nominal + frozen current robot tracking estimate",
+        "runtime_feedback_revalidation": true
+      },
+      "status": "FINISHED",
+      "executed_physics_steps": 720,
+      "incomplete_control_interval": false,
+      "simulation_time_after": 3.0166666666666666,
+      "observation_id_after": "cf4ef20f-e763-44ec-8a85-bbf7b5825f04:180",
+      "successor_observation_available": true,
+      "actual_endpoint_valid": true,
+      "actual_endpoint_TCP": {
+        "position_m": [
+          -0.08505978967770637,
+          -0.17487503800445356,
+          1.0228517747956367
+        ],
+        "quaternion_wxyz": [
+          -0.0004551784953833043,
+          0.7070122510644912,
+          -0.7072011381718534,
+          0.000140803740779192
+        ]
+      },
+      "TCPpose": {
+        "position_m": [
+          -0.08505978967770637,
+          -0.17487503800445356,
+          1.0228517747956367
+        ],
+        "quaternion_wxyz": [
+          -0.0004551784953833043,
+          0.7070122510644912,
+          -0.7072011381718534,
+          0.000140803740779192
+        ]
+      },
+      "final_position_error_m": 1.5519695157683603e-06,
+      "final_orientation_error_rad": 8.461081667548225e-06,
+      "tracking_error_coverage_complete": true,
+      "tracking_error_sampling": "completed control boundaries; not a physics-substep maximum",
+      "target_reached_scope": "TCP pose only; not a claim of grasp, gripper opening, or task success",
+      "requested_gripper_opening_m": 0.08,
+      "applied_gripper_opening_m": 0.08,
+      "requested_effort_limit_N": 8.0,
+      "applied_effort_limit_N": 8.0,
+      "stop_domain": "none",
+      "endpoint_tolerances": {
+        "position_m": 0.001,
+        "orientation_rad": 0.008726646259971648
+      },
+      "wall_seconds": 20.558505548979156,
+      "terminated": false,
+      "gripper_opening_m": 0.07999992743134499
+    }
+  ],
+  "repeated_finish_preserved_status": true,
+  "terminal_status": {
+    "episode_id": "cf4ef20f-e763-44ec-8a85-bbf7b5825f04",
+    "observation_id": "cf4ef20f-e763-44ec-8a85-bbf7b5825f04:180",
+    "simulation_time": 3.0166666666666666,
+    "terminated": true,
+    "task_success": false,
+    "termination_reason": "CONTROLLED_EARLY_FINISH"
+  }
+}

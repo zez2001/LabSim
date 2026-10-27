@@ -1,0 +1,64 @@
+{
+  "schema": "labsim.Project_release_v1.application_shutdown.v1",
+  "version": "menu_callback_owner_order.v1",
+  "steps": [
+    {
+      "step": "close_environment_writers_and_world",
+      "ok": true,
+      "wall_seconds": 0.2712088009575382
+    },
+    {
+      "step": "unload_menu_owners_before_USD",
+      "USD_context_available_before": true,
+      "menu_extensions": [
+        {
+          "extension": "isaacsim.gui.menu",
+          "enabled_before": true,
+          "enabled_after": false,
+          "API_return": true,
+          "USD_context_available": true,
+          "wall_seconds": 1.1160506299929693
+        },
+        {
+          "extension": "omni.kit.menu.utils",
+          "enabled_before": true,
+          "enabled_after": false,
+          "API_return": true,
+          "USD_context_available": true,
+          "wall_seconds": 19.088296805042773
+        }
+      ],
+      "API": "ExtensionManager.set_extension_enabled_immediate(name, False)",
+      "ok": true,
+      "wall_seconds": 20.204379300936125
+    },
+    {
+      "step": "SimulationApp.close_full_cleanup",
+      "ok": true,
+      "wall_seconds": 18.82939415902365
+    }
+  ],
+  "errors": [],
+  "application_close_returned": true,
+  "native_warning_absence_verified": false,
+  "menu_extensions": [
+    {
+      "extension": "isaacsim.gui.menu",
+      "enabled_before": true,
+      "enabled_after": false,
+      "API_return": true,
+      "USD_context_available": true,
+      "wall_seconds": 1.1160506299929693
+    },
+    {
+      "extension": "omni.kit.menu.utils",
+      "enabled_before": true,
+      "enabled_after": false,
+      "API_return": true,
+      "USD_context_available": true,
+      "wall_seconds": 19.088296805042773
+    }
+  ],
+  "wall_seconds": 39.30499899305869,
+  "successful_cleanup_calls": true
+}
