@@ -1,0 +1,916 @@
+{
+  "schema": "labsim.agent_results_package.v1",
+  "repository_url": "https://github.com/zez2001/LabSim",
+  "readme": "docs/agent_handoff/Project_release_v1_current/00_给Agent阅读说明.md",
+  "directories": [],
+  "files": [
+    {
+      "source": ".gitattributes",
+      "destination": ".gitattributes"
+    },
+    {
+      "source": ".github/workflows/cpu-contracts.yml",
+      "destination": ".github/workflows/cpu-contracts.yml"
+    },
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE"
+    },
+    {
+      "source": "assets/lab_cuvette_loading/Size_v1/registry.json",
+      "destination": "assets/lab_cuvette_loading/Size_v1/registry.json"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_release_v1/standard.yaml",
+      "destination": "config/lab_cuvette_loading/Project_release_v1/standard.yaml"
+    },
+    {
+      "source": "config/lab_cuvette_loading/Project_v1/assets.lock.json",
+      "destination": "config/lab_cuvette_loading/Project_v1/assets.lock.json"
+    },
+    {
+      "source": "data_collectors/lab_cuvette_project_release_collector.py",
+      "destination": "data_collectors/lab_cuvette_project_release_collector.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/__init__.py",
+      "destination": "demos/lab_cuvette_project_release_v1/__init__.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/contract.py",
+      "destination": "demos/lab_cuvette_project_release_v1/contract.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/dataset_index.py",
+      "destination": "demos/lab_cuvette_project_release_v1/dataset_index.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/environment.py",
+      "destination": "demos/lab_cuvette_project_release_v1/environment.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/launch.py",
+      "destination": "demos/lab_cuvette_project_release_v1/launch.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/recording.py",
+      "destination": "demos/lab_cuvette_project_release_v1/recording.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/rpc.py",
+      "destination": "demos/lab_cuvette_project_release_v1/rpc.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/run.py",
+      "destination": "demos/lab_cuvette_project_release_v1/run.py"
+    },
+    {
+      "source": "demos/lab_cuvette_project_release_v1/shutdown.py",
+      "destination": "demos/lab_cuvette_project_release_v1/shutdown.py"
+    },
+    {
+      "source": "docs/agent_handoff/Project_release_v1_current/external_data_sources.json",
+      "destination": "docs/agent_handoff/Project_release_v1_current/external_data_sources.json"
+    },
+    {
+      "source": "docs/agent_handoff/Project_release_v1_current/package_readiness.json",
+      "destination": "docs/agent_handoff/Project_release_v1_current/package_readiness.json"
+    },
+    {
+      "source": "docs/agent_handoff/Project_release_v1_current/prepare_manifest.py",
+      "destination": "docs/agent_handoff/Project_release_v1_current/prepare_manifest.py"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/README.md",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/README.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/external_policy/cpu_change_review_20261027.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/external_policy/cpu_change_review_20261027.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/external_policy/preflight_20261027.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/external_policy/preflight_20261027.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/lifecycle.md",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/lifecycle.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/current_evidence_map.pending.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/current_evidence_map.pending.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/generate_meeting.py",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/generate_meeting.py"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/gpt08_terminal.png",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/gpt08_terminal.png"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/homepage_initial_check.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/homepage_initial_check.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/meeting_build_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/meeting_build_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/meeting_preview_qa.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/meeting_preview_qa.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/release_README_pending_link_check.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/release_README_pending_link_check.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/teacher_retreat.png",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/teacher_retreat.png"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/teacher_scene.png",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/meeting_source/teacher_scene.png"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/release_acceptance.md",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/release_acceptance.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/GUI_shutdown_source_audit_20261027.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/GUI_shutdown_source_audit_20261027.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/actual_resource_samples.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/actual_resource_samples.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/audit_source_provenance.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/audit_source_provenance.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/close_timings.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/close_timings.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/closed_gate.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/closed_gate.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_H5_attributes.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_H5_attributes.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_H5_datasets_full_read.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_H5_datasets_full_read.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_all_valid_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_all_valid_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_all_valid_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_all_valid_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_failure_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_failure_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_failure_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_failure_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_success_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_success_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_success_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_direct_success_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_all_valid_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_all_valid_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_all_valid_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_all_valid_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_failure_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_failure_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_failure_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_failure_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_success_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_success_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_success_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/episode_0000_independent_path_success_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/evidence_manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/evidence_manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/index_build_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/index_build_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/normal_reader_timings.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/normal_reader_timings.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/performance_measurements.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/performance_measurements.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/readonly_episode_index.index.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/readonly_episode_index.index.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_all_valid_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_all_valid_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_all_valid_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_all_valid_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_failure_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_failure_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_failure_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_failure_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_success_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_success_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_success_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/relative_index_success_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/source_SHA256_before_after.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/source_SHA256_before_after.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/source_inventory.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/source_inventory.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/baseline_diagnostic_01_closed/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/fresh_assets/asset_check_actual.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/fresh_assets/asset_check_actual.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/fresh_assets/manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/fresh_assets/manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/github_122c4c0_actual.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/github_122c4c0_actual.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/application_shutdown.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/application_shutdown.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/controlled_termination.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/controlled_termination.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/evidence_manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/evidence_manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/evidence_manifest.v2.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/evidence_manifest.v2.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/gui_finish_02.native.log",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/gui_finish_02.native.log"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/native_warning_error_lines.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/native_warning_error_lines.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/process_exit.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/process_exit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/shutdown_error_context.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/shutdown_error_context.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/startup_rejection_01.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/startup_rejection_01.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/summary.v2.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_closed/summary.v2.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/actual_resource_samples.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/actual_resource_samples.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/audit_source_provenance.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/audit_source_provenance.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/close_timings.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/close_timings.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/closed_gate.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/closed_gate.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_H5_attributes.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_H5_attributes.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_H5_datasets_full_read.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_H5_datasets_full_read.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_all_valid_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_all_valid_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_all_valid_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_all_valid_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_failure_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_failure_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_failure_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_failure_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_success_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_success_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_success_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_direct_success_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_all_valid_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_all_valid_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_all_valid_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_all_valid_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_failure_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_failure_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_failure_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_failure_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_success_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_success_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_success_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/episode_0000_independent_path_success_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/evidence_manifest.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/evidence_manifest.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/index_build_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/index_build_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/initial_state_differences.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/initial_state_differences.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/lossless_stream_verification.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/lossless_stream_verification.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/normal_reader_timings.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/normal_reader_timings.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/performance_measurements.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/performance_measurements.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/readonly_episode_index.index.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/readonly_episode_index.index.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_all_valid_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_all_valid_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_all_valid_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_all_valid_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_failure_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_failure_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_failure_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_failure_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_success_act.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_success_act.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_success_dp.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/relative_index_success_dp.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/reset_publication_audit.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/reset_publication_audit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/reset_stage_results.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/reset_stage_results.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/source_SHA256_before_after.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/source_SHA256_before_after.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/source_inventory.csv",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/source_inventory.csv"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/summary.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_data_closed/summary.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/ManipulatorFactory_native_excerpt.log",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/ManipulatorFactory_native_excerpt.log"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/ManipulatorFactory_source_audit.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/ManipulatorFactory_source_audit.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/selected_log_excerpt.log",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/gui_finish_02_shutdown_actual_20261027/selected_log_excerpt.log"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/lifecycle_cpu.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/lifecycle_cpu.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/lifecycle_cpu.xml",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/lifecycle_cpu.xml"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/preservation.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/preservation.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/recording_termination_cpu.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/recording_termination_cpu.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/recording_termination_cpu.xml",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/recording_termination_cpu.xml"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/runtime_environment.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/runtime_environment.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_cases.dry_run.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_cases.dry_run.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_cli_cpu.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_cli_cpu.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_cli_cpu.xml",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_cli_cpu.xml"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/READ_FIRST.md",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/READ_FIRST.md"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/envelopes.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/envelopes.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/plan_receipt.json",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/plan_receipt.json"
+    },
+    {
+      "source": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/replay_rpc.py",
+      "destination": "docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/replay_rpc.py"
+    },
+    {
+      "source": "factories/collector_factory.py",
+      "destination": "factories/collector_factory.py"
+    },
+    {
+      "source": "factories/task_factory.py",
+      "destination": "factories/task_factory.py"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/audit_input.yaml",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/audit_input.yaml"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/camera_lifecycle.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/camera_lifecycle.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/cameras.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/cameras.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/config.yaml",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/config.yaml"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/contact_hold_configuration.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/contact_hold_configuration.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/dataset/meta/episode.jsonl",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/dataset/meta/episode.jsonl"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/declared_initial_joints.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/declared_initial_joints.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/episode_0000_complete.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/episode_0000_complete.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/episode_0000_result.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/episode_0000_result.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/executor_configuration.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/executor_configuration.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/facade_reset_audit.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/facade_reset_audit.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/final_camera_meta.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/final_camera_meta.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/finalization_timing.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/finalization_timing.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/geometry_audit_binding.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/geometry_audit_binding.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/independent_score.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/independent_score.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/initial_debug.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/initial_debug.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/initialization_timing.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/initialization_timing.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/options.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/options.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/physics_capture_meta.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/physics_capture_meta.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/project_scene_contract.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/project_scene_contract.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/release_metadata.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/release_metadata.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/reset_audit.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/reset_audit.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/reset_check.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/reset_check.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/result.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/result.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/robot_tracking_configuration.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/robot_tracking_configuration.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/teacher_events.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/teacher_events.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/video_timestamps.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/episode_0000/video_timestamps.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/launch_config.yaml",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/launch_config.yaml"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/process_exit.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/process_exit.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/reset_checks.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/reset_checks.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/resource_samples.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/resource_samples.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/run_manifest.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/run_manifest.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/summary.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01/summary.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/application_shutdown.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/application_shutdown.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/audit_input.yaml",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/audit_input.yaml"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/camera_lifecycle.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/camera_lifecycle.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/cameras.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/cameras.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/config.yaml",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/config.yaml"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/contact_hold_configuration.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/contact_hold_configuration.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/controlled_termination.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/controlled_termination.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/dataset/meta/episode.jsonl",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/dataset/meta/episode.jsonl"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/declared_initial_joints.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/declared_initial_joints.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/episode_0000_complete.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/episode_0000_complete.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/episode_0000_result.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/episode_0000_result.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/executor_configuration.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/executor_configuration.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/facade_reset_audit.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/facade_reset_audit.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/final_camera_meta.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/final_camera_meta.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/finalization_timing.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/finalization_timing.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/geometry_audit_binding.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/geometry_audit_binding.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/independent_score.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/independent_score.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/initial_debug.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/initial_debug.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/initialization_timing.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/initialization_timing.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/options.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/options.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/physics_capture_meta.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/physics_capture_meta.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/project_scene_contract.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/project_scene_contract.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/recording_closed_receipt.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/recording_closed_receipt.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/recording_configuration.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/recording_configuration.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/release_metadata.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/release_metadata.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/reset_audit.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/reset_audit.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/reset_check.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/reset_check.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/result.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/result.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/robot_tracking_configuration.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/robot_tracking_configuration.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/video_timestamps.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/episode_0000/video_timestamps.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/launch_config.yaml",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/launch_config.yaml"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/process_exit.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/process_exit.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/reset_checks.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/reset_checks.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/resource_samples.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/resource_samples.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/run_manifest.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/run_manifest.json"
+    },
+    {
+      "source": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/summary.json",
+      "destination": "outputs/lab_cuvette_loading/Project_release_v1/gui_finish_02/summary.json"
+    },
+    {
+      "source": "policy/dataset/lab_cuvette_project_release_dataset.py",
+      "destination": "policy/dataset/lab_cuvette_project_release_dataset.py"
+    },
+    {
+      "source": "policy/dataset/lab_cuvette_project_v1_1_dataset.py",
+      "destination": "policy/dataset/lab_cuvette_project_v1_1_dataset.py"
+    },
+    {
+      "source": "policy_backends/lab_cuvette_env_v1/pi05_rollout.py",
+      "destination": "policy_backends/lab_cuvette_env_v1/pi05_rollout.py"
+    },
+    {
+      "source": "policy_backends/lab_cuvette_env_v1/policy_adapters.py",
+      "destination": "policy_backends/lab_cuvette_env_v1/policy_adapters.py"
+    },
+    {
+      "source": "policy_backends/lab_cuvette_env_v1/policy_runner.py",
+      "destination": "policy_backends/lab_cuvette_env_v1/policy_runner.py"
+    },
+    {
+      "source": "requirements.txt",
+      "destination": "requirements.txt"
+    },
+    {
+      "source": "requirements/ci-readers.txt",
+      "destination": "requirements/ci-readers.txt"
+    },
+    {
+      "source": "requirements/ci.txt",
+      "destination": "requirements/ci.txt"
+    },
+    {
+      "source": "scripts/labsim_assets.py",
+      "destination": "scripts/labsim_assets.py"
+    },
+    {
+      "source": "scripts/labsim_cli.py",
+      "destination": "scripts/labsim_cli.py"
+    },
+    {
+      "source": "scripts/package_agent_results.py",
+      "destination": "scripts/package_agent_results.py"
+    },
+    {
+      "source": "tasks/lab_cuvette_loading_project_release.py",
+      "destination": "tasks/lab_cuvette_loading_project_release.py"
+    },
+    {
+      "source": "tests/test_lab_cuvette_external_policy_rollout.py",
+      "destination": "tests/test_lab_cuvette_external_policy_rollout.py"
+    },
+    {
+      "source": "tests/test_lab_cuvette_project_release_lifecycle.py",
+      "destination": "tests/test_lab_cuvette_project_release_lifecycle.py"
+    },
+    {
+      "source": "tests/test_lab_cuvette_project_release_reader.py",
+      "destination": "tests/test_lab_cuvette_project_release_reader.py"
+    },
+    {
+      "source": "tests/test_lab_cuvette_project_release_recording.py",
+      "destination": "tests/test_lab_cuvette_project_release_recording.py"
+    },
+    {
+      "source": "tests/test_lab_cuvette_project_release_termination.py",
+      "destination": "tests/test_lab_cuvette_project_release_termination.py"
+    },
+    {
+      "source": "tests/test_lab_cuvette_release_rpc.py",
+      "destination": "tests/test_lab_cuvette_release_rpc.py"
+    },
+    {
+      "source": "tests/test_lab_cuvette_release_shutdown.py",
+      "destination": "tests/test_lab_cuvette_release_shutdown.py"
+    },
+    {
+      "source": "tests/test_labsim_release_cli.py",
+      "destination": "tests/test_labsim_release_cli.py"
+    },
+    {
+      "source": "utils/episode_selection.py",
+      "destination": "utils/episode_selection.py"
+    }
+  ],
+  "status": "draft_waiting_closed_native_evidence_and_final_commit",
+  "preferred_bytes": 60000000,
+  "hard_limit_bytes": 120000000,
+  "pending_evidence": "docs/agent_handoff/Project_release_v1_current/package_readiness.json"
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "labsim.Project_release_v1.termination_plan_prepared.v1",
+  "timestamp": "2026-10-27T18:17:47.637081+08:00",
+  "source_repository_commit": "73b1a9db9470f9706a3068a8ce24e7e09d8cfc65",
+  "new_safety_execution_status": "prepared_not_run",
+  "RPC_endpoint_contacted": false,
+  "native_process_started": false,
+  "new_model_calls": 0,
+  "paid_API_calls": 0,
+  "budget_ledger_read_or_modified": false,
+  "source": {
+    "name": "closed Project_v1_1 GPT05",
+    "runtime": "58da857e14a0a1152884e13984607a286547a046",
+    "control_rows": 2994,
+    "action_envelopes": 25,
+    "nominal_simulation_s": 50.0,
+    "actual_historical_simulation_s": 49.916666666666664
+  },
+  "same_physical_core_files": 6,
+  "only_numeric_action_changes": "none; rebind four identity fields only",
+  "priority": "Reuse real pi05 safety stop if observed; root explicitly schedules any replay after model lifecycle ends",
+  "offline_validation_command": "CUDA_VISIBLE_DEVICES='' /home/wujing/Desktop/vla/labutopia-env/bin/python docs/lab_cuvette_loading/Project_release_v1/validation/termination_plan/replay_rpc.py --plan-sha256 82cf00f9ac48ab09ad3bb20ff306984e4cb92ba9be3c0d76c72219bcb15e011e",
+  "offline_validation_result": {
+    "status": "offline_plan_validated_not_executed",
+    "endpoint_contacted": false
+  },
+  "files": {
+    "READ_FIRST.md": {
+      "bytes": 5018,
+      "sha256": "d9dfa0afd9548567470d368cee43018cb5c6115d8a8a25562475d69d2b3572e6"
+    },
+    "envelopes.json": {
+      "bytes": 19484,
+      "sha256": "82cf00f9ac48ab09ad3bb20ff306984e4cb92ba9be3c0d76c72219bcb15e011e"
+    },
+    "replay_rpc.py": {
+      "bytes": 11005,
+      "sha256": "384c849ac6baa951b8e1671d1fe98294a62885857a850377911129ec4fdd387e"
+    }
+  },
+  "limitations": [
+    "Original large source logs remain local, are SHA-addressed and are not included here",
+    "Native RGB hashes are not claims that transformed H5 images or encoded video preserve the same raw pixel bytes",
+    "Actual new safety stop and record closure must be audited after source native process exits"
+  ]
+}

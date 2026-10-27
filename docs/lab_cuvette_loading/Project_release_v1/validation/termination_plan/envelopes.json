@@ -1,0 +1,608 @@
+{
+  "schema": "labsim.Project_release_v1.closed_GPT05_numeric_envelopes.v1",
+  "source_episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+  "source_runtime": "58da857e14a0a1152884e13984607a286547a046",
+  "source_files": {
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/execution_trace.jsonl": {
+      "sha256": "7a06368564704bc74ec11f32bc46351ec515946c5043c37145bda338cba820b2",
+      "bytes": 21328305
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/result.json": {
+      "sha256": "b20134e847a2b6093495aa600c6ed6d334fb299b651cf4001d1267bafd6e1290",
+      "bytes": 7045
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/gpt_control/policy_trace.jsonl": {
+      "sha256": "4c95935cd004185decb19ba01a436b5072aea8765eaf7db93a523fcca7090c59",
+      "bytes": 234404
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/config.yaml": {
+      "sha256": "8267d353268f911609bdeefbc4029aa4d2006889f52138e0bddd619150c360ae",
+      "bytes": 54865
+    },
+    "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_05/episode_0000/initial_debug.json": {
+      "sha256": "6933bec3ee26e9ebbf1cc32b8b4bf7e673de4a32a8d15b7e48a3a97bb953010f",
+      "bytes": 60300
+    }
+  },
+  "source_control_rows": 2994,
+  "source_result": {
+    "task_success": false,
+    "failure_type": "SAFETY_COLLISION",
+    "failure_domain": "safety",
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "simulation_seconds": 49.916666666666664,
+    "actual_control_steps": 2994,
+    "actual_physics_steps": 11980,
+    "record_integrity_valid": true,
+    "physics_trustworthy": true
+  },
+  "physical_executor_sources_unchanged_vs_source": {
+    "demos/lab_cuvette_project_v1_1/environment.py": true,
+    "tasks/lab_cuvette_loading_project_v1_1.py": true,
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": true,
+    "demos/lab_cuvette_project_v1_1/robot_tracking.py": true,
+    "demos/lab_cuvette_project_v1_1/scorer.py": true,
+    "demos/lab_cuvette_env_v1/physics_capture.py": true
+  },
+  "expected_first_forbidden_contact": {
+    "physics_step": 11978,
+    "simulation_time_s": 49.90833333333333,
+    "robot_link": "panda_link6",
+    "obstacle": "Instrument/Collision/SourceMesh5",
+    "scope": "historical measured reference, not a required label for new run"
+  },
+  "action_count": 25,
+  "nominal_action_duration_s": 50.0,
+  "actions": [
+    {
+      "action_id": "gpt:8f6f459a6d12b7712461e123b651b92a41b2a46b877cc90919bdef99226a1a67",
+      "model_action_id": "a1",
+      "execution_action_id": "gpt:8f6f459a6d12b7712461e123b651b92a41b2a46b877cc90919bdef99226a1a67",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:0",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        -0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.0799999088048935,
+      "gripper_effort_limit_N": 8.0
+    },
+    {
+      "action_id": "gpt:cf2b2dc95a7fbc408076034b1bc8627d69bf7851c824e53be07fc9cf3c57c129",
+      "model_action_id": "a2",
+      "execution_action_id": "gpt:cf2b2dc95a7fbc408076034b1bc8627d69bf7851c824e53be07fc9cf3c57c129",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:120",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        -0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.0799999088048935,
+      "gripper_effort_limit_N": 8.0
+    },
+    {
+      "action_id": "gpt:77585278fcee8e3b29b1edf38fec6cd6327946d551ca91cf551851d2acfa3e94",
+      "model_action_id": "a3",
+      "execution_action_id": "gpt:77585278fcee8e3b29b1edf38fec6cd6327946d551ca91cf551851d2acfa3e94",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:240",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        -0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.0799999088048935,
+      "gripper_effort_limit_N": 8.0
+    },
+    {
+      "action_id": "gpt:070845eb6e6cf2d690272e7f2595eeacd2f5a82e7869040030c1286bac11c88e",
+      "model_action_id": "a4",
+      "execution_action_id": "gpt:070845eb6e6cf2d690272e7f2595eeacd2f5a82e7869040030c1286bac11c88e",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:360",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        -0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.0799999088048935,
+      "gripper_effort_limit_N": 8.0
+    },
+    {
+      "action_id": "gpt:370742759e4e268c61059075454724d0fd175009dafe25122539d814acbcc5c7",
+      "model_action_id": "a5",
+      "execution_action_id": "gpt:370742759e4e268c61059075454724d0fd175009dafe25122539d814acbcc5c7",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:480",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        -0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.0799999088048935,
+      "gripper_effort_limit_N": 8.0
+    },
+    {
+      "action_id": "gpt:0296334cd7cd4ccaa99354c49f2e3e0f57f486ffaf462a676f4ff11e51894f18",
+      "model_action_id": "a6",
+      "execution_action_id": "gpt:0296334cd7cd4ccaa99354c49f2e3e0f57f486ffaf462a676f4ff11e51894f18",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:600",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        -0.025,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.0799999088048935,
+      "gripper_effort_limit_N": 8.0
+    },
+    {
+      "action_id": "gpt:9cd1b8f7cfb655c3d0bd9792d934d1bc248e25f92dd767cb8fa5ae31a7365ac8",
+      "model_action_id": "a7",
+      "execution_action_id": "gpt:9cd1b8f7cfb655c3d0bd9792d934d1bc248e25f92dd767cb8fa5ae31a7365ac8",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:720",
+      "type": "ee_delta",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:665034b2c9b5efc1a1b1062982492a793b4235ecb7c979630aba7d2cc0ae00c6",
+      "model_action_id": "a8",
+      "execution_action_id": "gpt:665034b2c9b5efc1a1b1062982492a793b4235ecb7c979630aba7d2cc0ae00c6",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:840",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:877bfe54b508f4d8e0a1ec3fa0e75b6825c7b3d498d614446f518819539d7b37",
+      "model_action_id": "a9",
+      "execution_action_id": "gpt:877bfe54b508f4d8e0a1ec3fa0e75b6825c7b3d498d614446f518819539d7b37",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:960",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:5ce967dcca4a1002ffb50040d6f609ed9adedf87772b5634578ef932200388af",
+      "model_action_id": "a10",
+      "execution_action_id": "gpt:5ce967dcca4a1002ffb50040d6f609ed9adedf87772b5634578ef932200388af",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1080",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:fb64ee09672ffdb7a64058a017e4e271d5d1ac88628bf07b47138fc216a65e55",
+      "model_action_id": "a11",
+      "execution_action_id": "gpt:fb64ee09672ffdb7a64058a017e4e271d5d1ac88628bf07b47138fc216a65e55",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1200",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:2bc4e3e889875f3f10e09a12562a116243b3f6bcb059163ce09e280b608c8be0",
+      "model_action_id": "a12",
+      "execution_action_id": "gpt:2bc4e3e889875f3f10e09a12562a116243b3f6bcb059163ce09e280b608c8be0",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1320",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:5ce31462695af85f36590edf1035231d573607e3d1ac1e2f543a161c9ca04263",
+      "model_action_id": "a13",
+      "execution_action_id": "gpt:5ce31462695af85f36590edf1035231d573607e3d1ac1e2f543a161c9ca04263",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1440",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:d9183eeef95c99ddf2701246e40def7e06185ff0acc86e4b9ec125993aece891",
+      "model_action_id": "a14",
+      "execution_action_id": "gpt:d9183eeef95c99ddf2701246e40def7e06185ff0acc86e4b9ec125993aece891",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1560",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:20ccff2ed82323fda65bbf0c61ec079e1a0d4f82306a55492a8be31d7b189e0c",
+      "model_action_id": "a15",
+      "execution_action_id": "gpt:20ccff2ed82323fda65bbf0c61ec079e1a0d4f82306a55492a8be31d7b189e0c",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1680",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0,
+        0.04,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:81d8972d959ae59f7446dfc61a39371a64eff6df3446745af4faae6dfc693143",
+      "model_action_id": "a16",
+      "execution_action_id": "gpt:81d8972d959ae59f7446dfc61a39371a64eff6df3446745af4faae6dfc693143",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1800",
+      "type": "ee_delta",
+      "values": [
+        0.04,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:3e7bba578e3d3c3e07afe8093cd6c6b7715228c3ab15913d6298ff82eb270630",
+      "model_action_id": "a17",
+      "execution_action_id": "gpt:3e7bba578e3d3c3e07afe8093cd6c6b7715228c3ab15913d6298ff82eb270630",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:1920",
+      "type": "ee_delta",
+      "values": [
+        0.04,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:304ddd2a7e8478feeeef40222566ea42a2cf19604b95b0ed4fa8821d7256ae52",
+      "model_action_id": "a18",
+      "execution_action_id": "gpt:304ddd2a7e8478feeeef40222566ea42a2cf19604b95b0ed4fa8821d7256ae52",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2040",
+      "type": "ee_delta",
+      "values": [
+        0.04,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:52efcf60acc7f86aa10506393bfd922e1a734830ac8aa4a92b2ed63b60e1396c",
+      "model_action_id": "a19",
+      "execution_action_id": "gpt:52efcf60acc7f86aa10506393bfd922e1a734830ac8aa4a92b2ed63b60e1396c",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2160",
+      "type": "ee_delta",
+      "values": [
+        0.04,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:4359939a1916c311413ba04802122ab6db36c9372b7db318fa1a899b5fefc73a",
+      "model_action_id": "a20",
+      "execution_action_id": "gpt:4359939a1916c311413ba04802122ab6db36c9372b7db318fa1a899b5fefc73a",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2280",
+      "type": "ee_delta",
+      "values": [
+        0.03,
+        0.02,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:6c253e8a282d9899ea88732cd0757d9527ade1a2bf615f2e1ffdcc113953a27d",
+      "model_action_id": "a21",
+      "execution_action_id": "gpt:6c253e8a282d9899ea88732cd0757d9527ade1a2bf615f2e1ffdcc113953a27d",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2400",
+      "type": "ee_delta",
+      "values": [
+        0.04,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:cd15971feb1fbdb8925cbd43054512b1229a705cdc0fefc9bb01ee542090a882",
+      "model_action_id": "a22",
+      "execution_action_id": "gpt:cd15971feb1fbdb8925cbd43054512b1229a705cdc0fefc9bb01ee542090a882",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2520",
+      "type": "ee_delta",
+      "values": [
+        0.04,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:c4ccf42b19bda1f210f775beeaa2087bb0eea8fb3eaa2eeef1f6a472c403e40f",
+      "model_action_id": "a23",
+      "execution_action_id": "gpt:c4ccf42b19bda1f210f775beeaa2087bb0eea8fb3eaa2eeef1f6a472c403e40f",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2640",
+      "type": "ee_delta",
+      "values": [
+        0,
+        -0.04,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:1e8f21bbc38dcc23c6198a7edf14b44b498f9e2d6784bca20b3529e976200d63",
+      "model_action_id": "a24",
+      "execution_action_id": "gpt:1e8f21bbc38dcc23c6198a7edf14b44b498f9e2d6784bca20b3529e976200d63",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2760",
+      "type": "ee_delta",
+      "values": [
+        0,
+        0.04,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    },
+    {
+      "action_id": "gpt:ee00e2a5e1cb939ae4e36fbcceac8e93325d2c70ebdc0bae71723fd62d270612",
+      "model_action_id": "a25",
+      "execution_action_id": "gpt:ee00e2a5e1cb939ae4e36fbcceac8e93325d2c70ebdc0bae71723fd62d270612",
+      "episode_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44",
+      "observation_id": "23702d4d-6791-414c-bc4c-cd2cc8276d44:2880",
+      "type": "ee_delta",
+      "values": [
+        0.035,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": "world",
+      "duration_s": 2.0,
+      "gripper_opening_m": 0.009,
+      "gripper_effort_limit_N": 4.0
+    }
+  ],
+  "allowed_rebindings": [
+    "action_id",
+    "execution_action_id",
+    "episode_id",
+    "observation_id"
+  ],
+  "model_calls_planned": 0,
+  "paid_api_calls_planned": 0,
+  "execution_status": "prepared_not_run",
+  "initial_public_robot_state": {
+    "joint_positions": [
+      0.1779361367225647,
+      -1.2082452774047852,
+      -0.8200522661209106,
+      -2.87337064743042,
+      -0.7667176723480225,
+      1.7454451322555542,
+      -0.8053153157234192,
+      0.03999993950128555,
+      0.03999996930360794
+    ],
+    "TCPpose": {
+      "position_m": [
+        -0.08505931596479005,
+        -0.1748760546046365,
+        1.0228528475162522
+      ],
+      "quaternion_wxyz": [
+        -0.00045383827446051326,
+        0.7070149041122215,
+        -0.7071984863989618,
+        0.00014222877477737954
+      ]
+    }
+  },
+  "initial_equivalence_gate": {
+    "arm_rad": 1e-05,
+    "finger_m": 1e-06,
+    "TCP_position_m": 5e-06,
+    "TCP_angle_rad": 2e-05,
+    "scope": "diagnostic initial-state equivalence only; not physical calibration or relaxed task scoring"
+  },
+  "physical_executor_current_sha256": {
+    "demos/lab_cuvette_project_v1_1/environment.py": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+    "tasks/lab_cuvette_loading_project_v1_1.py": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+    "demos/lab_cuvette_project_v1_1/gripper_hold.py": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+    "demos/lab_cuvette_project_v1_1/robot_tracking.py": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+    "demos/lab_cuvette_project_v1_1/scorer.py": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+    "demos/lab_cuvette_env_v1/physics_capture.py": "10d6d6a40455d16c6234701c661516212f7367fc85f3201ba6c7066020358276"
+  }
+}
