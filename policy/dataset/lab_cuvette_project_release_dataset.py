@@ -7,6 +7,7 @@ from utils.episode_selection import _optional_bool
 
 class LabCuvetteProjectReleaseDataset(LabCuvetteProjectV11Dataset):
     SCENE_VERSION = "Project_release_v1"
+    ALLOWED_CONDITION_GROUPS = LabCuvetteProjectV11Dataset.ALLOWED_CONDITION_GROUPS | frozenset(("controlled_lifecycle_diagnostic",))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

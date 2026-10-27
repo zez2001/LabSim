@@ -10,6 +10,7 @@ from utils.episode_selection import _optional_bool
 
 class LabCuvetteProjectV11Dataset(MinimalPickDataset):
     SCENE_VERSION = "Project_v1_1"
+    ALLOWED_CONDITION_GROUPS = frozenset(("natural", "deterministic_action_deviation"))
 
     def __init__(self, *args, scene_mode="standard", scene_randomization_enabled=False,
                  automatic_validation_mode="standard", scene_contract_path=None, **kwargs):
@@ -27,7 +28,7 @@ class LabCuvetteProjectV11Dataset(MinimalPickDataset):
                     raise ValueError("Not a Project_v1_1 fixed standard episode: " + episode)
                 if attrs.get("task_type") != "loading":
                     raise ValueError("Diagnostic subtasks cannot enter the full-loading dataset: " + episode)
-                if attrs.get("condition_group") not in ("natural", "deterministic_action_deviation"):
+                if attrs.get("condition_group") not in self.ALLOWED_CONDITION_GROUPS:
                     raise ValueError("Unknown condition group: " + episode)
                 if attrs.get("qualification_schema") != "labsim.Project_v1_1.qualifications.v1":
                     raise ValueError("Missing Project_v1_1 qualifications: " + episode)

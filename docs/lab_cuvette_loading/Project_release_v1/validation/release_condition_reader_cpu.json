@@ -1,0 +1,33 @@
+{
+  "schema": "labsim.Project_release_v1.condition_group_reader_repair.v1",
+  "date": "2026-10-27T18:50:05.296943+08:00",
+  "base_commit": "51968e9776c1365c66c7ee4462a3ae45ca16ff6e",
+  "problem": "Official release qualification reader rejected controlled_lifecycle_diagnostic, although raw MinimalPickDataset could read it",
+  "repair": "Subclass-specific immutable allowed groups; old v1.1 keeps exactly its original two groups",
+  "source_sha256": {
+    "policy/dataset/lab_cuvette_project_v1_1_dataset.py": "475b073e835b7d933fca3c1d537deee5371ef4e8f7c786396905640bfba4496d",
+    "policy/dataset/lab_cuvette_project_release_dataset.py": "80f0b400b1553a438d6f2c17364fd00ddf9009dd950cd6c1aed0d14f65a911d8",
+    "tests/test_lab_cuvette_project_release_reader.py": "3cb661900be212a47c45c537280a87e90d15b3d5e35a332b736537e1a10dee32"
+  },
+  "cpu_tests_passed": 34,
+  "junit_sha256": "9f9f9de1ef2a74a66213c5567e3b81b7dbbe8390df71fcc0a1b8e785a3099b83",
+  "checks": [
+    "read_check and official dataset-check route both ACT and DP",
+    "controlled valid task failure can read through release failure/all_valid only",
+    "old v1.1 still rejects controlled_lifecycle_diagnostic",
+    "service/executor/simulation/recording/protocol and incomplete gates retained"
+  ],
+  "actual_closed_native_data": {
+    "runtime": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+    "official_three_filter_summary": "official_dataset_check_condition_repair/summary.json",
+    "sha256": "95bc47d2f8d10847bcb285598b58a69747de3a28a431e3e67d3430cd69c08cd6",
+    "both_ACT_DP_episode_counts": {
+      "success": 2,
+      "failure": 1,
+      "all_valid": 3
+    }
+  },
+  "H5_labels_or_index_modified": false,
+  "GPU_started": false,
+  "model_calls": 0
+}

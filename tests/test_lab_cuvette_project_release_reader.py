@@ -15,6 +15,7 @@ pytest.importorskip("zarr")
 
 from data_collectors.lab_cuvette_project_release_collector import LabCuvetteProjectReleaseCollector
 from policy.dataset.lab_cuvette_project_release_dataset import LabCuvetteProjectReleaseDataset
+from policy.dataset.lab_cuvette_project_v1_1_dataset import LabCuvetteProjectV11Dataset
 from scripts import labsim_cli as cli
 from scripts.read_lab_cuvette_project_v1_data import read_check
 
@@ -73,3 +74,53 @@ def test_release_reader_rejects_pending_even_when_task_success_true(tmp_path):
         source.attrs["publication_state"] = "finalizing"
     with pytest.raises(ValueError):
         read_check(path, dataset_class=LabCuvetteProjectReleaseDataset)
+
+
+def test_release_controlled_lifecycle_failure_reads_official_entry_without_relabelling(tmp_path):
+    path = fixture_episode(tmp_path / "episode", success=False)
+    with h5py.File(path, "r+") as source:
+        source.attrs["condition_group"] = "controlled_lifecycle_diagnostic"
+    before = hashlib.sha256(path.read_bytes()).hexdigest()
+    for sample_filter in ("failure", "all_valid"):
+        direct = read_check(path, sample_filter=sample_filter, dataset_class=LabCuvetteProjectReleaseDataset)
+        assert len(direct["reader_validation"]) == 2
+        output = tmp_path / (sample_filter + ".json")
+        assert cli.main(["dataset-check", "--index", str(path), "--sample-filter", sample_filter,
+                         "--output", str(output)]) == 0
+        result = json.loads(output.read_text())
+        assert result["dataset_class"].endswith(".LabCuvetteProjectReleaseDataset")
+        for reader in result["reader_validation"]:
+            assert reader["episode_checks"][0]["condition_group"] == "controlled_lifecycle_diagnostic"
+            assert reader["episode_checks"][0]["task_success"] is False
+    with pytest.raises(ValueError):
+        read_check(path, sample_filter="success", dataset_class=LabCuvetteProjectReleaseDataset)
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == before
+
+
+def test_original_v11_still_rejects_release_only_condition_group(tmp_path):
+    path = fixture_episode(tmp_path / "episode", success=False)
+    with h5py.File(path, "r+") as source:
+        source.attrs.update(scene_version="Project_v1_1", condition_group="controlled_lifecycle_diagnostic")
+    assert LabCuvetteProjectV11Dataset.ALLOWED_CONDITION_GROUPS == frozenset(("natural", "deterministic_action_deviation"))
+    with pytest.raises(ValueError, match="Unknown condition group"):
+        read_check(path, sample_filter="failure", dataset_class=LabCuvetteProjectV11Dataset)
+
+
+@pytest.mark.parametrize("domain", ["service", "executor", "simulation", "recording", "protocol"])
+def test_release_extended_group_cannot_bypass_qualification_domains(tmp_path, domain):
+    path = fixture_episode(tmp_path / "episode", success=False)
+    with h5py.File(path, "r+") as source:
+        # Intentionally poisoned fixture: domain gate must still reject even
+        # if an external caller wrongly left legacy valid/eligible attrs true.
+        source.attrs.update(condition_group="controlled_lifecycle_diagnostic", failure_domain=domain)
+    with pytest.raises(ValueError, match="diagnostics are not task training data"):
+        read_check(path, sample_filter="failure", dataset_class=LabCuvetteProjectReleaseDataset)
+
+
+def test_release_controlled_group_does_not_bypass_incomplete_gate(tmp_path):
+    path = fixture_episode(tmp_path / "episode", success=False)
+    with h5py.File(path, "r+") as source:
+        source.attrs.update(condition_group="controlled_lifecycle_diagnostic", complete=False,
+                            publication_state="prepared")
+    with pytest.raises(ValueError):
+        read_check(path, sample_filter="all_valid", dataset_class=LabCuvetteProjectReleaseDataset)

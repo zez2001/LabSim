@@ -1,0 +1,29 @@
+{
+  "schema": "labsim.release.official_reader.initial_failure.v1",
+  "source_runtime": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+  "run_source": "outputs/lab_cuvette_loading/Project_release_v1/same_process_collect_01",
+  "command_template": "<Isaac Python> scripts/labsim_cli.py dataset-check --index RUN/index/episode_data.hdf5 --sample-filter FILTER --policy both --output NEW.json",
+  "observations": [
+    {
+      "filter": "success",
+      "stdout_report_created": true,
+      "receipt": "success.json"
+    },
+    {
+      "filter": "failure",
+      "exit_code": 2,
+      "observed_output": "LabSim: Unknown condition group: episode_0001\n",
+      "JSON_output_created": false
+    },
+    {
+      "filter": "all_valid",
+      "exit_code": 2,
+      "observed_output": "LabSim: Unknown condition group: episode_0001\n",
+      "JSON_output_created": false
+    }
+  ],
+  "capture_method": "Structured transcription of actual root exec tool responses; original stdout was not redirected to a separate log file",
+  "cause": "Release controlled_lifecycle_diagnostic group absent from normal Project_v1_1 whitelist",
+  "not_a_physical_failure": true,
+  "H5_labels_changed": false
+}
