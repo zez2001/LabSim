@@ -1,5 +1,7 @@
 # 单细胞前流程数字资产 API、Franka 交互与 HF 交付
 
+已提交：[PR #1](https://github.com/zez2001/LabSim/pull/1)，等待项目负责人评审，未合并。
+
 ## 解决的问题与最终行为
 
 前九类设备缺少统一的资产获取、Isaac 适配及可追溯交互入口。本改动注册 7 个固定来源条目（6 类主资产及 1 项辅助支架），通过 `list_assets`、`get_asset`、`fetch_asset`、`convert_asset`、`load_asset` 获取、校验、转换和加载。九类清单、替代关系与阻塞集中在 `config/cell_assets/coverage.json`。
