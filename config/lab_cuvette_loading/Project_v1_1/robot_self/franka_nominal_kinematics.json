@@ -1,0 +1,292 @@
+{
+  "schema": "labsim.public_robot_numeric_model.v1",
+  "units": "m",
+  "angle_units": "rad",
+  "base_frame": "base_link",
+  "tcp_frame": "right_gripper",
+  "source_URDF_logical_path": "robots/franka/lula_franka_gen.urdf",
+  "source_URDF_SHA256": "e9024642e7952cbcaec0ae14425bf1cd19d674d3c98eeef3793913f63a8101b6",
+  "source_robot_boxes_SHA256": "5f3ff56c2b011c9db69b48bd4e3d2637863f75342e495ab51c740f674f293466",
+  "robot_input_asset_SHA256": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b",
+  "joint_order": [
+    "panda_joint1",
+    "panda_joint2",
+    "panda_joint3",
+    "panda_joint4",
+    "panda_joint5",
+    "panda_joint6",
+    "panda_joint7"
+  ],
+  "selected_frames": [
+    "panda_link6",
+    "panda_link7",
+    "panda_hand"
+  ],
+  "joints": [
+    {
+      "name": "base_link_robot",
+      "type": "fixed",
+      "parent": "base_link",
+      "child": "panda_link0",
+      "origin_xyz_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "panda_joint1",
+      "type": "revolute",
+      "parent": "panda_link0",
+      "child": "panda_link1",
+      "origin_xyz_m": [
+        0.0,
+        0.0,
+        0.333
+      ],
+      "origin_rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower_rad": -2.8973,
+      "upper_rad": 2.8973
+    },
+    {
+      "name": "panda_joint2",
+      "type": "revolute",
+      "parent": "panda_link1",
+      "child": "panda_link2",
+      "origin_xyz_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        -1.57079632679,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower_rad": -1.7628,
+      "upper_rad": 1.7628
+    },
+    {
+      "name": "panda_joint3",
+      "type": "revolute",
+      "parent": "panda_link2",
+      "child": "panda_link3",
+      "origin_xyz_m": [
+        0.0,
+        -0.316,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        1.57079632679,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower_rad": -2.8973,
+      "upper_rad": 2.8973
+    },
+    {
+      "name": "panda_joint4",
+      "type": "revolute",
+      "parent": "panda_link3",
+      "child": "panda_link4",
+      "origin_xyz_m": [
+        0.0825,
+        0.0,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        1.57079632679,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower_rad": -3.0718,
+      "upper_rad": -0.0698
+    },
+    {
+      "name": "panda_joint5",
+      "type": "revolute",
+      "parent": "panda_link4",
+      "child": "panda_link5",
+      "origin_xyz_m": [
+        -0.0825,
+        0.384,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        -1.57079632679,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower_rad": -2.8973,
+      "upper_rad": 2.8973
+    },
+    {
+      "name": "panda_joint6",
+      "type": "revolute",
+      "parent": "panda_link5",
+      "child": "panda_link6",
+      "origin_xyz_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        1.57079632679,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower_rad": -0.0175,
+      "upper_rad": 3.7525
+    },
+    {
+      "name": "panda_joint7",
+      "type": "revolute",
+      "parent": "panda_link6",
+      "child": "panda_link7",
+      "origin_xyz_m": [
+        0.088,
+        0.0,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        1.57079632679,
+        0.0,
+        0.0
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower_rad": -2.8973,
+      "upper_rad": 2.8973
+    },
+    {
+      "name": "panda_joint8",
+      "type": "fixed",
+      "parent": "panda_link7",
+      "child": "panda_link8",
+      "origin_xyz_m": [
+        0.0,
+        0.0,
+        0.107
+      ],
+      "origin_rpy_rad": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "panda_hand_joint",
+      "type": "fixed",
+      "parent": "panda_link8",
+      "child": "panda_hand",
+      "origin_xyz_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_rpy_rad": [
+        0.0,
+        0.0,
+        -0.785398163397
+      ]
+    },
+    {
+      "name": "right_gripper",
+      "type": "fixed",
+      "parent": "panda_link8",
+      "child": "right_gripper",
+      "origin_xyz_m": [
+        0.0,
+        0.0,
+        0.1
+      ],
+      "origin_rpy_rad": [
+        0.0,
+        0.0,
+        2.35619449019
+      ]
+    }
+  ],
+  "nominal_authored_local_boxes": {
+    "panda_link6": {
+      "local_min_m": [
+        -0.04790424716581437,
+        -0.051200043584967464,
+        -0.04398965403090202
+      ],
+      "local_max_m": [
+        0.13202129170074672,
+        0.08166316039490981,
+        0.05625363328615273
+      ]
+    },
+    "panda_link7": {
+      "local_min_m": [
+        -0.044026211708198204,
+        -0.044023276309807444,
+        0.05200002172589165
+      ],
+      "local_max_m": [
+        0.08130681809842244,
+        0.081306561229362,
+        0.10680007066429559
+      ]
+    },
+    "panda_hand": {
+      "local_min_m": [
+        -0.03151953048820678,
+        -0.10394635976854016,
+        -0.02599490990418964
+      ],
+      "local_max_m": [
+        0.03152513332535837,
+        0.10056975657813048,
+        0.06599989195170876
+      ]
+    }
+  },
+  "geometry_scope": "Per-link conservative AABB of authored collision INPUT vertices only; not cooked shapes, fingers/held vessel, contact offset or scene clearance",
+  "regeneration": "python -m policy.robot_self_kinematics --urdf SOURCE_URDF --boxes LOCKED_PUBLIC_BOXES --output NEW_MODEL_JSON"
+}

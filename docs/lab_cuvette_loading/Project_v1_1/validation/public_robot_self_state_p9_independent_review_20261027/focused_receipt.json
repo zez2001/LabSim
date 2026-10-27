@@ -1,0 +1,37 @@
+{
+  "schema": "labsim.Project_v1_1.P9.independent_focused_CPU.v1",
+  "command": [
+    "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_lab_cuvette_project_v1_1_self_state.py",
+    "tests/test_lab_cuvette_project_v1_1_active_view.py",
+    "tests/test_lab_cuvette_project_v1_1_side_detail.py",
+    "tests/test_lab_cuvette_project_v1_1_visual_context.py",
+    "tests/test_lab_cuvette_project_v1_1_temporal_prompt_cadence.py",
+    "tests/test_cubence_project_v1_1_tools.py",
+    "--junitxml=docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_independent_review_20261027/focused.xml"
+  ],
+  "exit_code": 0,
+  "counts": {
+    "tests": 130,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 130
+  },
+  "reported_wall_s": 0.93,
+  "XML_SHA256": "6410ed058e774cd469ba5590655a32e60bf9151279c2fcdb2344da70b218131d",
+  "network_transport": "injected fake openers only",
+  "real_API_calls": 0,
+  "GPU_runs": 0,
+  "frozen_source_SHA256": {
+    "policy/robot_self_kinematics.py": "a4c30750b7419eb2a6092eb98316d9041c823248565db8b38d738909e978ef7a",
+    "policy/backends/cubence_project_v1_1_self_state.py": "f115eb3eba5a921c88fb4a7ed8bb97c4ebd58b5607cb477509fa29a610332041",
+    "policy/backends/cubence_project_v1_1_tools.py": "0f196f9e541228c2c1ceb1b9c6a2cf17e840a2f1a0f24b21643094bc8fd92614",
+    "tests/test_lab_cuvette_project_v1_1_self_state.py": "b905ad764350709c9a0969248bcfd71143bac649f9f6986e830097b2964e3e32",
+    "config/lab_cuvette_loading/Project_v1_1/robot_self/franka_nominal_kinematics.json": "8fa2321de1ae537da1276484869cd66ae4f19d374d58c99f84f23a940227fe10",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json": "5cb577c8f5e50f136b7adf8ae80c23c6d2386e52c888f7b68a047aa761cdce38"
+  }
+}

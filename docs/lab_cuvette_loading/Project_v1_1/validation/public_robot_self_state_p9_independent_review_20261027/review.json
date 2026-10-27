@@ -1,0 +1,303 @@
+{
+  "schema": "labsim.Project_v1_1.P9_independent_CPU_review.v1",
+  "created_utc": "2026-10-27T02:07:22.508237+00:00",
+  "reviewer": "release_final_audit",
+  "base_HEAD": "42264193cc7fea92b467e14d29f28e7a05ba421f",
+  "development_HEAD": "ce271ca19ab8d8b2f3a9e7a54e34a775e9890b2f",
+  "verdict": "No blocking issue found for exact frozen P9 CPU/fake candidate. New derived robot-self observation domain must be explicitly versioned; no genuine P9 model/task success established.",
+  "source_SHA256": {
+    "policy/robot_self_kinematics.py": "a4c30750b7419eb2a6092eb98316d9041c823248565db8b38d738909e978ef7a",
+    "policy/backends/cubence_project_v1_1_self_state.py": "f115eb3eba5a921c88fb4a7ed8bb97c4ebd58b5607cb477509fa29a610332041",
+    "policy/backends/cubence_project_v1_1_tools.py": "0f196f9e541228c2c1ceb1b9c6a2cf17e840a2f1a0f24b21643094bc8fd92614",
+    "tests/test_lab_cuvette_project_v1_1_self_state.py": "b905ad764350709c9a0969248bcfd71143bac649f9f6986e830097b2964e3e32",
+    "config/lab_cuvette_loading/Project_v1_1/robot_self/franka_nominal_kinematics.json": "8fa2321de1ae537da1276484869cd66ae4f19d374d58c99f84f23a940227fe10",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json": "5cb577c8f5e50f136b7adf8ae80c23c6d2386e52c888f7b68a047aa761cdce38"
+  },
+  "independent_focused": {
+    "schema": "labsim.Project_v1_1.P9.independent_focused_CPU.v1",
+    "command": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_self_state.py",
+      "tests/test_lab_cuvette_project_v1_1_active_view.py",
+      "tests/test_lab_cuvette_project_v1_1_side_detail.py",
+      "tests/test_lab_cuvette_project_v1_1_visual_context.py",
+      "tests/test_lab_cuvette_project_v1_1_temporal_prompt_cadence.py",
+      "tests/test_cubence_project_v1_1_tools.py",
+      "--junitxml=docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_independent_review_20261027/focused.xml"
+    ],
+    "exit_code": 0,
+    "counts": {
+      "tests": 130,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 130
+    },
+    "reported_wall_s": 0.93,
+    "XML_SHA256": "6410ed058e774cd469ba5590655a32e60bf9151279c2fcdb2344da70b218131d",
+    "network_transport": "injected fake openers only",
+    "real_API_calls": 0,
+    "GPU_runs": 0,
+    "frozen_source_SHA256": {
+      "policy/robot_self_kinematics.py": "a4c30750b7419eb2a6092eb98316d9041c823248565db8b38d738909e978ef7a",
+      "policy/backends/cubence_project_v1_1_self_state.py": "f115eb3eba5a921c88fb4a7ed8bb97c4ebd58b5607cb477509fa29a610332041",
+      "policy/backends/cubence_project_v1_1_tools.py": "0f196f9e541228c2c1ceb1b9c6a2cf17e840a2f1a0f24b21643094bc8fd92614",
+      "tests/test_lab_cuvette_project_v1_1_self_state.py": "b905ad764350709c9a0969248bcfd71143bac649f9f6986e830097b2964e3e32",
+      "config/lab_cuvette_loading/Project_v1_1/robot_self/franka_nominal_kinematics.json": "8fa2321de1ae537da1276484869cd66ae4f19d374d58c99f84f23a940227fe10",
+      "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json": "5cb577c8f5e50f136b7adf8ae80c23c6d2386e52c888f7b68a047aa761cdce38"
+    }
+  },
+  "independent_authored_box_receipt": {
+    "path": "authored_boxes_receipt.json",
+    "SHA256": "d85792faf1c6a319fc4139c4627534116d44655b3b90f0064906acb366512c2e",
+    "result": {
+      "method": "Read-only authored USD vertices in rigid-body local frames; no native or GPU context",
+      "robot_USD_SHA256": "312a326e338949fb40fd245886508cc52cc47e2bebd696e99c7dcdd3d3a7f90b",
+      "boxes": [
+        {
+          "frame": "panda_link6",
+          "vertices": 11639,
+          "meshes": 1,
+          "max_local_bound_difference_m": 0.0
+        },
+        {
+          "frame": "panda_link7",
+          "vertices": 6183,
+          "meshes": 1,
+          "max_local_bound_difference_m": 0.0
+        },
+        {
+          "frame": "panda_hand",
+          "vertices": 3319,
+          "meshes": 1,
+          "max_local_bound_difference_m": 0.0
+        }
+      ],
+      "all_exact_numeric_extrema": true,
+      "cooked_shape_readback": false,
+      "environment_or_task_geometry_read": false
+    },
+    "first_import_failure_retained": true
+  },
+  "author_change_audit": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_state_p9_20261027/change_audit.json",
+    "SHA256": "ef294067b8ce1c54ae47d65b2798765c5dc478f53cb5b7ec297d54bd75019090"
+  },
+  "author_CPU": {
+    "full": {
+      "tests": 773,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 13,
+      "passed": 760
+    },
+    "Git_free": {
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 82
+    },
+    "full_XML_SHA256": "f90aec77b01c835a59eabba2029ccadc9f37ddaadead3b591d0df16eeea2fc6f",
+    "Git_free_XML_SHA256": "54fc09e608030109ad8ea2c4d146e58338c87c4e29478994b9d9ff8115d611da",
+    "reviewer_reran_full_or_Git_free": false
+  },
+  "protected_files": [
+    {
+      "path": "policy/backends/cubence_project_v1_1_side_detail.py",
+      "SHA256": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "base_SHA256": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "recorded_SHA256": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "unchanged": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json",
+      "SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "base_SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "recorded_SHA256": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+      "unchanged": true
+    },
+    {
+      "path": "policy/backends/cubence_project_v1_1_visual_context.py",
+      "SHA256": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "base_SHA256": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "recorded_SHA256": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "unchanged": true
+    },
+    {
+      "path": "policy/backends/cubence.py",
+      "SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "base_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "recorded_SHA256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "unchanged": true
+    },
+    {
+      "path": "policy/backends/cubence_tools.py",
+      "SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "base_SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "recorded_SHA256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "unchanged": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+      "SHA256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+      "base_SHA256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+      "recorded_SHA256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+      "unchanged": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/run.py",
+      "SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "base_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "recorded_SHA256": "e94f6026f3f28e3c4cf14b7cf2707d7ea631e17ad1d726c4007d3be22a494881",
+      "unchanged": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/environment.py",
+      "SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "base_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "recorded_SHA256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+      "unchanged": true
+    },
+    {
+      "path": "controllers/lab_cuvette_project_v1_1_controller.py",
+      "SHA256": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+      "base_SHA256": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+      "recorded_SHA256": "e54b131899312544a3d7bbd4c612fe150beff9ad6109fc823593ba66f7320ab6",
+      "unchanged": true
+    },
+    {
+      "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+      "SHA256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+      "base_SHA256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+      "recorded_SHA256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+      "unchanged": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+      "SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "base_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "recorded_SHA256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+      "unchanged": true
+    },
+    {
+      "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+      "SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "base_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "recorded_SHA256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+      "unchanged": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json",
+      "SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "base_SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "recorded_SHA256": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+      "unchanged": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+      "SHA256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+      "base_SHA256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+      "recorded_SHA256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+      "unchanged": true
+    },
+    {
+      "path": "policy/backends/cubence_project_v1_1_active_view.py",
+      "SHA256": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843",
+      "base_SHA256": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843",
+      "recorded_SHA256": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843",
+      "unchanged": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view.json",
+      "SHA256": "3679ae68f23f52fc53f4306d3896be6ad1492bb3a3a276d73a5700334b01bd92",
+      "base_SHA256": "3679ae68f23f52fc53f4306d3896be6ad1492bb3a3a276d73a5700334b01bd92",
+      "recorded_SHA256": "3679ae68f23f52fc53f4306d3896be6ad1492bb3a3a276d73a5700334b01bd92",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_lab_cuvette_project_v1_1_active_view.py",
+      "SHA256": "00c277a164d24a23eab7182d9066f73c7ed583a66c46133a55a061ebe05a41a6",
+      "base_SHA256": "00c277a164d24a23eab7182d9066f73c7ed583a66c46133a55a061ebe05a41a6",
+      "recorded_SHA256": "00c277a164d24a23eab7182d9066f73c7ed583a66c46133a55a061ebe05a41a6",
+      "unchanged": true
+    }
+  ],
+  "existing_frame_proof": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_robot_self_geometry_p9_frames_20261027/compatibility.json",
+    "SHA256": "34f07aff18c740c3442b1790f8e32398957cf0f87a0a2fe7237d9a947c1e3768",
+    "maximum_translation_difference_m": 2.4539184407770677e-07,
+    "maximum_orientation_difference_rad": 6.524181505799977e-08,
+    "samples": 3,
+    "scope": "Existing nominal robotUSDjoint/URDF frame composition at3closed publicjoint samples; not physical accuracy/cooked surface certification."
+  },
+  "checks": [
+    {
+      "item": "information boundary",
+      "status": "pass",
+      "detail": "Production FK function accepts only q7, actualpublicTCP, publicepisode/observation/time and hash-locked staticnumericmodel. No task/environment/object/seat/obstacle query, simulator link pose, teacher phase, collision, clearance, support or planner. Fake poisoned object/teacher/scorer inputs excluded. Newly sent data is nominal own-state derivation, not native link-state readback."
+    },
+    {
+      "item": "FK and TCP convention",
+      "status": "pass",
+      "detail": "URDFjoint order1..7(rad), base_link/world transform inferred as T_world_TCP*inverse(T_base_TCP(q)); selected link poses compose same base with FK. Three nontrivial independentMDH cases and noncommuting worldorientation compare successfully. T_hand_TCP z=.1m/Rz(pi),wxyz[0,0,0,1] is explicitly checked. AnchoredTCPagreement is construction, not independent realcalibration."
+    },
+    {
+      "item": "model provenance and portable runtime",
+      "status": "pass",
+      "detail": "Numericmodel bytes8fa2321d and canonicalcontent81275b52 locked; URDFsourcee9024642 and sourceboxes5f3ff56c registered; regeneration fixture byte-identical. Runtime needs normalGit JSON+numpy, noURDF/USD/LFS/Git parsing or sourceauthorpaths. Tamperedmodel/nonfinite/invalidshape/quaternion/jointlimit inputs failclosed. Numericmodel is code-release artifact, not a silent HF assetrevision change."
+    },
+    {
+      "item": "three local robot boxes",
+      "status": "independently_recomputed_CPU",
+      "detail": "Read-only lockedFrankUSD312a326e body-local authored input vertices give exact extrema matching link6(11639),link7(6183),hand(3319) modelboxes. No arbitrary padding/obstaclelocation. Box is conservative for inputvertices/hulls but can fillconcavities, excludesfingers/heldvessel/cooking/contactoffset/sweep. Existing3publicqsample USDjoint-vsURDF frameproof supports nominalattachment only; no global collision precision claim."
+    },
+    {
+      "item": "P4 P6 P7 P8 preservation",
+      "status": "pass",
+      "detail": "Only3line explicit robot_self_state dispatch precedes unchangedP8/P7routes. P7/P8modules/profiles plus client/physicalcamera/scene/control/scorer/core all17protected files equal4226419. Focusedtests compare old public/direct fakewire and frozenP4/P6, retainoriginalimages/currentfinal5blocks/tools/actions. DispatcherimplementationSHA changes and is recorded truthfully."
+    },
+    {
+      "item": "new packet and private memory",
+      "status": "pass",
+      "detail": "One CURRENT self-state text item inserted immediatelybefore original finalCURRENT, after unchangedP7detail/history. Observation/episode/time/hash provenance recorded. Original images exact; final liveinputhash/publicprojection/privacyindices updated. Privateprovideritems remainlive but savedonlyhashedredactions; fullreconstruction refused ifprivateitems exist. Intermediatepre-selfmanifest explicitlynotdelegated."
+    },
+    {
+      "item": "prompt scope and limits",
+      "status": "pass",
+      "detail": "P9 appends generic explanation of nominalownframes and incremental allowedtaskcontact before bottomsupport, inherits allP8/P6slip/support/release rules. NoSourceMesh/seatcoordinate/height/waypoint/expertmacro/forcedactions. P9 changesboth own-stateinformation and this promptclarification, so eventual performance cannot be called single-factorA/B. Noautomaticmotion/action/safetyoverride."
+    },
+    {
+      "item": "budget and reservation",
+      "status": "pass",
+      "detail": "Profile differs fromP8 only robot_self_state. Originalsameclient reserves fullaugmentedinput before exactlyonefakeHTTP; requestcount/cost/input/output/actioncaps unchanged30USD/1500/80k/1024. Counterfactualclosed06(17decisions/18attempts) and07(46/46) maxbounds71826/71661, minimum margins8174/8339; not actualP9usage nor futurecapacity/billing guarantee. Boundfailure tested beforeHTTP/action."
+    },
+    {
+      "item": "CPU scope",
+      "status": "pass",
+      "detail": "Reviewer130passed/0failed/0skip; authorfullXML independentlyparsed760passed/13skip/0failure/error. AuthorGit-freeXML82passed/0failure separately; reviewer didnotrerunfull/Git-free suites. NoAPI/GPU/nativeepisode validation performed."
+    }
+  ],
+  "remaining_limits": [
+    "P9 genuine API/native task notrun byreviewer; fullsuccess requiresactual standardreset workflow and originalscorer.",
+    "Derivedframes are nominal ownmodel facts anchoredto measuredpublicTCP; not nativebodypose truth, obstacleperception or collisionfree-path proof.",
+    "Onlylink6/link7/hand boxes; fingers/heldvessel/otherlinks remain outsidethisaddedboxscope; RGBanddeclaredsensorsstillneeded.",
+    "Cookedshape/contactoffset/padding/sweepandrealcalibration remainunverified; numerical8decimal rounding is serialization, notprecisionclaim.",
+    "P9 is new information/promptcondition; do not poololdP4–P8debugor callimprovementproved.",
+    "Futureprivatecontext/modeloutput/billingunknown; retain originalledger/caps and actualclosedcall receipts."
+  ],
+  "scope": {
+    "real_API_calls": 0,
+    "GPU_runs": 0,
+    "SimulationApp_started": false,
+    "active_episode_read": false,
+    "H5_or_raw_read": false,
+    "implementation_or_asset_modified": false,
+    "only_new_review_directory_written": true,
+    "report_authoring": false,
+    "commit_created": false
+  }
+}
