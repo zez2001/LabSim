@@ -4,6 +4,8 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 
 当前推荐版本为 **`Project_release_v1`**，长期开发分支为 **`codex/labsim`**。
 
+本地完整工程为 `SLAI_Lab/labsim/`，资产缓存位于 `local_assets/`，最终结果位于 `results/final/`；代码快照见[交付说明](DELIVERY.md)。
+
 [English](README_EN.md) · [中文导航](README_CN.md) · [组内使用指南](docs/development/ONBOARDING.md) · [版本与技术参考](docs/lab_cuvette_loading/Project_release_v1/README.md) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim)
 
 ## 完整演示

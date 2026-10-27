@@ -10,13 +10,12 @@ import json
 from pathlib import Path
 import traceback
 
-from demos.cell_assets.cameras import create_views, read_rgb
+from demos.cell_assets.cameras import VideoRecorder, create_views, read_rgb
 from utils.cell_assets import convert_asset, fetch_asset, get_asset, load_asset
 
 
 def run(output, cache):
     """Run one deterministic loading attempt and return its measured result."""
-    import cv2
     import numpy as np
     from PIL import Image
     from isaacsim.core.prims import SingleArticulation
@@ -75,14 +74,7 @@ def run(output, cache):
         ("retreat", 2.0, target_grip, above, 0.04),
         ("settle", 3.5, above, above, 0.04),
     ]
-    writers = {
-        name: cv2.VideoWriter(
-            str(output / f"{name}.mp4"), cv2.VideoWriter_fourcc(*"mp4v"),
-            30, (960, 720)
-        ) for name in views
-    }
-    if not all(w.isOpened() for w in writers.values()):
-        raise RuntimeError("Could not open video encoders")
+    recording = VideoRecorder(output, views)
     records = []
     # Fingers close along X, leaving room between the source fixture's rollers.
     orientation = euler_angles_to_quat(np.array([np.pi, 0.0, np.pi / 2]))
@@ -115,14 +107,12 @@ def run(output, cache):
                     "end_effector_m": solver.compute_end_effector_pose()[0].tolist(),
                 })
                 if step % 4 == 0:
-                    for name, view in views.items():
-                        writers[name].write(cv2.cvtColor(read_rgb(view), cv2.COLOR_RGB2BGR))
+                    recording.write()
                 step += 1
         for name, view in views.items():
             Image.fromarray(read_rgb(view)).save(output / f"{name}.png")
     finally:
-        for writer in writers.values():
-            writer.release()
+        recording.close()
         with (output / "trajectory.jsonl").open("w") as stream:
             for record in records:
                 stream.write(json.dumps(record) + "\n")
