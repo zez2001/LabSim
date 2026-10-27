@@ -66,8 +66,7 @@ def main(argv=None):
         raise ValueError('Release launcher requires the explicit Project_release_v1 configuration')
     if args.asset_id is not None and args.asset_id != 'cuvette_xy_1000':
         raise ValueError('This release freezes cuvette_xy_1000; use a separate version for another asset')
-    if args.record_mode is not None:
-        cfg.release.record_mode = args.record_mode
+    cfg.release.record_mode = args.record_mode or ('collect' if args.execution_purpose == 'collect' else 'eval')
     cfg.experiment.truth_teacher = args.backend == 'teacher'
     if args.execution_purpose == 'collect' and cfg.asset_id != 'cuvette_xy_1000':
         raise ValueError('Fixed Project_v1 collection retains cuvette_xy_1000; use an independent demo/eval configuration for another registered asset')
@@ -115,6 +114,7 @@ def main(argv=None):
         print('LABSIM_RELEASE', json.dumps(dict(version=cfg.version, task=cfg.task_type,
             config=str(args.config.resolve()), backend=args.backend, record_mode=cfg.release.record_mode,
             controller=cfg.controller_type, scorer=cfg.env.scorer_module, asset_id=cfg.asset_id,
+            asset_revision=asset_lock['revision'],
             physics_hz=int(cfg.physics.hz), control_hz=int(cfg.physics.control_hz))), flush=True)
         if args.backend == 'rpc':
             from demos.lab_cuvette_project_release_v1.rpc import serve_environment
@@ -183,13 +183,10 @@ def main(argv=None):
         raise
     finally:
         try:
-            if env is not None:env.close()
+            from demos.lab_cuvette_project_release_v1.shutdown import close_release_application
+            close_release_application(app, environment=env, report_path=output / 'application_shutdown.json')
         finally:
-            try:
-                from omni.kit.app import get_app
-                get_app().post_quit(0)
-                app.close()
-            finally:lock.close()
+            lock.close()
 
 
 if __name__ == '__main__':

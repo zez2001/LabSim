@@ -80,6 +80,9 @@ def parser():
     commands = p.add_subparsers(dest="command", required=True)
     doctor = commands.add_parser("doctor", help="CPU-only runtime, LFS and frozen-scene checks")
     doctor.add_argument("--json", action="store_true", help="Print a machine-readable diagnostic")
+    doctor.add_argument("--project-version", choices=tuple(PROJECT_RELEASES), default="Project_v1",
+        help="Configuration to inspect; omitted preserves the historical Project_v1 default")
+    doctor.add_argument("--config", help="Optional explicit config; its version must match --project-version")
     assets = commands.add_parser("assets", help="List registered size hypotheses; no simulation")
     assets.add_argument("operation", nargs="?", choices=("list", "download", "install", "check"), default="list")
     assets.add_argument("--asset-id")
@@ -146,6 +149,8 @@ def parser():
     dataset.add_argument("--output", required=True, help="New JSON read-check path")
     dataset.add_argument("--dry-run", action="store_true")
     for command in (demo, evaluation, serve, collect):
+        command.add_argument("--sequence", nargs="+", choices=("teacher", "early_finish", "no_progress"),
+            help="Release-only same-process acceptance sequence; omitting runs the normal selected backend")
         command.add_argument("--record-mode", choices=("collect", "eval", "diagnostic"),
             help="Explicit Project_release_v1 persistence mode; omitted preserves each version's default")
         command.add_argument("--project-version", choices=tuple(PROJECT_RELEASES), default="Project_v1",
@@ -181,6 +186,30 @@ def build_command(args):
     """Build real subprocess argv without shell interpolation or output writes."""
     if getattr(args, "record_mode", None) is not None and getattr(args, "project_version", None) != "Project_release_v1":
         raise ValueError("--record-mode is supported only by --project-version Project_release_v1")
+    sequence = getattr(args, "sequence", None)
+    if sequence is not None:
+        if args.project_version != "Project_release_v1" or args.command not in ("demo", "collect", "eval"):
+            raise ValueError("--sequence requires Project_release_v1 demo/collect/eval; serve has no acceptance sequence")
+        if args.backend != "teacher" or getattr(args, "phase", None) is not None:
+            raise ValueError("--sequence is an explicit teacher/lifecycle diagnostic, not a policy or historical collection")
+        if any(getattr(args, key, None) is not None for key in ("provider_config", "budget_ledger", "asset_id", "controlled_stop_depth_mm")):
+            raise ValueError("--sequence cannot silently ignore policy, asset or stop-depth overrides")
+        if getattr(args, "gui", False) and args.headless:
+            raise ValueError("Choose --gui or --headless")
+        if not args.output:
+            raise ValueError("Release --sequence requires a new --output directory")
+        output = new_path(args.output)
+        config = PROJECT_RELEASES["Project_release_v1"][1]
+        record_mode = args.record_mode or ("collect" if args.command == "collect" else "eval")
+        command = [sys.executable, "-m", "demos.lab_cuvette_project_release_v1.run",
+            "--config", str(config), "--output", str(output), "--seed", "0",
+            "--execution-purpose", args.command, "--record-mode", record_mode,
+            "--sequence", *sequence]
+        if args.headless:
+            command.append("--headless")
+        if getattr(args, "gui", False):
+            command.append("--gui")
+        return command
     if args.command in ("demo", "eval", "serve") or (args.command == "collect" and args.phase is None):
         if not args.output:
             raise ValueError("Project collection requires --output; historical collection uses --phase and --collection")
@@ -198,8 +227,9 @@ def build_command(args):
             "--output", str(output)]
         if args.headless:
             command.append("--headless")
-        if args.project_version == "Project_release_v1" and getattr(args, "record_mode", None) is not None:
-            command += ["--record-mode", args.record_mode]
+        if args.project_version == "Project_release_v1":
+            record_mode = getattr(args, "record_mode", None) or ("collect" if args.command == "collect" else "eval")
+            command += ["--record-mode", record_mode]
         for name in ("provider_config", "budget_ledger", "max_calls", "controlled_stop_depth_mm", "port", "asset_id"):
             value = getattr(args, name, None)
             if name == "max_calls" and args.backend != "gpt6":
@@ -254,12 +284,24 @@ def frozen_check():
     return dict(value, dependency_count=len(frozen["assets"]))
 
 
-def doctor_report():
+def doctor_configuration(project_version="Project_v1", config_path=None):
+    from omegaconf import OmegaConf
+    selected = existing_file(config_path) if config_path is not None else PROJECT_RELEASES[project_version][1]
+    configuration = OmegaConf.load(selected)
+    actual = str(configuration.get("version", ""))
+    if actual != project_version:
+        raise ValueError(f"Doctor config version {actual!r} conflicts with --project-version {project_version}; select the matching version/config")
+    return selected
+
+
+def doctor_report(project_version="Project_v1", config_path=None):
     """Portable CPU-only preflight; never starts SimulationApp or installs packages."""
     from demos.lab_cuvette_project_v1.runtime import isaac_paths, geometry_site, usd_environment
+    selected_config = doctor_configuration(project_version, config_path)
     result = dict(schema="labsim.project_doctor.v2", repository=str(ROOT), python=sys.executable,
         python_version=sys.version.split()[0], simulation_started=False, GPU_initialized=False,
-        files_modified=False, config=str(PROJECT_CONFIG), warnings=[], errors=[])
+        files_modified=False, config=str(selected_config), project_version=project_version,
+        config_sha256=sha256(selected_config), warnings=[], errors=[])
     result["modules"] = {}
     for name in ("omegaconf", "h5py", "numpy", "torch", "cv2", "scipy", "isaacsim"):
         try:
@@ -392,12 +434,12 @@ def main(argv=None):
         sys.path.insert(0, str(ROOT))
     try:
         if args.command == "doctor":
-            result = doctor_report()
+            result = doctor_report(args.project_version, args.config)
             if args.json:
                 print(json.dumps(result, ensure_ascii=False, indent=2))
             else:
                 print(f"LabSim runtime: {result['python']} (Python {result['python_version']})")
-                print("Project release: " + str(PROJECT_CONFIG.relative_to(ROOT)))
+                print("Project release: " + result['project_version'] + " (" + result['config'] + ")")
                 print("Assets: " + json.dumps(result.get("assets", {}), ensure_ascii=False))
                 for level in ("errors", "warnings"):
                     for message in result[level]:

@@ -1,0 +1,94 @@
+{
+  "schema": "labsim.Project_release_v1.closed_CPU_data_performance_audit.v1",
+  "created_UTC": "2026-10-27T08:26:11.975440+00:00",
+  "run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/baseline_diagnostic_01",
+  "runtime_commit": "cbf8446da086cd8685512c0306ec495ee33f3d0e",
+  "closed_gate_verified": true,
+  "source_files": 46,
+  "all_source_SHA256_unchanged": true,
+  "full_H5_audits": [
+    {
+      "episode": "episode_0000",
+      "unique_dataset_objects_read": 40,
+      "all_datasets_fully_read": true,
+      "no_external_or_soft_links": true,
+      "no_virtual_or_external_storage": true,
+      "root_camera_hardlink_aliases_verified": true,
+      "decoded_payload_bytes": 3849922035,
+      "stored_unique_dataset_bytes": 1044119369,
+      "frames": 7539,
+      "first_observation_timestamp_s": 0.016666666666666666,
+      "final_successor_timestamp_s": 125.66666666666667,
+      "control_interval_sum_s": 125.65,
+      "all_adjacent_observation_action_time_alignment_passed": true,
+      "action_8D_to_executed_9D_first8_mapping_passed": true,
+      "finalization_id": "c8afa730fac1dd60bc289013986087ca07284108498b5e28e43311388175e26e",
+      "H5_result_marker_index_qualifications_consistent": true,
+      "independent_score_snapshot_preserved": true,
+      "task_success": true,
+      "record_valid": true,
+      "condition_group": "natural",
+      "physics_quality_flags": [
+        "NATIVE_FD_LINEAR_VELOCITY_DISAGREEMENT",
+        "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+      ],
+      "full_read_wall_seconds": 13.625110002001747
+    }
+  ],
+  "normal_reader_tests": 18,
+  "all_expected_normal_reader_admissions_and_rejections_passed": true,
+  "independent_path_scope": "Same-host hardlink at unrelated filename, all ACT/DP modes; links removed, no source dependencies read via absolute H5 external links",
+  "relative_index_scope": "Deliberate relative external H5 links only in new audit index, not standalone source H5; not a self-contained index",
+  "performance": {
+    "runtime_commit": "cbf8446da086cd8685512c0306ec495ee33f3d0e",
+    "run": "baseline_diagnostic_01",
+    "episodes": 1,
+    "simulation_seconds": 125.66666666666667,
+    "startup_wall_seconds": 7.043846374028362,
+    "rollout_wall_seconds": 1129.264555573929,
+    "native_manifest_wall_seconds": 1141.1109242179664,
+    "outer_process_wall_seconds": 1215.0702504189685,
+    "total_source_bytes": 3878486272,
+    "h5_bytes": 1944570883,
+    "video_bytes": 55591990,
+    "physics_bytes": 1236569165,
+    "contact_bytes": 573337781,
+    "execution_trace_bytes": 64178079,
+    "other_bytes": 4238374,
+    "maximum_reported_kernel_VmHWM_bytes": 8371507200,
+    "maximum_sampled_VmRSS_bytes": 8371507200,
+    "maximum_sampled_VRAM_MiB": 3591.0,
+    "max_sampled_file_descriptors": 339,
+    "source_resource_sample_rows": 16,
+    "simulation_to_rollout_ratio": 0.11128186574739235,
+    "full_unique_H5_read_seconds": 13.625110002001747,
+    "whole_source_sha256_before_seconds": 1.9462293519172817
+  },
+  "close_timings": [
+    {
+      "episode": "episode_0000",
+      "task_finalization_wall_seconds": 0.41401492105796933,
+      "collector_to_completion_marker_wall_seconds": 0.06511631899047643,
+      "source_finalization_timing_sha256": "2ae385aba665adf4e0f6b9e0d2783eab1c4b948ef7ce8eea9680bfb26d0c38f7",
+      "scope": "Task finalization inclusive; marker subinterval stops before H5 complete attribute and final index commit; per-step writer cost not instrumented"
+    }
+  ],
+  "resource_scope": "VmHWM is kernel process high-water mark sampled before app/after reset/every600control/after episode. RSS/VRAM/FD are sparse samples, not continuous peaks; no post-process resource measurement reconstructed.",
+  "runtime_storage_scope": "All original files under closed run, no gzip/archive/removal/rewrite; categories mutually exclusive",
+  "measurement_limitations": [
+    "Read timings from this host/cache state; no cold-cache eviction or concurrent workload isolation.",
+    "Collector marker interval is not total task finalization or process shutdown.",
+    "No per-step write-time accumulator in baseline; rollout contains physics/rendering/control and writes.",
+    "One-episode RSS growth does not by itself establish a reset leak."
+  ],
+  "task_outcomes": [
+    {
+      "episode": "episode_0000",
+      "task_success": true,
+      "record_valid": true
+    }
+  ],
+  "audit_wall_seconds": 18.94870158599224,
+  "simulation_started": false,
+  "model_calls": 0
+}

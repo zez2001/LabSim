@@ -233,3 +233,113 @@ def test_standard_reset_rejects_slot_override_before_mutating_episode():
     with pytest.raises(ValueError, match='frozen source slot'):
         task.reset(seed=0, options={'mode': 'standard', 'source_slot_id': 'F6'})
     assert task._finalization_error == {'type': 'old-failure'}
+
+
+def test_deferred_collector_is_ineligible_until_explicit_commit(tmp_path):
+    c = collector(tmp_path)
+    c.defer_publication = True
+    c.begin_episode(0, episode_id='deferred')
+    transition(c)
+    pending = c.finish_episode({}, score(c))
+    assert not pending['complete'] and pending['publication_state'] == 'prepared'
+    with h5py.File(c.path) as output:
+        assert not episode_matches_filter(output.attrs, 'success')[0]
+        assert output.attrs['publication_state'] == 'prepared'
+    assert not (tmp_path / 'dataset/meta/episode.jsonl').exists()
+    assert c.finish_episode({}, score(c)) == pending
+    final = c.commit_publication()
+    assert final['complete'] and final['publication_state'] == 'complete'
+    assert c.commit_publication() == final
+    assert c.episode_count == 1
+    assert len((tmp_path / 'dataset/meta/episode.jsonl').read_text().splitlines()) == 1
+
+
+@pytest.mark.parametrize('stage', ['none', 'camera_metadata', 'terminal_video', 'video_release', 'result_tail', 'recorder_close', 'final_result'])
+def test_real_parent_tail_cannot_publish_until_all_required_task_closure_passes(tmp_path, monkeypatch, stage):
+    """Runs actual inherited Env_v1.finalize with fixture owners, no physics."""
+    import time
+    from types import SimpleNamespace
+    from omegaconf import OmegaConf
+    from tasks.lab_cuvette_loading_project_release import LabCuvetteProjectRelease
+    from data_collectors import lab_cuvette_project_release_collector as module
+    # An existing episode must stay byte-for-byte unchanged on a new tail failure.
+    previous = collector(tmp_path / 'previous')
+    previous.begin_episode(0, episode_id='old-closed')
+    transition(previous)
+    previous.finish_episode({}, score(previous))
+    protected = previous.path.read_bytes()
+    episode = tmp_path / 'current'
+    c = collector(episode)
+    c.defer_publication = True
+    c.begin_episode(0, episode_id='tail-fixture')
+    transition(c)
+    evidence = score(c)
+    task = LabCuvetteProjectRelease.__new__(LabCuvetteProjectRelease)
+    task.collector, task.episode_dir, task.episode_id = c, episode, c.episode_id
+    task._result = None
+    task._finalization_error = None
+    task.cfg = OmegaConf.create(dict(version='Project_release_v1', env=dict(task_type='loading', seed=0)))
+    task.ctx = {'world': SimpleNamespace(stop=lambda: None, clear=lambda: None)}
+    task.scorer = SimpleNamespace(finalize=lambda *args: copy.deepcopy(evidence))
+    task.options = {'policy_id': 'cpu-fixture'}
+    task.t, task.control_steps, task.steps = 1 / 60, 1, 4
+    task.episode_wall = time.perf_counter()
+    task.rig = SimpleNamespace(names=[], close=lambda: None)
+    task._video_frame_times = []
+    task._recording_sinks = {}
+    task.ended = False
+    def close_recorder():
+        if stage == 'recorder_close':
+            raise OSError('injected recorder footer failure')
+    task.recorder = SimpleNamespace(close=close_recorder)
+    class Writer:
+        def release(self):
+            if stage == 'video_release':
+                raise OSError('injected native video release failure')
+    task._video_writers = {'dual': Writer()}
+    def write_video(**kwargs):
+        if stage == 'terminal_video':
+            raise OSError('injected terminal frame failure')
+        return False
+    task._write_video = write_video
+    fail_once = False
+    actual_write = task._write
+    def write(path, value):
+        nonlocal fail_once
+        target = 'final_camera_meta.json' if stage == 'camera_metadata' else 'result.json' if stage == 'result_tail' else None
+        if Path(path).name == target and not fail_once:
+            fail_once = True
+            raise OSError('injected task tail write failure')
+        actual_write(path, value)
+    task._write = write
+    if stage == 'final_result':
+        actual_atomic = module.atomic_text
+        def atomic(path, text):
+            nonlocal fail_once
+            if Path(path).name == 'result.json' and not fail_once:
+                fail_once = True
+                raise OSError('injected final task result failure')
+            actual_atomic(path, text)
+        monkeypatch.setattr(module, 'atomic_text', atomic)
+    if stage == 'none':
+        result = task.finalize_episode('FIXTURE_END')
+        assert result['complete'] and result['publication_state'] == 'complete'
+        saved = (episode / 'result.json').read_bytes()
+        assert task.finalize_episode('must_not_relabel') == result
+        assert (episode / 'result.json').read_bytes() == saved
+    else:
+        with pytest.raises(OSError, match='injected'):
+            task.finalize_episode('FIXTURE_END')
+        assert not task._result['complete']
+        assert not (episode / 'dataset/meta/episode.jsonl').exists()
+        assert not (episode / 'episode_0000_complete.json').exists()
+        assert json.loads((episode / 'result.json').read_text())['complete'] is False
+    with h5py.File(c.path) as output:
+        assert episode_matches_filter(output.attrs, 'success')[0] is (stage == 'none')
+        if stage != 'none':
+            labels = json.loads(output['task_properties'].asstr()[()])['labels']
+            qualification = json.loads(output['qualification_json'].asstr()[()])
+            assert labels['complete'] is False and labels['record_valid'] is False
+            assert labels['eligible_for_success_bc'] is False
+            assert qualification['success_bc_eligible'] is False
+    assert previous.path.read_bytes() == protected

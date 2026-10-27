@@ -10,10 +10,10 @@
 
 - streaming 数据集、相机规格、8D reader 映射和 9D 实际命令不变。
 - H5 写入期 `complete=false`、`publication_state=recording/finalizing`；qualification 一次写入。
-- 先关闭视频与 H5，再原子写结果、完成标记，提交 H5 完成状态；正式 JSONL 索引最后原子发布。
+- collector 先关闭自身视频与 H5，保留 `publication_state=prepared/complete=false`，不发布索引。task 完成相机元数据、native 终帧、三路视频释放、recorder/gzip footer、日志 receipt 和最终结果后，才调用唯一的 `commit_publication` 发布完成标记、H5 资格和正式 JSONL 索引。
 - 每个结果、完成标记、索引和 H5 均携带相同 `finalization_id`。普通 reader 对声明了 publication_state 的新文件只接受 complete 状态；历史文件筛选不变。
 - finish 完成后用相同结果再次调用返回原标签，不写重复索引；试图重标注报错。
-- 新集 finalization 失败则取消本集完成标记和索引、标记 failed/incomplete；保留原轨迹便于诊断，旧集 H5 不变。磁盘彻底不可写时不能保证还能写出诊断文件，不宣称能从中断处恢复。
+- collector 准备后任意 task 尾部失败，同样走 `abort_publication`：取消本集完成标记和索引、H5 标记 failed/incomplete、结果标记 failed；保留原轨迹便于诊断，旧集 H5 不变。磁盘彻底不可写时不能保证还能写出诊断文件，不宣称能从中断处恢复。
 - close 而未 finish 的记录仍 incomplete，不进入训练索引。
 - cleanup 无论某一 owner 是否关闭失败，都继续释放其他视频、collector、物理 recorder、相机和 world；异常另存 cleanup_errors。
 - reset 建立新 UUID、重建 scorer/contact hold/tracking，对旧 observation/action 拒绝执行。标准配置禁止来源槽位覆盖。
@@ -32,7 +32,13 @@ LABSIM_ASSET_ROOT=/path/to/pinned-asset-cache \
 
 三个 episode 使用同一个 Isaac 进程及相同 seed、固定标准场景。第 2 集真实执行预设 3 秒零增量动作后主动 finish，不是模型推理，也不是完整任务成功；前后两集调用原教师控制器。可显式选择 `--sequence no_progress` 和 `--no-progress-after-s 5`，验证预先声明的交互时长上限。
 
+`--record-mode collect` 与正式 CLI 相同：完整物理/接触日志 lossless gzip level1，取消 collector 的第四路重复视频；H5 双相机 60 Hz 和 native 侧视、腕视、双视角 30 Hz 保持。`eval` 当前采用相同持久化规格；不会把它宣传成无图像的轻量评测。`diagnostic` 保留原 plain JSONL 和额外 collector 视频。执行调试 JSONL 仍保留，线上物理/评分 240 Hz、策略观察及数据 60 Hz 均不变。压缩收益和墙钟影响必须依据实际对比结果。
+
+另外可顺序运行 `--sequence early_finish no_progress unreachable service_timeout user_interrupt`。unreachable 对真实超关节上限目标检查零步预规划拒绝；timeout/interruption 是有明确标记的受控异常注入，不冒充真实服务断线或用户实际按下中止。各案例先真实推进物理和记录，再走对应终止路径；`controlled_termination.json` 保存完整回执及重复 finish 不改结果的检查。
+
 每集输出 `reset_audit.json`、`facade_reset_audit.json`、实际 `initial_debug.json`、相机元数据、数据、录像、评分和完成标记。运行级输出 summary、reset_checks、resource_samples 和 run_manifest；资源为采样值，不能冒充连续精确峰值。
+
+collect/eval 关闭后的 `recording_closed_receipt.json` 提供每条流的行数、原 UTF-8 字节数与 SHA256、存储字节数和 close 耗时，包含 reset 的早期下落行。进程退出后可用 `python -m demos.lab_cuvette_project_release_v1.recording RUN/episode_0000` 全量解压核对 SHA、行数与 gzip EOF/CRC；此命令检查源 PID 已退出。公共辅助函数 `iter_jsonl` 同时支持 plain JSONL 与 gzip，正常 H5 reader 不受影响。
 
 ## 多集索引与读取
 

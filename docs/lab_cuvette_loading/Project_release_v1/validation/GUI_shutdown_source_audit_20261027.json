@@ -1,0 +1,107 @@
+{
+  "schema": "labsim.Project_release_v1.GUI_shutdown_source_audit.v1",
+  "observed_utc": "2026-10-27T09:23:23.058954+00:00",
+  "GPU_started": false,
+  "API_calls": 0,
+  "installed_files_modified": false,
+  "historical_log_modified": false,
+  "historical_original_log": {
+    "path": "/tmp/labsim-project-v1-1-teacher-support-align-01.log",
+    "bytes": 2255292,
+    "sha256": "3f967d8f7d323c3a5919a9e88683b67d06247a180b64fc7c3be487d402c38d76"
+  },
+  "historical_trace_excerpt": "docs/lab_cuvette_loading/Project_v1_1/diagnostics/teacher_support_align_01_support_portability_audit/GUI_shutdown_warning_exact_excerpt.log",
+  "confirmed_timeline": [
+    {
+      "runtime_s": 992.201,
+      "event": "Simulation App Shutting Down"
+    },
+    {
+      "runtime_s": 1011.759,
+      "event": "isaacsim.gui.menu on_shutdown"
+    },
+    {
+      "runtime_s": 1046.478,
+      "event": "omni.usd shutdown"
+    },
+    {
+      "runtime_s": 1048.746,
+      "event": "omni.kit.window.property shutdown then AppMenu._build_menu -> can_close -> None USD context"
+    }
+  ],
+  "confirmed_failure": "A retained FileMenuExtension.can_close enable_fn is invoked during a later menu rebuild after USD context destruction. It directly calls get_stage_state on None. Menu extension on_shutdown had already run, so merely repeating its shutdown does not establish that all callback owners are gone.",
+  "source_findings": [
+    "FileMenuExtension.shutdown removes menu entries/layout/actions but AppMenu retains separate extension-state and hotkey hooks until its own destroy. The exact ownership of the retained menu entry after FileMenu shutdown has not been proven.",
+    "MenuUtilsExtension.on_shutdown calls AppMenu.destroy, which releases extension/hotkey hook references and clears menu bar.",
+    "The supported extension unload utility uses ExtensionManager.set_extension_enabled_immediate(name,False).",
+    "omni.usd extension dependencies do not include menu.utils. Native dependency-unload side effects still require actual GUI validation.",
+    "SimulationApp.close(wait_for_replicator=True,skip_cleanup=False) stops replicator, closes stage, and performs framework shutdown itself. A preceding post_quit is not required by this API."
+  ],
+  "candidate_fix": "release-only shutdown helper: close environment writers/world; unload isaacsim.gui.menu and omni.kit.menu.utils through official extension manager while USD context remains alive; then SDK full close; record every failure and propagate nonzero cleanup errors. No app.update/world.step, logging suppression, global monkeypatch or installed-source edit.",
+  "new_native_GUI_validation": "not_run_at_source_audit",
+  "residual_unknowns": [
+    "Exact retained menu-entry ownership after original FileMenu shutdown",
+    "Whether all GUI shutdown traceback variants are eliminated by candidate ordering",
+    "No adjacent samples interpolation warnings and ~74s headless close are distinct observations, not declared resolved"
+  ],
+  "source_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.gui.menu/isaacsim/gui/menu/extension.py",
+      "sha256": "5dbedf64e4ff2b44003b806fe36e0d56e2dd0f9e38ed55672893cc0cc0c88044",
+      "lines_1based": [
+        64,
+        86
+      ]
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.gui.menu/isaacsim/gui/menu/file_menu/file_menu.py",
+      "sha256": "d61b02d7054cb4a6ae836b8dff5b8ec2a22c1c5569f296ee9952bb27ba28d0f2",
+      "lines_1based": [
+        150,
+        164,
+        326
+      ]
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.menu.utils-2.0.5+69cbf6ad/omni/kit/menu/utils/app_menu.py",
+      "sha256": "491821fac6f7e4c5745593b52f53e90bf3ba035066220877a8353cec49f15115",
+      "lines_1based": [
+        206,
+        237,
+        808
+      ]
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.kit.menu.utils-2.0.5+69cbf6ad/omni/kit/menu/utils/utils.py",
+      "sha256": "5c992bf474dfb925368a6d068d22749f846066ba7a619964371836a44ef7ddfe",
+      "lines_1based": [
+        115,
+        123
+      ]
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.core.utils/isaacsim/core/utils/extensions.py",
+      "sha256": "bee387c41a8f51f886182613091ad53d8651d076e9d730bb76a0a4331c302ea8",
+      "lines_1based": [
+        108,
+        127
+      ]
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/exts/isaacsim.simulation_app/isaacsim/simulation_app/simulation_app.py",
+      "sha256": "7cbaa6f00e935a6f14bf1c28ec0db089fd924e931f3b0deee07a822f9b7d0090",
+      "lines_1based": [
+        763,
+        838
+      ]
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/labutopia-env/lib/python3.11/site-packages/isaacsim/extscache/omni.usd-1.13.10+69cbf6ad.lx64.r.cp311/config/extension.toml",
+      "sha256": "ebc8d1a582de3c4dd8ffc6a20aad5c97427028e0a45b45f6fb7478553c2569aa",
+      "lines_1based": [
+        13,
+        29
+      ]
+    }
+  ]
+}

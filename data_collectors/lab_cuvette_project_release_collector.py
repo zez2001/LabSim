@@ -49,11 +49,14 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
         self._finalize_fingerprint = None
         self._finalizing = False
         self._publication_failed = False
+        self.defer_publication = bool(self.configuration.get('release', {}).get('defer_publication', False))
+        self._prepared = None
 
     def begin_episode(self, *args, **kwargs):
         super().begin_episode(*args, **kwargs)
         self._finalized = self._finalize_fingerprint = None
         self._finalizing = self._publication_failed = False
+        self._prepared = None
         self.file.attrs.update(
             schema_version='labsim.lab_cuvette_loading.Project_release_v1.v1',
             qualification_schema='labsim.Project_v1_1.qualifications.v1',
@@ -138,6 +141,10 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
             if fingerprint != self._finalize_fingerprint:
                 raise ValueError('Finalized episode cannot be relabelled')
             return copy.deepcopy(self._finalized)
+        if self._prepared is not None:
+            if fingerprint != self._prepared['fingerprint']:
+                raise ValueError('Prepared episode cannot be relabelled')
+            return self.prepared_labels()
         if self.file is None or self._publication_failed:
             raise RuntimeError('No open publishable episode; failed closure requires a new episode')
         if self._finalizing:
@@ -187,43 +194,93 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
             self.file.flush()
             self.file.close()
             self.file = None
-            atomic_text(summary, json.dumps(json_safe(properties), ensure_ascii=False, indent=2, allow_nan=False) + '\n')
-            atomic_text(marker, json_text(dict(schema='labsim.Project_release_v1.complete.v1',
-                episode_id=self.episode_id, finalization_id=finalization_id, h5=self.path.name,
-                result=summary.name, finalize_wall_seconds=time.perf_counter() - wall)) + '\n')
-            # A raw H5 becomes eligible only after payload and sidecar closure.
-            # The formal JSONL index is published last and can never advertise
-            # an H5 that is still being written. No recovery/resume is implied.
             with h5py.File(self.path, 'r+') as output:
-                output.attrs.update(publication_state='complete', complete=True)
+                output.attrs.update(publication_state='prepared', complete=False)
                 output.flush()
-            self._publish_index(dict(episode_id=self.episode_id, episode_index=self.index,
-                                     length=self.count, labels=labels, finalization_id=finalization_id))
-            self._finalized = copy.deepcopy(labels)
-            self._finalize_fingerprint = fingerprint
-            self.episode_count += 1
-            return copy.deepcopy(labels)
+            self._prepared = dict(labels=copy.deepcopy(labels), properties=copy.deepcopy(properties),
+                fingerprint=fingerprint, finalization_id=finalization_id, wall_started=wall)
+            pending = copy.deepcopy(properties)
+            pending['labels'] = self.prepared_labels()
+            atomic_text(summary, json.dumps(json_safe(pending), ensure_ascii=False, indent=2, allow_nan=False) + '\n')
+            return self.prepared_labels() if self.defer_publication else self.commit_publication()
         except BaseException as error:
-            self._publication_failed = True
-            self.close()
-            try:
-                with h5py.File(self.path, 'r+') as output:
-                    output.attrs.update(complete=False, publication_state='failed', record_valid=False,
-                        eligible_for_success_bc=False, eligible_for_failure_analysis=False, success=False)
-                self._remove_own_index()
-                marker.unlink(missing_ok=True)
-                if summary.exists():
-                    atomic_text(summary, json_text(dict(episode_id=self.episode_id,
-                        complete=False, record_valid=False, publication_state='failed',
-                        failure='FINALIZATION_FAILED', error_type=type(error).__name__,
-                        error=str(error))) + '\n')
-                atomic_text(self.output / (self.name + '_incomplete.json'), json_text(dict(
-                    episode_id=self.episode_id, complete=False, error_type=type(error).__name__,
-                    error=str(error), failure='FINALIZATION_FAILED')) + '\n')
-            except BaseException:
-                # Disk/I/O may prevent any marker. H5 was never committed before
-                # the last operation; no recovery/resume or success is implied.
-                pass
+            self.abort_publication(error)
             raise
         finally:
             self._finalizing = False
+
+    def prepared_labels(self, *, final=False):
+        if self._prepared is None:
+            raise RuntimeError('No prepared episode')
+        labels = copy.deepcopy(self._prepared['labels'])
+        labels.update(complete=bool(final), publication_state='complete' if final else 'prepared',
+                      finalization_id=self._prepared['finalization_id'])
+        return labels
+
+    def commit_publication(self):
+        if self._finalized is not None:
+            return copy.deepcopy(self._finalized)
+        if self._prepared is None or self._publication_failed:
+            raise RuntimeError('No prepared publishable episode')
+        pending = self._prepared
+        labels = self.prepared_labels(final=True)
+        properties = copy.deepcopy(pending['properties'])
+        properties['labels'] = labels
+        summary = self.output / (self.name + '_result.json')
+        marker = self.output / (self.name + '_complete.json')
+        try:
+            atomic_text(summary, json.dumps(json_safe(properties), ensure_ascii=False, indent=2, allow_nan=False) + '\n')
+            atomic_text(marker, json_text(dict(schema='labsim.Project_release_v1.complete.v1',
+                episode_id=self.episode_id, finalization_id=pending['finalization_id'], h5=self.path.name,
+                result=summary.name, finalize_wall_seconds=time.perf_counter() - pending['wall_started'])) + '\n')
+            with h5py.File(self.path, 'r+') as output:
+                output['task_properties'][()] = json_text(properties)
+                output.attrs.update(publication_state='complete', complete=True)
+                output.flush()
+            self._publish_index(dict(episode_id=self.episode_id, episode_index=self.index,
+                length=self.count, labels=labels, finalization_id=pending['finalization_id']))
+            self._finalized = copy.deepcopy(labels)
+            self._finalize_fingerprint = pending['fingerprint']
+            self.episode_count += 1
+            return copy.deepcopy(labels)
+        except BaseException as error:
+            self.abort_publication(error)
+            raise
+
+    def abort_publication(self, error=None):
+        """Invalidate this new episode, including a prepared/published tail failure."""
+        self._publication_failed = True
+        self._finalized = None
+        detail = dict(episode_id=self.episode_id, complete=False, record_valid=False,
+            publication_state='failed', failure='FINALIZATION_FAILED',
+            error_type=type(error).__name__ if error else 'ClosureAborted', error=str(error or 'aborted'))
+        try:
+            self.close()
+        finally:
+            try:
+                with h5py.File(self.path, 'r+') as output:
+                    output.attrs.update(complete=False, publication_state='failed', record_valid=False,
+                        eligible_for_success_bc=False, eligible_for_failure_analysis=False,
+                        record_integrity_valid=False, trajectory_analysis_eligible=False,
+                        success_bc_eligible=False, success=False)
+                    if 'task_properties' in output:
+                        properties = json.loads(output['task_properties'].asstr()[()])
+                        properties['labels'].update(complete=False, publication_state='failed',
+                            record_valid=False, record_integrity_valid=False,
+                            eligible_for_success_bc=False, eligible_for_failure_analysis=False,
+                            success_bc_eligible=False, trajectory_analysis_eligible=False)
+                        output['task_properties'][()] = json_text(properties)
+                    if 'qualification_json' in output:
+                        qualification = json.loads(output['qualification_json'].asstr()[()])
+                        qualification.update(record_integrity_valid=False,
+                            success_bc_eligible=False, trajectory_analysis_eligible=False)
+                        output['qualification_json'][()] = json_text(qualification)
+                self._remove_own_index()
+                (self.output / (self.name + '_complete.json')).unlink(missing_ok=True)
+                atomic_text(self.output / (self.name + '_result.json'), json_text(detail) + '\n')
+                atomic_text(self.output / (self.name + '_incomplete.json'), json_text(detail) + '\n')
+            except BaseException:
+                # Real unwriteable storage can also prevent rollback receipts.
+                # This is not a resume/recovery guarantee.
+                pass
+            self._prepared = None

@@ -11,6 +11,9 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
     def _reset(self, seed=None, options=None):
         started = time.perf_counter()
         observation, info = super()._reset(seed, options)
+        self.collector.defer_publication = True
+        from demos.lab_cuvette_project_release_v1.recording import install
+        install(self)
         from demos.lab_cuvette_project_release_v1.contract import scene_contract
         self.release_contract = scene_contract(self.base_cfg, self.geometry_audit)
         self._write(self.episode_dir / 'project_scene_contract.json', self.release_contract)
@@ -22,6 +25,11 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
             action_interface_version='Project_release_v1.actions.v1',
             physical_baseline='Project_v1_1',
             lifecycle_version='Project_release_v1.transactional_lifecycle.v1')
+        condition = self.options.get('lifecycle_condition')
+        if condition:
+            metadata['lifecycle_condition'] = str(condition)
+            if condition != 'teacher':
+                metadata['condition_group'] = 'controlled_lifecycle_diagnostic'
         self._write(metadata_path, metadata)
         self.collector.file.attrs.update(metadata)
         self._write(self.episode_dir / 'reset_audit.json', dict(
@@ -67,6 +75,11 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
             finally:
                 self.ctx = None
         self._cleanup_errors = errors
+        from demos.lab_cuvette_project_release_v1.recording import persist_closed_receipts
+        try:
+            persist_closed_receipts(self)
+        except Exception as error:
+            errors.append(dict(resource='recording_receipt', error_type=type(error).__name__, error=str(error)))
         if errors and getattr(self, 'episode_dir', None):
             self._write(self.episode_dir / 'cleanup_errors.json', errors)
 
@@ -79,9 +92,22 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
         try:
             result = super().finalize_episode(termination_reason, failure_type)
             if result is not None:
+                # The inherited tail has now written camera metadata, flushed
+                # the terminal frame, released native video writers and saved
+                # a PREPARED result. Finish every required log before eligibility.
+                self.recorder.close()
+                from demos.lab_cuvette_project_release_v1.recording import persist_closed_receipts
+                persist_closed_receipts(self)
                 self._write(self.episode_dir / 'finalization_timing.json', dict(
                     wall_seconds=time.perf_counter() - started,
-                    publication_state='complete', episode_id=self.episode_id))
+                    publication_state='prepared_for_commit', episode_id=self.episode_id))
+                final_labels = self.collector.prepared_labels(final=True)
+                self._result.update(final_labels)
+                from data_collectors.lab_cuvette_project_release_collector import atomic_text
+                from data_collectors.lab_cuvette_env_v1_collector import json_text
+                atomic_text(self.episode_dir / 'result.json', json_text(self._result) + '\n')
+                self.collector.commit_publication()
+                result = copy.deepcopy(self._result)
             return result
         except BaseException as error:
             self._finalization_error = dict(type=type(error).__name__, error=str(error))
@@ -89,11 +115,14 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
             result = dict(self._result or {})
             result.update(complete=False, record_valid=False, record_integrity_valid=False,
                 eligible_for_success_bc=False, eligible_for_failure_analysis=False,
-                success_bc_eligible=False, publication_state='failed',
+                success_bc_eligible=False, trajectory_analysis_eligible=False, publication_state='failed',
                 finalization_error=self._finalization_error)
             self._result = result
             try:
+                if self.collector is not None:
+                    self.collector.abort_publication(error)
                 self._write(self.episode_dir / 'finalization_failure.json', result)
+                self._write(self.episode_dir / 'result.json', result)
             finally:
                 self._cleanup_episode()
             raise

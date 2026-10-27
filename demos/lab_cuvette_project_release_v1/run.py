@@ -14,6 +14,70 @@ from omegaconf import OmegaConf
 from demos.lab_cuvette_project_v1.runtime import ROOT, resolve_config
 from demos.lab_cuvette_project_v1_1.run import ensure_audit
 
+CONDITIONS = ('teacher', 'early_finish', 'no_progress', 'unreachable', 'service_timeout', 'user_interrupt')
+
+
+def controlled_case(facade, condition, *, seconds=1.):
+    """Real bounded physics plus explicitly labelled controlled failure paths."""
+    task = facade.task
+    hz = float(task.cfg.physics.control_hz)
+    ticks = round(seconds * hz)
+    start = int(task.control_steps)
+    records = []
+    while not task.ended and task.control_steps - start < ticks:
+        observation = facade.observe()
+        count = min(ticks - (task.control_steps - start), int(3 * hz))
+        records.append(facade.execute(dict(action_id=f'{task.episode_id}:wait:{task.control_steps}',
+            episode_id=task.episode_id, observation_id=observation['observation_id'],
+            type='ee_delta', frame='world', values=[0.] * 6, duration_s=count / hz)))
+    injected = False
+    if condition == 'unreachable' and not task.ended:
+        observation = facade.observe()
+        values = list(observation['joint_positions'][:7])
+        # A target beyond the declared robot joint limit is physically
+        # unreachable. The actual public preplanner must reject it, not step.
+        _, upper, _ = task.joint_bounds()
+        values[0] = float(upper[0]) + 1.
+        before = int(task.control_steps)
+        receipt = facade.execute(dict(action_id=f'{task.episode_id}:unreachable',
+            episode_id=task.episode_id, observation_id=observation['observation_id'],
+            type='joint_position', values=values, duration_s=1.))
+        records.append(receipt)
+        if receipt['accepted'] or task.control_steps != before or receipt['stop_reason'] != 'JOINT_PLAN_REJECTED':
+            raise RuntimeError('Unreachable preplan rejection contract violated')
+        facade.finish('CONTROLLED_UNREACHABLE_REQUEST_END')
+    elif condition == 'service_timeout':
+        # Exercise the same finalization category as a real service timeout;
+        # no network failure or model inference is claimed by this injection.
+        try:
+            raise TimeoutError('controlled model-service timeout injection')
+        except TimeoutError:
+            injected = True
+            facade.finish('PROVIDER_TIMEOUT', failure_type='MODEL_SERVICE_ERROR')
+    elif condition == 'user_interrupt':
+        try:
+            raise KeyboardInterrupt('controlled user-interruption path injection')
+        except KeyboardInterrupt:
+            injected = True
+            facade.finish('USER_INTERRUPTED', failure_type='PROCESS_INTERRUPTED')
+    elif condition == 'no_progress' and not task.ended:
+        task.finalize_episode('CONTROLLED_NO_PROGRESS_LIMIT', 'TIMEOUT')
+    elif condition == 'early_finish':
+        facade.finish('CONTROLLED_EARLY_FINISH')
+    first = facade.status()
+    facade.finish('DUPLICATE_FINISH_MUST_NOT_RELABEL')
+    second = facade.status()
+    if first != second:
+        raise RuntimeError('Repeated finish changed terminal status')
+    evidence = dict(schema='labsim.Project_release_v1.controlled_termination.v1',
+        condition=condition, controlled_fault_injection=injected,
+        real_model_service_failure=False, actual_user_keyboard_action=False,
+        declared_duration_s=seconds, control_steps_advanced=int(task.control_steps) - start,
+        action_receipts=records, repeated_finish_preserved_status=True,
+        terminal_status=second)
+    task._write(task.episode_dir / 'controlled_termination.json', evidence)
+    return evidence
+
 
 def resources():
     status = {}
@@ -39,13 +103,15 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--config', type=Path, default=ROOT / 'config/lab_cuvette_loading/Project_release_v1/standard.yaml')
     p.add_argument('--output', type=Path, required=True)
-    p.add_argument('--sequence', nargs='+', choices=('teacher', 'early_finish', 'no_progress'),
+    p.add_argument('--sequence', nargs='+', choices=CONDITIONS,
                    default=['teacher', 'early_finish', 'teacher'])
     p.add_argument('--early-finish-after-s', type=float, default=3.)
     p.add_argument('--no-progress-after-s', type=float, default=5.)
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--headless', action='store_true')
     p.add_argument('--gui', action='store_true')
+    p.add_argument('--record-mode', choices=('diagnostic', 'collect', 'eval'), default=None)
+    p.add_argument('--execution-purpose', choices=('demo', 'collect', 'eval'), default=None)
     return p
 
 
@@ -62,6 +128,18 @@ def main(argv=None):
     cfg = resolve_config(OmegaConf.load(args.config))
     if cfg.version != 'Project_release_v1':
         raise ValueError('Use the explicit Project_release_v1 config')
+    if args.record_mode is not None:
+        cfg.release.record_mode = args.record_mode
+    if args.execution_purpose is not None:
+        cfg.env.execution_purpose = args.execution_purpose
+    from demos.lab_cuvette_project_v1.assets import load_lock
+    asset_revision = load_lock()['revision']
+    print('LABSIM_RELEASE', json.dumps(dict(version=cfg.version, config=str(args.config.resolve()),
+        execution_purpose=str(cfg.env.get('execution_purpose', 'eval')),
+        record_mode=str(cfg.release.record_mode), sequence=args.sequence,
+        controller=cfg.controller_type, scorer=cfg.env.scorer_module,
+        asset_id=cfg.asset_id, asset_revision=asset_revision,
+        physics_hz=int(cfg.physics.hz), control_hz=int(cfg.physics.control_hz))), flush=True)
     OmegaConf.save(cfg, output / 'launch_config.yaml')
     audit = ensure_audit(cfg, output)
     if audit.get('geometry_valid') is not True:
@@ -89,7 +167,8 @@ def main(argv=None):
             reset_start = time.perf_counter()
             observation = facade.reset(args.seed, dict(mode='standard', teacher=condition == 'teacher',
                 policy_id='truth_teacher' if condition == 'teacher' else 'controlled_' + condition,
-                demonstrator_id='LabCuvetteTeacher' if condition == 'teacher' else 'lifecycle_acceptance'))
+                demonstrator_id='LabCuvetteTeacher' if condition == 'teacher' else 'lifecycle_acceptance',
+                lifecycle_condition=condition))
             snapshot = dict(event='after_reset', episode=index, condition=condition, **resources())
             snapshots.append(snapshot)
             check = dict(episode=index, episode_id=observation['episode_id'],
@@ -123,19 +202,9 @@ def main(argv=None):
                         print('RELEASE_PROGRESS', index, round(env.t, 3), env.phase, flush=True)
                 env._write(env.episode_dir / 'teacher_events.json', teacher.events)
             else:
-                duration = args.early_finish_after_s if condition == 'early_finish' else args.no_progress_after_s
-                ticks = round(duration * cfg.physics.control_hz)
-                # A real, bounded zero-delta action runs physics and recording.
-                # This is a controlled interface diagnostic, never model inference.
-                while not env.ended and env.control_steps < ticks:
-                    observation = facade.observe()
-                    remaining = ticks - env.control_steps
-                    action_ticks = min(remaining, int(3 * cfg.physics.control_hz))
-                    facade.execute(dict(action_id=f'{env.episode_id}:wait:{env.control_steps}',
-                        episode_id=env.episode_id, observation_id=observation['observation_id'],
-                        type='ee_delta', frame='world', values=[0.] * 6,
-                        duration_s=action_ticks / cfg.physics.control_hz))
-                facade.finish('CONTROLLED_EARLY_FINISH' if condition == 'early_finish' else 'POLICY_TIME_LIMIT')
+                duration = (args.early_finish_after_s if condition == 'early_finish' else
+                            args.no_progress_after_s if condition == 'no_progress' else 1.)
+                controlled_case(facade, condition, seconds=duration)
             if not env.ended:
                 facade.finish('APPLICATION_INTERRUPTED', failure_type='PROCESS_INTERRUPTED')
             old_observation = facade.observe()
@@ -149,6 +218,9 @@ def main(argv=None):
             print('RELEASE_RESULT', json.dumps(row, default=str), flush=True)
         env._write(output / 'run_manifest.json', dict(schema='labsim.Project_release_v1.same_process.v1',
             process_id=os.getpid(), sequence=args.sequence, seed=args.seed, standard_randomization=False,
+            record_mode=str(cfg.release.record_mode),
+            execution_purpose=str(cfg.env.get('execution_purpose', 'eval')),
+            asset_revision=asset_revision,
             episodes_requested=len(args.sequence), episodes_completed=len(results),
             all_episodes_same_process=True, startup_wall_seconds=startup_s,
             rollout_wall_seconds=sum(item['rollout_wall_seconds'] for item in results),
@@ -168,15 +240,10 @@ def main(argv=None):
         raise
     finally:
         try:
-            if env is not None:
-                env.close()
+            from demos.lab_cuvette_project_release_v1.shutdown import close_release_application
+            close_release_application(app, environment=env, report_path=output / 'application_shutdown.json')
         finally:
-            try:
-                from omni.kit.app import get_app
-                get_app().post_quit(0)
-                app.close()
-            finally:
-                lock.close()
+            lock.close()
 
 
 if __name__ == '__main__':

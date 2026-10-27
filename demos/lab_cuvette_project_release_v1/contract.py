@@ -14,6 +14,8 @@ def scene_contract(cfg, geometry_audit=None):
         'data_collectors/lab_cuvette_project_release_collector.py',
         'demos/lab_cuvette_project_release_v1/environment.py',
         'demos/lab_cuvette_project_release_v1/contract.py',
+        'demos/lab_cuvette_project_release_v1/recording.py',
+        'demos/lab_cuvette_project_release_v1/shutdown.py',
         'utils/episode_selection.py',
     )
     body = dict(schema='labsim.Project_release_v1.scene_contract.v1',
