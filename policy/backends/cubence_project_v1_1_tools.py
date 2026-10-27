@@ -212,6 +212,9 @@ class ProjectV11TemporalRobotTools(ProjectV11RobotTools):
 
 def run_episode(environment,client,output,*,max_calls=160,prompt=SYSTEM_PROMPT):
     """Keep legacy v4 exact unless the explicit public visual profile is enabled."""
+    if 'fixed_side_detail' in client.cfg:
+        from .cubence_project_v1_1_side_detail import run_episode as run_fixed_side_detail
+        return run_fixed_side_detail(environment,client,output,max_calls=max_calls,prompt=prompt)
     from .cubence_project_v1_1_visual_context import PublicTemporalVisualClient, validate_visual_context
     visual = validate_visual_context(client.cfg)
     if visual is None:

@@ -1,0 +1,120 @@
+{
+  "schema": "labsim.Project_v1_1.P7_independent_CPU_review.v1",
+  "reviewed_utc": "2026-10-27T00:24:34.346389+00:00",
+  "reviewer": "release_report independent static/CPU reviewer",
+  "verdict": "No remaining blocking finding for exact P7 sources and offline candidate artifacts at the listed SHA; no real model or task execution validated.",
+  "development_HEAD_at_review": "cd827ed70f7da4b2d06a766db4136e459a39b64b",
+  "reviewed_source_SHA256": {
+    "policy/backends/cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+    "policy/backends/cubence_project_v1_1_tools.py": "381df32220a223eb7374b070333dfc12324cfb1d60938807d450f19e01f6f9d5",
+    "policy/backends/cubence_project_v1_1_visual_context.py": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail.json": "559e5fdd10383c810728c90a34426e807695a9fdca32dcf8f6c8b57e51f93318",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high_temporal.json": "208fa601494b5b0bf5baacace1036838f47e3d9e7b5ec1ece87d928615413313",
+    "tests/test_lab_cuvette_project_v1_1_side_detail.py": "75f9574d308e2f75e88787cb3130e1e7d5483d3901e3c480dd82f7a3aec89b88",
+    "policy/backends/cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+    "policy/backends/cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23"
+  },
+  "independent_focused": {
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0,
+    "reported_wall_s": 0.38,
+    "command": [
+      "/tmp/labsim-handoff-ci-py311-20261022/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_lab_cuvette_project_v1_1_side_detail.py"
+    ],
+    "evidence": "focused39.xml",
+    "opener": "fake transports only; no network"
+  },
+  "author_full_CPU_result_independently_checked": {
+    "path": "docs/lab_cuvette_loading/Project_v1_1/validation/public_fixed_side_detail_p7_20261027/release/change_audit.json",
+    "SHA256": "f9afa99218c4d9a8fd70e5f06ec43d40093b3c261cd8f766d17e7759ba10ab6c",
+    "XML_SHA_matches_record": true,
+    "counts": {
+      "passed": 717,
+      "skipped": 13,
+      "failed": 0,
+      "errors": 0
+    },
+    "reviewer_reran_full_suite": false
+  },
+  "checks": [
+    {
+      "item": "fixed public crop and exact source",
+      "status": "pass",
+      "detail": "Only current encoded side JPEG is decoded, fixed half-open ROI[240,32,520,312] is480/280 uniform LANCZOS resized to480x480 and q60 JPEG encoded. No object/seat pose, detection, tracking, GT crop, tactile vector or new physical camera. Source mounting/resolution/intrinsics and source JPEG SHA validated before delegation; original current two JPEGs/JSON bytes unchanged."
+    },
+    {
+      "item": "pixel-centre calibration",
+      "status": "pass",
+      "detail": "Independently reencoded real D24 crop is byte-identical with Pillow12.3. A uses dst=(src-roi_origin+.5)*scale-.5 and K_detail=A*K_source; centre(379.5,171.5)->(239.5,239.5). Same current side extrinsics remain accessible in original CURRENT. No claimed new sensor resolution or precision."
+    },
+    {
+      "item": "ordering and history",
+      "status": "pass",
+      "detail": "Original CURRENT five blocks are byte-value unchanged and final. One separate current detail group immediately precedes it. At most1historical wrist: first public bilateral reference, otherwise previous while no reference exists; if reference is CURRENT, no duplicate history is sent. Context2 retains latest1complete response/tool-receipt group. Reset/episode change/duplicate observation tests prevent stale replacement and packet overwrite."
+    },
+    {
+      "item": "public-only/private redaction",
+      "status": "pass",
+      "detail": "Same public whitelist rejects injected truth. Live private provider items stay in protocol; persisted projections contain hash placeholders, not their content. Full live canonical input hash preserved; exact reconstruction is refused when private items were redacted. Detail metadata hashes/A/K and final input projection are saved, pre_detail explicitly intermediate/not delegated."
+    },
+    {
+      "item": "dispatch/P4/P6 preservation",
+      "status": "pass",
+      "detail": "Oldtools run_episode adds exactly3 explicit dispatch lines keyed by fixed_side_detail. New runner calls shared cubence_tools runner directly, avoiding recursion. Existing helper and P6 profile SHA unchanged; independent tests compare P4/P6 fake-wire bodies to frozen58da exactly. Controller implementation SHA honestly changes for3dispatch lines and includes final new module."
+    },
+    {
+      "item": "budget and single delegation",
+      "status": "pass",
+      "detail": "Profile changes only fixed_detail+context2 vs P6; max_estimated_usd30/max_requests1500/max_context_input_tokens80000/max_output_tokens1024/action limits unchanged. Final augmented3–4JPEG input is delegated exactly once to original client, which checks actual complete payload bound then reserves existing ledger before HTTP. Crop is not a separate request. Fake transport verifies final input equals captured/reserved body."
+    },
+    {
+      "item": "offline preview and bounds",
+      "status": "pass",
+      "detail": "Actual closedGPT05 D24 packet is offline only, API_sent=false/task_executed=false;17selected files+manifest,4images, original CURRENT last5blocks verified. Independent source/proof PID/run/command checks passed. Independent25-frame context2 bound replay equals authoritative release evidence: public63462/private conservative67829/minmargin12171. Private byte interval is inferred from old actual reservation residual without content recovery; it is not a future bound guarantee."
+    },
+    {
+      "item": "prompt scope",
+      "status": "pass",
+      "detail": "Generic attention to wrist/palm/fingers/held object/terminal arm segment versus visible upright obstacles/open lid. No SourceMesh IDs, collision time/point, safe height, world obstacle/seat coordinate, expert route, detector, planner or action macro. Original tools and default P6 rules retained."
+    }
+  ],
+  "issues_found_and_resolved": [
+    {
+      "scope": "offline preview only",
+      "issue": "Proof initially verified closure/PID but not source run identity.",
+      "resolution": "Final _closed_source_proof binds run_directory and/or unambiguous command output; refuses missing/mismatched/conflicting identities, duplicate--output, supports single--output=; new CPU negative cases pass."
+    },
+    {
+      "scope": "offline preview/bound audit only",
+      "issue": "Output originally could be added beside gpt_control inside the already closed source run.",
+      "resolution": "Final source-run overlap guard rejects any destination inside or enclosing entire closed run; actual docs preview unaffected, no original source changed."
+    }
+  ],
+  "artifacts": {
+    "authoritative_release_change_audit": "docs/lab_cuvette_loading/Project_v1_1/validation/public_fixed_side_detail_p7_20261027/release/change_audit.json",
+    "authoritative_release_bound": "docs/lab_cuvette_loading/Project_v1_1/validation/public_fixed_side_detail_p7_20261027/release/closed_context_bounds/summary.json",
+    "final_D24_preview_artifact_manifest": "docs/lab_cuvette_loading/Project_v1_1/camera/fixed_side_detail_P7_D24_preview/artifact_manifest.json",
+    "final_D24_preview_manifest_SHA256": "579d417aa86bc7e2aaba3bba35b294a8f7868387c6ab49d93987843c934592f6",
+    "preview_API_sent": false,
+    "preview_task_success": null,
+    "preview_input_items_hash": "eef07b7c153c767060cb3eba03a9f1f4df68add180407d969c06ff10d02c5620"
+  },
+  "limits": [
+    "This is a candidate combination of fixed ROI detail, one-history selection, context2 and prompt; not a single-factor A/B and no task/model success inference.",
+    "P7 was not actually sent to a provider by this review or offline preview. Fake responses, offline capture count25 and CPU717 are not model decisions or physical progress.",
+    "Magnification cannot recover hidden geometry, certify3D whole-arm clearance or establish bottom support; D24 actualcrop was viewed but no collision avoidance result claimed.",
+    "The67,829 bound covers these25closed public frames/old reservations only. Future larger private responses may still be refused before network under unchanged80k/$30/1500caps.",
+    "Original API request projection is not complete HTTP headers/credentials/full private memory. pre_detail and old5-image exploratory candidates are not final actual inputs.",
+    "No GPU, SimulationApp, new API, H5/raw read, runtime code change or package installation by reviewer."
+  ],
+  "API_calls": 0,
+  "GPU_used": false,
+  "H5_raw_read": false,
+  "private_provider_content_read": false,
+  "implementation_modified_by_reviewer": false
+}

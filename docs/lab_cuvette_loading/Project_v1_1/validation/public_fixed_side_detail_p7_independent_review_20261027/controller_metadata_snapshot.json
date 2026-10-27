@@ -1,0 +1,68 @@
+{
+  "version": "Project_v1_1",
+  "tools_class": "ProjectV11FixedSideDetailTools",
+  "prompt_version": "Project_v1_1.public_tools.v7_fixed_side_detail",
+  "receipt_contract": "accepted/execution_finished/target_reached/safety_stopped/partial_execution",
+  "implementation_sha256": {
+    "cubence_project_v1_1_tools.py": "381df32220a223eb7374b070333dfc12324cfb1d60938807d450f19e01f6f9d5",
+    "cubence_project_v1_1_visual_context.py": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+    "cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061"
+  },
+  "observation_scope": "Same public RGB/robot/calibration/tactile whitelist as Project_v1; no object truth",
+  "visual_context_version": "Project_v1_1.public_temporal_visual_context.v1",
+  "visual_context_profile": {
+    "enabled": true,
+    "previous_distinct_wrist": true,
+    "first_public_bilateral_wrist": true,
+    "bilateral_contact_threshold_N": 0.02
+  },
+  "temporal_context_scope": "Public already-encoded wrist JPEGs, robot/tactile/time/calibration only; reference is not grasp success; no automatic action/stop/scoring",
+  "tool_response_memory_scope": "Opt-in P7 profile: latest one complete response/tool-receipt turn (max_context_messages=2); P6 context4 unchanged",
+  "fixed_side_detail_version": "Project_v1_1.fixed_public_side_detail.v1",
+  "fixed_side_detail_profile": {
+    "enabled": true,
+    "camera_name": "side_camera",
+    "expected_resolution_wh": [
+      640,
+      480
+    ],
+    "roi_pixel_edges_xyxy": [
+      240,
+      32,
+      520,
+      312
+    ],
+    "max_side_px": 480,
+    "jpeg_quality": 60,
+    "detail": "high",
+    "resize_interpolation": "lanczos",
+    "max_historical_wrist_images": 1,
+    "history_priority": [
+      "first_public_bilateral_wrist",
+      "previous_distinct_wrist"
+    ],
+    "current_reference_is_not_duplicated": true,
+    "expected_physical_parent": "/World",
+    "expected_local_position_m": [
+      -0.7,
+      -0.85,
+      1.32
+    ],
+    "expected_local_quaternion_wxyz": [
+      0.72224223613739,
+      0.5659829784132289,
+      -0.24520192217047324,
+      -0.3128984465440159
+    ],
+    "mounting_tolerance": 1e-05
+  },
+  "historical_input_policy": {
+    "max_images": 1,
+    "priority": [
+      "first_public_bilateral_wrist",
+      "previous_distinct_wrist"
+    ],
+    "no_current_reference_duplication": true
+  },
+  "fixed_side_detail_scope": "Fixed public side JPEG crop/magnification only; no new sensing, precision, detector or action"
+}
