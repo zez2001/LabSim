@@ -19,7 +19,7 @@ def main() -> None:
     parser.add_argument(
         "--output", type=Path, required=True, help="New output directory; never overwritten"
     )
-    parser.add_argument("--cache", type=Path, help="Source asset cache (default ~/LabSim-assets)")
+    parser.add_argument("--cache", type=Path, help="Source asset cache (default project local_assets/)")
     parser.add_argument("--offline", action="store_true", help="Use already downloaded assets")
     parser.add_argument("--gui", action="store_true", help="Show the Isaac window")
     args = parser.parse_args()
