@@ -1,0 +1,342 @@
+{
+  "schema": "labsim.gpt_controller.v1",
+  "provider_config": {
+    "schema": "labsim.cubence_provider.v1",
+    "provider": "cubence",
+    "base_url": "https://api.cubence.ai/v1",
+    "model": "gpt-6-astra",
+    "credential_env": "CUBENCE_API_KEY",
+    "endpoint": "responses",
+    "request_timeout_s": 120,
+    "episode_timeout_s": 1800,
+    "max_output_tokens": 1024,
+    "max_context_messages": 2,
+    "max_context_input_tokens": 80000,
+    "max_requests": 1500,
+    "max_estimated_usd": 30.0,
+    "max_retries": 2,
+    "retry_delay_s": 1,
+    "reasoning_effort": "low",
+    "images": {
+      "max_side_px": 640,
+      "jpeg_quality": 60,
+      "detail": "high",
+      "resize_interpolation": "lanczos"
+    },
+    "pricing": {
+      "source": "https://cubence.com/pricing",
+      "observed_date": "2026-10-26",
+      "input_usd_per_million": 10.0,
+      "output_usd_per_million": 50.0,
+      "cached_input_usd_per_million": 1.0,
+      "billing_note": "Published <=272000-token tier; account group multipliers are unknown. This is a local estimate, not a billing claim."
+    },
+    "action_limits": {
+      "max_translation_m": 0.04,
+      "max_rotation_rad": 0.15,
+      "max_linear_speed_m_s": 0.02,
+      "max_angular_speed_rad_s": 0.15,
+      "max_duration_s": 3.0,
+      "min_duration_s": 0.05,
+      "control_hz": 60,
+      "max_gripper_opening_m": 0.08,
+      "gripper_effort_limit_N": 8.0
+    },
+    "visual_context": {
+      "enabled": true,
+      "previous_distinct_wrist": true,
+      "first_public_bilateral_wrist": true,
+      "bilateral_contact_threshold_N": 0.02
+    },
+    "fixed_side_detail": {
+      "enabled": true,
+      "camera_name": "side_camera",
+      "expected_resolution_wh": [
+        640,
+        480
+      ],
+      "roi_pixel_edges_xyxy": [
+        240,
+        32,
+        520,
+        312
+      ],
+      "max_side_px": 480,
+      "jpeg_quality": 60,
+      "detail": "high",
+      "resize_interpolation": "lanczos",
+      "max_historical_wrist_images": 1,
+      "history_priority": [
+        "first_public_bilateral_wrist",
+        "previous_distinct_wrist"
+      ],
+      "current_reference_is_not_duplicated": true,
+      "expected_physical_parent": "/World",
+      "expected_local_position_m": [
+        -0.7,
+        -0.85,
+        1.32
+      ],
+      "expected_local_quaternion_wxyz": [
+        0.72224223613739,
+        0.5659829784132289,
+        -0.24520192217047324,
+        -0.3128984465440159
+      ],
+      "mounting_tolerance": 1e-05
+    },
+    "active_view_control": {
+      "enabled": true,
+      "version": "Project_v1_1.active_view_prompt.v1",
+      "scope": "prompt_only_no_automatic_action"
+    }
+  },
+  "prompt": "You directly control a simulated Franka for the task in task_language.\nUse only the synchronized side and wrist RGB, robot joint/TCP state, provided camera calibration, task text and tool receipts.\nThere is no object-pose oracle and no expert motion primitive. Infer locations from images and calibration. Do not request debug or ground truth.\nAll translations are metres; rotations radians; ee_pose quaternion order wxyz. Gripper opening is total finger separation, not each finger's position.\nCall one tool at a time. Every motion needs the current episode_id, observation_id, and a unique action_id. A receipt acknowledges executed motion; never replay an acknowledged action.\nUse larger bounded moves in free space and small, slower actions near contact. Model requests pause simulation; duration_s advances simulation only during tool execution.\nTranslation and rotation limits apply to the Euclidean vector norm. For example, delta[.02,.02,0] has length.028284m and needs at least1.415s at.02m/s. A longer duration cannot make a vector longer than.04m legal; split it into smaller commands. Read numeric rejection details and correct the next command.\nFollow the full task: approach the designated light cuvette in the white rack, physical grasp, extraction, transport, internal-seat insertion, support transfer, symmetric release, retreat, then at least3seconds stable observation.\nPublic fixed-scene task prior: the light cuvette in slot A1 is at the rack corner closest to the robot. The blue cuvette in opposite corner F6 is a distractor to leave in place. The selected light cuvette's nominal outer dimensions are10x10x67.5mm. These are nominal task facts; infer current poses from the images and calibration.\nDo not declare success from your own assessment: finish only requests the same independent physical scorer used for every backend.\nAvoid pushing after stalled insertion, dropping, collisions, and joint limits. If unsure, observe. You may reduce the gripper force cap during an image/state-confirmed support handoff, but cannot change physics or task thresholds.\nReturn a tool call rather than a long explanation. No task-specific macro, teacher takeover or hidden plan execution is available.\n\nProject_v1_1 execution contract:\naccepted means the command passed preflight, not that motion occurred or the target was reached.\nexecution_finished means its execution interval ended. target_reached is a separate measurement of the actual endpoint.\ncompleted is a compatibility alias for interval completion; never interpret it alone as reaching the requested pose.\nA CONTROL_PLAN_REJECTED receipt means a continuous local IK path could not be verified. Rejection executes zero ticks and leaves the current observation valid. Reduce the requested move or choose another visually supported direction; never assume it moved. Do not repeatedly send the same rejected path with a new ID.\nRead requested versus actual endpoint, final and maximum tracking errors, executed duration/ticks, stop_reason, safety_stopped and partial_execution.\nIf an action partially executed or safety stopped, do not replay it as though nothing moved. Use its successor observation and actual receipt; the backend may end the episode to preserve the safety evidence.\nAn execution_finished command with target_reached=false is not a successful move. Observe the fresh images/state before deciding on a smaller correction.\nThe force cap is an upper limit, not a measured contact force. move and wait preserve the previous gripper request; only the explicit gripper tool changes opening/effort. Use the public bilateral finger contact readings to assess contact, and fresh images to assess retention.\nBoth cameras are synchronized at each decision. The side camera covers the rack, arm and instrument; the wrist camera moves with the hand. Use their actual supplied mounting, intrinsics, extrinsics, image transformation and timestamps. Do not assume an old wrist mounting or invent object poses from a task ID.\nUse the static robot calibration in task_language to distinguish the TCP frame from the panda_hand/palm frame when interpreting images and camera mounting. Apply the stated parent/child transform and quaternion convention; do not assume the frames share an origin or orientation. The frame-origin offset is robot geometry, not a complete hand/finger collision envelope or an obstacle-pose oracle.\nPlan clearance for the whole hand and the held vessel, not only the TCP or the vessel bottom. After extraction, inspect the side image and lift sufficiently above intervening rack walls and instrument housing before lateral transport. Leaving the source slot does not prove that the fingers, palm or arm clear the instrument. Use fresh images to choose a clear route and to check clearance again before descent; no obstacle coordinates or safe-height oracle are provided.\nIf an intervening housing edge or whole-hand clearance cannot be judged from the current images, obtain fresh dual views and establish visually supported clearance before horizontal transport. Do not continue laterally solely because the TCP or vessel appears outside the source slot; if clearance remains uncertain, observe or stop rather than assume a safe route.\nPerspective alignment: overlap or centering in one image does not establish coaxial alignment. Cross-check the vessel long axis and the intended aperture in both views using the supplied calibration; do not assume equal image pixels imply equal world positions.\nOnce visually near the seat or uncertain contact, command insertion/descent at no more than0.001m/s. Split it into short bounded increments and inspect fresh dual-view images, robot state and bilateral finger contact after each increment. This instruction does not add a hidden contact detector or automatic insertion macro.\nIf the hand descends while the vessel moves upward relative to the fingers, or one side of finger contact is lost, stop descending. Use only a visually supported safe backoff and realignment before trying again; do not keep pressing with the same downward command or release to bypass the obstruction.\nDo not open the fingers before sufficient nominal loading depth and actual support have been established from the allowed observations. Compare the visible exposed vessel length with the static task goal while accounting for perspective and occlusion. A TCP endpoint reached, a tool interval finished, or a vessel tip or mouth overlapping a seat rim is not evidence of bottom support. If depth or support remains uncertain, stop and reassess rather than opening early.\nThese controls remain generic move, gripper, wait, observe and finish. No expert stage controller, object ground truth or hidden recovery action is available.\n\nProject_v1_1 temporal visual observation contract:\nThe explicitly labelled historical wrist references are stale public observations, not current state. Actions must use only the episode_id and observation_id in the final current observation item. Never copy an identity from a historical frame.\nCompare the current wrist image with both the previous distinct observation and the fixed first public bilateral-contact reference when supplied. That reference was selected only from the public finger contact readings above0.02N. It does not certify persistent contact, successful grasp, insertion, support or a 3D object pose.\nUse the vessel mouth/top edge relative to the black finger pads and the intended seat rim as visual evidence. The wrist camera is attached to the hand, so a vessel rising relative to the pads while the hand is commanded downward is evidence to stop descent and reassess, not evidence of insertion. Account for camera motion, perspective, tilt, occlusion and pixel uncertainty; equal pixels across frames do not establish equal world positions.\nBefore another near-seat descent, compare visible exposed length and relative vessel-to-finger placement across the references. Do not accumulate repeated downward millimetres merely because the TCP target was reached. If the relative vessel position visibly moves upward, retention/contact becomes asymmetric, or the expected visual progress cannot be established, stop descending; choose only a visually supported safe backoff or finish without release.\nTemporal observation cadence is a model instruction, not an executor-enforced guarantee. When the vessel bottom is visually near the seat entrance, during first entry contact, or while free passage remains unconfirmed, request no more than 0.0001 m downward displacement per decision and no more than 0.001 m/s downward speed, then inspect a new observation. Use the visible geometry and static nominal task dimensions to decide when this applies; no actual contact event, object pose or precomputed insertion path is supplied.\nOnly after visible progress supports free passage, without vessel-to-finger upward movement or an abrupt tactile change, may you request a longer controlled descent; keep the existing 0.001 m/s near-seat speed limit. Near the nominal bottom, approximately the final 0.001 m of travel estimated from static dimensions and actual images, return to downward increments no larger than 0.0001 m. If remaining travel or free passage cannot be established, do not assume it from accumulated TCP motion.\nAt any of these contact-sensitive checks, single-side contact loss, a marked contact-force change, relative upward vessel motion or images that cannot establish progress require stopping descent. Obtain fresh views and choose a visually supported safe backoff/realignment or finish without release. Do not repeatedly press the same obstructed pose. These are instructions the model must follow, not an automatic stop, detector or hidden task stage.\nHistorical images are additional observations only. They provide no hidden contact detector, object coordinates, insertion depth, teacher stage, automatic recovery, stop command or success label. Current bilateral contact by itself is not bottom support. The independent task scorer is unchanged.\n\nP7: CURRENT 480-by-480 side detail is a fixed crop/magnification, same exposure, with no new resolution or accuracy. Use its A/new K with current side extrinsics. Check the whole wrist, palm, fingers, held vessel and terminal arm segment against upright obstacles/open lid across views; TCP clearance or perspective overlap cannot prove 3D clearance. If unclear, observe/finish instead of moving blindly. Original CURRENT JSON/two images stay last; use its action IDs. All P6 rules remain.\nAt most one historical wrist is supplied: first public bilateral reference, else previous distinct; no duplicate if the reference is CURRENT.\n\nP8 active-view clarification: uncertainty about an entire route is not itself evidence that no safe local action exists. Distinguish a visible obstruction or imminent contact from missing depth information. If the current views support that the next local motion is free for the whole moving arm, hand and held vessel, choose a conservative reversible translation or rotation within the existing tool limits to gain a different view, then inspect fresh images and tactile readings before proceeding. Account for how wrist rotation also moves the fingers and held vessel. A stationary observe does not change the camera viewpoint; repeated lifting without new useful visibility is not evidence of a route. Do not require certainty about the whole route before a supported local observation move. If no safe local action is supported, or an actual safety stop/anomaly occurs, stop and finish without release. All insertion, contact, support, release and current-identity requirements remain.\n",
+  "tool_schema": [
+    {
+      "type": "function",
+      "name": "observe",
+      "description": "Read the current synchronized side/wrist images and robot state. Physics remains paused.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "move_ee",
+      "description": "Execute one bounded generic Cartesian command via IK/interpolation. No task macro. Units metres/radians, world frame or TCP delta, quaternion wxyz.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "episode_id": {
+            "type": "string"
+          },
+          "observation_id": {
+            "type": "string"
+          },
+          "action_id": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "ee_pose",
+              "ee_delta"
+            ]
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "frame": {
+            "type": "string",
+            "enum": [
+              "world",
+              "tcp"
+            ]
+          },
+          "duration_s": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "episode_id",
+          "observation_id",
+          "action_id",
+          "mode",
+          "values",
+          "frame",
+          "duration_s"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "gripper",
+      "description": "Symmetric two-finger total opening in metres and explicit per-finger force cap in newtons; arm holds its current pose. No object binding.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "episode_id": {
+            "type": "string"
+          },
+          "observation_id": {
+            "type": "string"
+          },
+          "action_id": {
+            "type": "string"
+          },
+          "opening_m": {
+            "type": "number"
+          },
+          "effort_limit_N": {
+            "type": "number"
+          },
+          "duration_s": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "episode_id",
+          "observation_id",
+          "action_id",
+          "opening_m",
+          "effort_limit_N",
+          "duration_s"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "wait",
+      "description": "Advance a bounded simulation interval while holding the current robot and gripper command.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "episode_id": {
+            "type": "string"
+          },
+          "observation_id": {
+            "type": "string"
+          },
+          "action_id": {
+            "type": "string"
+          },
+          "duration_s": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "episode_id",
+          "observation_id",
+          "action_id",
+          "duration_s"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "type": "function",
+      "name": "finish",
+      "description": "Request independent scoring and finish. This cannot assert success or bypass release/retreat/stability checks.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "episode_id": {
+            "type": "string"
+          },
+          "observation_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "episode_id",
+          "observation_id",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "object_truth_used": false,
+  "teacher_used": false,
+  "physics_paused_during_inference": true,
+  "implementation_sha256": {
+    "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+    "cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23"
+  },
+  "action_meaning": "generic EE pose/delta, symmetric gripper or wait; facade performs only IK, interpolation and bounds",
+  "controller_extension": {
+    "version": "Project_v1_1",
+    "tools_class": "ProjectV11ActiveViewRobotTools",
+    "prompt_version": "Project_v1_1.public_tools.v8_active_view",
+    "receipt_contract": "accepted/execution_finished/target_reached/safety_stopped/partial_execution",
+    "implementation_sha256": {
+      "cubence_project_v1_1_tools.py": "b764b502f3e4fe2549a0770293e50282ba4ba87ff1487bf749499438e38c7347",
+      "cubence_project_v1_1_visual_context.py": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "cubence_project_v1_1_active_view.py": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843"
+    },
+    "observation_scope": "Same public RGB/robot/calibration/tactile whitelist as Project_v1; no object truth",
+    "visual_context_version": "Project_v1_1.public_temporal_visual_context.v1",
+    "visual_context_profile": {
+      "enabled": true,
+      "previous_distinct_wrist": true,
+      "first_public_bilateral_wrist": true,
+      "bilateral_contact_threshold_N": 0.02
+    },
+    "temporal_context_scope": "Public already-encoded wrist JPEGs, robot/tactile/time/calibration only; reference is not grasp success; no automatic action/stop/scoring",
+    "tool_response_memory_scope": "Opt-in P7 profile: latest one complete response/tool-receipt turn (max_context_messages=2); P6 context4 unchanged",
+    "fixed_side_detail_version": "Project_v1_1.fixed_public_side_detail.v1",
+    "fixed_side_detail_profile": {
+      "enabled": true,
+      "camera_name": "side_camera",
+      "expected_resolution_wh": [
+        640,
+        480
+      ],
+      "roi_pixel_edges_xyxy": [
+        240,
+        32,
+        520,
+        312
+      ],
+      "max_side_px": 480,
+      "jpeg_quality": 60,
+      "detail": "high",
+      "resize_interpolation": "lanczos",
+      "max_historical_wrist_images": 1,
+      "history_priority": [
+        "first_public_bilateral_wrist",
+        "previous_distinct_wrist"
+      ],
+      "current_reference_is_not_duplicated": true,
+      "expected_physical_parent": "/World",
+      "expected_local_position_m": [
+        -0.7,
+        -0.85,
+        1.32
+      ],
+      "expected_local_quaternion_wxyz": [
+        0.72224223613739,
+        0.5659829784132289,
+        -0.24520192217047324,
+        -0.3128984465440159
+      ],
+      "mounting_tolerance": 1e-05
+    },
+    "historical_input_policy": {
+      "max_images": 1,
+      "priority": [
+        "first_public_bilateral_wrist",
+        "previous_distinct_wrist"
+      ],
+      "no_current_reference_duplication": true
+    },
+    "fixed_side_detail_scope": "Fixed public side JPEG crop/magnification only; no new sensing, precision, detector or action",
+    "active_view_control": {
+      "enabled": true,
+      "version": "Project_v1_1.active_view_prompt.v1",
+      "scope": "prompt_only_no_automatic_action"
+    },
+    "active_view_scope": "Generic prompt guidance only; no coordinates, route, automatic action, perception oracle or altered safety gate",
+    "default_system_prompt_SHA256": "4fac82b16c265c3e10ba3b5f25a2eaf8a4c0fca834c4214e96100e3226f5e574",
+    "actual_system_prompt_SHA256": "4fac82b16c265c3e10ba3b5f25a2eaf8a4c0fca834c4214e96100e3226f5e574",
+    "actual_request_instructions_SHA256": "a9e751809e297378fc0a1a1b45fa9f50a9acf64a26b9c6e22ee5c3bba67e4542"
+  }
+}

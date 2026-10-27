@@ -1,0 +1,158 @@
+{
+  "schema": "Project_v1_1.public_temporal_visual_context.v1",
+  "decision_index": 27,
+  "request_label": "policy:d21df24d-c4ec-469d-a8a9-87dfada0aeee:3330:decision27",
+  "current": {
+    "episode_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee",
+    "observation_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee:3330",
+    "simulation_time_s": 55.516666666666666,
+    "source_decision_index": 27,
+    "source_request_label": "policy:d21df24d-c4ec-469d-a8a9-87dfada0aeee:3330:decision27",
+    "wrist_jpeg_sha256": "e02f1136011097ac48c8d150e89f3b2bd705a18ced450ce0c8f91b80f61e2963"
+  },
+  "previous": {
+    "episode_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee",
+    "observation_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee:3210",
+    "simulation_time_s": 53.516666666666666,
+    "source_decision_index": 26,
+    "source_request_label": "policy:d21df24d-c4ec-469d-a8a9-87dfada0aeee:3210:decision26",
+    "wrist_jpeg_sha256": "fee7c977e7c27e4dccb76fafe0eb215fd6d25646da10240eff0dbbd55dbe9cf2"
+  },
+  "first_public_bilateral_reference": {
+    "episode_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee",
+    "observation_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee:810",
+    "simulation_time_s": 13.516666666666667,
+    "source_decision_index": 7,
+    "source_request_label": "policy:d21df24d-c4ec-469d-a8a9-87dfada0aeee:810:decision7",
+    "wrist_jpeg_sha256": "9089152c0589c0200f0b12b42269dfb77099d6acdb82d0369c04ded26a623c40"
+  },
+  "current_observation_is_duplicate_id": false,
+  "first_reference_selected_this_observation": false,
+  "first_reference_selection": "First distinct public observation with both finite finger_contact_N >0.02N; not persistence, grasp success or object truth",
+  "historical_references": [
+    {
+      "reference_roles": [
+        "first_public_bilateral_wrist"
+      ],
+      "episode_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee",
+      "observation_id": "d21df24d-c4ec-469d-a8a9-87dfada0aeee:810",
+      "simulation_time_s": 13.516666666666667,
+      "source_decision_index": 7,
+      "source_request_label": "policy:d21df24d-c4ec-469d-a8a9-87dfada0aeee:810:decision7",
+      "wrist_jpeg_sha256": "9089152c0589c0200f0b12b42269dfb77099d6acdb82d0369c04ded26a623c40",
+      "exact_jpeg": {
+        "path": "historical_00_wrist.jpg",
+        "sha256": "9089152c0589c0200f0b12b42269dfb77099d6acdb82d0369c04ded26a623c40",
+        "bytes": 14269
+      },
+      "public_observation": {
+        "path": "historical_00_public_observation.json",
+        "sha256": "0141e3399affa034da430564b4b9706802c0d5770957086a1d4efd2fa7afa394",
+        "semantics": "Exact original encoded public JSON; historical model message uses the declared robot/tactile/time/wrist-only projection"
+      }
+    }
+  ],
+  "historical_images_inserted": 1,
+  "total_image_count": 3,
+  "expanded_input": true,
+  "current_user_item_preserved": true,
+  "current_user_item_index": 5,
+  "input_items_public_projection": [
+    {
+      "role": "user",
+      "content": "Task: Pick the light cuvette from white rack slot A1 and transport it to the candidate_far_hinge internal seat of the single open instrument. Insert, transfer support, open both fingers, retreat and leave the vessel stable. The selected target is candidate_far_hinge, the internal seat farther from the lid hinge among the two seats. Nominal task geometry: loading depth 27 mm, cuvette height 67.5 mm, and 40.5 mm of the cuvette remaining above the seat entrance at the nominal loaded pose. These are static configured task goals, not measurements of the current vessel pose, insertion depth or support. Static robot calibration: TCPpose is the world pose of frame right_gripper, not the panda_hand/palm origin. The fixed transform from right_gripper coordinates into parent frame panda_hand has translation [0.0, 0.0, 0.1] metres and quaternion [0.0, 0.0, 0.0, 1.0] in wxyz order. This 100 mm frame-origin separation is not the whole-hand collision envelope. Confirm clearance for the entire hand, fingers and held vessel in both camera views; this fixed robot calibration provides no current object or obstacle pose, safe height or motion path."
+    },
+    {
+      "type": "private_provider_item_not_persisted",
+      "original_type": "reasoning",
+      "canonical_sha256": "013e6abb8f8e2e2108a872444048681bbfd075cbc8096f9a94af214a873a028f"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_0b6dcaaa696a49d6016adffdabc04c819099c4782ea3e95d50",
+      "call_id": "call_35d377c670b2473b84e77329651dd771",
+      "name": "move_ee",
+      "arguments": "{\"action_id\":\"a27\",\"duration_s\":2,\"episode_id\":\"d21df24d-c4ec-469d-a8a9-87dfada0aeee\",\"frame\":\"world\",\"mode\":\"ee_delta\",\"observation_id\":\"d21df24d-c4ec-469d-a8a9-87dfada0aeee:3210\",\"values\":[0.03,0,0,0,0,0]}",
+      "status": "completed"
+    },
+    {
+      "type": "function_call_output",
+      "call_id": "call_35d377c670b2473b84e77329651dd771",
+      "output": "{\"action_id\": \"a27\", \"episode_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee\", \"observation_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee:3210\", \"accepted\": true, \"execution_finished\": true, \"target_reached\": true, \"safety_stopped\": false, \"completed\": true, \"completed_semantics\": \"Execution interval ended; target_reached independently measures actual endpoint.\", \"requested_duration_s\": 2, \"executed_duration_s\": 2.0, \"executed_control_ticks\": 120, \"partial_execution\": false, \"simulation_time_before\": 53.516666666666666, \"requested_start_TCP\": {\"position_m\": [0.044930217625560695, -0.1448820954180478, 1.127839272019393], \"quaternion_wxyz\": [-0.0004313521856556623, 0.7070119616169442, -0.7072014447730147, 0.0001287509737951357]}, \"requested_target_TCP\": {\"position_m\": [0.0749302176255607, -0.1448820954180478, 1.127839272019393], \"quaternion_wxyz\": [-0.0004313521856556623, 0.7070119616169442, -0.7072014447730147, 0.0001287509737951357]}, \"maximum_position_tracking_error_m\": 0.0002644628571307052, \"maximum_orientation_tracking_error_rad\": 0.0002198166148288848, \"stop_reason\": \"INTERVAL_FINISHED\", \"status\": \"FINISHED\", \"executed_physics_steps\": 480, \"incomplete_control_interval\": false, \"simulation_time_after\": 55.516666666666666, \"observation_id_after\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee:3330\", \"successor_observation_available\": true, \"actual_endpoint_valid\": true, \"actual_endpoint_TCP\": {\"position_m\": [0.07492930219725619, -0.14488308436357894, 1.1278379601514024], \"quaternion_wxyz\": [-0.00042842131422526333, 0.7070114261031775, -0.7072019821430493, 0.00012754478032274313]}, \"TCPpose\": {\"position_m\": [0.07492930219725619, -0.14488308436357894, 1.1278379601514024], \"quaternion_wxyz\": [-0.00042842131422526333, 0.7070114261031775, -0.7072019821430493, 0.00012754478032274313]}, \"final_position_error_m\": 1.880696644655806e-06, \"final_orientation_error_rad\": 6.517806865139986e-06, \"tracking_error_coverage_complete\": true, \"tracking_error_sampling\": \"completed control boundaries; not a physics-substep maximum\", \"target_reached_scope\": \"TCP pose only; not a claim of grasp, gripper opening, or task success\", \"requested_gripper_opening_m\": 0.009, \"applied_gripper_opening_m\": 0.008999999999999994, \"requested_effort_limit_N\": 4.0, \"applied_effort_limit_N\": 4.0, \"stop_domain\": \"none\", \"endpoint_tolerances\": {\"position_m\": 0.001, \"orientation_rad\": 0.008726646259971648}, \"wall_seconds\": 17.490461137029342, \"terminated\": false, \"gripper_opening_m\": 0.01061688782647252, \"quantized_requested_duration_s\": 2.0, \"executed_duration_source\": \"simulation_time_after_minus_before\", \"model_action_id\": \"a27\", \"execution_action_id\": \"gpt:d19de860bbd4e54d44c30eb9f1632b3002da4625224a82e8783f2d3ed817e8ca\", \"plan\": {\"planned_ticks\": 120, \"requested_ticks\": 120, \"maximum_FK_position_error_m\": 4.652682298944613e-16, \"maximum_FK_orientation_error_rad\": 7.220011917462923e-16, \"maximum_joint_step_rad\": 0.000811414383722675, \"wall_seconds\": 0.8026468800380826, \"scope\": \"Continuous kinematics only; not collision or dynamics certification\"}}"
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "HISTORICAL PUBLIC WRIST REFERENCES, NOT CURRENT OBSERVATIONS. Use only the episode_id and observation_id in the final CURRENT user item for actions. The first public bilateral-contact reference is not verified grasp, support, insertion or 3D object state. Same pixels across these hand-mounted images do not establish equal world positions."
+        },
+        {
+          "type": "input_text",
+          "text": "{\"reference_roles\": [\"first_public_bilateral_wrist\"], \"episode_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee\", \"observation_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee:810\", \"simulation_time_s\": 13.516666666666667, \"source_decision_index\": 7, \"source_request_label\": \"policy:d21df24d-c4ec-469d-a8a9-87dfada0aeee:810:decision7\", \"wrist_jpeg_sha256\": \"9089152c0589c0200f0b12b42269dfb77099d6acdb82d0369c04ded26a623c40\", \"public_robot_tactile_time_and_wrist_calibration\": {\"episode_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee\", \"observation_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee:810\", \"step_index\": 810, \"simulation_time\": 13.516666666666667, \"joint_positions\": [0.6387965083122253, -0.7271289825439453, -1.8026646375656128, -2.9228310585021973, -1.5504190921783447, 2.4388012886047363, -0.47901779413223267, 0.005346641410142183, 0.00534668006002903], \"joint_velocities\": [0.0008532734354957938, 0.01981757953763008, 0.01797114871442318, 0.004650340881198645, -0.00012706901179626584, 0.003475273959338665, 0.0011345958337187767, 6.374164513545111e-05, 6.374157965183258e-05], \"TCPpose\": {\"position_m\": [-0.08505873850219017, -0.17487824614660957, 0.7978613477130059], \"quaternion_wxyz\": [-0.00045598368090728897, 0.707006289052097, -0.7072070970872214, 0.00014542740750566254]}, \"gripper_opening_m\": 0.010693321470171213, \"gripper_effort_limit_N\": 4.0, \"finger_contact_N\": [1.199033260345459, 2.07958722114563], \"camera_meta\": {\"wrist_camera\": {\"name\": \"wrist_camera\", \"physical_parent\": \"/World/Franka/panda_hand\", \"local_pose_position_m\": [0.07500000298023224, 0.0, 0.03999999910593033], \"local_pose_quaternion_wxyz\": [-0.2600301802158356, 0.6575593535868104, -0.6575593535868104, 0.26003018747428563], \"world_pose_position_m\": [-0.08508849621196177, -0.0999045977470647, 0.8578942696435622], \"world_pose_quaternion_wxyz\": [0.0002884282472457609, -0.00034325245759190697, 0.3675339575932654, 0.930009994033789], \"camera_cv_from_world\": [[-0.9999995979737928, 0.0002841684366157716, -0.0008504707824582478, -0.08433045826003364], [0.0007887961733850063, 0.729837413649956, -0.6836203094096452, 0.6594551767661616], [0.0004264420816905043, -0.6836207054244644, -0.7298373443871637, 0.5578627092500796], [0.0, 0.0, 0.0, 1.0]], \"intrinsic_matrix_native\": [[366.4996337890625, 0.0, 320.0], [0.0, 366.4996337890625, 240.0], [0.0, 0.0, 1.0]], \"resolution_wh\": [640, 480], \"sensor_rendering_time_s\": 13.525000705383718, \"frames\": \"world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz\"}}, \"model_image_transforms\": {\"wrist_camera\": {\"native_resolution_wh\": [640, 480], \"transmitted_resolution_wh\": [640, 480], \"scale_xy\": [1.0, 1.0], \"native_rgb_sha256\": \"c1a1de99f930ca1cebbb685bcf6918541472dc8d82a98329ae2aab09a384c61d\", \"transmitted_jpeg_sha256\": \"9089152c0589c0200f0b12b42269dfb77099d6acdb82d0369c04ded26a623c40\", \"transmitted_bytes\": 14269, \"jpeg_quality\": 60, \"detail\": \"high\", \"resize_interpolation\": \"Pillow LANCZOS\", \"crop\": null, \"rotation_deg\": 0, \"color_space\": \"RGB\", \"transmitted_pixel_from_native_pixel\": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]], \"intrinsic_matrix_transmitted\": [[366.4996337890625, 0.0, 320.0], [0.0, 366.4996337890625, 240.0], [0.0, 0.0, 1.0]], \"pixel_convention\": \"zero-based pixel-centre indices: dst=(src+.5)*scale-.5\", \"native_recording_changed\": false}}}}"
+        },
+        {
+          "type": "input_image",
+          "image_url": {
+            "encoding": "data:image/jpeg;base64",
+            "path": "historical_00_wrist.jpg",
+            "sha256": "9089152c0589c0200f0b12b42269dfb77099d6acdb82d0369c04ded26a623c40",
+            "bytes": 14269
+          },
+          "detail": "high"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "input_text",
+          "text": "{\"episode_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee\", \"step_index\": 3330, \"simulation_time\": 55.516666666666666, \"joint_positions\": [0.5374355912208557, -0.6936381459236145, -0.7436103820800781, -2.388225793838501, -0.46156084537506104, 1.8128612041473389, -0.7449291348457336, 0.005308439023792744, 0.005308448802679777], \"joint_velocities\": [0.02118513360619545, 0.041399456560611725, -0.0015616544988006353, 0.052517861127853394, 0.007753058336675167, 0.013859744183719158, -0.003894821973517537, -1.776460703695193e-05, -1.776464341674e-05], \"TCPpose\": {\"position_m\": [0.07492930219725619, -0.14488308436357894, 1.1278379601514024], \"quaternion_wxyz\": [-0.00042842131422526333, 0.7070114261031775, -0.7072019821430493, 0.00012754478032274313]}, \"task_language\": \"Pick the light cuvette from white rack slot A1 and transport it to the candidate_far_hinge internal seat of the single open instrument. Insert, transfer support, open both fingers, retreat and leave the vessel stable. The selected target is candidate_far_hinge, the internal seat farther from the lid hinge among the two seats. Nominal task geometry: loading depth 27 mm, cuvette height 67.5 mm, and 40.5 mm of the cuvette remaining above the seat entrance at the nominal loaded pose. These are static configured task goals, not measurements of the current vessel pose, insertion depth or support. Static robot calibration: TCPpose is the world pose of frame right_gripper, not the panda_hand/palm origin. The fixed transform from right_gripper coordinates into parent frame panda_hand has translation [0.0, 0.0, 0.1] metres and quaternion [0.0, 0.0, 0.0, 1.0] in wxyz order. This 100 mm frame-origin separation is not the whole-hand collision envelope. Confirm clearance for the entire hand, fingers and held vessel in both camera views; this fixed robot calibration provides no current object or obstacle pose, safe height or motion path.\", \"source_slot_id\": \"A1\", \"target_seat_id\": \"candidate_far_hinge\", \"observation_id\": \"d21df24d-c4ec-469d-a8a9-87dfada0aeee:3330\", \"gripper_opening_m\": 0.01061688782647252, \"gripper_effort_limit_N\": 4.0, \"finger_contact_N\": [1.6104419231414795, 1.6020563840866089], \"camera_meta\": {\"side_camera\": {\"name\": \"side_camera\", \"physical_parent\": \"/World\", \"local_pose_position_m\": [-0.699999988079071, -0.8500000238418579, 1.3200000524520874], \"local_pose_quaternion_wxyz\": [0.72224223613739, 0.5659829784132289, -0.24520192217047324, -0.3128984465440159], \"world_pose_position_m\": [-0.699999988079071, -0.8500000238418579, 1.3200000524520874], \"world_pose_quaternion_wxyz\": [0.72224223613739, 0.5659829784132289, -0.24520192217047324, -0.3128984465440159], \"camera_cv_from_world\": [[0.6839411590284936, -0.7295371758771174, -2.0284531455158232e-08, -0.14134778694675726], [-0.17441671898634484, -0.1635156605936646, -0.9710002249632363, 1.0206403312680965], [0.7083807585788866, 0.6641070228162453, -0.23907857102079172, 1.375941234075633], [0.0, 0.0, 0.0, 1.0]], \"intrinsic_matrix_native\": [[519.2078247070312, 0.0, 320.0], [0.0, 519.2078247070312, 240.0], [0.0, 0.0, 1.0]], \"resolution_wh\": [640, 480], \"sensor_rendering_time_s\": 55.52500289585441, \"frames\": \"world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz\"}, \"wrist_camera\": {\"name\": \"wrist_camera\", \"physical_parent\": \"/World/Franka/panda_hand\", \"local_pose_position_m\": [0.07500000298023224, 0.0, 0.03999999910593033], \"local_pose_quaternion_wxyz\": [-0.2600301802158356, 0.6575593535868104, -0.6575593535868104, 0.26003018747428563], \"world_pose_position_m\": [0.07490232989942433, -0.0699086147568864, 1.187869857788694], \"world_pose_quaternion_wxyz\": [0.00026986988351910423, -0.0003160355111989514, 0.36754032835395645, 0.9300074915425508], \"camera_cv_from_world\": [[-0.9999996545836026, 0.0002696504357137499, -0.0007862069172199905, 0.07585506641431132], [0.0007342736179440436, 0.7298280684074234, -0.6836303470494429, 0.8630301535979468], [0.00038945465481402393, -0.6836306882033095, -0.7298280143100423, 0.8191198540900488], [0.0, 0.0, 0.0, 1.0]], \"intrinsic_matrix_native\": [[366.4996337890625, 0.0, 320.0], [0.0, 366.4996337890625, 240.0], [0.0, 0.0, 1.0]], \"resolution_wh\": [640, 480], \"sensor_rendering_time_s\": 55.52500289585441, \"frames\": \"world metres Z-up; camera CV x-right y-down z-forward; quaternion wxyz\"}}, \"model_image_transforms\": {\"side_camera\": {\"native_resolution_wh\": [640, 480], \"transmitted_resolution_wh\": [640, 480], \"scale_xy\": [1.0, 1.0], \"native_rgb_sha256\": \"5b3e9534bcb54501929f5afe540e4bf7e9a7519907f6c2a66afb17e64af2d5e5\", \"transmitted_jpeg_sha256\": \"3d997ae3f3ab19ed37749b8f76479e9ad3f15e4d7bc2d0c4c4e315a848e6dc99\", \"transmitted_bytes\": 13415, \"jpeg_quality\": 60, \"detail\": \"high\", \"resize_interpolation\": \"Pillow LANCZOS\", \"crop\": null, \"rotation_deg\": 0, \"color_space\": \"RGB\", \"transmitted_pixel_from_native_pixel\": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]], \"intrinsic_matrix_transmitted\": [[519.2078247070312, 0.0, 320.0], [0.0, 519.2078247070312, 240.0], [0.0, 0.0, 1.0]], \"pixel_convention\": \"zero-based pixel-centre indices: dst=(src+.5)*scale-.5\", \"native_recording_changed\": false}, \"wrist_camera\": {\"native_resolution_wh\": [640, 480], \"transmitted_resolution_wh\": [640, 480], \"scale_xy\": [1.0, 1.0], \"native_rgb_sha256\": \"ebd9fabeff6098698dff78cf69048b9f419ab9c0a1761ac6aa715ba984523ac4\", \"transmitted_jpeg_sha256\": \"e02f1136011097ac48c8d150e89f3b2bd705a18ced450ce0c8f91b80f61e2963\", \"transmitted_bytes\": 13654, \"jpeg_quality\": 60, \"detail\": \"high\", \"resize_interpolation\": \"Pillow LANCZOS\", \"crop\": null, \"rotation_deg\": 0, \"color_space\": \"RGB\", \"transmitted_pixel_from_native_pixel\": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]], \"intrinsic_matrix_transmitted\": [[366.4996337890625, 0.0, 320.0], [0.0, 366.4996337890625, 240.0], [0.0, 0.0, 1.0]], \"pixel_convention\": \"zero-based pixel-centre indices: dst=(src+.5)*scale-.5\", \"native_recording_changed\": false}}}"
+        },
+        {
+          "type": "input_text",
+          "text": "Synchronized RGB: side_camera"
+        },
+        {
+          "type": "input_image",
+          "image_url": {
+            "encoding": "data:image/jpeg;base64",
+            "path": "../../observations/decision_000027/side_camera.jpg",
+            "sha256": "3d997ae3f3ab19ed37749b8f76479e9ad3f15e4d7bc2d0c4c4e315a848e6dc99",
+            "bytes": 13415
+          },
+          "detail": "high"
+        },
+        {
+          "type": "input_text",
+          "text": "Synchronized RGB: wrist_camera"
+        },
+        {
+          "type": "input_image",
+          "image_url": {
+            "encoding": "data:image/jpeg;base64",
+            "path": "../../observations/decision_000027/wrist_camera.jpg",
+            "sha256": "e02f1136011097ac48c8d150e89f3b2bd705a18ced450ce0c8f91b80f61e2963",
+            "bytes": 13654
+          },
+          "detail": "high"
+        }
+      ]
+    }
+  ],
+  "full_wire_input_canonical_sha256": "9f6f90377e28ec636e2ea1a524b3d0ced22d7aa8c5dfc0d2b5493359953d0b83",
+  "exact_full_input_reconstructable": false,
+  "private_provider_items_redacted": [
+    {
+      "input_item_index": 1,
+      "provider_item_type": "reasoning",
+      "canonical_sha256": "013e6abb8f8e2e2108a872444048681bbfd075cbc8096f9a94af214a873a028f"
+    }
+  ],
+  "public_projection_canonical_sha256": "785c4ab9db5d676305d5ef5d43163cb1d06d55596eeb7b8dff3e0f7dc895648a",
+  "private_reasoning_credentials_headers_saved": false,
+  "source_scope": "Only already-encoded public RGB, robot/tactile/time and public wrist calibration; no environment/object truth/teacher stages",
+  "no_action_or_success_label_generated": true,
+  "budget_scope": "Augmented input delegated before the unchanged client computes token bound/reserves shared ledger; no extra network request"
+}

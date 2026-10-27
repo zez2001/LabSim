@@ -1,0 +1,53 @@
+{
+  "attempts": [
+    {
+      "reference_t": 13.6125,
+      "reference_physics_step": 3267,
+      "end_t": 90.01666666666667,
+      "maximum_metrics": {
+        "body_origin_drift_m": 4.915801197154441e-06,
+        "orientation_drift_deg": 0.010204155326352013,
+        "anchor_drift_m": 1.9867902947218816e-06,
+        "anchor_axial_drift_m": 1.684671410281328e-06,
+        "anchor_transverse_drift_m": 1.8867560220869335e-06
+      },
+      "first_threshold_crossing": null,
+      "ended_by": "episode_end"
+    }
+  ],
+  "final_reference_metric_checks": {
+    "maximum_position_drift_m": {
+      "recorded": 4.915801197154441e-06,
+      "offline_recomputed": 4.915801197154441e-06,
+      "absolute_difference": 0.0,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_orientation_drift_deg": {
+      "recorded": 0.010204155326352013,
+      "offline_recomputed": 0.010204155326352013,
+      "absolute_difference": 0.0,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_drift_m": {
+      "recorded": 1.986790294719697e-06,
+      "offline_recomputed": 1.9867902947218816e-06,
+      "absolute_difference": 2.1844979709688406e-18,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_axial_drift_m": {
+      "recorded": 1.6846714102743891e-06,
+      "offline_recomputed": 1.684671410281328e-06,
+      "absolute_difference": 6.938893903907228e-18,
+      "within_numeric_comparison_tolerance": true
+    },
+    "maximum_configured_grasp_anchor_transverse_drift_m": {
+      "recorded": 1.886756022086923e-06,
+      "offline_recomputed": 1.8867560220869335e-06,
+      "absolute_difference": 1.0587911840678754e-20,
+      "within_numeric_comparison_tolerance": true
+    }
+  },
+  "first_observed_threshold_crossings": [],
+  "reference_rule": "Identical actual continuous bilateral>=0.01N for0.1s, reset only after measured opening/contact-loss>=0.2s; stop accumulating after an actual aligned loaded-pose candidate, not teacher phase; this pose candidate alone does not establish contact support. Material anchor is configured[0,0,grasp_height], not measured pressure centre.",
+  "height_m": 0.053
+}
