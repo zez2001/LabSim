@@ -2,6 +2,8 @@
 
 LabSim 是基于 LabUtopia 与 Isaac Sim 的科学实验机器人仿真项目。默认稳定入口为 **`lab_cuvette_loading / Project_v1 / standard`**：Franka 从完整白色 6×6 来源架取出比色皿，搬运到单台开盖仪器的内部 A 座，完成插入、支撑交接、松爪、撤离与至少 3 秒稳定观察。
 
+本地完整工程统一位于 `SLAI_Lab/labsim/`，新增仪器缓存为 `local_assets/`，最终报告与 HTML 在 `results/final/`。每轮验证后运行 `python scripts/export_code_snapshot.py`，生成同级 `codex/labsim_junjie_yao_YYYYMMDD/` 代码交付副本；详见 [交付说明](DELIVERY.md)。
+
 [Project_v1_1 使用入口](docs/lab_cuvette_loading/Project_v1_1/README.md) · [验证报告](docs/lab_cuvette_loading/Project_v1_1/report/LabSim_Project_v1_1_项目发布与验证报告.docx) · [结果阅读包说明](docs/agent_handoff/Project_v1_1_current/00_给Agent阅读说明.md) · [开发分支 `codex/labsim`](https://github.com/zez2001/LabSim/tree/codex/labsim) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim) · [开发接入](docs/development/ONBOARDING.md) · [历史实验](docs/history/README.md)
 
 [观看 Project_v1_1 完整 teacher 演示](docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_full.mp4) · [松爪与撤离近景](docs/lab_cuvette_loading/Project_v1_1/media/reading/teacher_support_align_01_release_wrist_clip.mp4)
@@ -162,6 +164,10 @@ Project_v1 发布、匿名资产验证和该版本执行证据集中在 [Project
 - 资产缺失或 SHA 不符：执行 `./labsim assets download` 重新获取声明文件；离线模式需要此前完整校验的缓存。不要手工把不同版本 USD 混进同一缓存。
 - 输出目录已存在：选择新的目录，入口会拒绝覆盖旧结果。GUI 缺少显示环境时使用 `--headless`。
 - GPT 缺凭据、超时或返回模型不符：检查当前进程的环境变量和 provider 配置；错误会保留在本次独立目录，不会替换模型、接管任务或伪造成功。统计结果时分别查看任务结果与服务/协议/物理错误。
+
+## 单细胞前流程数字资产
+
+单细胞前流程设备见[设备资产与 API](demos/cell_assets/README.md)：固定版本下载并加载 PCR、移液工作站、恒温摇床、磁珠分离架体及 DNA 定量仪、细胞计数器打印件装配，另含 Poseidon 固定显微支架辅助资产，提供 Franka 的 IKA 装载／开关盖、DIYNAFLUOR 取帽／停放／盖回及 Flex／MagSep 架体装载／取回接触示例，[交接汇报](docs/cell_assets/交接汇报.md) 汇总当前状态。新增大型源模型和运行结果分别存放于 Git 忽略的 `local_assets/`、`results/final/`；类别替代、机构验证范围、许可和未覆盖设备见该文档。
 
 ## 开发与来源
 

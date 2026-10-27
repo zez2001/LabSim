@@ -1,0 +1,172 @@
+{
+  "updated_at": "2026-10-27",
+  "scope": "对应用户指定的前九类实体设备。状态仅描述已有证据；补齐路径是待执行工作，不计入已完成资产。",
+  "categories": [
+    {
+      "category_id": 1,
+      "title": "自动细胞计数仪",
+      "reference_model": "Countess 3 FL",
+      "asset_key": "openflexure",
+      "mapping": "OpenFlexure Cell Counter 打印件装配；开放方案替代，非 Countess 3 FL 同型号。",
+      "robot": "已加载 Franka 尝试计数室取放，但未通过接触验证。",
+      "blocker": "原装夹指接近时碰到样品架或照明支座；抬高后又无法形成稳定双指夹持。计数室厚约 4 mm、露出样品架约 2 mm，上方有照明组件。仍缺光电组件及计数功能。",
+      "feasibility": "需尺寸可核验的细指或专用夹具",
+      "next_step": "已检查不同开口、抓取点和高度。最终录像在接近阶段碰到 IlluminationDovetail，另一次碰到 SlideHolder；抬高后未形成双指夹持。需要有尺寸依据的细指／专用夹具及安装 CAD，再验证侧向退出与装回。不能删除碰撞体或忽略接触来标为成功。",
+      "references": [
+        {
+          "label": "OpenFlexure Cell Counter 固定来源",
+          "url": "https://github.com/engpol/OpenFlexure_Cell_Counter/tree/e751bfee1a2e1265d8244fb2e27c2ccf448ba741"
+        }
+      ]
+    },
+    {
+      "category_id": 2,
+      "title": "液滴微流控单细胞处理设备",
+      "reference_model": "达普 Galaxy",
+      "asset_key": null,
+      "auxiliary_asset_key": "poseidon",
+      "mapping": "整机未建成；Poseidon 显微支架仅是辅助件，不填补整机缺口。",
+      "robot": "尚不能进行整机机械臂操作。",
+      "blocker": "已有芯片图纸和部分支架／泵 CAD，但缺完整装配、芯片／管路接口、装载机构及部分文件的复用许可确认。",
+      "feasibility": "已有局部材料，需补整套装配",
+      "next_step": "可继续沿 Drop-seq、HyDrop 或 Poseidon 开放方案核实泵、芯片夹具及装载接口。需要可复用的对应部件和明确的整体装配关系，才能构建可操作装置；现有辅助支架不能当作整台设备。",
+      "references": [
+        {
+          "label": "Poseidon 原始硬件",
+          "url": "https://github.com/pachterlab/poseidon/tree/5a139fed350bbf5d775ffa9650f465e557b6ccb0"
+        },
+        {
+          "label": "Drop-seq 作者资料",
+          "url": "https://mccarrolllab.org/dropseq/"
+        }
+      ]
+    },
+    {
+      "category_id": 3,
+      "title": "微孔单细胞处理设备",
+      "reference_model": "Singleron Matrix NEO",
+      "asset_key": null,
+      "mapping": "整机未建成；Seq-Well 是候选开放方案，尚未作为完整设备纳入。",
+      "robot": "尚不能进行整机机械臂操作。",
+      "blocker": "Matrix NEO 公开尺寸存在冲突且缺完整分件；Seq-Well 的四份 DWG 不等于自动化整机，其 CC BY-NC-ND 许可限制改编分享。",
+      "feasibility": "需明确装配、机构与许可",
+      "next_step": "先确认 Seq-Well 等替代方案的适用许可、完整装配和芯片装载／夹持关系，再评估导入及机械臂任务。当前不能直接凭四份参考图纸标为整机完成。",
+      "references": [
+        {
+          "label": "Seq-Well 作者 CAD 与协议",
+          "url": "https://shaleklab.com/protocol/seq-well-portable-low-cost-rna-sequencing-of-single-cells-at-high-throughput_old-2/"
+        }
+      ]
+    },
+    {
+      "category_id": 4,
+      "title": "全自动液体处理工作站",
+      "reference_model": "Hamilton STAR",
+      "asset_key": "flex",
+      "mapping": "Opentrons Flex 单通道 5–1000 µL；同类替代，通道数、工位和 API 与 STAR 不同。",
+      "robot": "已验证 Franka 将 MagSep 空架体放到 Flex D2 工位、松手撤离，再抓取并取回；同一连续流程 32/32 通过。",
+      "blocker": "只验证几何工位上的架体放置，不是官方耗材兼容认证。未验证移液、取吸头和液体过程；Flex 内部执行器参数仍待校准。",
+      "feasibility": "工位放置可用，移液仍需耗材及驱动资料",
+      "next_step": "当前 handling 入口可复现架体装载／取回；原始架体及 Flex 碰撞几何保持不变。后续需匹配板／管／吸头的 CAD、工位注册、夹持固定及驱动参数，才能继续验证移液。",
+      "references": [
+        {
+          "label": "ChemLab 固定源版本",
+          "url": "https://github.com/mbzuai-nlp/ChemLab-Assets/tree/c711fe1a7a9d26a7efd9d63d2bddc0de62e6b65e"
+        },
+        {
+          "label": "Opentrons 官方文档",
+          "url": "https://docs.opentrons.com/"
+        }
+      ]
+    },
+    {
+      "category_id": 5,
+      "title": "PCR热循环仪",
+      "reference_model": "Bio-Rad T100",
+      "asset_key": "pcr",
+      "mapping": "Bio-Rad CFX Opus 96；PCR 同类替代，非 T100 同型号。",
+      "robot": "仅滑盖／屏幕关节回放，未验证机械臂装板或插管。",
+      "blocker": "源 sample_block 与 block_wells 使用实心盒碰撞，无法表达可插入孔腔；还缺已核验匹配的板／管。",
+      "feasibility": "需先修复任务相关几何",
+      "next_step": "需要有依据的孔位／配合尺寸或可复用分件 CAD，恢复可用孔腔碰撞并配套耗材，再验证开盖联动与机械臂装载。CFX 的盖子是电动机构；机械臂不应被默认设计成强拉盖子。热循环及检测需单独实现。",
+      "references": [
+        {
+          "label": "CFX 固定模型与 contract",
+          "url": "https://huggingface.co/datasets/MBZUAI/ChemLab-Assets/tree/a6c006f921c9bee62f5585dd7f769163a7f51573/assets/expansion_batch04/t4_measure/biorad_cfxopus"
+        }
+      ]
+    },
+    {
+      "category_id": 6,
+      "title": "磁珠纯化模块",
+      "reference_model": "DynaMag-96",
+      "asset_key": "magsep",
+      "mapping": "MagSep Rack 12 管架体；管式部分替代，非 96 孔板式结构。",
+      "robot": "已验证 Franka 抓取 MagSep 空架体、搬到 Flex 工位并释放，再取回；与第 4 类共用一条 32/32 通过的连续流程。",
+      "blocker": "验证的是空架体搬运，尚非试管插装或磁珠纯化。缺尺寸适配已核验的试管和磁铁模型；架体毫米尺度仍为工程推断。",
+      "feasibility": "架体搬运可用，插管需配套模型",
+      "next_step": "可复用现有架体抓取和释放流程。试管插装仍需许可及尺寸明确的 1.5–2.0 mL 试管 CAD，核对孔口配合后验证；磁场、磁珠和液体过程另行实现。",
+      "references": [
+        {
+          "label": "MagSep 原始架体与规格",
+          "url": "https://github.com/cmmonaco/MagSep-Rack/tree/66bd2302d2f6daa9911eb5fbf7bfe080a079a93e"
+        }
+      ]
+    },
+    {
+      "category_id": 7,
+      "title": "温控/混匀反应模块",
+      "reference_model": "INHECO CPAC",
+      "asset_key": "ika",
+      "mapping": "IKA KS 4000 i control；加热／混匀类别的部分替代，不覆盖 CPAC 冷却或紧凑占位。",
+      "robot": "已验证完整开盖 → 装载烧杯 → 释放撤离 → 关盖，36/36 通过。",
+      "blocker": "只通过固定布局机械操作。气弹簧力学未标定，平台轨道为虚拟 XY，加热、液体与混匀过程均未实现。",
+      "feasibility": "现有机械流程可用，扩展需资料",
+      "next_step": "现有流程可按脚本复现。继续扩展需实测气弹簧／摩擦参数及真实偏心机构资料；温控、摇动受力和液体过程分别验证。两支气弹簧数量和布置有厂家依据，不能据此认定全部参数已正确标定。",
+      "references": [
+        {
+          "label": "IKA 固定源模型",
+          "url": "https://huggingface.co/datasets/MBZUAI/ChemLab-Assets/tree/a6c006f921c9bee62f5585dd7f769163a7f51573/assets/expansion_batch03/t4_measure/ika_ks4000"
+        }
+      ]
+    },
+    {
+      "category_id": 8,
+      "title": "核酸片段分析仪",
+      "reference_model": "Agilent 4200 TapeStation",
+      "asset_key": null,
+      "mapping": "整机未纳入；SCIEX PA 800 Plus 仅为已筛查候选。",
+      "robot": "尚不能进行已验证的整机机械臂操作。",
+      "blocker": "TapeStation 缺适用整机 CAD；PA 800 源模型将真机四连杆外罩简化为单铰链、托盘固定，不满足当前机构正确性要求。",
+      "feasibility": "需正确机构资料或新来源",
+      "next_step": "继续寻找原有四连杆、样品托盘及进样机构的可复用 CAD／装配依据，或选择资料更完整的同类设备。现有手册与单铰链模型不足以确定关节轴点、连杆尺寸和正确装载轨迹。",
+      "references": [
+        {
+          "label": "TapeStation 官方手册",
+          "url": "https://www.agilent.com/cs/library/usermanuals/public/4200-TapeStation_SystemManual.pdf"
+        },
+        {
+          "label": "PA 800 候选模型与限制",
+          "url": "https://huggingface.co/datasets/MBZUAI/ChemLab-Assets/tree/a6c006f921c9bee62f5585dd7f769163a7f51573/assets/expansion_batch04/t3_analytical/sciex_pa800"
+        }
+      ]
+    },
+    {
+      "category_id": 9,
+      "title": "核酸浓度检测仪",
+      "reference_model": "Qubit Flex",
+      "asset_key": "diynafluor",
+      "mapping": "DIYNAFLUOR 打印件装配；单管开放方案替代，非 Qubit Flex 8 管整机。",
+      "robot": "已验证取帽 → 停放释放 → 重新抓取 → 盖回，32/32 通过。",
+      "blocker": "只通过遮光帽操作。未装载样品管；缺光电组件，尚不能完成荧光检测或浓度读数。",
+      "feasibility": "可继续核对并补样品管装载",
+      "next_step": "原始遮光帽和支座已复用成功。下一步按手册的 0.5 mL 薄壁 PCR／Qubit 管要求，取得匹配耗材模型、核对孔口尺寸与姿态，再验证插管和盖帽。测量需另接光学、电子／算法或有依据的过程模型。",
+      "references": [
+        {
+          "label": "DIYNAFLUOR 原始 STL、STEP 与手册",
+          "url": "https://github.com/traulab/DIYNAFLUOR/tree/2b4b65022160533f55032c1206cdc6eb5fb7e0fc"
+        }
+      ]
+    }
+  ]
+}
