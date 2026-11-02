@@ -85,6 +85,7 @@ def lfs_pointer(path):
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     commands = p.add_subparsers(dest="command", required=True)
+    commands.add_parser("unit", help="Single-cell instrument units; use unit --help").add_argument("unit_args", nargs=argparse.REMAINDER)
     doctor = commands.add_parser("doctor", help="CPU-only runtime, LFS and frozen-scene checks")
     doctor.add_argument("--json", action="store_true", help="Print a machine-readable diagnostic")
     doctor.add_argument("--project-version", type=project_version, choices=tuple(PROJECT_RELEASES), default="Project_v1",
@@ -446,6 +447,12 @@ def dataset_check(args):
 
 
 def main(argv=None):
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    requested = sys.argv[1:] if argv is None else argv
+    if requested and requested[0] == "unit":
+        from demos.cell_units.run import main as unit_main
+        return unit_main(requested[1:])
     args = parser().parse_args(argv)
     if str(ROOT) not in sys.path:
         sys.path.insert(0, str(ROOT))

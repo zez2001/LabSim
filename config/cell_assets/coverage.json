@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27",
+  "updated_at": "2026-11-02",
   "scope": "对应用户指定的前九类实体设备。状态仅描述已有证据；补齐路径是待执行工作，不计入已完成资产。",
   "categories": [
     {
@@ -85,16 +85,17 @@
       "reference_model": "Bio-Rad T100",
       "asset_key": "pcr",
       "mapping": "Bio-Rad CFX Opus 96；PCR 同类替代，非 T100 同型号。",
-      "robot": "仅滑盖／屏幕关节回放，未验证机械臂装板或插管。",
-      "blocker": "源 sample_block 与 block_wells 使用实心盒碰撞，无法表达可插入孔腔；还缺已核验匹配的板／管。",
-      "feasibility": "需先修复任务相关几何",
-      "next_step": "需要有依据的孔位／配合尺寸或可复用分件 CAD，恢复可用孔腔碰撞并配套耗材，再验证开盖联动与机械臂装载。CFX 的盖子是电动机构；机械臂不应被默认设计成强拉盖子。热循环及检测需单独实现。",
+      "robot": "原始资产保留滑盖／屏幕回放；新增 pcr_insert 派生场景已验证 Franka 抓取小管、插入中央孔、松爪撤离并稳定 3 秒。",
+      "blocker": "源模型仍为贴图孔／实心碰撞；本地 unit 新建 96 孔及 6 mm 小管，尺寸、质量和摩擦为未标定工程假设，不是厂家 CAD 或耗材兼容认证。",
+      "feasibility": "派生孔腔插管仿真通过，真机尺寸与工况待确认",
+      "next_step": "调用 ./labsim unit collect --unit pcr_insert；盖子预先电动打开，未验证机械臂开盖、整板装载或热循环。需实测孔腔／耗材配合尺寸与夹持力后再做真机迁移。",
       "references": [
         {
           "label": "CFX 固定模型与 contract",
           "url": "https://huggingface.co/datasets/MBZUAI/ChemLab-Assets/tree/a6c006f921c9bee62f5585dd7f769163a7f51573/assets/expansion_batch04/t4_measure/biorad_cfxopus"
         }
-      ]
+      ],
+      "validation_label": "机械臂插管仿真已验证 · Expert"
     },
     {
       "category_id": 6,

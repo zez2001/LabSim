@@ -62,7 +62,7 @@ def dynamic_part(stage, path, position, config):
                   "collision": "SDF from unchanged source triangles; rigid transform only"}
 
 
-def plan_handling(solver, home, pickup, target, config):
+def plan_handling(solver, home, pickup, target, config, *, path_solver=cartesian_joint_path):
     """Plan load and unload on one IK branch, reversing the verified entry path."""
     from isaacsim.core.utils.rotations import euler_angles_to_quat
 
@@ -77,8 +77,8 @@ def plan_handling(solver, home, pickup, target, config):
 
     def add(name, seconds, goal, aperture):
         nonlocal position, joints
-        path = cartesian_joint_path(kin, frame, position, orientation,
-                                    goal, orientation, joints, seconds)
+        path = path_solver(kin, frame, position, orientation,
+                           goal, orientation, joints, seconds)
         motions.append(Motion(name, seconds, path, aperture))
         position, joints = goal, path[-1]
 
@@ -165,7 +165,7 @@ def evaluate_handling(records, targets, grip_offset, dt, motions, support_surfac
     return checks
 
 
-def run(output, cache, config):
+def run(output, cache, config, *, driver=None):
     """Build the source scene and record actual poses, contacts and arm commands."""
     from PIL import Image
     from pxr import PhysxSchema, UsdPhysics
@@ -190,7 +190,7 @@ def run(output, cache, config):
     sources = {}
     for role in ("device", "payload"):
         asset_id = config[role + "_asset"]
-        if role == "payload" and asset_id == config["device_asset"]:
+        if asset_id is None or (role == "payload" and asset_id == config["device_asset"]):
             continue
         sources[asset_id] = fetch_asset(asset_id, cache, offline=True)
         usd = convert_asset(asset_id, output / (role + "-usd"), cache)
@@ -221,6 +221,8 @@ def run(output, cache, config):
     if not obstacles:
         obstacles = [str(p.GetPath()) for p in stage.Traverse() if str(p.GetPath()).startswith("/World/Device/Asset/")
                      and p.HasAPI(UsdPhysics.CollisionAPI) and str(p.GetPath()) != path]
+    if config["device_asset"] is None:
+        obstacles = ["/World/Table"]
     if not obstacles:
         raise RuntimeError("No device contact filters; collision checks cannot be valid")
     geometry["device_contact_filters"] = obstacles
@@ -257,12 +259,37 @@ def run(output, cache, config):
     stage.GetRootLayer().Export(str(output / "scene.usda"))
     for name, view in views.items():
         Image.fromarray(read_rgb(view)).save(output / f"initial-{name}.png")
-    recorder = VideoRecorder(output, views)
-    records, error = [], None
-    dt, start = scene["dt"], world.current_time
+    dt = scene["dt"]
 
     def force(view):
         return np.linalg.norm(view.get_contact_force_matrix(dt=dt), axis=-1)
+
+    def measure(q, phase, start):
+        pos, rot = payload.get_world_pose()
+        row = {"time_s": world.current_time - start, "phase": phase,
+               "joint_target": q.tolist(), "joint_actual": robot.get_joint_positions().tolist(),
+               "position_m": pos.tolist(), "orientation_wxyz": rot.tolist(),
+               "end_effector_m": scene["solver"].compute_end_effector_pose()[0].tolist(),
+               "finger_force_n": force(contacts).ravel().tolist(),
+               "payload_device_force_n": float(force(payload_device).sum()),
+               "payload_table_force_n": float(force(payload_table).sum()),
+               "robot_device_force_n": float(force(device_contacts).max()),
+               "robot_table_force_n": float(force(table_contacts).max())}
+        if row["robot_device_force_n"] > 0.1:
+            matrix = force(device_contacts)
+            body_index, filter_index = np.unravel_index(matrix.argmax(), matrix.shape)
+            row["robot_device_contact_pair"] = [arms[body_index], obstacles[filter_index]]
+        return row
+
+    if driver is not None:
+        return driver(scene=scene, views=views, motions=motions, measure=measure,
+                      targets={"loaded": target, "returned": initial}, grip_offset=grip,
+                      metadata={"config": config, "geometry": geometry},
+                      contact=contacts)
+
+    recorder = VideoRecorder(output, views)
+    records, error = [], None
+    dt, start = scene["dt"], world.current_time
 
     try:
         for motion in motions:
@@ -271,27 +298,15 @@ def run(output, cache, config):
                 q = np.r_[sample_joints(motion.joints, f * f * (3 - 2 * f)), motion.aperture, motion.aperture]
                 robot.apply_action(ArticulationAction(joint_positions=q))
                 world.step(render=False)
-                pos, rot = payload.get_world_pose()
-                row = {"time_s": world.current_time - start, "phase": motion.name,
-                       "joint_target": q.tolist(), "joint_actual": robot.get_joint_positions().tolist(),
-                       "position_m": pos.tolist(), "orientation_wxyz": rot.tolist(),
-                       "end_effector_m": scene["solver"].compute_end_effector_pose()[0].tolist(),
-                       "finger_force_n": force(contacts).ravel().tolist(),
-                       "payload_device_force_n": float(force(payload_device).sum()),
-                       "payload_table_force_n": float(force(payload_table).sum()),
-                       "robot_device_force_n": float(force(device_contacts).max()),
-                       "robot_table_force_n": float(force(table_contacts).max())}
-                if row["robot_device_force_n"] > 0.1:
-                    matrix = force(device_contacts)
-                    body_index, filter_index = np.unravel_index(matrix.argmax(), matrix.shape)
-                    row["robot_device_contact_pair"] = [arms[body_index], obstacles[filter_index]]
+                row = measure(q, motion.name, start)
+                pos = row["position_m"]
                 records.append(row)
                 if (len(records) - 1) % 4 == 0:
                     world.render()
                     recorder.write()
                 if max(row["robot_device_force_n"], row["robot_table_force_n"]) > 5:
                     raise RuntimeError("Unexpected robot collision in " + motion.name)
-            print("HANDLING_PHASE", motion.name, pos.tolist(), row["finger_force_n"], flush=True)
+            print("HANDLING_PHASE", motion.name, pos, row["finger_force_n"], flush=True)
             if motion.name in {"grasp", "regrasp"} and min(row["finger_force_n"]) <= 0.01:
                 raise RuntimeError("No bilateral grasp in " + motion.name)
             if motion.name in {"grasp", "loaded_settle", "returned_settle"}:

@@ -107,4 +107,6 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
 
 ## 单细胞前流程数字资产
 
+五个仪器的可调用任务场景（PCR 为工程派生孔腔）、expert 生成及 GPT-6 / π0.5 验证入口见[单细胞测序 unit](demos/cell_units/README.md)。通过 `./labsim unit list` 查看，视频在本地最终 HTML 的对应资产卡片内。
+
 单细胞前流程设备见[设备资产与 API](demos/cell_assets/README.md)：固定来源资产、Franka 接触演示及范围限制。

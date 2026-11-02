@@ -5,6 +5,8 @@
 已有第二台交互设备 **DIYNAFLUOR**：复用原始遮光帽，已完成取帽—停放释放—重新抓取—盖回的 39 秒连续接触验证；不包含样品管装载或荧光测量。
 新增 **Flex × MagSep 空架体装载／取回**，同一连续机械臂流程 32/32 通过，覆盖两类资产的限定操作；不含移液、插管或磁分离。OpenFlexure 已尝试原装夹爪取放，接近碰撞未通过。
 
+新增 **PCR 小试管插孔 unit**：复用 CFX Opus 外壳／滑盖，生成未标定的 96 孔与 6 mm 小管，expert 已通过抓取、入孔、释放撤离。此派生场景不等同于厂家 CAD 或原始静态加载模型；见 [unit README](../cell_units/README.md)。
+
 另有 **1 项固定辅助资产：Poseidon 显微支架**。共 7 个注册条目；辅助支架不计为第 2 类单细胞处理整机，不增加设备类别覆盖。
 未取得合适源模型的设备保持待补资料，不生成占位设备，不计入可用数量。
 
@@ -282,3 +284,9 @@ python scripts/update_cell_asset_showcase.py \
 当前按用户要求仅本地整理；未新增提交、推送、PR 或团队 HF 发布。
 
 私有 HF Dataset 镜像已发布：[PercyM/labsim-cell-assets](https://huggingface.co/datasets/PercyM/labsim-cell-assets)，固定版本 `f6b0f9f2dbe5046c0833fb099121e5a551d208f7`。53 个文件（含 40 段 MP4）的远端回读和 SHA256 校验通过；下载后的 GPU 仿真未重跑。按 [发布与调用指南](../../docs/cell_assets/HuggingFace上传指南.md) 下载 `assets/LabSim-digital-assets.zip`，解压后将其根目录设为 `LABSIM_ASSET_CACHE`，再使用现有离线 API。默认上游获取逻辑不变。镜像不含本轮尚未提交的项目代码；GitHub 提交和 PR 尚未执行。
+
+本地最终展示页以“实验设备与数字资产总览”统一呈现九类清单与原有比色皿装载仪器卡片。原有仪器接在九类之后，详情窗口内复用 Size_v1 历史截图和两段录像；不另设独立板块，仍与新增资产分开统计。重建时 `scripts/update_cell_asset_showcase.py` 默认使用 `config/cell_assets/baseline_showcase.json`；本次没有新增 GPU 验证，也未更新远端展示页。
+
+## 单细胞测序 unit 入口
+
+[unit README](../cell_units/README.md) 提供五个独立简单场景（含 PCR 派生孔腔插管）、expert H5 生成、GPT-6 / π0.5 评测和公开 RPC。旧演示入口保留，新场景复用其物理搭建及测量函数，控制与记录分别管理。当前结果见[单细胞 Unit 验证](../../docs/cell_assets/单细胞Unit验证.md)。

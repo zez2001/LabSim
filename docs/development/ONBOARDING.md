@@ -208,3 +208,7 @@ Teacher 评测示例：
 CPU 验证见[工作流](../../.github/workflows/cpu-contracts.yml)与独立 [CI 依赖](../../requirements/ci.txt)。真实 Isaac 运行另外记录运行提交、配置/资产指纹、退出凭据、独立结果和实际 reader。历史物理/标签保持原样。
 
 日常工作沿用 `codex/labsim`，遵循[贡献规范](../../CONTRIBUTING.md)。每批验证后提交并推送；每次交付生成只含本次改动与结果的[精简阅读包](../agent_handoff/README.md)。
+
+## 扩展：单细胞测序 unit
+
+单细胞仪器使用独立 `SingleCellUnit_v2` 场景与数据版本（兼容历史 v1 回读），入口为 `./labsim unit list`。五个 unit（含 PCR 派生孔腔）的目标、调用示例、expert 记录、GPT-6 / π0.5 和 RPC 说明见[unit README](../../demos/cell_units/README.md)。它复用当前 release 的公开执行器，不改变默认比色皿任务、原评分或历史数据资格；有限 policy 调用不等于完成任务。

@@ -1,43 +1,35 @@
-# 单细胞前流程数字资产 API、Franka 交互与 HF 交付
+# 单细胞仪器 unit、expert 数据与策略评测接口
 
-已提交：[PR #1](https://github.com/zez2001/LabSim/pull/1)，等待项目负责人评审，未合并。
+本轮 PR 说明；旧 PR #1 已关闭，按最新授权以 `codex_junjie_1102` 提交至 `codex/labsim`，不自动合并。
 
-## 解决的问题与最终行为
+## 问题与实现
 
-前九类设备缺少统一的资产获取、Isaac 适配及可追溯交互入口。本改动注册 7 个固定来源条目（6 类主资产及 1 项辅助支架），通过 `list_assets`、`get_asset`、`fetch_asset`、`convert_asset`、`load_asset` 获取、校验、转换和加载。九类清单、替代关系与阻塞集中在 `config/cell_assets/coverage.json`。
+新增仪器原先只有加载／回放或独立演示，无法直接按当前 LabSim 方式生成 expert 数据和评测 policy。本改动提供五个单细胞测序 unit：IKA 开盖、DIYNAFLUOR 取帽、Flex 装空架、MagSep 空架搬运和 PCR 小试管入孔；统一通过 `./labsim unit`、Python facade 及 loopback RPC 调用。
 
-提供三个已验证的 Franka 接触任务：IKA 开盖→装载→关盖、DIYNAFLUOR 取帽→停放→盖回、MagSep 空架体放入 Flex 工位后取回。OpenFlexure 取放尝试保留失败状态；PCR 仅支持机构回放；第 2、3、8 类整机仍缺资料。以上不代表移液、磁珠纯化、温控或浓度测量完成。
+复用 `Project_release_v1` 的动作执行、回执和策略接口，以及原设备导入／接触场景。PCR 孔腔和 6 mm 小管为单独的工程派生几何，参数未经过厂家或真机校准，盖子预先打开；不修改源资产缓存。
 
-## 实现与验证
+修复 π0.5 亚毫米位移被 IK 容差忽略的问题，记录实际末端移动；Flex／MagSep 增加放置初态，expert 准备与 policy 控制分别计时、录像和判分。模型可失败，不将调用成功、掉落到目标或 expert 准备计为策略完成。
 
-- 本分支：`codex/labsim_junjie_yao_20261027`，目标：`codex/labsim`；已同步集成基线 `abf7556`，保留上游 Project_v1／v1.1 更新。
-- 复用 Franka 场景、连续 IK、相机与录像接口；任务参数独立配置，输出拒绝覆盖。判分检查双指接触、物体运动、实际释放、撤离、稳定和非预期碰撞。
-- 新增设备及快照 CPU 检查已接入 GitHub Actions；新增轻量依赖 `trimesh==4.5.1`。
-- 同步后执行 CPU workflow 的全部测试文件（分两批）：**847 passed、1 skipped**。其中资产与快照为 63 passed、1 skipped；跳过项是普通 Python 缺 `pxr`，不代表 GPU 验证。
-- `git diff --check` 通过，7 个注册条目离线获取通过。新增变更只含源码、配置、测试和 Markdown，没有新增大型模型或媒体。
-- 既有 GPU 证据：IKA 36/36；DIYNAFLUOR 32/32；Flex／MagSep 32/32、6120 步、约 51 秒。OpenFlexure 接近碰撞，未通过。本次同步与交付没有重跑 GPU 或真机。
+## 验证与边界
 
-复现 CPU：按 `.github/workflows/cpu-contracts.yml` 的 `contracts` 测试列表运行；资产单独检查：
+- 已有五个 expert 任务通过，共 3990 个选中 transition；GPT-6 与 π0.5 均真实运行，策略任务仍失败。完整证据与预算见 [unit 交接](单细胞Unit验证.md)。
+- 代码复核修正启动参数、初始化失败清理、完整动作块检查、开盖撤离稳定判定和 PCR 入孔判定，并将 unit 测试加入 CPU CI。新场景／评分版本为 v2，旧 v1 记录保留，不重写。
+- CPU、GPU 复验及文档检查的当前结果见 [代码复核](代码复核.md)；CPU 通过不能代替 GPU 或真机验证。
+- OpenFlexure 夹指干涉、三类缺失整机及现场测量仍未解决；不涉及训练、热循环、移液、磁珠或液体过程。
+
+## 获取与复现
+
+基线为此前 rebase 的 `ab519ed`，本地 HEAD `2294a17`；本轮已重新核对远端、fetch 并在 `codex_junjie_1102` 执行 rebase，无冲突。该引用在核对时仍为上述基线，不直接改写集成分支。
 
 ```bash
-python -m pytest -q -p no:cacheprovider tests/test_cell_assets.py tests/test_export_code_snapshot.py
+./labsim unit list
+./labsim unit collect --unit pcr_insert --headless --output outputs/pcr_NEW
+./labsim unit dataset-check --path outputs/pcr_NEW/episode_0000
+python -m pytest -q tests/test_cell_units.py tests/test_cell_assets.py
 ```
 
-复现设备操作需要 Python 3.11、Isaac Sim 5.1、GPU、原工程 Franka／场景资源以及 HF 仪器源包。完整命令见 [API 与 Demo](../../demos/cell_assets/README.md)。
+环境、参数单位、API、GPT 与 π0.5 配置见 [unit README](../../demos/cell_units/README.md)。沿用已有 Conda／Isaac Sim 5.1；模型／策略依赖不随代码安装或创建项目虚拟环境。
 
-## 资产与数据影响
+新增仪器源包从 [assets/README.md](../../assets/README.md) 的固定 HF revision 获取，解压至 `local_assets/`；保留原 LabSim Franka 基础资源。HF 上仍为此前发布版本，未包含本轮 unit 结果、策略权重和最新 HTML。
 
-新设备使用独立命名空间，不改写上游冻结场景、既有数据标签或历史证据。质量、摩擦及布局仍有未标定假设；未做真机和现场测量。
-
-大型资产、40 段 MP4、单文件 HTML 和仿真证据位于 [HF 公开仓库 PercyM/labsim-cell-assets](https://huggingface.co/datasets/PercyM/labsim-cell-assets/tree/f6b0f9f2dbe5046c0833fb099121e5a551d208f7)。固定 revision：`f6b0f9f2dbe5046c0833fb099121e5a551d208f7`，53 个发布文件均已回读核对大小和 SHA256；2026-10-27 已改为 Public，下载无需登录或申请权限。各来源许可单独保留，代码许可不覆盖模型。
-
-[`assets/README.md`](../../assets/README.md) 保留为普通 Git 文本下载入口。HF 源包解压至 `local_assets/`，调用 `fetch_asset(..., offline=True)`；默认在线源仍是目录中固定的上游来源，未实现自动从 HF 镜像下载。原 LabSim 基础资源需保留，HF 新仪器包不包含其全部内容。
-
-## 交接
-
-- [数字资产交接汇报](交接汇报.md)：九类对应、成功／失败边界和未完成项。
-- [资产下载与调用](HuggingFace上传指南.md)、[来源与许可](来源与调研.md)。
-- [代码交付说明](../../DELIVERY.md)：唯一完整本地工程、最终结果和可重复导出的轻量代码副本。
-- HF 的 `assets/` 存模型包，`videos/` 存独立 MP4，`showcase/` 存 HTML，`evidence/` 存执行记录。
-
-通过 PR 交由负责人审核；不自动合并集成分支。
+本轮更新本地工程、统一 HTML、中文 MD 及自动生成代码快照，并按授权推送代码分支、创建 PR；不更新 HF。快照不含模型、媒体、H5、环境或 .git；保留资产下载说明。原 RM65 等本地工作保留，但不属于本次 unit 改动的审查范围。

@@ -183,7 +183,7 @@ def make_dynamic_cap(stage, config, device_position):
     return cap, {"closed": closed, "parked": parked}, metadata
 
 
-def run(output, cache, config):
+def run(output, cache, config, *, driver=None):
     """Run a continuous, contact-driven cap cycle and write all measured evidence."""
     from PIL import Image
     from pxr import PhysxSchema, UsdPhysics
@@ -259,12 +259,32 @@ def run(output, cache, config):
     stage.GetRootLayer().Export(str(output / "scene.usda"))
     for name, view in views.items():
         Image.fromarray(read_rgb(view)).save(output / f"initial-{name}.png")
-    recorder = VideoRecorder(output, views)
-    records, error, step = [], None, 0
-    dt, start = scene["dt"], world.current_time
+    dt = scene["dt"]
 
     def forces(view):
         return np.linalg.norm(view.get_contact_force_matrix(dt=dt), axis=-1)
+
+    def measure(q, phase, start):
+        position, rotation = cap.get_world_pose()
+        record = {
+            "time_s": world.current_time - start, "phase": phase,
+            "joint_target": q.tolist(), "joint_actual": robot.get_joint_positions().tolist(),
+            "cap_position_m": position.tolist(), "cap_orientation_wxyz": rotation.tolist(),
+            "end_effector_m": scene["solver"].compute_end_effector_pose()[0].tolist(),
+            "finger_force_n": forces(contacts).ravel().tolist(),
+            "robot_device_force_n": float(forces(device_contact).max()),
+            "robot_table_force_n": float(forces(table_contact).max()),
+        }
+        return record
+
+    if driver is not None:
+        return driver(scene=scene, views=views, motions=motions, measure=measure,
+                      targets=targets, grip_offset=grip_offset,
+                      metadata={"config": config, "geometry": geometry}, contact=contacts)
+
+    recorder = VideoRecorder(output, views)
+    records, error, step = [], None, 0
+    dt, start = scene["dt"], world.current_time
 
     try:
         for motion in motions:
@@ -274,16 +294,8 @@ def run(output, cache, config):
                           motion.aperture, motion.aperture]
                 robot.apply_action(ArticulationAction(joint_positions=q))
                 world.step(render=False)
-                position, rotation = cap.get_world_pose()
-                record = {
-                    "time_s": world.current_time - start, "phase": motion.name,
-                    "joint_target": q.tolist(), "joint_actual": robot.get_joint_positions().tolist(),
-                    "cap_position_m": position.tolist(), "cap_orientation_wxyz": rotation.tolist(),
-                    "end_effector_m": scene["solver"].compute_end_effector_pose()[0].tolist(),
-                    "finger_force_n": forces(contacts).ravel().tolist(),
-                    "robot_device_force_n": float(forces(device_contact).max()),
-                    "robot_table_force_n": float(forces(table_contact).max()),
-                }
+                record = measure(q, motion.name, start)
+                position = record["cap_position_m"]
                 records.append(record)
                 if step % 4 == 0:
                     world.render()
@@ -291,7 +303,7 @@ def run(output, cache, config):
                 step += 1
                 if max(record["robot_device_force_n"], record["robot_table_force_n"]) > 5:
                     raise RuntimeError("Unexpected robot collision during " + motion.name)
-            print("CAP_PHASE", motion.name, position.tolist(), record["finger_force_n"], flush=True)
+            print("CAP_PHASE", motion.name, position, record["finger_force_n"], flush=True)
             if motion.name in {"grasp_cap", "uncap", "parked_settle", "closed_settle"}:
                 world.render()
                 for name, view in views.items():

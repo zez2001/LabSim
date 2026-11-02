@@ -112,7 +112,7 @@ def plan_opening(solver, home, device_position, geometry, release_test, close_te
     return motions
 
 
-def run(output, cache, release_test, gas_springs=False, close_test=False, load_test=False):
+def run(output, cache, release_test, gas_springs=False, close_test=False, load_test=False, *, driver=None):
     from PIL import Image
     from pxr import PhysxSchema, Usd, UsdGeom, UsdPhysics
     from isaacsim.core.api.objects import FixedCuboid
@@ -239,6 +239,37 @@ def run(output, cache, release_test, gas_springs=False, close_test=False, load_t
         {"phase": p.name, "duration_s": p.duration, "joints": p.joints.tolist(),
          "aperture_m": p.aperture} for p in motions
     ]))
+    def measure(q, phase, start):
+        record = {
+            "time_s": world.current_time - start, "phase": phase,
+            "joint_target": q.tolist(), "joint_actual": robot.get_joint_positions().tolist(),
+            "hood_angle_rad": float(device.get_joint_positions()[index]),
+            "hood_velocity_rad_s": float(device.get_joint_velocities()[index]),
+            "support_torque_nm": 0.,
+            "gas_springs": [],
+            "handle_force_n": np.linalg.norm(contacts.get_contact_force_matrix(dt=dt), axis=-1).ravel().tolist(),
+            "unintended_robot_device_force_n": float(np.max(np.linalg.norm(
+                arm_contacts.get_contact_force_matrix(dt=dt), axis=-1))),
+            "robot_environment_force_n": float(np.max(np.linalg.norm(
+                environment_contacts.get_contact_force_matrix(dt=dt), axis=-1))),
+            "finger_stiffness": float(rkp[-1]),
+            "end_effector_m": solver.compute_end_effector_pose()[0].tolist(),
+        }
+        if load_test:
+            position, orientation = scene["beaker"].get_world_pose()
+            record.update({
+                "beaker_position_m": position.tolist(),
+                "beaker_orientation_wxyz": orientation.tolist(),
+                "beaker_force_n": np.linalg.norm(scene["contact_view"].get_contact_force_matrix(dt=dt), axis=-1).ravel().tolist(),
+            })
+        return record
+
+    if driver is not None:
+        return driver(scene=scene, views=views, motions=motions, measure=measure,
+                      targets={"initial_angle_rad": initial_angle}, grip_offset=np.zeros(3),
+                      metadata={"gas_spring_config": support.config if support else None},
+                      contact=contacts, before_step=support.step if support else None)
+
     recording = VideoRecorder(output, views)
     records, error = [], None
     start_time, step = world.current_time, 0
@@ -256,28 +287,8 @@ def run(output, cache, release_test, gas_springs=False, close_test=False, load_t
                 spring_state = support.step() if support else []
                 robot.apply_action(ArticulationAction(joint_positions=q))
                 world.step(render=False)
-                record = {
-                    "time_s": world.current_time - start_time, "phase": motion.name,
-                    "joint_target": q.tolist(), "joint_actual": robot.get_joint_positions().tolist(),
-                    "hood_angle_rad": float(device.get_joint_positions()[index]),
-                    "hood_velocity_rad_s": float(device.get_joint_velocities()[index]),
-                    "support_torque_nm": 0.,
-                    "gas_springs": spring_state,
-                    "handle_force_n": np.linalg.norm(contacts.get_contact_force_matrix(dt=dt), axis=-1).ravel().tolist(),
-                    "unintended_robot_device_force_n": float(np.max(np.linalg.norm(
-                        arm_contacts.get_contact_force_matrix(dt=dt), axis=-1))),
-                    "robot_environment_force_n": float(np.max(np.linalg.norm(
-                        environment_contacts.get_contact_force_matrix(dt=dt), axis=-1))),
-                    "finger_stiffness": float(rkp[-1]),
-                    "end_effector_m": solver.compute_end_effector_pose()[0].tolist(),
-                }
-                if load_test:
-                    position, orientation = scene["beaker"].get_world_pose()
-                    record.update({
-                        "beaker_position_m": position.tolist(),
-                        "beaker_orientation_wxyz": orientation.tolist(),
-                        "beaker_force_n": np.linalg.norm(scene["contact_view"].get_contact_force_matrix(dt=dt), axis=-1).ravel().tolist(),
-                    })
+                record = measure(q, motion.name, start_time)
+                record["gas_springs"] = spring_state
                 records.append(record)
                 if step % 4 == 0:
                     world.render()
