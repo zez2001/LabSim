@@ -117,7 +117,10 @@ def check_dataset(path):
         if actions.shape != (n, stride, 9):
             raise ValueError("Joint target shape must be transitions x stride x 9")
         ends = f["actions/time_end_s"][:]
-        if ends.shape != (n,) or not np.allclose(ends, times[1:], atol=1e-6, rtol=0):
+        # The simulator accumulates a float32 physics step while observation
+        # timestamps use the nominal rate. Allow clock precision, not a substep.
+        clock_tolerance = 1e-6 + np.finfo(np.float32).eps * np.abs(times[1:])
+        if ends.shape != (n,) or not np.all(np.abs(ends - times[1:]) <= clock_tolerance):
             raise ValueError("Action end times disagree with observations")
         for key in ("qpos", "qvel", "tcp", "images/side_camera", "images/wrist_camera"):
             if len(f["observations/" + key]) != n + 1:
