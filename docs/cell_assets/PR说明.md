@@ -1,6 +1,6 @@
 # 单细胞仪器 unit、expert 数据与策略评测接口
 
-本轮 PR 说明；旧 PR #1 已关闭，按最新授权以 `codex_junjie_1102` 提交至 `codex/labsim`，不自动合并。
+本轮 PR 说明；旧 PR #1／#2 已关闭，当前为 [PR #3](https://github.com/zez2001/LabSim/pull/3)，按最新授权以 `codex/labsim_junjie_yao_20261102` 提交至 `codex/labsim`，不自动合并。
 
 ## 问题与实现
 
@@ -19,7 +19,7 @@
 
 ## 获取与复现
 
-基线为此前 rebase 的 `ab519ed`，本地 HEAD `2294a17`；本轮已重新核对远端、fetch 并在 `codex_junjie_1102` 执行 rebase，无冲突。该引用在核对时仍为上述基线，不直接改写集成分支。
+基线为此前 rebase 的 `ab519ed`，本地 HEAD `2294a17`；本轮已重新核对远端、fetch 并在 `codex/labsim_junjie_yao_20261102` 执行 rebase，无冲突。该引用在核对时仍为上述基线，不直接改写集成分支。
 
 ```bash
 ./labsim unit list
