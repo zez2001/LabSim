@@ -8,7 +8,9 @@
 
 ## 选择文件
 
-当前默认[清单](package.json)是 [Policy_eval_v1 工程反馈包](Policy_eval_v1_current/package.json)：收录本轮冻结 GPT-6 direct 与 π0.5 RPC 的实际评测结果、协议、代码、逐集指标、完整 Progress、代表录像和验证凭据。先读[工程包说明](Policy_eval_v1_current/00_给Agent阅读说明.md)。独立[汇报包清单](Policy_eval_v1_current/report_package.json)只包含详细 DOCX、报告引用的四段双视角录像及发布凭据，见[汇报包说明](Policy_eval_v1_current/00_汇报包说明.md)。完整 H5、详细模型调用日志、资产与环境保留工程端。
+当前默认[清单](package.json)是 [Gpt_debug04_v1 工程反馈包](Gpt_debug04_v1_current/package.json)，收录历史 debug04 恢复、本次正式评测、完整 Progress 与验证证据，先读[工程包说明](Gpt_debug04_v1_current/00_给Agent阅读说明.md)。独立[汇报包清单](Gpt_debug04_v1_current/report_package.json)提供本轮 DOCX 与历史／新正式集各一条完整双视角录像，见[汇报包说明](Gpt_debug04_v1_current/00_汇报包说明.md)。历史组与新组分别统计；完整 H5、模型日志、资产和环境保留工程端。
+
+此前 [Policy_eval_v1 工程包](Policy_eval_v1_current/package.json)与[汇报包](Policy_eval_v1_current/report_package.json)保留其冻结 GPT-6 direct／π0.5 评测及原始统计范围。
 
 历史 [Progress v1 结果清单](Progress_v1_current/package.json)保留其原始证据和统计范围。
 

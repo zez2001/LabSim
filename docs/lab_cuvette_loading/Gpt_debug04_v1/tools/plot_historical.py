@@ -1,4 +1,4 @@
-"""Three source-backed CPU plots for the single historical debug04 episode."""
+"""Three source-backed CPU plots for one historical or closed formal episode."""
 from __future__ import annotations
 
 import argparse
@@ -12,14 +12,18 @@ sys.path.insert(0, str(ROOT))
 from demos.lab_cuvette_policy_eval_v1.analysis import file_sha256, finite, json_rows, metric
 
 
-def plot(progress, metrics_path, quant_path, output):
+def plot(progress, metrics_path, quant_path, output, *, scope='historical'):
     progress, metrics_path, quant_path, output = map(Path, (progress, metrics_path, quant_path, output))
     if output.exists():
         raise FileExistsError(output)
-    episode = json.loads(metrics_path.read_text())[0]
+    episodes = json.loads(metrics_path.read_text())
+    selected = [row for row in episodes if row.get('started') and row.get('purpose')==scope]
+    if len(selected) != 1:
+        raise ValueError('Exactly one started '+scope+' episode is required')
+    episode = selected[0]
     quant = json.loads(quant_path.read_text())
     if episode['episode_id'] != quant['episode_id']:
-        raise ValueError('Historical identities differ')
+        raise ValueError('Episode identities differ')
     config = json.loads((progress/'progress_config.resolved.json').read_text())
     keys = ('t', 'coverage', 'transport', 'align', 'valid_insert', 'drift_mm', 'rotation_deg', 'xy_mm', 'tilt_deg', 'yaw_deg')
     data = {k: [] for k in keys}
@@ -65,10 +69,10 @@ def plot(progress, metrics_path, quant_path, output):
             ax.text(3,i,'not reached' if stage.get('reached') is False else 'unknown evidence',va='center',color='#777777',fontsize=8)
     ax.set(yticks=range(len(stages)),yticklabels=labels,xlim=(0,quant['simulation_seconds']),
         xlabel='Simulation time of first physical confirmation (s)',
-        title='Historical gpt_debug_04: first achieved milestones')
+        title=('Historical gpt_debug_04' if scope=='historical' else 'Restored debug04: authorized formal trial 01')+': first achieved milestones')
     ax.set_ylim(len(stages)-.5,-.5);ax.grid(axis='x',alpha=.2)
     fig.tight_layout()
-    save(fig,'01_historical_first_times.png','First confirmations from the full event stream; unachieved stages have no invented zero-second timestamp.')
+    save(fig,f'01_{scope}_first_times.png','First confirmations from the full event stream; unachieved stages have no invented zero-second timestamp.')
 
     fig,axes=plt.subplots(3,1,figsize=(8.8,7.7),sharex=True)
     for key,label,color in [('coverage','Historical stage coverage','#1769aa'),('transport','Effective transport','#228563'),
@@ -81,16 +85,18 @@ def plot(progress, metrics_path, quant_path, output):
     axes[2].plot(data['t'],data['rotation_deg'],color='#228563',linewidth=1.)
     axes[2].set(ylabel='Relative rotation (deg)',xlabel='Simulation time (s)')
     quality=quant['observed_control_times']['first_grasp_quality_false_t']
-    loss=quant['progress_failures'][0]['t']
+    loss=quant['observed_control_times']['first_actual_grasp_loss_observed_t']
     for ax in axes:
-        ax.axvline(quality,color='#cd7b26',linestyle='--',linewidth=.9)
-        ax.axvline(loss,color='#9b3447',linestyle=':',linewidth=1.)
+        if quality is not None:ax.axvline(quality,color='#cd7b26',linestyle='--',linewidth=.9)
+        if loss is not None:ax.axvline(loss,color='#9b3447',linestyle=':',linewidth=1.)
         ax.grid(alpha=.2);ax.set_xlim(0,quant['simulation_seconds'])
-    axes[1].text(.02,.94,f'First false quality (control): {quality:.3f} s\nConfirmed unsupported loss: {loss:.4f} s',
+    warning='N/A' if quality is None else f'{quality:.3f} s'
+    lost='N/A' if loss is None else f'{loss:.4f} s'
+    axes[1].text(.02,.94,f'First false quality (control): {warning}\nConfirmed unsupported loss (observed control): {lost}',
         transform=axes[1].transAxes,va='top',fontsize=8)
     axes[2].text(.02,.94,'Curves: unique control endpoints; 240 Hz physical maxima are in the evidence table.\nReference resets across attempts are not object teleportation.',transform=axes[2].transAxes,va='top',fontsize=7.5)
     fig.tight_layout()
-    save(fig,'02_historical_progress_drift.png','Actual control-endpoint effective Progress and relative drift; per-attempt references and different warning/loss times are explicit.')
+    save(fig,f'02_{scope}_progress_drift.png','Actual control-endpoint effective Progress and relative drift; per-attempt references and different warning/loss times are explicit.')
 
     fig,axes=plt.subplots(3,1,figsize=(8.8,7.2),sharex=True)
     params=config['thresholds']
@@ -102,12 +108,14 @@ def plot(progress, metrics_path, quant_path, output):
         ax.axhline(threshold,color='#9b3447',linestyle='--',linewidth=.9,label=f'Original alignment limit {threshold:g}')
         ax.set_ylabel(label);ax.grid(alpha=.2);ax.legend(fontsize=8,loc='upper left')
         ax.set_xlim(0,quant['simulation_seconds'])
+        if not any(math.isfinite(value) for value in data[key]):
+            ax.text(.5,.45,'N/A: target operation region not reached',ha='center',va='center',transform=ax.transAxes,color='#666666')
     axes[0].set_title('Target errors only where entrance-region AND attempt-route gates hold')
     axes[2].set_xlabel('Simulation time (s)')
     fig.text(.11,-.015,'Outside the applicable region: no measured target-error curve. Valid insertion depth and post-release stability are N/A.',fontsize=8)
     fig.tight_layout()
-    save(fig,'03_historical_applicable_errors.png','Only applicable target-region endpoints are plotted; original limits unchanged; component minima are not a synthetic common pose.')
-    receipt=dict(schema='labsim.Gpt_debug04_v1.historical_figures.v1',historical_only=True,
+    save(fig,f'03_{scope}_applicable_errors.png','Only applicable target-region endpoints are plotted; original limits unchanged; component minima are not a synthetic common pose.')
+    receipt=dict(schema='labsim.Gpt_debug04_v1.'+scope+'_figures.v1',historical_only=scope=='historical',
         episode_id=episode['episode_id'],control_endpoint_count=len(data['t']),
         progress_source_sha256=file_sha256(progress/'progress_v1.jsonl.gz'),
         quantification_sha256=file_sha256(quant_path),metric_source_sha256=file_sha256(metrics_path),
@@ -120,7 +128,8 @@ def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--progress',required=True,type=Path);p.add_argument('--metrics',required=True,type=Path)
     p.add_argument('--quantification',required=True,type=Path);p.add_argument('--output',required=True,type=Path)
-    a=p.parse_args(argv);r=plot(a.progress,a.metrics,a.quantification,a.output)
+    p.add_argument('--scope',choices=('historical','formal'),default='historical')
+    a=p.parse_args(argv);r=plot(a.progress,a.metrics,a.quantification,a.output,scope=a.scope)
     print(json.dumps(dict(figures=len(r['figures']),endpoints=r['control_endpoint_count'])))
     return 0
 

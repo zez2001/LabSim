@@ -1,0 +1,117 @@
+{
+  "schema": "labsim.Gpt_debug04_v1.terminal_contact_observation.v1",
+  "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+  "scope": "Last actual physics row, after the complete task record closed. Raw terminal geometry is a diagnostic and is not an applicable target-operation metric or post-retreat success.",
+  "raw_terminal_physics": {
+    "t": 101.01666666666667,
+    "physics_step": 24244,
+    "object_position_m": [
+      0.2143392115831375,
+      -0.14283981919288635,
+      0.914002001285553
+    ],
+    "object_quaternion_wxyz": [
+      0.7073433995246887,
+      -7.686251774430275e-05,
+      0.0003363359719514847,
+      0.7068700790405273
+    ],
+    "actual_tcp_position_m": [
+      0.21392312457266643,
+      -0.1429013852917721,
+      1.017844739863327
+    ],
+    "actual_tcp_quaternion_wxyz": [
+      -0.00041823513776539163,
+      0.7070064500361228,
+      -0.7072069600598905,
+      0.00014258168723002608
+    ],
+    "target_bottom_gap_m": 0.026997505613705508,
+    "depth_m": 2.4943862944916406e-06,
+    "xy_error_target_m": [
+      0.0064257164140899825,
+      -0.0019695648461001687
+    ],
+    "tilt_deg": 0.0395348723975384,
+    "yaw_error_deg": -0.038346293832347556,
+    "target_region_contains_object": false,
+    "target_bottom_support_N": 0.0,
+    "wall_contact_N": 0.19596244348213077,
+    "entrance_feature_contact_N": 0.19596244348213077,
+    "gripper_object_clearance_m": 0.025858491733670448,
+    "finger_contact_N": [
+      0.0,
+      0.0
+    ],
+    "finger_joint_positions_m": [
+      0.014999966137111187,
+      0.015000049956142902
+    ],
+    "gripper_target_m": 0.015000000000000003,
+    "input_geometry_overlap_observed_m": 0.0,
+    "input_geometry_assessment": "input_surface_crossing_depth_unresolved",
+    "input_geometry_scope": "authored vessel material/seat collision input, not cooked PhysX",
+    "native_target_overlap_m": null,
+    "native_target_overlap_measured": false
+  },
+  "derived": {
+    "raw_terminal_target_xy_distance_m": 0.006720789917658415,
+    "actual_total_finger_separation_m": 0.03000001609325409,
+    "assumed_mass_kg": 0.02,
+    "assumed_gravity_m_s2": 9.81,
+    "assumed_weight_N": 0.1962
+  },
+  "unchanged_original_windows": {
+    "terminal_window": {
+      "criteria": {
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "position_stable": true,
+        "target_contains": null,
+        "target_support": null
+      },
+      "end_t": 101.01666666666667,
+      "measured_duration_s": 3.0,
+      "orientation_change_deg": 0.005552390863160983,
+      "position_drift_m": 4.998001405968792e-07,
+      "required_duration_s": 3.0,
+      "sample_count": 721,
+      "stable": true,
+      "start_t": 98.01666666666667,
+      "status": "complete"
+    },
+    "post_retreat_window": {
+      "reason": "actual_gripper_retreat_not_observed",
+      "sample_count": 0,
+      "stable": null,
+      "status": "unavailable"
+    }
+  },
+  "original_qualifications": {
+    "task_success": false,
+    "record_valid": true,
+    "success_bc_eligible": false,
+    "physics_quality_flags": [
+      "CONTACT_STALL_DETECTED",
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "failure_type": "BLOCKED",
+    "failure_domain": "task",
+    "termination_reason": "POLICY_FINISH_REQUEST"
+  },
+  "legal_gate_first_confirmed": {
+    "support_transfer": null,
+    "released": null,
+    "retreated": null,
+    "stable_complete": null
+  },
+  "interpretation": "Actual fingers are open and contact-free at the end; the vessel is supported by entrance/wall contact, roughly27mm above the target bottom, outside the target containment region. Legal support/release/retreat were not confirmed. A stable terminal window is not a post-retreat or valid insertion success. Authored input overlap does not establish cooked PhysX nonpenetration.",
+  "sources": {
+    "outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/physics_records.jsonl.gz": "960245bc155c189cc7dcde8637c769b23e100098d9a1cb386296ea69494fc22a",
+    "outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/result.json": "272fd71a03b837a141e55ca97a43576c9a517a63aeaf321658da6377886f7e8e",
+    "outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/independent_score.json": "fbc474de45ba497329b34325c1ec3081740a7da09792da6c86ef6298b7e09c7b",
+    "outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/progress_summary.json": "91e1db07ed9b91aa907874423cadb1c932c96ed5da76c8b8fad95d1d270b15a0"
+  },
+  "original_source_mutated": false
+}

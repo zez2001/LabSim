@@ -1,0 +1,820 @@
+{
+  "schema": "labsim.gpt_debug04.initial_states.v1",
+  "episodes": [
+    {
+      "trial_id": "debug04_01",
+      "group_id": "restored_debug04",
+      "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+      "scope": "Evaluation-only reset/initial state; object truth is never a policy input",
+      "scene_fingerprint": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "scene": "standard",
+      "seed": 0,
+      "reset_audit": {
+        "schema": "labsim.Project_release_v1.reset.v1",
+        "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+        "episode_index": 0,
+        "control_steps": 0,
+        "physics_steps": 4,
+        "simulation_time": 0.016666666666666666,
+        "gripper_target_m": 0.08,
+        "effort_limit_N": 8.0,
+        "policy_latch": null,
+        "policy_latch_contact": null,
+        "contact_hold_state": {
+          "control_hz": 60.0,
+          "mass_kg": 0.02,
+          "dynamic_friction": 0.5,
+          "finger_dynamic_friction": 0.8,
+          "finger_kp_N_per_m": 2000.0,
+          "contact_safety_factor": 2.0,
+          "maximum_compression_m": 0.0003,
+          "contact_threshold_N": 0.03,
+          "contact_persist_s": 0.1,
+          "contact_approach_speed_m_s": 0.002,
+          "minimum_total_opening_m": 0.002,
+          "weight_compression_per_finger_m": 0.000155109719231259,
+          "version": "Project_v1_1.contact_hold.v2",
+          "minimum_hold_normal_force_N": 0.310219438462518,
+          "normal_force_hysteresis_fraction": 0.1,
+          "maximum_force_feedback_closure_m": 0.0006,
+          "logical_requested_opening_m": null,
+          "frozen_opening_m": null,
+          "contact_since_s": null,
+          "confirmed": false,
+          "ever_confirmed": false,
+          "recovering": false,
+          "release_ramp_active": false,
+          "last_t": null,
+          "force_hold_reference_opening_m": null,
+          "previous_ramped_opening_m": null,
+          "release_ramp_speed_m_s": 0.0,
+          "force_preload_adjusted": false,
+          "release_slew_active": false,
+          "_last_input": null,
+          "_last_output": null
+        },
+        "tracking_state": {
+          "time_constant_s": 0.1,
+          "alpha": null,
+          "max_position_bias_m": 0.001,
+          "max_rotation_bias_rad": 0.002,
+          "_position_bias": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "_rotation_bias": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "_samples": 0
+        },
+        "tracking_sample_control_step": -1,
+        "scorer_rows": 5,
+        "ended": false,
+        "result_is_none": true,
+        "tick_trace_is_none": true,
+        "collector_count": 0,
+        "collector_file_open": true,
+        "reset_wall_seconds": 4.390935935778543
+      },
+      "reset_check": {
+        "errors_m": [
+          9.763786632287495e-09,
+          9.763786632287495e-09
+        ],
+        "passed": true
+      },
+      "initial_debug_source": {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/initial_debug.json",
+        "sha256": "1831ed25ea8c0f0638c5f1a208843794cfffd70aff46cb6228557e5ab35fd516",
+        "bytes": 60299
+      },
+      "measured_before_first_action": {
+        "t": 0.016666666666666666,
+        "physics_step": 4,
+        "object_position_m": [
+          -0.08500000834465027,
+          -0.17499999701976776,
+          0.7430000305175781
+        ],
+        "object_quaternion_wxyz": [
+          0.7071091532707214,
+          1.1641532182693481e-08,
+          -7.450580596923828e-09,
+          0.7071045637130737
+        ],
+        "actual_tcp_position_m": [
+          -0.08505931596479005,
+          -0.1748760546046365,
+          1.0228528475162522
+        ],
+        "actual_tcp_quaternion_wxyz": [
+          -0.00045383827446051326,
+          0.7070149041122215,
+          -0.7071984863989618,
+          0.00014222877477737954
+        ],
+        "joints9": [
+          0.1779361367225647,
+          -1.2082452774047852,
+          -0.8200522661209106,
+          -2.87337064743042,
+          -0.7667176723480225,
+          1.7454451322555542,
+          -0.8053153157234192,
+          0.03999993950128555,
+          0.03999996930360794
+        ],
+        "gripper_target_m": 0.04,
+        "gripper_effort_limit_N": 8.0,
+        "source_bottom_gap_m": 3.0360991498668e-08
+      },
+      "first_policy_observation": {
+        "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+        "observation_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55:0",
+        "simulation_time": 0.016666666666666666,
+        "step_index": 0,
+        "joint_positions": [
+          0.1779361367225647,
+          -1.2082452774047852,
+          -0.8200522661209106,
+          -2.87337064743042,
+          -0.7667176723480225,
+          1.7454451322555542,
+          -0.8053153157234192,
+          0.03999993950128555,
+          0.03999996930360794
+        ],
+        "joint_velocities": [
+          0.0010142129613086581,
+          0.00918547622859478,
+          0.009416138753294945,
+          0.008577585220336914,
+          0.00032430345891043544,
+          0.00214076298289001,
+          -1.1982684554823209e-05,
+          1.4414921679417603e-05,
+          1.4414922588912304e-05
+        ],
+        "TCPpose": {
+          "position_m": [
+            -0.08505931596479005,
+            -0.1748760546046365,
+            1.0228528475162522
+          ],
+          "quaternion_wxyz": [
+            -0.00045383827446051326,
+            0.7070149041122215,
+            -0.7071984863989618,
+            0.00014222877477737954
+          ]
+        },
+        "gripper_opening_m": 0.0799999088048935,
+        "finger_contact_N": [
+          0.0,
+          0.0
+        ],
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge",
+        "model_image_transforms": {
+          "side_camera": {
+            "native_resolution_wh": [
+              640,
+              480
+            ],
+            "transmitted_resolution_wh": [
+              640,
+              480
+            ],
+            "scale_xy": [
+              1.0,
+              1.0
+            ],
+            "native_rgb_sha256": "f65724d8c5a8ed83dc3601c5cd955a4a3e0d335fbc9cbb69ec9fab55e87cb9ff",
+            "transmitted_jpeg_sha256": "18589b61b9f018274f3cd3fef8b860897600308313d38555e3151c2712a1144d",
+            "transmitted_bytes": 12538,
+            "jpeg_quality": 60,
+            "detail": "high",
+            "resize_interpolation": "Pillow LANCZOS",
+            "crop": null,
+            "rotation_deg": 0,
+            "color_space": "RGB",
+            "transmitted_pixel_from_native_pixel": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "intrinsic_matrix_transmitted": [
+              [
+                519.2078247070312,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                519.2078247070312,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+            "native_recording_changed": false
+          },
+          "wrist_camera": {
+            "native_resolution_wh": [
+              640,
+              480
+            ],
+            "transmitted_resolution_wh": [
+              640,
+              480
+            ],
+            "scale_xy": [
+              1.0,
+              1.0
+            ],
+            "native_rgb_sha256": "d692b7084c1683df88e561e709b9ec2aee49b43ab21aa2badd70a9ce00e5c0c6",
+            "transmitted_jpeg_sha256": "3ba1d15c46b99bc9072f0f656bc68e737acd053de86dbd4484d097c71a57f06b",
+            "transmitted_bytes": 14272,
+            "jpeg_quality": 60,
+            "detail": "high",
+            "resize_interpolation": "Pillow LANCZOS",
+            "crop": null,
+            "rotation_deg": 0,
+            "color_space": "RGB",
+            "transmitted_pixel_from_native_pixel": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "intrinsic_matrix_transmitted": [
+              [
+                366.4996337890625,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                366.4996337890625,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+            "native_recording_changed": false
+          }
+        },
+        "source": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+          "sha256": "8118889e19554ff8dfb7d61699272578fb2827ad2d199cbd3df82fe5dd17d222",
+          "bytes": 5887
+        },
+        "task_text_sha256": "08cf802a689dd18cbc0eff89749b821d966b6a0106907dc779426720f8dd8a65"
+      },
+      "last_policy_observation": {
+        "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+        "observation_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55:6060",
+        "simulation_time": 101.01666666666667,
+        "step_index": 6060,
+        "joint_positions": [
+          1.081172227859497,
+          0.08163212984800339,
+          -1.3662511110305786,
+          -2.191826343536377,
+          0.10014574229717255,
+          2.206695079803467,
+          -1.1290819644927979,
+          0.014999966137111187,
+          0.015000049956142902
+        ],
+        "joint_velocities": [
+          0.008663763292133808,
+          -0.00882709864526987,
+          -0.008926908485591412,
+          0.026465781033039093,
+          -0.00014078669482842088,
+          0.0026781181804835796,
+          0.0002256075676996261,
+          -3.292407200206071e-07,
+          -3.292407200206071e-07
+        ],
+        "TCPpose": {
+          "position_m": [
+            0.21392312457266643,
+            -0.1429013852917721,
+            1.017844739863327
+          ],
+          "quaternion_wxyz": [
+            -0.00041823513776539163,
+            0.7070064500361228,
+            -0.7072069600598905,
+            0.00014258168723002608
+          ]
+        },
+        "gripper_opening_m": 0.03000001609325409,
+        "finger_contact_N": [
+          0.0,
+          0.0
+        ],
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge",
+        "model_image_transforms": {
+          "side_camera": {
+            "native_resolution_wh": [
+              640,
+              480
+            ],
+            "transmitted_resolution_wh": [
+              640,
+              480
+            ],
+            "scale_xy": [
+              1.0,
+              1.0
+            ],
+            "native_rgb_sha256": "3e18045fc30441bef3f69f8e651ee153ea0ec7efc5e0e6c100b6a2b4c8ff9917",
+            "transmitted_jpeg_sha256": "8f1cc2b9a116ce41c11998a2b2e4ecd0b0081c6b569ffa8078f2e2dfe727bb37",
+            "transmitted_bytes": 12551,
+            "jpeg_quality": 60,
+            "detail": "high",
+            "resize_interpolation": "Pillow LANCZOS",
+            "crop": null,
+            "rotation_deg": 0,
+            "color_space": "RGB",
+            "transmitted_pixel_from_native_pixel": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "intrinsic_matrix_transmitted": [
+              [
+                519.2078247070312,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                519.2078247070312,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+            "native_recording_changed": false
+          },
+          "wrist_camera": {
+            "native_resolution_wh": [
+              640,
+              480
+            ],
+            "transmitted_resolution_wh": [
+              640,
+              480
+            ],
+            "scale_xy": [
+              1.0,
+              1.0
+            ],
+            "native_rgb_sha256": "85db2591fd326eff8096f380975c7e661164aa6397c2dfb48f6a08b30ba98790",
+            "transmitted_jpeg_sha256": "5342a561cd415b40e28d952cd307bd0c6fcee284124ff7e1d63a05c3197cd8dd",
+            "transmitted_bytes": 14895,
+            "jpeg_quality": 60,
+            "detail": "high",
+            "resize_interpolation": "Pillow LANCZOS",
+            "crop": null,
+            "rotation_deg": 0,
+            "color_space": "RGB",
+            "transmitted_pixel_from_native_pixel": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "intrinsic_matrix_transmitted": [
+              [
+                366.4996337890625,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                366.4996337890625,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+            "native_recording_changed": false
+          }
+        },
+        "source": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/gpt_control/observations/decision_000041/public_observation.json",
+          "sha256": "eca5f81380ce15bcee09bb9de68c9f2e185c7534edecfd5e900f4db69d7fed1e",
+          "bytes": 5888
+        },
+        "task_text_sha256": "08cf802a689dd18cbc0eff89749b821d966b6a0106907dc779426720f8dd8a65"
+      },
+      "first_actual_model_packet": {
+        "source": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/gpt_control/observations/decision_000000/manifest.json",
+          "sha256": "89238deef4c152ad1ec8198fc23d8e8075bcd4f5409607f5dcc4b3142b075ea5",
+          "bytes": 1160
+        },
+        "request_label": "policy:32bd28cb-aee3-4bea-9c10-5408fc1d1b55:0:decision0",
+        "network_attempted": true,
+        "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+        "observation_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55:0",
+        "simulation_time_s": 0.016666666666666666,
+        "public_observation": {
+          "path": "observations/decision_000000/public_observation.json",
+          "sha256": "8118889e19554ff8dfb7d61699272578fb2827ad2d199cbd3df82fe5dd17d222",
+          "bytes": 5887
+        },
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "observations/decision_000000/side_camera.jpg",
+            "sha256": "18589b61b9f018274f3cd3fef8b860897600308313d38555e3151c2712a1144d",
+            "bytes": 12538,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "observations/decision_000000/wrist_camera.jpg",
+            "sha256": "3ba1d15c46b99bc9072f0f656bc68e737acd053de86dbd4484d097c71a57f06b",
+            "bytes": 14272,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          }
+        ],
+        "full_wire_input_canonical_sha256": null,
+        "full_wire_input_status": "Unavailable in exact historical vendor; exact current public state and two encoded JPEGs are preserved; no invented full-conversation hash"
+      },
+      "last_actual_model_packet": {
+        "source": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/gpt_control/observations/decision_000041/manifest.json",
+          "sha256": "bdb0e903f8dd4d25f561101afb9ad0b248dc7bb3947f8cd9d6efa513d58cc125",
+          "bytes": 1166
+        },
+        "request_label": "policy:32bd28cb-aee3-4bea-9c10-5408fc1d1b55:6060:decision41",
+        "network_attempted": true,
+        "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+        "observation_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55:6060",
+        "simulation_time_s": 101.01666666666667,
+        "public_observation": {
+          "path": "observations/decision_000041/public_observation.json",
+          "sha256": "eca5f81380ce15bcee09bb9de68c9f2e185c7534edecfd5e900f4db69d7fed1e",
+          "bytes": 5888
+        },
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "observations/decision_000041/side_camera.jpg",
+            "sha256": "8f1cc2b9a116ce41c11998a2b2e4ecd0b0081c6b569ffa8078f2e2dfe727bb37",
+            "bytes": 12551,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "observations/decision_000041/wrist_camera.jpg",
+            "sha256": "5342a561cd415b40e28d952cd307bd0c6fcee284124ff7e1d63a05c3197cd8dd",
+            "bytes": 14895,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          }
+        ],
+        "full_wire_input_canonical_sha256": null,
+        "full_wire_input_status": "Unavailable in exact historical vendor; exact current public state and two encoded JPEGs are preserved; no invented full-conversation hash"
+      },
+      "last_prepared_model_packet": {
+        "source": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/gpt_control/observations/decision_000041/manifest.json",
+          "sha256": "bdb0e903f8dd4d25f561101afb9ad0b248dc7bb3947f8cd9d6efa513d58cc125",
+          "bytes": 1166
+        },
+        "request_label": "policy:32bd28cb-aee3-4bea-9c10-5408fc1d1b55:6060:decision41",
+        "network_attempted": true,
+        "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+        "observation_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55:6060",
+        "simulation_time_s": 101.01666666666667,
+        "public_observation": {
+          "path": "observations/decision_000041/public_observation.json",
+          "sha256": "eca5f81380ce15bcee09bb9de68c9f2e185c7534edecfd5e900f4db69d7fed1e",
+          "bytes": 5888
+        },
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "observations/decision_000041/side_camera.jpg",
+            "sha256": "8f1cc2b9a116ce41c11998a2b2e4ecd0b0081c6b569ffa8078f2e2dfe727bb37",
+            "bytes": 12551,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "observations/decision_000041/wrist_camera.jpg",
+            "sha256": "5342a561cd415b40e28d952cd307bd0c6fcee284124ff7e1d63a05c3197cd8dd",
+            "bytes": 14895,
+            "content_type": "image/jpeg",
+            "resolution_wh": [
+              640,
+              480
+            ]
+          }
+        ],
+        "full_wire_input_canonical_sha256": null,
+        "full_wire_input_status": "Unavailable in exact historical vendor; exact current public state and two encoded JPEGs are preserved; no invented full-conversation hash"
+      },
+      "last_prepared_observation": {
+        "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+        "observation_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55:6060",
+        "simulation_time": 101.01666666666667,
+        "step_index": 6060,
+        "joint_positions": [
+          1.081172227859497,
+          0.08163212984800339,
+          -1.3662511110305786,
+          -2.191826343536377,
+          0.10014574229717255,
+          2.206695079803467,
+          -1.1290819644927979,
+          0.014999966137111187,
+          0.015000049956142902
+        ],
+        "joint_velocities": [
+          0.008663763292133808,
+          -0.00882709864526987,
+          -0.008926908485591412,
+          0.026465781033039093,
+          -0.00014078669482842088,
+          0.0026781181804835796,
+          0.0002256075676996261,
+          -3.292407200206071e-07,
+          -3.292407200206071e-07
+        ],
+        "TCPpose": {
+          "position_m": [
+            0.21392312457266643,
+            -0.1429013852917721,
+            1.017844739863327
+          ],
+          "quaternion_wxyz": [
+            -0.00041823513776539163,
+            0.7070064500361228,
+            -0.7072069600598905,
+            0.00014258168723002608
+          ]
+        },
+        "gripper_opening_m": 0.03000001609325409,
+        "finger_contact_N": [
+          0.0,
+          0.0
+        ],
+        "source_slot_id": "A1",
+        "target_seat_id": "candidate_far_hinge",
+        "model_image_transforms": {
+          "side_camera": {
+            "native_resolution_wh": [
+              640,
+              480
+            ],
+            "transmitted_resolution_wh": [
+              640,
+              480
+            ],
+            "scale_xy": [
+              1.0,
+              1.0
+            ],
+            "native_rgb_sha256": "3e18045fc30441bef3f69f8e651ee153ea0ec7efc5e0e6c100b6a2b4c8ff9917",
+            "transmitted_jpeg_sha256": "8f1cc2b9a116ce41c11998a2b2e4ecd0b0081c6b569ffa8078f2e2dfe727bb37",
+            "transmitted_bytes": 12551,
+            "jpeg_quality": 60,
+            "detail": "high",
+            "resize_interpolation": "Pillow LANCZOS",
+            "crop": null,
+            "rotation_deg": 0,
+            "color_space": "RGB",
+            "transmitted_pixel_from_native_pixel": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "intrinsic_matrix_transmitted": [
+              [
+                519.2078247070312,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                519.2078247070312,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+            "native_recording_changed": false
+          },
+          "wrist_camera": {
+            "native_resolution_wh": [
+              640,
+              480
+            ],
+            "transmitted_resolution_wh": [
+              640,
+              480
+            ],
+            "scale_xy": [
+              1.0,
+              1.0
+            ],
+            "native_rgb_sha256": "85db2591fd326eff8096f380975c7e661164aa6397c2dfb48f6a08b30ba98790",
+            "transmitted_jpeg_sha256": "5342a561cd415b40e28d952cd307bd0c6fcee284124ff7e1d63a05c3197cd8dd",
+            "transmitted_bytes": 14895,
+            "jpeg_quality": 60,
+            "detail": "high",
+            "resize_interpolation": "Pillow LANCZOS",
+            "crop": null,
+            "rotation_deg": 0,
+            "color_space": "RGB",
+            "transmitted_pixel_from_native_pixel": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "intrinsic_matrix_transmitted": [
+              [
+                366.4996337890625,
+                0.0,
+                320.0
+              ],
+              [
+                0.0,
+                366.4996337890625,
+                240.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "pixel_convention": "zero-based pixel-centre indices: dst=(src+.5)*scale-.5",
+            "native_recording_changed": false
+          }
+        },
+        "source": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/gpt_control/observations/decision_000041/public_observation.json",
+          "sha256": "eca5f81380ce15bcee09bb9de68c9f2e185c7534edecfd5e900f4db69d7fed1e",
+          "bytes": 5888
+        },
+        "task_text_sha256": "08cf802a689dd18cbc0eff89749b821d966b6a0106907dc779426720f8dd8a65"
+      },
+      "prepared_packet_count": 42,
+      "actually_sent_packet_count": 42,
+      "actual_input_selection": "Exact archived observation manifest.request_label membership in new episode ledger. These saved state/JPEG packets exclude unrecorded full wire/conversation serialization."
+    }
+  ],
+  "comparison": {
+    "reference_trial_id": "debug04_01",
+    "comparisons": [
+      {
+        "trial_id": "debug04_01",
+        "same_standard_layout": true,
+        "TCP_position_delta_m": 0.0,
+        "TCP_rotation_delta_rad": 0.0,
+        "object_position_delta_m": 0.0,
+        "maximum_arm_joint_delta_rad": 0.0,
+        "maximum_finger_joint_delta_m": 0.0,
+        "note": "Measured initial-state differences, not a calibrated accuracy acceptance threshold"
+      }
+    ],
+    "actual_initial_state_coverage": 1
+  },
+  "source_identity": {
+    "protocol_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment.frozen_protocol.json",
+    "protocol_sha256": "0e09dec1a329d3e3609970c8ad4ce06074423c0d982ecfdb0d0b7b1fec3f9ecd",
+    "authorization_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/authorization_02.json",
+    "authorization_sha256": "2cc78f5725b232247e865ceb0a33972ef716ad4c59da2e8f8f7f43cc2f6441f1",
+    "collector_sha256": "b42e54232a28ef99a7b6ea98600460da090018b7777cd4899e9aaf60aa993690",
+    "original_ledger_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+    "original_ledger_sha256": "8d2bbcc3e7c48aeac38128d86b5ba0fd9aa77f2c8d751b027fff1215e9315495",
+    "ledger_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/authorized_cumulative_budget.json",
+    "ledger_snapshot_sha256": "32285221204a5d6b62e22b6918b419c4e9b82705da1d383302bce3f2e0ac864b",
+    "created_utc": "2026-11-03T14:18:27.663516+00:00",
+    "runtime_commit": "801a3f704298faf00cc31b55d572e5e0ff4bb4b6",
+    "historical_and_P9_and_pi05_excluded": true
+  }
+}

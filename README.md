@@ -102,6 +102,7 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
 - [当前版本技术参考](docs/lab_cuvette_loading/Project_release_v1/README.md)：资产规格、接口和验收证据导航。
 - [装载进展 Progress v1.2](docs/lab_cuvette_loading/Progress_v1_2/README.md)：在线 `--progress`、已有轨迹离线分析、阶段证据和可视化；保留原评分与 reward。
 - [冻结策略量化评测](docs/lab_cuvette_loading/Policy_eval_v1/README.md)：GPT direct P9 与 LIBERO π0.5 的协议、真实逐集结果、输入及成本审计。
+- [历史 debug04 策略恢复与独立复测](docs/lab_cuvette_loading/Gpt_debug04_v1/README.md)：完整策略身份、历史量化、当前标准场景单集结果及读取证据。
 - [数据用途与移交](docs/lab_cuvette_loading/Project_release_v1/data_usage.md) · [可选策略部署](policy/backends/OPTIONAL_POLICIES.md)。
 - [历史版本](docs/history/README.md) · [贡献规范](CONTRIBUTING.md) · [CPU CI](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) · [结果阅读包](docs/agent_handoff/README.md)。
 

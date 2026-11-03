@@ -1,0 +1,251 @@
+{
+  "schema": "labsim.Gpt_debug04_v1.official_reader_summary.v1",
+  "passed": true,
+  "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+  "closure_passed_before_any_h5_open": true,
+  "closure_receipt": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/validation/formal_debug04_01_closed.json",
+  "closure_receipt_sha256": "fcf6aa40af68f840cc66003761b8d72d79c81441914c1c3147bb323bb9222c8f",
+  "actual_runtime_commit": "801a3f704298faf00cc31b55d572e5e0ff4bb4b6",
+  "reader_execution_commit": "801a3f704298faf00cc31b55d572e5e0ff4bb4b6",
+  "normal_entrypoints": {
+    "index": "python -m demos.lab_cuvette_project_release_v1.dataset_index",
+    "reader": "./labsim dataset-check --sample-filter failure --policy both"
+  },
+  "purpose_selection": "policy_evaluation",
+  "sample_filter": "failure",
+  "dataset_class": "policy.dataset.lab_cuvette_project_release_dataset.LabCuvetteProjectReleaseDataset",
+  "recorded_policy_image_shape": [
+    3,
+    256,
+    256
+  ],
+  "raw_h5_dataset_shapes": {
+    "actions": {
+      "shape": [
+        6060,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "camera_1_rgb": {
+      "shape": [
+        6060,
+        3,
+        256,
+        256
+      ],
+      "dtype": "uint8"
+    },
+    "camera_2_rgb": {
+      "shape": [
+        6060,
+        3,
+        256,
+        256
+      ],
+      "dtype": "uint8"
+    },
+    "camera_timestamp/side_camera_rgb": {
+      "shape": [
+        6060
+      ],
+      "dtype": "float64"
+    },
+    "camera_timestamp/wrist_camera_rgb": {
+      "shape": [
+        6060
+      ],
+      "dtype": "float64"
+    },
+    "terminal_observation/side_camera_rgb": {
+      "shape": [
+        3,
+        256,
+        256
+      ],
+      "dtype": "uint8"
+    },
+    "terminal_observation/wrist_camera_rgb": {
+      "shape": [
+        3,
+        256,
+        256
+      ],
+      "dtype": "uint8"
+    }
+  },
+  "index_counts": {
+    "success": 0,
+    "failure": 1,
+    "all_valid": 1,
+    "incomplete": 0
+  },
+  "included_episode_ids": [
+    "32bd28cb-aee3-4bea-9c10-5408fc1d1b55"
+  ],
+  "readers": [
+    {
+      "policy_type": "act",
+      "episodes": [
+        "episode_0000"
+      ],
+      "scene_fingerprint": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "image_shapes": {
+        "side_camera_rgb": [
+          3,
+          3,
+          256,
+          256
+        ],
+        "wrist_camera_rgb": [
+          3,
+          3,
+          256,
+          256
+        ]
+      },
+      "image_dtypes": {
+        "side_camera_rgb": "torch.float32",
+        "wrist_camera_rgb": "torch.float32"
+      },
+      "action_shape": [
+        3,
+        16,
+        8
+      ],
+      "action_dtype": "torch.float32",
+      "all_numeric_finite": true,
+      "episode_checks": [
+        {
+          "episode_id": "episode_0000",
+          "transitions": 6060,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            6060,
+            8
+          ],
+          "executed_command_shape": [
+            6060,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": false,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    },
+    {
+      "policy_type": "dp",
+      "episodes": [
+        "episode_0000"
+      ],
+      "scene_fingerprint": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "image_shapes": {
+        "side_camera_rgb": [
+          3,
+          3,
+          3,
+          256,
+          256
+        ],
+        "wrist_camera_rgb": [
+          3,
+          3,
+          3,
+          256,
+          256
+        ]
+      },
+      "image_dtypes": {
+        "side_camera_rgb": "torch.float32",
+        "wrist_camera_rgb": "torch.float32"
+      },
+      "action_shape": [
+        3,
+        16,
+        8
+      ],
+      "action_dtype": "torch.float32",
+      "all_numeric_finite": true,
+      "episode_checks": [
+        {
+          "episode_id": "episode_0000",
+          "transitions": 6060,
+          "observation_action_time_aligned": true,
+          "action_shape": [
+            6060,
+            8
+          ],
+          "executed_command_shape": [
+            6060,
+            9
+          ],
+          "source_slot_id": "A1",
+          "target_seat_id": "candidate_far_hinge",
+          "asset_id": "cuvette_xy_1000",
+          "record_valid": true,
+          "task_success": false,
+          "condition_group": "natural"
+        }
+      ],
+      "training_or_optimizer_executed": false
+    }
+  ],
+  "source_hashes_before": {
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/dataset/episode_0000.h5": "123f68e4f76ff093f5e5edb55a327b07bca27f5fe5284f07659199c869275ce1",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/episode_0000_result.json": "f320a03a214e9ad3761eae994d72405efd837aa0fb1e5badf8fb06d482af6180",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/result.json": "272fd71a03b837a141e55ca97a43576c9a517a63aeaf321658da6377886f7e8e",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/independent_score.json": "fbc474de45ba497329b34325c1ec3081740a7da09792da6c86ef6298b7e09c7b",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/episode_0000_complete.json": "8e5f2df7df9537c26e6773b0d0a5e83ae7bf7bac91a87cbf24c4872db47913b1",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/recording_closed_receipt.json": "602de8074ac34080a1029697aad240644162d58269392074083c16e00e132895"
+  },
+  "source_hashes_after": {
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/dataset/episode_0000.h5": "123f68e4f76ff093f5e5edb55a327b07bca27f5fe5284f07659199c869275ce1",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/episode_0000_result.json": "f320a03a214e9ad3761eae994d72405efd837aa0fb1e5badf8fb06d482af6180",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/result.json": "272fd71a03b837a141e55ca97a43576c9a517a63aeaf321658da6377886f7e8e",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/independent_score.json": "fbc474de45ba497329b34325c1ec3081740a7da09792da6c86ef6298b7e09c7b",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/episode_0000_complete.json": "8e5f2df7df9537c26e6773b0d0a5e83ae7bf7bac91a87cbf24c4872db47913b1",
+    "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Gpt_debug04_v1/20261103/formal_debug04_01/environment/episode_0000/recording_closed_receipt.json": "602de8074ac34080a1029697aad240644162d58269392074083c16e00e132895"
+  },
+  "source_hashes_unchanged": true,
+  "source_labels_before": {
+    "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+    "complete": true,
+    "publication_state": "complete",
+    "record_purpose": "policy_evaluation",
+    "record_valid": true,
+    "task_success": false,
+    "task_success_known": true,
+    "failure_type": "BLOCKED",
+    "termination_reason": "POLICY_FINISH_REQUEST",
+    "finalization_id": "948f879a7a1d8518adf028ab65fc5837e7aa032a3907510a35e993d766b8cf19",
+    "success_bc_eligible": false
+  },
+  "source_labels_after": {
+    "episode_id": "32bd28cb-aee3-4bea-9c10-5408fc1d1b55",
+    "complete": true,
+    "publication_state": "complete",
+    "record_purpose": "policy_evaluation",
+    "record_valid": true,
+    "task_success": false,
+    "task_success_known": true,
+    "failure_type": "BLOCKED",
+    "termination_reason": "POLICY_FINISH_REQUEST",
+    "finalization_id": "948f879a7a1d8518adf028ab65fc5837e7aa032a3907510a35e993d766b8cf19",
+    "success_bc_eligible": false
+  },
+  "source_labels_unchanged": true,
+  "task_success": false,
+  "record_valid": true,
+  "success_bc_eligible": false,
+  "source_h5_copied": false,
+  "gpu_disabled": true,
+  "optimizer_or_training_executed": false,
+  "actual_batch_read": true,
+  "index_receipt_sha256": "d85dcb79bb0528883004ad715104157175521ee795ce7132b69144a59be69d80",
+  "reader_receipt_sha256": "5ecfb1b8d20fa512d809beb85adc649be2d48b9e7d58c58a627230ca43d27961"
+}
