@@ -1,0 +1,58 @@
+{
+  "version": "SingleCellUnit_v2",
+  "upstream_commit": "ab519ed4f2493e5ae069a8b661e6a51e1d432186",
+  "units": [
+    {
+      "id": "ika_open",
+      "name": "单细胞测序 unit · 温控/混匀开盖",
+      "asset_id": "ika_ks4000",
+      "builder": "hood",
+      "last_phase": "release_settle",
+      "goal": "Open the IKA transparent hood using its front handle, release the handle and withdraw the gripper. Leave the hood above 69 degrees for at least 3 seconds. Do not move the beaker."
+    },
+    {
+      "id": "diynafluor_uncap",
+      "name": "单细胞测序 unit · 核酸浓度仪取帽",
+      "asset_id": "diynafluor",
+      "builder": "cap",
+      "last_phase": "parked_settle",
+      "goal": "Remove the green light baffle cap from the DIYNAFLUOR sample opening and place it on the adjacent parking support. Release, withdraw at least 12 cm and leave it stable for at least 3 seconds."
+    },
+    {
+      "id": "flex_load",
+      "name": "单细胞测序 unit · 液体工作站装架",
+      "asset_id": "opentrons_flex_single_5_1000ul",
+      "builder": "rack",
+      "last_phase": "loaded_settle",
+      "goal": "Pick up the empty green MagSep rack from the table and place it on the front D2 surface inside the Opentrons Flex. Release it, withdraw at least 12 cm and wait for at least 3 seconds of stable support."
+    },
+    {
+      "id": "magsep_transfer",
+      "name": "单细胞测序 unit · 磁珠模块空架搬运",
+      "asset_id": "magsep_rack_12_tube",
+      "builder": "rack",
+      "last_phase": "loaded_settle",
+      "goal": "Pick up the empty green MagSep rack and place it at the marked table station. Release it, withdraw at least 12 cm and leave it stable for at least 3 seconds."
+    },
+    {
+      "id": "pcr_insert",
+      "name": "单细胞测序 unit · PCR 小试管插孔",
+      "asset_id": "biorad_cfxopus",
+      "builder": "pcr",
+      "last_phase": "loaded_settle",
+      "goal": "Pick up the small blue-capped tube from the table holder and insert it upright into the central well (row 4, column 6) of the open PCR block. Release the tube, withdraw at least 12 cm and leave it seated for at least 3 seconds. The powered lid is already open.",
+      "smooth_gripper": true,
+      "effort_limit_N": 0.5
+    }
+  ],
+  "blocked": [
+    {
+      "asset_id": "openflexure_cell_counter",
+      "reason": "已有机械臂尝试未通过；原夹爪碰样品架/照明支座，需要有尺寸依据的细指或夹具。"
+    },
+    {
+      "asset_id": "poseidon_microscope_support",
+      "reason": "辅助显微支架，非完整液滴处理设备；没有独立可操作仪器任务。"
+    }
+  ]
+}

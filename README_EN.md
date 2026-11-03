@@ -102,3 +102,9 @@ Public observations include both cameras, robot state and declared contact signa
 - [History](docs/history/README.md) · [Contributing](CONTRIBUTING.md) · [CPU CI](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) · [Result packages](docs/agent_handoff/README.md).
 
 LabSim builds on [LabUtopia](https://github.com/Rui-li023/LabUtopia); see [upstream references](docs/upstream/README.labutopia.md) and [LICENSE](LICENSE). Asset-specific provenance and authorization are recorded in the [lock file](config/lab_cuvette_loading/Project_v1/assets.lock.json). The project owner authorized public redistribution of the external instrument/cuvette CAD and derivatives. This is rigid-body simulation; real-world mass, friction and dynamics remain engineering assumptions pending calibration.
+
+## Single-cell workflow assets
+
+Five instrument units (including the derived PCR well block), expert recording and GPT-6 / π0.5 evaluation are documented in [single-cell units](demos/cell_units/README.md). Use `./labsim unit list` to list them. The local consolidated HTML shows videos and outcomes on each instrument card.
+
+Source assets and their scope are described in [asset APIs and demos](demos/cell_assets/README.md).

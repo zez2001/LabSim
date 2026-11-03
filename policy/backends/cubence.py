@@ -159,8 +159,8 @@ def input_token_bound(payload: dict, limit: int) -> int:
 
 
 class CubenceClient:
-    def __init__(self, config: dict, ledger: BudgetLedger, *, opener=None, sleeper=time.sleep):
-        self.cfg, self.ledger, self.sleeper = validate_config(config), ledger, sleeper
+    def __init__(self, config: dict, ledger: BudgetLedger, *, opener=None, sleeper=time.sleep, config_validator=validate_config):
+        self.cfg, self.ledger, self.sleeper = config_validator(config), ledger, sleeper
         self.opener = opener or urllib.request.build_opener(_NoRedirect)
         self.key = os.environ.get(config["credential_env"], "").strip()
         if not self.key:

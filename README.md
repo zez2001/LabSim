@@ -4,6 +4,8 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 
 当前推荐版本为 **`Project_release_v1`**，长期开发分支为 **`codex/labsim`**。
 
+本地完整工程为 `SLAI_Lab/labsim/`，资产缓存位于 `local_assets/`，最终结果位于 `results/final/`；代码快照见[交付说明](DELIVERY.md)。
+
 [English](README_EN.md) · [中文导航](README_CN.md) · [组内使用指南](docs/development/ONBOARDING.md) · [版本与技术参考](docs/lab_cuvette_loading/Project_release_v1/README.md) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim)
 
 ## 完整演示
@@ -102,3 +104,9 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
 - [历史版本](docs/history/README.md) · [贡献规范](CONTRIBUTING.md) · [CPU CI](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) · [结果阅读包](docs/agent_handoff/README.md)。
 
 项目基于 [LabUtopia](https://github.com/Rui-li023/LabUtopia)，引用见[上游文档](docs/upstream/README.labutopia.md)，代码许可见 [LICENSE](LICENSE)。第三方资产按[锁文件来源与授权](config/lab_cuvette_loading/Project_v1/assets.lock.json)使用；外部仪器与比色皿 CAD 及派生模型获项目所有者公开再分发授权。当前为刚体纯仿真任务；实物质量、摩擦与动力学采用明确工程假设，真实校准另行进行。
+
+## 单细胞前流程数字资产
+
+五个仪器的可调用任务场景（PCR 为工程派生孔腔）、expert 生成及 GPT-6 / π0.5 验证入口见[单细胞测序 unit](demos/cell_units/README.md)。通过 `./labsim unit list` 查看，视频在本地最终 HTML 的对应资产卡片内。
+
+单细胞前流程设备见[设备资产与 API](demos/cell_assets/README.md)：固定来源资产、Franka 接触演示及范围限制。
