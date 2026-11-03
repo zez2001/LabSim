@@ -1,0 +1,2574 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:labsim:lab-cuvette-loading:progress:v1.2",
+  "title": "LabSim cuvette loading Progress v1.2 records and evaluator values",
+  "description": "JSONL records are validated one object at a time. Time is episode simulation seconds. A control transition owns (t_obs,t_next]; before and after require exact physical sample matches and are null if unavailable. Reset/initial and unassigned terminal events remain in summary. Completion is causal at confirmed_t; no future result is written into earlier snapshots. Additional properties permit source metadata and compatible future diagnostics. Source episode, asset and code identities are data, not fixed constants in this schema.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/transition"
+    },
+    {
+      "$ref": "#/$defs/event"
+    },
+    {
+      "$ref": "#/$defs/summary"
+    },
+    {
+      "$ref": "#/$defs/snapshot"
+    },
+    {
+      "$ref": "#/$defs/metric"
+    },
+    {
+      "$ref": "#/$defs/resolvedConfiguration"
+    }
+  ],
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": [
+            "number",
+            "boolean",
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          }
+        },
+        "unit": {
+          "type": "string"
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "available",
+        "value",
+        "unit",
+        "source",
+        "reason"
+      ],
+      "description": "SI units: m, rad, s, N, m/s; bool and 1 are dimensionless. Missing evidence is available=false,value=null with a reason; never numeric zero.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "available": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "available": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "milestone": {
+      "type": "object",
+      "properties": {
+        "ever_achieved": {
+          "type": "boolean"
+        },
+        "current_satisfied": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "first_candidate_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "first_confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "evidence_version": {
+          "type": "string"
+        },
+        "last_confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "confirmation_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "ever_achieved",
+        "current_satisfied",
+        "first_candidate_t",
+        "first_confirmed_t",
+        "evidence_version",
+        "last_confirmed_t",
+        "confirmation_count"
+      ]
+    },
+    "stage": {
+      "type": "object",
+      "properties": {
+        "ever_achieved": {
+          "type": "boolean"
+        },
+        "current_satisfied": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "first_candidate_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "first_confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "evidence_version": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "current_satisfied",
+            "evidence_missing",
+            "in_progress",
+            "regressed",
+            "not_started",
+            "not_reached"
+          ]
+        },
+        "continuous": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "terminal_status": {
+          "enum": [
+            "not_reached",
+            "current_satisfied",
+            "previously_achieved_currently_unmet",
+            "incomplete",
+            "interrupted"
+          ]
+        },
+        "last_confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "confirmation_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "effective_continuous": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "continuous_semantics": {
+          "type": "string"
+        },
+        "user_status": {
+          "enum": [
+            "active",
+            "completed_followed",
+            "temporarily_unmet",
+            "evidenced_failure",
+            "evidence_missing",
+            "not_started"
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "ever_achieved",
+        "current_satisfied",
+        "first_candidate_t",
+        "first_confirmed_t",
+        "evidence_version",
+        "status",
+        "continuous",
+        "last_confirmed_t",
+        "confirmation_count"
+      ]
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "labsim.lab_cuvette_loading.progress.v1.2"
+        },
+        "event_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "t": {
+          "type": "number"
+        },
+        "candidate_start_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "confirmed_t": {
+          "type": "number"
+        },
+        "attempt_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "evidence": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "event_id",
+        "name",
+        "t",
+        "candidate_start_t",
+        "confirmed_t",
+        "attempt_id",
+        "evidence"
+      ],
+      "description": "schema is added only in progress_events.jsonl. Snapshot/summary/transition event objects retain the core event shape. Candidate events also have confirmed_t=t as their emission time; milestone confirmation is represented by the separate *_confirmed event. Event t always records emission/confirmation time, not a backdated candidate start."
+    },
+    "stableWindow": {
+      "type": "object",
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "conditions": {
+          "type": "object",
+          "properties": {
+            "correct_target_supported": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "released": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "retreated": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "no_finger_contact": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "upright": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "retained_loading_depth": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "observed_input_overlap_within_limit": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "correct_target_supported",
+            "released",
+            "retreated",
+            "no_finger_contact",
+            "upright",
+            "retained_loading_depth",
+            "observed_input_overlap_within_limit"
+          ]
+        },
+        "current_satisfied": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "candidate_start_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "continuous_duration_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "required_duration_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "position_drift_m": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "orientation_change_rad": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "available",
+        "conditions",
+        "current_satisfied",
+        "candidate_start_t",
+        "confirmed_t",
+        "continuous_duration_s",
+        "required_duration_s",
+        "position_drift_m",
+        "orientation_change_rad"
+      ],
+      "description": "Continuous duration resets when conditions, pose bounds or declared evidence cadence fail. Historical ever_achieved remains separate from current_satisfied."
+    },
+    "snapshot": {
+      "type": "object",
+      "properties": {
+        "progress_schema_version": {
+          "const": "labsim.Progress_v1_2.v1"
+        },
+        "progress_evaluator_version": {
+          "type": "string"
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "episode_id": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
+        "t": {
+          "type": "number"
+        },
+        "physics_step": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "sample_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current_stage": {
+          "enum": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete"
+          ]
+        },
+        "current_stage_continuous": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stage_vector": {
+          "type": "array",
+          "items": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "minItems": 9,
+          "maxItems": 9
+        },
+        "stage_order": {
+          "const": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete"
+          ]
+        },
+        "stages": {
+          "type": "object",
+          "properties": {
+            "approach_grasp": {
+              "$ref": "#/$defs/stage"
+            },
+            "grasp": {
+              "$ref": "#/$defs/stage"
+            },
+            "extract": {
+              "$ref": "#/$defs/stage"
+            },
+            "transport": {
+              "$ref": "#/$defs/stage"
+            },
+            "align": {
+              "$ref": "#/$defs/stage"
+            },
+            "insert": {
+              "$ref": "#/$defs/stage"
+            },
+            "support_transfer": {
+              "$ref": "#/$defs/stage"
+            },
+            "release_retreat": {
+              "$ref": "#/$defs/stage"
+            },
+            "stable_complete": {
+              "$ref": "#/$defs/stage"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete"
+          ]
+        },
+        "milestones": {
+          "type": "object",
+          "properties": {
+            "approach_grasp": {
+              "$ref": "#/$defs/milestone"
+            },
+            "grasp": {
+              "$ref": "#/$defs/milestone"
+            },
+            "extract": {
+              "$ref": "#/$defs/milestone"
+            },
+            "transport": {
+              "$ref": "#/$defs/milestone"
+            },
+            "align": {
+              "$ref": "#/$defs/milestone"
+            },
+            "insert": {
+              "$ref": "#/$defs/milestone"
+            },
+            "support_transfer": {
+              "$ref": "#/$defs/milestone"
+            },
+            "release_retreat": {
+              "$ref": "#/$defs/milestone"
+            },
+            "stable_complete": {
+              "$ref": "#/$defs/milestone"
+            },
+            "released": {
+              "$ref": "#/$defs/milestone"
+            },
+            "retreated": {
+              "$ref": "#/$defs/milestone"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete",
+            "released",
+            "retreated"
+          ]
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "grasp_approach_position_error_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_approach_orientation_error_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "gripper_opening_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "finger_contact_N": {
+              "$ref": "#/$defs/metric"
+            },
+            "bilateral_contact": {
+              "$ref": "#/$defs/metric"
+            },
+            "bilateral_contact_duration_s": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_relative_translation_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_relative_rotation_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_quality_current": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_off_source_verified": {
+              "$ref": "#/$defs/metric"
+            },
+            "source_bottom_envelope_clearance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "source_supported": {
+              "$ref": "#/$defs/metric"
+            },
+            "preinsert_distance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "held_transport_displacement_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_lateral_error_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_tilt_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_yaw_error_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "correct_target_contains": {
+              "$ref": "#/$defs/metric"
+            },
+            "raw_depth_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_depth_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "depth_ratio": {
+              "$ref": "#/$defs/metric"
+            },
+            "effective_insertion": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_bottom_support_N": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_bottom_gap_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "input_geometry_overlap_observed_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "both_fingers_open_and_detached": {
+              "$ref": "#/$defs/metric"
+            },
+            "gripper_object_clearance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "tcp_object_distance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "stable_duration_s": {
+              "$ref": "#/$defs/metric"
+            },
+            "stable_position_drift_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "stable_orientation_change_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "insertion_depth_change_window_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "contact_stall_observed": {
+              "$ref": "#/$defs/metric"
+            },
+            "native_linear_velocity_m_s": {
+              "$ref": "#/$defs/metric"
+            },
+            "pose_difference_linear_velocity_m_s": {
+              "$ref": "#/$defs/metric"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/metric"
+          },
+          "required": [
+            "grasp_approach_position_error_m",
+            "grasp_approach_orientation_error_rad",
+            "gripper_opening_m",
+            "finger_contact_N",
+            "bilateral_contact",
+            "bilateral_contact_duration_s",
+            "grasp_relative_translation_m",
+            "grasp_relative_rotation_rad",
+            "grasp_quality_current",
+            "grasp_off_source_verified",
+            "source_bottom_envelope_clearance_m",
+            "source_supported",
+            "preinsert_distance_m",
+            "held_transport_displacement_m",
+            "target_lateral_error_m",
+            "target_tilt_rad",
+            "target_yaw_error_rad",
+            "correct_target_contains",
+            "raw_depth_m",
+            "target_depth_m",
+            "depth_ratio",
+            "effective_insertion",
+            "target_bottom_support_N",
+            "target_bottom_gap_m",
+            "input_geometry_overlap_observed_m",
+            "both_fingers_open_and_detached",
+            "gripper_object_clearance_m",
+            "tcp_object_distance_m",
+            "stable_duration_s",
+            "stable_position_drift_m",
+            "stable_orientation_change_rad",
+            "insertion_depth_change_window_m",
+            "contact_stall_observed",
+            "native_linear_velocity_m_s",
+            "pose_difference_linear_velocity_m_s"
+          ]
+        },
+        "hold_state": {
+          "enum": [
+            "source_supported",
+            "gripper_held",
+            "target_supported",
+            "unsupported_or_lost",
+            "unknown"
+          ]
+        },
+        "hold_evidence": {
+          "type": "object",
+          "properties": {
+            "source_supported": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "gripper_held": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "target_supported": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "source_supported",
+            "gripper_held",
+            "target_supported"
+          ]
+        },
+        "attempt_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "highest_ever_stage": {
+          "enum": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete",
+            null
+          ]
+        },
+        "coverage_progress": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "coverage_progress_definition": {
+          "type": "string"
+        },
+        "stable_window": {
+          "$ref": "#/$defs/stableWindow"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "sampling_gap": {
+              "type": "boolean"
+            },
+            "phase_used_as_success_evidence": {
+              "const": false
+            },
+            "raw_fields_present": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "sampling_gap",
+            "phase_used_as_success_evidence",
+            "raw_fields_present"
+          ]
+        },
+        "raw_axial_depth_m": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "raw_depth_fraction": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Signed and unclipped; can be negative or exceed one. This is a diagnostic axial projection ratio."
+        },
+        "valid_insertion_progress": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Causal task-gated insertion diagnostic, separate from raw depth and original final score."
+        },
+        "insertion_progress_applicable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "insertion_gate_details": {
+          "$ref": "#/$defs/insertionGateDetails"
+        },
+        "hold_state_user": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "progress_schema_version",
+        "progress_evaluator_version",
+        "config_hash",
+        "episode_id",
+        "t",
+        "physics_step",
+        "sample_index",
+        "current_stage",
+        "current_stage_continuous",
+        "stage_vector",
+        "stage_order",
+        "stages",
+        "milestones",
+        "metrics",
+        "hold_state",
+        "hold_evidence",
+        "attempt_id",
+        "highest_ever_stage",
+        "coverage_progress",
+        "coverage_progress_definition",
+        "stable_window",
+        "events",
+        "evidence",
+        "raw_axial_depth_m",
+        "raw_depth_fraction",
+        "valid_insertion_progress",
+        "insertion_progress_applicable",
+        "insertion_gate_details",
+        "hold_state_user"
+      ]
+    },
+    "compactSnapshot": {
+      "type": "object",
+      "properties": {
+        "progress_schema_version": {
+          "const": "labsim.Progress_v1_2.v1"
+        },
+        "progress_evaluator_version": {
+          "type": "string"
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "episode_id": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
+        "t": {
+          "type": "number"
+        },
+        "physics_step": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "sample_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current_stage": {
+          "enum": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete"
+          ]
+        },
+        "current_stage_continuous": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stage_vector": {
+          "type": "array",
+          "items": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "minItems": 9,
+          "maxItems": 9
+        },
+        "stage_order": {
+          "const": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete"
+          ]
+        },
+        "stages": {
+          "type": "object",
+          "properties": {
+            "approach_grasp": {
+              "$ref": "#/$defs/stage"
+            },
+            "grasp": {
+              "$ref": "#/$defs/stage"
+            },
+            "extract": {
+              "$ref": "#/$defs/stage"
+            },
+            "transport": {
+              "$ref": "#/$defs/stage"
+            },
+            "align": {
+              "$ref": "#/$defs/stage"
+            },
+            "insert": {
+              "$ref": "#/$defs/stage"
+            },
+            "support_transfer": {
+              "$ref": "#/$defs/stage"
+            },
+            "release_retreat": {
+              "$ref": "#/$defs/stage"
+            },
+            "stable_complete": {
+              "$ref": "#/$defs/stage"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete"
+          ]
+        },
+        "milestones": {
+          "type": "object",
+          "properties": {
+            "approach_grasp": {
+              "$ref": "#/$defs/milestone"
+            },
+            "grasp": {
+              "$ref": "#/$defs/milestone"
+            },
+            "extract": {
+              "$ref": "#/$defs/milestone"
+            },
+            "transport": {
+              "$ref": "#/$defs/milestone"
+            },
+            "align": {
+              "$ref": "#/$defs/milestone"
+            },
+            "insert": {
+              "$ref": "#/$defs/milestone"
+            },
+            "support_transfer": {
+              "$ref": "#/$defs/milestone"
+            },
+            "release_retreat": {
+              "$ref": "#/$defs/milestone"
+            },
+            "stable_complete": {
+              "$ref": "#/$defs/milestone"
+            },
+            "released": {
+              "$ref": "#/$defs/milestone"
+            },
+            "retreated": {
+              "$ref": "#/$defs/milestone"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete",
+            "released",
+            "retreated"
+          ]
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "grasp_approach_position_error_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_approach_orientation_error_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "gripper_opening_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "finger_contact_N": {
+              "$ref": "#/$defs/metric"
+            },
+            "bilateral_contact": {
+              "$ref": "#/$defs/metric"
+            },
+            "bilateral_contact_duration_s": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_relative_translation_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_relative_rotation_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_quality_current": {
+              "$ref": "#/$defs/metric"
+            },
+            "grasp_off_source_verified": {
+              "$ref": "#/$defs/metric"
+            },
+            "source_bottom_envelope_clearance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "source_supported": {
+              "$ref": "#/$defs/metric"
+            },
+            "preinsert_distance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "held_transport_displacement_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_lateral_error_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_tilt_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_yaw_error_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "correct_target_contains": {
+              "$ref": "#/$defs/metric"
+            },
+            "raw_depth_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_depth_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "depth_ratio": {
+              "$ref": "#/$defs/metric"
+            },
+            "effective_insertion": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_bottom_support_N": {
+              "$ref": "#/$defs/metric"
+            },
+            "target_bottom_gap_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "input_geometry_overlap_observed_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "both_fingers_open_and_detached": {
+              "$ref": "#/$defs/metric"
+            },
+            "gripper_object_clearance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "tcp_object_distance_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "stable_duration_s": {
+              "$ref": "#/$defs/metric"
+            },
+            "stable_position_drift_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "stable_orientation_change_rad": {
+              "$ref": "#/$defs/metric"
+            },
+            "insertion_depth_change_window_m": {
+              "$ref": "#/$defs/metric"
+            },
+            "contact_stall_observed": {
+              "$ref": "#/$defs/metric"
+            },
+            "native_linear_velocity_m_s": {
+              "$ref": "#/$defs/metric"
+            },
+            "pose_difference_linear_velocity_m_s": {
+              "$ref": "#/$defs/metric"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/metric"
+          },
+          "required": [
+            "grasp_approach_position_error_m",
+            "grasp_approach_orientation_error_rad",
+            "gripper_opening_m",
+            "finger_contact_N",
+            "bilateral_contact",
+            "bilateral_contact_duration_s",
+            "grasp_relative_translation_m",
+            "grasp_relative_rotation_rad",
+            "grasp_quality_current",
+            "grasp_off_source_verified",
+            "source_bottom_envelope_clearance_m",
+            "source_supported",
+            "preinsert_distance_m",
+            "held_transport_displacement_m",
+            "target_lateral_error_m",
+            "target_tilt_rad",
+            "target_yaw_error_rad",
+            "correct_target_contains",
+            "raw_depth_m",
+            "target_depth_m",
+            "depth_ratio",
+            "effective_insertion",
+            "target_bottom_support_N",
+            "target_bottom_gap_m",
+            "input_geometry_overlap_observed_m",
+            "both_fingers_open_and_detached",
+            "gripper_object_clearance_m",
+            "tcp_object_distance_m",
+            "stable_duration_s",
+            "stable_position_drift_m",
+            "stable_orientation_change_rad",
+            "insertion_depth_change_window_m",
+            "contact_stall_observed",
+            "native_linear_velocity_m_s",
+            "pose_difference_linear_velocity_m_s"
+          ]
+        },
+        "hold_state": {
+          "enum": [
+            "source_supported",
+            "gripper_held",
+            "target_supported",
+            "unsupported_or_lost",
+            "unknown"
+          ]
+        },
+        "hold_evidence": {
+          "type": "object",
+          "properties": {
+            "source_supported": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "gripper_held": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "target_supported": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "source_supported",
+            "gripper_held",
+            "target_supported"
+          ]
+        },
+        "attempt_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "highest_ever_stage": {
+          "enum": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete",
+            null
+          ]
+        },
+        "coverage_progress": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "coverage_progress_definition": {
+          "type": "string"
+        },
+        "stable_window": {
+          "$ref": "#/$defs/stableWindow"
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "sampling_gap": {
+              "type": "boolean"
+            },
+            "phase_used_as_success_evidence": {
+              "const": false
+            },
+            "raw_fields_present": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "sampling_gap",
+            "phase_used_as_success_evidence",
+            "raw_fields_present"
+          ]
+        },
+        "raw_axial_depth_m": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "raw_depth_fraction": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Signed and unclipped; can be negative or exceed one. This is a diagnostic axial projection ratio."
+        },
+        "valid_insertion_progress": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Causal task-gated insertion diagnostic, separate from raw depth and original final score."
+        },
+        "insertion_progress_applicable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "insertion_gate_details": {
+          "$ref": "#/$defs/insertionGateDetails"
+        },
+        "hold_state_user": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "progress_schema_version",
+        "progress_evaluator_version",
+        "config_hash",
+        "episode_id",
+        "t",
+        "physics_step",
+        "sample_index",
+        "current_stage",
+        "current_stage_continuous",
+        "stage_vector",
+        "stage_order",
+        "stages",
+        "milestones",
+        "metrics",
+        "hold_state",
+        "hold_evidence",
+        "attempt_id",
+        "highest_ever_stage",
+        "coverage_progress",
+        "coverage_progress_definition",
+        "stable_window",
+        "evidence",
+        "raw_axial_depth_m",
+        "raw_depth_fraction",
+        "valid_insertion_progress",
+        "insertion_progress_applicable",
+        "insertion_gate_details",
+        "hold_state_user"
+      ],
+      "description": "Persisted before/after/reset snapshots omit events to prevent duplication; interval events are stored beside them."
+    },
+    "attempt": {
+      "type": "object",
+      "properties": {
+        "attempt_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start_t": {
+          "type": "number"
+        },
+        "end_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "success",
+            "failure",
+            "interrupted",
+            "incomplete"
+          ]
+        },
+        "ended_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "completed_stages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "previous_attempt_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "recovered_from_attempt_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "next_attempt_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "maximum_relative_translation_m": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum_relative_rotation_rad": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "source_clear_confirmed": {
+          "type": "boolean"
+        },
+        "held_transport_confirmed": {
+          "type": "boolean"
+        },
+        "preinsert_region_reached": {
+          "type": "boolean"
+        },
+        "stable_complete_t": {
+          "type": "number"
+        },
+        "operation_end_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "outcome_confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "outcome_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "final_outcome_confirmed": {
+          "type": "boolean"
+        },
+        "stage_timing": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/attemptStageTiming"
+          }
+        },
+        "relative_pose_reference": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "t": {
+              "type": "number"
+            },
+            "position_m": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "quaternion_wxyz": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "frame": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "t",
+            "position_m",
+            "quaternion_wxyz",
+            "frame",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        "first_support_transfer_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "relative_motion_statistics": {
+          "type": "object",
+          "required": [
+            "operation",
+            "before_first_target_support",
+            "support_transfer"
+          ],
+          "additionalProperties": {
+            "$ref": "#/$defs/relativeMotionInterval"
+          }
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "attempt_id",
+        "start_t",
+        "end_t",
+        "outcome",
+        "ended_by",
+        "completed_stages",
+        "previous_attempt_id",
+        "recovered_from_attempt_id",
+        "next_attempt_id",
+        "maximum_relative_translation_m",
+        "maximum_relative_rotation_rad",
+        "source_clear_confirmed",
+        "held_transport_confirmed",
+        "preinsert_region_reached",
+        "operation_end_t",
+        "outcome_confirmed_t",
+        "final_outcome_confirmed",
+        "relative_motion_statistics",
+        "stage_timing"
+      ],
+      "description": "One grasp interval per attempt. Legal support release ends its grip interval at end_t. A later stable completion updates outcome to success and adds stable_complete_t; past snapshots/events are not rewritten. References are rebuilt internally for each attempt; only relative-motion maxima are serialized here."
+    },
+    "transition": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "labsim.lab_cuvette_loading.progress.v1.2"
+        },
+        "episode_id": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
+        "transition_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "t_obs": {
+          "type": "number"
+        },
+        "t_next": {
+          "type": "number"
+        },
+        "interval_convention": {
+          "const": "(t_obs,t_next]"
+        },
+        "before": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/compactSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "after": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/compactSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        },
+        "unassigned_gap_event_ids": {
+          "type": "array",
+          "items": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "transition": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "source_transition_index": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "obs_step": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "next_obs_step": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "control_interval_s": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "partial_terminal_control_interval": {
+              "type": "boolean"
+            },
+            "done": {
+              "type": "boolean"
+            },
+            "original_task_events": {}
+          },
+          "additionalProperties": true,
+          "description": "Original collector or HDF5 alignment metadata; fields vary by online/offline source. Original actions/reward remain upstream."
+        },
+        "evidence_alignment": {
+          "type": "object",
+          "properties": {
+            "before_available": {
+              "type": "boolean"
+            },
+            "after_available": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "before_available",
+            "after_available"
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "schema",
+        "episode_id",
+        "transition_index",
+        "t_obs",
+        "t_next",
+        "interval_convention",
+        "before",
+        "after",
+        "events",
+        "unassigned_gap_event_ids",
+        "transition",
+        "evidence_alignment"
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "labsim.lab_cuvette_loading.progress.v1.2"
+        },
+        "progress_schema_version": {
+          "const": "labsim.lab_cuvette_loading.progress.v1.2"
+        },
+        "evaluator_schema_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "progress_evaluator_version": {
+          "type": "string"
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "config_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "episode_id": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
+        "progress_complete": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "termination_domain": {
+          "type": "string"
+        },
+        "termination": {
+          "type": "object"
+        },
+        "unfinished_requirement": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "stage": {
+                  "enum": [
+                    "approach_grasp",
+                    "grasp",
+                    "extract",
+                    "transport",
+                    "align",
+                    "insert",
+                    "support_transfer",
+                    "release_retreat",
+                    "stable_complete"
+                  ]
+                },
+                "requirement": {
+                  "type": "string"
+                },
+                "available": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": true,
+              "required": [
+                "code",
+                "stage",
+                "requirement",
+                "available"
+              ]
+            }
+          ]
+        },
+        "failure_observation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "t": {
+                "type": "number"
+              },
+              "attempt_id": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "evidence": {
+                "type": "object"
+              },
+              "attribution": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "required": [
+              "code",
+              "t",
+              "attempt_id",
+              "evidence",
+              "attribution"
+            ]
+          }
+        },
+        "stages": {
+          "type": "object",
+          "properties": {
+            "approach_grasp": {
+              "$ref": "#/$defs/stage"
+            },
+            "grasp": {
+              "$ref": "#/$defs/stage"
+            },
+            "extract": {
+              "$ref": "#/$defs/stage"
+            },
+            "transport": {
+              "$ref": "#/$defs/stage"
+            },
+            "align": {
+              "$ref": "#/$defs/stage"
+            },
+            "insert": {
+              "$ref": "#/$defs/stage"
+            },
+            "support_transfer": {
+              "$ref": "#/$defs/stage"
+            },
+            "release_retreat": {
+              "$ref": "#/$defs/stage"
+            },
+            "stable_complete": {
+              "$ref": "#/$defs/stage"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete"
+          ]
+        },
+        "milestones": {
+          "type": "object",
+          "properties": {
+            "approach_grasp": {
+              "$ref": "#/$defs/milestone"
+            },
+            "grasp": {
+              "$ref": "#/$defs/milestone"
+            },
+            "extract": {
+              "$ref": "#/$defs/milestone"
+            },
+            "transport": {
+              "$ref": "#/$defs/milestone"
+            },
+            "align": {
+              "$ref": "#/$defs/milestone"
+            },
+            "insert": {
+              "$ref": "#/$defs/milestone"
+            },
+            "support_transfer": {
+              "$ref": "#/$defs/milestone"
+            },
+            "release_retreat": {
+              "$ref": "#/$defs/milestone"
+            },
+            "stable_complete": {
+              "$ref": "#/$defs/milestone"
+            },
+            "released": {
+              "$ref": "#/$defs/milestone"
+            },
+            "retreated": {
+              "$ref": "#/$defs/milestone"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "approach_grasp",
+            "grasp",
+            "extract",
+            "transport",
+            "align",
+            "insert",
+            "support_transfer",
+            "release_retreat",
+            "stable_complete",
+            "released",
+            "retreated"
+          ]
+        },
+        "attempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attempt"
+          }
+        },
+        "retry_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "physical_sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence_gap_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknown_metric_sample_counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "input_evidence": {
+          "type": "object"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "last_snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/snapshot"
+            },
+            {
+              "$ref": "#/$defs/compactSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reset_snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/compactSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "first_control_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/compactSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "initial_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        },
+        "unassigned_terminal_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        },
+        "original_result": {},
+        "original_result_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "original_scoring_unchanged": {
+          "const": true
+        },
+        "reward_unchanged": {
+          "const": true
+        },
+        "current_and_historical_status_separate": {
+          "const": true
+        },
+        "output_integrity": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "complete",
+                "partial",
+                "interrupted"
+              ]
+            },
+            "complete": {
+              "type": "boolean"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true,
+                "required": [
+                  "operation",
+                  "type",
+                  "message"
+                ]
+              }
+            },
+            "files": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "bytes": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "additionalProperties": true,
+                "required": [
+                  "bytes",
+                  "sha256"
+                ]
+              }
+            },
+            "hashes_exclude": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "status",
+            "complete",
+            "errors",
+            "files",
+            "hashes_exclude"
+          ]
+        },
+        "recording": {
+          "type": "object",
+          "properties": {
+            "physics_samples": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "control_transitions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "event_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "uncompressed_transition_bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "stored_bytes_excluding_summary": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "compute_wall_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "write_wall_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "physical_annotation_wall_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "total_annotation_wall_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "lifecycle_wall_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "interval_convention": {
+              "const": "(t_obs,t_next]"
+            },
+            "reset_separate": {
+              "const": true
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "physics_samples",
+            "control_transitions",
+            "event_count",
+            "uncompressed_transition_bytes",
+            "stored_bytes_excluding_summary",
+            "compute_wall_seconds",
+            "write_wall_seconds",
+            "physical_annotation_wall_seconds",
+            "total_annotation_wall_seconds",
+            "lifecycle_wall_seconds",
+            "interval_convention",
+            "reset_separate"
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "schema",
+        "progress_schema_version",
+        "evaluator_schema_version",
+        "progress_evaluator_version",
+        "config_sha256",
+        "progress_complete",
+        "output_integrity",
+        "metadata",
+        "recording",
+        "reset_snapshot",
+        "first_control_observation",
+        "initial_events",
+        "unassigned_terminal_events",
+        "original_result",
+        "original_result_sha256"
+      ],
+      "description": "ProgressWriter.finalize output. Core stages/attempts/termination diagnosis are present when evaluator finalization succeeds; degraded writer output may omit them and reports errors. output_integrity.complete concerns sidecar integrity, not task success. original_result is preserved without relabeling. config_hash hashes resolved configuration without itself; config_sha256 hashes the complete saved configuration including config_hash."
+    },
+    "resolvedConfiguration": {
+      "type": "object",
+      "properties": {
+        "progress_schema_version": {
+          "const": "labsim.Progress_v1_2.v1"
+        },
+        "progress_evaluator_version": {
+          "type": "string"
+        },
+        "parameters_version": {
+          "type": "string"
+        },
+        "task": {
+          "type": "string"
+        },
+        "scene_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "asset_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "asset_selection": {
+          "type": "object"
+        },
+        "geometry": {
+          "type": "object"
+        },
+        "thresholds": {
+          "type": "object"
+        },
+        "normalization": {
+          "type": "object"
+        },
+        "sources": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "criterion_scope": {
+          "type": "string"
+        },
+        "reward_adapter": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "const": false
+            },
+            "original_reward_unchanged": {
+              "const": true
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "enabled",
+            "original_reward_unchanged"
+          ]
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "progress_schema_version",
+        "progress_evaluator_version",
+        "parameters_version",
+        "task",
+        "scene_version",
+        "asset_id",
+        "asset_selection",
+        "geometry",
+        "thresholds",
+        "normalization",
+        "sources",
+        "criterion_scope",
+        "reward_adapter",
+        "config_hash"
+      ]
+    },
+    "insertionGateDetails": {
+      "type": "object",
+      "properties": {
+        "gates": {
+          "type": "object",
+          "properties": {
+            "correct_target": {
+              "$ref": "#/$defs/gateFact"
+            },
+            "entrance_region": {
+              "$ref": "#/$defs/gateFact"
+            },
+            "orientation": {
+              "$ref": "#/$defs/gateFact"
+            },
+            "current_attempt_route": {
+              "$ref": "#/$defs/gateFact"
+            },
+            "held_or_transferred": {
+              "$ref": "#/$defs/gateFact"
+            }
+          },
+          "required": [
+            "correct_target",
+            "entrance_region",
+            "orientation",
+            "current_attempt_route",
+            "held_or_transferred"
+          ],
+          "additionalProperties": false
+        },
+        "not_applicable_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknown_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicability": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "causality": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "gates",
+        "not_applicable_reasons",
+        "unknown_reasons",
+        "applicability",
+        "causality"
+      ],
+      "additionalProperties": false,
+      "description": "Known false gates establish inapplicability. With no known exclusion, missing necessary evidence remains null. Gate facts are causal current/past evidence."
+    },
+    "relativeMotionInterval": {
+      "type": "object",
+      "properties": {
+        "interval_definition": {
+          "type": "string"
+        },
+        "reference_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "declared_start_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "declared_end_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "sample_start_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "sample_end_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "valid_sample_count": {
+          "type": "integer"
+        },
+        "missing_sample_count": {
+          "type": "integer"
+        },
+        "maximum_relative_translation_m": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum_relative_rotation_rad": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "translation_peak_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rotation_peak_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "quality_filter_applied": {
+          "const": false
+        },
+        "nominal_sampling_frequency_hz": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "observed_sampling_frequency_hz": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minimum_sample_interval_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum_sample_interval_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "translation_peak_hold_state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rotation_peak_hold_state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "translation_valid_sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "translation_missing_sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rotation_valid_sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rotation_missing_sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "grasp_quality_false_sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "grasp_quality_unknown_sample_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "interval_definition",
+        "reference_t",
+        "valid_sample_count",
+        "missing_sample_count",
+        "maximum_relative_translation_m",
+        "maximum_relative_rotation_rad",
+        "quality_filter_applied",
+        "declared_start_t",
+        "declared_end_t",
+        "sample_start_t",
+        "sample_end_t",
+        "nominal_sampling_frequency_hz",
+        "observed_sampling_frequency_hz",
+        "translation_peak_t",
+        "rotation_peak_t",
+        "translation_peak_hold_state",
+        "rotation_peak_hold_state"
+      ],
+      "additionalProperties": true
+    },
+    "gateFact": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "source",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "attemptStageTiming": {
+      "type": "object",
+      "properties": {
+        "first_candidate_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "first_confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "last_confirmed_t": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "confirmation_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "duration_basis": {
+          "type": "string"
+        },
+        "first_candidate_to_first_confirmation_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "attempt_start_to_first_confirmation_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "first_candidate_t",
+        "first_confirmed_t",
+        "last_confirmed_t",
+        "confirmation_count",
+        "duration_basis",
+        "first_candidate_to_first_confirmation_s",
+        "attempt_start_to_first_confirmation_s"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

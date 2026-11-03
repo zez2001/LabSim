@@ -100,7 +100,7 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
 
 - [组内使用指南](docs/development/ONBOARDING.md)：准备环境 → 完整任务 → 采集 → 读取 → 策略接入；常见问题及实现地图。
 - [当前版本技术参考](docs/lab_cuvette_loading/Project_release_v1/README.md)：资产规格、接口和验收证据导航。
-- [装载进展 Progress v1](docs/lab_cuvette_loading/Progress_v1/README.md)：在线 `--progress`、已有轨迹离线分析、阶段证据和可视化；保留原评分与 reward。
+- [装载进展 Progress v1.2](docs/lab_cuvette_loading/Progress_v1_2/README.md)：在线 `--progress`、已有轨迹离线分析、阶段证据和可视化；保留原评分与 reward。
 - [数据用途与移交](docs/lab_cuvette_loading/Project_release_v1/data_usage.md) · [可选策略部署](policy/backends/OPTIONAL_POLICIES.md)。
 - [历史版本](docs/history/README.md) · [贡献规范](CONTRIBUTING.md) · [CPU CI](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) · [结果阅读包](docs/agent_handoff/README.md)。
 

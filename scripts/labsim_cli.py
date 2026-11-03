@@ -86,7 +86,7 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     commands = p.add_subparsers(dest="command", required=True)
     commands.add_parser("unit", help="Single-cell instrument units; use unit --help").add_argument("unit_args", nargs=argparse.REMAINDER)
-    commands.add_parser("progress", help="Cuvette Progress v1 offline analysis and report; use progress --help").add_argument("progress_args", nargs=argparse.REMAINDER)
+    commands.add_parser("progress", help="Cuvette Progress v1.2 offline analysis and report; use progress --help").add_argument("progress_args", nargs=argparse.REMAINDER)
     doctor = commands.add_parser("doctor", help="CPU-only runtime, LFS and frozen-scene checks")
     doctor.add_argument("--json", action="store_true", help="Print a machine-readable diagnostic")
     doctor.add_argument("--project-version", type=project_version, choices=tuple(PROJECT_RELEASES), default="Project_v1",
@@ -159,7 +159,7 @@ def parser():
     dataset.add_argument("--dry-run", action="store_true")
     for command in (demo, evaluation, serve, collect):
         command.add_argument("--progress", action="store_true",
-            help="Opt in to causal Progress v1 sidecars (Project_release_v1); task scoring and reward stay unchanged")
+            help="Opt in to causal Progress v1.2 sidecars (Project_release_v1); task scoring and reward stay unchanged")
         command.add_argument("--sequence", nargs="+", choices=("teacher", "early_finish", "no_progress", "unreachable", "service_timeout", "user_interrupt"),
             help="Release-only same-process acceptance: teacher/finish/time-limit/unreachable; service_timeout/user_interrupt are controlled injections. Omit for the normal selected backend")
         command.add_argument("--record-mode", choices=("collect", "eval", "diagnostic"),

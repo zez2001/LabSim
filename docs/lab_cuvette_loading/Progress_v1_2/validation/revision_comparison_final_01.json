@@ -1,0 +1,772 @@
+{
+  "schema": "labsim.Progress_v1_2.revision_comparison.v1",
+  "old_facts": "pre_revision_facts.json",
+  "cases": {
+    "teacher": {
+      "path": "outputs/lab_cuvette_loading/Progress_v1_2/historical_teacher_final_01",
+      "control_count": 7539,
+      "metrics": {
+        "approach_position_quality": {
+          "min": 0.30594895802602107,
+          "max": 0.9999990833968391,
+          "unknown_count": 0
+        },
+        "approach_orientation_quality": {
+          "min": 0.9399388538796909,
+          "max": 0.9999995683962386,
+          "unknown_count": 0
+        },
+        "raw_axial_depth_m": {
+          "min": -0.061032985210418694,
+          "max": 0.17099996948242188,
+          "unknown_count": 0
+        },
+        "raw_depth_fraction": {
+          "min": -2.260480933719211,
+          "max": 6.333332203052662,
+          "unknown_count": 0
+        },
+        "valid_insertion_progress": {
+          "min": 0.0,
+          "max": 1.0,
+          "unknown_count": 0
+        },
+        "target_lateral_error_m": {
+          "min": 8.01327715485134e-09,
+          "max": 0.2984811627535927,
+          "unknown_count": 0
+        }
+      },
+      "applicability_counts": {
+        "True": 2925,
+        "False": 4614,
+        "None": 0
+      },
+      "effective_zero_count": 4616,
+      "final_valid_insertion": 0.9999953686884476,
+      "first_times": {
+        "approach_grasp": 12.2375,
+        "grasp": 18.141666666666666,
+        "extract": 20.85,
+        "transport": 71.83333333333333,
+        "align": 71.83333333333333,
+        "insert": 107.60833333333333,
+        "support_transfer": 110.05416666666666,
+        "release_retreat": 116.41666666666667,
+        "stable_complete": 123.45416666666667,
+        "released": 112.1875,
+        "retreated": 116.41666666666667
+      },
+      "final_user_status": {
+        "align": "active",
+        "approach_grasp": "completed_followed",
+        "extract": "completed_followed",
+        "grasp": "completed_followed",
+        "insert": "active",
+        "release_retreat": "active",
+        "stable_complete": "active",
+        "support_transfer": "active",
+        "transport": "completed_followed"
+      },
+      "events": 174,
+      "attempts": [
+        {
+          "attempt_id": 1,
+          "start_t": 18.041666666666668,
+          "end_t": 112.1875,
+          "outcome": "success",
+          "ended_by": "legal_target_support_release",
+          "completed_stages": {
+            "grasp": 18.141666666666666,
+            "extract": 20.85,
+            "transport": 71.83333333333333,
+            "align": 71.83333333333333,
+            "insert": 107.60833333333333,
+            "support_transfer": 110.05416666666666,
+            "release_retreat": 116.41666666666667,
+            "stable_complete": 123.45416666666667
+          },
+          "previous_attempt_id": null,
+          "recovered_from_attempt_id": null,
+          "next_attempt_id": null,
+          "maximum_relative_translation_m": 0.0016679013268406143,
+          "maximum_relative_rotation_rad": 0.03397191850076167,
+          "source_clear_confirmed": true,
+          "held_transport_confirmed": true,
+          "preinsert_region_reached": true,
+          "operation_end_t": 112.1875,
+          "outcome_confirmed_t": 123.45416666666667,
+          "outcome_reason": "stable_complete_confirmed",
+          "final_outcome_confirmed": true,
+          "stage_timing": {
+            "grasp": {
+              "first_candidate_t": 18.041666666666668,
+              "first_confirmed_t": 18.141666666666666,
+              "last_confirmed_t": 18.141666666666666,
+              "confirmation_count": 1,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.09999999999999787,
+              "attempt_start_to_first_confirmation_s": 0.09999999999999787
+            },
+            "extract": {
+              "first_candidate_t": 20.85,
+              "first_confirmed_t": 20.85,
+              "last_confirmed_t": 20.85,
+              "confirmation_count": 1,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.0,
+              "attempt_start_to_first_confirmation_s": 2.8083333333333336
+            },
+            "transport": {
+              "first_candidate_t": 71.83333333333333,
+              "first_confirmed_t": 71.83333333333333,
+              "last_confirmed_t": 71.83333333333333,
+              "confirmation_count": 1,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.0,
+              "attempt_start_to_first_confirmation_s": 53.79166666666666
+            },
+            "align": {
+              "first_candidate_t": 71.83333333333333,
+              "first_confirmed_t": 71.83333333333333,
+              "last_confirmed_t": 111.5625,
+              "confirmation_count": 12,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.0,
+              "attempt_start_to_first_confirmation_s": 53.79166666666666
+            },
+            "insert": {
+              "first_candidate_t": 107.60833333333333,
+              "first_confirmed_t": 107.60833333333333,
+              "last_confirmed_t": 111.57916666666667,
+              "confirmation_count": 7,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.0,
+              "attempt_start_to_first_confirmation_s": 89.56666666666666
+            },
+            "support_transfer": {
+              "first_candidate_t": 110.05416666666666,
+              "first_confirmed_t": 110.05416666666666,
+              "last_confirmed_t": 111.93333333333334,
+              "confirmation_count": 29,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.0,
+              "attempt_start_to_first_confirmation_s": 92.01249999999999
+            },
+            "release_retreat": {
+              "first_candidate_t": 116.41666666666667,
+              "first_confirmed_t": 116.41666666666667,
+              "last_confirmed_t": 120.45416666666667,
+              "confirmation_count": 2,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.0,
+              "attempt_start_to_first_confirmation_s": 98.375
+            },
+            "stable_complete": {
+              "first_candidate_t": 116.41666666666667,
+              "first_confirmed_t": 123.45416666666667,
+              "last_confirmed_t": 123.45416666666667,
+              "confirmation_count": 1,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 7.037499999999994,
+              "attempt_start_to_first_confirmation_s": 105.4125
+            }
+          },
+          "relative_pose_reference": {
+            "t": 18.141666666666666,
+            "position_m": [
+              1.3671102753227388e-05,
+              0.0002283098177315219,
+              0.15300071561647213
+            ],
+            "quaternion_wxyz": [
+              -2.7039507950006072e-05,
+              -0.9999999904055046,
+              2.1030314239889325e-05,
+              0.00013422213546051838
+            ],
+            "frame": "cup in actual hand frame",
+            "source": "first valid bilateral-hold reference in this attempt"
+          },
+          "first_support_transfer_t": 110.05416666666666,
+          "relative_motion_statistics": {
+            "operation": {
+              "interval_definition": "reference_t <= sample_t <= operation_end_t; entire operation, including support handover",
+              "available": true,
+              "declared_start_t": 18.141666666666666,
+              "declared_end_t": 112.1875,
+              "end_inclusive": true,
+              "sample_start_t": 18.141666666666666,
+              "sample_end_t": 112.1875,
+              "sample_count": 22572,
+              "valid_sample_count": 22572,
+              "missing_sample_count": 0,
+              "translation_valid_sample_count": 22572,
+              "translation_missing_sample_count": 0,
+              "rotation_valid_sample_count": 22572,
+              "rotation_missing_sample_count": 0,
+              "grasp_quality_false_sample_count": 525,
+              "grasp_quality_unknown_sample_count": 0,
+              "maximum_relative_translation_m": 0.0016679013268406143,
+              "translation_peak_t": 111.44166666666666,
+              "translation_peak_hold_state": "target_supported",
+              "translation_peak_grasp_quality": false,
+              "maximum_relative_rotation_rad": 0.03397191850076167,
+              "rotation_peak_t": 111.44166666666666,
+              "rotation_peak_hold_state": "target_supported",
+              "rotation_peak_grasp_quality": false,
+              "nominal_sampling_frequency_hz": 240.0,
+              "observed_sampling_frequency_hz": 240.0,
+              "minimum_sample_interval_s": 0.004166666666662877,
+              "maximum_sample_interval_s": 0.004166666666677088,
+              "reference_t": 18.141666666666666,
+              "reference_position_m": [
+                1.3671102753227388e-05,
+                0.0002283098177315219,
+                0.15300071561647213
+              ],
+              "reference_quaternion_wxyz": [
+                -2.7039507950006072e-05,
+                -0.9999999904055046,
+                2.1030314239889325e-05,
+                0.00013422213546051838
+              ],
+              "sampling_scope": "physical samples after fixed attempt reference; not control-rate maxima",
+              "sample_count_definition": "completed physical rows observed in the declared interval",
+              "missing_sample_count_definition": "observed rows lacking finite translation or rotation evidence; does not invent samples inside an evidence gap",
+              "quality_filter_applied": false,
+              "interpretation": "relative cup-in-hand motion; support-handover motion is not automatically grasp failure"
+            },
+            "before_first_target_support": {
+              "interval_definition": "reference_t <= sample_t < first support_transfer confirmation; if none, through operation_end_t",
+              "available": true,
+              "declared_start_t": 18.141666666666666,
+              "declared_end_t": 110.05416666666666,
+              "end_inclusive": false,
+              "sample_start_t": 18.141666666666666,
+              "sample_end_t": 110.05,
+              "sample_count": 22059,
+              "valid_sample_count": 22059,
+              "missing_sample_count": 0,
+              "translation_valid_sample_count": 22059,
+              "translation_missing_sample_count": 0,
+              "rotation_valid_sample_count": 22059,
+              "rotation_missing_sample_count": 0,
+              "grasp_quality_false_sample_count": 12,
+              "grasp_quality_unknown_sample_count": 0,
+              "maximum_relative_translation_m": 0.0003195321521961731,
+              "translation_peak_t": 110.05,
+              "translation_peak_hold_state": "support_unconfirmed",
+              "translation_peak_grasp_quality": false,
+              "maximum_relative_rotation_rad": 0.005788583583377579,
+              "rotation_peak_t": 110.05,
+              "rotation_peak_hold_state": "support_unconfirmed",
+              "rotation_peak_grasp_quality": false,
+              "nominal_sampling_frequency_hz": 240.0,
+              "observed_sampling_frequency_hz": 240.0,
+              "minimum_sample_interval_s": 0.004166666666662877,
+              "maximum_sample_interval_s": 0.004166666666677088,
+              "reference_t": 18.141666666666666,
+              "reference_position_m": [
+                1.3671102753227388e-05,
+                0.0002283098177315219,
+                0.15300071561647213
+              ],
+              "reference_quaternion_wxyz": [
+                -2.7039507950006072e-05,
+                -0.9999999904055046,
+                2.1030314239889325e-05,
+                0.00013422213546051838
+              ],
+              "sampling_scope": "physical samples after fixed attempt reference; not control-rate maxima",
+              "sample_count_definition": "completed physical rows observed in the declared interval",
+              "missing_sample_count_definition": "observed rows lacking finite translation or rotation evidence; does not invent samples inside an evidence gap",
+              "quality_filter_applied": false,
+              "interpretation": "relative cup-in-hand motion; support-handover motion is not automatically grasp failure"
+            },
+            "support_transfer": {
+              "interval_definition": "first support_transfer confirmation <= sample_t <= operation_end_t",
+              "available": true,
+              "declared_start_t": 110.05416666666666,
+              "declared_end_t": 112.1875,
+              "end_inclusive": true,
+              "sample_start_t": 110.05416666666666,
+              "sample_end_t": 112.1875,
+              "sample_count": 513,
+              "valid_sample_count": 513,
+              "missing_sample_count": 0,
+              "translation_valid_sample_count": 513,
+              "translation_missing_sample_count": 0,
+              "rotation_valid_sample_count": 513,
+              "rotation_missing_sample_count": 0,
+              "grasp_quality_false_sample_count": 513,
+              "grasp_quality_unknown_sample_count": 0,
+              "maximum_relative_translation_m": 0.0016679013268406143,
+              "translation_peak_t": 111.44166666666666,
+              "translation_peak_hold_state": "target_supported",
+              "translation_peak_grasp_quality": false,
+              "maximum_relative_rotation_rad": 0.03397191850076167,
+              "rotation_peak_t": 111.44166666666666,
+              "rotation_peak_hold_state": "target_supported",
+              "rotation_peak_grasp_quality": false,
+              "nominal_sampling_frequency_hz": 240.0,
+              "observed_sampling_frequency_hz": 239.99999999999926,
+              "minimum_sample_interval_s": 0.004166666666662877,
+              "maximum_sample_interval_s": 0.004166666666677088,
+              "reference_t": 18.141666666666666,
+              "reference_position_m": [
+                1.3671102753227388e-05,
+                0.0002283098177315219,
+                0.15300071561647213
+              ],
+              "reference_quaternion_wxyz": [
+                -2.7039507950006072e-05,
+                -0.9999999904055046,
+                2.1030314239889325e-05,
+                0.00013422213546051838
+              ],
+              "sampling_scope": "physical samples after fixed attempt reference; not control-rate maxima",
+              "sample_count_definition": "completed physical rows observed in the declared interval",
+              "missing_sample_count_definition": "observed rows lacking finite translation or rotation evidence; does not invent samples inside an evidence gap",
+              "quality_filter_applied": false,
+              "interpretation": "relative cup-in-hand motion; support-handover motion is not automatically grasp failure"
+            }
+          },
+          "relative_motion_summary_semantics": "entire operation from fixed reference through operation end; see named interval statistics",
+          "operation_end_reason": "legal_target_support_release",
+          "outcome_status": "final",
+          "stable_complete_t": 123.45416666666667
+        }
+      ],
+      "source": {
+        "h5": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/teacher_online_02/episode_0000/dataset/episode_0000.h5",
+        "h5_group": "/",
+        "h5_sha256": "9d5aafc90e265efc39500be2dbee653bbd2312bd6c959d15838fb52c088cdc50",
+        "episode_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/teacher_online_02/episode_0000",
+        "original_labels": {
+          "episode_id": "bf3fdd1b-4c05-4fce-8250-95a4fec8f540",
+          "scene_version": "Project_release_v1",
+          "asset_id": "cuvette_xy_1000",
+          "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+          "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+          "code_commit": "913af8a5989dd328d22752a4bba6431339094306",
+          "actual_execution_commit": "913af8a5989dd328d22752a4bba6431339094306",
+          "record_purpose": "demonstration",
+          "task_success": true,
+          "task_success_known": true,
+          "failure_type": "NONE",
+          "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+          "record_valid": true,
+          "physics_trustworthy": true,
+          "success_bc_eligible": true,
+          "record_integrity_valid": true,
+          "publication_state": "complete",
+          "complete": true
+        },
+        "mutation_policy": "read-only; original HDF5, labels and reward untouched"
+      },
+      "analysis_commit": "3f2638b781bcd89fe0b2f5ba35af6c50ae172ff9",
+      "analysis_clean": true
+    },
+    "pi05": {
+      "path": "outputs/lab_cuvette_loading/Progress_v1_2/historical_pi05_final_01",
+      "control_count": 1021,
+      "metrics": {
+        "approach_position_quality": {
+          "min": 0.26896578228411805,
+          "max": 0.308384392338109,
+          "unknown_count": 0
+        },
+        "approach_orientation_quality": {
+          "min": 0.21671815180770915,
+          "max": 0.9966203320822886,
+          "unknown_count": 0
+        },
+        "raw_axial_depth_m": {
+          "min": 0.17099996948242188,
+          "max": 0.17099996948242188,
+          "unknown_count": 0
+        },
+        "raw_depth_fraction": {
+          "min": 6.333332203052662,
+          "max": 6.333332203052662,
+          "unknown_count": 0
+        },
+        "valid_insertion_progress": {
+          "min": 0.0,
+          "max": 0.0,
+          "unknown_count": 0
+        },
+        "target_lateral_error_m": {
+          "min": 0.298481103370898,
+          "max": 0.29848111207848366,
+          "unknown_count": 0
+        }
+      },
+      "applicability_counts": {
+        "True": 0,
+        "False": 1021,
+        "None": 0
+      },
+      "effective_zero_count": 1021,
+      "final_valid_insertion": 0.0,
+      "first_times": {
+        "approach_grasp": null,
+        "grasp": null,
+        "extract": null,
+        "transport": null,
+        "align": null,
+        "insert": null,
+        "support_transfer": null,
+        "release_retreat": null,
+        "stable_complete": null,
+        "released": null,
+        "retreated": null
+      },
+      "final_user_status": {
+        "align": "not_started",
+        "approach_grasp": "active",
+        "extract": "not_started",
+        "grasp": "not_started",
+        "insert": "not_started",
+        "release_retreat": "not_started",
+        "stable_complete": "not_started",
+        "support_transfer": "not_started",
+        "transport": "not_started"
+      },
+      "events": 0,
+      "attempts": [],
+      "source": {
+        "h5": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/dataset/episode_0000.h5",
+        "h5_group": "/",
+        "h5_sha256": "6675bc91be220d4c401c530b2347c572c02a5da6bb8c1a05955a8d9aa1cdfed6",
+        "episode_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000",
+        "original_labels": {
+          "episode_id": "510b10af-2470-41af-bc58-2468ed7cc690",
+          "scene_version": "Project_release_v1",
+          "asset_id": "cuvette_xy_1000",
+          "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+          "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+          "code_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+          "actual_execution_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+          "task_success": false,
+          "task_success_known": true,
+          "failure_type": "SAFETY_COLLISION",
+          "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+          "record_valid": true,
+          "physics_trustworthy": true,
+          "success_bc_eligible": false,
+          "record_integrity_valid": true,
+          "publication_state": "complete",
+          "complete": true
+        },
+        "mutation_policy": "read-only; original HDF5, labels and reward untouched"
+      },
+      "analysis_commit": "3f2638b781bcd89fe0b2f5ba35af6c50ae172ff9",
+      "analysis_clean": true
+    },
+    "held_incomplete": {
+      "path": "outputs/lab_cuvette_loading/Progress_v1_2/historical_held_incomplete_final_01",
+      "control_count": 3906,
+      "metrics": {
+        "approach_position_quality": {
+          "min": 0.30620909256358725,
+          "max": 0.9634576956546345,
+          "unknown_count": 0
+        },
+        "approach_orientation_quality": {
+          "min": 0.9972646670931685,
+          "max": 0.9984604296689952,
+          "unknown_count": 0
+        },
+        "raw_axial_depth_m": {
+          "min": -0.11919096565246581,
+          "max": 0.17099996948242188,
+          "unknown_count": 0
+        },
+        "raw_depth_fraction": {
+          "min": -4.414480209350586,
+          "max": 6.333332203052662,
+          "unknown_count": 0
+        },
+        "valid_insertion_progress": {
+          "min": 0.0,
+          "max": 0.0,
+          "unknown_count": 0
+        },
+        "target_lateral_error_m": {
+          "min": 0.03425849212869414,
+          "max": 0.31320407258188177,
+          "unknown_count": 0
+        }
+      },
+      "applicability_counts": {
+        "True": 0,
+        "False": 3906,
+        "None": 0
+      },
+      "effective_zero_count": 3906,
+      "final_valid_insertion": 0.0,
+      "first_times": {
+        "approach_grasp": 13.304166666666667,
+        "grasp": 15.6125,
+        "extract": 17.670833333333334,
+        "transport": null,
+        "align": null,
+        "insert": null,
+        "support_transfer": null,
+        "release_retreat": null,
+        "stable_complete": null,
+        "released": null,
+        "retreated": null
+      },
+      "final_user_status": {
+        "align": "not_started",
+        "approach_grasp": "active",
+        "extract": "active",
+        "grasp": "active",
+        "insert": "not_started",
+        "release_retreat": "not_started",
+        "stable_complete": "not_started",
+        "support_transfer": "not_started",
+        "transport": "active"
+      },
+      "events": 9,
+      "attempts": [
+        {
+          "attempt_id": 1,
+          "start_t": 15.5125,
+          "end_t": 65.11666666666666,
+          "outcome": "incomplete",
+          "ended_by": "episode_terminated:normal_end",
+          "completed_stages": {
+            "grasp": 15.6125,
+            "extract": 17.670833333333334
+          },
+          "previous_attempt_id": null,
+          "recovered_from_attempt_id": null,
+          "next_attempt_id": null,
+          "maximum_relative_translation_m": 1.4445889568221543e-05,
+          "maximum_relative_rotation_rad": 0.0003182859344228634,
+          "source_clear_confirmed": true,
+          "held_transport_confirmed": true,
+          "preinsert_region_reached": false,
+          "operation_end_t": 65.11666666666666,
+          "outcome_confirmed_t": 65.11666666666666,
+          "outcome_reason": "episode_terminated:normal_end",
+          "final_outcome_confirmed": true,
+          "stage_timing": {
+            "grasp": {
+              "first_candidate_t": 15.5125,
+              "first_confirmed_t": 15.6125,
+              "last_confirmed_t": 15.6125,
+              "confirmation_count": 1,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.10000000000000142,
+              "attempt_start_to_first_confirmation_s": 0.10000000000000142
+            },
+            "extract": {
+              "first_candidate_t": 17.670833333333334,
+              "first_confirmed_t": 17.670833333333334,
+              "last_confirmed_t": 17.670833333333334,
+              "confirmation_count": 1,
+              "duration_basis": "first candidate to first confirmation",
+              "first_candidate_to_first_confirmation_s": 0.0,
+              "attempt_start_to_first_confirmation_s": 2.158333333333335
+            }
+          },
+          "relative_pose_reference": {
+            "t": 15.6125,
+            "position_m": [
+              -0.00012589796883788023,
+              0.00022940492656030545,
+              0.15687321861557976
+            ],
+            "quaternion_wxyz": [
+              -3.501660052988452e-05,
+              -0.9999999916313852,
+              -9.99324699658688e-05,
+              -7.43274428572061e-05
+            ],
+            "frame": "cup in actual hand frame",
+            "source": "first valid bilateral-hold reference in this attempt"
+          },
+          "first_support_transfer_t": null,
+          "relative_motion_statistics": {
+            "operation": {
+              "interval_definition": "reference_t <= sample_t <= operation_end_t; entire operation, including support handover",
+              "available": true,
+              "declared_start_t": 15.6125,
+              "declared_end_t": 65.11666666666666,
+              "end_inclusive": true,
+              "sample_start_t": 15.6125,
+              "sample_end_t": 65.11666666666666,
+              "sample_count": 11882,
+              "valid_sample_count": 11882,
+              "missing_sample_count": 0,
+              "translation_valid_sample_count": 11882,
+              "translation_missing_sample_count": 0,
+              "rotation_valid_sample_count": 11882,
+              "rotation_missing_sample_count": 0,
+              "grasp_quality_false_sample_count": 0,
+              "grasp_quality_unknown_sample_count": 0,
+              "maximum_relative_translation_m": 1.4445889568221543e-05,
+              "translation_peak_t": 28.566666666666666,
+              "translation_peak_hold_state": "gripper_held",
+              "translation_peak_grasp_quality": true,
+              "maximum_relative_rotation_rad": 0.0003182859344228634,
+              "rotation_peak_t": 28.566666666666666,
+              "rotation_peak_hold_state": "gripper_held",
+              "rotation_peak_grasp_quality": true,
+              "nominal_sampling_frequency_hz": 240.0,
+              "observed_sampling_frequency_hz": 240.00000000000003,
+              "minimum_sample_interval_s": 0.004166666666662877,
+              "maximum_sample_interval_s": 0.004166666666677088,
+              "reference_t": 15.6125,
+              "reference_position_m": [
+                -0.00012589796883788023,
+                0.00022940492656030545,
+                0.15687321861557976
+              ],
+              "reference_quaternion_wxyz": [
+                -3.501660052988452e-05,
+                -0.9999999916313852,
+                -9.99324699658688e-05,
+                -7.43274428572061e-05
+              ],
+              "sampling_scope": "physical samples after fixed attempt reference; not control-rate maxima",
+              "sample_count_definition": "completed physical rows observed in the declared interval",
+              "missing_sample_count_definition": "observed rows lacking finite translation or rotation evidence; does not invent samples inside an evidence gap",
+              "quality_filter_applied": false,
+              "interpretation": "relative cup-in-hand motion; support-handover motion is not automatically grasp failure"
+            },
+            "before_first_target_support": {
+              "interval_definition": "reference_t <= sample_t < first support_transfer confirmation; if none, through operation_end_t",
+              "available": true,
+              "declared_start_t": 15.6125,
+              "declared_end_t": 65.11666666666666,
+              "end_inclusive": true,
+              "sample_start_t": 15.6125,
+              "sample_end_t": 65.11666666666666,
+              "sample_count": 11882,
+              "valid_sample_count": 11882,
+              "missing_sample_count": 0,
+              "translation_valid_sample_count": 11882,
+              "translation_missing_sample_count": 0,
+              "rotation_valid_sample_count": 11882,
+              "rotation_missing_sample_count": 0,
+              "grasp_quality_false_sample_count": 0,
+              "grasp_quality_unknown_sample_count": 0,
+              "maximum_relative_translation_m": 1.4445889568221543e-05,
+              "translation_peak_t": 28.566666666666666,
+              "translation_peak_hold_state": "gripper_held",
+              "translation_peak_grasp_quality": true,
+              "maximum_relative_rotation_rad": 0.0003182859344228634,
+              "rotation_peak_t": 28.566666666666666,
+              "rotation_peak_hold_state": "gripper_held",
+              "rotation_peak_grasp_quality": true,
+              "nominal_sampling_frequency_hz": 240.0,
+              "observed_sampling_frequency_hz": 240.00000000000003,
+              "minimum_sample_interval_s": 0.004166666666662877,
+              "maximum_sample_interval_s": 0.004166666666677088,
+              "reference_t": 15.6125,
+              "reference_position_m": [
+                -0.00012589796883788023,
+                0.00022940492656030545,
+                0.15687321861557976
+              ],
+              "reference_quaternion_wxyz": [
+                -3.501660052988452e-05,
+                -0.9999999916313852,
+                -9.99324699658688e-05,
+                -7.43274428572061e-05
+              ],
+              "sampling_scope": "physical samples after fixed attempt reference; not control-rate maxima",
+              "sample_count_definition": "completed physical rows observed in the declared interval",
+              "missing_sample_count_definition": "observed rows lacking finite translation or rotation evidence; does not invent samples inside an evidence gap",
+              "quality_filter_applied": false,
+              "interpretation": "relative cup-in-hand motion; support-handover motion is not automatically grasp failure"
+            },
+            "support_transfer": {
+              "interval_definition": "first support_transfer confirmation <= sample_t <= operation_end_t",
+              "available": false,
+              "declared_start_t": null,
+              "declared_end_t": null,
+              "end_inclusive": true,
+              "sample_start_t": null,
+              "sample_end_t": null,
+              "sample_count": 0,
+              "valid_sample_count": 0,
+              "missing_sample_count": 0,
+              "translation_valid_sample_count": 0,
+              "translation_missing_sample_count": 0,
+              "rotation_valid_sample_count": 0,
+              "rotation_missing_sample_count": 0,
+              "grasp_quality_false_sample_count": 0,
+              "grasp_quality_unknown_sample_count": 0,
+              "maximum_relative_translation_m": null,
+              "translation_peak_t": null,
+              "translation_peak_hold_state": null,
+              "translation_peak_grasp_quality": null,
+              "maximum_relative_rotation_rad": null,
+              "rotation_peak_t": null,
+              "rotation_peak_hold_state": null,
+              "rotation_peak_grasp_quality": null,
+              "nominal_sampling_frequency_hz": 240.0,
+              "observed_sampling_frequency_hz": null,
+              "minimum_sample_interval_s": null,
+              "maximum_sample_interval_s": null,
+              "reference_t": 15.6125,
+              "reference_position_m": [
+                -0.00012589796883788023,
+                0.00022940492656030545,
+                0.15687321861557976
+              ],
+              "reference_quaternion_wxyz": [
+                -3.501660052988452e-05,
+                -0.9999999916313852,
+                -9.99324699658688e-05,
+                -7.43274428572061e-05
+              ],
+              "sampling_scope": "physical samples after fixed attempt reference; not control-rate maxima",
+              "sample_count_definition": "completed physical rows observed in the declared interval",
+              "missing_sample_count_definition": "observed rows lacking finite translation or rotation evidence; does not invent samples inside an evidence gap",
+              "quality_filter_applied": false,
+              "interpretation": "relative cup-in-hand motion; support-handover motion is not automatically grasp failure"
+            }
+          },
+          "relative_motion_summary_semantics": "entire operation from fixed reference through operation end; see named interval statistics",
+          "operation_end_reason": "episode_terminated:normal_end",
+          "outcome_status": "final"
+        }
+      ],
+      "source": {
+        "h5": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/dataset/episode_0000.h5",
+        "h5_group": "/",
+        "h5_sha256": "6efe17debe6b5a3dc1ba31c7dfbd60408b26f678d3ed3de1ed7ddc4f8035bef3",
+        "episode_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000",
+        "original_labels": {
+          "episode_id": "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+          "scene_version": "Project_v1_1",
+          "asset_id": "cuvette_xy_1000",
+          "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+          "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+          "code_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+          "actual_execution_commit": "9a88ea0b1b4c34dcec9ae74b9913cb1b192394c0",
+          "task_success": false,
+          "task_success_known": true,
+          "failure_type": "TASK_INCOMPLETE",
+          "termination_reason": "POLICY_FINISH_REQUEST",
+          "record_valid": true,
+          "physics_trustworthy": true,
+          "success_bc_eligible": false,
+          "record_integrity_valid": true,
+          "complete": true
+        },
+        "mutation_policy": "read-only; original HDF5, labels and reward untouched"
+      },
+      "analysis_commit": "3f2638b781bcd89fe0b2f5ba35af6c50ae172ff9",
+      "analysis_clean": true
+    }
+  }
+}

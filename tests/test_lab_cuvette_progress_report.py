@@ -67,6 +67,8 @@ def test_all_control_scalar_endpoints_are_packed_exactly_without_full_states(tmp
     html = generate_report(case)
     data = _payload(html)
     assert data['report_version'] == REPORT_VERSION
+    from demos.lab_cuvette_progress_v1.config import resolve_config
+    assert data['report_version'] == resolve_config({})['visualization_version']
     assert len(data['rows']) == data['display_sampling']['cursor_rows'] == 3001
     assert len(data['plot_indices']) < 3001
     assert data['rows'][3][0] == 4/60

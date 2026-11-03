@@ -1,0 +1,568 @@
+{
+  "schema": "labsim.Progress_v1.2.independent_revision_coverage.v1",
+  "created_utc": "2026-11-03T06:08:36Z",
+  "scope": "Read-only source, CPU evidence and historical completed analyses. Does not read active H5/video/physics streams, run simulation, or assert completion of the currently running new Teacher.",
+  "frozen_runtime_commit": "3f2638b781bcd89fe0b2f5ba35af6c50ae172ff9",
+  "read_only_runtime_files": [
+    {
+      "path": "demos/lab_cuvette_progress_v1/core.py",
+      "sha256": "3de919ff528075f711df6d28485372e0538007736d3ee5042747edaba663fc9d",
+      "bytes": 57236,
+      "frozen_commit_sha256": "3de919ff528075f711df6d28485372e0538007736d3ee5042747edaba663fc9d",
+      "matches_frozen_runtime": true
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/config.py",
+      "sha256": "239f7d846f28ea9f32f7735b406ca6670ddf5ae6bc5e03135ff3f8bfc283e9c4",
+      "bytes": 12695,
+      "frozen_commit_sha256": "239f7d846f28ea9f32f7735b406ca6670ddf5ae6bc5e03135ff3f8bfc283e9c4",
+      "matches_frozen_runtime": true
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/attempts.py",
+      "sha256": "c05501192d3a830733869ab5a512274a781b99f38ba1835192c71cfcea370167",
+      "bytes": 10482,
+      "frozen_commit_sha256": "c05501192d3a830733869ab5a512274a781b99f38ba1835192c71cfcea370167",
+      "matches_frozen_runtime": true
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/geometry.py",
+      "sha256": "cae60dceea9eb1bf2e10d052fdf0c3528a04902a61c0dafedf0a16a9a00be988",
+      "bytes": 5958,
+      "frozen_commit_sha256": "cae60dceea9eb1bf2e10d052fdf0c3528a04902a61c0dafedf0a16a9a00be988",
+      "matches_frozen_runtime": true
+    },
+    {
+      "path": "config/lab_cuvette_loading/Progress_v1_2/progress.json",
+      "sha256": "683605f454c6811a89bd2d980793752ce735ba54298bf224b7d282d851809753",
+      "bytes": 1467,
+      "frozen_commit_sha256": "683605f454c6811a89bd2d980793752ce735ba54298bf224b7d282d851809753",
+      "matches_frozen_runtime": true
+    }
+  ],
+  "cpu_repository_evidence": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "1084",
+    "time": "14.683",
+    "timestamp": "2026-11-03T14:02:58.752280",
+    "hostname": "0",
+    "identity": {
+      "path": "outputs/lab_cuvette_loading/Progress_v1_2/cpu_repository.xml",
+      "sha256": "072a4ddc25c6e1da297235850aace29fc23484c255ada4810a4461c3df9f7cb8",
+      "bytes": 175372
+    }
+  },
+  "user_acceptance_cases": [
+    {
+      "user_case": 1,
+      "requirement": "Source-bound raw projection must not imply valid insertion",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_known_source_bound_raw_projection_is_not_insertion_progress",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 14
+        }
+      ],
+      "historical_evidence": {
+        "control_rows": 1021,
+        "endpoint_samples": 1021,
+        "raw_legacy_insert_one_count": 1021,
+        "effective_insertion_zero_count": 1021,
+        "applicability_false_count": 1021,
+        "all_have_explicit_gate_reason": true,
+        "no_grasp_confirmed": true,
+        "approach_position_quality_range": [
+          0.26896578228411805,
+          0.308384392338109
+        ],
+        "original_result_unchanged_declaration": true,
+        "source": {
+          "path": "outputs/lab_cuvette_loading/Progress_v1_2/historical_pi05_final_01/progress_summary.json",
+          "sha256": "1f9eb0c47ae546d98fa0c8a606f8c0cea28e39e00ad8a4fc7187fe438afb8c27",
+          "bytes": 131315
+        }
+      }
+    },
+    {
+      "user_case": 2,
+      "requirement": "Missing required evidence remains unknown",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_missing_required_containment_after_valid_route_stays_unknown",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 29
+        },
+        {
+          "name": "test_original_axial_measurement_remains_readable_when_pose_channel_is_missing",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 161
+        }
+      ],
+      "historical_evidence": {
+        "synthetic_fixture_only": true
+      }
+    },
+    {
+      "user_case": 3,
+      "requirement": "Insertion and legal target support/release retain effective progress",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_valid_depth_and_transferred_release_keep_effective_progress_without_grasp",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 48
+        }
+      ],
+      "historical_evidence": {
+        "teacher_final_effective": 0.9999953686884476,
+        "teacher_final_applicable": true
+      }
+    },
+    {
+      "user_case": 4,
+      "requirement": "Drift statistics independently recomputable on declared intervals",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_fixed_reference_whole_operation_includes_quality_false_handover_motion",
+          "file": "tests/test_lab_cuvette_progress_attempts.py",
+          "line": 20
+        }
+      ],
+      "historical_evidence": {
+        "independent_audit": "outputs/lab_cuvette_loading/Progress_v1_2/audit_attempts_teacher_preflight_02.json",
+        "frozen_final_recalculation": "root separately records corresponding audit_attempts final receipt",
+        "translation_peak_m": 0.0016679013268406143,
+        "rotation_peak_rad": 0.03397191850076167
+      }
+    },
+    {
+      "user_case": 5,
+      "requirement": "Quality-false samples remain included",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_fixed_reference_whole_operation_includes_quality_false_handover_motion",
+          "file": "tests/test_lab_cuvette_progress_attempts.py",
+          "line": 20
+        },
+        {
+          "name": "test_missing_samples_counted_and_no_reference_reset_can_hide_motion",
+          "file": "tests/test_lab_cuvette_progress_attempts.py",
+          "line": 46
+        }
+      ],
+      "historical_evidence": {
+        "quality_false_samples": {
+          "operation": 525,
+          "before_first_target_support": 12,
+          "support_transfer": 513
+        },
+        "quality_filter_applied": false
+      }
+    },
+    {
+      "user_case": 6,
+      "requirement": "First confirmation immutable under re-entry",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_first_confirmation_is_immutable_and_reconfirmation_is_separately_counted",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 113
+        },
+        {
+          "name": "test_first_stage_candidate_and_confirmation_preserved_with_reconfirm_count",
+          "file": "tests/test_lab_cuvette_progress_attempts.py",
+          "line": 70
+        }
+      ],
+      "historical_evidence": {
+        "first_times": {
+          "approach_grasp": {
+            "old_first_candidate_t": 12.2375,
+            "new_first_candidate_t": 12.2375,
+            "old_first_confirmed_t": 12.2375,
+            "new_first_confirmed_t": 12.2375,
+            "equal": true
+          },
+          "grasp": {
+            "old_first_candidate_t": 18.041666666666668,
+            "new_first_candidate_t": 18.041666666666668,
+            "old_first_confirmed_t": 18.141666666666666,
+            "new_first_confirmed_t": 18.141666666666666,
+            "equal": true
+          },
+          "extract": {
+            "old_first_candidate_t": 20.85,
+            "new_first_candidate_t": 20.85,
+            "old_first_confirmed_t": 20.85,
+            "new_first_confirmed_t": 20.85,
+            "equal": true
+          },
+          "transport": {
+            "old_first_candidate_t": 71.83333333333333,
+            "new_first_candidate_t": 71.83333333333333,
+            "old_first_confirmed_t": 71.83333333333333,
+            "new_first_confirmed_t": 71.83333333333333,
+            "equal": true
+          },
+          "align": {
+            "old_first_candidate_t": 71.83333333333333,
+            "new_first_candidate_t": 71.83333333333333,
+            "old_first_confirmed_t": 71.83333333333333,
+            "new_first_confirmed_t": 71.83333333333333,
+            "equal": true
+          },
+          "insert": {
+            "old_first_candidate_t": 107.60833333333333,
+            "new_first_candidate_t": 107.60833333333333,
+            "old_first_confirmed_t": 107.60833333333333,
+            "new_first_confirmed_t": 107.60833333333333,
+            "equal": true
+          },
+          "support_transfer": {
+            "old_first_candidate_t": 110.05416666666666,
+            "new_first_candidate_t": 110.05416666666666,
+            "old_first_confirmed_t": 110.05416666666666,
+            "new_first_confirmed_t": 110.05416666666666,
+            "equal": true
+          },
+          "release_retreat": {
+            "old_first_candidate_t": 116.41666666666667,
+            "new_first_candidate_t": 116.41666666666667,
+            "old_first_confirmed_t": 116.41666666666667,
+            "new_first_confirmed_t": 116.41666666666667,
+            "equal": true
+          },
+          "stable_complete": {
+            "old_first_candidate_t": 116.41666666666667,
+            "new_first_candidate_t": 116.41666666666667,
+            "old_first_confirmed_t": 123.45416666666667,
+            "new_first_confirmed_t": 123.45416666666667,
+            "equal": true
+          },
+          "released": {
+            "old_first_candidate_t": 112.1375,
+            "new_first_candidate_t": 112.1375,
+            "old_first_confirmed_t": 112.1875,
+            "new_first_confirmed_t": 112.1875,
+            "equal": true
+          },
+          "retreated": {
+            "old_first_candidate_t": 116.41666666666667,
+            "new_first_candidate_t": 116.41666666666667,
+            "old_first_confirmed_t": 116.41666666666667,
+            "new_first_confirmed_t": 116.41666666666667,
+            "equal": true
+          }
+        },
+        "attempt_align": {
+          "first_candidate_t": 71.83333333333333,
+          "first_confirmed_t": 71.83333333333333,
+          "last_confirmed_t": 111.5625,
+          "confirmation_count": 12,
+          "duration_basis": "first candidate to first confirmation",
+          "first_candidate_to_first_confirmation_s": 0.0,
+          "attempt_start_to_first_confirmation_s": 53.79166666666666
+        }
+      }
+    },
+    {
+      "user_case": 7,
+      "requirement": "Append-only event replay matches final attempt receipts",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_event_only_replay_keeps_operation_end_separate_from_final_outcome",
+          "file": "tests/test_lab_cuvette_progress_attempts.py",
+          "line": 88
+        },
+        {
+          "name": "test_actual_evaluator_retry_and_recovery_replay",
+          "file": "tests/test_lab_cuvette_progress_attempts.py",
+          "line": 167
+        },
+        {
+          "name": "test_actual_evaluator_post_success_instability_and_recovery_replay",
+          "file": "tests/test_lab_cuvette_progress_attempts.py",
+          "line": 179
+        }
+      ],
+      "historical_evidence": {
+        "operation_end_t": 112.1875,
+        "outcome_confirmed_t": 123.45416666666667,
+        "outcome": "success",
+        "outcome_update_events": 2
+      }
+    },
+    {
+      "user_case": 8,
+      "requirement": "Legal successor is not displayed as subtask regression/failure",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_normal_physical_successors_do_not_display_as_grasp_or_transport_failure",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 92
+        },
+        {
+          "name": "test_unconfirmed_support_and_actual_grasp_loss_are_separate_facts",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 103
+        }
+      ],
+      "historical_evidence": {
+        "teacher_final_user_status": {
+          "approach_grasp": "completed_followed",
+          "grasp": "completed_followed",
+          "extract": "completed_followed",
+          "transport": "completed_followed",
+          "align": "active",
+          "insert": "active",
+          "support_transfer": "active",
+          "release_retreat": "active",
+          "stable_complete": "active"
+        },
+        "failure_observation_count": 0
+      }
+    },
+    {
+      "user_case": 9,
+      "requirement": "Current regression/history/retry/reset/exception lifecycle remains coherent",
+      "status": "passed_cpu_and_historical",
+      "tests": [
+        {
+          "name": "test_unsupported_grasp_loss_preserves_history_and_current_state_regresses",
+          "file": "tests/test_lab_cuvette_progress_core.py",
+          "line": 112
+        },
+        {
+          "name": "test_retry_has_new_relative_reference_and_preserves_failed_attempt",
+          "file": "tests/test_lab_cuvette_progress_core.py",
+          "line": 163
+        },
+        {
+          "name": "test_reset_isolates_first_times_attempts_and_finalize_is_idempotent",
+          "file": "tests/test_lab_cuvette_progress_core.py",
+          "line": 217
+        },
+        {
+          "name": "test_cleanup_aborts_unfinished_sidecar_and_new_recorder_starts_new_session",
+          "file": "tests/test_lab_cuvette_progress_online.py",
+          "line": 188
+        }
+      ],
+      "historical_evidence": {
+        "actual_held_incomplete_episode_id": "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+        "original_scene_version": "Project_v1_1",
+        "historical_actual_policy_execution_not_new_paid_call": true,
+        "original_task_success": null,
+        "unfinished_requirement": {
+          "code": "TRANSPORT_NOT_COMPLETED",
+          "stage": "transport",
+          "requirement": "reach fixed preinsert region with same-attempt held-object evidence",
+          "available": true
+        }
+      }
+    },
+    {
+      "user_case": 10,
+      "requirement": "Causal shared implementation and immutable prefixes",
+      "status": "passed_cpu; fresh_online_offline_pending_root",
+      "tests": [
+        {
+          "name": "test_prefix_and_online_offline_same_raw_inputs_are_identical",
+          "file": "tests/test_lab_cuvette_progress_core.py",
+          "line": 232
+        },
+        {
+          "name": "test_current_state_and_prior_snapshots_are_not_backfilled_by_success",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 128
+        },
+        {
+          "name": "test_prefix_transitions_are_immutable_when_future_samples_are_appended",
+          "file": "tests/test_lab_cuvette_progress_io.py",
+          "line": 270
+        },
+        {
+          "name": "test_offline_online_same_inputs_same_events_and_partial_control_records",
+          "file": "tests/test_lab_cuvette_progress_io.py",
+          "line": 178
+        }
+      ],
+      "historical_evidence": {
+        "fresh_gpu_control_by_control_comparison": "root performs after fresh Teacher process is fully closed; not claimed in this independent offline review"
+      }
+    },
+    {
+      "user_case": 11,
+      "requirement": "Original final score, reward and dataset qualification unchanged",
+      "status": "passed_cpu_and_historical; fresh_reader_pending_root",
+      "tests": [
+        {
+          "name": "test_sidecar_failure_preserves_original_success_reward_and_eligibility",
+          "file": "tests/test_lab_cuvette_progress_online.py",
+          "line": 149
+        },
+        {
+          "name": "test_progress_configuration_does_not_change_physical_scene_contract",
+          "file": "tests/test_lab_cuvette_progress_online.py",
+          "line": 217
+        },
+        {
+          "name": "test_new_parameters_are_explicitly_versioned_without_discrete_threshold_change",
+          "file": "tests/test_lab_cuvette_progress12_core.py",
+          "line": 139
+        }
+      ],
+      "historical_evidence": {
+        "historical_teacher_original_result_equal": false,
+        "resolved_discrete_thresholds_equal": true,
+        "resolved_geometry_equal": true,
+        "new_teacher_original_scorer_reader": "root verifies fresh closed run separately"
+      }
+    },
+    {
+      "user_case": 12,
+      "requirement": "New analyses separated and old raw data/output protected",
+      "status": "passed_cpu_and_separate_historical_outputs; final_protection_pending_root",
+      "tests": [
+        {
+          "name": "test_original_episode_output_and_active_source_are_protected",
+          "file": "tests/test_lab_cuvette_progress_io.py",
+          "line": 215
+        }
+      ],
+      "historical_evidence": {
+        "old_output": "outputs/lab_cuvette_loading/Progress_v1/teacher_online_02/episode_0000",
+        "new_output": "outputs/lab_cuvette_loading/Progress_v1_2/historical_teacher_final_01",
+        "baseline_protection_receipt": {
+          "path": "outputs/lab_cuvette_loading/Progress_v1_2/protection_baseline.json",
+          "sha256": "18c6b8210f67b07b73035dd7451f4c0a8d47b92e895d6f228b9849e11937796e",
+          "bytes": 1444583
+        },
+        "final_protection": "root records at final publication; this review does not claim final publication preservation from an early baseline"
+      }
+    }
+  ],
+  "discrete_compatibility": {
+    "teacher_episode_id": "bf3fdd1b-4c05-4fce-8250-95a4fec8f540",
+    "comparison": "all before/after control endpoint stage current_satisfied, ever_achieved, first_candidate_t and first_confirmed_t on the same recorded physical trace",
+    "control_transition_count": 7539,
+    "control_endpoint_count": 15078,
+    "difference_count": 0,
+    "first_differences": [],
+    "all_first_milestone_times_unchanged": true,
+    "first_milestone_comparison": {
+      "approach_grasp": {
+        "old_first_candidate_t": 12.2375,
+        "new_first_candidate_t": 12.2375,
+        "old_first_confirmed_t": 12.2375,
+        "new_first_confirmed_t": 12.2375,
+        "equal": true
+      },
+      "grasp": {
+        "old_first_candidate_t": 18.041666666666668,
+        "new_first_candidate_t": 18.041666666666668,
+        "old_first_confirmed_t": 18.141666666666666,
+        "new_first_confirmed_t": 18.141666666666666,
+        "equal": true
+      },
+      "extract": {
+        "old_first_candidate_t": 20.85,
+        "new_first_candidate_t": 20.85,
+        "old_first_confirmed_t": 20.85,
+        "new_first_confirmed_t": 20.85,
+        "equal": true
+      },
+      "transport": {
+        "old_first_candidate_t": 71.83333333333333,
+        "new_first_candidate_t": 71.83333333333333,
+        "old_first_confirmed_t": 71.83333333333333,
+        "new_first_confirmed_t": 71.83333333333333,
+        "equal": true
+      },
+      "align": {
+        "old_first_candidate_t": 71.83333333333333,
+        "new_first_candidate_t": 71.83333333333333,
+        "old_first_confirmed_t": 71.83333333333333,
+        "new_first_confirmed_t": 71.83333333333333,
+        "equal": true
+      },
+      "insert": {
+        "old_first_candidate_t": 107.60833333333333,
+        "new_first_candidate_t": 107.60833333333333,
+        "old_first_confirmed_t": 107.60833333333333,
+        "new_first_confirmed_t": 107.60833333333333,
+        "equal": true
+      },
+      "support_transfer": {
+        "old_first_candidate_t": 110.05416666666666,
+        "new_first_candidate_t": 110.05416666666666,
+        "old_first_confirmed_t": 110.05416666666666,
+        "new_first_confirmed_t": 110.05416666666666,
+        "equal": true
+      },
+      "release_retreat": {
+        "old_first_candidate_t": 116.41666666666667,
+        "new_first_candidate_t": 116.41666666666667,
+        "old_first_confirmed_t": 116.41666666666667,
+        "new_first_confirmed_t": 116.41666666666667,
+        "equal": true
+      },
+      "stable_complete": {
+        "old_first_candidate_t": 116.41666666666667,
+        "new_first_candidate_t": 116.41666666666667,
+        "old_first_confirmed_t": 123.45416666666667,
+        "new_first_confirmed_t": 123.45416666666667,
+        "equal": true
+      },
+      "released": {
+        "old_first_candidate_t": 112.1375,
+        "new_first_candidate_t": 112.1375,
+        "old_first_confirmed_t": 112.1875,
+        "new_first_confirmed_t": 112.1875,
+        "equal": true
+      },
+      "retreated": {
+        "old_first_candidate_t": 116.41666666666667,
+        "new_first_candidate_t": 116.41666666666667,
+        "old_first_confirmed_t": 116.41666666666667,
+        "new_first_confirmed_t": 116.41666666666667,
+        "equal": true
+      }
+    },
+    "thresholds_equal": true,
+    "geometry_equal": true,
+    "original_result_equal": false,
+    "old_summary": {
+      "path": "outputs/lab_cuvette_loading/Progress_v1/teacher_online_02/episode_0000/progress_summary.json",
+      "sha256": "17c65752bbd54f5bb905d575c81d0deb557fccffb0592497037212f6a02353e2",
+      "bytes": 279001
+    },
+    "new_summary": {
+      "path": "outputs/lab_cuvette_loading/Progress_v1_2/historical_teacher_final_01/progress_summary.json",
+      "sha256": "e2b29be9221ed3f06b75736700ac1dd62f9ed6bfed4024f02506a24e6bac9293",
+      "bytes": 407225
+    }
+  },
+  "limitations": [
+    "Material overlap uses vessel source visual mesh versus selected-seat collision input triangles, not complete effective cooked PhysX collision readback.",
+    "The target input mesh is not watertight (90 boundary edges); near-boundary material classification is qualified. Observed sampled overlap is not a global penetration upper bound.",
+    "15 Hz cached input-material geometry observations retain actual measurement times; no claim that 240 Hz progress sampling refreshes that geometric query each step.",
+    "Gripper clearance is an input-geometry three-link AABB separation lower bound, distinct from TCP distance and cooked-shape exact distance.",
+    "Target support is attributed from reported actual contact points and upward forces within the declared bottom partition. It is not proof of true calibrated material compliance.",
+    "All task dimensions, mass and physics remain engineering/synthetic assumptions where not measured; diagnostic progress is not real-world precision calibration.",
+    "Legacy continuous/status/raw depth channels intentionally remain available; consumers must select effective_continuous, valid_insertion_progress and user_status for v1.2 task interpretation.",
+    "Stage condition reconfirmations are raw condition transitions, not new attempts or repeated reward. No reward adapter is enabled.",
+    "The held-incomplete historical example was originally recorded under Project_v1_1; its actual source version is preserved and it is not relabeled as a new release-version policy run.",
+    "Fresh online/offline, official ACT/DP reader and final publication/protection receipts are produced separately by the root after process exit."
+  ]
+}
