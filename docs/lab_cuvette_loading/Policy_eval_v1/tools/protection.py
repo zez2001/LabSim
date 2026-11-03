@@ -44,7 +44,9 @@ ALLOWED_FILES = {
     "README.md", "README_CN.md", "README_EN.md",
     "scripts/run_lab_cuvette_policy_eval.py",
     "docs/agent_handoff/package.json",
+    "docs/agent_handoff/README.md",
     ".github/workflows/cpu-contracts.yml",
+    ".gitattributes",
 }
 PROTECTED_PATHS = (
     "assets", "collectors", "controllers", "tasks", "SLAI_Lab", "local_assets",

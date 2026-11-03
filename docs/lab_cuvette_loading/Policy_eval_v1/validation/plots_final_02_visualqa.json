@@ -1,0 +1,131 @@
+{
+  "schema": "labsim.policy_eval.figure_visual_qa.v1",
+  "analysis_version": "analysis_final_02",
+  "passed": true,
+  "reviewed_at_utc": "2026-11-03T09:40:03.850403+00:00",
+  "analysis_sha256": "adc154e6b85a9f3ed164f326b99a4d86a3b7d88cfad5a840f0c219ab0fa32e45",
+  "analysis_commit": "094f8a18ecf0858dee4b8c86e9133c7275520995",
+  "plot_implementation_sha256": "c3fa5e25d3e25247b5e072cb33ec59253dc0074e035e94f3be49b8daaf94cb90",
+  "review_method": "All six final02 PNG files individually displayed with tools.view_image and visually checked",
+  "figures": [
+    {
+      "path": "outputs/lab_cuvette_loading/Policy_eval_v1/20261103/analysis_final_02/figures/01_stage_rates.png",
+      "sha256": "061aae14519f57a61441f43af86d5024cc800f5fbc10678d39edbaa9f5dde85f",
+      "viewed": true,
+      "passed_no_clipping": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Policy_eval_v1/20261103/analysis_final_02/figures/02_episode_farthest_stage.png",
+      "sha256": "b8ba23d05fea99b7a8f360a2fe581447a5b1aad3fccd13c7780c1dc60054b80a",
+      "viewed": true,
+      "passed_no_clipping": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Policy_eval_v1/20261103/analysis_final_02/figures/03_termination_types.png",
+      "sha256": "238721b5f714d1930037c8de99c17bae8e64d8eadd17f5aac2ba824291f70a8a",
+      "viewed": true,
+      "passed_no_clipping": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Policy_eval_v1/20261103/analysis_final_02/figures/04_representative_progress.png",
+      "sha256": "91e9e29db1074dde26f467c71abd4429f8685496a2526388226e734ebd2c2fcc",
+      "viewed": true,
+      "passed_no_clipping": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Policy_eval_v1/20261103/analysis_final_02/figures/05_applicable_target_metrics.png",
+      "sha256": "fa0800b979b884b85867e9e59a9705e36048cfca7722442cdcd92ec1f0b85140",
+      "viewed": true,
+      "passed_no_clipping": true
+    },
+    {
+      "path": "outputs/lab_cuvette_loading/Policy_eval_v1/20261103/analysis_final_02/figures/06_latency_and_wall_time.png",
+      "sha256": "4e3268d90160877fd0f4659b3bbdceaba01a1b4f0e4beeba300608494a4a6fcc",
+      "viewed": true,
+      "passed_no_clipping": true
+    }
+  ],
+  "comparisons_to_preserved_analysis_final_01": {
+    "task_success": true,
+    "record_valid": true,
+    "record_complete": true,
+    "environment_valid": true,
+    "task_evaluable": true,
+    "stage_results": true,
+    "source_files": true,
+    "resource": true,
+    "termination_reason": true,
+    "failure_type": true,
+    "drift_intervals": true
+  },
+  "checks": {
+    "stage_rates_counts_wilson_unknown_match": true,
+    "all_unknown_counts_zero": true,
+    "successful_completion_times_na_n_zero": true,
+    "post_release_stability_na_n_zero": true,
+    "applicable_target_error_depth_na_not_fake_zero": true,
+    "na_panels_use_real_episode_time_intervals": true,
+    "all_four_actual_formal_episodes_selected": true,
+    "diagnostic_and_history_not_in_formal_counts": true,
+    "inference_latency_total_inference_and_episode_wall_separate": true,
+    "original_raw_core_scorer_and_labels_unchanged": true
+  },
+  "formal_counts": {
+    "gpt6": {
+      "planned": 10,
+      "started": 2,
+      "unstarted": 8,
+      "success": 0,
+      "environment_valid": 2,
+      "record_complete": 2,
+      "task_evaluable": 2,
+      "censored": 1
+    },
+    "pi05": {
+      "planned": 10,
+      "started": 2,
+      "unstarted": 8,
+      "success": 0,
+      "environment_valid": 2,
+      "record_complete": 2,
+      "task_evaluable": 2,
+      "censored": 0
+    }
+  },
+  "resources": {
+    "pi05_calls": 137,
+    "pi05_returned_actions": [
+      340,
+      345
+    ],
+    "pi05_executed_actions": [
+      337,
+      343
+    ],
+    "pi05_total_returned_actions": 685,
+    "pi05_total_executed_actions": 680,
+    "pi05_actual_control_steps": [
+      1011,
+      1028
+    ],
+    "gpt_calls": [
+      33,
+      6
+    ],
+    "gpt_total_input_tokens": 482033,
+    "gpt_total_output_tokens": 5870,
+    "gpt_formal_estimated_usd": 1.24311,
+    "monetary_scope": "usage-based local estimate; actual invoice unavailable"
+  },
+  "approach_interpretation": {
+    "source": "demos/lab_cuvette_progress_v1/core.py:380-386",
+    "configured_distance_threshold_m": 0.005,
+    "held_grasp_is_sufficient_reach_evidence": true,
+    "closest_control_endpoint_reference_distance_m": 0.00672506046754925,
+    "closest_t": 16.066666666666666,
+    "first_confirmed_t": 18.1125,
+    "confirmation_reference_distance_m": 0.006875240169847834,
+    "interpretation": "A physically valid held grasp also confirms approach, so the stage does not assert the configured TCP-to-grip-reference distance is below 5 mm. This independent geometric metric is not contact-point accuracy."
+  },
+  "original_outputs_overwritten": false
+}

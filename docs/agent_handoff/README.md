@@ -8,7 +8,9 @@
 
 ## 选择文件
 
-当前默认[清单](package.json)是 [Progress v1 本轮结果清单](Progress_v1_current/package.json)：只收本次进度诊断改动、真实 Teacher 与 π0.5 未完成示例、逐步 sidecar、可视化、视频显示副本和验证证据。先读[本次说明](Progress_v1_current/00_给Agent阅读说明.md)。完整 H5、物理原日志、资产与环境保留工程端。
+当前默认[清单](package.json)是 [Policy_eval_v1 工程反馈包](Policy_eval_v1_current/package.json)：收录本轮冻结 GPT-6 direct 与 π0.5 RPC 的实际评测结果、协议、代码、逐集指标、完整 Progress、代表录像和验证凭据。先读[工程包说明](Policy_eval_v1_current/00_给Agent阅读说明.md)。独立[汇报包清单](Policy_eval_v1_current/report_package.json)只包含详细 DOCX、报告引用的四段双视角录像及发布凭据，见[汇报包说明](Policy_eval_v1_current/00_汇报包说明.md)。完整 H5、详细模型调用日志、资产与环境保留工程端。
+
+历史 [Progress v1 结果清单](Progress_v1_current/package.json)保留其原始证据和统计范围。
 
 此前 [Internal_use_v1 文档与内部使用优化清单](Internal_use_v1_current/package.json)及其结果保留。
 

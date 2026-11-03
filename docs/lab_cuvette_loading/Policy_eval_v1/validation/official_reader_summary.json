@@ -1,0 +1,740 @@
+{
+  "schema": "labsim.Policy_eval_v1.official_reader_summary.v1",
+  "passed": true,
+  "runtime_test_reference_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+  "analysis_commit": "094f8a18ecf0858dee4b8c86e9133c7275520995",
+  "audit_commit": "094f8a18ecf0858dee4b8c86e9133c7275520995",
+  "readers": [
+    {
+      "trial_id": "gpt6_01",
+      "episode_id": "51abe385-697e-4a22-92a6-f24659929d8f",
+      "reader_receipt_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/readers/gpt6_01.json",
+      "reader_receipt_sha256": "b41c83eafa22a48794a7c309d5ee295ad2409a32e70b2dccf194ce7ebf09066b",
+      "dataset_class": "policy.dataset.lab_cuvette_project_release_dataset.LabCuvetteProjectReleaseDataset",
+      "sample_filter": "failure",
+      "index_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_01/environment/index/policy_evaluation.hdf5",
+      "index_sha256": "58bc33c5e77490b33becd7da8fe677f626db9ed82f3a65062a439305cade3786",
+      "source_h5_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_01/environment/episode_0000/dataset/episode_0000.h5",
+      "source_h5_sha256_before": "f359cbdb7638a99b65556b0996849e63bf4c0ed1d7c2bf47ad4502181e4bc62c",
+      "source_h5_sha256_after": "f359cbdb7638a99b65556b0996849e63bf4c0ed1d7c2bf47ad4502181e4bc62c",
+      "source_h5_sha256_pre_reader_closure": "f359cbdb7638a99b65556b0996849e63bf4c0ed1d7c2bf47ad4502181e4bc62c",
+      "source_hashes_before_after_equal": true,
+      "original_labels": {
+        "episode_id": "51abe385-697e-4a22-92a6-f24659929d8f",
+        "complete": true,
+        "task_success": false,
+        "record_valid": true,
+        "success_bc_eligible": false,
+        "record_purpose": "policy_evaluation",
+        "finalization_id": "5d079acdceff5f769595cebb500df0e6e9e66e1b4c5255cab670a794bd9eb8f9",
+        "scene_version": "Project_release_v1",
+        "asset_id": "cuvette_xy_1000"
+      },
+      "actual_transitions": 3720,
+      "actual_batches": [
+        {
+          "policy_type": "act",
+          "image_shape": [
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        },
+        {
+          "policy_type": "dp",
+          "image_shape": [
+            3,
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        }
+      ],
+      "checks": [
+        {
+          "check": "independent_closure_passed",
+          "passed": true
+        },
+        {
+          "check": "current_H5_equals_pre_reader_closed_H5_hash",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_reports_no_label_mutation",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_uses_failure_qualification",
+          "passed": true
+        },
+        {
+          "check": "actual_release_reader_selected",
+          "passed": true
+        },
+        {
+          "check": "actual_ACT_and_DP_batches_present",
+          "passed": true
+        },
+        {
+          "check": "source_episode_UUID_matches",
+          "passed": true
+        },
+        {
+          "check": "source_failure_qualification_preserved",
+          "passed": true
+        },
+        {
+          "check": "source_formal_purpose_preserved",
+          "passed": true
+        },
+        {
+          "check": "normal_index_exists",
+          "passed": true
+        },
+        {
+          "check": "reader_act_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_act_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "source_H5_hash_unchanged_during_read_only_review",
+          "passed": true
+        },
+        {
+          "check": "source_score_label_files_unchanged_during_review",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "batch_episode_alias": "episode_0000 is the index group alias; source UUID above is unchanged"
+    },
+    {
+      "trial_id": "pi05_01",
+      "episode_id": "072eb1fc-d7ae-4a79-9e97-8986bac3856c",
+      "reader_receipt_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/readers/pi05_01.json",
+      "reader_receipt_sha256": "cdee77ff4f0d79b66605bd41fd496ec3d21e9c42ba6b76d44f34b04bf5df6f32",
+      "dataset_class": "policy.dataset.lab_cuvette_project_release_dataset.LabCuvetteProjectReleaseDataset",
+      "sample_filter": "failure",
+      "index_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/index/policy_evaluation.hdf5",
+      "index_sha256": "7ac651170962e5273fa6ce4bdd3a971a77a137f45260a75e591989246900d1cf",
+      "source_h5_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/dataset/episode_0000.h5",
+      "source_h5_sha256_before": "bd08fc40867e1e67ee82cfcf4de1dd8f5b9a1408f1bc85db7d6c1770593f1a15",
+      "source_h5_sha256_after": "bd08fc40867e1e67ee82cfcf4de1dd8f5b9a1408f1bc85db7d6c1770593f1a15",
+      "source_h5_sha256_pre_reader_closure": "bd08fc40867e1e67ee82cfcf4de1dd8f5b9a1408f1bc85db7d6c1770593f1a15",
+      "source_hashes_before_after_equal": true,
+      "original_labels": {
+        "episode_id": "072eb1fc-d7ae-4a79-9e97-8986bac3856c",
+        "complete": true,
+        "task_success": false,
+        "record_valid": true,
+        "success_bc_eligible": false,
+        "record_purpose": "policy_evaluation",
+        "finalization_id": "915bf6e6cb92dbec4d1d19079f196b720460469d0f6dccb32a404e5dc49b90be",
+        "scene_version": "Project_release_v1",
+        "asset_id": "cuvette_xy_1000"
+      },
+      "actual_transitions": 1011,
+      "actual_batches": [
+        {
+          "policy_type": "act",
+          "image_shape": [
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        },
+        {
+          "policy_type": "dp",
+          "image_shape": [
+            3,
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        }
+      ],
+      "checks": [
+        {
+          "check": "independent_closure_passed",
+          "passed": true
+        },
+        {
+          "check": "current_H5_equals_pre_reader_closed_H5_hash",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_reports_no_label_mutation",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_uses_failure_qualification",
+          "passed": true
+        },
+        {
+          "check": "actual_release_reader_selected",
+          "passed": true
+        },
+        {
+          "check": "actual_ACT_and_DP_batches_present",
+          "passed": true
+        },
+        {
+          "check": "source_episode_UUID_matches",
+          "passed": true
+        },
+        {
+          "check": "source_failure_qualification_preserved",
+          "passed": true
+        },
+        {
+          "check": "source_formal_purpose_preserved",
+          "passed": true
+        },
+        {
+          "check": "normal_index_exists",
+          "passed": true
+        },
+        {
+          "check": "reader_act_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_act_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "source_H5_hash_unchanged_during_read_only_review",
+          "passed": true
+        },
+        {
+          "check": "source_score_label_files_unchanged_during_review",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "batch_episode_alias": "episode_0000 is the index group alias; source UUID above is unchanged"
+    },
+    {
+      "trial_id": "gpt6_02",
+      "episode_id": "57a3dcad-591f-4b39-8d99-6d9c53fc1d67",
+      "reader_receipt_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/readers/gpt6_02.json",
+      "reader_receipt_sha256": "a3d11edea4d9daf672614b9f3fe0b028fed088085185d2d541a00fa2e540902d",
+      "dataset_class": "policy.dataset.lab_cuvette_project_release_dataset.LabCuvetteProjectReleaseDataset",
+      "sample_filter": "failure",
+      "index_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/index/policy_evaluation.hdf5",
+      "index_sha256": "d9ee0229c715a489e8ee7fc958d34f14f94df7970f5d77121d3ccdbf0c60733e",
+      "source_h5_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/dataset/episode_0000.h5",
+      "source_h5_sha256_before": "f29baa59a2e4f45d032834b0c3c7c2208a123cd8bb6b0b526cbad2de44fef0c5",
+      "source_h5_sha256_after": "f29baa59a2e4f45d032834b0c3c7c2208a123cd8bb6b0b526cbad2de44fef0c5",
+      "source_h5_sha256_pre_reader_closure": "f29baa59a2e4f45d032834b0c3c7c2208a123cd8bb6b0b526cbad2de44fef0c5",
+      "source_hashes_before_after_equal": true,
+      "original_labels": {
+        "episode_id": "57a3dcad-591f-4b39-8d99-6d9c53fc1d67",
+        "complete": true,
+        "task_success": false,
+        "record_valid": true,
+        "success_bc_eligible": false,
+        "record_purpose": "policy_evaluation",
+        "finalization_id": "0cdcd6bb9d4b8a2b787f9ead03cea47d730781a736ed363449ff3af3aade2ade",
+        "scene_version": "Project_release_v1",
+        "asset_id": "cuvette_xy_1000"
+      },
+      "actual_transitions": 750,
+      "actual_batches": [
+        {
+          "policy_type": "act",
+          "image_shape": [
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        },
+        {
+          "policy_type": "dp",
+          "image_shape": [
+            3,
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        }
+      ],
+      "checks": [
+        {
+          "check": "independent_closure_passed",
+          "passed": true
+        },
+        {
+          "check": "current_H5_equals_pre_reader_closed_H5_hash",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_reports_no_label_mutation",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_uses_failure_qualification",
+          "passed": true
+        },
+        {
+          "check": "actual_release_reader_selected",
+          "passed": true
+        },
+        {
+          "check": "actual_ACT_and_DP_batches_present",
+          "passed": true
+        },
+        {
+          "check": "source_episode_UUID_matches",
+          "passed": true
+        },
+        {
+          "check": "source_failure_qualification_preserved",
+          "passed": true
+        },
+        {
+          "check": "source_formal_purpose_preserved",
+          "passed": true
+        },
+        {
+          "check": "normal_index_exists",
+          "passed": true
+        },
+        {
+          "check": "reader_act_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_act_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "source_H5_hash_unchanged_during_read_only_review",
+          "passed": true
+        },
+        {
+          "check": "source_score_label_files_unchanged_during_review",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "batch_episode_alias": "episode_0000 is the index group alias; source UUID above is unchanged"
+    },
+    {
+      "trial_id": "pi05_02",
+      "episode_id": "aa17c728-5239-40f1-a0e4-46f79a1dad22",
+      "reader_receipt_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/readers/pi05_02.json",
+      "reader_receipt_sha256": "f43751040fe7cac011cc73cb2c31a592591a54eef96e2c32286daf434b5b4148",
+      "dataset_class": "policy.dataset.lab_cuvette_project_release_dataset.LabCuvetteProjectReleaseDataset",
+      "sample_filter": "failure",
+      "index_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_02/environment/index/policy_evaluation.hdf5",
+      "index_sha256": "4eeffd5279a5d5c831bdcb518e63f67d7a17a938a528b108d424159ae86e5852",
+      "source_h5_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_02/environment/episode_0000/dataset/episode_0000.h5",
+      "source_h5_sha256_before": "b23ee24bd9d0d3dd93b202432a5e5c2b10a61c17808065ca933e8364aebcae59",
+      "source_h5_sha256_after": "b23ee24bd9d0d3dd93b202432a5e5c2b10a61c17808065ca933e8364aebcae59",
+      "source_h5_sha256_pre_reader_closure": "b23ee24bd9d0d3dd93b202432a5e5c2b10a61c17808065ca933e8364aebcae59",
+      "source_hashes_before_after_equal": true,
+      "original_labels": {
+        "episode_id": "aa17c728-5239-40f1-a0e4-46f79a1dad22",
+        "complete": true,
+        "task_success": false,
+        "record_valid": true,
+        "success_bc_eligible": false,
+        "record_purpose": "policy_evaluation",
+        "finalization_id": "3ef15906f0c894e9ad4eaf5eb7eb4a0322ebc823bd7984d6a6106da81a015721",
+        "scene_version": "Project_release_v1",
+        "asset_id": "cuvette_xy_1000"
+      },
+      "actual_transitions": 1028,
+      "actual_batches": [
+        {
+          "policy_type": "act",
+          "image_shape": [
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        },
+        {
+          "policy_type": "dp",
+          "image_shape": [
+            3,
+            3,
+            3,
+            256,
+            256
+          ],
+          "agent_pose_shape": [
+            3,
+            3,
+            8
+          ],
+          "action_shape": [
+            3,
+            16,
+            8
+          ],
+          "dtype": "torch.float32",
+          "finite": true,
+          "training_or_optimizer_executed": false
+        }
+      ],
+      "checks": [
+        {
+          "check": "independent_closure_passed",
+          "passed": true
+        },
+        {
+          "check": "current_H5_equals_pre_reader_closed_H5_hash",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_reports_no_label_mutation",
+          "passed": true
+        },
+        {
+          "check": "normal_reader_uses_failure_qualification",
+          "passed": true
+        },
+        {
+          "check": "actual_release_reader_selected",
+          "passed": true
+        },
+        {
+          "check": "actual_ACT_and_DP_batches_present",
+          "passed": true
+        },
+        {
+          "check": "source_episode_UUID_matches",
+          "passed": true
+        },
+        {
+          "check": "source_failure_qualification_preserved",
+          "passed": true
+        },
+        {
+          "check": "source_formal_purpose_preserved",
+          "passed": true
+        },
+        {
+          "check": "normal_index_exists",
+          "passed": true
+        },
+        {
+          "check": "reader_act_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_act_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_act_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_no_training",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_image_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_actual_action_batch_shape",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_observation_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_finite_action_batch",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_time_alignment_and_actual_transition_count",
+          "passed": true
+        },
+        {
+          "check": "reader_dp_original_failure_label",
+          "passed": true
+        },
+        {
+          "check": "source_H5_hash_unchanged_during_read_only_review",
+          "passed": true
+        },
+        {
+          "check": "source_score_label_files_unchanged_during_review",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "batch_episode_alias": "episode_0000 is the index group alias; source UUID above is unchanged"
+    }
+  ],
+  "actual_episode_count": 4,
+  "ACT_batch_count": 4,
+  "DP_batch_count": 4,
+  "source_labels_modified": false,
+  "training_executed": false,
+  "qualification_scope": "All four are original qualified failure trajectories; no success flag or BC eligibility changed",
+  "all_source_H5_hashes_equal_pre_reader_closure_and_after_audit": true
+}

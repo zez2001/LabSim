@@ -1,0 +1,76 @@
+{
+  "schema": "labsim.policy_eval.figures.v1",
+  "analysis_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/analysis_final_02/summary.json",
+  "analysis_sha256": "adc154e6b85a9f3ed164f326b99a4d86a3b7d88cfad5a840f0c219ab0fa32e45",
+  "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/metrics_final_01/trials.json",
+  "manifest_sha256": "b29ec0c790ffce047806e17df9a210d9c5124ab2b40d1ed72e04275da877acd0",
+  "selection_rule": "all started formal episodes (at most four)",
+  "representatives": [
+    {
+      "trial_id": "gpt6_01",
+      "episode_id": "51abe385-697e-4a22-92a6-f24659929d8f",
+      "group_id": "gpt6",
+      "task_success": false,
+      "progress_dir": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_01/environment/episode_0000"
+    },
+    {
+      "trial_id": "gpt6_02",
+      "episode_id": "57a3dcad-591f-4b39-8d99-6d9c53fc1d67",
+      "group_id": "gpt6",
+      "task_success": false,
+      "progress_dir": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000"
+    },
+    {
+      "trial_id": "pi05_01",
+      "episode_id": "072eb1fc-d7ae-4a79-9e97-8986bac3856c",
+      "group_id": "pi05",
+      "task_success": false,
+      "progress_dir": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000"
+    },
+    {
+      "trial_id": "pi05_02",
+      "episode_id": "aa17c728-5239-40f1-a0e4-46f79a1dad22",
+      "group_id": "pi05",
+      "task_success": false,
+      "progress_dir": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_02/environment/episode_0000"
+    }
+  ],
+  "started_formal_episode_count": 4,
+  "formal_group_counts": {
+    "gpt6": 2,
+    "pi05": 2
+  },
+  "figures": [
+    {
+      "path": "01_stage_rates.png",
+      "sha256": "061aae14519f57a61441f43af86d5024cc800f5fbc10678d39edbaa9f5dde85f",
+      "description": "First physical confirmations, explicit started denominators and unknown counts; Wilson 95% intervals."
+    },
+    {
+      "path": "02_episode_farthest_stage.png",
+      "sha256": "b8ba23d05fea99b7a8f360a2fe581447a5b1aad3fccd13c7780c1dc60054b80a",
+      "description": "One row per actual started formal episode; held 50 mm translation and pre-insertion arrival remain separate."
+    },
+    {
+      "path": "03_termination_types.png",
+      "sha256": "238721b5f714d1930037c8de99c17bae8e64d8eadd17f5aac2ba824291f70a8a",
+      "description": "Original termination reasons, including service failures and budget truncation, retain started denominators."
+    },
+    {
+      "path": "04_representative_progress.png",
+      "sha256": "91e9e29db1074dde26f467c71abd4429f8685496a2526388226e734ebd2c2fcc",
+      "description": "Original control-endpoint Progress v1.2 curves; diagnostic stage coverage is separate from effective insertion."
+    },
+    {
+      "path": "05_applicable_target_metrics.png",
+      "sha256": "fa0800b979b884b85867e9e59a9705e36048cfca7722442cdcd92ec1f0b85140",
+      "description": "Target error uses entrance AND current-route gates; insertion curves require applicability. Missing regions are N/A, never zero millimetres."
+    },
+    {
+      "path": "06_latency_and_wall_time.png",
+      "sha256": "4e3268d90160877fd0f4659b3bbdceaba01a1b4f0e4beeba300608494a4a6fcc",
+      "description": "Separate per-call latency, total inference wall time and whole-episode wall time. Missing telemetry remains N/A."
+    }
+  ],
+  "original_data_modified": false
+}

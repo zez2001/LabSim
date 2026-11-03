@@ -1,0 +1,896 @@
+{
+  "schema": "labsim.Policy_eval_v1.closed_episode_audit.v1",
+  "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000",
+  "episode_id": "bb89e853-a385-4fb3-a8f9-4f537df1ad71",
+  "passed": true,
+  "errors": [],
+  "check_count": 965,
+  "checks_failed": [],
+  "runtime_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+  "task_success": false,
+  "environment_valid": true,
+  "environment_validity": {
+    "environment_valid": true,
+    "reasons": [],
+    "scope": "geometry, reset, finite physical state and explicit simulation-domain failures; independent of task_success"
+  },
+  "record_complete": true,
+  "record_valid": true,
+  "record_purpose": "lifecycle_diagnostic",
+  "qualification_semantics": "Integrity acceptance is independent of task success; preserve authoritative record_valid/BC labels",
+  "termination_reason": "POLICY_BUDGET",
+  "failure_domain": "budget",
+  "original_final_result": {
+    "acceptance_geometry_scope": "Declared input material geometry checks plus actual physical contact and motion, not calibrated cooked geometry or real accuracy",
+    "actual_control_steps": 150,
+    "actual_physics_steps": 604,
+    "asset_id": "cuvette_xy_1000",
+    "base_scoring_diagnostics": {
+      "failure_type": "POLICY_BUDGET",
+      "invalid_state_reasons": [],
+      "record_valid": true,
+      "task_success": false,
+      "termination_reason": "POLICY_BUDGET"
+    },
+    "complete": true,
+    "condition_group": "natural",
+    "diagnostic_hold_window": {
+      "stable": null,
+      "status": "not_applicable"
+    },
+    "eligibility_pending_collector_integrity": false,
+    "eligible_for_failure_analysis": true,
+    "eligible_for_success_bc": false,
+    "episode_id": "bb89e853-a385-4fb3-a8f9-4f537df1ad71",
+    "failure_domain": "budget",
+    "failure_type": "POLICY_BUDGET",
+    "finalization_id": "a3babf110ec30821cbd76d5c7205b610526dd3d4c0955cd9bdb87a1b6043a06a",
+    "frames": 150,
+    "full_success": false,
+    "geometry_audit_fingerprint": "bcc68d65179438a4d6a431dfc5a544172065c95b2e94103dd687eb3302081bd8",
+    "geometry_valid": true,
+    "grasp_attempts": [],
+    "grasp_relative_pose": {
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "configured_grasp_anchor_height_m": 0.053,
+      "maximum_configured_grasp_anchor_axial_drift_m": null,
+      "maximum_configured_grasp_anchor_drift_m": null,
+      "maximum_configured_grasp_anchor_transverse_drift_m": null,
+      "maximum_orientation_drift_deg": null,
+      "maximum_position_drift_m": null,
+      "orientation_limit_deg": 1.0,
+      "position_limit_m": 0.0002,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "reference_available": false
+    },
+    "grasp_success": false,
+    "invalid_state_reasons": [],
+    "legacy_guard_events": [],
+    "legacy_invalid_state_reasons": [],
+    "loading_candidate_sequence_observed": false,
+    "loading_sequence_observed": false,
+    "measured_grasp_segments": {
+      "extraction": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      },
+      "static_grasp": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      },
+      "transport": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      }
+    },
+    "native_pair_success": null,
+    "observed_events": {},
+    "original_12_5mm_native_pair_verdict_unchanged": true,
+    "physical_sample_count": 605,
+    "physical_score_record_valid": true,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "physics_trust_scope": "declared input geometry and recorded physical state; effective cooked geometry and real calibration remain unverified",
+    "physics_trustworthy": true,
+    "policy_id": "cubence_gpt6_astra",
+    "post_retreat_window": {
+      "reason": "actual_gripper_retreat_not_observed",
+      "sample_count": 0,
+      "stable": null,
+      "status": "unavailable"
+    },
+    "progress_status": "complete",
+    "progress_summary": "progress_summary.json",
+    "publication_state": "complete",
+    "qualification_schema": "labsim.Project_v1_1.qualifications.v1",
+    "raw_failure_type": "NONE",
+    "raw_termination_reason": "POLICY_BUDGET",
+    "real_calibrated": false,
+    "record_integrity_errors": [],
+    "record_integrity_source": "streaming_collector_checks_at_flush_close",
+    "record_integrity_valid": true,
+    "record_purpose": "lifecycle_diagnostic",
+    "record_valid": true,
+    "record_valid_scope": "independent physical trace AND collector action/sensor/time integrity",
+    "release_observed": false,
+    "retreat_observed": false,
+    "retry_count": 0,
+    "safety_attribution": "not_determined_by_scorer",
+    "safety_event": null,
+    "scene_version": "Project_release_v1",
+    "schema": "labsim.Project_v1_1.independent.v1",
+    "scorer_version": "Project_v1_1.independent.v1",
+    "seed": 0,
+    "simulation_duration_s": 2.5166666666666666,
+    "simulation_seconds": 2.5166666666666666,
+    "source_slot_cleared": false,
+    "stable_after_retreat": null,
+    "stage_labels_used_as_success_proof": false,
+    "success_bc_eligible": false,
+    "task_result": {
+      "failure_domain": "budget",
+      "scope": "complete_loading",
+      "status": "failure",
+      "success": false
+    },
+    "task_success": false,
+    "task_type": "loading",
+    "terminal_window": {
+      "criteria": {
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "position_stable": true,
+        "target_contains": null,
+        "target_support": null
+      },
+      "end_t": 2.5166666666666666,
+      "measured_duration_s": 2.5166666666666666,
+      "orientation_change_deg": 0.0003863964847417592,
+      "position_drift_m": 0.0001999735839154166,
+      "required_duration_s": 3.0,
+      "sample_count": 605,
+      "stable": null,
+      "start_t": 0.0,
+      "status": "incomplete"
+    },
+    "termination_reason": "POLICY_BUDGET",
+    "trajectory_analysis_eligible": true,
+    "transport_success": false,
+    "variant_pair_success": false,
+    "wall_seconds": 33.25779285491444,
+    "workflow_success": false
+  },
+  "original_completion_marker": {
+    "episode_id": "bb89e853-a385-4fb3-a8f9-4f537df1ad71",
+    "finalization_id": "a3babf110ec30821cbd76d5c7205b610526dd3d4c0955cd9bdb87a1b6043a06a",
+    "finalize_wall_seconds": 0.11713591986335814,
+    "h5": "episode_0000.h5",
+    "record_purpose": "lifecycle_diagnostic",
+    "result": "episode_0000_result.json",
+    "schema": "labsim.Project_release_v1.complete.v1"
+  },
+  "physical_scorer_projection_pending_collector": true,
+  "process": {
+    "process_exited": true,
+    "exit_code": 0,
+    "checked_native_PIDs": [
+      1430349,
+      1430351
+    ],
+    "native_PIDs_absent": true,
+    "evidence_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/process_exit.json",
+    "wall_seconds": 225.0195084149018
+  },
+  "h5": {
+    "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/dataset/episode_0000.h5",
+    "sha256": "a92be6230f79e1ac3a202f6c6e29d6384e0602b8721e588b57e378f959a3dc41",
+    "bytes": 37285320,
+    "transitions": 150,
+    "first_t_obs_s": 0.016666666666666666,
+    "last_t_next_s": 2.5166666666666666,
+    "metadata": {
+      "action_interface_version": "Project_release_v1.actions.v1",
+      "actual_execution_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+      "asset_id": "cuvette_xy_1000",
+      "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+      "code_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+      "condition_group": "natural",
+      "control_config_sha256": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "demonstrator_id": "CubenceGenericTools",
+      "deterministic_action_deviation_json": "{}",
+      "fixed_collection_eligible": true,
+      "frozen_scene_sha256": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "lifecycle_version": "Project_release_v1.transactional_lifecycle.v1",
+      "physical_baseline": "Project_v1_1",
+      "policy_id": "cubence_gpt6_astra",
+      "record_purpose": "lifecycle_diagnostic",
+      "scene_mode": "standard",
+      "scene_version": "Project_release_v1",
+      "seed": 0,
+      "source_slot_id": "A1",
+      "target_seat_id": "candidate_far_hinge",
+      "task_type": "loading"
+    },
+    "all_unique_datasets_read": true,
+    "read_array_bytes": 59446938,
+    "datasets": [
+      {
+        "name": "action_conversion_json",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "actions",
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "actions_raw_json",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "agent_pose",
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "camera_1_rgb",
+        "shape": [
+          150,
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "camera_2_rgb",
+        "shape": [
+          150,
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "camera_pose_json",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "camera_timestamp/side_camera_rgb",
+        "shape": [
+          150
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "camera_timestamp/wrist_camera_rgb",
+        "shape": [
+          150
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/available",
+        "shape": [
+          150
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "control_auxiliary/command_q",
+        "shape": [
+          150,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/gripper_effort_limit_N",
+        "shape": [
+          150,
+          2
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/gripper_target_m",
+        "shape": [
+          150
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_interval_s",
+        "shape": [
+          150
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "done",
+        "shape": [
+          150
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "episode_id",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "episode_metadata_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "independent_score_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "inference_wall_time_s",
+        "shape": [
+          150
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "joint_positions",
+        "shape": [
+          150,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "language_instruction",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "next_agent_pose",
+        "shape": [
+          150,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "next_joint_positions",
+        "shape": [
+          150,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "next_obs_step",
+        "shape": [
+          150
+        ],
+        "dtype": "int64"
+      },
+      {
+        "name": "next_timestamp",
+        "shape": [
+          150
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "obs_step",
+        "shape": [
+          150
+        ],
+        "dtype": "int64"
+      },
+      {
+        "name": "partial_terminal_control_interval",
+        "shape": [
+          150
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "phase",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "phase_code",
+        "shape": [
+          150
+        ],
+        "dtype": "int32"
+      },
+      {
+        "name": "privileged/next_state_json",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "privileged/state_json",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "qualification_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "reward",
+        "shape": [
+          150
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "task_events_json",
+        "shape": [
+          150
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "task_properties",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "task_result_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "terminal_observation/joint_positions",
+        "shape": [
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "terminal_observation/side_camera_rgb",
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "terminal_observation/wrist_camera_rgb",
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "timestamp",
+        "shape": [
+          150
+        ],
+        "dtype": "float64"
+      }
+    ],
+    "image_hardlink_aliases": {
+      "camera_1_rgb": true,
+      "camera_2_rgb": true
+    }
+  },
+  "logs": {
+    "physics_records.jsonl.gz": {
+      "rows": 605,
+      "sha256": "61bed300146fe5c3a6826f3c7535e35d56d369daa890840b00b6a68df27fed2a",
+      "stored_bytes": 3296582,
+      "uncompressed_bytes": 25725462,
+      "uncompressed_sha256": "a7d9ef8a1615b9ef4087b5deaa0016fcf32cad29ce915d537f3283fc81ea871b",
+      "gzip_crc_and_json_valid": true
+    },
+    "native_contact_events.jsonl.gz": {
+      "rows": 2416,
+      "sha256": "1cd405ddd86e6f530ebb9f1da6e9d6ed5ef9917d2e920e1189771b72c36d4b12",
+      "stored_bytes": 798463,
+      "uncompressed_bytes": 5149137,
+      "uncompressed_sha256": "51e844a5695018825c06f4865981c6cc44c06741338b8b37b08b9f3cd942c35f",
+      "gzip_crc_and_json_valid": true
+    },
+    "progress_v1.jsonl.gz": {
+      "rows": 150,
+      "sha256": "66753a36d0133dcac5ff984ab9e5477f25cc36393a55a3e36e4bd149f129708e",
+      "stored_bytes": 514231,
+      "uncompressed_bytes": 5149600,
+      "uncompressed_sha256": "7b178835755e7f9d7d869d9cc7ea62131a58322ffcab613d1dd9200332c8342a",
+      "gzip_crc_and_json_valid": true
+    }
+  },
+  "videos": {
+    "side_camera.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/side_camera.mp4",
+      "frames_decoded": 76,
+      "expected_frames": 76,
+      "fps": 30.0,
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "fa5bc8f1a51bc09b33161aa0d38d7695ea059471e1bf52a94eb7e4dac074b653"
+    },
+    "wrist_camera.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/wrist_camera.mp4",
+      "frames_decoded": 76,
+      "expected_frames": 76,
+      "fps": 30.0,
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "e37365dab57816884998ff8d0708e46a3b1c2699ee768e6bde3bd36c3c163d34"
+    },
+    "dual_view.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/dual_view.mp4",
+      "frames_decoded": 76,
+      "expected_frames": 76,
+      "fps": 30.0,
+      "resolution_wh": [
+        1280,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "0cb0a6a428b161d1a119cec7a9b7482da499f12472251c484a76942594d544c6"
+    }
+  },
+  "progress": {
+    "recording_complete": true,
+    "task_progress_complete": false,
+    "output_integrity": {
+      "status": "complete",
+      "complete": true,
+      "errors": [],
+      "files": {
+        "progress_v1.jsonl.gz": {
+          "bytes": 514231,
+          "sha256": "66753a36d0133dcac5ff984ab9e5477f25cc36393a55a3e36e4bd149f129708e"
+        },
+        "progress_events.jsonl": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "progress_config.resolved.json": {
+          "bytes": 12972,
+          "sha256": "a357739065253f008b6efc875f6626df27590f8705854e85133800eddb100e6f"
+        }
+      },
+      "hashes_exclude": "progress_summary.json (self), report and linked videos"
+    },
+    "recording": {
+      "physics_samples": 605,
+      "control_transitions": 150,
+      "event_count": 0,
+      "uncompressed_transition_bytes": 5149600,
+      "stored_bytes_excluding_summary": 527203,
+      "compute_wall_seconds": 1.1694306237623096,
+      "write_wall_seconds": 0.26895841443911195,
+      "physical_annotation_wall_seconds": 1.3109056297689676,
+      "total_annotation_wall_seconds": 1.5798640442080796,
+      "lifecycle_wall_seconds": 29.70686776097864,
+      "interval_convention": "(t_obs,t_next]",
+      "reset_separate": true
+    },
+    "events_replay": {
+      "schema": "labsim.Progress_v1.2.attempt_event_replay.v1",
+      "attempts": [],
+      "attempt_count": 0,
+      "retry_count": 0,
+      "lifecycle_events": [],
+      "complete": true,
+      "warnings": [],
+      "source": "append-only Progress lifecycle events only; no summary or task-success input",
+      "attempts_match_summary": true,
+      "retry_count_matches_summary": true,
+      "passed": true
+    },
+    "complete_stream_events": 0,
+    "event_names": {},
+    "finalize_events_included": "Consumed every line of progress_events.jsonl, including unassigned/finalize outcomes if emitted; no event required when no attempt exists"
+  },
+  "source_hashes_unchanged": true,
+  "source_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/action_receipts.jsonl",
+      "sha256": "e6f864e0dc34c6f0ac05464a65ef5a94dbb4aa8525c5a3b625e65f7107754e4a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/camera_debug/side_camera_depth_first.npz",
+      "sha256": "d7339f93a9d1e3e6d9dcda06483da44dbd373645c7d2de0cd90f4276489b8b3b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/camera_debug/side_camera_depth_last.npz",
+      "sha256": "7016ada2966340720a868e4361e4e4f7cb167931793d324a04fc6ba78ae8cf2b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/camera_debug/wrist_camera_depth_first.npz",
+      "sha256": "e99b23b8c6b3cca708e70eff4ce73cf50915bc434b8361ff30f696ef2bdc9a7b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/camera_debug/wrist_camera_depth_last.npz",
+      "sha256": "52e4d9b83e2f80371e26c9c411bb185339630a8bb75d8df33f394080021e118f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/camera_lifecycle.json",
+      "sha256": "bed2c6680fde9fba748ae82b22d6c7692c02d7b8eb589105eaf3b7dc93084782"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/cameras.json",
+      "sha256": "40892461aeda42bb3552b8644c839eb2a30dba55615d16de1b86502c91c36775"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/config.yaml",
+      "sha256": "7a03a8f16a66e04529f2366cf2d4385989110acd553e029c9d386c2311822039"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/contact_hold_configuration.json",
+      "sha256": "3cd6b47fb19124e79678077dac0ad0edb77d7dff9fe71bd7dafc1515ece42d25"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/cooked_collision_probe.json",
+      "sha256": "718851f432ab2286b222d9e58dd9f29c1020b40cf64a445f2dcf1d16175fc554"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/dataset/episode_0000.h5",
+      "sha256": "a92be6230f79e1ac3a202f6c6e29d6384e0602b8721e588b57e378f959a3dc41"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/dataset/meta/episode.jsonl",
+      "sha256": "8fcc5a1ccbcae1fe11d646ba1f3d8040805dce5e29c907c041b7408fffe371b6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/declared_initial_joints.json",
+      "sha256": "8ed595969983132b37323384179a9a773790a7b7dc70d98f81da9541b8c75ce1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/dual_view.mp4",
+      "sha256": "0cb0a6a428b161d1a119cec7a9b7482da499f12472251c484a76942594d544c6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/episode_0000_complete.json",
+      "sha256": "5ca4d0ff9fb7f328f9fc9cff3cbfa426725d763bd83ef54d3d7ef221a2e59466"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/episode_0000_result.json",
+      "sha256": "8fe6354488ba407c8aa3617a45860a0d88374c077ea2aacbea6ac4758817fffc"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/execution_trace.jsonl",
+      "sha256": "6117871935cd00ae49d3f21ed9f1f880956c8d787a4fef35b8725b6cec5c8791"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/executor_configuration.json",
+      "sha256": "275a19ec786432c6995c83cc828f56391686f254f3af62ea3edf35c41fd82503"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/facade_reset_audit.json",
+      "sha256": "5fbb9a837382974b69ed4f0f03c09e889bc7691a106a976d038e69ccc710c620"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/final_camera_meta.json",
+      "sha256": "8591a50c7695a868970a24e4c22bd2c632f02b6527e6623d43c94d981e4aea43"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/finalization_timing.json",
+      "sha256": "fb16197abb72013fdc521f2f636df965e06dfa2f9c8817af1295369a8011c4aa"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/geometry_audit_binding.json",
+      "sha256": "9300d0b294e0ed61536c02f7066d28c8346685b0c373033417b60cea4aec0a8f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/controller.json",
+      "sha256": "a77359cc76e28b72f47fb30948023b0342c07e35321d9c2af99b477acb79775a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/manifest.json",
+      "sha256": "e0a513c5f2bb506494793009090f892950cf219997cc4ad77da1a351e3e52d3e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+      "sha256": "d4963c87278233568c9bfa1f884d9315223b481cc45404b2f25397a54ce02873"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+      "sha256": "51d792527e0cc967a8e7f0f0d53858a3764da0abf0a3cec12e82e8e8c9874124"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "55cd3d99e505b9d2fc103e1cb13404a5aceb30c9d1aae81a8b6a625b1497fc45"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/policy_trace.jsonl",
+      "sha256": "8a0f509fb07ed47898fe4b5ab7841061edf2cd0dfb57648ef6aa285e41b26f13"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/summary.json",
+      "sha256": "fab8a0a44e046cfd227b7f9a12a687b9139bfd18f626a98f19bf81c0adfd9316"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/call_outcome.json",
+      "sha256": "1362d53af553a899da83bbcd4766f3780184ec06c9c79615eae04c226c3dfe02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/current_robot_self_state.json",
+      "sha256": "315b84528e1a7233085e7cecf405320e9b55675d6523ce42226f52e9743d740b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/current_side_detail.jpg",
+      "sha256": "da60e93ad2c72d08b7445f7443586f86c101d747c8145dfb3abc81761bf6d7e2"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/current_side_detail.json",
+      "sha256": "7e5ea620424fa4c9f5c15ccae54bee0c3fe15acf3aa3f9d6791c08fc46e46ea2"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/input_items_manifest.json",
+      "sha256": "68605f33e0fa639d45263492ef8c27c7894d24d1c1f512565ac76530f1ac721a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_detail_input_items_manifest.json",
+      "sha256": "b3385babe13fb9ec28cb002634c636122a13ec653ec0e3899939ae9fdd676117"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_detail_preparation.json",
+      "sha256": "2358a4e5abf4679a83f4ce637478b16dd6865d3b0f7f4376a31707fd9e48fc31"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_robot_self_input_items_manifest.json",
+      "sha256": "fd2759f43dc2c69d0aef7c2fdfa85f84ad06628570994adef8dbf2996644cf76"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_robot_self_preparation.json",
+      "sha256": "fce12a9987943c7a499d31d2ddb5e5cc4e492da1458019d6b18956344e8a03b0"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/independent_score.json",
+      "sha256": "e6e008d49e4fbb0fbf88c4e46465b0d3b143954311856fe51c94e0b1c3c1cf6a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/initial_debug.json",
+      "sha256": "0ad2556dae6f957b56795bc9ae01e65ac0fbde96e1b84374eb0990c980827567"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/initialization_timing.json",
+      "sha256": "560b1572c29b67f47b48c0e26317941c4d76eb2115b01c1b6d16c099bd43b02f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/native_contact_events.jsonl.gz",
+      "sha256": "1cd405ddd86e6f530ebb9f1da6e9d6ed5ef9917d2e920e1189771b72c36d4b12"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/options.json",
+      "sha256": "58a1ba63cfb208d6950a509346570e9fbabafc74f83567da47e8288ed84ddc58"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/physics_capture_meta.json",
+      "sha256": "71d78d47bfff4741a0649b1daee2c8d36fdeb7222e3250e450840976028ede28"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/physics_records.jsonl.gz",
+      "sha256": "61bed300146fe5c3a6826f3c7535e35d56d369daa890840b00b6a68df27fed2a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/progress_config.resolved.json",
+      "sha256": "a357739065253f008b6efc875f6626df27590f8705854e85133800eddb100e6f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/progress_events.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/progress_input_metadata.json",
+      "sha256": "58146434a2b76d989ee0ca0b2c76913391ad810e43073da4aa943002e37b8f58"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/progress_summary.json",
+      "sha256": "a077a2cd58c170390200dc7c903d422ce78c87d6c078f5680f61da096b7a4286"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/progress_v1.jsonl.gz",
+      "sha256": "66753a36d0133dcac5ff984ab9e5477f25cc36393a55a3e36e4bd149f129708e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/project_scene_contract.json",
+      "sha256": "0fac18c513b20f228977c7013d9a5d2c5d16118832608c306837658ce4d26919"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/recording_closed_receipt.json",
+      "sha256": "9bf2e77568f800f9eb4ae0e5b29353b876d4be7e2bde66c8307442a9e69db550"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/recording_configuration.json",
+      "sha256": "7a2e4df059612e61557f8fdc64b918c819618ee11288eb108c27e7e735dcb26f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/release_metadata.json",
+      "sha256": "efccf8219027e2d59d898de5b4371e0f98c3c0d0805e764c533f9dccd2dd0da2"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/reset_audit.json",
+      "sha256": "76eefdf1209774df91be0773a58f93f80d423cb2acf2900254893fcc1e134fa3"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/reset_check.json",
+      "sha256": "c074d945e00edf1448229b741040804d111897ba6eeb162811783333107f6e98"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/result.json",
+      "sha256": "5df729cbcf5034a3bdf136590b7408a1f4ab197dd11aa73062a9eee0f8c1f0a6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/robot_tracking_configuration.json",
+      "sha256": "ab941eda6d14d748bee072d625b60e8c5950a2caa865d2a5449eb7455aef9454"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/side_camera.mp4",
+      "sha256": "fa5bc8f1a51bc09b33161aa0d38d7695ea059471e1bf52a94eb7e4dac074b653"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/video_timestamps.json",
+      "sha256": "5614416cd9cd103e05de61152b058189762bbf07d170ba339826515749d66c2b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/episode_0000/wrist_camera.mp4",
+      "sha256": "e37365dab57816884998ff8d0708e46a3b1c2699ee768e6bde3bd36c3c163d34"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/process_exit.json",
+      "sha256": "3d6fb66f255d9e35e1124fa52df626f56f05e7b3dcada1cceea3005364024633"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/run_manifest.json",
+      "sha256": "fc4ac6a2ea61bc220da5054ecf8ba6ab0771a95f818577d123f5dbdf77a81eca"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/launch_identity.json",
+      "sha256": "1ac3a8b4615c362f6a8381f46c12806287064d83d76d894beb9894b8e8fe2f5b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/diagnostic_gpt6_02/environment/application_shutdown.json",
+      "sha256": "5639d0283f8d11a0e2c6b8f2ebb416a7d19eec1db98da9df499d9b6067fc11d3"
+    }
+  ],
+  "audit_wall_seconds": 0.5833640489727259,
+  "audit_tool_sha256": "6cd653dd6fc6d366ac3ec4f4268d7bc3b3a50602d4b363873a9706d0bbb2aa74"
+}

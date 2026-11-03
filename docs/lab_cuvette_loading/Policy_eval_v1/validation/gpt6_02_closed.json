@@ -1,0 +1,1255 @@
+{
+  "schema": "labsim.Policy_eval_v1.closed_episode_audit.v1",
+  "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000",
+  "episode_id": "57a3dcad-591f-4b39-8d99-6d9c53fc1d67",
+  "passed": true,
+  "errors": [],
+  "check_count": 4565,
+  "checks_failed": [],
+  "runtime_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+  "task_success": false,
+  "environment_valid": true,
+  "environment_validity": {
+    "environment_valid": true,
+    "reasons": [],
+    "scope": "geometry, reset, finite physical state and explicit simulation-domain failures; independent of task_success"
+  },
+  "record_complete": true,
+  "record_valid": true,
+  "record_purpose": "policy_evaluation",
+  "qualification_semantics": "Integrity acceptance is independent of task success; preserve authoritative record_valid/BC labels",
+  "termination_reason": "COST_BUDGET_EXHAUSTED",
+  "failure_domain": "budget",
+  "original_final_result": {
+    "acceptance_geometry_scope": "Declared input material geometry checks plus actual physical contact and motion, not calibrated cooked geometry or real accuracy",
+    "actual_control_steps": 750,
+    "actual_physics_steps": 3004,
+    "asset_id": "cuvette_xy_1000",
+    "base_scoring_diagnostics": {
+      "failure_type": "POLICY_BUDGET",
+      "invalid_state_reasons": [],
+      "record_valid": true,
+      "task_success": false,
+      "termination_reason": "COST_BUDGET_EXHAUSTED"
+    },
+    "complete": true,
+    "condition_group": "natural",
+    "diagnostic_hold_window": {
+      "stable": null,
+      "status": "not_applicable"
+    },
+    "eligibility_pending_collector_integrity": false,
+    "eligible_for_failure_analysis": true,
+    "eligible_for_success_bc": false,
+    "episode_id": "57a3dcad-591f-4b39-8d99-6d9c53fc1d67",
+    "failure_domain": "budget",
+    "failure_type": "POLICY_BUDGET",
+    "finalization_id": "0cdcd6bb9d4b8a2b787f9ead03cea47d730781a736ed363449ff3af3aade2ade",
+    "frames": 750,
+    "full_success": false,
+    "geometry_audit_fingerprint": "bcc68d65179438a4d6a431dfc5a544172065c95b2e94103dd687eb3302081bd8",
+    "geometry_valid": true,
+    "grasp_attempts": [],
+    "grasp_relative_pose": {
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "configured_grasp_anchor_height_m": 0.053,
+      "maximum_configured_grasp_anchor_axial_drift_m": null,
+      "maximum_configured_grasp_anchor_drift_m": null,
+      "maximum_configured_grasp_anchor_transverse_drift_m": null,
+      "maximum_orientation_drift_deg": null,
+      "maximum_position_drift_m": null,
+      "orientation_limit_deg": 1.0,
+      "position_limit_m": 0.0002,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "reference_available": false
+    },
+    "grasp_success": false,
+    "invalid_state_reasons": [],
+    "legacy_guard_events": [],
+    "legacy_invalid_state_reasons": [],
+    "loading_candidate_sequence_observed": false,
+    "loading_sequence_observed": false,
+    "measured_grasp_segments": {
+      "extraction": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      },
+      "static_grasp": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      },
+      "transport": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      }
+    },
+    "native_pair_success": null,
+    "observed_events": {},
+    "original_12_5mm_native_pair_verdict_unchanged": true,
+    "physical_sample_count": 3005,
+    "physical_score_record_valid": true,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "physics_trust_scope": "declared input geometry and recorded physical state; effective cooked geometry and real calibration remain unverified",
+    "physics_trustworthy": true,
+    "policy_id": "cubence_gpt6_astra",
+    "post_retreat_window": {
+      "reason": "actual_gripper_retreat_not_observed",
+      "sample_count": 0,
+      "stable": null,
+      "status": "unavailable"
+    },
+    "progress_status": "complete",
+    "progress_summary": "progress_summary.json",
+    "publication_state": "complete",
+    "qualification_schema": "labsim.Project_v1_1.qualifications.v1",
+    "raw_failure_type": "NONE",
+    "raw_termination_reason": "COST_BUDGET_EXHAUSTED",
+    "real_calibrated": false,
+    "record_integrity_errors": [],
+    "record_integrity_source": "streaming_collector_checks_at_flush_close",
+    "record_integrity_valid": true,
+    "record_purpose": "policy_evaluation",
+    "record_valid": true,
+    "record_valid_scope": "independent physical trace AND collector action/sensor/time integrity",
+    "release_observed": false,
+    "retreat_observed": false,
+    "retry_count": 0,
+    "safety_attribution": "not_determined_by_scorer",
+    "safety_event": null,
+    "scene_version": "Project_release_v1",
+    "schema": "labsim.Project_v1_1.independent.v1",
+    "scorer_version": "Project_v1_1.independent.v1",
+    "seed": 0,
+    "simulation_duration_s": 12.516666666666667,
+    "simulation_seconds": 12.516666666666667,
+    "source_slot_cleared": false,
+    "stable_after_retreat": null,
+    "stage_labels_used_as_success_proof": false,
+    "success_bc_eligible": false,
+    "task_result": {
+      "failure_domain": "budget",
+      "scope": "complete_loading",
+      "status": "failure",
+      "success": false
+    },
+    "task_success": false,
+    "task_type": "loading",
+    "terminal_window": {
+      "criteria": {
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "position_stable": true,
+        "target_contains": null,
+        "target_support": null
+      },
+      "end_t": 12.516666666666667,
+      "measured_duration_s": 3.0,
+      "orientation_change_deg": 3.871277472170378e-05,
+      "position_drift_m": 1.666000468656264e-08,
+      "required_duration_s": 3.0,
+      "sample_count": 721,
+      "stable": true,
+      "start_t": 9.516666666666667,
+      "status": "complete"
+    },
+    "termination_reason": "COST_BUDGET_EXHAUSTED",
+    "trajectory_analysis_eligible": true,
+    "transport_success": false,
+    "variant_pair_success": false,
+    "wall_seconds": 165.99797345907427,
+    "workflow_success": false
+  },
+  "original_completion_marker": {
+    "episode_id": "57a3dcad-591f-4b39-8d99-6d9c53fc1d67",
+    "finalization_id": "0cdcd6bb9d4b8a2b787f9ead03cea47d730781a736ed363449ff3af3aade2ade",
+    "finalize_wall_seconds": 0.08479059883393347,
+    "h5": "episode_0000.h5",
+    "record_purpose": "policy_evaluation",
+    "result": "episode_0000_result.json",
+    "schema": "labsim.Project_release_v1.complete.v1"
+  },
+  "physical_scorer_projection_pending_collector": true,
+  "process": {
+    "process_exited": true,
+    "exit_code": 0,
+    "checked_native_PIDs": [
+      1707050,
+      1707056
+    ],
+    "native_PIDs_absent": true,
+    "evidence_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/process_exit.json",
+    "wall_seconds": 220.02189686195925
+  },
+  "h5": {
+    "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/dataset/episode_0000.h5",
+    "sha256": "f29baa59a2e4f45d032834b0c3c7c2208a123cd8bb6b0b526cbad2de44fef0c5",
+    "bytes": 172317246,
+    "transitions": 750,
+    "first_t_obs_s": 0.016666666666666666,
+    "last_t_next_s": 12.516666666666667,
+    "metadata": {
+      "action_interface_version": "Project_release_v1.actions.v1",
+      "actual_execution_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+      "asset_id": "cuvette_xy_1000",
+      "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+      "code_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+      "condition_group": "natural",
+      "control_config_sha256": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "demonstrator_id": "CubenceGenericTools",
+      "deterministic_action_deviation_json": "{}",
+      "fixed_collection_eligible": true,
+      "frozen_scene_sha256": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "lifecycle_version": "Project_release_v1.transactional_lifecycle.v1",
+      "physical_baseline": "Project_v1_1",
+      "policy_id": "cubence_gpt6_astra",
+      "record_purpose": "policy_evaluation",
+      "scene_mode": "standard",
+      "scene_version": "Project_release_v1",
+      "seed": 0,
+      "source_slot_id": "A1",
+      "target_seat_id": "candidate_far_hinge",
+      "task_type": "loading"
+    },
+    "all_unique_datasets_read": true,
+    "read_array_bytes": 295661538,
+    "datasets": [
+      {
+        "name": "action_conversion_json",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "actions",
+        "shape": [
+          750,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "actions_raw_json",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "agent_pose",
+        "shape": [
+          750,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "camera_1_rgb",
+        "shape": [
+          750,
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "camera_2_rgb",
+        "shape": [
+          750,
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "camera_pose_json",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "camera_timestamp/side_camera_rgb",
+        "shape": [
+          750
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "camera_timestamp/wrist_camera_rgb",
+        "shape": [
+          750
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/available",
+        "shape": [
+          750
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "control_auxiliary/command_q",
+        "shape": [
+          750,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/gripper_effort_limit_N",
+        "shape": [
+          750,
+          2
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/gripper_target_m",
+        "shape": [
+          750
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_interval_s",
+        "shape": [
+          750
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "done",
+        "shape": [
+          750
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "episode_id",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "episode_metadata_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "independent_score_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "inference_wall_time_s",
+        "shape": [
+          750
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "joint_positions",
+        "shape": [
+          750,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "language_instruction",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "next_agent_pose",
+        "shape": [
+          750,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "next_joint_positions",
+        "shape": [
+          750,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "next_obs_step",
+        "shape": [
+          750
+        ],
+        "dtype": "int64"
+      },
+      {
+        "name": "next_timestamp",
+        "shape": [
+          750
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "obs_step",
+        "shape": [
+          750
+        ],
+        "dtype": "int64"
+      },
+      {
+        "name": "partial_terminal_control_interval",
+        "shape": [
+          750
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "phase",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "phase_code",
+        "shape": [
+          750
+        ],
+        "dtype": "int32"
+      },
+      {
+        "name": "privileged/next_state_json",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "privileged/state_json",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "qualification_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "reward",
+        "shape": [
+          750
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "task_events_json",
+        "shape": [
+          750
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "task_properties",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "task_result_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "terminal_observation/joint_positions",
+        "shape": [
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "terminal_observation/side_camera_rgb",
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "terminal_observation/wrist_camera_rgb",
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "timestamp",
+        "shape": [
+          750
+        ],
+        "dtype": "float64"
+      }
+    ],
+    "image_hardlink_aliases": {
+      "camera_1_rgb": true,
+      "camera_2_rgb": true
+    }
+  },
+  "logs": {
+    "physics_records.jsonl.gz": {
+      "rows": 3005,
+      "sha256": "1a57cd01f91ed1b7bc63fd889dcaa00f36fe0162661259e78739bb081aec7f1b",
+      "stored_bytes": 16387175,
+      "uncompressed_bytes": 127796081,
+      "uncompressed_sha256": "0acf8e327896a7fe6c278fe40afecf0fe8927a01367157bf32bcfa494401faff",
+      "gzip_crc_and_json_valid": true
+    },
+    "native_contact_events.jsonl.gz": {
+      "rows": 12016,
+      "sha256": "55ef3ae94fafaea96fb6272e264dd453cbf04a00c41912471b532ee9bd753552",
+      "stored_bytes": 3980311,
+      "uncompressed_bytes": 25649097,
+      "uncompressed_sha256": "cea46af788d39981564e7b71b8715b6bcb754fdd6d3f2c6194458c783a22be81",
+      "gzip_crc_and_json_valid": true
+    },
+    "progress_v1.jsonl.gz": {
+      "rows": 750,
+      "sha256": "d126376a43e77abb40f384f467fb13bcff5f2ddb810df10d72f72e286ff8ef1d",
+      "stored_bytes": 2548646,
+      "uncompressed_bytes": 25738205,
+      "uncompressed_sha256": "a4ca8fd340f1122e3a816802fe4042cee4716e7882379c4b67a077562ce3e4be",
+      "gzip_crc_and_json_valid": true
+    }
+  },
+  "videos": {
+    "side_camera.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/side_camera.mp4",
+      "frames_decoded": 376,
+      "expected_frames": 376,
+      "fps": 30.0,
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "463ab6d51b75838f29e5db06efcf1634face00ed4fedb722de8a9536530d84d1"
+    },
+    "wrist_camera.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/wrist_camera.mp4",
+      "frames_decoded": 376,
+      "expected_frames": 376,
+      "fps": 30.0,
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "7c7257dfed09037197309b2d8f8815f287fe4827bc2b37e3c5436b72c80ddf33"
+    },
+    "dual_view.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/dual_view.mp4",
+      "frames_decoded": 376,
+      "expected_frames": 376,
+      "fps": 30.0,
+      "resolution_wh": [
+        1280,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "8eae681f6d6fd5cc1a57933fc8a057d437726afbe0df5d835f5a9a331f6d9b72"
+    }
+  },
+  "progress": {
+    "recording_complete": true,
+    "task_progress_complete": false,
+    "output_integrity": {
+      "status": "complete",
+      "complete": true,
+      "errors": [],
+      "files": {
+        "progress_v1.jsonl.gz": {
+          "bytes": 2548646,
+          "sha256": "d126376a43e77abb40f384f467fb13bcff5f2ddb810df10d72f72e286ff8ef1d"
+        },
+        "progress_events.jsonl": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "progress_config.resolved.json": {
+          "bytes": 12972,
+          "sha256": "a357739065253f008b6efc875f6626df27590f8705854e85133800eddb100e6f"
+        }
+      },
+      "hashes_exclude": "progress_summary.json (self), report and linked videos"
+    },
+    "recording": {
+      "physics_samples": 3005,
+      "control_transitions": 750,
+      "event_count": 0,
+      "uncompressed_transition_bytes": 25738205,
+      "stored_bytes_excluding_summary": 2561618,
+      "compute_wall_seconds": 4.922503612469882,
+      "write_wall_seconds": 1.3218887101393193,
+      "physical_annotation_wall_seconds": 5.61255217040889,
+      "total_annotation_wall_seconds": 6.934440880548209,
+      "lifecycle_wall_seconds": 162.544109857874,
+      "interval_convention": "(t_obs,t_next]",
+      "reset_separate": true
+    },
+    "events_replay": {
+      "schema": "labsim.Progress_v1.2.attempt_event_replay.v1",
+      "attempts": [],
+      "attempt_count": 0,
+      "retry_count": 0,
+      "lifecycle_events": [],
+      "complete": true,
+      "warnings": [],
+      "source": "append-only Progress lifecycle events only; no summary or task-success input",
+      "attempts_match_summary": true,
+      "retry_count_matches_summary": true,
+      "passed": true
+    },
+    "complete_stream_events": 0,
+    "event_names": {},
+    "finalize_events_included": "Consumed every line of progress_events.jsonl, including unassigned/finalize outcomes if emitted; no event required when no attempt exists"
+  },
+  "source_hashes_unchanged": true,
+  "source_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/action_receipts.jsonl",
+      "sha256": "511d56956f799a6c260b1213df491688f33c8847c1a34c982553ee569819a4bb"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/camera_debug/side_camera_depth_first.npz",
+      "sha256": "d7339f93a9d1e3e6d9dcda06483da44dbd373645c7d2de0cd90f4276489b8b3b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/camera_debug/side_camera_depth_last.npz",
+      "sha256": "7d8c6d4966da0471b8a7154d5aebd6d48fa7d13eecb485e1831af7914f272431"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/camera_debug/wrist_camera_depth_first.npz",
+      "sha256": "e99b23b8c6b3cca708e70eff4ce73cf50915bc434b8361ff30f696ef2bdc9a7b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/camera_debug/wrist_camera_depth_last.npz",
+      "sha256": "6011eab198861314b5b1bb6352126b2129968d98c18482628f859eef5d773b6c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/camera_lifecycle.json",
+      "sha256": "bed2c6680fde9fba748ae82b22d6c7692c02d7b8eb589105eaf3b7dc93084782"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/cameras.json",
+      "sha256": "860dac14cb61651fdc5878bc9101a069512cc530c5e09fa33ab827613c05674f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/config.yaml",
+      "sha256": "109a03684d06af7792d66e09e1635d0b47d449630bff66f6814ac37f3e5fbb17"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/contact_hold_configuration.json",
+      "sha256": "3cd6b47fb19124e79678077dac0ad0edb77d7dff9fe71bd7dafc1515ece42d25"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/cooked_collision_probe.json",
+      "sha256": "ba8b19a5f46afcced5f0ddd25139ac02996d4ff596f6ea564b8464760c41aa98"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/dataset/episode_0000.h5",
+      "sha256": "f29baa59a2e4f45d032834b0c3c7c2208a123cd8bb6b0b526cbad2de44fef0c5"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/dataset/meta/episode.jsonl",
+      "sha256": "ed6660f1da85fb400241cfec313eba73f8c3ebfcd051a0395bfa78e6f57a5727"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/declared_initial_joints.json",
+      "sha256": "8ed595969983132b37323384179a9a773790a7b7dc70d98f81da9541b8c75ce1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/dual_view.mp4",
+      "sha256": "8eae681f6d6fd5cc1a57933fc8a057d437726afbe0df5d835f5a9a331f6d9b72"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/episode_0000_complete.json",
+      "sha256": "3010d85b9dad2fb8e3cdac4544812d33b033ddef753373a86d2ffdcd2358f9ef"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/episode_0000_result.json",
+      "sha256": "11fb3fdcbb2823a1369323409ef0d07c78ddd19febef439852a14eee7e4b149e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/execution_trace.jsonl",
+      "sha256": "95fcc33cdc99443471d59f00a307e9ac5360c161ec6d198a73f19f5b836bfbed"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/executor_configuration.json",
+      "sha256": "275a19ec786432c6995c83cc828f56391686f254f3af62ea3edf35c41fd82503"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/facade_reset_audit.json",
+      "sha256": "50e268510f14607dff1bc608b25fb8332b7c755b59c111a1ed039238a814fd54"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/final_camera_meta.json",
+      "sha256": "cd63a98604f69c653f91b4f8ff33dbb237f6208fac41814cf0d3d30b540e16e8"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/finalization_timing.json",
+      "sha256": "35bfe4c3029ed8f4445ba1804bc25de54437bc3a6de7de0d69922e81d13a1f0e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/geometry_audit_binding.json",
+      "sha256": "9300d0b294e0ed61536c02f7066d28c8346685b0c373033417b60cea4aec0a8f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/controller.json",
+      "sha256": "a77359cc76e28b72f47fb30948023b0342c07e35321d9c2af99b477acb79775a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/manifest.json",
+      "sha256": "ee662e50f80e572b76898df4dd156e9df706c4d3714a30744210d9c8833fdd2e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+      "sha256": "58b3bca877b5fbb80c689c5536be5191972d7c9f9a126dde9456e525129d53ef"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+      "sha256": "de47b4cce7c444b81e0c67c7b20db5998b955e22675cca0f6486c698d642930b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+      "sha256": "64e483a7cbb2a8a16e44bd43f63ff8d03ab2cc932be86a36a5686c99966ea892"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000001/manifest.json",
+      "sha256": "abab9d4a644c2277e8b1e5eb7edbb8c713b318954589a2e1923e3db417083a21"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000001/public_observation.json",
+      "sha256": "7760624968b4f11d68020b7f4996399abccba266601dd0119823e971b350361f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+      "sha256": "d649d49866834fa98f49845809662421f898e6e9977299afa559e867a8ebb9d8"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+      "sha256": "aa1072ccc28082c81aa06a2ea9f00473c7b1dc8adf6d8baed7be7cce0b07b81c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000002/manifest.json",
+      "sha256": "3ac1efbbf3b8b1954a1d978621ec237c6f6832567e3ca368070cc8015d212338"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000002/public_observation.json",
+      "sha256": "02ad2cee54542b10bce8add8eb6343219c262119fda749c4e632e5504b8d469b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+      "sha256": "de79e9e90bc001f5603bb07e6347f502c2525554f70d69685c20e9fe97d92fec"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+      "sha256": "6f8139922fcfce56e5224f9ecf5b59ccb28fa7de8327e7f1ef8793e329a3a0f5"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000003/manifest.json",
+      "sha256": "753b33429a868325945b1550bbf56a670a37a9989e14fd0ea04e95377d33b0ae"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000003/public_observation.json",
+      "sha256": "26526fca2771f325b10626fa3c518f6c572108d2e9bcad98e3a3733de9866407"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000003/side_camera.jpg",
+      "sha256": "00406168530962b8120f3b7a6d9f4106c6c2db8d45526251e7c4cc5cc19ba345"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000003/wrist_camera.jpg",
+      "sha256": "bb5480f29734903c482215762015f19c1d5077194b293d379c4d0b582a39b733"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000004/manifest.json",
+      "sha256": "a38622c87a259da93dddd8e07921f5779cf8443711146edc376f14e347802a56"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000004/public_observation.json",
+      "sha256": "4dceecf8a7936605002bfdd71e9ee48cbad82493fd1396554463654f3919dea2"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000004/side_camera.jpg",
+      "sha256": "50bb9002a396cd2bd35202d51478467850ae59ca03c45a4f6631078a02335335"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000004/wrist_camera.jpg",
+      "sha256": "f96061596beb57aa625a8981a7d17eb9760fbe1aa8e10dfafee62466c76f2def"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000005/manifest.json",
+      "sha256": "ac2bd2084a3eab4d5fa568bc8b4359a777ba2c6ba905cdec53518e806d250d82"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000005/public_observation.json",
+      "sha256": "8885c33cdb4f479a7b19e90900942936d7fdb489b49dfc9305a449f73ebdffbc"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000005/side_camera.jpg",
+      "sha256": "dc96f810a04160605fcf006cdec3047c5ab3019c65d0584f312f2bc2cbbeb6df"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000005/wrist_camera.jpg",
+      "sha256": "801cc4ef23bb7ee6ab3f2b914570bfe52d9a4a07d7afe6c907a8635b99b31c02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000006/manifest.json",
+      "sha256": "a93d4cc56ab09630d0c21dfb697b7a78f38272287df977147c133508d050a9c0"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000006/public_observation.json",
+      "sha256": "0ac9f69fa2c6c487f4556dab551db8910a79390be2f7da07ce0ce7612d32d659"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000006/side_camera.jpg",
+      "sha256": "c1bf42d4c395c689b75d9a14b6042cfb2ff7c8ca77595b00726e4cc8304bcdd1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/observations/decision_000006/wrist_camera.jpg",
+      "sha256": "2d22239b05d22cd2ace0d0664294aadb689d06e23acf84648026184578eb4532"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/policy_trace.jsonl",
+      "sha256": "ebef77c64f23e03e7fce009522531667febdd4f9d3e1429147e292ed7a3d7992"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/summary.json",
+      "sha256": "6ffb4c7154262d383bdee96a1a11027295545c6ac83b7cfd8a5d65d4b3bf6c46"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/call_outcome.json",
+      "sha256": "1362d53af553a899da83bbcd4766f3780184ec06c9c79615eae04c226c3dfe02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/current_robot_self_state.json",
+      "sha256": "b9724f3c7c59e277d40b9c1476c894a0b7e54861a5275e7ebfa95fff327afdf0"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/current_side_detail.jpg",
+      "sha256": "2a358b821f6af0fd086a08923f12460bac4daa734298fc88c3432b2d38f54903"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/current_side_detail.json",
+      "sha256": "1312fc85a5f0e98b73736b3ebc7931486fa4f551c45b4e3c6b8d3c512ea942d5"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/input_items_manifest.json",
+      "sha256": "300e6e0b52a84fdefe6d0416fbcc4b70761709c1c67c66b187d858e3feddbd46"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_detail_input_items_manifest.json",
+      "sha256": "b2be91324cd05c9677d2f8bfe725cc1f75357947b308eaf42af81402673b2fa6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_detail_preparation.json",
+      "sha256": "2a07602ecfd9cddafa6418e7745c428a6b2751825608d48dd2cd98390e54fc61"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_robot_self_input_items_manifest.json",
+      "sha256": "768c28dea964b2419386e46646487a20a058d594810b210363788cb0be57d821"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000000/pre_robot_self_preparation.json",
+      "sha256": "ecc49305be8afe5b4ecf05875393392d85180189d77c3bda3dacd153c617dc2f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/call_outcome.json",
+      "sha256": "1362d53af553a899da83bbcd4766f3780184ec06c9c79615eae04c226c3dfe02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/current_robot_self_state.json",
+      "sha256": "def12b58690444ba8ed2a6e6251e89402738faf788fe5b8f88a8e148e7f5facb"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/current_side_detail.jpg",
+      "sha256": "3b19894e14548b3506e34e626023600d54851dbe351e927992e682ffccc4eb9e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/current_side_detail.json",
+      "sha256": "55c184954c3ee514bf0e70ba1aad071ff54b902c40df12b9c94ef652c4753579"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/historical_00_public_observation.json",
+      "sha256": "58b3bca877b5fbb80c689c5536be5191972d7c9f9a126dde9456e525129d53ef"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/historical_00_wrist.jpg",
+      "sha256": "64e483a7cbb2a8a16e44bd43f63ff8d03ab2cc932be86a36a5686c99966ea892"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/input_items_manifest.json",
+      "sha256": "b30d00bd4fb52641eb878715d1c2c6c64371dbc1d72db1fe8ecd77e34ac48ee9"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/pre_detail_input_items_manifest.json",
+      "sha256": "60ccee9b2e606ce32e5c930a0dccee53fa2dd499092098f11fe1226b1b5ac67f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/pre_detail_preparation.json",
+      "sha256": "2325cba897e9ea48f038ef7161c1dac28516eb541874abc42110eda0a2240d97"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/pre_robot_self_input_items_manifest.json",
+      "sha256": "4a2492d8c0e2d75a6cda6d450e49f829f8a2fb21316ab114e197b769612c33f3"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000001/pre_robot_self_preparation.json",
+      "sha256": "2583c6613fb5b5f5db0167675a5177bf6a572c1621d450de1e40ffe9204f75e8"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/call_outcome.json",
+      "sha256": "1362d53af553a899da83bbcd4766f3780184ec06c9c79615eae04c226c3dfe02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/current_robot_self_state.json",
+      "sha256": "306b76f2a43b924a02e92e26a70989c26905ed78522af8fea2519fc2ce5f5c69"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/current_side_detail.jpg",
+      "sha256": "b4467bb801c0bdea8de6e1e13e3456c5a7cb2ada546fc6a703feb8ec48f98902"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/current_side_detail.json",
+      "sha256": "0c43efc94d9307325439dd52a371920bdb44ff509e8c66820e48e8b92d9ae587"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/historical_00_public_observation.json",
+      "sha256": "7760624968b4f11d68020b7f4996399abccba266601dd0119823e971b350361f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/historical_00_wrist.jpg",
+      "sha256": "aa1072ccc28082c81aa06a2ea9f00473c7b1dc8adf6d8baed7be7cce0b07b81c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/input_items_manifest.json",
+      "sha256": "77604474d5f46723e7dc57d59562a7b8d9bdce97cbf2f0f958d2fd6008e12738"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/pre_detail_input_items_manifest.json",
+      "sha256": "5537b461126db4122e5845e1243f5dfdbd41d750c2a3bc912be538084c332cfe"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/pre_detail_preparation.json",
+      "sha256": "bb58b73442fd2abdebb6ff661ec62e4ea8dd25c13d85bef2791f90081feaac43"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/pre_robot_self_input_items_manifest.json",
+      "sha256": "2a97d5c77030c0892328a5fa912ef132d36246599924c364c32e5c565e7a0d48"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000002/pre_robot_self_preparation.json",
+      "sha256": "2239dcd17320c3b83b0ae03b62959c5515b26a1deb843386301221e68c7fde44"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/call_outcome.json",
+      "sha256": "1362d53af553a899da83bbcd4766f3780184ec06c9c79615eae04c226c3dfe02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/current_robot_self_state.json",
+      "sha256": "bad163c67462206a611bf76bf93f3b3c6773bab3224a00fdc410595e3d05cd82"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/current_side_detail.jpg",
+      "sha256": "e98e3b19cc0a3cc2f8e2a2c113eb12f6a6aeb9e14ff26cce8e60cd9288a8827c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/current_side_detail.json",
+      "sha256": "c07703cd70f1c6089358fa479741631e0652e1a4847bdfb43951a87e165a4165"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/historical_00_public_observation.json",
+      "sha256": "02ad2cee54542b10bce8add8eb6343219c262119fda749c4e632e5504b8d469b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/historical_00_wrist.jpg",
+      "sha256": "6f8139922fcfce56e5224f9ecf5b59ccb28fa7de8327e7f1ef8793e329a3a0f5"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/input_items_manifest.json",
+      "sha256": "453ae722aecb49beb0d4b284e2229b189496146ff4f1ac4fb55766ccb0099520"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/pre_detail_input_items_manifest.json",
+      "sha256": "10d358c3b2f7b062bec85fb29d1775ee28ff8639c69a9647116e08ff8c448117"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/pre_detail_preparation.json",
+      "sha256": "70251117b2ccef4341888cd791fa0225dfd34128557127e848bf9998f160e4be"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/pre_robot_self_input_items_manifest.json",
+      "sha256": "1ac8335a5ba3f32a2d7132c6699e0413fd02d35ce8ba8539e54e674ab6f902e8"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000003/pre_robot_self_preparation.json",
+      "sha256": "e9f2a3d807e14bd8111321c9a1604550d673ea30d33f94b73e5fe58ea5899d13"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/call_outcome.json",
+      "sha256": "1362d53af553a899da83bbcd4766f3780184ec06c9c79615eae04c226c3dfe02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/current_robot_self_state.json",
+      "sha256": "4abb2b5e5f8b4d072432300c82dcdde36dc719162792741152fe7f750673dcb7"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/current_side_detail.jpg",
+      "sha256": "8d8e0cf214e696b1a96ee1c3f22a23cda4ee39416eb338418203b68e097cebe5"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/current_side_detail.json",
+      "sha256": "d506595951fbeafbeed3d54acc235f351fdd2fb6bdfb3a0e3b4464463642bd22"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/historical_00_public_observation.json",
+      "sha256": "26526fca2771f325b10626fa3c518f6c572108d2e9bcad98e3a3733de9866407"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/historical_00_wrist.jpg",
+      "sha256": "bb5480f29734903c482215762015f19c1d5077194b293d379c4d0b582a39b733"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/input_items_manifest.json",
+      "sha256": "aad40325121dbc75674b9e80c831d53c85885027b2153b011cb2b793f960b773"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/pre_detail_input_items_manifest.json",
+      "sha256": "693a7d0bdb13a14c8694b3e8ad9a70c8d10b84ab096f3cf85c47623bf2b03df2"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/pre_detail_preparation.json",
+      "sha256": "0e4388f89a51d15fd94cb752411a418e635f1958f5d733750b0b8d0c9596ee6f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/pre_robot_self_input_items_manifest.json",
+      "sha256": "992ccbbef63b732b52d45a0ae43eb282eaae45d7d67ffe073774339903957047"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000004/pre_robot_self_preparation.json",
+      "sha256": "fdd7f7675a6e326481288d3aa8a7e7cd6072207b67fd94513e0ad18a3b22481c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/call_outcome.json",
+      "sha256": "1362d53af553a899da83bbcd4766f3780184ec06c9c79615eae04c226c3dfe02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/current_robot_self_state.json",
+      "sha256": "d4512d3f2bbf24226a2a6efb1891772adaba8401137f1c856f0e1253b627c595"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/current_side_detail.jpg",
+      "sha256": "1c3b58964da2949c953985011073a87762401277a7ff9a701b1e467d5cdfde2c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/current_side_detail.json",
+      "sha256": "08b6c7fd2b0fa8641f3702aea474306c91eaab24c6c300e84161b01d2f069097"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/historical_00_public_observation.json",
+      "sha256": "4dceecf8a7936605002bfdd71e9ee48cbad82493fd1396554463654f3919dea2"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/historical_00_wrist.jpg",
+      "sha256": "f96061596beb57aa625a8981a7d17eb9760fbe1aa8e10dfafee62466c76f2def"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/input_items_manifest.json",
+      "sha256": "8910f08418e9945f8ac680485be8c323dcd8674be412c2c82eb3fc6224e8ef48"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/pre_detail_input_items_manifest.json",
+      "sha256": "ec816bc85fd611ebaa5af3a3efa3c710af5fc6c4a9757e7b0ae49be4158fdfc6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/pre_detail_preparation.json",
+      "sha256": "32891c504d950360c2a27d97e30a05d0933e1c9293ceef414632b5eaf4c13dd1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/pre_robot_self_input_items_manifest.json",
+      "sha256": "a110873b9987c23ebdbca3ed5c637016e98ffcd6ccc0d823ffa519a1aa46097c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000005/pre_robot_self_preparation.json",
+      "sha256": "76503d13f2e98e73e950dbd4403f87b152817f0423ea9fccc9b7012f727977aa"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/call_outcome.json",
+      "sha256": "06c5380db007db953a0dcb62c91aac1cf38936c43d142e82b5bcc30fc484d8d4"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/current_robot_self_state.json",
+      "sha256": "0b075f58257b42975d97bddff07e159edcb4491c730b9ab13e7e19efa3ac0449"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/current_side_detail.jpg",
+      "sha256": "18d0e2573efa8333d7cd24db9ebdc21111547a694b480412221aa4c6cb9d7a3e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/current_side_detail.json",
+      "sha256": "489dc569e714127961547d0a0554a7d8d4f1bd4f65afc334b91b2d923b812632"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/historical_00_public_observation.json",
+      "sha256": "8885c33cdb4f479a7b19e90900942936d7fdb489b49dfc9305a449f73ebdffbc"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/historical_00_wrist.jpg",
+      "sha256": "801cc4ef23bb7ee6ab3f2b914570bfe52d9a4a07d7afe6c907a8635b99b31c02"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/input_items_manifest.json",
+      "sha256": "8df365f1618b703e8ea2f68110094a461d32069601a907636b100892a1a1c15c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/pre_detail_input_items_manifest.json",
+      "sha256": "ab2e9a59535bea64b596e477bdd38e558475cf4d8fb19711de30af2f8c5c2e64"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/pre_detail_preparation.json",
+      "sha256": "48b5d00d66d774a988173a66d8ea1497af2f15a378fae3239573a80ef33bee25"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/pre_robot_self_input_items_manifest.json",
+      "sha256": "27b9f6690d1e0987bd664d86f3d89d1fbd619f779a210cb94e01dc8b49b491bd"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/gpt_control/temporal_visual_context/decision_000006/pre_robot_self_preparation.json",
+      "sha256": "aa53eab035473b1afa5b53cd4dae07be2c86fd33db353ca3b6f614dde8d192d6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/independent_score.json",
+      "sha256": "0110d1e25ece82e14bf698393b476c9b7dc195b61d5f1bc28629aaca2c59f8ce"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/initial_debug.json",
+      "sha256": "b3563a3733683e286100abd3d956c8d9ba1e1f582c5276d2f3464263deffd52c"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/initialization_timing.json",
+      "sha256": "560b1572c29b67f47b48c0e26317941c4d76eb2115b01c1b6d16c099bd43b02f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/native_contact_events.jsonl.gz",
+      "sha256": "55ef3ae94fafaea96fb6272e264dd453cbf04a00c41912471b532ee9bd753552"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/options.json",
+      "sha256": "58a1ba63cfb208d6950a509346570e9fbabafc74f83567da47e8288ed84ddc58"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/physics_capture_meta.json",
+      "sha256": "71d78d47bfff4741a0649b1daee2c8d36fdeb7222e3250e450840976028ede28"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/physics_records.jsonl.gz",
+      "sha256": "1a57cd01f91ed1b7bc63fd889dcaa00f36fe0162661259e78739bb081aec7f1b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/progress_config.resolved.json",
+      "sha256": "a357739065253f008b6efc875f6626df27590f8705854e85133800eddb100e6f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/progress_events.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/progress_input_metadata.json",
+      "sha256": "0128daccd5aabba5144c3bbf47c861555e013488405673905cca2052b9ded4b3"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/progress_summary.json",
+      "sha256": "32b8f9d587b53720dc2dbedd73f9ba689cdead074f7515b9cd587fab42a9c5bb"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/progress_v1.jsonl.gz",
+      "sha256": "d126376a43e77abb40f384f467fb13bcff5f2ddb810df10d72f72e286ff8ef1d"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/project_scene_contract.json",
+      "sha256": "0fac18c513b20f228977c7013d9a5d2c5d16118832608c306837658ce4d26919"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/recording_closed_receipt.json",
+      "sha256": "c44dbf2d91195e9207b20aafa43623b63b84553c3a41c047b506bb5f6626230b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/recording_configuration.json",
+      "sha256": "7a2e4df059612e61557f8fdc64b918c819618ee11288eb108c27e7e735dcb26f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/release_metadata.json",
+      "sha256": "3e72f8417ce4ad92472149d3007b15feec6d9d2d6e34e457a050c9df21d4775d"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/reset_audit.json",
+      "sha256": "e0af111ca29d2c18dfaded1bf291e39ce71ca07bce561defa0f50704edd3cac7"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/reset_check.json",
+      "sha256": "c074d945e00edf1448229b741040804d111897ba6eeb162811783333107f6e98"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/result.json",
+      "sha256": "52e2107287e0b2d7b193b11b594f8b8f0933f14610c20381168cf3a289f455b5"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/robot_tracking_configuration.json",
+      "sha256": "ab941eda6d14d748bee072d625b60e8c5950a2caa865d2a5449eb7455aef9454"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/side_camera.mp4",
+      "sha256": "463ab6d51b75838f29e5db06efcf1634face00ed4fedb722de8a9536530d84d1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/video_timestamps.json",
+      "sha256": "59dccdaca6e969d462277a0aaea61ed34e9b097c2b515870585b4decfa97e90f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/episode_0000/wrist_camera.mp4",
+      "sha256": "7c7257dfed09037197309b2d8f8815f287fe4827bc2b37e3c5436b72c80ddf33"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/process_exit.json",
+      "sha256": "a5d73b100e25ac396b27cfddae4b571f0ab8165d106588c1118af643bc11130b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/run_manifest.json",
+      "sha256": "130d0dadaa3ef3db29a1195d9b5d4bec5aef107ef2f362b4d4fdcdda8af9d528"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/launch_identity.json",
+      "sha256": "d7319691b5cbdddb2c862248c147fdae6daf64be3785fb9b0d9c452f5615a212"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_gpt6_02/environment/application_shutdown.json",
+      "sha256": "f996d77b6ee2e21a9462157452ea94e0b01a94701d1cd1838d8c5c976237de0a"
+    }
+  ],
+  "audit_tool_sha256": "6cd653dd6fc6d366ac3ec4f4268d7bc3b3a50602d4b363873a9706d0bbb2aa74"
+}

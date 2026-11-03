@@ -1,0 +1,847 @@
+{
+  "schema": "labsim.Policy_eval_v1.closed_episode_audit.v1",
+  "episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000",
+  "episode_id": "072eb1fc-d7ae-4a79-9e97-8986bac3856c",
+  "passed": true,
+  "errors": [],
+  "check_count": 6131,
+  "checks_failed": [],
+  "runtime_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+  "task_success": false,
+  "environment_valid": true,
+  "environment_validity": {
+    "environment_valid": true,
+    "reasons": [],
+    "scope": "geometry, reset, finite physical state and explicit simulation-domain failures; independent of task_success"
+  },
+  "record_complete": true,
+  "record_valid": true,
+  "record_purpose": "policy_evaluation",
+  "qualification_semantics": "Integrity acceptance is independent of task success; preserve authoritative record_valid/BC labels",
+  "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+  "failure_domain": "safety",
+  "original_final_result": {
+    "acceptance_geometry_scope": "Declared input material geometry checks plus actual physical contact and motion, not calibrated cooked geometry or real accuracy",
+    "actual_control_steps": 1011,
+    "actual_physics_steps": 4048,
+    "asset_id": "cuvette_xy_1000",
+    "base_scoring_diagnostics": {
+      "failure_type": "SAFETY_COLLISION",
+      "invalid_state_reasons": [],
+      "record_valid": true,
+      "task_success": false,
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION"
+    },
+    "complete": true,
+    "condition_group": "natural",
+    "diagnostic_hold_window": {
+      "stable": null,
+      "status": "not_applicable"
+    },
+    "eligibility_pending_collector_integrity": false,
+    "eligible_for_failure_analysis": true,
+    "eligible_for_success_bc": false,
+    "episode_id": "072eb1fc-d7ae-4a79-9e97-8986bac3856c",
+    "failure_domain": "safety",
+    "failure_type": "SAFETY_COLLISION",
+    "finalization_id": "915bf6e6cb92dbec4d1d19079f196b720460469d0f6dccb32a404e5dc49b90be",
+    "frames": 1011,
+    "full_success": false,
+    "geometry_audit_fingerprint": "bcc68d65179438a4d6a431dfc5a544172065c95b2e94103dd687eb3302081bd8",
+    "geometry_valid": true,
+    "grasp_attempts": [],
+    "grasp_relative_pose": {
+      "anchor_reference": "Configured body point[0,0,grasp_height] in hand frame, not measured contact pressure centre. Anchor metrics are analysis only; existing acceptance gates unchanged.",
+      "configured_grasp_anchor_height_m": 0.053,
+      "maximum_configured_grasp_anchor_axial_drift_m": null,
+      "maximum_configured_grasp_anchor_drift_m": null,
+      "maximum_configured_grasp_anchor_transverse_drift_m": null,
+      "maximum_orientation_drift_deg": null,
+      "maximum_position_drift_m": null,
+      "orientation_limit_deg": 1.0,
+      "position_limit_m": 0.0002,
+      "position_reference": "Vessel bottom-frame origin in hand frame; includes rotation lever-arm motion, not isolated axial slip.",
+      "reference_available": false
+    },
+    "grasp_success": false,
+    "invalid_state_reasons": [],
+    "legacy_guard_events": [
+      {
+        "failure_type": "PHYSICS_INVALID",
+        "t": 16.866666666666667,
+        "termination_reason": "ROBOT_ENVIRONMENT_COLLISION"
+      }
+    ],
+    "legacy_invalid_state_reasons": [
+      "robot_contact_with_original_instrument_or_rack"
+    ],
+    "loading_candidate_sequence_observed": false,
+    "loading_sequence_observed": false,
+    "measured_grasp_segments": {
+      "extraction": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      },
+      "static_grasp": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      },
+      "transport": {
+        "reference_orientation_drift_deg": null,
+        "reference_position_drift_m": null,
+        "status": "unavailable"
+      }
+    },
+    "native_pair_success": null,
+    "observed_events": {},
+    "original_12_5mm_native_pair_verdict_unchanged": true,
+    "physical_sample_count": 4049,
+    "physical_score_record_valid": true,
+    "physics_quality_flags": [
+      "NATIVE_TARGET_OVERLAP_UNAVAILABLE"
+    ],
+    "physics_trust_scope": "declared input geometry and recorded physical state; effective cooked geometry and real calibration remain unverified",
+    "physics_trustworthy": true,
+    "policy_id": "RLinf-Pi05-LIBERO-130-fullshot-SFT",
+    "post_retreat_window": {
+      "reason": "actual_gripper_retreat_not_observed",
+      "sample_count": 0,
+      "stable": null,
+      "status": "unavailable"
+    },
+    "progress_status": "complete",
+    "progress_summary": "progress_summary.json",
+    "publication_state": "complete",
+    "qualification_schema": "labsim.Project_v1_1.qualifications.v1",
+    "raw_failure_type": "SAFETY_COLLISION",
+    "raw_termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "real_calibrated": false,
+    "record_integrity_errors": [],
+    "record_integrity_source": "streaming_collector_checks_at_flush_close",
+    "record_integrity_valid": true,
+    "record_purpose": "policy_evaluation",
+    "record_valid": true,
+    "record_valid_scope": "independent physical trace AND collector action/sensor/time integrity",
+    "release_observed": false,
+    "retreat_observed": false,
+    "retry_count": 0,
+    "safety_attribution": "not_determined_by_scorer",
+    "safety_event": {
+      "evidence_reasons": [
+        "robot_contact_with_original_instrument_or_rack"
+      ],
+      "failure_type": "SAFETY_COLLISION",
+      "termination_reason": "ROBOT_ENVIRONMENT_COLLISION"
+    },
+    "scene_version": "Project_release_v1",
+    "schema": "labsim.Project_v1_1.independent.v1",
+    "scorer_version": "Project_v1_1.independent.v1",
+    "seed": 0,
+    "simulation_duration_s": 16.866666666666667,
+    "simulation_seconds": 16.866666666666667,
+    "source_slot_cleared": false,
+    "stable_after_retreat": null,
+    "stage_labels_used_as_success_proof": false,
+    "success_bc_eligible": false,
+    "task_result": {
+      "failure_domain": "safety",
+      "scope": "complete_loading",
+      "status": "failure",
+      "success": false
+    },
+    "task_success": false,
+    "task_type": "loading",
+    "terminal_window": {
+      "criteria": {
+        "native_overlap_within_limit": null,
+        "no_finger_contact": null,
+        "position_stable": true,
+        "target_contains": null,
+        "target_support": null
+      },
+      "end_t": 16.866666666666667,
+      "measured_duration_s": 3.0,
+      "orientation_change_deg": 3.878801828098024e-05,
+      "position_drift_m": 1.666000468656264e-08,
+      "required_duration_s": 3.0,
+      "sample_count": 721,
+      "stable": true,
+      "start_t": 13.866666666666667,
+      "status": "complete"
+    },
+    "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+    "trajectory_analysis_eligible": true,
+    "transport_success": false,
+    "variant_pair_success": false,
+    "wall_seconds": 174.17523480509408,
+    "workflow_success": false
+  },
+  "original_completion_marker": {
+    "episode_id": "072eb1fc-d7ae-4a79-9e97-8986bac3856c",
+    "finalization_id": "915bf6e6cb92dbec4d1d19079f196b720460469d0f6dccb32a404e5dc49b90be",
+    "finalize_wall_seconds": 0.09788000793196261,
+    "h5": "episode_0000.h5",
+    "record_purpose": "policy_evaluation",
+    "result": "episode_0000_result.json",
+    "schema": "labsim.Project_release_v1.complete.v1"
+  },
+  "physical_scorer_projection_pending_collector": true,
+  "process": {
+    "process_exited": true,
+    "exit_code": 0,
+    "checked_native_PIDs": [
+      1688219,
+      1688226,
+      1689233,
+      1691689
+    ],
+    "native_PIDs_absent": true,
+    "evidence_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/process_exit.json",
+    "wall_seconds": 279.0528050069697
+  },
+  "h5": {
+    "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/dataset/episode_0000.h5",
+    "sha256": "bd08fc40867e1e67ee82cfcf4de1dd8f5b9a1408f1bc85db7d6c1770593f1a15",
+    "bytes": 231967968,
+    "transitions": 1011,
+    "first_t_obs_s": 0.016666666666666666,
+    "last_t_next_s": 16.866666666666667,
+    "metadata": {
+      "action_interface_version": "Project_release_v1.actions.v1",
+      "actual_execution_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+      "asset_id": "cuvette_xy_1000",
+      "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+      "code_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+      "condition_group": "natural",
+      "control_config_sha256": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "demonstrator_id": "unknown",
+      "deterministic_action_deviation_json": "{}",
+      "fixed_collection_eligible": true,
+      "frozen_scene_sha256": "171b188da73904f2a77d6232be63f8beb95323f75e6886f81df76fee9ae16a37",
+      "lifecycle_version": "Project_release_v1.transactional_lifecycle.v1",
+      "physical_baseline": "Project_v1_1",
+      "policy_id": "RLinf-Pi05-LIBERO-130-fullshot-SFT",
+      "record_purpose": "policy_evaluation",
+      "scene_mode": "standard",
+      "scene_version": "Project_release_v1",
+      "seed": 0,
+      "source_slot_id": "A1",
+      "target_seat_id": "candidate_far_hinge",
+      "task_type": "loading"
+    },
+    "all_unique_datasets_read": true,
+    "read_array_bytes": 398414889,
+    "datasets": [
+      {
+        "name": "action_conversion_json",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "actions",
+        "shape": [
+          1011,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "actions_raw_json",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "agent_pose",
+        "shape": [
+          1011,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "camera_1_rgb",
+        "shape": [
+          1011,
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "camera_2_rgb",
+        "shape": [
+          1011,
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "camera_pose_json",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "camera_timestamp/side_camera_rgb",
+        "shape": [
+          1011
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "camera_timestamp/wrist_camera_rgb",
+        "shape": [
+          1011
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/available",
+        "shape": [
+          1011
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "control_auxiliary/command_q",
+        "shape": [
+          1011,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/gripper_effort_limit_N",
+        "shape": [
+          1011,
+          2
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_auxiliary/gripper_target_m",
+        "shape": [
+          1011
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "control_interval_s",
+        "shape": [
+          1011
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "done",
+        "shape": [
+          1011
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "episode_id",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "episode_metadata_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "independent_score_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "inference_wall_time_s",
+        "shape": [
+          1011
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "joint_positions",
+        "shape": [
+          1011,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "language_instruction",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "next_agent_pose",
+        "shape": [
+          1011,
+          8
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "next_joint_positions",
+        "shape": [
+          1011,
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "next_obs_step",
+        "shape": [
+          1011
+        ],
+        "dtype": "int64"
+      },
+      {
+        "name": "next_timestamp",
+        "shape": [
+          1011
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "obs_step",
+        "shape": [
+          1011
+        ],
+        "dtype": "int64"
+      },
+      {
+        "name": "partial_terminal_control_interval",
+        "shape": [
+          1011
+        ],
+        "dtype": "bool"
+      },
+      {
+        "name": "phase",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "phase_code",
+        "shape": [
+          1011
+        ],
+        "dtype": "int32"
+      },
+      {
+        "name": "privileged/next_state_json",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "privileged/state_json",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "qualification_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "reward",
+        "shape": [
+          1011
+        ],
+        "dtype": "float32"
+      },
+      {
+        "name": "task_events_json",
+        "shape": [
+          1011
+        ],
+        "dtype": "object"
+      },
+      {
+        "name": "task_properties",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "task_result_json",
+        "shape": [],
+        "dtype": "object"
+      },
+      {
+        "name": "terminal_observation/joint_positions",
+        "shape": [
+          9
+        ],
+        "dtype": "float64"
+      },
+      {
+        "name": "terminal_observation/side_camera_rgb",
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "terminal_observation/wrist_camera_rgb",
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "dtype": "uint8"
+      },
+      {
+        "name": "timestamp",
+        "shape": [
+          1011
+        ],
+        "dtype": "float64"
+      }
+    ],
+    "image_hardlink_aliases": {
+      "camera_1_rgb": true,
+      "camera_2_rgb": true
+    }
+  },
+  "logs": {
+    "physics_records.jsonl.gz": {
+      "rows": 4049,
+      "sha256": "9ceecc622f77e44dd58546a743a8a47e7c70316c3ed2e296e7e4c26ba64293f2",
+      "stored_bytes": 22022624,
+      "uncompressed_bytes": 171918310,
+      "uncompressed_sha256": "256f484165385381503d098da7c090977050a97f1e78d8ce09a9d6eca06da7c4",
+      "gzip_crc_and_json_valid": true
+    },
+    "native_contact_events.jsonl.gz": {
+      "rows": 16193,
+      "sha256": "3df7f48e7909e43f8d256cdcbaa5b251fb36db7907f4f95194a8773d8a3721b0",
+      "stored_bytes": 5367200,
+      "uncompressed_bytes": 34571508,
+      "uncompressed_sha256": "e57095fe72dbd5f8e898bfac8d30e302819fd12b9f8f5d71bc0bc4e56f57f2fa",
+      "gzip_crc_and_json_valid": true
+    },
+    "progress_v1.jsonl.gz": {
+      "rows": 1011,
+      "sha256": "3422082cfe423d94ea7d58ebf23cce034effa56ab6bd02662946875c926a6356",
+      "stored_bytes": 3439496,
+      "uncompressed_bytes": 34694353,
+      "uncompressed_sha256": "8c74ab80767cc04aaef7bb0b432be1c3348600f51a3d44bdb0b5d39bc8bf1eca",
+      "gzip_crc_and_json_valid": true
+    }
+  },
+  "videos": {
+    "side_camera.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/side_camera.mp4",
+      "frames_decoded": 507,
+      "expected_frames": 507,
+      "fps": 30.0,
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "5a36b06f996ed2187536340ac9918c5eb8a446a2547e4dfc6efdb63d4a2cdfb8"
+    },
+    "wrist_camera.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/wrist_camera.mp4",
+      "frames_decoded": 507,
+      "expected_frames": 507,
+      "fps": 30.0,
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "1732a3a80f98e03dbc088902301c7743efb8d6999f23d289ceb996beddb19ad1"
+    },
+    "dual_view.mp4": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/dual_view.mp4",
+      "frames_decoded": 507,
+      "expected_frames": 507,
+      "fps": 30.0,
+      "resolution_wh": [
+        1280,
+        480
+      ],
+      "complete_decode": true,
+      "sha256": "08118f41917a183300af29d5adf94e88b33a44245b07b953a5a1f4472a79de7d"
+    }
+  },
+  "progress": {
+    "recording_complete": true,
+    "task_progress_complete": false,
+    "output_integrity": {
+      "status": "complete",
+      "complete": true,
+      "errors": [],
+      "files": {
+        "progress_v1.jsonl.gz": {
+          "bytes": 3439496,
+          "sha256": "3422082cfe423d94ea7d58ebf23cce034effa56ab6bd02662946875c926a6356"
+        },
+        "progress_events.jsonl": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "progress_config.resolved.json": {
+          "bytes": 12972,
+          "sha256": "a357739065253f008b6efc875f6626df27590f8705854e85133800eddb100e6f"
+        }
+      },
+      "hashes_exclude": "progress_summary.json (self), report and linked videos"
+    },
+    "recording": {
+      "physics_samples": 4049,
+      "control_transitions": 1011,
+      "event_count": 0,
+      "uncompressed_transition_bytes": 34694353,
+      "stored_bytes_excluding_summary": 3452468,
+      "compute_wall_seconds": 6.092974733561277,
+      "write_wall_seconds": 1.8060120958834887,
+      "physical_annotation_wall_seconds": 7.037644016789272,
+      "total_annotation_wall_seconds": 8.843656112672761,
+      "lifecycle_wall_seconds": 170.6296062199399,
+      "interval_convention": "(t_obs,t_next]",
+      "reset_separate": true
+    },
+    "events_replay": {
+      "schema": "labsim.Progress_v1.2.attempt_event_replay.v1",
+      "attempts": [],
+      "attempt_count": 0,
+      "retry_count": 0,
+      "lifecycle_events": [],
+      "complete": true,
+      "warnings": [],
+      "source": "append-only Progress lifecycle events only; no summary or task-success input",
+      "attempts_match_summary": true,
+      "retry_count_matches_summary": true,
+      "passed": true
+    },
+    "complete_stream_events": 0,
+    "event_names": {},
+    "finalize_events_included": "Consumed every line of progress_events.jsonl, including unassigned/finalize outcomes if emitted; no event required when no attempt exists"
+  },
+  "source_hashes_unchanged": true,
+  "source_files": [
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/action_receipts.jsonl",
+      "sha256": "ea2a360f70011444a9a07f49a9ec3d97f36073e6f5892befbc68b333d333580e"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/camera_debug/side_camera_depth_first.npz",
+      "sha256": "d7339f93a9d1e3e6d9dcda06483da44dbd373645c7d2de0cd90f4276489b8b3b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/camera_debug/side_camera_depth_last.npz",
+      "sha256": "bd3e2e8aa3a3e397218c82f94cd2cdf6c56d652646f23f62dd1956d6d7749e06"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/camera_debug/wrist_camera_depth_first.npz",
+      "sha256": "e99b23b8c6b3cca708e70eff4ce73cf50915bc434b8361ff30f696ef2bdc9a7b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/camera_debug/wrist_camera_depth_last.npz",
+      "sha256": "8bc38b59c69388c10900bc69622eaefd46542e05f3c38e9032ce996a4b5cbee7"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/camera_lifecycle.json",
+      "sha256": "bed2c6680fde9fba748ae82b22d6c7692c02d7b8eb589105eaf3b7dc93084782"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/cameras.json",
+      "sha256": "f2bf71d41b2ade43adf7c4be6039fc5b6b812613046e519a05f604e53b3ac5ab"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/config.yaml",
+      "sha256": "109a03684d06af7792d66e09e1635d0b47d449630bff66f6814ac37f3e5fbb17"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/contact_hold_configuration.json",
+      "sha256": "3cd6b47fb19124e79678077dac0ad0edb77d7dff9fe71bd7dafc1515ece42d25"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/cooked_collision_probe.json",
+      "sha256": "06819447b7bc83f1936a84573d3035f11e3fdba08ef914089d664ddd4a03af16"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/dataset/episode_0000.h5",
+      "sha256": "bd08fc40867e1e67ee82cfcf4de1dd8f5b9a1408f1bc85db7d6c1770593f1a15"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/dataset/meta/episode.jsonl",
+      "sha256": "6c7bf0d99b1362d4535c6df3f602b3fb7dc72476a487924ccd1b1b3461d26014"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/declared_initial_joints.json",
+      "sha256": "8ed595969983132b37323384179a9a773790a7b7dc70d98f81da9541b8c75ce1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/dual_view.mp4",
+      "sha256": "08118f41917a183300af29d5adf94e88b33a44245b07b953a5a1f4472a79de7d"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/episode_0000_complete.json",
+      "sha256": "01ca52e3a92b1a625b4241ac1dbe90da7e010e2b5d0c0ad4e7e1b5602bd6e934"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/episode_0000_result.json",
+      "sha256": "13936643dd45935581ba8420a24f8a090fb455f4e9e892b3b246b0f226b18415"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/execution_trace.jsonl",
+      "sha256": "a3d7afa07d6f0048263f9ca23b97b3455133e6d7bdc53ecdf928975c8f8414d4"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/executor_configuration.json",
+      "sha256": "275a19ec786432c6995c83cc828f56391686f254f3af62ea3edf35c41fd82503"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/facade_reset_audit.json",
+      "sha256": "40d136de0407fc30015017bdfe8de704fa15bd7ec45327026aefb2516ccb25db"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/final_camera_meta.json",
+      "sha256": "2bccc2d4d7222a845ec8a18f0e86bac194b362492e114e106e027a68a6263888"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/finalization_timing.json",
+      "sha256": "a21ea409ab595c0f5f2dfb5252b0d23ee4417511fb3bb3ebef687be927bbb17d"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/geometry_audit_binding.json",
+      "sha256": "9300d0b294e0ed61536c02f7066d28c8346685b0c373033417b60cea4aec0a8f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/independent_score.json",
+      "sha256": "044287bb74484cbb15248e33c406c26e8cc328174c54fcd45193d3695ccd1627"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/initial_debug.json",
+      "sha256": "ed3ccabd567f2c7f797881bb5fe19ea6656308dad81beff5c31fabbfb0cf61f3"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/initialization_timing.json",
+      "sha256": "560b1572c29b67f47b48c0e26317941c4d76eb2115b01c1b6d16c099bd43b02f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/native_contact_events.jsonl.gz",
+      "sha256": "3df7f48e7909e43f8d256cdcbaa5b251fb36db7907f4f95194a8773d8a3721b0"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/options.json",
+      "sha256": "68599fa0a3bc052ee3ad4bc85ce66e3e71e8baebbc8fc272f280b3994055aa9a"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/physics_capture_meta.json",
+      "sha256": "71d78d47bfff4741a0649b1daee2c8d36fdeb7222e3250e450840976028ede28"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/physics_records.jsonl.gz",
+      "sha256": "9ceecc622f77e44dd58546a743a8a47e7c70316c3ed2e296e7e4c26ba64293f2"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/progress_config.resolved.json",
+      "sha256": "a357739065253f008b6efc875f6626df27590f8705854e85133800eddb100e6f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/progress_events.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/progress_input_metadata.json",
+      "sha256": "3ca75d8a8abfbec9940e0c64e14d9ec5f2ae4013d5bf9a0b77a357078df0da56"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/progress_summary.json",
+      "sha256": "0c7dcc150e76d17ba293aaaab64a49ec9f1e954580e5820c9b30d6f988b2da85"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/progress_v1.jsonl.gz",
+      "sha256": "3422082cfe423d94ea7d58ebf23cce034effa56ab6bd02662946875c926a6356"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/project_scene_contract.json",
+      "sha256": "0fac18c513b20f228977c7013d9a5d2c5d16118832608c306837658ce4d26919"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/recording_closed_receipt.json",
+      "sha256": "f428254ad0e8e78ee6da041cde4d7072fe3842f317aa821cc82b90e443c59fe6"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/recording_configuration.json",
+      "sha256": "7a2e4df059612e61557f8fdc64b918c819618ee11288eb108c27e7e735dcb26f"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/release_metadata.json",
+      "sha256": "3e72f8417ce4ad92472149d3007b15feec6d9d2d6e34e457a050c9df21d4775d"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/reset_audit.json",
+      "sha256": "b669ffb82190a7a80e6eefa59f11342e859f3f263bd0d0ddcc1b837e7d4ce883"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/reset_check.json",
+      "sha256": "c074d945e00edf1448229b741040804d111897ba6eeb162811783333107f6e98"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/result.json",
+      "sha256": "94061a8023a7f2dfe4acebe6fbeeefefeb9d371289ba805bde9da42271b5c8b7"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/robot_tracking_configuration.json",
+      "sha256": "ab941eda6d14d748bee072d625b60e8c5950a2caa865d2a5449eb7455aef9454"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/side_camera.mp4",
+      "sha256": "5a36b06f996ed2187536340ac9918c5eb8a446a2547e4dfc6efdb63d4a2cdfb8"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/video_timestamps.json",
+      "sha256": "0a8a6fc5035cbeb38fbe6cf6d1893741373dc6b3d641d2815c94e746c4c0a467"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/episode_0000/wrist_camera.mp4",
+      "sha256": "1732a3a80f98e03dbc088902301c7743efb8d6999f23d289ceb996beddb19ad1"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/process_exit.json",
+      "sha256": "459f01125a392334a50207dc4d0c42bb12204c8cae06f3d3ff59f8e8c486cb7b"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/run_manifest.json",
+      "sha256": "1521d74630567529b20bf219b32100a4ba01e1ebda53f7c76bb2a9d9eb9edf52"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/launch_identity.json",
+      "sha256": "19f52b22907035e43a8192875fd2930109339de04e4b240b89b8833cea1e86db"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Policy_eval_v1/20261103/formal_pi05_01/environment/application_shutdown.json",
+      "sha256": "784b8a26546ca0d9f50f921dc81f1791828284cef32c739e964aa26eade5bbf5"
+    }
+  ],
+  "audit_tool_sha256": "6cd653dd6fc6d366ac3ec4f4268d7bc3b3a50602d4b363873a9706d0bbb2aa74"
+}
