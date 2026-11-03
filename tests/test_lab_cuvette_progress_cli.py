@@ -57,3 +57,19 @@ def test_replay_cli_checks_events_and_refuses_to_overwrite(tmp_path):
     before = output.read_bytes()
     assert progress_main(['replay', str(source), '--output', str(output)]) == 2
     assert output.read_bytes() == before
+
+
+def test_publication_scope_audit_receives_real_unicode_paths(tmp_path):
+    import importlib.util
+    from pathlib import Path
+    import subprocess
+    tool = Path(__file__).resolve().parents[1] / 'docs/lab_cuvette_loading/Progress_v1_2/tools/protection.py'
+    spec = importlib.util.spec_from_file_location('progress_protection', tool)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    subprocess.run(['git', 'init', '-q', str(tmp_path)], check=True)
+    name = '中文验证报告.txt'
+    (tmp_path / name).write_text('fixture only')
+    subprocess.run(['git', 'config', 'core.quotepath', 'true'], cwd=tmp_path, check=True)
+    subprocess.run(['git', 'add', '--', name], cwd=tmp_path, check=True)
+    assert module.git(tmp_path, 'diff', '--cached', '--name-only') == name

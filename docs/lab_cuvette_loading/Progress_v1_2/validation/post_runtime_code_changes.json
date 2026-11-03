@@ -34,5 +34,12 @@
     "online.py",
     "Progress_v1_2/progress.json"
   ],
-  "documentation_and_evidence": "README navigation; v1.2 guide/migration/schema/report; audit/portable tools; result receipts; reading-package manifests"
+  "documentation_and_evidence": "README navigation; v1.2 guide/migration/schema/report; audit/portable tools; result receipts; reading-package manifests",
+  "publication_audit_fix": {
+    "path": "docs/lab_cuvette_loading/Progress_v1_2/tools/protection.py",
+    "change": "Use core.quotepath=false per git invocation so Unicode file names remain actual repository paths rather than C-quoted text. No Git config is changed.",
+    "validation": "publication_unicode_test.xml: 15 relevant tests including a real temporary Git repository with Unicode file name",
+    "previous_attempt": "Original failed scope receipt retained as outputs/.../publication/protection_failed_quoting_01.json; all historical hashes already unchanged in that receipt",
+    "runtime_effect": "none; publication audit helper only"
+  }
 }

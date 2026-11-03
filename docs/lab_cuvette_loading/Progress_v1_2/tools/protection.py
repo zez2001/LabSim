@@ -11,7 +11,9 @@ def sha(path):
 
 
 def git(root,*args):
-    return subprocess.check_output(['git',*args],cwd=root,text=True).strip()
+    # Git otherwise C-quotes Chinese paths, which are not repository-relative
+    # names and would falsely trip the explicit Progress scope allowlist.
+    return subprocess.check_output(['git','-c','core.quotepath=false',*args],cwd=root,text=True).strip()
 
 
 def verify(root,baseline,output,runtime_commit,asset_root=None,closed_run_proof=None):
