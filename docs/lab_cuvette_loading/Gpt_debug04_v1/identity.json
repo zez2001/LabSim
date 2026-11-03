@@ -1,0 +1,2106 @@
+{
+  "schema": "labsim.Gpt_debug04_v1.historical_identity.v1",
+  "purpose": "Exact historical gpt_debug_04 method identity and restoration reference; not a new run or a model success claim",
+  "audit_utc": "2026-11-03T12:47:14.893551+00:00",
+  "audit_current_commit": "9bdf8c7c36b0c324cb9009bfe9aa0538dd6ff485",
+  "historical_identity": {
+    "run_name": "gpt_debug_04",
+    "episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+    "scene_version": "Project_v1_1",
+    "runtime_commit": "63410bf9258ba2f9bd0af4d517194523fca6617c",
+    "original_run_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04",
+    "original_episode_directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000",
+    "original_runtime_checkout": "/tmp/labsim-project-v1-1-clean-20261027",
+    "original_process_exit_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/process_exit.json",
+    "original_process_exit_sha256": "e8d393c9142e3221d1fd7a2092530352cab61d2aec7ad4e5e378cb1c1df2e542",
+    "original_selected_arguments": {
+      "--provider-config": "/tmp/labsim-project-v1-1-clean-20261027/config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+      "--episodes": "1"
+    },
+    "original_entrypoint": [
+      "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+      "-m",
+      "demos.lab_cuvette_project_v1_1.run",
+      "--backend"
+    ],
+    "source_file_identities": [
+      {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/controller.json",
+        "sha256": "1b16bbf83a56925d212ba578a878003c0a78949e22ddaea4432b2ea038386576"
+      },
+      {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/summary.json",
+        "sha256": "195804e81a4b1ae64ac59c6e2a944951c442279069d484f6b8942ef0fd13e301"
+      },
+      {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/policy_trace.jsonl",
+        "sha256": "344dac3e2cf76d4728279f93570d7209425c92e0303b57ae2a2d55fa1bfadef2"
+      },
+      {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/result.json",
+        "sha256": "30d863c28fe1fc90d914ce349f75f1a258f02c4ac8a076cbe707ed15fc38dbbf"
+      },
+      {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/independent_score.json",
+        "sha256": "552593cca79088436aeb4a32ac5a191e7605b962f4c2f98fa4aba21401a7ca78"
+      },
+      {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/release_metadata.json",
+        "sha256": "c69dd26792e7591085d37c8c74f59aeff3d53c5cb907ae934e47cbab228194d2"
+      }
+    ]
+  },
+  "frozen_policy": {
+    "profile_path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+    "original_profile_absolute_path": "/tmp/labsim-project-v1-1-clean-20261027/config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+    "profile_sha256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+    "profile_canonical_sha256": "9c273d0815d81db5aad1a54e41dd93508b80a6ddb8d0d0a2e0076895c5f69eaf",
+    "profile_snapshot": {
+      "schema": "labsim.cubence_provider.v1",
+      "provider": "cubence",
+      "base_url": "https://api.cubence.ai/v1",
+      "model": "gpt-6-astra",
+      "credential_env": "CUBENCE_API_KEY",
+      "endpoint": "responses",
+      "request_timeout_s": 120,
+      "episode_timeout_s": 1800,
+      "max_output_tokens": 1024,
+      "max_context_messages": 4,
+      "max_context_input_tokens": 80000,
+      "max_requests": 1500,
+      "max_estimated_usd": 30.0,
+      "max_retries": 2,
+      "retry_delay_s": 1,
+      "reasoning_effort": "low",
+      "images": {
+        "max_side_px": 640,
+        "jpeg_quality": 60,
+        "detail": "high",
+        "resize_interpolation": "lanczos"
+      },
+      "pricing": {
+        "source": "https://cubence.com/pricing",
+        "observed_date": "2026-10-26",
+        "input_usd_per_million": 10.0,
+        "output_usd_per_million": 50.0,
+        "cached_input_usd_per_million": 1.0,
+        "billing_note": "Published <=272000-token tier; account group multipliers are unknown. This is a local estimate, not a billing claim."
+      },
+      "action_limits": {
+        "max_translation_m": 0.04,
+        "max_rotation_rad": 0.15,
+        "max_linear_speed_m_s": 0.02,
+        "max_angular_speed_rad_s": 0.15,
+        "max_duration_s": 3.0,
+        "min_duration_s": 0.05,
+        "control_hz": 60,
+        "max_gripper_opening_m": 0.08,
+        "gripper_effort_limit_N": 8.0
+      }
+    },
+    "tools_class": "ProjectV11RobotTools",
+    "prompt_version": "Project_v1_1.public_tools.v4",
+    "SYSTEM_PROMPT": "You directly control a simulated Franka for the task in task_language.\nUse only the synchronized side and wrist RGB, robot joint/TCP state, provided camera calibration, task text and tool receipts.\nThere is no object-pose oracle and no expert motion primitive. Infer locations from images and calibration. Do not request debug or ground truth.\nAll translations are metres; rotations radians; ee_pose quaternion order wxyz. Gripper opening is total finger separation, not each finger's position.\nCall one tool at a time. Every motion needs the current episode_id, observation_id, and a unique action_id. A receipt acknowledges executed motion; never replay an acknowledged action.\nUse larger bounded moves in free space and small, slower actions near contact. Model requests pause simulation; duration_s advances simulation only during tool execution.\nTranslation and rotation limits apply to the Euclidean vector norm. For example, delta[.02,.02,0] has length.028284m and needs at least1.415s at.02m/s. A longer duration cannot make a vector longer than.04m legal; split it into smaller commands. Read numeric rejection details and correct the next command.\nFollow the full task: approach the designated light cuvette in the white rack, physical grasp, extraction, transport, internal-seat insertion, support transfer, symmetric release, retreat, then at least3seconds stable observation.\nPublic fixed-scene task prior: the light cuvette in slot A1 is at the rack corner closest to the robot. The blue cuvette in opposite corner F6 is a distractor to leave in place. The selected light cuvette's nominal outer dimensions are10x10x67.5mm. These are nominal task facts; infer current poses from the images and calibration.\nDo not declare success from your own assessment: finish only requests the same independent physical scorer used for every backend.\nAvoid pushing after stalled insertion, dropping, collisions, and joint limits. If unsure, observe. You may reduce the gripper force cap during an image/state-confirmed support handoff, but cannot change physics or task thresholds.\nReturn a tool call rather than a long explanation. No task-specific macro, teacher takeover or hidden plan execution is available.\n\nProject_v1_1 execution contract:\naccepted means the command passed preflight, not that motion occurred or the target was reached.\nexecution_finished means its execution interval ended. target_reached is a separate measurement of the actual endpoint.\ncompleted is a compatibility alias for interval completion; never interpret it alone as reaching the requested pose.\nA CONTROL_PLAN_REJECTED receipt means a continuous local IK path could not be verified. Rejection executes zero ticks and leaves the current observation valid. Reduce the requested move or choose another visually supported direction; never assume it moved. Do not repeatedly send the same rejected path with a new ID.\nRead requested versus actual endpoint, final and maximum tracking errors, executed duration/ticks, stop_reason, safety_stopped and partial_execution.\nIf an action partially executed or safety stopped, do not replay it as though nothing moved. Use its successor observation and actual receipt; the backend may end the episode to preserve the safety evidence.\nAn execution_finished command with target_reached=false is not a successful move. Observe the fresh images/state before deciding on a smaller correction.\nThe force cap is an upper limit, not a measured contact force. move and wait preserve the previous gripper request; only the explicit gripper tool changes opening/effort. Use the public bilateral finger contact readings to assess contact, and fresh images to assess retention.\nBoth cameras are synchronized at each decision. The side camera covers the rack, arm and instrument; the wrist camera moves with the hand. Use their actual supplied mounting, intrinsics, extrinsics, image transformation and timestamps. Do not assume an old wrist mounting or invent object poses from a task ID.\nUse the static robot calibration in task_language to distinguish the TCP frame from the panda_hand/palm frame when interpreting images and camera mounting. Apply the stated parent/child transform and quaternion convention; do not assume the frames share an origin or orientation. The frame-origin offset is robot geometry, not a complete hand/finger collision envelope or an obstacle-pose oracle.\nPlan clearance for the whole hand and the held vessel, not only the TCP or the vessel bottom. After extraction, inspect the side image and lift sufficiently above intervening rack walls and instrument housing before lateral transport. Leaving the source slot does not prove that the fingers, palm or arm clear the instrument. Use fresh images to choose a clear route and to check clearance again before descent; no obstacle coordinates or safe-height oracle are provided.\nIf an intervening housing edge or whole-hand clearance cannot be judged from the current images, obtain fresh dual views and establish visually supported clearance before horizontal transport. Do not continue laterally solely because the TCP or vessel appears outside the source slot; if clearance remains uncertain, observe or stop rather than assume a safe route.\nPerspective alignment: overlap or centering in one image does not establish coaxial alignment. Cross-check the vessel long axis and the intended aperture in both views using the supplied calibration; do not assume equal image pixels imply equal world positions.\nOnce visually near the seat or uncertain contact, command insertion/descent at no more than0.001m/s. Split it into short bounded increments and inspect fresh dual-view images, robot state and bilateral finger contact after each increment. This instruction does not add a hidden contact detector or automatic insertion macro.\nIf the hand descends while the vessel moves upward relative to the fingers, or one side of finger contact is lost, stop descending. Use only a visually supported safe backoff and realignment before trying again; do not keep pressing with the same downward command or release to bypass the obstruction.\nDo not open the fingers before sufficient nominal loading depth and actual support have been established from the allowed observations. Compare the visible exposed vessel length with the static task goal while accounting for perspective and occlusion. A TCP endpoint reached, a tool interval finished, or a vessel tip or mouth overlapping a seat rim is not evidence of bottom support. If depth or support remains uncertain, stop and reassess rather than opening early.\nThese controls remain generic move, gripper, wait, observe and finish. No expert stage controller, object ground truth or hidden recovery action is available.\n",
+    "SYSTEM_PROMPT_sha256": "ac9ac4d33b2e329dfe684bfcd8461b4962274ac5b57659c94194da2af0ce2ddf",
+    "actual_instructions_reconstruction": "Exact unchanged cubence_tools.run_episode builder: prompt + newline + \"Action limits: \" + json.dumps(provider.action_limits), preserving loaded insertion order",
+    "actual_instructions_sha256": "829f54e345e4b2343cdd433f21fb57a559ce60b7fd65a0ee5b393acf22e0c46d",
+    "tool_schema": [
+      {
+        "type": "function",
+        "name": "observe",
+        "description": "Read the current synchronized side/wrist images and robot state. Physics remains paused.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      {
+        "type": "function",
+        "name": "move_ee",
+        "description": "Execute one bounded generic Cartesian command via IK/interpolation. No task macro. Units metres/radians, world frame or TCP delta, quaternion wxyz.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "episode_id": {
+              "type": "string"
+            },
+            "observation_id": {
+              "type": "string"
+            },
+            "action_id": {
+              "type": "string"
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "ee_pose",
+                "ee_delta"
+              ]
+            },
+            "values": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "frame": {
+              "type": "string",
+              "enum": [
+                "world",
+                "tcp"
+              ]
+            },
+            "duration_s": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "episode_id",
+            "observation_id",
+            "action_id",
+            "mode",
+            "values",
+            "frame",
+            "duration_s"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "type": "function",
+        "name": "gripper",
+        "description": "Symmetric two-finger total opening in metres and explicit per-finger force cap in newtons; arm holds its current pose. No object binding.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "episode_id": {
+              "type": "string"
+            },
+            "observation_id": {
+              "type": "string"
+            },
+            "action_id": {
+              "type": "string"
+            },
+            "opening_m": {
+              "type": "number"
+            },
+            "effort_limit_N": {
+              "type": "number"
+            },
+            "duration_s": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "episode_id",
+            "observation_id",
+            "action_id",
+            "opening_m",
+            "effort_limit_N",
+            "duration_s"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "type": "function",
+        "name": "wait",
+        "description": "Advance a bounded simulation interval while holding the current robot and gripper command.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "episode_id": {
+              "type": "string"
+            },
+            "observation_id": {
+              "type": "string"
+            },
+            "action_id": {
+              "type": "string"
+            },
+            "duration_s": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "episode_id",
+            "observation_id",
+            "action_id",
+            "duration_s"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "type": "function",
+        "name": "finish",
+        "description": "Request independent scoring and finish. This cannot assert success or bypass release/retreat/stability checks.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "episode_id": {
+              "type": "string"
+            },
+            "observation_id": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "episode_id",
+            "observation_id",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "tool_schema_canonical_sha256": "d0f8634840a59594da8c62d92d98dbf4ae91cb64421cb6c975375350efffedeb",
+    "historical_controller_canonical_sha256": "00c22ce18856b428bd4c8ab1bb7a5d76f7575a96f96b2901457b6f867bded388",
+    "original_source_hashes_recorded_by_controller": {
+      "cubence.py": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23"
+    },
+    "original_extension_metadata": {
+      "version": "Project_v1_1",
+      "tools_class": "ProjectV11RobotTools",
+      "prompt_version": "Project_v1_1.public_tools.v4",
+      "receipt_contract": "accepted/execution_finished/target_reached/safety_stopped/partial_execution",
+      "implementation_sha256": {
+        "cubence_project_v1_1_tools.py": "50dbcf18cb613ae98b403cbc7ba698ffb63fc044b2810ec7ccda45f68b6008d4"
+      },
+      "observation_scope": "Same public RGB/robot/calibration/tactile whitelist as Project_v1; no object truth"
+    },
+    "episode_max_calls": 160,
+    "max_calls_evidence": "Original Project_v1_1/run.py parser default; no --max-calls override in recorded command",
+    "temperature": null,
+    "temperature_status": "Not sent; provider default unknown",
+    "policy_seed": null,
+    "policy_seed_supported": false,
+    "no_temporal_visual_context": true,
+    "no_fixed_side_detail": true,
+    "no_active_view_extension": true,
+    "no_robot_self_state_extension": true,
+    "context_complete_tool_turns": 2,
+    "images_each_request": "Only current side+wrist JPEG, 640x480 RGB, quality60/detailhigh; no historical images/crop",
+    "episode_context_reset": "New tools and history=[] per run_episode; last2 complete response/tool-receipt turns only; not cross-episode memory"
+  },
+  "real_historical_result": {
+    "scope": "Original historical result retained; excluded from all new evaluation denominators",
+    "api_decisions": 51,
+    "network_attempts": 51,
+    "protocol_rejections": 0,
+    "estimated_usd": 4.17499,
+    "actual_invoice_usd": null,
+    "policy_wall_seconds": 1319.6093003740534,
+    "simulation_seconds": 114.71666666666667,
+    "control_steps": 6882,
+    "physics_steps": 27532,
+    "termination_reason": "POLICY_FINISH_REQUEST",
+    "failure_type": "GRASP_SLIP",
+    "task_success": false,
+    "record_valid": true,
+    "grasp_success": false,
+    "source_slot_cleared": true,
+    "transport_success": false,
+    "release_observed": false,
+    "retreat_observed": false,
+    "stable_after_retreat": null,
+    "observed_events": {
+      "bilateral_grasp_observed": {
+        "t": 14.1125,
+        "physics_step": 3387,
+        "actual_force_N": [
+          1.6063358783721924,
+          1.60846745967865
+        ]
+      },
+      "actual_lift_started": {
+        "t": 14.1125,
+        "physics_step": 3387,
+        "actual_lift_m": 0.0012949941147327726
+      },
+      "source_slot_cleared": {
+        "t": 15.5625,
+        "physics_step": 3735,
+        "actual_bottom_world_z_m": 0.7700548563252031,
+        "source_rim_world_z_m": 0.768
+      },
+      "held_transport_observed": {
+        "t": 32.50833333333333,
+        "physics_step": 7802,
+        "horizontal_displacement_m": 0.05008056925323036
+      }
+    },
+    "tool_counts": {
+      "move_ee": 48,
+      "gripper": 2,
+      "finish": 1
+    },
+    "requested_returned_models": [
+      {
+        "requested": "gpt-6-astra",
+        "returned": "gpt-6-astra",
+        "count": 51
+      }
+    ],
+    "input_tokens": 375584,
+    "output_tokens": 8383
+  },
+  "input_evidence": {
+    "observations": 51,
+    "verified_wire_JPEGs": 102,
+    "forbidden_dynamic_evaluation_key_scan": {
+      "exact_keys": [
+        "debug",
+        "hole_error",
+        "lateral_error_m",
+        "object_pose",
+        "object_position",
+        "object_position_m",
+        "phase",
+        "progress",
+        "progress_stage",
+        "reward",
+        "scorer",
+        "task_success",
+        "teacher_waypoint",
+        "valid_insertion_progress",
+        "vessel_pose",
+        "vessel_position_m"
+      ],
+      "matches": []
+    },
+    "first_public_state": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+      "sha256": "411b4dcbe7d4fa645f269f880069575059d824daabc5981b0820a599fc11487d",
+      "keys": [
+        "episode_id",
+        "step_index",
+        "simulation_time",
+        "joint_positions",
+        "joint_velocities",
+        "TCPpose",
+        "task_language",
+        "source_slot_id",
+        "target_seat_id",
+        "observation_id",
+        "gripper_opening_m",
+        "gripper_effort_limit_N",
+        "finger_contact_N",
+        "camera_meta",
+        "model_image_transforms"
+      ],
+      "task_language_sha256": "08cf802a689dd18cbc0eff89749b821d966b6a0106907dc779426720f8dd8a65",
+      "simulation_time": 0.016666666666666666
+    },
+    "last_public_state": {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000050/public_observation.json",
+      "sha256": "87d91b38612898b483bd5648f9821a47cd700880fd6e4a091c82d33fe5e57226",
+      "simulation_time": 114.71666666666667
+    },
+    "artifacts": [
+      {
+        "decision_index": 0,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000000/manifest.json",
+        "manifest_sha256": "431c13c41d3513644875f788f5405737b94e36cb2274edc0beb39d9166602029",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+        "public_observation_sha256": "411b4dcbe7d4fa645f269f880069575059d824daabc5981b0820a599fc11487d",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000000/side_camera.jpg",
+            "sha256": "c2437267fb4b5b3d399f865c2686f4c46011fbcaae64686fc1ce585771e4931d",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000000/wrist_camera.jpg",
+            "sha256": "3bc1d8e9a480b09c5bf7622dda4d6686c1b5bc44f2a0730e197d7afd69ab7ce2",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 1,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000001/manifest.json",
+        "manifest_sha256": "85624c3dc04f95ad71b9bccc10441a3421f422c8068828ad45d16d39ff77f7f7",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000001/public_observation.json",
+        "public_observation_sha256": "f3b190dbe2efd1dc914bf83ca2e1f89a1befdcd81fad2829dbe050dd6ff16e3f",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000001/side_camera.jpg",
+            "sha256": "519b9dd1b869854abe89c2c2c7bad6b4750e7bf93a91cb430b083e6636a2f93b",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000001/wrist_camera.jpg",
+            "sha256": "39d4dd0fa3adf75c71ca594c7e049bd555e763ab1523c7ee13e2b0287eebfd66",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 2,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000002/manifest.json",
+        "manifest_sha256": "e1c689c52c5075515178a62599eac543a74b00b568f3218e3e118064132dd3b3",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000002/public_observation.json",
+        "public_observation_sha256": "1b328b5d8bb6654f3e35cf3287d3e0e1e80986a99b7b33156352d7e08d8a6537",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000002/side_camera.jpg",
+            "sha256": "7b9dc1123832943df0944f4b0b4cd12f6a96cb194e9b5b2555e97d83702b5196",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000002/wrist_camera.jpg",
+            "sha256": "8e6cdb44dad40343410a9e58c0ea2d1853b749e7b6d1ed918a7eb7865a8804c2",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 3,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000003/manifest.json",
+        "manifest_sha256": "d075c0d224703d8e304d349f1fdb4fe73128dfc09a848ee18823f48bb191cc8e",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000003/public_observation.json",
+        "public_observation_sha256": "181d14095a0d6f593447c40165ca196d880bc3a0fd37da584ce0e351f5d349dd",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000003/side_camera.jpg",
+            "sha256": "0a1c557abeee8ca5ddaa9f11e9ad31353e89687807a0e340702a41d39db7728d",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000003/wrist_camera.jpg",
+            "sha256": "ba0e45cc95385c2b70e729f38e032960fe2d1813f043ec6716e865bf07aaa93e",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 4,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000004/manifest.json",
+        "manifest_sha256": "6bd7465ac9b3727d5867feaf97caf011771a7fe6537dd7b6bc9ffb1d209fe48e",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000004/public_observation.json",
+        "public_observation_sha256": "61f4bcef14b902736defe25b7790e064eaedbb53c57957c6e2643be6667f1105",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000004/side_camera.jpg",
+            "sha256": "6700ea562028f13004fbc18b232015d908aeae5c9774109c0f21a9d044689ae4",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000004/wrist_camera.jpg",
+            "sha256": "0c7373bdae92e07c032b1cec66a979cb1e6ca77074af245a1eb7ea885a81ba6a",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 5,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000005/manifest.json",
+        "manifest_sha256": "fa8373b024d2a5c2fb5f58a9079ac84a1560069df5346a0655b679489de2b120",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000005/public_observation.json",
+        "public_observation_sha256": "bf0eabf25c9415942239c114a82e1f5353d2e642d663840d9b97981096fa91b6",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000005/side_camera.jpg",
+            "sha256": "e5bd631804a56d9882d48aafac568a42aa17d86c0a3e463384b0778d20029dc5",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000005/wrist_camera.jpg",
+            "sha256": "a74b374cec7e596cfc48c9e92eff0e6fdb22b2cf443b7272ac9c844adf78641d",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 6,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000006/manifest.json",
+        "manifest_sha256": "c50dbcfcfbc33991cf40270f269753dca0a05a77b63fc5c10986f58e163a6491",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000006/public_observation.json",
+        "public_observation_sha256": "3bf17c69301f9fddde36efc2c556e16041d1663ab35c83317431f4dbaf34477b",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000006/side_camera.jpg",
+            "sha256": "0202735ec89719a1e4ad85a51c07e1b3e33b30335f9d94a41a8fc4b6b2282491",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000006/wrist_camera.jpg",
+            "sha256": "0aaa6a0a9a73099540977646a63ef5e513d350a9f37dc675083a7e7091d3a4a5",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 7,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000007/manifest.json",
+        "manifest_sha256": "caad8bf37ea0d4cad59d14d8a10eab0f80cffb252f2cf43e2e78aec222007493",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000007/public_observation.json",
+        "public_observation_sha256": "ca6042699562c6915a8edacd39406005f5fb087625fbafde035d6c4e33dabc21",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000007/side_camera.jpg",
+            "sha256": "22ea2db4bc4429cba45db1e9dae4457d3d4fa35c5dc3ddba52986da64b103fdc",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000007/wrist_camera.jpg",
+            "sha256": "81b77bac197322c3cb0b0c901c9548fdc9f25dc3662a582691d98167f4077aa7",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 8,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000008/manifest.json",
+        "manifest_sha256": "80bf7e48a72a62356091a0ba9dfe2f18103b9485f716431e001b786608d2960b",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000008/public_observation.json",
+        "public_observation_sha256": "5e26f80bfdf250feec9c254cb66a9a255ac550f2aaf4d5ffd10da0768ba263ac",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000008/side_camera.jpg",
+            "sha256": "dde18da6ca350d1c80ee91d7dab3da2a7380f1b52d618bd1d6e5617471534266",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000008/wrist_camera.jpg",
+            "sha256": "17615841b2ac1a95a065dd8e2bf1653392a1a1a701e8a56101bc2f03d60510cc",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 9,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000009/manifest.json",
+        "manifest_sha256": "19aec8bc7bcd5420e60cc4a20fe52949ac8aaa18282e1cafb19f0e5f323f5ee8",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000009/public_observation.json",
+        "public_observation_sha256": "ebf2a3604d9abff6621c2cfe3781555867eed1a4d87f131b3d12290d0aec726b",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000009/side_camera.jpg",
+            "sha256": "7df132c69d2c77b973aff082c66b6676c4d329ec34e3e9f8c2058159948b653a",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000009/wrist_camera.jpg",
+            "sha256": "4c03a29ec010980ede341685ca86a43618e88ebdbda82844fedc8b4911266e54",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 10,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000010/manifest.json",
+        "manifest_sha256": "4d565b92865ab9f53e0a337b116dc7a0cae9dd2713e1d84f30ba6957046b23f3",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000010/public_observation.json",
+        "public_observation_sha256": "b0e34e49184fe8185501d0139d0baa32f89494e67c07a478a6c27429b6a93203",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000010/side_camera.jpg",
+            "sha256": "1f6db8c11cef5559e32aab5e16226d95ede4b2e97ec115b3299de56bef7cf7db",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000010/wrist_camera.jpg",
+            "sha256": "6efbe2507a9e5dbf9e958d7bcac53e1fe9732c0fbe277e0a8189be46ecaea50c",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 11,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000011/manifest.json",
+        "manifest_sha256": "ae62eab6c65ad23c741f0e029a5a554a7106f0890d7d7dc86d637d5482b4cb2d",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000011/public_observation.json",
+        "public_observation_sha256": "5e7d2e6e1a3fe0278a96bbccaf266c61f0e79c1d30d454aaedf663b59280cfea",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000011/side_camera.jpg",
+            "sha256": "5c525c26ba60644aefcff6de88e9162c3162619f615b5bab34e9cf99c73431fd",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000011/wrist_camera.jpg",
+            "sha256": "56841a6fb7d84d908b5b265cfde1b6fc7bb17a9d2488b35c9ec7d2123d6b0687",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 12,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000012/manifest.json",
+        "manifest_sha256": "afb01c90f5c5eec0ed51e147499ddee9fe5ad19ed6d2f62469f5b3127efd4915",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000012/public_observation.json",
+        "public_observation_sha256": "34585f78bec9b5ee60c14c153172238910987ee2607ca89155414894172ea176",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000012/side_camera.jpg",
+            "sha256": "ca1e91c54603ef61cb68142971ede3b42f36c2c9b2b0bb2c6370cbae7efb8531",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000012/wrist_camera.jpg",
+            "sha256": "fb59808f8d0469b7d53f7bab39fc06940a23dd35f670ddf5ee88e0ac9d863111",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 13,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000013/manifest.json",
+        "manifest_sha256": "afeb57c73c138aaad221c5e545b5df31ffd93730722be7aab3f356e222159bff",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000013/public_observation.json",
+        "public_observation_sha256": "7fe30463e86901a4f574f683096112d337ff9a9a25b88c2392c0729003b53917",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000013/side_camera.jpg",
+            "sha256": "5953b7998975dd8ccc6ca1a808ed2fbec4b0397609e2df89a0961f40b360156b",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000013/wrist_camera.jpg",
+            "sha256": "84ea21e0466455e17930d52a80d69756075968c2cf2a4eccd9bc40b97b722aff",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 14,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000014/manifest.json",
+        "manifest_sha256": "ccfd533afc87dbcead3655073209c00dcaa68e331ba5b3f27ba51f6689b7ddd3",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000014/public_observation.json",
+        "public_observation_sha256": "2fb5dc9fe1a296537c31a0df65d66c366c318b33a64b4762040957d0d37fe07a",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000014/side_camera.jpg",
+            "sha256": "491440aee112d9fff63a0bbbdefbdf8f10cb7f5ae4b02af0bd0f1807a5e1bc40",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000014/wrist_camera.jpg",
+            "sha256": "14207a71fb7220e1d2d2c0f47e911d3bfc9c6d71273286454f7f9408a9eaef66",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 15,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000015/manifest.json",
+        "manifest_sha256": "fbf8a6a4eafbcb7d45789b285c33c25f60bf0c78e34a084d99272b601b5e6d2e",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000015/public_observation.json",
+        "public_observation_sha256": "8a6478ee6593d09107564651b65e45fbc42df18b6b9f621e67976c61fe0a4504",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000015/side_camera.jpg",
+            "sha256": "3513a01a44e054129b510fe9d1464f11dae23e55b6828d424b2e95e1210f5c50",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000015/wrist_camera.jpg",
+            "sha256": "31623bf2ff59b080e79ead2115540c643b8e91dcf4d4db67251a7b662970e0b5",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 16,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000016/manifest.json",
+        "manifest_sha256": "55fd07a79b2b409a6af1c11d659f9554d82bdb2c8292d7bd9c419c5a7a055a79",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000016/public_observation.json",
+        "public_observation_sha256": "01a31e9cb7e8e054377874ddc54b5ec60c242d3e8bd6ea9cbcef205352a9dbcd",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000016/side_camera.jpg",
+            "sha256": "c646f9835f29288d9633c422e99afe7334e5827921529d518b54c9fb894dc75d",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000016/wrist_camera.jpg",
+            "sha256": "3fb0795dc90236155936987cbb1ffcc1a3d4b66eba0fbf6200f5b28a54d3f5b4",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 17,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000017/manifest.json",
+        "manifest_sha256": "7964c6ca0d731ac61dc878e2de81c6ca83e578de9809904a82c4a00f744deeb4",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000017/public_observation.json",
+        "public_observation_sha256": "80e8d4eb0b6472afc43b458e480f0e7e7deb9174659fe00de537d2355a7c14fb",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000017/side_camera.jpg",
+            "sha256": "32c933d294f1b089aa03618b5eed9a64fb223407eb6ddf6f218913e0bd94460b",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000017/wrist_camera.jpg",
+            "sha256": "fd09098a08f6fdb6b718db9049a19ac80495b3abe31f5014efa802aeb6c4ada4",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 18,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000018/manifest.json",
+        "manifest_sha256": "8380ed148d69e29ef06b62df199f3a4473a2e8a858ea2afa2e8fd397ad9e5d8f",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000018/public_observation.json",
+        "public_observation_sha256": "f23071f044798a4e83e94e5e60338e4d10643078c47be7a9fc28366d953a788f",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000018/side_camera.jpg",
+            "sha256": "dffbac61f21b5b5bdc9c7ecd51ec84b2b21e622cbc81e60976005288b0386e58",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000018/wrist_camera.jpg",
+            "sha256": "deba0278cce1a8c24a8bfd511e3ee98faf814af97d8ab7788a66e3678c71ac15",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 19,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000019/manifest.json",
+        "manifest_sha256": "6a14745ab8105be2e50649426802ac81fbff822a61c5524c2815c7569119767a",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000019/public_observation.json",
+        "public_observation_sha256": "be817ef85de4feab81aacfd4760633083ccfc4145a0b6cfd6036495a126068bb",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000019/side_camera.jpg",
+            "sha256": "8ae9a2e9c645756be43305ac0a8623b56d25b0c319578ce3e444e39221a7015f",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000019/wrist_camera.jpg",
+            "sha256": "7917c0111afd6d7dab044ca69b5e5e6c72146dea2f7e16a2f9eb14ae0ba4e029",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 20,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000020/manifest.json",
+        "manifest_sha256": "f5820e9431adf62fee2f2e94be9b5dacfa0b98e6a1ad34e6524f39c695980b84",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000020/public_observation.json",
+        "public_observation_sha256": "1e67c95d902d9c762a213b0d57a12f354b4155cf836d96598e50e8e6446e1eb8",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000020/side_camera.jpg",
+            "sha256": "fa23ecba562b5ac902b9f86a258ba46a761643ff17a047c849461ee3354dcfa9",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000020/wrist_camera.jpg",
+            "sha256": "29edbc5dd1b69acc57c56492ca9749bb4607a285c569557de333dbe6db1b2c96",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 21,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000021/manifest.json",
+        "manifest_sha256": "da2bce9bee284486c664bf80d3db750ea03f5108c7634cfbbb90f6bcddf32cfb",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000021/public_observation.json",
+        "public_observation_sha256": "b228969742f885131b0ea7fa898da4ba09c55eeaf32a4b48b40f3e814175c3d4",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000021/side_camera.jpg",
+            "sha256": "b5421ea8273fbfd96cd74e871fdfc660aba3bf82352e89ad71393ac92cff5886",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000021/wrist_camera.jpg",
+            "sha256": "ae3e8bbeb034df054364afa9fee397256a589746b94d9321167d95f52a421da1",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 22,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000022/manifest.json",
+        "manifest_sha256": "b1aef9e16a828d36659fc754dfb89b6d3d957af72739c2e68132daba4d6023c5",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000022/public_observation.json",
+        "public_observation_sha256": "023de4b6f7808fd2506ddbf01919ceb143754df0f2ab72e573f22e4b611f10bc",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000022/side_camera.jpg",
+            "sha256": "e191272396fe179ff754ac2ba1ec437fd9a7da7846c0abab2bc691ccbc4c64f7",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000022/wrist_camera.jpg",
+            "sha256": "6dc2ecf6c2f54fe7a0e2c158be38132fba3da503d634ba5ba153dbbffdd5b606",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 23,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000023/manifest.json",
+        "manifest_sha256": "edb1b4ba77ab90f2d04df1ed62a842767d8425fa61288fc0ac6b122462651302",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000023/public_observation.json",
+        "public_observation_sha256": "ba3782b0f569d6b6637934dd2660328dab6cbf0081e6c4b0c08f614f60de9ed3",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000023/side_camera.jpg",
+            "sha256": "bfb8d4df3b139fc5fed27abf85d77d59a7c771db1e3056979744db13d4c5223a",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000023/wrist_camera.jpg",
+            "sha256": "0b4bb18744930c591ebde83dc757d042f63a9cca4a99ade845cff4147cf88898",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 24,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000024/manifest.json",
+        "manifest_sha256": "9e2980df828ecc30038c4753ba00fff355b55f50d209e6b41f97ecfad6c92f12",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000024/public_observation.json",
+        "public_observation_sha256": "abefd23f02ecc636dd04cd610f41016c865f39070f78fc0ce25f5d544c400d47",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000024/side_camera.jpg",
+            "sha256": "cfb02bfde4d0f5464513790500857b8d8608f04a9a2e2d352582d170ecb33743",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000024/wrist_camera.jpg",
+            "sha256": "45face241758d0500e7389c1ba821f371f2c143ed2763e52a5239f4e7c661225",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 25,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000025/manifest.json",
+        "manifest_sha256": "8c2dacb6c7449870779d71190031c85b4e5596358b737750a83d7bb2100627f8",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000025/public_observation.json",
+        "public_observation_sha256": "05be0703bed574adc3bcfd97c68156acd3618d0aee8a30c87ccf0a52ec7e3eee",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000025/side_camera.jpg",
+            "sha256": "1da9f5bee987cb373f31002c8817f69b9d96ecfa59dbcd9395d50549e34f7142",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000025/wrist_camera.jpg",
+            "sha256": "69a82d2c0af9587f9cecba3df1b642b6b646bacca5da2881b31b20cbb3a62ae8",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 26,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000026/manifest.json",
+        "manifest_sha256": "12da53487af08d3fd9fa822cd80945338cb7ee453120938a7ab5e8219d843d6e",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000026/public_observation.json",
+        "public_observation_sha256": "50d21ce6f4109d3864e9582b0710ff50b1e16b95a7b2ec44878108c06aca83cc",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000026/side_camera.jpg",
+            "sha256": "663fca25f272b1428b1cabd0468c280cb104a9aa6a6a7c3d271c51154aec6106",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000026/wrist_camera.jpg",
+            "sha256": "bf328bac92afaf96dd87aed7ece80ef3d9380dd628499f90d9f089a53f9e8145",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 27,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000027/manifest.json",
+        "manifest_sha256": "14dc5e84892ded88bbb99a2bec6ce3797b0707ed7f658465acf0f01c54fac343",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000027/public_observation.json",
+        "public_observation_sha256": "7c57c180a018e409a89675aafbafc4bdf4947031cfc6880752dd413b0a4e902a",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000027/side_camera.jpg",
+            "sha256": "29a243934b751bb8c5537d13b5211e81dafdd6a312ad5ee4e8351fbc3a2b9013",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000027/wrist_camera.jpg",
+            "sha256": "0c90037437ac8ae147251f9ee587ffcf65d63a25bfe2805fc9d4fc05c0836379",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 28,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000028/manifest.json",
+        "manifest_sha256": "956e4d82c474b01c6bd10495d8d32a11d6b8aca0d2f98a5efb93e8227651b19d",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000028/public_observation.json",
+        "public_observation_sha256": "023687c1f371567f9d7052dd16aabff890c1a7bf9005db94fc9a2c08cde8c565",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000028/side_camera.jpg",
+            "sha256": "832ffd61e3fac530c3938e26c6891c52a748704f8251f8e285c8d1ed559fad12",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000028/wrist_camera.jpg",
+            "sha256": "382b102a4300bbc039c87cf52e30457fd6fbc1839cd74de512347318f4414392",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 29,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000029/manifest.json",
+        "manifest_sha256": "30baf204864aa3998f8c00088fac2c2951ebfe182b9fe0b08c562a4170f16fc6",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000029/public_observation.json",
+        "public_observation_sha256": "ff6e5889c9440137e039b2dc1f8ebaeb2842b5d493aa2e804404a16def9aae21",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000029/side_camera.jpg",
+            "sha256": "e9b717040a53329fd321b321bf1121cec00c7b23677610bd0e884f5a89e94d5e",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000029/wrist_camera.jpg",
+            "sha256": "f310a49baac9b6722456d4af5609dfe58733712b2a01ceccc273c1990be58b75",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 30,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000030/manifest.json",
+        "manifest_sha256": "2cd6c6099fce61ec3ee45b3c033cfe899356865c5c1fa47cda53613ce176d0ff",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000030/public_observation.json",
+        "public_observation_sha256": "c9a9e9f1495a57d090bda150cbf98f7ea6c0480f557f8a3aeae2a8e947202350",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000030/side_camera.jpg",
+            "sha256": "687b8853a536a910e2e4f15293a8c036ba99c9fd327aede6310401517d1a9310",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000030/wrist_camera.jpg",
+            "sha256": "b93069c32a61c84c364310563742dfecba977c4d6a2c74727bc89496e838bfea",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 31,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000031/manifest.json",
+        "manifest_sha256": "277ea7516c918076f8a6c99e0012d2973d3fed832e87c3367fe6ec4713880390",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000031/public_observation.json",
+        "public_observation_sha256": "f42023bcaff4d983bfef053c1b9eaea3824bc300862c4f93e69f58bd333f39c6",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000031/side_camera.jpg",
+            "sha256": "3475fb08400c626899f7fa2a9cb15839a222737c67718ee4f6f99856edcec587",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000031/wrist_camera.jpg",
+            "sha256": "9785f5db7841435ecb6e3eb1ee2c4126e5736360d3284f0399020db53996a522",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 32,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000032/manifest.json",
+        "manifest_sha256": "2877cf3459e1f6de6478dbdb94f640e1a60417e5a50285e4952b32be9ff4ded4",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000032/public_observation.json",
+        "public_observation_sha256": "bc2d42ae7af1b8b2780489e8f502301e5443cfe1e1f0bf5ba380fc0447d7a000",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000032/side_camera.jpg",
+            "sha256": "b413d414740ee72115faee0a16a27036654a401423b5fd041997399fabdfa843",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000032/wrist_camera.jpg",
+            "sha256": "ddc22995263019d27e585eeddc7e28576ba7d9b75cd00899254beaba2803cfc6",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 33,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000033/manifest.json",
+        "manifest_sha256": "c1b07dc0e8260c52c402afc4019c7c6375fc676b9368a56f2d1e91fdd3e15a5f",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000033/public_observation.json",
+        "public_observation_sha256": "6fd2e33a0d91fb295b3dad8c50e63b7bdf7643d506d77d07d0cf6bf07d8af21c",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000033/side_camera.jpg",
+            "sha256": "f1a84b6ee22516ef48eb811966e5878fadccd72f3578d5b997158a4fc03abaee",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000033/wrist_camera.jpg",
+            "sha256": "1b470522112e22be45530606852fb742ac8e808d402dc06a951d5f92e8f66617",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 34,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000034/manifest.json",
+        "manifest_sha256": "e3a6cfa68269ee61334c96f88b25b2822dde64e8d83cd857e23a4a6cc23aa413",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000034/public_observation.json",
+        "public_observation_sha256": "dd107aed4eb32859173d214d6972b7b64eaaf3a1801da6d69940a323003cb184",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000034/side_camera.jpg",
+            "sha256": "cbb2f2e912ec269cdce1dc7f6fdb0d29e2a4b05e6e18f7e0439f39a2689f0003",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000034/wrist_camera.jpg",
+            "sha256": "590493abe4e41cec7da748e360fed1816d3cf9d400034bc27369297b92b1985a",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 35,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000035/manifest.json",
+        "manifest_sha256": "d3e8076ede54a481cafa44440335ab1c74429318de7eb2fe0c5d0aa0258a1ad3",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000035/public_observation.json",
+        "public_observation_sha256": "f0737b3273ef42d89c4e09a8cce0b1ca97293f651a364bf672e604c0724077f4",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000035/side_camera.jpg",
+            "sha256": "6abf6a94dde237d7452f2363ca01f0aa3896f097a9b550d76933197769e38e2d",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000035/wrist_camera.jpg",
+            "sha256": "7dcd86d8a23511116303f79d03a74ed4a9b17c0b7edafe08f018c61c2a18630c",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 36,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000036/manifest.json",
+        "manifest_sha256": "62c7f8daf873d4e84943d326cbd24c79dcfc00a95858a3ba8cb25be8aecdeeca",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000036/public_observation.json",
+        "public_observation_sha256": "e737eb8b0fc0174b9ec00e5ec8d1a881e7103c7fc6651c63123bb86254681b90",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000036/side_camera.jpg",
+            "sha256": "7a028dbab6f9da88c7e357d8d4d9a8a56ecf1ad6f674fc5668361d4267fed8c7",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000036/wrist_camera.jpg",
+            "sha256": "d10d8d73f2369da6b61e6793435d99996e685cad843c3a70f24a9942118a49ab",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 37,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000037/manifest.json",
+        "manifest_sha256": "6e0489490b934a014a1d79f3462b29bf911d84dede8e6736bfda9c4ffb12d1ae",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000037/public_observation.json",
+        "public_observation_sha256": "077065ad077a979d5a9285b530e96894832b2302fb42727c91a73801046d6751",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000037/side_camera.jpg",
+            "sha256": "a6b76c2ca7f14519239fcf1094200aff5f15170397725c909760553c293ceca4",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000037/wrist_camera.jpg",
+            "sha256": "9bdb6cbd10a3ac5718442af885f9d0df57e312a67b9ab1e0c8602dc941bc8be1",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 38,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000038/manifest.json",
+        "manifest_sha256": "08875ed7d4c17170b10b42e0977c93f8148e28e2ec7548beb5f39810cc34e723",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000038/public_observation.json",
+        "public_observation_sha256": "f053bdb4e575706b7ad795b172586c017068867bdd9a6e5c81444c3047971a07",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000038/side_camera.jpg",
+            "sha256": "1d3e6afe643e264c209bb8a6b988bf4300d9fd4ab061056519289aa01cd32d89",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000038/wrist_camera.jpg",
+            "sha256": "3ab2413c398b92f9de4158dc3d034e975e49d7e7380cf3749cae9ff0a18e7ae2",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 39,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000039/manifest.json",
+        "manifest_sha256": "b815dbca38e446901f2afc108d19ece46465d713bfaef11fc6eea8d104baf845",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000039/public_observation.json",
+        "public_observation_sha256": "c108726e6d53dce6566846ab6a892a45394b6b51ec2a3623199a5dfc69d4a706",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000039/side_camera.jpg",
+            "sha256": "4769f708db896431a8eefcbbeb477bde7d985199989a31af7ac586222b326934",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000039/wrist_camera.jpg",
+            "sha256": "69e3a4d76821303e891717f056f98329df211822073c78ac896ca51379ed99c8",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 40,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000040/manifest.json",
+        "manifest_sha256": "63b7dde9e03ebc4f1591362624edb3d0b7c0ae47afb0a8c9d11210e3ad49063d",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000040/public_observation.json",
+        "public_observation_sha256": "d89913917c333a2a93364b82ee84e33dab8174b74c032787f5bc1598a784be14",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000040/side_camera.jpg",
+            "sha256": "a73024742dfcf7bac62ce7b0b750ba40683139567621f8887ab6e20542a8b954",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000040/wrist_camera.jpg",
+            "sha256": "13b2594329583351ec8ed62a4ee7d6ed8fb8cdac26a5ac103f0209e305bd3fe0",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 41,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000041/manifest.json",
+        "manifest_sha256": "5bb4dba80b067c5332f3b1bd6b9555ea9f01d50844fb59993dfc5bb4dccfcaa9",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000041/public_observation.json",
+        "public_observation_sha256": "2abdd684ed359779fbd0b7ecc92345f2ffe69fc41c39c9c6fba8b89136bdd5ee",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000041/side_camera.jpg",
+            "sha256": "26143a52c3702b09394ee1d0091fb357e3eea82833f32c24f538b9bc2ca847aa",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000041/wrist_camera.jpg",
+            "sha256": "9f0745e8aca8ce05c046daaad396d336156d0cd815dbb8ad2ac2f72b1ba82345",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 42,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000042/manifest.json",
+        "manifest_sha256": "159abc5362194c1119c5a970237f10da8dc46c0232a757b611fa3bbbb50dafdd",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000042/public_observation.json",
+        "public_observation_sha256": "17a70c7c229598de151791ebae1004e7bbaf6a58d6b50b3ec696ea0233a1007a",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000042/side_camera.jpg",
+            "sha256": "50124a095bcdb171eb8bf7d8d6d69e3fc0e174713fccff95c9c266b70831b617",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000042/wrist_camera.jpg",
+            "sha256": "7856986463615399655a52e1b231206bd209f145eb8177a43a179857ab5399b0",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 43,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000043/manifest.json",
+        "manifest_sha256": "58f851ae2b18fd44b2690948b8fb2fde3473190692b3d68d93bc7052067a7b4d",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000043/public_observation.json",
+        "public_observation_sha256": "3153373d9f76112569a17648aabae4d3891832f4013409f7062799c5f682b240",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000043/side_camera.jpg",
+            "sha256": "aa00421321a927b4bbbf349c2d8a8c4d018d719a755202736a3ca382a68d4ebe",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000043/wrist_camera.jpg",
+            "sha256": "e8b3551f76e9e35f0035d308c1b8e1fa3c3e261d7fe39d6cfd4ee1dbe60ef37d",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 44,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000044/manifest.json",
+        "manifest_sha256": "00553d863b6fda63d06c97b43bd5ebe1a33e9fe697300b182fdefdb1edfa824f",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000044/public_observation.json",
+        "public_observation_sha256": "c0b2a05d3bf1eb9c7dc83acda430d34670ad1376b6d2a5cf0110c8ccd35a5ef8",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000044/side_camera.jpg",
+            "sha256": "a80e6289712c10f450becf4e5fd3cdb3c42a7f9b94e69e5784d7e8aae2865f89",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000044/wrist_camera.jpg",
+            "sha256": "296b695af6e7685a6d8153c4170c06e7c5717049687a38697364a9a365948201",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 45,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000045/manifest.json",
+        "manifest_sha256": "40af8427127f60335688340891b4a20dddb70c4b01162b2f25bc17adb9ac9fba",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000045/public_observation.json",
+        "public_observation_sha256": "7e7d534157ef1aedd98be716680f8cb285922edb730243c6f7d9a4f0a998da2c",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000045/side_camera.jpg",
+            "sha256": "969ef181c02a15bcaf77a38acf3dff38f87869249b4eefe22a3156c9a3b1b0b3",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000045/wrist_camera.jpg",
+            "sha256": "4fe91910d67fe71c584c4c6eebf6197616155c6a135d8075d9c051e2ef51dfff",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 46,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000046/manifest.json",
+        "manifest_sha256": "892ce39da76ba28cd377f80bb6a7791a8497b4789b250499fe4219556cc3ef58",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000046/public_observation.json",
+        "public_observation_sha256": "3900c8d583c7d4d8b6c17a30e342ba26ff55e47a6c50b3b8b62a22a5368b3917",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000046/side_camera.jpg",
+            "sha256": "2ef7bd8204a67f9cc6f6bb96be0e74c09b20a8e7d9df5414262c2cb5adad1a18",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000046/wrist_camera.jpg",
+            "sha256": "fdd394976e0b39ce80b27339f8221986cfcef8f68a59ac071a33911c7a2cb4ac",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 47,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000047/manifest.json",
+        "manifest_sha256": "9fefc3d303cfc04f38c3a64ee8f518aa3c5842671d798966a9f86aae380c5dcd",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000047/public_observation.json",
+        "public_observation_sha256": "da371e29d74e26f783f7fe8373759f4c727fc370adc355ca6e57eef6c0e84a9a",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000047/side_camera.jpg",
+            "sha256": "7eee300be9f18fa5111a6695d6e6e9ad5fe88df901939b87f936ce4763689abc",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000047/wrist_camera.jpg",
+            "sha256": "a494ac2165377cc6ba91e1e157fc4b239a87b85a37b30722617788f26b99fce6",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 48,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000048/manifest.json",
+        "manifest_sha256": "cbb6aef3d3a3daa80e268a6ddd5aff561711fc8249eadf06beae6a32d8c7ad60",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000048/public_observation.json",
+        "public_observation_sha256": "0a072541946a2b6d4c70d14ab307b63a23f429224145a1cc790cb3f3d0cbdadf",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000048/side_camera.jpg",
+            "sha256": "30dc1a81fc32fbe804387fa7e46dd508a406057d577653568b0cbbfa5aebafe7",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000048/wrist_camera.jpg",
+            "sha256": "f9e07e5ae1de86a09a84ac6fce4e725b9d1b4436e558ba8e387e0b4458d99126",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 49,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000049/manifest.json",
+        "manifest_sha256": "d131d6ea25dfd044de6b092595b900564c3e847d2a1a2f10a84089e6932e6054",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000049/public_observation.json",
+        "public_observation_sha256": "904ada3b49cbe5848117b86ad473da097c5000debf7534625ed8818fc4178a1f",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000049/side_camera.jpg",
+            "sha256": "0ff595627adb1f75d9fcae244a77d6cc4325301ab26705e83a7642145a157724",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000049/wrist_camera.jpg",
+            "sha256": "27475bb35cbfa8fe535bf27b99ff1ec293bb26bb5dc6ecb1f06a6e178d056f9b",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      },
+      {
+        "decision_index": 50,
+        "manifest_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000050/manifest.json",
+        "manifest_sha256": "7abfd5f1238c37c313aabc671fe7d258930f306933262d6cd713c83b0a9bb1ff",
+        "public_observation_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000050/public_observation.json",
+        "public_observation_sha256": "87d91b38612898b483bd5648f9821a47cd700880fd6e4a091c82d33fe5e57226",
+        "images": [
+          {
+            "camera_name": "side_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000050/side_camera.jpg",
+            "sha256": "8df4bd6f5281512fcc38203004074efff73c558a1fd55bd223205c06a1eefab5",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          },
+          {
+            "camera_name": "wrist_camera",
+            "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000/gpt_control/observations/decision_000050/wrist_camera.jpg",
+            "sha256": "951264140e4d2a657a3c1a2c0f93efbaf3f1ff8fef14693008e49127cbc95d7d",
+            "resolution_wh": [
+              640,
+              480
+            ],
+            "valid": true
+          }
+        ],
+        "verified": true
+      }
+    ],
+    "exact_request_wire_archive_status": "No full augmented wire manifest existed in this version. Original prompt/tools/profile and current public state/JPEG bytes are preserved. Private response reasoning groups retained in memory for prior2 turns were intentionally not serialized; complete historical request byte sequence cannot be reconstructed independently.",
+    "actual_model_weights_identity": "Unknown behind intermediary; 51 returned service labels match requested gpt-6-astra",
+    "task_language": "Pick the light cuvette from white rack slot A1 and transport it to the candidate_far_hinge internal seat of the single open instrument. Insert, transfer support, open both fingers, retreat and leave the vessel stable. The selected target is candidate_far_hinge, the internal seat farther from the lid hinge among the two seats. Nominal task geometry: loading depth 27 mm, cuvette height 67.5 mm, and 40.5 mm of the cuvette remaining above the seat entrance at the nominal loaded pose. These are static configured task goals, not measurements of the current vessel pose, insertion depth or support. Static robot calibration: TCPpose is the world pose of frame right_gripper, not the panda_hand/palm origin. The fixed transform from right_gripper coordinates into parent frame panda_hand has translation [0.0, 0.0, 0.1] metres and quaternion [0.0, 0.0, 0.0, 1.0] in wxyz order. This 100 mm frame-origin separation is not the whole-hand collision envelope. Confirm clearance for the entire hand, fingers and held vessel in both camera views; this fixed robot calibration provides no current object or obstacle pose, safe height or motion path."
+  },
+  "information_boundary": {
+    "allowed": [
+      "Current two RGB cameras",
+      "Actual robot joints9/TCP/opening/force limit",
+      "Camera calibration and timestamps",
+      "Public bilateral finger contact readings",
+      "Static task geometry and slot/seat identities",
+      "Generic robot execution/IK/safety receipts"
+    ],
+    "evaluation_only_not_sent": [
+      "Object/vessel ground-truth pose",
+      "Exact target error or insertion depth",
+      "Teacher waypoints",
+      "Progress stage/effective insertion",
+      "Independent scorer/reward"
+    ],
+    "special_tools": [],
+    "teacher_used": false,
+    "object_truth_used": false,
+    "phase_assistance": "No expert task stage or automatic motion macro. Existing generic continuous IK, contact-hold gripper mechanics and independent physical safety guards remain environment execution features. No task metadata/phase can be selected by public actions."
+  },
+  "current_compatibility": {
+    "source_comparisons": [
+      {
+        "path": "policy/backends/cubence.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:policy/backends/cubence.py",
+        "historical_sha256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+        "current_sha256": "faad038ba6408037a3c824983f00358c11f4840b63d25df91f276dfdb23bf594",
+        "exact_bytes_unchanged": false
+      },
+      {
+        "path": "policy/backends/cubence_tools.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:policy/backends/cubence_tools.py",
+        "historical_sha256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+        "current_sha256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "policy/backends/cubence_project_v1_1_tools.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:policy/backends/cubence_project_v1_1_tools.py",
+        "historical_sha256": "50dbcf18cb613ae98b403cbc7ba698ffb63fc044b2810ec7ccda45f68b6008d4",
+        "current_sha256": "0f196f9e541228c2c1ceb1b9c6a2cf17e840a2f1a0f24b21643094bc8fd92614",
+        "exact_bytes_unchanged": false
+      },
+      {
+        "path": "demos/lab_cuvette_project_v1_1/environment.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_project_v1_1/environment.py",
+        "historical_sha256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+        "current_sha256": "b32f9c83ed2085987648843ecc833fc5143b521d0afea1a2b955c25d1e0dd48d",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "tasks/lab_cuvette_loading_project_v1_1.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:tasks/lab_cuvette_loading_project_v1_1.py",
+        "historical_sha256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+        "current_sha256": "147f0a12af1f41b76dc21063a8f5ef3021ae8edf9ecd1c37e6cd4a3bab119a11",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "demos/lab_cuvette_project_v1_1/gripper_hold.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_project_v1_1/gripper_hold.py",
+        "historical_sha256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+        "current_sha256": "e2b65aaf35756a1172e0a64793851fd28757530bd4d9ba22db82280335ebfbc6",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "demos/lab_cuvette_project_v1_1/robot_tracking.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_project_v1_1/robot_tracking.py",
+        "historical_sha256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+        "current_sha256": "874c54f512816f13f4d9832a2ab34d913539d7189b1af7047fd09614b3846917",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "demos/lab_cuvette_project_v1_1/continuous_ik.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_project_v1_1/continuous_ik.py",
+        "historical_sha256": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+        "current_sha256": "1ba7471948ec235adeac50a7ff974c2a44b333f7a34d0d7ae0700f8d248a221a",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "demos/lab_cuvette_project_v1_1/scorer.py",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:demos/lab_cuvette_project_v1_1/scorer.py",
+        "historical_sha256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+        "current_sha256": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+        "historical_sha256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+        "current_sha256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+        "exact_bytes_unchanged": true
+      },
+      {
+        "path": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+        "historical_git_path": "63410bf9258ba2f9bd0af4d517194523fca6617c:config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+        "historical_sha256": "80796efeabc3e434b4b0790d6df79fe88abcb0970e17d953ccee98299087db00",
+        "current_sha256": "a8f24dcdcd603b444364acac0cddfa49535d00a34145a55ce87e426c812f33ad",
+        "exact_bytes_unchanged": false
+      }
+    ],
+    "AST_comparisons": {
+      "ProjectV11RobotTools": true,
+      "_public_receipt": true
+    },
+    "differences": [
+      {
+        "file": "policy/backends/cubence.py",
+        "change": "Optional config_validator constructor injection added; default still the original validate_config. No default transport/action change."
+      },
+      {
+        "file": "policy/backends/cubence_project_v1_1_tools.py",
+        "change": "Optional P6-P9 routing and helper metadata added. This original profile lacks all extension keys, so it uses the original v4 prompt/class/schema and observation path."
+      },
+      {
+        "file": "config/lab_cuvette_loading/Project_v1_1/standard.yaml",
+        "change": "Teacher controller version labels v6→v7 in two fields. External GPT does not execute the Teacher controller."
+      }
+    ],
+    "explicit_profile_required": "Do not select launcher default cubence_gpt6.json (context12/512low) or P9. Select context4_640high or an independent byte-traceable copy.",
+    "restoration_scope": "Restoring the exact policy profile/prompt/tools does not replay the51 old actions and does not reproduce stochastic responses or supplier model weights. New runs must record their actual current environment/version and budget."
+  },
+  "historical_budget_binding": {
+    "ledger_absolute_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+    "historical_label_prefix": "policy:28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d:",
+    "historical_attempt_count": 51,
+    "historical_attempts_canonical_sha256": "2c766e23152775a92af220a13f499afe21085b96a695f6b8e546e227db5b1bdf",
+    "historical_estimated_usd": 4.17499,
+    "historical_max_input_reservation_tokens": 48879,
+    "current_remaining_budget_not_granted_by_this_audit": true,
+    "scope": "Historical profile caps are recorded; this audit grants or changes no allowance and never constructs a client."
+  },
+  "checks": {
+    "controller_canonical_hash_matches_original_summary": true,
+    "provider_profile_object_matches_historical_git": true,
+    "provider_profile_object_matches_current_file": true,
+    "profile_raw_bytes_equal_historical_git_and_current": true,
+    "current_v4_SYSTEM_PROMPT_exactly_equal_historical": true,
+    "current_tool_schema_exactly_equal_historical": true,
+    "current_v4_class_AST_unchanged": true,
+    "all_public_observation_and_JPEG_artifacts_hash_verified": true,
+    "forbidden_exact_key_scan_no_matches": true,
+    "51_trace_models_match_gpt6_astra": true,
+    "ledger_51_attempts_match_original_summary": true,
+    "runtime_commit_evidence_agrees": true
+  },
+  "passed": true,
+  "source_records_modified": false,
+  "network_model_calls_by_this_audit": 0,
+  "GPU_runs_by_this_audit": 0,
+  "independent_restoration": {
+    "namespace": "policy.backends.gpt_debug04_v1.vendor",
+    "manifest_path": "policy/backends/gpt_debug04_v1/source_manifest.json",
+    "manifest_sha256": "2b41a1872b1eec7ee459b6aa360443de9a53f2258249081e25efe39791345602",
+    "provider_config_path": "config/lab_cuvette_loading/Gpt_debug04_v1/provider.json",
+    "provider_config_sha256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+    "shared_policy_or_P9_modified": false
+  }
+}

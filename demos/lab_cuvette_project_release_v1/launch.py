@@ -57,7 +57,8 @@ def ensure_audit(cfg, output):
     return json.loads((cache / latest['audit_relative_path']).read_text())
 
 
-def main(argv=None):
+def main(argv=None, *, gpt_client_factory=None, gpt_episode_runner=None,
+         gpt_profile_identity=None):
     args = parser().parse_args(argv)
     if args.episodes < 1 or args.episodes > 20:
         raise ValueError('episodes must be1..20; one sequential Isaac process')
@@ -101,6 +102,8 @@ def main(argv=None):
         resolved_config_sha256=hashlib.sha256((output / 'launch_config.yaml').read_bytes()).hexdigest(),
         asset_revision=asset_lock['revision'], version=cfg.version, record_mode=cfg.release.record_mode,
         record_purpose=cfg.release.record_purpose)
+    if gpt_profile_identity is not None:
+        identity['gpt_profile_identity'] = gpt_profile_identity
     (output / 'launch_identity.json').write_text(json.dumps(identity, indent=2) + '\n')
     audit = ensure_audit(cfg, output)
     (output / 'geometry_audit.json').write_text(json.dumps(audit, indent=2) + '\n')
@@ -150,10 +153,13 @@ def main(argv=None):
             return 0
         client = None
         if args.backend == 'gpt6':
-            from policy.backends.cubence import CubenceClient, BudgetLedger, load_config
-            provider = load_config(args.provider_config)
-            ledger = args.budget_ledger
-            client = CubenceClient(provider, BudgetLedger(ledger, provider))
+            if gpt_client_factory is not None:
+                client = gpt_client_factory(args.provider_config, args.budget_ledger)
+            else:
+                from policy.backends.cubence import CubenceClient, BudgetLedger, load_config
+                provider = load_config(args.provider_config)
+                ledger = args.budget_ledger
+                client = CubenceClient(provider, BudgetLedger(ledger, provider))
         for index in range(args.episodes):
             facade.reset(args.seed + index, dict(mode='standard', teacher=args.backend == 'teacher',
                 policy_id='truth_teacher' if args.backend == 'teacher' else 'cubence_gpt6_astra',
@@ -176,7 +182,10 @@ def main(argv=None):
                 camera_qa.capture(facade,teacher.phase,event='terminal')
                 env._write(env.episode_dir / 'teacher_events.json', teacher.events)
             else:
-                from policy.backends.cubence_project_v1_1_tools import run_episode
+                if gpt_episode_runner is None:
+                    from policy.backends.cubence_project_v1_1_tools import run_episode
+                else:
+                    run_episode = gpt_episode_runner
                 run_episode(facade, client, env.episode_dir / 'gpt_control', max_calls=args.max_calls)
             if not env.ended:
                 env.finalize_episode('APPLICATION_INTERRUPTED', 'PROCESS_INTERRUPTED')

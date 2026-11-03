@@ -1,0 +1,267 @@
+{
+  "progress_schema_version": "labsim.Progress_v1_2.v1",
+  "progress_evaluator_version": "Progress_v1_2.causal_physics.v1",
+  "parameters_version": "Progress_v1.2",
+  "visualization_version": "Progress_v1.2.portable.v1",
+  "task": "lab_cuvette_loading",
+  "scene_version": "Project_v1_1.standard.v1",
+  "asset_id": "cuvette_xy_1000",
+  "asset_selection": {
+    "schema": "labsim.Project_v1.atomic_asset_selection.v1",
+    "asset_id": "cuvette_xy_1000",
+    "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+    "source_path": "assets/lab_cuvette_loading/V0_demo04/vessel_125_mm.usda",
+    "source_sha256": "4ccd39708e34d9851dbe17db293734c4882ea9f6e660df83114e120cb0c2f3da",
+    "registry_path": "/tmp/labsim-project-v1-1-clean-assets-20261027/bb880f098180c291f6f65995f969d48047207067/assets/lab_cuvette_loading/Size_v1/registry.json",
+    "registry_sha256": "c619f9fb914509cc791f2b586df186b92be309df31cb95134dc9507256c695e4",
+    "original_rack_and_instrument_preserved": true,
+    "target_offset_automatically_adjusted": false,
+    "mass_distribution_assumption": "Uniform closed visual material volume, cavity excluded; fixed total mass means numerical density varies; no constant-density claim",
+    "validation_scope": "Registered USD/source/sidecar hashes and atomic geometric/mass/contact metadata; independent geometry, cooked collision and physical execution still required"
+  },
+  "geometry": {
+    "source_floor_world_m": [
+      -0.085,
+      -0.175,
+      0.743
+    ],
+    "source_rim_world_z_m": 0.768,
+    "source_rotation_world": [
+      [
+        6.123233995736766e-17,
+        1.0,
+        0.0
+      ],
+      [
+        -1.0,
+        6.123233995736766e-17,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "source_inner_m": 0.016,
+    "target_loading_floor_world_m": [
+      0.21236964673703734,
+      -0.14926553560697634,
+      0.887
+    ],
+    "target_original_seat_floor_world_m": [
+      0.21237064673703734,
+      -0.14991553560697635,
+      0.887
+    ],
+    "target_rotation_world": [
+      [
+        6.123233995736766e-17,
+        -1.0,
+        0.0
+      ],
+      [
+        1.0,
+        6.123233995736766e-17,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "target_inner_m": 0.0126,
+    "target_loading_offset_local_m": [
+      0.00065,
+      1e-06,
+      0
+    ],
+    "target_depth_m": 0.027,
+    "preinsert_above_rim_m": 0.002,
+    "tcp_local_translation_m": [
+      0,
+      0,
+      0.1
+    ],
+    "tcp_local_quaternion_wxyz": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "vessel_body_local_bounds_m": [
+      [
+        -0.00500000175088644,
+        -0.00500000175088644,
+        0.0
+      ],
+      [
+        0.00500000175088644,
+        0.00500000175088644,
+        0.06749999523162842
+      ]
+    ],
+    "vessel_bottom_reference_body_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "vessel_top_reference_body_m": [
+      0.0,
+      0.0,
+      0.06749999523162842
+    ],
+    "grasp_reference_body_m": [
+      0.0,
+      0.0,
+      0.053
+    ],
+    "legal_grasp_band_body_z_m": [
+      0.048,
+      0.057999999999999996
+    ],
+    "grasp_tcp_rotation_world": [
+      [
+        6.123233995736766e-17,
+        -1.0,
+        0.0
+      ],
+      [
+        -1.0,
+        -6.123233995736766e-17,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    ],
+    "allowed_yaw_symmetry_order": 1,
+    "gripper_clearance_scope": "actual panda_hand and two finger link input-vertex AABB separation lower bound; cooked geometry unverified"
+  },
+  "thresholds": {
+    "approach_position_m": 0.005,
+    "approach_orientation_rad": 0.17453292519943295,
+    "bilateral_force_N": 0.01,
+    "bilateral_hold_s": 0.1,
+    "grasp_loss_hold_s": 0.2,
+    "source_clearance_m": 0.002,
+    "lift_started_m": 0.001,
+    "held_transport_displacement_m": 0.05,
+    "preinsert_region_radius_m": 0.003,
+    "release_hold_s": 0.05,
+    "support_hold_s": 0.0,
+    "sample_gap_tolerance_factor": 1.6,
+    "grasp_translation_m": 0.0002,
+    "grasp_rotation_rad": 0.017453292519943295,
+    "alignment_lateral_m": 0.0001,
+    "alignment_tilt_rad": 0.002617993877991494,
+    "alignment_yaw_rad": 0.003490658503988659,
+    "support_min_N": 0.1,
+    "support_gap_m": 5e-05,
+    "overlap_m": 5e-05,
+    "retreat_clearance_m": 0.04,
+    "stable_duration_s": 3.0,
+    "stable_position_drift_m": 0.0002,
+    "stable_orientation_change_rad": 0.017453292519943295,
+    "upright_after_release_rad": 0.017453292519943295,
+    "stall_window_s": 0.3,
+    "stall_command_down_min_m": 0.00015,
+    "stall_actual_down_max_m": 2.5e-05,
+    "finger_open_min_m": 0.006,
+    "maximum_evidence_gap_s": 0.006666666666666667
+  },
+  "normalization": {
+    "approach_distance_scale_m": 0.1,
+    "approach_rotation_scale_rad": 0.5235987755982988,
+    "preinsert_distance_scale_m": 0.35,
+    "alignment_lateral_scale_m": 0.003,
+    "alignment_tilt_scale_rad": 0.08726646259971647,
+    "alignment_yaw_scale_rad": 0.17453292519943295,
+    "function": "legacy continuous retained per-stage; effective approach uses reciprocal 1/(1+error/scale), other effective progress uses explicit physical lineage gates",
+    "stage_coverage_weights": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "approach_quality_function": "reciprocal: 1 / (1 + nonnegative_error / positive_scale)",
+    "extraction_depth_scale_m": 0.025000000000000022
+  },
+  "sources": {
+    "geometry.source_floor_world_m": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).source_floor",
+    "geometry.source_rim_world_z_m": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).source_rim_z",
+    "geometry.source_rotation_world": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).rack_rotation",
+    "geometry.source_inner_m": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).source_inner_m",
+    "geometry.target_loading_floor_world_m": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).target_floor",
+    "geometry.target_original_seat_floor_world_m": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).seat_original_floor",
+    "geometry.target_rotation_world": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).instrument_rotation",
+    "geometry.target_inner_m": "demos.lab_cuvette_size_v1.scene.layout(task_cfg).target_inner_m",
+    "geometry.target_loading_offset_local_m": "task.geometry.target_loading_offset_local_m; original seat remains fixed",
+    "geometry.target_depth_m": "task.geometry.target_depth_m",
+    "geometry.preinsert_above_rim_m": "task.control.preinsert_bottom_above_rim_m; fixed diagnostic reference",
+    "geometry.tcp_local_translation_m": "task.robot.tcp_local_m; panda_hand to right_gripper",
+    "geometry.tcp_local_quaternion_wxyz": "task.robot.tcp_quaternion_wxyz; validated by capture Lula FK",
+    "geometry.vessel_body_local_bounds_m": "/tmp/labsim-project-v1-1-clean-assets-20261027/bb880f098180c291f6f65995f969d48047207067/assets/lab_cuvette_loading/Size_v1/registry.json: assets.cuvette_xy_1000.actual_body_bounds_m; registered asset SHA matches episode binding",
+    "geometry.vessel_bottom_reference_body_m": "/tmp/labsim-project-v1-1-clean-assets-20261027/bb880f098180c291f6f65995f969d48047207067/assets/lab_cuvette_loading/Size_v1/registry.json: assets.cuvette_xy_1000.actual_body_bounds_m; registered asset SHA matches episode binding; bottom-plane XY centre, not USD-root assumption",
+    "geometry.vessel_top_reference_body_m": "/tmp/labsim-project-v1-1-clean-assets-20261027/bb880f098180c291f6f65995f969d48047207067/assets/lab_cuvette_loading/Size_v1/registry.json: assets.cuvette_xy_1000.actual_body_bounds_m; registered asset SHA matches episode binding; top-plane XY centre",
+    "geometry.grasp_reference_body_m": "task.robot.grasp_above_bottom_m; configured legal grip reference, not measured pressure centre",
+    "geometry.legal_grasp_band_body_z_m": "Progress_v1 new definition: +/-5mm around configured grip height",
+    "geometry.grasp_tcp_rotation_world": "task.robot.gripper_yaw_deg; documented static Rz(yaw)Rx(pi), not teacher phase",
+    "geometry.allowed_yaw_symmetry_order": "Progress_v1 conservative physical frame; square appearance does not imply equivalent seat orientations",
+    "geometry.gripper_clearance_scope": "PhysicsRecorder.hand_clearance; TCP distance is auxiliary only",
+    "thresholds.approach_position_m": "Progress_v1 new diagnostic definition",
+    "thresholds.approach_orientation_rad": "Progress_v1 new diagnostic definition",
+    "thresholds.bilateral_force_N": "original independent scorer literal",
+    "thresholds.bilateral_hold_s": "original independent scorer literal",
+    "thresholds.grasp_loss_hold_s": "original independent scorer literal",
+    "thresholds.source_clearance_m": "original independent scorer literal",
+    "thresholds.lift_started_m": "original independent scorer literal",
+    "thresholds.held_transport_displacement_m": "original independent scorer literal",
+    "thresholds.preinsert_region_radius_m": "Progress_v1 new diagnostic definition",
+    "thresholds.release_hold_s": "original independent scorer literal",
+    "thresholds.support_hold_s": "Progress_v1 new diagnostic definition",
+    "thresholds.sample_gap_tolerance_factor": "Progress_v1 new diagnostic definition",
+    "thresholds.grasp_translation_m": "independent scorer reads task.gripper.max_relative_position_drift_m (default)",
+    "thresholds.grasp_rotation_rad": "independent scorer reads task.gripper.max_relative_orientation_drift_deg (default)",
+    "thresholds.alignment_lateral_m": "independent scorer reads task.control.alignment_budget_m",
+    "thresholds.alignment_tilt_rad": "independent scorer reads task.control.tilt_budget_deg",
+    "thresholds.alignment_yaw_rad": "independent scorer reads task.control.yaw_budget_deg",
+    "thresholds.support_min_N": "independent scorer reads task.demo_release.min_support_N",
+    "thresholds.support_gap_m": "independent scorer reads task.demo_release.bottom_distance_m",
+    "thresholds.overlap_m": "independent scorer reads task.acceptance.steady_source_penetration_m",
+    "thresholds.retreat_clearance_m": "independent scorer reads task.acceptance.actual_retreat_clearance_m",
+    "thresholds.stable_duration_s": "independent scorer reads task.demo_release.observe_s",
+    "thresholds.stable_position_drift_m": "independent scorer reads task.demo_release.position_drift_m",
+    "thresholds.stable_orientation_change_rad": "independent scorer reads task.demo_release.orientation_change_deg",
+    "thresholds.upright_after_release_rad": "independent scorer reads task.acceptance.upright_after_release_deg",
+    "thresholds.stall_window_s": "independent scorer reads task.control.jam_detection.window_s",
+    "thresholds.stall_command_down_min_m": "independent scorer reads task.control.jam_detection.command_down_min_m",
+    "thresholds.stall_actual_down_max_m": "independent scorer reads task.control.jam_detection.vessel_down_max_m",
+    "thresholds.finger_open_min_m": "independent scorer: task.scorer.finger_joint_open_min_m or nominal vessel X/2 +1mm",
+    "thresholds.maximum_evidence_gap_s": "input evidence cadence (metadata.sample_interval_s or physics.hz) times declared gap tolerance",
+    "normalization.approach_distance_scale_m": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.approach_rotation_scale_rad": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.preinsert_distance_scale_m": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.alignment_lateral_scale_m": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.alignment_tilt_scale_rad": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.alignment_yaw_scale_rad": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.function": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.stage_coverage_weights": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.approach_quality_function": "Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)",
+    "normalization.extraction_depth_scale_m": "source rim world Z minus source floor world Z; diagnostic travel normalization"
+  },
+  "criterion_scope": "Alignment gates are the existing scorer loaded-pose-candidate checks that read control budgets. They are not a new final accuracy claim. Original final scorer remains authoritative.",
+  "reward_adapter": {
+    "enabled": false,
+    "original_reward_unchanged": true
+  },
+  "config_hash": "75f8a85f6ba1edd59e7fa4e0b5b2e5f66417c838297a2eb240a076748c18a015"
+}

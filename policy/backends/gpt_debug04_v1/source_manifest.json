@@ -1,0 +1,90 @@
+{
+  "schema": "labsim.Gpt_debug04_v1.vendor_source_manifest.v1",
+  "historical_runtime_commit": "63410bf9258ba2f9bd0af4d517194523fca6617c",
+  "original_episode_id": "28bd2fc2-7bd7-44ee-9fb6-aaff53cbc99d",
+  "original_episode_absolute_path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_04/episode_0000",
+  "copied_utc": "2026-11-03T12:50:57.841355+00:00",
+  "files": [
+    {
+      "source_git_path": "policy/backends/cubence.py",
+      "destination": "policy/backends/gpt_debug04_v1/vendor/cubence.py",
+      "source_git_blob": "10714fadaeb96074bdf2a7cbd0be452931ee9298",
+      "sha256": "319c3105eaf3e24016d20fcffed78b988da3169c9d914e604107ac865777dfda",
+      "bytes": 16380,
+      "unchanged_original_bytes": true,
+      "relative_imports": []
+    },
+    {
+      "source_git_path": "policy/backends/cubence_tools.py",
+      "destination": "policy/backends/gpt_debug04_v1/vendor/cubence_tools.py",
+      "source_git_blob": "818493a96f90d5831ffbce8363cf460e7c6d2068",
+      "sha256": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "bytes": 36441,
+      "unchanged_original_bytes": true,
+      "relative_imports": [
+        {
+          "level": 1,
+          "module": "cubence",
+          "names": [
+            "CubenceClient",
+            "ProviderError",
+            "canonical_hash",
+            "response_tools"
+          ]
+        }
+      ]
+    },
+    {
+      "source_git_path": "policy/backends/cubence_project_v1_1_tools.py",
+      "destination": "policy/backends/gpt_debug04_v1/vendor/cubence_project_v1_1_tools.py",
+      "source_git_blob": "6164b12668c6e184f6e9178866f9965675ecd980",
+      "sha256": "50dbcf18cb613ae98b403cbc7ba698ffb63fc044b2810ec7ccda45f68b6008d4",
+      "bytes": 14190,
+      "unchanged_original_bytes": true,
+      "relative_imports": [
+        {
+          "level": 1,
+          "module": "cubence",
+          "names": [
+            "ProviderError"
+          ]
+        },
+        {
+          "level": 1,
+          "module": "cubence_tools",
+          "names": [
+            "GenericRobotTools",
+            "SYSTEM_PROMPT",
+            "backend_failure_class",
+            "json_safe",
+            "run_episode"
+          ]
+        }
+      ]
+    }
+  ],
+  "provider_config": {
+    "source_git_path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context4_640high.json",
+    "source_git_blob": "7d351c8ce3fdf17a53f5908db8bfe4d98bffb235",
+    "destination": "config/lab_cuvette_loading/Gpt_debug04_v1/provider.json",
+    "sha256": "650301fda097d73e41c5520438228d66acf4bab0437b6d351464046cf3c3a2d5",
+    "bytes": 1263,
+    "unchanged_original_bytes": true
+  },
+  "dependency_closure": {
+    "relative_policy_modules": [
+      "cubence",
+      "cubence_tools",
+      "cubence_project_v1_1_tools"
+    ],
+    "closed_within_vendor_package": true,
+    "external_runtime_dependencies": [
+      "Python3 stdlib",
+      "Pillow for observation JPEG encoding",
+      "Existing environment facade injected by caller; no Isaac import in vendor"
+    ],
+    "no_shared_policy_imports": true
+  },
+  "restoration_scope": "Exactly copied original policy and original provider JSON. New namespace __init__ files are metadata only. No shared policy, P9, CLI, environment, task, physics, reward or scorer edited. No API calls, GPU runs or budget changes by this copy.",
+  "financial_bridge_contract": "If separately authorized, caller must use vendor CubenceClient/BudgetLedger/ProviderError consistently. Original provider.json remains unchanged; any approved financial-cap override belongs in a separately recorded bridge, never in these vendored files."
+}
