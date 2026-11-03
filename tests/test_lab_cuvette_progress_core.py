@@ -301,3 +301,17 @@ def test_reject_nonfinite_and_nonmonotonic_time():
         evaluator.update({'t': 0.})
     with pytest.raises(ValueError, match='finite'):
         evaluator.update({'t': float('nan')})
+
+@pytest.mark.parametrize('reason,expected', [
+    ('SERVICE_TIMEOUT', 'service_interruption'),
+    ('PROVIDER_TIMEOUT', 'service_interruption'),
+    ('TASK_TIME_LIMIT', 'timeout'),
+    ('ROBOT_ENVIRONMENT_COLLISION', 'safety_stop'),
+    ('PROCESS_INTERRUPTED', 'interruption'),
+])
+def test_final_domain_distinguishes_service_deadline_from_task_limit(reason, expected):
+    evaluator, snapshots = evaluate(Trace().add(held=False, n=2).rows)
+    final = evaluator.finalize({'termination_reason': reason})
+    assert final['termination_domain'] == expected
+    assert final['termination']['termination_reason'] == reason
+    assert final['last_snapshot'] == snapshots[-1]

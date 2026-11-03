@@ -550,8 +550,11 @@ class ProgressEvaluator:
         if explicit:
             return explicit
         text = (str(termination.get('termination_reason', ''))+' '+str(termination.get('failure_type', ''))).upper()
-        for words, domain in [(['TIMEOUT', 'TIME_LIMIT'], 'timeout'), (['SAFETY', 'COLLISION', 'GEOMETRY_VIOLATION'], 'safety_stop'),
-            (['SERVICE', 'MODEL_ERROR', 'PROVIDER'], 'service_interruption'), (['INTERRUPT', 'PROCESS_ABORT', 'RESET_', 'ENVIRONMENT_CLOSED'], 'interruption'),
+        # A service deadline is a service interruption, distinct from the
+        # environment's task time limit. Keep the original reason alongside it.
+        for words, domain in [(['SERVICE', 'MODEL_ERROR', 'PROVIDER'], 'service_interruption'),
+            (['SAFETY', 'COLLISION', 'GEOMETRY_VIOLATION'], 'safety_stop'), (['TIMEOUT', 'TIME_LIMIT'], 'timeout'),
+            (['INTERRUPT', 'PROCESS_ABORT', 'RESET_', 'ENVIRONMENT_CLOSED'], 'interruption'),
             (['EXECUTOR', 'TRACKING_ERROR', 'CONTROL_OR_IK'], 'executor_failure'), (['SIMULATION', 'NONFINITE'], 'simulation_failure'),
             (['RECORDING', 'WRITER'], 'recording_failure')]:
             if any(word in text for word in words):
