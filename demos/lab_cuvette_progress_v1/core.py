@@ -565,20 +565,30 @@ class ProgressEvaluator:
         if snapshot['stages']['stable_complete']['current_satisfied'] is True:
             return None
         milestone = self._milestones
-        # This is an unfulfilled requirement, never a fabricated failure fact.
-        if not milestone['grasp']['ever_achieved']:
-            code, stage, requirement = 'GRASP_NOT_ESTABLISHED', 'grasp', 'establish a measured bilateral grasp'
-        elif snapshot['hold_state'] == 'unsupported_or_lost' and not self._support_committed:
-            code, stage, requirement = 'GRASP_NOT_ESTABLISHED', 'grasp', 'recover a supported or held object before continuing'
-        elif not milestone['extract']['ever_achieved']:
+        held = snapshot['hold_evidence']['gripper_held']
+        supported = snapshot['hold_evidence']['target_supported']
+        # finalize closes the active grip before calling this method. The last
+        # causal snapshot identifies its attempt without borrowing another
+        # attempt's historical milestones or relying on that cleared pointer.
+        attempt = next((a for a in reversed(self.attempts)
+            if a['attempt_id'] == snapshot['attempt_id']), None)
+        released_attempt = (self.attempts[-1] if self.attempts and
+            self.attempts[-1]['ended_by'] == 'legal_target_support_release' else None)
+        # This is an unfulfilled current requirement, never a failure fact.
+        # A legal release on the source needs a fresh grasp. A legal release on
+        # the target proceeds through support/release/retreat/stability gates.
+        if supported is not True and held is not True and released_attempt is None:
+            code, stage, requirement = 'GRASP_NOT_ESTABLISHED', 'grasp', 'verify or re-establish a measured bilateral grasp'
+        elif supported is not True and held is True and (attempt is None or not attempt['source_clear_confirmed'] or
+                snapshot['stages']['extract']['current_satisfied'] is not True):
             code, stage, requirement = 'EXTRACTION_NOT_COMPLETED', 'extract', 'clear source rim with the complete tilted vessel envelope while held'
-        elif not milestone['transport']['ever_achieved']:
+        elif supported is not True and held is True and (not attempt['held_transport_confirmed'] or not attempt['preinsert_region_reached']):
             code, stage, requirement = 'TRANSPORT_NOT_COMPLETED', 'transport', 'reach fixed preinsert region with same-attempt held-object evidence'
-        elif not milestone['align']['ever_achieved']:
+        elif supported is not True and held is True and snapshot['stages']['align']['current_satisfied'] is not True:
             code, stage, requirement = 'ALIGNMENT_NOT_COMPLETED', 'align', 'satisfy measured loading-frame lateral, tilt and full-yaw gates'
-        elif not milestone['insert']['ever_achieved']:
+        elif supported is not True and held is True and snapshot['stages']['insert']['current_satisfied'] is not True:
             code, stage, requirement = 'INSERTION_NOT_COMPLETED', 'insert', 'reach requested depth with valid target, posture and route evidence'
-        elif snapshot['hold_evidence']['target_supported'] is not True:
+        elif supported is not True:
             code, stage, requirement = 'SUPPORT_TRANSFER_NOT_COMPLETED', 'support_transfer', 'establish correct-target classified bottom support'
         elif milestone['released']['current_satisfied'] is not True:
             code, stage, requirement = 'RELEASE_NOT_COMPLETED', 'release_retreat', 'open both actual fingers and lose both contacts under legal support'

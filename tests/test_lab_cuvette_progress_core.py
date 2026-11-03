@@ -174,6 +174,33 @@ def test_retry_has_new_relative_reference_and_preserves_failed_attempt():
     assert len(result['failure_observation']) == 1
 
 
+def test_unfinished_requirement_uses_current_retry_not_previous_route_milestones():
+    trace = Trace().held_route().add((.15, 0., .15), held=False, n=7)
+    trace.add((0., 0., .00002), held=False, n=2).add(n=8)
+    evaluator, snapshots = evaluate(trace.rows)
+    result = evaluator.finalize({'termination_reason': 'TIMEOUT'})
+    assert snapshots[-1]['current_stage'] == 'extract'
+    assert snapshots[-1]['hold_state'] == 'gripper_held'
+    assert result['attempts'][-1]['attempt_id'] == 2
+    assert result['attempts'][-1]['source_clear_confirmed'] is False
+    assert result['milestones']['align']['ever_achieved'] is True
+    assert result['unfinished_requirement']['code'] == 'EXTRACTION_NOT_COMPLETED'
+    assert result['unfinished_requirement']['stage'] == 'extract'
+    assert result['failure_observation'][0]['attempt_id'] == 1
+
+
+def test_release_back_on_source_requires_new_grasp_despite_historical_grasp():
+    evaluator, snapshots = evaluate(Trace().add(n=8).add(held=False, n=7).rows)
+    result = evaluator.finalize({'termination_reason': 'TIMEOUT'})
+    assert snapshots[-1]['hold_state'] == 'source_supported'
+    assert snapshots[-1]['attempt_id'] is None
+    assert result['milestones']['grasp']['ever_achieved'] is True
+    assert result['attempts'][-1]['ended_by'] == 'released_on_source_support'
+    assert result['unfinished_requirement']['code'] == 'GRASP_NOT_ESTABLISHED'
+    assert result['unfinished_requirement']['stage'] == 'grasp'
+    assert result['failure_observation'] == []
+
+
 @pytest.mark.parametrize('missing', ['finger_contact_N', 'cup_in_hand_position_m', 'object_quaternion_wxyz'])
 def test_missing_contact_or_pose_remains_unknown(missing):
     rows = Trace().add(n=8).rows
@@ -246,6 +273,10 @@ def test_post_transfer_upright_gate_is_original_release_gate_not_alignment_budge
     assert snapshots[-1]['stages']['align']['current_satisfied'] is False
     assert snapshots[-1]['hold_state'] == 'target_supported'
     assert evaluator.finalize()['progress_complete'] is True
+    # Target support already acquired also takes priority while fingers remain
+    # closed: the next current requirement is release, not renewed alignment.
+    evaluator, _ = evaluate(Trace().seated().add((.3, 0., .12), support=.2, tilt_deg=.5, n=3).rows)
+    assert evaluator.finalize()['unfinished_requirement']['code'] == 'RELEASE_NOT_COMPLETED'
 
 
 def test_depth_stall_without_executed_intent_is_unknown_not_jam():
