@@ -1,0 +1,116 @@
+{
+  "schema": "labsim.Progress_v1.unfinished_retry_fix.v1",
+  "scope": "Synthetic CPU counterexamples only; no simulation or formal demonstration/index data",
+  "implementation_change": "Only ProgressEvaluator._unfinished changes runtime behavior; update, event generation, config, thresholds, geometry and version constants are unchanged.",
+  "changed_evaluator_methods": [
+    "_unfinished"
+  ],
+  "unchanged_update_ast_sha256": "e9feda8bc49a945a537a01b6ba3f29d045a828c1ce052c538c8381330c6833ea",
+  "unchanged_parameter_and_geometry_files_sha256": {
+    "demos/lab_cuvette_progress_v1/config.py": "b884833cb458863578b1f4f937817c89f4a7d2e4d762f9dcf15177fec669ef7d",
+    "demos/lab_cuvette_progress_v1/geometry.py": "cae60dceea9eb1bf2e10d052fdf0c3528a04902a61c0dafedf0a16a9a00be988",
+    "config/lab_cuvette_loading/Progress_v1/progress.json": "3676894476a880918094dc39e697a6e4fa7d5df424494986bb78693b41e1af20"
+  },
+  "active_physical_run_scope": "The initial 289d5d2 physical run was interrupted before publication and is not admitted. The replacement normal Teacher regression runs clean commit 913af8a5989dd328d22752a4bba6431339094306, containing this summary correction. Final source later distinguishes service deadlines in terminal-domain analysis; no update/config/event/physical-control change.",
+  "cases": [
+    {
+      "case": "retry_held_but_still_in_source",
+      "expected_unfinished": "EXTRACTION_NOT_COMPLETED",
+      "before_unfinished": {
+        "code": "INSERTION_NOT_COMPLETED",
+        "stage": "insert",
+        "requirement": "reach requested depth with valid target, posture and route evidence",
+        "available": true
+      },
+      "after_unfinished": {
+        "code": "EXTRACTION_NOT_COMPLETED",
+        "stage": "extract",
+        "requirement": "clear source rim with the complete tilted vessel envelope while held",
+        "available": true
+      },
+      "current_stage": "extract",
+      "hold_state": "gripper_held",
+      "current_attempt_id": 2,
+      "historical_milestones": {
+        "approach_grasp": true,
+        "grasp": true,
+        "extract": true,
+        "transport": true,
+        "align": true,
+        "insert": false,
+        "support_transfer": false,
+        "release_retreat": false,
+        "stable_complete": false
+      },
+      "attempt_outcomes": [
+        {
+          "attempt_id": 1,
+          "outcome": "failure",
+          "ended_by": "unsupported_grasp_loss",
+          "source_clear_confirmed": true,
+          "preinsert_region_reached": true
+        },
+        {
+          "attempt_id": 2,
+          "outcome": "incomplete",
+          "ended_by": "episode_terminated:timeout",
+          "source_clear_confirmed": false,
+          "preinsert_region_reached": false
+        }
+      ],
+      "failure_observation_codes": [
+        "GRASP_LOST_DURING_TRANSPORT"
+      ],
+      "passed": true
+    },
+    {
+      "case": "release_back_on_source_support",
+      "expected_unfinished": "GRASP_NOT_ESTABLISHED",
+      "before_unfinished": {
+        "code": "EXTRACTION_NOT_COMPLETED",
+        "stage": "extract",
+        "requirement": "clear source rim with the complete tilted vessel envelope while held",
+        "available": true
+      },
+      "after_unfinished": {
+        "code": "GRASP_NOT_ESTABLISHED",
+        "stage": "grasp",
+        "requirement": "verify or re-establish a measured bilateral grasp",
+        "available": true
+      },
+      "current_stage": "grasp",
+      "hold_state": "source_supported",
+      "current_attempt_id": null,
+      "historical_milestones": {
+        "approach_grasp": true,
+        "grasp": true,
+        "extract": false,
+        "transport": false,
+        "align": false,
+        "insert": false,
+        "support_transfer": false,
+        "release_retreat": false,
+        "stable_complete": false
+      },
+      "attempt_outcomes": [
+        {
+          "attempt_id": 1,
+          "outcome": "interrupted",
+          "ended_by": "released_on_source_support",
+          "source_clear_confirmed": false,
+          "preinsert_region_reached": false
+        }
+      ],
+      "failure_observation_codes": [],
+      "passed": true
+    }
+  ],
+  "validation": {
+    "focused_command": "/tmp/labsim-handoff-ci-py311-20261022/bin/python -m pytest -q tests/test_lab_cuvette_progress_core.py -k \"unfinished_requirement_uses_current_retry or release_back_on_source\"",
+    "focused_result": "2 passed, 22 deselected",
+    "core_command": "/tmp/labsim-handoff-ci-py311-20261022/bin/python -m pytest -q tests/test_lab_cuvette_progress_core.py",
+    "core_result": "24 passed"
+  },
+  "baseline_review_commit": "bdf223c89f67f377eb0b0154f88581edd3ff2e1a",
+  "baseline_runtime_commit": "289d5d25b522cfc7fe2952ad887de30c644e8f60"
+}

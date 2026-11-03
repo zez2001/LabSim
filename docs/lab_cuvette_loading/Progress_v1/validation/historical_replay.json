@@ -1,0 +1,649 @@
+{
+  "schema": "labsim.Progress_v1.historical_replay_validation.v1",
+  "created_utc": "2026-11-03T01:38:43.239801+00:00",
+  "scope": "Read-only CPU replay of existing real simulation recordings. This is not a new simulation or GPU regression.",
+  "runtime_commit": "bdf223c89f67f377eb0b0154f88581edd3ff2e1a",
+  "runtime_sources": [
+    {
+      "path": "demos/lab_cuvette_progress_v1/core.py",
+      "sha256": "e18d658995c077f3c0bdb8d36f18f4bdd44eddab6a9cd679ed970330744f6fed"
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/config.py",
+      "sha256": "b884833cb458863578b1f4f937817c89f4a7d2e4d762f9dcf15177fec669ef7d"
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/geometry.py",
+      "sha256": "cae60dceea9eb1bf2e10d052fdf0c3528a04902a61c0dafedf0a16a9a00be988"
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/io.py",
+      "sha256": "65a6204ae4769cb4f06bbb164fa162252a5d1dbe5ce1e3bd1d109105ca9b69f5"
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/offline.py",
+      "sha256": "ce276030c1a2ed3ce3de1ea7ac26816bafd3bfdb61215839b8bfd047f245b32d"
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/report.py",
+      "sha256": "086b3372388ddb380ce4facc4191ad0a1f73ecdd2b6b8fc3a2d86dc5f1f35c5c"
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/online.py",
+      "sha256": "432859ef6af03366915fe9ccbe5ffa4d524aacc3aaeff9b9db7aea9702737345"
+    },
+    {
+      "path": "demos/lab_cuvette_progress_v1/__main__.py",
+      "sha256": "a136b640c5b71e3a077b64ee4639c69e5631a1488e6584d20ad96b1dd1699281"
+    }
+  ],
+  "runtime_matches_committed_files": true,
+  "tests": {
+    "io_contracts_passed": 16,
+    "command": "PYTHONPATH=/tmp/labsim-handoff-ci-py311-20261022/lib/python3.11/site-packages CUDA_VISIBLE_DEVICES='' /home/wujing/Desktop/vla/labutopia-env/bin/python -m pytest -q tests/test_lab_cuvette_progress_io.py",
+    "elapsed_seconds": 0.26,
+    "embedded_report_javascript_syntax": "passed via existing bundled Node vm.Script"
+  },
+  "browser_validation": {
+    "browser": "Codex in-app browser / Chromium",
+    "svg_charts_rendered": 8,
+    "success_report_current_and_historical_states_verified": true,
+    "original_mp4_codec": "MPEG-4 Part 2 / mp4v; not decoded in tested Chromium",
+    "portable_h264_decoded": true,
+    "portable_h264_ready_state": [
+      4,
+      4
+    ],
+    "portable_h264_resolution": [
+      480,
+      360
+    ],
+    "portable_success_duration_s": 125.7,
+    "portable_slider_end_both_video_current_time_s": [
+      125.666666,
+      125.666666
+    ],
+    "serving_requirement": "Open the portable HTML as a local file or use a static HTTP server that supports byte Range; plain python http.server cannot seek these movies.",
+    "screenshot_observation": "Both real recorded camera images and stable_complete / target_supported visible at terminal slider position."
+  },
+  "performance_scope": "recording.lifecycle_wall_seconds includes streaming input/update/control serialization and close; excludes initial contact audit, initial H5 hashing and subsequent HTML generation. It is CPU offline cost, not a measured simulation slowdown.",
+  "episodes": [
+    {
+      "label": "success",
+      "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000",
+      "command": "LABSIM_ASSET_ROOT=/tmp/labsim-release-v1-assets-20261027/bb880f098180c291f6f65995f969d48047207067 CUDA_VISIBLE_DEVICES='' ./labsim progress episode /home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000 --output /home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/historical_success_final_01",
+      "output": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/historical_success_final_01",
+      "code_commit_at_replay": "289d5d25b522cfc7fe2952ad887de30c644e8f60",
+      "original_h5": {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000/dataset/episode_0000.h5",
+        "sha256_before": "e0349886620be357f80e258c178c55e4621c7a159f456984b0235c820ea805be",
+        "sha256_after": "e0349886620be357f80e258c178c55e4621c7a159f456984b0235c820ea805be",
+        "unchanged": true,
+        "bytes": 1944646901
+      },
+      "original_labels": {
+        "episode_id": "0ad51fab-347f-4ae0-856e-4e272341a68e",
+        "scene_version": "Project_release_v1",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+        "code_commit": "5c6b6422f9ba6fc16ac7b4374799c5ed7e426e47",
+        "actual_execution_commit": "5c6b6422f9ba6fc16ac7b4374799c5ed7e426e47",
+        "record_purpose": "demonstration",
+        "task_success": true,
+        "task_success_known": true,
+        "failure_type": "NONE",
+        "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+        "record_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": true,
+        "record_integrity_valid": true,
+        "publication_state": "complete",
+        "complete": true
+      },
+      "progress_complete": true,
+      "termination_domain": "normal_end",
+      "unfinished_requirement": null,
+      "failure_observation": [],
+      "attempts": [
+        {
+          "attempt_id": 1,
+          "start_t": 18.041666666666668,
+          "end_t": 112.1875,
+          "outcome": "success",
+          "ended_by": "legal_target_support_release",
+          "completed_stages": {
+            "grasp": 18.141666666666666,
+            "extract": 20.85,
+            "transport": 71.83333333333333,
+            "align": 111.5625,
+            "insert": 111.57916666666667,
+            "support_transfer": 111.93333333333334
+          },
+          "previous_attempt_id": null,
+          "recovered_from_attempt_id": null,
+          "next_attempt_id": null,
+          "maximum_relative_translation_m": 1.932089304361064e-05,
+          "maximum_relative_rotation_rad": 0.00036691423858901907,
+          "source_clear_confirmed": true,
+          "held_transport_confirmed": true,
+          "preinsert_region_reached": true,
+          "stable_complete_t": 123.45416666666667
+        }
+      ],
+      "stage_first_confirmed_t": {
+        "approach_grasp": 12.2375,
+        "grasp": 18.141666666666666,
+        "extract": 20.85,
+        "transport": 71.83333333333333,
+        "align": 71.83333333333333,
+        "insert": 107.60833333333333,
+        "support_transfer": 110.05416666666666,
+        "release_retreat": 116.41666666666667,
+        "stable_complete": 123.45416666666667,
+        "released": 112.1875,
+        "retreated": 116.41666666666667
+      },
+      "stable_window_final": {
+        "available": true,
+        "conditions": {
+          "correct_target_supported": true,
+          "released": true,
+          "retreated": true,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true,
+          "observed_input_overlap_within_limit": true
+        },
+        "current_satisfied": true,
+        "candidate_start_t": 120.45416666666667,
+        "confirmed_t": 123.45416666666667,
+        "continuous_duration_s": 5.212500000000006,
+        "required_duration_s": 3.0,
+        "position_drift_m": 3.591767189858541e-07,
+        "orientation_change_rad": 0.0002631048445941485
+      },
+      "input_evidence": {
+        "mode": "physics_rate",
+        "contacts": {
+          "available": true,
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000/native_contact_events.jsonl.gz",
+          "sha256": "6e48ce0a675cbd3d97df8fa07b6af237e6a159db113ee91229dac53f377e9eff",
+          "events": 168647,
+          "possible_duplicate_same_step": 0,
+          "forbidden_callback_events": 0,
+          "first_t": 0.004166666666666667,
+          "last_t": 125.66666666666667,
+          "evidence_scope": "Sparse raw native PhysX callbacks, not a regularly sampled no-contact channel",
+          "force_fusion": "audit only; callback impulse/force never summed with tensor normal/friction channels",
+          "matches_recorder_cumulative_count": true
+        },
+        "h5_transitions": 7539,
+        "privileged_channels": {
+          "before": true,
+          "after": true
+        },
+        "missing_evidence": [],
+        "temporal_scope": "physics timestamps",
+        "sampling": {
+          "first_t": 0.0,
+          "last_t": 125.66666666666667,
+          "min_dt_s": 0.004166666666662877,
+          "max_dt_s": 0.004166666666677088,
+          "samples": 30161,
+          "expected_native_callback_count": 168647
+        },
+        "h5_alignment": {
+          "exact_before": 7539,
+          "exact_after": 7539,
+          "discontinuous_intervals": 0
+        },
+        "physics": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000/physics_records.jsonl.gz",
+          "sha256": "69924e9062e8ea9dccbec0c4eeba19cf04e419697deb488de04946b86262b06a",
+          "bytes": 171665936
+        },
+        "processing_wall_seconds_before_finalize": 50.47374478308484
+      },
+      "config_sha256": "798e30600b12174147a8563b5114e2874ef32f39c831e7a353b8d6708550799e",
+      "output_integrity": {
+        "status": "complete",
+        "complete": true,
+        "errors": [],
+        "files": {
+          "progress_v1.jsonl.gz": {
+            "bytes": 15060169,
+            "sha256": "609f742a019a020e46a44a31f66b7f928ad47877e016d0820fb7fd3c4ab5799a"
+          },
+          "progress_events.jsonl": {
+            "bytes": 59586,
+            "sha256": "fa04ccf20bda48e214fe9275fdf0092370e7e5c490e1a59bf708aa6590bc643e"
+          },
+          "progress_config.resolved.json": {
+            "bytes": 12371,
+            "sha256": "b4ec14f944249a19e444c909f93b2a3d3d0c445a730913d597b0d79b7903b2ed"
+          }
+        },
+        "hashes_exclude": "progress_summary.json (self), report and linked videos"
+      },
+      "recording": {
+        "physics_samples": 30161,
+        "control_transitions": 7539,
+        "event_count": 172,
+        "uncompressed_transition_bytes": 176750484,
+        "stored_bytes_excluding_summary": 15132126,
+        "compute_wall_seconds": 14.509633962297812,
+        "write_wall_seconds": 4.537323273951188,
+        "physical_annotation_wall_seconds": 16.144705492071807,
+        "total_annotation_wall_seconds": 20.682028766022995,
+        "lifecycle_wall_seconds": 50.49324896885082,
+        "interval_convention": "(t_obs,t_next]",
+        "reset_separate": true
+      },
+      "event_histogram": {
+        "approach_grasp_candidate": 1,
+        "approach_grasp_confirmed": 1,
+        "attempt_started": 1,
+        "grasp_candidate": 1,
+        "grasp_confirmed": 1,
+        "extract_candidate": 1,
+        "extract_confirmed": 1,
+        "held_transport_observed": 1,
+        "transport_candidate": 1,
+        "transport_confirmed": 1,
+        "align_candidate": 12,
+        "align_confirmed": 12,
+        "transport_condition_lost": 1,
+        "insert_candidate": 7,
+        "insert_confirmed": 7,
+        "grasp_condition_lost": 1,
+        "extract_condition_lost": 1,
+        "align_condition_lost": 11,
+        "insert_condition_lost": 6,
+        "support_transfer_candidate": 29,
+        "support_transfer_confirmed": 29,
+        "support_transfer_condition_lost": 28,
+        "released_candidate": 1,
+        "released_confirmed": 1,
+        "attempt_ended": 1,
+        "approach_grasp_condition_lost": 1,
+        "retreated_candidate": 2,
+        "retreated_confirmed": 2,
+        "release_retreat_candidate": 2,
+        "release_retreat_confirmed": 2,
+        "stable_complete_candidate": 2,
+        "retreated_condition_lost": 1,
+        "release_retreat_condition_lost": 1,
+        "stable_window_interrupted": 1,
+        "stable_complete_confirmed": 1
+      },
+      "artifacts": [
+        {
+          "name": "progress_config.resolved.json",
+          "bytes": 12371,
+          "sha256": "b4ec14f944249a19e444c909f93b2a3d3d0c445a730913d597b0d79b7903b2ed"
+        },
+        {
+          "name": "progress_events.jsonl",
+          "bytes": 59586,
+          "sha256": "fa04ccf20bda48e214fe9275fdf0092370e7e5c490e1a59bf708aa6590bc643e"
+        },
+        {
+          "name": "progress_report.html",
+          "bytes": 909070,
+          "sha256": "3d1df05bce7b62d3d93487886530fd61952083abb2dc3efe6f28f98ebc0821bc"
+        },
+        {
+          "name": "progress_summary.json",
+          "bytes": 189672,
+          "sha256": "3e7d85d15ada499eee56c732d851ced576ae207a10a5e4ed7d6436580fd0a91e"
+        },
+        {
+          "name": "progress_v1.jsonl.gz",
+          "bytes": 15060169,
+          "sha256": "609f742a019a020e46a44a31f66b7f928ad47877e016d0820fb7fd3c4ab5799a"
+        }
+      ],
+      "total_new_sidecar_and_html_bytes": 16230868,
+      "report_display_sampling": {
+        "original_transitions": 7539,
+        "displayed_rows": 805,
+        "method": "Display-only per-metric bucket extrema; all event, stage/hold and unknown boundaries retained"
+      },
+      "final_vs_development": {
+        "progress_complete_unchanged": true,
+        "old_event_count": 100,
+        "final_event_count": 172,
+        "old_config_sha256": "7cc3c75fdcc54be24c8c82d632368ade0a2e756c089acd5a194b5abf9cfe7311",
+        "final_config_sha256": "798e30600b12174147a8563b5114e2874ef32f39c831e7a353b8d6708550799e",
+        "stable_first_confirmation_unchanged": true,
+        "note": "Development receipt is retained separately. Frozen runtime final replay is authoritative; original scorer/H5 is unchanged."
+      },
+      "portable_report": {
+        "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/portable_historical_success_01",
+        "receipt": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/portable_historical_success_01/portable_media_receipt.json",
+        "receipt_sha256": "12abe666ee30042fb7865d28da4a540f8b7c881f04d62227faa725ef1a2ea1f1",
+        "total_bytes": 18404550,
+        "media": [
+          {
+            "camera": "side_camera",
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000/side_camera.mp4",
+            "source_sha256": "46b721002024a87a8e40d4666135bb8e10e3722d5d4ee09a39e4c5fea7331765",
+            "source_bytes": 7775140,
+            "source_stream": {
+              "codec_name": "mpeg4",
+              "codec_tag_string": "mp4v",
+              "width": 640,
+              "height": 480,
+              "r_frame_rate": "30/1",
+              "duration": "125.700000",
+              "nb_frames": "3771"
+            },
+            "display_copy": "media/side_camera.h264.mp4",
+            "display_sha256": "b2e48c23ab7c537cc2d8d3a27a0012f724530ad573bb317f599a7b46a0af3892",
+            "display_bytes": 722361,
+            "display_stream": {
+              "codec_name": "h264",
+              "codec_tag_string": "avc1",
+              "width": 480,
+              "height": 360,
+              "r_frame_rate": "30/1",
+              "duration": "125.700000",
+              "nb_frames": "3771"
+            },
+            "frame_count_and_duration_preserved": true
+          },
+          {
+            "camera": "wrist_camera",
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000/wrist_camera.mp4",
+            "source_sha256": "1127eb8855628209a3a2305c51c17000a0e057dd737cfd2ca639e226b38cb27e",
+            "source_bytes": 13463558,
+            "source_stream": {
+              "codec_name": "mpeg4",
+              "codec_tag_string": "mp4v",
+              "width": 640,
+              "height": 480,
+              "r_frame_rate": "30/1",
+              "duration": "125.700000",
+              "nb_frames": "3771"
+            },
+            "display_copy": "media/wrist_camera.h264.mp4",
+            "display_sha256": "c137bee5f0fe5eaaf78d4787f327ed3b03bc3f842be9fd86ec2858ac04e1371f",
+            "display_bytes": 1372582,
+            "display_stream": {
+              "codec_name": "h264",
+              "codec_tag_string": "avc1",
+              "width": 480,
+              "height": 360,
+              "r_frame_rate": "30/1",
+              "duration": "125.700000",
+              "nb_frames": "3771"
+            },
+            "frame_count_and_duration_preserved": true
+          }
+        ]
+      },
+      "consistency_with_original_score": true
+    },
+    {
+      "label": "pi05",
+      "source_episode": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000",
+      "command": "LABSIM_ASSET_ROOT=/tmp/labsim-release-v1-assets-20261027/bb880f098180c291f6f65995f969d48047207067 CUDA_VISIBLE_DEVICES='' ./labsim progress episode /home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000 --output /home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/historical_pi05_final_01",
+      "output": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/historical_pi05_final_01",
+      "code_commit_at_replay": "289d5d25b522cfc7fe2952ad887de30c644e8f60",
+      "original_h5": {
+        "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/dataset/episode_0000.h5",
+        "sha256_before": "6675bc91be220d4c401c530b2347c572c02a5da6bb8c1a05955a8d9aa1cdfed6",
+        "sha256_after": "6675bc91be220d4c401c530b2347c572c02a5da6bb8c1a05955a8d9aa1cdfed6",
+        "unchanged": true,
+        "bytes": 233899893
+      },
+      "original_labels": {
+        "episode_id": "510b10af-2470-41af-bc58-2468ed7cc690",
+        "scene_version": "Project_release_v1",
+        "asset_id": "cuvette_xy_1000",
+        "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+        "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+        "code_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+        "actual_execution_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+        "task_success": false,
+        "task_success_known": true,
+        "failure_type": "SAFETY_COLLISION",
+        "termination_reason": "ROBOT_ENVIRONMENT_COLLISION",
+        "record_valid": true,
+        "physics_trustworthy": true,
+        "success_bc_eligible": false,
+        "record_integrity_valid": true,
+        "publication_state": "complete",
+        "complete": true
+      },
+      "progress_complete": false,
+      "termination_domain": "safety_stop",
+      "unfinished_requirement": {
+        "code": "GRASP_NOT_ESTABLISHED",
+        "stage": "grasp",
+        "requirement": "establish a measured bilateral grasp",
+        "available": true
+      },
+      "failure_observation": [],
+      "attempts": [],
+      "stage_first_confirmed_t": {
+        "approach_grasp": null,
+        "grasp": null,
+        "extract": null,
+        "transport": null,
+        "align": null,
+        "insert": null,
+        "support_transfer": null,
+        "release_retreat": null,
+        "stable_complete": null,
+        "released": null,
+        "retreated": null
+      },
+      "stable_window_final": {
+        "available": true,
+        "conditions": {
+          "correct_target_supported": false,
+          "released": false,
+          "retreated": false,
+          "no_finger_contact": true,
+          "upright": true,
+          "retained_loading_depth": true,
+          "observed_input_overlap_within_limit": null
+        },
+        "current_satisfied": false,
+        "candidate_start_t": null,
+        "confirmed_t": null,
+        "continuous_duration_s": 0.0,
+        "required_duration_s": 3.0,
+        "position_drift_m": null,
+        "orientation_change_rad": null
+      },
+      "input_evidence": {
+        "mode": "physics_rate",
+        "contacts": {
+          "available": true,
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/native_contact_events.jsonl.gz",
+          "sha256": "b705f9672e02a5239cf96c4544ab2bb337dd6fdf50bec8803f8cda4f4052e67b",
+          "events": 16353,
+          "possible_duplicate_same_step": 0,
+          "forbidden_callback_events": 1,
+          "first_t": 0.004166666666666667,
+          "last_t": 17.033333333333335,
+          "evidence_scope": "Sparse raw native PhysX callbacks, not a regularly sampled no-contact channel",
+          "force_fusion": "audit only; callback impulse/force never summed with tensor normal/friction channels",
+          "matches_recorder_cumulative_count": true
+        },
+        "h5_transitions": 1021,
+        "privileged_channels": {
+          "before": true,
+          "after": true
+        },
+        "missing_evidence": [],
+        "temporal_scope": "physics timestamps",
+        "sampling": {
+          "first_t": 0.0,
+          "last_t": 17.033333333333335,
+          "min_dt_s": 0.00416666666666643,
+          "max_dt_s": 0.0041666666666699825,
+          "samples": 4089,
+          "expected_native_callback_count": 16353
+        },
+        "h5_alignment": {
+          "exact_before": 1021,
+          "exact_after": 1021,
+          "discontinuous_intervals": 0
+        },
+        "physics": {
+          "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/physics_records.jsonl.gz",
+          "sha256": "414f0aef554d161851c26279bdcc8730f28eba06e876a06e0f4aeb885c48de0f",
+          "bytes": 22238872
+        },
+        "processing_wall_seconds_before_finalize": 6.756764756981283
+      },
+      "config_sha256": "798e30600b12174147a8563b5114e2874ef32f39c831e7a353b8d6708550799e",
+      "output_integrity": {
+        "status": "complete",
+        "complete": true,
+        "errors": [],
+        "files": {
+          "progress_v1.jsonl.gz": {
+            "bytes": 1678471,
+            "sha256": "55c4ead533acb8df3f98f6acfc155af118f9c925155aa24190fd4e8eb961cdd2"
+          },
+          "progress_events.jsonl": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "progress_config.resolved.json": {
+            "bytes": 12371,
+            "sha256": "b4ec14f944249a19e444c909f93b2a3d3d0c445a730913d597b0d79b7903b2ed"
+          }
+        },
+        "hashes_exclude": "progress_summary.json (self), report and linked videos"
+      },
+      "recording": {
+        "physics_samples": 4089,
+        "control_transitions": 1021,
+        "event_count": 0,
+        "uncompressed_transition_bytes": 23423396,
+        "stored_bytes_excluding_summary": 1690842,
+        "compute_wall_seconds": 1.8825732241384685,
+        "write_wall_seconds": 0.5873772127088159,
+        "physical_annotation_wall_seconds": 2.1055155307985842,
+        "total_annotation_wall_seconds": 2.6928927435074,
+        "lifecycle_wall_seconds": 6.7625318369828165,
+        "interval_convention": "(t_obs,t_next]",
+        "reset_separate": true
+      },
+      "event_histogram": {},
+      "artifacts": [
+        {
+          "name": "progress_config.resolved.json",
+          "bytes": 12371,
+          "sha256": "b4ec14f944249a19e444c909f93b2a3d3d0c445a730913d597b0d79b7903b2ed"
+        },
+        {
+          "name": "progress_events.jsonl",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "progress_report.html",
+          "bytes": 966093,
+          "sha256": "3d4701631fb79cab90616d75b9f48a58d91ff2889aec57cc674c3910891c5971"
+        },
+        {
+          "name": "progress_summary.json",
+          "bytes": 102632,
+          "sha256": "3ca753c3370c6c0b976f5d038098c212ab5f3c4ffa0e7b477b88c4801052b024"
+        },
+        {
+          "name": "progress_v1.jsonl.gz",
+          "bytes": 1678471,
+          "sha256": "55c4ead533acb8df3f98f6acfc155af118f9c925155aa24190fd4e8eb961cdd2"
+        }
+      ],
+      "total_new_sidecar_and_html_bytes": 2759567,
+      "report_display_sampling": {
+        "original_transitions": 1021,
+        "displayed_rows": 1021,
+        "method": "Display-only per-metric bucket extrema; all event, stage/hold and unknown boundaries retained"
+      },
+      "final_vs_development": {
+        "progress_complete_unchanged": true,
+        "old_event_count": 0,
+        "final_event_count": 0,
+        "old_config_sha256": "798e30600b12174147a8563b5114e2874ef32f39c831e7a353b8d6708550799e",
+        "final_config_sha256": "798e30600b12174147a8563b5114e2874ef32f39c831e7a353b8d6708550799e",
+        "stable_first_confirmation_unchanged": true,
+        "note": "Development receipt is retained separately. Frozen runtime final replay is authoritative; original scorer/H5 is unchanged."
+      },
+      "portable_report": {
+        "directory": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/portable_historical_pi05_01",
+        "receipt": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Progress_v1/portable_historical_pi05_01/portable_media_receipt.json",
+        "receipt_sha256": "e958f232f200581b83a41740ca4177befb349dee1d17f77b1ca610c31d1f3488",
+        "total_bytes": 3166427,
+        "media": [
+          {
+            "camera": "side_camera",
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/side_camera.mp4",
+            "source_sha256": "eef4bacecbe2c78d7724aafb043214cd3cd00569aae1331aab3ee24f9b21684d",
+            "source_bytes": 1421826,
+            "source_stream": {
+              "codec_name": "mpeg4",
+              "codec_tag_string": "mp4v",
+              "width": 640,
+              "height": 480,
+              "r_frame_rate": "30/1",
+              "duration": "17.066667",
+              "nb_frames": "512"
+            },
+            "display_copy": "media/side_camera.h264.mp4",
+            "display_sha256": "6891fbd3b4a350c826c3f79c891acd60ec8f83fca5fc71befaab61f3f1666342",
+            "display_bytes": 144033,
+            "display_stream": {
+              "codec_name": "h264",
+              "codec_tag_string": "avc1",
+              "width": 480,
+              "height": 360,
+              "r_frame_rate": "30/1",
+              "duration": "17.066667",
+              "nb_frames": "512"
+            },
+            "frame_count_and_duration_preserved": true
+          },
+          {
+            "camera": "wrist_camera",
+            "source": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/pi05_standard_01_env/episode_0000/wrist_camera.mp4",
+            "source_sha256": "3702d9cb47b4a86029813db7a41fec34df153ff0b4e031f1d04bd768ee3d33ef",
+            "source_bytes": 1812193,
+            "source_stream": {
+              "codec_name": "mpeg4",
+              "codec_tag_string": "mp4v",
+              "width": 640,
+              "height": 480,
+              "r_frame_rate": "30/1",
+              "duration": "17.066667",
+              "nb_frames": "512"
+            },
+            "display_copy": "media/wrist_camera.h264.mp4",
+            "display_sha256": "6b101d682d4f382efd29cdef705c25e3e618d57f506f53ae85790ff539fcfece",
+            "display_bytes": 247411,
+            "display_stream": {
+              "codec_name": "h264",
+              "codec_tag_string": "avc1",
+              "width": 480,
+              "height": 360,
+              "r_frame_rate": "30/1",
+              "duration": "17.066667",
+              "nb_frames": "512"
+            },
+            "frame_count_and_duration_preserved": true
+          }
+        ]
+      },
+      "consistency_with_original_score": true
+    }
+  ]
+}

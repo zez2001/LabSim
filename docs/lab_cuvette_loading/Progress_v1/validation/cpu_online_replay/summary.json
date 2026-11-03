@@ -1,0 +1,248 @@
+{
+  "schema": "labsim.Progress_v1.cpu_online_adapter_replay.validation.v1",
+  "verification_kind": "CPU replay of original recorded physics and H5 commands; NOT a new simulation",
+  "physical_simulator_started": false,
+  "controller_called": false,
+  "original_scorer_rerun": false,
+  "new_formal_dataset_created": false,
+  "validated_code_commit": "289d5d25b522cfc7fe2952ad887de30c644e8f60",
+  "source_identity": {
+    "h5": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/dataset/episode_0000.h5",
+    "h5_group": "/",
+    "h5_sha256": "9face028628168b65a2db90e4740c3d7b0c585fed7ce8cd0eda48a5d8c3babd0",
+    "episode_directory": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay",
+    "original_labels": {
+      "episode_id": "2d292cba-6a58-4838-b545-ab8a2c70c8fe",
+      "scene_version": "Project_release_v1",
+      "asset_id": "cuvette_xy_1000",
+      "asset_sha256": "cd2ef00254241c7ba09c8a90da646da4a6d629bb41ddec4d754f2ebb6aa27537",
+      "asset_version": "dad100ac45a4c29474353abba40a5366d7eb0ac684e8f4a8ff2971e3a84ee103",
+      "code_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+      "actual_execution_commit": "122c4c03586abdfa7e3117c13e62f8d46f786b04",
+      "task_success": true,
+      "task_success_known": true,
+      "failure_type": "NONE",
+      "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+      "record_valid": true,
+      "physics_trustworthy": true,
+      "success_bc_eligible": true,
+      "record_integrity_valid": true,
+      "publication_state": "complete",
+      "complete": true
+    },
+    "mutation_policy": "read-only; original HDF5, labels and reward untouched"
+  },
+  "source_files": [
+    {
+      "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/config.yaml",
+      "bytes": 55120,
+      "sha256": "aea7a42e464443cb1d454ab5c01f6b09f7c7eda2f66574b50bfdc514cdafa778"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/same_process_collect_01/episode_0000/physics_records.jsonl.gz",
+      "bytes": 171665063,
+      "sha256": "22096f8f313a85d708cb294047d5ac40d01d897a3aae26278394be29224e6738"
+    },
+    {
+      "path": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_release_v1/same_process_collect_01/episode_0000/native_contact_events.jsonl.gz",
+      "bytes": 98042578,
+      "sha256": "2f9816fce3e06c6c354985e214e44870ad0ca0726c8e0c604af79d9bf9d7cd38"
+    }
+  ],
+  "input_geometry": {
+    "layout_source": "original scenario configuration, computed by current layout(cfg)",
+    "body_bounds_source": "existing verified asset registry; CPU replay reference, not a new runtime USD readback",
+    "persisted_metadata": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/progress_input_metadata.json"
+  },
+  "original_recorded_result": {
+    "episode_id": "2d292cba-6a58-4838-b545-ab8a2c70c8fe",
+    "task_success": true,
+    "record_valid": true,
+    "physics_trustworthy": true,
+    "success_bc_eligible": true,
+    "termination_reason": "CONTROLLER_WORKFLOW_COMPLETE",
+    "failure_type": "NONE",
+    "actual_physics_steps": 30160,
+    "actual_control_steps": 7539,
+    "simulation_seconds": 125.66666666666667
+  },
+  "progress_result": {
+    "progress_schema_version": "labsim.lab_cuvette_loading.progress.v1",
+    "progress_evaluator_version": "Progress_v1.causal_physics.v1",
+    "progress_complete": true,
+    "unfinished_requirement": null,
+    "failure_observation": [],
+    "retry_count": 0,
+    "evidence_gap_count": 0
+  },
+  "milestone_confirmed_t": {
+    "approach_grasp": 12.2375,
+    "grasp": 18.141666666666666,
+    "extract": 20.85,
+    "transport": 71.83333333333333,
+    "align": 71.83333333333333,
+    "insert": 107.60833333333333,
+    "support_transfer": 110.05416666666666,
+    "release_retreat": 116.41666666666667,
+    "stable_complete": 123.45416666666667,
+    "released": 112.1875,
+    "retreated": 116.41666666666667
+  },
+  "attempts": [
+    {
+      "attempt_id": 1,
+      "start_t": 18.041666666666668,
+      "end_t": 112.1875,
+      "outcome": "success",
+      "ended_by": "legal_target_support_release",
+      "completed_stages": {
+        "grasp": 18.141666666666666,
+        "extract": 20.85,
+        "transport": 71.83333333333333,
+        "align": 111.5625,
+        "insert": 111.57916666666667,
+        "support_transfer": 111.93333333333334
+      },
+      "previous_attempt_id": null,
+      "recovered_from_attempt_id": null,
+      "next_attempt_id": null,
+      "maximum_relative_translation_m": 1.932089304361064e-05,
+      "maximum_relative_rotation_rad": 0.00036691423858901907,
+      "source_clear_confirmed": true,
+      "held_transport_confirmed": true,
+      "preinsert_region_reached": true,
+      "stable_complete_t": 123.45416666666667
+    }
+  ],
+  "online_recording": {
+    "physics_samples": 30161,
+    "control_transitions": 7539,
+    "event_count": 172,
+    "uncompressed_transition_bytes": 176576963,
+    "stored_bytes_excluding_summary": 14902503,
+    "compute_wall_seconds": 14.639041908783838,
+    "write_wall_seconds": 4.498141339281574,
+    "physical_annotation_wall_seconds": 16.296651882119477,
+    "total_annotation_wall_seconds": 20.79479322140105,
+    "lifecycle_wall_seconds": 46.593488675775006,
+    "interval_convention": "(t_obs,t_next]",
+    "reset_separate": true
+  },
+  "offline_recording": {
+    "physics_samples": 30161,
+    "control_transitions": 7539,
+    "event_count": 172,
+    "uncompressed_transition_bytes": 176750446,
+    "stored_bytes_excluding_summary": 15143477,
+    "compute_wall_seconds": 14.582148034824058,
+    "write_wall_seconds": 4.6074662450701,
+    "physical_annotation_wall_seconds": 16.213754761964083,
+    "total_annotation_wall_seconds": 20.821221007034183,
+    "lifecycle_wall_seconds": 50.777388802031055,
+    "interval_convention": "(t_obs,t_next]",
+    "reset_separate": true
+  },
+  "reset_sample_t": 0.0,
+  "first_control_observation_t": 0.016666666666666666,
+  "comparison": {
+    "equal": true,
+    "causal_labels_equal": true,
+    "resolved_config_equal": true,
+    "physics_sample_count_equal": true,
+    "transitions_compared": 7539,
+    "differences": [],
+    "online_summary_sha256": "ae9f3478dc25a71dc075387ae7144f4813e6215cd0118b22b9ed3fd7ccc2af69",
+    "offline_summary_sha256": "5555840929edff15a335c584f3ca8b630754c2a94555e29f57eeffb05e45261f"
+  },
+  "artifacts": {
+    "online_adapter_cpu_replay": [
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/progress_config.resolved.json",
+        "bytes": 11868,
+        "sha256": "d62b5571d57cbc0f4a4fc89e2c109514d269d4520b9b0d08bf1b15a5a4c62434"
+      },
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/progress_events.jsonl",
+        "bytes": 59586,
+        "sha256": "fa04ccf20bda48e214fe9275fdf0092370e7e5c490e1a59bf708aa6590bc643e"
+      },
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/progress_input_metadata.json",
+        "bytes": 64777,
+        "sha256": "942f23ac2f8b5b2b81b8b9613e061b34bbc0fd8ddbeeb6da4f2df5befce06bda"
+      },
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/progress_summary.json",
+        "bytes": 279937,
+        "sha256": "ae9f3478dc25a71dc075387ae7144f4813e6215cd0118b22b9ed3fd7ccc2af69"
+      },
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/cpu_online_replay/progress_v1.jsonl.gz",
+        "bytes": 14831049,
+        "sha256": "b913fda8d5e4dd36f28ae2c0ec4f234e2b890e55664dfddfad29c3777a64f8f0"
+      }
+    ],
+    "offline_replay": [
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/offline_replay/progress_config.resolved.json",
+        "bytes": 11868,
+        "sha256": "d62b5571d57cbc0f4a4fc89e2c109514d269d4520b9b0d08bf1b15a5a4c62434"
+      },
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/offline_replay/progress_events.jsonl",
+        "bytes": 59586,
+        "sha256": "fa04ccf20bda48e214fe9275fdf0092370e7e5c490e1a59bf708aa6590bc643e"
+      },
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/offline_replay/progress_summary.json",
+        "bytes": 317765,
+        "sha256": "5555840929edff15a335c584f3ca8b630754c2a94555e29f57eeffb05e45261f"
+      },
+      {
+        "path": "/tmp/labsim-progress-full-online-replay-82vjqb8o/offline_replay/progress_v1.jsonl.gz",
+        "bytes": 15072023,
+        "sha256": "beff09b7cfbe896d8ab160dff1c480d579f365857e9fb1233cea4f8b430c4363"
+      }
+    ]
+  },
+  "validated_source_files": {
+    "tasks/lab_cuvette_loading_project_release.py": {
+      "sha256": "57471e4f6713a7a0dc30e75972b7009a05beb3629a3e07175bbec9416d054718",
+      "matches_committed_source": true
+    },
+    "demos/lab_cuvette_progress_v1/online.py": {
+      "sha256": "432859ef6af03366915fe9ccbe5ffa4d524aacc3aaeff9b9db7aea9702737345",
+      "matches_committed_source": true
+    },
+    "demos/lab_cuvette_progress_v1/core.py": {
+      "sha256": "e18d658995c077f3c0bdb8d36f18f4bdd44eddab6a9cd679ed970330744f6fed",
+      "matches_committed_source": true
+    },
+    "demos/lab_cuvette_progress_v1/geometry.py": {
+      "sha256": "cae60dceea9eb1bf2e10d052fdf0c3528a04902a61c0dafedf0a16a9a00be988",
+      "matches_committed_source": true
+    },
+    "demos/lab_cuvette_progress_v1/config.py": {
+      "sha256": "b884833cb458863578b1f4f937817c89f4a7d2e4d762f9dcf15177fec669ef7d",
+      "matches_committed_source": true
+    },
+    "demos/lab_cuvette_progress_v1/io.py": {
+      "sha256": "65a6204ae4769cb4f06bbb164fa162252a5d1dbe5ce1e3bd1d109105ca9b69f5",
+      "matches_committed_source": true
+    },
+    "demos/lab_cuvette_progress_v1/offline.py": {
+      "sha256": "ce276030c1a2ed3ce3de1ea7ac26816bafd3bfdb61215839b8bfd047f245b32d",
+      "matches_committed_source": true
+    },
+    "config/lab_cuvette_loading/Progress_v1/progress.json": {
+      "sha256": "3676894476a880918094dc39e697a6e4fa7d5df424494986bb78693b41e1af20",
+      "matches_committed_source": true
+    }
+  },
+  "limitations": [
+    "CPU adapter replay does not replace normal Teacher entry point physics/rendering/reader regression.",
+    "Lifecycle wall time includes original JSON/HDF5 replay reads; annotation timers report Python diagnostic work only.",
+    "Full sidecars remain at the listed host paths and are not included in Git."
+  ],
+  "packaging_head": "bdf223c89f67f377eb0b0154f88581edd3ff2e1a"
+}

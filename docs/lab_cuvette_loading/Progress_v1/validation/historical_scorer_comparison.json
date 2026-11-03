@@ -1,0 +1,409 @@
+{
+  "schema": "labsim.Progress_v1.original_scorer_comparison.v1",
+  "episode_id": "0ad51fab-347f-4ae0-856e-4e272341a68e",
+  "original_result": "outputs/lab_cuvette_loading/Project_release_v1/Internal_use_v1/teacher_standard_01/episode_0000/result.json",
+  "progress_summary": "outputs/lab_cuvette_loading/Progress_v1/historical_success_final_01/progress_summary.json",
+  "original_task_success": true,
+  "progress_complete": true,
+  "comparisons": [
+    {
+      "original_event": "bilateral_grasp_observed",
+      "progress_milestone": "grasp",
+      "original_t_s": 18.145833333333332,
+      "progress_t_s": 18.141666666666666,
+      "progress_minus_original_s": -0.00416666666666643,
+      "criterion_comparison": "Same physical bilateral hold; Progress allows 1e-9s numerical comparison tolerance, original literal >=0.1s may confirm one physical step later."
+    },
+    {
+      "original_event": "source_slot_cleared",
+      "progress_milestone": "extract",
+      "original_t_s": 20.85,
+      "progress_t_s": 20.85,
+      "progress_minus_original_s": 0.0,
+      "criterion_comparison": "Actual held minimum envelope above source rim; same nominal 2mm clearance."
+    },
+    {
+      "original_event": "held_transport_observed",
+      "progress_milestone": "transport",
+      "original_t_s": 44.3125,
+      "progress_t_s": 71.83333333333333,
+      "progress_minus_original_s": 27.52083333333333,
+      "criterion_comparison": "Different facts: original confirms held XY displacement; Progress also requires fixed preinsert-region arrival."
+    },
+    {
+      "original_event": "safe_preinsert_observed",
+      "progress_milestone": "align",
+      "original_t_s": 73.83333333333333,
+      "progress_t_s": 71.83333333333333,
+      "progress_minus_original_s": -2.0,
+      "criterion_comparison": "Different facts: original includes a signed-depth safety band; Progress alignment uses target-frame errors with current-attempt arrival lineage."
+    },
+    {
+      "original_event": "loaded_pose_candidate",
+      "progress_milestone": "insert",
+      "original_t_s": 107.60833333333333,
+      "progress_t_s": 107.60833333333333,
+      "progress_minus_original_s": 0.0,
+      "criterion_comparison": "Original candidate includes bottom gap; Progress separates effective full insertion, measured target containment and target support."
+    },
+    {
+      "original_event": "correct_target_supported",
+      "progress_milestone": "support_transfer",
+      "original_t_s": 110.05416666666666,
+      "progress_t_s": 110.05416666666666,
+      "progress_minus_original_s": 0.0,
+      "criterion_comparison": "Both bind selected-seat bottom force and geometry; Progress current support also retains sampled input-material overlap evidence."
+    },
+    {
+      "original_event": "both_fingers_open_and_detached",
+      "progress_milestone": "released",
+      "original_t_s": 112.19166666666666,
+      "progress_t_s": 112.1875,
+      "progress_minus_original_s": -0.004166666666662877,
+      "criterion_comparison": "Same measured open/no-contact hold; 1e-9s numerical comparison tolerance can shift first confirmation one physics step."
+    },
+    {
+      "original_event": "actual_gripper_retreat",
+      "progress_milestone": "retreated",
+      "original_t_s": 116.41666666666667,
+      "progress_t_s": 116.41666666666667,
+      "progress_minus_original_s": 0.0,
+      "criterion_comparison": "Same actual gripper-input-geometry lower-bound clearance requirement; TCP is not proof."
+    }
+  ],
+  "actual_samples_at_different_confirmation_times": [
+    {
+      "t": 18.141666666666666,
+      "physics_step": 4354,
+      "finger_contact_N": [
+        1.0198845863342285,
+        0.8727103471755981
+      ],
+      "finger_joint_positions_m": [
+        0.005309379659593105,
+        0.005309422500431538
+      ],
+      "cup_in_hand_position_m": [
+        1.3671102753227388e-05,
+        0.0002283098177315219,
+        0.15300071561647213
+      ],
+      "source_clearance_m": -0.02499965590179265,
+      "depth_m": null,
+      "xy_error_target_m": [
+        -0.025720051989916993,
+        0.29713584841197554
+      ],
+      "tilt_deg": 0.01580663538414205,
+      "yaw_error_deg": 0.002835540275469839,
+      "target_bottom_gap_m": null,
+      "target_bottom_support_N": 0.0,
+      "target_region_contains_object": null,
+      "input_geometry_overlap_observed_m": null,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 18.145833333333332,
+      "physics_step": 4355,
+      "finger_contact_N": [
+        1.0214643478393555,
+        0.8739928603172302
+      ],
+      "finger_joint_positions_m": [
+        0.0053093950264155865,
+        0.005309431813657284
+      ],
+      "cup_in_hand_position_m": [
+        1.349533810445814e-05,
+        0.00022845073017373175,
+        0.15300059625419674
+      ],
+      "source_clearance_m": -0.024999739397419618,
+      "depth_m": null,
+      "xy_error_target_m": [
+        -0.025720260606173707,
+        0.29713588566487853
+      ],
+      "tilt_deg": 0.015413288924015695,
+      "yaw_error_deg": 0.002381533586429896,
+      "target_bottom_gap_m": null,
+      "target_bottom_support_N": 0.0,
+      "target_region_contains_object": null,
+      "input_geometry_overlap_observed_m": null,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 20.85,
+      "physics_step": 5004,
+      "finger_contact_N": [
+        0.9450629353523254,
+        0.947853147983551
+      ],
+      "finger_joint_positions_m": [
+        0.0053092194721102715,
+        0.005309214349836111
+      ],
+      "cup_in_hand_position_m": [
+        2.5202371308609917e-05,
+        0.0002277905279956814,
+        0.15300165275604224
+      ],
+      "source_clearance_m": 0.002054466767923535,
+      "depth_m": null,
+      "xy_error_target_m": [
+        -0.025705508456591798,
+        0.2971587216944081
+      ],
+      "tilt_deg": 0.02840235448227174,
+      "yaw_error_deg": 0.003206522708950388,
+      "target_bottom_gap_m": null,
+      "target_bottom_support_N": 0.0,
+      "target_region_contains_object": null,
+      "input_geometry_overlap_observed_m": null,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 44.3125,
+      "physics_step": 10635,
+      "finger_contact_N": [
+        0.9585076570510864,
+        0.9333994388580322
+      ],
+      "finger_joint_positions_m": [
+        0.0053091817535459995,
+        0.005309168715029955
+      ],
+      "cup_in_hand_position_m": [
+        2.8663580379668552e-05,
+        0.0002274987111914411,
+        0.1530024465581214
+      ],
+      "source_clearance_m": 0.2070000734832702,
+      "depth_m": null,
+      "xy_error_target_m": [
+        -3.049479520721325e-05,
+        0.25446981922691886
+      ],
+      "tilt_deg": 0.0021463713247930013,
+      "yaw_error_deg": -0.001767640711364038,
+      "target_bottom_gap_m": null,
+      "target_bottom_support_N": 0.0,
+      "target_region_contains_object": null,
+      "input_geometry_overlap_observed_m": null,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 71.83333333333333,
+      "physics_step": 17240,
+      "finger_contact_N": [
+        0.9457350969314575,
+        0.9484477043151855
+      ],
+      "finger_joint_positions_m": [
+        0.005309164058417082,
+        0.005309254862368107
+      ],
+      "cup_in_hand_position_m": [
+        2.7017251558962154e-05,
+        0.00022770975306534214,
+        0.15300154477152844
+      ],
+      "source_clearance_m": 0.15099785414158318,
+      "depth_m": -0.004997854141583182,
+      "xy_error_target_m": [
+        -1.2622869413614346e-07,
+        -1.9758039887518564e-07
+      ],
+      "tilt_deg": 0.00025648758619649614,
+      "yaw_error_deg": 3.8637107678596294e-05,
+      "target_bottom_gap_m": 0.03199785414158318,
+      "target_bottom_support_N": 0.0,
+      "target_region_contains_object": null,
+      "input_geometry_overlap_observed_m": null,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 73.83333333333333,
+      "physics_step": 17720,
+      "finger_contact_N": [
+        0.9461624622344971,
+        0.9471813440322876
+      ],
+      "finger_joint_positions_m": [
+        0.005309158470481634,
+        0.005309249274432659
+      ],
+      "cup_in_hand_position_m": [
+        2.7418554166676463e-05,
+        0.00022754703859818214,
+        0.15300154502492694
+      ],
+      "source_clearance_m": 0.14899836309086634,
+      "depth_m": -0.0029983630908663426,
+      "xy_error_target_m": [
+        2.4630033571004795e-07,
+        2.1965211455254876e-07
+      ],
+      "tilt_deg": 0.00021221385110881455,
+      "yaw_error_deg": 8.210428322286134e-05,
+      "target_bottom_gap_m": 0.029998363090866342,
+      "target_bottom_support_N": 0.0,
+      "target_region_contains_object": null,
+      "input_geometry_overlap_observed_m": null,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 107.60833333333333,
+      "physics_step": 25826,
+      "finger_contact_N": [
+        0.9462692737579346,
+        0.9464169144630432
+      ],
+      "finger_joint_positions_m": [
+        0.005309160333126783,
+        0.005309255328029394
+      ],
+      "cup_in_hand_position_m": [
+        2.7297862610947976e-05,
+        0.00022783388206818072,
+        0.15300154553518025
+      ],
+      "source_clearance_m": 0.11904966552712415,
+      "depth_m": 0.026950334472875846,
+      "xy_error_target_m": [
+        -7.818797866654403e-07,
+        -3.865303355166153e-09
+      ],
+      "tilt_deg": 8.148060708365174e-05,
+      "yaw_error_deg": -0.00024631334937907923,
+      "target_bottom_gap_m": 4.9665527124154174e-05,
+      "target_bottom_support_N": 0.0,
+      "target_region_contains_object": true,
+      "input_geometry_overlap_observed_m": 0.0,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 110.05416666666666,
+      "physics_step": 26413,
+      "finger_contact_N": [
+        0.23382031917572021,
+        0.15018068253993988
+      ],
+      "finger_joint_positions_m": [
+        0.005310913547873497,
+        0.005311022978276014
+      ],
+      "cup_in_hand_position_m": [
+        0.00035036878975008867,
+        0.00022750550785597738,
+        0.1530481424201324
+      ],
+      "source_clearance_m": 0.11899952109119594,
+      "depth_m": 0.027000478908804058,
+      "xy_error_target_m": [
+        2.2955669995133876e-05,
+        -1.904754930909247e-05
+      ],
+      "tilt_deg": 0.07093517930002283,
+      "yaw_error_deg": -0.005959333410260115,
+      "target_bottom_gap_m": -4.78908804057987e-07,
+      "target_bottom_support_N": 0.3761737048625946,
+      "target_region_contains_object": true,
+      "input_geometry_overlap_observed_m": 0.0,
+      "gripper_object_clearance_m": 0.0
+    },
+    {
+      "t": 112.1875,
+      "physics_step": 26925,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "finger_joint_positions_m": [
+        0.006548319011926651,
+        0.0065484181977808475
+      ],
+      "cup_in_hand_position_m": [
+        0.0016429680592530281,
+        0.0002449608876136949,
+        0.15304977703061237
+      ],
+      "source_clearance_m": 0.11900030656370009,
+      "depth_m": 0.026999693436299908,
+      "xy_error_target_m": [
+        -4.3730596343827255e-06,
+        -3.5205393451032134e-06
+      ],
+      "tilt_deg": 0.0121602484631313,
+      "yaw_error_deg": -0.0030186434739221113,
+      "target_bottom_gap_m": 3.0656370009207734e-07,
+      "target_bottom_support_N": 0.19606874883174896,
+      "target_region_contains_object": true,
+      "input_geometry_overlap_observed_m": 0.0,
+      "gripper_object_clearance_m": 0.0012356316151664049
+    },
+    {
+      "t": 112.19166666666666,
+      "physics_step": 26926,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "finger_joint_positions_m": [
+        0.006596352439373732,
+        0.006596452556550503
+      ],
+      "cup_in_hand_position_m": [
+        0.0016429442683342271,
+        0.0002451962412917461,
+        0.1530497775027482
+      ],
+      "source_clearance_m": 0.11900011266140365,
+      "depth_m": 0.02699988733859635,
+      "xy_error_target_m": [
+        -4.34325731199503e-06,
+        -3.6099463122662993e-06
+      ],
+      "tilt_deg": 0.010069013236326203,
+      "yaw_error_deg": -0.0031003983517621236,
+      "target_bottom_gap_m": 1.1266140365062682e-07,
+      "target_bottom_support_N": 0.19644257426261902,
+      "target_region_contains_object": true,
+      "input_geometry_overlap_observed_m": 0.0,
+      "gripper_object_clearance_m": 0.0012798957028247737
+    },
+    {
+      "t": 116.41666666666667,
+      "physics_step": 27940,
+      "finger_contact_N": [
+        0.0,
+        0.0
+      ],
+      "finger_joint_positions_m": [
+        0.03999985754489899,
+        0.03999994695186615
+      ],
+      "cup_in_hand_position_m": [
+        0.0032011576157901394,
+        0.000306396890844026,
+        0.19999108901448617
+      ],
+      "source_clearance_m": 0.11900010711727604,
+      "depth_m": 0.02699989288272395,
+      "xy_error_target_m": [
+        -4.387960795576573e-06,
+        -3.624847473460147e-06
+      ],
+      "tilt_deg": 0.01033299625817522,
+      "yaw_error_deg": -0.0035109379623179393,
+      "target_bottom_gap_m": 1.0711727604917343e-07,
+      "target_bottom_support_N": 0.19627238810062408,
+      "target_region_contains_object": true,
+      "input_geometry_overlap_observed_m": 0.0,
+      "gripper_object_clearance_m": 0.04003430043573267
+    }
+  ],
+  "original_labels_modified": false,
+  "progress_online_offline_equality_is_a_separate_check": true,
+  "interpretation": "Timing differences are explicit, not automatic changes to original grades. Event names alone are not semantic equivalence."
+}

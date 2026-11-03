@@ -8,7 +8,9 @@
 
 ## 选择文件
 
-当前默认[清单](package.json)是 [Internal_use_v1 文档与内部使用优化清单](Internal_use_v1_current/package.json)：只收本次修改、当前使用指南、普通Teacher原始连续视频、正式reader、用途/移交与输入审计。先读[本次说明](Internal_use_v1_current/00_给Agent阅读说明.md)。完整H5、资产及模型权重单独管理。
+当前默认[清单](package.json)是 [Progress v1 本轮结果清单](Progress_v1_current/package.json)：只收本次进度诊断改动、真实 Teacher 与 π0.5 未完成示例、逐步 sidecar、可视化、视频显示副本和验证证据。先读[本次说明](Progress_v1_current/00_给Agent阅读说明.md)。完整 H5、物理原日志、资产与环境保留工程端。
+
+此前 [Internal_use_v1 文档与内部使用优化清单](Internal_use_v1_current/package.json)及其结果保留。
 
 历史[Project_release_v1环境发布包](Project_release_v1_current/package.json)、[Project_v1_1](Project_v1_1_current/package.json)、[Project_v1](Project_v1_current/package.json)及旧包保留。
 

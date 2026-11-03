@@ -98,6 +98,7 @@ Public observations include both cameras, robot state and declared contact signa
 
 - [Internal usage guide](docs/development/ONBOARDING.md): environment → complete task → collection → reading → policy integration, troubleshooting and implementation map.
 - [Current technical reference](docs/lab_cuvette_loading/Project_release_v1/README.md): assets, interfaces and acceptance evidence.
+- [Loading Progress v1](docs/lab_cuvette_loading/Progress_v1/README.md): online `--progress`, offline trajectory analysis, stage evidence and visualization; original scoring and reward are preserved.
 - [Data usage and transfer](docs/lab_cuvette_loading/Project_release_v1/data_usage.md) · [Optional policy deployment](policy/backends/OPTIONAL_POLICIES.md).
 - [History](docs/history/README.md) · [Contributing](CONTRIBUTING.md) · [CPU CI](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) · [Result packages](docs/agent_handoff/README.md).
 
