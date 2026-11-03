@@ -25,9 +25,25 @@ def main(argv=None):
     compare.add_argument('online_directory', type=Path)
     compare.add_argument('offline_directory', type=Path)
     compare.add_argument('--output', type=Path, help='New consistency JSON file; never overwrite an earlier comparison')
+    replay = sub.add_parser('replay', help='Reconstruct attempts from append-only events and compare with summary')
+    replay.add_argument('progress_directory', type=Path)
+    replay.add_argument('--output', type=Path, required=True, help='New event replay receipt; never overwrite')
     args = parser.parse_args(argv)
     try:
-        if args.command == 'compare':
+        if args.command == 'replay':
+            from .io import iter_json_rows
+            from .replay import verify_replay
+            if args.output.exists():
+                raise FileExistsError(args.output)
+            summary = json.loads((args.progress_directory / 'progress_summary.json').read_text())
+            result = verify_replay(list(iter_json_rows(args.progress_directory / 'progress_events.jsonl')), summary)
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            with args.output.open('x') as stream:
+                json.dump(result, stream, ensure_ascii=False, indent=2)
+                stream.write('\n')
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0 if result['passed'] else 1
+        elif args.command == 'compare':
             from .offline import compare_progress
             result = compare_progress(args.online_directory, args.offline_directory, args.output)
             print(json.dumps(result, ensure_ascii=False, indent=2))

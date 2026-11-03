@@ -42,3 +42,18 @@ def test_progress_subcommand_preserves_native_help_and_arguments(monkeypatch):
     monkeypatch.setitem(sys.modules, fake.__name__, fake)
     assert main(['progress', 'episode', '/data/closed', '--output', '/data/new']) == 0
     assert received == [['episode', '/data/closed', '--output', '/data/new']]
+
+
+def test_replay_cli_checks_events_and_refuses_to_overwrite(tmp_path):
+    import json
+    from demos.lab_cuvette_progress_v1.__main__ import main as progress_main
+    source = tmp_path / 'case'
+    source.mkdir()
+    (source / 'progress_events.jsonl').write_text('')
+    (source / 'progress_summary.json').write_text(json.dumps({'attempts': [], 'retry_count': 0}))
+    output = tmp_path / 'proof.json'
+    assert progress_main(['replay', str(source), '--output', str(output)]) == 0
+    assert json.loads(output.read_text())['passed'] is True
+    before = output.read_bytes()
+    assert progress_main(['replay', str(source), '--output', str(output)]) == 2
+    assert output.read_bytes() == before

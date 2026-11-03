@@ -13,7 +13,7 @@ import tempfile
 import time
 
 
-SCHEMA_VERSION = 'labsim.lab_cuvette_loading.progress.v1'
+SCHEMA_VERSION = 'labsim.lab_cuvette_loading.progress.v1.2'
 OUTPUT_NAMES = ('progress_v1.jsonl.gz', 'progress_events.jsonl',
                 'progress_summary.json', 'progress_config.resolved.json')
 

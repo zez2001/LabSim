@@ -96,6 +96,18 @@ def _identity(source_h5, group, episode, container_hash=None):
             ['git', 'rev-parse', 'HEAD'], cwd=Path(__file__).parents[2], text=True).strip()
     except (OSError, subprocess.CalledProcessError):
         metadata['progress_code_commit'] = 'unknown'
+    root = Path(__file__).resolve().parents[2]
+    code_files = list(Path(__file__).parent.glob('*.py'))
+    parameter = root / 'config/lab_cuvette_loading/Progress_v1_2/progress.json'
+    if parameter.is_file():
+        code_files.append(parameter)
+    metadata['analysis_code_files'] = {
+        str(path.relative_to(root)): file_sha256(path) for path in sorted(code_files)}
+    try:
+        metadata['analysis_worktree_clean'] = not bool(subprocess.check_output(
+            ['git', 'status', '--porcelain'], cwd=root, text=True).strip())
+    except (OSError, subprocess.CalledProcessError):
+        metadata['analysis_worktree_clean'] = None
     return metadata
 
 

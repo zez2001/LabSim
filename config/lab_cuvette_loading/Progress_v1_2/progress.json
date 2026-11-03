@@ -1,0 +1,40 @@
+{
+  "schema": "labsim.Progress_v1_2.parameters.v1",
+  "version": "Progress_v1.2",
+  "thresholds": {
+    "approach_position_m": 0.005,
+    "approach_orientation_rad": 0.17453292519943295,
+    "bilateral_force_N": 0.01,
+    "bilateral_hold_s": 0.1,
+    "grasp_loss_hold_s": 0.2,
+    "source_clearance_m": 0.002,
+    "lift_started_m": 0.001,
+    "held_transport_displacement_m": 0.05,
+    "preinsert_region_radius_m": 0.003,
+    "release_hold_s": 0.05,
+    "support_hold_s": 0.0,
+    "sample_gap_tolerance_factor": 1.6
+  },
+  "normalization": {
+    "approach_distance_scale_m": 0.1,
+    "approach_rotation_scale_rad": 0.5235987755982988,
+    "preinsert_distance_scale_m": 0.35,
+    "alignment_lateral_scale_m": 0.003,
+    "alignment_tilt_scale_rad": 0.08726646259971647,
+    "alignment_yaw_scale_rad": 0.17453292519943295,
+    "function": "legacy continuous retained per-stage; effective approach uses reciprocal 1/(1+error/scale), other effective progress uses explicit physical lineage gates",
+    "stage_coverage_weights": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "approach_quality_function": "reciprocal: 1 / (1 + nonnegative_error / positive_scale)"
+  },
+  "source_note": "Progress v1.2 changes diagnostic semantics only. Discrete thresholds, original independent scorer, reward, physics and control remain unchanged. Legacy continuous fields remain raw diagnostic values; effective_continuous has task gates."
+}

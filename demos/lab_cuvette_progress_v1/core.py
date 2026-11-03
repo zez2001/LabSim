@@ -15,6 +15,8 @@ import numpy as np
 
 from .config import EVALUATOR_VERSION, SCHEMA_VERSION, plain, resolve_config
 from .geometry import measured_geometry, number, rotation, rotation_distance, vector
+from .attempts import (new_attempt_fields, set_reference, confirm_stage, observe_drift,
+                       end_operation_statistics, candidate_stage)
 
 STAGES = ('approach_grasp', 'grasp', 'extract', 'transport', 'align', 'insert',
           'support_transfer', 'release_retreat', 'stable_complete')
@@ -44,6 +46,18 @@ def quality(error, scale):
     return float(np.clip(1.-error/scale, 0., 1.)) if error is not None and scale and scale > 0 else None
 
 
+def smooth_quality(error, scale):
+    """Fixed-scale diagnostic, monotonic throughout the nonnegative domain."""
+    return float(1. / (1. + abs(error)/scale)) if error is not None and scale and scale > 0 else None
+
+
+def gated_progress(raw, *gates):
+    """Known inapplicability is zero; absent necessary evidence stays unknown."""
+    applicable = conjunction(*gates)
+    return (float(np.clip(raw, 0., 1.)) if raw is not None else None) if applicable is True else (0. if applicable is False else None)
+
+
+
 class ProgressEvaluator:
     """One independent instance per environment, episode and source trace.
 
@@ -68,9 +82,10 @@ class ProgressEvaluator:
         self._observation_keys = set()
         self._since = {name: None for name in MILESTONES}
         self._milestones = {name: dict(ever_achieved=False, current_satisfied=None,
-            first_candidate_t=None, first_confirmed_t=None,
+            first_candidate_t=None, first_confirmed_t=None, last_confirmed_t=None, confirmation_count=0,
             evidence_version=EVALUATOR_VERSION) for name in MILESTONES}
         self._active_attempt = None
+        self._pending_release_attempt_id = None
         self._attempt_counter = 0
         self._grasp_reference = None
         self._bilateral_since = None
@@ -105,13 +120,15 @@ class ProgressEvaluator:
     def _event(self, name, t, *, candidate_start_t=None, evidence=None):
         event = dict(event_id=len(self.events)+1, name=name, t=float(t),
             candidate_start_t=float(candidate_start_t) if candidate_start_t is not None else None,
-            confirmed_t=float(t), attempt_id=self._active_attempt['attempt_id'] if self._active_attempt else None,
+            confirmed_t=float(t), attempt_id=self._active_attempt['attempt_id'] if self._active_attempt else self._pending_release_attempt_id,
             evidence=plain(evidence or {}))
         self.events.append(event)
         return event
 
     def _observe(self, name, fact, t, hold_s=0., evidence=None):
         milestone = self._milestones[name]
+        timing_attempt = self._active_attempt or next((item for item in self.attempts
+            if item['attempt_id'] == self._pending_release_attempt_id), None)
         old = milestone['current_satisfied']
         if fact is True:
             if self._since[name] is None:
@@ -119,13 +136,17 @@ class ProgressEvaluator:
                 if milestone['first_candidate_t'] is None:
                     milestone['first_candidate_t'] = t
                 self._event(name+'_candidate', t, candidate_start_t=t, evidence=evidence)
+                if timing_attempt and name in STAGES:
+                    candidate_stage(timing_attempt, name, t)
             satisfied = bool(t-self._since[name]+1e-9 >= hold_s)
             if satisfied and old is not True:
                 self._event(name+'_confirmed', t, candidate_start_t=self._since[name], evidence=evidence)
                 if not milestone['ever_achieved']:
                     milestone.update(ever_achieved=True, first_confirmed_t=t)
-                if self._active_attempt and name in STAGES:
-                    self._active_attempt['completed_stages'][name] = t
+                milestone['last_confirmed_t'] = t
+                milestone['confirmation_count'] += 1
+                if timing_attempt and name in STAGES:
+                    confirm_stage(timing_attempt, name, t, self._since[name])
             milestone['current_satisfied'] = satisfied
         else:
             if old is True:
@@ -136,6 +157,9 @@ class ProgressEvaluator:
         return milestone['current_satisfied']
 
     def _new_attempt(self, t):
+        pending = next((item for item in self.attempts if item['attempt_id'] == self._pending_release_attempt_id), None)
+        if pending is not None and pending.get('outcome_status') == 'awaiting_stability':
+            self._update_attempt_outcome(t, 'incomplete', 'superseded_by_new_grasp_attempt')
         self._attempt_counter += 1
         attempt = dict(attempt_id=self._attempt_counter, start_t=t, end_t=None,
             outcome='incomplete', ended_by=None, completed_stages={},
@@ -144,23 +168,52 @@ class ProgressEvaluator:
             next_attempt_id=None, maximum_relative_translation_m=None,
             maximum_relative_rotation_rad=None, source_clear_confirmed=False,
             held_transport_confirmed=False, preinsert_region_reached=False)
+        attempt.update(new_attempt_fields(sample_hz=1. / (self.thresholds['maximum_evidence_gap_s']/self.thresholds['sample_gap_tolerance_factor'])))
         if self.attempts:
             self.attempts[-1]['next_attempt_id'] = attempt['attempt_id']
         self.attempts.append(attempt)
         self._active_attempt = attempt
         self._support_committed = False
         self._loaded_pose_seen = False
-        self._event('attempt_started', t)
+        self._pending_release_attempt_id = None
+        self._event('attempt_started', t, evidence=dict(attempt=copy.deepcopy(attempt)))
 
     def _end_attempt(self, t, outcome, reason):
         if self._active_attempt is None:
             return
-        self._active_attempt.update(end_t=t, outcome=outcome, ended_by=reason)
-        self._event('attempt_ended', t, evidence=dict(outcome=outcome, reason=reason))
+        self._active_attempt.update(end_t=t, operation_end_t=t, outcome=outcome, ended_by=reason,
+            operation_end_reason=reason, final_outcome_confirmed=reason != 'legal_target_support_release')
+        if reason == 'legal_target_support_release':
+            self._pending_release_attempt_id = self._active_attempt['attempt_id']
+            self._active_attempt['outcome_status'] = 'awaiting_stability'
+        else:
+            self._active_attempt['outcome_status'] = 'final'
+            self._active_attempt['outcome_confirmed_t'] = t
+            self._active_attempt['outcome_reason'] = reason
+        end_operation_statistics(self._active_attempt, t)
+        self._event('attempt_ended', t, evidence=dict(outcome=outcome, reason=reason,
+            operation_interval_ended=True, attempt=copy.deepcopy(self._active_attempt)))
         self._active_attempt = None
         self._grasp_reference = None
         self._loss_since = None
         self._bilateral_since = None
+
+    def _update_attempt_outcome(self, t, outcome, reason, *, provisional=False):
+        attempt = next((item for item in self.attempts
+            if item['attempt_id'] == self._pending_release_attempt_id), None)
+        if attempt is None:
+            return
+        status = 'awaiting_stability' if provisional else 'final'
+        if (attempt.get('outcome') == outcome and attempt.get('outcome_reason') == reason and
+                attempt.get('outcome_status') == status):
+            return
+        attempt.update(outcome=outcome, outcome_reason=reason, outcome_status=status,
+            outcome_confirmed_t=t if not provisional else None, final_outcome_confirmed=not provisional)
+        if outcome == 'success':
+            attempt['stable_complete_t'] = t
+        event = self._event('attempt_outcome_updated', t, evidence=dict(
+            outcome=outcome, reason=reason, provisional=provisional, attempt=copy.deepcopy(attempt)))
+        event['attempt_id'] = attempt['attempt_id']
 
     def _failure(self, code, t, evidence):
         # Repeated physical samples of one continuous incident are one fact.
@@ -198,6 +251,7 @@ class ProgressEvaluator:
                 self._failure('POST_RELEASE_UNSTABLE', t, dict(position_drift_m=drift,
                     orientation_change_rad=angle, candidate_start_t=self._stable_start))
         if interrupted and self._stable_start is not None:
+            self._update_attempt_outcome(t, 'incomplete', 'stable_window_interrupted:'+interrupted, provisional=True)
             self._event('stable_window_interrupted', t, candidate_start_t=self._stable_start,
                 evidence=dict(reason=interrupted, position_drift_m=self._stable_max_position,
                               orientation_change_rad=self._stable_max_rotation))
@@ -218,8 +272,7 @@ class ProgressEvaluator:
             if complete and self._stable_confirmed_t is None:
                 self._stable_confirmed_t = t
                 # A legally released attempt can finish after its grip ended.
-                if self.attempts and self.attempts[-1]['ended_by'] == 'legal_target_support_release':
-                    self.attempts[-1].update(outcome='success', stable_complete_t=t)
+                self._update_attempt_outcome(t, 'success', 'stable_complete_confirmed')
         else:
             duration = 0.
             complete = self._observe('stable_complete', valid, t)
@@ -308,17 +361,13 @@ class ProgressEvaluator:
                     self._new_attempt(t)
             if t-self._bilateral_since+1e-9 >= thresholds['bilateral_hold_s'] and self._grasp_reference is None:
                 self._grasp_reference = dict(position=relative_p.copy(), quaternion=relative_q.copy(), t=t)
+                set_reference(self._active_attempt, t, relative_p, relative_q)
         else:
             self._bilateral_since = None
         slip = angle = None
         if self._grasp_reference is not None and relative_known:
             slip = float(np.linalg.norm(relative_p-self._grasp_reference['position']))
             angle = rotation_distance(relative_q, self._grasp_reference['quaternion'])
-            if self._active_attempt and not self._loaded_pose_seen:
-                old = self._active_attempt['maximum_relative_translation_m']
-                self._active_attempt['maximum_relative_translation_m'] = max(old or 0., slip)
-                old = self._active_attempt['maximum_relative_rotation_rad']
-                self._active_attempt['maximum_relative_rotation_rad'] = max(old or 0., angle)
         grip_quality = conjunction(compare(slip, thresholds['grasp_translation_m']), compare(angle, thresholds['grasp_rotation_rad']))
         held = conjunction(grasp_candidate, self._grasp_reference is not None, grip_quality)
         # Candidate time is contact onset; confirmation time is causal .1s later.
@@ -396,6 +445,16 @@ class ProgressEvaluator:
             observed_input_overlap_m=overlap, scope='classified physical bottom support and qualified input-material geometry, not cooked geometry'))
         if support is True:
             self._support_committed = True
+        # Statistics are event-window based, not quality-filtered. Include the
+        # last operation sample before release/loss closes the interval.
+        measured_hold_state = ('target_supported' if support is True else
+            'gripper_held' if held is True else 'source_supported' if source_supported is True
+            else 'unknown' if any(v is None for v in (support, held, source_supported))
+            else 'support_unconfirmed')
+        if self._active_attempt:
+            observe_drift(self._active_attempt, t, relative_p, relative_q,
+                measured_hold_state, first_support_transfer_t=self._active_attempt['completed_stages'].get('support_transfer'),
+                grasp_quality=grip_quality)
         if held is not True and self._active_attempt and bilateral is False:
             if support is True:
                 self._loss_since = None
@@ -441,6 +500,11 @@ class ProgressEvaluator:
             hold_state = 'unknown'
         else:
             hold_state = 'unsupported_or_lost'
+        # Preserve the historical raw hold enum; expose a precise user label
+        # without equating unconfirmed support with a measured dropped vessel.
+        observed_loss = any(item['code'] in {'GRASP_LOST', 'GRASP_LOST_DURING_TRANSPORT'}
+            and item.get('attempt_id') == self._attempt_counter for item in self.failure_observations)
+        hold_state_user = ('unsupported_with_observed_loss' if observed_loss else 'support_unconfirmed') if hold_state == 'unsupported_or_lost' else hold_state
         if released is True and retreated is True:
             current_stage = 'stable_complete'
         elif support is True:
@@ -505,6 +569,50 @@ class ProgressEvaluator:
                 fd = (p-old_p)/(t-self._last_t)
         metric('pose_difference_linear_velocity_m_s', fd, 'm/s', 'actual body-origin finite difference, distinct from native/COM velocity')
         norms = self.normalization
+        approach_position_quality = smooth_quality(geom['approach_distance'], norms['approach_distance_scale_m'])
+        approach_orientation_quality = smooth_quality(geom['approach_orientation'], norms['approach_rotation_scale_rad'])
+        approach_effective = math.sqrt(approach_position_quality * approach_orientation_quality) if approach_position_quality is not None and approach_orientation_quality is not None else None
+        raw_axial_depth = number(row.get('depth_m'))
+        if raw_axial_depth is None:
+            raw_axial_depth = depth
+        raw_fraction = raw_axial_depth/requested if raw_axial_depth is not None and requested and requested > 0 else None
+        # The insertion value is conditional on *current causal* task evidence.
+        # No original final label or Teacher phase participates. Target support
+        # retains legal lineage after the hand releases; holding is not a
+        # permanent prerequisite once that handover has actually occurred.
+        physical_grasp_evidence_known = bilateral is not None and relative_known and pose_known
+        lineage_gate = True if near_lineage else (False if physical_grasp_evidence_known else None)
+        holder_gate = True if (held is True or self._support_committed) else held
+        insertion_posture = conjunction(
+            compare(geom['tilt'], thresholds['upright_after_release_rad'], absolute=True),
+            compare(geom['yaw'], thresholds['alignment_yaw_rad'], absolute=True)) if self._support_committed else aligned
+        entrance_gate = conjunction(compare(geom['lateral'], thresholds['preinsert_region_radius_m']),
+            compare(depth, -float(self.geometry['preinsert_above_rim_m']), minimum=True))
+        insertion_gates = dict(correct_target=contains, entrance_region=entrance_gate,
+            orientation=insertion_posture, current_attempt_route=lineage_gate,
+            held_or_transferred=holder_gate)
+        applicable = conjunction(*insertion_gates.values())
+        valid_insertion = gated_progress(raw_fraction, applicable)
+        gate_sources = dict(correct_target='selected-seat qualified material containment; far known lateral exclusion',
+            entrance_region='actual loading-frame lateral position and axial entrance neighborhood',
+            orientation='existing alignment gates; after physical target support, original released upright limit and original yaw limit',
+            current_attempt_route='same-attempt measured extraction, held transport and preinsert arrival, retained after legal support transfer',
+            held_or_transferred='current measured grasp or physically acquired target support lineage')
+        gate_reasons = dict(correct_target='outside_correct_target_region', entrance_region='outside_target_entrance_region',
+            orientation='loading_orientation_not_valid', current_attempt_route='current_attempt_route_not_completed',
+            held_or_transferred='neither_valid_hold_nor_legal_target_transfer')
+        gate_details = dict(gates={key: dict(value=value, source=gate_sources[key],
+                reason=None if value is True else ('missing_required_evidence' if value is None else gate_reasons[key]))
+            for key, value in insertion_gates.items()},
+            not_applicable_reasons=[gate_reasons[key] for key, value in insertion_gates.items() if value is False],
+            unknown_reasons=['missing_'+key+'_evidence' for key, value in insertion_gates.items() if value is None],
+            applicability=applicable, causality='current and past physical evidence only; no final-result backfill')
+        metric('approach_position_quality', approach_position_quality, '1', '1/(1+actual_position_error / fixed approach_distance_scale_m)')
+        metric('approach_orientation_quality', approach_orientation_quality, '1', '1/(1+actual_orientation_error / fixed approach_rotation_scale_rad)')
+        metric('raw_axial_depth_m', raw_axial_depth, 'm', 'unclipped original capture depth_m preferred even if another pose channel is missing; declared projection fallback; diagnostic only')
+        metric('raw_depth_fraction', raw_fraction, '1', 'unclipped signed raw_axial_depth_m / target_depth_m; diagnostic only')
+        metric('valid_insertion_progress', valid_insertion, '1', 'clipped raw fraction qualified by causal insertion_gate_details', ';'.join(gate_details['unknown_reasons']) or 'raw_depth_or_target_depth_unavailable')
+        metric('insertion_progress_applicable', applicable, 'bool', 'three-valued conjunction of insertion_gate_details', ';'.join(gate_details['unknown_reasons']))
         continuous = dict(
             approach_grasp=quality(geom['approach_distance'], norms['approach_distance_scale_m']),
             grasp=quality(slip, thresholds['grasp_translation_m']),
@@ -517,20 +625,61 @@ class ProgressEvaluator:
             support_transfer=float(np.clip(support_force/thresholds['support_min_N'], 0., 1.)) if support_force is not None else None,
             release_retreat=float(np.clip(clearance_gripper/thresholds['retreat_clearance_m'], 0., 1.)) if released is True and clearance_gripper is not None else (0. if released is False else None),
             stable_complete=float(np.clip(stable_window['continuous_duration_s']/thresholds['stable_duration_s'], 0., 1.)) if stable_window['available'] else None)
+        # Legacy per-stage continuous values remain raw diagnostics for
+        # compatibility. New consumers must use effective_continuous, whose
+        # gates prevent unrelated geometry/force from appearing as progress.
+        effective = dict(continuous)
+        effective.update(approach_grasp=approach_effective,
+            grasp=gated_progress(continuous['grasp'], grasp_candidate),
+            extract=gated_progress(continuous['extract'], held),
+            transport=gated_progress(continuous['transport'], held, route_extracted),
+            align=gated_progress(continuous['align'], lineage_gate, holder_gate),
+            insert=valid_insertion,
+            support_transfer=gated_progress(continuous['support_transfer'], contains, depth_done, lineage_gate, support_posture,
+                compare(support_gap, thresholds['support_gap_m'], absolute=True), compare(overlap, thresholds['overlap_m'])))
+        legal_followed = dict(
+            approach_grasp=bool((self._active_attempt and 'grasp' in self._active_attempt['completed_stages']) or self._support_committed),
+            grasp=bool(self._support_committed and contains is True),
+            extract=bool((held is True and transported) or (self._support_committed and contains is True)),
+            transport=bool(near_lineage and applicable is True),
+            align=bool(self._support_committed and applicable is True),
+            insert=bool(self._support_committed and depth_done is True and contains is True),
+            support_transfer=bool(released is True and support is True),
+            release_retreat=bool(stable_window['current_satisfied'] is True), stable_complete=False)
+        active_failure = any(item.get('attempt_id') == self._attempt_counter for item in self.failure_observations)
         stages = {}
         for name in STAGES:
             milestone = self._milestones[name]
             fact = milestone['current_satisfied']
             status = 'current_satisfied' if fact is True else 'evidence_missing' if fact is None else 'in_progress' if (self._since[name] is not None or current_stage == name) else 'regressed' if milestone['ever_achieved'] else 'not_started'
-            stages[name] = dict(milestone, status=status, continuous=continuous[name])
+            if fact is True:
+                user_status, user_reason = 'active', 'physical_condition_currently_satisfied'
+            elif milestone['ever_achieved'] and legal_followed[name]:
+                user_status, user_reason = 'completed_followed', 'verified_legal_physical_successor'
+            elif fact is None:
+                user_status, user_reason = 'evidence_missing', 'required_current_physical_evidence_missing'
+            elif active_failure and milestone['ever_achieved']:
+                user_status, user_reason = 'evidenced_failure', 'independent_observed_failure_fact_in_current_attempt'
+            elif milestone['ever_achieved']:
+                user_status, user_reason = 'temporarily_unmet', 'current_condition_false_without_verified_legal_successor'
+            elif current_stage == name or self._since[name] is not None:
+                user_status, user_reason = 'active', 'current_physical_requirement'
+            else:
+                user_status, user_reason = 'not_started', 'no_candidate_for_current_requirement'
+            stages[name] = dict(milestone, status=status, continuous=continuous[name],
+                continuous_semantics='legacy_raw_diagnostic; insert is clipped raw depth fraction, not effective insertion',
+                effective_continuous=effective[name], user_status=user_status, user_status_reason=user_reason)
         highest = max((i for i, name in enumerate(STAGES) if self._milestones[name]['ever_achieved']), default=-1)
         snapshot = dict(progress_schema_version=SCHEMA_VERSION, progress_evaluator_version=EVALUATOR_VERSION,
             config_hash=self.config['config_hash'], episode_id=self.metadata.get('episode_id'),
             t=t, physics_step=row.get('physics_step'), sample_index=self._sample_count,
-            current_stage=current_stage, current_stage_continuous=continuous[current_stage],
+            current_stage=current_stage, current_stage_continuous=effective[current_stage],
+            current_stage_continuous_semantics='v1.2 task-gated effective diagnostic progress',
+            raw_axial_depth_m=raw_axial_depth, raw_depth_fraction=raw_fraction, valid_insertion_progress=valid_insertion,
+            insertion_progress_applicable=applicable, insertion_gate_details=gate_details,
             stage_vector=[stages[name]['current_satisfied'] for name in STAGES], stage_order=list(STAGES),
             stages=stages, milestones=copy.deepcopy(self._milestones), metrics=metrics,
-            hold_state=hold_state, hold_evidence=dict(source_supported=source_supported, gripper_held=held, target_supported=support),
+            hold_state=hold_state, hold_state_user=hold_state_user, actual_grasp_loss_observed=observed_loss, hold_evidence=dict(source_supported=source_supported, gripper_held=held, target_supported=support),
             attempt_id=self._active_attempt['attempt_id'] if self._active_attempt else None,
             highest_ever_stage=STAGES[highest] if highest >= 0 else None,
             coverage_progress=sum(int(self._milestones[name]['ever_achieved']) for name in STAGES)/len(STAGES),
@@ -611,6 +760,10 @@ class ProgressEvaluator:
             self._end_attempt(self._last_t if self._last_t is not None else 0.,
                 'interrupted' if domain not in {'normal_end', 'timeout'} else 'incomplete',
                 'episode_terminated:'+domain)
+        if self._pending_release_attempt_id is not None and self._milestones['stable_complete']['current_satisfied'] is not True:
+            self._update_attempt_outcome(self._last_t if self._last_t is not None else 0.,
+                'interrupted' if domain not in {'normal_end', 'timeout'} else 'incomplete',
+                'episode_terminated_before_stability:'+domain)
         stages = copy.deepcopy(self._last_snapshot['stages']) if self._last_snapshot else {
             name: dict(self._milestones[name], status='not_reached', continuous=None) for name in STAGES}
         for name, stage in stages.items():
@@ -633,7 +786,13 @@ class ProgressEvaluator:
             failure_observation=self.failure_observations,
             stages=stages, milestones=copy.deepcopy(self._milestones), attempts=copy.deepcopy(self.attempts),
             retry_count=max(0, len(self.attempts)-1), events=copy.deepcopy(self.events),
-            event_count=len(self.events), physical_sample_count=self._sample_count,
+            event_count=len(self.events),
+            event_statistics=dict(raw_condition_transition_count=sum(event['name'].endswith(('_candidate', '_confirmed', '_condition_lost')) for event in self.events),
+                operational_attempt_count=len(self.attempts), retry_count=max(0, len(self.attempts)-1),
+                first_stage_achievement_count=sum(bool(self._milestones[name]['ever_achieved']) for name in STAGES),
+                repeated_confirmation_count=sum(max(0,self._milestones[name]['confirmation_count']-1) for name in STAGES),
+                interpretation='raw reconfirmations are condition toggles, not new attempts, independent successes or reward events'),
+            physical_sample_count=self._sample_count,
             evidence_gap_count=self._gap_count, unknown_metric_sample_counts=self._unknown_counts,
             input_evidence=copy.deepcopy(self.metadata), last_snapshot=copy.deepcopy(self._last_snapshot),
             original_scoring_unchanged=True, reward_unchanged=True,

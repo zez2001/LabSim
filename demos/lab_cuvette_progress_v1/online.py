@@ -63,7 +63,7 @@ class OnlineProgressSession:
     def _failure(self, error, operation):
         self.errors.append(dict(operation=operation, type=type(error).__name__, message=str(error)))
         _write_failure(self.output / 'progress_failure.json', dict(
-            schema='labsim.lab_cuvette_loading.progress.online_failure.v1',
+            schema='labsim.lab_cuvette_loading.progress.online_failure.v1.2',
             episode_id=self.metadata['episode_id'], progress_status='partial',
             errors=self.errors, original_task_result_preserved=True))
 
@@ -182,7 +182,7 @@ class OnlineProgressSession:
             integrity = dict(integrity) if isinstance(integrity, dict) else {}
             integrity.update(status='partial', complete=False, errors=copy.deepcopy(self.errors))
             self.summary.update(
-                schema='labsim.lab_cuvette_loading.progress.v1',
+                schema='labsim.lab_cuvette_loading.progress.v1.2',
                 episode_id=self.metadata['episode_id'], progress_status='partial',
                 output_integrity=integrity, errors=copy.deepcopy(self.errors),
                 physics_samples_processed=self.physics_count, control_transitions_written=self.transition_count,

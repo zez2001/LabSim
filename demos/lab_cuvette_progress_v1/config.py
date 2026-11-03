@@ -14,9 +14,9 @@ import numpy as np
 from .geometry import yaw_rotation
 
 ROOT = Path(__file__).resolve().parents[2]
-PARAMETERS = ROOT/'config/lab_cuvette_loading/Progress_v1/progress.json'
-SCHEMA_VERSION = 'labsim.Progress_v1.v1'
-EVALUATOR_VERSION = 'Progress_v1.causal_physics.v1'
+PARAMETERS = ROOT/'config/lab_cuvette_loading/Progress_v1_2/progress.json'
+SCHEMA_VERSION = 'labsim.Progress_v1_2.v1'
+EVALUATOR_VERSION = 'Progress_v1_2.causal_physics.v1'
 
 
 def plain(value):
@@ -74,6 +74,9 @@ def resolve_config(task_cfg_dict, episode_metadata=None, initial_sample=None, ov
         result.pop('config_hash', None)
         result['config_hash'] = hashlib.sha256(json.dumps(result, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
         return result
+    if cfg.get('progress_schema_version') and 'thresholds' in cfg:
+        raise ValueError('Resolved Progress configuration uses '+str(cfg.get('progress_schema_version'))+
+            '; v1.2 requires the original task config plus metadata. Keep the old resolved config for provenance; do not silently reinterpret it.')
     metadata = plain(episode_metadata or {})
     defaults = json.loads(PARAMETERS.read_text())
     layout = metadata.get('layout', metadata.get('fixtures', {}))
@@ -171,7 +174,7 @@ def resolve_config(task_cfg_dict, episode_metadata=None, initial_sample=None, ov
     thresholds['maximum_evidence_gap_s'] = float(metadata.get('sample_interval_s', 1/hz))*thresholds['sample_gap_tolerance_factor']
     sources['thresholds.maximum_evidence_gap_s'] = 'input evidence cadence (metadata.sample_interval_s or physics.hz) times declared gap tolerance'
     result = dict(progress_schema_version=SCHEMA_VERSION, progress_evaluator_version=EVALUATOR_VERSION,
-                  parameters_version=defaults['version'], task='lab_cuvette_loading',
+                  parameters_version=defaults['version'], visualization_version='Progress_v1.2.portable.v1', task='lab_cuvette_loading',
                   scene_version=get(cfg, 'project.scene_version', cfg.get('version')),
                   asset_id=asset_id, asset_selection=plain(cfg.get('asset_selection', {})),
                   geometry=geometry, thresholds=thresholds, normalization=defaults['normalization'], sources=sources,
@@ -181,7 +184,7 @@ def resolve_config(task_cfg_dict, episode_metadata=None, initial_sample=None, ov
     source_rim = geometry.get('source_rim_world_z_m')
     result['normalization']['extraction_depth_scale_m'] = float(source_rim-source_floor[2]) if source_floor is not None and source_rim is not None else None
     for key in result['normalization']:
-        sources['normalization.'+key] = 'Progress_v1 fixed diagnostic scale; not acceptance threshold'
+        sources['normalization.'+key] = 'Progress_v1.2 fixed diagnostic scale; not acceptance threshold; approach scales unchanged from v1.1 (0.1m position, pi/6 rad orientation)'
     sources['normalization.extraction_depth_scale_m'] = 'source rim world Z minus source floor world Z; diagnostic travel normalization'
     if overrides:
         for key in overrides:
