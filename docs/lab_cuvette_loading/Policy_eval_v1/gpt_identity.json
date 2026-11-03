@@ -1,0 +1,298 @@
+{
+  "schema": "labsim.Policy_eval_v1.gpt_identity.v1",
+  "purpose": "Frozen-method identity and preflight reference; historical outcomes are not current formal evaluation results",
+  "created_utc": "2026-11-03T07:56:56.772527+00:00",
+  "source_commit_at_audit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+  "model": {
+    "requested_model": "gpt-6-astra",
+    "provider": "cubence",
+    "base_url": "https://api.cubence.ai/v1",
+    "protocol_endpoint": "responses",
+    "identity_validation": "Responses transport rejects missing or unequal returned_model before tools execute",
+    "weights_identity_verification": "Unknown behind intermediary; returned service label is not independent weights verification",
+    "historical_response_identity_counts": [
+      {
+        "requested_model": "gpt-6-astra",
+        "returned_model": "gpt-6-astra",
+        "status": "OK",
+        "count": 324
+      },
+      {
+        "requested_model": "gpt-6-astra",
+        "returned_model": null,
+        "status": "PROVIDER_TIMEOUT",
+        "count": 8
+      },
+      {
+        "requested_model": "gpt-6-astra",
+        "returned_model": null,
+        "status": "OK",
+        "count": 1
+      }
+    ]
+  },
+  "profile": {
+    "path": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json",
+    "sha256": "5cb577c8f5e50f136b7adf8ae80c23c6d2386e52c888f7b68a047aa761cdce38",
+    "selected_profile": "P9",
+    "launcher_default_profile": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6.json",
+    "launcher_default_selected_profile": "P4",
+    "explicit_profile_required": true,
+    "config_schema": "labsim.cubence_provider.v1",
+    "prompt_version": "Project_v1_1.public_tools.v9_robot_self_state",
+    "controller_schema": "labsim.gpt_controller.v1",
+    "system_prompt_sha256": "b404a99aca6d70793fa7686b82e6a5b94b1bd03addafa06709a9a59e0dff0e3e",
+    "system_prompt_utf8_bytes": 12414,
+    "actual_request_instructions_sha256": "7ab70b9f04721189677888655aaefa2ecd806cbeb24152c3c74a5b4cf38338be",
+    "tool_schema_canonical_sha256": "d0f8634840a59594da8c62d92d98dbf4ae91cb64421cb6c975375350efffedeb",
+    "tools": [
+      "observe",
+      "move_ee",
+      "gripper",
+      "wait",
+      "finish"
+    ],
+    "frozen_policy_file_sha256": {
+      "policy/backends/cubence.py": "faad038ba6408037a3c824983f00358c11f4840b63d25df91f276dfdb23bf594",
+      "policy/backends/cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+      "policy/backends/cubence_project_v1_1_tools.py": "0f196f9e541228c2c1ceb1b9c6a2cf17e840a2f1a0f24b21643094bc8fd92614",
+      "policy/backends/cubence_project_v1_1_visual_context.py": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+      "policy/backends/cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+      "policy/backends/cubence_project_v1_1_active_view.py": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843",
+      "policy/backends/cubence_project_v1_1_self_state.py": "f115eb3eba5a921c88fb4a7ed8bb97c4ebd58b5607cb477509fa29a610332041",
+      "policy/robot_self_kinematics.py": "a4c30750b7419eb2a6092eb98316d9041c823248565db8b38d738909e978ef7a",
+      "config/lab_cuvette_loading/Project_v1_1/robot_self/franka_nominal_kinematics.json": "8fa2321de1ae537da1276484869cd66ae4f19d374d58c99f84f23a940227fe10",
+      "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json": "5cb577c8f5e50f136b7adf8ae80c23c6d2386e52c888f7b68a047aa761cdce38"
+    }
+  },
+  "parameters": {
+    "reasoning_effort": "low",
+    "max_output_tokens": 1024,
+    "temperature": null,
+    "temperature_status": "not sent; server default",
+    "seed": null,
+    "seed_status": "not sent; provider determinism unsupported/unverified",
+    "max_context_messages": 2,
+    "complete_tool_receipt_turns": 1,
+    "max_context_input_tokens_conservative_bound": 80000,
+    "images": {
+      "max_side_px": 640,
+      "jpeg_quality": 60,
+      "detail": "high",
+      "resize_interpolation": "lanczos"
+    },
+    "fixed_side_detail": {
+      "enabled": true,
+      "camera_name": "side_camera",
+      "expected_resolution_wh": [
+        640,
+        480
+      ],
+      "roi_pixel_edges_xyxy": [
+        240,
+        32,
+        520,
+        312
+      ],
+      "max_side_px": 480,
+      "jpeg_quality": 60,
+      "detail": "high",
+      "resize_interpolation": "lanczos",
+      "max_historical_wrist_images": 1,
+      "history_priority": [
+        "first_public_bilateral_wrist",
+        "previous_distinct_wrist"
+      ],
+      "current_reference_is_not_duplicated": true,
+      "expected_physical_parent": "/World",
+      "expected_local_position_m": [
+        -0.7,
+        -0.85,
+        1.32
+      ],
+      "expected_local_quaternion_wxyz": [
+        0.72224223613739,
+        0.5659829784132289,
+        -0.24520192217047324,
+        -0.3128984465440159
+      ],
+      "mounting_tolerance": 1e-05
+    },
+    "visual_context": {
+      "enabled": true,
+      "previous_distinct_wrist": true,
+      "first_public_bilateral_wrist": true,
+      "bilateral_contact_threshold_N": 0.02
+    },
+    "robot_self_state": {
+      "enabled": true,
+      "version": "Project_v1_1.public_robot_self_kinematics.v1",
+      "model_SHA256": "8fa2321de1ae537da1276484869cd66ae4f19d374d58c99f84f23a940227fe10",
+      "frames": [
+        "panda_link6",
+        "panda_link7",
+        "panda_hand"
+      ],
+      "scope": "robot_only_nominal_fk_authored_local_input_boxes"
+    },
+    "parallel_tool_calls": false,
+    "store": false,
+    "request_timeout_s": 120,
+    "max_retries": 2,
+    "retry_delay_s": 1,
+    "max_network_attempts_per_logical_request": 3,
+    "episode_wall_timeout_s": 1800,
+    "formal_max_calls_recommendation": 160,
+    "simulation_timeout_s": 170.0,
+    "simulation_timeout_source": "config/lab_cuvette_loading/Project_release_v1/standard.yaml env.timeout_s; task enforces at every physics step",
+    "control_hz": 60,
+    "physics_hz": 240,
+    "action_limits": {
+      "max_translation_m": 0.04,
+      "max_rotation_rad": 0.15,
+      "max_linear_speed_m_s": 0.02,
+      "max_angular_speed_rad_s": 0.15,
+      "max_duration_s": 3.0,
+      "min_duration_s": 0.05,
+      "control_hz": 60,
+      "max_gripper_opening_m": 0.08,
+      "gripper_effort_limit_N": 8.0
+    }
+  },
+  "input_isolation": {
+    "public_top_level_allowlist": [
+      "TCPpose",
+      "camera_calibration",
+      "camera_meta",
+      "episode_id",
+      "finger_contact_N",
+      "finger_contact_forces_N",
+      "gripper_effort_limit_N",
+      "gripper_opening_m",
+      "images",
+      "joint_positions",
+      "joint_velocities",
+      "observation_id",
+      "simulation_time",
+      "simulation_time_s",
+      "source_slot_id",
+      "step_index",
+      "target_seat_id",
+      "task_language",
+      "tcp_pose"
+    ],
+    "forbidden_evaluation_only_key_scan": {
+      "reference_episode": "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+      "scope": "Historical public_observation JSON only; source allowlists and packet manifests separately establish augmented robot-only scope",
+      "files": 34,
+      "forbidden_exact_keys": [
+        "debug",
+        "hole_error",
+        "lateral_error_m",
+        "object_pose",
+        "object_position",
+        "object_position_m",
+        "phase",
+        "progress",
+        "progress_stage",
+        "reward",
+        "scorer",
+        "task_success",
+        "teacher_waypoint",
+        "valid_insertion_progress",
+        "vessel_pose",
+        "vessel_position_m"
+      ],
+      "matches": []
+    },
+    "robot_self_state_source": "Current public q7 and actual TCP plus locked nominal robot-only model; no scene/USD runtime queries",
+    "static_task_priors": [
+      "rack slot A1",
+      "blue distractor F6",
+      "nominal vessel 10x10x67.5 mm",
+      "target candidate_far_hinge",
+      "27 mm loading depth and 40.5 mm exposed length",
+      "static hand/TCP transform"
+    ],
+    "policy_forbidden_dynamic_inputs": [
+      "vessel true pose",
+      "precise aperture alignment error",
+      "Teacher waypoint",
+      "Progress stage or effective insertion",
+      "independent scorer result/reward"
+    ],
+    "reset": "run_episode creates new tools, empty history and episode-local visual wrapper; facade reset clears receipts; wrapper also resets on episode-ID change",
+    "finish_result_scope": "finish finalizes and immediately exits; no next provider request sends final independent scoring result",
+    "robot_proprioception_units": {
+      "joint_positions_0_6": "rad",
+      "joint_positions_7_8": "m",
+      "joint_velocities_0_6": "rad/s",
+      "joint_velocities_7_8": "m/s",
+      "TCP_translation": "m, world Z-up",
+      "TCP_rotation": "unit quaternion wxyz",
+      "gripper_opening": "m, total two-finger separation",
+      "finger_contact": "N"
+    }
+  },
+  "budget_before": {
+    "ledger_path": "outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+    "ledger_sha256": "c488e00ea9fa8a3839d9db54307f6fe64f23670c93a2b07faf5423c505de9ef3",
+    "prefix_attempt_count": 333,
+    "prefix_attempts_canonical_sha256": "7aab91e9d18a6da85c77a34f644fd0dd74d6144ab3208faf8c394d75a96dcbca",
+    "max_estimated_usd": 30.0,
+    "max_requests": 1500,
+    "network_attempts": 333,
+    "estimated_usd": 27.8942,
+    "remaining_estimated_usd": 2.1058,
+    "remaining_network_attempts": 1167,
+    "status_counts": {
+      "OK": 325,
+      "PROVIDER_TIMEOUT": 8
+    },
+    "active_reserved_count": 0,
+    "reservation_rule": "Before each network attempt, charge conservative bound; returned usage reconciles estimate; unknown usage retains reservation",
+    "input_bound_rule": "8192 tokens per transmitted image; UTF8 serialized text bytes plus 1024; maximum 80000; not deployed tokenizer",
+    "pricing": {
+      "source": "https://cubence.com/pricing",
+      "observed_date": "2026-10-26",
+      "input_usd_per_million": 10.0,
+      "output_usd_per_million": 50.0,
+      "cached_input_usd_per_million": 1.0,
+      "billing_note": "Published <=272000-token tier; account group multipliers are unknown. This is a local estimate, not a billing claim."
+    },
+    "billing_actual_usd": null,
+    "billing_actual_status": "Unknown: intermediary account multipliers and actual vendor invoice unavailable",
+    "recommended_formal_pairs_initial": 1,
+    "budget_sufficiency": "10 complete GPT episodes not supportable from known remaining balance; even one historical-length P9 task cannot be guaranteed. Keep normal per-episode maxima; shared ledger decides actual budget stop. Unstarted trials must be explicit."
+  },
+  "historical_reference": {
+    "scope": "Preflight/method appendix only; do not include in current formal result denominators",
+    "episode_id": "265a03f0-cbf9-4117-8eba-716b3f0e0c82",
+    "directory": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/gpt_control",
+    "controller_sha256": "441ed941e056d0c7e6812265e702eff9ac447989b7593429d12919a5e9e3126e",
+    "summary_sha256": "6893c2fa69bd00e0fa5332da559e07a88c4b8cb92d9b24b3c40eeaf69e2481ad",
+    "api_decisions": 34,
+    "network_attempts": 34,
+    "estimated_usd": 3.05067,
+    "termination_reason": "POLICY_FINISH_REQUEST",
+    "p9_current_prompt_matches_historical": true,
+    "first_current_observation": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/gpt_control/observations/decision_000000/public_observation.json",
+    "last_current_observation": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/gpt_control/observations/decision_000033/public_observation.json",
+    "first_augmented_input_manifest": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/gpt_control/temporal_visual_context/decision_000000/input_items_manifest.json",
+    "last_augmented_input_manifest": "outputs/lab_cuvette_loading/Project_v1_1/gpt_debug_08/episode_0000/gpt_control/temporal_visual_context/decision_000033/input_items_manifest.json",
+    "first_augmented_input_manifest_sha256": "6004c0337c812e0cf604564a187da66e209d77262d47861948eb5ba8fd12f9ee",
+    "last_augmented_input_manifest_sha256": "8d18a697891ecdd584f5fed2a6b21948c1f571322ae4959dd5e835490e691b31"
+  },
+  "evidence_locations": {
+    "launcher_default": "demos/lab_cuvette_project_release_v1/launch.py:34",
+    "network_budget_reservation": "policy/backends/cubence.py:88",
+    "public_observation": "policy/backends/cubence_tools.py:59",
+    "tool_schema": "policy/backends/cubence_tools.py:104",
+    "receipt_filter": "policy/backends/cubence_project_v1_1_tools.py:75",
+    "per_episode_reset": "policy/backends/cubence_tools.py:402",
+    "visual_context_reset": "policy/backends/cubence_project_v1_1_visual_context.py:157",
+    "robot_only_augmentation": "policy/backends/cubence_project_v1_1_self_state.py:49",
+    "static_task_language": "tasks/lab_cuvette_loading_project_v1_1.py:11",
+    "task_timeout": "tasks/lab_cuvette_loading_env_v1.py:266"
+  }
+}

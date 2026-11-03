@@ -1,0 +1,128 @@
+{
+  "schema": "labsim.policy_eval.protocol.v1",
+  "protocol_id": "Policy_eval_v1_20261103",
+  "status": "preflight_candidate_not_yet_formal_frozen",
+  "created_utc": "2026-11-03T07:58:20.425903+00:00",
+  "environment": {
+    "runtime_commit": "3ca253324b1ec540ae5ec07f2110c9c091f6ddd1",
+    "version": "Project_release_v1",
+    "task": "lab_cuvette_loading",
+    "mode": "standard",
+    "randomization": false,
+    "seed": 0,
+    "simulation_limit_s": 170.0,
+    "physics_hz": 240,
+    "control_hz": 60,
+    "asset_id": "cuvette_xy_1000",
+    "nominal_cuvette_mm": [
+      10,
+      10,
+      67.5
+    ],
+    "mass_kg": 0.02,
+    "source_slot_id": "A1",
+    "target_seat_id": "candidate_far_hinge",
+    "target_depth_m": 0.027,
+    "asset_revision": "bb880f098180c291f6f65995f969d48047207067",
+    "asset_root": "/tmp/labsim-release-v1-assets-20261027/bb880f098180c291f6f65995f969d48047207067",
+    "isaac_python": "/home/wujing/Desktop/vla/labutopia-env/bin/python",
+    "task_config": "config/lab_cuvette_loading/Project_release_v1/standard.yaml",
+    "teacher_reference": "outputs/lab_cuvette_loading/Progress_v1_2/teacher_online_01/episode_0000",
+    "teacher_repeated": false
+  },
+  "gpt6": {
+    "label": "GPT-6 Astra direct P9 public self-state",
+    "provider_config": "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json",
+    "model": "gpt-6-astra",
+    "max_calls": 160,
+    "episode_wall_s": 1800,
+    "request_timeout_s": 120,
+    "max_retries": 2,
+    "context_reset": "New run_episode tools/history/wrappers per episode",
+    "seed_supported": false
+  },
+  "pi05": {
+    "label": "RLinf-Pi05-LIBERO-130-fullshot-SFT via native RPC transfer",
+    "python": "/home/wujing/Desktop/vla/rpent/.venv/bin/python",
+    "checkpoint": "/home/wujing/Desktop/vla/rpent/checkpoints/RLinf-Pi05-LIBERO-130-fullshot-SFT",
+    "policy_config": "config/lab_cuvette_loading/Project_v1/policies/pi05_libero.yaml",
+    "max_model_requests": 700,
+    "max_actions": 3500,
+    "action_hz": 20,
+    "executed_chunk_length": 5,
+    "torch_seed": 0,
+    "state_reset": "New server/adapter process per trial; empty action queue; torch seed0"
+  },
+  "execution": {
+    "planned_per_group": 10,
+    "order": [
+      "diagnostic:gpt6",
+      "diagnostic:pi05",
+      "formal:trial_01:gpt6",
+      "formal:trial_01:pi05"
+    ],
+    "single_isaac_process": true,
+    "supervisor_wall_s": 4200,
+    "resource_order_basis": "Sequential GPU and checkpoint resident only during pi05 trial",
+    "initial_settle": "Unchanged standard reset/gravity settling; capture actual pre-action initial state",
+    "preflight_calls_gpt6": 1,
+    "preflight_calls_pi05": 1,
+    "formal_stop_rule": "After a GPT episode reaches shared ledger reservation limit, finish its paired pi05 episode; leave remaining pairs unstarted for budget. Do not split short episodes to reach planned10."
+  },
+  "budget": {
+    "ledger": "/home/wujing/Desktop/vla/LabSim/outputs/lab_cuvette_loading/Project_v1/cubence_budget.json",
+    "sha256_before": "c488e00ea9fa8a3839d9db54307f6fe64f23670c93a2b07faf5423c505de9ef3",
+    "cap_estimated_usd": 30.0,
+    "cap_network_attempts": 1500,
+    "network_attempts_before": 333,
+    "estimated_usd_before": 27.8942,
+    "estimated_usd_remaining": 2.1057999999999986,
+    "no_automatic_cap_increase": true,
+    "cost_basis": "Returned usage at configured historical rates; actual supplier billing/account multiplier unavailable"
+  },
+  "locked_source_files": {
+    "config/lab_cuvette_loading/Project_release_v1/standard.yaml": "45cfd2f4361dc7a73411b727ae15e92823b0569ff03ef5d4ede4521213d4e40d",
+    "config/lab_cuvette_loading/Progress_v1_2/progress.json": "683605f454c6811a89bd2d980793752ce735ba54298bf224b7d282d851809753",
+    "config/lab_cuvette_loading/Project_v1/policies/pi05_libero.yaml": "abedacd31bb9f9144e61aece52ea21cf0b3bb680dec5f1af9a2e7e0414e216ef",
+    "config/lab_cuvette_loading/Project_v1_1/policies/cubence_gpt6_context2_640high_temporal_detail_active_view_self_state.json": "5cb577c8f5e50f136b7adf8ae80c23c6d2386e52c888f7b68a047aa761cdce38",
+    "policy/backends/cubence.py": "faad038ba6408037a3c824983f00358c11f4840b63d25df91f276dfdb23bf594",
+    "policy/backends/cubence_tools.py": "30086b2b07c88424af32cfe52a6deff3310fade12179981d7044b6f7d22f2a23",
+    "policy/backends/cubence_project_v1_1_tools.py": "0f196f9e541228c2c1ceb1b9c6a2cf17e840a2f1a0f24b21643094bc8fd92614",
+    "policy/backends/cubence_project_v1_1_self_state.py": "f115eb3eba5a921c88fb4a7ed8bb97c4ebd58b5607cb477509fa29a610332041",
+    "policy/backends/cubence_project_v1_1_active_view.py": "bc726756a1873eaf0da22f575d2c6b0f5bd7f1976ae183670746750caeec5843",
+    "policy/backends/cubence_project_v1_1_visual_context.py": "df8ed2781ddd273ce1226b2ea40d0b38ee9f2779c89b18bd2057c4ab9e523ed6",
+    "policy/backends/cubence_project_v1_1_side_detail.py": "4f1b481fb3e724252beeb9c8453f20914e744ecfa94aeb9054c85110c4596061",
+    "policy/backends/rpent_compat.py": "c1205a9d1ad936da108845b0d2d3123dac133067f2005b4d366a13c1e57e8da7",
+    "policy_backends/lab_cuvette_env_v1/pi05_server.py": "0e626aea83f12e7182510a1d841e92564efcd3bc881e16453101cf82bd042231",
+    "policy_backends/lab_cuvette_env_v1/pi05_rollout.py": "b17c08f316a9641bf9c0a519c6701af8fd3674e8e7c805f3c247ab0fc112e86b",
+    "policy_backends/lab_cuvette_env_v1/policy_adapters.py": "bc58d05ab88d26c3c502253f51db724c6567ca99ea0756cd2cae2f461e298dde",
+    "policy_backends/lab_cuvette_env_v1/policy_runner.py": "62860709199e84aceb7863c32f08efa8fab6e4422116b21267368e61a3723594",
+    "demos/lab_cuvette_project_release_v1/launch.py": "5b4dd892f5ec20cf11e05cced82921e1a9be49e362a88d32b588b76c2c7ef42f",
+    "demos/lab_cuvette_project_release_v1/environment.py": "f33aeea59e4b598ad3da1c6e130337f4adb144fc6f21e4c45c76b21d8bec2a98",
+    "demos/lab_cuvette_project_v1_1/scorer.py": "eb19daf43997f299428d8f5fb4f577dfcb4f3d65b6f719fd37041f4a045ab74f",
+    "demos/lab_cuvette_progress_v1/core.py": "3de919ff528075f711df6d28485372e0538007736d3ee5042747edaba663fc9d",
+    "demos/lab_cuvette_progress_v1/attempts.py": "c05501192d3a830733869ab5a512274a781b99f38ba1835192c71cfcea370167",
+    "demos/lab_cuvette_progress_v1/online.py": "a555405cac065028c9215f3be0f176189f47a2a52298babdde02eae9d5ec2d97"
+  },
+  "prohibited_policy_inputs": [
+    "object_truth_pose",
+    "precise_target_error",
+    "teacher_waypoint",
+    "Progress",
+    "scorer_result"
+  ],
+  "recording": {
+    "formal_purpose": "policy_evaluation",
+    "diagnostic_purpose": "lifecycle_diagnostic",
+    "record_mode": "eval",
+    "progress": "v1.2",
+    "continuous_side_and_wrist": true
+  },
+  "analysis": {
+    "primary_denominator": "All started formal episodes, service failures retained",
+    "confidence_interval": "Wilson95percent per group fixed scene repeats",
+    "historical_in_formal": false,
+    "reward_changed": false,
+    "scorer_changed": false
+  }
+}
