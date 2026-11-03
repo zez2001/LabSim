@@ -79,6 +79,15 @@ from valid depth. Drift uses the three original physical-rate attempt scopes.
 Group continuous summaries first reduce each episode, then weight episodes
 equally; long trajectories do not receive extra weight through frame pooling.
 
+Post-release stability statistics use only actual control endpoints at or after
+the first physically confirmed `released` event. An episode that never releases
+has `post_release_stable_duration_status: not_applicable` and null maxima. Raw
+Progress pre-release zero values are preserved in source files and excluded
+from this statistic. `maximum.post_release_stable_duration_s` is the explicit
+field; `maximum.stable_duration_s` and CSV
+`maximum_continuous_stable_duration_s` remain aliases with the same applicable
+scope. CSV also exposes `maximum_post_release_stable_duration_s` and its status.
+
 The analysis verifies source identities, recorded Progress hashes, monotonically
 increasing and adjacent control transitions, event/summary timing, and event-only
 attempt replay. The run's independent closure verifier remains responsible for

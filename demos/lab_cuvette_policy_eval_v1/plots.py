@@ -199,6 +199,11 @@ def plot_results(result_path, manifest_path, output):
                     unavailable = 'N/A\nTarget operation region not reached'
                 ax.text(.5, .5, unavailable, transform=ax.transAxes, ha='center', va='center', color='#666666')
                 ax.set_yticks([])
+                # An empty Matplotlib axis defaults to 0..1, which would look
+                # like a measured one-second episode. Keep the actual observed
+                # simulation interval even when the metric itself is N/A.
+                if c['time'] and c['time'][-1] > c['time'][0]:
+                    ax.set_xlim(c['time'][0], c['time'][-1])
             ax.set(xlabel='Simulation time (s)', ylabel=unit,
                 title=f"{e['trial_id']}: {title}")
             ax.grid(alpha=.18)

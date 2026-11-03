@@ -122,6 +122,7 @@ def _scan_progress(path, summary, events):
     maximum = dict(valid_insertion_progress=_empty_extreme('1'),
         valid_insertion_depth_m=_empty_extreme('m'),
         stable_duration_s=_empty_extreme('s'),
+        post_release_stable_duration_s=_empty_extreme('s'),
         post_release_clearance_m=_empty_extreme('m'))
     minimum = dict(grasp_approach_position_error_m=_empty_extreme('m'),
         target_lateral_error_m=_empty_extreme('m'), target_tilt_rad=_empty_extreme('rad'),
@@ -130,14 +131,14 @@ def _scan_progress(path, summary, events):
     region_values = {name: [] for name in ('target_lateral_error_m', 'target_tilt_rad', 'target_yaw_error_rad')}
     milestones = summary.get('milestones') or summary.get('stages') or {}
     release_t = finite((milestones.get('released') or {}).get('first_confirmed_t'))
-    endpoint_count = transition_count = region_count = applicable_count = 0
+    endpoint_count = transition_count = region_count = applicable_count = post_release_count = 0
     last_t = last_next = None
     previous_after = None
     errors, transition_event_ids, identities = [], set(), set()
     first_t = None
 
     def snapshot(s):
-        nonlocal endpoint_count, region_count, applicable_count, last_t, first_t
+        nonlocal endpoint_count, region_count, applicable_count, post_release_count, last_t, first_t
         if not isinstance(s, dict):
             for name in counts:
                 counts[name]['unknown'] += 1
@@ -175,11 +176,16 @@ def _scan_progress(path, summary, events):
                     region_values[name].append(value)
                     _update_extreme(minimum, name, value, t, minimum=True)
         if release_t is not None and t is not None and t >= release_t:
+            post_release_count += 1
             clearance = metric(s, 'gripper_object_clearance_m')
             _update_extreme(maximum, 'post_release_clearance_m', clearance, t)
             _update_extreme(minimum, 'post_release_clearance_m', clearance, t, minimum=True)
             post_release_clearance_final.update(value=finite(clearance), t=t)
-        _update_extreme(maximum, 'stable_duration_s', metric(s, 'stable_duration_s'), t)
+            # The core's pre-release zero remains unchanged in raw evidence.
+            # Evaluation statistics apply only after actual physical release;
+            # never reaching release is N/A, not an observed zero-second hold.
+            _update_extreme(maximum, 'post_release_stable_duration_s', metric(s, 'stable_duration_s'), t)
+            _update_extreme(maximum, 'stable_duration_s', metric(s, 'stable_duration_s'), t)
 
     if path and path.exists():
         for row in json_rows(path):
@@ -206,6 +212,7 @@ def _scan_progress(path, summary, events):
         first_observation_t=first_t, last_observation_t=last_t, evidence_counts={k: dict(v) for k, v in counts.items()},
         maximum=maximum, minimum=minimum, target_operation_region_sample_count=region_count,
         post_release_clearance_final=post_release_clearance_final,
+        post_release_sample_count=post_release_count,
         target_operation_region_definition='entrance_region AND current_attempt_route gates are both true at this actual control endpoint',
         target_error_within_episode={k: numeric_summary(v) for k, v in region_values.items()},
         insertion_applicable_sample_count=applicable_count,
@@ -426,6 +433,9 @@ def analyze_trial(trial, base):
     output['farthest_stage_rank'] = max((STAGE_ORDER.index(name)+1 for name in achieved), default=0)
     output['continuous'] = dict(minimum=scan['minimum'], maximum=scan['maximum'],
         post_release_clearance_final=scan['post_release_clearance_final'],
+        post_release_sample_count=scan['post_release_sample_count'],
+        post_release_stable_duration_status='observed_after_release' if scan['post_release_sample_count'] else 'not_applicable',
+        post_release_stable_duration_definition='maximum original stable_duration_s among actual control endpoints at or after the first physically confirmed released event; stable_duration_s is a compatibility alias of post_release_stable_duration_s; raw pre-release zeros are excluded',
         target_operation_region_sample_count=scan['target_operation_region_sample_count'],
         target_operation_region_definition=scan['target_operation_region_definition'],
         target_error_within_episode=scan['target_error_within_episode'],
@@ -493,7 +503,7 @@ def summarize_group(episodes, group_id):
     }
     for name in ('grasp_approach_position_error_m', 'target_lateral_error_m', 'target_tilt_rad', 'target_yaw_error_rad'):
         scalar['episode_minimum_'+name] = [(e.get('continuous') or {}).get('minimum', {}).get(name, {}).get('value') for e in started]
-    for name in ('valid_insertion_progress', 'valid_insertion_depth_m', 'post_release_clearance_m', 'stable_duration_s'):
+    for name in ('valid_insertion_progress', 'valid_insertion_depth_m', 'post_release_clearance_m', 'stable_duration_s', 'post_release_stable_duration_s'):
         scalar['episode_maximum_'+name] = [(e.get('continuous') or {}).get('maximum', {}).get(name, {}).get('value') for e in started]
     for name in RESOURCE_FIELDS:
         scalar[name] = [e.get('resource', {}).get(name) for e in started]
@@ -567,7 +577,8 @@ def write_results(result, output):
         'farthest_stage', 'attempt_count', 'retry_count', 'event_count', 'analysis_evidence_valid', 'unstarted_reason']
     metrics = ['nearest_grasp_distance_m', 'target_error_status', 'target_xy_mean_m', 'target_tilt_mean_rad',
         'maximum_valid_insertion_progress', 'maximum_applicable_insertion_depth_m',
-        'post_release_clearance_final_m', 'maximum_continuous_stable_duration_s']
+        'post_release_clearance_final_m', 'maximum_continuous_stable_duration_s',
+        'maximum_post_release_stable_duration_s', 'post_release_stable_duration_status']
     for interval in ('operation', 'before_first_target_support', 'support_transfer'):
         metrics += ['maximum_drift_'+interval+'_m', 'maximum_drift_'+interval+'_rad']
     metrics += ['resource_'+k for k in RESOURCE_FIELDS]
@@ -585,7 +596,9 @@ def write_results(result, output):
             maximum_valid_insertion_progress=c.get('maximum', {}).get('valid_insertion_progress', {}).get('value'),
             maximum_applicable_insertion_depth_m=c.get('maximum', {}).get('valid_insertion_depth_m', {}).get('value'),
             post_release_clearance_final_m=c.get('post_release_clearance_final', {}).get('value'),
-            maximum_continuous_stable_duration_s=c.get('maximum', {}).get('stable_duration_s', {}).get('value'))
+            maximum_continuous_stable_duration_s=c.get('maximum', {}).get('stable_duration_s', {}).get('value'),
+            maximum_post_release_stable_duration_s=c.get('maximum', {}).get('post_release_stable_duration_s', {}).get('value'),
+            post_release_stable_duration_status=c.get('post_release_stable_duration_status'))
         for interval in ('operation', 'before_first_target_support', 'support_transfer'):
             attempts = e.get('drift_intervals', {}).get(interval, [])
             for name, suffix in (('maximum_relative_translation_m', 'm'), ('maximum_relative_rotation_rad', 'rad')):

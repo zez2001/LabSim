@@ -106,6 +106,9 @@ def test_outside_target_raw_depth_does_not_count_as_effective_insertion(tmp_path
     assert result['continuous']['maximum']['valid_insertion_depth_m']['value'] is None
     assert result['continuous']['target_error_status'] == 'not_reached'
     assert result['continuous']['minimum']['target_lateral_error_m']['value'] is None
+    assert result['continuous']['maximum']['post_release_stable_duration_s']['value'] is None
+    assert result['continuous']['maximum']['stable_duration_s']['value'] is None
+    assert result['continuous']['post_release_stable_duration_status'] == 'not_applicable'
     assert result['stage_results']['insert']['reached'] is False
     assert result['task_evaluable'] is True  # actual safety failure is task evidence
     assert result['scan']['endpoint_count'] == 3  # shared boundary is not counted twice
@@ -119,6 +122,26 @@ def test_target_error_is_only_measured_at_applicable_endpoints(tmp_path):
     assert result['continuous']['maximum']['valid_insertion_depth_m']['value'] == .0135
     assert result['continuous']['target_operation_region_sample_count'] == 3
     assert result['continuous']['target_error_within_episode']['target_yaw_error_rad']['mean'] == .01
+
+
+def test_stable_duration_statistics_start_only_after_actual_release(tmp_path):
+    p = episode(tmp_path, confirmed=('released',))
+    rows_path = p/'progress_v1.jsonl.gz'
+    with gzip.open(rows_path, 'rt') as f:
+        rows = [json.loads(line) for line in f]
+    for row in rows:
+        for key in ('before', 'after'):
+            s = row[key]
+            s['metrics']['stable_duration_s']['value'] = 99. if s['t'] < .05 else 3.+s['t']
+    with gzip.open(rows_path, 'wt') as f:
+        for row in rows:
+            f.write(json.dumps(row)+'\n')
+    result = analyze_trial(trial(p), tmp_path)
+    assert result['continuous']['post_release_sample_count'] == 2
+    assert result['continuous']['post_release_stable_duration_status'] == 'observed_after_release'
+    assert result['continuous']['maximum']['post_release_stable_duration_s']['value'] == 3.2
+    assert result['continuous']['maximum']['stable_duration_s']['value'] == 3.2
+    assert result['continuous']['maximum']['post_release_stable_duration_s']['t'] == .2
 
 
 def test_unknown_evidence_not_assigned_failure_and_confirmation_has_time(tmp_path):
@@ -234,6 +257,7 @@ def test_episode_weighting_and_missing_times_are_not_frame_weighted_or_zero():
     assert group['stage_rates']['insert']['first_confirmed_time_s']['n'] == 0
     assert group['stage_rates']['insert']['first_confirmed_time_s']['mean'] is None
     assert group['episode_equal_weighted']['success_completion_time_s']['n'] == 0
+    assert group['episode_equal_weighted']['episode_maximum_post_release_stable_duration_s']['n'] == 0
 
 
 def test_manifest_does_not_duplicate_formal_episode_and_writes_portable_tables(tmp_path):
@@ -251,6 +275,9 @@ def test_manifest_does_not_duplicate_formal_episode_and_writes_portable_tables(t
     assert csv_result['target_error_status'] == 'not_reached'
     assert csv_result['maximum_applicable_insertion_depth_m'] == ''
     assert csv_result['target_xy_mean_m'] == ''
+    assert csv_result['maximum_continuous_stable_duration_s'] == ''
+    assert csv_result['maximum_post_release_stable_duration_s'] == ''
+    assert csv_result['post_release_stable_duration_status'] == 'not_applicable'
     assert (output/'stage_rates.csv').read_text(encoding='utf-8-sig').splitlines()[0].startswith('group_id,stage,')
     with pytest.raises(FileExistsError):
         write_results(result, output)
@@ -294,6 +321,9 @@ def test_actual_historical_progress12_read_only_protocol(case, episode_dir, expe
     assert file_sha256(p/'result.json') == original_hash
     assert file_sha256(base/case/'progress_summary.json') == progress_hash
     assert summarize_group([result], 'gpt')['started'] == 0
+    if 'teacher' in case:
+        assert result['continuous']['post_release_stable_duration_status'] == 'observed_after_release'
+        assert result['continuous']['maximum']['post_release_stable_duration_s']['value'] >= 3.
     if 'pi05' in case:
         assert result['continuous']['maximum']['valid_insertion_progress']['value'] == 0.
         assert result['continuous']['maximum']['valid_insertion_depth_m']['value'] is None
