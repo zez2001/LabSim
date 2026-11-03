@@ -8,6 +8,53 @@ from tasks.lab_cuvette_loading_project_v1_1 import LabCuvetteProjectV11
 
 
 class LabCuvetteProjectRelease(LabCuvetteProjectV11):
+    def _progress_enabled(self):
+        cfg = getattr(self, 'base_cfg', {})
+        progress = cfg.get('progress', {}) if hasattr(cfg, 'get') else getattr(cfg, 'progress', {})
+        return bool(progress.get('enabled', False) if hasattr(progress, 'get') else
+                    getattr(progress, 'enabled', False))
+
+    def _progress_error(self, error, operation):
+        failure = dict(type=type(error).__name__, message=str(error), operation=operation)
+        self._progress_unhandled_error = failure
+        if isinstance(getattr(self, '_result', None), dict):
+            self._result.update(progress_status='partial', progress_summary='progress_failure.json')
+        try:
+            if getattr(self, 'episode_dir', None):
+                self._write(self.episode_dir / 'progress_failure.json', dict(
+                    progress_status='partial', errors=[failure], original_task_result_preserved=True))
+        except Exception:
+            pass
+
+    def _finish_progress(self, termination=None, *, interrupted=False):
+        if not self._progress_enabled() and getattr(self, '_progress_session', None) is None:
+            return
+        try:
+            from demos.lab_cuvette_progress_v1.online import finish
+            finish(self, termination, interrupted=interrupted)
+        except Exception as error:
+            self._progress_error(error, 'finish')
+            # Even an integration error outside the writer's own safeguards
+            # must release its handles before the physical owners are reused.
+            writer = getattr(getattr(self, '_progress_session', None), 'writer', None)
+            if writer is not None:
+                try:
+                    writer.close()
+                except Exception as close_error:
+                    self._progress_error(close_error, 'emergency-close')
+
+    def __setattr__(self, name, value):
+        super().__setattr__(name, value)
+        if name in ('recorder', 'collector') and value is not None and self._progress_enabled():
+            # The base reset captures step 0 immediately after constructing its
+            # recorder. Bind this instance here, before that first capture;
+            # installing only after super()._reset() would lose early gravity.
+            try:
+                from demos.lab_cuvette_progress_v1.online import bind_owner
+                bind_owner(self, name, value)
+            except Exception as error:
+                self._progress_error(error, 'bind:' + name)
+
     def _reset(self, seed=None, options=None):
         started = time.perf_counter()
         observation, info = super()._reset(seed, options)
@@ -81,6 +128,8 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
             finally:
                 self.ctx = None
         self._cleanup_errors = errors
+        self._finish_progress(dict(termination_reason='EPISODE_RESOURCE_CLEANUP',
+            failure_type='PROCESS_INTERRUPTED'), interrupted=True)
         from demos.lab_cuvette_project_release_v1.recording import persist_closed_receipts
         try:
             persist_closed_receipts(self)
@@ -104,6 +153,8 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
                 self.recorder.close()
                 from demos.lab_cuvette_project_release_v1.recording import persist_closed_receipts
                 persist_closed_receipts(self)
+                self._finish_progress(dict(termination_reason=termination_reason, failure_type=failure_type),
+                    interrupted=failure_type in ('PROCESS_INTERRUPTED', 'EXECUTOR_FAILURE'))
                 self._write(self.episode_dir / 'finalization_timing.json', dict(
                     wall_seconds=time.perf_counter() - started,
                     publication_state='prepared_for_commit', episode_id=self.episode_id))

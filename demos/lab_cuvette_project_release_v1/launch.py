@@ -40,6 +40,8 @@ def parser():
                    help='Persistence only; online safety/scoring sample rates are unchanged')
     p.add_argument('--record-purpose', choices=RECORD_PURPOSES,
                    help='Explicit dataset intent; independent of outcome and qualification')
+    p.add_argument('--progress', action='store_true',
+                   help='Record Progress v1 sidecars at every control transition; diagnostic only')
     return p
 
 
@@ -75,6 +77,11 @@ def main(argv=None):
     cfg.release.record_purpose = select_record_purpose(args.record_purpose, backend=args.backend,
         execution_purpose=args.execution_purpose)
     cfg.experiment.truth_teacher = args.backend == 'teacher'
+    if args.progress:
+        if 'progress' not in cfg:
+            cfg.progress = dict(enabled=True, configuration={})
+        else:
+            cfg.progress.enabled = True
     if args.execution_purpose == 'collect' and cfg.asset_id != 'cuvette_xy_1000':
         raise ValueError('Fixed Project_v1 collection retains cuvette_xy_1000; use an independent demo/eval configuration for another registered asset')
     if args.controlled_stop_depth_mm is not None:

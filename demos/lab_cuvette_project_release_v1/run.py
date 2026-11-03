@@ -117,6 +117,8 @@ def parser():
     p.add_argument('--execution-purpose', choices=('demo', 'collect', 'eval'), default=None)
     p.add_argument('--record-purpose', choices=RECORD_PURPOSES,
                    help='Acceptance sequence intent: lifecycle_diagnostic or resource_probe')
+    p.add_argument('--progress', action='store_true',
+                   help='Record optional Progress v1 sidecars; original physical scoring is unchanged')
     return p
 
 
@@ -139,6 +141,11 @@ def main(argv=None):
         cfg.env.execution_purpose = args.execution_purpose
     cfg.release.record_purpose = select_record_purpose(args.record_purpose, backend='teacher',
         execution_purpose=cfg.env.get('execution_purpose'), sequence=True)
+    if args.progress:
+        if 'progress' not in cfg:
+            cfg.progress = dict(enabled=True, configuration={})
+        else:
+            cfg.progress.enabled = True
     from demos.lab_cuvette_project_v1.assets import load_lock
     asset_revision = load_lock()['revision']
     print('LABSIM_RELEASE', json.dumps(dict(version=cfg.version, config=str(args.config.resolve()),

@@ -86,6 +86,7 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     commands = p.add_subparsers(dest="command", required=True)
     commands.add_parser("unit", help="Single-cell instrument units; use unit --help").add_argument("unit_args", nargs=argparse.REMAINDER)
+    commands.add_parser("progress", help="Cuvette Progress v1 offline analysis and report; use progress --help").add_argument("progress_args", nargs=argparse.REMAINDER)
     doctor = commands.add_parser("doctor", help="CPU-only runtime, LFS and frozen-scene checks")
     doctor.add_argument("--json", action="store_true", help="Print a machine-readable diagnostic")
     doctor.add_argument("--project-version", type=project_version, choices=tuple(PROJECT_RELEASES), default="Project_v1",
@@ -157,6 +158,8 @@ def parser():
     dataset.add_argument("--output", required=True, help="New JSON read-check path")
     dataset.add_argument("--dry-run", action="store_true")
     for command in (demo, evaluation, serve, collect):
+        command.add_argument("--progress", action="store_true",
+            help="Opt in to causal Progress v1 sidecars (Project_release_v1); task scoring and reward stay unchanged")
         command.add_argument("--sequence", nargs="+", choices=("teacher", "early_finish", "no_progress", "unreachable", "service_timeout", "user_interrupt"),
             help="Release-only same-process acceptance: teacher/finish/time-limit/unreachable; service_timeout/user_interrupt are controlled injections. Omit for the normal selected backend")
         command.add_argument("--record-mode", choices=("collect", "eval", "diagnostic"),
@@ -194,6 +197,8 @@ def closed_collection(collection):
 
 def build_command(args):
     """Build real subprocess argv without shell interpolation or output writes."""
+    if getattr(args, "progress", False) and getattr(args, "project_version", None) != "Project_release_v1":
+        raise ValueError("--progress requires --project-version Project_release_v1")
     if getattr(args, "record_mode", None) is not None and getattr(args, "project_version", None) != "Project_release_v1":
         raise ValueError("--record-mode is supported only by --project-version Project_release_v1")
     if getattr(args, "record_purpose", None) is not None and getattr(args, "project_version", None) != "Project_release_v1":
@@ -224,6 +229,8 @@ def build_command(args):
             command.append("--headless")
         if getattr(args, "gui", False):
             command.append("--gui")
+        if args.progress:
+            command.append("--progress")
         return command
     if args.command in ("demo", "eval", "serve") or (args.command == "collect" and args.phase is None):
         if not args.output:
@@ -248,6 +255,8 @@ def build_command(args):
                 "demonstration" if args.command in ("demo", "collect") and args.backend == "teacher"
                 else "policy_evaluation")
             command += ["--record-mode", record_mode, "--record-purpose", record_purpose]
+            if args.progress:
+                command.append("--progress")
         for name in ("provider_config", "budget_ledger", "max_calls", "controlled_stop_depth_mm", "port", "asset_id"):
             value = getattr(args, name, None)
             if name == "max_calls" and args.backend != "gpt6":
@@ -453,6 +462,9 @@ def main(argv=None):
     if requested and requested[0] == "unit":
         from demos.cell_units.run import main as unit_main
         return unit_main(requested[1:])
+    if requested and requested[0] == "progress":
+        from demos.lab_cuvette_progress_v1.__main__ import main as progress_main
+        return progress_main(requested[1:])
     args = parser().parse_args(argv)
     if str(ROOT) not in sys.path:
         sys.path.insert(0, str(ROOT))

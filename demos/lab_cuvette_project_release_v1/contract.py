@@ -17,6 +17,9 @@ def scene_contract(cfg, geometry_audit=None):
         from omegaconf import OmegaConf
         scene_cfg = OmegaConf.to_container(cfg, resolve=True)
     scene_cfg.get('release', {}).pop('record_purpose', None)
+    # Progress is an optional observer with its own resolved configuration and
+    # hash. Its diagnostic settings are not physical/control scene settings.
+    scene_cfg.pop('progress', None)
     baseline = previous_contract(scene_cfg, geometry_audit)
     names = (
         'tasks/lab_cuvette_loading_project_release.py',
