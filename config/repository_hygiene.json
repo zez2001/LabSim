@@ -1,0 +1,45 @@
+{
+  "schema": "labsim.repository_hygiene_policy.v1",
+  "baseline_commit": "137f1b20b36f821894b6387ba36ee592231c8b1f",
+  "new_file_max_bytes": 5242880,
+  "new_file_limit_reason": "5 MiB bounds new Git payloads and growth of existing large files; LFS declared object bytes count, rather than its small pointer. Existing unchanged or non-growing large files are grandfathered.",
+  "text_scan_max_bytes": 2097152,
+  "current_markdown": [
+    "*.md",
+    "docs/development/*.md",
+    "docs/agent_handoff/README.md",
+    "docs/lab_cuvette_loading/Project_release_v1/README.md",
+    "docs/lab_cuvette_loading/Project_release_v1/data_usage.md",
+    "docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md",
+    "policy/backends/*.md",
+    ".cursor/rules/*.mdc",
+    "docs/history/README.md",
+    "docs/history/RESULTS.md",
+    "docs/archive/*.md",
+    "docs/archive/**/*.md",
+    "demos/cell_units/README.md",
+    "docs/cell_assets/*.md"
+  ],
+  "exceptions": [
+    {
+      "path": "tests/fixtures/repository_hygiene/sample_episode.h5",
+      "purpose": "Small deterministic reader test fixture; never a recorded experiment trajectory.",
+      "max_bytes": 65536
+    },
+    {
+      "path": "docs/assets/project-thumbnail.png",
+      "purpose": "Curated project navigation thumbnail.",
+      "max_bytes": 262144
+    },
+    {
+      "path": "docs/showcase/Project_release_v1/teacher-demo.mp4",
+      "purpose": "Explicitly curated short release showcase, with provenance reviewed alongside this policy.",
+      "max_bytes": 10485760
+    },
+    {
+      "path": "assets/robots/Franka.usd",
+      "purpose": "Formal baseline robot scene input; preserve the scene dependency, not a runtime recording.",
+      "max_bytes": 268435456
+    }
+  ]
+}

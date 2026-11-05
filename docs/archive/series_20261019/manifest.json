@@ -1,0 +1,105 @@
+{
+  "schema": "labsim.historical_archive.v1",
+  "archive_id": "series_20261019-docx-pilot-20261105",
+  "baseline_commit": "137f1b20b36f821894b6387ba36ee592231c8b1f",
+  "repository_url": "https://github.com/zez2001/LabSim",
+  "scope": "One historical DOCX only; original bytes and repository-relative path preserved. This is engineering archiving, not a new experiment.",
+  "archive": {
+    "filename": "LabSim-series_20261019-docx-137f1b20.zip",
+    "size_bytes": 2100985,
+    "sha256": "6f19760443cf1905afb561ba80b721f78400a75bc6761d0e917ed743989c6a5c",
+    "format": "zip",
+    "compression": "stored",
+    "member_timestamp_utc": "2026-10-19T00:00:00Z",
+    "file_count": 1,
+    "payload_bytes": 2100765
+  },
+  "files": [
+    {
+      "path": "docs/series_20261019/LabSim系列实验总报告20261019.docx",
+      "size_bytes": 2100765,
+      "sha256": "cb6d6ff3521f181f20f56c913395aaf7d4700ddd50cf12f15a3f6534d16493fe",
+      "git_blob_oid": "fc23aed8e59ac31ea21a2bf8ffa9af2c2e205a15",
+      "git_mode": "100644",
+      "lfs_pointer": false,
+      "source": "https://github.com/zez2001/LabSim/blob/137f1b20b36f821894b6387ba36ee592231c8b1f/docs/series_20261019/LabSim系列实验总报告20261019.docx"
+    }
+  ],
+  "release": {
+    "tag": "archive-series-20261019-20261105",
+    "title": "Historical archive pilot: series_20261019 DOCX (baseline 137f1b20)",
+    "target_commit": "137f1b20b36f821894b6387ba36ee592231c8b1f",
+    "archive_download_url": "https://github.com/zez2001/LabSim/releases/download/archive-series-20261019-20261105/LabSim-series_20261019-docx-137f1b20.zip",
+    "manifest_asset_name": "LabSim-series_20261019-docx-137f1b20.manifest.json",
+    "manifest_download_url": "https://github.com/zez2001/LabSim/releases/download/archive-series-20261019-20261105/LabSim-series_20261019-docx-137f1b20.manifest.json",
+    "checksums_asset_name": "LabSim-series_20261019-docx-137f1b20.SHA256SUMS.txt",
+    "checksums_download_url": "https://github.com/zez2001/LabSim/releases/download/archive-series-20261019-20261105/LabSim-series_20261019-docx-137f1b20.SHA256SUMS.txt",
+    "publication_note": "These are intended stable URLs. Their presence in this manifest is not proof of publication or successful download; see archive README for verification status."
+  },
+  "selection_checks": {
+    "candidate_proof_sha256": "f03f043b48c1c8bea7ed267e3ec4fc6067a09ce6310ab70415285f9e1b0f9b5a",
+    "audit_csv_sha256": "8b42ea47ed609132dd1d4ae7b9dc91524623806114e80397c460c71f8a022df1",
+    "source_matches_baseline_git_blob": true,
+    "source_clean_at_selection": true,
+    "lfs_download_or_resolution_needed": false,
+    "protected67_exact_intersection": [],
+    "protected26_group_intersection": [],
+    "colleague65_intersection": [],
+    "test_runtime_or_package_inputs_selected": false,
+    "package_manifests_reviewed": 16,
+    "protected_summary": "Audited 67 additional keep paths, 26 exception groups, and 65 colleague changes; candidate intersects none.",
+    "current_navigation_to_update": [
+      "docs/history/README.md: series_20261019 historical DOCX entry should point to docs/archive/series_20261019/README.md"
+    ],
+    "historical_references_retained": [
+      {
+        "path": "LABSIM_PROGRESS.md",
+        "line": 31,
+        "kind": "historical_navigation",
+        "resolution": "retain original bytes; current history/archive navigation maps to baseline source and released archive"
+      },
+      {
+        "path": "docs/series_20261019/render_verification.json",
+        "line": 2,
+        "kind": "historical_render_record",
+        "resolution": "retain original bytes"
+      },
+      {
+        "path": "docs/lab_cuvette_loading/V0_demo03/preservation_verification.json",
+        "line": 101,
+        "kind": "historical_inventory",
+        "resolution": "retain original bytes"
+      },
+      {
+        "path": "docs/lab_cuvette_loading/V0_demo03/preservation_final_verification.json",
+        "line": 106,
+        "kind": "historical_inventory",
+        "resolution": "retain original bytes"
+      },
+      {
+        "path": "demos/lab_cuvette_demo02/preservation.py",
+        "line": 16,
+        "kind": "dynamic_recursive_snapshot",
+        "resolution": "kept unchanged; snapshots present files, verifies prior user snapshot if provided; old snapshots may require restoration outside current checkout"
+      }
+    ],
+    "historical_mapping": {
+      "raw_report": "https://github.com/zez2001/LabSim/blob/137f1b20b36f821894b6387ba36ee592231c8b1f/docs/series_20261019/report.md",
+      "raw_navigation": "https://github.com/zez2001/LabSim/blob/137f1b20b36f821894b6387ba36ee592231c8b1f/LABSIM_PROGRESS.md",
+      "raw_source_manifest": "https://github.com/zez2001/LabSim/blob/137f1b20b36f821894b6387ba36ee592231c8b1f/docs/series_20261019/source_manifest.json",
+      "mapping_rule": "Every files[].path maps unchanged to the ZIP member of the same name and to blob/<baseline_commit>/<path>. Raw historical Markdown/JSON and hashes are not rewritten."
+    }
+  },
+  "limits": [
+    "Static/dynamic source review does not prove absence of external consumers. Users needing old snapshot verification must use fixed baseline checkout or separately restored tree.",
+    "DOCX does not represent new physics validation; media and Markdown remain tracked.",
+    "The legacy demo02 recursive preservation helper remains unchanged. A fresh snapshot covers files present; checking an old snapshot that expected this DOCX requires a baseline checkout or separately restored tree.",
+    "The ZIP contains only the listed DOCX, not the rest of the milestone, external media, H5 data, models, environment, or code. All unselected tracked files stay in place."
+  ],
+  "restoration": {
+    "helper": "scripts/restore_history_archive.py",
+    "destination_rule": "A new directory outside any existing Git worktree; no overwrite or repository mutation.",
+    "layout": "Original repository-relative paths below the new destination root.",
+    "hash_requirement": "Archive SHA256 and size plus every member path, byte size and SHA256 must pass before restoration creates output."
+  }
+}

@@ -1,5 +1,7 @@
 # 历史实验与证据索引
 
+本页保留早期版本范围；近期策略、Progress、cell unit 与里程碑证据统一见[结果索引](RESULTS.md)。
+
 当前项目功能、安装和稳定调用入口见[项目主页](../../README.md)，开发接入见[ONBOARDING](../development/ONBOARDING.md)。推荐使用版本为 [Project_release_v1](../lab_cuvette_loading/Project_release_v1/README.md)。本页保留历史实验的原有范围、结果和局限，不把旧阶段的阻塞或临时工程成功混入当前正式任务。
 
 - **Size_v1，历史固定场景尺寸实验**：[使用说明](../../demos/lab_cuvette_size_v1/README.md)、[最终报告与连续视频](../lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)、[40 条数据审计](../lab_cuvette_loading/Size_v1/data/final40_actual/README.md)。固定原 A 座，以尺寸变体完成完整装载和标准场景 20 成功 / 20 受控失败。
@@ -14,6 +16,6 @@
 - **minimal_precision_insertion**：[运行说明](../../demos/minimal_precision_insertion/README.md)、[实验记录](../experiments/minimal_precision_insertion_20261013.md)。亚毫米偏差、物理步长与独立判分实验。
 - **minimal_pick**：[运行说明](../../demos/minimal_pick/README.md)。独立 Franka / 烧杯物理抓取、采集、回放及早期训练接口。
 
-系列背景见[规划书与背景说明](../background/README.md)，早期汇总见 [LABSIM_PROGRESS.md](../../LABSIM_PROGRESS.md) 和 [TASK_STATUS.md](../../TASK_STATUS.md)。这些文件中的旧分支链接和时间点是历史记录；当前共享入口以根 README 为准。
+系列背景见[规划书与背景说明](../background/README.md)，早期汇总见 [LABSIM_PROGRESS.md](https://github.com/zez2001/LabSim/blob/137f1b20b36f821894b6387ba36ee592231c8b1f/LABSIM_PROGRESS.md) 和 [TASK_STATUS.md](../../TASK_STATUS.md)。这些文件中的旧分支链接和时间点是历史记录；当前共享入口以根 README 为准。
 
-交接整理前的根 README 按原字节备份在 [README_before_handoff_20261022.md](README_before_handoff_20261022.md)。LabUtopia 上游说明、引用及许可证信息单独保留在 [docs/upstream](../upstream/README.labutopia.md)。历史中间分支的备份标签和删除清单以本轮仓库治理记录为准；删除分支不删除这些历史目录、提交或标签。
+交接整理前的根 README 按原字节备份在 [README_before_handoff_20261022.md](README_before_handoff_20261022.md)。LabUtopia 上游说明、引用及许可证信息单独保留在 [docs/upstream](../upstream/README.labutopia.md)。历史中间分支的备份标签和删除清单见[固定归档清单](../development/branch_archive_20261022.json)；当前规则见[AGENTS](../../AGENTS.md)。删除分支不删除这些历史目录、提交或标签。

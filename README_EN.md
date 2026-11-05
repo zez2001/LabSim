@@ -12,7 +12,11 @@ The recommended version is **`Project_release_v1`**, on the long-lived **`codex/
 
 [Watch a continuous complete Teacher episode](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/teacher_full.mp4), from the rack initial state through post-retreat stability. Teacher uses privileged task state for physical grasping and loading. Policy-specific capabilities are listed below.
 
-## Capabilities
+## Supported tasks
+
+Single-cell units are a parallel extension with bounded mechanical operations for five instruments, including derived PCR wells. See [single-cell units](demos/cell_units/README.md) and use `./labsim unit list` to list them. Expert recordings and limited policy calls are reported separately; they do not establish a complete single-cell experiment or real-world calibration.
+
+[Asset APIs and demos](demos/cell_assets/README.md) retain pinned sources, Franka contact demonstrations and scope limits. [Public source assets and licensing](docs/cell_assets/HuggingFace上传指南.md) describe the HF mirror and unpublished derivatives; historical outcomes are in the [unified results index](docs/history/RESULTS.md).
 
 | Module | Function | Typical use |
 |---|---|---|
@@ -23,11 +27,11 @@ The recommended version is **`Project_release_v1`**, on the long-lived **`codex/
 | Independent evaluation | Stage progress, full success, termination reason, record integrity, physics quality and data qualification | Policy comparisons and demonstration filtering |
 | Project interfaces | Unified CLI, Teacher, direct GPT control, π0.5 RPC, Harness and custom-policy lifecycle | Internal reuse and external policy evaluation |
 
-The fixed standard scene uses `cuvette_xy_1000` (10×10×67.5 mm size hypothesis; assumed engineering mass 20 g), source slot A1, a blue vessel at F6, and the original internal A seat `candidate_far_hinge`. Physics runs at 240 Hz and control at 60 Hz. Collection and training-data preparation disable scene randomization. See [asset specifications](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格) for parameter sources and measurement requirements.
+The release uses the fixed standard scene; collection and training-data preparation disable scene randomization. See [asset and physics specifications](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格) for dimensions, mass, rates and pending measurements. This is rigid-body simulation with engineering assumptions for mass, friction and dynamics. A complete Teacher demonstration does not establish completion by another policy.
 
 ## Installation and assets
 
-The validated runtime is Linux, Python 3.11, Isaac Sim 5.1.0 and NVIDIA RTX 4090. Prepare an existing Isaac interpreter and separate geometry tools using [onboarding](docs/development/ONBOARDING.md#准备环境与资产). Run Isaac processes sequentially on one GPU.
+Use Linux, Python 3.11 and Isaac Sim 5.1.0. Prepare an existing Isaac interpreter and separate geometry tools using [onboarding](docs/development/ONBOARDING.md#准备环境与资产). Hardware validation records, workspace layout and deployment checks are in [deployment and delivery](DELIVERY.md).
 
 ```bash
 GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/labsim https://github.com/zez2001/LabSim.git
@@ -65,7 +69,7 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
   --sample-filter success --policy both --output "$LABSIM_RUN/read_success.json"
 ```
 
-Purpose and qualification are independent: `demonstration` selects the cohort; `success` selects qualified complete successes. Normal ACT/DP readers load an actual batch. The 8-D training action is seven absolute arm-joint targets plus one finger position; the executed symmetric 9-D command is recorded separately. Split training and validation by complete episode.
+Purpose and qualification are independent: `demonstration` selects the cohort; `success` selects qualified complete successes. Normal ACT/DP readers load an actual batch. Action formats and the rule for splitting training and validation by complete episode are in the [data contract](docs/lab_cuvette_loading/Project_release_v1/data_usage.md).
 
 The default `relative-links` index must move with its source H5 files, preserving relative paths. `--mode copy` creates a self-contained file while preserving image hardlink aliases. See [data usage and transfer](docs/lab_cuvette_loading/Project_release_v1/data_usage.md) for historical sidecars, qualifications and dependency checks. Both `collect` and `eval` recording modes retain full H5, native video and compressed physics logs; `diagnostic` also retains detailed logs. Recording mode and purpose are separate options.
 
@@ -74,8 +78,8 @@ The default `relative-links` index must move with its source H5 files, preservin
 | Policy | Capability | Entry |
 |---|---|---|
 | Teacher | Complete physical loading demonstrations | `demo` / `collect --backend teacher` |
-| Direct GPT control | Visual closed-loop grasping, extraction and transport | `eval --backend gpt6`, separate credentials and budget |
-| π0.5 | Real continuous model RPC, action receipts, safety termination and data reading | Environment `serve`, model service and adapter client |
+| Direct GPT control | Recorded visual closed-loop grasping, extraction and transport; complete loading has not passed | `eval --backend gpt6`, separate credentials and budget |
+| π0.5 | Real continuous model RPC, receipts, safety termination and reading; these do not establish complete-task success | Environment `serve`, model service and adapter client |
 | Harness | Local RPC integration and existing short interactions | `serve` and Harness client |
 | ACT / DP | Normal dataset readers and actual batch loading | `dataset-check --policy both` |
 | Custom policy | Unified observation, execution and lifecycle | `reset / observe / execute / receipt / status / finish / close` |
@@ -92,22 +96,14 @@ The default `relative-links` index must move with its source H5 files, preservin
   --output outputs/lab_cuvette_loading/Project_release_v1/rpc_001
 ```
 
-Public observations include both cameras, robot state and declared contact signals. Simulation pauses during model inference and advances a defined number of steps during execution. End-effector actions use meters/radians, world/TCP frames and wxyz quaternions. See [the interface guide](docs/development/ONBOARDING.md#策略接口与时序) and [external-policy contract](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md) for limits, receipts and the three image-processing layers. The current π0.5 deployment truncates its task text from 264 to 200 tokens; the [input audit](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md) records its effective input.
+Public observations include both cameras, robot state and declared contact signals. Simulation pauses during model inference. Action frames, units, limits and receipts are in the [interface guide](docs/development/ONBOARDING.md#策略接口与时序). Image processing, task-text/tokenizer truncation and deployment input audits are in the [external-policy contract](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md). Actual policy results and unexecuted scope are collected in the [results index](docs/history/RESULTS.md).
 
 ## Documentation, sources and license
 
 - [Internal usage guide](docs/development/ONBOARDING.md): environment → complete task → collection → reading → policy integration, troubleshooting and implementation map.
 - [Current technical reference](docs/lab_cuvette_loading/Project_release_v1/README.md): assets, interfaces and acceptance evidence.
-- [Loading Progress v1.2](docs/lab_cuvette_loading/Progress_v1_2/README.md): online `--progress`, offline trajectory analysis, stage evidence and visualization; original scoring and reward are preserved.
-- [Frozen policy evaluation](docs/lab_cuvette_loading/Policy_eval_v1/README.md): GPT direct P9 and LIBERO pi0.5 protocols, actual episode results, inputs and resource accounting.
-- [Restored historical debug04 baseline](docs/lab_cuvette_loading/Gpt_debug04_v1/README.md): full strategy identity, historical quantification, one independent current-scene trial and normal-reader evidence.
+- [Unified results index](docs/history/RESULTS.md): Progress, policy evaluation, historical restoration, cell units and milestone evidence, each with its own denominators and unexecuted scope.
 - [Data usage and transfer](docs/lab_cuvette_loading/Project_release_v1/data_usage.md) · [Optional policy deployment](policy/backends/OPTIONAL_POLICIES.md).
 - [History](docs/history/README.md) · [Contributing](CONTRIBUTING.md) · [CPU CI](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) · [Result packages](docs/agent_handoff/README.md).
 
 LabSim builds on [LabUtopia](https://github.com/Rui-li023/LabUtopia); see [upstream references](docs/upstream/README.labutopia.md) and [LICENSE](LICENSE). Asset-specific provenance and authorization are recorded in the [lock file](config/lab_cuvette_loading/Project_v1/assets.lock.json). The project owner authorized public redistribution of the external instrument/cuvette CAD and derivatives. This is rigid-body simulation; real-world mass, friction and dynamics remain engineering assumptions pending calibration.
-
-## Single-cell workflow assets
-
-Five instrument units (including the derived PCR well block), expert recording and GPT-6 / π0.5 evaluation are documented in [single-cell units](demos/cell_units/README.md). Use `./labsim unit list` to list them. The local consolidated HTML shows videos and outcomes on each instrument card.
-
-Source assets and their scope are described in [asset APIs and demos](demos/cell_assets/README.md).

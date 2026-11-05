@@ -1,17 +1,16 @@
 ---
-description: LabSim 项目交接与持续开发规则
+description: LabSim 开发、验证与历史证据保护
 alwaysApply: true
 ---
 
-# LabSim 开发规则
+# 开发边界
 
-- 遵守根 AGENTS.md 与 CONTRIBUTING.md。
-- `codex/labsim` 是长期开发及默认交接入口；`main` 保留上游基线。
-- 修复、文档、重构及同一功能迭代沿用当前分支，不按实验轮次或会话创建分支。
-- 仅独立新功能或用户明确要求才创建 `codex/<feature>`。
-- 已验证修改独立提交、自动推送 origin，并核对远端 SHA；不强制推送。
-- 保留历史资产、配置、输出和原附件，派生版本使用独立命名空间。
-- 冻结数据依赖不能静默修改；接口整理不得改变已有物理语义或成功标签。
-- 根 README 维护项目使用说明；实验过程和报告链接放入 docs。
-- 区分 CPU 检查、实际仿真、真实策略和实物校准，不将未执行工作写成通过。
-- 每轮交付创建只含本轮变化的精简阅读包，保留旧包，按推送后提交生成并核查链接和 SHA；纯工程整理不重复复制旧视频。
+- 根 `AGENTS.md` 是当前协作入口，开发流程见 `CONTRIBUTING.md`。
+- 遵循当前授权的分支范围；独立功能采用 `codex/<feature>`，不按会话拆分分支。
+- Git 保存代码/配置/协议/当前文档/必要 fixture；HF 保存版本化大资产与正式数据；本地忽略输出；Release 保存获授权的里程碑包与代表视频。
+- 保留冻结依赖、源 CAD、历史资产/报告/输出/标签及原始路径和源码指纹；派生版本使用新路径。
+- 不按扩展名或零字符串引用推定文件可删；`docs/` 和 `assets/` 含运行/测试依赖。
+- 保护 cell assets、cell units 及其共享代码、配置、测试与来源说明。
+- 分别报告 CPU、Isaac、真实模型和真机校准，未执行不写通过。
+- README 保留稳定使用说明；历史结果统一经 `docs/history/RESULTS.md` 导航。
+- 暂存后运行 `python3 -B scripts/check_repository_changes.py`；规则门禁不替代适当 CPU 与物理验证。

@@ -4,8 +4,6 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 
 当前推荐版本为 **`Project_release_v1`**，长期开发分支为 **`codex/labsim`**。
 
-本地完整工程为 `SLAI_Lab/labsim/`，资产缓存位于 `local_assets/`，最终结果位于 `results/final/`；代码快照见[交付说明](DELIVERY.md)。
-
 [English](README_EN.md) · [中文导航](README_CN.md) · [组内使用指南](docs/development/ONBOARDING.md) · [版本与技术参考](docs/lab_cuvette_loading/Project_release_v1/README.md) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim)
 
 ## 完整演示
@@ -14,7 +12,11 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 
 [观看连续 Teacher 完整任务](docs/lab_cuvette_loading/Internal_use_v1/20261028/media/teacher_full.mp4)。Teacher 使用任务真值完成物理抓取与装载，视频覆盖来源架初态至撤离后稳定。各策略的使用范围见下方策略表。
 
-## 当前能力
+## 当前支持的任务
+
+单细胞是并行扩展，包含五个仪器的限定机械操作 unit（PCR 为工程派生孔腔），见[单细胞测序 unit](demos/cell_units/README.md)，通过 `./labsim unit list` 查看。Expert 记录和有限策略调用的结果分别统计，不代表完成单细胞实验流程或真机校准。
+
+[设备资产与 API](demos/cell_assets/README.md)保留固定来源、Franka 接触演示与限制；[公开源资产与许可](docs/cell_assets/HuggingFace上传指南.md)说明 HF 镜像及未发布派生物，历史结果见[统一结果索引](docs/history/RESULTS.md)。
 
 | 模块 | 功能 | 典型用途 |
 |---|---|---|
@@ -25,11 +27,11 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 | 独立评测 | 阶段进度、完整成功、终止原因、记录完整性、物理质量与数据资格 | 策略比较、合格示范筛选 |
 | 项目接口 | 统一 CLI、Teacher、GPT 直接控制、π0.5 RPC、Harness、自有策略生命周期 | 组内复用、外部策略评测 |
 
-发布版固定 standard 场景：`cuvette_xy_1000`（10×10×67.5 mm 尺寸假设、20 g 工程质量假设）、来源槽 A1、远角蓝色器皿 F6、原内部 A 座 `candidate_far_hinge`；物理 240 Hz、控制 60 Hz。采集与训练数据准备关闭场景随机化。资产依据、尺寸系列和真实测量待补项集中见[资产说明](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。
+发布版采用固定 standard 场景，采集与训练数据准备关闭场景随机化。资产尺寸、质量、控制频率及真实测量待补项见[资产与物理规格](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。当前是刚体仿真，质量、摩擦与动力学仍有工程假设；完整 Teacher 示范不代表其他策略完成同一任务。
 
 ## 安装与资产获取
 
-已使用的运行环境：Linux、Python 3.11、Isaac Sim 5.1.0、NVIDIA RTX 4090。先准备已有 Isaac 解释器及独立几何工具环境，步骤见[准备环境与资产](docs/development/ONBOARDING.md#准备环境与资产)。同一 GPU 顺序运行 Isaac 进程。
+使用 Linux、Python 3.11 和 Isaac Sim 5.1.0，先准备已有 Isaac 解释器及独立几何工具环境，步骤见[准备环境与资产](docs/development/ONBOARDING.md#准备环境与资产)。硬件验证记录、工作区布局和部署检查见[部署与交付](DELIVERY.md)。
 
 ```bash
 GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/labsim https://github.com/zez2001/LabSim.git
@@ -67,7 +69,7 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
   --sample-filter success --policy both --output "$LABSIM_RUN/read_success.json"
 ```
 
-用途选择与任务资格分开：`demonstration` 选择示范集合，`success` 再筛选合格完整成功。ACT/DP 正常 reader 读取实际 batch；动作是 7 个臂关节绝对位置目标加 1 个单指位置，共 8 维，9 维双指实际命令另存。训练/验证按完整 episode 划分。
+用途选择与任务资格分开：`demonstration` 选择示范集合，`success` 再筛选合格完整成功。ACT/DP 正常 reader 读取实际 batch；动作格式及按完整 episode 划分训练/验证的规则见[数据契约](docs/lab_cuvette_loading/Project_release_v1/data_usage.md)。
 
 索引默认 `relative-links`，须连同来源 H5 保持相对目录移交；`--mode copy` 生成自包含文件并保留图像 hardlink 别名。用途、历史 sidecar、资格规则和移交依赖检查见[数据使用与移交](docs/lab_cuvette_loading/Project_release_v1/data_usage.md)。`collect/eval` 均保存完整 H5、原生视频及压缩物理日志，`diagnostic` 另保留详细日志；记录模式与用途分别配置。
 
@@ -76,8 +78,8 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
 | 策略 | 提供的功能 | 典型入口 |
 |---|---|---|
 | Teacher | 完整物理装载示范 | `demo` / `collect --backend teacher` |
-| GPT 直接控制 | 图像闭环抓取、离架与搬运 | `eval --backend gpt6`，独立凭据与预算 |
-| π0.5 | 真实模型连续 RPC 交互、动作回执、安全终止与数据回读 | 环境 `serve` + 模型服务 + 适配客户端 |
+| GPT 直接控制 | 已记录图像闭环抓取、离架与搬运；完整装载未通过 | `eval --backend gpt6`，独立凭据与预算 |
+| π0.5 | 真实模型连续 RPC、回执、安全终止与回读；不据此声称完整成功 | 环境 `serve` + 模型服务 + 适配客户端 |
 | Harness | 本地 RPC 接入及已有短程调用 | `serve` + Harness 客户端 |
 | ACT / DP | 正常数据 reader 与实际 batch 读取 | `dataset-check --policy both` |
 | 自有策略 | 统一观察、动作执行和生命周期 | `reset / observe / execute / receipt / status / finish / close` |
@@ -94,22 +96,14 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
   --output outputs/lab_cuvette_loading/Project_release_v1/rpc_001
 ```
 
-公开观测提供双相机、机器人状态及声明的接触信号。模型等待时仿真暂停，动作执行按规定物理步推进。末端动作使用米/弧度、world/TCP 坐标系与 wxyz 四元数；具体输入、限幅、回执及图像三层契约见[使用指南](docs/development/ONBOARDING.md#策略接口与时序)和[外部策略契约](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md)。当前 π0.5 部署的任务文本存在 264→200 token 截断，部署审计和处理入口集中在[输入审计](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md)。
+公开观测提供双相机、机器人状态及声明的接触信号。模型等待时仿真暂停。动作坐标、单位、限幅、回执见[接口与时序](docs/development/ONBOARDING.md#策略接口与时序)；图像处理、任务文本/tokenizer 截断与部署输入审计见[外部策略契约](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md)。各策略的真实结果与未执行范围统一见[结果索引](docs/history/RESULTS.md)。
 
 ## 文档导航、来源与许可
 
 - [组内使用指南](docs/development/ONBOARDING.md)：准备环境 → 完整任务 → 采集 → 读取 → 策略接入；常见问题及实现地图。
 - [当前版本技术参考](docs/lab_cuvette_loading/Project_release_v1/README.md)：资产规格、接口和验收证据导航。
-- [装载进展 Progress v1.2](docs/lab_cuvette_loading/Progress_v1_2/README.md)：在线 `--progress`、已有轨迹离线分析、阶段证据和可视化；保留原评分与 reward。
-- [冻结策略量化评测](docs/lab_cuvette_loading/Policy_eval_v1/README.md)：GPT direct P9 与 LIBERO π0.5 的协议、真实逐集结果、输入及成本审计。
-- [历史 debug04 策略恢复与独立复测](docs/lab_cuvette_loading/Gpt_debug04_v1/README.md)：完整策略身份、历史量化、当前标准场景单集结果及读取证据。
+- [统一结果索引](docs/history/RESULTS.md)：Progress、策略评测、历史恢复、cell unit 和里程碑证据；保留各自分母及未执行范围。
 - [数据用途与移交](docs/lab_cuvette_loading/Project_release_v1/data_usage.md) · [可选策略部署](policy/backends/OPTIONAL_POLICIES.md)。
 - [历史版本](docs/history/README.md) · [贡献规范](CONTRIBUTING.md) · [CPU CI](https://github.com/zez2001/LabSim/actions/workflows/cpu-contracts.yml) · [结果阅读包](docs/agent_handoff/README.md)。
 
 项目基于 [LabUtopia](https://github.com/Rui-li023/LabUtopia)，引用见[上游文档](docs/upstream/README.labutopia.md)，代码许可见 [LICENSE](LICENSE)。第三方资产按[锁文件来源与授权](config/lab_cuvette_loading/Project_v1/assets.lock.json)使用；外部仪器与比色皿 CAD 及派生模型获项目所有者公开再分发授权。当前为刚体纯仿真任务；实物质量、摩擦与动力学采用明确工程假设，真实校准另行进行。
-
-## 单细胞前流程数字资产
-
-五个仪器的可调用任务场景（PCR 为工程派生孔腔）、expert 生成及 GPT-6 / π0.5 验证入口见[单细胞测序 unit](demos/cell_units/README.md)。通过 `./labsim unit list` 查看，视频在本地最终 HTML 的对应资产卡片内。
-
-单细胞前流程设备见[设备资产与 API](demos/cell_assets/README.md)：固定来源资产、Franka 接触演示及范围限制。

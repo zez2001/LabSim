@@ -1,68 +1,43 @@
 # 结果阅读包
 
-每轮交付创建一个新目录，只收本轮改动与结果。保留旧包，不打包完整工程、环境、原始 H5 或检查点。完整工程通过 GitHub 分享，原始数据单独交接。
+是否生成阅读包、导出代码或发布，以[当前授权规则](../../AGENTS.md)和本次任务为准。需要阅读包时选一个新目录，只收本轮新增材料；保留旧包，不复制完整工程、环境、原始大 H5 或模型权重。纯工程管理、文档或接口整理通过[统一结果索引](../history/RESULTS.md)及固定提交链接引用旧报告和视频。
 
-数字资产按用户 2026-10-27 的最新要求，只保留 `~/SLAI_Lab/labsim/results/final/` 一套交付，旧日期包已清理。当前 [交接汇报](../cell_assets/交接汇报.md) 列明 4 类限定机械操作、OpenFlexure 失败、剩余缺口及复现方法。HTML 内嵌 40 段视频，必要证据与来源集中保留。本轮已获用户授权提交功能分支并创建 PR，当前交付状态见上述交接汇报。
+包内说明用途、实际已运行/失败/未执行、来源提交与哈希、缺失依赖和剩余问题。新实验按需要包含报告、代表录像、结果表、配置与独立评分证据，并保持相对媒体结构。任务结果、环境有效性、记录完整性和数据资格分别报告，不以正常退出冒充任务成功。
 
-纯工程管理、文档或接口整理只放新的项目文档、相关源码与检查结果，不重复复制旧实验的大视频和报告。新实验需要时加入本轮 DOCX / Markdown、代表录像、结果表、配置及评分证据，保持报告和媒体的相对目录结构。
+## 历史清单与来源
 
-## 选择文件
+根[默认清单](package.json)及带 `_current` 的历史目录是已有交付配方，不保证对应当前任务或可由新检出独立重建。它们可能选择被忽略的原机 `outputs/`；缺失项必须报告 unavailable，并通过原保管者/发布入口回取，不能补造、替换标签或静默下载。
 
-当前默认[清单](package.json)是 [Gpt_debug04_v1 工程反馈包](Gpt_debug04_v1_current/package.json)，收录历史 debug04 恢复、本次正式评测、完整 Progress 与验证证据，先读[工程包说明](Gpt_debug04_v1_current/00_给Agent阅读说明.md)。独立[汇报包清单](Gpt_debug04_v1_current/report_package.json)提供本轮 DOCX 与历史／新正式集各一条完整双视角录像，见[汇报包说明](Gpt_debug04_v1_current/00_汇报包说明.md)。历史组与新组分别统计；完整 H5、模型日志、资产和环境保留工程端。
+- [debug04 工程包](Gpt_debug04_v1_current/package.json)及[汇报包](Gpt_debug04_v1_current/report_package.json)。
+- [Policy_eval 工程包](Policy_eval_v1_current/package.json)及[汇报包](Policy_eval_v1_current/report_package.json)。
+- [Progress](Progress_v1_current/package.json)、[Internal_use](Internal_use_v1_current/package.json)、[Project_release_v1](Project_release_v1_current/package.json)、[Project_v1_1](Project_v1_1_current/package.json)、[Project_v1](Project_v1_current/package.json)。
+- [纯项目交接清单](project_handoff/package.json)；当时数字资产唯一交付目录及特定旧包清理授权保留在[固定提交原说明](https://github.com/zez2001/LabSim/blob/137f1b20b36f821894b6387ba36ee592231c8b1f/docs/agent_handoff/README.md)，不扩展为新任务的清理许可。
 
-此前 [Policy_eval_v1 工程包](Policy_eval_v1_current/package.json)与[汇报包](Policy_eval_v1_current/report_package.json)保留其冻结 GPT-6 direct／π0.5 评测及原始统计范围。
+原清单、先读说明、来源路径和报告保持原字节；为新任务另建清单。source 指向真实仓库内文件，destination 留在包内。清单可组合 `directories`、`files` 和 `readme`；参考现有 JSON schema，不改写旧配方冒充本轮成果。
 
-历史 [Progress v1 结果清单](Progress_v1_current/package.json)保留其原始证据和统计范围。
+## 生成与验证
 
-此前 [Internal_use_v1 文档与内部使用优化清单](Internal_use_v1_current/package.json)及其结果保留。
+先逐项检查 readme、文件和递归目录的实体是否存在，排除未下载 LFS 指针，确认所有包内/未复制引用的依赖。将本轮材料区分为 Git 固定提交内容与原机 external evidence；后者记录原路径、字节数及 SHA256，单独说明并未由 Git 恢复。
 
-历史[Project_release_v1环境发布包](Project_release_v1_current/package.json)、[Project_v1_1](Project_v1_1_current/package.json)、[Project_v1](Project_v1_current/package.json)及旧包保留。
-
-纯项目交接的旧配置仍保留在 [project_handoff/package.json](project_handoff/package.json)，历史实验通过固定提交的 GitHub 链接引用。
-
-清单支持整个目录和独立文件，可组合使用：
-
-```json
-{
-  "schema": "labsim.agent_results_package.v1",
-  "repository_url": "https://github.com/zez2001/LabSim",
-  "readme": "docs/agent_handoff/project_handoff/00_交接阅读说明.md",
-  "directories": [
-    {"source": "docs/development", "destination": "开发接入"}
-  ],
-  "files": [
-    {"source": "README.md", "destination": "项目README.md"}
-  ]
-}
-```
-
-source必须指向仓库内真实内容，destination必须在包内。脚本拒绝越界、symlink、重复或冲突目标、未下载的 LFS 指针和覆盖已有输出。旧的仅含directories的清单继续兼容。
-
-Markdown里已选中的文件链接会改为包内相对链接；未复制的仓库文件链接会固定到本次提交的GitHub路径。DOCX相对媒体链接须在作者阶段做好，并把相应媒体目录一并纳入。源码路径与大数据路径若只用于追溯，必须明确其并未复制到包内。
-
-## 生成与检查
-
-先验证改动、提交推送并核对远端SHA，再在工程根目录运行：
+当前打包脚本没有 draft/final 或远端发布验证门禁：它读取工作树字节，并将未复制链接拼到 HEAD。最终提交包应在指定提交的干净独立 checkout 制作，先核对选中 Git 来源与该提交同字节、每个未复制链接确实存在于该 Git tree，再运行：
 
 ```bash
-python3 scripts/package_agent_results.py --manifest docs/agent_handoff/package.json --output /home/wujing/Desktop/LabSim_内部使用优化_NEW
+python3 -B scripts/package_agent_results.py \
+  --manifest docs/agent_handoff/project_handoff/package.json \
+  --output /path/to/new-reading-package
 ```
 
-输出目录必须尚不存在。实验资料通常控制在20MiB内；纯工程整理应更小。不要为接近体积预算而复制不相关历史媒体。
+按任务替换清单及新输出路径。脚本拒绝越界、symlink、目标冲突、LFS 指针和覆盖已有目录；已复制的 Markdown 链接转成包内相对链接。DOCX 的相对媒体在作者阶段核对并随包复制。使用工作树材料制作预览时明确标为 draft，不能据其 HEAD 字段声称与已发布提交一致。
 
-包根的文件清单.json记录实际提交、分支、源文件SHA、转换及复制后SHA；SHA256SUMS.txt用于传输后的逐文件检查：
+包根 `文件清单.json` 记录实际 HEAD、分支、来源及复制后哈希；`SHA256SUMS.txt` 用于传输检查：
 
 ```bash
 cd /path/to/reading-package
 sha256sum --check SHA256SUMS.txt
 ```
 
-交付前检查总大小、包内相对链接、媒体实体、配置和报告引用；不把内部预览包或未推送工作树标成最终交付。不要预填未来提交SHA，也不把旧实验报告描述为本轮新运行。
+在移开原工程后核对包内链接、媒体实体、配置/报告引用、缺失来源和总大小。只有本次任务授权推送/发布时才执行，并另行核验远端提交与上传后文件 SHA256；离线通过只能记本地验证，不声称已上传。不要预填未来 SHA，或把旧报告称为本轮新运行。
 
-## 实验数据范围
+## 数据与历史保护
 
-数字资产的 IKA、DIYNAFLUOR、Flex／MagSep 与失败对照统一见 `~/SLAI_Lab/labsim/results/final/evidence/`；这次覆盖旧包的清理要求仅适用于该数字资产交付。
-
-结果包不建立新的数据平台，不修改原始标签。完整任务、几何预检、初始化、服务异常、人工中断、短预算接口诊断和实际受控失败须区分。
-
-Size_v1的最终40集证据保存在[正式审计目录](../lab_cuvette_loading/Size_v1/data/final40_actual/README.md)。刷新其小型配置快照应使用真实的最终审计和汇总，不能把计划配额写成已完成。需要重新制作包含视频的实验包时，从历史清单选择必要目录，并指向实际存在的results_20261022，不覆盖旧包。
+完整 H5 与模型日志留在本地输出或单独获授权的数据交付中。HDF5 外链索引须连同源文件移交，或另建带来源的 copy 派生物。Size_v1 40 集的历史最终审计见[原证据](../lab_cuvette_loading/Size_v1/data/final40_actual/README.md)，不得把计划数量写成完成数量。刷新小型快照与构建派生报告均不构成修改原始标签、源 CAD、配置指纹或历史媒体的授权。

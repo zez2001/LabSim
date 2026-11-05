@@ -1,0 +1,81 @@
+name: Repository hygiene
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  incremental-changes:
+    runs-on: ubuntu-latest
+    env:
+      GIT_LFS_SKIP_SMUDGE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          lfs: false
+      - name: Resolve the incremental comparison
+        id: comparison
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          anchor=$(python3 -B -c 'import json; print(json.load(open("config/repository_hygiene.json"))["baseline_commit"])')
+          head=$(git rev-parse HEAD)
+          if [ "$EVENT_NAME" = pull_request ]; then
+            candidate="$PR_BASE"
+          elif [ -z "$PUSH_BEFORE" ] || [[ "$PUSH_BEFORE" =~ ^0+$ ]]; then
+            candidate="$anchor"
+          else
+            candidate="$PUSH_BEFORE"
+          fi
+          # Fetch only needed commit histories/blobs; never run git-lfs or fetch all refs.
+          for revision in "$anchor" "$candidate"; do
+            if ! git cat-file -e "$revision^{commit}" 2>/dev/null; then
+              git fetch --no-tags --no-recurse-submodules --filter=blob:none --depth=1 origin "$revision"
+            fi
+          done
+          found=false
+          for depth in 0 32 64 128 256 512 1024 2048; do
+            if git merge-base "$candidate" "$head" >/dev/null 2>&1; then
+              found=true
+              break
+            fi
+            if [ "$depth" -gt 0 ]; then
+              git fetch --no-tags --no-recurse-submodules --filter=blob:none --deepen="$depth" origin "$candidate" "$head"
+            fi
+          done
+          if [ "$found" != true ]; then
+            # Recheck after the final bounded deepen before reporting a missing ancestor.
+            git merge-base "$candidate" "$head" >/dev/null
+          fi
+          base=$(python3 -B -c 'import sys; from scripts.check_repository_changes import ci_comparison_base; print(ci_comparison_base(".", sys.argv[1], sys.argv[2], sys.argv[3]))' "$candidate" "$head" "$anchor")
+          # A new-branch push must compare the fixed audited anchor, never an empty tree.
+          if { [ -z "$PUSH_BEFORE" ] || [[ "$PUSH_BEFORE" =~ ^0+$ ]]; } && [ "$EVENT_NAME" != pull_request ] && [ "$base" != "$anchor" ]; then
+            echo 'First-push head must descend from the audited baseline.' >&2
+            exit 2
+          fi
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          echo "head=$head" >> "$GITHUB_OUTPUT"
+      - name: Check changed Git blobs
+        run: >-
+          python3 -B scripts/check_repository_changes.py
+          --base '${{ steps.comparison.outputs.base }}'
+          --head '${{ steps.comparison.outputs.head }}'
+          --json --output "$RUNNER_TEMP/repository-hygiene.json"
+      - name: Exercise isolated Git and archive fixtures
+        run: python3 -B -m unittest tests.test_repository_hygiene tests.test_restore_history_archive -v
+      - name: Save redacted receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: repository-hygiene
+          path: ${{ runner.temp }}/repository-hygiene.json
+          if-no-files-found: ignore

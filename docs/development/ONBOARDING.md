@@ -6,7 +6,7 @@
 
 ### 解释器与依赖
 
-使用 Linux、Python 3.11、Isaac Sim 5.1.0 及兼容 NVIDIA GPU/驱动。已有物理验证使用 RTX 4090。同一 GPU 上顺序运行 Isaac 进程。
+使用 Linux、Python 3.11、Isaac Sim 5.1.0 及兼容 NVIDIA GPU/驱动；硬件验证记录和可迁移工作区布局见[部署说明](../../DELIVERY.md#工作区与运行环境)。同一 GPU 上顺序运行 Isaac 进程。
 
 ```bash
 GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/labsim https://github.com/zez2001/LabSim.git
@@ -207,7 +207,16 @@ Teacher 评测示例：
 
 CPU 验证见[工作流](../../.github/workflows/cpu-contracts.yml)与独立 [CI 依赖](../../requirements/ci.txt)。真实 Isaac 运行另外记录运行提交、配置/资产指纹、退出凭据、独立结果和实际 reader。历史物理/标签保持原样。
 
-日常工作沿用 `codex/labsim`，遵循[贡献规范](../../CONTRIBUTING.md)。每批验证后提交并推送；每次交付生成只含本次改动与结果的[精简阅读包](../agent_handoff/README.md)。
+日常工作遵循[当前协作规则](../../AGENTS.md)及[贡献规范](../../CONTRIBUTING.md)，使用当前授权的分支。提交、推送、PR、发布与导出分别按授权执行，历史要求不构成新任务许可。需要交付时按[精简阅读包规范](../agent_handoff/README.md)选择本次材料，历史结果通过[统一结果索引](../history/RESULTS.md)追溯。
+
+暂存内容的 CPU 门禁与当前指南检查：
+
+```bash
+python3 -B scripts/check_repository_changes.py
+python3 -B scripts/check_current_usage_docs.py
+```
+
+检查已提交范围时，前一命令加 `--base <base-ref> --head <head-ref>`。门禁不启动 Isaac、GPU、API 或训练，不替代物理实验。它保留既有历史证据；新增 fixture/精简证据需注明用途、来源、大小与哈希。
 
 ## 扩展：单细胞测序 unit
 
