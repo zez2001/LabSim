@@ -27,7 +27,7 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 | 独立评测 | 阶段进度、完整成功、终止原因、记录完整性、物理质量与数据资格 | 策略比较、合格示范筛选 |
 | 项目接口 | 统一 CLI、Teacher、GPT 直接控制、π0.5 RPC、Harness、自有策略生命周期 | 组内复用、外部策略评测 |
 
-发布版的示范采集与训练数据准备使用固定 `standard`。评测可显式选择 `random_001`–`random_010` 十个固定实例，定义、用途及验收方法见[场景协议](docs/lab_cuvette_loading/Scene_suite_v1/README.md)。资产尺寸、质量、控制频率及真实测量待补项见[资产与物理规格](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。当前是刚体仿真，质量、摩擦与动力学仍有工程假设；完整 Teacher 示范不代表其他策略完成同一任务。
+发布版的示范采集与训练数据准备使用固定 `standard`。评测接口可显式选择 `random_001`–`random_010` 十个固定候选实例，定义、用途及物理验收状态见[场景协议](docs/lab_cuvette_loading/Scene_suite_v1/README.md)。资产尺寸、质量、控制频率及真实测量待补项见[资产与物理规格](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。当前是刚体仿真，质量、摩擦与动力学仍有工程假设；完整 Teacher 示范不代表其他策略完成同一任务。
 
 ## 安装与资产获取
 

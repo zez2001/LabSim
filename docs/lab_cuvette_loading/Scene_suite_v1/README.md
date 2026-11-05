@@ -2,6 +2,8 @@
 
 套件版本：`lab_cuvette_loading.scene_suite.v1`。环境版本：`Project_release_v1`；任务仍为完整 `lab_cuvette_loading`，独立评分沿用 `Project_v1_1.independent.v1`，Progress v1.2 负责过程诊断。
 
+验收状态：固定协议、CPU 接口与离线 USD 装配已核验。本次代码的 standard 完整回归、三次物理 reset 和 Random-10 Teacher 执行仍待空闲 GPU；Random-10 当前按候选评测场景使用。历史 standard 成功记录不作为本套件的新运行成绩。
+
 [套件注册表](../../../config/lab_cuvette_loading/Scene_suite_v1/suite.json)固定 `standard` 和 `random_001`–`random_010` 十一个实例。共享加载器应用独立 JSON 覆盖层，使用同一环境和控制实现。没有十一套环境代码；运行中不重新采样，不改变来源槽 A1 或原内部 A 座 `candidate_far_hinge`。
 
 ## 用途与身份

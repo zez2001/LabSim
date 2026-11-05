@@ -27,7 +27,7 @@ Single-cell units are a parallel extension with bounded mechanical operations fo
 | Independent evaluation | Stage progress, full success, termination reason, record integrity, physics quality and data qualification | Policy comparisons and demonstration filtering |
 | Project interfaces | Unified CLI, Teacher, direct GPT control, π0.5 RPC, Harness and custom-policy lifecycle | Internal reuse and external policy evaluation |
 
-Demonstrations and training-data preparation use fixed `standard`. Evaluation can explicitly select the ten fixed `random_001`–`random_010` instances; see the [scene protocol](docs/lab_cuvette_loading/Scene_suite_v1/README.md) for definitions, allowed uses and acceptance checks. See [asset and physics specifications](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格) for dimensions, mass, rates and pending measurements. This is rigid-body simulation with engineering assumptions for mass, friction and dynamics. A complete Teacher demonstration does not establish completion by another policy.
+Demonstrations and training-data preparation use fixed `standard`. The evaluation interface can explicitly select ten fixed candidate `random_001`–`random_010` instances; see the [scene protocol](docs/lab_cuvette_loading/Scene_suite_v1/README.md) for definitions, allowed uses and physical acceptance status. See [asset and physics specifications](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格) for dimensions, mass, rates and pending measurements. This is rigid-body simulation with engineering assumptions for mass, friction and dynamics. A complete Teacher demonstration does not establish completion by another policy.
 
 ## Installation and assets
 
