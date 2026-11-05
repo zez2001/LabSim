@@ -29,8 +29,9 @@ PRIVATE_PATH = re.compile(r'(?:(?:/home|/Users|/mnt/[a-z]/Users)/[^\s\"\'<>`;,\]
 CREDENTIAL = re.compile(r'''(?ix)["']?\b(?:api[_-]?key|api[_-]?token|access[_-]?token|auth[_-]?token|password|client[_-]?secret|secret[_-]?key|authorization)\b["']?\s*[:=]\s*(?:["']([^"'\n]*)["']|([^\s,\#}\]]+))''')
 CONFIG_CREDENTIAL = re.compile(r'''(?ix)["']?\b(?:token|secret|hf[_-]?token|huggingface[_-]?token)\b["']?\s*[:=]\s*(?:["']([^"'\n]*)["']|([^\s,\#}\]]+))''')
 GENERATED = re.compile(r'(^|/)(?:outputs|test_outputs|results|runs|recordings|checkpoints|trajectories|rollouts|wandb|__pycache__)(/|$)', re.I)
-GENERATED_SUFFIXES = {'.mp4', '.mov', '.avi', '.webm', '.mkv', '.docx', '.h5', '.hdf5', '.pt', '.pth', '.ckpt', '.safetensors'}
+GENERATED_SUFFIXES = {'.mp4', '.mov', '.avi', '.webm', '.mkv', '.docx', '.zip', '.h5', '.hdf5', '.pt', '.pth', '.ckpt', '.safetensors'}
 CONFIG_SUFFIXES = {'.yaml', '.yml', '.json', '.toml', '.ini', '.cfg', '.env'}
+CURRENT_ENTRYPOINTS = {'README.md', 'README_CN.md', 'README_EN.md', 'AGENTS.md', 'CONTRIBUTING.md', 'DELIVERY.md'}
 
 
 class GuardError(Exception):
@@ -139,6 +140,9 @@ FINDING_GUIDANCE = {
     'invalid_markdown_target': (
         'A linked Markdown target is not valid UTF-8 text.',
         'Stage a valid UTF-8 Markdown target or correct the link.'),
+    'invalid_historical_archive_mapping': (
+        'A removed historical target has no valid, fixed-commit archive mapping.',
+        'Preserve the target or review a mapping with unchanged historical source, original hashes, same-repository Release URL and a verified restoration entry. Current guides must update their links.'),
     'invalid_comparison_or_policy': (
         'The comparison or reviewed policy is invalid.',
         'Stage the policy files together; supply an existing ancestor --base and --head pair, or omit both for staged changes. Compute a merge-base for divergent history.'),
@@ -185,6 +189,23 @@ def validate_policy(policy):
                 or not row.get('path') or any(c in row['path'] for c in '*?[')
                 or row['path'].startswith('/') or '..' in PurePosixPath(row['path']).parts):
             raise GuardError('Each exception requires an exact repository path, purpose and positive max_bytes.')
+    mappings = policy.get('historical_archive_mappings', [])
+    if not isinstance(mappings, list):
+        raise GuardError('Historical archive mappings must be an explicit list.')
+    for row in mappings:
+        paths = [row.get('manifest'), row.get('archive_index')] if isinstance(row, dict) else []
+        documents = row.get('historical_documents', []) if isinstance(row, dict) else []
+        if (not paths or not all(repository_path(p) for p in paths)
+                or not isinstance(documents, list) or not documents
+                or not all(repository_path(p) and p not in CURRENT_ENTRYPOINTS for p in documents)
+                or not re.fullmatch(r'[a-f0-9]{40}', row.get('verified_commit', ''))):
+            raise GuardError('Archive mappings require exact paths, frozen historical documents and a full verified commit; current entrypoints cannot be exempted.')
+
+
+def repository_path(value):
+    return (isinstance(value, str) and bool(value) and not value.startswith('/')
+            and '\\' not in value and '..' not in PurePosixPath(value).parts
+            and not any(c in value for c in '*?[') and posixpath.normpath(value) == value)
 
 
 def effective_size(root, entry):
@@ -235,21 +256,40 @@ def markdown_links(text):
     for match in re.finditer(r'\]\((<[^>]+>|[^)\n]+)\)|^ {0,3}\[[^]]+\]:\s*(<[^>]+>|\S+)', text, re.M):
         raw = (match.group(1) or match.group(2)).strip()
         yield raw[1:raw.index('>')] if raw.startswith('<') else raw.split(' ', 1)[0]
+    for match in re.finditer(r'''(?is)<(?:a|img|video|source)\b[^>]*?\b(?:href|src)\s*=\s*["']([^"']+)["']''', text):
+        yield match.group(1)
 
 
-def check_links(root, name, text, entries):
+def local_link(name, raw):
+    target = urlsplit(raw)
+    if target.scheme or target.netloc:
+        return None
+    path = posixpath.normpath(posixpath.join(posixpath.dirname(name), unquote(target.path))) if target.path else name
+    return path, target
+
+
+def check_links(root, name, text, entries, *, removed=None, archive_allow=None):
     errors = []
     for raw in markdown_links(text):
-        target = urlsplit(raw)
-        if target.scheme or target.netloc:
+        parsed = local_link(name, raw)
+        if parsed is None:
             continue  # HTTP/archive/codex/mail links are inventoried by docs tools; never fetched here.
-        path = posixpath.normpath(posixpath.join(posixpath.dirname(name), unquote(target.path))) if target.path else name
+        path, target = parsed
+        if removed is not None:
+            # Scan unchanged guides only for targets removed in this comparison.
+            # Existing broken historical links are not new findings.
+            directory_removed = (any(p.startswith(path.rstrip('/') + '/') for p in removed)
+                                 and not any(p.startswith(path.rstrip('/') + '/') for p in entries))
+            if path not in removed and not directory_removed:
+                continue
         if path.startswith('../') or path.startswith('/'):
             errors.append(issue('local_link_outside_repository', name, target=clean(raw)))
             continue
         if path not in entries:
             if target.fragment or not any(p.startswith(path.rstrip('/') + '/') for p in entries):
-                errors.append(issue('missing_local_link', name, target=clean(raw)))
+                archived = archive_allow(name, path) if archive_allow else False
+                if not archived:
+                    errors.append(issue('missing_local_link', name, target=clean(raw)))
             continue
         if target.fragment and path.lower().endswith('.md'):
             try:
@@ -260,6 +300,62 @@ def check_links(root, name, text, entries):
             if unquote(target.fragment) not in headings(target_text):
                 errors.append(issue('missing_local_anchor', name, target=clean(raw)))
     return errors
+
+
+def archive_mapping(root, row, name, path, entries):
+    """Validate a reviewed, fixed-commit mapping locally; never download an archive.
+
+    The verification commit binds the already published archive index/manifest.
+    Only an unchanged original historical document may keep its original link.
+    """
+    if name not in row['historical_documents']:
+        return False
+    try:
+        verified = tree(root, resolve(root, row['verified_commit']))
+        for target in (row['manifest'], row['archive_index']):
+            if target not in entries or entries[target] != verified.get(target):
+                return False
+        manifest = json.loads(blob(root, entries[row['manifest']]))
+        if manifest.get('schema') != 'labsim.historical_archive.v1':
+            return False
+        source_sha = manifest['baseline_commit']
+        if not re.fullmatch(r'[a-f0-9]{40}', source_sha):
+            return False
+        source = tree(root, resolve(root, source_sha))
+        if entries.get(name) != source.get(name) or name not in source:
+            return False
+        repository = manifest['repository_url'].rstrip('/')
+        expected_repository = 'https://github.com/zez2001/LabSim'
+        if repository != expected_repository:
+            return False
+        archive, release = manifest['archive'], manifest['release']
+        if (not re.fullmatch(r'[a-f0-9]{64}', archive['sha256'])
+                or not isinstance(archive['size_bytes'], int) or archive['size_bytes'] <= 0
+                or not repository_path(archive['filename']) or '/' in archive['filename']
+                or archive.get('format') != 'zip' or release['target_commit'] != source_sha
+                or not re.fullmatch(r'[A-Za-z0-9._-]+', release['tag'])):
+            return False
+        download = repository + '/releases/download/' + release['tag'] + '/' + archive['filename']
+        if release['archive_download_url'] != download:
+            return False
+        helper = manifest['restoration']['helper']
+        if not repository_path(helper) or helper not in entries or helper not in verified:
+            return False
+        index = blob(root, entries[row['archive_index']]).decode('utf-8')
+        if download not in index or archive['sha256'] not in index or helper not in index:
+            return False
+        member = next((f for f in manifest['files'] if f.get('path') == path), None)
+        if member is None or path not in source or member.get('lfs_pointer') is not False:
+            return False
+        original = blob(root, source[path])
+        expected_source = repository + '/blob/' + source_sha + '/' + path
+        return (member.get('git_blob_oid') == source[path][1]
+                and member.get('git_mode') == source[path][0]
+                and member.get('size_bytes') == len(original)
+                and member.get('sha256') == hashlib.sha256(original).hexdigest()
+                and unquote(member.get('source', '')) == expected_source)
+    except (GuardError, KeyError, ValueError, TypeError, UnicodeError, StopIteration):
+        return False
 
 
 def current_markdown(name, patterns):
@@ -308,6 +404,21 @@ def check(root=ROOT, *, base=None, head=None, policy=None, legacy=None):
     changes = sorted(name for name in after if before.get(name) != after[name])
     ignored = ignored_paths(root, after, changes)
     errors, rows = [], []
+    removed = set(before) - set(after)
+    archived_links, archive_failures = [], set()
+
+    def allow_archived(name, target):
+        candidates = [row for row in policy.get('historical_archive_mappings', [])
+                      if name in row['historical_documents']]
+        if any(archive_mapping(root, row, name, target, after) for row in candidates):
+            receipt = dict(document=clean(name), target=clean(target))
+            if receipt not in archived_links:
+                archived_links.append(receipt)
+            return True
+        if candidates:
+            archive_failures.add((name, target))
+        return False
+
     for name in changes:
         state = 'modified' if name in before else 'added'
         size, stored_size, lfs = effective_size(root, after[name])
@@ -323,8 +434,7 @@ def check(root=ROOT, *, base=None, head=None, policy=None, legacy=None):
         if name in ignored and name not in legacy and not permitted:
             errors.append(issue('new_tracked_ignored_path', name))
         suffix = PurePosixPath(name).suffix.lower()
-        generated = bool(GENERATED.search(name) or suffix in GENERATED_SUFFIXES
-                         or suffix == '.zip' and re.search(r'(?i)(result|output|evidence|trajectory|checkpoint)', name))
+        generated = bool(GENERATED.search(name) or suffix in GENERATED_SUFFIXES)
         if generated and not permitted:
             errors.append(issue('generated_runtime_output', name))
         old_size = effective_size(root, before[name])[0] if name in before else 0
@@ -360,11 +470,30 @@ def check(root=ROOT, *, base=None, head=None, policy=None, legacy=None):
         if is_config and not GENERATED.search(name) and PRIVATE_PATH.search(fresh):
             errors.append(issue('private_machine_path_in_config', name))
         if suffix in ('.md', '.mdc') and current_markdown(name, policy.get('current_markdown', [])):
-            errors.extend(check_links(root, name, text, after))
+            errors.extend(check_links(root, name, text, after, archive_allow=allow_archived))
+    removal_checked_documents = []
+    if removed:
+        for name, entry in sorted(after.items()):
+            if (name in changes or not current_markdown(name, policy.get('current_markdown', []))
+                    or PurePosixPath(name).suffix.lower() not in ('.md', '.mdc')):
+                continue
+            removal_checked_documents.append(clean(name))
+            size, stored_size, lfs = effective_size(root, entry)
+            if lfs or stored_size > policy['text_scan_max_bytes']:
+                raise GuardError('A current guide cannot be inspected for removed targets; use small UTF-8 Markdown.')
+            try:
+                text = blob(root, entry).decode('utf-8')
+            except UnicodeError:
+                errors.append(issue('invalid_markdown_target', name))
+                continue
+            errors.extend(check_links(root, name, text, after, removed=removed, archive_allow=allow_archived))
+    errors.extend(issue('invalid_historical_archive_mapping', name, target=clean(target))
+                  for name, target in sorted(archive_failures))
     return dict(schema='labsim.repository_hygiene.v1', passed=not errors, mode=mode,
                 base_commit=base_sha, head_commit=head_sha, comparison_reason=reason,
                 baseline_commit=baseline, baseline_ignored_count=len(legacy), changed_file_count=len(changes),
-                deleted_file_count=len(set(before) - set(after)), files=rows, errors=errors,
+                deleted_file_count=len(removed), files=rows, errors=errors,
+                removal_checked_documents=removal_checked_documents, archived_links=archived_links,
                 simulation_started=False, lfs_downloaded=False, network_accessed=False)
 
 

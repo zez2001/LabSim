@@ -24,6 +24,7 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.write('README.md', '# Start\n\nInitial guide.\n')
         self.write('docs/results/frozen.json', '{"historical": true}\n')
         self.write('docs/old.mp4', b'x' * 5000)
+        self.write('docs/old-feedback.zip', b'old immutable zip')
         self.write('data/existing.bin', b'x' * 5000)
         self.write('config/legacy.json', json.dumps({'local': '/home/' + 'legacy/old-model',
                                                  API_FIELD: 'previous-credential-value'}))
@@ -82,6 +83,35 @@ class RepositoryHygieneTests(unittest.TestCase):
         blocked = {e['path'] for e in report['errors'] if e['code'] == 'generated_runtime_output'}
         self.assertEqual(blocked, set(names))
         self.assertIn('new_tracked_ignored_path', self.codes(report))
+
+    def test_zip_is_controlled_by_default_in_plain_directories_and_any_language(self):
+        names = ['docs/feedback.zip', 'docs/report.zip', 'docs/结果包.zip', 'source/archive.ZIP']
+        for name in names:
+            self.write(name, b'tiny archive')
+        self.stage(*names)
+        report = self.check()
+        self.assertEqual({e['path'] for e in report['errors'] if e['code'] == 'generated_runtime_output'}, set(names))
+        self.assertFalse(any(e.get('path') == 'docs/old-feedback.zip' for e in report['errors']))
+
+    def test_zip_source_fixture_requires_exact_purpose_and_size_exception(self):
+        source_zip = 'tests/fixtures/source-layout.zip'
+        self.policy['exceptions'].append(dict(path=source_zip, purpose='Synthetic source-layout parser fixture', max_bytes=32))
+        self.write(source_zip, b'small source fixture')
+        self.stage(source_zip)
+        self.assertTrue(self.check()['passed'])
+        self.write('tests/fixtures/other-layout.zip', b'tiny')
+        self.stage('tests/fixtures/other-layout.zip')
+        self.assertIn('generated_runtime_output', self.codes(self.check()))
+        self.write(source_zip, b'x' * 33)
+        self.stage(source_zip)
+        self.assertIn('exception_size_exceeded', self.codes(self.check()))
+
+    def test_unmodified_historical_zip_is_not_rechecked(self):
+        self.write('source.txt', 'ordinary source change\n')
+        self.stage('source.txt')
+        report = self.check()
+        self.assertTrue(report['passed'])
+        self.assertEqual(report['changed_file_count'], 1)
 
     def test_modified_recording_is_blocked_but_unchanged_recording_is_not(self):
         self.write('docs/old.mp4', b'y' * 5000)
@@ -187,6 +217,145 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.write('docs/history/frozen.md', '[old](missing-original-output.md)\n')
         self.stage('docs/history/frozen.md')
         self.assertTrue(self.check()['passed'])
+
+    def referenced_target(self, target='docs/current/topic.txt'):
+        self.write(target, 'source text\n')
+        self.write('README.md', '# Start\n\n[topic](' + target + ')\n[old unrelated](already-missing.md)\n')
+        self.stage(target, 'README.md')
+        self.commit()
+        return target
+
+    def test_deleted_target_is_checked_even_when_readme_is_unchanged(self):
+        target = self.referenced_target()
+        self.git('rm', '-q', '--', target)
+        report = self.check()
+        missing = [e for e in report['errors'] if e['code'] == 'missing_local_link']
+        self.assertEqual(len(missing), 1)
+        self.assertEqual(missing[0]['path'], 'README.md')
+        self.assertEqual(missing[0]['target'], target)
+        self.assertIn('README.md', report['removal_checked_documents'])
+        self.assertEqual(report['deleted_file_count'], 1)
+
+    def test_deleted_target_with_fixed_readme_passes(self):
+        target = self.referenced_target()
+        self.git('rm', '-q', '--', target)
+        self.write('README.md', '# Start\n\nUpdated current guide.\n')
+        self.stage('README.md')
+        self.assertTrue(self.check()['passed'])
+
+    def test_renamed_target_requires_link_update_in_staged_and_commit_modes(self):
+        target = self.referenced_target()
+        old_head = self.git('rev-parse', 'HEAD').strip()
+        self.git('mv', target, 'docs/current/renamed.txt')
+        self.assertIn('missing_local_link', self.codes(self.check()))
+        self.commit()
+        self.assertIn('missing_local_link', self.codes(self.check(base=old_head, head='HEAD')))
+        self.write('README.md', '# Start\n\n[topic](docs/current/renamed.txt)\n')
+        self.stage('README.md')
+        self.assertTrue(self.check()['passed'])
+        self.commit()
+        self.assertTrue(self.check(base=old_head, head='HEAD')['passed'])
+
+    def test_removed_directory_target_is_checked_and_other_old_errors_are_ignored(self):
+        target = 'docs/topic/source.txt'
+        self.write(target, 'source\n')
+        self.write('README.md', '# Start\n\n[directory](docs/topic/)\n[old](missing-before.md)\n')
+        self.stage(target, 'README.md')
+        self.commit()
+        self.git('rm', '-q', '--', target)
+        missing = [e for e in self.check()['errors'] if e['code'] == 'missing_local_link']
+        self.assertEqual([e['target'] for e in missing], ['docs/topic/'])
+
+    def test_removed_html_media_target_in_unchanged_readme_is_checked(self):
+        self.write('docs/showcase/demo.mp4', b'historical demo')
+        self.write('README.md', '# Start\n\n<video controls><source src="docs/showcase/demo.mp4" type="video/mp4"></video>\n')
+        self.stage('docs/showcase/demo.mp4', 'README.md')
+        self.commit()
+        self.git('rm', '-q', '--', 'docs/showcase/demo.mp4')
+        missing = [e for e in self.check()['errors'] if e['code'] == 'missing_local_link']
+        self.assertEqual([e['target'] for e in missing], ['docs/showcase/demo.mp4'])
+
+    def archive_fixture(self):
+        import hashlib
+        target = 'docs/frozen/report.docx'
+        original = b'original historical report bytes'
+        history = 'HISTORY.md'
+        helper = 'scripts/restore_history_archive.py'
+        manifest_path = 'docs/archive/pilot/manifest.json'
+        index = 'docs/archive/pilot/README.md'
+        self.write(target, original)
+        self.write(history, '# Frozen history\n\n[report](' + target + ')\n')
+        self.write(helper, '# verified restoration helper fixture\n')
+        self.stage(target, history, helper)
+        self.commit()
+        source = self.git('rev-parse', 'HEAD').strip()
+        oid = self.git('rev-parse', 'HEAD:' + target).strip()
+        repository = 'https://github.com/zez2001/LabSim'
+        archive_sha = hashlib.sha256(b'fixture archive').hexdigest()
+        download = repository + '/releases/download/history-pilot/archive.zip'
+        manifest = dict(schema='labsim.historical_archive.v1', baseline_commit=source,
+                        repository_url=repository,
+                        archive=dict(filename='archive.zip', sha256=archive_sha, size_bytes=123, format='zip'),
+                        release=dict(target_commit=source, tag='history-pilot', archive_download_url=download),
+                        files=[dict(path=target, size_bytes=len(original), sha256=hashlib.sha256(original).hexdigest(),
+                                    git_blob_oid=oid, git_mode='100644', lfs_pointer=False,
+                                    source=repository + '/blob/' + source + '/' + target)],
+                        restoration=dict(helper=helper))
+        self.write(manifest_path, json.dumps(manifest))
+        self.write(index, '# Verified archive\n\n[Download](' + download + ')\nSHA256: `' + archive_sha + '`\nRestore: `' + helper + '`\n')
+        self.stage(manifest_path, index)
+        self.commit()
+        verified = self.git('rev-parse', 'HEAD').strip()
+        self.policy['historical_archive_mappings'] = [dict(manifest=manifest_path, archive_index=index,
+                                                          verified_commit=verified, historical_documents=[history])]
+        self.git('rm', '-q', '--', target)
+        return target, history, manifest_path, manifest
+
+    def test_verified_archive_mapping_preserves_unchanged_historical_report_links(self):
+        target, history, _manifest_path, _manifest = self.archive_fixture()
+        report = self.check()
+        self.assertTrue(report['passed'], report['errors'])
+        self.assertEqual(report['archived_links'], [dict(document=history, target=target)])
+
+    def test_archive_mapping_does_not_exempt_current_readme(self):
+        target, _history, _manifest_path, _manifest = self.archive_fixture()
+        self.write('README.md', '# Start\n\n[report](' + target + ')\n')
+        self.stage('README.md')
+        self.assertIn('missing_local_link', self.codes(self.check()))
+        self.policy['historical_archive_mappings'][0]['historical_documents'].append('README.md')
+        with self.assertRaises(guard.GuardError):
+            self.check()
+
+    def test_archive_mapping_rejects_modified_original_history(self):
+        _target, history, _manifest_path, _manifest = self.archive_fixture()
+        self.write(history, (self.root / history).read_text() + '\nNew claims.\n')
+        self.stage(history)
+        self.assertIn('invalid_historical_archive_mapping', self.codes(self.check()))
+
+    def test_archive_mapping_requires_verified_manifest_bytes(self):
+        _target, _history, manifest_path, manifest = self.archive_fixture()
+        manifest['files'][0]['sha256'] = '0' * 64
+        self.write(manifest_path, json.dumps(manifest))
+        self.stage(manifest_path)
+        self.assertIn('invalid_historical_archive_mapping', self.codes(self.check()))
+
+    def test_archive_mapping_checks_original_hash_release_and_restore_entry(self):
+        import copy
+        target, history, manifest_path, manifest = self.archive_fixture()
+        for mutate in ('hash', 'release', 'helper'):
+            changed = copy.deepcopy(manifest)
+            if mutate == 'hash':
+                changed['files'][0]['sha256'] = '0' * 64
+            elif mutate == 'release':
+                changed['release']['archive_download_url'] = 'https://example.invalid/archive.zip'
+            else:
+                changed['restoration']['helper'] = 'scripts/missing-restore.py'
+            self.write(manifest_path, json.dumps(changed))
+            self.stage(manifest_path)
+            self.commit()
+            self.policy['historical_archive_mappings'][0]['verified_commit'] = self.git('rev-parse', 'HEAD').strip()
+            self.assertFalse(guard.archive_mapping(self.root, self.policy['historical_archive_mappings'][0], history,
+                                                  target, guard.tree(self.root)))
 
     def test_range_requires_ancestor_and_rejects_zero_base(self):
         with self.assertRaises(guard.GuardError):
