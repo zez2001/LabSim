@@ -34,6 +34,21 @@ def build_context(cfg,app,output,initial_state=None):
         import json
         initial_state=output/'declared_initial_joints.json'
         initial_state.write_text(json.dumps(dict(joints=list(cfg.robot.initial_joint_positions),robot_base_m=list(cfg.robot.base_m)),indent=2)+'\n')
-    context=make_scene(SimpleNamespace(initial_state=initial_state),app,output,cfg)
+    args=SimpleNamespace(initial_state=initial_state)
+    authoring_snapshots=[]
+    if cfg.get('scene_suite'):
+        from demos.lab_cuvette_project_release_v1.scene_validation import capture_scene_authoring
+        def observe_authoring(stage):
+            try:
+                authoring_snapshots.append(capture_scene_authoring(stage,cfg,layout(cfg)))
+            except Exception as error:
+                # Defer the closed failure until the returned context belongs
+                # to the task, so its normal cleanup can release the world.
+                authoring_snapshots.append(dict(error_type=type(error).__name__,error=str(error)))
+        args.scene_authoring_observer=observe_authoring
+    context=make_scene(args,app,output,cfg)
     context['fixtures']=layout(cfg)
+    if cfg.get('scene_suite'):
+        context['scene_authoring_snapshot']=(authoring_snapshots[0] if len(authoring_snapshots)==1
+            else dict(error='Scene authoring observer must run once before the first world reset'))
     return context

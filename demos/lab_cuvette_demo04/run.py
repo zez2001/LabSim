@@ -74,6 +74,8 @@ def make_scene(args,app,output,cfg):
     filters=[str(p.GetPath()) for p in stage.Traverse() if p.HasAPI(UsdPhysics.CollisionAPI) and not any(str(p.GetPath()).startswith('/World/'+x) for x in ['Franka','Cuvette','Distractor'])]
     env=RigidContactView(prim_paths_expr='/World/Cuvette',filter_paths_expr=filters,name='external_contacts',max_contact_count=4096)
     fingers=RigidContactView(prim_paths_expr=['/World/Franka/panda_leftfinger','/World/Franka/panda_rightfinger'],filter_paths_expr=[['/World/Cuvette'],['/World/Cuvette']],name='external_fingers',max_contact_count=256)
+    if getattr(args,'scene_authoring_observer',None) is not None:
+        args.scene_authoring_observer(stage)
     world.reset();solver=KinematicsSolver(robot);solver.get_kinematics_solver().set_robot_base_pose(np.array(cfg.robot.base_m),np.array([1.,0,0,0]));orientation=euler_angles_to_quat(np.array([np.pi,0,np.radians(float(cfg.robot.gripper_yaw_deg))]))
     initial_tcp=source+np.array([0,0,.28]);cfg.robot.initial_tcp_m=initial_tcp.tolist();ik,valid=solver.compute_inverse_kinematics(initial_tcp,orientation)
     if not valid:raise RuntimeError('Initial TCP unreachable')

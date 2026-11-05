@@ -138,11 +138,42 @@ def _usd_pose(stage, path):
     xyzw = Rotation.from_matrix(normalized).as_quat()
     return dict(available=True, path=path, position_m=matrix[:3, 3].tolist(),
         quaternion_wxyz=np.roll(xyzw, 1).tolist(), world_from_prim_column=matrix.tolist(),
-        basis_scale=basis_scale.tolist(), source='UsdGeom.XformCache; actual composed authored USD')
+        basis_scale=basis_scale.tolist(), source='UsdGeom.XformCache; actual composed USD')
+
+
+def _assembly_paths(cfg, fixtures):
+    paths = dict(rack='/World/SourceRack', instrument='/World/Instrument', robot='/World/Franka',
+        cuvette='/World/Cuvette', source_slot='/World/SourceRack/Slots/'+cfg['rack']['selected_slot_id'],
+        target_seat='/World/Instrument/Frames/'+cfg['adapter']['selected_target_seat_id'])
+    paths.update({'neighbor_'+str(index): neighbor['prim_path']
+        for index, neighbor in enumerate(fixtures['neighbors'])})
+    return paths
+
+
+def capture_scene_authoring(stage, cfg, fixtures):
+    """Read authored assembly poses before the builder's first World.reset."""
+    from pxr import UsdGeom
+    cfg = _plain(cfg)
+    paths = _assembly_paths(cfg, fixtures)
+    return dict(schema='labsim.scene_suite.scene_authoring_snapshot.v1',
+        scene_id=cfg['scene_suite']['scene_id'], timing='before_first_world_reset',
+        timing_description='Composed USD before the first World.reset; before physics initialization or stepping',
+        stage_meters_per_unit=float(UsdGeom.GetStageMetersPerUnit(stage)),
+        poses={name: _usd_pose(stage, path) for name, path in paths.items()})
+
+
+def _pose_change(before, after):
+    valid = (_finite_vector(before.get('position_m')) and _finite_vector(after.get('position_m')))
+    delta = np.asarray(after['position_m'])-np.asarray(before['position_m']) if valid else None
+    return dict(position_delta_m=None if delta is None else delta.tolist(),
+        displacement_m=None if delta is None else float(np.linalg.norm(delta)),
+        vertical_delta_m=None if delta is None else float(delta[2]),
+        orientation_change_deg=quaternion_angle_deg(before.get('quaternion_wxyz'), after.get('quaternion_wxyz')),
+        gating=False, semantics='Observed composed-USD change across the unchanged builder World.reset calls; dynamic state is not restored; not native PhysX pose readback')
 
 
 def configure_context(task, ctx):
-    """Validate the newly built stage before its first recorded gravity step.
+    """Compare pre-reset authored poses and retain post-builder physical state.
 
     Called only by the release task hook. Legacy configurations are a no-op;
     standard suite selection reads the baseline light without authoring it.
@@ -177,16 +208,37 @@ def configure_context(task, ctx):
         'target_seat': dict(position_m=np.asarray(fixtures['seat_original_floor'])-
                             np.asarray(fixtures['instrument_rotation'])@np.array([0., 0., .002])),
     }
-    paths = dict(rack='/World/SourceRack', instrument='/World/Instrument', robot='/World/Franka',
-        cuvette='/World/Cuvette', source_slot='/World/SourceRack/Slots/'+cfg['rack']['selected_slot_id'],
-        target_seat='/World/Instrument/Frames/'+cfg['adapter']['selected_target_seat_id'])
+    paths = _assembly_paths(cfg, fixtures)
     for index, neighbor in enumerate(fixtures['neighbors']):
         name = 'neighbor_'+str(index)
-        paths[name] = neighbor['prim_path']
         expected[name] = dict(position_m=neighbor['position'],
             quaternion_wxyz=_yaw_quaternion(cfg['vessel']['yaw_deg']))
-    actual = {name: _usd_pose(stage, path) for name, path in paths.items()}
+    current = {name: _usd_pose(stage, path) for name, path in paths.items()}
+    offline = ctx.get('validation_runtime_kind') == 'offline_usd_composition'
+    snapshot = ctx.get('scene_authoring_snapshot')
+    snapshot_valid = bool(isinstance(snapshot, dict) and
+        snapshot.get('schema') == 'labsim.scene_suite.scene_authoring_snapshot.v1' and
+        snapshot.get('timing') == 'before_first_world_reset' and snapshot.get('scene_id') == scene_id and
+        snapshot.get('stage_meters_per_unit') == float(UsdGeom.GetStageMetersPerUnit(stage)) and
+        isinstance(snapshot.get('poses'), dict) and set(snapshot['poses']) == set(paths) and
+        all(isinstance(snapshot['poses'][name], dict) and snapshot['poses'][name].get('path') == path and
+            snapshot['poses'][name].get('available') is True
+            for name, path in paths.items()))
+    if not offline and not snapshot_valid:
+        _write(Path(task.episode_dir)/'authored_scene_validation.json', dict(
+            schema='labsim.scene_suite.authored_scene_validation.v1', scene_id=scene_id,
+            passed=False, errors=['pre_reset_authoring_snapshot_missing_or_invalid'],
+            timing='After existing builder World.reset calls; before PhysicsRecorder capture',
+            scene_authoring_snapshot=snapshot, post_builder_actual=current))
+        raise SceneInitializationError('Native scene requires its pre-reset authored USD snapshot')
+    actual = current if offline else snapshot['poses']
     checks = {name: compare_pose(value, actual[name]) for name, value in expected.items()}
+    static_names = ('rack', 'instrument', 'robot', 'source_slot', 'target_seat')
+    static_checks = {} if offline else {name: compare_pose(
+        {key: actual[name].get(key) for key in ('position_m', 'quaternion_wxyz')}, current[name])
+        for name in static_names}
+    dynamic_names = [name for name in paths if name == 'cuvette' or name.startswith('neighbor_')]
+    dynamic_changes = {} if offline else {name: _pose_change(actual[name], current[name]) for name in dynamic_names}
     configured_q = np.asarray(cfg['robot']['initial_joint_positions'], float)
     actual_q = np.asarray(ctx['robot'].get_joint_positions(), float)
     joints_valid = (configured_q.shape == actual_q.shape == (9,) and
@@ -228,16 +280,27 @@ def configure_context(task, ctx):
         no_engineering_adapter=not bool(stage.GetPrimAtPath('/World/Instrument/EngineeringAdapterA')),
         source_initial_clearance_nonnegative=bool(np.min(source_margin) >= 0.),
         source_initial_bottom_gap_nonnegative=float(cfg['scene']['initial_bottom_gap_m']) >= 0.,
+        pre_reset_authoring_snapshot_valid=offline or snapshot_valid,
+        static_poses_unchanged_during_builder=all(item['passed'] for item in static_checks.values()),
+        dynamic_post_builder_poses_finite=offline or all(
+            _finite_vector(current[name].get('position_m')) and
+            quaternion_angle_deg(current[name].get('quaternion_wxyz'), current[name].get('quaternion_wxyz')) is not None
+            for name in dynamic_names),
         source_slot_exists=actual['source_slot']['available'], target_seat_exists=actual['target_seat']['available'],
         dome_intensity_matches=abs(float(light_actual['intensity'])-float(expected_light['intensity'])) <= 1.e-3,
         dome_exposure_matches=abs(float(light_actual['exposure'])-float(expected_light.get('exposure', 0.))) <= 1.e-6)
     receipt = dict(schema='labsim.scene_suite.authored_scene_validation.v1', scene_id=scene_id,
         runtime_kind=str(ctx.get('validation_runtime_kind', 'native_builder_context')),
         stage_meters_per_unit=float(UsdGeom.GetStageMetersPerUnit(stage)),
-        timing='Offline composed USD only; no PhysicsRecorder or gravity steps' if
-            ctx.get('validation_runtime_kind') == 'offline_usd_composition' else
-            'After existing builder/reset; before PhysicsRecorder first gravity step',
+        timing='Offline composed USD only; no physics initialization or steps' if offline else
+            'Authored poses captured before first World.reset; current poses read after existing builder World.reset calls and before PhysicsRecorder capture',
         configured=expected, authored_actual=actual, comparisons=checks,
+        authored_pose_timing='offline_usd_composition' if offline else 'before_first_world_reset',
+        scene_authoring_snapshot=None if offline else snapshot,
+        post_builder_actual=None if offline else current,
+        post_builder_pose_source=None if offline else
+            'Composed USD after builder World.reset calls, before the environment disables Fabric/enables explicit USD transformation updates; not native PhysX pose readback',
+        static_post_builder_comparisons=static_checks, dynamic_builder_pose_changes=dynamic_changes,
         lighting=dict(expected=expected_light, actual=light_actual),
         collision_shape_counts=counts, collision_paths=colliders, component_checks=component_checks,
         visual_geometry_counts=visual_counts, visual_geometry_paths=visual_geometry,
@@ -245,7 +308,7 @@ def configure_context(task, ctx):
             passed=bool(joints_valid), arm_tolerance_rad=1.e-6, finger_tolerance_m=1.e-6,
             source=str(ctx.get('robot_joint_state_source', 'native articulation get_joint_positions')),
             native_articulation_verified=ctx.get('robot_joint_state_source') != 'configuration_mock',
-            timing='Before first recorded gravity step'),
+            timing='Offline configuration mock' if offline else 'After builder World.reset calls; before PhysicsRecorder capture'),
         source_initial_analytic_xy_margin_m=source_margin,
         configured_target_loading_floor_world_m=fixtures['target_floor'],
         configured_original_seat_floor_world_m=fixtures['seat_original_floor'],

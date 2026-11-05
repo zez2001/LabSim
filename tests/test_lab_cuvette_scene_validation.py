@@ -128,8 +128,7 @@ def test_closure_requires_matching_marker_h5_and_result(tmp_path):
     assert not validation.closure_status(tmp_path, 'identity_a')['closed']
 
 
-@pytest.mark.parametrize('scene_id', ['standard', 'random_007'])
-def test_context_hook_preserves_standard_light_and_sets_explicit_random_only(tmp_path, monkeypatch, scene_id):
+def mock_context(tmp_path, monkeypatch, scene_id='standard'):
     from omegaconf import OmegaConf
     from demos.lab_cuvette_project_release_v1.scene_suite import select_scene
     from demos.lab_cuvette_size_v1.scene import layout
@@ -168,6 +167,7 @@ def test_context_hook_preserves_standard_light_and_sets_explicit_random_only(tmp
         UsdPhysics=SimpleNamespace(CollisionAPI=object()),
         UsdLux=SimpleNamespace(DomeLight=SimpleNamespace(Get=lambda *_: light)))
     monkeypatch.setitem(sys.modules, 'pxr', fake)
+    pose_offsets = {}
     def pose(_, path):
         if path == '/World/SourceRack':
             position, yaw = cfg.rack.origin_m, cfg.rack.yaw_deg
@@ -184,19 +184,178 @@ def test_context_hook_preserves_standard_light_and_sets_explicit_random_only(tmp
             yaw = cfg.scene.instrument_yaw_deg
         else:
             position, yaw = fixtures['neighbors'][0]['position'], cfg.vessel.yaw_deg
+        position = np.asarray(position)+np.asarray(pose_offsets.get(path, [0., 0., 0.]))
         return dict(available=True, path=path, position_m=list(position), quaternion_wxyz=validation._yaw_quaternion(yaw))
     monkeypatch.setattr(validation, '_usd_pose', pose)
     task = SimpleNamespace(cfg=cfg, episode_dir=tmp_path)
     ctx = dict(stage=SimpleNamespace(GetPrimAtPath=lambda _: False), fixtures=fixtures,
         validation_runtime_kind='offline_usd_composition', robot_joint_state_source='configuration_mock',
         robot=SimpleNamespace(get_joint_positions=lambda: np.asarray(cfg.robot.initial_joint_positions)))
+    return task, ctx, pose_offsets, sets, intensity
+
+
+@pytest.mark.parametrize('scene_id', ['standard', 'random_007'])
+def test_context_hook_preserves_standard_light_and_sets_explicit_random_only(tmp_path, monkeypatch, scene_id):
+    task, ctx, _, sets, intensity = mock_context(tmp_path, monkeypatch, scene_id)
     receipt = validation.configure_context(task, ctx)
     assert receipt['passed']
     assert (tmp_path/'authored_scene_validation.json').is_file()
     assert len(sets) == (0 if scene_id == 'standard' else 2)
-    assert intensity.Get() == cfg.scene_suite.actual_parameters.lighting.intensity
+    assert intensity.Get() == task.cfg.scene_suite.actual_parameters.lighting.intensity
     assert receipt['runtime_kind'] == 'offline_usd_composition'
     assert receipt['robot_initial_joint_check']['native_articulation_verified'] is False
+
+
+def native_snapshot(task, ctx):
+    ctx.pop('validation_runtime_kind')
+    ctx.pop('robot_joint_state_source')
+    ctx['scene_authoring_snapshot'] = validation.capture_scene_authoring(ctx['stage'], task.cfg, ctx['fixtures'])
+    return copy.deepcopy(ctx['scene_authoring_snapshot'])
+
+
+def test_native_authoring_uses_pre_reset_snapshot_and_retains_natural_fall(tmp_path, monkeypatch):
+    task, ctx, offsets, sets, _ = mock_context(tmp_path, monkeypatch)
+    before = native_snapshot(task, ctx)
+    for path in ('/World/Cuvette', '/World/NeighborCuvette_F6'):
+        offsets[path] = [0., 0., -.000170286]
+    receipt = validation.configure_context(task, ctx)
+    assert receipt['passed']
+    assert receipt['scene_authoring_snapshot'] == before
+    assert ctx['scene_authoring_snapshot'] == before
+    assert sets == []
+    assert receipt['authored_pose_timing'] == 'before_first_world_reset'
+    for name in ('cuvette', 'neighbor_0'):
+        assert receipt['comparisons'][name]['passed']
+        assert receipt['dynamic_builder_pose_changes'][name]['vertical_delta_m'] == pytest.approx(-.000170286)
+        assert receipt['post_builder_actual'][name]['position_m'][2] == pytest.approx(
+            receipt['authored_actual'][name]['position_m'][2]-.000170286)
+    assert all(row['passed'] for row in receipt['static_post_builder_comparisons'].values())
+
+
+@pytest.mark.parametrize('name,path', [('cuvette', '/World/Cuvette'), ('rack', '/World/SourceRack')])
+def test_native_pre_reset_snapshot_keeps_one_micrometre_tolerance(tmp_path, monkeypatch, name, path):
+    task, ctx, offsets, _, _ = mock_context(tmp_path, monkeypatch)
+    offsets[path] = [1.1e-6, 0., 0.]
+    native_snapshot(task, ctx)
+    with pytest.raises(validation.SceneInitializationError):
+        validation.configure_context(task, ctx)
+    receipt = json.loads((tmp_path/'authored_scene_validation.json').read_text())
+    assert receipt['comparisons'][name]['errors'] == ['position_mismatch']
+    assert receipt['comparisons'][name]['position_tolerance_m'] == 1.e-6
+
+
+def test_native_pre_reset_snapshot_keeps_orientation_tolerance(tmp_path, monkeypatch):
+    task, ctx, _, _, _ = mock_context(tmp_path, monkeypatch)
+    native_snapshot(task, ctx)
+    ctx['scene_authoring_snapshot']['poses']['cuvette']['quaternion_wxyz'] = validation._yaw_quaternion(90.00002)
+    with pytest.raises(validation.SceneInitializationError):
+        validation.configure_context(task, ctx)
+    receipt = json.loads((tmp_path/'authored_scene_validation.json').read_text())
+    assert receipt['comparisons']['cuvette']['errors'] == ['orientation_mismatch']
+    assert receipt['comparisons']['cuvette']['orientation_tolerance_deg'] == 1.e-5
+
+
+@pytest.mark.parametrize('channel', ['snapshot', 'post_builder'])
+def test_native_nonfinite_pose_fails_closed(tmp_path, monkeypatch, channel):
+    task, ctx, offsets, _, _ = mock_context(tmp_path, monkeypatch)
+    native_snapshot(task, ctx)
+    if channel == 'snapshot':
+        ctx['scene_authoring_snapshot']['poses']['cuvette']['position_m'][0] = float('nan')
+    else:
+        offsets['/World/Cuvette'] = [float('nan'), 0., 0.]
+    with pytest.raises(validation.SceneInitializationError):
+        validation.configure_context(task, ctx)
+    receipt = json.loads((tmp_path/'authored_scene_validation.json').read_text())
+    assert receipt['passed'] is False
+    if channel == 'snapshot':
+        assert receipt['comparisons']['cuvette']['errors'] == ['position_missing_or_nonfinite']
+    else:
+        assert receipt['component_checks']['dynamic_post_builder_poses_finite'] is False
+
+
+@pytest.mark.parametrize('name,path', [
+    ('rack', '/World/SourceRack'), ('instrument', '/World/Instrument'),
+    ('robot', '/World/Franka'), ('source_slot', '/World/SourceRack/Slots/A1'),
+    ('target_seat', '/World/Instrument/Frames/candidate_far_hinge')])
+def test_native_static_roots_must_remain_fixed_during_builder(tmp_path, monkeypatch, name, path):
+    task, ctx, offsets, _, _ = mock_context(tmp_path, monkeypatch)
+    native_snapshot(task, ctx)
+    offsets[path] = [1.1e-6, 0., 0.]
+    with pytest.raises(validation.SceneInitializationError):
+        validation.configure_context(task, ctx)
+    receipt = json.loads((tmp_path/'authored_scene_validation.json').read_text())
+    assert receipt['comparisons'][name]['passed']
+    assert receipt['static_post_builder_comparisons'][name]['errors'] == ['position_mismatch']
+
+
+@pytest.mark.parametrize('fault', ['missing', 'wrong_timing', 'wrong_scene', 'missing_pose', 'wrong_path'])
+def test_native_context_without_valid_pre_reset_snapshot_fails_closed(tmp_path, monkeypatch, fault):
+    task, ctx, _, _, _ = mock_context(tmp_path, monkeypatch)
+    native_snapshot(task, ctx)
+    snapshot = ctx['scene_authoring_snapshot']
+    if fault == 'missing':
+        del ctx['scene_authoring_snapshot']
+    elif fault == 'wrong_timing':
+        snapshot['timing'] = 'after_builder_reset'
+    elif fault == 'wrong_scene':
+        snapshot['scene_id'] = 'random_007'
+    elif fault == 'missing_pose':
+        del snapshot['poses']['neighbor_0']
+    else:
+        snapshot['poses']['cuvette']['path'] = '/World/OtherCuvette'
+    with pytest.raises(validation.SceneInitializationError, match='pre-reset'):
+        validation.configure_context(task, ctx)
+    receipt = json.loads((tmp_path/'authored_scene_validation.json').read_text())
+    assert receipt['passed'] is False
+    assert receipt['errors'] == ['pre_reset_authoring_snapshot_missing_or_invalid']
+    assert receipt['post_builder_actual']['cuvette']['available']
+
+
+@pytest.mark.parametrize('suite', [False, True])
+def test_builder_passes_read_only_observer_only_for_suite(tmp_path, monkeypatch, suite):
+    from omegaconf import OmegaConf
+    from demos.lab_cuvette_env_v1 import scene
+    from demos.lab_cuvette_project_release_v1.scene_suite import select_scene
+    cfg = OmegaConf.create(config())
+    if suite:
+        cfg = select_scene(cfg, 'standard')
+    calls = []
+    stage = object()
+    snapshot = dict(pre_reset='read-only-observation')
+    def capture(actual_stage, actual_cfg, fixtures):
+        assert actual_stage is stage
+        assert actual_cfg is cfg
+        calls.append('observe_before_reset')
+        return snapshot
+    def make_scene(args, app, output, actual_cfg):
+        assert actual_cfg is cfg
+        if suite:
+            args.scene_authoring_observer(stage)
+        else:
+            assert not hasattr(args, 'scene_authoring_observer')
+        calls.append('unchanged_builder_reset')
+        return dict(stage=stage)
+    monkeypatch.setattr(validation, 'capture_scene_authoring', capture)
+    monkeypatch.setitem(sys.modules, 'demos.lab_cuvette_demo04.run', SimpleNamespace(make_scene=make_scene))
+    context = scene.build_context(cfg, None, tmp_path)
+    assert calls == (['observe_before_reset', 'unchanged_builder_reset'] if suite else ['unchanged_builder_reset'])
+    assert ('scene_authoring_snapshot' in context) is suite
+    if suite:
+        assert context['scene_authoring_snapshot'] is snapshot
+
+
+def test_observer_is_before_first_builder_reset_without_changing_reset_calls():
+    import ast
+    from pathlib import Path
+    source = Path('demos/lab_cuvette_demo04/run.py').read_text()
+    function = next(node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef) and node.name == 'make_scene')
+    calls = [node for node in ast.walk(function) if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)]
+    observer = [node for node in calls if node.func.attr == 'scene_authoring_observer']
+    resets = [node for node in calls if isinstance(node.func.value, ast.Name) and
+        node.func.value.id == 'world' and node.func.attr == 'reset']
+    assert len(observer) == 1
+    assert len(resets) == 2  # first reset plus the unchanged range(2) reset loop
+    assert observer[0].lineno < min(node.lineno for node in resets)
 
 
 @pytest.mark.parametrize('count', [0, 1, 2, True, 11, 3.5])
