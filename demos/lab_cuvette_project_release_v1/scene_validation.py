@@ -341,25 +341,59 @@ def _finite_vector(value, length=3):
 
 
 def closure_status(episode_dir, episode_id):
-    """Read only committed completion identities and closed H5 metadata."""
+    """Read the release collector's fixed H5 layout and completion identities."""
     import h5py
     directory = Path(episode_dir)
     entries = []
-    for marker in sorted(directory.rglob('*_complete.json')):
-        payload = json.loads(marker.read_text())
-        path = marker.parent/payload['h5']
-        row = dict(marker=str(marker.relative_to(directory)), h5=str(path.relative_to(directory)),
-            h5_exists=path.is_file(), episode_identity_matches=payload.get('episode_id') == episode_id)
-        if path.is_file():
-            with h5py.File(path, 'r') as source:
-                row.update(complete=bool(source.attrs.get('complete', False)),
-                    publication_state=str(source.attrs.get('publication_state', 'unknown')),
-                    h5_identity_matches=str(source.attrs.get('episode_id')) == episode_id,
-                    finalization_identity_matches=str(source.attrs.get('finalization_id')) == payload.get('finalization_id'))
+    markers = sorted(directory.rglob('*_complete.json'))
+    for marker in markers:
+        row = dict(marker=str(marker.relative_to(directory)), h5=None, h5_exists=False,
+            episode_identity_matches=False, closed=False)
+        entries.append(row)
+        if len(markers) != 1:
+            row['error'] = 'ambiguous_completion_markers'
+            continue
+        if marker.is_symlink() or marker.parent not in (directory, directory/'dataset') or (directory/'dataset').is_symlink():
+            row['error'] = 'unsupported_or_symlinked_marker_layout'
+            continue
+        try:
+            payload = json.loads(marker.read_text())
+        except (OSError, ValueError) as error:
+            row['error'] = 'unreadable_completion_marker'
+            row['error_type'] = type(error).__name__
+            continue
+        name = payload.get('h5') if isinstance(payload, dict) else None
+        if (not isinstance(name, str) or not name or name in ('.', '..') or
+                any(character in name for character in ('/', '\\', ':', '\x00')) or Path(name).is_absolute()):
+            row['error'] = 'invalid_h5_basename'
+            continue
+        # The collector writes its marker at episode root, but its H5 under
+        # dataset/. Older test/diagnostic markers already live beside that H5.
+        path = directory/'dataset'/name
+        row.update(h5=str(path.relative_to(directory)), h5_exists=path.is_file(),
+            episode_identity_matches=payload.get('episode_id') == episode_id)
+        if (directory/name).exists() or (directory/name).is_symlink():
+            row['error'] = 'ambiguous_h5_layout'
+            continue
+        if path.is_symlink():
+            row['error'] = 'symlinked_h5_not_allowed'
+            continue
+        if row['h5_exists']:
+            try:
+                with h5py.File(path, 'r') as source:
+                    row.update(complete=bool(source.attrs.get('complete', False)),
+                        publication_state=str(source.attrs.get('publication_state', 'unknown')),
+                        h5_identity_matches=str(source.attrs.get('episode_id')) == episode_id,
+                        finalization_identity_matches=bool(isinstance(payload.get('finalization_id'), str) and
+                            payload['finalization_id'] and
+                            str(source.attrs.get('finalization_id')) == payload['finalization_id']))
+            except (OSError, ValueError) as error:
+                row['error'] = 'unreadable_h5'
+                row['error_type'] = type(error).__name__
+                continue
         row['closed'] = bool(row.get('h5_exists') and row['episode_identity_matches'] and
             row.get('complete') and row.get('publication_state') == 'complete' and
             row.get('h5_identity_matches') and row.get('finalization_identity_matches'))
-        entries.append(row)
     return dict(entries=entries, result_exists=(directory/'result.json').is_file(),
         closed=bool(entries) and all(row['closed'] for row in entries) and (directory/'result.json').is_file())
 

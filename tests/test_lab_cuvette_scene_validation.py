@@ -128,6 +128,125 @@ def test_closure_requires_matching_marker_h5_and_result(tmp_path):
     assert not validation.closure_status(tmp_path, 'identity_a')['closed']
 
 
+def release_closure_fixture(tmp_path):
+    import h5py
+    dataset = tmp_path/'dataset'
+    dataset.mkdir()
+    marker = tmp_path/'episode_0000_complete.json'
+    marker.write_text(json.dumps(dict(schema='labsim.Project_release_v1.complete.v1',
+        episode_id='identity_a', h5='episode_0000.h5', finalization_id='closure_a')))
+    path = dataset/'episode_0000.h5'
+    with h5py.File(path, 'w') as source:
+        source.attrs.update(complete=True, publication_state='complete',
+            episode_id='identity_a', finalization_id='closure_a')
+    (tmp_path/'result.json').write_text('{}')
+    return marker, path
+
+
+def test_closure_resolves_real_release_root_marker_to_dataset_read_only(tmp_path, monkeypatch):
+    import h5py
+    _, path = release_closure_fixture(tmp_path)
+    native_open = h5py.File
+    modes = []
+    def read_only_open(actual_path, mode):
+        assert actual_path == path
+        modes.append(mode)
+        return native_open(actual_path, mode)
+    monkeypatch.setattr(h5py, 'File', read_only_open)
+    status = validation.closure_status(tmp_path, 'identity_a')
+    assert status['closed']
+    assert status['entries'][0]['h5'] == 'dataset/episode_0000.h5'
+    assert modes == ['r']
+
+
+def test_closure_missing_release_dataset_h5_does_not_search_other_directories(tmp_path):
+    _, path = release_closure_fixture(tmp_path)
+    other = tmp_path/'unrelated'
+    other.mkdir()
+    path.rename(other/path.name)
+    status = validation.closure_status(tmp_path, 'identity_a')
+    assert not status['closed']
+    assert status['entries'][0]['h5'] == 'dataset/episode_0000.h5'
+    assert not status['entries'][0]['h5_exists']
+
+
+@pytest.mark.parametrize('where,key,value', [
+    ('marker', 'episode_id', 'identity_b'),
+    ('marker', 'finalization_id', 'closure_b'),
+    ('marker', 'finalization_id', ''),
+    ('h5', 'episode_id', 'identity_b'),
+    ('h5', 'finalization_id', 'closure_b'),
+    ('h5', 'complete', False),
+    ('h5', 'publication_state', 'prepared'),
+])
+def test_release_closure_keeps_all_completion_and_identity_gates(tmp_path, where, key, value):
+    import h5py
+    marker, path = release_closure_fixture(tmp_path)
+    if where == 'marker':
+        payload = json.loads(marker.read_text())
+        payload[key] = value
+        marker.write_text(json.dumps(payload))
+    else:
+        with h5py.File(path, 'r+') as source:
+            source.attrs[key] = value
+    assert not validation.closure_status(tmp_path, 'identity_a')['closed']
+
+
+@pytest.mark.parametrize('name', ['/tmp/episode_0000.h5', '../episode_0000.h5',
+    'dataset/episode_0000.h5', '..\\episode_0000.h5', 'C:\\episode_0000.h5', '', None, ['episode_0000.h5']])
+def test_closure_rejects_nonbasename_h5_paths_before_opening_h5(tmp_path, monkeypatch, name):
+    import h5py
+    marker, _ = release_closure_fixture(tmp_path)
+    payload = json.loads(marker.read_text())
+    payload['h5'] = name
+    marker.write_text(json.dumps(payload))
+    monkeypatch.setattr(h5py, 'File', lambda *_: pytest.fail('Unsafe path must not open H5'))
+    status = validation.closure_status(tmp_path, 'identity_a')
+    assert not status['closed']
+    assert status['entries'][0]['error'] == 'invalid_h5_basename'
+
+
+@pytest.mark.parametrize('fault', ['duplicate_h5', 'extra_marker', 'nested_marker', 'h5_symlink', 'marker_symlink', 'dataset_symlink'])
+def test_closure_rejects_ambiguous_or_symlinked_layouts(tmp_path, monkeypatch, fault):
+    import h5py
+    marker, path = release_closure_fixture(tmp_path)
+    if fault == 'duplicate_h5':
+        (tmp_path/path.name).write_bytes(path.read_bytes())
+    elif fault == 'extra_marker':
+        (path.parent/marker.name).write_bytes(marker.read_bytes())
+    elif fault == 'nested_marker':
+        nested = tmp_path/'unrelated'
+        nested.mkdir()
+        (nested/marker.name).write_bytes(marker.read_bytes())
+        marker.unlink()
+    elif fault == 'h5_symlink':
+        moved = path.with_name('other.h5')
+        path.rename(moved)
+        path.symlink_to(moved)
+    elif fault == 'marker_symlink':
+        moved = marker.with_name('other.json')
+        marker.rename(moved)
+        marker.symlink_to(moved)
+    else:
+        dataset = path.parent
+        moved = tmp_path/'other_dataset'
+        dataset.rename(moved)
+        dataset.symlink_to(moved, target_is_directory=True)
+    monkeypatch.setattr(h5py, 'File', lambda *_: pytest.fail('Ambiguous/unsafe layout must not open H5'))
+    assert not validation.closure_status(tmp_path, 'identity_a')['closed']
+
+
+def test_release_closure_requires_result_and_readable_h5(tmp_path):
+    _, path = release_closure_fixture(tmp_path)
+    (tmp_path/'result.json').unlink()
+    assert not validation.closure_status(tmp_path, 'identity_a')['closed']
+    (tmp_path/'result.json').write_text('{}')
+    path.write_bytes(b'not an H5 file')
+    status = validation.closure_status(tmp_path, 'identity_a')
+    assert not status['closed']
+    assert status['entries'][0]['error'] == 'unreadable_h5'
+
+
 def mock_context(tmp_path, monkeypatch, scene_id='standard'):
     from omegaconf import OmegaConf
     from demos.lab_cuvette_project_release_v1.scene_suite import select_scene
