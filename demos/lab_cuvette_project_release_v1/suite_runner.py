@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ROOT / "config/lab_cuvette_loading/Project_release_v1/standard.yaml"
 INITIALIZATION_FAILURES = frozenset(("INVALID_INITIAL_STATE", "INITIALIZATION_INVALID",
     "INIT_INVALID", "GEOMETRY_PREFLIGHT_BLOCKED", "GEOMETRY_PRECHECK_BLOCKED"))
+INITIALIZATION_EXCEPTION_TYPES = frozenset(("SceneInitializationError",))
 
 
 def parser():
@@ -105,6 +106,15 @@ def _read_json(path):
     return json.loads(path.read_text()) if path.is_file() else None
 
 
+def _read_optional_mapping(path):
+    # Failure sidecars may be absent or incomplete after an abnormal exit.
+    try:
+        value = _read_json(path)
+    except (OSError, ValueError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
 def classify_result(result, *, initialization_failure, process_closed, complete,
                     independent_outcome_matches, backend="teacher"):
     if initialization_failure:
@@ -125,13 +135,14 @@ def inspect_closed_run(output, exit_code, *, backend="teacher", expected_scene_i
     independent = _read_json(episodes[0].parent / "independent_score.json") if len(episodes) == 1 else None
     manifest = _read_json(output / "run_manifest.json")
     shutdown = _read_json(output / "application_shutdown.json") or {}
-    runner_failure = _read_json(output / "runner_failure.json")
+    runner_failure = _read_optional_mapping(output / "runner_failure.json")
     reason = str(result.get("termination_reason", result.get("reason", "NO_COMPLETED_EPISODE")))
     failure_type = str(result.get("failure_type", "UNKNOWN"))
     initialization_failure = failure_type in INITIALIZATION_FAILURES or reason in INITIALIZATION_FAILURES
-    if not episodes and runner_failure:
-        message = str(runner_failure.get("error", ""))
-        initialization_failure = initialization_failure or "initial" in message.lower() or "geometry precheck" in message.lower()
+    if not episodes:
+        error_type = runner_failure.get("type")
+        initialization_failure = initialization_failure or (
+            isinstance(error_type, str) and error_type in INITIALIZATION_EXCEPTION_TYPES)
     complete = result.get("complete") is True and result.get("publication_state") == "complete"
     process_closed = exit_code == 0 and manifest is not None and shutdown.get("successful_cleanup_calls") is True
     row = dict(process_exit_code=exit_code, process_exited=True,

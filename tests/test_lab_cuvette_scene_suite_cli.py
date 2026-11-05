@@ -197,3 +197,171 @@ def test_partial_repetitions_do_not_publish_a_fixed_denominator_success_rate(tmp
     assert row["full_success_rate"] is None
     assert row["observed_full_success_rate"] == 1.
     assert result["random_mean_full_success_rate"] is None
+
+
+# Actual 20261105_165005 payload projection; the complete historical traceback
+# is retained here so this regression has no runtime dependency on outputs/.
+def _actual_scene_initialization_failure():
+    return {'type': 'SceneInitializationError',
+     'error': 'Configured scene differs from authored assembly; see '
+              'authored_scene_validation.json',
+     'traceback': 'Traceback (most recent call last):\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/demos/lab_cuvette_project_release_v1/launch.py", '
+                  'line 198, in main\n'
+                  "    facade.reset(args.seed + index, dict(mode='standard', teacher=args.backend "
+                  "== 'teacher',\n"
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/demos/lab_cuvette_project_release_v1/environment.py", '
+                  'line 8, in reset\n'
+                  '    observation = super().reset(*args, **kwargs)\n'
+                  '                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/demos/lab_cuvette_project_v1_1/environment.py", '
+                  'line 15, in reset\n'
+                  '    result=super().reset(*args,**kwargs)\n'
+                  '           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/demos/lab_cuvette_project_v1/environment.py", '
+                  'line 49, in reset\n'
+                  "    self.task.reset(seed, options or dict(mode='standard', "
+                  "policy_id='external'))\n"
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_project_release.py", '
+                  'line 219, in reset\n'
+                  '    return super().reset(*args, **kwargs)\n'
+                  '           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_project_v1.py", '
+                  'line 44, in reset\n'
+                  '    return super().reset(seed, options)\n'
+                  '           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_env_v1.py", '
+                  'line 48, in reset\n'
+                  '    try:return self._reset(seed,options)\n'
+                  '               ^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_project_release.py", '
+                  'line 66, in _reset\n'
+                  '    observation, info = super()._reset(seed, options)\n'
+                  '                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_project_v1_1.py", '
+                  'line 46, in _reset\n'
+                  '    observation,info=super()._reset(seed,options)\n'
+                  '                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_project_v1.py", '
+                  'line 47, in _reset\n'
+                  '    observation, info = super()._reset(seed, options)\n'
+                  '                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_env_v1.py", '
+                  'line 61, in _reset\n'
+                  '    '
+                  'self.ctx=build_context(self.cfg,self.app,self.episode_dir,self.initial_state)\n'
+                  '    ^^^^^^^^\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/tasks/lab_cuvette_loading_project_release.py", '
+                  'line 53, in __setattr__\n'
+                  '    configure_context(self, value)\n'
+                  '  File '
+                  '"/home/wujing/Desktop/vla/LabSim-projectization/demos/lab_cuvette_project_release_v1/scene_validation.py", '
+                  'line 256, in configure_context\n'
+                  "    raise SceneInitializationError('Configured scene differs from authored "
+                  "assembly; see authored_scene_validation.json')\n"
+                  'demos.lab_cuvette_project_release_v1.scene_validation.SceneInitializationError: '
+                  'Configured scene differs from authored assembly; see '
+                  'authored_scene_validation.json\n'}
+
+
+def _historical_unbound_initialization_receipt():
+    return {'record_valid': False,
+     'task_success': None,
+     'failure_type': 'INITIALIZATION_INVALID',
+     'error_type': 'SceneInitializationError',
+     'error': 'Configured scene differs from authored assembly; see '
+              'authored_scene_validation.json',
+     'episode_id': 'bcdbacc9-3359-42b2-8fc1-7ba65cbbc5ca',
+     'physical_attempt_qualified': False}
+
+
+def test_actual_scene_initialization_exception_without_message_keywords(tmp_path):
+    payload = _actual_scene_initialization_failure()
+    assert "initial" not in payload["error"].lower()
+    assert "geometry precheck" not in payload["error"].lower()
+    (tmp_path / "runner_failure.json").write_text(json.dumps(payload))
+    observed = suite_runner.inspect_closed_run(tmp_path, 1)
+    assert observed["outcome"] == "initialization_failure"
+    assert observed["failure_type"] == "UNKNOWN"  # Missing raw result is preserved.
+    assert observed["termination_reason"] == "NO_COMPLETED_EPISODE"
+
+
+@pytest.mark.parametrize("error_type,message", [
+    ("RuntimeError", "initial buffer allocation failed"),
+    ("RuntimeError", "geometry precheck text alone is insufficient"),
+    ("ReferenceControlError", "Configured scene differs from authored assembly"),
+    ("NotSceneInitializationError", "CPU fixture"),
+])
+def test_ordinary_environment_error_is_not_initialization_by_message(tmp_path, error_type, message):
+    (tmp_path / "runner_failure.json").write_text(json.dumps(dict(type=error_type, error=message)))
+    assert suite_runner.inspect_closed_run(tmp_path, 1)["outcome"] == "environment_exception"
+
+
+@pytest.mark.parametrize("relative", ["episode_0000", "episode_notes", "episode_0001",
+    "reset_validation/episode_0000"])
+@pytest.mark.parametrize("ordinary_runner_failure", [False, True])
+def test_unbound_receipt_does_not_override_ordinary_environment_failure(tmp_path, relative, ordinary_runner_failure):
+    episode = tmp_path / relative
+    episode.mkdir(parents=True)
+    # A correctly formatted UUID in this sidecar alone does not bind it to
+    # the current run; generic reset exceptions can produce the same flags.
+    (episode / "initialization_failure.json").write_text(json.dumps(_historical_unbound_initialization_receipt()))
+    if ordinary_runner_failure:
+        (tmp_path / "runner_failure.json").write_text(json.dumps(dict(type="RuntimeError", error="render failed")))
+    assert suite_runner.inspect_closed_run(tmp_path, 1)["outcome"] == "environment_exception"
+
+
+def test_episode_directory_alone_is_not_initialization_evidence(tmp_path):
+    (tmp_path / "episode_0000").mkdir()
+    assert suite_runner.inspect_closed_run(tmp_path, 1)["outcome"] == "environment_exception"
+
+
+@pytest.mark.parametrize("text", ["{", "[]", "null", '"unexpected"',
+    '{"type": []}', '{"type": {}}', '{"type": null}'])
+def test_bad_or_nonmapping_runner_failure_is_environment_exception(tmp_path, text):
+    (tmp_path / "runner_failure.json").write_text(text)
+    assert suite_runner.inspect_closed_run(tmp_path, 1)["outcome"] == "environment_exception"
+
+
+@pytest.mark.parametrize("text", ["{", "[]", "null", '{}',
+    '{"failure_type":"INITIALIZATION_INVALID"}'])
+def test_bad_or_partial_initialization_sidecar_is_not_positive_evidence(tmp_path, text):
+    episode = tmp_path / "episode_0000"
+    episode.mkdir()
+    (episode / "initialization_failure.json").write_text(text)
+    assert suite_runner.inspect_closed_run(tmp_path, 1)["outcome"] == "environment_exception"
+
+
+@pytest.mark.parametrize("episode_count", [1, 2])
+def test_initialization_exception_does_not_override_existing_or_ambiguous_results(tmp_path, episode_count):
+    for index in range(episode_count):
+        episode = tmp_path / f"episode_{index:04d}"
+        episode.mkdir()
+        (episode / "result.json").write_text(json.dumps(dict(failure_type="SAFETY_COLLISION",
+            termination_reason="ROBOT_ENVIRONMENT_COLLISION", task_success=False, record_valid=True)))
+    (tmp_path / "runner_failure.json").write_text(json.dumps(_actual_scene_initialization_failure()))
+    observed = suite_runner.inspect_closed_run(tmp_path, 1)
+    assert observed["outcome"] == "environment_exception"
+    if episode_count == 1:
+        assert observed["failure_type"] == "SAFETY_COLLISION"
+        assert observed["termination_reason"] == "ROBOT_ENVIRONMENT_COLLISION"
+
+
+def test_structured_result_initialization_label_remains_authoritative(tmp_path):
+    episode = tmp_path / "episode_0000"
+    episode.mkdir()
+    (episode / "result.json").write_text(json.dumps(dict(failure_type="INITIALIZATION_INVALID",
+        task_success=None, record_valid=False)))
+    assert suite_runner.inspect_closed_run(tmp_path, 1)["outcome"] == "initialization_failure"

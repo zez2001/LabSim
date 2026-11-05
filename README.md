@@ -4,6 +4,8 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 
 当前推荐版本为 **`Project_release_v1`**，长期开发分支为 **`codex/labsim`**。
 
+本分支 **`codex/labsim-projectization`** 提供项目管理与固定 Random-10 场景协议，当前独立交付，未合并到长期开发线。
+
 [English](README_EN.md) · [中文导航](README_CN.md) · [组内使用指南](docs/development/ONBOARDING.md) · [版本与技术参考](docs/lab_cuvette_loading/Project_release_v1/README.md) · [公开资产](https://huggingface.co/datasets/Txie000/SLAI-Labsim)
 
 ## 完整演示
@@ -27,14 +29,14 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 | 独立评测 | 阶段进度、完整成功、终止原因、记录完整性、物理质量与数据资格 | 策略比较、合格示范筛选 |
 | 项目接口 | 统一 CLI、Teacher、GPT 直接控制、π0.5 RPC、Harness、自有策略生命周期 | 组内复用、外部策略评测 |
 
-发布版的示范采集与训练数据准备使用固定 `standard`。评测接口可显式选择 `random_001`–`random_010` 十个固定候选实例，定义、用途及物理验收状态见[场景协议](docs/lab_cuvette_loading/Scene_suite_v1/README.md)。资产尺寸、质量、控制频率及真实测量待补项见[资产与物理规格](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。当前是刚体仿真，质量、摩擦与动力学仍有工程假设；完整 Teacher 示范不代表其他策略完成同一任务。
+发布版的示范采集与训练数据准备使用固定 `standard`。本分支评测接口可显式选择 `random_001`–`random_010` 十个固定实例，定义、用途及参考运行结果见[场景协议](docs/lab_cuvette_loading/Scene_suite_v1/README.md)。资产尺寸、质量、控制频率及真实测量待补项见[资产与物理规格](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。当前是刚体仿真，质量、摩擦与动力学仍有工程假设；完整 Teacher 示范不代表其他策略完成同一任务。
 
 ## 安装与资产获取
 
 使用 Linux、Python 3.11 和 Isaac Sim 5.1.0，先准备已有 Isaac 解释器及独立几何工具环境，步骤见[准备环境与资产](docs/development/ONBOARDING.md#准备环境与资产)。硬件验证记录、工作区布局和部署检查见[部署与交付](DELIVERY.md)。
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/labsim https://github.com/zez2001/LabSim.git
+GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/labsim-projectization https://github.com/zez2001/LabSim.git
 cd LabSim
 export LABSIM_PYTHON=/absolute/path/to/installed/isaac-python
 ./labsim assets download

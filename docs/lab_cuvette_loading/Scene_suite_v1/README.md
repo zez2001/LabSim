@@ -2,7 +2,9 @@
 
 套件版本：`lab_cuvette_loading.scene_suite.v1`。环境版本：`Project_release_v1`；任务仍为完整 `lab_cuvette_loading`，独立评分沿用 `Project_v1_1.independent.v1`，Progress v1.2 负责过程诊断。
 
-验收状态：固定协议、CPU 接口与离线 USD 装配已核验。本次代码的 standard 完整回归、三次物理 reset 和 Random-10 Teacher 执行仍待空闲 GPU；Random-10 当前按候选评测场景使用。历史 standard 成功记录不作为本套件的新运行成绩。
+验收状态：standard 与十个固定 random 均已完成三次物理 reset、一次 Teacher 参考执行、独立评分、记录闭合、进程退出及正常 ACT/DP batch 读取。standard 完整成功；Random-10 完整成功 5/10，其余为三次抓持漂移和两次碰撞安全终止，详见[参考运行验证](#参考运行验证)。参考控制器在全部实例上的成功验收尚未通过。
+
+本协议目前位于 `codex/labsim-projectization` 分支，未合并到 `codex/labsim` 或 main。检出本分支后使用下列命令，HF 资产 revision 继续复用当前发布版。
 
 [套件注册表](../../../config/lab_cuvette_loading/Scene_suite_v1/suite.json)固定 `standard` 和 `random_001`–`random_010` 十一个实例。共享加载器应用独立 JSON 覆盖层，使用同一环境和控制实现。没有十一套环境代码；运行中不重新采样，不改变来源槽 A1 或原内部 A 座 `candidate_far_hinge`。
 
@@ -71,7 +73,7 @@
 
 ## 场景验收
 
-eval 可加 `--reset-checks 3`：在正式任务前，于独立 `reset_validation/` 子目录做三次重建，每次原物理控制下自然静置四秒。构建器首次内部 reset 前保存真实 USD 装配快照，与配置按同一时点比较；另外保存构建器返回后的实际动态位姿及其重力位移。原构建器的内部 reset 次序保持，PhysicsRecorder 从随后步骤 0 开始记录；内部 reset 的逐物理步接触不在该记录范围内。配置与 USD 装配检查使用 1 µm / 0.00001° 数值一致性门槛；稳定后跨 reset 位姿比较使用 0.2 mm / 1°。这些是配置和重复性检查规格，不是实物标定精度。
+eval 可加 `--reset-checks 3`：在正式任务前，于独立 `reset_validation/` 子目录做三次重建，每次原物理控制下自然静置四秒。构建器首次内部 reset 前保存真实 USD 装配快照，与配置按同一时点比较；另外保存构建器返回后的 USD 动态位姿读数。该读数可能与原生刚体状态存在更新时点差异，不作为原生运动测量。原构建器的内部 reset 次序保持，PhysicsRecorder 从随后步骤 0 开始记录实际原生状态；内部 reset 的逐物理步接触不在该记录范围内。配置与 USD 装配检查使用 1 µm / 0.00001° 数值一致性门槛；稳定后跨 reset 位姿比较使用 0.2 mm / 1°。这些是配置和重复性检查规格，不是实物标定精度。
 
 reset 检查记录配置初态、实际初态、稳定状态、原生/差分速度、源几何穿透、支撑、装配及双相机图。诊断记录按原中断语义闭合，`task_attempt=false`，不计正式 Teacher 完整任务的分母，也不伪造成合格失败。
 
@@ -80,6 +82,30 @@ reset 检查记录配置初态、实际初态、稳定状态、原生/差分速�
 每次运行写 `source_identity.json`、解析配置、`launch_identity.json`、`scene_manifest.json` 及 episode 元数据。新增依赖侧记显式覆盖实际读取的 `V0.yaml`、demo04 构建器及关键间接链；历史指纹与旧结果不回写。源码或发布实现变化会产生新运行指纹，不能借此改写历史身份。
 
 CPU 测试及离线 USD 组合只证明协议、几何装配或接口行为。物理 reset、整手可达、完整装载、记录闭合和读取结果由对应新运行收据证明；不能以静态检查通过替代。
+
+## 参考运行验证
+
+2026-11-05/06 实际执行源码：`bd263790c49fcbb8a82b45c0c17fa770d0a31031`。每场景一次完整任务机会，之前各做三次 reset；33/33 reset 通过，11/11 正式记录有效、退出及数据闭合，11/11 正常 ACT/DP reader 读取通过。
+
+| 场景 | 独立完整结果 | 终止或失败原因 | 撤离后稳定窗口 |
+|---|---|---|---|
+| standard | SUCCESS | CONTROLLER_WORKFLOW_COMPLETE | 3 秒通过 |
+| random_001 | FAILURE | GRASP_SLIP | 3 秒通过 |
+| random_002 | FAILURE | GRASP_SLIP | 3 秒通过 |
+| random_003 | SUCCESS | CONTROLLER_WORKFLOW_COMPLETE | 3 秒通过 |
+| random_004 | FAILURE | SAFETY_COLLISION | unavailable / null |
+| random_005 | FAILURE | GRASP_SLIP | 3 秒通过 |
+| random_006 | FAILURE | SAFETY_COLLISION | unavailable / null |
+| random_007 | SUCCESS | CONTROLLER_WORKFLOW_COMPLETE | 3 秒通过 |
+| random_008 | SUCCESS | CONTROLLER_WORKFLOW_COMPLETE | 3 秒通过 |
+| random_009 | SUCCESS | CONTROLLER_WORKFLOW_COMPLETE | 3 秒通过 |
+| random_010 | SUCCESS | CONTROLLER_WORKFLOW_COMPLETE | 3 秒通过 |
+
+Random-10 等权平均完整成功为 50%，分母为全部十个固定场景各一次执行。此表是固定参考运行观测；多次重复的统计需另行执行。早先普通 standard 回归也完整成功，源码为 `b2dc1ea096b69a0ae8da70efcb45f234ecd741b1`，独立列出，不重复计入十一场景分母。
+
+R1/R2 的底部参考点漂移为约 0.228/0.227 mm，早期抓持姿态重整的转动杠杆贡献较大；R5 在腾空提取时超限，峰值约 0.478 mm，另有轴向相对运动。最终放稳不覆盖已发生的抓持失败。R4/R6 在低位 SUPPORT_TRANSFER 持续姿态反馈期间，掌部接触仪器 SourceMesh2/SourceMesh4，触发原安全门槛；没有实际撤离，其稳定窗口保持 unavailable。场景变换与目标坐标同步检查通过，失败场景未更换种子或改评分。
+
+后续参考控制适配重点为抓持参考/滑移与低位整手姿态扫掠净空。原生与差分速度不一致、实际 cooked 表面全局误差未完整取得的质量标记继续保留；真实标定状态保持 false。详细原始录像、H5、逐场景结果、来源哈希和失败分析保存在 ignored 运行目录，通过本轮结果阅读包移交。
 
 ## 评测数据读取与汇总
 

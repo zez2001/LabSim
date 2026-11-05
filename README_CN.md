@@ -1,6 +1,6 @@
 # LabSim 中文使用入口
 
-当前推荐 **Project_release_v1**，开发分支 **codex/labsim**。
+当前推荐 **Project_release_v1**，长期开发分支 **codex/labsim**；本次项目化与固定场景协议位于独立分支 **codex/labsim-projectization**，尚未合并。
 
 从[项目主页](README.md)开始，按以下顺序操作：
 

@@ -8,6 +8,10 @@
 - [Internal_use_v1 使用验收](../lab_cuvette_loading/Internal_use_v1/20261028/README.md)及[数据用途与移交](../lab_cuvette_loading/Project_release_v1/data_usage.md)分别说明普通示范、诊断、策略评测和资源检查。
 - [Size_v1 最终报告与连续视频](../lab_cuvette_loading/Size_v1/results_20261022/LabSim_Size_v1_尺寸变体装载实验报告.md)、[40 集正式审计](../lab_cuvette_loading/Size_v1/data/final40_actual/README.md)：保留 20 成功 / 20 受控失败的历史统计，不能把受控提前结束解释为自然失败分布。
 
+## standard 与固定 Random-10
+
+[Scene_suite_v1 参考运行验证](../lab_cuvette_loading/Scene_suite_v1/README.md#参考运行验证)：2026-11-05/06 新运行，standard 完整成功，Random-10 各一次为 5/10 完整成功；33 次 reset、11 条正式记录闭合/退出及实际 ACT/DP 读取通过。三条抓持漂移、两条碰撞安全失败保持原标签；普通 standard 基线与十一场景分母分别记录。
+
 ## Progress 阶段分析
 
 [Progress v1.2 使用入口](../lab_cuvette_loading/Progress_v1_2/README.md)提供在线 `--progress`、已有记录离线分析及便携报告；[实际结果](../lab_cuvette_loading/Progress_v1_2/RESULTS.md)保留当时验证和局限。阶段诊断不修改原 reward、独立评分或数据资格；阶段到达不等于完整任务成功。[Progress v1 历史入口](../lab_cuvette_loading/Progress_v1/README.md)保留旧字段与证据。
