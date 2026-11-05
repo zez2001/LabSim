@@ -47,7 +47,7 @@ def recorded_image_shape(path, sample_filter):
 
 
 def read_check(path, *, sample_filter='success', policies=('act', 'dp'),
-               dataset_class=LabCuvetteProjectV1Dataset):
+               dataset_class=LabCuvetteProjectV1Dataset, dataset_options=None):
     """Read through the selected normal dataset; the default preserves Project_v1."""
     path = Path(path)
     if path.is_dir():
@@ -62,7 +62,7 @@ def read_check(path, *, sample_filter='success', policies=('act', 'dp'),
     for policy in policies:
         dataset = dataset_class(shape_meta=shape, dataset_path=path,
             horizon=16, n_obs_steps=1 if policy == 'act' else 3, policy_type=policy,
-            sample_filter=sample_filter, val_ratio=0)
+            sample_filter=sample_filter, val_ratio=0, **(dataset_options or {}))
         batch = next(iter(DataLoader(dataset, batch_size=min(3, len(dataset)), num_workers=0)))
         def describe(value):
             if isinstance(value, dict):
@@ -73,22 +73,29 @@ def read_check(path, *, sample_filter='success', policies=('act', 'dp'),
                 return [describe(item) for item in value]
             return value
         with h5py.File(path, 'r') as source:
+            from demos.lab_cuvette_project_release_v1.scene_data import scene_identity
             checks = []
             for episode, group_path in dataset.group_paths.items():
                 group = source[group_path]
                 scene_versions.add(str(group.attrs['scene_version']))
                 dt = group['next_timestamp'][:] - group['timestamp'][:]
+                identity = scene_identity(group)
                 checks.append(dict(episode_id=episode, transitions=len(dt),
                     observation_action_time_aligned=bool(np.allclose(dt, 1 / 60, atol=1e-6)),
                     action_shape=list(group['actions'].shape),
                     executed_command_shape=list(group['control_auxiliary/command_q'].shape),
                     source_slot_id=str(group.attrs['source_slot_id']), target_seat_id=str(group.attrs['target_seat_id']),
                     asset_id=str(group.attrs['asset_id']), record_valid=bool(group.attrs['record_valid']),
+                    scene_id=identity['scene_id'],
+                    scene_suite_version=identity['scene_suite_version'],
+                    record_purpose=str(group.attrs.get('record_purpose', 'unknown')),
                     task_success=bool(group.attrs['task_success']), condition_group=str(group.attrs['condition_group'])))
         results.append(dict(policy_type=policy, episodes=list(dataset.group_paths), scene_fingerprint=dataset.scene_fingerprint,
+            scene_fingerprints=getattr(dataset, 'scene_fingerprints', [dataset.scene_fingerprint]),
             batch=describe(batch), episode_checks=checks, training_or_optimizer_executed=False))
     scene_version = next(iter(scene_versions)) if len(scene_versions) == 1 else 'mixed'
     return dict(schema='labsim.' + scene_version + '.reader_check.v1', path=str(path),
         scene_version=scene_version, dataset_class=dataset_class.__module__ + '.' + dataset_class.__name__,
         recorded_policy_image_shape=image_shape, public_sample_derivations=derivations,
-        sample_filter=sample_filter, reader_validation=results, source_labels_modified=False)
+        sample_filter=sample_filter, data_use=(dataset_options or {}).get('data_use', 'train'),
+        reader_validation=results, source_labels_modified=False)

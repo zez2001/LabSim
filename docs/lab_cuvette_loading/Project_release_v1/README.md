@@ -2,6 +2,8 @@
 
 **当前推荐使用版本**，任务 `lab_cuvette_loading / standard`。从[项目主页](../../../README.md)或[组内使用指南](../../development/ONBOARDING.md)开始完成安装、完整任务、采集、读取和策略接入。本目录集中记录接口、资产规格及验收证据。
 
+示范与训练数据使用 standard；评测还可显式选择十个固定布局实例。版本化定义、调用、用途隔离及运行验收见 [Scene_suite_v1](../Scene_suite_v1/README.md)。原 standard 配置、资产与判分阈值继续保留。
+
 ## 当前使用入口
 
 | 文档 | 用途 |

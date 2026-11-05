@@ -11,6 +11,7 @@ from utils.episode_selection import _optional_bool
 class LabCuvetteProjectV11Dataset(MinimalPickDataset):
     SCENE_VERSION = "Project_v1_1"
     ALLOWED_CONDITION_GROUPS = frozenset(("natural", "deterministic_action_deviation"))
+    ALLOW_MULTIPLE_SCENE_FINGERPRINTS = False
 
     def __init__(self, *args, scene_mode="standard", scene_randomization_enabled=False,
                  automatic_validation_mode="standard", scene_contract_path=None, **kwargs):
@@ -43,8 +44,9 @@ class LabCuvetteProjectV11Dataset(MinimalPickDataset):
                 if len(fingerprint) != 64 or expected and fingerprint != expected:
                     raise ValueError("Missing or mismatched Project_v1_1 fingerprint: " + episode)
                 fingerprints.add(fingerprint)
-        if len(fingerprints) != 1:
+        if len(fingerprints) != 1 and not self.ALLOW_MULTIPLE_SCENE_FINGERPRINTS:
             raise ValueError("Do not mix Project_v1_1 scene revisions")
-        self.scene_fingerprint = next(iter(fingerprints))
+        self.scene_fingerprints = sorted(fingerprints)
+        self.scene_fingerprint = next(iter(fingerprints)) if len(fingerprints) == 1 else None
         if set(self.train_episodes) & set(self.val_episodes):
             raise AssertionError("One episode crossed the train/validation split")

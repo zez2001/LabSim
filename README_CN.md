@@ -7,7 +7,7 @@
 1. [准备环境与资产](docs/development/ONBOARDING.md#准备环境与资产)。
 2. [运行完整装载任务](README.md#完整任务快速开始)。
 3. [采集标准示范并读取 ACT/DP batch](README.md#标准采集与数据读取)。
-4. [接入策略开展评测](README.md#策略接入与评测)。
+4. [接入策略开展评测](README.md#策略接入与评测)，按[standard / Random-10 协议](docs/lab_cuvette_loading/Scene_suite_v1/README.md)选择固定场景。
 5. [数据用途、历史兼容与移交](docs/lab_cuvette_loading/Project_release_v1/data_usage.md)。
 6. [统一结果索引](docs/history/RESULTS.md)：Progress、策略评测、历史恢复及 cell unit 的实际结果与范围。
 7. [单细胞 unit](demos/cell_units/README.md)与[设备资产/API](demos/cell_assets/README.md)：并行扩展与限定机械操作。

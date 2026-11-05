@@ -27,7 +27,7 @@ Single-cell units are a parallel extension with bounded mechanical operations fo
 | Independent evaluation | Stage progress, full success, termination reason, record integrity, physics quality and data qualification | Policy comparisons and demonstration filtering |
 | Project interfaces | Unified CLI, Teacher, direct GPT control, π0.5 RPC, Harness and custom-policy lifecycle | Internal reuse and external policy evaluation |
 
-The release uses the fixed standard scene; collection and training-data preparation disable scene randomization. See [asset and physics specifications](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格) for dimensions, mass, rates and pending measurements. This is rigid-body simulation with engineering assumptions for mass, friction and dynamics. A complete Teacher demonstration does not establish completion by another policy.
+Demonstrations and training-data preparation use fixed `standard`. Evaluation can explicitly select the ten fixed `random_001`–`random_010` instances; see the [scene protocol](docs/lab_cuvette_loading/Scene_suite_v1/README.md) for definitions, allowed uses and acceptance checks. See [asset and physics specifications](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格) for dimensions, mass, rates and pending measurements. This is rigid-body simulation with engineering assumptions for mass, friction and dynamics. A complete Teacher demonstration does not establish completion by another policy.
 
 ## Installation and assets
 
@@ -78,9 +78,9 @@ The default `relative-links` index must move with its source H5 files, preservin
 | Policy | Capability | Entry |
 |---|---|---|
 | Teacher | Complete physical loading demonstrations | `demo` / `collect --backend teacher` |
-| Direct GPT control | Recorded visual closed-loop grasping, extraction and transport; complete loading has not passed | `eval --backend gpt6`, separate credentials and budget |
-| π0.5 | Real continuous model RPC, receipts, safety termination and reading; these do not establish complete-task success | Environment `serve`, model service and adapter client |
-| Harness | Local RPC integration and existing short interactions | `serve` and Harness client |
+| Direct GPT control | Image/state tool calls, budget management and execution receipts | `eval --backend gpt6`, separate credentials and budget |
+| π0.5 | Model RPC, action adapters, execution receipts, safety termination and data readback | Environment `serve`, model service and adapter client |
+| Harness | Local RPC client and a shared environment lifecycle | `serve` and Harness client |
 | ACT / DP | Normal dataset readers and actual batch loading | `dataset-check --policy both` |
 | Custom policy | Unified observation, execution and lifecycle | `reset / observe / execute / receipt / status / finish / close` |
 
@@ -89,6 +89,16 @@ The default `relative-links` index must move with its source H5 files, preservin
 ./labsim eval --project-version Project_release_v1 --backend teacher --headless \
   --episodes 1 --record-mode eval --record-purpose policy_evaluation \
   --output outputs/lab_cuvette_loading/Project_release_v1/eval_001
+
+# One fixed evaluation scene; repeated runs load the same definition.
+./labsim eval --project-version Project_release_v1 --scene random_003 \
+  --backend teacher --headless --episodes 1 --progress \
+  --output outputs/lab_cuvette_loading/Scene_suite_v1/random003_001
+
+# Ten fixed scenes, one repetition each; sequential execution on one GPU.
+./labsim eval --project-version Project_release_v1 --suite random10 \
+  --episodes-per-scene 1 --backend teacher --headless --progress \
+  --output outputs/lab_cuvette_loading/Scene_suite_v1/random10_001
 
 # Start the environment, then connect a policy client from another terminal.
 ./labsim serve --project-version Project_release_v1 --headless --port 8097 \

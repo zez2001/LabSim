@@ -31,15 +31,18 @@ def startup_summary(cfg, *, source_config, output, backend, geometry_audit=None)
     from omegaconf import OmegaConf
     from demos.lab_cuvette_project_release_v1.contract import scene_contract
     resolved = OmegaConf.to_container(cfg, resolve=True)
+    from demos.lab_cuvette_project_release_v1.scene_recording import scene_metadata
     return dict(schema='labsim.Project_release_v1.startup.v1',
-        version=str(cfg.version), task=str(cfg.task_type), scene=str(cfg.scene_mode),
+        version=str(cfg.version), task=str(cfg.task_type),
+        scene=str(cfg.get('scene_suite', {}).get('scene_id', cfg.scene_mode)),
         backend=str(backend), asset_id=str(cfg.asset_id),
         record_purpose=record_purpose(cfg.release.get('record_purpose'), allow_unknown=True),
         record_mode=str(cfg.release.record_mode), output=str(Path(output).resolve()),
         config=str(Path(source_config).resolve()),
         source_config_sha256=hashlib.sha256(Path(source_config).read_bytes()).hexdigest(),
         resolved_config_sha256=hashlib.sha256(OmegaConf.to_yaml(resolved).encode()).hexdigest(),
-        project_scene_fingerprint=scene_contract(cfg, geometry_audit)['frozen_scene_sha256'])
+        project_scene_fingerprint=scene_contract(cfg, geometry_audit)['frozen_scene_sha256'],
+        **scene_metadata(cfg))
 
 
 def announce_startup(cfg, *, source_config, output, backend, geometry_audit=None):

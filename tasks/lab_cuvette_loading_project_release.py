@@ -45,6 +45,12 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
 
     def __setattr__(self, name, value):
         super().__setattr__(name, value)
+        if name == 'ctx' and value is not None and getattr(self, 'cfg', {}).get('scene_suite'):
+            # Applied once immediately after the existing builder returns, before
+            # reset's first physical capture. Only the declared light is authored;
+            # assembly transforms and all dynamic-body state remain builder-owned.
+            from demos.lab_cuvette_project_release_v1.scene_validation import configure_context
+            configure_context(self, value)
         if name in ('recorder', 'collector') and value is not None and self._progress_enabled():
             # The base reset captures step 0 immediately after constructing its
             # recorder. Bind this instance here, before that first capture;
@@ -73,6 +79,14 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
             physical_baseline='Project_v1_1',
             lifecycle_version='Project_release_v1.transactional_lifecycle.v1',
             record_purpose=self.collector.record_purpose)
+        from demos.lab_cuvette_project_release_v1.scene_recording import scene_metadata
+        metadata.update(scene_metadata(self.cfg))
+        if self.cfg.get('scene_suite'):
+            from demos.lab_cuvette_project_release_v1.scene_suite import scene_manifest
+            manifest = scene_manifest(self.base_cfg, self.cfg.scene_suite.scene_id,
+                geometry_audit=self.geometry_audit)
+            self._write(self.episode_dir / 'scene_manifest.json', manifest)
+            metadata['scene_suite_fingerprint'] = manifest['scene_suite_fingerprint']
         condition = self.options.get('lifecycle_condition')
         if condition:
             metadata['lifecycle_condition'] = str(condition)
@@ -161,6 +175,8 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
                 final_labels = self.collector.prepared_labels(final=True)
                 self._result.update(final_labels)
                 self._result['record_purpose'] = self.collector.record_purpose
+                from demos.lab_cuvette_project_release_v1.scene_recording import scene_metadata
+                self._result.update(scene_metadata(self.cfg))
                 from data_collectors.lab_cuvette_project_release_collector import atomic_text
                 from data_collectors.lab_cuvette_env_v1_collector import json_text
                 atomic_text(self.episode_dir / 'result.json', json_text(self._result) + '\n')
@@ -187,6 +203,11 @@ class LabCuvetteProjectRelease(LabCuvetteProjectV11):
 
     def reset(self, *args, **kwargs):
         options = dict(kwargs.get('options') or (args[1] if len(args) > 1 else {}) or {})
+        suite = (self.base_cfg.get('scene_suite', {}) if hasattr(self.base_cfg, 'get')
+                 else getattr(self.base_cfg, 'scene_suite', {}))
+        selected = str(suite.get('scene_id', 'standard'))
+        if options.get('scene_id', selected) != selected:
+            raise ValueError('Reset cannot change the fixed scene; create a new environment')
         if options.get('source_slot_id', self.base_cfg.rack.selected_slot_id) != self.base_cfg.rack.selected_slot_id:
             raise ValueError('Project_release_v1 standard reset cannot change the frozen source slot')
         if 'record_purpose' in options:

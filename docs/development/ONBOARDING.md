@@ -108,6 +108,8 @@ ACT/DP 数据为两路 CHW uint8 RGB；正常数据读取器生成实际 batch�
 
 ## 接入策略与开展评测
 
+省略场景时保持 `standard`。固定的 `random_001`–`random_010` 只用于评测，进程启动时选择，reset 不重新采样。单场景、Random-10 套件、重复编号、三次 reset 验收与评测数据读取见[场景协议](../lab_cuvette_loading/Scene_suite_v1/README.md)。示范采集与训练数据准备继续使用 standard。
+
 Teacher 评测示例：
 
 ```bash

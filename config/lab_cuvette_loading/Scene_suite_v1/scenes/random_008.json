@@ -1,0 +1,295 @@
+{
+  "scene_id": "random_008",
+  "suite_version": "lab_cuvette_loading.scene_suite.v1",
+  "source_configuration": "config/lab_cuvette_loading/Project_release_v1/standard.yaml",
+  "source_configuration_sha256": "45cfd2f4361dc7a73411b727ae15e92823b0569ff03ef5d4ede4521213d4e40d",
+  "source_commit": "d54f888b7d85994fb5602a831b9ab70a30c56860",
+  "source_seed": 31008,
+  "candidate_revision": "seeded_generation_r2",
+  "generation": {
+    "seed": 31008,
+    "generator": "numpy.random.Generator(PCG64)",
+    "numpy_version": "1.26.0",
+    "stratum": "lighting",
+    "raw_draws": [
+      {
+        "distribution": "uniform",
+        "low": 1050.0,
+        "high": 1100.0,
+        "raw_value": 1072.1938164096673,
+        "decimal_places": 3,
+        "effective_value": 1072.194
+      }
+    ],
+    "rounding": "Python round: translation6 decimals(m), yaw4 decimals(deg), light3 decimals; all effective values serialized"
+  },
+  "generation_method": "one-time seeded stratified sampling; effective parameters frozen; no runtime RNG",
+  "change_family": "lighting",
+  "declared_delta": {
+    "rack_translation_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "instrument_translation_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rack_yaw_deg": 0.0,
+    "instrument_yaw_deg": 0.0,
+    "dome_intensity_scale": 1.0721939999999999
+  },
+  "actual_parameters": {
+    "rack": {
+      "origin_m": [
+        -0.04,
+        -0.22,
+        0.74
+      ],
+      "yaw_deg": -90.0
+    },
+    "instrument": {
+      "origin_m": [
+        0.36,
+        0.0,
+        0.74
+      ],
+      "yaw_deg": 90.0
+    },
+    "vessel_initial_yaw_deg": 90.0,
+    "target_vessel_yaw_deg": 90.0,
+    "retreat_lateral_m": [
+      -0.12,
+      0.0
+    ],
+    "lighting": {
+      "prim_path": "/World/Light",
+      "type": "DomeLight",
+      "intensity": 1072.194,
+      "intensity_units": "USD light intensity; baseline authoring value1000",
+      "exposure": 0.0
+    }
+  },
+  "allowed_uses": [
+    "policy_evaluation"
+  ],
+  "fixed_source_slot_id": "A1",
+  "fixed_target_seat_id": "candidate_far_hinge",
+  "initial_robot": {
+    "base_m": [
+      -0.3,
+      0,
+      0.74
+    ],
+    "grasp_above_bottom_m": 0.053,
+    "initial_tcp_m": [
+      -0.085,
+      -0.175,
+      1.0230000000000001
+    ],
+    "tcp_local_m": [
+      0,
+      0,
+      0.1
+    ],
+    "usd_path": "assets/robots/Franka.usd",
+    "gripper_yaw_deg": -90.0,
+    "tcp_quaternion_wxyz": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "tcp_frame": "right_gripper",
+    "initial_joint_positions": [
+      0.1779404569926203,
+      -1.208031663591094,
+      -0.8197921486914327,
+      -2.872999113364274,
+      -0.7667170833832817,
+      1.7454942736950525,
+      -0.8053155743445266,
+      0.04,
+      0.04
+    ],
+    "initial_joint_basis": "Env_v1 arm_plan_01 seed1; sampled full11-link input triangle pathcheck, actual dynamics still required"
+  },
+  "cameras": {
+    "side_camera": {
+      "prim_path": "/World/SideCamera",
+      "eye_m": [
+        -0.7,
+        -0.85,
+        1.32
+      ],
+      "target_m": [
+        0.1,
+        -0.1,
+        1.05
+      ],
+      "focal_length_cm": 1.7,
+      "horizontal_aperture_mm": 20.955,
+      "resolution": [
+        640,
+        480
+      ],
+      "fps": 60,
+      "policy_resolution": [
+        256,
+        256
+      ],
+      "upworld": [
+        0,
+        0,
+        1
+      ]
+    },
+    "wrist_camera": {
+      "parent_link": "/World/Franka/panda_hand",
+      "prim_path": "/World/Franka/panda_hand/WristCameraV11",
+      "focal_length_cm": 1.2,
+      "horizontal_aperture_mm": 20.955,
+      "resolution": [
+        640,
+        480
+      ],
+      "fps": 60,
+      "policy_resolution": [
+        256,
+        256
+      ],
+      "localeye_m": [
+        0.075,
+        0,
+        0.04
+      ],
+      "localtarget_m": [
+        0,
+        0,
+        0.12
+      ],
+      "localup": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "policy_names": [
+      "side_camera_rgb",
+      "wrist_camera_rgb"
+    ]
+  },
+  "asset_revision": {
+    "repository": "Txie000/SLAI-Labsim",
+    "revision": "bb880f098180c291f6f65995f969d48047207067",
+    "asset_id": "cuvette_xy_1000"
+  },
+  "initialization_rules": {
+    "reset_repetitions": 3,
+    "settle_seconds": 4.0,
+    "configured_pose_position_tolerance_m": 1e-06,
+    "configured_pose_rotation_tolerance_deg": 1e-05,
+    "settled_vessel_position_repeatability_m": 0.0002,
+    "settled_vessel_orientation_repeatability_deg": 1.0,
+    "no_initial_illegal_overlap": true,
+    "source_slot_unchanged": true,
+    "target_seat_unchanged": true,
+    "all_components_and_collisions_follow_assembly": true,
+    "side_camera_continuous": true,
+    "robot_initial_joints_fixed": true,
+    "camera_pixels_need_not_be_identical": true
+  },
+  "unchanged": {
+    "geometry": true,
+    "mass": true,
+    "contact_parameters": true,
+    "physics": true,
+    "robot_base": true,
+    "robot_initial_joints": true,
+    "camera_calibration": true,
+    "public_observation": true,
+    "action_interface": true,
+    "scoring_thresholds": true
+  },
+  "frames": {
+    "convention": "column vectors: world=Rz@local+origin; metres, degrees",
+    "source_floor_world_m": [
+      -0.085,
+      -0.175,
+      0.743
+    ],
+    "target_loading_floor_world_m": [
+      0.21236964673703734,
+      -0.14926553560697634,
+      0.887
+    ],
+    "original_seat_floor_world_m": [
+      0.21237064673703734,
+      -0.14991553560697635,
+      0.887
+    ],
+    "source_cuvette_initial_bottom_world_m": [
+      -0.085,
+      -0.175,
+      0.7432
+    ],
+    "blue_neighbor_initial": [
+      {
+        "slot_id": "F6",
+        "position": [
+          0.0050000000000000044,
+          -0.265,
+          0.7432
+        ],
+        "prim_path": "/World/NeighborCuvette_F6"
+      }
+    ],
+    "rack_rotation_world": [
+      [
+        6.123233995736766e-17,
+        1.0,
+        0.0
+      ],
+      [
+        -1.0,
+        6.123233995736766e-17,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "instrument_rotation_world": [
+      [
+        6.123233995736766e-17,
+        -1.0,
+        0.0
+      ],
+      [
+        1.0,
+        6.123233995736766e-17,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "target_loading_offset_local_m": [
+      0.00065,
+      1e-06,
+      0
+    ],
+    "insertion_axis_world": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "target_depth_m": 0.027
+  },
+  "definition_sha256": "f9ffe1738632c81e963910918d88c1ca50c04b9cfd83dc3bd83cb7c7f92dfa84"
+}

@@ -12,10 +12,11 @@ import h5py
 from data_collectors.lab_cuvette_project_release_collector import atomic_text
 from utils.episode_selection import episode_matches_filter
 from demos.lab_cuvette_project_release_v1.membership import PURPOSES, file_sha256, load_members
+from demos.lab_cuvette_project_release_v1.scene_data import scene_identity
 
 
 def build_index(run_directory, destination, *, mode='relative-links', require_closed_process=True,
-                purpose='all-completed', members=None):
+                purpose='all-completed', members=None, data_use=None):
     """Select usage independently of the unchanged success/failure qualification.
 
     Python's historical default retains all completed records. The CLI defaults
@@ -30,6 +31,9 @@ def build_index(run_directory, destination, *, mode='relative-links', require_cl
         raise ValueError('Source process_id must be a positive PID')
     if purpose not in PURPOSES | {'all-completed', 'members'}:
         raise ValueError('Unknown purpose selection: ' + str(purpose))
+    data_use = data_use or ('train' if purpose == 'demonstration' else 'evaluation')
+    if data_use not in {'train', 'evaluation'}:
+        raise ValueError('data_use must be train or evaluation')
     annotations, membership_provenance = load_members(members)
     if purpose == 'members' and members is None:
         raise ValueError('The members purpose selection requires --members')
@@ -55,7 +59,7 @@ def build_index(run_directory, destination, *, mode='relative-links', require_cl
             index.attrs.update(schema_version='labsim.Project_release_v1.index.v2',
                 index_mode=mode, complete=False,
                 self_contained=(mode == 'copy'), external_links_relative=(mode == 'relative-links'),
-                purpose_selection=purpose)
+                purpose_selection=purpose, data_use=data_use)
             for source in sorted(run.glob('episode_*/dataset/episode_*.h5')):
                 with h5py.File(source) as episode:
                     identity = str(episode.attrs['episode_id'])
@@ -82,6 +86,16 @@ def build_index(run_directory, destination, *, mode='relative-links', require_cl
                         declared = annotated
                     accepted_purpose = purpose == 'all-completed' or (
                         purpose == 'members' and annotation is not None) or declared == purpose
+                    scene_metadata = scene_identity(episode)
+                    scene_id = scene_metadata['scene_id']
+                    random_scene = scene_id != 'standard'
+                    if random_scene:
+                        from demos.lab_cuvette_project_release_v1.scene_suite import validate_selection
+                        validate_selection(scene_id, purpose='eval')
+                        if declared != 'policy_evaluation':
+                            raise ValueError('Random-10 record must declare policy_evaluation: ' + identity)
+                        if data_use == 'train' and accepted_purpose:
+                            raise ValueError('Random-10 scene ' + scene_id + ' is evaluation-only; training/demo export requires standard')
                     # A supplied membership file is also an explicit cohort limit.
                     if members is not None and annotation is None:
                         accepted_purpose = False
@@ -90,11 +104,15 @@ def build_index(run_directory, destination, *, mode='relative-links', require_cl
                         exclusion = 'purpose_unknown' if declared == 'unknown' else 'purpose_mismatch'
                     else:
                         exclusion = None
+                    if random_scene and purpose == 'demonstration':
+                        accepted_purpose = False
+                        exclusion = 'random_scene_evaluation_only'
                     if not complete:
                         exclusion = 'publication_not_complete'
                     row = dict(episode_id=identity, source=os.path.relpath(source, destination.parent),
                         source_bytes=source.stat().st_size, source_h5_sha256=source_sha,
-                        complete=complete, record_purpose=declared,
+                        complete=complete, record_purpose=declared, scene_id=scene_id,
+                        scene_suite_version=scene_metadata['scene_suite_version'],
                         purpose_source='members_sidecar' if annotation else ('recorded' if declared != 'unknown' else 'unknown'),
                         included=complete and accepted_purpose, exclusion_reason=exclusion,
                         task_success=bool(episode.attrs.get('task_success')) if episode.attrs.get('task_success_known') else None,
@@ -151,7 +169,7 @@ def build_index(run_directory, destination, *, mode='relative-links', require_cl
         mode=mode, self_contained=mode == 'copy',
         portability='one HDF5 file' if mode == 'copy' else 'move this index and every declared relative source H5 together',
         source_isaac_process_absent=require_closed_process, source_pid=pid,
-        purpose_selection=purpose, membership_sidecar=membership_provenance,
+        purpose_selection=purpose, data_use=data_use, membership_sidecar=membership_provenance,
         counts=counts, source_qualification_counts=source_counts,
         included_episode_ids=[row['episode_id'] for row in rows if row['included']],
         excluded_episode_ids=[row['episode_id'] for row in rows if not row['included']],
@@ -170,9 +188,11 @@ def main(argv=None):
     parser.add_argument('--purpose', choices=sorted(PURPOSES) + ['all-completed', 'members'],
                         default='policy_evaluation', help='Explicit usage cohort; independent of reader sample-filter')
     parser.add_argument('--members', type=Path, help='Hash-bound historical purpose/member sidecar')
+    parser.add_argument('--data-use', choices=('train', 'evaluation'),
+                        help='Demonstration indexes default to train; other cohorts default to evaluation')
     args = parser.parse_args(argv)
     print(json.dumps(build_index(args.run_directory, args.output, mode=args.mode,
-                                purpose=args.purpose, members=args.members), indent=2))
+                                purpose=args.purpose, members=args.members, data_use=args.data_use), indent=2))
 
 
 if __name__ == '__main__':

@@ -21,7 +21,13 @@ def parser():
     p.add_argument('--config', type=Path, default=ROOT / 'config/lab_cuvette_loading/Project_release_v1/standard.yaml')
     p.add_argument('--backend', choices=('teacher', 'gpt6', 'rpc'), default='teacher')
     p.add_argument('--port', type=int, default=8097)
-    p.add_argument('--layout-mode', '--scene', dest='scene', choices=('standard',), default='standard')
+    from demos.lab_cuvette_project_release_v1.scene_suite import SCENE_IDS
+    p.add_argument('--layout-mode', '--scene', dest='scene', choices=SCENE_IDS, default='standard')
+    p.add_argument('--suite-run-id', default='')
+    p.add_argument('--scene-repetition-index', type=int, default=0)
+    p.add_argument('--suite-episode-index', type=int, default=0)
+    p.add_argument('--reset-checks', type=int, choices=(0, 3), default=0,
+        help='Three independent reset/settle checks before the formal episode; default preserves the ordinary task')
     p.add_argument('--task', choices=('lab_cuvette_loading',), default='lab_cuvette_loading')
     p.add_argument('--episodes', type=int, default=1)
     p.add_argument('--asset-id', help='Registered XY-size hypothesis; original seat and loading axis stay unchanged')
@@ -66,9 +72,19 @@ def main(argv=None, *, gpt_client_factory=None, gpt_episode_runner=None,
         raise ValueError('Choose --gui or --headless')
     if args.controlled_stop_depth_mm is not None and args.backend != 'teacher':
         raise ValueError('Controlled early-stop is an explicitly separate teacher condition')
+    from demos.lab_cuvette_project_release_v1.scene_suite import validate_selection
+    validate_selection(args.scene, purpose=args.execution_purpose)
+    if min(args.scene_repetition_index, args.suite_episode_index) < 0:
+        raise ValueError('Scene repetition and suite episode ordinals must be nonnegative')
+    if args.scene != 'standard' and args.record_purpose not in (None, 'policy_evaluation'):
+        raise ValueError('Random-10 records must declare policy_evaluation')
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     cfg = resolve_config(OmegaConf.load(args.config), asset_id=args.asset_id)
+    from demos.lab_cuvette_project_release_v1.scene_suite import select_scene
+    cfg = select_scene(cfg, args.scene, purpose=args.execution_purpose)
+    cfg.scene_execution = dict(suite_run_id=args.suite_run_id,
+        scene_repetition_index=args.scene_repetition_index, suite_episode_index=args.suite_episode_index)
     cfg.env.execution_purpose = args.execution_purpose
     if cfg.version != 'Project_release_v1':
         raise ValueError('Release launcher requires the explicit Project_release_v1 configuration')
@@ -77,6 +93,8 @@ def main(argv=None, *, gpt_client_factory=None, gpt_episode_runner=None,
     cfg.release.record_mode = args.record_mode or ('collect' if args.execution_purpose == 'collect' else 'eval')
     cfg.release.record_purpose = select_record_purpose(args.record_purpose, backend=args.backend,
         execution_purpose=args.execution_purpose)
+    if args.scene != 'standard':
+        cfg.release.record_purpose = 'policy_evaluation'
     cfg.experiment.truth_teacher = args.backend == 'teacher'
     if args.progress:
         if 'progress' not in cfg:
@@ -102,6 +120,11 @@ def main(argv=None, *, gpt_client_factory=None, gpt_episode_runner=None,
         resolved_config_sha256=hashlib.sha256((output / 'launch_config.yaml').read_bytes()).hexdigest(),
         asset_revision=asset_lock['revision'], version=cfg.version, record_mode=cfg.release.record_mode,
         record_purpose=cfg.release.record_purpose)
+    from demos.lab_cuvette_project_release_v1.scene_recording import scene_metadata, source_identity
+    identity.update(scene_metadata(cfg))
+    sources = source_identity(ROOT)
+    (output / 'source_identity.json').write_text(json.dumps(sources, indent=2) + '\n')
+    identity['worktree_source_sha256'] = sources['worktree_source_sha256']
     if gpt_profile_identity is not None:
         identity['gpt_profile_identity'] = gpt_profile_identity
     (output / 'launch_identity.json').write_text(json.dumps(identity, indent=2) + '\n')
@@ -109,6 +132,10 @@ def main(argv=None, *, gpt_client_factory=None, gpt_episode_runner=None,
     (output / 'geometry_audit.json').write_text(json.dumps(audit, indent=2) + '\n')
     startup = announce_startup(cfg, source_config=args.config, output=output,
         backend=args.backend, geometry_audit=audit)
+    from demos.lab_cuvette_project_release_v1.scene_suite import scene_manifest
+    manifest = scene_manifest(cfg, args.scene, geometry_audit=audit)
+    (output / 'scene_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    identity['scene_suite_fingerprint'] = manifest['scene_suite_fingerprint']
     identity.update(project_scene_fingerprint=startup['project_scene_fingerprint'],
         task=startup['task'], scene=startup['scene'], asset_id=startup['asset_id'])
     (output / 'launch_identity.json').write_text(json.dumps(identity, indent=2) + '\n')
@@ -132,6 +159,11 @@ def main(argv=None, *, gpt_client_factory=None, gpt_episode_runner=None,
         from factories.task_factory import create_task
         from factories.controller_factory import create_controller
         from demos.lab_cuvette_project_release_v1.environment import ProjectEnvironment
+        if args.reset_checks:
+            from demos.lab_cuvette_project_release_v1.scene_validation import validate_resets
+            reset_report = validate_resets(app, cfg, output, audit, count=args.reset_checks)
+            if reset_report.get('passed') is not True:
+                raise RuntimeError('INITIALIZATION_INVALID: fixed-scene reset checks failed; see reset_validation/reset_validation_summary.json')
         env = create_task(cfg.task_type, cfg, app, output, geometry_audit=audit)
         facade = ProjectEnvironment(env)
         print('LABSIM_RELEASE', json.dumps(dict(version=cfg.version, task=cfg.task_type,
@@ -161,7 +193,10 @@ def main(argv=None, *, gpt_client_factory=None, gpt_episode_runner=None,
                 ledger = args.budget_ledger
                 client = CubenceClient(provider, BudgetLedger(ledger, provider))
         for index in range(args.episodes):
+            cfg.scene_execution.scene_repetition_index = args.scene_repetition_index + index
+            cfg.scene_execution.suite_episode_index = args.suite_episode_index + index
             facade.reset(args.seed + index, dict(mode='standard', teacher=args.backend == 'teacher',
+                scene_id=args.scene,
                 policy_id='truth_teacher' if args.backend == 'teacher' else 'cubence_gpt6_astra',
                 demonstrator_id='LabCuvetteTeacher' if args.backend == 'teacher' else 'CubenceGenericTools'))
             if args.backend == 'teacher':

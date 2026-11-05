@@ -60,8 +60,16 @@ class LabCuvetteProjectReleaseCollector(LabCuvetteEnvV1Collector):
         if 'record_purpose' in metadata and metadata['record_purpose'] != self.record_purpose:
             raise ValueError('Episode record_purpose cannot override the declared run intent')
         metadata['record_purpose'] = self.record_purpose
+        from demos.lab_cuvette_project_release_v1.scene_recording import scene_metadata
+        scene = scene_metadata(self.configuration)
+        if any(key in metadata and metadata[key] != value for key, value in scene.items()):
+            raise ValueError('Episode scene identity cannot override the declared run scene')
+        metadata.update(scene)
         kwargs['metadata'] = metadata
         super().begin_episode(*args, **kwargs)
+        # The legacy collector intentionally has a fixed attrs whitelist. Keep
+        # the explicit scene fields in both that public record and embedded JSON.
+        self.file.attrs.update(scene)
         self._finalized = self._finalize_fingerprint = None
         self._finalizing = self._publication_failed = False
         self._prepared = None

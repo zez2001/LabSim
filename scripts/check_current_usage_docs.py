@@ -22,6 +22,7 @@ CURRENT_GUIDES = (
     'docs/lab_cuvette_loading/Project_release_v1/README.md',
     'docs/lab_cuvette_loading/Project_release_v1/data_usage.md',
     'docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md',
+    'docs/lab_cuvette_loading/Scene_suite_v1/README.md',
     'policy/backends/OPTIONAL_POLICIES.md',
 )
 HISTORICAL_NAVIGATION = ('docs/lab_cuvette_loading/Project_v1_1/README.md',)
@@ -125,7 +126,10 @@ def inspect_guide(root, relative, *, current=True):
                     parsed.output = str(Path(directory) / 'new_run')
                     command = cli.build_command(parsed)
                 row['module'] = command[2]
-                expected = ('demos.lab_cuvette_project_release_v1.run' if parsed.sequence else
+                selected_suite = (argv[1] == 'eval' and (getattr(parsed, 'suite', None)
+                    or getattr(parsed, 'scene', None) not in (None, 'standard')))
+                expected = ('demos.lab_cuvette_project_release_v1.suite_runner' if selected_suite else
+                            'demos.lab_cuvette_project_release_v1.run' if parsed.sequence else
                             'demos.lab_cuvette_project_release_v1.launch')
                 if row['module'] != expected:
                     raise ValueError('Guide routed outside the declared release entry')

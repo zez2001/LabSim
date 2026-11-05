@@ -27,7 +27,7 @@ LabSim 是面向科学实验机器人的 Isaac Sim 仿真项目，提供完整�
 | 独立评测 | 阶段进度、完整成功、终止原因、记录完整性、物理质量与数据资格 | 策略比较、合格示范筛选 |
 | 项目接口 | 统一 CLI、Teacher、GPT 直接控制、π0.5 RPC、Harness、自有策略生命周期 | 组内复用、外部策略评测 |
 
-发布版采用固定 standard 场景，采集与训练数据准备关闭场景随机化。资产尺寸、质量、控制频率及真实测量待补项见[资产与物理规格](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。当前是刚体仿真，质量、摩擦与动力学仍有工程假设；完整 Teacher 示范不代表其他策略完成同一任务。
+发布版的示范采集与训练数据准备使用固定 `standard`。评测可显式选择 `random_001`–`random_010` 十个固定实例，定义、用途及验收方法见[场景协议](docs/lab_cuvette_loading/Scene_suite_v1/README.md)。资产尺寸、质量、控制频率及真实测量待补项见[资产与物理规格](docs/lab_cuvette_loading/Project_release_v1/README.md#资产与物理规格)。当前是刚体仿真，质量、摩擦与动力学仍有工程假设；完整 Teacher 示范不代表其他策略完成同一任务。
 
 ## 安装与资产获取
 
@@ -78,9 +78,9 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
 | 策略 | 提供的功能 | 典型入口 |
 |---|---|---|
 | Teacher | 完整物理装载示范 | `demo` / `collect --backend teacher` |
-| GPT 直接控制 | 已记录图像闭环抓取、离架与搬运；完整装载未通过 | `eval --backend gpt6`，独立凭据与预算 |
-| π0.5 | 真实模型连续 RPC、回执、安全终止与回读；不据此声称完整成功 | 环境 `serve` + 模型服务 + 适配客户端 |
-| Harness | 本地 RPC 接入及已有短程调用 | `serve` + Harness 客户端 |
+| GPT 直接控制 | 图像与机器人状态闭环工具调用、预算管理及执行回执 | `eval --backend gpt6`，独立凭据与预算 |
+| π0.5 | 模型服务 RPC、动作适配、执行回执、安全终止和数据回读 | 环境 `serve` + 模型服务 + 适配客户端 |
+| Harness | 本地 RPC 客户端与统一环境生命周期 | `serve` + Harness 客户端 |
 | ACT / DP | 正常数据 reader 与实际 batch 读取 | `dataset-check --policy both` |
 | 自有策略 | 统一观察、动作执行和生命周期 | `reset / observe / execute / receipt / status / finish / close` |
 
@@ -90,13 +90,23 @@ export LABSIM_RUN=outputs/lab_cuvette_loading/Project_release_v1/collect_001
   --episodes 1 --record-mode eval --record-purpose policy_evaluation \
   --output outputs/lab_cuvette_loading/Project_release_v1/eval_001
 
+# 一个固定评测场景；重复调用复用同一场景定义。
+./labsim eval --project-version Project_release_v1 --scene random_003 \
+  --backend teacher --headless --episodes 1 --progress \
+  --output outputs/lab_cuvette_loading/Scene_suite_v1/random003_001
+
+# 十个固定场景，每场景一次；同一 GPU 上顺序运行。
+./labsim eval --project-version Project_release_v1 --suite random10 \
+  --episodes-per-scene 1 --backend teacher --headless --progress \
+  --output outputs/lab_cuvette_loading/Scene_suite_v1/random10_001
+
 # 启动环境服务，随后在另一终端连接策略客户端。
 ./labsim serve --project-version Project_release_v1 --headless --port 8097 \
   --record-mode eval --record-purpose policy_evaluation \
   --output outputs/lab_cuvette_loading/Project_release_v1/rpc_001
 ```
 
-公开观测提供双相机、机器人状态及声明的接触信号。模型等待时仿真暂停。动作坐标、单位、限幅、回执见[接口与时序](docs/development/ONBOARDING.md#策略接口与时序)；图像处理、任务文本/tokenizer 截断与部署输入审计见[外部策略契约](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md)。各策略的真实结果与未执行范围统一见[结果索引](docs/history/RESULTS.md)。
+公开观测提供双相机、机器人状态及声明的接触信号。模型等待时仿真暂停。动作坐标、单位、限幅、回执见[接口与时序](docs/development/ONBOARDING.md#策略接口与时序)；图像处理、任务文本/tokenizer 截断与部署输入审计见[外部策略契约](docs/lab_cuvette_loading/Project_release_v1/external_policy/contract.md)。场景选择在进程启动时固定；`demo/collect` 保持 standard，random 数据仅用于评测。各策略的具体实验结果统一见[结果索引](docs/history/RESULTS.md)。
 
 ## 文档导航、来源与许可
 

@@ -20,6 +20,11 @@ def scene_contract(cfg, geometry_audit=None):
     # Progress is an optional observer with its own resolved configuration and
     # hash. Its diagnostic settings are not physical/control scene settings.
     scene_cfg.pop('progress', None)
+    # Fixed scene-suite membership and dependency receipts are independent
+    # provenance. The resolved assembly positions already enter the physical
+    # contract; preserve the pre-suite standard projection and historical files.
+    scene_cfg.pop('scene_suite', None)
+    scene_cfg.pop('scene_execution', None)
     baseline = previous_contract(scene_cfg, geometry_audit)
     names = (
         'tasks/lab_cuvette_loading_project_release.py',

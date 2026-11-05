@@ -117,18 +117,26 @@ def parser():
         evaluation.add_argument(flag, action="store_true")
     evaluation.add_argument("--output", required=True)
     evaluation.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
-    evaluation.add_argument("--scene", choices=("standard",), default="standard")
+    selection = evaluation.add_mutually_exclusive_group()
+    selection.add_argument("--scene", help="Fixed scene ID; omitted selects standard")
+    selection.add_argument("--suite", choices=("random10",), help="Ten fixed evaluation scenes, not ten repetitions")
+    evaluation.add_argument("--episodes-per-scene", type=int,
+        help="Repetitions per fixed scene; defaults to one for --suite")
+    evaluation.add_argument("--reset-checks", type=int, choices=(0, 3), default=0,
+        help="Optional three-reset initialization validation before formal evaluation episodes")
     evaluation.add_argument("--backend", choices=("teacher", "gpt6"), default="teacher")
     evaluation.add_argument("--asset-id", help="Optional registered hypothesis for a separate evaluation")
-    evaluation.add_argument("--episodes", type=int, default=5)
+    evaluation.add_argument("--episodes", type=int,
+        help="Single-scene repetitions (standard default: 5); use --episodes-per-scene for suites")
     evaluation.add_argument("--provider-config")
     evaluation.add_argument("--budget-ledger")
     evaluation.add_argument("--max-calls", type=int, default=160)
     serve = commands.add_parser("serve", help="Loopback policy RPC for existing Harness/pi0.5 adapters; physics pauses between requests")
     serve.add_argument("--output", required=True)
     serve.add_argument("--task", choices=("lab_cuvette_loading",), default="lab_cuvette_loading")
-    serve.add_argument("--scene", choices=("standard",), default="standard")
+    serve.add_argument("--scene", default="standard", help="One fixed standard or random_001..random_010 scene")
     serve.add_argument("--port", type=int, default=8097)
+    serve.add_argument("--reset-checks", type=int, choices=(0, 3), default=0)
     serve.add_argument("--headless", action="store_true")
     serve.add_argument("--dry-run", action="store_true")
     serve.set_defaults(backend="rpc", episodes=1)
@@ -155,6 +163,8 @@ def parser():
     dataset.add_argument("--index", "--path", dest="index", required=True)
     dataset.add_argument("--sample-filter", choices=("success", "failure", "all_valid"), default="success")
     dataset.add_argument("--policy", choices=("act", "dp", "both"), default="both")
+    dataset.add_argument("--data-use", choices=("train", "evaluation"), default="train",
+        help="Training preparation defaults to standard only; explicitly select evaluation to read Random-10")
     dataset.add_argument("--output", required=True, help="New JSON read-check path")
     dataset.add_argument("--dry-run", action="store_true")
     for command in (demo, evaluation, serve, collect):
@@ -197,6 +207,37 @@ def closed_collection(collection):
 
 def build_command(args):
     """Build real subprocess argv without shell interpolation or output writes."""
+    args = argparse.Namespace(**vars(args))
+    if args.command in ("demo", "collect", "eval", "serve"):
+        scene = getattr(args, "scene", None) or "standard"
+        suite = getattr(args, "suite", None)
+        if getattr(args, "reset_checks", 0) and args.project_version != "Project_release_v1":
+            raise ValueError("--reset-checks requires --project-version Project_release_v1")
+        if getattr(args, "reset_checks", 0) and getattr(args, "sequence", None) is not None:
+            raise ValueError("--reset-checks validates ordinary task execution; do not combine it with --sequence")
+        if scene != "standard" or suite is not None:
+            if args.project_version != "Project_release_v1":
+                raise ValueError("Fixed random scenes require --project-version Project_release_v1")
+            from demos.lab_cuvette_project_release_v1.scene_suite import validate_selection
+            validate_selection(scene, purpose=args.command)
+            if getattr(args, "record_purpose", None) not in (None, "policy_evaluation"):
+                raise ValueError("Random-10 records must declare record-purpose policy_evaluation")
+            if getattr(args, "sequence", None) is not None:
+                raise ValueError("--sequence is a standard lifecycle diagnostic; use ordinary eval for fixed random scenes")
+        elif args.command == "eval" and getattr(args, "scene", None) is not None:
+            from demos.lab_cuvette_project_release_v1.scene_suite import validate_selection
+            validate_selection(scene, purpose="eval")
+        if args.command == "eval":
+            repetitions = args.episodes_per_scene
+            if repetitions is not None and args.episodes is not None:
+                raise ValueError("Choose --episodes or --episodes-per-scene, not both")
+            if suite is not None and args.episodes is not None:
+                raise ValueError("--suite uses --episodes-per-scene; --episodes denotes single-scene repetitions")
+            if repetitions is not None and not 1 <= repetitions <= 20:
+                raise ValueError("--episodes-per-scene must be 1..20")
+            if suite is not None or scene != "standard":
+                return build_suite_command(args, scene)
+            args.episodes = repetitions if repetitions is not None else (args.episodes if args.episodes is not None else 5)
     if getattr(args, "progress", False) and getattr(args, "project_version", None) != "Project_release_v1":
         raise ValueError("--progress requires --project-version Project_release_v1")
     if getattr(args, "record_mode", None) is not None and getattr(args, "project_version", None) != "Project_release_v1":
@@ -243,7 +284,7 @@ def build_command(args):
             raise ValueError("Choose --gui or --headless")
         module, config = PROJECT_RELEASES[args.project_version]
         command = [sys.executable, "-m", module,
-            "--backend", args.backend, "--config", str(config), "--layout-mode", args.scene,
+            "--backend", args.backend, "--config", str(config), "--layout-mode", getattr(args, "scene", None) or "standard",
             "--seed", "0", "--episodes", str(episodes),
             "--execution-purpose", "eval" if args.command == "serve" else args.command,
             "--output", str(output)]
@@ -263,6 +304,8 @@ def build_command(args):
                 continue
             if value is not None:
                 command += ["--" + name.replace("_", "-"), str(value)]
+        if getattr(args, "reset_checks", 0):
+            command += ["--reset-checks", str(args.reset_checks)]
         return command
     if args.command == "collect":
         if args.project_version != "Project_v1":
@@ -299,8 +342,37 @@ def build_command(args):
     if args.command == "dataset-check":
         index, output = dataset_file(args.index), new_path(args.output)
         return [sys.executable, str(Path(__file__).resolve()), "dataset-check", "--index", str(index),
-            "--sample-filter", args.sample_filter, "--policy", args.policy, "--output", str(output)]
+            "--sample-filter", args.sample_filter, "--policy", args.policy,
+            "--data-use", args.data_use, "--output", str(output)]
     raise ValueError("No subprocess command for " + args.command)
+
+
+def build_suite_command(args, scene):
+    """Use the same release launcher sequentially for fixed evaluation members."""
+    if getattr(args, "gui", False) and args.headless:
+        raise ValueError("Choose --gui or --headless")
+    output = new_path(args.output)
+    repetitions = args.episodes_per_scene if args.episodes_per_scene is not None else (
+        args.episodes if args.episodes is not None else 1)
+    if not 1 <= repetitions <= 20:
+        raise ValueError("Scene repetitions must be 1..20")
+    argv = [sys.executable, "-m", "demos.lab_cuvette_project_release_v1.suite_runner",
+        "--config", str(PROJECT_RELEASES["Project_release_v1"][1]),
+        "--backend", args.backend, "--output", str(output),
+        "--episodes-per-scene", str(repetitions), "--record-mode", args.record_mode or "eval"]
+    argv += ["--suite", args.suite] if args.suite else ["--scene", scene]
+    for key in ("headless", "gui", "progress"):
+        if getattr(args, key, False):
+            argv.append("--" + key.replace("_", "-"))
+    if getattr(args, "reset_checks", 0):
+        argv += ["--reset-checks", str(args.reset_checks)]
+    for key in ("asset_id", "provider_config", "budget_ledger", "max_calls"):
+        value = getattr(args, key, None)
+        if key == "max_calls" and args.backend != "gpt6":
+            continue
+        if value is not None:
+            argv += ["--" + key.replace("_", "-"), str(value)]
+    return argv
 
 
 def frozen_check():
@@ -429,6 +501,7 @@ def dataset_check(args):
         elif version == "Project_release_v1":
             from policy.dataset.lab_cuvette_project_release_dataset import LabCuvetteProjectReleaseDataset
             options["dataset_class"] = LabCuvetteProjectReleaseDataset
+            options["dataset_options"] = dict(data_use=args.data_use)
         value = read_check(index, sample_filter=args.sample_filter, policies=policies, **options)
         output.parent.mkdir(parents=True, exist_ok=True)
         with output.open("x", encoding="utf-8") as stream:
